@@ -22,9 +22,12 @@ from ping_docsets import (
 
 
 USER_AGENT = "ping-agent-skills-sync/1.0 (+https://github.com/mark-nienaber/ping-agent-skills)"
+LAST_CURL_ERROR = ""
 
 
 def curl_fetch(url: str, destination: Path) -> bool:
+    global LAST_CURL_ERROR
+    LAST_CURL_ERROR = ""
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(delete=False, dir=str(destination.parent)) as tmp:
         tmp_path = Path(tmp.name)
@@ -33,9 +36,13 @@ def curl_fetch(url: str, destination: Path) -> bool:
             "curl",
             "-fsSL",
             "--retry",
-            "2",
+            os.environ.get("PING_DOCS_CURL_RETRIES", "5"),
             "--retry-delay",
-            "1",
+            os.environ.get("PING_DOCS_CURL_RETRY_DELAY", "2"),
+            "--connect-timeout",
+            os.environ.get("PING_DOCS_CONNECT_TIMEOUT", "20"),
+            "--max-time",
+            os.environ.get("PING_DOCS_MAX_TIME", "120"),
             "-A",
             USER_AGENT,
             "-o",
@@ -44,6 +51,7 @@ def curl_fetch(url: str, destination: Path) -> bool:
         ]
         result = subprocess.run(command, check=False, text=True, capture_output=True)
         if result.returncode != 0:
+            LAST_CURL_ERROR = (result.stderr or result.stdout).strip()
             tmp_path.unlink(missing_ok=True)
             return False
         tmp_path.replace(destination)
@@ -73,7 +81,8 @@ def sync_docset(args: argparse.Namespace) -> int:
     llms_path = references_root / "llms.txt"
     print(f"[{docset.skill_slug}] fetching {llms_url}")
     if not curl_fetch(llms_url, llms_path):
-        die(f"[{docset.skill_slug}] failed to fetch {llms_url}")
+        detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
+        die(f"[{docset.skill_slug}] failed to fetch {llms_url}{detail}")
 
     entries = parse_llms_file(llms_path)
     if not entries:
@@ -86,10 +95,8 @@ def sync_docset(args: argparse.Namespace) -> int:
     if not clusters:
         die(f"[{docset.skill_slug}] no guide clusters found for version {selected_version or 'current'}")
 
-    for old_snapshot in snapshots_root.glob("*.md"):
-        old_snapshot.unlink()
-
     snapshots: list[dict[str, str]] = []
+    captured_files: set[str] = set()
     delay = float(os.environ.get("PING_DOCS_SYNC_DELAY", "0.05"))
     for cluster in clusters:
         snapshot_file = f"{cluster.guide_slug}.md"
@@ -103,7 +110,8 @@ def sync_docset(args: argparse.Namespace) -> int:
             source_type = "page"
             source_url = cluster.first_page_url
             if not curl_fetch(cluster.first_page_url, snapshot_path):
-                print(f"[{docset.skill_slug}] skipped {cluster.guide}: snapshot fetch failed")
+                detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
+                print(f"[{docset.skill_slug}] skipped {cluster.guide}: snapshot fetch failed{detail}")
                 continue
             if not markdownish(snapshot_path):
                 snapshot_path.unlink(missing_ok=True)
@@ -118,9 +126,19 @@ def sync_docset(args: argparse.Namespace) -> int:
                 "page_count": str(len(cluster.entries)),
             }
         )
+        captured_files.add(snapshot_file)
         print(f"[{docset.skill_slug}] captured {snapshot_file} from {source_type}")
         if delay:
             time.sleep(delay)
+
+    if len(snapshots) == len(clusters):
+        for old_snapshot in snapshots_root.glob("*.md"):
+            if old_snapshot.name not in captured_files:
+                old_snapshot.unlink()
+    elif snapshots:
+        print(
+            f"[{docset.skill_slug}] retained existing snapshots because sync was partial"
+        )
 
     write_manifest(
         path=references_root / "MANIFEST.md",

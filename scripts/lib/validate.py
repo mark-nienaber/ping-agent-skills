@@ -14,6 +14,7 @@ import subprocess
 from ping_docsets import load_docsets, parse_llms_file
 
 
+USER_AGENT = "ping-agent-skills-validate/1.0 (+https://github.com/mark-nienaber/ping-agent-skills)"
 ALLOWED_FRONTMATTER = {
     "name",
     "description",
@@ -92,7 +93,11 @@ def curl_ok(url: str) -> bool:
             "curl",
             "-fsSL",
             "--retry",
+            "2",
+            "--retry-delay",
             "1",
+            "-A",
+            USER_AGENT,
             "-o",
             "/dev/null",
             url,
