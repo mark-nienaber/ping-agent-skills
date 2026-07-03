@@ -1,44 +1,49 @@
 # Ping Agent Skills
 
-Agent Skills for Ping Identity documentation. Each generated skill is a thin router to Ping's official Markdown docs: it reads a cached `llms.txt`, selects the right live `.md` URL, and falls back to committed snapshots when offline.
+Agent Skills for Ping Identity documentation. Each skill is a thin router to Ping's official Markdown docs: it reads a cached `llms.txt`, selects the right live `.md` URL, and falls back to committed snapshots when offline.
 
-This repo complements [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins). Use their six umbrella skills when you need product routing across PingOne, AIC, DaVinci, PingFederate, PingAccess, and app integration. Use this repo when you already know the docset and need deeper per-product documentation coverage.
+Complements [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins). Use their umbrella skills for cross-product routing; use this repo for per-docset depth.
 
-## Status
+## Coverage
 
-- 57 docsets are registered in `scripts/docsets.yaml`; 56 are enabled.
-- 56 skills are generated under `plugins/ping-identity-docs/skills/`.
-- `pingcli` is disabled: Ping's root developer `llms.txt` links to `https://developer.pingidentity.com/pingcli/llms.txt`, but that redirects to `/pingcli/1.1/llms.txt`, which returns 404. Tracking issue: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
-- Snapshot size is about 19 MB, below the 200 MB threshold for proposing fetch-on-demand mode.
-- Numeric-version docsets are pinned with `preferred_version` in `scripts/docsets.yaml`; quarterly bump PRs should update that field and refresh snapshots.
+- 57 docsets registered in `scripts/docsets.yaml`; 56 enabled.
+- 56 skills generated under `plugins/ping-identity-docs/skills/`.
+- `pingcli` disabled: `https://developer.pingidentity.com/pingcli/llms.txt` redirects to a 404. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
+- Snapshot footprint ~19 MB.
+- Numeric-version docsets pinned via `preferred_version` in `scripts/docsets.yaml`.
 
 ## Install
 
-Claude Code marketplace install, once published:
+### Claude Code (recommended)
+
+Marketplace install:
 
 ```bash
-/plugin marketplace add https://github.com/mark-nienaber/ping-agent-skills
+/plugin marketplace add mark-nienaber/ping-agent-skills
+/plugin install ping-identity-docs@ping-agent-skills
 ```
 
-Local Claude Code skill install:
+### Codex
+
+No marketplace. Use the setup script to symlink skills into `~/.codex/skills/`:
 
 ```bash
-./setup-claude.sh
-./setup-claude.sh pingam pingoneaic pingfederate
-./setup-claude.sh --push /path/to/project pingam pingone
+scripts/setup-codex.sh                          # all skills
+scripts/setup-codex.sh pingam pingoneaic        # selective
+scripts/setup-codex.sh --push /path/to/project  # into <project>/.codex/skills/
 ```
 
-Local Codex skill install:
+### Local Claude Code (pre-marketplace or selective)
+
+Use `setup-claude.sh` when you want to install without the marketplace, install into a specific project, or install only a subset of skills:
 
 ```bash
-./setup-codex.sh
-./setup-codex.sh pingam pingoneaic pingfederate
-./setup-codex.sh --push /path/to/project pingam pingone
+scripts/setup-claude.sh                          # symlink all into ~/.claude/skills/
+scripts/setup-claude.sh pingam pingoneaic        # selective
+scripts/setup-claude.sh --push /path/to/project  # into <project>/.claude/skills/
 ```
 
-The setup scripts preserve the legacy positional slug filtering style. With no slugs, they install every generated skill. With slugs, they install only those skills.
-
-## Repository Layout
+## Layout
 
 ```text
 .claude-plugin/
@@ -46,7 +51,6 @@ The setup scripts preserve the legacy positional slug filtering style. With no s
   marketplace.json
 plugins/
   ping-identity-docs/
-    .claude-plugin/plugin.json
     skills/<docset-slug>/
       SKILL.md
       references/
@@ -62,7 +66,14 @@ scripts/
   lib/
 ```
 
-## Workflow
+## How Skills Resolve Docs
+
+1. Agent loads `SKILL.md`.
+2. `SKILL.md` routing table + bundled `references/llms.txt` pick exact live `.md` URL.
+3. Agent `WebFetch`es the URL.
+4. Offline or fetch fails → agent reads `references/snapshots/<guide>.md`.
+
+## Maintenance
 
 Sync one docset:
 
@@ -70,19 +81,19 @@ Sync one docset:
 scripts/sync-docset.sh pingam
 ```
 
-Sync all enabled docsets:
+Sync all enabled:
 
 ```bash
 scripts/sync-all.sh
 ```
 
-Generate a skill after syncing:
+Regenerate a `SKILL.md` from cached `llms.txt`:
 
 ```bash
 scripts/generate-skill.sh pingam
 ```
 
-Validate generated skills:
+Validate:
 
 ```bash
 scripts/validate.sh
@@ -90,11 +101,11 @@ scripts/validate.sh --skip-url-check
 scripts/validate.sh --require-all-enabled
 ```
 
-`--require-all-enabled` validates the generated skill set against enabled registry entries. `pingcli` remains registered but disabled until Ping fixes its per-docset `llms.txt` endpoint.
+`--require-all-enabled` checks that every enabled registry entry has a generated skill.
 
 ## Snapshot Policy
 
-Snapshots are committed by default for offline safety and visible documentation drift. The sync script attempts each guide's versioned `single-page.md` URL, then the unversioned guide `single-page.md` URL. If both are unavailable, it falls back to the first official Ping `.md` page in the guide and records the source type in `references/MANIFEST.md`.
+Snapshots committed for offline safety and visible doc drift. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then first official `.md` page in the guide. Source type recorded in `references/MANIFEST.md`.
 
 ## License
 

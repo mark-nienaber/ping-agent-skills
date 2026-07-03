@@ -2,23 +2,24 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS_ROOT="${SCRIPT_DIR}/plugins/ping-identity-docs/skills"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SKILLS_ROOT="${REPO_ROOT}/plugins/ping-identity-docs/skills"
 
 usage() {
   cat <<'USAGE'
 Usage:
-  ./setup-claude.sh [skill-slug ...]
-  ./setup-claude.sh --push <project-dir> [skill-slug ...]
-  ./setup-claude.sh --copy [skill-slug ...]
+  scripts/setup-codex.sh [skill-slug ...]
+  scripts/setup-codex.sh --push <project-dir> [skill-slug ...]
+  scripts/setup-codex.sh --copy [skill-slug ...]
 
-Default mode symlinks selected skills into ~/.claude/skills/.
+Default mode symlinks selected skills into ~/.codex/skills/.
 --copy copies selected skills instead of symlinking.
---push installs selected skills into <project-dir>/.claude/skills/.
+--push installs selected skills into <project-dir>/.codex/skills/.
 USAGE
 }
 
 copy_mode=0
-target_root="${HOME}/.claude/skills"
+target_root="${HOME}/.codex/skills"
 slugs=()
 
 while [[ $# -gt 0 ]]; do
@@ -36,7 +37,7 @@ while [[ $# -gt 0 ]]; do
         echo "--push requires a project directory" >&2
         exit 2
       fi
-      target_root="$2/.claude/skills"
+      target_root="$2/.codex/skills"
       copy_mode=1
       shift 2
       ;;

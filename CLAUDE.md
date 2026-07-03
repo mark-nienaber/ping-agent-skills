@@ -9,7 +9,7 @@ This repo contains Agent Skills for Ping Identity documentation. Treat `plugins/
 - The frontmatter `name` must match the skill directory.
 - The frontmatter `description` is the activation trigger. Keep it concrete, product-specific, and under 500 characters.
 - Prefer live fetch from the URL selected through `references/llms.txt`; use `references/snapshots/` only when offline or live fetch fails.
-- Do not rename `scripts/docsets.yaml` slugs without an explicit migration note.
+- Do not rename `scripts/docsets.yaml` slugs without updating every reference.
 - `pingcli` is registered but disabled because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
 
 ## Skill Inventory
