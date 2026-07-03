@@ -20,6 +20,29 @@ LLMS_ENTRY_RE = re.compile(
     r"(?:(?::|\s+-)\s*(?P<description>.*))?\s*$"
 )
 VERSION_RE = re.compile(r"^\d+(?:\.\d+)*$")
+STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "api",
+    "apis",
+    "as",
+    "for",
+    "from",
+    "how",
+    "in",
+    "including",
+    "into",
+    "of",
+    "on",
+    "or",
+    "ping",
+    "pingidentity",
+    "the",
+    "to",
+    "using",
+    "with",
+}
 
 
 @dataclass(frozen=True)
@@ -57,6 +80,10 @@ def slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower())
     slug = re.sub(r"-+", "-", slug).strip("-")
     return slug or "root"
+
+
+def humanize_slug(value: str) -> str:
+    return re.sub(r"[-_]+", " ", value).strip().title() or "Root"
 
 
 def load_docsets(path: str | Path) -> list[Docset]:
@@ -212,6 +239,44 @@ def cluster_entries(
             )
         )
     return sorted(clusters, key=lambda item: (-len(item.entries), item.guide_slug))
+
+
+def routing_url_pattern(base_url: str, cluster: GuideCluster) -> str:
+    if cluster.version and cluster.version != "current":
+        if cluster.guide == "root":
+            return f"{base_url}/{cluster.version}/*.md"
+        return f"{base_url}/{cluster.version}/{cluster.guide}/*.md"
+    if cluster.guide == "root":
+        return f"{base_url}/*.md"
+    return f"{base_url}/{cluster.guide}/*.md"
+
+
+def task_category(cluster: GuideCluster) -> str:
+    guide_name = humanize_slug(cluster.guide)
+    words: dict[str, int] = {}
+    for entry in cluster.entries[:20]:
+        text = f"{entry.title} {entry.description}".lower()
+        for word in re.findall(r"[a-z][a-z0-9]{2,}", text):
+            if word in STOPWORDS:
+                continue
+            words[word] = words.get(word, 0) + 1
+    top_words = [
+        word
+        for word, _count in sorted(words.items(), key=lambda item: (-item[1], item[0]))[:3]
+    ]
+    if top_words:
+        return f"{guide_name}: {', '.join(top_words)}"
+    return guide_name
+
+
+def product_summary(label: str, entries: Iterable[LlmEntry]) -> str:
+    for entry in entries:
+        if entry.title.lower().replace(" ", "") == label.lower().replace(" ", "") and entry.description:
+            return entry.description.rstrip(".") + "."
+    for entry in entries:
+        if entry.description:
+            return entry.description.rstrip(".") + "."
+    return f"{label} documentation is indexed in the bundled llms.txt and live Ping Markdown pages."
 
 
 def sha256_file(path: str | Path) -> str:
