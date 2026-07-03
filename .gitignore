@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Local tool state
+.claude/
+scripts/__pycache__/
+
+# Sync working dirs (kept out until we decide commit-snapshots policy)
+# Uncomment to gitignore snapshots:
+# plugins/*/skills/*/references/snapshots/
