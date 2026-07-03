@@ -1,0 +1,412 @@
+# Ping Identity docset registry
+# One entry per docset that gets a skill. Slug is the skill directory name.
+# base_url is the docset root without trailing slash; sync scripts append /llms.txt.
+# skill_slug is what ends up at plugins/ping-identity-docs/skills/<slug>/.
+# preferred_version pins the latest published version when the docset has numeric versions.
+# Use null for unversioned/current docsets; quarterly bump PRs update this field.
+# When docs and developer sites share a product name, the developer variant carries -dev suffix.
+# enabled=false skips the docset in sync/generate runs — use for staged rollout.
+
+docsets:
+  # --- docs.pingidentity.com (40) ---
+  - skill_slug: auth-node-ref
+    label: Auth Node Ref
+    source: docs
+    base_url: https://docs.pingidentity.com/auth-node-ref
+    preferred_version: 8.1
+    enabled: true
+
+  - skill_slug: autonomous-identity
+    label: Autonomous Identity
+    source: docs
+    base_url: https://docs.pingidentity.com/autonomous-identity
+    preferred_version: 2022.11.12
+    enabled: true
+
+  - skill_slug: configuration-guides
+    label: Configuration Guides
+    source: docs
+    base_url: https://docs.pingidentity.com/configuration_guides
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: connectors
+    label: Connectors
+    source: docs
+    base_url: https://docs.pingidentity.com/connectors
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: davinci
+    label: DaVinci
+    source: docs
+    base_url: https://docs.pingidentity.com/davinci
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: developer-resources
+    label: Developer Resources
+    source: docs
+    base_url: https://docs.pingidentity.com/developer-resources
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: enterprise-connect
+    label: Enterprise Connect
+    source: docs
+    base_url: https://docs.pingidentity.com/enterprise-connect
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: forgeops
+    label: ForgeOps
+    source: docs
+    base_url: https://docs.pingidentity.com/forgeops
+    preferred_version: 2026.2
+    enabled: true
+
+  - skill_slug: glossary
+    label: Glossary
+    source: docs
+    base_url: https://docs.pingidentity.com/glossary
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: identity-governance
+    label: Identity Governance
+    source: docs
+    base_url: https://docs.pingidentity.com/identity-governance
+    preferred_version: 7.1.2
+    enabled: true
+
+  - skill_slug: identity-reporting
+    label: Identity Reporting
+    source: docs
+    base_url: https://docs.pingidentity.com/identity-reporting
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: integrations
+    label: Integrations
+    source: docs
+    base_url: https://docs.pingidentity.com/integrations
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: java-agents
+    label: Java Agents
+    source: docs
+    base_url: https://docs.pingidentity.com/java-agents
+    preferred_version: 2026
+    enabled: true
+
+  - skill_slug: licensing-guide
+    label: Licensing Guide
+    source: docs
+    base_url: https://docs.pingidentity.com/licensing-guide
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: openicf
+    label: OpenICF
+    source: docs
+    base_url: https://docs.pingidentity.com/openicf
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pgic
+    label: PGIC
+    source: docs
+    base_url: https://docs.pingidentity.com/pgic
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingaccess
+    label: PingAccess
+    source: docs
+    base_url: https://docs.pingidentity.com/pingaccess
+    preferred_version: 9.1
+    enabled: true
+
+  - skill_slug: pingam
+    label: PingAM
+    source: docs
+    base_url: https://docs.pingidentity.com/pingam
+    preferred_version: 8.1
+    enabled: true
+
+  - skill_slug: pingauthorize
+    label: PingAuthorize
+    source: docs
+    base_url: https://docs.pingidentity.com/pingauthorize
+    preferred_version: 11.1
+    enabled: true
+
+  - skill_slug: pingcentral
+    label: PingCentral
+    source: docs
+    base_url: https://docs.pingidentity.com/pingcentral
+    preferred_version: 3.1.1
+    enabled: true
+
+  - skill_slug: pingdirectory
+    label: PingDirectory
+    source: docs
+    base_url: https://docs.pingidentity.com/pingdirectory
+    preferred_version: 11.1
+    enabled: true
+
+  - skill_slug: pingds
+    label: PingDS
+    source: docs
+    base_url: https://docs.pingidentity.com/pingds
+    preferred_version: 8.1
+    enabled: true
+
+  - skill_slug: pingfederate
+    label: PingFederate
+    source: docs
+    base_url: https://docs.pingidentity.com/pingfederate
+    preferred_version: 13.1
+    enabled: true
+
+  - skill_slug: pinggateway
+    label: PingGateway
+    source: docs
+    base_url: https://docs.pingidentity.com/pinggateway
+    preferred_version: 2026
+    enabled: true
+
+  - skill_slug: pingid-user-guide
+    label: PingID User Guide
+    source: docs
+    base_url: https://docs.pingidentity.com/pingid-user-guide
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingid
+    label: PingID
+    source: docs
+    base_url: https://docs.pingidentity.com/pingid
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingidm
+    label: PingIDM
+    source: docs
+    base_url: https://docs.pingidentity.com/pingidm
+    preferred_version: 8.1
+    enabled: true
+
+  - skill_slug: pingintelligence
+    label: PingIntelligence
+    source: docs
+    base_url: https://docs.pingidentity.com/pingintelligence
+    preferred_version: 5.2
+    enabled: true
+
+  - skill_slug: pingone-admin-mfa-faq
+    label: PingOne Admin MFA FAQ
+    source: docs
+    base_url: https://docs.pingidentity.com/pingone-admin-mfa-faq
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingone-solutions
+    label: PingOne Solutions
+    source: docs
+    base_url: https://docs.pingidentity.com/pingone-solutions
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingone
+    label: PingOne
+    source: docs
+    base_url: https://docs.pingidentity.com/pingone
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingoneadvancedservices
+    label: PingOne Advanced Services
+    source: docs
+    base_url: https://docs.pingidentity.com/pingoneadvancedservices
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingoneaic
+    label: PingOne Advanced Identity Cloud
+    source: docs
+    base_url: https://docs.pingidentity.com/pingoneaic
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingoneforenterprise
+    label: PingOne for Enterprise
+    source: docs
+    base_url: https://docs.pingidentity.com/pingoneforenterprise
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: platform
+    label: Ping Platform
+    source: docs
+    base_url: https://docs.pingidentity.com/platform
+    preferred_version: 8
+    enabled: true
+
+  - skill_slug: privilege
+    label: PingOne Privilege
+    source: docs
+    base_url: https://docs.pingidentity.com/privilege
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: recognize
+    label: Recognize
+    source: docs
+    base_url: https://docs.pingidentity.com/recognize
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: sdks
+    label: Ping SDKs
+    source: docs
+    base_url: https://docs.pingidentity.com/sdks
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: solution-guides
+    label: Solution Guides
+    source: docs
+    base_url: https://docs.pingidentity.com/solution-guides
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: web-agents
+    label: Web Agents
+    source: docs
+    base_url: https://docs.pingidentity.com/web-agents
+    preferred_version: 2026
+    enabled: true
+
+  # --- developer.pingidentity.com (18) ---
+  - skill_slug: build-with-ai
+    label: Build with AI
+    source: developer
+    base_url: https://developer.pingidentity.com/build-with-ai
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: config-automation-management-sdks
+    label: Config Automation Management SDKs
+    source: developer
+    base_url: https://developer.pingidentity.com/config-automation-management-sdks
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: config-automation-promotion
+    label: Config Automation Promotion
+    source: developer
+    base_url: https://developer.pingidentity.com/config-automation-promotion
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: devops
+    label: DevOps
+    source: developer
+    base_url: https://developer.pingidentity.com/devops
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: helm
+    label: Helm Charts
+    source: developer
+    base_url: https://developer.pingidentity.com/helm
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: identity-for-ai
+    label: Identity for AI
+    source: developer
+    base_url: https://developer.pingidentity.com/identity-for-ai
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: login-widget
+    label: Login Widget
+    source: developer
+    base_url: https://developer.pingidentity.com/login-widget
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: orchsdks
+    label: Orchestration SDKs
+    source: developer
+    base_url: https://developer.pingidentity.com/orchsdks
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: p14e-directory-api
+    label: P14e Directory API
+    source: developer
+    base_url: https://developer.pingidentity.com/p14e-directory-api
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingauthorize-dev
+    label: PingAuthorize (Developer)
+    source: developer
+    base_url: https://developer.pingidentity.com/pingauthorize
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingcli
+    label: Ping CLI
+    source: developer
+    base_url: https://developer.pingidentity.com/pingcli
+    preferred_version: null
+    # Disabled until Ping fixes the advertised per-docset llms.txt redirect.
+    # Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2
+    enabled: false
+
+  - skill_slug: pingdirectory-dev
+    label: PingDirectory (Developer)
+    source: developer
+    base_url: https://developer.pingidentity.com/pingdirectory
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingid-api
+    label: PingID API
+    source: developer
+    base_url: https://developer.pingidentity.com/pingid-api
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingone-api-ea
+    label: PingOne API (Early Access)
+    source: developer
+    base_url: https://developer.pingidentity.com/pingone-api-ea
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingone-api
+    label: PingOne API
+    source: developer
+    base_url: https://developer.pingidentity.com/pingone-api
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: pingoneaic-api
+    label: PingOne AIC API
+    source: developer
+    base_url: https://developer.pingidentity.com/pingoneaic-api
+    preferred_version: null
+    enabled: true
+
+  - skill_slug: terraform
+    label: Terraform
+    source: developer
+    base_url: https://developer.pingidentity.com/terraform
+    preferred_version: null
+    enabled: true

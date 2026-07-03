@@ -1,0 +1,19 @@
+# Documentation
+
+## Identity Reporting
+
+- [Before you start](https://docs.pingidentity.com/identity-reporting/release-notes/chap-before-you-install.md)
+- [Changelog](https://docs.pingidentity.com/identity-reporting/release-notes/chap-changelog.md)
+- [Configuration](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-report-configuration.md)
+- [Data sources](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-data-sources.md)
+- [Documentation updates](https://docs.pingidentity.com/identity-reporting/release-notes/chap-doc-updates.md)
+- [GDPR compliance](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-report-gdpr.md)
+- [Getting support](https://docs.pingidentity.com/identity-reporting/release-notes/appendix-getting-support.md)
+- [Identity Reporting](https://docs.pingidentity.com/identity-reporting/identity-reporting/preface.md)
+- [Installation](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-installation.md)
+- [Release notes](https://docs.pingidentity.com/identity-reporting/release-notes/preface.md)
+- [Report definitions](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-report-definitions.md)
+- [Report schedules](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-report-schedules.md)
+- [Reporting interface](https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-reporting-dashboard.md)
+- [Security advisories](https://docs.pingidentity.com/identity-reporting/release-notes/chap-security-advisories.md)
+- [What&#8217;s new](https://docs.pingidentity.com/identity-reporting/release-notes/chap-whats-new.md)

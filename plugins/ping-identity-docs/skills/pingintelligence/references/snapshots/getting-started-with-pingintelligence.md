@@ -1,0 +1,133 @@
+---
+title: API discovery in your environment
+description: PingIntelligence supports API discovery in sideband and inline mode as an automated method of building API definitions that provide the properties of the managed APIs.
+component: pingintelligence
+version: 5.2
+page_id: pingintelligence:getting_started_with_pingintelligence:pingintelligence_api_discovery_environment
+canonical_url: https://docs.pingidentity.com/pingintelligence/5.2/getting_started_with_pingintelligence/pingintelligence_api_discovery_environment.html
+revdate: April 3, 2024
+section_ids:
+  configuring-ase-with-api-discovery: Configuring ASE with API discovery
+  about-this-task: About this task
+  steps: Steps
+  example: Example:
+  configuring-discovery-settings-in-the-dashboard: Configuring discovery settings in the Dashboard
+  about-this-task-2: About this task
+  steps-2: Steps
+  example-2: Example:
+---
+
+# API discovery in your environment
+
+PingIntelligence supports API discovery in sideband and inline mode as an automated method of building API definitions that provide the properties of the managed APIs.
+
+These API definitions are then used to provide API visibility and detection of anomalous client behavior. You can configure API discovery through the Dashboard, which displays, manages, and renders the discovered APIs. The Dashboard also allows you to edit the discovered APIs and export their definition files.
+
+To set up PingIntelligence for discovery, you must:
+
+1. [Configure ASE with API discovery](pingintelligence_configure_ase_discovery_api.html)
+
+2. [Configure discovery settings in the Dashboard](pingintelligence_configure_discovery_settings.html)
+
+## Configuring ASE with API discovery
+
+### About this task
+
+|   |                                                                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Configure API discovery when API Security Enforcer (ASE) is deployed in sideband mode. To configure ASE for inline discovery, contact Ping Identity support. |
+
+ASE requires a `root` definition that enables it to route all API traffic to the AI engine. The AI engine receives and monitors all API traffic that is not associated with a known API. It analyzes the traffic and builds API models for the unknown APIs, which are shown on the Discovery dashboard.
+
+To add a `root` API in ASE:
+
+### Steps
+
+1. Use the sample `root` API JSON shipped with ASE in the `<ASE_Installation path>/pingidentity/ase/config/api/` directory and configure the API JSON for the `root` API.
+
+   For sideband environments, use the following settings:
+
+   | Parameter  | Setting |
+   | ---------- | ------- |
+   | `protocol` | `http`  |
+   | `url`      | `/`     |
+   | `hostname` | `*`     |
+
+2. To capture client identifiers such as token, cookies, API keys, IP addresses, and username, configure the `root` API JSON file with the following client identifiers.
+
+   |   |                                                                                                                                                                                        |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If the identifiers are not present in at least 50% of the traffic received for a discovered API, then the identifiers are not reported or used in Indicator of Attack (IoA) detection. |
+
+   | Client Identifier              | Description                                                                      |
+   | ------------------------------ | -------------------------------------------------------------------------------- |
+   | `oauth2_access_token`          | If a bearer token is present, set to `true`.                                     |
+   | `cookie`                       | If cookies are used as the primary client identifier, configure the cookie name. |
+   | `apikey_qs` or `apikey_header` | Set for the API key in query parameter or for the API key in header.             |
+
+   #### Example:
+
+   The following is a sample API JSON for the `root` API:
+
+   ```json
+   {
+    "api_metadata": {
+    "protocol": "http",
+    "url": "/",
+    "hostname": "*",
+    "cookie": "",
+    "oauth2_access_token": true,
+    "apikey_qs": "",
+    "apikey_header": "",
+    "login_url": "",
+    "enable_blocking": true,
+    "api_memory_size": "1mb",
+    "decoy_config":
+   { "decoy_enabled": false, "response_code": 200, "response_def": "", "response_message": "", "decoy_subpaths": [] }
+   }
+    }
+   ```
+
+   |   |                                                     |
+   | - | --------------------------------------------------- |
+   |   | IP addresses and usernames are captured separately. |
+
+3. After configuring an API JSON file for the `root` API, add it to ASE to initiate the API discovery process by running the following command:
+
+   ```
+   /<ASE_Installation path>/pingidentity/ase/bin/cli.sh –u admin -p admin add_api {file_path/api_name}
+   ```
+
+## Configuring discovery settings in the Dashboard
+
+### About this task
+
+To customize the discovery process, configure the discovery parameters on the Dashboard.
+
+### Steps
+
+1. Go to **Discovered APIs → Settings**.
+
+![A screen capture of the Discovered APIs page in PingIntelligence with the Discovered APIs and Settings links highlighted in yellow. Discovered APIs is numbered 1, and Settings is numbered 2 to show the order of your clicks.](_images/hkd1607595182330.png)
+
+1. Click the **Discovery Configuration** tab and set the value for **AI Engine Subpath Depth**.
+
+   **AI Engine Subpath Depth** defines the number of subpaths used to uniquely discover the base path of a new API. The maximum allowed value is 6 when ASE is deployed in inline mode and 10 when ASE is deployed in sideband mode.
+
+   #### Example:
+
+   The following are examples of subpath values and what they mean:
+
+   * `1` indicates `/atmapp` is the base path for `/atmapp/zipcode`,`/atmapp/update`, and so on.
+
+   * `3` indicates `v1/cust1/atmapp` is the base path for `v1/cust1/atmapp/zipcode`, and so on.
+
+2. Click **Discovered APIs** on the Dashboard and click **Export** to download the API definition in `.json` format .
+
+   ![A screen capture of the Discovered APIs page in the PingIntelligence Dashboard with a yellow arrow pointing to Discovered APIs in the left navigation pane and a second yellow arrow pointing to the Export link next to an API definition.](_images/qyl1631090190432.png)
+
+3. Add the downloaded API JSON definitions to ASE by running the following command:
+
+   ```
+   # /<ASE_Installation path>/pingidentity/ase/bin/cli.sh –u admin -p admin add_api {file_path/api_name}
+   ```

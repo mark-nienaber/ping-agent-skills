@@ -1,0 +1,25 @@
+# Documentation
+
+## Identity For Ai
+
+- [Agent Types](https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.md): Understanding each type of AI agent is paramount for identity security.
+- [Computer-Using Agents (CUAs)](https://developer.pingidentity.com/identity-for-ai/agents/idai-computer-using-agents.md): A computer-using agent (CUA) is an AI agent that operates computers through human interfaces like GUIs or CLIs, rather than structured APIs.
+- [Identifying Agents with Token Exchange](https://developer.pingidentity.com/identity-for-ai/identity/idai-token-exhange.md): Correctly implement token exchange in your flows to achieve delegation, not impersonation.
+- [Identity for AI](https://developer.pingidentity.com/identity-for-ai/index.md): Ping Identity's comprehensive Identity for AI solution secures, manages, and governs AI systems and data.
+- [Key Identity for AI Terminology](https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.md): Learn about key terms related to AI concepts and Identity for AI, a solution for securing, managing, and governing AI systems and data.
+- [MCP servers and OAuth 2.0](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-mcp-servers.md): When using MCP servers as an interface between AI agents and external tools, follow authentication and authorization best practices.
+- [Secure a Cloudflare Workers MCP server with PingFederate](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-pingfed.md)
+- [Secure a Cloudflare Workers MCP server with PingOne](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-pingone.md)
+- [Secure a Cloudflare Workers MCP server with PingOne Advanced Identity Cloud](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-aic.md)
+- [Secure a Cloudflare Workers MCP server with PingOne DaVinci](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-davinci.md)
+- [Secure an MCP server with PingGateway](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-mcp-servers-gateway.md): Secure any MCP server with PingGateway.
+- [Secure AWS Bedrock AgentCore Identity with the Ping Identity Platform](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-aws-ping.md)
+- [Securing AI Agents with PingFederate using delegated access tokens](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.md)
+- [Securing AI agents with PingOne using delegation and least privilege](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingone.md): Use delegation and least privilege to secure AI agents with PingOne and PingGateway.
+- [Securing Digital Assistants](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-digital-assistants.md): Secure AI agents by treating them as first-class identities and enforcing least-privilege access at runtime.
+- [Tools](https://developer.pingidentity.com/identity-for-ai/agents/idai-tools-intro.md): Agents can extend their capabilities with external tools.
+- [What Are AI Agents?](https://developer.pingidentity.com/identity-for-ai/agents/idai-what-are-agents.md): AI agents are systems that can act autonomously on behalf of a user or another system to complete tasks.
+- [What is Agent2Agent Protocol (A2A)?](https://developer.pingidentity.com/identity-for-ai/agents/idai-what-is-a2a.md): Learn about Google's Agent to Agent protocol, which defines how AI agents interact with each other
+- [What Is Identity for AI?](https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.md): Learn about Identity for AI, a comprehensive solution designed to secure, manage, and govern AI systems and data.
+- [What is Model Context Protocol (MCP)?](https://developer.pingidentity.com/identity-for-ai/agents/idai-what-is-mcp.md): The Model Context Protocol introduces a standardized integration layer for agent-tool communication.
+- [What&#8217;s New?](https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.md): Learn about new developments in Identity for AI, Ping Identity's solution for securing,  managing, and governing AI systems and data.

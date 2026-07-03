@@ -1,0 +1,10 @@
+# PingID End User Guide
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
+## Pingid User Guide
+
+- [Get help using PingID for authentication and verification](https://docs.pingidentity.com/pingid-user-guide/index.md): PingID FAQ for end users. Covers pairing PingID mobile app, finding a QR code, a lost or stolen device, and when to contact their company's help desk.
+- [Lost or stolen device?](https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md): What to do if your phone with PingID mobile app is lost or stolen: how to unpair it and set up a new phone, or get help from your IT help desk.
+- [Where to find a QR code to pair your device with PingID mobile app?](https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md): Where to find the QR code or pairing key your organization provides to pair your device with PingID mobile app.

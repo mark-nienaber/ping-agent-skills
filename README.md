@@ -1,36 +1,100 @@
 # Ping Agent Skills
 
-Agentskills-compliant skill bundles that route AI coding agents to Ping Identity's official live Markdown documentation.
+Agent Skills for Ping Identity documentation. Each generated skill is a thin router to Ping's official Markdown docs: it reads a cached `llms.txt`, selects the right live `.md` URL, and falls back to committed snapshots when offline.
 
-**Status:** Under construction. See `docs/specs/2026-07-03-agentskills-migration-design.md` for the full plan.
+This repo complements [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins). Use their six umbrella skills when you need product routing across PingOne, AIC, DaVinci, PingFederate, PingAccess, and app integration. Use this repo when you already know the docset and need deeper per-product documentation coverage.
 
-## What this is
+## Status
 
-- One [Agent Skill](https://agentskills.io) per Ping Identity docset (59 total across `docs.pingidentity.com` and `developer.pingidentity.com`).
-- Each skill is a thin router: a `SKILL.md` with an agentskills-spec frontmatter, a task-to-URL routing table, and a bundled `llms.txt` snapshot for offline discovery.
-- All actual documentation content is fetched live from Ping's official `.md` endpoints. No hand-authored copies. Never stales.
-- Monthly automated sync captures `single-page.md` snapshots per guide as offline fallback.
-
-## What it is not
-
-- Not a replacement for [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins). That plugin ships umbrella skills that route across products; this repo provides deep per-docset coverage. The two compose.
-- Not a rewrite of Ping's docs. Content comes from Ping's canonical `.md` endpoints via their [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md) guidance.
-
-## Predecessor
-
-This repo supersedes the hand-curated static skill set at [`mark-nienaber_pingcorp/ping_skills`](https://github.com/mark-nienaber_pingcorp/ping_skills), preserved under the `v1.0-legacy-static` tag.
+- 57 docsets are registered in `scripts/docsets.yaml`; 56 are enabled.
+- 56 skills are generated under `plugins/ping-identity-docs/skills/`.
+- `pingcli` is disabled: Ping's root developer `llms.txt` links to `https://developer.pingidentity.com/pingcli/llms.txt`, but that redirects to `/pingcli/1.1/llms.txt`, which returns 404. Tracking issue: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
+- Snapshot size is about 19 MB, below the 200 MB threshold for proposing fetch-on-demand mode.
+- Numeric-version docsets are pinned with `preferred_version` in `scripts/docsets.yaml`; quarterly bump PRs should update that field and refresh snapshots.
 
 ## Install
 
-Not yet published. Once the first-pass ships:
+Claude Code marketplace install, once published:
 
-```
-# Claude Code
+```bash
 /plugin marketplace add https://github.com/mark-nienaber/ping-agent-skills
-
-# Cursor / Copilot / Gemini / OpenCode
-npx skills add mark-nienaber/ping-agent-skills
 ```
+
+Local Claude Code skill install:
+
+```bash
+./setup-claude.sh
+./setup-claude.sh pingam pingoneaic pingfederate
+./setup-claude.sh --push /path/to/project pingam pingone
+```
+
+Local Codex skill install:
+
+```bash
+./setup-codex.sh
+./setup-codex.sh pingam pingoneaic pingfederate
+./setup-codex.sh --push /path/to/project pingam pingone
+```
+
+The setup scripts preserve the legacy positional slug filtering style. With no slugs, they install every generated skill. With slugs, they install only those skills.
+
+## Repository Layout
+
+```text
+.claude-plugin/
+  plugin.json
+  marketplace.json
+plugins/
+  ping-identity-docs/
+    .claude-plugin/plugin.json
+    skills/<docset-slug>/
+      SKILL.md
+      references/
+        llms.txt
+        MANIFEST.md
+        snapshots/*.md
+scripts/
+  docsets.yaml
+  sync-docset.sh
+  sync-all.sh
+  generate-skill.sh
+  validate.sh
+  lib/
+```
+
+## Workflow
+
+Sync one docset:
+
+```bash
+scripts/sync-docset.sh pingam
+```
+
+Sync all enabled docsets:
+
+```bash
+scripts/sync-all.sh
+```
+
+Generate a skill after syncing:
+
+```bash
+scripts/generate-skill.sh pingam
+```
+
+Validate generated skills:
+
+```bash
+scripts/validate.sh
+scripts/validate.sh --skip-url-check
+scripts/validate.sh --require-all-enabled
+```
+
+`--require-all-enabled` validates the generated skill set against enabled registry entries. `pingcli` remains registered but disabled until Ping fixes its per-docset `llms.txt` endpoint.
+
+## Snapshot Policy
+
+Snapshots are committed by default for offline safety and visible documentation drift. The sync script attempts each guide's versioned `single-page.md` URL, then the unversioned guide `single-page.md` URL. If both are unavailable, it falls back to the first official Ping `.md` page in the guide and records the source type in `references/MANIFEST.md`.
 
 ## License
 

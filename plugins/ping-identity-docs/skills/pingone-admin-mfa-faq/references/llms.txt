@@ -1,0 +1,5 @@
+# PingOne administrators MFA requirement - FAQ
+
+## Pingone Admin Mfa Faq
+
+- [PingOne administrators MFA requirement - FAQ](https://docs.pingidentity.com/pingone-admin-mfa-faq/p1_mfa_required_for_admins_faq.md)

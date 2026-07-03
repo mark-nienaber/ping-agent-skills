@@ -1,0 +1,5 @@
+# Documentation
+
+## Glossary
+
+- [Ping Identity Glossary](https://docs.pingidentity.com/glossary/index.md): Glossary for the Ping Identity documentation.

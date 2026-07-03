@@ -1,0 +1,16 @@
+# Ping Identity Licensing Guide
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
+## Licensing Guide
+
+- [Advanced Identity Software](https://docs.pingidentity.com/licensing-guide/advanced-identity-software.md): Licensing information for Ping Identity advanced identity software products, including features, packaging, and managed (stored) identity unit of measure.
+- [Archive](https://docs.pingidentity.com/licensing-guide/archive/archive.md): Archived Ping Identity licensing components no longer offered to new customers.
+- [Licensing basics](https://docs.pingidentity.com/licensing-guide/licensing-basics.md): Overview of Ping Identity licensing concepts, including subscription terms and environment types for production and non-production deployments.
+- [Ping Government Identity Cloud](https://docs.pingidentity.com/licensing-guide/ping-government-identity-cloud.md): Licensing information for Ping Government Identity Cloud, including dedicated deployment options, managed identity unit of measure, add-ons, and Secure Containers.
+- [Ping Identity Licensing Guide](https://docs.pingidentity.com/licensing-guide/index.md): Landing page for the Ping Identity licensing guide, with links to licensing basics, product-specific licensing information, and release notes.
+- [Ping Identity Licensing Guide release notes](https://docs.pingidentity.com/licensing-guide/release_notes/licensing-release-notes.md): Release notes for the Ping Identity licensing guide, documenting updates and changes to licensing documentation.
+- [PingOne Advanced Identity Cloud](https://docs.pingidentity.com/licensing-guide/pingone-advanced-identity-cloud.md): Licensing information for PingOne Advanced Identity Cloud, a dedicated-tenant SaaS platform, covering CIAM packaging options, annual active user measures, and add-ons.
+- [PingOne Advanced Services](https://docs.pingidentity.com/licensing-guide/pingone-advanced-services.md): Licensing for PingOne Advanced Services, a dedicated SaaS platform, covering supported products, identity-based usage measures, and infrastructure add-ons.
+- [PingOne Multi-tenant SaaS](https://docs.pingidentity.com/licensing-guide/multitenant-saas.md): Licensing for the PingOne Multi-Tenant SaaS platform, including environment management, identity-based usage measures, and license limits.

@@ -1,0 +1,43 @@
+name: Weekly Docs Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Sync Ping documentation snapshots
+        env:
+          PING_DOCS_SYNC_DELAY: "0.2"
+        run: scripts/sync-all.sh --batch-size 1
+
+      - name: Validate synced skills
+        run: scripts/validate.sh --skip-url-check
+
+      - name: Open pull request for documentation snapshot changes
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/weekly-docs-sync
+          commit-message: "chore: sync ping documentation snapshots"
+          title: "chore: sync Ping documentation snapshots"
+          body: |
+            Automated weekly Ping documentation snapshot sync.
+
+            This workflow runs `scripts/sync-all.sh --batch-size 1` with a polite per-snapshot delay, then validates generated skill structure.
+
+            If this PR includes only `references/llms.txt`, `references/snapshots/`, or `references/MANIFEST.md` changes, it reflects upstream Ping documentation drift.
+          labels: |
+            automated
+            documentation
+          delete-branch: true
