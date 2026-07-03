@@ -1,0 +1,25 @@
+# Build with AI
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
+## Build With Ai
+
+- [Agent Skills](https://developer.pingidentity.com/build-with-ai/agent-skills/overview.md): Agent skills that extend AI coding assistants with Ping Identity domain expertise for building, integrating, and operating identity solutions.
+- [Authentication](https://developer.pingidentity.com/build-with-ai/aic-mcp-server/authentication.md): How authentication works in the AIC MCP Server, including OAuth 2.0 PKCE and Device Code flows.
+- [Authentication](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/authentication.md): How authentication works in the DaVinci MCP Server, including OAuth 2.0 PKCE flow, token storage, and regional configuration.
+- [Available tools](https://developer.pingidentity.com/build-with-ai/aic-mcp-server/available-tools.md): An overview of the tool categories available in the AIC MCP Server.
+- [Available tools](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/available-tools.md): An overview of the tool categories available in the DaVinci MCP Server.
+- [Build an iOS Sample App with AI](https://developer.pingidentity.com/build-with-ai/use-cases/build-ios-app.md)
+- [Client configuration](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/client-configuration.md): MCP client configuration examples, CLI flags, and advanced usage for the DaVinci MCP Server.
+- [Disclaimers and Limitations](https://developer.pingidentity.com/build-with-ai/disclaimers.md): Important disclaimers, warnings, and limitations to understand before using MCP servers, agent skills, and other AI tooling from Ping Identity.
+- [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md): How AI agents can discover, navigate, and ingest Ping Identity documentation, including AI-friendly Markdown alternates and llms.txt endpoints.
+- [Overview](https://developer.pingidentity.com/build-with-ai/aic-mcp-server/overview.md): An overview of the AIC MCP Server, a Model Context Protocol server for managing PingOne Advanced Identity Cloud environments using natural language.
+- [Overview](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/overview.md): An overview of the DaVinci MCP Server for interacting with PingOne DaVinci identity orchestration resources using natural language.
+- [Security](https://developer.pingidentity.com/build-with-ai/aic-mcp-server/security.md): Security considerations and best practices for the AIC MCP Server.
+- [Security](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/security.md): Security considerations and best practices for the DaVinci MCP Server.
+- [Start Here](https://developer.pingidentity.com/build-with-ai/index.md)
+- [Try it out](https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/getting-started.md): Install and configure the DaVinci MCP Server to interact with your PingOne DaVinci environment using natural language.
+- [Try it Out](https://developer.pingidentity.com/build-with-ai/aic-mcp-server/getting-started.md): Install and configure the AIC MCP Server to interact with your PingOne Advanced Identity Cloud environment using natural language.
+- [Tying It All Together](https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md)
+- [What&#8217;s New?](https://developer.pingidentity.com/build-with-ai/release_notes/whats-new.md): Release notes and announcements for Build with AI and Ping.

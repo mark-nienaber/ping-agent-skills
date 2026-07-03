@@ -1,0 +1,14 @@
+# Documentation
+
+## Config Automation Management Sdks
+
+- [Configuration and User Management SDKs Overview](https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md)
+- [Develop with Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md)
+- [Getting support](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md)
+- [identitycloud-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md)
+- [Interface stability](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/interface_stability.md)
+- [Introduction to PingDirectory Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/introduction.md)
+- [Introduction to PingFederate Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/introduction.md)
+- [Introduction to PingOne Advanced Identity Cloud Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/introduction.md)
+- [pingdirectory-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/languages/go/getting_started.md)
+- [pingfederate-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/languages/go/getting_started.md)

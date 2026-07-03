@@ -1,0 +1,25 @@
+# Documentation
+
+## P14e Directory Api
+
+- [Creating a Resource](https://developer.pingidentity.com/p14e-directory-api/create-resource.md)
+- [Creating Requests](https://developer.pingidentity.com/p14e-directory-api/create-requests.md)
+- [Deleting a Resource](https://developer.pingidentity.com/p14e-directory-api/delete-resource.md)
+- [Directory Actions](https://developer.pingidentity.com/p14e-directory-api/directory-actions.md)
+- [Functional Overview](https://developer.pingidentity.com/p14e-directory-api/functional-overview.md)
+- [Group Actions](https://developer.pingidentity.com/p14e-directory-api/group-actions.md)
+- [Group Membership Count](https://developer.pingidentity.com/p14e-directory-api/group-membership-count.md)
+- [Group Resources](https://developer.pingidentity.com/p14e-directory-api/group-resources.md)
+- [Handling Errors](https://developer.pingidentity.com/p14e-directory-api/handle-errors.md)
+- [Handling Responses](https://developer.pingidentity.com/p14e-directory-api/handle-responses.md)
+- [PingOne for Enterprise Directory API](https://developer.pingidentity.com/p14e-directory-api/index.md)
+- [Previous Releases](https://developer.pingidentity.com/p14e-directory-api/release_notes/docset-release-notes.md)
+- [Reading a Resource](https://developer.pingidentity.com/p14e-directory-api/read-resource.md)
+- [Resetting a Password](https://developer.pingidentity.com/p14e-directory-api/reset-password.md)
+- [Resetting a Password by Email](https://developer.pingidentity.com/p14e-directory-api/reset-password-by-email.md)
+- [Updating a Resource](https://developer.pingidentity.com/p14e-directory-api/update-resource.md)
+- [User Actions](https://developer.pingidentity.com/p14e-directory-api/user-actions.md)
+- [User Authentication](https://developer.pingidentity.com/p14e-directory-api/user-authentication.md)
+- [User Invitation](https://developer.pingidentity.com/p14e-directory-api/user-invitation.md)
+- [User Registration Notifications](https://developer.pingidentity.com/p14e-directory-api/user-registration-notifications.md)
+- [User Resources](https://developer.pingidentity.com/p14e-directory-api/user-resources.md)

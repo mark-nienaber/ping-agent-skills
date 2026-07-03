@@ -1,0 +1,79 @@
+---
+title: Azure Kubernetes Service
+description: This directory contains scripts and deployment files to help with the deployment, management, and scaling of Ping Identity DevOps Docker images to Microsoft Azure Kubernetes Service (AKS).
+component: devops
+page_id: devops::deployment/deployK8s-AKS
+canonical_url: https://developer.pingidentity.com/devops/deployment/deployK8s-AKS.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-preparing-azure-kubernetes-service: Preparing Azure Kubernetes Service
+  devops-prerequisites: Prerequisites
+  devops-deploying-our-fullstack-example-in-aks: Deploying our fullstack example in AKS
+---
+
+# Azure Kubernetes Service
+
+## Preparing Azure Kubernetes Service
+
+This directory contains scripts and deployment files to help with the deployment, management, and scaling of Ping Identity DevOps Docker images to Microsoft Azure Kubernetes Service (AKS).
+
+### Prerequisites
+
+Before you begin, you must:
+
+* Set up your DevOps environment and run a test deployment of the products. For more information, see [Get Started](../get-started/introduction.html).
+
+* Create a Kubernetes cluster on AKS.
+
+* Create a Kubernetes secret using your DevOps credentials. See the *For Kubernetes* topic in [Using your DevOps user and key](../how-to/devopsUserKey.html).
+
+* Download and install the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+
+We also highly recommend you are familiar with the information in these AKS articles:
+
+* [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)
+
+### Deploying our fullstack example in AKS
+
+1. Create an Azure Resource Group to put all resources into by entering:
+
+   ```
+   az group create \
+      --name ping-devops-rg \
+      --location westus
+   ```
+
+2. Create a two-node Azure AKS cluster by entering the following.
+
+   ```
+   az aks create \
+      --resource-group ping-devops-rg \
+      --name ping-devops-cluster \
+      --node-count 2 \
+      --enable-addons monitoring \
+      --ssh-key-value ~/.ssh/id_rsa.pub
+   ```
+
+   You need a public certificate by default in \~/.ssh/id\_rsa.pub.
+
+3. Import the AKS Credentials into `.kube/config` by entering:
+
+   ```
+   az aks get-credentials \
+      --resource-group ping-devops-rg \
+      --name ping-devops-cluster
+   ```
+
+4. At this point, the cluster should be ready for helm deployments.
+
+5. To clean up the Azure Resource Group and all associated resources, including the AKS cluster created, enter the following command:
+
+   |   |                                                                                      |
+   | - | ------------------------------------------------------------------------------------ |
+   |   | This will remove everything you created that is associated with this resource group. |
+
+   ```
+   az group delete \
+     --name ping-devops-rg
+   ```

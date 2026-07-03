@@ -1,0 +1,12 @@
+# Documentation
+
+## Config Automation Promotion
+
+- [Auditing and Reviewing Changes](https://developer.pingidentity.com/config-automation-promotion/concepts/auditing_and_reviewing_changes.md)
+- [Configuration as Code (CaC)](https://developer.pingidentity.com/config-automation-promotion/concepts/configuration_as_code.md)
+- [Configuration Automation Concepts](https://developer.pingidentity.com/config-automation-promotion/concepts/overview.md)
+- [Configuration Promotion at Ping Identity](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md)
+- [GitOps Pipeline Examples](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md)
+- [Promoting and Deploying Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/promoting_and_deploying_configuration.md)
+- [Testing Automation](https://developer.pingidentity.com/config-automation-promotion/concepts/automated_testing.md)
+- [Verifying Deployed Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/verifying_deployed_configuration.md)
