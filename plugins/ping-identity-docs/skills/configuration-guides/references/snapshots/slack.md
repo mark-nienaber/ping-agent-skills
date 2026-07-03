@@ -191,3 +191,155 @@ Enable Slack sign-on from a PingFederate URL (IdP-initiated sign-on) and direct 
    |   | If the user doesn't exist in Slack, you are prompted to accept the Slack terms. |
 
    ![Screen capture of the new Slack domain and the user's profile.](_images/nib1618954174193.jpg)
+
+---
+
+---
+title: Configuring SAML SSO with Slack and PingOne for Enterprise
+description: Enable Slack sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct Slack sign-on using PingOne for Enterprise (SP-initiated sign-on) with JIT provisioning.
+component: configuration_guides
+page_id: configuration_guides:slack:config_saml_slack_p1
+canonical_url: https://docs.pingidentity.com/configuration_guides/slack/config_saml_slack_p1.html
+revdate: May 15, 2024
+section_ids:
+  before-you-begin: Before you begin
+  set-up-the-slack-application-in-pingone-for-enterprise: Set up the Slack application in PingOne for Enterprise
+  add-the-pingone-for-enterprise-idp-connection-to-slack: Add the PingOne for Enterprise IdP connection to Slack
+  test-the-pingone-for-enterprise-idp-initiated-sso-integration: Test the PingOne for Enterprise IdP-initiated SSO integration
+  test-the-pingone-for-enterprise-sp-initiated-sso-integration: Test the PingOne for Enterprise SP-initiated SSO integration
+  next-steps: Next steps
+---
+
+# Configuring SAML SSO with Slack and PingOne for Enterprise
+
+Enable Slack sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct Slack sign-on using PingOne for Enterprise (SP-initiated sign-on) with JIT provisioning.
+
+## Before you begin
+
+* Link PingOne for Enterprise to an identity repository containing the users requiring application access.
+
+* You must have administrative access to PingOne for Enterprise and Slack.
+
+## Set up the Slack application in PingOne for Enterprise
+
+1. Sign on to PingOne for Enterprise and go to **Applications → Application Catalog**.
+
+2. Search for `Slack`.
+
+   ![Screen capture showing a search for Slack in the application catalog. The search results list shows the results for Slack.](_images/pou1618952920684.jpg)
+
+3. Expand the Slack entry and click the **Setup** icon.
+
+4. Copy the **Issuer** and **IdP ID** values.
+
+5. Download the signing certificate.
+
+   ![Screen capture showing how to download the signing certificate.](_images/efl1618952988715.jpg)
+
+6. Click **Continue to Next Step**.
+
+7. Set **ACS URL** to `https://your-slack-domain.slack.com/sso/saml`.
+
+8. Click **Continue to Next Step**.
+
+9. In the **Attribute Mapping** section, map the attributes to the corresponding attributes in your userstore.
+
+   ![Screen capture showing how to map the application attributes to the corresponding attributes in your userstore.](_images/xgl1618953065755.jpg)
+
+10. In the **SAML\_SUBJECT** row, click **Advanced**.
+
+11. In the **NameID Format to send to SP field**, enter `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+
+12. Click **Save**.
+
+    ![Screen capture showing the advanced attribute options and where to enter the Name ID Format to send to the SP.](_images/snt1618953100698.jpg)
+
+13. Click **Continue to Next Step**.
+
+14. Click **Add** for each user group that should have access to Slack.
+
+    ![Screen capture showing how to add user groups that should have access to Slack.](_images/zyb1618953176791.jpg)
+
+15. Click **Continue to Next Step**.
+
+16. Click **Finish**.
+
+## Add the PingOne for Enterprise IdP connection to Slack
+
+1. Sign on to your Slack Admin account as an administrator.
+
+2. Go to **Settings & Administration → Workspace Settings**.
+
+   ![Screen capture showing how to select Workspace settings in the Settings and administration menu.](_images/kgz1618953230690.jpg)
+
+3. Click the **Authentication** tab.
+
+4. In the **Configure an authentication method** section, on the **SAML authentication** line, click **Configure**.
+
+   ![Screen capture showing where to click the Configure button to begin configuring the SAML authentication method.](_images/olx1618953369144.jpg)
+
+5. If prompted, enter your password to continue.
+
+6. In the **SAML 2.0 Endpoint (HTTP)** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=PingOne-IdP-ID-value`.
+
+7. In the **Identity Provider Issuer** field, enter `PingOne-Issuer-value`.
+
+8. In the **Public Certificate** field, paste in the contents of the PingOne for Enterprise signing certificate.
+
+   ![Screen capture showing where to paste the SAML 2.0 Endpoint, the Identity Provider Issuer, and the PingOne for Enterprise signing certificate.](_images/rdd1618953501614.jpg)
+
+9. Expand the **Advanced Options** section and clear the **Responses Signed** check box.
+
+   ![Screen capture showing where to clear the Responses Signed check box in the Advanced Options section.](_images/ble1618953446851.jpg)
+
+10. In the **Settings** section, select the **It's optional** check box for the authentication setting.
+
+    |   |                                                                                                   |
+    | - | ------------------------------------------------------------------------------------------------- |
+    |   | You can change the authentication setting to your desired value after testing has been completed. |
+
+    ![Screen capture showing where to select It's Optional in the authentication settings.](_images/idk1618953623813.jpg)
+
+11. Click **Save Configuration**.
+
+    ![Screen capture of the Customize section. The Sign in Button Label and Button Preview are here to custmomize. The Save Configuration button is highlighted.](_images/xap1618954017365.jpg)
+
+## Test the PingOne for Enterprise IdP-initiated SSO integration
+
+1. Go to your Ping desktop as a user with Slack access.
+
+   |   |                                                                                               |
+   | - | --------------------------------------------------------------------------------------------- |
+   |   | To find the Ping desktop URL in the Admin console, go to **Setup → Dock → PingOne Dock URL**. |
+
+2. Complete the PingOne for Enterprise authentication.
+
+   You're redirected to your Slack domain.
+
+   |   |                                                                                 |
+   | - | ------------------------------------------------------------------------------- |
+   |   | If the user doesn't exist in Slack, you are prompted to accept the Slack terms. |
+
+## Test the PingOne for Enterprise SP-initiated SSO integration
+
+1. Go to your Slack domain, `https://your-domain.slack.com`.
+
+2. Click **Sign in with PingOne**.
+
+   ![Screen capture showing the Slack domain's sign in screen with the Sign in with PingOne button.](_images/jka1618954390829.jpg)
+
+3. After you're redirected to PingOne for Enterprise, enter your PingOne for Enterprise username and password.
+
+   ![Screen capture showing the Ping Identity Sign On screen.](_images/suk1618954127566.jpg)
+
+   After successful authentication, you're redirected back to Slack.
+
+   |   |                                                                                 |
+   | - | ------------------------------------------------------------------------------- |
+   |   | If the user doesn't exist in Slack, you are prompted to accept the Slack terms. |
+
+   ![Screen capture showing the new Slack application.](_images/nib1618954174193.jpg)
+
+## Next steps
+
+After successful testing, you can change the Slack **It's optional** authentication setting as necessary.

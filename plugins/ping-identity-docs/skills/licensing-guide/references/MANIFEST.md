@@ -12,27 +12,27 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| advanced-identity-software-md.md | page | https://docs.pingidentity.com/licensing-guide/advanced-identity-software.md | 1 |
-| archive.md | page | https://docs.pingidentity.com/licensing-guide/archive/archive.md | 1 |
-| index-md.md | page | https://docs.pingidentity.com/licensing-guide/index.md | 1 |
-| licensing-basics-md.md | page | https://docs.pingidentity.com/licensing-guide/licensing-basics.md | 1 |
-| multitenant-saas-md.md | page | https://docs.pingidentity.com/licensing-guide/multitenant-saas.md | 1 |
-| ping-government-identity-cloud-md.md | page | https://docs.pingidentity.com/licensing-guide/ping-government-identity-cloud.md | 1 |
-| pingone-advanced-identity-cloud-md.md | page | https://docs.pingidentity.com/licensing-guide/pingone-advanced-identity-cloud.md | 1 |
-| pingone-advanced-services-md.md | page | https://docs.pingidentity.com/licensing-guide/pingone-advanced-services.md | 1 |
-| release-notes.md | page | https://docs.pingidentity.com/licensing-guide/release_notes/licensing-release-notes.md | 1 |
+| advanced-identity-software-md.md | assembled | <1 pages from advanced-identity-software.md> | 1 |
+| archive.md | assembled | <1 pages from archive> | 1 |
+| index-md.md | assembled | <1 pages from index.md> | 1 |
+| licensing-basics-md.md | assembled | <1 pages from licensing-basics.md> | 1 |
+| multitenant-saas-md.md | assembled | <1 pages from multitenant-saas.md> | 1 |
+| ping-government-identity-cloud-md.md | assembled | <1 pages from ping-government-identity-cloud.md> | 1 |
+| pingone-advanced-identity-cloud-md.md | assembled | <1 pages from pingone-advanced-identity-cloud.md> | 1 |
+| pingone-advanced-services-md.md | assembled | <1 pages from pingone-advanced-services.md> | 1 |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | fdc8933d8a75a368cf785fe2f0c86cfecf51d53d5ca57fb7188061a9a3385d79 |
-| snapshots/advanced-identity-software-md.md | fcb845dd086547f2aa11db079548adb4b432326d1bc36801693b30f0e289b30d |
-| snapshots/archive.md | 54a8d9715d99f625fd598208aaefcc091371d182fbbc8d58012d58cabd3442b2 |
-| snapshots/index-md.md | 8e7c569f64f41590dce3661a63106fa175f5d09e1e005cafec127460a6b19850 |
-| snapshots/licensing-basics-md.md | 4a3a29b220c67b8059ca84ca09383e823cad37fe3b9fa75a223bde0a23172a94 |
-| snapshots/multitenant-saas-md.md | d314ce802ed53181f9e42db18e5cbbbf9c23cc3e64250b00ea9089b3c1b9072e |
-| snapshots/ping-government-identity-cloud-md.md | 0d10ecc88df6099ad636f490747a1a60835c05269b630f28c676234ba624d0d2 |
-| snapshots/pingone-advanced-identity-cloud-md.md | e6a952a6de48ceda3d93401ebe2ecaf4116a839dd57803b412ee7bf07ba529a7 |
-| snapshots/pingone-advanced-services-md.md | 0240c803917baa9588fda3303b471006c564e33c79840451cb3f1db1401c3193 |
-| snapshots/release-notes.md | 7707835b457777959828532dc5f95b4712bc9d7adcc91127a59d7c890089ef18 |
+| snapshots/advanced-identity-software-md.md | 80c95f7be5514d5061e2a692407281dea109a07fd28d92210179ec8eaa3b3554 |
+| snapshots/archive.md | f6daf49e9651b8f0c7523d1561c79cef29f07042520774bb4242c205352bea3f |
+| snapshots/index-md.md | b574abb22824a68709703c1d89289a30a049656aa1c56f77ceb6e5734c88da9e |
+| snapshots/licensing-basics-md.md | cd261db55e91ad873704e833722ad7071bb1c2647f591a7f62bfbcc1f29f04fb |
+| snapshots/multitenant-saas-md.md | 4a28126aa4bce6399ccbc85a2b2bc4a23ba92a6cafaf5da5b8f31a6769d3928b |
+| snapshots/ping-government-identity-cloud-md.md | a3102b1cffed2b4a655e82990dc63d257ca9bdc934802ed1640ace97b7fca249 |
+| snapshots/pingone-advanced-identity-cloud-md.md | d9a33ee9d48527d03b73baa91ace0a60aec78e9a794191e2599619edc9a18643 |
+| snapshots/pingone-advanced-services-md.md | 6f5f2a04b0ee594dcccd146730bb7f36922094bd04584e5f0ba6d1421a56340f |
+| snapshots/release-notes.md | e078e4b4305357f097ed2ea9412d3fba1a080590b74845dd954ae52118a6f3b5 |

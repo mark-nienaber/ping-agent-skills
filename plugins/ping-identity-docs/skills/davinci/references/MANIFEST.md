@@ -12,49 +12,49 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| flows.md | page | http://docs.pingidentity.com/davinci/flows/davinci_actions.md | 38 |
-| davinci-best-practices.md | page | http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_creating.md | 15 |
-| connectors.md | page | http://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.md | 13 |
-| applications.md | page | http://docs.pingidentity.com/davinci/applications/davinci_applications.md | 11 |
-| integrating-flows-into-applications.md | page | http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_how_to_implement_a_flow.md | 7 |
-| variables.md | page | http://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.md | 5 |
-| use-cases.md | page | http://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_adding_social_login.md | 4 |
-| users.md | page | http://docs.pingidentity.com/davinci/users/davinci_deleting_a_user.md | 3 |
-| usage-terms.md | page | http://docs.pingidentity.com/davinci/usage_terms/davinci_browser_support.md | 2 |
-| company-settings.md | page | http://docs.pingidentity.com/davinci/company_settings/davinci_company_settings.md | 1 |
-| configuring-siem-streaming.md | page | http://docs.pingidentity.com/davinci/configuring_siem_streaming/davinci_configuring_siem_streaming.md | 1 |
-| davinci-adding-p1-admin-users-md.md | page | http://docs.pingidentity.com/davinci/davinci_adding_p1_admin_users.md | 1 |
-| davinci-audit-trail-md.md | page | http://docs.pingidentity.com/davinci/davinci_audit_trail.md | 1 |
-| davinci-dashboard-md.md | page | http://docs.pingidentity.com/davinci/davinci_dashboard.md | 1 |
-| davinci-early-access-md.md | page | http://docs.pingidentity.com/davinci/davinci_early_access.md | 1 |
-| davinci-forms-md.md | page | http://docs.pingidentity.com/davinci/davinci_forms.md | 1 |
-| davinci-introduction-md.md | page | http://docs.pingidentity.com/davinci/davinci_introduction.md | 1 |
-| davinci-landing-page-md.md | page | http://docs.pingidentity.com/davinci/davinci_landing_page.md | 1 |
-| release-notes.md | page | http://docs.pingidentity.com/davinci/release_notes/davinci_release_notes.md | 1 |
-| ui-studio.md | page | http://docs.pingidentity.com/davinci/ui_studio/davinci_ui_studio.md | 1 |
+| flows.md | assembled | <38 pages from flows> | 38 |
+| davinci-best-practices.md | assembled | <15 pages from davinci_best_practices> | 15 |
+| connectors.md | assembled | <13 pages from connectors> | 13 |
+| applications.md | assembled | <11 pages from applications> | 11 |
+| integrating-flows-into-applications.md | assembled | <7 pages from integrating_flows_into_applications> | 7 |
+| variables.md | assembled | <5 pages from variables> | 5 |
+| use-cases.md | assembled | <4 pages from use_cases> | 4 |
+| users.md | assembled | <3 pages from users> | 3 |
+| usage-terms.md | assembled | <2 pages from usage_terms> | 2 |
+| company-settings.md | assembled | <1 pages from company_settings> | 1 |
+| configuring-siem-streaming.md | assembled | <1 pages from configuring_siem_streaming> | 1 |
+| davinci-adding-p1-admin-users-md.md | assembled | <1 pages from davinci_adding_p1_admin_users.md> | 1 |
+| davinci-audit-trail-md.md | assembled | <1 pages from davinci_audit_trail.md> | 1 |
+| davinci-dashboard-md.md | assembled | <1 pages from davinci_dashboard.md> | 1 |
+| davinci-early-access-md.md | assembled | <1 pages from davinci_early_access.md> | 1 |
+| davinci-forms-md.md | assembled | <1 pages from davinci_forms.md> | 1 |
+| davinci-introduction-md.md | assembled | <1 pages from davinci_introduction.md> | 1 |
+| davinci-landing-page-md.md | assembled | <1 pages from davinci_landing_page.md> | 1 |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 |
+| ui-studio.md | assembled | <1 pages from ui_studio> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 515bd920f7a014e527b1f8d36077924f19f765ba3900a6c2b212a78fea823479 |
-| snapshots/flows.md | 65e5f13623774e67ce1f1d8e4c6df9579b4bc1db4c92ae4d8e3247231a071e06 |
-| snapshots/davinci-best-practices.md | 8db5ac712db9c4fa45e71162436d9e02c53d3b06cb3a32372e18d397132e293d |
-| snapshots/connectors.md | 424060c5e05c4c6b679322ba0546d8a14ff7322859ecc59f1ed63b306589b63a |
-| snapshots/applications.md | 65e34096499230d2147bc409fd4f1ce147bf8fbf34f4948b4c0228dcc8ce953b |
-| snapshots/integrating-flows-into-applications.md | b11a5765f029c01fa4e99b86ff508d5e64ea8a6b17f171401c660245a2a95012 |
-| snapshots/variables.md | 7a1fe305aab1e7d6559b9e52c836b93f07548292f042c6af8d496050606e4952 |
-| snapshots/use-cases.md | 1fe14399a7ea40281a6378b166937f648bab78372f8c0ebad3bfd346ad6b3de3 |
-| snapshots/users.md | 86aba68189d9aff2cfe1b0ed5448879df386dcff2ef57440bbdf42bb09e77565 |
-| snapshots/usage-terms.md | 710cf182d5e3517ac55b87f60b6b385f4262398b3a86ec1a0041df5ae3d7c8b6 |
-| snapshots/company-settings.md | 9fdc8c9a2a58d0eb8de0009553c7033094f2b1048bb1611ba286f3cb9bc91dee |
-| snapshots/configuring-siem-streaming.md | 76a84d73526467c7b319f6a12a4d0f69dca8f93341b4fd642a00f92c9d08d6dd |
-| snapshots/davinci-adding-p1-admin-users-md.md | bf0fbec78eced8011eae69e185d8e8b3b1bf6e5145ed9d61a991265954ba3a58 |
-| snapshots/davinci-audit-trail-md.md | 3c92f9c036bc69c33b55deee8b20e2427c9eacf24603431c5be81f62d11a852d |
-| snapshots/davinci-dashboard-md.md | 783509f001f7fd7fb4509753fd759ab9a8f0ecd1d38901ebe239cd287fe0ea84 |
-| snapshots/davinci-early-access-md.md | bff7a5c750763589992cfbf9593649475838d594ef77f446b7e1a9b0253dd12b |
-| snapshots/davinci-forms-md.md | 6b26652ffaf3c96280f7f4076ce8a858447fb4f1574c7a11e515b43c8dcd3503 |
-| snapshots/davinci-introduction-md.md | 24653fdf11ef88f9208e7fb26502993f30811a2489def911bbbbe2d44a5f8b80 |
-| snapshots/davinci-landing-page-md.md | d3c55e9c101ab698f1f57396cd8f94204ce4cd3ca51e1ff4e617fe305b5dfcb4 |
-| snapshots/release-notes.md | e619744fa45c19b04109f33ae2c18e12b91a973b1b2d9d99049aedef415c2752 |
-| snapshots/ui-studio.md | b1309da0f13c4be4051d80b8c90b59ae489d63764175337991da5998c2724299 |
+| snapshots/flows.md | 5f5ab8f1970dc8f5b02370c9d64a05e06dc0af70c01edd6a569ecd15e1c9536b |
+| snapshots/davinci-best-practices.md | b08c156a827f4489e35f37ad1d87a4be827de476df75d9f2abdb1fd3eb9d674d |
+| snapshots/connectors.md | ab4154d1cb66fc0b0c23026c60fda850ba525e9e9fb3221e22b0dfdbb79dd413 |
+| snapshots/applications.md | 13e98cc6fb590410bcf1a3158662bc2bc4368bed54fa1c8ef3c5143b07a65e6a |
+| snapshots/integrating-flows-into-applications.md | 39105ea72a4c3bb49a762941ccaed9fd049dbc7f21a51ccca2c526ac65845dc7 |
+| snapshots/variables.md | 61ee03c14b0c6b645431f89206c4f3f18d73723a9ead52faa496d9ff96f8d997 |
+| snapshots/use-cases.md | 1150ea184b4a0be7fb2ceb72430287dfe424d41f86c475b150b4e42960b83688 |
+| snapshots/users.md | fc3a687528b25ca734867444296f1f159e20fa53c36f77c3f8a6bafb7f29cedf |
+| snapshots/usage-terms.md | f2512cb238d654e7b1426de4d81e90ff878014179a2465c55d07fae125db666e |
+| snapshots/company-settings.md | c9eeb0331518a8b15133f67e7238706c28e345196a6271b0ec9e65c278eab6c6 |
+| snapshots/configuring-siem-streaming.md | bd2823707341649cff184b67d9f0bd5206616f8bb7dd9b8b8bbf5b3b0248a967 |
+| snapshots/davinci-adding-p1-admin-users-md.md | b46a8bc4151dccfbd8ce41f32013f07aff3832dba638c5a94b2fc7455e339fc0 |
+| snapshots/davinci-audit-trail-md.md | 99e8ac497702f06142282f6cf5604acae69ed19e72452f2bf1d3982aa60a6384 |
+| snapshots/davinci-dashboard-md.md | 9bca466a3bdcf3c7e8f41b861c2b97b43a718ee134545d2df36a366419e7fa66 |
+| snapshots/davinci-early-access-md.md | c17a940bbfc593135c263b530c417a22790b3d2476477a0e0cb4d2aa7a7af2f7 |
+| snapshots/davinci-forms-md.md | 8f45a9376bc68659588c1c90eaeae909ebe655fe92616a2ab9f570e6e26c848d |
+| snapshots/davinci-introduction-md.md | e7566962b759de813c97b4d84c6eb424b734b2b76403ad18250c5ead2b18f206 |
+| snapshots/davinci-landing-page-md.md | e40f01e39532a17cc4a21bc8b44d5c46975c61b43a68bee995e7d6be19d6623d |
+| snapshots/release-notes.md | 5789764f976dfd91b4a88fcff5172d85ad74d773346aaccd0f2ec9faec4f993a |
+| snapshots/ui-studio.md | 435620f331dd6127fc670dd2b8a9bf5ecd36edd018123badba4b2be33bc817f1 |

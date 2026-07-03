@@ -515,3 +515,177 @@ The examples in this section assume that the agent is installed in `/path/to/jav
 |   |                                                                                                                                                                                     |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Before you roll back to an earlier version of Java Agent, consider whether any change to the configuration during or since upgrade could be incompatible with the previous version. |
+
+---
+
+---
+title: Major upgrade
+description: "Perform a major upgrade of PingAM Java Agent: plan downtime, back up, uninstall the old agent, install the new version, and update configuration."
+component: java-agents
+version: 2026
+page_id: java-agents:upgrade:major-upgrade
+canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/major-upgrade.html
+section_ids:
+  perform_a_major_upgrade: Perform a major upgrade
+  roll_back_from_a_major_upgrade: Roll back from a major upgrade
+---
+
+# Major upgrade
+
+## Perform a major upgrade
+
+1. Read the [release notes](https://docs.pingidentity.com/java-agents/release-notes/preface.html) for information about changes in Java Agent.
+
+2. Plan for server downtime.
+
+   Plan to route client applications to another server until the process is complete and you have validated the result. Make sure the owners of client applications are aware of the change, and let them know what to expect.
+
+3. Download the agent binaries from the [Ping Identity Download Center](https://backstage.pingidentity.com/downloads).
+
+4. Back up the directories for the agent installation and the web application container configuration:
+
+   * In [local configuration mode](../user-guide/glossary.html#def-local-configuration-mode):
+
+     ```bash
+     $ cp -r /path/to/java_agents/agent_type /path/to/backup
+     $ cp -r /path/to/agent_type/webapps/agentapp /path/to/backup
+     ```
+
+   * In [remote configuration mode](../user-guide/glossary.html#def-remote-configuration-mode), back up as described in AM's [Maintenance guide](https://docs.pingidentity.com/pingam/8.1/maintenance-guide/backup-restore.html).
+
+5. Redirect client traffic away from protected web applications.
+
+6. Stop the web applications where the agent is installed.
+
+7. Remove the old Java Agent, as described in [Remove Java Agent](../installation-guide/uninstallation.html).
+
+8. Install the new agent.
+
+   The installer creates new versions of the following files, with configuration that is relevant to the new version of the agent:
+
+   * [AgentConfiguration.properties](../user-guide/about.html#agentsConfigurationFile)
+
+   * [AgentBootstrap.properties](../user-guide/about.html#about-bootstrap-properties)
+
+   * [agent-logback.xml](../user-guide/about.html#agent-logback-xml)
+
+   * [AgentPassword.properties](../user-guide/about.html#agentPassword-properties)
+
+   * [AgentKey.properties](../user-guide/about.html#agentkey-properties)
+
+9. Using the agent's [release notes](https://docs.pingidentity.com/java-agents/release-notes/preface.html) and AM's [release notes](https://docs.pingidentity.com/pingam/release-notes), check for changes and update the configuration.
+
+   |   |                                                                                                                                                                           |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | To prevent errors, do not copy configuration files from the previous installation to the new installation. Use the new version of the files and update then as necessary. |
+
+   * In [local configuration mode](../user-guide/glossary.html#def-local-configuration-mode), update `AgentConfiguration.properties` manually to include properties for your environment, using backed-up files for guidance.
+
+     The `AgentBootstrap.properties` file created by the installer contains bootstrap properties relevant to the new version of the agent.
+
+   * In [remote configuration mode](../user-guide/glossary.html#def-remote-configuration-mode), change the agent configuration using the AM admin UI.
+
+10. Secure communication between AM and the agent with appropriate keys. For information, refer to [Configure AM servers to communicate with Java Agents](../installation-guide/pre-installation.html#configuring-agent-communication).
+
+11. Start the web applications where the agent is installed.
+
+12. Check that the agent is performing as expected:
+
+    1. Check the correct version of the agent is running:
+
+       * Set the log level to `trace`, as described in [Manage logs](../maintenance-guide/logging.html).
+
+       * In `/path/to/java_agents/agent_type/Agent_n/logs/debug`, search for lines containing the string `X-ForgeRock-Edge-Metadata`. The version number is given in the header.
+
+         For example, the log file can contain the following header: `--header "X-ForgeRock-Edge-Metadata: JPA 2025.11`.
+
+    2. Navigate to a protected page on the website and confirm whether you can access it according to your configuration.
+
+    3. Check logs files for warnings and errors.
+
+13. Allow client traffic to flow to the protected web applications.
+
+## Roll back from a major upgrade
+
+|   |                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Before you roll back to a previous version of Java Agent, consider whether any change to the configuration during or since upgrade could be incompatible with the previous version. |
+
+---
+
+---
+title: Post update and upgrade tasks
+description: "Review what's new after upgrading PingAM Java Agent and consider activating new features and functionality."
+component: java-agents
+version: 2026
+page_id: java-agents:upgrade:post-upgrade-tasks
+canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/post-upgrade-tasks.html
+---
+
+# Post update and upgrade tasks
+
+After upgrade or update, review the [what's new](https://docs.pingidentity.com/java-agents/release-notes/whats-new.html) section in the release notes and consider activating new features and functionality.
+
+For information about other post-installation options, refer to [Post-installation tasks](../installation-guide/post-installation.html).
+
+---
+
+---
+title: Upgrade
+description: "Introduction to PingAM Java Agent upgrade types: drop-in software updates for minor versions and major upgrades between major versions."
+component: java-agents
+version: 2026
+page_id: java-agents:upgrade:preface
+canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/preface.html
+page_aliases: ["index.adoc"]
+section_ids:
+  preface-examples: Example installation for this guide
+---
+
+# Upgrade
+
+Java Agent supports the following types of upgrade:
+
+* [Drop-in software update](drop-in-upgrade.html):
+
+  Usually, an update from a version of Java Agent to a newer minor version, as defined in [Ping Identity End of Life (EOL) Software Tracker](https://support.pingidentity.com/s/article/Ping-Identity-EOL-Tracker#pamagents). For example, update from 2025.3 to 2025.11 can be a drop-in software update.
+
+  Drop-in software updates can introduce additional functionality and fix bugs or security issues. Consider the following restrictions for drop-in software updates:
+
+  * Don't require any update to the configuration
+
+  * Can't cause feature regression
+
+  * Can change default or previously configured behavior **only** for bug fixes and security issues
+
+  * Can deprecate **but not remove** existing functionality
+
+* [Major upgrade](major-upgrade.html):
+
+  Usually, an upgrade from a version of Java Agent to a newer major version, as defined in [Ping Identity End of Life (EOL) Software Tracker](https://support.pingidentity.com/s/article/Ping-Identity-EOL-Tracker#pamagents). For example, upgrade from 2025.11 to 2026.6 is a major upgrade.
+
+  Major upgrades can introduce additional functionality and fix bugs or security issues. Major upgrades do not have the restrictions of drop-in software update. Consider the following features of major upgrades:
+
+  * Can require code or configuration changes
+
+  * Can cause feature regression
+
+  * Can change default or previously configured behavior
+
+  * Can deprecate **and** remove existing functionality
+
+This guide describes how to upgrade a single Java Agent instance. To upgrade sites with multiple Java Agent instances, one by one, stop, upgrade, and then restart each server individually, leaving the service running during the upgrade.
+
+For information about upgrade between supported versions of Java Agent, refer to [Ping Identity End of Life (EOL) Software Tracker](https://support.pingidentity.com/s/article/Ping-Identity-EOL-Tracker#pamagents).
+
+## Example installation for this guide
+
+Unless otherwise stated, the examples in this guide assume the following installation:
+
+* Java Agent installed on `https://agent.example.com:443/app`.
+
+* AM installed on `https://am.example.com:8443/am`.
+
+* Work in the top-level realm `/`.
+
+If you use a different configuration, substitute in the procedures accordingly.

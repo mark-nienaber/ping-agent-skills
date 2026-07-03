@@ -12,19 +12,19 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| latest.md | page | https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.md | 223 |
-| root.md | page | https://docs.pingidentity.com/auth-node-ref/8.1/accept-terms-and-conditions.md | 121 |
-| pingone.md | page | https://docs.pingidentity.com/auth-node-ref/8.1/pingone/pingone-authorize.md | 23 |
-| am-only.md | page | https://docs.pingidentity.com/auth-node-ref/8.1/am-only/amster-jwt-decision.md | 12 |
-| self-managed.md | page | https://docs.pingidentity.com/auth-node-ref/8.1/self-managed/authenticate-thing.md | 3 |
+| latest.md | assembled | <223 pages from latest> | 223 |
+| root.md | assembled | <121 pages from root> | 121 |
+| pingone.md | assembled | <23 pages from pingone> | 23 |
+| am-only.md | assembled | <12 pages from am-only> | 12 |
+| self-managed.md | assembled | <3 pages from self-managed> | 3 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | c380560a805fde9f4bd02198a464a5027f8abcd5274513504c05f1440eba676e |
-| snapshots/latest.md | a7984af3b8d36600f90481524300928ff817d3f10db0ed5022044a0499da322b |
-| snapshots/root.md | a60eddbaff8a4ddec0533798147d6153296c43d8190978bc91d914462900cbc3 |
-| snapshots/pingone.md | 0d0c24de5f077e9fbc8cd2191bee017c3fd0d4164fb008f5454657de934baf2f |
-| snapshots/am-only.md | 3fcb2310b541ef82fdaebd7c67f33b6f4eb3efd3ee0ef5b2808f5deb9114b627 |
-| snapshots/self-managed.md | e6390227d23d3335cd8bb6d96ab82c86f0439fa2a85af8c14de00b3ccb75b024 |
+| snapshots/latest.md | a49bfd07a473f404cc116b6a64c971c46a728339995fca1363f0d57ce77f6966 |
+| snapshots/root.md | 7518b8e45f446468bd3dbd6c31beb2a22d4a20eeb177534bba415eabb3ec2e22 |
+| snapshots/pingone.md | 2913d512348b8ed6acba2565e1de7f9e6b497e3704fe8933afb91fbcb73daf99 |
+| snapshots/am-only.md | fc500f0f8b2277dcc874d726a41587521e621ed6148730fdc0234b00a329094a |
+| snapshots/self-managed.md | efcc4d7148c9b7dd3301a5efc5fca484c62a113d95fedc72d633441fae9e24a3 |

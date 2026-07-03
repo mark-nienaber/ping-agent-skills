@@ -246,3 +246,68 @@ The agent session lifetime is defined by the AM version and configuration, and i
 For the security of your deployment, set the agent session lifetime as described in [Manage Web Agent sessions](../security-guide/access.html#agent_sessions).
 
 If you clear agent sessions in the AM admin UI, you can accidentally kill an active agent session. If this happens, the agent detects that its session has expired and automatically obtains a new one.
+
+---
+
+---
+title: Continuous security
+description: Configure PingAM Web Agent to pass request context to PingAM in an environment map, enabling policy conditions based on client IP, DNS name, cookies, and headers.
+component: web-agents
+version: 2026
+page_id: web-agents:user-guide:continuous-security
+canonical_url: https://docs.pingidentity.com/web-agents/2026/user-guide/continuous-security.html
+section_ids:
+  continuous-security-custom: Environment maps with customizable keys
+---
+
+# Continuous security
+
+When a user requests a resource through AM, excluding proxies and load balancers, the Web Agent is usually the first point of contact. Because Web Agent is closer to the user than AM, and outside the firewalls that separate the user and AM, the Web Agent can sometimes gather information about the request, which AM cannot access.
+
+When Web Agent requests a policy decision from AM, it can include the additional information in an *environment map*, a set of name/value pairs that describe the request IP and DNS name, along with other, optional, information. The additional information can then be included in the policy, for example, to allow only incoming requests that contain the `InternalNetwork`.
+
+In AM, use server-side authorization scripts to access the environment map, and write scripted conditions based on cookies and headers in the request. For information about server-side authorization scripts, refer to [Scripting a policy condition](https://docs.pingidentity.com/pingam/8.1/am-authorization/scripted-policy-condition.html) in AM's *Authorization guide*.
+
+## Environment maps with customizable keys
+
+In Web Agent, use the continuous security properties [Continuous Security Cookie Map](../properties-reference/org.forgerock.openam.agents.config.continuous.security.cookies.html) and [Continuous Security Header Map](../properties-reference/org.forgerock.openam.agents.config.continuous.security.headers.html) to configure an environment map with the following parts:
+
+* requestIp
+
+  The IP address of the inbound request, determined as follows:
+
+  * If [Client IP Address Header](../properties-reference/com.sun.identity.agents.config.client.ip.header.html) is configured, Web Agent extracts the IP address from the header.
+
+  * Otherwise, Web Agent uses the web server connection information to determine the client IP address.
+
+  This entry is always created in the map.
+
+* requestDNSName
+
+  The host name address of the inbound request, determined as follows:
+
+  * If [Client Hostname Header](../properties-reference/com.sun.identity.agents.config.client.hostname.header.html) is configured, Web Agent extracts the host name from the header.
+
+  * Otherwise, Web Agent uses the web server connection information to determine the client's host name.
+
+  This entry is always created in the map.
+
+* Other variable names
+
+  An array of cookie or header values. An entry is created for each value specified in the continuous security properties.
+
+  In the following example, the continuous security properties are configured to map values for the `ssid` cookie and `User-Agent` header to fields in an environment map:
+
+  ```
+  org.forgerock.openam.agents.config.continuous.security.cookies[ssid]=mySsid
+  org.forgerock.openam.agents.config.continuous.security.headers[User-Agent]=myUser-Agent
+  ```
+
+  If the incoming request contains an `ssid` cookie and a `User-Agent` header, the environment map takes the value of the cookie and header, as shown in this example:
+
+  ```
+  requestIp=192.16.8.0.1
+  requestDnsName=client.example.com
+  mySsid=77xe99f4zqi1l99z
+  myUser-Agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+  ```

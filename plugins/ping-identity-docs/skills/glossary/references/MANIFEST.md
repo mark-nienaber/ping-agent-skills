@@ -12,11 +12,11 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| index-md.md | page | https://docs.pingidentity.com/glossary/index.md | 1 |
+| index-md.md | assembled | <1 pages from index.md> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | e372b0ad048f2470709ddbe96180b9ef02fb332982186f5cf2dc5477ea071554 |
-| snapshots/index-md.md | 2fa8575be4a6ced1468843109a652205124c10da9458c7c433c3783a7766525f |
+| snapshots/index-md.md | aba49a28f2d49493a5db3bf7b13f756d1b200bb6caa941d101183858eabf9a3c |

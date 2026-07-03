@@ -5,26 +5,24 @@
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/identity-governance/llms.txt
 - Guides discovered: 5
-- Guides captured: 5
+- Guides captured: 4
 - Total pages indexed: 70
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| users-guide.md | page | https://docs.pingidentity.com/identity-governance/7.1.2/users-guide/chap-access-request.md | 32 |
-| release-notes.md | page | https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-before-you-install.md | 20 |
-| admin-guide.md | page | https://docs.pingidentity.com/identity-governance/7.1.2/admin-guide/chap-access-request.md | 8 |
-| api-guide.md | page | https://docs.pingidentity.com/identity-governance/7.1.2/api-guide/chap-api-intro.md | 8 |
-| root.md | page | https://docs.pingidentity.com/identity-governance/7.1.2/glossary.md | 2 |
+| users-guide.md | assembled | <32 pages from users-guide> | 32 |
+| release-notes.md | assembled | <20 pages from release-notes> | 20 |
+| api-guide.md | assembled | <8 pages from api-guide> | 8 |
+| root.md | assembled | <2 pages from root> | 2 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | e8baacd78db8490bdfbbee2efdb33e81fc740eee69b4ce7509c65a6997b90398 |
-| snapshots/users-guide.md | 94c4e4bf6dc089951218376747b4938bf840072a539b808892a19d000eeea9e6 |
-| snapshots/release-notes.md | 47f1f59bf6dd9d21333a9109d5ac8e2b95dcf14f84337f275c7603ce85dcad73 |
-| snapshots/admin-guide.md | f7f751e30f45c8216dddb4adbf280327452fe48ac97f92a384c7383736a98f67 |
-| snapshots/api-guide.md | 287599c3f5299c734ca4922a9a7c2d2e0757bee96a5e69a6d4ea1c8c50937969 |
-| snapshots/root.md | cadf38f15d4f2b345aa05ca88cb7a4e2972ed39d02d2a09bc9cb5d05be430ec8 |
+| snapshots/users-guide.md | bf37b4da6ff339c9194dc23a352bed26c3e9318347d34ce16b2c03a3a3c423bc |
+| snapshots/release-notes.md | fbe5b8ac3a14a9216011cfc4c2bf8cf9e000007eb9da5862d15bd8ffdcbed7ff |
+| snapshots/api-guide.md | 05a022d5daaea9be314320a0d7ad14ec35cddc901634c307ecc2448a7a45ebf4 |
+| snapshots/root.md | 879c2c957ff2d8a2eac47cca3174910a176f1e49038b8ae67ffab3ff7cfa007b |

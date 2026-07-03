@@ -5,34 +5,32 @@
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/pingauthorize/llms.txt
 - Guides discovered: 9
-- Guides captured: 9
+- Guides captured: 8
 - Total pages indexed: 393
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| pingauthorize-server-administration-guide.md | page | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_encrypt_log_files.md | 240 |
-| pingauthorize-policy-administration-guide.md | page | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_actions.md | 76 |
-| installing-and-uninstalling-pingauthorize.md | page | https://docs.pingidentity.com/pingauthorize/11.1/installing_and_uninstalling_pingauthorize/paz_available_docker_images.md | 25 |
-| troubleshooting-pingauthorize-server.md | page | https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_advanced_http_logging_monitoring.md | 23 |
-| pingauthorize-integrations.md | page | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration.md | 15 |
-| upgrading-pingauthorize.md | page | https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/paz_back_up_policies.md | 8 |
-| root.md | page | https://docs.pingidentity.com/pingauthorize/11.1/paz_introduction.md | 4 |
-| getting-started-with-pingauthorize-tutorials.md | page | https://docs.pingidentity.com/pingauthorize/11.1/getting_started_with_pingauthorize_tutorials/paz_get_started_tutorials.md | 1 |
-| release-notes.md | page | https://docs.pingidentity.com/pingauthorize/11.1/release_notes/paz_release_notes_legacy_home.md | 1 |
+| pingauthorize-server-administration-guide.md | assembled | <240 pages from pingauthorize_server_administration_guide> | 240 |
+| pingauthorize-policy-administration-guide.md | assembled | <76 pages from pingauthorize_policy_administration_guide> | 76 |
+| installing-and-uninstalling-pingauthorize.md | assembled | <25 pages from installing_and_uninstalling_pingauthorize> | 25 |
+| troubleshooting-pingauthorize-server.md | assembled | <23 pages from troubleshooting_pingauthorize_server> | 23 |
+| pingauthorize-integrations.md | assembled | <15 pages from pingauthorize_integrations> | 15 |
+| upgrading-pingauthorize.md | assembled | <8 pages from upgrading_pingauthorize> | 8 |
+| root.md | assembled | <4 pages from root> | 4 |
+| getting-started-with-pingauthorize-tutorials.md | assembled | <1 pages from getting_started_with_pingauthorize_tutorials> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | fae5f807a537aaea48816a11db693dd9d350f0fca926635f8cf5d2b81af638ac |
-| snapshots/pingauthorize-server-administration-guide.md | 832f4b25930be13ff4650f3a22ea123228a69219e859e0f0ab372266014ae756 |
-| snapshots/pingauthorize-policy-administration-guide.md | 7755c42c3cae917b45fb43df9658d10a165e812145ffd41b7c1b990088fddb58 |
-| snapshots/installing-and-uninstalling-pingauthorize.md | a32703700a52c315edee0468729d585e6b9033679d0c723cb709af310a757d3e |
-| snapshots/troubleshooting-pingauthorize-server.md | e601bfdd56f5e969c4186ebf466994664fc016b96d97c0a4f0b5ee5cd072246b |
-| snapshots/pingauthorize-integrations.md | 58ca0842af086ba19dd0799fd5e1d77dc08313faaf1a214dc5cb44fe925c37d6 |
-| snapshots/upgrading-pingauthorize.md | 5daa34b80a7a1b10614e0f8912c1870718934123da29f3b69fecfa73d3d1f5eb |
-| snapshots/root.md | 2014d25383518b088b628fa7347ccfcf039608be46861bc2089b43370a85d50b |
-| snapshots/getting-started-with-pingauthorize-tutorials.md | 05e57c017ca2543b4671f709062bf673f08c50c55e9966091c4e6647f09db761 |
-| snapshots/release-notes.md | 34ae14836153bfa1487f97649f3d9e77ada11000a641f83f85a8bf6a1a52bb63 |
+| snapshots/pingauthorize-server-administration-guide.md | 98038100f6a7926d2a4dae8ed4a7170d288b54e56b27c05454981d2c470af7e1 |
+| snapshots/pingauthorize-policy-administration-guide.md | 8cc4ea5d93593993e18c00cea26666062bd89d82d78c25579fc24c006359e4ae |
+| snapshots/installing-and-uninstalling-pingauthorize.md | 1948de5309de21e172296d793a9ecf044a587410ef4d352c580ed0241380ad4f |
+| snapshots/troubleshooting-pingauthorize-server.md | 0d4531711a1c5d7a672ea9d33db9e0ee37ccaff547fdc17b8fe36cdc94bd582e |
+| snapshots/pingauthorize-integrations.md | ae3d40fbe1927a8e636e35970db2a17b362d082e9f30304c1d3292b7e2226c30 |
+| snapshots/upgrading-pingauthorize.md | 4afa886468abc3280ba063923ec113648841644f39c5fdb3313b219a043ffa63 |
+| snapshots/root.md | 9a8821c31ca2f7558100c05b1f5522cc77efafcae15614f67940c8765379d188 |
+| snapshots/getting-started-with-pingauthorize-tutorials.md | 5aee4c06e310af3963a92384f2b42318b21696a4051863636693706a2929a801 |

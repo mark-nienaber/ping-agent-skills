@@ -12,11 +12,11 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| pingauthorize.md | page | https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/snapshot-management/approve-snapshot.md | 206 |
+| pingauthorize.md | assembled | <206 pages from pingauthorize> | 206 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 74af56fc12a0b07d91dd0df9589dcab79a836484d1a9943a6d821e9e229354ba |
-| snapshots/pingauthorize.md | a7dfa5f13b17b30852aacfd484f6b655dd0d3d6277587941d1f65a2fa1cdc0d3 |
+| snapshots/pingauthorize.md | c335fde2bec1c6fb913fdc7a3b3743cb85dd75d8d2d69409b0d839dea28b385e |

@@ -318,3 +318,413 @@ page_aliases: ["reference:glossary.adoc"]
 * Web Agent
 
   Native library installed in a web server that acts as a policy enforcement point with policies based on web page URLs.
+
+---
+
+---
+title: Reference
+description: Access comprehensive reference information for PingAM, including Amster entity references, audit logging, authentication settings, token types, ports, service configuration, and REST API documentation
+component: pingam
+version: 8.1
+page_id: pingam:am-reference:preface
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/preface.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Administration", "Configuration"]
+page_aliases: ["index.adoc", "reference:preface.adoc"]
+---
+
+# Reference
+
+The following table summarizes the reference information available in the wider AM documentation.
+
+| Reference information                                                                          | Useful links                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Amster                                                                                         | [Amster entity reference](../entity-reference/preface.html)                                                                                                                                           |
+| Audit log formats, event components, and fields you can filter by.                             | [Audit logging reference](../monitoring/audit-logging-ref.html)                                                                                                                                       |
+| Authentication settings, endpoints, node configuration, supported callbacks.                   | [Authentication reference](../am-authentication/authn-reference.html)                                                                                                                                 |
+| Core Token Service token reference information, including LDAP attributes and example formats. | [CTS token types](../cts/cts-token-types.html)                                                                                                                                                        |
+| Ports used                                                                                     | [Default ports used by AM](../security/am-ports-used.html)                                                                                                                                            |
+| Configuration settings for AM services such as the OAuth2 provider, Email, and CORS.           | [Configure AM services](../setup/services-configuration.html)                                                                                                                                         |
+| Deployment configuration, such as advanced server properties.                                  | [Manage deployment configuration](../setup/deployment-configuration-reference.html)                                                                                                                   |
+| Public API Javadoc                                                                             | [PingAM Java API Specification](../_attachments/apidocs/index.html)                                                                                                                                   |
+| Common REST API                                                                                | * [REST API endpoints](../am-rest/rest-endpoints.html)
+
+* Log in to the AM admin UI and access the API at the following URL:
+
+  ```none
+  https://am.example.com:8443/am/ui-admin/#api/explorer
+  ``` |
+
+[icon: flag, set=fad, size=3x]
+
+#### [Standards support](am-supported-standards.html)
+
+View the wide range of standards that AM supports.
+
+[icon: browser, set=fad, size=3x]
+
+#### [Service endpoints](endpoints-reference.html)
+
+Learn about the AM web service endpoints.
+
+[icon: edit, set=fad, size=3x]
+
+#### [Glossary](endpoints-reference.html)
+
+The definitions for terminology used within AM documentation.
+
+---
+
+---
+title: Service endpoints
+description: Reference for PingAM service endpoints including JSP files, REST API endpoints, and well-known URIs with guidance on blocking unused endpoints
+component: pingam
+version: 8.1
+page_id: pingam:am-reference:endpoints-reference
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/endpoints-reference.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Endpoints", "JSP"]
+page_aliases: ["reference:endpoints-reference.adoc"]
+section_ids:
+  jsp-endpoints: JSP files
+  web-inf-endpoints: Configure access to endpoints
+  json-rest-endpoints: REST API endpoints
+  well-known-endpoints: Well-known endpoints
+---
+
+# Service endpoints
+
+A service endpoint is an entry point to a web service. This page lists AM service endpoints that are accessible by default.
+
+If you're certain a particular AM service endpoint isn't used in your deployment, you can block access to the endpoint.
+
+Learn more in [Secure network communication](../security/securing-communications.html).
+
+## JSP files
+
+Some AM JSP pages are directly accessible as service endpoints. The following sections describe the files for those JSP pages. Directory paths in this section are relative to AM's deployment path, for example, `/path/to/tomcat/webapps/am/`.
+
+> **Collapse: Top-level JSP files**
+>
+> You will find these files in the top-level directory of AM's deployment path.
+>
+> * `Logback.jsp`
+>
+>   Provides a page to configure debug logging.
+>
+>   See [Debug logging](../monitoring/debug-logging.html) for details.
+>
+> * `encode.jsp`
+>
+>   Provides a page to encode a cleartext password for use in SAML entity configurations.
+>
+> * `getServerInfo.jsp`
+>
+>   Supports requests for server information. This page is used internally by AM.
+>
+> * `isAlive.jsp`
+>
+>   Displays a "Server is ALIVE" message when AM is ready to serve requests.
+>
+> * `proxyidpfinder.jsp`
+>
+>   Supports access to a remote identity provider through the federation broker.
+>
+> * `services.jsp`
+>
+>   Only used for ssoadm, which has been removed.
+>
+> * `showServerConfig.jsp`
+>
+>   Displays system configuration information, including the deployment URL, OS, Java VM, configuration directory, and more.
+
+> **Collapse: Authentication JSP files**
+>
+> The JSP files in the `config/auth/default*/` directories were used only for authentication modules.
+
+> **Collapse: OAuth 2.0 JSP files**
+>
+> The JSP file, `oauth2/registerClient.jsp`, provides a template page to register an OAuth 2.0 client application without using the main console.
+>
+> The JSP files in the `oauth2c/` directory were used only for authentication modules. They weren't intended to be used directly as external endpoints.
+
+> **Collapse: WS Federation JSP files**
+>
+> The JSP files in the `wsfederation/jsp/` directory provide endpoints used in WS-Federation deployments.
+
+|   |                                                                                                                                                                                                                                                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Previous versions of AM provided JSPs for SAML 2.0 standalone mode. These JSPs are now deprecated.You can still invoke the JSPs because they're mapped to URLs for backward compatibility, but any customizations to the JSPs will be lost.Learn more in the [release notes](https://docs.pingidentity.com/pingam/release-notes/removed.html). |
+
+## Configure access to endpoints
+
+When protecting an AM server, consider blocking external access to unused services. You can either configure a reverse proxy (nginx, for example) to prevent access to endpoints, or configure the deployment descriptor file, `WEB-INF/web.xml`, to use a custom version of `AmServletInitializer`.
+
+The Guice dependency injection framework initializes servlets and filters programmatically, but you can still customize filters that don't use Guice, such as `SecureCookieFilter` or `SetHeadersFilter`. Register new filters by adding `<filter>` and `<filter-mapping>` elements to your `web.xml` file. If you're overriding an existing filter, you only need to define the `<filter>` element, as `AmFilterInitializer` handles the corresponding mapping.
+
+Find an example of customizing the `SecureCookieFilter` in [Exclude cookies from the filter](../security/secure-cookie-filter.html#exclude-cookies-from-secure-filter).
+
+The `web.xml` file and AM endpoints may change from release to release. Review the [API documentation](../am-rest/rest-endpoints.html) and release notes to check for changes.
+
+Learn more about securing your deployment by restricting access to endpoints in [Protecting PingAM with PingGateway](https://docs.pingidentity.com/pinggateway/2025.11/gateway-guide/protect-am.html), [How do I remove admin UI access in PingAM](https://support.pingidentity.com/s/article/How-do-I-remove-admin-UI-access-in-PingAM) and [Best practice for blocking the top level realm in a proxy for PingAM](https://support.pingidentity.com/s/article/Best-practice-for-blocking-the-top-level-realm-in-a-proxy-for-PingAM).
+
+## REST API endpoints
+
+REST API endpoints are discussed in detail as follows:
+
+| What do you want to do?                                                                                                                      | APIs                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authenticate to AM and log out                                                                                                               | * [Authenticate over REST](../am-authentication/authn-rest.html)
+
+* [Log out of AM over REST](../am-authentication/logout-using-rest.html)                                                                                                                                                                                                             |
+| Create and configure authentication trees                                                                                                    | - [Create a tree over REST](../am-authentication/create-auth-trees.html#create-authn-tree-rest)
+
+- [Configure authentication trees](../am-authentication/configure-auth-trees.html)                                                                                                                                                                    |
+| Manage a user's registered devices                                                                                                           | [Manage devices for MFA](../am-authentication/authn-mfa-devices.html)                                                                                                                                                                                                                                                                                  |
+| Manage policies                                                                                                                              | * [Policies over REST](../am-authorization/rest-api-authz-policies.html)
+
+* [Policy sets over REST](../am-authorization/rest-api-authz-applications.html)
+
+* [Resource types over REST](../am-authorization/rest-api-authz-resource-types.html)
+
+* [Policy set application types over REST](../am-authorization/rest-api-authz-application-types.html) |
+| Request authorization decisions                                                                                                              | [Request policy decisions over REST](../am-authorization/rest-api-authz-policy-decisions.html)                                                                                                                                                                                                                                                         |
+| Use OAuth 2.0-specific endpoints to request access and refresh tokens, as well as introspect and revoke them                                 | [OAuth 2.0 endpoints](../am-oauth2/oauth2-client-endpoints.html)                                                                                                                                                                                                                                                                                       |
+| Perform OAuth 2.0 administrative tasks such as registering, reading, and deleting clients                                                    | [OAuth 2.0 administration REST endpoints](../am-oauth2/oauth2-admin-endpoints.html)                                                                                                                                                                                                                                                                    |
+| Use OpenID Connect-specific endpoints to retrieve information about an authenticated user, as well as validate ID tokens and check sessions. | [OpenID Connect 1.0 endpoints](../am-oidc1/oidc-client-endpoints.html)                                                                                                                                                                                                                                                                                 |
+| Implement user self-registration and forgotten password reset                                                                                | - [Retrieve forgotten usernames](../user-self-service/uss-forgotten-username.html)
+
+- [Reset forgotten passwords](../user-self-service/uss-forgotten-password.html)
+
+- [Register a user](../user-self-service/uss-registering-users.html)                                                                                                              |
+| Manage AM identities and realms                                                                                                              | [Configure identities and realms over REST](../setup/am-realms.html#sec-rest-realm-rest)                                                                                                                                                                                                                                                               |
+| Manage AM scripts                                                                                                                            | [Manage scripts (REST)](../am-scripting/manage-scripts-rest.html)                                                                                                                                                                                                                                                                                      |
+| Record information to help you troubleshoot AM                                                                                               | [Capture troubleshooting information](../maintenance/record-troubleshooting.html)                                                                                                                                                                                                                                                                      |
+| Manage AM sessions                                                                                                                           | [Manage sessions using REST](../am-sessions/managing-sessions-REST.html)                                                                                                                                                                                                                                                                               |
+| Manage AM's Security Token Service to bridge identities across web and enterprise identity access management (IAM) systems                   | * [Consume STS instances](../sts/sts-consume-rest.html)
+
+* [Query, validate, and cancel tokens](../sts/sts-query-validate-cancel.html)                                                                                                                                                                                                                 |
+
+## Well-known endpoints
+
+The endpoints described in this section are [Well-known URIs](https://www.rfc-editor.org/info/rfc5785) supported by AM:
+
+* `/.well-known/openid-configuration`
+
+  Exposes OpenID Provider configuration by HTTP GET as specified by OpenID Connect Discovery 1.0. No query string parameters are required.
+
+* `/uma/.well-known/uma2-configuration`
+
+  Exposes User-Managed Access (UMA) configuration by HTTP GET as specified by UMA Profile of OAuth 2.0. No query string parameters are required.
+
+  Find an example in [/uma/.well-known/uma2-configuration](../uma/endpoint-configuration.html).
+
+* `/.well-known/webfinger`
+
+  Lets a client retrieve the provider URL for an end user by HTTP GET as specified by OpenID Connect Discovery 1.0.
+
+  Find an example in [OpenID Connect Discovery](../am-oidc1/oidc-am-provider.html#configure-openid-connect-discovery).
+
+---
+
+---
+title: Supported standards
+description: PingAM implements OAuth 2.0, OpenID Connect, SAML 2.0, UMA, and other federation and security standards
+component: pingam
+version: 8.1
+page_id: pingam:am-reference:am-supported-standards
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/am-supported-standards.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Standards", "Federation", "SAML 2.0", "OAuth 2.0", "OpenID Connect (OIDC)"]
+page_aliases: ["reference:am-supported-standards.adoc"]
+---
+
+# Supported standards
+
+AM implements the following RFCs, Internet-Drafts, and standards:
+
+> **Collapse: Open Authentication**
+>
+> [RFC 4226: HOTP: An HMAC-Based One-Time Password Algorithm](https://www.rfc-editor.org/info/rfc4226), supported by the OATH authentication nodes.
+>
+> [RFC 6238: TOTP: Time-Based One-Time Password Algorithm](https://www.rfc-editor.org/info/rfc6238), supported by the OATH authentication nodes.
+>
+> For more information, refer to [Open Authentication](https://en.wikipedia.org/wiki/Initiative_for_Open_Authentication).
+
+> **Collapse: OAuth 2.0**
+>
+> [RFC 6749: The OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/info/rfc6749)
+>
+> [RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage](https://www.rfc-editor.org/info/rfc6750)
+>
+> [RFC 7009: OAuth 2.0 Token Revocation](https://www.rfc-editor.org/info/rfc7009)
+>
+> [RFC 7515: JSON Web Signature (JWS)](https://www.rfc-editor.org/info/rfc7515)
+>
+> [RFC 7516: JSON Web Encryption (JWE)](https://www.rfc-editor.org/info/rfc7516)
+>
+> [RFC 7517: JSON Web Key (JWK)](https://www.rfc-editor.org/info/rfc7517)
+>
+> [RFC 7518: JSON Web Algorithms (JWA)](https://www.rfc-editor.org/info/rfc7518)
+>
+> [RFC 7519: JSON Web Token (JWT)](https://www.rfc-editor.org/info/rfc7519)
+>
+> [RFC 7522: Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://www.rfc-editor.org/info/rfc7522)
+>
+> [RFC 7523: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://www.rfc-editor.org/info/rfc7523)
+>
+> [RFC 7591: OAuth 2.0 Dynamic Client Registration Protocol](https://www.rfc-editor.org/info/rfc7591)
+>
+> [RFC 7636: Proof Key for Code Exchange by OAuth Public Clients](https://www.rfc-editor.org/info/rfc7636)
+>
+> [RFC 7662: OAuth 2.0 Token Introspection](https://www.rfc-editor.org/info/rfc7662)
+>
+> [RFC 7800: Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)](https://www.rfc-editor.org/info/rfc7800)
+>
+> [RFC 8628: OAuth 2.0 Device Authorization Grant](https://www.rfc-editor.org/info/rfc8628)
+>
+> [RFC 8705: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens](https://www.rfc-editor.org/info/rfc8705)
+>
+> [RFC 7592: OAuth 2.0 Dynamic Client Registration Management Protocol](https://www.rfc-editor.org/info/rfc7592)
+>
+> [Internet Draft: JWT Response for OAuth Token Introspection](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-introspection-response-03)
+>
+> [RFC 8693: OAuth 2.0 Token Exchange](https://www.rfc-editor.org/info/rfc8693) (Access token to access token, access token to ID token, ID token to ID token, and ID token to access token)
+>
+> [RFC 9101: The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)](https://www.rfc-editor.org/info/rfc9101)
+>
+> [RFC 9126: OAuth 2.0 Pushed Authorization Requests](https://www.rfc-editor.org/info/rfc9126)
+>
+> For more information, see [OAuth 2.0](https://oauth.net/2/)
+
+> **Collapse: OpenID Connect 1.0**
+>
+> [OpenID Connect Core 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-core-1_0.html).
+>
+> In section 5.6 of this specification, AM supports *Normal Claims*. AM does not support the optional *Aggregated Claims* and *Distributed Claims* representations.
+>
+> [OpenID Connect Client Initiated Backchannel Authentication Flow - Core 1.0 draft-02](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html)
+>
+> AM applies the guidelines suggested by the OpenID [Financial-grade API (FAPI) Working Group](https://openid.net/wg/fapi/) to the implementation of CIBA, which shapes the support of CIBA in AM.
+>
+> |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+> | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+> |   | Implementation Decisions Applying to CIBA Support in AM- AM only supports the CIBA "poll" mode, not the "push" or "ping" modes.
+>
+> - AM requires use of confidential clients for CIBA.
+>
+> - AM requires use of signed JSON-web tokens (JWT) to pass parameters, using one of the following algorithms:
+>
+>   * `ES256` - ECDSA with SHA-256 and NIST standard P-256 elliptic curve.
+>
+>   * `PS256` - RSASSA-PSS using SHA-256.Plain JSON or form parameters for CIBA-related data is not supported. |
+>
+> [OpenID Connect Discovery 1.0](https://openid.net/specs/openid-connect-discovery-1_0.html)
+>
+> [OpenID Connect Dynamic Client Registration 1.0](https://openid.net/specs/openid-connect-registration-1_0.html)
+>
+> [OpenID Connect Session Management 1.0 Draft 10](https://openid.net/specs/openid-connect-session-1_0-10.html)
+>
+> [OAuth 2.0 Multiple Response Type Encoding Practices](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html)
+>
+> [OAuth 2.0 Form Post Response Mode](https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html)
+>
+> [Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)](https://openid.net/specs/openid-financial-api-jarm-wd-01.html)
+>
+> [OpenID Connect Back-Channel Logout 1.0 Draft 06](https://openid.net/specs/openid-connect-backchannel-1_0.html).
+>
+> AM currently only supports backchannel logout when acting as the provider.
+>
+> For more information, see:
+>
+> * [OpenID Connect 1.0](http://openid.net/connect/)
+>
+> * [OpenID Connect Basic Client Implementer's Guide 1.0](https://openid.net/specs/openid-connect-basic-1_0.html)
+>
+> * [OpenID Connect Implicit Client Implementer's Guide 1.0](https://openid.net/specs/openid-connect-implicit-1_0.html)
+
+> **Collapse: User-Managed Access (UMA) 2.0**
+>
+> [User-Managed Access (UMA) 2.0 Grant for OAuth 2.0 Authorization](https://docs.kantarainitiative.org/uma/wg/oauth-uma-grant-2.0-08.html)
+>
+> [Federated Authorization for User-Managed Access (UMA) 2.0](https://docs.kantarainitiative.org/uma/wg/oauth-uma-federated-authz-2.0-08.html)
+
+> **Collapse: Security Assertion Markup Language (SAML) and Federation-related standards**
+>
+> AM supports SAML 2.0, although WS-Federation functionality still creates assertions in SAML v1.x format.
+>
+> SAML Specifications are available from the [OASIS standards page](https://www.oasis-open.org/standards/).
+>
+> [Web Services Federation Language (WS-Federation)](https://en.wikipedia.org/wiki/WS-Federation)
+>
+> [Web Services Description Language (WSDL)](https://www.w3.org/TR/wsdl/)
+>
+> [eXtensible Access Control Markup Language (XACML)](https://wiki.oasis-open.org/xacml)
+>
+> For more information, see [Security Assertion Markup Language (SAML)](http://saml.xml.org/)
+
+> **Collapse: Encryption and signatures**
+>
+> Assertion encryption:
+>
+> [aes128-cbc](http://www.w3.org/2001/04/xmlenc#aes128-cbc)\
+> [aes192-cbc](http://www.w3.org/2001/04/xmlenc#aes192-cbc)\
+> [aes256-cbc](http://www.w3.org/2001/04/xmlenc#aes256-cbc)\
+> [tripledes-cbc](http://www.w3.org/2001/04/xmlenc#tripledes-cbc)
+>
+> Assertion signatures:
+>
+> [rsa-sha1](http://www.w3.org/2000/09/xmldsig#rsa-sha1)\
+> [rsa-sha256](http://www.w3.org/2001/04/xmldsig-more#rsa-sha256)\
+> [rsa-sha384](http://www.w3.org/2001/04/xmldsig-more#rsa-sha384)\
+> [rsa-sha512](http://www.w3.org/2001/04/xmldsig-more#rsa-sha512)
+>
+> Query string signatures:
+>
+> [rsa-sha1](http://www.w3.org/2000/09/xmldsig#rsa-sha1)\
+> [rsa-sha256](http://www.w3.org/2001/04/xmldsig-more#rsa-sha256)\
+> [rsa-sha384](http://www.w3.org/2001/04/xmldsig-more#rsa-sha384)\
+> [rsa-sha512](http://www.w3.org/2001/04/xmldsig-more#rsa-sha512)\
+> [ecdsa-sha1](http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1)\
+> [ecdsa-sha256](http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256)\
+> [ecdsa-sha384](http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384)\
+> [ecdsa-sha512](http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512)
+>
+> [RFC 2898: PKCS #5: Password-Based Cryptography Specification Version 2.0](https://www.rfc-editor.org/info/rfc2898)
+>
+> [RFC 3394: Advanced Encryption Standard (AES) Key Wrap Algorithm](https://www.rfc-editor.org/info/rfc3394)
+>
+> [RFC 7518: JSON Web Algorithms (JWA)](https://www.rfc-editor.org/info/rfc7518)
+>
+> [Federal Information Processing Standard (FIPS) "Security Requirements for Cryptographic Modules"](https://www.nist.gov/publications/security-requirements-cryptographic-modules-includes-change-notices-1232002)
+
+> **Collapse: Other standards**
+>
+> [REST](https://en.wikipedia.org/wiki/REST)
+>
+> [Simple Object Access Protocol (SOAP)](http://www.w3.org/TR/soap/)
+>
+> [Recommendation E.146](https://www.itu.int/rec/T-REC-E.164/en), concerning Mobile Subscriber ISDN Numbers (MSISDN), supported for authentication.
+>
+> [RFC 2616: Hypertext Transfer Protocol — HTTP/1.1](https://www.rfc-editor.org/info/rfc2616).
+>
+> [RFC 2617: HTTP Authentication: Basic and Digest Access Authentication](https://www.rfc-editor.org/info/rfc2617), supported for authentication.
+>
+> [RFC 2865: Remote Authentication Dial In User Service (RADIUS)](https://www.rfc-editor.org/info/rfc2865), supported as an AM service.
+>
+> [RFC 4510: Lightweight Directory Access Protocol (LDAP)](https://www.rfc-editor.org/info/rfc4510), for authentication and when accessing datastores.
+>
+> [RFC 5280: Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://www.rfc-editor.org/info/rfc5280), supported for certificate-based authentication.
+>
+> [RFC 5646: Tags for Identifying Languages](https://www.rfc-editor.org/info/rfc5646).
+>
+> [RFC 5785: Defining Well-Known Uniform Resource Identifiers (URIs)](https://www.rfc-editor.org/info/rfc5785).
+>
+> [RFC 6265: HTTP State Management Mechanism](https://www.rfc-editor.org/info/rfc6265) regarding HTTP Cookies and `Set-Cookie` header fields.
+>
+> [RFC 7239: Forwarded HTTP Extension](https://www.rfc-editor.org/info/rfc7239).
+>
+> [Internet-Draft: Password Policy for LDAP Directories](https://datatracker.ietf.org/doc/html/draft-behera-ldap-password-policy-09) (draft 09).

@@ -80,3 +80,82 @@ PingAuthorize Server includes the runtime policy decision service and multiple i
 |   | The available enforcement features described above vary depending on your license. For more information, check your PingAuthorize license key or contact your Ping Identity account representative. |
 
 Learn more about PingAuthorize architecture and policy decision environments in [PingAuthorize architectural overview](paz_architecture_overview.html).
+
+---
+
+---
+title: PingAuthorize
+description: PingAuthorize software provides fine-grained, attribute-based access control and dynamic authorization management, enabling you to protect resources and filter data for databases, applications, and APIs.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize::paz_home_landing_page
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/paz_home_landing_page.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 13, 2026
+page_aliases: ["_@pingauthorize::index.adoc"]
+section_ids:
+  release-notes: Release Notes
+  get-started-with-pingauthorize: Get Started with PingAuthorize
+  use-pingauthorize: Use PingAuthorize
+  troubleshoot-pingauthorize: Troubleshoot PingAuthorize
+  learn-more: Learn More
+---
+
+# PingAuthorize
+
+PingAuthorize software provides fine-grained, attribute-based access control and dynamic authorization management, enabling you to protect resources and filter data for databases, applications, and APIs.
+
+## Release Notes
+
+* [Current](release_notes/paz_release_notes_legacy_home.html)
+
+* [Previous releases](release_notes/paz_release_notes_legacy_home.html#previous_releases)
+
+## Get Started with PingAuthorize
+
+* [Introduction to PingAuthorize](paz_introduction.html)
+
+* [Installing PingAuthorize](installing_and_uninstalling_pingauthorize/paz_install_pingauthorize.html)
+
+## Use PingAuthorize
+
+* [Use cases](pingauthorize_policy_administration_guide/paz_policy_solutions.html)
+
+* [Server admin guide](pingauthorize_server_administration_guide/paz_server_admin_guide.html)
+
+* [Policy admin guide](pingauthorize_policy_administration_guide/paz_policy_admin_guide.html)
+
+* [Policy development and promotion](pingauthorize_server_administration_guide/paz_create_policies_dev_env.html)
+
+* [API gateway integrations](pingauthorize_integrations/paz_integrations_main.html)
+
+## Troubleshoot PingAuthorize
+
+* [Enable detailed logging](pingauthorize_server_administration_guide/paz_enable_detailed_logging.html)
+
+* [Capture debugging data](troubleshooting_pingauthorize_server/paz_working_with_collect_support_data.html)
+
+* [Monitor server availability](pingauthorize_server_administration_guide/paz_server_availability.html)
+
+* [Troubleshoot TLS-related issues](pingauthorize_server_administration_guide/paz_troubleshoot_tls_issues.html)
+
+* [Configure LDAP health checks](pingauthorize_server_administration_guide/paz_config_health_check_dsconfig.html)
+
+* [Visualize a policy decision response](pingauthorize_policy_administration_guide/paz_visualize_pol_resp.html)
+
+## Learn More
+
+* [PingAuthorize API Reference](https://developer.pingidentity.com/pingauthorize/pingauthorize/introduction.html)
+
+* [PingAuthorize Server Docker image](https://hub.docker.com/r/pingidentity/pingauthorize)
+
+* [PingAuthorize Policy Editor Docker image](https://hub.docker.com/r/pingidentity/pingauthorizepap)
+
+* [PingAuthorize Community](https://support.pingidentity.com/s/topic/0TO1W000000dcxNWAQ/pingauthorize)
+
+* [Ping Identity Support Portal](https://support.pingidentity.com/s/)
+
+* [PingAuthorize customer training (existing customers only)](https://education.pingidentity.com/learn/course/1143/introduction-to-pingauthorize-90?generated_by=13429\&hash=d85bf6092a769d1b6671371d7fc89fa5b55dfd3b)
+
+* [Partner Portal](https://www.pingidentity.com/en/account/sign-on.html?retURL=/bin/pic/sso/community?retURL=/PartnerPortal/s/)

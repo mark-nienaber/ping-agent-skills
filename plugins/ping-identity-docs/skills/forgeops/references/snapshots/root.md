@@ -10301,3 +10301,135 @@ Useful links that cover topics beyond the scope of this documentation.
 ***
 
 [1](#_footnoteref_1). Not available on single-instance ForgeOps deployments.[2](#_footnoteref_2). Not available on ForgeOps deployments on minikube.[3](#_footnoteref_3). The Linux version of Homebrew doesn't support installing software it maintains as casks. Because of this, if you're setting up an environment on Linux, you won't be able to use Homebrew to install software in several cases. You'll need to refer to the software's documentation for information about how to install the software on a Linux system.[4](#_footnoteref_4). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[5](#_footnoteref_5). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[6](#_footnoteref_6). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[7](#_footnoteref_7). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[8](#_footnoteref_8). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[9](#_footnoteref_9). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[10](#_footnoteref_10). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[11](#_footnoteref_11). For example, systems based on M1 or M2 chipsets.[12](#_footnoteref_12). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[13](#_footnoteref_13). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[14](#_footnoteref_14). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[15](#_footnoteref_15). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[16](#_footnoteref_16). You can automate logging into ECR every 12 hours by using the `cron` utility.[17](#_footnoteref_17). To access DS, refer to [DS command-line access.](deploy/access.html#ds_command_line_access)[18](#_footnoteref_18). If you prefer to use a different ingress controller, deploy infrastructure in Kubernetes to support it.[19](#_footnoteref_19). Traefik and cert-manager are evolving technologies. Descriptions of these technologies were accurate at the time of this writing, but might differ when you deploy them.[20](#_footnoteref_20). For more information on howto change the default behavior, refer to [the steps for creatingTLS certificate](#mkcert-use).[21](#_footnoteref_21). Use similar steps to modify the schedule and purge delay for the `cts` repository[22](#_footnoteref_22). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository[23](#_footnoteref_23). To get the access key from the Azure portal, go to your storage account. Under Security + networking on the left navigation menu, select Access keys[24](#_footnoteref_24). The `FROM` statement originally contained `am-cdk` as part of the repository name. Be sure to use `am`, not `am-cdk`, in the revised statement.[25](#_footnoteref_25). The `FROM` statement originally contained `idm-cdk` as part of the repository name. Be sure to use `idm`, not `idm-cdk`, in the revised statement.[26](#_footnoteref_26). Except for the deprecated `amster` component.
+
+---
+
+---
+title: Welcome to ForgeOps
+description: The Ping Advanced Identity Software provides ForgeOps to help you deploy PingAM, PingDS, PingIDM, and PingGateway collectively in an integrated manner on a cloud platform that runs Kubernetes.
+component: forgeops
+version: 2026.2
+page_id: forgeops::index
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/index.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["_@forgeops::index.adoc"]
+section_ids:
+  chapters_in_this_documentation: Chapters in this documentation
+---
+
+# Welcome to ForgeOps
+
+The Ping Advanced Identity Software provides ForgeOps to help you deploy PingAM, PingDS, PingIDM, and PingGateway collectively in an integrated manner on a cloud platform that runs Kubernetes.
+
+ForgeOps comprises mainly two sets of resources:
+
+* The [forgeops repository](https://github.com/ForgeRock/forgeops.git)
+
+  The repository contains artifacts that let you get a sample Ping Advanced Identity Software deployment up and running quickly. After you get the out-of-the-box deployment running, you can tailor it to explore how you might configure your Kubernetes cluster before you deploy the platform in production.
+
+  ForgeOps deployments have the following characteristics:
+
+  * Fully integrated AM, IDM, and DS installations
+
+  * Multi-zone high availability'\[[1](#_footnotedef_1 "View footnote.")]'
+
+  * Replicated directory services'\[[1](#_footnotedef_1 "View footnote.")]'
+
+  * Ingress configuration'\[[2](#_footnotedef_2 "View footnote.")]'
+
+  * Certificate management
+
+  * Randomly generated secrets with ability to rotate secrets
+
+  * Prometheus monitoring, Grafana reporting, and alert management'\[[1](#_footnotedef_1 "View footnote.")]'
+
+* The [ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.2)
+
+  The ForgeOps documentation helps you work with ForgeOps deployments:
+
+  * Tells you how you can quickly [create a Kubernetes cluster](setup/overview.html) on Google Cloud, Amazon Web Services (AWS), or Microsoft Azure, [deploy the Ping Advanced Identity Software](deploy/deploy.html), and [access components in the deployment](deploy/access.html).
+
+  * Contains [how-tos for preparing for production deployments](prepare/overview.html) by customizing monitoring, setting alerts, backing up and restoring directory data, modifying the default security configuration, and running lightweight benchmarks to test DS, AM, and IDM performance.
+
+  * Tells you how to [modify the AM and IDM configurations](customize/overview.html) in ForgeOps deployments and create customized Docker images for the Ping Advanced Identity Software.
+
+  * [Keeps you up-to-date with the latest changes to the `forgeops` repository](rn/rn.html).
+
+## Chapters in this documentation
+
+[icon: play-circle, set=fas, size=3x]
+
+#### [Start Here](https://docs.pingidentity.com/forgeops/2026.2/start/start-here.html)
+
+Important considerations for a ForgeOps deployment.
+
+[icon: hands-helping, set=fas, size=3x]
+
+#### [Support](https://docs.pingidentity.com/forgeops/2026.2/start/support.html)
+
+Support options for ForgeOps deployments.
+
+[icon: github, set=fab, size=3x]
+
+#### [Repositories](https://docs.pingidentity.com/forgeops/2026.2/start/repositories.html)
+
+How to use the artifacts in ForgeOps public repositories.
+
+[icon: circle-nodes, set=fas, size=3x]
+
+#### [Setup](https://docs.pingidentity.com/forgeops/2026.2/setup/overview.html)
+
+Create a Kubernetes cluster for a ForgeOps deployment.
+
+[icon: sign-posts-wrench, set=fas, size=3x]
+
+#### [Deploy](https://docs.pingidentity.com/forgeops/2026.2/deploy/overview.html)
+
+Deploy the platform on a Kubernetes cluster.
+
+[icon: sliders, set=fas, size=3x]
+
+#### [Customize](https://docs.pingidentity.com/forgeops/2026.2/customize/overview.html)
+
+Customize AM and IDM configurations.
+
+[icon: tasks, set=fas, size=3x]
+
+#### [Prepare for production](https://docs.pingidentity.com/forgeops/2026.2/prepare/overview.html)
+
+PingGateway, monitoring, security, and benchmarking.
+
+[icon: floppy-disk-circle-arrow-right, set=fas, size=3x]
+
+#### [Backup](https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html)
+
+Backup and restore your data.
+
+[icon: level-up, set=fas, size=3x]
+
+#### [Upgrade](https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-overview.html)
+
+Upgrade or apply a patch to ForgeOps deployments.
+
+[icon: ban-bug, set=fas, size=3x]
+
+#### [Troubleshoot](https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/overview.html)
+
+Troubleshoot problems.
+
+[icon: books, set=fas, size=3x]
+
+#### [Reference](https://docs.pingidentity.com/forgeops/2026.2/reference/overview.html)
+
+Command external references, glossary, articles.
+
+[icon: newspaper, set=fas, size=3x]
+
+#### [Single Page](https://docs.pingidentity.com/forgeops/2026.2/consolidated.html)
+
+This entire documentation set on a single HTML page.
+
+***
+
+[1](#_footnoteref_1). Not available on single-instance ForgeOps deployments.[2](#_footnoteref_2). Not available on ForgeOps deployments on minikube.

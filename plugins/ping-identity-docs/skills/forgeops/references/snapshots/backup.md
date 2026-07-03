@@ -377,3 +377,390 @@ In DS version 8.1.0 you can use cloud storage mounted locally for backup and res
 ***
 
 [1](#_footnoteref_1). To get the access key from the Azure portal, go to your storage account. Under Security + networking on the left navigation menu, select Access keys
+
+---
+
+---
+title: Backup and restore overview
+description: ForgeOps deployments include two directory services:
+component: forgeops
+version: 2026.2
+page_id: forgeops:backup:overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Backup &amp; Restore", "Volume Snapshot", "Directory Server"]
+section_ids:
+  choose_a_backup_solution: Choose a backup solution
+---
+
+# Backup and restore overview
+
+[ForgeOps deployments](../deploy/architecture.html#cdm-topology) include two directory services:
+
+* The `ds-idrepo` service, which stores identities, application data, and AM policies
+
+* The `ds-cts` service, which stores AM Core Token Service data
+
+Before deploying the Ping Advanced Identity Software in production, create and test a backup plan that lets you recover these two directory services should you experience data loss.
+
+## Choose a backup solution
+
+There are numerous options to implement data backup. ForgeOps deployments provide two solutions:
+
+* Kubernetes [volume snapshots](snapshots.html)
+
+* [The dsbackup utility](dsbackup.html)
+
+You can also use backup products from third-party vendors. For example:
+
+* Backup tooling from your cloud provider. For example, [Google backup for GKE](https://cloud.google.com/blog/products/storage-data-transfer/google-cloud-launches-backups-for-gke).
+
+* Third-party utilities, such as Velero, Kasten K10, TrilioVault, Commvault, and Portworx Backup. These third-party products are cloud-platform agnostic, and can be used across cloud platforms.
+
+Your organization might have specific needs for its backup solution. Some factors to consider include:
+
+* Does your organization already have a backup strategy for Kubernetes deployments? If it does, you might want to use the same backup strategy for your Ping Advanced Identity Software deployment.
+
+* Do you plan to deploy the platform in a hybrid architecture, where part of your deployment is on-premises and another part of it is in the cloud? If you do, then you might want to employ a backup strategy that lets you move around DS data most easily.
+
+* When considering how to store your backup data, is cost or convenience more important to you? If cost is more important, then you might need to take into account that archival storage in the cloud is much less expensive than snapshot storage—ten times less expensive, as of this writing.
+
+* If you're thinking about using snapshots for backup, are there any limitations imposed by your cloud provider that are unacceptable to you? Historically, cloud providers have placed quotas on snapshots. Check your cloud provider's documentation for more information.
+
+---
+
+---
+title: Backup and restore using volume snapshots
+description: Kubernetes volume snapshots provide a standardized way to create copies of persistent volumes at a point in time without creating new volumes. Backing up your directory data with volume snapshots lets you perform rapid recovery from the last snapshot point. Volume snapshot backups also facilitate testing by letting you initialize DS with sample data.
+component: forgeops
+version: 2026.2
+page_id: forgeops:backup:snapshots
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/backup/snapshots.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Backup &amp; Restore", "Volume Snapshot"]
+section_ids:
+  backup: Backup
+  set_up_backup: Set up backup
+  customize_the_backup_schedule: Customize the backup schedule
+  restore_from_volume_snapshot: Restore from volume snapshot
+  restore_examples: Restore examples
+---
+
+# Backup and restore using volume snapshots
+
+Kubernetes [volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots) provide a standardized way to create copies of persistent volumes at a point in time without creating new volumes. Backing up your directory data with volume snapshots lets you perform rapid recovery from the last snapshot point. Volume snapshot backups also facilitate testing by letting you initialize DS with sample data.
+
+In ForgeOps deployments, the DS data, changelog, and configuration are stored in the same persistent volume. This ensures the volume snapshot captures DS data and changelog together.
+
+## Backup
+
+### Set up backup
+
+Kustomize overlays and Helm values necessary for configuring volume snapshots are already provided, but they have not been enabled to take backup. The default volume snapshot setup takes snapshots of the `data-ds-idrepo-0` and `data-ds-cts-0` PVCs once a day.
+
+* Enable volume snapshot before deployment
+
+  You can enable volume snapshot when you set up an environment before performing a ForgeOps deployment. For example, to enable snapshot for both `idrepo` and `cts`:
+
+  ```
+  $ cd /path/to/forgeops/bin
+  $ ./forgeops env --env-name  my-env --fqdn my-fqdn \
+    --namespace my-namespace --cluster-issuer my_issuer \
+    --idrepo-snap-enable --cts-snap-enable
+  ```
+
+* Enable volume snapshot in a ForgeOps deployment
+
+  To enable volume snapshots of DS data where ForgeOps has been deployed in my-namespace namespace:
+
+  1. Revise the environment to enable snapshot:
+
+     ```
+     $ cd /path/to/forgeops/bin
+     $ ./forgeops env --env-name  my-env --idrepo-snap-enable --cts-snap-enable
+     ```
+
+     |   |                                                                                                                   |
+     | - | ----------------------------------------------------------------------------------------------------------------- |
+     |   | If you want to enable snapshot for `idrepo` alone, don't specify `--cts-snap-enable` in the forgeops env command. |
+
+  2. Apply the changes to your ForgeOps deployment:
+
+     1. In a Kustomize-based deployment:
+
+        ```
+        $ cd /path/to/forgeops/bin
+        $ ./forgeops apply --env-name  my-env
+        ```
+
+     2. In a Helm-based deployment:
+
+        ```
+        $ cd /path/to/forgeops/charts/identity-platform
+        $ helm upgrade --install identity-platform ./ \
+         --namespace my-namespace --values /path/to/forgeops/helm/my-env/values.yaml
+        ```
+
+You can view the volume snapshots that are available for restore, using this command:
+
+```
+$ kubectl get volumesnapshots --namespace my-namespace
+
+NAME                               READYTOUSE   SOURCEPVC          SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS       SNAPSHOTCONTENT
+          CREATIONTIME   AGE
+ds-idrepo-snapshot-20231117-1320   true         data-ds-idrepo-0                           100Gi         ds-snapshot-class   snapcontent-be3f4a44-cfb2-4f68-aa2b-60902
+bb44192   3h29m          3h29m
+ds-idrepo-snapshot-20231117-1330   true         data-ds-idrepo-0                           100Gi         ds-snapshot-class   snapcontent-7bcf6779-382d-40e3-9c9f-edf31
+c54768e   3h19m          3h19m
+ds-idrepo-snapshot-20231117-1340   true         data-ds-idrepo-0                           100Gi         ds-snapshot-class   snapcontent-c9c88332-ad05-4880-bda7-48616
+ec13579   3h9m           3h9m
+ds-idrepo-snapshot-20231117-1401   true         data-ds-idrepo-0                           100Gi         ds-snapshot-class   snapcontent-1f3f4ce9-0083-447f-9803-f6b45
+e03ac27   167m           167m
+ds-idrepo-snapshot-20231117-1412   true         data-ds-idrepo-0                           100Gi         ds-snapshot-class   snapcontent-4c39c095-0891-4da8-ae61-fac78
+c7147ff   156m           156m
+```
+
+### Customize the backup schedule
+
+When enabled, volume snapshots are created once every day by default and purged after three days. You can customize the backup schedules as required in your environment.
+
+* In a Kustomize-based deployment
+
+* In a Helm-based deployment
+
+To modify the default schedule and purge delay for the `idrepo` repository\[[1](#_footnotedef_1 "View footnote.")]:
+
+1. In a terminal window, change to the path/to/idrepo directory.
+
+2. Copy the schedule.yaml file to a temporary location, so you can restore if needed.
+
+3. Edit the schedule.yaml file and set the `schedule` and `purge-delay` parameters as needed.
+
+4. Run the kubectl apply command.
+
+   * Examples for scheduling snapshots
+
+     * To schedule snapshots twice a day, at noon and midnight:
+
+       ```
+       ...
+         spec:
+           schedule: "0 0/12 * * *"
+       ...
+       ```
+
+     * To schedule snapshots every 8 hours:
+
+       ```
+       ...
+         spec:
+           schedule: "0 */8 * * *"
+       ...
+       ```
+
+   * Examples for purging schedule
+
+     * To schedule purge after 4 days:
+
+       ```
+       ...
+                env:
+                  - name: PURGE_DELAY
+                    value: "-4 day"
+       ```
+
+     * To schedule purge after a week:
+
+       ```
+       ...
+                env:
+                  - name: PURGE_DELAY
+                    value: "-7 day"
+       ```
+
+To modify the default schedule and purge delay:
+
+1. In a terminal window, change to the /path/to/forgeops/helm/my-env directory:
+
+   ```
+   $ cd /path/to/forgeops/helm/my-env
+   ```
+
+2. Copy the values.yaml file, so you can restore it if required:
+
+   ```
+   $ cp values.yaml /tmp/values.yaml
+   ```
+
+3. Edit the values.yaml file and set the `schedule` and `purge-delay` parameters as needed.
+
+4. Run the helm upgrade command.
+
+   * Examples for scheduling snapshots for the `idrepo` repository\[[2](#_footnotedef_2 "View footnote.")]
+
+     * To schedule snapshots twice a day, at noon and midnight:
+
+       ```
+       ...
+       ds-idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 0/12 * * *"
+       ...
+       ```
+
+     * To schedule snapshots every 8 hours:
+
+       ```
+       ...
+       ds-idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 */8 * * *"
+       ...
+       ```
+
+   * Examples for purging schedule for the `idrepo` repository\[[2](#_footnotedef_2 "View footnote.")]
+
+     * To schedule purge after 4 days:
+
+       ```
+       ...
+       ds-idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-4 day"
+       ...
+       ```
+
+     * To schedule purge after a week:
+
+       ```
+       ...
+       ds-idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-7 day"
+       ...
+       ```
+
+## Restore from volume snapshot
+
+The snapshot-restore.sh script lets you restore DS instances in a ForgeOps deployment. By default, this script restores a DS instance from the latest available snapshot.
+
+There are two options when using the snapshot-restore.sh script to restore a DS from a volume snapshot:
+
+* Full—Use the full option to fully restore a DS instance from a volume snapshot. When you specify this option, the DS is scaled down to 0 pods before restoring data. The data is restored to an existing PVC from a snapshot. This operation requires downtime.
+
+* Selective—Use the selective option to restore a portion of DS data from volume snapshot. The selective restore creates a new temporary DS instance with a new DS pod. You can selectively export from the temporary DS pod and import into your functional DS instance. After restoring data, you can clean up the temporary resources.
+
+The snapshot-restore.sh command is available in the `bin` directory of the `forgeops` repository. To learn more about the snapshot-restore.sh command and its options, run snapshot-restore.sh --help.
+
+### Restore examples
+
+* Trial run without actually restoring DS data
+
+  1. In a terminal window, change to the /path/to/forgeops/bin directory.
+
+  2. Set your Kubernetes context to the correct cluster and namespace.
+
+  3. Run the snapshot-restore.sh command with the `--dryrun` option:
+
+     ```
+     $ ./snapshot-restore.sh --dryrun --namespace my-namespace full idrepo
+
+     ./snapshot-restore.sh --dryrun --namespace my-namespace full idrepo
+     /usr/local/bin/kubectl apply -f /tmp/snapshot-restore-idrepo.20231121T23:03:15Z/sts-restore.json -n my-namespace
+     /usr/local/bin/kubectl delete pvc data-ds-idrepo-0 -n my-namespace
+     /usr/local/bin/kubectl apply -f /tmp/snapshot-restore-idrepo.20231121T23:03:15Z/data-ds-idrepo-0.json -n my-namespace
+     /usr/local/bin/kubectl apply -f /tmp/snapshot-restore-idrepo.20231121T23:03:15Z/sts.json -n my-namespace
+     ```
+
+* Full restore of the `idrepo` instance from the latest available volume snapshot
+
+  1. In a terminal window, change to the /path/to/forgeops/bin directory.
+
+  2. Set your Kubernetes context to the correct cluster and namespace.
+
+  3. Get a list of available volume snapshots:
+
+     ```
+     $ kubectl get volumesnapshots --namespace my-namespace
+     ```
+
+  4. Restore the full DS instance:
+
+     ```
+     $ ./snapshot-restore.sh --namespace my-namespace full idrepo
+     ```
+
+  5. Verify that DS data has been restored.
+
+* Selective restore from a specific volume snapshot and storing data in a user-defined storage path
+
+  1. In a terminal window, change to the /path/to/forgeops/bin directory.
+
+  2. Set your Kubernetes context to the correct cluster and namespace.
+
+  3. Get a list of available volume snapshots:
+
+     ```
+     $ kubectl get volumesnapshots --namespace my-namespace
+     ```
+
+  4. Perform a selective restore trial run:
+
+     ```
+     $ ./snapshot-restore.sh --dryrun --path /tmp/ds-restore --snapshot ds-idrepo-snapshot-20231121-2250 --namespace my-namespace selective idrepo
+
+     VolumeSnapshot ds-idrepo-snapshot-20231121-2250 is ready to use
+     /usr/local/bin/kubectl apply -f /tmp/ds-rest/sts-restore.json -n my-namespace
+     /usr/local/bin/kubectl apply -f /tmp/ds-rest/svc.json -n my-namespace
+     ```
+
+  5. Perform a selective restore using a specific snapshot:
+
+     ```
+     $ ./snapshot-restore.sh --path /tmp/ds-restore --snapshot ds-idrepo-snapshot-20231121-2250 --namespace my-namespace selective idrepo
+
+     statefulset.apps/ds-idrepo-restore created
+     service/ds-idrepo configured
+     ```
+
+  6. Verify that a new `ds-idrepo-restore-0` pod was created:
+
+     ```
+     $ kubectl get pods
+     NAME                          READY   STATUS      RESTARTS   AGE
+     admin-ui-656db67f54-2brbf     1/1     Running     0          3h17m
+     am-7fffff59fd-mkks5           1/1     Running     0          107m
+     amster-hgkv9                  0/1     Completed   0          3h18m
+     ds-idrepo-0                   1/1     Running     0          39m
+     ds-idrepo-restore-0           1/1     Running     0          2m40s
+     end-user-ui-df49f79d4-n4q54   1/1     Running     0          3h17m
+     idm-fc88578bf-lqcdj           1/1     Running     0          3h18m
+     login-ui-5945d48fc6-ljxw2     1/1     Running     0          3h17m
+     ```
+
+     |   |                                                                                                                                                                                                 |
+     | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | The `ds-idrepo-restore-0` pod is temporary and not to be used as a complete DS instance. You can export required data from the temporary pod, and import data into your functional DS instance. |
+
+  7. Clean up resources from the selective restore:
+
+     ```
+     $ ./snapshot-restore.sh clean idrepo
+
+     statefulset.apps "ds-idrepo-restore" deleted
+     persistentvolumeclaim "data-ds-idrepo-restore-0" deleted
+     ```
+
+***
+
+[1](#_footnoteref_1). Use similar steps to modify the schedule and purge delay for the `cts` repository[2](#_footnoteref_2). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository

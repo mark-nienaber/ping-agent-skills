@@ -12,17 +12,17 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| connector-reference.md | page | https://docs.pingidentity.com/openicf/connector-reference/msgraph-conf.md | 72 |
-| connector-dev-guide.md | page | https://docs.pingidentity.com/openicf/connector-dev-guide/about-icf.md | 48 |
-| connector-release-notes.md | page | https://docs.pingidentity.com/openicf/connector-release-notes/dotnet-server-release.md | 9 |
-| index-md.md | page | https://docs.pingidentity.com/openicf/index.md | 1 |
+| connector-reference.md | assembled | <72 pages from connector-reference> | 72 |
+| connector-dev-guide.md | assembled | <48 pages from connector-dev-guide> | 48 |
+| connector-release-notes.md | assembled | <9 pages from connector-release-notes> | 9 |
+| index-md.md | assembled | <1 pages from index.md> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 516f6f6b6cd2d6818df7b9353e7e1192e328b813fb88a4e7e0cd31b7cdb1f014 |
-| snapshots/connector-reference.md | b532707ae806a173ae055550fea52342ddb68e043a1db9ea66b5eaa6ff73e134 |
-| snapshots/connector-dev-guide.md | 400f47140c44265d4b7af2bed826e9db10373e25001ad455926ba93bfc094cde |
-| snapshots/connector-release-notes.md | b448a733ec8aa4409c7e75d6881575e97be62ed3600f5d51bced9f4a9d1678d1 |
-| snapshots/index-md.md | 6f4587d6e6c2a34e2fcbde40de42b7d88d0e73ac4e2cf8db33cd79b7fbe2fed7 |
+| snapshots/connector-reference.md | 0b034f461ce3bafcacf28ceb94e17f60d6b0f338573032439523020ebd2e885f |
+| snapshots/connector-dev-guide.md | 3c644775aa3c5b5abfc58ce8626c5d085e1603664087187e4fea2c29da1d8150 |
+| snapshots/connector-release-notes.md | f66b0e17a06c2a7538885a0f61cdbbcb0a7563e8b0fec2514cba2436c26658a0 |
+| snapshots/index-md.md | a41622f0337c6ed8e8e87c505734b111b5943e449a4c529c0db9da8bbc0bfaba |

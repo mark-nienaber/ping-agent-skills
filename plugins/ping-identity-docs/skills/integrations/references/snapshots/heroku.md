@@ -101,3 +101,162 @@ Use the following procedure to configure a quick connection for single sign-on (
 23. On the **Activation & Summary** page, **Activate** the SP Connection.
 
 24. On the **Activation & Summary** page, click **Save**.
+
+---
+
+---
+title: Configure Heroku for SSO
+description: To complete single sign-on (SSO) setup for Heroku, configure these steps to enable SSO for users.
+component: heroku
+page_id: heroku::pf_heroku_integration_configure_heroku_for_sso
+canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_configure_heroku_for_sso.html
+revdate: February 24, 2025
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configure Heroku for SSO
+
+## About this task
+
+To complete single sign-on (SSO) setup for Heroku, configure these steps to enable SSO for users.
+
+|   |                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Make sure you have the following information from PingFederate:- The SSO Application Endpoint, which can be found on the **Activation & Summary** page of the **SP Connection** for Heroku.
+
+- The exported certificate used to sign the SAML assertion that was configured in [Configure a Connection](pf_heroku_integration_configure_a_connection.html). |
+
+## Steps
+
+1. Go to https\://dashboard.heroku.com/orgs/*\<ORGANIZATION\_NAME>*/settings.
+
+2. Sign on with your administrator credentials.
+
+3. In the **Single Sign On** section, click **Add Metadata Manually**.
+
+   ![Screen capture of the Add Metadata Manually button in the Single Sign On (SSO) section.](_images/hof1563995397443.jpg)
+
+4. Enter the SSO Application endpoint into the **IdP Login Redirect URL** field.
+
+   ```
+   https://<pf_host>:<pf_port>/idp/startSSO.ping?PartnerSpId=<IdP_connection_entity_id>
+   ```
+
+   |   |                                                                                                                      |
+   | - | -------------------------------------------------------------------------------------------------------------------- |
+   |   | An email will be sent to new Heroku users instructing them on how to initiate SSO with the SSO Application endpoint. |
+
+5. Copy and paste the SAML 2.0 Entity ID and signing certificate into the **Identity Provider Issuer URL** and **Public Certificate** fields, respectively.
+
+   |   |                                                                                                                                                                                                    |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | To override the SAML 2.0 Entity ID on the **Server Settings** page for your SP Connection, go to the **General Info** page and add a `Virtual Server ID`. This value sends as the SAML Issuer URL. |
+
+   ![Screen capture of the Identity Provider Issuer URL, IdP Login Redirect URL and IdP Certificate fields.](_images/bkj1563995398269.jpg)
+
+6. Click **Save**.
+
+---
+
+---
+title: Configure Server Settings
+description: Sign on to the PingFederate administrative console.
+component: heroku
+page_id: heroku::pf_heroku_integration_configure_server_settings
+canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_configure_server_settings.html
+revdate: February 24, 2025
+section_ids:
+  steps: Steps
+---
+
+# Configure Server Settings
+
+## Steps
+
+1. Sign on to the PingFederate administrative console.
+
+2. On the **System > Protocol Settings > Roles & Protocols** page, ensure the IdP role is enabled and SAML 2.0 is selected for that role.
+
+   |   |                                                                                                |
+   | - | ---------------------------------------------------------------------------------------------- |
+   |   | Click **Server Settings** from the main menu to locate this screen after initial installation. |
+
+3. Click **Next** to continue to configure roles and protocols, or click **Save** for an existing configuration.
+
+---
+
+---
+title: Heroku Integration Guide
+description: This guide describes how to configure PingFederate for browser-based single sign-on (SSO) to Heroku, initiated by the identity provider (IdP) or service provider (SP). The PingFederate administrative console uses an SP connection along with imported metadata to configure most of the settings needed for Heroku SAML SSO.
+component: heroku
+page_id: heroku::pf_heroku_integration
+canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration.html
+revdate: February 24, 2025
+---
+
+# Heroku Integration Guide
+
+This guide describes how to configure PingFederate for browser-based single sign-on (SSO) to Heroku, initiated by the identity provider (IdP) or service provider (SP). The PingFederate administrative console uses an SP connection along with imported metadata to configure most of the settings needed for Heroku SAML SSO.
+
+---
+
+---
+title: Obtain the Heroku SAML 2.0 Metadata XML
+description: This guide uses a metadata XML file to assist in configuring many settings in the service provider (SP) connection. When asked during the configuration steps, import the saml-metadata.xml built in the following steps.
+component: heroku
+page_id: heroku::pf_heroku_integration_obtain_the_heroku_saml_20_metadata_xml
+canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_obtain_the_heroku_saml_20_metadata_xml.html
+revdate: February 24, 2025
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Obtain the Heroku SAML 2.0 Metadata XML
+
+## About this task
+
+This guide uses a metadata XML file to assist in configuring many settings in the service provider (SP) connection. When asked during the configuration steps, import the `saml-metadata.xml` built in the following steps.
+
+## Steps
+
+1. Copy the following sample metadata into a text editor.
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <md:EntityDescriptor
+         xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+
+         entityID="https://sso.heroku.com/saml/<ORGANIZATION_NAME>" cacheDuration="PT1440M"
+
+         ID="nYtE3pu8fofN4a5Z_ST5F8jDObh">
+          <md:SPSSODescriptor
+         AuthnRequestsSigned="false"  WantAssertionsSigned="true"
+         protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+
+         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+          <md:AssertionConsumerService
+         isDefault="true"
+
+         Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+
+         Location="https://sso.heroku.com/saml/<ORGANIZATION_NAME>/finalize"
+           index="0" />
+         </md:SPSSODescriptor>
+
+       </md:EntityDescriptor>
+   ```
+
+2. Replace the instances of *\<ORGANIZATION\_NAME>* with the organization name for the Heroku account.
+
+   For example, if the URL you use to access your Heroku team account is
+
+   ```
+   https://dashboard.heroku.com/orgs/myOrgName/settings
+   ```
+
+   then your *\<ORGANIZATION\_NAME>* is `myOrgName`.
+
+3. Once you have updated the file, save `saml-metadata.xml`.

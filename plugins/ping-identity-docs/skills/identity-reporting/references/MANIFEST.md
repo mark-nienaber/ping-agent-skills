@@ -12,13 +12,13 @@
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| identity-reporting.md | page | https://docs.pingidentity.com/identity-reporting/identity-reporting/chap-report-configuration.md | 8 |
-| release-notes.md | page | https://docs.pingidentity.com/identity-reporting/release-notes/chap-before-you-install.md | 7 |
+| identity-reporting.md | assembled | <8 pages from identity-reporting> | 8 |
+| release-notes.md | assembled | <7 pages from release-notes> | 7 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | f8e278c2c2fcb2e89d11ab27fce20c6d864ada49f07c5a62a93b086a91540ecb |
-| snapshots/identity-reporting.md | 6ad83ed5859e90d69ca3bf039f06cf08d584a4e30a0c1e05b2dc35ceb66e91b7 |
-| snapshots/release-notes.md | e67afdf616208474983e69c07051a89d1d744f45921c938c7e39efee3fb681cb |
+| snapshots/identity-reporting.md | 2a762175284421a2cd50c1753f6bb1a1c3b98eaaa06d7a9a104ec4590781e433 |
+| snapshots/release-notes.md | 04ddf9193edd619717d4bd817d102826b242aa0e82ed4a44bea0e2a918c529da |

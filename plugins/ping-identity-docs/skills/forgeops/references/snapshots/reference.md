@@ -583,3 +583,930 @@ forgeops prereqs prereqs
 ***
 
 [1](#_footnoteref_1). Except for the deprecated `amster` component.
+
+---
+
+---
+title: About ForgeOps benchmarking
+description: ForgeOps benchmarks provides instructions for running lightweight benchmarks to give you a means for validating your own ForgeOps deployment.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/intro
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/intro.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Benchmark"]
+section_ids:
+  next_step: Next step
+---
+
+# About ForgeOps benchmarking
+
+[ForgeOps benchmarks](overview.html) provides instructions for running lightweight benchmarks to give you a means for validating your own ForgeOps deployment.
+
+The ForgeOps team runs the same benchmark tests. Our results are available upon request. To get them, contact your Ping Identity sales representative.
+
+We conduct our tests using the configurations specified for [small, medium, and large clusters](../../deploy/architecture.html#cluster-and-deployment-sizes). We create our clusters using the techniques described in the [Setup documentation](../../setup/overview.html).
+
+Next, we [generate test users](testusers.html):
+
+* 1,000,000 test users for a small cluster.
+
+* 10,000,000 test users for a medium cluster.
+
+* 100,000,000 test users for a large cluster.
+
+Finally, we run tests that measure authentication rates and OAuth 2.0 authorization code flow performance.
+
+If you follow the same method of performing a ForgeOps deployment and running benchmarks, the results you obtain similar results. However, factors beyond the scope of ForgeOps deployment or a failure to use our documented sizing and configuration may affect your benchmark test results. These factors might include (but are not limited to) updates to cloud platform SDKs, changes to third-party software required for Kubernetes, and changes you've made to sizing or configuration to suit your business needs.
+
+ForgeOps deployments are designed to:
+
+* Conform to DevOps best practices
+
+* Facilitate continuous integration and continuous deployment
+
+* Scale and deploy on any Kubernetes environment in the cloud
+
+If you require higher performance than the benchmarks reported here, you can scale your deployment horizontally and vertically. Vertically scaling Ping Advanced Identity Software works particularly well in the cloud. For more information about scaling your deployment, contact your qualified Ping Identity partner or technical consultant.
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: square-o, set=fa]*[Install third-party software](sw.html)*
+
+* [icon: square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: Articles in the <code>forgeops</code> repository
+description: How-to articles in the forgeops repository that augment this documentation:
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:how-tos
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/how-tos.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Amster", "Docker", "Prometheus", "Grafana", "Alertmanager", "Multi-cluster", "Certificates"]
+---
+
+# Articles in the `forgeops` repository
+
+[How-to articles](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos) in the `forgeops` repository that augment this documentation:
+
+* [Configure a ForgeOps deployment with additional DNS alias for the root realm.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/add-additional-dns-alias-to-root-realm.md)
+
+* [Change the FQDN in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/change-fqdn-in-running-deployment.md).
+
+* [Use custom shell environment variables with ForgeOps.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/custom-envs.md)
+
+* [Use custom shell environment variables with ForgeOps.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/custom-envs.md)
+
+* [Use custom secrets with ForgeOps.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/custom-secrets.md)
+
+* [Enable PingAM's REST API.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/enabling-pingam-rest-apis.md)
+
+* [Managing Ping Advanced Identity Software Docker images.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/manage-platform-images.md)
+
+* [Add user supplied certificates to the truststore.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/migrate-custom-certs-to-new-truststore.md)
+
+* [Migrate ForgeOps tooling from legacy (7.x) to new (202x.y.z).](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/migrate-legacy-to-YYYY.md)
+
+* [Workflow for production environments.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/production-workflow.md)
+
+* [Recreate the PingDS stateful set.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/recreating-ds-sts.md)
+
+* [Retrieve SBOMs based on original image URL.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/retrieve-SBOMs-based-on-original-image-URL.md)
+
+* [Use an externally deployed PingDS with a ForgeOps deployment.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/use-an-externally-deployed-ds-with-a-forgeops-deployment.md)
+
+---
+
+---
+title: Authentication rate
+description: The AMRestAuthNSim.scala simulation tests authentication rates using the REST API. It measures the throughput and response times of an AM server performing REST authentications when AM is configured to use CTS-based sessions.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/authrate
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/authrate.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Benchmark", "Authentication"]
+section_ids:
+  next_step: Next step
+---
+
+# Authentication rate
+
+The `AMRestAuthNSim.scala` simulation tests authentication rates using the REST API. It measures the throughput and response times of an AM server performing REST authentications when AM is configured to use CTS-based sessions.
+
+To run the simulation:
+
+1. Make sure the userstore is provisioned, and the PingDS cache is primed.
+
+   Refer to [Test user generation](testusers.html).
+
+2. Set environment variables that specify the host on which to run the test, the number of concurrent threads to spawn when running the test, the duration of the test (in seconds), the first part of the user ID, and the user password, and the number of users for the test:
+
+   ```
+   $ export TARGET_HOST=
+   $ export CONCURRENCY=100
+   $ export DURATION=60
+   $ export USER_PREFIX=user.
+   $ export USER_PASSWORD=T35tr0ck123
+   $ export USER_POOL=n-users
+   ```
+
+   where *n-users* is `1000000` for a small cluster, `10000000` for a medium cluster, and `100000000` for a large cluster.
+
+3. Configure AM for CTS-based sessions:
+
+   1. Log in to the Ping Advanced Identity Software admin UI as the `amadmin` user. For details, refer to [AM Services](../../deploy/access.html#am-services-cdm).
+
+   2. Access the AM admin UI.
+
+   3. Select the top level realm.
+
+   4. Select Properties.
+
+   5. Make sure the Use Client-based Sessions option is disabled.
+
+      If it's not disabled, disable it, and then select Save Changes.
+
+4. Change to the /path/to/forgeops/docker/gatling directory.
+
+5. Run the simulation:
+
+   ```
+   $ gradle clean; gradle gatlingRun-am.AMRestAuthNSim
+   ```
+
+   When the simulation is complete, the name of a file containing the test results appears near the end of the output.
+
+6. Open the file containing the test results in a browser to review the results.
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: check-square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: check-square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: check-square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa]*[Benchmark the OAuth 2.0 authorization code flow](oauth2.html)*
+
+---
+
+---
+title: Base Docker images
+description: This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:base-docker-images
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/base-docker-images.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Docker", "forgeops Command"]
+section_ids:
+  which_docker_images_do_i_deploy: Which Docker images do I deploy?
+  base-images: Your initial base Docker images
+  create_docker_images_for_use_in_production: Create Docker images for use in production
+---
+
+# Base Docker images
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.Before you begin building custom images, ensure you've installed Java version 25 or 21 on your computer.For example:> **Collapse: When using platform versions 8.x**
+>
+> ```
+> $ java --version
+> openjdk version "25.0.2" 2026-01-20
+> OpenJDK Runtime Environment Homebrew (build 25.0.2)
+> OpenJDK 64-Bit Server VM Homebrew (build 25.0.2, mixed mode, sharing)
+> ```> **Collapse: When using platform versions 7.x**
+>
+> ```
+> $ java --version
+> openjdk 21.0.5 2024-10-15 LTS
+> OpenJDK Runtime Environment Temurin-21.0.5+11 (build 21.0.5+11-LTS)
+> OpenJDK 64-Bit Server VM Temurin-21.0.5+11 (build 21.0.5+11-LTS, mixed mode)
+> ``` |
+
+## Which Docker images do I deploy?
+
+* I am a developer using a single-instance ForgeOps deployment.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy either:
+
+    * The ForgeOps-provided images.
+
+    * Customized Docker images that are based on ForgeOps-provided images and contain customized configuration profile.
+
+* I am doing a proof-of-concept ForgeOps deployment.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy either:
+
+    * The ForgeOps-provided images.
+
+    * Customized Docker images that are based on ForgeOps-provided images and contain customized configuration profile.
+
+* I am deploying the platform in production.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy Docker images you've built that are based on [your own base images](#base-images), but contain your customized configuration profile.
+
+## Your initial base Docker images
+
+|   |                                                                                                                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The procedures here describe the use of:1) Docker container engine to create images for ForgeOps deployment. You can use Podman container engine for the same.
+
+2) The latest ForgeOps-provided Docker images. You can select a specific image release suitable to your environment. |
+
+Perform the following steps to build base images. After you've built your own base images, push them to your Docker repository:
+
+1. Download the latest versions of the AM, Amster, IDM, and DS `.zip` files from [the Ping Identity Download Center](https://backstage.forgerock.com/downloads). Optionally, you can also download the latest version of the PingGateway `.zip` file.
+
+2. If you haven't already done so, clone the `forgeops` and `forgeops-extras` repositories. For example:
+
+   ```
+   $ git clone https://github.com/ForgeRock/forgeops.git
+   $ git clone https://github.com/ForgeRock/forgeops-extras.git
+   ```
+
+   Both repositories are public; you do not need credentials to clone them.
+
+3. Check out the `forgeops` repository's `2026.2.1` tag:
+
+   ```
+   $ cd /path/to/forgeops
+   $ git checkout 2026.2.1
+   ```
+
+4. Check out the `forgeops-extras` repository's `main` tag:
+
+   ```
+   $ cd /path/to/forgeops-extras
+   $ git checkout main
+   ```
+
+5. Build the Java base image, which is required by several of the other Dockerfiles:
+
+   > **Collapse: For platform images 8.x**
+   >
+   > ```
+   > $ cd /path/to/forgeops-extras/images/java-25
+   > $ docker build --tag my-repo/my-java .
+   > ```
+
+   > **Collapse: For platform images 7.x**
+   >
+   > ```
+   > $ cd /path/to/forgeops-extras/images/java-21
+   > $ docker build --tag my-repo/my-java .
+   > ```
+
+6. Build the base Docker image for Amster. The Amster image is required to build the base image for AM in the next step:
+
+   1. Unzip the Amster `.zip` file.
+
+   2. Change to the amster/samples/docker directory in the expanded `.zip` file output.
+
+   3. Run the setup.sh script:
+
+      ```
+      $ ./setup.sh
+
+      + mkdir -p build
+      + find ../.. '!' -name .. '!' -name samples '!' -name docker -maxdepth 1 -exec cp -R '{}' build/ ';'
+      + cp ../../docker/amster-install.sh ../../docker/docker-entrypoint.sh ../../docker/export.sh ../../docker/tar.sh build
+      ```
+
+   4. Edit the Dockerfile in the samples/docker directory. Change the line:
+
+      ```
+      FROM gcr.io/forgerock-io/java-...:latest
+      ```
+
+      to:
+
+      ```
+      FROM my-repo/my-java
+      ```
+
+   5. Build the `amster` Docker image:
+
+      ```
+      $ docker build --tag amster:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile
+      ...
+       ⇒ [1/8] FROM docker.io/my-repo/my-java
+      ...
+       ⇒ exporting to image
+       ⇒ ⇒ exporting layers
+       ⇒ ⇒ writing image sha256:bc47...f9e52                       0.0s
+       ⇒ ⇒ naming to docker.io/library/amster:8.1.0
+      ```
+
+7. Build the empty AM image:
+
+   1. Unzip the AM `.zip` file.
+
+   2. Change to the openam/samples/docker directory in the expanded `.zip` file output.
+
+   3. Change to the images/am-empty directory.
+
+   4. Build the `am-empty` Docker image:
+
+      ```
+      $ docker build --tag am-empty:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+       ⇒ ⇒ transferring dockerfile: 3.60kB                                                                                                         0.0s
+       ⇒ [internal] load .dockerignore                                                                                                             0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                                                0.0s
+       ⇒ [internal] load metadata for docker.io/library/tomcat:9-jdk17-openjdk-slim-bullseye                                                       1.8s
+       ⇒ [internal] load build context                                                                                                             5.6s
+       ⇒ ⇒ transferring context: 231.59MB                                                                                                          5.6s
+       ⇒ [base  1/14] FROM docker.io/library/tomcat:9-jdk17-openjdk-slim-bullseye@...
+      ...
+       ⇒ exporting to image                                                                                                                        1.7s
+       ⇒ ⇒ exporting layers                                                                                                                        1.6s
+       ⇒ ⇒ writing image sha256:9784a73...1d36018c9                                                                                                0.0s
+       ⇒ ⇒ naming to docker.io/library/am-empty:8.1.0
+      ```
+
+8. Build the base image for AM:
+
+   1. Change to the ../am-base directory.
+
+   2. Edit the Dockerfile in the ../am-base directory and change the line:
+
+      ```
+      FROM ${docker.push.repo}/am-empty:${docker.tag}
+      ```
+
+      to:
+
+      ```
+      FROM am-empty:8.1.0
+      ```
+
+   3. Build the `am-base` Docker image:
+
+      ```
+      $ docker build --tag am-base:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile                                                               0.0s
+       ⇒ ⇒ transferring dockerfile: 2.72kB                                                                              0.0s
+       ⇒ [internal] load .dockerignore                                                                                  0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                     0.0s
+       ⇒ [internal] load metadata for docker.io/library/amster:8.1.0                                                    0.0s
+       ⇒ [internal] load metadata for docker.io/library/am-empty:8.1.0                                                  0.0s
+       ⇒ [internal] load build context                                                                                  0.4s
+       ⇒ ⇒ transferring context: 35.66MB                                                                                0.4s
+       ⇒ [generator  1/15] FROM docker.io/library/am-empty:8.1.0                                                        0.4s
+       ⇒ [amster 1/1] FROM docker.io/library/amster:8.1.0                                                               0.2s
+       ⇒ [generator  2/15] RUN apt-get update -y &&     apt-get install -y git jq unzip
+      ...
+       ⇒ [am-base  7/11] COPY --chown=forgerock:root docker-entrypoint.sh /home/forgerock/                              0.0s
+       ⇒ [am-base  8/11] COPY --chown=forgerock:root scripts/import-pem-certs.sh /home/forgerock/                       0.0s
+       ⇒ [am-base  9/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/click-extras-*.jar                           0.2s
+       ⇒ [am-base 10/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/click-nodeps-*.jar                           0.3s
+       ⇒ [am-base 11/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/velocity-*.jar                               0.2s
+       ⇒ exporting to image                                                                                             0.2s
+       ⇒ ⇒ exporting layers                                                                                             0.2s
+       ⇒ ⇒ writing image sha256:2c06...87c6c                                                                            0.0s
+       ⇒ ⇒ naming to docker.io/library/am-base:8.1.0
+      ```
+
+   4. Change to the ../am-cdk directory.
+
+   5. Edit the Dockerfile in the ../am-cdk directory. Change the line:
+
+      ```
+      FROM ${docker.push.registry}/forgerock-io/am-base/${docker.promotion.folder}:${docker.tag}
+      ```
+
+      to:
+
+      ```
+      FROM am-base:8.1.0
+      ```
+
+   6. Build the `am` Docker image:
+
+      ```
+      $ docker build --tag my-repo/am:8.1.0 .
+      [+] Building 5.1s (10/10) FINISHED                                                                 docker:desktop-linux
+       ⇒ [internal] load build definition from Dockerfile                                                               0.0s
+       ⇒ ⇒ transferring dockerfile: 1.71kB                                                                              0.0s
+       ⇒ [internal] load .dockerignore                                                                                  0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                     0.0s
+       ⇒ [internal] load metadata for docker.io/library/am-base:8.1.0                                                   0.0s
+       ⇒ [1/5] FROM docker.io/library/am-base:8.1.0                                                                     0.2s
+       ⇒ [internal] load build context                                                                                  0.2s
+       ⇒ ⇒ transferring context: 403.07kB                                                                               0.1s
+       ⇒ [2/5] RUN apt-get update         && apt-get install -y git         && apt-get clean         && rm -r /var/lib  3.9s
+       ⇒ [3/5] RUN cp -R /usr/local/tomcat/webapps/am/XUI /usr/local/tomcat/webapps/am/OAuth2_XUI                       0.3s
+       ⇒ [4/5] COPY --chown=forgerock:root /config /home/forgerock/cdk/config                                           0.0s
+       ⇒ [5/5] RUN rm -rf /home/forgerock/openam/config/services &&     mkdir /home/forgerock/openam/config/services    0.5s
+       ⇒ exporting to image                                                                                             0.1s
+       ⇒ ⇒ exporting layers                                                                                             0.1s
+       ⇒ ⇒ writing image sha256:14b43fb5121cee08341130bf502b7841429b057ff406bbe635b23119a74dec45                        0.0s
+       ⇒ ⇒ naming to my-repo/am:8.1.0                                                                                   0.0s
+      ```
+
+9. Now that the AM image is built, tag the base image for Amster in advance of pushing it to your private repository:
+
+   ```
+   $ docker tag amster:8.1.0 my-repo/amster:8.1.0
+   ```
+
+10. Build the `am-config-upgrader` base image:
+
+    1. Change to the `openam` directory in the expanded AM `.zip` file output.
+
+    2. Unzip the `Config-Upgrader-8.1.0.zip` file.
+
+    3. Change to the `amupgrade/samples/docker` directory in the expanded `Config-Upgrader-8.1.0.zip` file output.
+
+    4. Edit the Dockerfile in the amupgrade/samples/docker directory and change line 16 from:
+
+       ```
+       FROM gcr.io/forgerock-io/java-17:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    5. Run the setup.sh script:
+
+       ```
+       $ ./setup.sh
+
+       + mkdir -p build/amupgrade
+       + find ../.. '!' -name .. '!' -name samples '!' -name docker -maxdepth 1 -exec cp -R '{}' build/amupgrade ';'
+       + cp ../../docker/docker-entrypoint.sh .
+       ```
+
+    6. Create the base `am-config-upgrader` image:
+
+       ```
+       $ docker build --tag my-repo/am-config-upgrader:8.1.0 .
+
+       [+] Building 8.5s (9/9) FINISHED                                  docker:desktop-linux
+        ⇒ [internal] load build definition from Dockerfile                               0.0s
+        ⇒ ⇒ transferring dockerfile: 1.10kB                                              0.0s
+        ⇒ [internal] load .dockerignore                                                  0.0s
+        ⇒ ⇒ transferring context: 2B                                                     0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                            0.0s
+        ⇒ CACHED [1/4] FROM my-repo/my-java                                              0.0s
+        ⇒ [internal] load build context                                                  0.3s
+        ⇒ ⇒ transferring context: 20.58MB                                                0.3s
+        ⇒ [2/4] RUN apt-get update &&     apt-get upgrade -y                             8.3s
+        ⇒ [3/4] COPY --chown=forgerock:root docker-entrypoint.sh /home/forgerock/        0.0s
+        ⇒ [4/4] COPY build/ /home/forgerock/                                             0.0s
+        ⇒ exporting to image                                                             0.1s
+        ⇒ ⇒ exporting layers                                                             0.1s
+        ⇒ ⇒ writing image sha256:3f6845…​44011                                            0.0s
+        ⇒ ⇒ naming to my-repo/am-config-upgrader:8.1.0                                   0.0s
+       ```
+
+11. Build the base image for DS:
+
+    1. Unzip the DS `.zip` file.
+
+    2. Change to the opendj directory in the expanded `.zip` file output.
+
+    3. Run the samples/docker/setup.sh script to create a server:
+
+       ```
+       $ ./samples/docker/setup.sh
+
+       + rm -f template/config/tools.properties
+       + cp -r samples/docker/Dockerfile samples/docker/README.md ...
+       + rm -rf — README README.md bat '*.zip' opendj_logo.png setup.bat upgrade.bat setup.sh
+       + ./setup --serverId docker --hostname localhost
+       ...
+
+       Validating parameters... Done
+       Configuring certificates... Done
+       ...
+       ```
+
+    4. Edit the Dockerfile in the opendj directory. Change the line:
+
+       ```
+       FROM gcr.io/forgerock-io/java-...:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    5. Build the `ds` base image:
+
+       ```
+       $ docker build --tag my-repo/ds:8.1.0 .
+
+       [+] Building 11.0s (9/9) FINISHED
+
+        ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+        ⇒ ⇒ transferring dockerfile: 1.23kB                                                                                                         0.0s
+        ⇒ [internal] load .dockerignore                                                                                                             0.0s
+        ⇒ ⇒ transferring context: 2B                                                                                                                0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                       1.7s
+        ⇒ [internal] load build context                                                                                                             1.2s
+        ⇒ ⇒ transferring context: 60.85MB                                                                                                           1.2s
+        ⇒ CACHED [1/4] FROM my-repo/my-java:latest
+       ...
+        ⇒ [4/4] WORKDIR /opt/opendj                                                                                                                 0.0s
+        ⇒ exporting to image                                                                                                                        0.4s
+        ⇒ ⇒ exporting layers                                                                                                                        0.3s
+        ⇒ ⇒ writing image sha256:713ac...b107e0f                                                                                                    0.0s
+        ⇒ ⇒ naming to my-repo/ds:8.1.0
+       ```
+
+12. []()Build the base image for IDM:
+
+    1. Create a new shell script file named build-idm-image.sh and copy the following lines into it:
+
+       ```none
+       #!/bin/bash
+
+       if [ $# -lt 3 ]; then
+         echo "$0 <source image> <new base image> <result image>"
+         exit 0
+       fi
+
+       sourceImage="$1"
+       javaImage="$2"
+       resultImage="$3"
+
+       container_id=$(docker create $sourceImage)
+       docker export $container_id -o image.tar
+       docker rm $container_id
+
+       tar xvf image.tar opt/openidm
+       rm -f image.tar
+
+       cd opt/openidm
+       # use | separators because image names often have / and :
+       sed -i.bak 's|^FROM.*$|FROM '$javaImage'|' bin/Custom.Dockerfile
+       rm bin/Custom.Dockerfile.bak
+
+       docker build . --file bin/Custom.Dockerfile --tag "$resultImage"
+       rm -rf opt
+       ```
+
+    2. Change the mode of the file to be executable and run it.
+
+       ```
+       $ chmod +x build-idm-image.sh
+       $ ./build-idm-image.sh docker.pkg.dev/forgeops-public/images-base/idm:8.1.0 my-repo/my-java my-repo/idm:8.1.0
+       ```
+
+       |   |                                                                                                          |
+       | - | -------------------------------------------------------------------------------------------------------- |
+       |   | The build-idm-image.sh script expands the IDM Docker image, rebuilds the image, and cleans up afterward. |
+
+13. (Optional) Build the base image for PingGateway:
+
+    1. Unzip the PingGateway `.zip` file.
+
+    2. Change to the identity-gateway directory in the expanded `.zip` file output.
+
+    3. Edit the Dockerfile in the identity-gateway/docker directory. Change the line:
+
+       ```
+       FROM gcr.io/forgerock-io/java-...:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    4. Build the `ig` base image:
+
+       ```
+       $ docker build . --file docker/Dockerfile --tag my-repo/ig:2026.3.0
+
+       [+] Building 2.1s (8/8) FINISHED
+       ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+        ⇒ ⇒ transferring dockerfile: 1.43kB                                                                                                        0.0s
+        ⇒ [internal] load .dockerignore                                                                                                            0.0s
+        ⇒ ⇒ transferring context: 2B                                                                                                               0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                      0.3s
+        ⇒ [internal] load build context                                                                                                            2.2s
+        ⇒ ⇒ transferring context: 113.60MB                                                                                                         2.2s
+        ⇒ CACHED [1/3] FROM my-repo/my-java:latest
+        ⇒ [2/3] COPY --chown=forgerock:root . /opt/ig                                                                                              0.7s
+        ⇒ [3/3] RUN mkdir -p "/var/ig"     && chown -R forgerock:root "/var/ig" "/opt/ig"     &&  -R g+rwx "/var/ig" "/opt/ig"                     0.9s
+        ⇒ exporting to image                                                                                                                       0.6s
+        ⇒ ⇒ exporting layers                                                                                                                       0.6s
+        ⇒ ⇒ writing image sha256:77fc5...6e63                                                                                                      0.0s
+        ⇒ ⇒ naming to my-repo/ig:2026.3.0
+       ```
+
+14. Run the docker images command to verify that you built the base images:
+
+    ```
+    $ docker images | grep my-repo
+
+    REPOSITORY                   TAG      IMAGE ID        CREATED        SIZE
+    my-repo/am                   8.1.0    552073a1c000    1 hour ago     795MB
+    my-repo/am-config-upgrader   8.1.0    d115125b1c3f    1 hour ago     795MB
+    my-repo/amster               8.1.0    d9e1c735f415    1 hour ago     577MB
+    my-repo/ds                   8.1.0    ac8e8ab0fda6    1 hour ago     196MB
+    my-repo/idm                  8.1.0    0cc1b7f70ce6    1 hour ago     387MB
+    my-repo/ig                   2026.3.0 cc52e9623b3c    1 hour ago     249MB
+    my-repo/java-...             latest   a504925c2672    1 hour ago     144MB
+    ```
+
+15. Push the new base Docker images to your Docker repository.
+
+    Refer to your registry provider documentation for detailed instructions. For most Docker registries, you run the docker login command to log in to the registry. Then, you run the docker push command to push a Docker image to the registry.
+
+    Be sure to configure your Docker registry so that you can successfully push your Docker images. Each cloud-based Docker registry has its own specific requirements. For example, on Amazon ECR, you must create a repository for each image.
+
+    Push the following images to your repository:
+
+    * `my-repo/am:8.1.0`
+
+    * `my-repo/am-config-upgrader:8.1.0`
+
+    * `my-repo/amster:8.1.0`
+
+    * `my-repo/ds:8.1.0`
+
+    * `my-repo/idm:8.1.0`
+
+    * `my-repo/my-java`
+
+    If you're deploying your own PingGateway base image, also push the `my-repo/ig:2026.3.0` image.
+
+## Create Docker images for use in production
+
+After you've [built and pushed your own base images](#base-images) to your Docker registry, you're ready to build customized Docker images that can be used in a production deployment of the Ping Advanced Identity Software. These images:
+
+* Contain customized [configuration profiles](../customize/fr-data.html#configuration-profiles) for AM, IDM, and, optionally, PingGateway.
+
+* Must be based on [your own base Docker images](#base-images).
+
+Create your production-ready Docker images, create a Kubernetes cluster to test them, and delete the cluster when you've finished testing the images:
+
+1. Clone the `forgeops` repository.
+
+2. Obtain custom configuration profiles that you want to use in your Docker images from your developer, and copy them into your `forgeops` repository clone:
+
+   * Obtain the AM configuration profile from the /path/to/forgeops/docker/am/config-profiles directory.
+
+   * Obtain the IDM configuration profile from the /path/to/forgeops/docker/idm/config-profiles directory.
+
+   * (Optional) Obtain the PingGateway configuration profile from the /path/to/forgeops/docker/ig/config-profiles directory.
+
+3. Change the `FROM` lines of Dockerfiles in the `forgeops` repositories to refer to your own base Docker images:
+
+   | In the `forgeops` repository file: | Change the `FROM` line to:                                        |
+   | ---------------------------------- | ----------------------------------------------------------------- |
+   | docker/am/Dockerfile               | `FROM my-repo/am:8.1.0` \[[1](#_footnotedef_1 "View footnote.")]  |
+   | docker/amster/Dockerfile           | `FROM my-repo/amster:8.1.0`                                       |
+   | docker/ds/ds-new/Dockerfile        | `FROM my-repo/ds:8.1.0`                                           |
+   | docker/idm/Dockerfile              | `FROM my-repo/idm:8.1.0` \[[2](#_footnotedef_2 "View footnote.")] |
+   | (Optional) docker/ig/Dockerfile    | `FROM my-repo/ig:2026.3.0`                                        |
+
+4. If necessary, log in to your Docker registry.
+
+5. Enable the Python3 virtual environment:
+
+   ```
+   $ source .venv/bin/activate
+   ```
+
+6. Set up a ForgeOps deployment environment:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops env --env-name my-env --fqdn my-fqdn --cluster-issuer my-cluster-issuer
+   ```
+
+   In the command above, replace my-fqdn and my-cluster-issuer with appropriate values from your environment. If you want to use the issuer provided with the platform for demo, then you can use default-issuer.
+
+7. Build Docker images that are based on your own base images.
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                   |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | While the forgeops build command uses the Docker engine by default for ForgeOps deployments, it supports Podman as well. If you are using Podman engine instead of Docker in your environment, then set the `CONTAINER_ENGINE` environment variable to `podman` before running the forgeops build command, for example:```
+   $ export CONTAINER_ENGINE="podman"
+   ``` |
+
+   The AM and IDM images contain your customized configuration profiles:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops build --env-name my-env ds --push-to my-repo --tag my-tag
+   $ ./forgeops build --env-name my-env amster --push-to my-repo --tag my-tag
+   $ ./forgeops build --env-name my-env am --push-to my-repo --tag my-tag --config-profile my-profile
+   $ ./forgeops build --env-name my-env idm --push-to my-repo --tag my-tag --config-profile my-profile
+   ```
+
+   The forgeops build command:
+
+   * Builds Docker images. The AM and IDM images incorporate customized configuration profiles.
+
+   * Pushes Docker images to the repository specified in the --push-to argument.
+
+   * Updates the image defaulter file, which the forgeops apply command uses to determine which Docker images to run.
+
+8. (Optional) Build and push an PingGateway Docker image that's based on your own base image and contains your customized configuration profile:
+
+   ```
+   $ ./forgeops build --env-name my-env ig --config-profile my-profile --push-to my-repo
+   ```
+
+9. Prepare a Kubernetes cluster to test your images:
+
+   1. Create the cluster. This example assumes that you create a cluster suitable for a small-sized ForgeOps deployment.
+
+   2. Make sure your cluster can [access and pull Docker images](https://kubernetes.io/docs/concepts/containers/images/#configuring-nodes-to-authenticate-to-a-private-registry) from your repository.
+
+   3. Create a namespace in the new cluster, and then make the new namespace the active namespace in your local Kubernetes context.
+
+10. Perform a ForgeOps deployment in your cluster:
+
+    ```
+    $ cd /path/to/forgeops/bin
+    $ ./forgeops apply --env-name my-env --fqdn my-fqdn --namespace my-namespace
+    ```
+
+11. Access the AM admin UI and verify that your customized configuration profiles are active.
+
+12. Delete the Kubernetes cluster that you used to test images.
+
+At the end of this process, the artifacts that you'll need to deploy the Ping Advanced Identity Software in production are available:
+
+* Docker images for the Ping Advanced Identity Software, in your Docker repository
+
+* An updated image defaulter file, in your `forgeops` repository clone
+
+You'll need to copy the image defaulter file to your production deployment, so that when you run the forgeops apply command, it will use the correct Docker images.
+
+Typically, you model the image creation process in a CI/CD pipeline. Then, you run the pipeline at milestones in the development of your customized configuration profile.
+
+***
+
+[1](#_footnoteref_1). The `FROM` statement originally contained `am-cdk` as part of the repository name. Be sure to use `am`, not `am-cdk`, in the revised statement.[2](#_footnoteref_2). The `FROM` statement originally contained `idm-cdk` as part of the repository name. Be sure to use `idm`, not `idm-cdk`, in the revised statement.
+
+---
+
+---
+title: Beyond the docs
+description: Useful links that cover topics beyond the scope of this documentation.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:beyond-the-docs
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/beyond-the-docs.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Amster", "Docker", "Prometheus", "Grafana", "Alertmanager", "Multi-cluster", "Certificates"]
+section_ids:
+  development_topics: Development topics
+  deployment_topics: Deployment topics
+  ds_topics: DS topics
+  troubleshooting: Troubleshooting
+---
+
+# Beyond the docs
+
+Useful links that cover topics beyond the scope of this documentation.
+
+## Development topics
+
+* [Get a full Amster export out of a ForgeOps deployment](https://support.pingidentity.com/s/article/How-do-I-get-a-full-Amster-export-out-of-a-ForgeOps-deployment)
+
+## Deployment topics
+
+* [Deploy and customize Prometheus, Grafana, and Alertmanager in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob/2026.2.1/etc/addons/prometheus#prometheus-and-grafana-deployment)
+
+* [Deploy the platform in a multi-cluster environment using Google Cloud Multi Cluster Ingress and Cloud DNS for GKE](https://github.com/ForgeRock/forgeops-extras/tree/master/samples/multi-cluster/google-cloud/multi-cluster-ingress)
+
+* [Import a certificate into the truststore in a ForgeOps deployment](https://support.pingidentity.com/s/article/How-do-I-import-a-certificate-into-the-truststore-in-a-ForgeOps-deployment) **(Updated)**
+
+* [Enable the IDM workflow in a ForgeOps deployment](https://community.forgerock.com/t/enabling-the-idm-workflow-with-forgeops-v7-x/3949)
+
+* [ForgeOps deployment to minikube on M1 or M2 based Mac running Colima](https://community.forgerock.com/t/deploying-forgeops-to-minikube-on-an-m1-mac-with-colima/3305)
+
+## DS topics
+
+* DS script guide
+
+  * [An overview of DS scripts to customize, build, and deploy DS Docker images](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522)
+
+  * []()The `ds/ds-new/ldif-ext` directory now contains subdirectories matching each DS backend setup-profile. This makes it easier for customers to add custom ldap configuration for backends without having to manipulate the `ds-setup.sh` script.
+
+    Customers can now just add their custom files in:
+
+    * `ldif-ext/am-config/` for the `` am-config` `` backend
+
+    * `ldif-ext/identities/` for the `identities` backend
+
+    * `ldif-ext/tokens/` for the `tokens` backend
+
+    * `ldif-ext/idm-repo/` for the `openidm` backend
+
+* Synchronization of DS data
+
+  * [Synchronize persistent DS data between ForgeOps deployments](https://support.pingidentity.com/s/article/How-to-Replicate-Persistent-DS-Data-Between-ForgeOps-Deployments-Using-Synchronisation).
+
+## Troubleshooting
+
+* [Enable and modify the AM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-am.html)
+
+* [Enable and modify the IDM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-idm/3152)
+
+* [Enable and modify the audit logging level](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops/3263)
+
+---
+
+---
+title: ForgeOps benchmarks
+description: The benchmarking instructions in this part of the documentation give you a method to validate performance of your ForgeOps deployment.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  forgeops_benchmarking_checklist: ForgeOps benchmarking checklist
+---
+
+# ForgeOps benchmarks
+
+The benchmarking instructions in this part of the documentation give you a method to validate performance of your ForgeOps deployment.
+
+The benchmarking techniques we present are a lightweight example, and are not a substitute for load testing a production deployment. Use our benchmarking techniques to help you get started with the task of constructing your own load tests.
+
+When you[create a project plan](../../start/start-here.html#planning), you'll need to think about how you'll put together production-quality load tests that accurately measure your own deployment's performance.
+
+## ForgeOps benchmarking checklist
+
+* [icon: square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: References
+description: This section includes:
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# References
+
+This section includes:
+
+* Steps to create your own [Base Docker images](base-docker-images.html).
+
+* [Reference documentation](forgeops.html) for the forgeops command.
+
+* A [glossary](glossary.html) of terminology used in this documentation.
+
+* [Articles and knowledge base entries](beyond-the-docs.html) pertaining ForgeOps that aren't part of the official ForgeOps documentation.
+
+* [How-to articles in `forgeops` repository](how-tos.html).
