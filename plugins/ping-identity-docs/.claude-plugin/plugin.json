@@ -1,0 +1,22 @@
+{
+  "name": "ping-identity-docs",
+  "version": "1.0.0",
+  "description": "Per-docset live-doc router skills for Ping Identity documentation.",
+  "author": {
+    "name": "Mark Nienaber"
+  },
+  "homepage": "https://github.com/mark-nienaber/ping-agent-skills",
+  "repository": "https://github.com/mark-nienaber/ping-agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "ping",
+    "ping-identity",
+    "identity",
+    "iam",
+    "sso",
+    "oauth",
+    "documentation",
+    "agent-skills"
+  ],
+  "skills": "./skills/"
+}
