@@ -65,6 +65,45 @@ def markdownish(path: Path) -> bool:
     return not (prefix.startswith("<!doctype html") or prefix.startswith("<html"))
 
 
+def assemble_guide_snapshot(cluster, destination: Path, delay: float = 0.02) -> bool:
+    """Assemble a comprehensive guide snapshot by fetching and concatenating all pages in a cluster.
+    
+    Returns True if assembly succeeded, False otherwise.
+    This is a fallback for when single-page.md doesn't exist.
+    """
+    if not cluster.entries:
+        return False
+    
+    assembled_parts: list[str] = []
+    successful_fetches = 0
+    
+    for i, entry in enumerate(cluster.entries):
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".md", mode="w", encoding="utf-8") as tmp:
+            tmp_path = Path(tmp.name)
+        
+        try:
+            if curl_fetch(entry.url, tmp_path):
+                content = tmp_path.read_text(encoding="utf-8", errors="replace").strip()
+                if content:
+                    assembled_parts.append(content)
+                    successful_fetches += 1
+                    if delay and i < len(cluster.entries) - 1:
+                        time.sleep(delay)
+            if successful_fetches >= 20:
+                # Limit assembly to first 20 pages to avoid oversized snapshots
+                break
+        finally:
+            tmp_path.unlink(missing_ok=True)
+    
+    # Only write if we got at least some content
+    if successful_fetches > 0:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text("\n\n---\n\n".join(assembled_parts), encoding="utf-8")
+        return True
+    
+    return False
+
+
 def sync_docset(args: argparse.Namespace) -> int:
     repo_root = Path(args.repo_root).resolve()
     registry_path = repo_root / args.registry
@@ -108,20 +147,30 @@ def sync_docset(args: argparse.Namespace) -> int:
                 source_type = "single-page"
                 source_url = candidate_url
                 break
+        
         if not source_type:
             if not args.page_fallback:
                 print(f"[{docset.skill_slug}] skipped {cluster.guide}: no single-page.md")
                 continue
-            source_type = "page"
-            source_url = cluster.first_page_url
-            if not curl_fetch(cluster.first_page_url, snapshot_path):
-                detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
-                print(f"[{docset.skill_slug}] skipped {cluster.guide}: snapshot fetch failed{detail}")
-                continue
-            if not markdownish(snapshot_path):
-                snapshot_path.unlink(missing_ok=True)
-                print(f"[{docset.skill_slug}] skipped {cluster.guide}: fallback was not markdown")
-                continue
+            
+            # Try assembling from individual entries before giving up
+            if assemble_guide_snapshot(cluster, snapshot_path, delay=0.01):
+                source_type = "assembled"
+                source_url = f"<{len(cluster.entries)} pages from {cluster.guide}>"
+            else:
+                # Final fallback: fetch just the first page
+                source_type = "page"
+                source_url = cluster.first_page_url
+                if not curl_fetch(cluster.first_page_url, snapshot_path):
+                    detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
+                    print(f"[{docset.skill_slug}] skipped {cluster.guide}: snapshot fetch failed{detail}")
+                    continue
+        
+        if not markdownish(snapshot_path):
+            snapshot_path.unlink(missing_ok=True)
+            print(f"[{docset.skill_slug}] skipped {cluster.guide}: content was not markdown")
+            continue
+        
         snapshots.append(
             {
                 "file": snapshot_file,
@@ -132,7 +181,7 @@ def sync_docset(args: argparse.Namespace) -> int:
             }
         )
         captured_files.add(snapshot_file)
-        print(f"[{docset.skill_slug}] captured {snapshot_file} from {source_type}")
+        print(f"[{docset.skill_slug}] captured {snapshot_file} from {source_type} ({len(cluster.entries)} pages)")
         if delay:
             time.sleep(delay)
 
