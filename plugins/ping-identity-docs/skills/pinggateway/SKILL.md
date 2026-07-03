@@ -28,6 +28,7 @@ Landing page for PingGateway documentation: get started, installation, upgrade, 
 |---|---|---|---|
 | Reference: pinggateway, configure, reference | reference | https://docs.pingidentity.com/pinggateway/2026/reference/*.md | references/snapshots/reference.md |
 | Gateway Guide: pingam, pinggateway, configure | gateway-guide | https://docs.pingidentity.com/pinggateway/2026/gateway-guide/*.md | references/snapshots/gateway-guide.md |
+| Release Notes: pinggateway, release, version | release-notes | https://docs.pingidentity.com/pinggateway/release-notes/*.md | references/snapshots/release-notes.md |
 | Aic: identity, advanced, cloud | aic | https://docs.pingidentity.com/pinggateway/2026/aic/*.md | references/snapshots/aic.md |
 | Studio Guide: studio, routes, pinggateway | studio-guide | https://docs.pingidentity.com/pinggateway/2026/studio-guide/*.md | references/snapshots/studio-guide.md |
 | Installation Guide: pinggateway, configure, jwt | installation-guide | https://docs.pingidentity.com/pinggateway/2026/installation-guide/*.md | references/snapshots/installation-guide.md |

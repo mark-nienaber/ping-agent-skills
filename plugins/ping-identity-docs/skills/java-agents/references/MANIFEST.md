@@ -4,15 +4,16 @@
 - Version: 2026
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/java-agents/llms.txt
-- Guides discovered: 8
-- Guides captured: 8
-- Total pages indexed: 249
+- Guides discovered: 9
+- Guides captured: 9
+- Total pages indexed: 285
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
 | properties-reference.md | page | https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.access.denied.uri.map.md | 197 |
+| release-notes.md | page | https://docs.pingidentity.com/java-agents/release-notes/archive.md | 36 |
 | user-guide.md | page | https://docs.pingidentity.com/java-agents/2026/user-guide/about.md | 21 |
 | installation-guide.md | page | https://docs.pingidentity.com/java-agents/2026/installation-guide/agentadmin.md | 8 |
 | maintenance-guide.md | page | https://docs.pingidentity.com/java-agents/2026/maintenance-guide/auditing.md | 7 |
@@ -27,6 +28,7 @@
 |---|---|
 | llms.txt | ce60186b54509182f53a05f1595b686a0a69956ab842a76f73653737eb4f2a8e |
 | snapshots/properties-reference.md | 59c313bbac9ef40075e59efdad929d24662b3a986c58d1dd3987c40561f7e967 |
+| snapshots/release-notes.md | 840aaffa04a945da82373b616597e21731af2de1760c239bd9f86a0873b1f7e6 |
 | snapshots/user-guide.md | d2d10352321277cbcf30b3097c4045b455c9399dbf8bfda64a0e0b7fc99ba113 |
 | snapshots/installation-guide.md | 1ea5e3055797278e40415d6f98e866050d3569d7dcfedb19b5f598b64933bec5 |
 | snapshots/maintenance-guide.md | 02d13e3b46636f1b4873bd83dbef5504c66e3e62c3ead92e87deed00802447b4 |

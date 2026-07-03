@@ -31,6 +31,7 @@ Introduction to LDAP directory concepts including data model, communication, con
 | Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | references/snapshots/config-guide.md |
 | Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | references/snapshots/tools-reference.md |
 | Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | references/snapshots/security-guide.md |
+| Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | references/snapshots/release-notes.md |
 | Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | references/snapshots/install-guide.md |
 | Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | references/snapshots/upgrade-guide.md |
 | Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | references/snapshots/getting-started.md |

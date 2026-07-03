@@ -27,6 +27,7 @@ Overview of PingAM Java Agent architecture: agent components, configuration mode
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
 | Properties Reference: agent, audit, log | properties-reference | https://docs.pingidentity.com/java-agents/2026/properties-reference/*.md | references/snapshots/properties-reference.md |
+| Release Notes: agent, java, changes | release-notes | https://docs.pingidentity.com/java-agents/release-notes/*.md | references/snapshots/release-notes.md |
 | User Guide: agent, pingam, java | user-guide | https://docs.pingidentity.com/java-agents/2026/user-guide/*.md | references/snapshots/user-guide.md |
 | Installation Guide: agent, java, pingam | installation-guide | https://docs.pingidentity.com/java-agents/2026/installation-guide/*.md | references/snapshots/installation-guide.md |
 | Maintenance Guide: pingam, agent, java | maintenance-guide | https://docs.pingidentity.com/java-agents/2026/maintenance-guide/*.md | references/snapshots/maintenance-guide.md |

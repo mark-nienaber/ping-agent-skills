@@ -4,9 +4,9 @@
 - Version: 2026
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/pinggateway/llms.txt
-- Guides discovered: 17
-- Guides captured: 17
-- Total pages indexed: 365
+- Guides discovered: 18
+- Guides captured: 18
+- Total pages indexed: 378
 
 ## Source URLs
 
@@ -14,6 +14,7 @@
 |---|---|---|---|
 | reference.md | page | https://docs.pingidentity.com/pinggateway/2026/reference/AboutCrest.md | 216 |
 | gateway-guide.md | page | https://docs.pingidentity.com/pinggateway/2026/gateway-guide/oidc-am.md | 58 |
+| release-notes.md | page | https://docs.pingidentity.com/pinggateway/release-notes/deprecated.md | 13 |
 | aic.md | page | https://docs.pingidentity.com/pinggateway/2026/aic/switch-to-saas.md | 12 |
 | studio-guide.md | page | https://docs.pingidentity.com/pinggateway/2026/studio-guide/freeform.md | 10 |
 | installation-guide.md | page | https://docs.pingidentity.com/pinggateway/2026/installation-guide/download.md | 9 |
@@ -37,6 +38,7 @@
 | llms.txt | 7f08805ae7f29a1e272abc8ed1bd04348a63cc9ea9f866833f17b524901d8e4c |
 | snapshots/reference.md | e276296ee6ca768e61222aa5a0c2d303b576c255fcf6c3deef8ac93b96d53028 |
 | snapshots/gateway-guide.md | ddbfc122f82ea7f7d2d0e30d7a335106208faa29715698383628376e8d69dbf8 |
+| snapshots/release-notes.md | 558a388ceccb819c778fc0ce6a551db234bab8c30f3bb198e91b78034b8e4742 |
 | snapshots/aic.md | 368414f492a1abde6913e75abeea80d5b8961dcc81a690cf3075f2d41cfc66e3 |
 | snapshots/studio-guide.md | 708a89ddbc0f75df5aaa616c28a646c2eccb348c16a0a5c7a0b6023222d130ab |
 | snapshots/installation-guide.md | 511b4262a96d10bf07497232705fca930c2197a8eccf4bb8771d1ff9134c1cbf |

@@ -70,6 +70,7 @@ class GuideCluster:
     entries: tuple[LlmEntry, ...]
     first_page_url: str
     single_page_url: str
+    single_page_urls: tuple[str, ...]
 
     @property
     def guide_slug(self) -> str:
@@ -122,13 +123,16 @@ def _clean_yaml_scalar(value: str) -> str:
 
 
 def _docset_from_mapping(data: dict[str, str]) -> Docset:
+    preferred_version = data.get("preferred_version")
+    if preferred_version is not None and preferred_version.lower() in {"", "null", "~"}:
+        preferred_version = None
     return Docset(
         skill_slug=data["skill_slug"],
         label=data.get("label", data["skill_slug"]),
         source=data.get("source", ""),
         base_url=data["base_url"].rstrip("/"),
         enabled=data.get("enabled", "true").lower() == "true",
-        preferred_version=data.get("preferred_version") or None,
+        preferred_version=preferred_version or None,
     )
 
 
@@ -203,39 +207,50 @@ def _version_key(version: str) -> tuple[int, ...]:
 def cluster_entries(
     entries: Iterable[LlmEntry], base_url: str, selected_version: str
 ) -> list[GuideCluster]:
-    grouped: dict[str, list[LlmEntry]] = {}
+    grouped: dict[tuple[str, str], list[LlmEntry]] = {}
     for entry in entries:
         rel_path = relative_doc_path(entry.url, base_url)
         parts = rel_path.split("/") if rel_path else []
         if selected_version:
-            if not parts or parts[0] != selected_version:
+            if parts and parts[0] == selected_version:
+                if len(parts) > 2:
+                    guide = parts[1]
+                else:
+                    guide = "root"
+                cluster_version = selected_version
+            elif parts and VERSION_RE.match(parts[0]):
                 continue
-            if len(parts) > 2:
-                guide = parts[1]
             else:
-                guide = "root"
+                guide = parts[0] if parts else "root"
+                cluster_version = "current"
         else:
             guide = parts[0] if parts else "root"
-        grouped.setdefault(guide, []).append(entry)
+            cluster_version = "current"
+        grouped.setdefault((cluster_version, guide), []).append(entry)
 
     clusters: list[GuideCluster] = []
-    for guide, guide_entries in grouped.items():
+    for (cluster_version, guide), guide_entries in grouped.items():
         first_url = guide_entries[0].url
-        if selected_version:
-            single_url = f"{base_url}/{selected_version}/{guide}/single-page.md"
+        single_urls: list[str]
+        if cluster_version and cluster_version != "current":
+            single_urls = [f"{base_url}/{cluster_version}/{guide}/single-page.md"]
             if guide == "root":
-                single_url = f"{base_url}/{selected_version}/single-page.md"
-        elif guide == "root":
-            single_url = f"{base_url}/single-page.md"
+                single_urls = [f"{base_url}/{cluster_version}/single-page.md"]
+            else:
+                single_urls.append(f"{base_url}/{guide}/single-page.md")
         else:
-            single_url = f"{base_url}/{guide}/single-page.md"
+            if guide == "root":
+                single_urls = [f"{base_url}/single-page.md"]
+            else:
+                single_urls = [f"{base_url}/{guide}/single-page.md"]
         clusters.append(
             GuideCluster(
                 guide=guide,
-                version=selected_version or "current",
+                version=cluster_version or "current",
                 entries=tuple(guide_entries),
                 first_page_url=first_url,
-                single_page_url=single_url,
+                single_page_url=single_urls[0],
+                single_page_urls=tuple(dict.fromkeys(single_urls)),
             )
         )
     return sorted(clusters, key=lambda item: (-len(item.entries), item.guide_slug))

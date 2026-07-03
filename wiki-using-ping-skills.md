@@ -41,4 +41,4 @@ Agents should load `SKILL.md`, use the routing table and `llms.txt` to choose ex
 
 ## Known Gap
 
-`pingcli` is not generated yet. Ping's developer root index advertises `https://developer.pingidentity.com/pingcli/llms.txt`, but that endpoint redirects to `/pingcli/1.1/llms.txt`, which returns 404. The migration intentionally leaves this as a loud failure instead of shipping an invented index.
+`pingcli` is not generated yet. Ping's developer root index advertises `https://developer.pingidentity.com/pingcli/llms.txt`, but that endpoint redirects to `/pingcli/1.1/llms.txt`, which returns 404. The registry disables this docset until https://github.com/mark-nienaber/ping-agent-skills/issues/2 is resolved.

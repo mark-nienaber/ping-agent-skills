@@ -79,12 +79,16 @@ def validate_frontmatter(skill_dir: Path, reporter: Reporter) -> None:
     name = frontmatter.get("name", "")
     if name != skill_dir.name:
         reporter.error(f"{skill_path}: name must match parent directory")
+    if len(name) > 64:
+        reporter.error(f"{skill_path}: name exceeds 64 characters")
     if not NAME_RE.match(name) or "--" in name:
         reporter.error(f"{skill_path}: invalid agentskills name {name!r}")
 
     description = frontmatter.get("description", "")
-    if len(description) > 1024:
-        reporter.error(f"{skill_path}: description exceeds 1024 characters")
+    if not description.startswith("Use when"):
+        reporter.error(f"{skill_path}: description must start with 'Use when'")
+    if len(description) > 500:
+        reporter.error(f"{skill_path}: description exceeds 500 characters")
 
 
 def curl_ok(url: str) -> bool:

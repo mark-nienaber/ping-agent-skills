@@ -4,9 +4,9 @@
 - Version: 8.1
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/pingds/llms.txt
-- Guides discovered: 19
-- Guides captured: 19
-- Total pages indexed: 2011
+- Guides discovered: 20
+- Guides captured: 20
+- Total pages indexed: 2034
 
 ## Source URLs
 
@@ -17,6 +17,7 @@
 | config-guide.md | page | https://docs.pingidentity.com/pingds/8.1/config-guide/idx-about.md | 46 |
 | tools-reference.md | page | https://docs.pingidentity.com/pingds/8.1/tools-reference/preface.md | 38 |
 | security-guide.md | page | https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-about.md | 25 |
+| release-notes.md | page | https://docs.pingidentity.com/pingds/release-notes/deprecation.md | 23 |
 | install-guide.md | page | https://docs.pingidentity.com/pingds/8.1/install-guide/file-layout.md | 19 |
 | upgrade-guide.md | page | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/about-upgrades.md | 15 |
 | getting-started.md | page | https://docs.pingidentity.com/pingds/8.1/getting-started/directory-services.md | 11 |
@@ -42,6 +43,7 @@
 | snapshots/config-guide.md | ed4d41c4908543b4391f8ba6359efebf78c71331aaae59b500a6757a9a0a6545 |
 | snapshots/tools-reference.md | 2ac568ded605c0f4f1fd82489ed677356726932b76045914f96b135cafe00d67 |
 | snapshots/security-guide.md | 56d2eceaa83005f52758937eab3a5081f69a39342cbe0db4bda680f9dc07705d |
+| snapshots/release-notes.md | feb46e239016418a3d088c92c3d802c4fbaaac8492192ece6b5d27dc15e2ffec |
 | snapshots/install-guide.md | 61267973bedf77c16705139680c2c9d1aa84cee6b6655fb8aa3e70705ca1254c |
 | snapshots/upgrade-guide.md | c582e64fc1c094a4c8fbeb0303fdcca7249e0cce5ad612817256ec3997388c9a |
 | snapshots/getting-started.md | df02dce67124c16ee91b934242be2942794085bd4010628c08321c158377780f |

@@ -29,6 +29,7 @@ Secure your resources and manage user access across your network with PingAM, a 
 | Entity Reference: accepttermsandconditions, accepttermsandconditionscollection, accountactivecheck | entity-reference | https://docs.pingidentity.com/pingam/8.1/entity-reference/*.md | references/snapshots/entity-reference.md |
 | Am Oauth2: oauth, authorization, token | am-oauth2 | https://docs.pingidentity.com/pingam/8.1/am-oauth2/*.md | references/snapshots/am-oauth2.md |
 | Am Authentication: authentication, pingam, authenticate | am-authentication | https://docs.pingidentity.com/pingam/8.1/am-authentication/*.md | references/snapshots/am-authentication.md |
+| Release Notes: changes, fixes, deprecated | release-notes | https://docs.pingidentity.com/pingam/release-notes/*.md | references/snapshots/release-notes.md |
 | Security: pingam, session, configure | security | https://docs.pingidentity.com/pingam/8.1/security/*.md | references/snapshots/security.md |
 | Am Scripting: scripts, scripting, bindings | am-scripting | https://docs.pingidentity.com/pingam/8.1/am-scripting/*.md | references/snapshots/am-scripting.md |
 | Installation: pingam, configuration, install | installation | https://docs.pingidentity.com/pingam/8.1/installation/*.md | references/snapshots/installation.md |

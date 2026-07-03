@@ -16,15 +16,16 @@ This repo uses Agent Skills as the shared source for Claude Code, Codex, and oth
 ## Current Coverage
 
 - Registered docsets: 57
+- Enabled docsets: 56
 - Generated skills: 56
-- Blocked docsets: `pingcli`
+- Disabled docsets: `pingcli`
 - Snapshot footprint: about 19 MB
 
 ## Deviations To Review
 
-Guide-level `single-page.md` endpoints returned 404 during migration. The sync tool still attempts `single-page.md` first, then falls back to the first official Ping `.md` page in each guide and records that source type in `MANIFEST.md`.
+Most versioned guide-level `single-page.md` endpoints returned 404 during migration. The sync tool attempts the versioned `single-page.md` URL first, then the unversioned guide `single-page.md` URL. If both are unavailable, it falls back to the first official Ping `.md` page in each guide and records that source type in `MANIFEST.md`.
 
-`pingcli` is not generated because the advertised per-docset `llms.txt` endpoint redirects to a 404. This should remain an explicit PR blocker until Ping fixes the endpoint or the registry intentionally disables the docset.
+`pingcli` is not generated because the advertised per-docset `llms.txt` endpoint redirects to a 404. The registry keeps the docset but sets `enabled: false` until https://github.com/mark-nienaber/ping-agent-skills/issues/2 is resolved.
 
 ## Distribution
 

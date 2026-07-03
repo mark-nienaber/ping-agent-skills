@@ -4,9 +4,9 @@
 - Version: 8.1
 - Sync date: 2026-07-03
 - Source: https://docs.pingidentity.com/pingam/llms.txt
-- Guides discovered: 26
-- Guides captured: 26
-- Total pages indexed: 1068
+- Guides discovered: 27
+- Guides captured: 27
+- Total pages indexed: 1117
 
 ## Source URLs
 
@@ -15,6 +15,7 @@
 | entity-reference.md | page | https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-accepttermsandconditions.md | 546 |
 | am-oauth2.md | page | https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-introspect-macaroon-endpoint.md | 63 |
 | am-authentication.md | page | https://docs.pingidentity.com/pingam/8.1/am-authentication/radius-client.md | 55 |
+| release-notes.md | single-page | https://docs.pingidentity.com/pingam/release-notes/single-page.md | 49 |
 | security.md | page | https://docs.pingidentity.com/pingam/8.1/security/account-lockout.md | 43 |
 | am-scripting.md | page | https://docs.pingidentity.com/pingam/8.1/am-scripting/access-token-modification-api.md | 37 |
 | installation.md | page | https://docs.pingidentity.com/pingam/8.1/installation/prepare-apache-tomcat.md | 33 |
@@ -47,6 +48,7 @@
 | snapshots/entity-reference.md | ab4e4c38e38c3943b7c142abdd724cd418dae42ca66e634e13111e3ddc759856 |
 | snapshots/am-oauth2.md | 40d0f02fb663dc9d9c18023eeba0f5c37012673da11cc9eb80f91dd977fe270b |
 | snapshots/am-authentication.md | 35ed97f808ef50fc279ffce6b7e7ac57f1fb1a94d9753c15ec7d2572f710da02 |
+| snapshots/release-notes.md | bbd645d1d884df3c4408fb8f63fed974cfd56cbb3064b076a87cec788c2735a2 |
 | snapshots/security.md | 3177a049cfbac6fe2fa27659c8d7241bef180befdc2815f42331dc4ef30da4d0 |
 | snapshots/am-scripting.md | 1f4bdad71dcf787c293e74d1d68561c7e67611becc363ff4afc6ff4c1d141d7e |
 | snapshots/installation.md | 6e26535528968b6d2a504c01f42a556c61e40e6a0ed225468375e47c3c73f63f |

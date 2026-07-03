@@ -26,6 +26,7 @@ Prompts users to accept the active terms and conditions during registration or s
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
+| Latest: node, identity, advanced | latest | https://docs.pingidentity.com/auth-node-ref/latest/*.md | references/snapshots/latest.md |
 | Root: node, pingam, user | root | https://docs.pingidentity.com/auth-node-ref/8.1/*.md | references/snapshots/root.md |
 | Pingone: pingone, node, credentials | pingone | https://docs.pingidentity.com/auth-node-ref/8.1/pingone/*.md | references/snapshots/pingone.md |
 | Am Only: node, deprecated, pingam | am-only | https://docs.pingidentity.com/auth-node-ref/8.1/am-only/*.md | references/snapshots/am-only.md |

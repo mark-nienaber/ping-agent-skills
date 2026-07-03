@@ -101,9 +101,14 @@ def sync_docset(args: argparse.Namespace) -> int:
     for cluster in clusters:
         snapshot_file = f"{cluster.guide_slug}.md"
         snapshot_path = snapshots_root / snapshot_file
-        source_type = "single-page"
-        source_url = cluster.single_page_url
-        if not curl_fetch(cluster.single_page_url, snapshot_path):
+        source_type = ""
+        source_url = ""
+        for candidate_url in cluster.single_page_urls:
+            if curl_fetch(candidate_url, snapshot_path):
+                source_type = "single-page"
+                source_url = candidate_url
+                break
+        if not source_type:
             if not args.page_fallback:
                 print(f"[{docset.skill_slug}] skipped {cluster.guide}: no single-page.md")
                 continue

@@ -6,10 +6,11 @@ This repo complements [`pingidentity/agent-plugins`](https://github.com/pingiden
 
 ## Status
 
-- 57 docsets are registered in `scripts/docsets.yaml`.
+- 57 docsets are registered in `scripts/docsets.yaml`; 56 are enabled.
 - 56 skills are generated under `plugins/ping-identity-docs/skills/`.
-- `pingcli` is blocked: Ping's root developer `llms.txt` links to `https://developer.pingidentity.com/pingcli/llms.txt`, but that redirects to `/pingcli/1.1/llms.txt`, which returns 404. The sync script fails loudly as required by the migration spec.
+- `pingcli` is disabled: Ping's root developer `llms.txt` links to `https://developer.pingidentity.com/pingcli/llms.txt`, but that redirects to `/pingcli/1.1/llms.txt`, which returns 404. Tracking issue: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
 - Snapshot size is about 19 MB, below the 200 MB threshold for proposing fetch-on-demand mode.
+- Numeric-version docsets are pinned with `preferred_version` in `scripts/docsets.yaml`; quarterly bump PRs should update that field and refresh snapshots.
 
 ## Install
 
@@ -89,11 +90,11 @@ scripts/validate.sh --skip-url-check
 scripts/validate.sh --require-all-enabled
 ```
 
-`--require-all-enabled` currently fails until Ping fixes the `pingcli` per-docset `llms.txt` endpoint or the registry explicitly disables that docset.
+`--require-all-enabled` validates the generated skill set against enabled registry entries. `pingcli` remains registered but disabled until Ping fixes its per-docset `llms.txt` endpoint.
 
 ## Snapshot Policy
 
-Snapshots are committed by default for offline safety and visible documentation drift. The sync script attempts each guide's `single-page.md` URL first. Current Ping docs return 404 for those guide-level `single-page.md` URLs, so the script falls back to the first official Ping `.md` page in each guide and records the source type in `references/MANIFEST.md`.
+Snapshots are committed by default for offline safety and visible documentation drift. The sync script attempts each guide's versioned `single-page.md` URL, then the unversioned guide `single-page.md` URL. If both are unavailable, it falls back to the first official Ping `.md` page in the guide and records the source type in `references/MANIFEST.md`.
 
 ## License
 

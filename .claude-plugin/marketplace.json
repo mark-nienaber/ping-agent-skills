@@ -2,7 +2,8 @@
   "name": "ping-agent-skills",
   "description": "Per-docset Agent Skills that route AI coding agents to Ping Identity's official live Markdown documentation.",
   "owner": {
-    "name": "Mark Nienaber"
+    "name": "Mark Nienaber",
+    "email": null
   },
   "plugins": [
     {

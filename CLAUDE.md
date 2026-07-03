@@ -10,7 +10,7 @@ This repo contains Agent Skills for Ping Identity documentation. Treat `plugins/
 - The frontmatter `description` is the activation trigger. Keep it concrete, product-specific, and under 500 characters.
 - Prefer live fetch from the URL selected through `references/llms.txt`; use `references/snapshots/` only when offline or live fetch fails.
 - Do not rename `scripts/docsets.yaml` slugs without an explicit migration note.
-- `pingcli` is registered but not generated because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
+- `pingcli` is registered but disabled because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
 
 ## Skill Inventory
 
@@ -75,7 +75,7 @@ Generated skills:
 
 Blocked:
 
-- `pingcli` - registry entry exists, but `https://developer.pingidentity.com/pingcli/llms.txt` currently redirects to a 404 endpoint.
+- `pingcli` - registry entry exists but is disabled. `https://developer.pingidentity.com/pingcli/llms.txt` currently redirects to a 404 endpoint. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
 
 ## Composition
 
