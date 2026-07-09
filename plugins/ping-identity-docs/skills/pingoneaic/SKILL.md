@@ -1,6 +1,6 @@
 ---
 name: pingoneaic
-description: "Use when administering PingOne Advanced Identity Cloud, including journeys, realms, tenants, AM OAuth2/OIDC/SAML, IDM objects, sync, governance, scripting, and reports. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne Advanced Identity Cloud: identity governance, release notes, am oauth2, tenants, app management, am authentication. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

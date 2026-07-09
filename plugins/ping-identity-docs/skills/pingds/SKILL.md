@@ -1,6 +1,6 @@
 ---
 name: pingds
-description: "Use when administering PingDS or ForgeRock DS, including configuration reference, schemas, tools, replication, security, installation, monitoring, and troubleshooting. Routes to live docs; snapshots fallback."
+description: "Use when working with PingDS: schemaref, configref, config guide, tools reference, security guide, release notes. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

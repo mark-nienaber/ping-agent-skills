@@ -1,6 +1,6 @@
 ---
 name: pingdirectory
-description: "Use when administering PingDirectory, PingDirectoryProxy, PingDataSync, delegated admin, consent, server configuration, security, installation, upgrades, and troubleshooting. Routes to live docs; snapshots fallback."
+description: "Use when working with PingDirectory: pingdirectory server administration guide, pingdirectory security guide, pingdirectoryproxy server administration guide, pingdatasync server administration guide, installing the pingdirectory suite of products, troubleshooting the pingdirectory suite of products. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

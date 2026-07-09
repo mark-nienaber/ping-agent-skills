@@ -1,6 +1,6 @@
 ---
 name: solution-guides
-description: "Use when choosing Ping solution patterns, including SSO, MFA, workforce, customer IAM, API security, directory, verified trust, identity for AI, and best practices. Routes to live docs; snapshots fallback."
+description: "Use when working with Solution Guides: single sign on use cases, data and application security use cases, workforce use cases, customer use cases, best practice guides, multi factor authentication use cases. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -36,7 +36,7 @@ Identity for AI secures AI agents with agent registration, authentication, autho
 | Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | references/snapshots/developer-api-use-cases.md |
 | Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | references/snapshots/verified-trust.md |
 | Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | references/snapshots/directory-use-cases.md |
-| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md/*.md | references/snapshots/htg-overview-md.md |
+| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | references/snapshots/htg-overview-md.md |
 | Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | references/snapshots/identity-for-ai.md |
 
 ## Composition

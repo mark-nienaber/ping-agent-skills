@@ -1,6 +1,6 @@
 ---
 name: davinci
-description: "Use when building PingOne DaVinci flows, connectors, applications, variables, forms, UI Studio screens, flow analytics, SIEM streaming, or orchestration best practices. Routes to live docs; snapshots fallback."
+description: "Use when working with DaVinci: flows, davinci best practices, connectors, applications, integrating flows into applications, variables. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -37,13 +37,13 @@ Use the flow search option to find specific nodes.
 | Usage Terms: browser, davinci, support | usage_terms | https://docs.pingidentity.com/davinci/usage_terms/*.md | references/snapshots/usage-terms.md |
 | Company Settings: company, settings | company_settings | https://docs.pingidentity.com/davinci/company_settings/*.md | references/snapshots/company-settings.md |
 | Configuring Siem Streaming: configuring, siem, streaming | configuring_siem_streaming | https://docs.pingidentity.com/davinci/configuring_siem_streaming/*.md | references/snapshots/configuring-siem-streaming.md |
-| Davinci Adding P1 Admin Users.Md: adding, admin, davinci | davinci_adding_p1_admin_users.md | https://docs.pingidentity.com/davinci/davinci_adding_p1_admin_users.md/*.md | references/snapshots/davinci-adding-p1-admin-users-md.md |
-| Davinci Audit Trail.Md: audit, trail | davinci_audit_trail.md | https://docs.pingidentity.com/davinci/davinci_audit_trail.md/*.md | references/snapshots/davinci-audit-trail-md.md |
-| Davinci Dashboard.Md: dashboard | davinci_dashboard.md | https://docs.pingidentity.com/davinci/davinci_dashboard.md/*.md | references/snapshots/davinci-dashboard-md.md |
-| Davinci Early Access.Md: access, davinci, early | davinci_early_access.md | https://docs.pingidentity.com/davinci/davinci_early_access.md/*.md | references/snapshots/davinci-early-access-md.md |
-| Davinci Forms.Md: forms | davinci_forms.md | https://docs.pingidentity.com/davinci/davinci_forms.md/*.md | references/snapshots/davinci-forms-md.md |
-| Davinci Introduction.Md: davinci, introduction, pingone | davinci_introduction.md | https://docs.pingidentity.com/davinci/davinci_introduction.md/*.md | references/snapshots/davinci-introduction-md.md |
-| Davinci Landing Page.Md: davinci, pingone | davinci_landing_page.md | https://docs.pingidentity.com/davinci/davinci_landing_page.md/*.md | references/snapshots/davinci-landing-page-md.md |
+| Davinci Adding P1 Admin Users.Md: adding, admin, davinci | davinci_adding_p1_admin_users.md | https://docs.pingidentity.com/davinci/davinci_adding_p1_admin_users.md | references/snapshots/davinci-adding-p1-admin-users-md.md |
+| Davinci Audit Trail.Md: audit, trail | davinci_audit_trail.md | https://docs.pingidentity.com/davinci/davinci_audit_trail.md | references/snapshots/davinci-audit-trail-md.md |
+| Davinci Dashboard.Md: dashboard | davinci_dashboard.md | https://docs.pingidentity.com/davinci/davinci_dashboard.md | references/snapshots/davinci-dashboard-md.md |
+| Davinci Early Access.Md: access, davinci, early | davinci_early_access.md | https://docs.pingidentity.com/davinci/davinci_early_access.md | references/snapshots/davinci-early-access-md.md |
+| Davinci Forms.Md: forms | davinci_forms.md | https://docs.pingidentity.com/davinci/davinci_forms.md | references/snapshots/davinci-forms-md.md |
+| Davinci Introduction.Md: davinci, introduction, pingone | davinci_introduction.md | https://docs.pingidentity.com/davinci/davinci_introduction.md | references/snapshots/davinci-introduction-md.md |
+| Davinci Landing Page.Md: davinci, pingone | davinci_landing_page.md | https://docs.pingidentity.com/davinci/davinci_landing_page.md | references/snapshots/davinci-landing-page-md.md |
 | Release Notes: notes, release | release_notes | https://docs.pingidentity.com/davinci/release_notes/*.md | references/snapshots/release-notes.md |
 | Ui Studio: studio | ui_studio | https://docs.pingidentity.com/davinci/ui_studio/*.md | references/snapshots/ui-studio.md |
 

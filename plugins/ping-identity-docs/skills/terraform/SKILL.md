@@ -1,6 +1,6 @@
 ---
 name: terraform
-description: "Use when automating Ping configuration with Terraform, including provider setup, products, best practices, configuration examples, pipelines, and infrastructure workflows. Routes to live docs; snapshots fallback."
+description: "Use when working with Terraform: products, develop with terraform, terraform at ping, best practices.md, develop with terraform.md, terraform landing page.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -29,9 +29,9 @@ Terraform documentation is indexed in the bundled llms.txt and live Ping Markdow
 | Products: asked, frequently, getting | products | https://developer.pingidentity.com/terraform/products/*.md | references/snapshots/products.md |
 | Develop With Terraform: terraform, configuration, exporting | develop_with_terraform | https://developer.pingidentity.com/terraform/develop_with_terraform/*.md | references/snapshots/develop-with-terraform.md |
 | Terraform At Ping: terraform, benefits, deployments | terraform_at_ping | https://developer.pingidentity.com/terraform/terraform_at_ping/*.md | references/snapshots/terraform-at-ping.md |
-| Best Practices.Md: best, practices | best_practices.md | https://developer.pingidentity.com/terraform/best_practices.md/*.md | references/snapshots/best-practices-md.md |
-| Develop With Terraform.Md: develop, terraform | develop_with_terraform.md | https://developer.pingidentity.com/terraform/develop_with_terraform.md/*.md | references/snapshots/develop-with-terraform-md.md |
-| Terraform Landing Page.Md: identity, terraform | terraform_landing_page.md | https://developer.pingidentity.com/terraform/terraform_landing_page.md/*.md | references/snapshots/terraform-landing-page-md.md |
+| Best Practices.Md: best, practices | best_practices.md | https://developer.pingidentity.com/terraform/best_practices.md | references/snapshots/best-practices-md.md |
+| Develop With Terraform.Md: develop, terraform | develop_with_terraform.md | https://developer.pingidentity.com/terraform/develop_with_terraform.md | references/snapshots/develop-with-terraform-md.md |
+| Terraform Landing Page.Md: identity, terraform | terraform_landing_page.md | https://developer.pingidentity.com/terraform/terraform_landing_page.md | references/snapshots/terraform-landing-page-md.md |
 
 ## Composition
 

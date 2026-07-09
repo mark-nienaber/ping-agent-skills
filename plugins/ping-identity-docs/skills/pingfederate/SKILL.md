@@ -1,6 +1,6 @@
 ---
 name: pingfederate
-description: "Use when configuring PingFederate SSO, federation, OAuth2/OIDC, SAML, adapters, grants, clustering, SDK development, administration, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingFederate: administrators reference guide, introduction to pingfederate, release notes, developers reference guide, server clustering guide, sdk developers guide. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

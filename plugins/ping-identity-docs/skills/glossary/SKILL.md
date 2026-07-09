@@ -1,6 +1,6 @@
 ---
 name: glossary
-description: "Use when clarifying Ping Identity terminology, acronyms, product names, IAM concepts, standards, or documentation vocabulary. Routes to live docs; snapshots fallback."
+description: "Use when working with Glossary: index.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -26,7 +26,7 @@ Glossary for the Ping Identity documentation.
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Index.Md: glossary, identity, documentation | index.md | https://docs.pingidentity.com/glossary/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: glossary, identity, documentation | index.md | https://docs.pingidentity.com/glossary/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

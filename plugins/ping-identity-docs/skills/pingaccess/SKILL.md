@@ -1,6 +1,6 @@
 ---
 name: pingaccess
-description: "Use when installing, configuring, operating, or troubleshooting PingAccess, including agents, token providers, applications, sites, policies, upgrades, monitoring, and UI reference. Routes to live docs; snapshots fallback."
+description: "Use when working with PingAccess: pingaccess user interface reference guide, agents and integrations, reference guides, configuring and customizing pingaccess, pingaccess use cases, token providers. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

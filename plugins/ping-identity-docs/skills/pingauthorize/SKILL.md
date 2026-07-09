@@ -1,6 +1,6 @@
 ---
 name: pingauthorize
-description: "Use when administering PingAuthorize, including policy administration, server configuration, trust framework, SCIM, integrations, installation, upgrades, and troubleshooting. Routes to live docs; snapshots fallback."
+description: "Use when working with PingAuthorize: pingauthorize server administration guide, pingauthorize policy administration guide, installing and uninstalling pingauthorize, troubleshooting pingauthorize server, pingauthorize integrations, upgrading pingauthorize. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

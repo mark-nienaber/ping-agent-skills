@@ -1,6 +1,6 @@
 ---
 name: pingone-api
-description: "Use when developing with PingOne Platform APIs, including auth flows, users, groups, applications, MFA, credentials, authorize, verify, protect, DaVinci, and SDKs. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne API: platform, workflow library, auth, mfa, credentials, authorize. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -39,8 +39,8 @@ PingOne API documentation is indexed in the bundled llms.txt and live Ping Markd
 | Getting Started: step, create, get | getting-started | https://developer.pingidentity.com/pingone-api/getting-started/*.md | references/snapshots/getting-started.md |
 | Native Sdks: pingone, sdk, native | native-sdks | https://developer.pingidentity.com/pingone-api/native-sdks/*.md | references/snapshots/native-sdks.md |
 | Before You Begin: pingone, postman, before | before-you-begin | https://developer.pingidentity.com/pingone-api/before-you-begin/*.md | references/snapshots/before-you-begin.md |
-| Changelog.Md: changelog | changelog.md | https://developer.pingidentity.com/pingone-api/changelog.md/*.md | references/snapshots/changelog-md.md |
-| Introduction.Md: pingone, platform | introduction.md | https://developer.pingidentity.com/pingone-api/introduction.md/*.md | references/snapshots/introduction-md.md |
+| Changelog.Md: changelog | changelog.md | https://developer.pingidentity.com/pingone-api/changelog.md | references/snapshots/changelog-md.md |
+| Introduction.Md: pingone, platform | introduction.md | https://developer.pingidentity.com/pingone-api/introduction.md | references/snapshots/introduction-md.md |
 
 ## Composition
 

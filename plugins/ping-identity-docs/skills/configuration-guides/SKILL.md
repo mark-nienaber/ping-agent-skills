@@ -1,6 +1,6 @@
 ---
 name: configuration-guides
-description: "Use when configuring third-party application integrations with Ping, including SAML, OIDC, SaaS app setup, provisioning, certificates, attribute mapping, or vendor-specific SSO guides. Routes to live docs; snapshots fallback."
+description: "Use when working with Configuration Guides: amazon, github, salesforce, tableau, atlassian cloud, bamboohr. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

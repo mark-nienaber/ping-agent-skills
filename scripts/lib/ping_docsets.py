@@ -257,6 +257,8 @@ def cluster_entries(
 
 
 def routing_url_pattern(base_url: str, cluster: GuideCluster) -> str:
+    if cluster.guide.endswith(".md"):
+        return f"{base_url}/{cluster.guide}"
     if cluster.version and cluster.version != "current":
         if cluster.guide == "root":
             return f"{base_url}/{cluster.version}/*.md"

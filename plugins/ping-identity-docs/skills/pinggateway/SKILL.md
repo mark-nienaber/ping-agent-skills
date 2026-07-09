@@ -1,6 +1,6 @@
 ---
 name: pinggateway
-description: "Use when configuring PingGateway, including routes, filters, handlers, Studio, AIC integration, installation, security, maintenance, and troubleshooting. Routes to live docs; snapshots fallback."
+description: "Use when working with PingGateway: reference, gateway guide, release notes, aic, studio guide, installation guide. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

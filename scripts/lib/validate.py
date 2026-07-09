@@ -11,7 +11,14 @@ import random
 import re
 import subprocess
 
-from ping_docsets import load_docsets, parse_llms_file
+from ping_docsets import (
+    Docset,
+    cluster_entries,
+    detect_latest_version,
+    load_docsets,
+    parse_llms_file,
+    routing_url_pattern,
+)
 
 
 USER_AGENT = "ping-agent-skills-validate/1.0 (+https://github.com/mark-nienaber/ping-agent-skills)"
@@ -26,6 +33,7 @@ ALLOWED_FRONTMATTER = {
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$")
 SNAPSHOT_RE = re.compile(r"references/snapshots/[A-Za-z0-9._-]+\.md")
 MANIFEST_DATE_RE = re.compile(r"^- Sync date: (\d{4}-\d{2}-\d{2})$", re.MULTILINE)
+ROUTING_TABLE_HEADER = "| Task category | Guide slug | Live URL pattern | Snapshot |"
 
 
 class Reporter:
@@ -113,8 +121,83 @@ def curl_ok(url: str) -> bool:
     return result.returncode == 0
 
 
+def parse_routing_rows(skill_text: str) -> list[tuple[str, str, str, str]]:
+    rows: list[tuple[str, str, str, str]] = []
+    in_table = False
+    for line in skill_text.splitlines():
+        stripped = line.strip()
+        if stripped == ROUTING_TABLE_HEADER:
+            in_table = True
+            continue
+        if not in_table:
+            continue
+        if stripped.startswith("|---"):
+            continue
+        if not stripped.startswith("|"):
+            if rows:
+                break
+            continue
+        columns = [column.strip() for column in stripped.strip("|").split("|")]
+        if len(columns) < 4:
+            continue
+        rows.append((columns[0], columns[1], columns[2], columns[3]))
+    return rows
+
+
+def validate_routing_table(
+    skill_dir: Path,
+    docset: Docset | None,
+    entries: list,
+    skill_text: str,
+    reporter: Reporter,
+) -> None:
+    rows = parse_routing_rows(skill_text)
+    skill_path = skill_dir / "SKILL.md"
+    if not rows:
+        reporter.error(f"{skill_path}: missing task routing rows")
+        return
+    if docset is None:
+        reporter.warn(f"{skill_path}: no registry entry available for routing validation")
+        return
+
+    selected_version = detect_latest_version(
+        entries, docset.base_url, preferred_version=docset.preferred_version
+    )
+    clusters = cluster_entries(entries, docset.base_url, selected_version)
+    if len(rows) > len(clusters):
+        reporter.error(
+            f"{skill_path}: routing table has {len(rows)} rows but only "
+            f"{len(clusters)} llms.txt-derived clusters"
+        )
+        return
+
+    for index, ((_category, guide, pattern, snapshot), cluster) in enumerate(
+        zip(rows, clusters), start=1
+    ):
+        expected_pattern = routing_url_pattern(docset.base_url, cluster)
+        expected_snapshot = f"references/snapshots/{cluster.guide_slug}.md"
+        if not (skill_dir / expected_snapshot).exists():
+            expected_snapshot = "live-only"
+        if guide != cluster.guide:
+            reporter.error(
+                f"{skill_path}: routing row {index} guide is {guide!r}, "
+                f"expected {cluster.guide!r}"
+            )
+        if pattern != expected_pattern:
+            reporter.error(
+                f"{skill_path}: routing row {index} pattern is {pattern!r}, "
+                f"expected {expected_pattern!r}"
+            )
+        if snapshot != expected_snapshot:
+            reporter.error(
+                f"{skill_path}: routing row {index} snapshot is {snapshot!r}, "
+                f"expected {expected_snapshot!r}"
+            )
+
+
 def validate_references(
     skill_dir: Path,
+    docset: Docset | None,
     reporter: Reporter,
     sample_percent: float,
     sample_max: int,
@@ -147,6 +230,7 @@ def validate_references(
                 reporter.warn(f"{manifest_path}: manifest is {age_days} days old")
 
     skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+    validate_routing_table(skill_dir, docset, entries, skill_text, reporter)
     for snapshot_ref in sorted(set(SNAPSHOT_RE.findall(skill_text))):
         if not (skill_dir / snapshot_ref).exists():
             reporter.error(f"{skill_dir / 'SKILL.md'}: missing {snapshot_ref}")
@@ -156,6 +240,10 @@ def validate_references(
             reporter.error(f"{snapshot_path}: empty snapshot")
 
     if check_urls and entries:
+        if docset is not None:
+            llms_url = f"{docset.base_url}/llms.txt"
+            if not curl_ok(llms_url):
+                reporter.error(f"{llms_path}: live llms.txt failed: {llms_url}")
         sample_size = max(1, math.ceil(len(entries) * sample_percent / 100.0))
         sample_size = min(sample_size, sample_max, len(entries))
         urls = sorted(entry.url for entry in entries)
@@ -188,10 +276,12 @@ def main() -> int:
     else:
         skill_dirs = sorted(path for path in skills_root.iterdir() if path.is_dir())
 
+    docsets = load_docsets(repo_root / args.registry)
+    docsets_by_slug = {docset.skill_slug: docset for docset in docsets}
     if args.require_all_enabled:
         enabled = {
             docset.skill_slug
-            for docset in load_docsets(repo_root / args.registry)
+            for docset in docsets
             if docset.enabled
         }
         present = {path.name for path in skill_dirs}
@@ -206,6 +296,7 @@ def main() -> int:
         validate_frontmatter(skill_dir, reporter)
         validate_references(
             skill_dir,
+            docsets_by_slug.get(skill_dir.name),
             reporter,
             sample_percent=args.url_sample_percent,
             sample_max=args.url_sample_max,

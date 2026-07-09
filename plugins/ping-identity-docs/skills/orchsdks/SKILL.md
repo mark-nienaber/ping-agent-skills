@@ -1,6 +1,6 @@
 ---
 name: orchsdks
-description: "Use when integrating Ping orchestration SDKs, including journey SDKs, DaVinci SDKs, OIDC flows, security, concepts, platform support, or release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Orchestration SDKs: journey, davinci, oidc, release notes, security, concepts. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -32,7 +32,7 @@ Use the FIDO module to register and authenticate FIDO authenticators in JavaScri
 | Release Notes: orchestration, sdk, release | release-notes | https://developer.pingidentity.com/orchsdks/release-notes/*.md | references/snapshots/release-notes.md |
 | Security: security, orchestration, sdks | security | https://developer.pingidentity.com/orchsdks/security/*.md | references/snapshots/security.md |
 | Concepts: concepts, multiple, system | concepts | https://developer.pingidentity.com/orchsdks/concepts/*.md | references/snapshots/concepts.md |
-| Index.Md: orchestration, sdks, advanced | index.md | https://developer.pingidentity.com/orchsdks/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: orchestration, sdks, advanced | index.md | https://developer.pingidentity.com/orchsdks/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

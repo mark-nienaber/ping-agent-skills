@@ -1,6 +1,6 @@
 ---
 name: config-automation-promotion
-description: "Use when designing Ping configuration promotion pipelines, promoting configuration between environments, using promotion concepts, or reviewing pipeline examples. Routes to live docs; snapshots fallback."
+description: "Use when working with Config Automation Promotion: concepts, configuration promotion landing page.md, configuration promotion pipeline examples.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -27,8 +27,8 @@ Config Automation Promotion documentation is indexed in the bundled llms.txt and
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
 | Concepts: configuration, automation, auditing | concepts | https://developer.pingidentity.com/config-automation-promotion/concepts/*.md | references/snapshots/concepts.md |
-| Configuration Promotion Landing Page.Md: configuration, identity, promotion | configuration_promotion_landing_page.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md/*.md | references/snapshots/configuration-promotion-landing-page-md.md |
-| Configuration Promotion Pipeline Examples.Md: examples, gitops, pipeline | configuration_promotion_pipeline_examples.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md/*.md | references/snapshots/configuration-promotion-pipeline-examples-md.md |
+| Configuration Promotion Landing Page.Md: configuration, identity, promotion | configuration_promotion_landing_page.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md | references/snapshots/configuration-promotion-landing-page-md.md |
+| Configuration Promotion Pipeline Examples.Md: examples, gitops, pipeline | configuration_promotion_pipeline_examples.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md | references/snapshots/configuration-promotion-pipeline-examples-md.md |
 
 ## Composition
 

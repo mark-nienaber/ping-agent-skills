@@ -1,6 +1,6 @@
 ---
 name: pingam
-description: "Use when configuring PingAM access management, authentication journeys, OAuth2/OIDC, SAML2 federation, sessions, security, Amster, REST APIs, or upgrade and install work. Routes to live docs; snapshots fallback."
+description: "Use when working with PingAM: entity reference, am oauth2, am authentication, release notes, security, am scripting. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

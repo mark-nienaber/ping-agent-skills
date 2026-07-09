@@ -1,6 +1,6 @@
 ---
 name: pingone-admin-mfa-faq
-description: "Use when answering PingOne administrator MFA requirement questions, including enrollment, enforcement, exceptions, account access, and admin sign-on behavior. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne Admin MFA FAQ: p1 mfa required for admins faq.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -26,7 +26,7 @@ PingOne Admin MFA FAQ documentation is indexed in the bundled llms.txt and live 
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| P1 Mfa Required For Admins Faq.Md: administrators, faq, mfa | p1_mfa_required_for_admins_faq.md | https://docs.pingidentity.com/pingone-admin-mfa-faq/p1_mfa_required_for_admins_faq.md/*.md | references/snapshots/p1-mfa-required-for-admins-faq-md.md |
+| P1 Mfa Required For Admins Faq.Md: administrators, faq, mfa | p1_mfa_required_for_admins_faq.md | https://docs.pingidentity.com/pingone-admin-mfa-faq/p1_mfa_required_for_admins_faq.md | references/snapshots/p1-mfa-required-for-admins-faq-md.md |
 
 ## Composition
 

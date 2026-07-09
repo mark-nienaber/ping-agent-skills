@@ -1,6 +1,6 @@
 ---
 name: pingidm
-description: "Use when administering PingIDM, including managed objects, synchronization, connectors, REST APIs, scripts, schedules, audit, samples, installation, and security. Routes to live docs; snapshots fallback."
+description: "Use when working with PingIDM: objects guide, synchronization guide, install guide, audit guide, samples guide, rest api reference. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

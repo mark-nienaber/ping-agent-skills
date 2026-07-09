@@ -1,6 +1,6 @@
 ---
 name: pingcentral
-description: "Use when administering PingCentral, including IAM administrator tasks, application owner workflows, application onboarding, templates, promotion, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingCentral: release notes, pingcentral for iam administrators, pingcentral for application owners, root. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

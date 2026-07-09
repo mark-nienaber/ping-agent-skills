@@ -1,6 +1,6 @@
 ---
 name: identity-for-ai
-description: "Use when designing identity for AI agents, including agent identity, delegated access, OAuth2 patterns, use cases, getting started guidance, glossary terms, or release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Identity for AI: agents, use cases, identity, getting started, glossary, index.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -31,7 +31,7 @@ Ping Identity's comprehensive Identity for AI solution secures, manages, and gov
 | Identity: agent, exchange, token | identity | https://developer.pingidentity.com/identity-for-ai/identity/*.md | references/snapshots/identity.md |
 | Getting Started: identity, about, comprehensive | getting-started | https://developer.pingidentity.com/identity-for-ai/getting-started/*.md | references/snapshots/getting-started.md |
 | Glossary: identity, key, about | glossary | https://developer.pingidentity.com/identity-for-ai/glossary/*.md | references/snapshots/glossary.md |
-| Index.Md: identity, comprehensive, data | index.md | https://developer.pingidentity.com/identity-for-ai/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: identity, comprehensive, data | index.md | https://developer.pingidentity.com/identity-for-ai/index.md | references/snapshots/index-md.md |
 | Release Notes: identity, new, about | release-notes | https://developer.pingidentity.com/identity-for-ai/release-notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition

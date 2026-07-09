@@ -1,6 +1,6 @@
 ---
 name: sdks
-description: "Use when integrating Ping SDKs, including native SDKs, JavaScript SDKs, mobile flows, authentication, orchestration, sample apps, and release guidance. Routes to live docs; snapshots fallback."
+description: "Use when working with Ping SDKs: latest. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

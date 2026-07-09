@@ -1,6 +1,6 @@
 ---
 name: pingid-user-guide
-description: "Use when supporting PingID end users, including mobile app setup, QR codes, lost devices, pairing, authentication prompts, and user self-service tasks. Routes to live docs; snapshots fallback."
+description: "Use when working with PingID User Guide: index.md, ma lost or stolen mobile.md, ma where find qr code.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -26,9 +26,9 @@ PingID FAQ for end users. Covers pairing PingID mobile app, finding a QR code, a
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Index.Md: pingid, help, app | index.md | https://docs.pingidentity.com/pingid-user-guide/index.md/*.md | references/snapshots/index-md.md |
-| Ma Lost Or Stolen Mobile.Md: help, lost, phone | ma_lost_or_stolen_mobile.md | https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md/*.md | references/snapshots/ma-lost-or-stolen-mobile-md.md |
-| Ma Where Find Qr Code.Md: your, app, code | ma_where_find_qr_code.md | https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md/*.md | references/snapshots/ma-where-find-qr-code-md.md |
+| Index.Md: pingid, help, app | index.md | https://docs.pingidentity.com/pingid-user-guide/index.md | references/snapshots/index-md.md |
+| Ma Lost Or Stolen Mobile.Md: help, lost, phone | ma_lost_or_stolen_mobile.md | https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md | references/snapshots/ma-lost-or-stolen-mobile-md.md |
+| Ma Where Find Qr Code.Md: your, app, code | ma_where_find_qr_code.md | https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md | references/snapshots/ma-where-find-qr-code-md.md |
 
 ## Composition
 

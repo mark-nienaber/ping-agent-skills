@@ -1,6 +1,6 @@
 ---
 name: build-with-ai
-description: "Use when building with Ping AI resources, including Docs for Agents, Agent Skills, AIC MCP Server, DaVinci MCP Server, AI tooling security, examples, or release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Build with AI: davinci mcp server, aic mcp server, agent skills, disclaimers.md, docs for agents.md, index.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -29,11 +29,11 @@ Agent skills that extend AI coding assistants with Ping Identity domain expertis
 | Davinci Mcp Server: davinci, mcp, server | davinci-mcp-server | https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/*.md | references/snapshots/davinci-mcp-server.md |
 | Aic Mcp Server: server, aic, mcp | aic-mcp-server | https://developer.pingidentity.com/build-with-ai/aic-mcp-server/*.md | references/snapshots/aic-mcp-server.md |
 | Agent Skills: agent, identity, skills | agent-skills | https://developer.pingidentity.com/build-with-ai/agent-skills/*.md | references/snapshots/agent-skills.md |
-| Disclaimers.Md: disclaimers, limitations, agent | disclaimers.md | https://developer.pingidentity.com/build-with-ai/disclaimers.md/*.md | references/snapshots/disclaimers-md.md |
-| Docs For Agents.Md: agents, alternates, can | docs-for-agents.md | https://developer.pingidentity.com/build-with-ai/docs-for-agents.md/*.md | references/snapshots/docs-for-agents-md.md |
-| Index.Md: here, start | index.md | https://developer.pingidentity.com/build-with-ai/index.md/*.md | references/snapshots/index-md.md |
+| Disclaimers.Md: disclaimers, limitations, agent | disclaimers.md | https://developer.pingidentity.com/build-with-ai/disclaimers.md | references/snapshots/disclaimers-md.md |
+| Docs For Agents.Md: agents, alternates, can | docs-for-agents.md | https://developer.pingidentity.com/build-with-ai/docs-for-agents.md | references/snapshots/docs-for-agents-md.md |
+| Index.Md: here, start | index.md | https://developer.pingidentity.com/build-with-ai/index.md | references/snapshots/index-md.md |
 | Release Notes: announcements, build, new | release_notes | https://developer.pingidentity.com/build-with-ai/release_notes/*.md | references/snapshots/release-notes.md |
-| Tying It All Together.Md: all, together, tying | tying-it-all-together.md | https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md/*.md | references/snapshots/tying-it-all-together-md.md |
+| Tying It All Together.Md: all, together, tying | tying-it-all-together.md | https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md | references/snapshots/tying-it-all-together-md.md |
 | Use Cases: app, build, ios | use-cases | https://developer.pingidentity.com/build-with-ai/use-cases/*.md | references/snapshots/use-cases.md |
 
 ## Composition

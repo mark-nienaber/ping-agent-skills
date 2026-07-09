@@ -1,6 +1,6 @@
 ---
 name: pingone
-description: "Use when administering PingOne, including applications, MFA, authentication policies, directory, integrations, Protect, Verify, Authorize, Credentials, DaVinci, and settings. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne: integrations, authorization using pingone authorize, applications, strong authentication mfa, settings, user experience. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -50,9 +50,9 @@ Groups and populations are both used to organize users in PingOne, but they diff
 | Introduction To Pingone: identity, pingone, access | introduction_to_pingone | https://docs.pingidentity.com/pingone/introduction_to_pingone/*.md | references/snapshots/introduction-to-pingone.md |
 | Migration Tools: cloud, acceleration, migration | migration-tools | https://docs.pingidentity.com/pingone/migration-tools/*.md | references/snapshots/migration-tools.md |
 | Operational Status: operational, status, alert | operational_status | https://docs.pingidentity.com/pingone/operational_status/*.md | references/snapshots/operational-status.md |
-| P1 Cloud Platform Main Landing Page.Md: pingone | p1_cloud__platform_main_landing_page.md | https://docs.pingidentity.com/pingone/p1_cloud__platform_main_landing_page.md/*.md | references/snapshots/p1-cloud-platform-main-landing-page-md.md |
-| P1 Open Davinci Console.Md: davinci | p1_open_davinci_console.md | https://docs.pingidentity.com/pingone/p1_open_davinci_console.md/*.md | references/snapshots/p1-open-davinci-console-md.md |
-| P1 Overview P1.Md: overview, page | p1_overview_p1.md | https://docs.pingidentity.com/pingone/p1_overview_p1.md/*.md | references/snapshots/p1-overview-p1-md.md |
+| P1 Cloud Platform Main Landing Page.Md: pingone | p1_cloud__platform_main_landing_page.md | https://docs.pingidentity.com/pingone/p1_cloud__platform_main_landing_page.md | references/snapshots/p1-cloud-platform-main-landing-page-md.md |
+| P1 Open Davinci Console.Md: davinci | p1_open_davinci_console.md | https://docs.pingidentity.com/pingone/p1_open_davinci_console.md | references/snapshots/p1-open-davinci-console-md.md |
+| P1 Overview P1.Md: overview, page | p1_overview_p1.md | https://docs.pingidentity.com/pingone/p1_overview_p1.md | references/snapshots/p1-overview-p1-md.md |
 | Release Notes: notes, pingone, release | release_notes | https://docs.pingidentity.com/pingone/release_notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition

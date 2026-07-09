@@ -1,6 +1,6 @@
 ---
 name: enterprise-connect
-description: "Use when configuring Ping Enterprise Connect, including connector setup, cloud-to-enterprise connectivity, deployment, operations, troubleshooting, or release information. Routes to live docs; snapshots fallback."
+description: "Use when working with Enterprise Connect: latest. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: pingone-api-ea
-description: "Use when developing against PingOne Early Access APIs, including EA platform, auth, authorize, preview endpoints, and migration considerations. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne API (Early Access): authorize, platform, auth, introduction.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -29,7 +29,7 @@ PingOne API (Early Access) documentation is indexed in the bundled llms.txt and 
 | Authorize: authorization, create, delete | authorize | https://developer.pingidentity.com/pingone-api-ea/authorize/*.md | references/snapshots/authorize.md |
 | Platform: create, promotion, delete | platform | https://developer.pingidentity.com/pingone-api-ea/platform/*.md | references/snapshots/platform.md |
 | Auth: access, early, auth | auth | https://developer.pingidentity.com/pingone-api-ea/auth/*.md | references/snapshots/auth.md |
-| Introduction.Md: untitled | introduction.md | https://developer.pingidentity.com/pingone-api-ea/introduction.md/*.md | references/snapshots/introduction-md.md |
+| Introduction.Md: untitled | introduction.md | https://developer.pingidentity.com/pingone-api-ea/introduction.md | references/snapshots/introduction-md.md |
 
 ## Composition
 

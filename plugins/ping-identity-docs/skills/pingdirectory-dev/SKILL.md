@@ -1,6 +1,6 @@
 ---
 name: pingdirectory-dev
-description: "Use when developing against PingDirectory APIs, including Directory REST, Directory Proxy SCIM, consent APIs, developer examples, and application integration. Routes to live docs; snapshots fallback."
+description: "Use when working with PingDirectory (Developer): directory, directory proxy scim, consent. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

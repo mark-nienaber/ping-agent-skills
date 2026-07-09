@@ -1,6 +1,6 @@
 ---
 name: identity-governance
-description: "Use when administering Ping Identity Governance, including access reviews, governance users, admin tasks, APIs, deployment, troubleshooting, or release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Identity Governance: users guide, release notes, admin guide, api guide, root. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

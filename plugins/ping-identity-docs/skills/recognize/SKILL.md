@@ -1,6 +1,6 @@
 ---
 name: recognize
-description: "Use when integrating PingOne Recognize, including mobile SDK, web SDK, identity verification bridge, on-prem deployment, user guide, troubleshooting, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Recognize: mobile sdk, web sdk, idv bridge, on premise, user guide, introduction. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -33,7 +33,7 @@ This page explains the options customers have when using PingOne Recognize to su
 | User Guide: account, your, app | user-guide | https://docs.pingidentity.com/recognize/user-guide/*.md | references/snapshots/user-guide.md |
 | Introduction: page, pingone, recognize | introduction | https://docs.pingidentity.com/recognize/introduction/*.md | references/snapshots/introduction.md |
 | Folder Example: folder, page | folder-example | https://docs.pingidentity.com/recognize/folder-example/*.md | references/snapshots/folder-example.md |
-| Pingone Recognize.Md: pingone, recognize | pingone-recognize.md | https://docs.pingidentity.com/recognize/pingone-recognize.md/*.md | references/snapshots/pingone-recognize-md.md |
+| Pingone Recognize.Md: pingone, recognize | pingone-recognize.md | https://docs.pingidentity.com/recognize/pingone-recognize.md | references/snapshots/pingone-recognize-md.md |
 | Release Notes: previous, releases | release-notes | https://docs.pingidentity.com/recognize/release-notes/*.md | references/snapshots/release-notes.md |
 | Troubleshooting: guide, troubleshooting | troubleshooting | https://docs.pingidentity.com/recognize/troubleshooting/*.md | references/snapshots/troubleshooting.md |
 

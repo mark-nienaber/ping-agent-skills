@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "Use when working with Ping DevOps images and tooling, including Docker builds, deployments, Kubernetes references, getting started, release notes, and operational examples. Routes to live docs; snapshots fallback."
+description: "Use when working with DevOps: docker images, release notes, how to, deployment, reference, get started. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -36,9 +36,9 @@ DevOps documentation is indexed in the bundled llms.txt and live Ping Markdown p
 | Tools: pingctl, code, utility | tools | https://developer.pingidentity.com/devops/tools/*.md | references/snapshots/tools.md |
 | Contact Us: community, contributing | contact-us | https://developer.pingidentity.com/devops/contact-us/*.md | references/snapshots/contact-us.md |
 | Docker Builds: builds, docker, hooks | docker-builds | https://developer.pingidentity.com/devops/docker-builds/*.md | references/snapshots/docker-builds.md |
-| Devops Landing Page.Md: devops, identity | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md/*.md | references/snapshots/devops-landing-page-md.md |
-| Overview.Md: overview | overview.md | https://developer.pingidentity.com/devops/overview.md/*.md | references/snapshots/overview-md.md |
-| Readme.Md: welcome | README.md | https://developer.pingidentity.com/devops/README.md/*.md | references/snapshots/readme-md.md |
+| Devops Landing Page.Md: devops, identity | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md | references/snapshots/devops-landing-page-md.md |
+| Overview.Md: overview | overview.md | https://developer.pingidentity.com/devops/overview.md | references/snapshots/overview-md.md |
+| Readme.Md: welcome | README.md | https://developer.pingidentity.com/devops/README.md | references/snapshots/readme-md.md |
 | Videos: videos | videos | https://developer.pingidentity.com/devops/videos/*.md | references/snapshots/videos.md |
 
 ## Composition

@@ -1,6 +1,6 @@
 ---
 name: config-automation-management-sdks
-description: "Use when using Ping configuration management SDKs to automate product configuration, manage resources, develop scripts, or integrate management APIs into CI/CD workflows. Routes to live docs; snapshots fallback."
+description: "Use when working with Config Automation Management SDKs: products, develop with management sdks, develop with management sdks.md, management sdks landing page.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -28,8 +28,8 @@ Config Automation Management SDKs documentation is indexed in the bundled llms.t
 |---|---|---|---|
 | Products: client, configuration, introduction | products | https://developer.pingidentity.com/config-automation-management-sdks/products/*.md | references/snapshots/products.md |
 | Develop With Management Sdks: getting, interface, stability | develop_with_management_sdks | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/*.md | references/snapshots/develop-with-management-sdks.md |
-| Develop With Management Sdks.Md: configuration, develop, management | develop_with_management_sdks.md | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md/*.md | references/snapshots/develop-with-management-sdks-md.md |
-| Management Sdks Landing Page.Md: configuration, management, overview | management_sdks_landing_page.md | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md/*.md | references/snapshots/management-sdks-landing-page-md.md |
+| Develop With Management Sdks.Md: configuration, develop, management | develop_with_management_sdks.md | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | references/snapshots/develop-with-management-sdks-md.md |
+| Management Sdks Landing Page.Md: configuration, management, overview | management_sdks_landing_page.md | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | references/snapshots/management-sdks-landing-page-md.md |
 
 ## Composition
 

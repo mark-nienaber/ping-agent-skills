@@ -1,6 +1,6 @@
 ---
 name: auth-node-ref
-description: "Use when choosing or configuring Ping authentication tree nodes, callbacks, journeys, PingOne nodes, AM-only nodes, self-managed nodes, node inputs/outputs, or node reference behavior. Routes to live docs; snapshots fallback."
+description: "Use when working with Auth Node Ref: latest, root, pingone, am only, self managed. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

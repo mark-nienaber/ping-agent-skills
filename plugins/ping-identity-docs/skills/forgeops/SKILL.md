@@ -1,6 +1,6 @@
 ---
 name: forgeops
-description: "Use when deploying PingOne AIC or ForgeRock software with ForgeOps, including Kubernetes setup, customization, backup, upgrade, troubleshooting, and deployment reference. Routes to live docs; snapshots fallback."
+description: "Use when working with ForgeOps: prepare, reference, deploy, troubleshoot, customize, start. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

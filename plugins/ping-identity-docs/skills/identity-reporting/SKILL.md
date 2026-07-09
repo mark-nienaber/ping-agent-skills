@@ -1,6 +1,6 @@
 ---
 name: identity-reporting
-description: "Use when configuring Ping Identity Reporting, including reports, data collection, deployment, administration, troubleshooting, or reporting release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Identity Reporting: identity reporting, release notes. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

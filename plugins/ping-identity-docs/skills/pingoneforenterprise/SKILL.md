@@ -1,6 +1,6 @@
 ---
 name: pingoneforenterprise
-description: "Use when administering PingOne for Enterprise, including SSO app catalog, SaaS apps, invited SSO, migration from P14E, monitoring, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne for Enterprise: pingone for enterprise app catalog, pingone for enterprise, pingone sso for saas apps, pingone for enterprise release notes, invited pingone for enterprise sso, migrating from p14e. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -32,10 +32,10 @@ PingOne for Enterprise documentation is indexed in the bundled llms.txt and live
 | Pingone For Enterprise Release Notes: pingone, previous, releases | pingone_for_enterprise_release_notes | https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_release_notes/*.md | references/snapshots/pingone-for-enterprise-release-notes.md |
 | Invited Pingone For Enterprise Sso: enterprise, invited, pingone | invited_pingone_for_enterprise_sso | https://docs.pingidentity.com/pingoneforenterprise/invited_pingone_for_enterprise_sso/*.md | references/snapshots/invited-pingone-for-enterprise-sso.md |
 | Migrating From P14E: pingone, enterprise, migrating | migrating_from_p14e | https://docs.pingidentity.com/pingoneforenterprise/migrating_from_p14e/*.md | references/snapshots/migrating-from-p14e.md |
-| P14E Landing.Md: enterprise, pingone | p14e_landing.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_landing.md/*.md | references/snapshots/p14e-landing-md.md |
-| P14E Monitoring Usage.Md: enterprise, monitoring, pingone | p14e_monitoring_usage.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_monitoring_usage.md/*.md | references/snapshots/p14e-monitoring-usage-md.md |
-| P14E Requirements Browsers.Md: browser, enterprise, pingone | p14e_requirements_browsers.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_requirements_browsers.md/*.md | references/snapshots/p14e-requirements-browsers-md.md |
-| P14E Which P14E Am I Using.Md: pingone, which | p14e_which_p14e_am_i_using.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_using.md/*.md | references/snapshots/p14e-which-p14e-am-i-using-md.md |
+| P14E Landing.Md: enterprise, pingone | p14e_landing.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_landing.md | references/snapshots/p14e-landing-md.md |
+| P14E Monitoring Usage.Md: enterprise, monitoring, pingone | p14e_monitoring_usage.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_monitoring_usage.md | references/snapshots/p14e-monitoring-usage-md.md |
+| P14E Requirements Browsers.Md: browser, enterprise, pingone | p14e_requirements_browsers.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_requirements_browsers.md | references/snapshots/p14e-requirements-browsers-md.md |
+| P14E Which P14E Am I Using.Md: pingone, which | p14e_which_p14e_am_i_using.md | https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_using.md | references/snapshots/p14e-which-p14e-am-i-using-md.md |
 
 ## Composition
 

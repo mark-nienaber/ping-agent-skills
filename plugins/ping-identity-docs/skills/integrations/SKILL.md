@@ -1,6 +1,6 @@
 ---
 name: integrations
-description: "Use when integrating Ping products with third-party systems, including SSO, MFA, WAM, directories, SaaS apps, cloud services, agents, adapters, or federation recipes. Routes to live docs; snapshots fallback."
+description: "Use when working with Integrations: pingone, amazon, google, azure, atlassian, github. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

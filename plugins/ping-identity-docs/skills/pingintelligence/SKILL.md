@@ -1,6 +1,6 @@
 ---
 name: pingintelligence
-description: "Use when deploying or operating PingIntelligence for APIs, including API security, ASE/ABS, dashboards, integrations, management, troubleshooting, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingIntelligence: pingintelligence reference guide, pingintelligence integrations, installing pingintelligence for apis, managing pingintelligence for apis, release notes, root. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

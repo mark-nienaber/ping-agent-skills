@@ -1,6 +1,6 @@
 ---
 name: login-widget
-description: "Use when integrating the PingOne login widget, including setup, configuration, embedded sign-on, release notes, or widget behavior in applications. Routes to live docs; snapshots fallback."
+description: "Use when working with Login Widget: login widget, release notes, index.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -28,7 +28,7 @@ Login Widget documentation is indexed in the bundled llms.txt and live Ping Mark
 |---|---|---|---|
 | Login Widget: widget, step, advanced | login-widget | https://developer.pingidentity.com/login-widget/login-widget/*.md | references/snapshots/login-widget.md |
 | Release Notes: changelog, compatibility, developer | release-notes | https://developer.pingidentity.com/login-widget/release-notes/*.md | references/snapshots/release-notes.md |
-| Index.Md: advanced, cloud, identity | index.md | https://developer.pingidentity.com/login-widget/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: advanced, cloud, identity | index.md | https://developer.pingidentity.com/login-widget/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

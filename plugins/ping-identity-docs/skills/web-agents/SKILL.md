@@ -1,6 +1,6 @@
 ---
 name: web-agents
-description: "Use when installing, configuring, upgrading, securing, or troubleshooting PingAM Web Agents, including properties, policies, identity cloud integration, and maintenance. Routes to live docs; snapshots fallback."
+description: "Use when working with Web Agents: properties reference, release notes, user guide, installation guide, maintenance guide, security guide. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: helm
-description: "Use when deploying Ping products with Helm charts, including chart configuration, examples, values, getting started, release notes, and Kubernetes deployment patterns. Routes to live docs; snapshots fallback."
+description: "Use when working with Helm Charts: configs, examples, getting started, release notes, helm charts landing page.md, how to. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -30,7 +30,7 @@ Helm Charts documentation is indexed in the bundled llms.txt and live Ping Markd
 | Examples: examples, chart, csi | examples | https://developer.pingidentity.com/helm/examples/*.md | references/snapshots/examples.md |
 | Getting Started: contributing, devops, getting | getting-started | https://developer.pingidentity.com/helm/getting-started/*.md | references/snapshots/getting-started.md |
 | Release Notes: current, previous, release | release-notes | https://developer.pingidentity.com/helm/release-notes/*.md | references/snapshots/release-notes.md |
-| Helm Charts Landing Page.Md: welcome | helm-charts-landing-page.md | https://developer.pingidentity.com/helm/helm-charts-landing-page.md/*.md | references/snapshots/helm-charts-landing-page-md.md |
+| Helm Charts Landing Page.Md: welcome | helm-charts-landing-page.md | https://developer.pingidentity.com/helm/helm-charts-landing-page.md | references/snapshots/helm-charts-landing-page-md.md |
 | How To: image, product, tags | how-to | https://developer.pingidentity.com/helm/how-to/*.md | references/snapshots/how-to.md |
 
 ## Composition

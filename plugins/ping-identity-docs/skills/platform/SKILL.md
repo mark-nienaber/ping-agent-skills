@@ -1,6 +1,6 @@
 ---
 name: platform
-description: "Use when deploying or operating the Ping Platform, including sample setup, platform guide, Kubernetes deployment, product integration, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Ping Platform: sample setup, platform guide, release notes. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

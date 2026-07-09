@@ -1,6 +1,6 @@
 ---
 name: pingone-solutions
-description: "Use when implementing PingOne solution guides, including healthcare, financial services, Customers Plus, passwordless, gift card authentication, and industry patterns. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne Solutions: healthcare, pingone customers plus, financial services, pingone customers passwordless, gift card auth, index.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -31,7 +31,7 @@ Learn about the purpose and configuration of the Financial Services.
 | Financial Services: financial, services, ootb | financial-services | https://docs.pingidentity.com/pingone-solutions/financial-services/*.md | references/snapshots/financial-services.md |
 | Pingone Customers Passwordless: passwordless, ciam, protect | pingone-customers-passwordless | https://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/*.md | references/snapshots/pingone-customers-passwordless.md |
 | Gift Card Auth: card, gift, redemption | gift-card-auth | https://docs.pingidentity.com/pingone-solutions/gift-card-auth/*.md | references/snapshots/gift-card-auth.md |
-| Index.Md: packs, pingone, solution | index.md | https://docs.pingidentity.com/pingone-solutions/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: packs, pingone, solution | index.md | https://docs.pingidentity.com/pingone-solutions/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

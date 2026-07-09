@@ -1,6 +1,6 @@
 ---
 name: pingauthorize-dev
-description: "Use when developing with PingAuthorize APIs and developer resources, including API calls, policy automation, authorization integration, examples, and developer workflows. Routes to live docs; snapshots fallback."
+description: "Use when working with PingAuthorize (Developer): pingauthorize. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

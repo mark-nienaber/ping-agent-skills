@@ -1,6 +1,6 @@
 ---
 name: privilege
-description: "Use when configuring PingOne Privilege or PAM, including privileged access policies, resources, integrations, approvals, troubleshooting, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne Privilege: privileged access management, configuration, getting started, integrations, procyonreadpolicy, troubleshooting. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -32,7 +32,7 @@ PingOne Privilege supports certificate-based SSH and Remote Desktop Protocol for
 | Integrations: integration, access, teams | integrations | https://docs.pingidentity.com/privilege/integrations/*.md | references/snapshots/integrations.md |
 | Procyonreadpolicy: create, policy, enable | procyonreadpolicy | https://docs.pingidentity.com/privilege/procyonreadpolicy/*.md | references/snapshots/procyonreadpolicy.md |
 | Troubleshooting: pingone, privilege, troubleshooting | troubleshooting | https://docs.pingidentity.com/privilege/troubleshooting/*.md | references/snapshots/troubleshooting.md |
-| Index.Md: pingone, privilege | index.md | https://docs.pingidentity.com/privilege/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: pingone, privilege | index.md | https://docs.pingidentity.com/privilege/index.md | references/snapshots/index-md.md |
 | Release Notes: pingone, privilege, about | release-notes | https://docs.pingidentity.com/privilege/release-notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition

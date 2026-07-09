@@ -1,6 +1,6 @@
 ---
 name: pingid
-description: "Use when administering PingID, including MFA policies, service management, integrations, SDKs, user lifecycle, device management, reporting, and release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with PingID: release notes, pingid service management, pingid integrations, pingid sdk, pingid user life cycle management, introduction to pingid. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -34,8 +34,8 @@ Overview of legacy PingID FIDO2 platform biometrics, including supported devices
 | Introduction To Pingid: pingid, authentication, pingfederate | introduction_to_pingid | https://docs.pingidentity.com/pingid/introduction_to_pingid/*.md | references/snapshots/introduction-to-pingid.md |
 | Pingid Offline Mfa: mfa, offline, pingid | pingid_offline_mfa | https://docs.pingidentity.com/pingid/pingid_offline_mfa/*.md | references/snapshots/pingid-offline-mfa.md |
 | Orphan Files Old: untitled | _orphan_files_old | https://docs.pingidentity.com/pingid/_orphan_files_old/*.md | references/snapshots/orphan-files-old.md |
-| Pid Landing Page.Md: pingid | pid_landing_page.md | https://docs.pingidentity.com/pingid/pid_landing_page.md/*.md | references/snapshots/pid-landing-page-md.md |
-| Pid Link To End User Guide.Md: accessing, end, guide | pid_link_to_end_user_guide.md | https://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.md/*.md | references/snapshots/pid-link-to-end-user-guide-md.md |
+| Pid Landing Page.Md: pingid | pid_landing_page.md | https://docs.pingidentity.com/pingid/pid_landing_page.md | references/snapshots/pid-landing-page-md.md |
+| Pid Link To End User Guide.Md: accessing, end, guide | pid_link_to_end_user_guide.md | https://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.md | references/snapshots/pid-link-to-end-user-guide-md.md |
 
 ## Composition
 

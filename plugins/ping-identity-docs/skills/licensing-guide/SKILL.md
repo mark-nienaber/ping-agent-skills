@@ -1,6 +1,6 @@
 ---
 name: licensing-guide
-description: "Use when checking Ping licensing guidance, including Advanced Identity Software, SaaS licensing, PGIC, PingOne AIC, Advanced Services, archives, or licensing basics. Routes to live docs; snapshots fallback."
+description: "Use when working with Licensing Guide: advanced identity software.md, archive, index.md, licensing basics.md, multitenant saas.md, ping government identity cloud.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -26,14 +26,14 @@ Licensing information for Ping Identity advanced identity software products, inc
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Advanced Identity Software.Md: identity, advanced, software | advanced-identity-software.md | https://docs.pingidentity.com/licensing-guide/advanced-identity-software.md/*.md | references/snapshots/advanced-identity-software-md.md |
+| Advanced Identity Software.Md: identity, advanced, software | advanced-identity-software.md | https://docs.pingidentity.com/licensing-guide/advanced-identity-software.md | references/snapshots/advanced-identity-software-md.md |
 | Archive: archive, archived, components | archive | https://docs.pingidentity.com/licensing-guide/archive/*.md | references/snapshots/archive.md |
-| Index.Md: licensing, guide, identity | index.md | https://docs.pingidentity.com/licensing-guide/index.md/*.md | references/snapshots/index-md.md |
-| Licensing Basics.Md: licensing, production, basics | licensing-basics.md | https://docs.pingidentity.com/licensing-guide/licensing-basics.md/*.md | references/snapshots/licensing-basics-md.md |
-| Multitenant Saas.Md: multi, pingone, saas | multitenant-saas.md | https://docs.pingidentity.com/licensing-guide/multitenant-saas.md/*.md | references/snapshots/multitenant-saas-md.md |
-| Ping Government Identity Cloud.Md: identity, cloud, government | ping-government-identity-cloud.md | https://docs.pingidentity.com/licensing-guide/ping-government-identity-cloud.md/*.md | references/snapshots/ping-government-identity-cloud-md.md |
-| Pingone Advanced Identity Cloud.Md: advanced, cloud, identity | pingone-advanced-identity-cloud.md | https://docs.pingidentity.com/licensing-guide/pingone-advanced-identity-cloud.md/*.md | references/snapshots/pingone-advanced-identity-cloud-md.md |
-| Pingone Advanced Services.Md: advanced, pingone, services | pingone-advanced-services.md | https://docs.pingidentity.com/licensing-guide/pingone-advanced-services.md/*.md | references/snapshots/pingone-advanced-services-md.md |
+| Index.Md: licensing, guide, identity | index.md | https://docs.pingidentity.com/licensing-guide/index.md | references/snapshots/index-md.md |
+| Licensing Basics.Md: licensing, production, basics | licensing-basics.md | https://docs.pingidentity.com/licensing-guide/licensing-basics.md | references/snapshots/licensing-basics-md.md |
+| Multitenant Saas.Md: multi, pingone, saas | multitenant-saas.md | https://docs.pingidentity.com/licensing-guide/multitenant-saas.md | references/snapshots/multitenant-saas-md.md |
+| Ping Government Identity Cloud.Md: identity, cloud, government | ping-government-identity-cloud.md | https://docs.pingidentity.com/licensing-guide/ping-government-identity-cloud.md | references/snapshots/ping-government-identity-cloud-md.md |
+| Pingone Advanced Identity Cloud.Md: advanced, cloud, identity | pingone-advanced-identity-cloud.md | https://docs.pingidentity.com/licensing-guide/pingone-advanced-identity-cloud.md | references/snapshots/pingone-advanced-identity-cloud-md.md |
+| Pingone Advanced Services.Md: advanced, pingone, services | pingone-advanced-services.md | https://docs.pingidentity.com/licensing-guide/pingone-advanced-services.md | references/snapshots/pingone-advanced-services-md.md |
 | Release Notes: licensing, guide, identity | release_notes | https://docs.pingidentity.com/licensing-guide/release_notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition

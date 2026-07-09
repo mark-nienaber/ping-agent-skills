@@ -1,6 +1,6 @@
 ---
 name: developer-resources
-description: "Use when implementing Ping developer patterns for OAuth2, OIDC, SCIM, SAML, JWT/JOSE, application integration, federation primers, or API-oriented examples. Routes to live docs; snapshots fallback."
+description: "Use when working with Developer Resources: oauth 20 developer guide, application integration guide, scim 11 developer guide, federated sso primer, openid connect developer guide, dev jwt jose overview.md. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -31,8 +31,8 @@ Developer Resources documentation is indexed in the bundled llms.txt and live Pi
 | Scim 11 Developer Guide: scim, action, resource | scim_11_developer_guide | https://docs.pingidentity.com/developer-resources/scim_11_developer_guide/*.md | references/snapshots/scim-11-developer-guide.md |
 | Federated Sso Primer: sign, single, sso | federated_sso_primer | https://docs.pingidentity.com/developer-resources/federated_sso_primer/*.md | references/snapshots/federated-sso-primer.md |
 | Openid Connect Developer Guide: client, connect, openid | openid_connect_developer_guide | https://docs.pingidentity.com/developer-resources/openid_connect_developer_guide/*.md | references/snapshots/openid-connect-developer-guide.md |
-| Dev Jwt Jose Overview.Md: introduction, json, jwt | dev_jwt_jose_overview.md | https://docs.pingidentity.com/developer-resources/dev_jwt_jose_overview.md/*.md | references/snapshots/dev-jwt-jose-overview-md.md |
-| Index.Md: developer, resources | index.md | https://docs.pingidentity.com/developer-resources/index.md/*.md | references/snapshots/index-md.md |
+| Dev Jwt Jose Overview.Md: introduction, json, jwt | dev_jwt_jose_overview.md | https://docs.pingidentity.com/developer-resources/dev_jwt_jose_overview.md | references/snapshots/dev-jwt-jose-overview-md.md |
+| Index.Md: developer, resources | index.md | https://docs.pingidentity.com/developer-resources/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

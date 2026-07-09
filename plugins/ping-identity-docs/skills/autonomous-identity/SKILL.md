@@ -1,6 +1,6 @@
 ---
 name: autonomous-identity
-description: "Use when administering Ping Autonomous Identity, including installation, deployment planning, analytics, governance users, APIs, upgrades, troubleshooting, or release notes. Routes to live docs; snapshots fallback."
+description: "Use when working with Autonomous Identity: admin guide, api guide, install guide, release notes, users guide, deployment planning. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 

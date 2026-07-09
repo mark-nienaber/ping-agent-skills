@@ -1,6 +1,6 @@
 ---
 name: pingoneadvancedservices
-description: "Use when administering PingOne Advanced Services, including environments, networking, logging, monitoring, certificates, support policy, limitations, and service tasks. Routes to live docs; snapshots fallback."
+description: "Use when working with PingOne Advanced Services: task summary table, release notes, introduction to pingone advanced services, environments, comparison pingone advanced services and pingone cloud platform, limitations guide. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -34,10 +34,10 @@ The home page for the PingOne Advanced Services guide.
 | Limitations Guide: guide, limitations | limitations_guide | https://docs.pingidentity.com/pingoneadvancedservices/limitations_guide/*.md | references/snapshots/limitations-guide.md |
 | Monitoring And Logging: logging, monitoring | monitoring_and_logging | https://docs.pingidentity.com/pingoneadvancedservices/monitoring_and_logging/*.md | references/snapshots/monitoring-and-logging.md |
 | Network Guide: guide, network | network_guide | https://docs.pingidentity.com/pingoneadvancedservices/network_guide/*.md | references/snapshots/network-guide.md |
-| P1As Home.Md: advanced, pingone, services | p1as_home.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_home.md/*.md | references/snapshots/p1as-home-md.md |
-| P1As How Works.Md: advanced, pingone, services | p1as_how_works.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_how_works.md/*.md | references/snapshots/p1as-how-works-md.md |
-| P1As Load Testing.Md: load, penetration, testing | p1as_load_testing.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_load_testing.md/*.md | references/snapshots/p1as-load-testing-md.md |
-| P1As Support Policy.Md: policy, support, about | p1as_support_policy.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_support_policy.md/*.md | references/snapshots/p1as-support-policy-md.md |
+| P1As Home.Md: advanced, pingone, services | p1as_home.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_home.md | references/snapshots/p1as-home-md.md |
+| P1As How Works.Md: advanced, pingone, services | p1as_how_works.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_how_works.md | references/snapshots/p1as-how-works-md.md |
+| P1As Load Testing.Md: load, penetration, testing | p1as_load_testing.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_load_testing.md | references/snapshots/p1as-load-testing-md.md |
+| P1As Support Policy.Md: policy, support, about | p1as_support_policy.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_support_policy.md | references/snapshots/p1as-support-policy-md.md |
 | Renew Certs: certificates, encrypt, let | renew_certs | https://docs.pingidentity.com/pingoneadvancedservices/renew_certs/*.md | references/snapshots/renew-certs.md |
 | Securing Ai Agents: advanced, pingone, services | securing_AI_agents | https://docs.pingidentity.com/pingoneadvancedservices/securing_AI_agents/*.md | references/snapshots/securing-ai-agents.md |
 

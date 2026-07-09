@@ -1,6 +1,6 @@
 ---
 name: pgic
-description: "Use when administering Ping Government Identity Cloud, including environments, service requests, secure containers, network, federation, observability, maintenance, or support tasks. Routes to live docs; snapshots fallback."
+description: "Use when working with PGIC: service requests, products and self service tasks, environments, identity federation, index.md, introduction. Routes to live Ping docs; snapshots fallback."
 license: MIT
 ---
 
@@ -30,17 +30,17 @@ PGIC documentation is indexed in the bundled llms.txt and live Ping Markdown pag
 | Products And Self Service Tasks: pingfederate, self, service | products_and_self-service_tasks | https://docs.pingidentity.com/pgic/products_and_self-service_tasks/*.md | references/snapshots/products-and-self-service-tasks.md |
 | Environments: environments | environments | https://docs.pingidentity.com/pgic/environments/*.md | references/snapshots/environments.md |
 | Identity Federation: identity, federation, provisioning | identity_federation | https://docs.pingidentity.com/pgic/identity_federation/*.md | references/snapshots/identity-federation.md |
-| Index.Md: cloud, government, identity | index.md | https://docs.pingidentity.com/pgic/index.md/*.md | references/snapshots/index-md.md |
+| Index.Md: cloud, government, identity | index.md | https://docs.pingidentity.com/pgic/index.md | references/snapshots/index-md.md |
 | Introduction: cloud, government, identity | introduction | https://docs.pingidentity.com/pgic/introduction/*.md | references/snapshots/introduction.md |
 | Maintenance: maintenance, network, ongoing | maintenance | https://docs.pingidentity.com/pgic/maintenance/*.md | references/snapshots/maintenance.md |
 | Network: connectivity, guide, network | network | https://docs.pingidentity.com/pgic/network/*.md | references/snapshots/network.md |
 | Penentration Load Testing: load, penetration, testing | penentration_load_testing | https://docs.pingidentity.com/pgic/penentration_load_testing/*.md | references/snapshots/penentration-load-testing.md |
-| Pgic Data Loading.Md: access, data, loading | pgic_data_loading.md | https://docs.pingidentity.com/pgic/pgic_data_loading.md/*.md | references/snapshots/pgic-data-loading-md.md |
-| Pgic Infrastructure.Md: infrastructure, regions, supported | pgic_infrastructure.md | https://docs.pingidentity.com/pgic/pgic_infrastructure.md/*.md | references/snapshots/pgic-infrastructure-md.md |
-| Pgic Observability.Md: logging, observability | pgic_observability.md | https://docs.pingidentity.com/pgic/pgic_observability.md/*.md | references/snapshots/pgic-observability-md.md |
+| Pgic Data Loading.Md: access, data, loading | pgic_data_loading.md | https://docs.pingidentity.com/pgic/pgic_data_loading.md | references/snapshots/pgic-data-loading-md.md |
+| Pgic Infrastructure.Md: infrastructure, regions, supported | pgic_infrastructure.md | https://docs.pingidentity.com/pgic/pgic_infrastructure.md | references/snapshots/pgic-infrastructure-md.md |
+| Pgic Observability.Md: logging, observability | pgic_observability.md | https://docs.pingidentity.com/pgic/pgic_observability.md | references/snapshots/pgic-observability-md.md |
 | Pgic Task Summary Table: summary, table, task | pgic_task_summary_table | https://docs.pingidentity.com/pgic/pgic_task_summary_table/*.md | references/snapshots/pgic-task-summary-table.md |
-| Pgic Web Servers.Md: ingress, servers, web | pgic_web_servers.md | https://docs.pingidentity.com/pgic/pgic_web_servers.md/*.md | references/snapshots/pgic-web-servers-md.md |
-| Secure Containers.Md: containers, secure | secure-containers.md | https://docs.pingidentity.com/pgic/secure-containers.md/*.md | references/snapshots/secure-containers-md.md |
+| Pgic Web Servers.Md: ingress, servers, web | pgic_web_servers.md | https://docs.pingidentity.com/pgic/pgic_web_servers.md | references/snapshots/pgic-web-servers-md.md |
+| Secure Containers.Md: containers, secure | secure-containers.md | https://docs.pingidentity.com/pgic/secure-containers.md | references/snapshots/secure-containers-md.md |
 
 ## Composition
 
