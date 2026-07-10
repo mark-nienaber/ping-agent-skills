@@ -4,6 +4,8 @@ description: Users are no longer required to provide the WebEx Site ID or Partne
 component: webex
 page_id: webex:release_notes:pf_webex_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/webex/release_notes/pf_webex_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   webex-provisioner-2-3-june-2023-current-release: Webex Provisioner 2.3 – June 2023 (current release)
@@ -67,6 +69,8 @@ description: You can follow these steps to create a new service provider (SP) co
 component: webex
 page_id: webex:setup:pf_webex_connector_configuring_provisioning_and_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_configuring_provisioning_and_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -193,6 +197,8 @@ description: Use the following minimum required settings to configure single sig
 component: webex
 page_id: webex:setup:pf_webex_connector_configuring_single_sign_on_in_webex
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_configuring_single_sign_on_in_webex.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -260,6 +266,8 @@ description: Download the integration .zip archive from the Add-ons tab of the P
 component: webex
 page_id: webex:setup:pf_webex_connector_deploy_the_provisioning_connector
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_deploy_the_provisioning_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -309,6 +317,8 @@ description: The distribution archive contains the following files.
 component: webex
 page_id: webex:release_notes:pf_webex_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/webex/release_notes/pf_webex_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -334,6 +344,8 @@ description: You can use a Webex SAML metadata file to automatically configure s
 component: webex
 page_id: webex:setup:pf_webex_connector_downloading_your_webex_saml_metadata_file
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_downloading_your_webex_saml_metadata_file.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -368,6 +380,8 @@ description: The following are known issues and limitations of the Webex Connect
 component: webex
 page_id: webex:release_notes:pf_webex_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/webex/release_notes/pf_webex_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   known-issues: Known issues
@@ -406,6 +420,8 @@ description: User Create
 component: webex
 page_id: webex:setup:pf_webex_connector_provisioning_options
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_provisioning_options.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -432,6 +448,8 @@ description: The following table lists the attributes that can be mapped for use
 component: webex
 page_id: webex:setup:pf_webex_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -475,6 +493,8 @@ description: If you're upgrading from a previous version of the Webex Connector,
 component: webex
 page_id: webex:setup:pf_webex_connector_upgrade_an_existing_connector
 canonical_url: https://docs.pingidentity.com/integrations/webex/setup/pf_webex_connector_upgrade_an_existing_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -523,6 +543,8 @@ description: The Webex Connector synchronizes users from your datastore to Webex
 component: webex
 page_id: webex::pf_webex_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/webex/pf_webex_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users
@@ -591,6 +613,8 @@ description: The Webex Provisioner allows PingFederate to integrate with Webex f
 component: webex
 page_id: webex::pf_webex_connector
 canonical_url: https://docs.pingidentity.com/integrations/webex/pf_webex_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/webex/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   provisioning-connector: Provisioning connector

@@ -4,6 +4,8 @@ description: Configure the RSA SecurID IdP Adapter to determine how PingFederate
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -61,6 +63,8 @@ description: The RSA SecurID Integration Kit includes templates that can display
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_customizing_templates
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_customizing_templates.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -91,6 +95,8 @@ description: To get started with the integration, deploy the RSA SecurID Integra
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -150,6 +156,8 @@ description: The following files are included in the RSA SecurID Integration Kit
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -205,6 +213,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -268,6 +278,8 @@ description: The following examples show common ways you might want to customize
 component: rsa
 page_id: rsa:rsa_securid_cloud_authentication_integration_guide:pf_rsa_cloudauthentication_integration_example_ognl_expressions
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_cloud_authentication_integration_guide/pf_rsa_cloudauthentication_integration_example_ognl_expressions.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   example-1-authncontextclassref-based-on-saml_authn_ctx: "Example 1: AuthnContextClassRef based on SAML_AUTHN_CTX"
@@ -353,6 +365,8 @@ description: RSA provides complete setup steps for both PingFederate and the RSA
 component: rsa
 page_id: rsa:rsa_securid_cloud_authentication_integration_guide:pf_rsa_cloudauthentication_integration_integrating_pf_with_rsa_securid
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_cloud_authentication_integration_guide/pf_rsa_cloudauthentication_integration_integrating_pf_with_rsa_securid.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -388,6 +402,8 @@ description: The following are known issues or limitations for the RSA SecurID I
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   known-issues: Known issues
@@ -459,6 +475,8 @@ description: With the RSA SecurID Integration Kit, PingFederate includes an RSA 
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   description: Description
@@ -498,6 +516,8 @@ description: The PingFederate Authentication API provides access to the current 
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 23, 2026
 section_ids:
   models-objects-and-error-codes: Models, objects, and error codes
@@ -1149,6 +1169,8 @@ description: To process sign-on requests, PingFederate requires access to the RS
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_registering_pf_as_an_agent_in_the_rsa_security_console
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_registering_pf_as_an_agent_in_the_rsa_security_console.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -1185,6 +1207,8 @@ description: This guide describes how to configure PingFederate and the RSA Secu
 component: rsa
 page_id: rsa:rsa_securid_cloud_authentication_integration_guide:pf_rsa_cloudauthentication_integration
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_cloud_authentication_integration_guide/pf_rsa_cloudauthentication_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   features: Features
@@ -1238,6 +1262,8 @@ description: Field descriptions for the RSA SecurID IdP Adapter configuration sc
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_rsa_securid_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_rsa_securid_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 
@@ -1295,6 +1321,8 @@ description: The RSA SecurID Integration Kit allows PingFederate to use the RSA 
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   components: Components
@@ -1360,6 +1388,8 @@ description: The following is the change history for the RSA SecurID Integration
 component: rsa
 page_id: rsa:rsa_securid_integration_kit:pf_rsa_securid_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/rsa/rsa_securid_integration_kit/pf_rsa_securid_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 27, 2026
 section_ids:
   version-4-1-1: Version 4.1.1
@@ -1566,6 +1596,8 @@ description: You can integrate PingFederate with RSA SecurID for multi-factor au
 component: rsa
 page_id: rsa::pf_is_overview_of_rsa_securid_integrations
 canonical_url: https://docs.pingidentity.com/integrations/rsa/pf_is_overview_of_rsa_securid_integrations.html
+llms_txt: https://docs.pingidentity.com/integrations/rsa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   rsa-securid-cloud-authentication-integration-guide-cloud: RSA SecurID Cloud Authentication integration guide (cloud)

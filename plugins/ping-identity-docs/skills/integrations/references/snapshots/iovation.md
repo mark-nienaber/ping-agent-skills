@@ -4,6 +4,8 @@ description: Instead of using the iovation IdP Adapter to gather the device prof
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_adding_device_profiling_to_an_authentication_page
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_adding_device_profiling_to_an_authentication_page.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 30, 2025
 section_ids:
   about-this-task: About this task
@@ -75,6 +77,8 @@ description: By modifying your authentication policy to include risk results, yo
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_adding_risk_results_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_adding_risk_results_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 30, 2025
 section_ids:
   about-this-task: About this task
@@ -153,6 +157,8 @@ description: This list describes the changes made in each version of the iovatio
 component: iovation
 page_id: iovation:release_notes:pf_iovation_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/iovation/release_notes/pf_iovation_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 14, 2025
 section_ids:
   iovation-integration-kit-2-0-august-2025: iovation Integration Kit 2.0 - August 2025
@@ -202,6 +208,8 @@ description: Configure the iovation IdP Adapter to determine how PingFederate co
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 30, 2025
 section_ids:
   steps: Steps
@@ -273,6 +281,8 @@ description: To get started with the integration, deploy the iovation Integratio
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 30, 2025
 section_ids:
   steps: Steps
@@ -308,6 +318,8 @@ description: To produce a risk assessment for a sign-on event, FraudForce requir
 component: iovation
 page_id: iovation::pf_iovation_ik_device_profiling_method
 canonical_url: https://docs.pingidentity.com/integrations/iovation/pf_iovation_ik_device_profiling_method.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 22, 2025
 section_ids:
   captured-by-the-iovation-idp-adapter: Captured by the iovation IdP Adapter
@@ -356,6 +368,8 @@ description: The following files are included in the iovation Integration Kit .z
 component: iovation
 page_id: iovation:release_notes:pf_iovation_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/iovation/release_notes/pf_iovation_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 22, 2025
 ---
 
@@ -405,6 +419,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: iovation
 page_id: iovation:troubleshooting:pf_iovation_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/iovation/troubleshooting/pf_iovation_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 20, 2025
 section_ids:
   steps: Steps
@@ -469,6 +485,8 @@ description: Field descriptions for the iovation IdP Adapter configuration page:
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_iovation_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_iovation_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 14, 2025
 ---
 
@@ -520,6 +538,8 @@ description: The iovation Integration Kit allows PingFederate to communicate wit
 component: iovation
 page_id: iovation::pf_iovation_ik
 canonical_url: https://docs.pingidentity.com/integrations/iovation/pf_iovation_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 14, 2025
 section_ids:
   components: Components
@@ -587,6 +607,8 @@ description: JavaScript Object Notation (JSON) Pointer defines a syntax for iden
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_json_pointer_syntax_reference
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_json_pointer_syntax_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 15, 2025
 section_ids:
   example-json-payload: Example JSON payload
@@ -690,6 +712,8 @@ description: The following are known issues or limitations for the iovation Inte
 component: iovation
 page_id: iovation:release_notes:pf_iovation_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/iovation/release_notes/pf_iovation_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 20, 2025
 section_ids:
   known-issues: Known issues
@@ -722,6 +746,8 @@ description: iovation Device Risk collects a device profile and other transactio
 component: iovation
 page_id: iovation::pf_iovation_ik_overview_of_iovation_device_risk
 canonical_url: https://docs.pingidentity.com/integrations/iovation/pf_iovation_ik_overview_of_iovation_device_risk.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 15, 2025
 section_ids:
   device-profile-blackbox-and-transaction-insight-parameters: Device profile, blackbox, and transaction insight parameters
@@ -774,6 +800,8 @@ description: With the iovation Integration Kit, PingFederate includes the iovati
 component: iovation
 page_id: iovation::pf_iovation_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/iovation/pf_iovation_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 30, 2025
 section_ids:
   description: Description
@@ -815,6 +843,8 @@ description: To use the iovation Integration Kit with PingFederate, set up a rev
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_setup
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 15, 2025
 section_ids:
   steps: Steps
@@ -850,6 +880,8 @@ description: When a user signs on, iovation can collect optional transaction dat
 component: iovation
 page_id: iovation:setup:pf_iovation_ik_transaction_insight_parameters
 canonical_url: https://docs.pingidentity.com/integrations/iovation/setup/pf_iovation_ik_transaction_insight_parameters.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 15, 2025
 ---
 
@@ -871,6 +903,8 @@ description: The following information addresses technical situations you might 
 component: iovation
 page_id: iovation:troubleshooting:pf_iovation_ik_troubleshooting_info
 canonical_url: https://docs.pingidentity.com/integrations/iovation/troubleshooting/pf_iovation_ik_troubleshooting_info.html
+llms_txt: https://docs.pingidentity.com/integrations/iovation/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 15, 2025
 ---
 

@@ -4,6 +4,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_adding_jamf_security_posture_results_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_adding_jamf_security_posture_results_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   steps: Steps
@@ -75,6 +77,8 @@ description: You can use the PingFederate authentication API to integrate the Ja
 component: jamf
 page_id: jamf::pf_jamf_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/jamf/pf_jamf_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 ---
 
@@ -94,6 +98,8 @@ description: For PingFederate to get a device's security posture, each device mu
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_certificate_requirements
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_certificate_requirements.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   device-identifier-and-device-type-attributes: Device identifier and device type attributes
@@ -169,6 +175,8 @@ description: The following is the change history for the Jamf Integration Kit.
 component: jamf
 page_id: jamf:release_notes:pf_jamf_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/jamf/release_notes/pf_jamf_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   jamf-integration-kit-2-0-2-november-2025: Jamf Integration Kit 2.0.2 - November 2025
@@ -223,6 +231,8 @@ description: Configure the Jamf IdP Adapter to determine how PingFederate commun
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   steps: Steps
@@ -286,6 +296,8 @@ description: To allow PingFederate to communicate with Jamf Pro, create a user a
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_creating_api_credentials_in_jamf_pro
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_creating_api_credentials_in_jamf_pro.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   steps: Steps
@@ -335,6 +347,8 @@ description: To get started with the integration, deploy the Jamf Integration Ki
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   steps: Steps
@@ -366,6 +380,8 @@ description: The following files are included in the Jamf Integration Kit .zip a
 component: jamf
 page_id: jamf:release_notes:pf_jamf_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/jamf/release_notes/pf_jamf_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 ---
 
@@ -387,6 +403,8 @@ description: Field descriptions for the Jamf IdP Adapter configuration page.
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_jamf_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_jamf_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 ---
 
@@ -420,6 +438,8 @@ description: The Jamf Integration Kit allows PingFederate to integrate with Jamf
 component: jamf
 page_id: jamf::pf_jamf_ik
 canonical_url: https://docs.pingidentity.com/integrations/jamf/pf_jamf_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   components: Components
@@ -483,6 +503,8 @@ description: JavaScript Object Notation (JSON) Pointer defines a syntax for iden
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_json_pointer_syntax_reference
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_json_pointer_syntax_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   example-jamf-pro-json-payload-for-computers: Example Jamf Pro JSON payload for computers
@@ -672,6 +694,8 @@ description: The following are known issues or limitations for the Jamf Integrat
 component: jamf
 page_id: jamf:release_notes:pf_jamf_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/jamf/release_notes/pf_jamf_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   known-issues: Known issues
@@ -700,6 +724,8 @@ description: With the Jamf Integration Kit, PingFederate parses identifying attr
 component: jamf
 page_id: jamf::pf_jamf_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/jamf/pf_jamf_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   description: Description
@@ -743,6 +769,8 @@ description: The Jamf Integration Kit requires the X.509 Certificate IdP Adapter
 component: jamf
 page_id: jamf:setup:pf_jamf_ik_setting_up_the_x509_certificate_i
 canonical_url: https://docs.pingidentity.com/integrations/jamf/setup/pf_jamf_ik_setting_up_the_x509_certificate_i.html
+llms_txt: https://docs.pingidentity.com/integrations/jamf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 4, 2025
 section_ids:
   steps: Steps

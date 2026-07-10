@@ -4,6 +4,8 @@ description: Added configuration options for CRUD capabilities
 component: dropbox
 page_id: dropbox:release_notes:pf_dropbox_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/release_notes/pf_dropbox_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   dropbox-connector-2-1-april-2017-current-release: Dropbox Connector 2.1 – April 2017 (current release)
@@ -44,6 +46,8 @@ description: The following section describes the steps for configuring service p
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_completing_setup_of_saml_sso_to_dropbox
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_completing_setup_of_saml_sso_to_dropbox.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -101,6 +105,8 @@ description: To allow PingFederate to act as an identity provider (IdP) and mana
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -183,6 +189,8 @@ description: To get started with the integration, deploy the Dropbox Provisioner
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -224,6 +232,8 @@ description: The distribution .zip archive for the Dropbox Connector contains th
 component: dropbox
 page_id: dropbox:release_notes:pf_dropbox_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/release_notes/pf_dropbox_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -251,6 +261,8 @@ description: The PingFederate provisioner for Dropbox allows an enterprise to pr
 component: dropbox
 page_id: dropbox::pf_dropbox_connector
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/pf_dropbox_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   features: Features
@@ -306,6 +318,8 @@ description: To use PingFederate for provisioning, configure an external datasto
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_enabling_provisioning_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_enabling_provisioning_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -359,6 +373,8 @@ description: Go to the Ping Identity OAuth Configuration Service.
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_generate_your_oauth_20_access_token
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_generate_your_oauth_20_access_token.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -398,6 +414,8 @@ description: The following are known issues and limitations of the Dropbox Conne
 component: dropbox
 page_id: dropbox:release_notes:pf_dropbox_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/release_notes/pf_dropbox_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -427,6 +445,8 @@ description: The Dropbox Connectors Outbound Provisioning functionality is built
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_obtain_an_app_key_and_secret_from_dropbox
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_obtain_an_app_key_and_secret_from_dropbox.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -475,6 +495,8 @@ description: For this procedure you will need to perform two steps:
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_obtaining_your_oauth_access_token
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_obtaining_your_oauth_access_token.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -494,6 +516,8 @@ description: This Connector's quick-connection template uses a metadata XML file
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_preparing_the_dropbox_saml_20_metadata_xml_file
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_preparing_the_dropbox_saml_20_metadata_xml_file.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -524,6 +548,8 @@ description: Given Name
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -553,6 +579,8 @@ description: Before stopping the PingFederate server to upgrade the Dropbox Conn
 component: dropbox
 page_id: dropbox:setup:pf_dropbox_connector_upgrading_existing_dropbox_connectors
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/setup/pf_dropbox_connector_upgrading_existing_dropbox_connectors.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -612,6 +640,8 @@ description: The Dropbox Provisioner synchronizes users and groups from your dat
 component: dropbox
 page_id: dropbox::pf_dropbox_connector_user_and_group_management
 canonical_url: https://docs.pingidentity.com/integrations/dropbox/pf_dropbox_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/dropbox/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

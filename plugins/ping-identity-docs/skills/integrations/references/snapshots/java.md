@@ -4,6 +4,8 @@ description: PingFederate system administrators might choose to override the aut
 component: java
 page_id: java:setup:pf_java_ik_advanced_installation_and_configuration
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_advanced_installation_and_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -25,6 +27,8 @@ description: The following is the change history for the Java Integration Kit.
 component: java
 page_id: java:release_notes:pf_java_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/java/release_notes/pf_java_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 6, 2025
 section_ids:
   java-integration-kit-2-9-1-november-2025: Java Integration Kit 2.9.1 - November 2025
@@ -269,6 +273,8 @@ description: Configure the OpenToken Adapter to determine how PingFederate commu
 component: java
 page_id: java:setup:pf_java_ik_configuring_an_opentoken_sp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_configuring_an_opentoken_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -318,6 +324,8 @@ description: You can configure the Java Integration Kit to integrate PingFederat
 component: java
 page_id: java:setup:pf_java_ik_custom_application_setup
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_custom_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -337,6 +345,8 @@ description: The readToken method inspects the cookie (or query parameters, depe
 component: java
 page_id: java:setup:pf_java_ik_decoding_attributes
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_decoding_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   sample-code: Sample code
@@ -377,6 +387,8 @@ description: The Java Integration Kit includes two applications that act as iden
 component: java
 page_id: java:setup:pf_java_ik_deploy_the_sample_applications
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_deploy_the_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -415,6 +427,8 @@ description: This configuration requires some familiarity with web-application d
 component: java
 page_id: java:setup:pf_java_ik_deploying_the_applications_to_separate_servlet_containers
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_deploying_the_applications_to_separate_servlet_containers.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -440,6 +454,8 @@ description: If you are upgrading this integration, we strongly recommend that y
 component: java
 page_id: java:setup:pf_java_ik_deploying_the_java_agent
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_deploying_the_java_agent.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -517,6 +533,8 @@ description: The data.zip archive configures a PingFederate to work with the sam
 component: java
 page_id: java:setup:pf_java_ik_deploying_the_sample_configuration_archive
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_deploying_the_sample_configuration_archive.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -558,6 +576,8 @@ description: The following files are included in the Java Integration Kit:
 component: java
 page_id: java:release_notes:pf_java_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/java/release_notes/pf_java_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -633,6 +653,8 @@ description: The writeToken method of the Agent class takes a java.util.Map coll
 component: java
 page_id: java:setup:pf_java_ik_encoding_attributes
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_encoding_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   sample-code: Sample code
@@ -682,6 +704,8 @@ description: You can use the Java Integration Kit to integrate your identity pro
 component: java
 page_id: java:setup:pf_java_ik_identity_provider_applications
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_identity_provider_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -703,6 +727,8 @@ description: The sample applications automatically work with PingFederate config
 component: java
 page_id: java:setup:pf_java_ik_idp_sample_application_configuration_reference
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_idp_sample_application_configuration_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -726,6 +752,8 @@ description: When an IdP PingFederate server receives a request for single logou
 component: java
 page_id: java:setup:pf_java_ik_idp_single_logout_slo
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_idp_single_logout_slo.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   sequence: Sequence
@@ -761,6 +789,8 @@ description: When PingFederate is configured as an IdP, it needs to be able to i
 component: java
 page_id: java:setup:pf_java_ik_idp_single_sign_on_sso
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_idp_single_sign_on_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -778,6 +808,8 @@ description: The Java Integration Kit allows PingFederate to integrate with iden
 component: java
 page_id: java::pf_java_ik
 canonical_url: https://docs.pingidentity.com/integrations/java/pf_java_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   components: Components
@@ -849,6 +881,8 @@ description: You can modify the JSPs, images, and cascading style sheets (CSSs) 
 component: java
 page_id: java:setup:pf_java_ik_jsps_and_web_page_components
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_jsps_and_web_page_components.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -874,6 +908,8 @@ description: The following are known issues or limitations with the Java Integra
 component: java
 page_id: java:release_notes:pf_java_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/java/release_notes/pf_java_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   known-issues: Known issues
@@ -914,6 +950,8 @@ description: Instead of using the sample data.zip archive from the Java Integrat
 component: java
 page_id: java:setup:pf_java_ik_manual_configuration_settings
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_manual_configuration_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   identity-provider-adapter-instance-settings: Identity provider adapter instance settings
@@ -982,6 +1020,8 @@ description: The Java Integration Kit distribution provides the source files for
 component: java
 page_id: java:setup:pf_java_ik_modifying_sample_source_files
 canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_modifying_sample_source_files.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   jsps-and-web-page-components: JSPs and web page components

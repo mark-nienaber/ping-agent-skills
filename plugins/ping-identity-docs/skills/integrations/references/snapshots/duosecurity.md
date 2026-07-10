@@ -4,6 +4,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_adding_duo_security_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_adding_duo_security_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -59,6 +61,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_adding_duo_security_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_adding_duo_security_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -114,6 +118,8 @@ description: You can use the PingFederate authentication API to integrate the Du
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -133,6 +139,8 @@ description: The following is the change history for the Duo Security Integratio
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_changelog
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   duo-security-integration-kit-2-2-2-january-2020: Duo Security Integration Kit 2.2.2 - January 2020
@@ -188,6 +196,8 @@ description: The following is the change history for the Duo Security Integratio
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   duo-security-integration-kit-3-1-2-may-2024: Duo Security Integration Kit 3.1.2 - May 2024
@@ -298,6 +308,8 @@ description: Configure the Duo Security IdP Adapter to determine how PingFederat
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   steps: Steps
@@ -353,6 +365,8 @@ description: Configure the Duo Security IdP Adapter to determine how PingFederat
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   steps: Steps
@@ -418,6 +432,8 @@ description: To get started with the integration, deploy the Duo Security Integr
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -456,6 +472,8 @@ description: To get started with the integration, deploy the Duo Security Integr
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   steps: Steps
@@ -504,6 +522,8 @@ description: The following files are included in the Duo Security Integration Ki
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -537,6 +557,8 @@ description: The following files are included in the Duo Security Integration Ki
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -560,6 +582,8 @@ description: Field descriptions for the Duo Security IdP Adapter configuration s
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_duo_security_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_duo_security_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -591,6 +615,8 @@ description: Field descriptions for the Duo Security IdP Adapter configuration s
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_duo_security_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_duo_security_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -630,6 +656,8 @@ description: The Duo Security Integration Kit allows PingFederate to use the Duo
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   components: Components
@@ -685,6 +713,8 @@ description: The Duo Security Integration Kit allows PingFederate to use Duo Uni
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   upgrade-considerations: Upgrade considerations
@@ -770,6 +800,8 @@ description: The latest Duo Security Integration Kit allows PingFederate to use 
 component: duosecurity
 page_id: duosecurity::pf_is_overview_of_duo_security_integrations
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/pf_is_overview_of_duo_security_integrations.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   duo-security-integration-kit-latest: Duo Security Integration Kit (latest)
@@ -796,6 +828,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -859,6 +893,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: duosecurity
 page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -920,8 +956,10 @@ These steps are optional. For general information about logging, see [Enabling d
 title: Getting your Duo Security keys and API hostname
 description: To allow PingFederate to communicate with Duo Security, add it as a protected application.
 component: duosecurity
-page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_getting_your_duo_security_keys_and_api_hostname
-canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_getting_your_duo_security_keys_and_api_hostname.html
+page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_getting_your_duo_security_keys_and_api_hostname
+canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_getting_your_duo_security_keys_and_api_hostname.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   steps: Steps
@@ -937,32 +975,6 @@ To allow PingFederate to communicate with Duo Security, add it as a protected ap
 
 2. Go to **Applications > Protect an Application**. For **PingFederate**, click **Protect this Application.**
 
-3. Note the **Client ID**, **Client Secret**, and **API hostname**. You will use these in [Configuring an adapter instance](pf_duo_security_ik_configuring_an_adapter_instance.html).
+3. Note the **Client ID**, **Client Secret**, and **API hostname**. You will use these in [Configuring an adapter instance](pf_duo_security_ik_22_configuring_an_adapter_instance.html).
 
    ![Screen capture showing the positioning of the Client ID, Client Secret, and API hostname fields on the PingFederate page.](../_images/lzr1579652693781.jpg)
-
----
-
----
-title: Known issues and limitations
-description: The following are known issues or limitations for the Duo Security Integration Kit.
-component: duosecurity
-page_id: duosecurity:duo_security_integration_kit_22:pf_duo_security_ik_22_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_22/pf_duo_security_ik_22_known_issues_and_limitations.html
-revdate: June 7, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-The following are known issues or limitations for the Duo Security Integration Kit.
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-There are no known limitations.

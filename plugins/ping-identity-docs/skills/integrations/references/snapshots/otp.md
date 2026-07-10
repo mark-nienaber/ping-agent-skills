@@ -4,6 +4,8 @@ description: You can configure one of the Twilio notification publishers to allo
 component: otp
 page_id: otp:setup:pf_otp_ik_configuring_a_twilio_notification_publisher_instance
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_configuring_a_twilio_notification_publisher_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 14, 2026
 section_ids:
   about-this-task: About this task
@@ -52,6 +54,8 @@ description: Configure the One-Time Passcode IdP Adapter to allow PingFederate t
 component: otp
 page_id: otp:setup:pf_otp_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 6, 2025
 section_ids:
   steps: Steps
@@ -152,6 +156,8 @@ description: The One-Time Passcode Integration Kit includes templates that can p
 component: otp
 page_id: otp:setup:pf_otp_ik_customizing_templates
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_customizing_templates.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 22, 2025
 ---
 
@@ -186,6 +192,8 @@ description: To get started with the integration, deploy the One-Time Passcode I
 component: otp
 page_id: otp:setup:pf_otp_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 6, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -230,6 +238,8 @@ description: The following files are included in the One-Time Passcode Integrati
 component: otp
 page_id: otp:release_notes:pf_otp_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/otp/release_notes/pf_otp_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 6, 2026
 ---
 
@@ -303,6 +313,8 @@ description: To use the Twilio notification publishers, configure your Twilio ac
 component: otp
 page_id: otp:setup:pf_otp_ik_getting_your_twilio_api_credentials
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_getting_your_twilio_api_credentials.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 21, 2025
 section_ids:
   steps: Steps
@@ -338,6 +350,8 @@ description: The following are known issues or limitations for the One-Time Pass
 component: otp
 page_id: otp:release_notes:pf_otp_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/otp/release_notes/pf_otp_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   known-issues: Known issues
@@ -374,6 +388,8 @@ description: The Language Property and Template Keys that you define in the One-
 component: otp
 page_id: otp:setup:pf_otp_ik_language_property_and_template_keys
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_language_property_and_template_keys.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 28, 2025
 section_ids:
   using-the-pingfederate-authentication-api: Using the PingFederate authentication API
@@ -488,6 +504,8 @@ description: Field descriptions for the One-Time Passcode IdP Adapter configurat
 component: otp
 page_id: otp:setup:pf_otp_ik_one_time_passcode_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_one_time_passcode_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 22, 2025
 ---
 
@@ -548,6 +566,8 @@ description: The One-Time Passcode Integration Kit allows PingFederate to send o
 component: otp
 page_id: otp::pf_otp_ik
 canonical_url: https://docs.pingidentity.com/integrations/otp/pf_otp_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 21, 2025
 section_ids:
   features: Features
@@ -620,6 +640,8 @@ description: The following is the change history for the One-Time Passcode Integ
 component: otp
 page_id: otp:release_notes:pf_otp_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/otp/release_notes/pf_otp_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   version-1-1-3: Version 1.1.3
@@ -725,6 +747,8 @@ description: The One-Time Passcode Integration Kit generates passcodes that the 
 component: otp
 page_id: otp::pf_otp_ik_overview_of_one_time_passcodes
 canonical_url: https://docs.pingidentity.com/integrations/otp/pf_otp_ik_overview_of_one_time_passcodes.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   passcode-storage: Passcode storage
@@ -751,6 +775,8 @@ description: With the One-Time Passcode Integration Kit, PingFederate sends a on
 component: otp
 page_id: otp::pf_otp_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/otp/pf_otp_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   description: Description
@@ -794,6 +820,8 @@ description: The One-Time Passcode Integration Kit includes two Twilio-based not
 component: otp
 page_id: otp::pf_otp_ik_overview_of_the_twilio_notification_publishers
 canonical_url: https://docs.pingidentity.com/integrations/otp/pf_otp_ik_overview_of_the_twilio_notification_publishers.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   twilio-programmable-api-notification-publisher: Twilio Programmable API Notification Publisher
@@ -834,6 +862,8 @@ description: The PingFederate Authentication API provides access to the current 
 component: otp
 page_id: otp::pf_otp_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/otp/pf_otp_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 6, 2025
 section_ids:
   models-objects-and-error-codes: Models, objects, and error codes
@@ -1002,6 +1032,8 @@ description: Field descriptions for the Twilio Programmable API Notification Pub
 component: otp
 page_id: otp:setup:pf_otp_ik_twilio_programmable_api_notification_publisher_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_twilio_programmable_api_notification_publisher_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 22, 2025
 ---
 
@@ -1043,6 +1075,8 @@ description: Field descriptions for the Twilio Verify API Notification Publisher
 component: otp
 page_id: otp:setup:pf_otp_ik_twilio_verify_api_notification_publisher_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/otp/setup/pf_otp_ik_twilio_verify_api_notification_publisher_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/otp/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 ---
 

@@ -2,7 +2,7 @@
 
 - Product: Developer Resources
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/developer-resources/llms.txt
 - Guides discovered: 7
 - Guides captured: 7

@@ -4,6 +4,8 @@ description: Use the following procedure to configure a quick connection for sin
 component: heroku
 page_id: heroku::pf_heroku_integration_configure_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_configure_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/heroku/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 24, 2025
 section_ids:
   about-this-task: About this task
@@ -110,6 +112,8 @@ description: To complete single sign-on (SSO) setup for Heroku, configure these 
 component: heroku
 page_id: heroku::pf_heroku_integration_configure_heroku_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_configure_heroku_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/heroku/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 24, 2025
 section_ids:
   about-this-task: About this task
@@ -166,6 +170,8 @@ description: Sign on to the PingFederate administrative console.
 component: heroku
 page_id: heroku::pf_heroku_integration_configure_server_settings
 canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_configure_server_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/heroku/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 24, 2025
 section_ids:
   steps: Steps
@@ -193,6 +199,8 @@ description: This guide describes how to configure PingFederate for browser-base
 component: heroku
 page_id: heroku::pf_heroku_integration
 canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/heroku/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 24, 2025
 ---
 
@@ -208,6 +216,8 @@ description: This guide uses a metadata XML file to assist in configuring many s
 component: heroku
 page_id: heroku::pf_heroku_integration_obtain_the_heroku_saml_20_metadata_xml
 canonical_url: https://docs.pingidentity.com/integrations/heroku/pf_heroku_integration_obtain_the_heroku_saml_20_metadata_xml.html
+llms_txt: https://docs.pingidentity.com/integrations/heroku/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 24, 2025
 section_ids:
   about-this-task: About this task

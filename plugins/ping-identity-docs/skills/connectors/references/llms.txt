@@ -46,6 +46,7 @@
 - [Functions Connector](https://docs.pingidentity.com/connectors/functions_connector.md)
 - [Google Login Connector](https://docs.pingidentity.com/connectors/google_login_connector.md): The Google Login connector authenticates users with Google and retrieves user attributes for use in DaVinci flows.
 - [Google Workspace Admin Connector](https://docs.pingidentity.com/connectors/google_workspace_admin_connector.md)
+- [Hellō Connector](https://docs.pingidentity.com/connectors/hello_connector.md)
 - [HTTP Connector](https://docs.pingidentity.com/connectors/http_connector.md)
 - [HYPR Connector](https://docs.pingidentity.com/connectors/hypr_connector.md)
 - [ID DataWeb Connector](https://docs.pingidentity.com/connectors/id_dataweb_connector.md)

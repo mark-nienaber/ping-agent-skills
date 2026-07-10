@@ -4,6 +4,8 @@ description: Egnyte Connector 1.0 – January 2015 (current release)
 component: egnyte
 page_id: egnyte:release_notes:pf_egnyte_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/release_notes/pf_egnyte_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -25,6 +27,8 @@ description: To proceed with configuring Egnyte for SSO, you will require the be
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_configure_egnyte_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_configure_egnyte_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -89,6 +93,8 @@ description: "The following section describes the steps for configuring single s
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_configure_pf_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_configure_pf_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -149,6 +155,8 @@ description: To configure a connection for outbound provisioning to Egnyte, foll
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_configure_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_configure_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -230,6 +238,8 @@ description: The following section describes the steps for configuring single si
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_configure_saml_sso
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_configure_saml_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -253,6 +263,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: egnyte
 page_id: egnyte:release_notes:pf_egnyte_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/release_notes/pf_egnyte_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -284,6 +296,8 @@ description: The PingFederate Egnyte Provisioner enables an enterprise to provis
 component: egnyte
 page_id: egnyte::pf_egnyte_connector
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/pf_egnyte_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   features: Features
@@ -335,6 +349,8 @@ description: After enabling outbound provisioning in the <pf_install>/pingfedera
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_enable_outbound_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_enable_outbound_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -367,6 +383,8 @@ description: This section describes the common steps required to install the Pin
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_install_the_connector
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_install_the_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -407,6 +425,8 @@ description: Due to a limitation with PingFederate 8.1 and earlier versions, whe
 component: egnyte
 page_id: egnyte:release_notes:pf_egnyte_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/release_notes/pf_egnyte_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -436,6 +456,8 @@ description: Once you have obtained your API key, you are able to use it to gene
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_obtain_access_token
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_obtain_access_token.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -486,6 +508,8 @@ description: The Egnyte Connector's outbound provisioning functionality is built
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_obtain_api_key
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_obtain_api_key.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -538,6 +562,8 @@ description: The connector's quick-connection template uses a metadata XML file 
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_obtain_egnyte_saml_20_metadata
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_obtain_egnyte_saml_20_metadata.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -570,6 +596,8 @@ description: The following table consists of the attributes that can be mapped o
 component: egnyte
 page_id: egnyte:setup:pf_egnyte_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/setup/pf_egnyte_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -610,6 +638,8 @@ description: The Egnyte Provisioner synchronizes users from your datastore to Eg
 component: egnyte
 page_id: egnyte::pf_egnyte_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/egnyte/pf_egnyte_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/egnyte/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

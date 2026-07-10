@@ -4,6 +4,8 @@ description: You can imitate a service provider (SP)-initiated single sign-on (S
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_configuring_service_provider_initiated_sso
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_configuring_service_provider_initiated_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -40,6 +42,8 @@ description: Configure a SAML trust association interceptor (TAI) on your WebSph
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_configuring_single_sign_on_in_websphere
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_configuring_single_sign_on_in_websphere.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -83,6 +87,8 @@ description: To allow PingFederate to handle single sign-on (SSO) authentication
 component: websphere
 page_id: websphere:setup:gnc1590516299053
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/gnc1590516299053.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -134,6 +140,8 @@ description: Before you can configure single sign-on in WebSphere, you need to s
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_enabling_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_enabling_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   enabling-single-sign-on-in-pingfederate-10-1-or-later: Enabling single sign-on in PingFederate 10.1 or later
@@ -180,6 +188,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_enabling_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_enabling_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -209,6 +219,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_enabling_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_enabling_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -232,6 +244,8 @@ description: Export a metadata file that describes your PingFederate identity pr
 component: websphere
 page_id: websphere:setup:pf_websphere_integration_exporting_saml_metadata_from_pf
 canonical_url: https://docs.pingidentity.com/integrations/websphere/setup/pf_websphere_integration_exporting_saml_metadata_from_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -285,6 +299,8 @@ description: This guide describes how to configure PingFederate and IBM WebSpher
 component: websphere
 page_id: websphere::pf_websphere_integration
 canonical_url: https://docs.pingidentity.com/integrations/websphere/pf_websphere_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/websphere/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   features: Features

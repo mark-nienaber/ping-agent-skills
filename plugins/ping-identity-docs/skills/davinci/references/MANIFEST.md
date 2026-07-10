@@ -2,7 +2,7 @@
 
 - Product: DaVinci
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/davinci/llms.txt
 - Guides discovered: 20
 - Guides captured: 20

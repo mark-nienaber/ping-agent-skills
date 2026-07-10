@@ -4,6 +4,8 @@ description: Added support for handling rate-limiting responses from Slack
 component: slack
 page_id: slack:release_notes:pf_slack_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/slack/release_notes/pf_slack_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   slack-connector-3-0-2-march-2020: Slack Connector 3.0.2 – March 2020
@@ -69,6 +71,8 @@ description: Use the following details for the Browser SSO part of your single s
 component: slack
 page_id: slack:setup:pf_slack_connector_configuring_browser_sso
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_browser_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -162,6 +166,8 @@ description: To allow PingFederate to act as an identity provider for Slack, cre
 component: slack
 page_id: slack:setup:pf_slack_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -192,6 +198,8 @@ description: To allow PingFederate to manage authentication, enable single sign-
 component: slack
 page_id: slack:setup:pf_slack_connector_configuring_single_sign_on_in_slack
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_single_sign_on_in_slack.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   configuring-sso-in-slack-standard-or-plus: Configuring SSO in Slack Standard or Plus
@@ -308,6 +316,8 @@ description: If you use Slack Enterprise Grid, configure SSO as follows.
 component: slack
 page_id: slack:setup:pf_slack_connector_configuring_sso_in_slack_enterprise_grid
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_sso_in_slack_enterprise_grid.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -377,6 +387,8 @@ description: If you use Slack Standard or Plus, configure SSO as follows.
 component: slack
 page_id: slack:setup:pf_slack_connector_configuring_sso_in_slack_standard_or_plus
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_sso_in_slack_standard_or_plus.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -430,6 +442,8 @@ description: To allow PingFederate to manage users in Slack, create a service pr
 component: slack
 page_id: slack:setup:pf_slack_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -497,6 +511,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to Slack, crea
 component: slack
 page_id: slack:setup:pf_slack_connector_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -567,6 +583,8 @@ description: To get started with the integration, deploy the Slack Provisioner f
 component: slack
 page_id: slack:setup:pf_slack_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -604,6 +622,8 @@ description: The following files are included in the Slack Provisioner .zip arch
 component: slack
 page_id: slack:release_notes:pf_slack_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/slack/release_notes/pf_slack_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 ---
 
@@ -627,6 +647,8 @@ description: To use PingFederate for provisioning and single sign-on (SSO), conf
 component: slack
 page_id: slack:setup:pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -692,6 +714,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: slack
 page_id: slack:setup:pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -727,6 +751,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: slack
 page_id: slack:setup:pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -756,6 +782,8 @@ description: Use the OAuth Configuration Service to exchange your Slack client I
 component: slack
 page_id: slack:setup:pf_slack_connector_getting_a_slack_api_access_token
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_getting_a_slack_api_access_token.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   getting-an-access-token-for-slack-standard-or-plus: Getting an access token for Slack Standard or Plus
@@ -840,6 +868,8 @@ description: Exchange your Slack Enterprise Grid client ID and secret for an acc
 component: slack
 page_id: slack:setup:pf_slack_connector_getting_an_access_token_for_slack_enterprise_grid
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_getting_an_access_token_for_slack_enterprise_grid.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -891,6 +921,8 @@ description: Exchange your Slack Standard or Plus client ID and secret for an ac
 component: slack
 page_id: slack:setup:pf_slack_connector_getting_an_access_token_for_slack_standard_or_plus
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_getting_an_access_token_for_slack_standard_or_plus.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -930,6 +962,8 @@ description: There are no known issues.
 component: slack
 page_id: slack:release_notes:pf_slack_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/slack/release_notes/pf_slack_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   known-issues: Known issues
@@ -976,6 +1010,8 @@ description: Modify the SAML details in the included saml-metadata.xml file. Thi
 component: slack
 page_id: slack:setup:pf_slack_connector_preparing_your_saml_metadata_file
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_preparing_your_saml_metadata_file.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -1009,6 +1045,8 @@ description: The table provided lists the main provisioning capabilities availab
 component: slack
 page_id: slack:setup:pf_slack_connector_provisioning_options_reference
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_provisioning_options_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 ---
 
@@ -1031,6 +1069,8 @@ description: Before PingFederate can access the Slack API, it needs an access to
 component: slack
 page_id: slack:setup:pf_slack_connector_registering_pf_as_an_app_in_slack
 canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_registering_pf_as_an_app_in_slack.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps

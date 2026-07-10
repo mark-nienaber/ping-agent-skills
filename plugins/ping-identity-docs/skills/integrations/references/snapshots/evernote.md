@@ -4,6 +4,8 @@ description: Evernote Connector 2.0 – July 2018 (current release)
 component: evernote
 page_id: evernote:release_notes:pf_evernote_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/evernote/release_notes/pf_evernote_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -39,6 +41,8 @@ description: The following are the tasks to enable SCIM provisioning on the Ever
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_configure_evernote_for_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_configure_evernote_for_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -79,6 +83,8 @@ description: To configure Evernote for single sign-on (SSO), you must have the s
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_configure_evernote_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_configure_evernote_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -129,6 +135,8 @@ description: To configure a connection for outbound provisioning to Evernote, fo
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_configure_pf_for_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_configure_pf_for_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -208,6 +216,8 @@ description: To configure a connection for single sign-on (SSO) to Evernote, fol
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_configure_pf_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_configure_pf_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -276,6 +286,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: evernote
 page_id: evernote:release_notes:pf_evernote_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/evernote/release_notes/pf_evernote_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -303,6 +315,8 @@ description: After enabling outbound provisioning in the <pf_install>/pingfedera
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_enable_outbound_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_enable_outbound_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -335,6 +349,8 @@ description: The PingFederate Evernote Provisioner enables an enterprise to prov
 component: evernote
 page_id: evernote::pf_evernote_connector
 canonical_url: https://docs.pingidentity.com/integrations/evernote/pf_evernote_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   features: Features
@@ -390,6 +406,8 @@ description: This section describes the common steps required to install the Pin
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_install_the_connector
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_install_the_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -430,6 +448,8 @@ description: Due to a limitation with PingFederate 8.1 and earlier versions, whe
 component: evernote
 page_id: evernote:release_notes:pf_evernote_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/evernote/release_notes/pf_evernote_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -455,6 +475,8 @@ description: The following are the steps to obtain the signing certificate that 
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_obtain_pf_signing_certificate
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_obtain_pf_signing_certificate.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -493,6 +515,8 @@ description: The following table consists of the attributes that can be mapped f
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -514,6 +538,8 @@ description: Before stopping the PingFederate server to upgrade the Evernote Con
 component: evernote
 page_id: evernote:setup:pf_evernote_connector_upgrade_an_existing_connector
 canonical_url: https://docs.pingidentity.com/integrations/evernote/setup/pf_evernote_connector_upgrade_an_existing_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -577,6 +603,8 @@ description: The Evernote Provisioner synchronizes users from your datastore to 
 component: evernote
 page_id: evernote::pf_evernote_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/evernote/pf_evernote_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/evernote/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

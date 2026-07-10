@@ -4,6 +4,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik_adding_review_statuses_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik_adding_review_statuses_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -86,6 +88,8 @@ description: To use your new password credential validator (PCV) instance, you m
 component: azure
 page_id: azure:azure_ad_password_credential_validator:pf_azuread_pcv_associating_the_pcv_with_an_idp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_password_credential_validator/pf_azuread_pcv_associating_the_pcv_with_an_idp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 19, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -151,6 +155,8 @@ description: You can use the PingFederate authentication API to integrate the Az
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -170,6 +176,8 @@ description: Integrating PingFederate with Microsoft Azure Active Directory (AD)
 component: azure
 page_id: azure::pf_azuread_office365_integration
 canonical_url: https://docs.pingidentity.com/integrations/azure/pf_azuread_office365_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   customers-already-running-azure-ad-connect: Customers already running Azure AD Connect
@@ -199,6 +207,8 @@ description: The following are setting descriptions for the Azure AD Identity Pr
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik_azure_ad_identity_protection_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik_azure_ad_identity_protection_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -235,6 +245,8 @@ description: The Azure AD Identity Protection Integration Kit allows PingFederat
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   features: Features
@@ -301,6 +313,8 @@ description: Password credential validators (PCV) allow PingFederate administrat
 component: azure
 page_id: azure::pf_is_overview_of_azure_ad_integrations
 canonical_url: https://docs.pingidentity.com/integrations/azure/pf_is_overview_of_azure_ad_integrations.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   azure-ad-password-credential-validator: Azure AD Password Credential Validator
@@ -325,6 +339,8 @@ description: Password credential validators (PCVs) enable PingFederate administr
 component: azure
 page_id: azure:azure_ad_password_credential_validator:pf_azuread_pcv
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_password_credential_validator/pf_azuread_pcv.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 19, 2025
 section_ids:
   features: Features
@@ -438,6 +454,8 @@ description: The following are setting descriptions for the Azure AD PCV.
 component: azure
 page_id: azure:azure_ad_password_credential_validator:pf_azuread_pcv_config_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_password_credential_validator/pf_azuread_pcv_config_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 19, 2025
 ---
 
@@ -483,6 +501,8 @@ description: The following is the change history for the Azure AD Identity Prote
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   azure-ad-identity-protection-integration-kit-1-0-october-2021: Azure AD Identity Protection Integration Kit 1.0 - October 2021
@@ -516,6 +536,8 @@ description: The following is the change history for the Azure AD Password Crede
 component: azure
 page_id: azure:azure_ad_password_credential_validator:pf_azuread_pcv_changelog
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_password_credential_validator/pf_azuread_pcv_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 8, 2026
 section_ids:
   version-2-2-1: Version 2.2.1
@@ -602,6 +624,8 @@ description: Add a new federated domain for your account.
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configuring_a_federated_domain
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configuring_a_federated_domain.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -686,6 +710,8 @@ description: Configure the Azure AD Password Credential Validator (PCV) to deter
 component: azure
 page_id: azure:azure_ad_password_credential_validator:pf_azuread_pcv_configuring_a_password_credential_validator_instance
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_password_credential_validator/pf_azuread_pcv_configuring_a_password_credential_validator_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 7, 2026
 section_ids:
   steps: Steps
@@ -773,6 +799,8 @@ description: To allow email clients, mobile phones, and other active clients tha
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configure_a_username_token_processor_instance
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configure_a_username_token_processor_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -835,6 +863,8 @@ description: Configure the Azure AD Identity Protection IdP Adapter to determine
 component: azure
 page_id: azure:azure_ad_identity_protection_integration_kit:pf_azuread_identityprotection_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_identity_protection_integration_kit/pf_azuread_identityprotection_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -900,6 +930,8 @@ description: PingFederate supports a wide selection of integration kits that plu
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_create_an_idp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_create_an_idp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -964,6 +996,8 @@ description: If you're planning to provide SSO to users whose accounts reside in
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configure_an_ldap_connection
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configure_an_ldap_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -1018,6 +1052,8 @@ description: Configure the assertion by mapping attributes from the necessary so
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configuring_assertion_creation
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configuring_assertion_creation.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -1059,6 +1095,8 @@ description: Complete the following to configure attribute source and user looku
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configuring_attribute_source_and_user_lookup_for_html_form_adapter_instances
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configuring_attribute_source_and_user_lookup_for_html_form_adapter_instances.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -1116,6 +1154,8 @@ description: Complete the following to configure attribute source and user looku
 component: azure
 page_id: azure:azure_ad_and_office_365_integration_guide:pf_azuread_office365_integration_configuring_attribute_source_and_user_lookup_for_token_processors
 canonical_url: https://docs.pingidentity.com/integrations/azure/azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_configuring_attribute_source_and_user_lookup_for_token_processors.html
+llms_txt: https://docs.pingidentity.com/integrations/azure/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps

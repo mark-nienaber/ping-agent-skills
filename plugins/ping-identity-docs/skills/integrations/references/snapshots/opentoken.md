@@ -4,6 +4,8 @@ description: The following is the change history for the OpenToken Token Transla
 component: opentoken
 page_id: opentoken:release_notes:pf_opentoken_tt_changelog
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/release_notes/pf_opentoken_tt_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   opentoken-token-translator-1-0-2-august-2022: OpenToken Token Translator 1.0.2 - August 2022
@@ -37,6 +39,8 @@ description: The following files are included in the OpenToken Token Translator 
 component: opentoken
 page_id: opentoken:release_notes:pf_opentoken_tt_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/release_notes/pf_opentoken_tt_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -72,6 +76,8 @@ description: This section describes how to install and configure the OpenToken T
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_idp_installation_and_setup
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_idp_installation_and_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -146,6 +152,8 @@ description: Complete the following to install the Java OpenToken Agent API.
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_install_the_opentoken_agent_api
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_install_the_opentoken_agent_api.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -181,6 +189,8 @@ description: Field descriptions for the OpenToken Token Generator configuration 
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_generator_settings
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_generator_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -216,6 +226,8 @@ description: Field descriptions for the OpenToken Token Processor configuration 
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_token_processor_settings
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_token_processor_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -251,6 +263,8 @@ description: The PingFederate OpenToken Token Translator provides a Token Proces
 component: opentoken
 page_id: opentoken::pf_opentoken_tt
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/pf_opentoken_tt.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   intended-audience: Intended audience
@@ -299,6 +313,8 @@ description: The Agent API provides access to functionality for reading an OpenT
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_read_an_opentoken_as_a_wsp
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_read_an_opentoken_as_a_wsp.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   java-sample-code: Java Sample Code
@@ -340,6 +356,8 @@ description: Download the OpenToken Token Translator .zip archive from the Add-o
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_sp_installation_and_setup
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_sp_installation_and_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -399,6 +417,8 @@ description: WSC and WSP application developers can use the Java OpenToken Agent
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_the_opentoken_agent_api
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_the_opentoken_agent_api.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -424,6 +444,8 @@ description: The OpenToken Agent API provides access to functionality for writin
 component: opentoken
 page_id: opentoken:setup:pf_opentoken_tt_write_an_opentoken_as_a_wsc
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/setup/pf_opentoken_tt_write_an_opentoken_as_a_wsc.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   java-sample-code: Java Sample Code
@@ -475,6 +497,8 @@ description: The following figure shows a basic Web Services scenario using the 
 component: opentoken
 page_id: opentoken::pf_opentoken_tt_ws_trust_sts_processing
 canonical_url: https://docs.pingidentity.com/integrations/opentoken/pf_opentoken_tt_ws_trust_sts_processing.html
+llms_txt: https://docs.pingidentity.com/integrations/opentoken/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 

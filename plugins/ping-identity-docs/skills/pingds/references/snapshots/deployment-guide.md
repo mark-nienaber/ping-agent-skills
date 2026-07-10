@@ -911,3 +911,1282 @@ Unpredictable changes include the following:
   * Deployed software that has a newly discovered security bug
 
 In summary, plan to adapt your service to changing conditions. To correct security bugs and other issues and to recover from minor or major disasters, be prepared to patch, upgrade, roll out, and roll back changes as part of your regular operations.
+
+---
+
+---
+title: Deployment
+description: "Guide for architects deploying PingDS: covers components, project planning, deployment patterns, system provisioning, and deployment checklists."
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:preface
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/preface.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Deployment", "LDAP"]
+page_aliases: ["index.adoc"]
+---
+
+# Deployment
+
+These pages show you how to use PingDS software to build secure, high-performance, manageable directory services. It helps directory service architects design scalable services that fit their needs.
+
+[icon: cubes, set=fas, size=3x]
+
+#### [DS Software](about-components.html)
+
+Use DS components.
+
+[icon: calendar-check, set=fas, size=3x]
+
+#### [Project Outline](project.html)
+
+Outline a successful plan.
+
+[icon: university, set=fas, size=3x]
+
+#### [Complete Plans](plans.html)
+
+Create comprehensive plans.
+
+[icon: code-branch, set=fas, size=3x]
+
+#### [Deployment Patterns](patterns.html)
+
+Apply best practices.
+
+[icon: arrows-alt, set=fas, size=3x]
+
+#### [Provisioning](prerequisites.html)
+
+Prepare systems and hardware.
+
+[icon: flag-checkered, set=fas, size=3x]
+
+#### [Checklists](checklists.html)
+
+Follow checklists.
+
+---
+
+---
+title: Deployment checklists
+description: Checklists to guide a PingDS deployment through project initiation, service design, development, implementation, and ongoing maintenance.
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:checklists
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/checklists.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Deployment", "Features", "Integration", "LDAP"]
+section_ids:
+  checklist-initiation: Initiate the project
+  checklist-support: Prepare supportability
+  checklist-design: Design the service
+  checklist-development: Develop the service
+  checklist-implementation: Implement the service
+  checklist-maintenance: Maintain the service
+---
+
+# Deployment checklists
+
+Use these checklists when deploying your directory service:
+
+## Initiate the project
+
+| Task                                                        | Done? |
+| ----------------------------------------------------------- | ----- |
+| Understand the business requirements for your DS deployment | ▢     |
+| Identify key client applications                            | ▢     |
+| Identify project stakeholders                               | ▢     |
+| Define SLOs based on business requirements                  | ▢     |
+| Define project scope                                        | ▢     |
+| Define project roles and responsibilities                   | ▢     |
+| Schedule DS training for deployment team members            | ▢     |
+
+## Prepare supportability
+
+| Task                                                                  | Done? |
+| --------------------------------------------------------------------- | ----- |
+| Find out how to get help and support from Ping Identity and partners  | ▢     |
+| Find out how to get training from Ping Identity and partners          | ▢     |
+| Find out how to keep up to date with new development and new releases | ▢     |
+| Find out how to report problems                                       | ▢     |
+
+## Design the service
+
+| Task                                                            | Done? |
+| --------------------------------------------------------------- | ----- |
+| Understand the roles of directory components                    | ▢     |
+| Define architecture, mapping requirements to component features | ▢     |
+| Define the directory data model                                 | ▢     |
+| Define the directory access model                               | ▢     |
+| Define the replication model                                    | ▢     |
+| Define how to backup, restore, and recover data                 | ▢     |
+| Define how you will monitor and audit the service               | ▢     |
+| Determine how to harden and secure the service                  | ▢     |
+
+## Develop the service
+
+| Task                                                     | Done? |
+| -------------------------------------------------------- | ----- |
+| Engage development of custom server plugins as necessary | ▢     |
+| Apply configuration management                           | ▢     |
+| Create a test plan                                       | ▢     |
+| Engage automation, continuous integration                | ▢     |
+| Create a documentation plan                              | ▢     |
+| Create a maintenance and support plan                    | ▢     |
+| Pilot the implementation                                 | ▢     |
+| Size systems to provision for production                 | ▢     |
+| Execute test plans                                       | ▢     |
+| Execute documentation plans                              | ▢     |
+| Create a rollout plan in alignment with all stakeholders | ▢     |
+| Prepare patch and upgrade plans                          | ▢     |
+
+## Implement the service
+
+| Task                                               | Done? |
+| -------------------------------------------------- | ----- |
+| Ensure appropriate support for production services | ▢     |
+| Execute the rollout plan                           | ▢     |
+| Engage ongoing monitoring and auditing services    | ▢     |
+| Engage ongoing maintenance and support             | ▢     |
+
+## Maintain the service
+
+| Task                                                              | Done? |
+| ----------------------------------------------------------------- | ----- |
+| Execute patch and upgrade plans as necessary                      | ▢     |
+| Plan how to adapt the deployment to new and changing requirements | ▢     |
+
+---
+
+---
+title: Deployment patterns
+description: Deployment patterns for PingDS covering high availability, scalability, data sovereignty with subtree and fractional replication, and interoperability.
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:patterns
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/patterns.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Deployment", "Features", "Integration", "LDAP", "Performance"]
+section_ids:
+  patterns-ha: High availability
+  effective_disaster_recovery: Effective disaster recovery
+  start_up_order: Start up order
+  patterns-scale: High scalability
+  patterns-scale-start: Plan to scale
+  patterns-scale-up: Scale up
+  patterns-scale-out: Scale out
+  patterns-data-sovereignty: Data sovereignty
+  data-sovereignty-replication: Replication and data sovereignty
+  data-sovereignty-subtree-replication: Subtree replication
+  data-sovereignty-fractional-replication: Fractional replication
+  patterns-interop: Interoperability
+  interop-proxy: Proxy layer
+  interop-pass-thru-authn: Pass-through authentication
+  interop-sync: Data synchronization and migration
+---
+
+# Deployment patterns
+
+Use these patterns in your deployments.
+
+## High availability
+
+|   |                                                |
+| - | ---------------------------------------------- |
+|   | This information applies to *all* deployments. |
+
+When you deploy DS servers into a highly available directory service, you are implementing the primary use case for which DS software is designed:
+
+* Data replication lets you eliminate single points of failure.
+
+  Replication favors [availability over immediate consistency](plans.html#overview-replication-cap).
+
+* DS upgrade capabilities let you perform rolling upgrades without ever taking the whole service offline.
+
+* If desired, DS proxy capabilities help you provide a single point of entry for directory applications, hiding the fact that individual servers do go offline.
+
+![Highly available directories avoid single points of failure.](../_images/ha.png)
+
+You build a highly available directory service of redundant servers in multiple locations. If possible, use redundant networks within and between locations to limit network partitions.
+
+### Effective disaster recovery
+
+|   |                                                |
+| - | ---------------------------------------------- |
+|   | This information applies to *all* deployments. |
+
+Avoiding downtime depends on redundant servers and operational readiness to recover quickly and effectively. Prepare and test your plans. Even if disaster strikes, you will repair the service promptly.
+
+Plan how you store backup files both onsite and offsite. Make sure you have safe copies of the master keys that let directory servers decrypt encrypted data. For details, refer to [Backup and restore](../maintenance-guide/backup-restore.html).
+
+When defining disaster recovery plans, consider at least the following situations:
+
+* **The entire service is down.**
+
+  It is important to distinguish whether the situation is temporary and easily recoverable, or permanent and requires implementation of disaster recovery plans.
+
+  If an accident, such as a sudden power cut at a single-site deployment, brought all the servers down temporarily, restart them when the power returns. As described in [Server recovery](../maintenance-guide/server-process.html#crash-recovery), directory servers might have to replay their transaction logs before they are ready. This operation happens automatically when you restart the server.
+
+  In case of disaster, be prepared to rebuild the entire service. For details, refer to [Disaster recovery](../use-cases/disaster-recovery.html).
+
+* **Part of the service is down.**
+
+  Fail client applications over to healthy servers, and restart or rebuild servers that are down.
+
+  Directory proxy servers can fail over automatically and retry requests for certain types of failure. For details, refer to [LDAP proxy](../config-guide/proxy.html).
+
+* **The network is temporarily down between servers.**
+
+  By default, you do not need to take immediate action for a temporary network outage. As long as client applications can still communicate with local servers, replication is designed to catch up when the network connections are reestablished.
+
+  By default, when a directory server replica cannot communicate with a replication server, the `isolation-policy` setting prevents the directory server replica from accepting updates.
+
+  In any case, if the network is partitioned longer than the replication purge delay (default: 3 days), then replication will have purged older data, and cannot catch up. For longer network outages, you must reinitialize replication.
+
+When defining procedures to rebuild a service that is permanently offline, the order of operations is the same as during an upgrade:
+
+1. Redirect client applications to a location where the service is still running.
+
+   If the proxy layer is still running, directory proxy servers can automatically fail requests over to remote servers that are still running.
+
+2. Rebuild any standalone replication servers.
+
+3. Rebuild directory servers.
+
+4. Rebuild any directory proxy servers.
+
+### Start up order
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+Some advanced deployments compose the directory service using separate component servers for different functions. Bring component servers online in the following order:
+
+1. **Standalone Replication Servers**
+
+   Replication servers are the foundation for high availability. They communicate change messages to directory server replicas. They also let other servers discover available replicas.
+
+2. **Directory Servers**
+
+   Directory server replicas ultimately respond to client application requests. They hold an eventually convergent copy of the directory data. They require a replication service to communicate with other replicas about changes to their copy of the directory data.
+
+3. **Directory Proxy Servers**
+
+   DS directory proxy servers discover DS replicas by querying the replication service. They forward requests to the directory server replicas, and responses to the client applications.
+
+## High scalability
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+A high-scale directory service requires very high throughput, very low response times, or both. It might have a large data set, such as 100 million entries or more. When building a high-scale directory, the fundamental question is whether to scale up or scale out.
+
+*Scaling up* means deploying more powerful server systems. *Scaling out* means deploying many more server systems.
+
+**Scale Up or Scale Out**
+
+|               | Scaling Up                                                                                                                       | Scaling Out                                                                                                             |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Why Choose…​? | * Simpler architecture
+
+* Cannot distribute or shard data                                                                        | - Very high update load
+
+- Can distribute or shard data                                                                 |
+| Advantages    | * Simpler architecture
+
+* No need to distribute or shard data                                                                    | - Not limited by underlying platform
+
+- Smaller server systems
+
+- Better isolation of issues
+
+- High update scalability |
+| Disadvantages | * Limited by underlying platform
+
+* Powerful (expensive) server systems
+
+* Less isolation of issues
+
+* Limited write scalability | - Complex architecture
+
+- Must distribute/shard data somehow                                                            |
+
+### Plan to scale
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+Before building a test directory service, start sizing systems by considering service level objectives (SLOs) and directory data.
+
+Define SLOs as described in [Performance requirements](../config-guide/tuning.html#perf-define-starting-points). Once you have defined the SLOs, model directory client traffic to test them using your own tools, or the tools described in [Performance tests](../config-guide/tuning.html#perf-testing).
+
+Estimate the disk space needed for each server. This depends on the traffic, your SLOs, and on directory data like what you expect in production:
+
+1. Import a known fraction of the expected initial data with the server configured for production.
+
+   For help, refer to [Generate test data](../ldap-guide/ldif-tools.html#generating-ldif). Make sure you adapt the template for *your* data. Do not rely only on the default template for the `makeldif` command.
+
+2. Check the size of the database.
+
+   Divide by the fraction used in the previous step to estimate the total starting database size.
+
+3. Multiply the result to account for replication metadata.
+
+   To estimate the volume of replication metadata, set up replication with multiple servers as expected in production, and run the estimated production load that corresponds to the data you used. Keep the load running until the replication purge delay. After the purge delay, measure the size of the databases on a directory server, and the size of the changelog database on a replication server. Assuming the load is representative of the production load including expected peaks and normal traffic, additional space used since the LDIF import should reflect expected growth due to replication metadata.
+
+4. Multiply the result to account for the overall growth that you expect for the directory service during the lifetime of the current architecture.
+
+5. To complete the estimate, add 2 GB for default access log files, and space for any backups or LDIF exports you expect to store on local disk.
+
+For a directory server, make sure the system has enough RAM available to cache the database. By default, database files are stored under the `/path/to/opendj/db` directory. Ideally, the RAM available to the server should be at least 1.5 to 2 times the total size of the database files on disk.
+
+### Scale up
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+When scaling up, each server system must have the resources to run a high-scale DS server. As described in [Scaling replication](plans.html#overview-replication-scale), each directory server replica only absorbs its share of the full read load, but each replica absorbs *the full write load* for the service.
+
+Make sure that the estimates you arrived at in [Plan to scale](#patterns-scale-start) remain within the capabilities of each server and system.
+
+In addition to the [hardware requirements](https://docs.pingidentity.com/pingds/release-notes/requirements.html#prerequisites-hardware), and the tips in [Performance settings](../config-guide/tuning.html#perf-tweaking), consider the following points to avoid resource contention:
+
+* For best performance, use dedicated servers.
+
+* Run as few additional system services as possible.
+
+* Run each server on a separate system.
+
+* Use fast disks with good IOPS, and put logs, databases, and backup files on separate disk subsystems.
+
+* Keep resource limitations for client applications to acceptable minimums.
+
+* Schedule backups and maintenance for minimum service impact.
+
+### Scale out
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+When scaling out onto multiple server systems, you must find a usable way to distribute or shard the data into separate replication domains.
+
+In some cases, each replication domain holds a branch of the DIT with a similar amount of traffic, and an equivalent amount of data. You can distribute entries based on location, network, or other characteristics. Branches can join at a base DN to bring all the entries together in the same logical view. Separate at least the directory server replicas in each replication domain, so that they share only minimal and top-level entries. To achieve this, use subtree replication, which is briefly described in [Subtree replication (advanced)](../config-guide/repl-subtree.html). Each replica can hold minimal and top-level entries in one database backend, but its primary database backend holds only the branch it shares with others in the domain.
+
+If the data to scale out is all under a single DN, consider using a DS proxy server layer to perform the data distribution, as described in [Data distribution](../config-guide/proxy.html#pattern-data-distribution-example).
+
+When building a scaled-out architecture, be sure to consider the following questions:
+
+* How will you distribute the data to allow the service to scale naturally, for example, by adding a replication domain?
+
+* How will you manage what are essentially multiple directory services?
+
+  All of your operations, from backup and recovery to routine monitoring, must take the branch data into account, always distinguishing between replication domains.
+
+* How will you automate operations?
+
+* How will you simplify access to the service?
+
+  Consider using DS proxy servers for a [single point of access](../config-guide/proxy.html#proxy-access-point).
+
+## Data sovereignty
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+In many countries, how you store and process user accounts and profile information is subject to regulations and restrictions that protect user privacy. Data sovereignty legislation is beyond the scope of this document, but DS servers do include features to build services in compliance with data sovereignty requirements:
+
+* Data replication
+
+* Subtree replication
+
+* Fractional replication
+
+The following deployment patterns address questions of data storage. When planning your deployment, consider how client applications access and process directory data. By correctly configuring access controls, as described in [Access control](../security-guide/access.html), you can restrict network access by hostname or IP address, but not generally by physical location of a mobile client application, for example.
+
+Consider developing a dedicated service layer to manage policies that define what clients can access and process based on their location. If your deployment calls for dynamic access management, use PingDS together with PingAM software.
+
+### Replication and data sovereignty
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+Data replication is critical to a high-scale, highly available directory service. For deployments where data protection is also critical, you must make sure you do not replicate data outside locations where you can guarantee compliance with local regulations.
+
+As described in [Deploying replication](plans.html#overview-replication-deployment), replication messages flow from directory servers through replication servers to other directory servers. Replication messages contain change data, including data governed by privacy regulations:
+
+* For details on replicating data that must not leave a given location, refer to [Subtree replication](#data-sovereignty-subtree-replication).
+
+* For details on replicating only part of the data set outside a given location, refer to [Fractional replication](#data-sovereignty-fractional-replication).
+
+### Subtree replication
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+The primary unit of replication is [the base DN](../config-guide/repl-about.html#repl-per-base-dn). Subtree replication refers to putting different subtrees (branches) in separate backends, and then replicating those subtrees only to specified servers. For example, only replicate data to locations where you can guarantee compliance with the regulations in force.
+
+For subtree replication, the RDN of the subtree base DN identifies the subtree. This leads to a hierarchical directory layout. The directory service retains the logical view of a flatter layout, because the branches all join at a top-level base DN.
+
+The following example shows an LDIF outline for a directory service with top-level and local backends:
+
+* The `userData` backend holds top-level entries, which do not directly reference users in a particular region.
+
+* The `region1` backend holds entries under the `ou=Region 1,dc=example,dc=com` base DN.
+
+* The `region2` backend holds entries under the `ou=Region 2,dc=example,dc=com` base DN.
+
+The example uses nested groups to avoid referencing local accounts at the top level, but still allowing users to belong to top-level groups:
+
+```ldif
+# %<--- Start of LDIF for userData --->%
+# Base entries are stored in the userData backend:
+dn: dc=example,dc=com                         # Base DN of userData backend
+...
+
+dn: ou=groups,dc=example,dc=com               # Stored in userData backend
+...
+
+dn: ou=Top-level Group,ou=groups,dc=example,dc=com
+...
+member: ou=R1 Group,ou=groups,ou=Region 1,dc=example,dc=com
+member: ou=R2 Group,ou=groups,ou=Region 2,dc=example,dc=com
+
+dn: ou=people,dc=example,dc=com               # Stored in userData backend
+...
+
+# %<--- End of LDIF for userData --->%
+# %<--- Start of LDIF for Region 1 --->%
+# Subtree entries are stored in a country or region-specific backend.
+dn: ou=Region 1,dc=example,dc=com             # Base DN of region1 backend
+...
+
+dn: ou=groups,ou=Region 1,dc=example,dc=com   # Stored in region1 backend
+...
+
+dn: ou=R1 Group,ou=groups,ou=Region 1,dc=example,dc=com
+...
+member: uid=aqeprfEUXIEuMa7M,ou=people,ou=Region 1,dc=example,dc=com
+...
+
+dn: ou=people,ou=Region 1,dc=example,dc=com   # Stored in region1 backend
+...
+
+dn: uid=aqeprfEUXIEuMa7M,ou=people,ou=Region 1,dc=example,dc=com
+uid: aqeprfEUXIEuMa7M
+...
+
+# %<--- End of LDIF for Region 1 --->%
+# %<--- Start of LDIF for Region 2 --->%
+dn: ou=Region 2,dc=example,dc=com             # Base DN of region2 backend
+...
+
+dn: ou=groups,ou=Region 2,dc=example,dc=com   # Stored in region2 backend
+...
+
+dn: ou=groups,ou=R2 Group,ou=Region 2,dc=example,dc=com
+...
+member: uid=8EvlfE0rRa3rgbX0,ou=people,ou=Region 2,dc=example,dc=com
+...
+
+dn: ou=people,ou=Region 2,dc=example,dc=com   # Stored in region2 backend
+...
+
+dn: uid=8EvlfE0rRa3rgbX0,ou=people,ou=Region 2,dc=example,dc=com
+uid: 8EvlfE0rRa3rgbX0
+...
+
+# %<--- End of LDIF for Region 2 --->%
+```
+
+The deployment for this example has the following characteristics:
+
+* The LDIF is split at the comments about where to cut the file:
+
+  `# %<--- Start|End of LDIF for ... --->%`
+
+* All locations share the LDIF for `dc=example,dc=com`, but the data is not replicated.
+
+  If DS replicates `dc=example,dc=com`, it replicates all data for that base DN, which includes *all* the data from *all* regions.
+
+  Instead, minimize the shared entries, and manually synchronize changes across all locations.
+
+* The local LDIF files are constituted and managed only in their regions:
+
+  * Region 1 data is only replicated to servers in region 1.
+
+  * Region 2 data is only replicated to servers in region 2.
+
+* The directory service only processes information for users in their locations according to local regulations.
+
+![Region-specific data is replicated only to local servers.](../_images/distinct-replication-domains.png)Figure 1. Separate replication domains for data sovereignty
+
+In a variation on the deployment shown above, consider a deployment with the following constraints:
+
+* Region 1 regulations allow region 1 user data to be replicated to region 2.
+
+  You choose to replicate the region 1 base DN in both regions for availability.
+
+* Region 2 regulations do not allow region 2 user data to be replicated to region 1.
+
+![Breadth of replication depends on regulations for data sovereignty.](../_images/mixed-replication-domains.png)Figure 2. Mixed replication domains for data sovereignty
+
+When you use subtree replication in this way, client applications can continue to read and update directory data as they normally would. Directory servers only return locally available data.
+
+Subtree replication and subordinate backends include important requirements and limitations. For more information, refer to [Subtree replication (advanced)](../config-guide/repl-subtree.html), and [Subordinate backends](../config-guide/import-export.html#split-data).
+
+### Fractional replication
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | This information applies to *advanced* deployments. |
+
+In some deployments, regulations let you replicate some user attributes. For example, data sovereignty regulations in one region let you replicate UIDs and class of service levels everywhere, but do not let personally identifiable information leave the user's location.
+
+Consider the following entry where you replicate only the `uid` and `classOfService` attributes outside the user's region:
+
+```ldif
+dn: uid=aqeprfEUXIEuMa7M,ou=people,ou=Region 1,dc=example,dc=com
+objectClass: top
+objectClass: cos
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Babs Jensen
+cn: Barbara Jensen
+facsimiletelephonenumber: +1 408 555 1992
+gidNumber: 1000
+givenname: Barbara
+homeDirectory: /home/bjensen
+l: Region 1
+mail: bjensen@example.com
+manager: uid=2jD5NanzOZGjMmcz,ou=people,ou=Region 1,dc=example,dc=com
+ou: People
+ou: Product Development
+preferredLanguage: en, ko;q=0.8
+roomnumber: 0209
+sn: Jensen
+telephonenumber: +1 408 555 1862
+uidNumber: 1076
+userpassword: {PBKDF2-HMAC-SHA256}10000:<hash>
+# Outside the user's region, you replicate only these attributes:
+uid: aqeprfEUXIEuMa7M
+classOfService: bronze
+```
+
+To let you replicate only a portion of each entry, DS servers implement fractional replication. You configure fractional replication by updating the directory server configuration to specify which attributes to include or exclude in change messages from replication servers to the directory server replica.
+
+The replication server must remain located with the directory server replicas that hold full entries which include all attributes. The replication server can receive updates from these replicas, and from replicas that hold fractional entries. Each replication server must therefore remain within the location where the full entries are processed. Otherwise, replication messages describing changes to protected attributes travel outside the location where the full entries are processed.
+
+![Only a portion of data is replicated everywhere.](../_images/fractional-replication.png)Figure 3. Fractional replication for protected data
+
+To leave schema checking enabled on the replicas that receive fractional updates, portions of entries that are replicated must themselves be complete entries. In other words, in the example above, the entry's structural object class would have to allow `classOfService` and `uid`. This would require editing the schema, and the `objectClass` values of the entries. For details, refer to [LDAP schema](../config-guide/schema.html).
+
+For additional information, refer to [Fractional replication (advanced)](../config-guide/repl-fractional.html).
+
+## Interoperability
+
+The following use cases involve interoperability with other directory software.
+
+| Use Case                                    | Refer to…​                                              |
+| ------------------------------------------- | ------------------------------------------------------- |
+| More than one directory service             | [Proxy layer](#interop-proxy)                           |
+| Credentials in another directory service    | [Pass-through authentication](#interop-pass-thru-authn) |
+| Must sync changes across directory services | [Data synchronization and migration](#interop-sync)     |
+
+### Proxy layer
+
+Adding a directory proxy layer can help you deploy alongside an existing directory service. The proxy layer lets you provide a single entry point to both new and old directory services.
+
+You configure a directory proxy server to connect to servers in each directory. DS proxy servers can discover DS directory servers by connecting to DS replication servers. For other directories, you must statically enumerate the directory server to contact. DS proxy servers work with any LDAP directory server that supports the standard proxied authorization control defined in [RFC 4370](https://www.rfc-editor.org/info/rfc4370).
+
+Each DS proxy server forwards client requests to the directory service based on the target DN of the operation. As long as the base DNs for each directory service differ, the proxy layer can provide a single entry point to multiple directory services.
+
+For details, refer to [Single point of access](../config-guide/proxy.html#proxy-access-point).
+
+### Pass-through authentication
+
+For cases where an existing directory service holds authentication credentials, DS servers provide a feature called pass-through authentication.
+
+With pass-through authentication, the DS server effectively redirects LDAP bind operations to a remote LDAP directory service. If the DS and remote user accounts do not have the same DN, you configure the DS server to automatically map local entries to the remote entries. Pass-through authentication can cache passwords if necessary for higher performance with frequent authentication.
+
+For details, refer to [Pass-through authentication](../security-guide/auth.html#pta).
+
+### Data synchronization and migration
+
+You may need to continually synchronize changes across multiple services, or to migrate data from an existing directory service.
+
+For ongoing data synchronization across multiple services, consider PingIDM software or a similar solution. PingIDM software supports configurable data reconciliation and synchronization at high scale, and with multiple data sources, including directory services.
+
+For one-time upgrade and data migration to DS software, the appropriate upgrade and migration depends on your deployment:
+
+* **Offline Migration**
+
+  When downtime is acceptable, you can synchronize data, then migrate applications to the DS service and retire the old service.
+
+  Depending on the volume of data, you might export LDIF from the old service and import LDIF into the DS service during the downtime period. In this case, stop the old service at the beginning of the downtime period to avoid losing changes.
+
+  If the old service has too much data to fit the export/import operation into the downtime period, you can perform an export/import operation before the downtime starts, but you must then implement ongoing data synchronization from the old service to the DS service. Assuming you can keep the new DS service updated with the latest changes, the DS service will be ready to use. You can stop the old service after migrating the last client application.
+
+* **Online Migration**
+
+  When downtime is not acceptable, both services continue running concurrently. You must be able to synchronize data, possibly in both directions. PingIDM software supports bi-directional data synchronization.
+
+  Once you have bi-directional synchronization operating correctly, migrate applications from the old service to the DS service. You can stop the old service after migrating the last client application.
+
+---
+
+---
+title: DS software
+description: "Overview of PingDS deployment components: directory servers, replication servers, proxy servers, HDAP gateways, and command-line tools."
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:about-components
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/about-components.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Deployment", "Features", "LDAP"]
+section_ids:
+  about-ds: Directory servers
+  about-ds-service: Roles
+  about-ds-data: Data
+  about-ds-system-resources: System resources
+  about-rs: Replication servers
+  about-rs-service: Roles
+  about-rs-data: Data
+  about-rs-system-resources: System resources
+  about-dps: Directory proxy servers
+  about-dps-service: Roles
+  about-dps-data: Data
+  about-dps-system-resources: System resources
+  about-tools: Command-line tools
+  about-rest: HDAP gateway
+  about-rest-service: Roles
+  about-rest-data: Data
+  about-rest-system-resources: System resources
+---
+
+# DS software
+
+A directory service provides LDAP and HTTP access to distributed, shared directory data. A deployed directory service consists of one or more components. Each component plays a particular role in your directory service. Before you design your deployment, you need to be familiar with the roles that each component can play:
+
+![Directory service component diagram](../_images/components.png)
+
+* Directory servers maintain and serve requests for directory data.
+
+  Directory servers use data replication *(tooltip: \<div class="paragraph">
+  \<p>Data synchronization to ensure all participating servers eventually share a consistent set of directory data.\</p>
+  \</div>)* to ensure their data sets eventually converge everywhere. This documentation refers to a replicated directory server as a replica *(tooltip: \<div class="paragraph">
+  \<p>A directory server configured to use replication.\</p>
+  \</div>)*.
+
+* (Optional) Directory proxy servers forward LDAP requests to directory servers and return responses to client applications.
+
+* (Optional) Replication servers transmit data replication messages among replicas.
+
+  A replication server can act as a [bootstrap replication server](../config-guide/repl-bootstrap.html). When starting up, each DS server contacts a bootstrap replication server to discover the remaining servers in the deployment. Every deployment with multiple replicas must have one or more bootstrap replication servers.
+
+  Some advanced deployments use *standalone* replication servers. These servers only broker replication change messages and do not store directory data. In most deployments, each directory server acts as a replication server as well.
+
+* (Optional) HDAP gateways *(tooltip: \<div class="paragraph">
+  \<p>A standalone HDAP web application.\</p>
+  \</div>)* intermediate between RESTful HTTP client applications and LDAP directories.
+
+* LDAP client tools and server administration tools serve to test and configure servers.
+
+## Directory servers
+
+Directory servers have the following characteristics.
+
+### Roles
+
+Directory servers provide access to their copy of the distributed directory database. A directory server usually functions as the repository of identities for users, applications, and things. They respond to requests from client applications directly or indirectly through directory proxy servers. This includes the following:
+
+* LDAP requests for authentication, reads, and updates.
+
+  An LDAP client application authenticates with the directory server, and then performs one or more operations before either re-authenticating to reuse the connection or ending the session and closing the connection.
+
+* HTTP read and update requests, often including credentials for authentication.
+
+  An HTTP request translates to one or more internal LDAP requests.
+
+* Administrative requests, such as requests to modify the server configuration or to perform a task such as backup or LDAP Data Interchange Format (LDIF) *(tooltip: \<div class="paragraph">
+  \<p>An IETF standard file format for representing LDAP directory content and modifications to directory content. Typically used to import and export LDAP-based directory information.\</p>
+  \</div>)* export.
+
+In deployments with multiple replicas, directory servers replay replicated operations. Expect each replica to replay every successful update to any replica.
+
+### Data
+
+In addition to the libraries and tools delivered with the server distribution, a directory server has the following persistent state information and local data:
+
+* User data
+
+  Directory servers store user data. The directory server stores the data in local storage, such as an internal disk or an attached disk array. The storage must keep pace with throughput for update operations.
+
+  The amount of user data depends entirely on the deployment, ranging from a few LDAP entries to more than a billion. The amount of user data grows or shrinks depending on the pattern of update operations.
+
+  The directory server stores user data in a backend database. For details, refer to [Data storage](../config-guide/import-export.html).
+
+* Metadata for replication
+
+  To avoid single points of failure, almost all real-world deployments depend on replication. Each directory server is a replica of other directory servers, meaning it holds an eventually consistent copy of the data on the other replicas.
+
+  When serving a request to update directory data, the directory server modifies its data and makes a request to a [replication server](#about-rs). The replication server is usually but not always part of the same Java process as the directory server. The replication server ensures all other replicas update their data to eventually reflect the current state of the data.
+
+  To tolerate network partitions, the directory service supports concurrent update operations on different replicas. Concurrent updates potentially cause conflicts, but directory servers can resolve most conflicts automatically. To resolve conflicts, a directory server stores historical metadata alongside user data, trading space for resilience. For details, refer to [About replication](../config-guide/repl-about.html).
+
+  The directory server purges this historical metadata after a configurable interval. The volume of historical metadata depends on the total number of updates made to the directory service since the purge interval.
+
+* Server configuration
+
+  Each server has configuration data in its `config` directory. This includes the server configuration in LDIF *(tooltip: \<div class="paragraph">
+  \<p>An IETF standard file format for representing LDAP directory content and modifications to directory content. Typically used to import and export LDAP-based directory information.\</p>
+  \</div>)* and JSON files, LDAP LDAP schema (schema) *(tooltip: \<div class="paragraph">
+  \<p>Definitions of object classes, attributes types, attribute value syntaxes, matching rules, and other constrains on entries.\</p>
+  \</div>)* definitions in LDIF files, keystores, and some additional data.
+
+  When installing a server, the `setup` command instantiates this configuration data from templates.
+
+  When upgrading a server, the `upgrade` command applies necessary changes to the configuration data.
+
+* Log files
+
+  The server writes multiple log files by default, including error and access logs.
+
+  The server writes a message to the current access log for each operation. For high-volume directory services, log file storage must keep pace with the requests to record access to the service.
+
+  Log file retention and rotation policies prevent log file data from filling the disk. For details, refer to [Logging](../logging-guide/preface.html). As a result of default retention policies, messages can eventually be lost unless you copy old files to another system for permanent storage.
+
+* Backup files
+
+  When you export directory data to LDIF or create a backup, the directory server writes the files to the specified directory. If you never purge or move these files, they can eventually fill the disk.
+
+  For details, refer to [Import and export](../config-guide/import-export.html#importing-exporting-ldif), and [Backup and restore](../maintenance-guide/backup-restore.html).
+
+### System resources
+
+When deciding how to deploy a directory server, think of it as a copy of the database. A large, high-performance, distributed database serving lots of applications requires more system resources than a small database serving one, simple application.
+
+A directory server requires the following system resources:
+
+* Sufficient RAM to cache frequently used data.
+
+  For best read performance, cache the entire directory data set in memory.
+
+* Sufficient CPU to perform any required calculations.
+
+  Authentication operations generally use more CPU than other operations. In particular, password storage schemes like PBKDF2 are designed to consume CPU resources. Calculations for transport layer security can use CPU as well, particularly if many client requests are over short-lived HTTPS connections.
+
+* Sufficient fast disk access to serve client applications, to replay replication operations, and to log access and errors.
+
+  The underlying disk subsystem must serve enough input/output operations per second (IOPS) to avoid becoming a bottleneck when performing these operations. A small database that serves few client operations and changes relatively infrequently requires fewer IOPS than a large database sustaining many updates and serving many clients.
+
+  Plan additional capacity for any backup or LDIF files stored on local partitions.
+
+* Sufficiently fast network access to serve client applications and relay replication traffic.
+
+  When considering network requirements, keep the following points in mind:
+
+  * Each LDAP search request can return multiple response messages.
+
+  * Each request to update directory data results in corresponding replication traffic. The operation must be communicated to replication servers and replayed on each other directory server.
+
+  * Once established, and unlike most HTTP connections, LDAP connections remain open until the client closes the connection, or until the server idles the connection. This is particularly true for applications using persistent searches, which by design are intended to be permanent.
+
+## Replication servers
+
+A replication server is usually but not always part of the same Java process as a directory server.
+
+Replication servers have the following characteristics.
+
+### Roles
+
+Replication servers provide the following services:
+
+* Receive and transmit change messages between replicas.
+
+  Each replica is connected to one replication server at a time.
+
+* Maintain information about all other replication servers and directory servers in the deployment that replicate the same data.
+
+  Change messages travel from a connected directory server to the replication server. The replication server transmits the message to connected replicas and to the other replication servers, which in turn transmit the message to their connected replicas. This hub-and-spoke communication model means directory services can be composed of many individual servers.
+
+* Respond to administrative requests.
+
+* Respond to requests for monitoring information.
+
+In all deployments using replication, the replication service provides the foundation of directory service availability. This is as important to the directory service as a naming service is for a network.
+
+To avoid a single point of failure, always install two or more replication servers. For example, install at least two directory servers operating as replication servers as well.
+
+### Data
+
+In addition to the libraries and tools delivered with the server distribution, a replication server has the following persistent state information and local data:
+
+* Change data
+
+  When serving a request to update directory data, a directory server, described in [Directory servers](#about-ds), modifies its data and makes a request to a replication server. The replication server makes sure all other replicas update their data to eventually reflect the current state of the data.
+
+  The replication protocol is proprietary. Replication servers expose a public record of changes in a change log, allowing other applications to keep up to date with changes to user data. Replication servers store changes in change log files. For details, refer to [Changelog for notifications](../config-guide/changelog.html).
+
+  The replication server purges this historical metadata after a configurable interval. The volume of historical metadata depends on the updates made to the directory service since the purge interval.
+
+* Server configuration
+
+  Each server has configuration data in its `config` directory. This includes the server configuration in LDIF and JSON files, LDAP schema definitions in LDIF files, keystores, and some additional data.
+
+  When installing a server, the `setup` command instantiates this configuration data from templates.
+
+  When upgrading a server, the `upgrade` command applies necessary changes to the configuration data.
+
+* Log files
+
+  The server writes multiple log files by default, including error and access logs.
+
+  Log file retention and rotation policies prevent log file data from filling the disk. For details, refer to [Logging](../logging-guide/preface.html). This means, however, that messages are eventually lost unless you move old files to another system for permanent storage.
+
+### System resources
+
+When deploying a replication server, keep its foundational role in mind. Directory servers communicate with other replicas through replication servers. Directory proxy servers rely on replication servers to find directory servers.
+
+A replication server requires the following system resources:
+
+* Sufficient fast disk access to log and read change messages, and to update access and error logs.
+
+  The underlying disk subsystem must serve enough IOPS to avoid becoming a bottleneck when performing these operations.
+
+* Sufficiently fast network access to receive and transmit change messages for multiple replicas and for each other replication server.
+
+## Directory proxy servers
+
+Some deployments use directory proxy servers.
+
+Directory proxy servers have the following characteristics.
+
+### Roles
+
+Directory proxy servers provide the following services:
+
+* Balance load of requests to LDAP directory servers.
+
+* Receive and transmit LDAP client requests to LDAP directory servers.
+
+* Receive and transmit LDAP directory server responses to LDAP client applications.
+
+* Respond to administrative requests.
+
+* Respond to requests for monitoring information.
+
+A directory proxy server can hide the underlying directory service architecture from client applications, enabling you to build a single point of directory service access.
+
+A directory proxy server can discover directory servers through a replication server. This capability depends on the replication server configuration. If you use the proxy server with third-party directory service components, then you must manually maintain the network locations for directory servers.
+
+A directory proxy server provides LDAP access to remote LDAP directory servers. If you want to offer HTTP access to remote LDAP directory servers, use a gateway instead. For details, refer to [HDAP gateway](#about-rest).
+
+### Data
+
+In addition to the libraries and tools delivered with the server distribution, a directory proxy server has the following persistent state information and local data:
+
+* Server configuration
+
+  Each server has configuration data in its `config` directory. This includes the server configuration in LDIF and JSON files, LDAP schema definitions in LDIF files, keystores, and some additional data.
+
+  When installing a server, the `setup` command instantiates this configuration data from templates.
+
+  When upgrading a server, the `upgrade` command applies necessary changes to the configuration data.
+
+* Log files
+
+  The server writes multiple log files by default, including error and access logs.
+
+  Log file retention and rotation policies prevent log file data from filling the disk. For details, refer to [Logging](../logging-guide/preface.html). This means, however, that messages are eventually lost unless you move old files to another system for permanent storage.
+
+### System resources
+
+A directory proxy server decodes incoming and encodes outgoing requests and responses. When you deploy directory proxy servers, the volume of decoding and encoding means you might need as many proxy servers as directory servers.
+
+A directory proxy server requires the following system resources:
+
+* Sufficient fast disk access to update access and error logs.
+
+  The underlying disk subsystem must serve enough IOPS to avoid becoming a bottleneck when performing these operations.
+
+* Sufficiently fast network access to receive and transmit client requests and server responses.
+
+* Sufficient CPU to perform any required calculations.
+
+  Request and response decoding and encoding consume CPU resources.
+
+* Sufficient RAM to maintain active connections.
+
+## Command-line tools
+
+When you install a server, its files include tools for setup, upgrade, configuration, and maintenance, and LDAP command-line tools for sending LDAP requests and measuring directory service performance.
+
+For details, refer to [Server commands](../maintenance-guide/admin-tools.html#cli-overview).
+
+## HDAP gateway
+
+The standalone HDAP *(tooltip: HTTP Directory Access Protocol)* gateway web application has the following characteristics. REST refers to the representational state transfer architectural style. RESTful requests use the HTTP protocol.
+
+You can install this component independently of directory services. For details, refer to [Install an HDAP gateway](../install-guide/install-hdap.html).
+
+### Roles
+
+HDAP gateways provide the following services:
+
+* Receive HTTP requests from client applications, and transmit them as LDAP requests to a directory service.
+
+* Receive LDAP responses from a directory service, and transmit them as HTTP responses to client applications.
+
+An HDAP gateway runs in a Java web application container. You can configure the gateway to contact multiple LDAP directory servers.
+
+### Data
+
+An HDAP gateway maintains only its own service configuration files. It depends on the host web application container for other services, such as logging.
+
+### System resources
+
+An HDAP gateway requires the following system resources:
+
+* Sufficiently fast network access to receive and transmit client requests and server responses.
+
+* Sufficient CPU to perform any required calculations.
+
+  Request and response decoding, encoding, and transformation all consume CPU resources.
+
+  Calculations to secure network connections also consume CPU resources.
+
+* Sufficient RAM to maintain active connections.
+
+---
+
+---
+title: Project outline
+description: High-level project outline for a PingDS deployment covering needs assessment, planning steps, design, implementation, testing, and supportability.
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:project
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/project.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Backup &amp; Restore", "Customization", "Deployment", "Extensibility", "Integration", "LDAP", "Performance"]
+section_ids:
+  importance-needs-assessemnt: Needs assessment
+  importance-planning: Deployment planning
+  deployment-considerations: Important questions
+  deployment-steps: Planning steps
+  deployment-steps-initiation: Project initiation
+  deployment-steps-design: Design
+  deployment-steps-implementation: Implementation
+  deployment-steps-automation: Automation and testing
+  deployment-steps-supportability: Supportability
+---
+
+# Project outline
+
+Consider the following when preparing the high-level project plan.
+
+## Needs assessment
+
+Needs assessment is prerequisite to developing a comprehensive deployment plan. An accurate needs assessment is critical to ensuring that your directory services implementation meets your business needs and objectives.
+
+As part of the needs assessment, make sure you answer the following questions:
+
+* **What are your business objectives?**
+
+  Clarify and quantify your business goals for directory services.
+
+* **Why do you want to deploy directory services?**
+
+  Consider at least the following list when answering this question:
+
+  * Is this a greenfield deployment?
+
+  * Do you need to transition an existing deployment to the cloud?
+
+  * Do you need to scale existing deployment for more users, devices, or things?
+
+* **If you have an existing deployment, how do you upgrade?**
+
+  Consider at least the following list when answering this question:
+
+  * Do you require a graceful upgrade?
+
+  * What obsolete components need a graceful transition?
+
+    What should their replacements be?
+
+  * What are the costs related to the change?
+
+    How can you save cost by making the transition?
+
+Define objectives based on your needs assessment. State your objective so that all stakeholders agree on the same goals and business objectives.
+
+## Deployment planning
+
+Deployment planning is critical to ensuring that your directory services are properly implemented within the time frame determined by your requirements. The more thoroughly you plan your deployment, the more solid your configuration will be, and you will meet timelines and milestones while staying within budget.
+
+A deployment plan defines the goals, scope, roles, and responsibilities of key stakeholders, architecture, implementation, and testing of your DS deployment. A good plan ensures that a smooth transition to a new product or service is configured and all possible contingencies are addressed to quickly troubleshoot and solve any issue that may occur during the deployment process.
+
+The deployment plan also defines a training schedule for your employees, procedural maintenance plans, and a service plan to support your directory services.
+
+## Important questions
+
+* **What key applications does your system serve?** Understand how key client applications will use your directory service and what they require. Based on this understanding, you can match service level objectives (SLOs) to operational requirements. This ensures that you focus on what is critical to your primary customers.
+
+* **What directory data does your system serve?** Directory data can follow standard schema and be shared by many applications. Alternatively, it can be dedicated to a single application such as AM CTS or IDM repository. Key applications can impose how they access directory data, or the directory data definition can be your decision.
+
+  In addition, know where you will obtain production data, and in what format you will obtain it. You might need to maintain synchronization between your directory service and existing data services.
+
+* **What are your SLOs?** In light of what you know about key and other applications, determine your SLOs. An SLO is a target for a directory service level that you can measure quantitatively.
+
+  What objectives will you set for your service? How will you measure the following?
+
+  * Availability
+
+  * Response times
+
+  * Throughput
+
+  * Support response
+
+* **What are your availability requirements?** DS services are designed to run continuously, without interruption even during upgrade. Providing a highly available service of course comes with operational complexities and costs.
+
+  If your deployment must be highly available, take care in your planning phase to avoid single points of failure. You will need to budget for redundancy in all cases, and good operational policies, procedures, and training to avoid downtime as much as possible.
+
+  If your deployment does not require true high availability, however, you will benefit from taking this into account during the planning stages of your deployment as well. You may be able to find significant cost savings as a trade for lower availability.
+
+* **What are your security requirements?** DS services build in security in depth, as described in [Security](../security-guide/preface.html).
+
+  Understand the specific requirements of your deployment in order to use only the security features you really need. If you have evaluated DS software by setting up servers with the evaluation setup profile, be aware that access control settings for Example.com data in the evaluation setup profile are very lenient.
+
+* **Are all stakeholders engaged starting in the planning phase?** This effort includes but is not limited to delivery resources, such as project managers, architects, designers, implementers, testers, and service resources, such as service managers, production transition managers, security, support, and sustaining personnel. Input from all stakeholders ensures all viewpoints are considered at project inception, rather than downstream, when it may be too late.
+
+## Planning steps
+
+Follow these steps to a successful deployment.
+
+### Project initiation
+
+The project initiation phase begins by defining the overall scope and requirements of the deployment. Plan the following items:
+
+* Determine the scope, roles and responsibilities of key stakeholders and resources required for the deployment.
+
+* Determine critical path planning including any dependencies and their assigned expectations.
+
+* Run a pilot to test the functionality and features of AM and uncover any possible issues early in the process.
+
+* Determine training for administrators of the environment and training for developers, if needed.
+
+### Design
+
+The design phase involves defining the deployment architecture. Plan the following items:
+
+* Determine the use of products, map requirements to features, and ensure the architecture meets the functional requirements.
+
+* Ensure that the architecture is designed for ease of management and scale. TCO is directly proportional to the complexity of the deployment.
+
+* Define the directory data model.
+
+* Determine how client applications will access directory data, and what data they have access to.
+
+* Determine which, if any, custom DS server plugins must be developed. Derive specifications and project plans for each plugin.
+
+* Determine the replication configuration.
+
+* Define backup and recovery procedures, including how to recover all the servers, should disaster occur.
+
+* Define monitoring and audit procedures, and how the directory service integrates with your tools.
+
+* Determine how to harden DS servers for a secure deployment.
+
+* Define the change management process for configurations and custom plugins.
+
+* Define the test criteria to validate that the service meets your objectives.
+
+* Define the operations required to maintain and support the running service.
+
+* Define how you will roll out the service into production.
+
+* Determine how many of each DS server type to deploy in order to meet SLOs. In addition, define the systems where each of the servers will run.
+
+### Implementation
+
+The implementation phase involves deploying directory services. Plan the following items:
+
+* Provision the DS servers.
+
+* Maintain a record and history of the deployment for consistency across the project.
+
+* Monitor and maintain the running service.
+
+### Automation and testing
+
+The automation and continuous integration phase involves using tools for testing. Plan the following items:
+
+* Use a continuous integration server, such as Jenkins, to ensure that changes have the expected impact, and no change causes any regressions.
+
+* Ensure your custom plugins follow the same continuous integration process.
+
+* Test all functionality to deliver the solution without any failures. Ensure that all customizations and configurations are covered in the test plan.
+
+* Non-functionally test failover and disaster recovery procedures. Run load testing to determine the demand of the system and measure its responses. During this phase, anticipate peak load conditions.
+
+### Supportability
+
+The supportability phase involves creating the runbook for system administrators and operators. This includes procedures for backup and restore operations, debugging, change control, and other processes.
+
+If you have a Ping Identity support contract, it ensures everything is in place prior to your deployment.
+
+---
+
+---
+title: Provisioning systems
+description: "Plan system resources for a PingDS deployment: size CPU, memory, network, and storage requirements, and understand cross-platform portability."
+component: pingds
+version: 8.1
+page_id: pingds:deployment-guide:prerequisites
+canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/prerequisites.html
+llms_txt: https://docs.pingidentity.com/pingds/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-22T14:42:39Z
+keywords: ["Architecture", "Deployment", "Integration", "LDAP", "Performance"]
+section_ids:
+  size-systems: Sizing systems
+  size-cpu: CPU
+  size-memory: Memory
+  size-network-connections: Network connections
+  size-io-storage: Disk I/O and storage
+  overview-portability: Portability
+  portability-servers: Server portability
+  portability-gateways: Gateway portability
+---
+
+# Provisioning systems
+
+Before running PingDS software in production, review the [requirements](https://docs.pingidentity.com/pingds/release-notes/requirements.html) in the *Release notes*, and the following information.
+
+## Sizing systems
+
+Given availability requirements and estimates on sizing for services, estimate the required capacity for individual systems, networks, and storage. Sizing described here only accounts for DS servers. Monitoring and audit tools, backup storage, and client applications require additional resources.
+
+CPU, memory, network, and storage requirements depend in large part on the services you plan to provide. The [hardware requirements](https://docs.pingidentity.com/pingds/release-notes/requirements.html#prerequisites-hardware) are only starting points for your sizing investigation.
+
+For details about how each component uses system resources, refer to [DS software](about-components.html).
+
+### CPU
+
+Directory servers consume significant CPU resources when processing username-password authentications where the password storage scheme is computationally intensive (Argon2, Bcrypt, PBKDF2, PKCS5S2, Scrypt).
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Using a computationally intensive password storage scheme will have a severe impact on performance. Before you deploy a computationally intensive password storage scheme in production, you *must* complete sufficient performance testing and size your deployment appropriately. Provision enough CPU resources to keep pace with the peak rate of simple binds. If you do not complete this testing and sizing prior to deploying in production, you run the risk of production outages due to insufficient resources. |
+
+DS servers also use CPU resources to decode requests and encode responses, and to set up secure connections. LDAP is a connection-oriented protocol, so the cost of setting up a connection may be small compared to the lifetime of the connection.
+
+HTTP, however, requires a new connection for each operation. If you have a significant volume of HTTPS traffic, provision enough CPU resources to set up secure connections.
+
+### Memory
+
+DS uses system memory to cache:
+
+* Directory database nodes.
+
+  Caching *all* directory data requires 1.5–2 times as much available RAM as the total size of the database files on disk.
+
+  For most deployments, caching all data is a costly and poor tradeoff. Instead, [cache all internal database nodes](../config-guide/tuning.html#perf-db-internal-nodes). Let the file system cache hold database leaf nodes.
+
+  Small directory data sets can fit in the JVM heap, which can improve performance in some cases.
+
+* ACIs *(tooltip: \<div class="paragraph">
+  \<p>An instruction or rule that can be used to grant or deny access to users to perform operations on a server.\</p>
+  \</div>)*.
+
+  This makes a difference in deployments where applications routinely create ACIs programmatically.
+
+* Static groups.
+
+  This makes a difference in deployments with many or large static groups.
+
+* LDAP subentries, such as replicated password policies or collective attribute definitions.
+
+DS also uses system memory for:
+
+* Argon2 and Scrypt password storage schemes.
+
+  Make sure you have enough memory for each storage scheme used in the deployment.
+
+* Maintaining active connections and processes.
+
+Learn more in [Memory requirements](https://docs.pingidentity.com/pingds/release-notes/requirements.html#prerequisites-memory).
+
+### Network connections
+
+When sizing network connections, account for all requests and responses, including replication traffic. When calculating request and response traffic, base your estimates on your key client applications. When calculating replication traffic, be aware that all write operations must be communicated over the network, and replayed on each directory server. Each write operation results in at least *N-1* replication messages, where *N* is the total number of servers. Be aware that all DS servers running a replication service are fully connected.
+
+In most modern deployments, WAN links are fast and responsive enough to prevent the extra traffic from causing problems. Adapt your deployment if you measure that some network links are too slow or the latency is too high.
+
+Make sure to size enough bandwidth for peak throughput, and do not forget redundancy for availability.
+
+### Disk I/O and storage
+
+The largest disk I/O loads for DS servers arise from logging and writing directory data. You can also expect high disk I/O when performing a backup operation or exporting data to LDAP Data Interchange Format (LDIF) *(tooltip: \<div class="paragraph">
+\<p>An IETF standard file format for representing LDAP directory content and modifications to directory content. Typically used to import and export LDAP-based directory information.\</p>
+\</div>)*.
+
+I/O rates depend on the service levels that the deployment provides. When you size disk I/O and disk space, you must account for peak rates and leave a safety margin when you must briefly enable debug-level logging to troubleshoot any issues that arise.
+
+Also, keep in mind the possible sudden I/O increases that can arise in a highly available service when one server fails and other servers must take over for the failed server temporarily.
+
+DS server access log files grow more quickly than other logs. Default settings prevent each access logger's files from growing larger than 2 GB before removing the oldest. If you configure multiple access loggers at once, multiply 2 GB by their number.
+
+Directory server database backend size grows as client applications modify directory data. Even if data set's size remains constant, the size of the backend grows. Historical data on modified directory entries increases until purged by the directory server when it reaches the replication purge delay (default: 3 days). In order to get an accurate disk space estimate, follow the process described in [Plan to scale](patterns.html#patterns-scale-start).
+
+Replication server changelog backend size is subject to the same growth pattern as historical data. Run the service under load until it reaches the replication purge delay to estimate disk use.
+
+For highest performance, use fast SSD disk and separate disk subsystems logging, backup, and database backends.
+
+## Portability
+
+DS client and server code is pure Java, and depends only on the JVM. This means you can run clients and servers on different operating systems, and copy backup files and archives from one system to another.
+
+### Server portability
+
+DS servers and data formats are portable across operating systems. When using multiple operating systems, nevertheless take the following features into account:
+
+* **Command-Line Tool Locations**
+
+  DS server and command-line tools are implemented as scripts. The paths to the scripts differ on Linux and Windows systems. Find Linux scripts in the `bin` directory. Find Windows scripts in the `bat` folder.
+
+* **Native Packaging**
+
+  When you download DS software, you choose between cross-platform and native packages.
+
+  * Cross-platform .zip packaging facilitates independence from the operating system. You manage the server software in the same way, regardless of the operating system.
+
+  * Native packaging facilitates integration with the operating system. You use the operating system tools to manage the software.
+
+  Both packaging formats provide tools to help register the server as a service of the operating system. These scripts are `create-rc-script` (Linux) and `windows-service` (Windows).
+
+### Gateway portability
+
+The only persistent state for gateway applications is in their configuration files. The gateway configuration files are portable across web application containers and operating systems.

@@ -975,6 +975,91 @@ See the `config/sample-dsconfig-batch-files/configure-password-reset-constraints
 ---
 
 ---
+title: Alarms and gauges
+description: Each PingDirectory server includes a set of gauges for tracking various metrics over time.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_alarms_gauges
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_alarms_gauges.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Alarms and gauges
+
+Each PingDirectory server includes a set of gauges for tracking various metrics over time.
+
+Each gauge is associated with a monitor attribute and can be configured with warning, minor, major, and critical thresholds. If the monitor value crosses one of those threshold values, then the server raises an alarm condition that might indicate a problem such as low disk space or unavailability of an external server, and can optionally trigger administrative alerts.
+
+Like alerts, alarms have a name, severity, and message. They also have a condition that is indicated by the alarm, like "Disk Usage," and they can be associated with a specific resource, such as which filesystem is running low on disk space. If alarm conditions are published using SNMP, then they can also include probable cause and alarm type properties.
+
+Alarms are exposed in the `cn=alarms` backend. Their values can change over time, and they can be cleared whenever the monitored value returns to normal. Active alarms can be viewed using the `status` tool.
+
+---
+
+---
+title: Assigning password policies to users
+description: Each user is associated with a password policy that governs their activity in the server, and different users can have different password policies.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_assign_password_policy
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_assign_password_policy.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+page_aliases: ["pd_sec_maintain_password_policies.adoc"]
+section_ids:
+  maintaining-password-policies-in-user-data: Maintaining password policies in user data
+---
+
+# Assigning password policies to users
+
+Each user is associated with a password policy that governs their activity in the server, and different users can have different password policies.
+
+Whenever the server processes an operation that attempts to authenticate a user, change their password, or interact with their password policy state in some way, it needs to select an appropriate password policy to use for that processing.
+
+A user can be associated with a password policy through the `ds-pwp-password-policy-dn` operational attribute. If this attribute exists in the user's entry and refers to a valid password policy, then the user is subject to that password policy. If that attribute exists but refers to a nonexistent policy, then that user is unable to authenticate or be used as an alternate authorization identity. If a user's entry does not include the `ds-pwp-password-policy-dn` operational attribute, then that user is subject to the server's default password policy, which is specified by the default-password-policy property in the global configuration.
+
+The `ds-pwp-password-policy-dn` operational attribute can be either real or virtual. You can explicitly set a value for the attribute in a user's entry, but it is also possible to have the server generate a value for that attribute based on some criteria using the virtual attribute subsystem. For example, you could use a virtual attribute to automatically assign the same password policy to all members of a specified group or to all users in a specified portion of the DIT.
+
+|   |                                                                                                                                                                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | A user should not be conditionally subjected to different password policies under different circumstances. While it is technically possible to use virtual attributes that assign different values to the same attribute under different conditions, this capability should not be used for the `ds-pwp-password-policy-dn` attribute. |
+
+For example, you should not attempt to detect which application has issued a request and select a password policy based on that application. The server only maintains one set of password policy state for each user, and attempting to access the same user under different password policies might have unexpected adverse effects and can introduce security risks.
+
+## Maintaining password policies in user data
+
+While password policies are typically defined in the server configuration, it is also possible to define them in user data.
+
+This is particularly useful when the PingDirectory server is used to back a multi-tenant application, in which information about many different organizations is maintained in the same server instance, typically with a separate branch for each organization. You can configure password policies on a per-organization basis.
+
+Each password policy must be defined in an entry containing the `ds-cfg-password-policy` structural object class. The definition of this object class can be found by querying the server schema over LDAP, by retrieving the "`cn=schema`" entry, or by looking in the `config/schema/02-config.ldif` schema definition file. The names of the LDAP attribute types which should correspond to names of the password policy configuration properties that are available in dsconfig or the administration console with a "`ds-cfg-`" prefix.
+
+For example, the following entry represents a minimal password policy that might be defined in user data:
+
+```
+dn: cn=Org X Password Policy,ou=Org X,ou=tenants,dc=example,dc=com
+objectClass: top
+objectClass: ds-cfg-password-policy
+cn: Org X Password Policy
+ds-cfg-password-attribute: userPassword
+ds-cfg-default-password-storage-scheme: cn=Salted SHA-256,cn=Password Storage
+  Schemes,cn=config
+```
+
+Assign users to password policies contained in the user data in the same way that you assign them to policies in the configuration. Include the `ds-pwp-password-policy-dn` operational attribute in their entry as either a real or a virtual attribute.
+
+|   |                                                                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | While password policies can reside in user data, any other configuration elements that they reference, including password storage schemes, password validators, password generators, account status notification handlers, and failure lockout actions, must reside within the configuration. |
+
+For improved performance, the PingDirectory server maintains a cache of password policy entries that are defined in the user data. This cache holds up to 500 policies by default, but you can tune that through the `maximum-user-data-password-policies-to-cache` property in the global configuration.
+
+---
+
+---
 title: Auditing
 description: It is important to regularly audit the PingDirectory server and its content to ensure that the data remains secure.
 component: pingdirectory
@@ -1062,197 +1147,351 @@ The PingDirectory server provides a `config-diff` tool to compare different vers
 ---
 
 ---
-title: Defining resource limits in client connection policies
-description: Use client connection policies to impose hard upper bounds on the values of some resource limit properties.
+title: Auditing data access
+description: It's also important to understand the kinds of requests that clients make. This can help you identify requests that are out of the ordinary, which might be evidence of a potential attack.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_define_resource_limits_policies
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_define_resource_limits_policies.html
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_audit_data_access
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_audit_data_access.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
 section_ids:
-  tuning-rate-limits: Tuning rate limits
+  log-analysis: Log analysis
+  account-status-notification-handlers: Account status notification handlers
 ---
 
-# Defining resource limits in client connection policies
+# Auditing data access
 
-Use client connection policies to impose hard upper bounds on the values of some resource limit properties.
+It's also important to understand the kinds of requests that clients make. This can help you identify requests that are out of the ordinary, which might be evidence of a potential attack.
 
-If the client connection policy is configured with a resource limit that's lower than the limit that would otherwise be imposed for the associated client, then the client connection policy's lower limit is enforced (even for root accounts and other types of administrative accounts). However, the client connection policy never grants a client a higher limit than it would otherwise have.
+## Log analysis
 
-The client connection policy properties that are used to define resource limits include the following.
+The primary way to accomplish this is through log analysis. It is important to regularly examine (or at least summarize) the log files to classify the types and frequency of operations being performed. A sudden increase in any one kind of traffic can be a red flag, but situations like the following might be of particular interest:
 
-| Property                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `maximum-concurrent-connections`               | The maximum number of client connections that can be associated with the client connection policy at any one time. If the maximum number of connections are already associated with the policy, any attempt to assign another connection to the policy causes that connection to be terminated. A value of zero (which is the default) indicates that no limit is enforced.                                                                                                                                                                                                                                                                                          |
-| `maximum-connection-duration`                  | The maximum length of time that connections associated with the policy can be established, regardless of how active those connections are. Any connection that's established for longer than this period of time will be terminated. A value of zero seconds (which is the default) indicates that no maximum connection duration is enforced.                                                                                                                                                                                                                                                                                                                       |
-| `maximum-idle-connection-duration`             | The maximum length of time that connections associated with the policy are allowed to remain idle (without issuing any new requests). Any client connection that's idle for longer than this period of time is terminated. A value of zero (which is the default) indicates that the policy doesn't impose a maximum idle connection duration for client connections, and they're subject to whatever limit is in place through the global configuration or operational attributes in the authenticated user's entry.                                                                                                                                                |
-| `maximum-operation-count-per-connection`       | The maximum number of requests that connections associated with the policy are allowed to request over the life of that connection. After a connection has already requested the maximum number of operations, if it attempts to request any other operations, then that connection is terminated. A value of zero (which is the default) indicates that no maximum operation count is enforced.                                                                                                                                                                                                                                                                     |
-| `maximum-concurrent-operations-per-connection` | The maximum number of operations that a client associated with the policy can request at any one time. After the maximum number of concurrent operations are already active for a connection, then any new requests can optionally block for a period of time (specified by the `maximum-concurrent-operation-wait-time-before-rejecting` property) to see if any of the outstanding operations complete. At that point, the request can be rejected or the connection can be terminated based on the value of the `maximum-concurrent-operations-per-connection-exceeded-behavior` property. By default, no maximum concurrent operation limit is imposed.          |
-| `maximum-connection-operation-rate`            | The maximum rate at which a client can issue requests. If provided, then the value should be provided as a count followed by a slash and a time duration (for example, 100/s indicates a maximum rate of one hundred requests per second, while 10K/6h indicates a maximum rate of 10,000 requests over a six-hour period). If any connection exceeds this rate, subsequent requests within that time period can be rejected or the connection can be terminated, as controlled by the `connection-operation-rate-exceeded-behavior` property. By default, no maximum connection operation rate is enforced.Learn more in [Tuning rate limits](#tuning-rate-limits). |
-| `maximum-policy-operation-rate`                | The maximum rate at which all clients associated with the client connection policy can issue requests. If provided, then the value should be provided as a count followed by a slash and a time duration. If the maximum policy operation rate is exceeded, then subsequent requests within that time period can be rejected or the connection can be terminated, as controlled by the `policy-operation-rate-exceeded-behavior` property. By default, no maximum connection operation rate is enforced.Learn more in [Tuning rate limits](#tuning-rate-limits).                                                                                                     |
-| `maximum-search-size-limit`                    | The maximum number of entries that can be returned in response to any single search operation for clients associated with the client connection policy. A value of zero (which is the default) indicates that the policy doesn't impose a maximum size limit for client connections, and they're subject to whatever limit is in place through the global configuration or operational attributes in the authenticated user's entry.                                                                                                                                                                                                                                 |
-| `maximum-search-time-limit`                    | The maximum length of time that the server can spend processing any single search operation for clients associated with the client connection policy. A value of zero seconds (which is the default) indicates that the policy doesn't impose a maximum time limit for client connections, and they're subject to whatever limit is in place through the global configuration or operational attributes in the authenticated user's entry.                                                                                                                                                                                                                           |
-| `maximum-search-lookthrough-limit`             | The maximum number of entries that the server can examine when processing any single search operation for clients associated with the client connection policy. A value of zero (which is the default) indicates that the policy doesn't impose a maximum lookthrough limit for client connections, and they're subject to whatever limit is in place through the global configuration or operational attributes in the authenticated user's entry.                                                                                                                                                                                                                  |
-| `maximum-ldap-join-size-limit`                 | The maximum LDAP join size limit that's enforced for clients associated with the client connection policy. A value of zero (which is the default) indicates that the policy doesn't impose a maximum join size limit for client connections, and they're subject to whatever limit is in place through the global configuration or operational attributes in the authenticated user's entry.                                                                                                                                                                                                                                                                         |
-| `maximum-sort-size-limit-without-vlv-index`    | The maximum number of entries that the server attempts to sort without the benefit of a VLV index. If the client issues a search request that includes the server-side sort control and matches more than this number of entries, then the server either returns the results in unsorted form (if the sort request control isn't marked critical), or it rejects the search (if the control is critical). A value of zero (which is the default) indicates that no limit should be enforced.                                                                                                                                                                         |
+* Connections from unusual client addresses, or a spike in requests from certain clients.
 
-## Tuning rate limits
+* Operations that fail with invalidCredentials (49) or insufficientAccessRights (50) results.
 
-To help you tune the server's rate-limiting operations, and to identify unusual client activity, you can allow operations to exceed the configured per-connection and per-policy operation rates by using log mode. The server adds information about the client connections that exceed those rates to the error log.
+* Search operations that fail with a timeLimitExceeded (3), sizeLimitExceeded (4), or adminLimitExceeded (11) results.
 
-To enable log mode for the `connection-operation-rate-exceeded-behavior` or `policy-operation-rate-exceeded-behavior` properties, supply the `log-allow` value.
+* Search operations that do not return any entries.
 
-You can use log mode without impacting application traffic, which makes it suitable for tuning production environments. For example, you can:
+* Search operations that return large numbers of entries.
 
-* Determine your traffic patterns, and then use that data to tune the thresholds for rejecting operations.
+* Search or compare operations that explicitly attempt to retrieve or target the userPassword attribute (or another password attribute).
 
-* Identify outlier client applications that need to be investigated.
+* Search operations that might represent attempts to exfiltrate data from the server through trawling. This can include things like repeated substring filters with subInitial filters in sequential order, such as searches with filters like `(cn=aa*)`, `(cn=ab*)`, `(cn=aa*)`, and so on. It can also include greater-or-equal and less-or-equal filters with similar patterns.
 
-Learn more about tuning rate limits in the configuration documentation included with the server.
+* Unindexed search attempts.
 
----
+If you regularly characterize the types of operations that clients request, then you might be able to more easily identify anomalous requests.
+
+There might be other specific events that you always want to know about. For example, you might want to know whenever clients retrieve search result entries that contain encoded passwords, or whenever a client alters the server's access control definitions or the set of privileges granted to an account. In such cases, you can create criteria to specifically identify those types of operations, and then you can use that criteria to create a logger that only records those types of events.
+
+If you want to know about these kinds of events right away, then you could create an admin alert access logger using that criteria. This causes the server to generate an administrative alert (with an alert type of `access-log-criteria-matched`) whenever it processes an operation matching that criteria.
+
+## Account status notification handlers
+
+You might want to audit certain events related to password policy processing. For example, if the server is configured to lock accounts after too many failed attempts, then you might want to have a record of any time that happens. You might also want to have a record of all administrative password resets and self password changes.
+
+This can be accomplished with account status notification handlers, and the server provides implementations that can either record messages about these kinds of events in the server error log or that can send email messages about them. If you would like to handle them in other ways, then you can use the UnboundID Server SDK to create a custom account status notification handler that implements the desired behavior.
 
 ---
-title: Defining resource limits in operational attributes
-description: Although the global configuration defines default values for several resource limits, it's possible to override those default values on a per-user basis by adding an appropriate set of operational attributes to the user's entry.
+
+---
+title: Auditing data content
+description: It's also a good idea to keep track of the data itself and identify any potential security-related issues that affect user entries or other data.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_define_resource_limits_op_attrs
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_define_resource_limits_op_attrs.html
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_audit_data_content
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_audit_data_content.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+section_ids:
+  data-security-auditors: Data security auditors
+  soft-deletes: Soft deletes
+---
+
+# Auditing data content
+
+It's also a good idea to keep track of the data itself and identify any potential security-related issues that affect user entries or other data.
+
+## Data security auditors
+
+One way to do this would be to regularly export the data to LDIF (ideally in encrypted form so that it is not exposed in the clear) and examine its content for unusual or undesirable conditions. You could also do this with search operations. However, in large data sets, such searches can be expensive and time consuming.
+
+The server also provides an "audit data security" administrative task and an associated audit-data-security command-line tool that can help with this. When invoked, the task causes the server to efficiently iterate through all entries in the configured set of backends, comparing each one against a configured set of data security auditors.
+
+The report is written into a directory structure on the server filesystem. There is a `summary.ldif` file that provides a summary of all of the processing that was performed. There is also a subdirectory for each of the backends that were examined with a set of LDIF files containing more detailed output from each of those auditors.
+
+Data security auditors included with the PingDirectory server do the following:
+
+* Identify all entries that contain ACIs.
+
+* Identify administratively disabled users.
+
+* Identify users with passwords that are expired or are about to expire.
+
+* Identify users whose accounts are locked because of too many failed authentication attempts because it's been too long since the user authenticated or because the user did not change their password in a timely manner after an administrative reset.
+
+* Identify users who have multiple passwords.
+
+* Identify users who have explicitly configured privileges or root users or topology administrators who inherit the default set of root privileges.
+
+* Identify users who have passwords encoded with password storage schemes that are considered weak.
+
+* Identify all accounts with password policy state issues that can currently or soon affect their usability.
+
+* Identify all accounts with activation times in the future, expiration times in the past, or expiration times in the near future.
+
+* Identify accounts with passwords encoded using a deprecated password storage scheme.
+
+* Identify accounts for users that have not authenticated in longer than a specified length of time.
+
+* Identify accounts that are configured to use a nonexistent password policy (and are therefore unable to authenticate).
+
+* Identify accounts that match a specified search filter.
+
+|   |                                                                                                                               |
+| - | ----------------------------------------------------------------------------------------------------------------------------- |
+|   | You can also use the PingDirectory server SDK to develop custom data security auditors for identifying other kinds of issues. |
+
+The `audit-data-security` tool offers the provided set of command-line arguments in addition to the usual options for connecting and authenticating to the server and scheduling tasks:
+
+* `--outputDirectory`
+
+  The directory (on the server filesystem) where the report files are created. If this is not specified, then it defaults to a directory whose name reflects the current time in the reports/audit-data-security subdirectory.
+
+* `--reportFilter`
+
+  An optional filter that can be used to indicate which entries should be examined. If this is provided, then only entries matching that filter are audited. Otherwise, all entries are examined. This can be provided multiple times if multiple filters should be specified, and only entries matching at least one of those filters are examined.
+
+* `--backendID`
+
+  An optional set of backend IDs for the backends to examine. If this is not provided, then all supported backends, including local DB backends and the server configuration, are examined.
+
+* `--includeAuditor`
+
+  An optional set of the names for the data security auditors that are invoked. By default, all data security auditors defined in the configuration are included, except for those excluded by the `--excludeAuditor` argument.
+
+* `--excludeAuditor`
+
+  An optional set of the names for the data security auditors that are not invoked.
+
+## Soft deletes
+
+Normally, when an authorized client deletes an entry, it is completely removed from the server. However, the PingDirectory server provides support for soft deletes, in which the server preserves the entry instead of removing it. When an entry is soft-deleted, the server makes the following changes to it:
+
+* The server adds the ds-soft-delete-entry auxiliary object class to the entry, which causes it to be hidden from normal search results.
+
+* The server renames the entry to add the entry's entryUUID attribute to the set of RDN attributes. This allows a new entry to be created with the same distinguished name (DN) as the former entry without conflicting with the soft-deleted form of the entry.
+
+* The server adds the following additional operational attributes to the entry:
+
+  * `ds-soft-delete-from-dn`: The original DN for the entry.
+
+  * `ds-soft-delete-timestamp`: The time that the entry was soft-deleted.
+
+  * `ds-soft-delete-requester-dn`: The DN of the user that requested the delete.
+
+  * `ds-soft-delete-requester-ip-address`: The IP address of the client that requested the delete.
+
+There are two ways that regular deletes can be turned into soft deletes. The first is to include the [soft delete request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/SoftDeleteRequestControl.html) in the delete request, such as using the `--softDelete` argument to `ldapmodify`.
+
+However, it is also possible to have the server automatically convert regular deletes into soft deletes. This can be done by creating a soft-delete policy, which can include the following properties:
+
+* `auto-soft-delete-connection-criteria`
+
+  Connection criteria that can identify client connections whose deletes should be converted to soft deletes.
+
+* `auto-soft-delete-request-criteria`
+
+  Request criteria that can identify delete requests that should be converted to soft deletes.
+
+* `soft-delete-retention-time`
+
+  The maximum length of time that soft-deleted entries should be retained in the server.
+
+* `soft-delete-retain-number-of-entries`
+
+  The maximum number of soft-deleted entries that should be retained in the server.
+
+After a soft delete policy has been created, the global configuration can be updated to use it with the following property:
+
+* `soft-delete-policy`
+
+  The soft-delete policy that should be used by the server. If this is not configured, then soft deletes are disabled in the server, even for delete requests that use the soft delete request control.
+
+Only soft-delete policies that contain values for at least one of the `auto-soft-delete-connection-criteria` and `auto-soft-delete-request-criteria` properties can automatically convert regular deletes to soft deletes. If the server has a soft delete policy without criteria, then soft deletes are only allowed with the soft delete request control.
+
+Turning deletes into soft deletes provides a way to verify the content of deleted entries. Even though soft-deleted entries are excluded from search results by default, users with the soft-delete-read privilege can retrieve them by including the [soft-deleted entry access request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/SoftDeletedEntryAccessRequestControl.html) in the search request, such as by providing the `--includeSoftDeletedEntries` argument to `ldapsearch`.
+
+If necessary, `soft-deleted` entries can be resurrected with the [undelete request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/UndeleteRequestControl.html) in an add request, such as using the `--allowUndelete` argument to `ldapmodify`. The attributes of the add request can be used to provide the details of the undelete. In particular, the DN from the add request specifies the DN to use for the resurrected entry, and the `ds-undelete-from-dn` attribute specifies the DN of the soft-deleted entry to undelete.
+
+---
+
+---
+title: Authentication
+description: Authentication is the process that a client uses to identify themselves to the server.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_authentication
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_authentication.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
 ---
 
-# Defining resource limits in operational attributes
+# Authentication
 
-Although the global configuration defines default values for several resource limits, it's possible to override those default values on a per-user basis by adding an appropriate set of operational attributes to the user's entry.
+Authentication is the process that a client uses to identify themselves to the server.
 
-Resource limits set through operational attributes can grant a user a higher limit than is available by default in the global configuration or impose a lower limit than would otherwise be permitted by default.
+This includes three basic components:
 
-These operational attributes include:
+* Identify the account that is trying to authenticate. This is often provided in the form of a DN or username, but it can come in other forms like a Kerberos principal or information in a certificate or OAuth bearer token.
 
-| Attribute                      | Description                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ds-rlim-size-limit`           | The maximum number of entries that the user is allowed to retrieve in any single search operation. A value of zero indicates that no size limit is enforced for the user. If this attribute is present in a user's entry, then it overrides the default `size-limit` value from the global configuration.                                                                              |
-| `ds-rlim-time-limit`           | The maximum length of time in seconds that the server is allowed to spend processing any single search operation for the user. A value of zero indicates that no time limit is enforced for the user. If this attribute is present in a user's entry, then it overrides the default `time-limit` value from the global configuration.                                                  |
-| `ds-rlim-lookthrough-limit`    | The maximum number of entries that the server is allowed to examine while processing any single search operation for the user. A value of zero indicates that no lookthrough limit is enforced for the user. If this attribute is present in a user's entry, then it overrides the default `lookthrough-limit` value from the global configuration.                                    |
-| `ds-rlim-idle-time-limit`      | The maximum length of time in seconds that the user is allowed to have an idle connection (one in which no operations in progress) established. A value of zero indicates that no idle time limit is enforced for the user. If this attribute is present in a user's entry, then it overrides the default idle-time-limit value from the global configuration.                         |
-| `ds-rlim-ldap-join-size-limit` | The maximum number of entries that are joined with any single search result entry when processing a search request that includes the LDAP join request control. A value of zero indicates that no LDAP join size limit is enforced for the user. If this attribute is present in the user's entry, then it overrides the default `ldap-join-size-limit` from the global configuration. |
+* Provide proof of that identity. This can include a password, optionally combined with a second factor like a one-time password, a certificate, or interaction with a trusted system like a Kerberos KDC or an OAuth introspection endpoint.
 
-Each of these attributes can be explicitly set in the entries for users who should have a value different from the corresponding property in the global configuration. You can also use virtual attributes to assign values dynamically for these attributes using criteria like the location or content of the user's entry, the groups in which that user is a member, or the client connection policy to which they're assigned.
+* Optionally specify an alternate authorization identity. Usually, when a client authenticates, subsequent operations on that connection are processed using the authority of the authenticated user. However, in some cases, it might be possible for the client to request that subsequent operations be processed under the authority of a different user.
 
-|   |                                                                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | After changing the resource limits for an operational attribute, you need to reset any existing client connections for the changes to take effect. |
+For LDAP clients, the PingDirectory server supports both simple authentication and several SASL mechanisms. For HTTP clients, the server supports basic authentication and OAuth 2.0.
+
+This section covers the set of authentication mechanisms that the PingDirectory server supports. It also provides information about its extensive support for password policy functionality, some of which also applies to non-password-based authentication.
 
 ---
 
 ---
-title: Defining resource limits in search requests
-description: Each search request allows the client to specify the size limit and time limit that should be used for that operation.
+title: Authentication-related controls
+description: The PingDirectory server provides support for several additional controls that can be used when authenticating or interacting with password policy-related operations.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_define_limits_search_requests
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_define_limits_search_requests.html
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_authn_ctrls
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_authn_ctrls.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
+page_aliases: ["pd_sec_authn_ctrls_ext_ops.adoc", "pd_sec_authr_id_request_ctrl.adoc", "pd_sec_get_authr_entry_ctrl.adoc", "pd_sec_acct_usable_control.adoc", "pd_sec_pw_policy_control.adoc", "pd_sec_pw_expire_controls.adoc", "pd_sec_get_pw_policy_state.adoc", "pd_sec_pw_validation_details_ctrl.adoc", "pd_sec_generate_pw_request_ctrl.adoc"]
+section_ids:
+  the-authorization-identity-request-control: The authorization identity request control
+  the-get-authorization-entry-request-control: The get authorization entry request control
+  the-account-usable-control: The account usable control
+  the-password-policy-control: The password policy control
+  the-password-expiring-and-password-expired-controls: The password expiring and password expired controls
+  the-get-password-policy-state-issues-control: The get password policy state issues control
+  the-password-validation-details-control: The password validation details control
+  the-generate-password-request-control: The generate password request control
 ---
 
-# Defining resource limits in search requests
+# Authentication-related controls
 
-Each search request allows the client to specify the size limit and time limit that should be used for that operation.
+The PingDirectory server provides support for several additional controls that can be used when authenticating or interacting with password policy-related operations.
 
-If the client requests a size limit of zero, then that indicates that the client does not want to impose any limit and the search request is processed using whatever size limit imposes for that client. If the client requests a nonzero size limit and that requested size limit is lower than what the server would otherwise impose, then the client-requested size limit is used. If the client requests a size limit that is higher than what the server would otherwise impose, then the server-imposed limit is used.
+## The authorization identity request control
 
-The same logic applies to the requested time limit. That is, the time limit from the search request is used if it is lower than what the server would have otherwise imposed. Otherwise, the server's limit is used.
+The authorization identity request control is described in [RFC 3829](https://www.ietf.org/rfc/rfc3829.txt) and can be included in a bind request to indicate that the server should include the resulting authorization identity in the successful bind response.
 
----
+In the PingDirectory server, this authorization identity is always in the form of a distinguished name (DN), prefixed by `dn:` (for example, `dn:uid=jdoe`,`ou=People`,`dc=example`,`dc=com`).
 
----
-title: Defining resource limits in the global configuration
-description: Use the following global configuration properties to enforce resource limits and provide protection against denial-of-service attacks.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_define_resource_limits_global_config
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_define_resource_limits_global_config.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
+This control is useful to determine the DN of the authenticated user entry, especially when the bind request does not identify the user by a DN, such as if the client was identified by a username, a Kerberos *(tooltip: \<div class="paragraph">
+\<p>A network authentication protocol to provide strong authentication for client/server applications using symmetric key cryptography and a trusted authentication service (Key Distribution Center). The KDC authenticates the client and issues tickets allowing access to the server. Kerberos is the default authentication technology used by Microsoft.\</p>
+\</div>)* principal, a client certificate, or an OAuth access token *(tooltip: \<div class="paragraph">
+\<p>A data object by which a client authenticates to a resource server and lays claim to authorizations for accessing particular resources.\</p>
+\</div>)*.
 
-# Defining resource limits in the global configuration
+## The get authorization entry request control
 
-Use the following global configuration properties to enforce resource limits and provide protection against denial-of-service attacks.
+While the authorization identity request control can be helpful, it only provides the distinguished name (DN) of the authenticated user and the specification does not even require that.
 
-| Property                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `size-limit`                                    | The default maximum number of entries that a client can retrieve in any single search operation. If the client attempts to process a search that matches more than 1000 entries, then the operation fails with a `sizeLimitExceeded` result (after returning all matching entries identified before the size limit was reached). This is set to 1000 by default. A value of zero indicates that no limit should be enforced.                                                                                                                                                                                                                                                |
-| `time-limit`                                    | The default maximum length of time in seconds that the server is allowed to spend processing any single search operation. If the client requests a search operation that takes longer than this length of time to complete, then the operation fails with a `timeLimitExceeded` result (after returning any matching entries identified before the time limit was reached). This is set to one minute by default. A value of zero seconds indicates that no limit should be enforced.                                                                                                                                                                                       |
-| `idle-time-limit`                               | The default maximum length of time that a client connection should be allowed to remain established after the server has completed processing on the most recent request issued on that connection. If the client remains idle for longer than this duration, the connection is terminated. A value of zero seconds (which is the default value) indicates that no idle time limit should be enforced.                                                                                                                                                                                                                                                                      |
-| `lookthrough-limit`                             | The default maximum number of entries that the server can examine in the course of processing a search request, regardless of whether those entries actually match the search criteria. This is primarily useful for limiting resource consumption when processing unindexed searches, and if the client attempts to process a search operation in which the server needs to examine more than this number of entries, then the operation fails with an `adminLimitExceeded` result (after returning any matching entries identified before the lookthrough limit was reached). This is set to 5000 by default. A value of zero indicates that no limit should be enforced. |
-| `ldap-join-size-limit`                          | The default maximum number of entries that can be joined with each search result entry when processing a search using the LDAP join request control. If an entry is joined with more than this number of entries, then the join result control for that entry has a sizeLimitExceeded result code (and might or might not include any matching entries). This is set to 10,000 by default. A value of zero indicates that no limit should be enforced.                                                                                                                                                                                                                      |
-| `maximum-concurrent-connections`                | The maximum number of connections that can be established to the server at any one time. After this limit has been reached, then any subsequent connection attempts are rejected until an existing client connection has been closed. A value of zero (which is the default) indicates that no limit is imposed by the server, although the operating system can impose a limit (for example, based on the number of available file descriptors).                                                                                                                                                                                                                           |
-| `maximum-concurrent-connections-per-ip-address` | The maximum number of connections that can be established to the server at any one time from the same client IP address. After this limit has been reached, then any subsequent attempts to establish a connection from that client are rejected until an existing connection from that client has been closed. A value of zero (which is the default) indicates that no limit is enforced.                                                                                                                                                                                                                                                                                 |
-| `maximum-concurrent-connections-per-bind-dn`    | The maximum number of connections that can be established to the server at any one time while authenticated as the same user. After this limit has been reached, then any subsequent attempts to bind as that user cause the connection to be terminated until an existing connection authenticated as that user is closed or binds as a different user. A value of zero (which is the default) indicates that no limit is enforced.                                                                                                                                                                                                                                        |
-| `maximum-concurrent-unindexed-searches`         | The maximum number of unindexed searches that can be in progress within the server at any one time. If an unindexed search is requested while the maximum number of searches are already in progress, then that search is rejected with an `unwillingToPerform` result. This is set to ten by default. A value of zero indicates that no limit is enforced.                                                                                                                                                                                                                                                                                                                 |
+The PingDirectory server offers a more useful alternative in the form of the proprietary [get authorization entry request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/GetAuthorizationEntryRequestControl.html).
 
-You can also configure the server to suppress duplicate error log messages and administrative alerts. This can help prevent flooding the log with repeated messages if the same condition keeps occurring. The global configuration properties used to control this are:
+This control can also be included in a bind request, and if the bind is successful, then the server can return a corresponding response control with the DN and a requested set of attributes from the authenticated user's entry. If the bind request also used an alternate authorization identity, then the response control can also include information about that user.
 
-| Property                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `duplicate-error-log-limit` and `duplicate-error-log-time-limit` | The maximum number of error log messages of the same type that can be written within a given length of time. If that error log message rate is exceeded, then any additional error log messages of that type within that time period are suppressed, and the server writes a message at the end of that time indicating the number of messages that were suppressed. By default, the server starts suppressing error log messages after 200 messages of the same type in a five-minute period. |
-| `duplicate-alert-limit` and `duplicate-alert-time-limit`         | The maximum number of administrative alerts of the same type that can be generated within a given length of time. If that alert rate is exceeded, then any additional alerts of that type within that time period are suppressed, and the server generates an additional alert at the end of that time period indicating the number of alerts that were suppressed. By default, the server starts suppressing alerts after 10 alerts of the same type are generated in a ten-minute period.    |
+## The account usable control
 
----
+Include the [account usable request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/AccountUsableRequestControl.html) in a search request to indicate that matching entries should include a corresponding response control with a minimal set of information about whether the server considers the associated account to be usable.
 
----
-title: Delay bind responses after too many authentication failures
-description: You should have some mechanism in place to protect against online password guessing attacks.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_delay_bind_responses_authn_failures
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_delay_bind_responses_authn_failures.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
+This includes:
 
-# Delay bind responses after too many authentication failures
+* Whether the account is usable
 
-You should have some mechanism in place to protect against online password guessing attacks.
+* The length of time until the user's password expires
 
-Traditionally, this is done by locking accounts (at least temporarily) after too many failed authentication attempts. However, this is undesirable because an attacker could use it to intentionally lock those accounts and deny access to its legitimate owner. While you might be willing to accept this possibility for regular user accounts, you don't want to risk the chance that administrative accounts can become locked and unusable.
+* Whether the account is inactive
 
-A compelling alternative to actually locking user accounts is to delay bind responses after too many failed attempts. This can help limit the rate at which attackers might make guesses without significantly impeding the legitimate account owner. To do this, use the `failure-lockout-action` property in the password policy configuration to select a policy that delays bind responses rather than locking the account.
+* Whether the user must change their password
 
-If you do need to actually lock accounts to prevent them from being used after too many failed attempts, then you should choose a high enough `lockout-failure-count` value to ensure that accounts are not inadvertently locked by legitimate users who know their passwords but just mistype it several times in a row.
+* Whether the password is expired
 
----
+* The number of remaining grace logins
 
----
-title: Delaying responses to failed bind attempts
-description: Configure PingDirectory server to delay the response to bind requests as a way of rate-limiting online password guessing attacks.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_delay_resp_failed_bind
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_delay_resp_failed_bind.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
+* The length of time until the account is unlocked
 
-# Delaying responses to failed bind attempts
+This control is maintained for compatibility with a legacy system. While it is still useful, it is not updated to support new features.
 
-Configure PingDirectory server to delay the response to bind requests as a way of rate-limiting online password guessing attacks.
+## The password policy control
 
-This can be done in two different ways:
+PingDirectory server supports the password policy request control, as described in [draft-behera-ldap-password-policy-10](https://docs.ldap.com/specs/draft-behera-ldap-password-policy-10.txt).
 
-* The LDAP connection handler offers a `failed-bind-response-delay` configuration property. If this is set to a nonzero duration, then the server automatically delays the response to any failed bind attempt by the specified length of time. The server does not delay the response to successful bind attempts.
+This control can be included in add, bind, compare, modify, and password modify extended requests to obtain information about the associated user's password policy state. This includes:
 
-* The password policy offers a `failure-lockout-action` configuration property that can be used to indicate what action should be taken after too many failed authentication attempts, and one possible action is delaying the bind response. For more information, see This will be covered in more detail in the [Failure lockout](pd_sec_failure_lockout.html) section in the discussion on password policies.
+* The length of time until the user's password expires
 
-The option to delay bind responses in the connection handler was available before the corresponding option in the password policy. However, the latter option is the recommended approach because it also delays the response to the first successful bind following several failed attempts, which makes it more difficult for an attacker to use the delay to identify a failed attempt and to abort early without waiting for the full failure duration. You can also configure the password policy approach to work for non-LDAP clients.
+* The number of remaining grace logins
+
+* Whether the password is expired
+
+* Whether the account is locked
+
+* Whether the user must change their password
+
+* Whether an update attempt failed because the user is not allowed to change their password
+
+* Whether an update attempt failed because the user is required to provide their current password
+
+* Whether an operation failed because the password is considered too weak
+
+* Whether the proposed password is too short
+
+* Whether the proposed password already exists in the user's password history
+
+* Whether a user cannot change their password because there has not been enough time since the previous password change
+
+Because this control is based on a public specification, its format is fixed and it is not updated to support additional features.
+
+## The password expiring and password expired controls
+
+PingDirectory server supports the password expiring and password expired controls, as described in [draft-vchu-ldap-pwd-policy-00](https://docs.ldap.com/specs/draft-vchu-ldap-pwd-policy-00.txt).
+
+The password expiring control can be included in the response to a successful bind attempt to indicate that the user's password is about to expire. Its value indicates the length of time until the password actually expires.
+
+The password expired control can be included in the response to a successful or failed bind attempt to indicate that the user's password has expired and must be changed. If the bind operation was successful, then it means that the user must change their password before they are allowed to request any other operations. If the bind operation failed, then it means that the password must be reset before the user can access their account.
+
+## The get password policy state issues control
+
+By default, PingDirectory server returns a minimal amount of information in the response to a failed bind attempt. This is intentional because revealing too much can give an attacker useful information that could allow them to improve their tactics.
+
+Yet, it's useful in some circumstances to provide an application with a way to obtain information about the reason for a failed authentication attempt. As such, PingDirectory server offers a [get password policy state issues request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/GetPasswordPolicyStateIssuesRequestControl.html) that can be included in a bind request to indicate that the server should include a control in the bind response with information about any error, warning, or notice conditions in the user's password policy state that might currently or soon interfere with their ability to authenticate. If the bind attempt fails, then it might also include specific information about the reason for that failure.
+
+To prevent this control from being misused, PingDirectory server only allows it to be requested under a limited set of circumstances:
+
+* The bind request must be issued on a connection that is currently authenticated as a user with the `permit-get-password-policy-state-issues` privilege.
+
+* The requester must have access control permission to use the get password policy state issues request control.
+
+The bind request must also include the [retain identity request control](pd_sec_retain_id_request_ctrl.html) in the bind request.
+
+## The password validation details control
+
+PingDirectory server provides support for a [password validation details request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/PasswordValidationDetailsRequestControl.html) that can be included in an add request, modify request, or password modify extended request.
+
+It indicates that the server should return a corresponding response control with a list of each of the requirements that the password must satisfy and an indication as to whether the proposed password satisfied.
+
+## The generate password request control
+
+You can include the proprietary [generate password request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/GeneratePasswordRequestControl.html) in an add request to indicate that the server should automatically generate a password for the user.
+
+The add response includes a corresponding response control that contains the generated password, along with an indication as to whether the user is required to choose a new password and how long the generated password is valid.
+
+The password is generated using the password generator defined in the password policy that governs the new entry. Although the server might attempt to re-generate the password multiple times if previous attempts do not satisfy the configured set of password validators for the user, it might end up setting a password that does not pass validation. We recommend configuring the password generator to ensure that it is capable of generating passwords of acceptable strength.

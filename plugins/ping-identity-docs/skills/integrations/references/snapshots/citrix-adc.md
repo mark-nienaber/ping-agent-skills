@@ -4,6 +4,8 @@ description: This guide describes how to configure PingFederate and Citrix ADC t
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   features: Features
@@ -51,6 +53,8 @@ description: Create an adapter instance to make the username attribute available
 component: citrix-adc
 page_id: citrix-adc:creating_a_single_sign-on_connection:pf_citrix_adc_integration_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/creating_a_single_sign-on_connection/pf_citrix_adc_integration_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -84,6 +88,8 @@ description: Create a SAML authentication policy and associate it with the authe
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration_creating_a_saml_policy_in_citrix
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration_creating_a_saml_policy_in_citrix.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -116,6 +122,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to Citrix, cre
 component: citrix-adc
 page_id: citrix-adc:creating_a_single_sign-on_connection:pf_citrix_adc_integration_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/creating_a_single_sign-on_connection/pf_citrix_adc_integration_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -184,6 +192,8 @@ description: To allow PingFederate to handle authentication requests, add your P
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration_creating_an_authentication_server_in_citrix
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration_creating_an_authentication_server_in_citrix.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -237,6 +247,8 @@ description: Configure a virtual server to direct authentication requests to Pin
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration_creating_an_authentication_virtual_server_in_citrix
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration_creating_an_authentication_virtual_server_in_citrix.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -295,6 +307,8 @@ description: Set the SAML policy you create as the default for the Gateway virtu
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration_enabling_saml_policy_on_the_gateway_virtual_server
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration_enabling_saml_policy_on_the_gateway_virtual_server.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -330,6 +344,8 @@ description: Before you can configure single sign-on in Citrix, you need to set 
 component: citrix-adc
 page_id: citrix-adc:enabling_single_sign-on_in_pingfederate:pf_citrix_adc_integration_enabling_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/enabling_single_sign-on_in_pingfederate/pf_citrix_adc_integration_enabling_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   enabling-single-sign-on-in-pingfederate-10-1-or-later: Enabling single sign-on in PingFederate 10.1 or later
@@ -376,6 +392,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: citrix-adc
 page_id: citrix-adc:enabling_single_sign-on_in_pingfederate:pf_citrix_adc_integration_enabling_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/enabling_single_sign-on_in_pingfederate/pf_citrix_adc_integration_enabling_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -405,6 +423,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: citrix-adc
 page_id: citrix-adc:enabling_single_sign-on_in_pingfederate:pf_citrix_adc_integration_enabling_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/enabling_single_sign-on_in_pingfederate/pf_citrix_adc_integration_enabling_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -428,6 +448,8 @@ description: To allow Citrix to communicate with PingFederate, export your PingF
 component: citrix-adc
 page_id: citrix-adc::pf_citrix_adc_integration_exporting_your_pf_signing_certificate
 canonical_url: https://docs.pingidentity.com/integrations/citrix-adc/pf_citrix_adc_integration_exporting_your_pf_signing_certificate.html
+llms_txt: https://docs.pingidentity.com/integrations/citrix-adc/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps

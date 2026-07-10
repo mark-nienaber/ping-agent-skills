@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Show deterministic routing proof for representative Ping documentation questions."""
+"""Show deterministic routing proof and write the visual proof report."""
 
 from __future__ import annotations
 
@@ -23,6 +23,9 @@ from ping_docsets import (
     routing_url_pattern,
     task_category,
 )
+
+
+DEFAULT_REPORT_PATH = "reports/routing-proof.html"
 
 
 EXTRA_STOPWORDS = {
@@ -93,7 +96,7 @@ class SkillRoute:
     matched_entry_terms: tuple[str, ...]
 
 
-SAMPLES = (
+CURATED_SAMPLES = (
     Sample(
         name="pingam-auth-tree-callbacks",
         question=(
@@ -192,6 +195,89 @@ SAMPLES = (
         expected_guide="connector-reference",
     ),
 )
+
+# Backwards-compatible name for callers that imported the original curated set.
+SAMPLES = CURATED_SAMPLES
+
+
+def available_docsets(
+    repo_root: Path,
+    registry: str,
+    skills_root_arg: str,
+) -> list[Docset]:
+    skills_root = repo_root / skills_root_arg
+    return [
+        docset
+        for docset in load_docsets(repo_root / registry)
+        if docset.enabled
+        and (skills_root / docset.skill_slug / "SKILL.md").exists()
+        and (skills_root / docset.skill_slug / "references" / "llms.txt").exists()
+    ]
+
+
+def representative_cluster(
+    docset: Docset,
+    skills_root: Path,
+    reserved_guide_slugs: set[str] | None = None,
+) -> GuideCluster | None:
+    reserved_guide_slugs = reserved_guide_slugs or set()
+    llms_path = skills_root / docset.skill_slug / "references" / "llms.txt"
+    entries = parse_llms_file(llms_path)
+    if not entries:
+        return None
+    selected_version = detect_latest_version(
+        entries, docset.base_url, preferred_version=docset.preferred_version
+    )
+    clusters = cluster_entries(entries, docset.base_url, selected_version)
+    if not clusters:
+        return None
+    for cluster in clusters:
+        if cluster.guide != "root" and cluster.guide_slug not in reserved_guide_slugs:
+            return cluster
+    for cluster in clusters:
+        if cluster.guide != "root":
+            return cluster
+    return clusters[0]
+
+
+def generated_samples(
+    repo_root: Path,
+    registry: str,
+    skills_root_arg: str,
+) -> tuple[Sample, ...]:
+    skills_root = repo_root / skills_root_arg
+    samples: list[Sample] = []
+    docsets = available_docsets(repo_root, registry, skills_root_arg)
+    skill_slugs = {docset.skill_slug for docset in docsets}
+    for docset in docsets:
+        reserved_guide_slugs = skill_slugs - {docset.skill_slug}
+        cluster = representative_cluster(docset, skills_root, reserved_guide_slugs)
+        if cluster is None:
+            continue
+        guide_name = humanize_slug(cluster.guide)
+        category = task_category(cluster)
+        samples.append(
+            Sample(
+                name=f"{docset.skill_slug}-installed-docset",
+                question=(
+                    f"Using the {docset.label} documentation and the "
+                    f"{docset.skill_slug} skill, answer a detailed product "
+                    f"question about {guide_name}. Route through the "
+                    f"{cluster.guide} guide and cover {category}."
+                ),
+                expected_skill=docset.skill_slug,
+                expected_guide=cluster.guide,
+            )
+        )
+    return tuple(samples)
+
+
+def build_samples(
+    repo_root: Path,
+    registry: str,
+    skills_root_arg: str,
+) -> tuple[Sample, ...]:
+    return generated_samples(repo_root, registry, skills_root_arg) + CURATED_SAMPLES
 
 
 def tokenize(text: str) -> Counter[str]:
@@ -330,11 +416,7 @@ def route_question(
     skills_root_arg: str,
 ) -> SkillRoute:
     skills_root = repo_root / skills_root_arg
-    docsets = [
-        docset
-        for docset in load_docsets(repo_root / registry)
-        if docset.enabled and (skills_root / docset.skill_slug / "SKILL.md").exists()
-    ]
+    docsets = available_docsets(repo_root, registry, skills_root_arg)
     query_tokens = tokenize(question)
     docset, skill_score, skill_terms = choose_skill(
         question, query_tokens, docsets, skills_root
@@ -399,16 +481,44 @@ def main() -> int:
     parser.add_argument(
         "--assert-defaults",
         action="store_true",
-        help="Fail unless built-in samples route to their expected skill and guide.",
+        help="Deprecated compatibility flag. Assertions are enabled by default.",
+    )
+    parser.add_argument(
+        "--no-assert",
+        action="store_true",
+        help="Print routes without failing on expected skill or guide mismatches.",
+    )
+    parser.add_argument(
+        "--no-report",
+        action="store_true",
+        help="Do not generate the HTML proof report.",
+    )
+    parser.add_argument(
+        "--output",
+        default=DEFAULT_REPORT_PATH,
+        help="Path to write the HTML report, relative to repo root unless absolute.",
+    )
+    parser.add_argument(
+        "--include-live-validation",
+        action="store_true",
+        help="Include sampled online Markdown URL validation in the generated report.",
     )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
+    samples = build_samples(repo_root, args.registry, args.skills_root)
+    print(
+        f"Routing proof samples: {len(samples)} "
+        f"({len(samples) - len(CURATED_SAMPLES)} installed docsets, "
+        f"{len(CURATED_SAMPLES)} curated complex cases)"
+    )
+    print()
+
     failures: list[str] = []
-    for sample in SAMPLES:
+    for sample in samples:
         route = route_question(sample.question, repo_root, args.registry, args.skills_root)
         print_route(sample, route)
-        if args.assert_defaults:
+        if not args.no_assert:
             if route.docset.skill_slug != sample.expected_skill:
                 failures.append(
                     f"{sample.name}: skill {route.docset.skill_slug} "
@@ -426,7 +536,22 @@ def main() -> int:
 
     for failure in failures:
         print(f"ERROR: {failure}")
-    return 1 if failures else 0
+    exit_code = 1 if failures else 0
+
+    if not args.no_report:
+        from render_proof_report import render_report
+
+        output_path = Path(args.output)
+        if not output_path.is_absolute():
+            output_path = repo_root / output_path
+        report_code = render_report(
+            repo_root=repo_root,
+            output_path=output_path,
+            include_live_validation=args.include_live_validation,
+        )
+        exit_code = max(exit_code, report_code)
+
+    return exit_code
 
 
 if __name__ == "__main__":

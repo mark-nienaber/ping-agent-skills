@@ -1,9 +1,102 @@
 ---
+title: Add an application in Aquera
+description: Configure the target service as an application in Aquera and note the connection credentials.
+component: aquera
+page_id: aquera:setup:pf_aquera_connector_add_an_application_in_aquera
+canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_add_an_application_in_aquera.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  steps: Steps
+---
+
+# Add an application in Aquera
+
+Configure the target service as an application in Aquera and note the connection credentials.
+
+## Steps
+
+1. Sign on to the Aquera [Applications](https://admin.aquera.io/securehome/endpoints) page.
+
+2. Click **Add Application** and select the target service.
+
+3. Configure the application. Learn more by searching for the the target service configuration steps in [Connectors](https://support.aquera.com/hc/en-us/categories/115000284613-Connectors) in the Aquera documentation.
+
+4. On the **Applications** page, select the application that you added.
+
+5. On the **Configure Application** window, from the **Copy this URL** field, note your SCIM URL.
+
+6. Note your application credentials.
+
+   Credentials can be a bearer token or a username and password pair. If both types of credentials are provided, note the bearer token.
+
+   On the application details page, the credentials can appear in the following locations:
+
+   * Right sidebar, in the **Authorization** section:
+
+     * **Bearer**
+
+   * Main window, in the **Credential To Access *\<application name>*** section:
+
+     * **Token**
+
+     * **Username**, **Password**
+
+       |   |                                                                               |
+       | - | ----------------------------------------------------------------------------- |
+       |   | Aquera shows tokens and passwords as dots, but you can still copy the values. |
+
+---
+
+---
+title: Adding SSO to a connection
+description: To enable single sign-on (SSO), modify the provisioning connection that you created in Creating a provisioning connection.
+component: aquera
+page_id: aquera:setup:pf_aquera_connector_adding_sso_to_a_connection
+canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_adding_sso_to_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  steps: Steps
+  choose-from: Choose from:
+---
+
+# Adding SSO to a connection
+
+To enable single sign-on (SSO), modify the provisioning connection that you created in [Creating a provisioning connection](pf_aquera_connector_creating_a_provisioning_connection.html).
+
+## Steps
+
+1. On the PingFederate administrator console, open your existing SP connection.
+
+   ### Choose from:
+
+   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Select your connection.
+
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Select your connection.
+
+2. On the **Connection Type** tab select **Browser SSO Profiles**. Click **Next**.
+
+3. On the **Browser SSO** tab, configure your SSO settings.
+
+   For specific connection details, consult the documentation and admin console provided by the target service.
+
+   Learn more in [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation.
+
+4. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
+
+---
+
+---
 title: Aquera Connector settings reference
 description: Lists the configuration settings and provisioning options for the Aquera Provisioner.
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_aquera_connector_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_aquera_connector_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -65,6 +158,8 @@ description: The Aquera Provisioner allows PingFederate to integrate with any ap
 component: aquera
 page_id: aquera::pf_aquera_connector
 canonical_url: https://docs.pingidentity.com/integrations/aquera/pf_aquera_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   features: Features
@@ -153,6 +248,8 @@ description: The following is the change history for the Aquera Provisioner.
 component: aquera
 page_id: aquera:release_notes:pf_aquera_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/aquera/release_notes/pf_aquera_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -190,6 +287,8 @@ description: To allow PingFederate to act as an identity provider for the target
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -220,6 +319,8 @@ description: To allow PingFederate to manage users in the target service, create
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -278,6 +379,8 @@ description: To get started with the integration, deploy the Aquera Provisioner 
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -319,6 +422,8 @@ description: The following files are included in the Aquera Provisioner .zip arc
 component: aquera
 page_id: aquera:release_notes:pf_aquera_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/aquera/release_notes/pf_aquera_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -342,6 +447,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -377,6 +484,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -406,6 +515,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -471,6 +582,8 @@ description: The following are known issues or limitations with the Aquera Provi
 component: aquera
 page_id: aquera:release_notes:pf_aquera_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/aquera/release_notes/pf_aquera_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   known-issues: Known issues
@@ -517,6 +630,8 @@ description: When enabling single sign-on (SSO) in the target service, you will 
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_pf_sso_details_for_the_service_provider
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_pf_sso_details_for_the_service_provider.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   metadata-file: Metadata file
@@ -561,6 +676,8 @@ description: The following list describes standard SCIM attributes. Attribute su
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 ---
 
@@ -641,6 +758,8 @@ description: If you're upgrading from a previous version of the Aquera Provision
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   upgrading-an-existing-deployment-in-pingfederate-10-1-or-later: Upgrading an existing deployment in PingFederate 10.1 or later
@@ -713,6 +832,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -752,6 +873,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: aquera
 page_id: aquera:setup:pf_aquera_connector_upgrading_an_existing_deployment_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_upgrading_an_existing_deployment_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -791,6 +914,8 @@ description: The Aquera Provisioner synchronizes users and groups from your data
 component: aquera
 page_id: aquera::pf_aquera_connector_user_and_group_management
 canonical_url: https://docs.pingidentity.com/integrations/aquera/pf_aquera_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/aquera/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

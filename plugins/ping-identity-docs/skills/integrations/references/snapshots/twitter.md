@@ -4,6 +4,8 @@ description: You can use the PingFederate authentication API to integrate the Tw
 component: twitter
 page_id: twitter::pf_threatmetrix_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/twitter/pf_threatmetrix_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -23,6 +25,8 @@ description: The following is the change history for the Twitter Login Integrati
 component: twitter
 page_id: twitter:release_notes:pf_twitter_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/twitter/release_notes/pf_twitter_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-1-4-1-january-2026: Version 1.4.1 - January 2026
@@ -92,6 +96,8 @@ description: Configure the Twitter IdP Adapter to determine how PingFederate com
 component: twitter
 page_id: twitter:setup:pf_twitter_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/twitter/setup/pf_twitter_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   steps: Steps
@@ -147,6 +153,8 @@ description: To get started with the integration, deploy the Twitter Login Integ
 component: twitter
 page_id: twitter:setup:pf_twitter_cic_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/twitter/setup/pf_twitter_cic_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   steps: Steps
@@ -186,6 +194,8 @@ description: The following files are included in the Twitter Login Integration K
 component: twitter
 page_id: twitter:release_notes:pf_twitter_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/twitter/release_notes/pf_twitter_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -237,6 +247,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: twitter
 page_id: twitter:troubleshooting:pf_twitter_cic_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/twitter/troubleshooting/pf_twitter_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   about-this-task: About this task
@@ -300,6 +312,8 @@ description: To complete your Twitter sign-on integration, add a sign-on hyperli
 component: twitter
 page_id: twitter:setup:pf_twitter_cic_integrating_social_sign_on_into_your_application
 canonical_url: https://docs.pingidentity.com/integrations/twitter/setup/pf_twitter_cic_integrating_social_sign_on_into_your_application.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   steps: Steps
@@ -368,6 +382,8 @@ description: The following are known issues or limitations for the Twitter Login
 component: twitter
 page_id: twitter:release_notes:pf_twitter_cic_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/twitter/release_notes/pf_twitter_cic_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   known-issues: Known issues
@@ -398,6 +414,8 @@ description: With the Twitter Login Integration Kit, PingFederate includes the T
 component: twitter
 page_id: twitter::pf_twitter_cic_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/twitter/pf_twitter_cic_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   description: Description
@@ -443,6 +461,8 @@ description: To allow PingFederate to process social sign-on requests with Twitt
 component: twitter
 page_id: twitter:setup:pf_twitter_cic_registering_pf_in_twitter
 canonical_url: https://docs.pingidentity.com/integrations/twitter/setup/pf_twitter_cic_registering_pf_in_twitter.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   steps: Steps
@@ -490,6 +510,8 @@ description: Field descriptions for the Twitter IdP Adapter configuration tab.
 component: twitter
 page_id: twitter:setup:pf_twitter_cic_twitter_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/twitter/setup/pf_twitter_cic_twitter_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -543,6 +565,8 @@ description: The Twitter Login Integration Kit allows PingFederate to use Twitte
 component: twitter
 page_id: twitter::pf_twitter_cic
 canonical_url: https://docs.pingidentity.com/integrations/twitter/pf_twitter_cic.html
+llms_txt: https://docs.pingidentity.com/integrations/twitter/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   features: Features

@@ -4,6 +4,8 @@ description: You can use the PingFederate Authentication API to integrate the Li
 component: linkedin
 page_id: linkedin::pf_linkedin_cic_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/pf_linkedin_cic_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 ---
 
@@ -23,6 +25,8 @@ description: The following is the change history for the LinkedIn Login Integrat
 component: linkedin
 page_id: linkedin:release_notes:pf_linkedin_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/release_notes/pf_linkedin_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-3-0-2-january-2026: Version 3.0.2 - January 2026
@@ -120,6 +124,8 @@ description: Configure the LinkedIn IdP Adapter to determine how PingFederate co
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   steps: Steps
@@ -193,6 +199,8 @@ description: access_token
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_core_contract_attributes
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_core_contract_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 ---
 
@@ -222,6 +230,8 @@ description: To get started with the integration, deploy the LinkedIn Login Inte
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   about-this-task: About this task
@@ -268,6 +278,8 @@ description: The following files are included in the LinkedIn Login Integration 
 component: linkedin
 page_id: linkedin:release_notes:pf_linkedin_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/release_notes/pf_linkedin_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -319,6 +331,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: linkedin
 page_id: linkedin:troubleshooting:pf_linkedin_cic_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/troubleshooting/pf_linkedin_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2024
 section_ids:
   about-this-task: About this task
@@ -382,6 +396,8 @@ description: To complete your LinkedIn sign-on integration, add a sign-on hyperl
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_integrating_social_sign_on_into_your_application
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_integrating_social_sign_on_into_your_application.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 21, 2025
 section_ids:
   steps: Steps
@@ -450,6 +466,8 @@ description: JSON Pointer defines a syntax for identifying a specific value with
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_json_pointer_syntax_reference
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_json_pointer_syntax_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   example-json-payload: Example JSON payload
@@ -505,6 +523,8 @@ description: There are no known issues.
 component: linkedin
 page_id: linkedin:release_notes:pf_linkedin_cic_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/release_notes/pf_linkedin_cic_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   known-issues: Known issues
@@ -529,6 +549,8 @@ description: Field descriptions for the LinkedIn IdP Adapter configuration page:
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_linkedin_idp_adapter_settings
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_linkedin_idp_adapter_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 ---
 
@@ -575,6 +597,8 @@ description: The LinkedIn Login Integration Kit allows PingFederate to use Linke
 component: linkedin
 page_id: linkedin::pf_linkedin_cic
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/pf_linkedin_cic.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   features: Features
@@ -641,6 +665,8 @@ description: With the LinkedIn Login Integration Kit, PingFederate includes the 
 component: linkedin
 page_id: linkedin::pf_linkedin_cic_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/pf_linkedin_cic_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   description: Description
@@ -686,6 +712,8 @@ description: To allow PingFederate to process social sign-on requests with Linke
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_register_pf_as_a_microsoft_application
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_register_pf_as_a_microsoft_application.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   steps: Steps
@@ -725,6 +753,8 @@ description: Description:
 component: linkedin
 page_id: linkedin:troubleshooting:pf_linkedin_cic_troubleshooting
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/troubleshooting/pf_linkedin_cic_troubleshooting.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   pingfederate-cant-connect-to-the-linkedin-api: PingFederate can't connect to the LinkedIn API
@@ -795,6 +825,8 @@ description: If you're upgrading from a previous version of the LinkedIn Login I
 component: linkedin
 page_id: linkedin:setup:pf_linkedin_cic_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/linkedin/setup/pf_linkedin_cic_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 22, 2025
 section_ids:
   steps: Steps

@@ -6,13 +6,14 @@ page_id: connectors::flow_analytics_connector
 canonical_url: https://docs.pingidentity.com/connectors/flow_analytics_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: June 30, 2026
 section_ids:
   setup: Setup
   resources: Resources
-  configuring-the-fingerprintjs-connector: Configuring the FingerprintJS connector
+  configuring-the-connector: Configuring the connector
   using-the-connector-in-a-flow: Using the connector in a flow
   capture-flow-information: Capture flow information
+  using-global-variables-in-flow-analytics: Using global variables in flow analytics
   capabilities: Capabilities
   logOutcome: Log Flow Outcomes
 ---
@@ -41,7 +42,7 @@ Learn more in the following:
 
   * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
-### Configuring the FingerprintJS connector
+### Configuring the connector
 
 Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
@@ -53,15 +54,35 @@ This connector doesn't have a configuration at the environment level. You config
 
 You can use the **Log flow outcomes** capability to log details about flow outcomes based on outcome type and outcome status.
 
-|   |                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The **Outcome Status Detail** field is limited to 75 characters and the **Outcome Description/Comment** field is limited to 1000 characters. While these limits can be exceeded, the system will automatically trim the data during flow execution. |
+The following character limits apply to flow outcome fields. Content that exceeds a limit is automatically trimmed during flow execution.
 
-No special flow configuration is needed. Add the capability and populate its properties according to the help text.
+* **Outcome Type**: Max 75 characters
 
-|   |                                                                                      |
-| - | ------------------------------------------------------------------------------------ |
-|   | To view flow analytics from the flow canvas, go to **More Options (⋮) > Analytics**. |
+* **Outcome Status**: Max 75 characters
+
+* **Outcome Status Detail**: Max 75 characters
+
+* **Outcome Description/Comment**: Max 2500 characters
+
+### Using global variables in flow analytics
+
+The following global variables are available for use in Flow Analytics connector fields:
+
+| Variable                      | Description                           |
+| ----------------------------- | ------------------------------------- |
+| `{{global.flowName}}`         | The name of the current flow          |
+| `{{global.flowVersionId}}`    | The version ID of the current flow    |
+| `{{global.flowVersionAlias}}` | The version alias of the current flow |
+
+You can map these variables into outcome fields like in the following example:
+
+```json
+{
+  "outcomeType": "{{global.flowName}}",
+  "outcomeStatus": "success",
+  "outcomeStatusDetail": "{{global.flowVersionAlias}}"
+}
+```
 
 ## Capabilities
 
@@ -77,12 +98,20 @@ Log custom flow outcomes.
 >
 > * Output Schema
 >
-> - - outcomeType dropdownWithCreate required
->   - outcomeStatus dropdownWithCreate required
->   - outcomeStatusDetail dropdownWithCreate
->   - outcomeDescription textArea
->   - customTimestamp textField
->   - shouldContinueOnError toggleSwitch
+> - - outcomeType dropDown required
+>   - Custom Value textField
+>
+>   Enter a custom text or map any previous connector outcome
+>
+> - * outcomeStatus dropDown required
+>   * Custom Value textField
+>
+>   Enter a custom text or map any previous connector outcome
+>
+> - * outcomeStatusDetail textField
+>   * outcomeDescription textArea
+>   * customTimestamp textField
+>   * shouldContinueOnError toggleSwitch
 >
 > * default object
 >
@@ -100,7 +129,7 @@ Log custom flow outcomes.
 >
 >       Details about status of the outcome
 >
->     * outcomeDescription string minLength: 2 maxLength: 1000
+>     * outcomeDescription string minLength: 2 maxLength: 2500
 >
 >       Description of the outcome
 >

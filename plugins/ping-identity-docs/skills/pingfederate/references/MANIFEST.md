@@ -2,43 +2,41 @@
 
 - Product: PingFederate
 - Version: 13.1
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/pingfederate/llms.txt
 - Guides discovered: 12
-- Guides captured: 12
-- Total pages indexed: 1212
+- Guides captured: 11
+- Total pages indexed: 1211
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| administrators-reference-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_administrators_reference_guide.md | 799 |
-| introduction-to-pingfederate.md | page | https://docs.pingidentity.com/pingfederate/13.1/introduction_to_pingfederate/pf_about_account_link.md | 105 |
-| release-notes.md | page | https://docs.pingidentity.com/pingfederate/13.1/release_notes/pf_release_notes_110.md | 98 |
-| developers-reference-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/developers_reference_guide/pf_access_api_interact_documentation.md | 56 |
-| server-clustering-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_server_clustering_guide.md | 34 |
-| sdk-developers-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/sdk_developers_guide/identitystoreprovisionerwithfiltering_interface_implemen.md | 27 |
-| upgrading-pingfederate.md | page | https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/pf_improv_index_datab_table_oauth_cli.md | 25 |
-| getting-started-with-pingfederate.md | page | https://docs.pingidentity.com/pingfederate/13.1/getting_started_with_pingfederate/pf_admin_console_best_practices.md | 22 |
-| performance-tuning-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/performance_tuning_guide/pf_about_performance_tuning.md | 21 |
-| installing-and-uninstalling-pingfederate.md | page | https://docs.pingidentity.com/pingfederate/13.1/installing_and_uninstalling_pingfederate/pf_compatible_database_drivers.md | 12 |
-| pingfederate-monitoring-guide.md | page | https://docs.pingidentity.com/pingfederate/13.1/pingfederate_monitoring_guide/pf_connect_local_process.md | 12 |
-| root.md | page | https://docs.pingidentity.com/pingfederate/13.1/pf_pf_landing_page.md | 1 |
+| administrators-reference-guide.md | assembled | <797 pages from administrators_reference_guide> | 797 |
+| introduction-to-pingfederate.md | assembled | <105 pages from introduction_to_pingfederate> | 105 |
+| release-notes.md | assembled | <99 pages from release_notes> | 99 |
+| developers-reference-guide.md | assembled | <56 pages from developers_reference_guide> | 56 |
+| server-clustering-guide.md | assembled | <34 pages from server_clustering_guide> | 34 |
+| sdk-developers-guide.md | assembled | <27 pages from sdk_developers_guide> | 27 |
+| upgrading-pingfederate.md | assembled | <25 pages from upgrading_pingfederate> | 25 |
+| getting-started-with-pingfederate.md | assembled | <22 pages from getting_started_with_pingfederate> | 22 |
+| performance-tuning-guide.md | assembled | <21 pages from performance_tuning_guide> | 21 |
+| installing-and-uninstalling-pingfederate.md | assembled | <12 pages from installing_and_uninstalling_pingfederate> | 12 |
+| pingfederate-monitoring-guide.md | assembled | <12 pages from pingfederate_monitoring_guide> | 12 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 44bbac983a56379b88eb6bf9681d5b7b86011efd459f5322ea4e7df27c7e3f1b |
-| snapshots/administrators-reference-guide.md | 8140ac67121e88f45746937d2e7f2dbad15bae720d89bbc9a6c08d50ffcb0522 |
-| snapshots/introduction-to-pingfederate.md | 2eeb66f79a663126488569ab94dd495ff960b873dad35f1765c123215a4a3254 |
-| snapshots/release-notes.md | f9940e0160f2207a85dc4060d84bb961b17e3619f04eb7c827f1c6155d859453 |
-| snapshots/developers-reference-guide.md | a1cb74bb8a171d066555c6dde27422baa5a40044db741c4f9447eee296b04831 |
-| snapshots/server-clustering-guide.md | 622b3396f6b87a707033027c9fcd8a4f473000b945b53a0b7f7ea8e2a0fefd8d |
-| snapshots/sdk-developers-guide.md | bf1c4e2ede3a5552a2bfa1483dd84dff92065555dd6c32506a24847262ceaee8 |
-| snapshots/upgrading-pingfederate.md | e1d2a08f770eedec68fe7751ae11973aacbc92331b76c2493287bf6388385b8f |
-| snapshots/getting-started-with-pingfederate.md | 82425969b0d3024eb10814fe5091ae7384fb926b2893c78ae2322edc0417dcbf |
-| snapshots/performance-tuning-guide.md | cb6e9660d416d289659cdcebc9828d50c24edd35db6b15e92a6e749a02ff1694 |
-| snapshots/installing-and-uninstalling-pingfederate.md | 7b11ce7017c2ff6f81467b53e3a30c85b36f33aec54d707145bceed054032d55 |
-| snapshots/pingfederate-monitoring-guide.md | 30afed69dded3120eb068d58c550b7e7c2c562e8d21074b88623da18e562ad6c |
-| snapshots/root.md | 7c4986d3dab77aeb6238d66e29950a34abdd559aa53579c22306b37963c498b0 |
+| llms.txt | 4c7ea4100a532e714a7e256f74d7e8a06a12c806ac9a107c1961286ec8796030 |
+| snapshots/administrators-reference-guide.md | aa128ecab6e002e18cbb47d7883ef163b770b09c4d8c3d5dbac4beb8549840c9 |
+| snapshots/introduction-to-pingfederate.md | f35aac1a29e2d47e729af8672332c793dfd2b72613e897f6338db713d080c9c5 |
+| snapshots/release-notes.md | 40d0a1a451ee6b32b2847bdfe69220de410c7a5b25aa2539badb2dc81904e9b3 |
+| snapshots/developers-reference-guide.md | 16ffd9121658a9562452e95b23abb2bdd699f2a9ee8f5f1b6ecfba3072df11ab |
+| snapshots/server-clustering-guide.md | fb3c287c2f4e7a212515299a5b4fbcd57b0e0d8ed9255610624c779d62339018 |
+| snapshots/sdk-developers-guide.md | 91cee75cd0814183224c8fb6718aa57a1aafc3d1503fc9f6952783f658837221 |
+| snapshots/upgrading-pingfederate.md | 834cf12f4a5867387470836ea7c0bc3bb5fa16fc393aa188fed541e68ee1496c |
+| snapshots/getting-started-with-pingfederate.md | 840cd2a0b6ba4d394ea0f5528e0e0953407e353ed944f36025736fceb90e4070 |
+| snapshots/performance-tuning-guide.md | cd6a64619324939c92f066ec03976cc4bc0ad0e37d701aa10ff7490e4916d048 |
+| snapshots/installing-and-uninstalling-pingfederate.md | dd62ee30116f447855441b22afbb9429dc1517d570aa024d60fa40806651132a |
+| snapshots/pingfederate-monitoring-guide.md | 5ed67f2fdd6244b61cba186893439c8cb039863468fb266cbabd360f45dbd964 |

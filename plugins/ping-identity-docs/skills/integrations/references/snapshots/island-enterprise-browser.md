@@ -4,6 +4,8 @@ description: Change history for the Island Enterprise Browser Device Trust Integ
 component: island-enterprise-browser
 page_id: island-enterprise-browser:release_notes:pf_island_browser_changelog
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/release_notes/pf_island_browser_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   island-enterprise-browser-device-trust-integration-kit-1-0-august-2025: Island Enterprise Browser Device Trust Integration Kit 1.0 – August 2025
@@ -25,6 +27,8 @@ description: Configure the Island Enterprise Browser Device Trust IdP Adapter to
 component: island-enterprise-browser
 page_id: island-enterprise-browser:setup:pf_island_browser_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/setup/pf_island_browser_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   about-this-task: About this task
@@ -95,6 +99,8 @@ description: To get started with the integration, deploy the Island Enterprise B
 component: island-enterprise-browser
 page_id: island-enterprise-browser:setup:pf_island_browser_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/setup/pf_island_browser_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   next-steps: Next steps
@@ -126,6 +132,8 @@ description: The following files are included in the Island Enterprise Browser D
 component: island-enterprise-browser
 page_id: island-enterprise-browser:release_notes:pf_island_browser_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/release_notes/pf_island_browser_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 ---
 
@@ -149,6 +157,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: island-enterprise-browser
 page_id: island-enterprise-browser:troubleshooting:pf_island_browser_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/troubleshooting/pf_island_browser_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   steps: Steps
@@ -231,6 +241,8 @@ description: Field descriptions for the Island Enterprise Browser Device Trust I
 component: island-enterprise-browser
 page_id: island-enterprise-browser:setup:pf_island_browser_idp_adapter_settings_ref
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/setup/pf_island_browser_idp_adapter_settings_ref.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 ---
 
@@ -264,6 +276,8 @@ description: Retrieve Island browser device posture information to use in authen
 component: island-enterprise-browser
 page_id: island-enterprise-browser::pf_island_browser_ik
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/pf_island_browser_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 21, 2025
 section_ids:
   components: Components
@@ -319,6 +333,8 @@ description: JSON Pointer defines a syntax for identifying a specific value with
 component: island-enterprise-browser
 page_id: island-enterprise-browser:setup:pf_island_browser_json_pointer_syntax_ref
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/setup/pf_island_browser_json_pointer_syntax_ref.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   example-island-browser-verify-challenge-response-api-json-payload: Example Island Browser Verify Challenge Response API JSON payload
@@ -396,6 +412,8 @@ description: Known issues or limitations for the Island Enterprise Browser Devic
 component: island-enterprise-browser
 page_id: island-enterprise-browser:release_notes:pf_island_browser_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/release_notes/pf_island_browser_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   known-issues: Known issues
@@ -424,6 +442,8 @@ description: The following figure illustrates a single sign-on (SSO) scenario in
 component: island-enterprise-browser
 page_id: island-enterprise-browser::pf_island_browser_sso_flow_overview
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/pf_island_browser_sso_flow_overview.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 6, 2025
 section_ids:
   description: Description
@@ -465,6 +485,8 @@ description: The Island Enterprise Browser Device Trust IdP Adapter looks for a 
 component: island-enterprise-browser
 page_id: island-enterprise-browser:setup:pf_island_browser_using_island_device_signals
 canonical_url: https://docs.pingidentity.com/integrations/island-enterprise-browser/setup/pf_island_browser_using_island_device_signals.html
+llms_txt: https://docs.pingidentity.com/integrations/island-enterprise-browser/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 7, 2025
 section_ids:
   requests-from-verified-island-enterprise-browsers: Requests from verified Island Enterprise browsers

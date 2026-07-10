@@ -4,6 +4,8 @@ description: The OpenToken HTTP module allows your IIS server to communicate wit
 component: microsoft-iis
 page_id: microsoft-iis:setup:pf_iis_ik_adding_the_opentoken_http_module_in_iis
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/setup/pf_iis_ik_adding_the_opentoken_http_module_in_iis.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   steps: Steps
@@ -46,6 +48,8 @@ description: The following is the change history for the IIS Integration Kit.
 component: microsoft-iis
 page_id: microsoft-iis:release_notes:pf_iis_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/release_notes/pf_iis_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   iis-integration-kit-3-5-march-2021: IIS Integration Kit 3.5 – March 2021
@@ -178,6 +182,8 @@ description: Configure the OpenToken Adapter to determine how PingFederate commu
 component: microsoft-iis
 page_id: microsoft-iis:setup:pf_iis_ik_configuring_an_opentoken_sp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/setup/pf_iis_ik_configuring_an_opentoken_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   steps: Steps
@@ -227,6 +233,8 @@ description: If your IIS web application cannot accept HTTP request headers with
 component: microsoft-iis
 page_id: microsoft-iis:session_information_and_http_request_headers:pf_iis_ik_configuring_the_opentoken_iis_agent_to_omit_the_http_header_prefix
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/session_information_and_http_request_headers/pf_iis_ik_configuring_the_opentoken_iis_agent_to_omit_the_http_header_prefix.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   steps: Steps
@@ -254,6 +262,8 @@ description: Deploy the OpenToken IIS Agent on your IIS server to allow it to co
 component: microsoft-iis
 page_id: microsoft-iis:setup:pf_iis_ik_deploying_and_configuring_the_opentoken_iis_agent
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/setup/pf_iis_ik_deploying_and_configuring_the_opentoken_iis_agent.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   steps: Steps
@@ -333,6 +343,8 @@ description: The following files are included in the IIS Integration Kit .zip ar
 component: microsoft-iis
 page_id: microsoft-iis:release_notes:pf_iis_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/release_notes/pf_iis_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 ---
 
@@ -382,6 +394,8 @@ description: The IIS Integration Kit allows PingFederate to coordinate user auth
 component: microsoft-iis
 page_id: microsoft-iis::pf_iis_ik
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/pf_iis_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   components: Components
@@ -437,6 +451,8 @@ description: The following are known issues or limitations for the IIS Integrati
 component: microsoft-iis
 page_id: microsoft-iis:release_notes:pf_iis_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/release_notes/pf_iis_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   known-issues: Known issues
@@ -487,6 +503,8 @@ description: The OpenToken IIS Agent acts as a filter in front of an application
 component: microsoft-iis
 page_id: microsoft-iis::pf_iis_ik_overview_of_the_opentoken_iis_agent
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/pf_iis_ik_overview_of_the_opentoken_iis_agent.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 ---
 
@@ -510,6 +528,8 @@ description: With the IIS Integration Kit, PingFederate handles authentication r
 component: microsoft-iis
 page_id: microsoft-iis::pf_iis_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/pf_iis_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   description: Description
@@ -547,6 +567,8 @@ description: The OpenToken IIS Agent uses HTTP request headers to provide sessio
 component: microsoft-iis
 page_id: microsoft-iis:session_information_and_http_request_headers:pf_iis_ik_session_information_and_http_request_headers
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/session_information_and_http_request_headers/pf_iis_ik_session_information_and_http_request_headers.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 ---
 
@@ -588,6 +610,8 @@ description: To get started with the integration, download the latest version of
 component: microsoft-iis
 page_id: microsoft-iis:setup:pf_iis_ik_updating_the_opentoken_adapter
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/setup/pf_iis_ik_updating_the_opentoken_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   about-this-task: About this task
@@ -628,6 +652,8 @@ description: If you're updating an existing deployment of the IIS Integration Ki
 component: microsoft-iis
 page_id: microsoft-iis:setup:pf_iis_ik_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-iis/setup/pf_iis_ik_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-iis/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2025
 section_ids:
   steps: Steps

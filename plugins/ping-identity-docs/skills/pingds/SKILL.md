@@ -31,7 +31,7 @@ Introduction to LDAP directory concepts including data model, communication, con
 | Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | references/snapshots/config-guide.md |
 | Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | references/snapshots/tools-reference.md |
 | Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | references/snapshots/security-guide.md |
-| Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | references/snapshots/release-notes.md |
+| Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | live-only |
 | Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | references/snapshots/install-guide.md |
 | Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | references/snapshots/upgrade-guide.md |
 | Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | references/snapshots/getting-started.md |
@@ -44,7 +44,7 @@ Introduction to LDAP directory concepts including data model, communication, con
 | Ldap Reference: ldap, supported, reference | ldap-reference | https://docs.pingidentity.com/pingds/8.1/ldap-reference/*.md | references/snapshots/ldap-reference.md |
 | Logging Guide: log, access, logging | logging-guide | https://docs.pingidentity.com/pingds/8.1/logging-guide/*.md | references/snapshots/logging-guide.md |
 | Log Reference: log, message, reference | log-reference | https://docs.pingidentity.com/pingds/8.1/log-reference/*.md | references/snapshots/log-reference.md |
-| Release Notes: notes, release, all | release-notes | https://docs.pingidentity.com/pingds/8.1/release-notes/*.md | references/snapshots/release-notes.md |
+| Release Notes: notes, release, all | release-notes | https://docs.pingidentity.com/pingds/8.1/release-notes/*.md | live-only |
 | Root: pingds | root | https://docs.pingidentity.com/pingds/8.1/*.md | references/snapshots/root.md |
 
 ## Composition

@@ -4,6 +4,8 @@ description: To enable single sign-on (SSO), modify the provisioning connection 
 component: scim
 page_id: scim:setup:pf_scim_connector_adding_sso_to_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_adding_sso_to_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -44,6 +46,8 @@ description: The following is the change history for the SCIM Provisioner.
 component: scim
 page_id: scim:release_notes:pf_scim_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/scim/release_notes/pf_scim_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 14, 2025
 section_ids:
   scim-provisioner-1-9-0-1-august-2025: SCIM Provisioner 1.9.0.1 - August 2025
@@ -162,6 +166,8 @@ description: To allow PingFederate to act as an identity provider for the target
 component: scim
 page_id: scim:setup:pf_scim_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -194,6 +200,8 @@ description: To allow PingFederate to manage users in the target service, create
 component: scim
 page_id: scim:setup:pf_scim_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -250,6 +258,8 @@ description: To get started with the integration, deploy the SCIM Provisioner fi
 component: scim
 page_id: scim:setup:pf_scim_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -291,6 +301,8 @@ description: The following files are included in the SCIM Provisioner .zip archi
 component: scim
 page_id: scim:release_notes:pf_scim_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/scim/release_notes/pf_scim_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 ---
 
@@ -312,6 +324,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: scim
 page_id: scim:setup:pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -377,6 +391,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: scim
 page_id: scim:setup:pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -412,6 +428,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: scim
 page_id: scim:setup:pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -441,6 +459,8 @@ description: Before you configure the SCIM Connector, collect the connection det
 component: scim
 page_id: scim:setup:pf_scim_connector_gathering_information_from_the_service_provider
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_gathering_information_from_the_service_provider.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   steps: Steps
@@ -470,6 +490,8 @@ description: The following are known issues or limitations with the SCIM Provisi
 component: scim
 page_id: scim:release_notes:pf_scim_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/scim/release_notes/pf_scim_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   known-issues: Known issues
@@ -520,6 +542,8 @@ description: When enabling single sign-on (SSO) in the target service, you will 
 component: scim
 page_id: scim:setup:pf_scim_connector_pf_sso_details_for_the_service_provider
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_pf_sso_details_for_the_service_provider.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   metadata-file: Metadata file
@@ -568,6 +592,8 @@ description: The SCIM Provisioner allows PingFederate to integrate with a wide r
 component: scim
 page_id: scim::pf_scim_connector
 canonical_url: https://docs.pingidentity.com/integrations/scim/pf_scim_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   features: Features
@@ -690,6 +716,8 @@ description: Configuration settings and provisioning options for the SCIM Provis
 component: scim
 page_id: scim:setup:pf_scim_connector_scim_connector_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_scim_connector_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -810,6 +838,8 @@ description: The following standard SCIM attributes can be mapped for user provi
 component: scim
 page_id: scim:setup:pf_scim_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -893,6 +923,8 @@ description: If you're upgrading from a previous version of the SCIM Provisioner
 component: scim
 page_id: scim:setup:pf_scim_connector_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   upgrading-an-existing-deployment-in-pingfederate-10-1-or-later: Upgrading an existing deployment in PingFederate 10.1 or later
@@ -965,6 +997,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: scim
 page_id: scim:setup:pf_scim_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -1004,6 +1038,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: scim
 page_id: scim:setup:pf_scim_connector_upgrading_an_existing_deployment_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/scim/setup/pf_scim_connector_upgrading_an_existing_deployment_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -1043,6 +1079,8 @@ description: The SCIM Provisioner synchronizes users and groups from your datast
 component: scim
 page_id: scim::pf_scim_connector_user_and_group_management
 canonical_url: https://docs.pingidentity.com/integrations/scim/pf_scim_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/scim/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

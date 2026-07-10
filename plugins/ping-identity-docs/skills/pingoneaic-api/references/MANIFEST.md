@@ -2,63 +2,59 @@
 
 - Product: PingOne AIC API
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://developer.pingidentity.com/pingoneaic-api/llms.txt
 - Guides discovered: 22
-- Guides captured: 22
+- Guides captured: 20
 - Total pages indexed: 91
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| idm-rest-api.md | page | https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-bulk-import.md | 20 |
-| am-oauth2.md | page | https://developer.pingidentity.com/pingoneaic-api/am-oauth2/oauth2-introspect-macaroon-endpoint.md | 14 |
-| am-authentication.md | page | https://developer.pingidentity.com/pingoneaic-api/am-authentication/authenticate-endpoint-parameters.md | 10 |
-| am-oidc1.md | page | https://developer.pingidentity.com/pingoneaic-api/am-oidc1/rest-api-oidc-discovery-webfinger.md | 10 |
-| crest.md | page | https://developer.pingidentity.com/pingoneaic-api/crest/action.md | 9 |
-| am-scripting.md | page | https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-create.md | 7 |
-| am-authorization.md | page | https://developer.pingidentity.com/pingoneaic-api/am-authorization/rest-api-authz-policies.md | 4 |
-| am-rest.md | page | https://developer.pingidentity.com/pingoneaic-api/am-rest/rest-api-versioning.md | 2 |
-| identity-governance.md | page | https://developer.pingidentity.com/pingoneaic-api/identity-governance/rest-api/endpoints/rest-iga-access-token.md | 2 |
-| am-sessions.md | page | https://developer.pingidentity.com/pingoneaic-api/am-sessions/managing-sessions-REST.md | 1 |
-| api-custom-headers-md.md | page | https://developer.pingidentity.com/pingoneaic-api/api-custom-headers.md | 1 |
-| api-reference-md.md | page | https://developer.pingidentity.com/pingoneaic-api/api-reference.md | 1 |
-| authenticate-to-rest-api-overview-md.md | page | https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-overview.md | 1 |
-| authenticate-to-rest-api-with-access-token-md.md | page | https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-with-access-token.md | 1 |
-| authenticate-to-rest-api-with-api-key-and-secret-md.md | page | https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-with-api-key-and-secret.md | 1 |
-| changelog-md.md | page | https://developer.pingidentity.com/pingoneaic-api/changelog.md | 1 |
-| index-md.md | page | https://developer.pingidentity.com/pingoneaic-api/index.md | 1 |
-| postman-collection-md.md | page | https://developer.pingidentity.com/pingoneaic-api/postman-collection.md | 1 |
-| scripting-auth-md.md | page | https://developer.pingidentity.com/pingoneaic-api/scripting-auth.md | 1 |
-| scripting-custom-endpoints-md.md | page | https://developer.pingidentity.com/pingoneaic-api/scripting-custom-endpoints.md | 1 |
-| scripting-event-hooks-md.md | page | https://developer.pingidentity.com/pingoneaic-api/scripting-event-hooks.md | 1 |
-| scripting-md.md | page | https://developer.pingidentity.com/pingoneaic-api/scripting.md | 1 |
+| idm-rest-api.md | assembled | <20 pages from idm-rest-api> | 20 |
+| am-oauth2.md | assembled | <14 pages from am-oauth2> | 14 |
+| crest.md | assembled | <9 pages from crest> | 9 |
+| am-scripting.md | assembled | <7 pages from am-scripting> | 7 |
+| am-authorization.md | assembled | <4 pages from am-authorization> | 4 |
+| am-rest.md | assembled | <2 pages from am-rest> | 2 |
+| identity-governance.md | assembled | <2 pages from identity-governance> | 2 |
+| am-sessions.md | assembled | <1 pages from am-sessions> | 1 |
+| api-custom-headers-md.md | assembled | <1 pages from api-custom-headers.md> | 1 |
+| api-reference-md.md | assembled | <1 pages from api-reference.md> | 1 |
+| authenticate-to-rest-api-overview-md.md | assembled | <1 pages from authenticate-to-rest-api-overview.md> | 1 |
+| authenticate-to-rest-api-with-access-token-md.md | assembled | <1 pages from authenticate-to-rest-api-with-access-token.md> | 1 |
+| authenticate-to-rest-api-with-api-key-and-secret-md.md | assembled | <1 pages from authenticate-to-rest-api-with-api-key-and-secret.md> | 1 |
+| changelog-md.md | assembled | <1 pages from changelog.md> | 1 |
+| index-md.md | assembled | <1 pages from index.md> | 1 |
+| postman-collection-md.md | assembled | <1 pages from postman-collection.md> | 1 |
+| scripting-auth-md.md | assembled | <1 pages from scripting-auth.md> | 1 |
+| scripting-custom-endpoints-md.md | assembled | <1 pages from scripting-custom-endpoints.md> | 1 |
+| scripting-event-hooks-md.md | assembled | <1 pages from scripting-event-hooks.md> | 1 |
+| scripting-md.md | assembled | <1 pages from scripting.md> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 79ff72a1a67c99e5b60b99021bea9213624ea453c092cbe016bfebd5bf2845bd |
-| snapshots/idm-rest-api.md | 9b96a560910df56b8ea60ce21efc63be7cf5ae5c4da63a2de2b6f8635b719b5a |
-| snapshots/am-oauth2.md | e2068a1161d7462bf3ce70c03c663685281bf4a2f2b506ff4e5f12decc5ac7cd |
-| snapshots/am-authentication.md | 7ea81fe6ca5216ee0f45333da762eedf77f96591246d153ebcbfb2fe1be324a0 |
-| snapshots/am-oidc1.md | 3a393a40a0d18b3834c42d85467580fd0058e8c8f183495b080b653068b4d895 |
-| snapshots/crest.md | 9669a4db1a851667a112fd6e3dd0fccf6834942d6a8926dc8889cc9336d4f945 |
-| snapshots/am-scripting.md | 9bdb55143a0cc243cf8d61f0c6fcfa22aeebb28c523367c71c729991cb6a2d1b |
-| snapshots/am-authorization.md | df23995c5cfefa43baf5b969a890e9dd5dfc13af5cd31e319717c8e1b2239dad |
-| snapshots/am-rest.md | 0c0b9f4c4545361eea35319de8bba99931c2e242b4066d5fc59451e1849008d6 |
-| snapshots/identity-governance.md | ab8b75c2ce1d9b3c33279a36e8be09e53e7b0c061bdc98bc8c0fab0017f70945 |
-| snapshots/am-sessions.md | 5e1cd3577af871b035e3c638f869d08dd6d3999845c5820460e19463d1dc1a93 |
-| snapshots/api-custom-headers-md.md | 2438db871d26c27c3f7c19a19628186130220c7285a5939648f9d93e4101c4f5 |
-| snapshots/api-reference-md.md | d2f5651a802d534b25e463d0e85b7a99db206e7dec11bf456640a514598a70de |
-| snapshots/authenticate-to-rest-api-overview-md.md | 9e14c10f9eea5eb8b3340d223d0cd31ed518566992baaade2219a5ab45c793f6 |
-| snapshots/authenticate-to-rest-api-with-access-token-md.md | 6fca2528d87859214f102974b457139a082d5baa7f28997e218445c4db604ecb |
-| snapshots/authenticate-to-rest-api-with-api-key-and-secret-md.md | 3eff0361299393568df7dc02fa27f14439fbb488df00e1eecf063dedb419e0b8 |
-| snapshots/changelog-md.md | 22a5246b516c521b5c046dcd5bb97b510dbcb311dd71cfcf66216df659add67f |
-| snapshots/index-md.md | 301367c92b67a445a900a96a2cc56dddc5357ef678e50b3f67e2355d077fd7e3 |
-| snapshots/postman-collection-md.md | b45a436ff5f151ac8d6a6c3cd4ef7aa283228b01e5d39b5f9a93de5b476b9c7d |
-| snapshots/scripting-auth-md.md | 2f09843a698c9dd18a755fa789374037a3d22798567dfff333260d12f99443aa |
-| snapshots/scripting-custom-endpoints-md.md | 3912f440c0b14134004e7dff7a3f2ae071e2531de99c219e3035bde61c9e6f96 |
-| snapshots/scripting-event-hooks-md.md | 92e1fb0c545364c02f54359dc7d1c8241ef361984b8c39c6591f45393878c180 |
-| snapshots/scripting-md.md | 0d9c0d5b7db6e1efcfd6948ad0101d36c42ea615a31147fc1a08a40fb73c65ef |
+| snapshots/idm-rest-api.md | 74616d5c5778982dc8ab7742aa0eeabc1b8b96e6c4c8d2b9eabf2f413116c747 |
+| snapshots/am-oauth2.md | 986f1c2dcd483144af60fc1469c63694260a7e77a1093a3b08f83f389d9b1223 |
+| snapshots/crest.md | 2b2cc9073b90a395c8fa0619e10074fa4ffb30198e9bc90d6038cb856e79a4ed |
+| snapshots/am-scripting.md | 52ea88365b5ceca8f292af79f969a7f6944cfd96243bc6f4132200f668be3b1a |
+| snapshots/am-authorization.md | f5b173e4ea5f0e7cfa8afc24f8183e4d2b7d2436fa04197fa952d9a1d0b4d304 |
+| snapshots/am-rest.md | 2d1ccd49da7a682218a3414cae6fcb863298aa420f7c03ad824b6bca7bb170e6 |
+| snapshots/identity-governance.md | 889e0da3df9935f996ecfeeb39f257c8c01518c9ca7f1190a3c2d5eab6f6f350 |
+| snapshots/am-sessions.md | 5a696908ad1a945e83b5c1308c10fd72fe5e89105a650b7196561e6448a0b743 |
+| snapshots/api-custom-headers-md.md | 3114530fd4d1abc03b74e3135a4647374ab1553be9343e182b18fc6ed48796ee |
+| snapshots/api-reference-md.md | 4f527782517dba24fa547ac6cc2cf58518e04123c79cc3017d74d20573112108 |
+| snapshots/authenticate-to-rest-api-overview-md.md | c634614a9485d3cc7912541bc56e2030de6ad1b4a26c58735adcd425085daf10 |
+| snapshots/authenticate-to-rest-api-with-access-token-md.md | a0bd4a2dca0e62acecba52747dc526b739717feb0c3a3bd59ad0acb8830537a3 |
+| snapshots/authenticate-to-rest-api-with-api-key-and-secret-md.md | e1da9d4a6c2f72f78ba0ea04f179932ecccfd25e74a9e74b8a221d48206a4bf7 |
+| snapshots/changelog-md.md | 6b8e24aff343b5598f4c7eed55310c498a264fc113c7110b6c83b22ca6add200 |
+| snapshots/index-md.md | d77b68ce124ace6cef845a1b7d0fc00b03024b82fcebf4e099ef3d8bb95ba0c5 |
+| snapshots/postman-collection-md.md | 72ae4b574b6a976ba0505356a388471e2a2a4f5f78668216330ee7fc35fa5c6f |
+| snapshots/scripting-auth-md.md | cd2c9c410b63c55be6bd45e2a21a1310ef6d47c63cadfe2d27c93882f436087e |
+| snapshots/scripting-custom-endpoints-md.md | 1df8a9f6d2be9e88aa69982712c4bbb2d3a6e9138cf6321be8f82fb69934a778 |
+| snapshots/scripting-event-hooks-md.md | 5fc78c1eb7683965a12ac2bfd1aaa6af92455ef1793e5edebba702fec4e373ec |
+| snapshots/scripting-md.md | c7b51a7c94f44934961959511a3f2734a698ee4ff7181c16400be9c40e6a9c09 |

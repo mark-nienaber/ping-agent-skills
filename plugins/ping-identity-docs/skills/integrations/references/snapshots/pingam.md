@@ -4,6 +4,8 @@ description: The following is the change history for the PingAM Integration Kit.
 component: pingam
 page_id: pingam:release_notes:pf_pingam_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/pingam/release_notes/pf_pingam_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 21, 2026
 section_ids:
   pingam-integration-kit-1-4-may-2026: PingAM Integration Kit 1.4 - May 2026
@@ -69,6 +71,8 @@ description: Get session data from a PingAM journey (tree) to use in PingFederat
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_collecting_session_data_from_pingam
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_collecting_session_data_from_pingam.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 2, 2024
 section_ids:
   steps: Steps
@@ -192,6 +196,8 @@ description: Configure the PingAM IdP Adapter to determine how PingFederate comm
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 21, 2026
 section_ids:
   about-this-task: About this task
@@ -321,6 +327,8 @@ description: To get started with the integration, deploy the PingAM Integration 
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -360,6 +368,8 @@ description: The following files are included in the PingAM Integration Kit .zip
 component: pingam
 page_id: pingam:release_notes:pf_pingam_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/pingam/release_notes/pf_pingam_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2024
 ---
 
@@ -383,6 +393,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: pingam
 page_id: pingam:troubleshooting:pf_pingam_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/pingam/troubleshooting/pf_pingam_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2024
 section_ids:
   about-this-task: About this task
@@ -466,6 +478,8 @@ description: Extract data collected from PingFederate through the simple and adv
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_extracting_data_from_pf
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_extracting_data_from_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 12, 2025
 section_ids:
   steps: Steps
@@ -564,6 +578,8 @@ description: The following are known issues or limitations for the PingAM Integr
 component: pingam
 page_id: pingam:release_notes:pf_pingam_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/pingam/release_notes/pf_pingam_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 21, 2026
 section_ids:
   known-issues: Known issues
@@ -598,6 +614,8 @@ description: The following figure illustrates an example single sign-on (SSO) pr
 component: pingam
 page_id: pingam::pf_pingam_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/pingam/pf_pingam_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 12, 2025
 ---
 
@@ -629,6 +647,8 @@ description: Field descriptions for the PingAM IdP Adapter configuration screen.
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_pingam_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_pingam_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 21, 2026
 ---
 
@@ -673,6 +693,8 @@ description: The PingAM Integration Kit allows PingFederate to communicate with 
 component: pingam
 page_id: pingam::pf_pingam_ik
 canonical_url: https://docs.pingidentity.com/integrations/pingam/pf_pingam_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 23, 2025
 section_ids:
   components: Components
@@ -730,6 +752,8 @@ description: To use a PingAM journey, you must install PingAM and perform the ad
 component: pingam
 page_id: pingam:setup:pf_pingam_ik_using_pingam_journey
 canonical_url: https://docs.pingidentity.com/integrations/pingam/setup/pf_pingam_ik_using_pingam_journey.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 23, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -810,6 +834,8 @@ description: To help with application log debugging, you can track PingFederate 
 component: pingam
 page_id: pingam:troubleshooting:pf_pingam_ik_tracking_transactions
 canonical_url: https://docs.pingidentity.com/integrations/pingam/troubleshooting/pf_pingam_ik_tracking_transactions.html
+llms_txt: https://docs.pingidentity.com/integrations/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2024
 section_ids:
   about-this-task: About this task

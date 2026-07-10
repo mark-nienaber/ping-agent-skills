@@ -4,6 +4,8 @@ description: Lucidchart Connector 1.0 – June 2018 (current release)
 component: lucidchart
 page_id: lucidchart:release_notes:pf_lucidchart_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/release_notes/pf_lucidchart_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -25,6 +27,8 @@ description: To configure Lucidchart for SSO you will require metadata from your
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_configure_lucidchart_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_configure_lucidchart_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -91,6 +95,8 @@ description: The following section describes the steps for configuring single si
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_configure_pf_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_configure_pf_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -155,6 +161,8 @@ description: To configure a connection for outbound provisioning to Lucidchart, 
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_configure_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_configure_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -244,6 +252,8 @@ description: The following section describes the steps for configuring single si
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_configure_saml_sso
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_configure_saml_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -267,6 +277,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: lucidchart
 page_id: lucidchart:release_notes:pf_lucidchart_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/release_notes/pf_lucidchart_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -294,6 +306,8 @@ description: After enabling outbound provisioning in the <pf_install>/pingfedera
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_enable_outbound_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_enable_outbound_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -326,6 +340,8 @@ description: This section describes the common steps required to install the Pin
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_install_the_connector
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_install_the_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -368,6 +384,8 @@ description: Due to a limitation with PingFederate 8.1 and earlier versions, whe
 component: lucidchart
 page_id: lucidchart:release_notes:pf_lucidchart_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/release_notes/pf_lucidchart_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -393,6 +411,8 @@ description: The PingFederate Lucidchart Provisioner enables an enterprise to pr
 component: lucidchart
 page_id: lucidchart::pf_lucidchart_connector
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/pf_lucidchart_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   features: Features
@@ -448,6 +468,8 @@ description: Below are the tasks to enable SCIM provisioning on the Lucidchart A
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_obtain_base_url_and_bearer_token
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_obtain_base_url_and_bearer_token.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -484,6 +506,8 @@ description: The following table consists of the attributes that can be mapped f
 component: lucidchart
 page_id: lucidchart:setup:pf_lucidchart_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/setup/pf_lucidchart_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -508,6 +532,8 @@ description: The Lucidchart Provisioner synchronizes users from your datastore t
 component: lucidchart
 page_id: lucidchart::pf_lucidchart_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/lucidchart/pf_lucidchart_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/lucidchart/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

@@ -4,6 +4,8 @@ description: Descriptions of standard and advanced fields that you can configure
 component: akamai
 page_id: akamai:setup:pf-akamai-p7-adapter-settings-ref
 canonical_url: https://docs.pingidentity.com/integrations/akamai/setup/pf-akamai-p7-adapter-settings-ref.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 ---
 
@@ -33,6 +35,8 @@ description: Overview of the components, requirements, and benefits of integrati
 component: akamai
 page_id: akamai::pf-akamai-p1-homepage
 canonical_url: https://docs.pingidentity.com/integrations/akamai/pf-akamai-p1-homepage.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   components: Components
@@ -84,6 +88,8 @@ description: Learn how to create an Akamai Account Protector IdP Adapter instanc
 component: akamai
 page_id: akamai:setup:pf-akamai-p6-configuring-an-adapter-instance
 canonical_url: https://docs.pingidentity.com/integrations/akamai/setup/pf-akamai-p6-configuring-an-adapter-instance.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   steps: Steps
@@ -130,6 +136,8 @@ description: Download the Akamai Account Protector Integration Kit [.filepath]``
 component: akamai
 page_id: akamai:setup:pf-akamai-p5-deploying-the-integration-files
 canonical_url: https://docs.pingidentity.com/integrations/akamai/setup/pf-akamai-p5-deploying-the-integration-files.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   download-manifest: Download manifest
@@ -179,6 +187,8 @@ description: Configure activity logging to troubleshoot how your Akamai Account 
 component: akamai
 page_id: akamai:troubleshooting:pf-akamai-p9-enabling-debug-logging
 canonical_url: https://docs.pingidentity.com/integrations/akamai/troubleshooting/pf-akamai-p9-enabling-debug-logging.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   steps: Steps
@@ -243,6 +253,8 @@ description: Description of the SSO flow when using the Akamai Account Protector
 component: akamai
 page_id: akamai::pf-akamai-p2-sso-flow-overview
 canonical_url: https://docs.pingidentity.com/integrations/akamai/pf-akamai-p2-sso-flow-overview.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 ---
 
@@ -272,6 +284,8 @@ description: Release notes for the Akamai Account Protector Integration Kit.
 component: akamai
 page_id: akamai::pf-akamai-p3-rn
 canonical_url: https://docs.pingidentity.com/integrations/akamai/pf-akamai-p3-rn.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   version-1-0: Version 1.0
@@ -307,6 +321,8 @@ description: Setup tasks for the Akamai Account Protector Integration Kit.
 component: akamai
 page_id: akamai:setup:pf-akamai-p4-setup
 canonical_url: https://docs.pingidentity.com/integrations/akamai/setup/pf-akamai-p4-setup.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 ---
 
@@ -330,6 +346,8 @@ description: Guidance on how to configure a branching PingFederate authenticatio
 component: akamai
 page_id: akamai:setup:pf-akamai-p8-using-score
 canonical_url: https://docs.pingidentity.com/integrations/akamai/setup/pf-akamai-p8-using-score.html
+llms_txt: https://docs.pingidentity.com/integrations/akamai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 30, 2026
 section_ids:
   how-the-adapter-handles-requests-with-or-without-the-specified-request-header: How the adapter handles requests with or without the specified request header

@@ -29,6 +29,7 @@ section_ids:
   added-alerts-for-ldap-schema-element-changes: Added alerts for LDAP schema element changes
   improved-psa-logging-for-connection-errors: Improved PSA logging for connection errors
   removed-scim-1-1-support: Removed SCIM 1.1 support
+  deprecated-support-for-the-implicit-grant-type: Deprecated support for the Implicit grant type
   removed-the-swagger-ui-and-schema-generation-endpoints: Removed the Swagger UI and schema generation endpoints
   updated-the-opencsv-library: Updated the opencsv library
   upgraded-the-embedded-http-server-to-jetty-12: Upgraded the embedded HTTP server to Jetty 12
@@ -255,6 +256,12 @@ $ bin/dsconfig set-connection-handler-prop \
     --handler-name "HTTPS Connection Handler" \
     --remove http-servlet-extension:SCIM
 ``` |
+
+### Deprecated support for the Implicit grant type
+
+Info DS-51671 Delegated Admin
+
+We deprecated support for the Implicit grant type and will remove it in a future release. Use the Authorization Code with PKCE grant type instead. Learn more in [Changing the default OIDC grant type](../delegated_admin_application_guide/pd_da_change_oidc_grant_type.html).
 
 ### Removed the Swagger UI and schema generation endpoints
 

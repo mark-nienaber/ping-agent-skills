@@ -4,6 +4,8 @@ description: The following is the change history for the ForgeRock Intelligent A
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:release_notes:pf_forgerock_intelligent_access_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/release_notes/pf_forgerock_intelligent_access_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   forgerock-intelligent-access-integration-kit-1-0-february-2024: ForgeRock Intelligent Access Integration Kit 1.0 – February 2024
@@ -25,6 +27,8 @@ description: Configure the ForgeRock Intelligent Access IdP Adapter to determine
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:setup:pf_forgerock_intelligent_access_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/setup/pf_forgerock_intelligent_access_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -87,6 +91,8 @@ description: To get started with the integration, deploy the ForgeRock Intellige
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:setup:pf_forgerock_intelligent_access_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/setup/pf_forgerock_intelligent_access_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -126,6 +132,8 @@ description: The following files are included in the ForgeRock Intelligent Acces
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:release_notes:pf_forgerock_intelligent_access_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/release_notes/pf_forgerock_intelligent_access_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -149,6 +157,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:troubleshooting:pf_forgerock_intelligent_access_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/troubleshooting/pf_forgerock_intelligent_access_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -232,6 +242,8 @@ description: Field descriptions for the ForgeRock Intelligent Access IdP Adapter
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:setup:pf_forgerock_intelligent_access_ik_forgerock_intelligent_access_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/setup/pf_forgerock_intelligent_access_ik_forgerock_intelligent_access_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -265,6 +277,8 @@ description: The ForgeRock Intelligent Access Integration Kit allows PingFederat
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access::pf_forgerock_intelligent_access_ik
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/pf_forgerock_intelligent_access_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   components: Components
@@ -318,6 +332,8 @@ description: The following are known issues or limitations for the ForgeRock Int
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:release_notes:pf_forgerock_intelligent_access_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/release_notes/pf_forgerock_intelligent_access_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   known-limitations: Known limitations
@@ -341,6 +357,8 @@ description: The following figure illustrates an example SSO process flow.
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access::pf_forgerock_intelligent_access_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/pf_forgerock_intelligent_access_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -364,6 +382,8 @@ description: To use a ForgeRock Intelligent Access Journey, you must install For
 component: forgerock-intelligent-access
 page_id: forgerock-intelligent-access:setup:pf_forgerock_intelligent_access_ik_using_forgerock_intelligent_access_journey
 canonical_url: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/setup/pf_forgerock_intelligent_access_ik_using_forgerock_intelligent_access_journey.html
+llms_txt: https://docs.pingidentity.com/integrations/forgerock-intelligent-access/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   before-you-begin: Before you begin

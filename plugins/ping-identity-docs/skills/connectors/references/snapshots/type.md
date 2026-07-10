@@ -359,6 +359,12 @@ Authenticate users with Google in your flow.
 
 Manage Google Workspace users, groups, and application licenses in your flow.
 
+![](../_images/connector-logos/hello-logo.png)
+
+#### [Hellō Connector](../hello_connector.html)
+
+Use Hellō for user login and gather verified claims such as email, phone, and profile picture in your flow.
+
 ![](../_images/connector-logos/hypr-logo.png)
 
 #### [HYPR Connector](../hypr_connector.html)

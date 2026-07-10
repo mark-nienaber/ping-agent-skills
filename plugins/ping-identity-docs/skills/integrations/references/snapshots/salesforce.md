@@ -4,6 +4,8 @@ description: Create a dynamic single sign-on (SSO) link and add it to your Sales
 component: salesforce
 page_id: salesforce:salesforce_login_integration_kit:pf_salesforce_cic_add_an_sso_link_in_salesforce_example
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_login_integration_kit/pf_salesforce_cic_add_an_sso_link_in_salesforce_example.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   steps: Steps
@@ -102,6 +104,8 @@ description: The following is the change history for the Salesforce Contacts Pro
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -125,6 +129,8 @@ description: Salesforce Cloud Identity Connector 1.0 – January 2011
 component: salesforce
 page_id: salesforce:salesforce_login_integration_kit:pf_salesforce_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_login_integration_kit/pf_salesforce_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -142,6 +148,8 @@ description: The following is the change history for the Salesforce Provisioner.
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   salesforce-connector-7-0-1-april-2020: Salesforce Connector 7.0.1 – April 2020
@@ -329,6 +337,8 @@ description: For this configuration, you need to know your Salesforce.com Organi
 component: salesforce
 page_id: salesforce:salesforce_login_integration_kit:pf_salesforce_cic_configure_the_idp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_login_integration_kit/pf_salesforce_cic_configure_the_idp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -391,6 +401,8 @@ description: The following table lists the core attributes that can be mapped fo
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_contact_record_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_contact_record_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -453,6 +465,8 @@ description: To allow PingFederate to act as an identity provider and manage use
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -548,6 +562,8 @@ description: To allow PingFederate to manage users in Salesforce, configure a se
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -626,6 +642,8 @@ description: In your Salesforce administrative web interface, add a custom link 
 component: salesforce
 page_id: salesforce:salesforce_login_integration_kit:pf_salesforce_cic_define_the_sso_url_in_salesforce
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_login_integration_kit/pf_salesforce_cic_define_the_sso_url_in_salesforce.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -645,6 +663,8 @@ description: To get started with the integration, deploy the Salesforce Contacts
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   steps: Steps
@@ -686,6 +706,8 @@ description: To get started with the integration, deploy the Salesforce Provisio
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -729,6 +751,8 @@ description: The following files are included in the Salesforce .zip archive:
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -756,6 +780,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: salesforce
 page_id: salesforce:salesforce_login_integration_kit:pf_salesforce_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_login_integration_kit/pf_salesforce_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -783,6 +809,8 @@ description: The following files are included in the Salesforce Provisioner .zip
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -806,6 +834,8 @@ description: To use PingFederate for provisioning and SSO, configure an external
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -871,6 +901,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -906,6 +938,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -935,6 +969,8 @@ description: To use PingFederate for provisioning, configure an external datasto
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_enabling_provisioning_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_enabling_provisioning_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -986,6 +1022,8 @@ description: PingFederate needs an access token to manage users and groups using
 component: salesforce
 page_id: salesforce:salesforce_contacts_provisioner:pf_salesforce_contacts_connector_getting_an_api_access_token_from_salesforce
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_contacts_provisioner/pf_salesforce_contacts_connector_getting_an_api_access_token_from_salesforce.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -1032,6 +1070,8 @@ description: PingFederate and PingOne need an access token to manage users and g
 component: salesforce
 page_id: salesforce:salesforce_provisioner:pf_salesforce_connector_getting_an_api_access_token_from_salesforce
 canonical_url: https://docs.pingidentity.com/integrations/salesforce/salesforce_provisioner/pf_salesforce_connector_getting_an_api_access_token_from_salesforce.html
+llms_txt: https://docs.pingidentity.com/integrations/salesforce/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task

@@ -4,6 +4,8 @@ description: The following examples use the adapter's issuance criteria to put r
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_configuration_examples
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_configuration_examples.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 5, 2025
 section_ids:
   restrict-users-based-on-device-ownership: Restrict users based on device ownership
@@ -70,6 +72,8 @@ description: Configure the MobileIron Adapter to determine how PingFederate comm
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_creating_a_mobileiron_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_creating_a_mobileiron_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 section_ids:
   steps: Steps
@@ -136,6 +140,8 @@ description: To get started with the integration, deploy the MobileIron Integrat
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 section_ids:
   download-manifest: Download manifest
@@ -180,6 +186,8 @@ description: The MobileIron Integration Kit includes an identity provider (IdP) 
 component: mobileiron
 page_id: mobileiron::pf_mobileiron_ik
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/pf_mobileiron_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 section_ids:
   example-use-cases: Example use cases
@@ -239,6 +247,8 @@ description: The following figure shows a basic single sign-on (SSO) scenario in
 component: mobileiron
 page_id: mobileiron::pf_mobileiron_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/pf_mobileiron_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 section_ids:
   description: Description
@@ -276,6 +286,8 @@ description: The change history for the MobileIron Integration Kit.
 component: mobileiron
 page_id: mobileiron::pf_mobileiron_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/pf_mobileiron_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 section_ids:
   version-1-0: Version 1.0
@@ -311,6 +323,8 @@ description: To configure the MobileIron Integration Kit, complete the following
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_setup
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2026
 ---
 
@@ -332,6 +346,8 @@ description: The MobileIron Adapter retrieves the following attributes. You can 
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 5, 2025
 ---
 
@@ -370,6 +386,8 @@ description: Test the X509 Adapter and MobileIron Adapter's connection to Mobile
 component: mobileiron
 page_id: mobileiron:setup:pf_mobileiron_ik_testing_the_adapter
 canonical_url: https://docs.pingidentity.com/integrations/mobileiron/setup/pf_mobileiron_ik_testing_the_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/mobileiron/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 6, 2024
 section_ids:
   before-you-begin: Before you begin

@@ -4,6 +4,8 @@ description: The .NET Integration Kit allows PingFederate to communicate user at
 component: net
 page_id: net::pf_net_ik
 canonical_url: https://docs.pingidentity.com/integrations/net/pf_net_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   components: Components
@@ -61,6 +63,8 @@ description: .NET Integration Kit 2.5.4 – March 2020
 component: net
 page_id: net:release_notes:pf_net_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -168,6 +172,8 @@ description: Configure the OpenToken Adapter to determine how PingFederate commu
 component: net
 page_id: net:setup:pf_net_ik_configuring_an_opentoken_sp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_an_opentoken_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   steps: Steps
@@ -217,6 +223,8 @@ description: To see a working demonstration of the .NET Integration Kit, deploy 
 component: net
 page_id: net:setup:pf_net_ik_configuring_iis_to_use_the_sample_applications
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_iis_to_use_the_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   steps: Steps
@@ -272,6 +280,8 @@ description: To see a working demonstration of the .NET Integration Kit, deploy 
 component: net
 page_id: net:setup:pf_net_ik_configuring_pf_to_use_the_sample_applications
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_pf_to_use_the_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   about-this-task: About this task
@@ -312,6 +322,8 @@ description: You can configure the .NET Integration Kit to integrate PingFederat
 component: net
 page_id: net:setup:pf_net_ik_custom_application_setup
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_custom_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -329,6 +341,8 @@ description: To allow your web application to send and receive user attributes i
 component: net
 page_id: net:setup:pf_net_ik_deploying_the_opentoken_agent
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_deploying_the_opentoken_agent.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   steps: Steps
@@ -360,6 +374,8 @@ description: The following files are included in the .NET Integration Kit .zip a
 component: net
 page_id: net:release_notes:pf_net_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -399,6 +415,8 @@ description: When an IdP PingFederate server receives a request for SLO, it redi
 component: net
 page_id: net:setup:pf_net_ik_idp_single_logout_integration
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_idp_single_logout_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   logout-flow: Logout flow
@@ -445,6 +463,8 @@ description: When PingFederate is configured as an identity provider (IdP), it n
 component: net
 page_id: net:setup:pf_net_ik_idp_single_sign_on_integration
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_idp_single_sign_on_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   writing-attributes: Writing attributes
@@ -515,6 +535,8 @@ description: To use the .NET Integration Kit, modify your application to use the
 component: net
 page_id: net:setup:pf_net_ik_integrating_the_opentoken_agent_into_your_net_application
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_integrating_the_opentoken_agent_into_your_net_application.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   sample-code: Sample code
@@ -553,6 +575,8 @@ description: There are no known issues.
 component: net
 page_id: net:release_notes:pf_net_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   known-issues: Known issues
@@ -583,6 +607,8 @@ description: With the .NET Integration Kit, PingFederate exchanges user attribut
 component: net
 page_id: net::pf_net_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/net/pf_net_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -620,6 +646,8 @@ description: You can configure the .NET Integration Kit to work with the include
 component: net
 page_id: net:setup:pf_net_ik_sample_applications_setup
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sample_applications_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   components: Components
@@ -678,6 +706,8 @@ description: When an SP PingFederate server receives a request for SLO, it redir
 component: net
 page_id: net:setup:pf_net_ik_sp_single_logout_slo
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_logout_slo.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -711,6 +741,8 @@ description: When PingFederate is configured as an SP, it takes inbound SAML ass
 component: net
 page_id: net:setup:pf_net_ik_sp_single_sign_on_integration
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_sign_on_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   reading-attributes: Reading attributes
@@ -771,6 +803,8 @@ description: If an SP's SSO implementation employs account linking, the flow of 
 component: net
 page_id: net:setup:pf_net_ik_sp_single_sign_on_integration_using_account_linking
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_sign_on_integration_using_account_linking.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   linking-accounts: Linking accounts
@@ -821,6 +855,8 @@ description: You can test the .NET Integration Kit using one of the sample appli
 component: net
 page_id: net:setup:pf_net_ik_testing
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_testing.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 ---
 
@@ -842,6 +878,8 @@ description: The .NET Integration Kit relies on the OpenToken Adapter that is di
 component: net
 page_id: net:setup:pf_net_ik_updating_the_opentoken_adapter
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_updating_the_opentoken_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
 section_ids:
   steps: Steps
@@ -877,6 +915,8 @@ description: The .NET Integration Kit identity provider (IdP) sample application
 component: net
 page_id: net:setup:pf_net_ik_using_the_idp_sample_application
 canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_using_the_idp_sample_application.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task

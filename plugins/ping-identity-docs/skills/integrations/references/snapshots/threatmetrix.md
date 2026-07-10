@@ -4,6 +4,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_adding_review_statuses_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_adding_review_statuses_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   about-this-task: About this task
@@ -98,6 +100,8 @@ description: You can use the PingFederate authentication API to integrate the Th
 component: threatmetrix
 page_id: threatmetrix::pf_threatmetrix_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 ---
 
@@ -117,6 +121,8 @@ description: The following is the change history for the ThreatMetrix Integratio
 component: threatmetrix
 page_id: threatmetrix:release_notes:pf_threatmetrix_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/release_notes/pf_threatmetrix_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 29, 2025
 section_ids:
   threatmetrix-integration-kit-1-4-2-may-2026: ThreatMetrix Integration Kit 1.4.2 - May 2026
@@ -207,6 +213,8 @@ description: Configure the ThreatMetrix IdP Adapter to determine how PingFederat
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -278,6 +286,8 @@ description: To complete the integration, you'll need your ThreatMetrix organiza
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_configuring_threatmetrix
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_configuring_threatmetrix.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -335,6 +345,8 @@ description: To get started with the integration, deploy the ThreatMetrix Integr
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -374,6 +386,8 @@ description: ThreatMetrix requires a device profile to determine a review status
 component: threatmetrix
 page_id: threatmetrix::pf_threatmetrix_ik_device_profiling_methods
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik_device_profiling_methods.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 section_ids:
   choosing-a-device-profiling-method: Choosing a device profiling method
@@ -512,6 +526,8 @@ description: The following files are included in the ThreatMetrix Integration Ki
 component: threatmetrix
 page_id: threatmetrix:release_notes:pf_threatmetrix_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/release_notes/pf_threatmetrix_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 29, 2025
 ---
 
@@ -567,6 +583,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: threatmetrix
 page_id: threatmetrix:troubleshooting:pf_threatmetrix_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/troubleshooting/pf_threatmetrix_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 section_ids:
   about-this-task: About this task
@@ -656,6 +674,8 @@ description: Depending on your authentication mode and preferences, complete one
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_integrating_device_profiling
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_integrating_device_profiling.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -684,6 +704,8 @@ description: Instead of using the ThreatMetrix IdP Adapter to collect the device
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_integrating_device_profiling_mobile_or_native_app_enhanced
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_integrating_device_profiling_mobile_or_native_app_enhanced.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -724,6 +746,8 @@ description: If you have a web application that uses the PingFederate authentica
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_integrating_device_profiling_web_app_basic
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_integrating_device_profiling_web_app_basic.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -791,6 +815,8 @@ description: Instead of using the ThreatMetrix IdP Adapter to collect the device
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_integrating_device_profiling_web_app_enhanced
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_integrating_device_profiling_web_app_enhanced.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 section_ids:
   steps: Steps
@@ -872,6 +898,8 @@ description: The following are known issues or limitations for the ThreatMetrix 
 component: threatmetrix
 page_id: threatmetrix:release_notes:pf_threatmetrix_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/release_notes/pf_threatmetrix_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 29, 2025
 section_ids:
   known-issues: Known issues
@@ -898,6 +926,8 @@ description: With the ThreatMetrix Integration Kit, PingFederate includes Threat
 component: threatmetrix
 page_id: threatmetrix::pf_threatmetrix_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 section_ids:
   description: Description
@@ -943,6 +973,8 @@ description: ThreatMetrix evaluates the level of security risk for a user sign-o
 component: threatmetrix
 page_id: threatmetrix::pf_threatmetrix_ik_overview_of_threatmetrix
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik_overview_of_threatmetrix.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 section_ids:
   device-profile: Device profile
@@ -996,6 +1028,8 @@ description: The following are setting descriptions for the ThreatMetrix IdP Ada
 component: threatmetrix
 page_id: threatmetrix:setup:pf_threatmetrix_ik_threatmetrix_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/setup/pf_threatmetrix_ik_threatmetrix_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 30, 2025
 ---
 
@@ -1056,6 +1090,8 @@ description: The ThreatMetrix Integration Kit allows PingFederate to communicate
 component: threatmetrix
 page_id: threatmetrix::pf_threatmetrix_ik
 canonical_url: https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/threatmetrix/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 28, 2025
 section_ids:
   features: Features

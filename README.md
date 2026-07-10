@@ -171,22 +171,23 @@ scripts/validate.sh --require-all-enabled
 
 `--require-all-enabled` checks that every enabled registry entry has a generated skill. When URL checks are enabled, validation also samples live Markdown URLs and checks each live `llms.txt` endpoint.
 
-Prove representative routing decisions:
+Prove routing for every installed docset skill plus curated complex cases:
 
 ```bash
-scripts/routing-proof.sh --assert-defaults
+scripts/routing-proof.sh
 ```
 
-The proof samples cover PingAM, DaVinci, PingFederate, PingDirectory, PingAccess, PingOne application policy configuration, PingOne Authorize OAuth/API policy configuration, PingOne AIC journey scripting, and an AIC/RCS LDAP truststore troubleshooting case that routes to OpenICF connector documentation.
+The proof command generates one deterministic route sample for every enabled skill that exists locally, adds curated complex product-knowledge cases, fails on unexpected skill or guide routing, and writes `reports/routing-proof.html` by default. The curated cases cover PingAM, DaVinci, PingFederate, PingDirectory, PingAccess, PingOne application policy configuration, PingOne Authorize OAuth/API policy configuration, PingOne AIC journey scripting, and an AIC/RCS LDAP truststore troubleshooting case that routes to OpenICF connector documentation.
 
-Render a visual HTML proof report:
+Useful options:
 
 ```bash
-scripts/render-proof-report.sh
-open reports/routing-proof.html
+scripts/routing-proof.sh --no-report
+scripts/routing-proof.sh --include-live-validation
+scripts/routing-proof.sh --output reports/custom-routing-proof.html
 ```
 
-The report includes validation output, route diagrams, selected live URLs, and fallback snapshot paths.
+The report includes validation output, route diagrams, selected live URLs, and fallback snapshot paths. Live URL validation is optional so the default proof remains deterministic and works offline.
 
 ## Layout
 

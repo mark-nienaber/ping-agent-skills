@@ -4,6 +4,8 @@ description: To allow PingFederate to manage users in ServiceNow, add the specia
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_adding_the_ping_identity_provisioning_role_in_servicenow
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_adding_the_ping_identity_provisioning_role_in_servicenow.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -61,6 +63,8 @@ description: The following is the change history for the ServiceNow Provisioner.
 component: servicenow
 page_id: servicenow:release_notes:pf_servicenow_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/release_notes/pf_servicenow_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   servicenow-provisioner-2-3-november-2023: ServiceNow Provisioner 2.3 – November 2023
@@ -149,6 +153,8 @@ description: To allow PingFederate to manage users in ServiceNow, create a user 
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_configuring_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_configuring_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -182,6 +188,8 @@ description: To allow PingFederate to act as an identity provider for ServiceNow
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -230,6 +238,8 @@ description: To allow PingFederate to manage users in ServiceNow, configure a se
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -287,6 +297,8 @@ description: To allow PingFederate to connect to ServiceNow, create a provisioni
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_creating_a_provisioning_user_in_servicenow
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_creating_a_provisioning_user_in_servicenow.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -330,6 +342,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to ServiceNow,
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -390,6 +404,8 @@ description: To get started with the integration, deploy the ServiceNow Provisio
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -427,6 +443,8 @@ description: The following files are included in the ServiceNow Provisioner .zip
 component: servicenow
 page_id: servicenow:release_notes:pf_servicenow_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/release_notes/pf_servicenow_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 ---
 
@@ -450,6 +468,8 @@ description: To use PingFederate for provisioning, configure an external datasto
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_enabling_provisioning_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_enabling_provisioning_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -503,6 +523,8 @@ description: To allow PingFederate and ServiceNow to communicate securely, excha
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_exchanging_signing_certificates
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_exchanging_signing_certificates.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -564,6 +586,8 @@ description: The following are known issues or limitations with the ServiceNow C
 component: servicenow
 page_id: servicenow:release_notes:pf_servicenow_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/release_notes/pf_servicenow_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   known-issues: Known issues
@@ -626,6 +650,8 @@ description: The following are setting descriptions for the ServiceNow provision
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_provisioning_options_reference
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_provisioning_options_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 ---
 
@@ -673,6 +699,8 @@ description: To allow PingFederate to coordinate authentication for ServiceNow, 
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_registering_pf_as_an_identity_provider_in_servicenow
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_registering_pf_as_an_identity_provider_in_servicenow.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   about-this-task: About this task
@@ -727,6 +755,8 @@ description: The PingFederate ServiceNow Provisioner allows PingFederate to inte
 component: servicenow
 page_id: servicenow::pf_servicenow_connector
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/pf_servicenow_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   features: Features
@@ -822,6 +852,8 @@ description: The following attributes can be mapped for user provisioning to Ser
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -870,6 +902,8 @@ description: If you are upgrading from a previous version of the ServiceNow Prov
 component: servicenow
 page_id: servicenow:setup:pf_servicenow_connector_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/setup/pf_servicenow_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   steps: Steps
@@ -919,6 +953,8 @@ description: The ServiceNow Provisioner links users from the data store to Servi
 component: servicenow
 page_id: servicenow::pf_servicenow_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/servicenow/pf_servicenow_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/servicenow/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

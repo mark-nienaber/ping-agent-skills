@@ -2,7 +2,7 @@
 
 - Product: Enterprise Connect
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/enterprise-connect/llms.txt
 - Guides discovered: 1
 - Guides captured: 1

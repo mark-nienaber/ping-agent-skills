@@ -1480,6 +1480,7 @@
 - [Task 3: Test The Workflow](https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/saml/saml-sign-on-flow/test-the-workflow.md)
 - [Test Connection Configuration](https://developer.pingidentity.com/pingone-api/platform/identity-propagation-provisioning/propagation-stores/test-connection-configuration.md)
 - [Test Push Notifications](https://developer.pingidentity.com/pingone-api/platform/notifications/send-notifications/test_push_notifications.md)
+- [Test Subscription](https://developer.pingidentity.com/pingone-api/platform/subscriptions-webhooks/test-subscription.md)
 - [The PingOne Postman collections](https://developer.pingidentity.com/pingone-api/before-you-begin/postman-and-pingone/download-the-pingone-postman-collections.md)
 - [The PingOne Postman collections](https://developer.pingidentity.com/pingone-api/auth/working-with-pingone-apis/postman-and-pingone/download-the-pingone-postman-collections.md)
 - [The PingOne Postman collections](https://developer.pingidentity.com/pingone-api/authorize/working-with-pingone-apis/postman-and-pingone/download-the-pingone-postman-collections.md)

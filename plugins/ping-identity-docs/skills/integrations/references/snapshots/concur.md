@@ -4,6 +4,8 @@ description: Concur Connector 1.0 – May 2015 (current release)
 component: concur
 page_id: concur:release_notes:pf_concur_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/concur/release_notes/pf_concur_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -25,6 +27,8 @@ description: The PingFederate Concur Provisioner enables an enterprise to provis
 component: concur
 page_id: concur::pf_concur_connector
 canonical_url: https://docs.pingidentity.com/integrations/concur/pf_concur_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   features: Features
@@ -74,6 +78,8 @@ description: To proceed with configuring Concur for single sign-on (SSO), you mu
 component: concur
 page_id: concur:setup:pf_concur_connector_configure_concur_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_configure_concur_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -106,6 +112,8 @@ description: The following section describes the steps for configuring single si
 component: concur
 page_id: concur:setup:pf_concur_connector_configure_pf_for_sso
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_configure_pf_for_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -164,6 +172,8 @@ description: To configure a connection for outbound provisioning to Concur, foll
 component: concur
 page_id: concur:setup:pf_concur_connector_configure_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_configure_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -248,6 +258,8 @@ description: The following section describes the steps for configuring single si
 component: concur
 page_id: concur:setup:pf_concur_connector_configure_saml_sso
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_configure_saml_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -267,6 +279,8 @@ description: "The distribution .zip: Archive for the connector contains the foll
 component: concur
 page_id: concur:release_notes:pf_concur_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/concur/release_notes/pf_concur_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -296,6 +310,8 @@ description: After enabling outbound provisioning in the <pf_install>/pingfedera
 component: concur
 page_id: concur:setup:pf_concur_connector_enable_outbound_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_enable_outbound_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -328,6 +344,8 @@ description: In a browser, go to the Ping Identity OAuth Configuration Service.
 component: concur
 page_id: concur:setup:pf_concur_connector_generate_oauth_access_token
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_generate_oauth_access_token.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -371,6 +389,8 @@ description: This section describes the common steps required to install the Pin
 component: concur
 page_id: concur:setup:pf_concur_connector_install_the_connector
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_install_the_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -415,6 +435,8 @@ description: Due to a limitation with PingFederate 8.1 and earlier versions, whe
 component: concur
 page_id: concur:release_notes:pf_concur_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/concur/release_notes/pf_concur_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -444,6 +466,8 @@ description: The Concur Connectors Outbound Provisioning functionality is built 
 component: concur
 page_id: concur:setup:pf_concur_connector_obtain_key_and_secret
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_obtain_key_and_secret.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -490,6 +514,8 @@ description: The following table consists of the attributes that can be mapped o
 component: concur
 page_id: concur:setup:pf_concur_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/concur/setup/pf_concur_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -534,6 +560,8 @@ description: The Concur Provisioner synchronizes users from your datastore to Co
 component: concur
 page_id: concur::pf_concur_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/concur/pf_concur_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/concur/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

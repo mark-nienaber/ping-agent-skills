@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<link rel="canonical" href="https://docs.pingidentity.com/pingds/release-notes/preface.html">
-<script>location="preface.html"</script>
-<meta http-equiv="refresh" content="0; url=preface.html">
-<meta name="robots" content="noindex">
-<title>Redirect Notice</title>
-<h1>Redirect Notice</h1>
-<p>The page you requested has been relocated to <a href="preface.html">https://docs.pingidentity.com/pingds/release-notes/preface.html</a>.</p>

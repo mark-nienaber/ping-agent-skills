@@ -4,6 +4,8 @@ description: Documentation for PingFederate and select PingOne Integrations. You
 component: ROOT
 page_id: ROOT::index
 canonical_url: https://docs.pingidentity.com/integrations/index.html
+llms_txt: https://docs.pingidentity.com/integrations/ROOT/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   a-e: A-E
   f-j: F-J

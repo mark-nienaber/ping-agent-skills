@@ -331,15 +331,17 @@ Consider the following points when upgrading your version of Delegated Admin.
 
 ## Considerations
 
-|   |                                                                                                                                                                                                                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you're running Delegated Admin 3.5 or earlier, upgrade it to the latest version to use PingDirectory 8.0 or later.For information about the compatibility between Delegated Admin and PingDirectory server versions, see the [Compatibility matrix](../delegated_admin_application_guide/pd_da_compatibility_matrix.html). |
+If you're running Delegated Admin 3.5 or earlier, upgrade it to the latest version to use PingDirectory 8.0 or later.
+
+Learn more about the compatibility between Delegated Admin and PingDirectory server versions in the [Compatibility matrix](../delegated_admin_application_guide/pd_da_compatibility_matrix.html).
+
+|   |                                                                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | We deprecated support for the Implicit grant type and will remove it in a future release. Use the Authorization Code with PKCE grant type instead. Learn more in [Changing the default OIDC grant type](../delegated_admin_application_guide/pd_da_change_oidc_grant_type.html). |
 
 ## Upgrade considerations introduced in Delegated Admin 4.9
 
 The default OpenID Connect (OIDC) grant type used by the `dadmin` client has been updated to Authorization Code with PKCE. The Delegated Admin application will continue to function normally with the Implicit grant type.
-
-If you want to switch to Authorization Code with PKCE, see [Changing the default OIDC grant type](../delegated_admin_application_guide/pd_da_change_oidc_grant_type.html).
 
 ## Upgrade considerations introduced in Delegated Admin 4.8
 
@@ -349,9 +351,7 @@ Two new permissions that affect user resource types have been added in Delegated
 
 * `Reset-password` grants the permission to reset passwords without the ability to change other user attributes.
 
-To preserve current admin rights, no action is required after you upgrade.
-
-For more information, see [Configuring delegated administrator rights on the PingDirectory server](../delegated_admin_application_guide/pd_da_config_delegated_admin_rights_pd_server.html).
+To preserve current admin rights, no action is required after you upgrade. Learn more in [Configuring delegated administrator rights on the PingDirectory server](../delegated_admin_application_guide/pd_da_config_delegated_admin_rights_pd_server.html).
 
 ## Upgrade considerations introduced in Delegated Admin 4.6
 

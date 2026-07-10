@@ -20,8 +20,8 @@ jobs:
       - name: Validate skill structure
         run: scripts/validate.sh --skip-url-check
 
-      - name: Validate routing proof samples
-        run: scripts/routing-proof.sh --assert-defaults
+      - name: Validate routing proof and report
+        run: scripts/routing-proof.sh
 
       - name: Validate sampled live URLs
         run: scripts/validate.sh --url-sample-max 5

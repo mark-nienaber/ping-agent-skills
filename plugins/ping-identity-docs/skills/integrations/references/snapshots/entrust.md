@@ -4,6 +4,8 @@ description: You can use the PingFederate authentication API to integrate the En
 component: entrust
 page_id: entrust:authentication_api_support:pf_entrust_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/entrust/authentication_api_support/pf_entrust_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -21,6 +23,8 @@ description: The following is the change history for the Entrust Identity Enterp
 component: entrust
 page_id: entrust:release_notes:pf_entrust_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/entrust/release_notes/pf_entrust_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   entrust-identity-enterprise-integration-kit-1-5-february-2024: Entrust Identity Enterprise Integration Kit 1.5 - February 2024
@@ -89,6 +93,8 @@ description: Configure the Entrust IdP Adapter to determine how PingFederate com
 component: entrust
 page_id: entrust:setup:pf_entrust_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/entrust/setup/pf_entrust_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   steps: Steps
@@ -134,6 +140,8 @@ description: To get started with the integration, deploy the Entrust Identity En
 component: entrust
 page_id: entrust:setup:pf_entrust_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/entrust/setup/pf_entrust_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -180,6 +188,8 @@ description: The following files are included in the Entrust Identity Enterprise
 component: entrust
 page_id: entrust:release_notes:pf_entrust_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/entrust/release_notes/pf_entrust_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -247,6 +257,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: entrust
 page_id: entrust:troubleshooting:pf_entrust_ik_enable_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/entrust/troubleshooting/pf_entrust_ik_enable_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -310,6 +322,8 @@ description: The Entrust Identity Enterprise Integration Kit allows PingFederate
 component: entrust
 page_id: entrust::pf_entrust_ik
 canonical_url: https://docs.pingidentity.com/integrations/entrust/pf_entrust_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   features: Features
@@ -368,6 +382,8 @@ description: Field descriptions for the Entrust IdP Adapter configuration screen
 component: entrust
 page_id: entrust:setup:pf_entrust_ik_entrust_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/entrust/setup/pf_entrust_ik_entrust_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -410,6 +426,8 @@ description: The following are known issues or limitations for the Entrust Ident
 component: entrust
 page_id: entrust:release_notes:pf_entrust_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/entrust/release_notes/pf_entrust_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   known-issues: Known issues
@@ -438,6 +456,8 @@ description: When using the Entrust IdP Adapter through the PingFederate authent
 component: entrust
 page_id: entrust:authentication_api_support:pf_entrust_ik_models_objects_and_error_codes
 canonical_url: https://docs.pingidentity.com/integrations/entrust/authentication_api_support/pf_entrust_ik_models_objects_and_error_codes.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   state-models: State models
@@ -554,6 +574,8 @@ description: With the Entrust Identity Enterprise Integration Kit, PingFederate 
 component: entrust
 page_id: entrust::pf_entrust_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/entrust/pf_entrust_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   description: Description
@@ -603,6 +625,8 @@ description: To process sign-on requests, PingFederate requires access to the En
 component: entrust
 page_id: entrust:setup:pf_entrust_ik_registering_pf_as_an_application_in_entrust
 canonical_url: https://docs.pingidentity.com/integrations/entrust/setup/pf_entrust_ik_registering_pf_as_an_application_in_entrust.html
+llms_txt: https://docs.pingidentity.com/integrations/entrust/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task

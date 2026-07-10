@@ -4,6 +4,8 @@ description: To allow PingFederate to coordinate authentication with Code42, upl
 component: code42-pingfederate
 page_id: code42-pingfederate:single_sign-on_setup:pf_code42_integration_adding_pf_as_an_authentication_provider_in_code42
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/single_sign-on_setup/pf_code42_integration_adding_pf_as_an_authentication_provider_in_code42.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -33,6 +35,8 @@ description: To get your base URL and credentials to access Code42 API, add Ping
 component: code42-pingfederate
 page_id: code42-pingfederate:provisioning_setup:pf_code42_integration_adding_pf_as_scim_provider_in_code42
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/provisioning_setup/pf_code42_integration_adding_pf_as_scim_provider_in_code42.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -62,6 +66,8 @@ description: You can integrate PingFederate with Code42 for user provisioning an
 component: code42-pingfederate
 page_id: code42-pingfederate::pf_code42_integration
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/pf_code42_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   features: Features
@@ -141,6 +147,8 @@ description: Integrating PingFederate with Code42 requires a specific attribute 
 component: code42-pingfederate
 page_id: code42-pingfederate:provisioning_setup:pf_code42_integration_creating_a_channel
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/provisioning_setup/pf_code42_integration_creating_a_channel.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -195,6 +203,8 @@ description: To allow PingFederate to manage users in Code42 using SCIM, create 
 component: code42-pingfederate
 page_id: code42-pingfederate:provisioning_setup:pf_code42_integration_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/provisioning_setup/pf_code42_integration_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -258,6 +268,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to Code42, cre
 component: code42-pingfederate
 page_id: code42-pingfederate:single_sign-on_setup:pf_code42_integration_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/single_sign-on_setup/pf_code42_integration_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -333,6 +345,8 @@ description: To get started with the integration, deploy the SCIM Connector file
 component: code42-pingfederate
 page_id: code42-pingfederate::pf_code42_integration_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/pf_code42_integration_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -374,6 +388,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: code42-pingfederate
 page_id: code42-pingfederate:enabling_provisioning_and_single_sign-on_in_pingfederate:pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/enabling_provisioning_and_single_sign-on_in_pingfederate/pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -439,6 +455,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: code42-pingfederate
 page_id: code42-pingfederate:enabling_provisioning_and_single_sign-on_in_pingfederate:pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/enabling_provisioning_and_single_sign-on_in_pingfederate/pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -474,6 +492,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: code42-pingfederate
 page_id: code42-pingfederate:enabling_provisioning_and_single_sign-on_in_pingfederate:pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/enabling_provisioning_and_single_sign-on_in_pingfederate/pf_code42_integration_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -503,6 +523,8 @@ description: Export a metadata file that describes your PingFederate identity pr
 component: code42-pingfederate
 page_id: code42-pingfederate:single_sign-on_setup:pf_code42_integration_exporting_saml_metadata_from_pf
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/single_sign-on_setup/pf_code42_integration_exporting_saml_metadata_from_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   about-this-task: About this task
@@ -556,6 +578,8 @@ description: Lists the configuration settings for the SCIM Connector when integr
 component: code42-pingfederate
 page_id: code42-pingfederate:provisioning_setup:pf_code42_integration_scim_connector_settings_reference_for_code42
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/provisioning_setup/pf_code42_integration_scim_connector_settings_reference_for_code42.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -592,6 +616,8 @@ description: Lists the attributes that can be mapped for user provisioning to Co
 component: code42-pingfederate
 page_id: code42-pingfederate:provisioning_setup:pf_code42_integration_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/provisioning_setup/pf_code42_integration_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 ---
 
@@ -626,6 +652,8 @@ description: If you're upgrading from a previous version of the SCIM Connector, 
 component: code42-pingfederate
 page_id: code42-pingfederate:updating_an_existing_deployment:pf_code42_integration_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingfederate/updating_an_existing_deployment/pf_code42_integration_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   updating-an-existing-deployment-in-pingfederate-10-1-or-later: Updating an existing deployment in PingFederate 10.1 or later

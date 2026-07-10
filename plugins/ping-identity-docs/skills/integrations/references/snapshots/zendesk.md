@@ -4,6 +4,8 @@ description: Zendesk Connector 2.1 – June 2017 (current release)
 component: zendesk
 page_id: zendesk:release_notes:pf_zendesk_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/release_notes/pf_zendesk_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -33,6 +35,8 @@ description: The following section describes the steps for configuring SP and Id
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_configuring_saml_sso_in_zendesk
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_configuring_saml_sso_in_zendesk.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   about-this-task: About this task
@@ -77,6 +81,8 @@ description: To allow PingFederate to act as an identity provider and manage use
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   steps: Steps
@@ -142,6 +148,8 @@ description: To get started with the integration, deploy the Zendesk Provisioner
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   steps: Steps
@@ -181,6 +189,8 @@ description: The distribution .zip archive for the Connector contains the follow
 component: zendesk
 page_id: zendesk:release_notes:pf_zendesk_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/release_notes/pf_zendesk_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -208,6 +218,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   about-this-task: About this task
@@ -273,6 +285,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -308,6 +322,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -337,6 +353,8 @@ description: Known Limitations
 component: zendesk
 page_id: zendesk:release_notes:pf_zendesk_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/release_notes/pf_zendesk_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -364,6 +382,8 @@ description: Before you can configure this connector, you must complete the foll
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_obtain_required_information
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_obtain_required_information.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   obtain-your-zendesk-administrator-email: Obtain your Zendesk administrator email
@@ -466,6 +486,8 @@ description: This connector requires a valid administrator account email to be u
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_obtain_your_zendesk_administrator_email
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_obtain_your_zendesk_administrator_email.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -485,6 +507,8 @@ description: The Zendesk Connector's outbound provisioning functionality is buil
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_obtain_your_zendesk_api_token
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_obtain_your_zendesk_api_token.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   about-this-task: About this task
@@ -523,6 +547,8 @@ description: This connectors quick-connection template uses a metadata XML file 
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_obtain_your_zendesk_saml_20_metadata_xml_file
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_obtain_your_zendesk_saml_20_metadata_xml_file.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -556,6 +582,8 @@ description: This connector requires the subdomain, such as <YourSubDomain>.zend
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_obtain_your_zendesk_subdomain
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_obtain_your_zendesk_subdomain.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -571,6 +599,8 @@ description: When configuring the connector, make sure that the value mapped to 
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_provision_existing_user_accounts_on_zendesk
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_provision_existing_user_accounts_on_zendesk.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -590,6 +620,8 @@ description: The following table consists of the attributes that can be mapped o
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 ---
 
@@ -626,6 +658,8 @@ description: If you're upgrading from a previous version of the Zendesk Provisio
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   upgrading-an-existing-deployment-in-pingfederate-10-1-or-later: Upgrading an existing deployment in PingFederate 10.1 or later
@@ -694,6 +728,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -731,6 +767,8 @@ description: Back up your current PingFederate configuration as shown in Configu
 component: zendesk
 page_id: zendesk:setup:pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -768,6 +806,8 @@ description: The Zendesk Provisioner synchronizes users and groups from your dat
 component: zendesk
 page_id: zendesk::pf_zendesk_connector_user_and_group_management
 canonical_url: https://docs.pingidentity.com/integrations/zendesk/pf_zendesk_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 17, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

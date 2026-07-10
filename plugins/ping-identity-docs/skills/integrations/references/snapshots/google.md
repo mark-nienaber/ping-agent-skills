@@ -4,6 +4,8 @@ description: After configuring PingFederate and deploying the application, users
 component: google
 page_id: google:google_workspace_provisioner:pf_google_workforce_connector_access_the_password_manager
 canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_access_the_password_manager.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 
@@ -31,6 +33,8 @@ description: The Google IdP Adapter can retrieve the following user attributes f
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_available_user_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_available_user_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 
@@ -89,6 +93,8 @@ description: The following is the change history for the Google Chrome Enterpris
 component: google
 page_id: google:google_chrome_enterprise_integration_kit:pf_google_chrome_enterprise_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/google/google_chrome_enterprise_integration_kit/pf_google_chrome_enterprise_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 8, 2026
 section_ids:
   version-1-0-2: Version 1.0.2
@@ -126,6 +132,8 @@ description: The following is the change history for the Google Login Integratio
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-1-5-3-january-2026: Version 1.5.3 - January 2026
@@ -236,6 +244,8 @@ description: In order to setup your Google Apps account for SSO you will need to
 component: google
 page_id: google:google_workspace_provisioner:pf_google_workforce_connector_complete_setup_of_saml_sso_to_google_apps
 canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_complete_setup_of_saml_sso_to_google_apps.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -298,6 +308,8 @@ description: Copy gapps-password-manager.war from the dist/gapps-password-manage
 component: google
 page_id: google:google_workspace_provisioner:pf_google_workforce_connector_configure_and_deploy_the_password_manager
 canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_configure_and_deploy_the_password_manager.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   steps: Steps
@@ -337,6 +349,8 @@ description: Configure the Google Chrome Enterprise Device Trust IdP Adapter to 
 component: google
 page_id: google:google_chrome_enterprise_integration_kit:pf_google_chrome_enterprise_ik_configuring_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/google/google_chrome_enterprise_integration_kit/pf_google_chrome_enterprise_ik_configuring_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -405,6 +419,8 @@ description: Configure the Google IdP Adapter to determine how PingFederate comm
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 6, 2026
 section_ids:
   steps: Steps
@@ -450,6 +466,8 @@ description: To enable SSO to an application within the PingFederate domain, con
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_configuring_sso_to_an_application_within_the_pf_domain
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_configuring_sso_to_an_application_within_the_pf_domain.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   steps: Steps
@@ -488,6 +506,8 @@ description: To enable SSO to a service provider (SP) outside the PingFederate d
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_configuring_sso_to_an_sp_outside_the_pf_domain
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_configuring_sso_to_an_sp_outside_the_pf_domain.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   steps: Steps
@@ -523,6 +543,8 @@ description: To allow PingFederate to act as an identity provider and manage use
 component: google
 page_id: google:google_workspace_provisioner:pf_google_workforce_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 23, 2024
 section_ids:
   steps: Steps
@@ -608,6 +630,8 @@ description: The Password Manager is located in the Google Workspace Provisioner
 component: google
 page_id: google:google_workspace_provisioner:pf_google_workforce_connector_deploying_the_application
 canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_deploying_the_application.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 
@@ -629,6 +653,8 @@ description: To get started with the integration, deploy the Google Chrome Enter
 component: google
 page_id: google:google_chrome_enterprise_integration_kit:pf_google_chrome_enterprise_ik_deploying_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/google/google_chrome_enterprise_integration_kit/pf_google_chrome_enterprise_ik_deploying_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -659,54 +685,12 @@ Sign up for Chrome Browser Cloud Management and enroll cloud-managed Chrome brow
 
 ---
 title: Deploying the integration files
-description: To get started with the integration, deploy the Google Workspace Provisioner files to your PingFederate directory.
-component: google
-page_id: google:google_workspace_provisioner:pf_google_workforce_connector_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_deploying_the_integration_files.html
-revdate: June 24, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Deploying the integration files
-
-## About this task
-
-To get started with the integration, deploy the Google Workspace Provisioner files to your PingFederate directory.
-
-## Steps
-
-1. Download the Google Workspace Provisioner `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/google-workspace-provisioner).
-
-2. Stop the PingFederate server if it is running.
-
-3. Remove any existing Google Workspace Provisioner files from the directory:
-
-   `<PF_install>/pingfederate/server/default/deploy`
-
-4. Unzip the distribution file and copy the contents of the `/dist` directory to the PingFederate directory:
-
-   `<PF_install>/pingfederate/server/default/deploy`
-
-5. Edit the `run.properties` file located in `<pf_install>/pingfederate/bin`, changing the property `pf.provisioner.mode` to the value shown here:
-
-   `pf.provisioner.mode=STANDALONE`
-
-   The property is located near the end of the file.
-
-   For information about using the `FAILOVER` setting for runtime deployment, see the PingFederate [Server Clustering Guide](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_server_clustering_guide.html).
-
-6. Start or restart the PingFederate server.
-
----
-
----
-title: Deploying the integration files
 description: To get started with the integration, deploy the Google Login Integration Kit files to your PingFederate directory.
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -748,11 +732,59 @@ To get started with the integration, deploy the Google Login Integration Kit fil
 ---
 
 ---
+title: Deploying the integration files
+description: To get started with the integration, deploy the Google Workspace Provisioner files to your PingFederate directory.
+component: google
+page_id: google:google_workspace_provisioner:pf_google_workforce_connector_deploying_the_integration_files
+canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 24, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Deploying the integration files
+
+## About this task
+
+To get started with the integration, deploy the Google Workspace Provisioner files to your PingFederate directory.
+
+## Steps
+
+1. Download the Google Workspace Provisioner `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/google-workspace-provisioner).
+
+2. Stop the PingFederate server if it is running.
+
+3. Remove any existing Google Workspace Provisioner files from the directory:
+
+   `<PF_install>/pingfederate/server/default/deploy`
+
+4. Unzip the distribution file and copy the contents of the `/dist` directory to the PingFederate directory:
+
+   `<PF_install>/pingfederate/server/default/deploy`
+
+5. Edit the `run.properties` file located in `<pf_install>/pingfederate/bin`, changing the property `pf.provisioner.mode` to the value shown here:
+
+   `pf.provisioner.mode=STANDALONE`
+
+   The property is located near the end of the file.
+
+   For information about using the `FAILOVER` setting for runtime deployment, see the PingFederate [Server Clustering Guide](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_server_clustering_guide.html).
+
+6. Start or restart the PingFederate server.
+
+---
+
+---
 title: Download manifest
 description: The following files are included in the Google Chrome Enterprise Integration Kit .zip archive.
 component: google
 page_id: google:google_chrome_enterprise_integration_kit:pf_google_chrome_enterprise_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/google/google_chrome_enterprise_integration_kit/pf_google_chrome_enterprise_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 
@@ -772,33 +804,12 @@ The following files are included in the Google Chrome Enterprise Integration Kit
 
 ---
 title: Download manifest
-description: The distribution .zip archive for the Google Workspace Provisioner contains the following:
-component: google
-page_id: google:google_workspace_provisioner:pf_google_workforce_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_download_manifest.html
-revdate: June 24, 2024
----
-
-# Download manifest
-
-The distribution `.zip` archive for the Google Workspace Provisioner contains the following:
-
-* `dist` – contains the integration files
-
-  * `gapps-password-manager.war` – The Google Password Manager Application
-
-  * `pf-google-quickconnection-<version>.jar`– PingFederate Google Workspace Provisioner
-
-* `legal/Legal.pdf` – copyright and license information.
-
----
-
----
-title: Download manifest
 description: The following files are included in the Google Login Integration Kit .zip archive:
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -845,11 +856,38 @@ The following files are included in the Google Login Integration Kit `.zip` arch
 ---
 
 ---
+title: Download manifest
+description: The distribution .zip archive for the Google Workspace Provisioner contains the following:
+component: google
+page_id: google:google_workspace_provisioner:pf_google_workforce_connector_download_manifest
+canonical_url: https://docs.pingidentity.com/integrations/google/google_workspace_provisioner/pf_google_workforce_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 24, 2024
+---
+
+# Download manifest
+
+The distribution `.zip` archive for the Google Workspace Provisioner contains the following:
+
+* `dist` – contains the integration files
+
+  * `gapps-password-manager.war` – The Google Password Manager Application
+
+  * `pf-google-quickconnection-<version>.jar`– PingFederate Google Workspace Provisioner
+
+* `legal/Legal.pdf` – copyright and license information.
+
+---
+
+---
 title: Enabling debug logging
 description: To help with troubleshooting or monitoring, you can optionally turn on activity logging for PingFederate, the Google Chrome Enterprise Device Trust IdP Adapter, or both.
 component: google
 page_id: google:google_chrome_enterprise_integration_kit:pf_google_chrome_enterprise_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/google/google_chrome_enterprise_integration_kit/pf_google_chrome_enterprise_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -933,6 +971,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: google
 page_id: google:google_login_integration_kit:pf_google_cic_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/google/google_login_integration_kit/pf_google_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/google/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task

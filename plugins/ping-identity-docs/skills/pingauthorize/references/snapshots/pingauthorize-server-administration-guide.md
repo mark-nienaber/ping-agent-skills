@@ -1,1143 +1,1323 @@
 ---
-title: About encrypting log files
-description: "Encrypt log files as they're written."
+title: Adding an Amazon S3 deployment package store to PingAuthorize
+description: To use Amazon Simple Storage Service (S3) as your deployment package store, add read access for your S3 bucket to the PingAuthorize Server.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_encrypt_log_files
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_encrypt_log_files.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_amazons3_deploy_package
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_amazons3_deploy_package.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 1, 2025
+revdate: November 25, 2025
 section_ids:
-  configuring-log-signing: Configuring log signing
+  before-you-begin: Before you begin
   steps: Steps
-  example: Example:
-  example-2: Example:
-  validating-a-signed-file: Validating a signed file
-  steps-2: Steps
-  example-3: Example:
   result: Result:
-  configuring-log-file-encryption: Configuring log file encryption
-  steps-3: Steps
-  example-4: Example:
-  example-5: Example:
-  result-2: Result:
+  steps-2: Steps
+  next-steps: Next steps
 ---
 
-# About encrypting log files
+# Adding an Amazon S3 deployment package store to PingAuthorize
 
-The server lets you encrypt log files as they're written.
+To use Amazon Simple Storage Service (S3) as your deployment package store, add read access for your S3 bucket to the PingAuthorize Server.
 
-The `encrypt-log` configuration property controls whether encryption is enabled for the logger. Enabling encryption causes the log file to have an `.encrypted` extension. If both encryption and compression are enabled, the extension is `.gz.encrypted`. Any change that affects the name used for the log file could prevent older files from getting properly cleaned up.
+Use the admin console or `dsconfig` to add the Amazon S3 deployment package store. If necessary, review your existing S3 bucket configurations on the S3 dashboard in the Amazon Web Services (AWS) Management Console.
 
-Like compression, encryption can only be enabled when the logger is created. Encryption cannot be turned on or off after the logger is configured. For any log file that is encrypted, enabling compression is also recommended to reduce the amount of data that needs to be encrypted. This reduces the overall size of the log file. The `encrypt-file` tool or custom code, using the LDAP SDK's `com.unboundid.util.PassphraseEncryptedInputStream`, is used to access the encrypted data.
+## Before you begin
 
-To enable encryption, at least one encryption settings definition must be defined in the server. Use the one created during setup, or create a new one with the `encryption-settings create` command. By default, the encryption is performed with the server's preferred encryption settings definition.
+If your environment doesn't use an IAM role to provide credentials (for example, IAM roles for service accounts on Amazon EKS or an instance profile on EC2), you must create an access key and accompanying secret key for your S3 bucket. Learn more in [Configuring the IAM user](paz_amazon_deployment_store_setup.html#create_amazon_iam_user).
 
-To explicitly specify which definition should be used for the encryption, set the `encryption-settings-definition-id` property with the ID of that definition. You should set the encryption settings definition to be created from a passphrase so that the file can be decrypted by providing that passphrase even if the original encryption settings definition is no longer available. You can also create a randomly generated encryption settings definition, but the log file can only be decrypted using a server instance that has that encryption settings definition.
+* Admin console
 
-When using encrypted logging, a small amount of data might remain in an in-memory buffer until the log file is closed. The encryption is performed using a block cipher, and it cannot write an incomplete block of data until the file is closed. This is not an issue for any log file that is not being actively written.
-
-To examine the contents of a log file that is being actively written, use the `rotate-log` tool to force the file to be rotated before attempting to examine it.
-
-## Configuring log signing
-
-Configure log signing for a log publisher.
+* dsconfig
 
 ### Steps
 
-1. To enable log signing for a log publisher, use `dsconfig`.
+1. In the PingAuthorize admin console, go to **Configuration > Authorization and Policies > Deployment Package Stores**.
 
-   #### Example:
+2. Click **New Deployment Package Store**.
 
-   In this example, the `sign-log` property is set on the File-based Audit Log Publisher.
+3. In the **New Deployment Package Store** modal, select **S3 Deployment Package Store**.
 
-   ```shell
-   $ bin/dsconfig set-log-publisher-prop --publisher-name "File-Based Audit Logger" \
-     --set sign-log:true
-   ```
+4. Complete the **General Configuration**:
 
-2. Disable and then re-enable the log publisher for the change to take effect.
+   1. Enter a **Name** for the deployment package store.
 
-   #### Example:
+   2. In the **Poll Interval** field, enter a value, in seconds, for how often the Amazon S3 bucket should be polled for changes.
 
-   ```shell
-   $ bin/dsconfig set-log-publisher-prop --publisher-name "File-Based Audit Logger" \
-     --set enabled:false
-   $ bin/dsconfig set-log-publisher-prop --publisher-name "File-Based Audit Logger" \
-     --set enabled:true
-   ```
+      |   |                                                                                                                                                                         |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | If you set the poll interval to `0`, the server won't scan for new packages after initializing the store. The server will only load new deployment packages on restart. |
 
-## Validating a signed file
+   3. In the **S3 Bucket Name** field, enter the name of your Amazon S3 bucket as shown on the AWS services page.
 
-The server provides a tool, `validate-file-signature`, that checks if a file has not been tampered with in any way.
+   4. In the **S3 Bucket Prefix** field, enter the S3 bucket prefix.
 
-### Steps
+   5. In the **S3 Server Endpoint** field, enter the S3 bucket endpoint.
 
-* Run the `validate-file-signature` tool to check if a signed file has been tampered with.
+   6. In the **S3 Region Name** field, enter the AWS region for the S3 bucket.
 
-  #### Example:
+   7. Next to the **S3 Access Key ID** field, click **Set Value** and enter the S3 access key ID you copied in [Configuring the IAM user](paz_amazon_deployment_store_setup.html#create_amazon_iam_user).
 
-  For this example, assume that the `sign-log` property was enabled for the File-Based Audit Log Publisher.
+   8. Enter the S3 access key ID value again to confirm and click **OK**.
 
-  ```shell
-  $ bin/validate-file-signature --file logs/audit
-  ```
+      |   |                                                                                                  |
+      | - | ------------------------------------------------------------------------------------------------ |
+      |   | Your access key value isn't displayed after you enter it. The page still displays **Set Value**. |
 
-  #### Result:
+   9. Next to the **S3 Secret Key** field, click **Set Value** and enter the S3 secret key you copied in [Configuring the IAM user](paz_amazon_deployment_store_setup.html#create_amazon_iam_user).
 
-  ```
-  All signature information in file 'logs/audit' is valid
-  ```
+   10. Enter the S3 secret key value again to confirm and click **OK**.
 
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                        |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | If any validations errors occur, you will see a message similar to the one as follows.```
-  One or more signature validation errors were encountered
-  while validating the contents of file 'logs/audit':
-  * The end of the input stream was encountered without
-    encountering the end of an active signature block.
-    The contents of this signed block cannot be trusted
-    because the signature cannot be verified
-  ``` |
+       |   |                                                                                                  |
+       | - | ------------------------------------------------------------------------------------------------ |
+       |   | Your secret key value isn't displayed after you enter it. The page still displays **Set Value**. |
 
-## Configuring log file encryption
+5. If your S3 bucket uses a legacy path-style URL, select the **Enabled** checkbox under **S3 Use Path Style Access**.
 
-Configure log file encryption for a log publisher.
+   |   |                                                                                                                                                                                                                                                                                                            |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Starting with PingAuthorize 11.0, the PingAuthorize Server expects virtual-hosted-style URLs by default when connecting to Amazon S3.Learn more in [Virtual hosting of general purpose buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html) in the Amazon S3 documentation. |
 
-### Steps
+6. (Optional) Complete the **Policy Security** configuration.
 
-1. To enable encryption for a log publisher, use `dsconfig`.
+   |   |                                                                                                                                   |
+   | - | --------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you select **Signed** in the **Deployment Package Security Level** list, you must select a **Deployment Package Trust Store**. |
 
-   #### Example:
-
-   In this example, the File-based Access Log Publisher `"Encrypted Access"` is created, compression is set, and rotation and retention policies are set.
-
-   ```shell
-   $ bin/dsconfig create-log-publisher-prop --publisher-name "Encrypted Access" \
-     --type file-based-access \
-     --set enabled:true \
-     --set compression-mechanism:gzip \
-     --set encryption-settings-definition-id:332C846EF0DCD1D5187C1592E4C74CAD33FC1E5FC20B726CD301CDD2B3FFBC2B \
-     --set encrypt-log:true \
-     --set log-file:logs/encrypted-access \
-     --set "rotation-policy:24 Hours Time Limit Rotation Policy" \
-     --set "rotation-policy:Size Limit Rotation Policy" \
-     --set "retention-policy:File Count Retention Policy" \
-     --set "retention-policy:Free Disk Space Retention Policy" \
-     --set "retention-policy:Size Limit Retention Policy"
-   ```
-
-2. Decrypt and decompress the file.
-
-   #### Example:
-
-   ```shell
-   $ bin/encrypt-file --decrypt \
-     --decompress-input \
-     --input-file logs/encrypted-access.20180216040332Z.gz.encrypted \
-     --output-file decrypted-access
-   ```
+7. Click **Save**.
 
    #### Result:
 
-   ```
-   Initializing the server's encryption framework...Done
-   Writing decrypted data to file '/ds/Data-Sync/decrypted-access' using a
-   key generated from encryption settings definition '332c846ef0dcd1d5187c1592e4c74cad33fc1e5fc20b726cd301cdd2b3ffbc2b'
-   Successfully wrote 123,456,789 bytes of decrypted data
-   ```
+   Your Amazon S3 deployment package store is displayed on the **Deployment Package Stores** page.
+
+### Steps
+
+* To create an Amazon S3 deployment package store, use the the `dsconfig create-deployment-package-store` command with the following arguments:
+
+  | Argument                                     | Required | Description                                                                                                                                                                                                                                                                                             |
+  | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `--type <type>`                              | Required | Set to `s3`.                                                                                                                                                                                                                                                                                            |
+  | `--store-name: <store-name>`                 | Required | Specifies a unique name for the configuration object.                                                                                                                                                                                                                                                   |
+  | `--set poll-interval:"<poll-interval>"`      | Required | Specifies how often, in seconds, the PingAuthorize Server scans the deployment package store for new deployment packages.If you set the poll interval to `0`, the server won't scan for new packages after initializing the store. The server will only load new deployment packages on restart.        |
+  | `--set s3-bucket-name:<bucket-name>`         | Required | Specifies the name of the S3 bucket in AWS.                                                                                                                                                                                                                                                             |
+  | `--set s3-bucket-prefix:<bucket-prefix>`     | Required | Specifies the prefix value for the S3 bucket.                                                                                                                                                                                                                                                           |
+  | `--set s3-server-endpoint:<server-endpoint>` | Optional | Specifies the S3 service endpoint.                                                                                                                                                                                                                                                                      |
+  | `--set s3-region-name:<server-region>`       | Optional | Specifies the AWS region for the S3 bucket.                                                                                                                                                                                                                                                             |
+  | `--set s3-access-key-id:<access-key-id>`     | Optional | Specifies the access key ID used to authenticate to the S3 bucket. If omitted, the server uses the AWS SDK default credentials provider chain (for example, IRSA on Amazon EKS, an instance profile on Amazon EC2, or environment variables).                                                           |
+  | `--set s3-secret-key:<secret-key>`           | Optional | Specifies the secret key used to authenticate to the S3 bucket. If omitted, the server uses the AWS SDK default credentials provider chain.                                                                                                                                                             |
+  | `--set s3-use-path-style-access:true`        | Optional | Enables legacy S3 path-style access. Defaults to `false`.&#xA;&#xA;Starting with PingAuthorize 11.0, the PingAuthorize Server uses virtual-hosted–style URLs by default when connecting to Amazon S3.&#xA;&#xA;Learn more in Virtual hosting of general purpose buckets in the Amazon S3 documentation. |
+
+## Next steps
+
+[Configure the PingAuthorize Server to use embedded PDP mode with your deployment package store](paz_config_embedded_pdp.html#config_embedded_dps_store).
 
 ---
 
 ---
-title: About log compression
-description: The server supports the ability to compress log files as they are written.
+title: Adding an Azure deployment package store
+description: To use the Deployment Manager, add a deployment package store for read access to the PingAuthorize server.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_log_compression
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_log_compression.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 2, 2023
----
-
-# About log compression
-
-The server supports the ability to compress log files as they are written.
-
-This feature can significantly increase the amount of data that can be stored in a given amount of space so that log information can be kept for a longer period of time.
-
-Because of the inherent problems with mixing compressed and uncompressed data, compression can only be enabled at the time the logger is created. Compression cannot be turned on or off when the logger is configured. Because of problems in trying to append to an existing compressed file, if the server encounters an existing log file at startup, it rotates that file and begin a new one rather than attempting to append to the previous file.
-
-Compression is performed using the standard gzip algorithm, so compressed log files can be accessed using readily available tools. The `summarize-access-log` tool can also work directly on compressed log files rather than requiring them to be decompressed first.
-
-However, because it can be useful to have a small amount of uncompressed log data available for troubleshooting purposes, administrators using compressed logging might want to have a second logger defined that does not use compression and has rotation and retention policies that minimizes the amount of space consumed by those logs while still making them useful for diagnostic purposes without the need to decompress the files before examining them.
-
-Configure compression by setting the `compression-mechanism` property to have the value of `gzip` when creating a new logger.
-
----
-
----
-title: About log signing
-description: The server supports the ability to cryptographically sign a log to ensure that it has not been modified in any way.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_log_signing
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_log_signing.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 2, 2023
----
-
-# About log signing
-
-The server supports the ability to cryptographically sign a log to ensure that it has not been modified in any way.
-
-For example, financial institutions require audit logs for all transactions to check for correctness. Tamper-proof files are needed to ensure that these transactions can be properly validated and ensure that they have not been modified by any third-party entity or internally by unscrupulous employees.
-
-Use the `dsconfig` tool to enable the `sign-log` property on a log publisher to turn on cryptographic signing.
-
-When enabling signing for a logger that already exists and was enabled without signing, the first log file is not completely verifiable because it still contains unsigned content from before signing was enabled. Only log files whose entire content was written with signing enabled are considered completely valid. For the same reason, if a log file is still open for writing, then signature validation does not indicate that the log is completely valid because the log doesn't include the necessary end signed content indicator at the end of the file.
-
-To validate log file signatures, use the `validate-file-signature` tool provided in the `bin` directory of the server or the `bat` directory for Windows systems.
-
-After you have enabled this property, you must disable and then re-enable the log publisher for the changes to take effect.
-
----
-
----
-title: About manage-certificates check-certificate-usability
-description: The manage-certificates tool offers a check-certificate-usability subcommand to examine a specified entry in a key store and to identify potential issues that might interfere with secure communication.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_manage_certs_check_cert
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_manage_certs_check_cert.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2022
----
-
-# About manage-certificates check-certificate-usability
-
-The `manage-certificates` tool offers a `check-certificate-usability` subcommand to examine a specified entry in a key store and to identify potential issues that might interfere with secure communication.
-
-The `check-certificate-usability` tool completes the following tasks:
-
-* Ensures that a specified entry in the key store includes a private key and a complete certificate chain
-
-* Checks whether the certificate at the root of the chain is found in the Java virtual machine's (JVM's) default set of trusted certificates
-
-* Ensures that the current time lies is within the validity window for all certificates in the chain
-
-* Validates the signatures for all certificates in the chain
-
-* Warns if the end-entity certificate is self-signed
-
-* Warns if the end-entity certificate does not contain an extended key usage extension with the `serverAuth` usage
-
-* Warns if the issuer certificates do not have a key usage extension with the `keyCertSign` usage
-
-* Warns if the issuer certificates do not have a basic constraints extension indicating that it can operate as a certification authority
-
-  If the chain violates a path length constraint, the `check-certificate-usability` tool reports an error.
-
-* Ensures that the signature algorithm uses a strong message digest algorithm, like SHA-256
-
-  The `check-certificate-usability` tool reports an error for weak digest algorithms like MD5 or SHA-1, and reports a warning for unrecognized digest algorithms.
-
-* Ensures that none of the certificates that use an RSA key pair have a key size less than 2048 bits
-
-The following example demonstrates the usage for the `manage-certificates check-certificate-usability` command and its output when no problems are identified.
-
-```shell
-$ bin/manage-certificates check-certificate-usability \
-     --keystore config/keystore \
-     --keystore-password-file config/keystore.pin \
-     --alias server-cert
-
-Successfully retrieved the certificate chain for alias 'server-cert':
-
-Subject DN:  CN=ds1.example.com,O=Example Corp,C=US
-Issuer DN:  CN=Example Intermediate CA,O=Example Corp,C=US
-Validity Start Time: Tuesday, November 12, 2019 at 03:52:44 PM CST
-                     (5 minutes, 45 seconds ago)
-Validity End Time: Wednesday, November 11, 2020 at 03:52:44 PM CST
-                   (364 days, 23 hours, 54 minutes, 14 seconds from now)
-Validity State:  The certificate is currently within the validity window.
-Signature Algorithm:  SHA-256 with RSA
-Public Key Algorithm:  RSA (2048-bit)
-SHA-1 Fingerprint: 84:e4:00:b9:f0:6b:58:bb:ac:67:79:28:2f:43:9f:e3:ac:24:ee:98
-SHA-256 Fingerprint: 63:85:4d:2c:50:ea:a8:84:54:e0:73:9a:e7:5b:e7:1b:06:85:0e:
-                     28:2b:76:a9:8b:57:fc:27:f7:60:81:48:41
-
-Subject DN:  CN=Example Intermediate CA,O=Example Corp,C=US
-Issuer DN:  CN=Example Root CA,O=Example Corp,C=US
-Validity Start Time: Tuesday, November 12, 2019 at 03:52:42 PM CST
-                     (5 minutes, 47 seconds ago)
-Validity End Time: Monday, November 7, 2039 at 03:52:42 PM CST
-                   (7299 days, 23 hours, 54 minutes, 12 seconds from now)
-Validity State:  The certificate is currently within the validity window.
-Signature Algorithm:  SHA-256 with RSA
-Public Key Algorithm:  RSA (4096-bit)
-SHA-1 Fingerprint: de:da:3d:fc:d4:1f:67:79:0a:a1:5a:cd:ca:4a:7e:a5:d3:46:88:27
-SHA-256 Fingerprint:
-   02:3c:af:ad:b7:07:81:89:45:48:d0:09:31:a8:90:c4:17:11:1c:00:11:fd:49:b2:2c:
-   ba:ac:dd:c4:9f:03:36
-
-Subject DN:  CN=Example Root CA,O=Example Corp,C=US
-Issuer DN:  CN=Example Root CA,O=Example Corp,C=US
-Validity Start Time: Tuesday, November 12, 2019 at 03:52:38 PM CST
-                     (5 minutes, 51 seconds ago)
-Validity End Time: Monday, November 7, 2039 at 03:52:38 PM CST
-                   (7299 days, 23 hours, 54 minutes, 8 seconds from now)
-Validity State:  The certificate is currently within the validity window.
-Signature Algorithm:  SHA-256 with RSA
-Public Key Algorithm:  RSA (4096-bit)
-SHA-1 Fingerprint: 8e:03:e4:58:e6:e3:59:9a:55:77:c0:88:3c:fa:d7:29:f4:ff:de:6c
-SHA-256 Fingerprint: 95:54:0d:e2:aa:48:29:c1:25:7c:20:69:c0:27:33:31:81:07:02:
-                     2e:00:24:ae:49:5e:98:bd:a3:72:a5:05:26
-
-OK:  The certificate chain is complete.  Each subsequent certificate is
-the issuer for the previous certificate in the chain, and the chain ends
-with a self-signed certificate.
-
-OK:  Certificate 'CN=ds1.example.com,O=Example Corp,C=US' has a valid
-signature.
-
-OK:  Certificate 'CN=Example Intermediate CA,O=Example Corp,C=US' has a
-valid signature.
-
-OK:  Certificate 'CN=Example Root CA,O=Example Corp,C=US' has a valid
-signature.
-
-OK:  Certificate 'CN=ds1.example.com,O=Example Corp,C=US' will expire at
-Wednesday, November 11, 2020 at 03:52:44 PM CST (364 days, 23 hours, 54
-minutes, 14 seconds from now), which is not in the near future.
-
-OK:  Issuer certificate 'CN=Example Intermediate CA,O=Example Corp,C=US'
-will expire at Monday, November 7, 2039 at 03:52:42 PM CST (7299 days, 23
-hours, 54 minutes, 12 seconds from now), which is not in the near future.
-
-OK:  Issuer certificate 'CN=Example Root CA,O=Example Corp,C=US' will
-expire at Monday, November 7, 2039 at 03:52:38 PM CST (7299 days, 23
-hours, 54 minutes, 8 seconds from now), which is not in the near future.
-
-OK:  Certificate 'CN=ds1.example.com,O=Example Corp,C=US' at the head of
-the chain includes an extended key usage extension, and that extension
-includes the serverAuth usage.
-
-OK:  Issuer certificate 'CN=Example Intermediate CA,O=Example Corp,C=US'
-includes a basic constraints extension, and the certificate chain
-satisfies those constraints.
-
-OK:  Issuer certificate 'CN=Example Intermediate CA,O=Example Corp,C=US'
-includes a key usage extension with the keyCertSign usage flag set to
-true.
-
-OK:  Issuer certificate 'CN=Example Root CA,O=Example Corp,C=US' includes
-a basic constraints extension, and the certificate chain satisfies those
-constraints.
-
-OK:  Issuer certificate 'CN=Example Root CA,O=Example Corp,C=US' includes
-a key usage extension with the keyCertSign usage flag set to true.
-
-OK:  Certificate 'CN=ds1.example.com,O=Example Corp,C=US' uses a signature
-algorithm of 'SHA-256 with RSA', which is is considered strong.
-
-OK:  Certificate 'CN=Example Intermediate CA,O=Example Corp,C=US' uses a
-signature algorithm of 'SHA-256 with RSA', which is is considered strong.
-
-OK:  Certificate 'CN=Example Root CA,O=Example Corp,C=US' uses a signature
-algorithm of 'SHA-256 with RSA', which is is considered strong.
-
-OK:  Certificate 'CN=ds1.example.com,O=Example Corp,C=US' has a 2048-bit
-RSA public key, which is considered strong.
-
-OK:  Certificate 'CN=Example Intermediate CA,O=Example Corp,C=US' has a
-4096-bit RSA public key, which is considered strong.
-
-OK:  Certificate 'CN=Example Root CA,O=Example Corp,C=US' has a 4096-bit
-RSA public key, which is considered strong.
-
-No usability errors or warnings were identified while validating the
-certificate chain.
-```
-
-If any usability issues are identified, they might be responsible for communication problems.
-
----
-
----
-title: About Periodic Stats Loggers
-description: The Periodic Stats Logger plugin records server performance metrics at fixed intervals, enabling you to monitor and analyze server behavior over time.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_prof_server_perf_stats
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_prof_server_perf_stats.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 8, 2025
----
-
-# About Periodic Stats Loggers
-
-The Periodic Stats Logger plugin records server performance metrics at fixed intervals, enabling you to monitor and analyze server behavior over time. You can control which statistics are collected and adjust their level of detail. The logger captures historical information, such as LDAP operation metrics, host details, and gauge data.
-
-At each interval, the logger writes server statistics to either a JSON file or a comma-separated value (`.csv`) log. The logger has a negligible impact on server performance unless the `log-interval` property is set to a value less than 1 second.
-
-You can create multiple loggers with different configurations, depending on your monitoring needs.
-
-Learn more about the Periodic Stats Logger in the following topics:
-
-* [Enabling the Periodic Stats Logger plugin](paz_enable_periodic_stats_logger.html)
-
-* [Configuring the Periodic Stats Logger](paz_config_periodic_stats_logger.html)
-
-* [Enabling HTTP metrics in the Periodic Stats Logger](paz_enable_http_metrics_stats_logger.html)
-
-* [Sending Periodic Stats Logger metrics to Splunk with the Splunk Universal Forwarder](paz_send_metrics_periodic_stats_logger_splunk_univ_forwarder.html)
-
----
-
----
-title: About representing certificates, private keys, and certificate signing requests
-description: X.509 is an encoding format that uses the ASN.1 distinguished encoding rules (DER), which exist in binary format. When writing a certificate to a file, either a raw DER format or a plaintext format called PEM can be used.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_rep_certs_keys_signing_reqs
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_rep_certs_keys_signing_reqs.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2022
----
-
-# About representing certificates, private keys, and certificate signing requests
-
-X.509 is an encoding format that uses the ASN.1 distinguished encoding rules (DER), which exist in binary format. When writing a certificate to a file, either a raw DER format or a plaintext format called PEM can be used.
-
-PEM encoding consists of a line that contains the text `-----BEGIN CERTIFICATE-----`, followed by a set of lines that contains the base64-encoded representation of the raw DER bytes (typically with no more than 64 characters per line), followed by a line that contains the text `-----END CERTIFICATE-----`.
-
-The X.509 encoding contains a certificate's public key, but not its private key. The PKCS #8 specification in [RFC 5958](https://www.ietf.org/rfc/rfc5958.txt) describes the encoding for private keys. This approach uses a DER encoding with a PEM variant that instead uses the following header and footer, respectively.
-
-```
------BEGIN PRIVATE KEY-----
------END PRIVATE KEY-----
-```
-
-RFC 5958 also describes an encrypted representation of the private key, but that format is currently unsupported.
-
-The PKCS #10 specification in [RFC 2986](https://www.ietf.org/rfc/rfc2986.txt) describes the CSR format. This format uses a DER encoding with a PEM variant that uses the following header and footer, respectively.
-
-```
------BEGIN CERTIFICATE REQUEST-----
------END CERTIFICATE REQUEST-----
-```
-
-Some implementations use the following alternate, nonstandard forms.
-
-```
------BEGIN NEW CERTIFICATE REQUEST-----
------END NEW CERTIFICATE REQUEST-----
-```
-
----
-
----
-title: About SCIM searches
-description: Search requests are used to return System for Cross-domain Identity Management (SCIM) resources. You can constrain search requests using filters.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_about_scim_searches
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_about_scim_searches.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2022
----
-
-# About SCIM searches
-
-Search requests are used to return System for Cross-domain Identity Management (SCIM) resources. You can constrain search requests using filters.
-
-A request that potentially causes the return of multiple SCIM resources is considered a search request. Perform such requests in one of the following manners:
-
-* Make a `GET` request to `/scim/v2/<resourceType>`.
-
-* Make a `POST` request to `/scim/v2/<resourceType>/.search`.
-
-To constrain the search results, clients should supply a search filter through the `filter` parameter. For example, a `GET` request to `/scim/v2/Users?filter=st+eq+"TX"` returns all SCIM resources of the `Users` resource type in which the `st` attribute possesses a value of `"TX"`. Additionally, the `Add Filter` policy can add a filter automatically to search requests.
-
----
-
----
-title: About the API security gateway
-description: When you configure PingAuthorize Server for the API gateway pattern, the server and gateway provide dynamic authorization management between a client and a REST API.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_api_security_gw
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 24, 2026
----
-
-# About the API security gateway
-
-When you configure PingAuthorize Server for the API gateway pattern, the server and gateway provide dynamic authorization management between a client and a REST API.
-
-You can find specific details about the functionality of the API security gateway in the following topics:
-
-* [API gateway request and response flow](paz_sec_gw_request_response_flow.html)
-
-* [Gateway configuration basics](paz_gw_config_basics.html)
-
-* [API security gateway authentication](paz_api_security_gw_authn.html)
-
-* [API security gateway policy requests](paz_api_security_gw_policy_reqs.html)
-
-* [API security gateway HTTP 1.1 support](paz_api_security_gw_http_support.html)
-
-* [Gateway error templates](paz_gateway_error_templates.html)
-
-* [Tuning API security gateway performance](paz_api_security_gw_performance_tuning.html)
-
----
-
----
-title: About the Authorization Policy Decision APIs
-description: The PingAuthorize Server provides Authorization Policy Decision APIs to support non-API use cases needing attribute-based access control (ABAC).
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_authr_policy_decision
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_authr_policy_decision.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 26, 2023
----
-
-# About the Authorization Policy Decision APIs
-
-The PingAuthorize Server provides Authorization Policy Decision APIs to support non-API use cases needing attribute-based access control (ABAC).
-
-|   |                                                                                                                                                         |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The Authorization Policy Decision APIs feature requires PingAuthorize Premier. For more information, contact your Ping Identity account representative. |
-
-The PingAuthorize Server's main functionality is to enforce fine-grained policies for data accessed through an application programming interface (API) *(tooltip: \<div class="paragraph">
-\<p>A specification of interactions available for building software to access an application or service.\</p>
-\</div>)*. However, organizations might need to use the core Policy Decision Service for non-API use cases. For example, an application server might use it to request policy decisions when generating dynamic web content. In this configuration, PingAuthorize Server becomes the policy decision point (PDP), and the application server becomes the policy enforcement point (PEP).
-
-The Authorization Policy Decision APIs consist of the following PDP APIs:
-
-* XACML-JSON PDP API
-
-  This API provides a standards-based interface.
-
-  Standards-based enforcement points request policy decisions based on a subset of the XACML-JSON standard. For more information, see [XACML 3.0 JSON Profile 1.1](http://docs.oasis-open.org/xacml/xacml-json-http/v1.1/csprd01/xacml-json-http-v1.1-csprd01.html).
-
-* JSON PDP API
-
-  This API provides a simpler interface.
-
-|   |                                                                                                                                                              |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | The Authorization Policy Decision APIs can indicate when a request or response triggers statements, but the application server must implement the statement. |
-
-To make a PDP API available, you must:
-
-* Configure the PingAuthorize Server with a feature-enabled license during setup.
-
-* Configure the Policy Decision Point Service. For more information, see [Use policies in a production environment](paz_config_embedded_pdp.html).
-
-* For the XACML-JSON PDP API, configure an access token *(tooltip: \<div class="paragraph">
-  \<p>A data object by which a client authenticates to a resource server and lays claim to authorizations for accessing particular resources.\</p>
-  \</div>)* validator or use token validation within your rules and policies. For more information, see [Access token validators](paz_access_token_validators.html) or [Policy conditions](../pingauthorize_policy_administration_guide/paz_conditions.html).
-
----
-
----
-title: About the config-diff tool
-description: The config-diff tool compares server configurations and produces a dsconfig batch file that lists the differences.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_config_diff_tool
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_config_diff_tool.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_azure_deploy_package_store
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_azure_deploy_package_store.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2022
 section_ids:
-  example: Example
+  about-this-task: About this task
+  adding-an-azure-deployment-package-store-using-the-administrative-console: Adding an Azure deployment package store using the administrative console
+  before-you-begin: Before you begin
+  steps: Steps
+  result: Result:
+  next-steps: Next steps
+  adding-an-azure-deployment-package-store-using-dsconfig: Adding an Azure deployment package store using dsconfig
+  steps-2: Steps
+  choose-from: Choose from:
+  next-steps-2: Next steps
 ---
 
-# About the config-diff tool
+# Adding an Azure deployment package store
 
-The `config-diff` tool compares server configurations and produces a `dsconfig` batch file that lists the differences.
+To use the Deployment Manager, add a deployment package store for read access to the PingAuthorize server.
 
-When run without arguments, the `config-diff` tool produces a list of changes to the configuration, as compared to the server's baseline or out-of-the-box configuration. Because this list captures the customizations of your server configuration, it is useful when you transition from a development environment to a staging or production environment.
+## About this task
 
-## Example
+Use the administrative console or `dsconfig` to add the deployment package store.
 
-```shell
-$  {pingauthorize}/bin/config-diff
-# No comparison arguments provided, so using "--sourceLocal --sourceTag postSetup --targetLocal" to compare the local configuration with the post-setup configuration.
-# Run "config-diff --help" to get a full list of options and example usages.
+* Administrative console
 
-# Configuration changes to bring source (config-postSetup.gz) to target (config.ldif)
-# Comparison options:
-#   Ignore differences on shared host
-#   Ignore differences by instance
-#   Ignore differences in configuration that is part of the topology registry
+* Dsconfig
 
-dsconfig create-external-server --server-name "DS API Server" --type api
---set base-url:https://localhost:1443 --set hostname-verification-method:allow-all --set "trust-manager-provider:Blind Trust" --set user-name:cn=root --set "password:AADaK6dtmjJQ7W+urtx9RGhSvKX9qCS8q5Q="
+## Adding an Azure deployment package store using the administrative console
 
-dsconfig create-external-server --server-name "FHIR Sandbox" --type api
---set base-url:https://fhir-open.sandboxcerner.com[https://fhir-open.sandboxcerner.com]
-...
-```
+### Before you begin
+
+Set up your Azure storage account:
+
+* If you don't already have an Azure storage account, create one.
+
+* Add a container to your storage account.
+
+* Record the Connection string value found in your account's Access key settings.
+
+For information on setting up an Azure storage account, see your Azure Blob Storage documentation.
+
+### Steps
+
+1. In the administrative console, go to Configuration → Authorization and Policies → Deployment Package Stores.
+
+2. Click New Deployment Package Store.
+
+3. In the New Deployment Package Store menu, select Azure Deployment Package Store.
+
+4. Complete the General Configuration fields.
+
+   1. In the Name field, enter a name for the deployment package store.
+
+   2. In the Poll Interval field, enter a value in seconds for how often the Azure store should be polled for changes.
+
+      |   |                                         |
+      | - | --------------------------------------- |
+      |   | A value of `0` only updates on restart. |
+
+   3. In the Azure Blob Connection String field, enter the connection string shown in your Azure storage account's Access key settings.
+
+      |   |                                                                                                      |
+      | - | ---------------------------------------------------------------------------------------------------- |
+      |   | Your connection string value is not displayed after you enter it. The page still displays Set Value. |
+
+   4. In the Azure Blob Container field, enter the name of your container.
+
+   5. In the Azure Blob Prefix field, enter the [prefix you defined](paz_config_pe_publish_policies.html) for the deployment package store.
+
+5. **Optional:** Complete the Policy Security fields.
+
+   |   |                                                                                                                                  |
+   | - | -------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you select signed in the Deployment Package Security Level field, you must complete the Deployment Package Trust Store field. |
+
+6. Click Save To PingAuthorize Server Cluster.
+
+   #### Result:
+
+   Your Azure deployment package store is displayed on the Deployment Package Stores page.
+
+### Next steps
+
+[Configure the PingAuthorize server to use embedded PDP mode with your deployment package store](paz_config_embedded_pdp.html#config_embedded_dps_store).
+
+## Adding an Azure deployment package store using dsconfig
+
+### Steps
+
+* Run `dsconfig` with the `create-deployment-package-store` option:
+
+  #### Choose from:
+
+  * Create a store with an unsigned deployment package.
+
+    ```
+    dsconfig create-deployment-package-store \
+      --store-name "<store-name>" \
+      --type azure  \
+      --set "poll-interval:<poll-interval>" \
+      --set "azure-blob-connection-string:<blob-connection-string>"  \
+      --set "azure-blob-container:<blob-container>"  \
+      --set "azure-blob-prefix:<blob-prefix>"
+    ```
+
+  * Create a store with `deployment-package-security-level` set to `signed`.
+
+    ```
+    dsconfig create-deployment-package-store \
+      --store-name "<store-name>"  \
+      --type azure  \
+      --set "poll-interval:<poll-interval>" \
+      --set "azure-blob-connection-string:<blob-connection-string>"  \
+      --set "azure-blob-container:<blob-container>"  \
+      --set "azure-blob-prefix:<blob-prefix>"
+      --set deployment-package-security-level:signed  \
+      --set "deployment-package-trust-store:<trust-store-provider-name>"  \
+      --set "deployment-package-verification-key-nickname:<key-nickname>"
+    ```
+
+### Next steps
+
+[Configure the PingAuthorize server to use embedded PDP mode with your deployment package store](paz_config_embedded_pdp.html#config_embedded_dps_store).
 
 ---
 
 ---
-title: About the configuration audit log
-description: The configuration audit log records the configuration commands that represent configuration changes, as well as the configuration commands that undo the changes.
+title: Administration accounts
+description: "Administration accounts, called root distinguished names (DNs), are stored in a branch of the configuration backend: cn=Root DNs,cn=config."
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_config_audit_log
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_config_audit_log.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_admin_accts
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_admin_accts.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2022
-section_ids:
-  example: Example
 ---
 
-# About the configuration audit log
+# Administration accounts
 
-The configuration audit log records the configuration commands that represent configuration changes, as well as the configuration commands that undo the changes.
+Administration accounts, called root distinguished names (DNs), are stored in a branch of the configuration backend: `cn=Root DNs,cn=config`.
 
-All successful configuration changes are recorded to the file `logs/config-audit.log`.
+When setup is run, the process creates a superuser account that is typically named `cn=Directory Manager`. Although PingAuthorize Server is not an LDAP directory server, it follows this convention by default. As a result, its superuser account is also typically named `cn=Directory Manager`.
 
-## Example
-
-```shell
-$ tail -n 8  {pingauthorize}/logs/config-audit.log
-# [23/Feb/2019:23:16:24.667 -0600] conn=4 op=12 dn='cn=Directory Manager,cn=Root DNs,cn=config' authtype=[Simple] from=127.0.0.1 to=127.0.0.1
-# Undo command: dsconfig delete-external-server --server-name "{pingauthorize}  PAP"
-dsconfig create-external-server --server-name "{pingauthorize}  PAP" --type policy --set base-url:http://localhost:4200 --set "branch:Default Policies"
-
-# [23/Feb/2019:23:16:24.946 -0600] conn=5 op=22 dn='cn=Directory Manager,cn=Root DNs,cn=config' authtype=[Simple] from=127.0.0.1 to=127.0.0.1
-# This change was made to mirrored configuration data, which is automatically kept in sync across all servers.
-# Undo command: dsconfig set-policy-decision-service-prop --set "policy-server:{pingauthorize}  (Gateway Policy Example)"
-dsconfig set-policy-decision-service-prop --set "policy-server:{pingauthorize}  PAP"
-```
+To create additional administration accounts, use `dsconfig` or, to add root DN users, use the PingAuthorize administrative console.
 
 ---
 
 ---
-title: About the dsconfig tool
-description: The dsconfig tool provides a command-line interface to configure the underlying server configuration.
+title: API gateway integration
+description: Enable attribute-based access control (ABAC) through your API gateway by installing the PingAuthorize API integration adapter (where supported) and connecting to the Sideband API.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_dsconfig_tool
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_dsconfig_tool.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_api_gw_integration
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_gw_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2024
+revdate: July 12, 2023
+section_ids:
+  processing-steps: Processing steps
+---
+
+# API gateway integration
+
+Enable attribute-based access control (ABAC) through your API gateway by installing the PingAuthorize API integration adapter *(tooltip: \<div class="paragraph">
+\<p>Plug-in software that allows Ping products to interact with web applications and authentication systems.\</p>
+\</div>)* (where supported) and connecting to the Sideband API.
+
+For more information on specific API gateway integrations, see [PingAuthorize Integrations](../pingauthorize_integrations/paz_integrations_main.html).
+
+Sequence diagram of the PingAuthorize sideband API inbound and outbound data flow involving the client, the API gateway, PingAuthorize, the PDP, and the REST API
+
+## Processing steps
+
+1. When the API gateway receives a request from an API gateway adapter, it makes a call to the Sideband API to process the request.
+
+2. The Sideband API returns a response that contains a modified version of the HTTP client's request.
+
+   The API gateway forwards the response to the REST API.
+
+3. If the Sideband API returns a response that indicates the request is unauthorized or not to be forwarded, the response includes the response to be returned to the client.
+
+   The API gateway returns the response to the client without forwarding the request to the REST API.
+
+4. When the API gateway receives a response from the REST API, it makes a call to the Sideband API to process the response.
+
+5. The Sideband API returns a response that contains a modified version of the REST API's response.
+
+   The API gateway forwards the response to the client.
+
+---
+
+---
+title: API gateway path parameters
+description: Path parameters are dynamic values in the request URI that are extracted and included in policy requests as fields of the Gateway policy request attribute.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_sec_gw_path_parameters
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_path_parameters.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 30, 2026
+section_ids:
+  basic-example: Basic example
+  advanced-example: Advanced example
+---
+
+# API gateway path parameters
+
+The `inbound-base-path` property value can include parameters. If parameters are found and matched, they are included in policy requests as fields of the `Gateway` policy request attribute.
+
+Other configuration properties can use these parameters. Learn more in [Gateway API Endpoint configuration properties](paz_gw_api_endpoint_config_parms.html).
+
+You must use the `inbound-base-path` property to introduce parameters. Other configuration properties cannot introduce new parameters.
+
+## Basic example
+
+The following example configuration demonstrates how request URIs are mapped to the outbound path to alter policy requests:
+
+| Gateway API Endpoint property | Example value                               |
+| ----------------------------- | ------------------------------------------- |
+| `inbound-base-path`           | `/accounts/{accountId}/transactions`        |
+| `outbound-base-path`          | `/api/v1/accounts/{accountId}/transactions` |
+| `policy-request-attribute`    | `foo=bar`                                   |
+
+A request URI with the path `/accounts/XYZ/transactions/1234` matches the inbound base path and is mapped to the outbound path `/api/v1/accounts/XYZ/transactions/1234`.
+
+The following properties are added to the policy request:
+
+* `HttpRequest.ResourcePath : 1234`
+
+* `Gateway.accountId : XYZ`
+
+* `Gateway.foo : bar`
+
+## Advanced example
+
+Unlike the basic example, which extracted a single path parameter, this example demonstrates how multiple parameters can be extracted from the request URI and referenced in other configuration properties.
+
+Consider the following example configuration:
+
+| Gateway API Endpoint property | Example value                            |
+| ----------------------------- | ---------------------------------------- |
+| `inbound-base-path`           | `/health/{tenant}/{resourceType}`        |
+| `outbound-base-path`          | `/api/v1/health/{tenant}/{resourceType}` |
+| `service`                     | `HealthAPI.{resourceType}`               |
+| `resource-path`               | `{resourceType}/{_TrailingPath}`         |
+
+A request URI with the path `/health/OmniCorp/patients/1234` matches the inbound base path and is mapped to the outbound path `/api/v1/health/OmniCorp/patients/1234`.
+
+The following properties are added to the policy request:
+
+* `service : HealthAPI.patients`
+
+* `HttpRequest.ResourcePath : patients/1234`
+
+* `Gateway.tenant : OmniCorp`
+
+* `Gateway.resourceType : patients`
+
+---
+
+---
+title: API gateway request and response flow
+description: Using the API gateway pattern, PingAuthorize processes JSON requests and responses in two distinct phases according to a defined sequence.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_sec_gw_request_response_flow
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_request_response_flow.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: October 7, 2022
+---
+
+# API gateway request and response flow
+
+Using the API gateway pattern, PingAuthorize processes JSON requests and responses in two distinct phases according to a defined sequence.
+
+The gateway handles proxied requests in the following phases:
+
+* Inbound phase – When a client submits an API request to PingAuthorize Server, the gateway forms a policy request based on the API request and submits it to the policy decision point (PDP) for evaluation. If the policy result allows it, PingAuthorize Server forwards the inbound *(tooltip: \<div class="paragraph">
+  \<p>A direction of message flow coming into a service. The type of message depends service's identity access management role.\</p>
+  \</div>)* request to the API server.
+
+* Outbound phase – After PingAuthorize Server receives the upstream API server's response, the gateway again forms a policy request, this time based on the API server response, and submits it to the PDP. If the policy result is positive, PingAuthorize Server forwards the outbound *(tooltip: \<div class="paragraph">
+  \<p>The direction of transaction flow from a service or server.\</p>
+  \</div>)* response to the client.
+
+Sequence diagram of the PingAuthorize API security gateway inbound and outbound data flow involving the client, PingAuthorize, the PDP, and the REST API
+
+The API gateway supports only JavaScript Object Notation (JSON) *(tooltip: \<div class="paragraph">
+\<p>An open, lightweight data-interchange format that uses human-readable text to store and transmit data.\</p>
+\</div>)* requests and responses.
+
+---
+
+---
+title: API security gateway authentication
+description: The API security gateway authenticates requests through bearer tokens by default, and you can configure it to handle authentication according to your preferences.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_api_security_gw_authn
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw_authn.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 28, 2025
 section_ids:
   example: Example
   example-2: Example
 ---
 
-# About the dsconfig tool
+# API security gateway authentication
 
-The `dsconfig` tool provides a command-line interface to configure the underlying server configuration.
+The API security gateway authenticates requests through bearer tokens by default, and you can configure it to handle authentication according to your preferences.
 
-Use the `dsconfig` tool whenever you administer the server from a shell. When run without arguments, `dsconfig` enters an interactive mode that lets you browse and update the configuration from a menu-based interface. Use this interface to list, update, create, and delete configuration objects.
+Although the gateway doesn't require the authentication of requests, the default policy set requires bearer token authentication.
 
-When viewing any configuration object in `dsconfig`, use the `d` command to display the command line that is necessary to recreate a configuration object. You can use a command line in this form directly from a shell or placed in a `dsconfig` batch file, along with other commands.
+To support this, the gateway uses the configured access token validators to evaluate bearer tokens that are included in incoming requests. The validation result is supplied to the policy request in the `HttpRequest.AccessToken` attribute, and the user identity associated with the token is provided in the `TokenOwner` attribute.
 
-Batch files are a powerful feature that enable scripted deployments. By convention, these scripts use a file extension of `dsconfig`. Batch files support comments by using the `#` character, and they support line continuation by using the `\`, or backslash, character.
-
-## Example
-
-This example `dsconfig` script configures the PingAuthorize Server policy service.
+Policies use this authentication information to affect the processing of requests and responses. For example, a policy in the default policy set requires that all requests are made with an active access token.
 
 ```
-# Define an external  {pingauthorize}  PAP
-dsconfig create-external-server \
-  --server-name "{pingauthorize}  {PAP_Name}" \
-  --type policy \
-  --set base-url:http://localhost:4200 \
-  --set user-id:admin \
-  --set "branch:Default Policies"
-# Configure the policy service
-dsconfig set-policy-decision-service-prop \
-  --type scim \
-  --set pdp-mode:external \
-  --set "policy-server:{pingauthorize}  PAP" \
-  --set "decision-response-view:request" \
-  --set "decision-response-view:decision-tree"
+Rule: Deny if HttpRequest.AccessToken.active Equals false
+
+Statement:
+  Code: denied-reason
+  Applies To: Deny
+  Payload: {"status":401, "message": "invalid_token", "detail":"Access token is expired or otherwise invalid"}
 ```
 
-## Example
+Gateway API Endpoints include the following configuration properties to specify how client authentication is handled:
 
-To load a `dsconfig` batch file, run `dsconfig` with the `--batch-file` argument.
+* `http-auth-evaluation-behavior`
 
-```shell
-$  {pingauthorize}/bin/dsconfig -n --batch-file example.dsconfig
+  Determines whether the Gateway API Endpoint evaluates or modifies the HTTP authentication scheme and whether this scheme is forwarded to the API server.
 
-Batch file 'example.dsconfig' contains 2 commands.
+  This property accepts the following values:
 
-Pre-validating with the local server ..... Done
+  * `do-not-evaluate`
 
-Executing: create-external-server -n --server-name "{pingauthorize}  PAP" --type policy --set base-url:http://localhost:4200 --set "branch:Default Policies"
+    The Gateway API Endpoint doesn't evaluate or modify the HTTP authentication scheme. This can be useful when implementing an authentication scheme that doesn't evaluate bearer tokens, such as MTLS.
 
-Arguments from tool properties file:  --useSSL  --hostname localhost --port 8636 --bindDN cn=root --bindPassword * --trustAll
+    If the client request includes an `Authorization` header, the PingAuthorize Server forwards the unmodified header to the external API server.
 
-The Policy External Server was created successfully.
+    |   |                                                                                                                                                                                                                                                           |
+    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | If you specify this value, policies protecting this endpoint should not enforce constraints on request authentication, such as the validity of the access token. The default policy snapshot enforces such a constraint in the `Token Validation` policy. |
 
-Executing: set-policy-decision-service-prop -n --set pdp-mode:external --set "policy-server:{pingauthorize}  PAP" --set
-decision-response-view:request --set decision-response-view:decision-tree
+  * `evaluate-and-forward`
 
-The Policy Decision Service was modified successfully.
-```
+    The Gateway API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server forwards the unmodified header to the external API server unless a policy decision directs otherwise.
+
+    This value is set by default.
+
+  * `evaluate-and-discard`
+
+    The Gateway API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server removes this header before forwarding the request to the external API server.
+
+  * `evaluate-and-replace`
+
+    The Gateway API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server replaces this header with one containing the basic authentication credentials defined for the external API server.
+
+    |   |                                                                                                                                |
+    | - | ------------------------------------------------------------------------------------------------------------------------------ |
+    |   | If you specify this value, make sure your authorization policies enforce an appropriate level of authorization for the client. |
+
+  ## Example
+
+  ```
+  bin/dsconfig set-gateway-api-endpoint-prop \
+    --endpoint-name <your-endpoint-name> \
+    --set http-auth-evaluation-behavior:evaluate-and-replace
+  ```
+
+  In this example, the `http-auth-evaluation-behavior` property is set to `evaluate-and-replace`.
+
+* `access-token-validator`
+
+  Sets the access token validators that the Gateway API Endpoint uses. By default, this property has no value, and the Gateway API Endpoint can evaluate every bearer token by using each access token validator that is configured on the server. To constrain the set of access token validators that a Gateway API Endpoint uses, set this property to use one or more specific values.
+
+  If `http-auth-evaluation-behavior` is set to `do-not-evaluate`, this setting is ignored.
+
+  ## Example
+
+  ```
+  bin/dsconfig set-gateway-api-endpoint-prop \
+    --endpoint-name <your-endpoint-name> \
+    --set access-token-validator:example-token-validator
+  ```
+
+  In this example, the `access-token-validator` property is set to `example-token-validator`.
 
 ---
 
 ---
-title: About the layout of the PingAuthorize Server folders
-description: The following table describes the contents of the PingAuthorize Server distribution file. In addition, the table describes items created as you use PingAuthorize Server.
+title: API security gateway HTTP 1.1 support
+description: As a reverse proxy, the API security gateway modifies HTTP requests and responses in addition to the changes required by policy processing.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_layout_server_folders
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_layout_server_folders.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_api_security_gw_http_support
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw_http_support.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2022
+revdate: June 26, 2026
+section_ids:
+  forwarded-http-request-headers: Forwarded HTTP request headers
+  forwarded-http-response-headers: Forwarded HTTP response headers
+  unsupported-http-request-header: Unsupported HTTP request header
+  unsupported-statement-changes: Unsupported statement changes
 ---
 
-# About the layout of the PingAuthorize Server folders
+# API security gateway HTTP 1.1 support
 
-The following table describes the contents of the PingAuthorize Server distribution file. In addition, the table describes items created as you use PingAuthorize Server.
+As a reverse proxy, the API security gateway modifies HTTP requests and responses in addition to the changes required by policy processing.
 
-**PingAuthorize Server directories, files, and tools**
+## Forwarded HTTP request headers
 
-| Directories, files, and tools | Description                                                                                                                                         |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `README`                      | README file that describes the steps to set up and start PingAuthorize Server.                                                                      |
-| `bak`                         | Stores the physical backup files used with the backup command-line tool.                                                                            |
-| `bat`                         | Stores Windows-based command-line tools for PingAuthorize Server.                                                                                   |
-| `bin`                         | Stores UNIX/Linux-based command-line tools for PingAuthorize Server.                                                                                |
-| `build-info.txt`              | Contains build and version information for PingAuthorize Server.                                                                                    |
-| `collector`                   | Used by the server to make monitored statistics available to PingDataMetrics Server.                                                                |
-| `config`                      | Stores the configuration files for the backends (admin, config) as well as the directories for messages, schema, tools, and updates.                |
-| `docs`                        | Provides the product documentation.                                                                                                                 |
-| `extensions`                  | Stores Server SDK extensions.                                                                                                                       |
-| `ldif`                        | Serves as the default location for LDIF exports and imports.                                                                                        |
-| `legal`                       | Stores any legal notices for dependent software used with PingAuthorize Server.                                                                     |
-| `lib`                         | Stores any scripts, jar, and library files needed for the server and its extensions.                                                                |
-| `locks`                       | Stores any lock files in the backends.                                                                                                              |
-| `logs`                        | Stores log files for PingAuthorize Server.                                                                                                          |
-| `metrics`                     | Stores the metrics that can be gathered for this server and surfaced in PingDataMetrics Server.                                                     |
-| `resource`                    | Stores supporting files such as default policies, a sample server profile template, and MIB files for SNMP.                                         |
-| `revert-update`               | The revert-update tool for UNIX/Linux systems.                                                                                                      |
-| `revert-update.bat`           | The revert-update tool for Windows systems.                                                                                                         |
-| `setup`                       | The setup tool for UNIX/Linux systems.                                                                                                              |
-| `setup.bat`                   | The setup tool for Windows systems.                                                                                                                 |
-| `tmp`                         | Stores temporary files and directories used by the server, including extracted WAR files and compiled JSP files used by Web Application Extensions. |
-| `uninstall`                   | The uninstall tool for UNIX/Linux systems.                                                                                                          |
-| `uninstall.bat`               | The uninstall tool for Windows systems.                                                                                                             |
-| `update`                      | The update tool for UNIX/Linux systems.                                                                                                             |
-| `update.bat`                  | The update tool for Windows systems.                                                                                                                |
-| `velocity`                    | Stores any customized Velocity templates and other artifacts (CSS, Javascript, images), or Velocity applications hosted by the server.              |
-| `webapps`                     | Stores web application files such as the administrative console.                                                                                    |
+HTTP requests often pass through several intermediaries before reaching their destination server. HTTP 1.1 defines two relevant types of headers:
+
+* End-to-end headers
+
+  Headers requiring transmission to all recipients on the chain, such as `Content-Type`.
+
+* Hop-by-hop headers
+
+  Headers that are only relevant to the next recipient on the chain, such as `Connection` and `Keep-Alive`.
+
+  The API security gateway never forwards hop-by-hop headers. It forwards all end-to-end headers, with the following exceptions:
+
+  * Headers related to HTTP resource versioning and conditional requests, such as `If-None-Match` and `If-Modified-Since`, are never forwarded.
+
+  * Headers related to CORS, such as `Origin` or `Access-Control-Request-Method`, are never forwarded.
+
+  * Headers that you exclude by using the `allowed-headers` configuration property of an API External Server to define an allow list of forwarded headers.
+
+  * Headers that you remove by using a custom statement extension.
+
+The API security gateway always adds the `Host`, `Accept-Encoding`, `Via`, `X-Forwarded-For`, `X-Forwarded-Host`, `X-Forwarded-Port`, and `X-Forwarded-Proto` headers to forwarded requests. If the `use-correlation-id-header` property is enabled on the HTTP Connection Handler, the gateway also adds a correlation ID header to the forwarded request. Learn more in [Configuring correlation IDs](paz_config_corr_id.html).
+
+You can use the `http-auth-evaluation-behavior` property of a Gateway API Endpoint to alter the `Authorization` header of a forwarded request.
+
+## Forwarded HTTP response headers
+
+The API security gateway forwards most HTTP response headers, with the following exceptions:
+
+* The `Date` header is replaced with a value generated by the API security gateway.
+
+* The `Content-Length` header is replaced with a value generated by the API security gateway.
+
+* The `Location` header is replaced with a value generated by the API security gateway.
+
+* If the `use-correlation-id-header` property is enabled on the HTTP Connection Handler, the gateway adds a correlation ID header to the response. Learn more in [Configuring correlation IDs](paz_config_corr_id.html).
+
+* Headers related to HTTP resource versioning and conditional requests, such as `ETag` and `Last-Modified`, are never forwarded.
+
+* Headers related to CORS, such as `Access-Control-Allow-Origin` or `Access-Control-Allow-Headers`, are never forwarded.
+
+## Unsupported HTTP request header
+
+The API security gateway doesn't support the `Upgrade` header.
+
+## Unsupported statement changes
+
+The API security gateway doesn't support using statements to add, modify, or delete the following headers:
+
+* Hop-by-hop headers that the gateway always removes, such as `Connection` and `Keep-Alive`
+
+* Conditional request headers that the gateway always removes, such as `If-None-Match` and `ETag`
+
+* Proxy-specific headers that the gateway always adds, such as `Via` and `X-Forwarded-For`
+
+The gateway overrides any changes to these headers.
 
 ---
 
 ---
-title: About the layout of the Policy Editor folders
-description: The following table describes the contents of the Policy Editor distribution file:
+title: API security gateway policy request attributes
+description: The API security gateway generates a set of attributes from inbound and outbound HTTP traffic.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_layout_pe_folders
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_layout_pe_folders.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_sec_gw_policy_request_attrs
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_policy_request_attrs.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 13, 2026
+section_ids:
+  top_level_gateway_attrs: Top-level Gateway request attributes
+  additional_gateway_attrs: Additional request attributes
+  gateway_access_token_attrs: Access token attributes
+  gateway_client_cert_attrs: Client certificate attributes
+  gateway_config_attrs: Gateway configuration attributes
+---
+
+# API security gateway policy request attributes
+
+The API security gateway generates a set of attributes from inbound and outbound HTTP traffic. These attributes are available to access control policies and reflect details such as the HTTP request, the access token, client certificates, and gateway-specific routing information.
+
+|   |                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------ |
+|   | These attributes are automatically included in `defaultPolicies.SNAPSHOT` in the Policy Editor distribution. |
+
+The following table describes these attributes:
+
+## Top-level Gateway request attributes
+
+| Attribute            | Value type | Description                                                                                                                                                                                                                                                      |
+| -------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **action**           | String     | Returns the request processing phase and the HTTP method.This value is formatted as `<phase>-<method>`. Example values include `inbound-GET`, `inbound-POST`, `outbound-GET`, and `outbound-POST`.                                                               |
+| **attributes**       | Object     | Returns additional attributes that don't correspond to a specific element type in the Trust Framework.You can find more information in the [next table](#additional_gateway_attrs).                                                                              |
+| **domain**           | String     | This value isn't used.                                                                                                                                                                                                                                           |
+| **identityProvider** | String     | Returns the name of the access token validator that evaluates the bearer token in an incoming request.                                                                                                                                                           |
+| **service**          | String     | Returns an identifier for the API service.By default, this value is set to the name of the Gateway API Endpoint. To override the default value, set the Gateway API Endpoint's `service` property.Multiple Gateway API Endpoints can use the same service value. |
+
+## Additional request attributes
+
+The following table describes the additional attributes included in **attributes**.
+
+| Attribute                         | Value type | Description                                                                                                                                                                |
+| --------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Gateway**                       | Object     | Returns gateway-specific information about the request not provided by the other attributes in this table.                                                                 |
+| **HttpRequest.AccessToken**       | Object     | Returns the parsed access token.You can find more information on this object in [Access token attributes](#gateway_access_token_attrs).                                    |
+| **HttpRequest.ClientCertificate** | Object     | Returns properties of the client certificate, if one was used.You can find more information on this object in [Client certificate attributes](#gateway_client_cert_attrs). |
+| **HttpRequest.CorrelationId**     | String     | Returns the ID that uniquely identifies the request and response, if available.                                                                                            |
+| **HttpRequest.IPAddress**         | String     | Returns the client IP address.                                                                                                                                             |
+| **HttpRequest.QueryParameters**   | Object     | Returns the request URI query parameters.                                                                                                                                  |
+| **HttpRequest.RequestBody**       | Object     | Returns the request body, if available.                                                                                                                                    |
+| **HttpRequest.RequestHeaders**    | Object     | Returns the request headers.                                                                                                                                               |
+| **HttpRequest.RequestURI**        | String     | Returns the request URI.                                                                                                                                                   |
+| **HttpRequest.ResourcePath**      | String     | Returns the portion of the request URI path that follows the inbound base path defined by the Gateway API Endpoint.                                                        |
+| **HttpRequest.ResponseBody**      | Object     | Returns the response body, if available.This attribute is only provided for outbound policy requests.                                                                      |
+| **HttpRequest.ResponseHeaders**   | Object     | Returns the response headers, if available.                                                                                                                                |
+| **HttpRequest.ResponseStatus**    | Number     | Returns the response status code, if available.                                                                                                                            |
+| **TokenOwner**                    | Object     | Returns the access token subject as a SCIM resource, as obtained by the access token validator.                                                                            |
+
+### Access token attributes
+
+The following table describes the child attributes of **HttpRequest.AccessToken**. These attributes are populated by the access token validator.
+
+|   |                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | These attributes correspond approximately to the fields defined by the IETF Token Introspection specification: [RFC 7662](https://datatracker.ietf.org/doc/html/rfc7662). |
+
+| Attribute                  | Value type      | Description                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **access\_token**          | String          | Returns the access token from the client request.                                                                                                                                                                                                                                                                                                  |
+| **active**                 | Boolean         | Indicates whether this access token is currently active, as determined by the access token validator.                                                                                                                                                                                                                                              |
+| **audience**               | String\[]       | Returns the recipients for whom the access token is intended. Typically, the authorization server sets this field to identify the resource servers that can accept the token.                                                                                                                                                                      |
+| **authentication\_age**    | Number          | Returns the number of seconds since the end user was authenticated by the token issuer.This attribute uses the `System Current DateTime` resolver and a SpEL processor to calculate the number of seconds since the **authentication\_time**. This calculation requires the `auth_time` claim in the access token.                                 |
+| **authentication\_policy** | String          | Returns the authentication policy that was satisfied when the access token was issued. An authentication policy is also called an authentication context class reference (ACR).If the access token contains an `acr` claim, this attribute uses a JSON Path processor to extract the date and time from the **HttpRequest.AccessToken** attribute. |
+| **authentication\_time**   | Zoned Date Time | Returns the date and time when the end user was authenticated.If the access token contains an `auth_time` claim, this attribute uses a JSON Path processor to extract the date and time from the **HttpRequest.AccessToken** attribute. If the claim is missing from the token, the default value is January 1, 1970.                              |
+| **client\_id**             | String          | Returns the client ID of the application that was granted the access token.                                                                                                                                                                                                                                                                        |
+| **expiration**             | DateTime        | Returns the date and time at which the access token expired.                                                                                                                                                                                                                                                                                       |
+| **issued\_at**             | DateTime        | Returns the date and time at which the access token was issued.                                                                                                                                                                                                                                                                                    |
+| **issuer**                 | String          | Returns the token issuer.Typically, this value is a URI that identifies the authorization server.                                                                                                                                                                                                                                                  |
+| **not\_before**            | DateTime        | Returns the date and time before which a resource server doesn't accept an access token.                                                                                                                                                                                                                                                           |
+| **scope**                  | Collection      | Returns the list of scopes granted to this token.                                                                                                                                                                                                                                                                                                  |
+| **subject**                | String          | Returns the token subject.This value represents a user identifier set by the authorization server.                                                                                                                                                                                                                                                 |
+| **token\_owner**           | String          | Returns the user identifier resolved by the access token validator's token resource lookup method.This value is a SCIM ID of the form `<resource type>/<resource ID>`.                                                                                                                                                                             |
+| **token\_type**            | String          | Returns the token type set by the authorization server.Typically, this value is `bearer`.                                                                                                                                                                                                                                                          |
+| **user\_token**            | Boolean         | Returns a flag set by the access token validator to indicate whether the token includes a subject. When this flag is `false`, the token contains no subject and was issued directly to a client.                                                                                                                                                   |
+| **username**               | String          | Returns the subject's user name.This value represents a user identifier set by the authorization server.                                                                                                                                                                                                                                           |
+
+### Client certificate attributes
+
+The following table describes the child attributes of **HttpRequest.ClientCertificate**:
+
+| Attribute        | Value type | Description                                                                                                                                             |
+| ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **algorithm**    | String     | Returns the name of the certificate signature algorithm, such as `SHA256withRSA`.                                                                       |
+| **algorithmOID** | String     | Returns the signature algorithm OID.                                                                                                                    |
+| **issuer**       | String     | Returns the distinguished name (DN) of the certificate issuer.                                                                                          |
+| **notAfter**     | DateTime   | Returns the expiration date and time of the certificate.                                                                                                |
+| **notBefore**    | DateTime   | Returns the earliest date on which the certificate is considered valid.                                                                                 |
+| **subject**      | String     | Returns the DN of the certificate subject.                                                                                                              |
+| **subjectRegex** | String     | Returns the regular expression that must be matched by the subject field of the certificate to ensure the certificate belongs to the requesting client. |
+| **valid**        | Boolean    | Indicates whether the SSL client certificate is valid.                                                                                                  |
+
+## Gateway configuration attributes
+
+The following table describes the child attributes of **Gateway**:
+
+| Attribute            | Value type | Description                                                                                                                 |
+| -------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **BasePath**         | String     | Returns the portion of the HTTP request URI that matches the Gateway API Endpoint's `inbound-base-path` value.              |
+| **TrailingPath**     | String     | Returns the portion of the HTTP request URI that follows the **BasePath**.                                                  |
+| Base path parameters | String     | Returns parameters defined in the Gateway API Endpoint's `inbound-base-path` configuration property.                        |
+| Custom attributes    | String     | Returns custom attributes that are defined in the Gateway API Endpoint's `policy-request-attribute` configuration property. |
+
+---
+
+---
+title: API security gateway policy requests
+description: The API security gateway creates policy requests for incoming requests and API responses, and you can observe how it creates them.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_api_security_gw_policy_reqs
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw_policy_reqs.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: December 15, 2025
+---
+
+# API security gateway policy requests
+
+The API security gateway creates policy requests for incoming requests and API responses, and you can observe how it creates them.
+
+Before accepting an incoming request and forwarding it to the API server, the gateway creates a policy request based on the incoming request and sends it to the policy decision point (PDP) for authorization. Before accepting an API server response and forwarding it back to the client, the gateway creates a policy request based on the incoming request and response and sends it to the PDP for authorization. An understanding of the manner in which the gateway formulates policy requests can help you create and troubleshoot policies more effectively.
+
+You can selectively disable response policy processing on a per-API-Endpoint basis. This ability is useful if the Gateway authorizes requests but does not filter responses. Disabling this processing can improve performance for frequent requests or requests that return very large responses. To disable processing, set the Gateway API Endpoint's `disable-response-processing` property to `true`.
+
+To better understand how the gateway formulates policy requests, enable detailed decision logging to view policy request attributes in action. This is especially helpful when first developing API security gateway policies. Learn more in [Policy Decision logger](paz_enable_detailed_logging.html#policy_decision_logger).
+
+---
+
+---
+title: API server request authentication
+description: As with the API security gateway, API server requests authorized by the Sideband API don't require authentication. However, the default policy set requires bearer token authentication.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_authn_api_server_reqs
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_authn_api_server_reqs.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 30, 2025
+section_ids:
+  example: Example
+  example-2: Example
+---
+
+# API server request authentication
+
+As with the [API security gateway](paz_api_security_gw_authn.html), API server requests authorized by the Sideband API don't require authentication. However, the default policy set requires bearer token authentication.
+
+The Sideband API uses configured Access Token Validators to evaluate bearer tokens that are included in incoming requests. The `HttpRequest.AccessToken` attribute supplies the validation result to the policy request, and the `TokenOwner` attribute provides the user identity that is associated with the token.
+
+Policies use this authentication information to affect the processing requests and responses. For example, the following policy in the default policy set requires all requests to be made with an active access token:
+
+```
+Rule: Deny if HttpRequest.AccessToken.active Equals false
+
+Statement:
+  Code: denied-reason
+  Applies To: Deny
+  Payload: {"status":401, "message": "invalid_token", "detail":"Access token is expired or otherwise invalid"}
+```
+
+Sideband API Endpoints include the following configuration properties to specify how client authentication is handled:
+
+* `http-auth-evaluation-behavior`
+
+  Determines whether the Sideband API Endpoint evaluates or modifies the HTTP authentication scheme and whether this scheme is forwarded to the API server through the API gateway.
+
+  This property accepts the following values:
+
+  * `do-not-evaluate`
+
+    The Sideband API Endpoint doesn't evaluate or modify the HTTP authentication scheme. This can be useful when implementing an authentication scheme that doesn't evaluate bearer tokens, such as MTLS.
+
+    If the client request includes an `Authorization` header, the PingAuthorize Server forwards the unmodified header to the external API server through the API gateway.
+
+    |   |                                                                                                                                                                                                                                                           |
+    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | If you specify this value, policies protecting this endpoint should not enforce constraints on request authentication, such as the validity of the access token. The default policy snapshot enforces such a constraint in the `Token Validation` policy. |
+
+  * `evaluate-and-forward`
+
+    The Sideband API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server forwards the unmodified header to the external API server through the API gateway unless a policy decision directs otherwise.
+
+    This value is set by default.
+
+  * `evaluate-and-discard`
+
+    The Sideband API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server removes this header before forwarding the request to the external API server through the API gateway.
+
+  * `evaluate-and-replace`
+
+    The Sideband API Endpoint evaluates the provided authentication credentials and makes authentication information available for policy evaluation. If the client request includes an `Authorization` header, the PingAuthorize Server replaces this header with one containing the basic authentication credentials defined for the external API server.
+
+    |   |                                                                                                                                |
+    | - | ------------------------------------------------------------------------------------------------------------------------------ |
+    |   | If you specify this value, make sure your authorization policies enforce an appropriate level of authorization for the client. |
+
+  ## Example
+
+  ```
+  bin/dsconfig set-sideband-api-endpoint-prop \
+    --endpoint-name <your-endpoint-name> \
+    --set http-auth-evaluation-behavior:evaluate-and-replace
+  ```
+
+  In this example, the `http-auth-evaluation-behavior` property is set to `evaluate-and-replace`.
+
+* `access-token-validator`
+
+  Sets the access token validators that the Sideband API Endpoint uses. By default, this property has no value, and the Sideband API Endpoint can evaluate every bearer token by using each access token validator that is configured on the server. To constrain the set of access token validators that a Sideband API Endpoint uses, set this property to use one or more specific values.
+
+  If `http-auth-evaluation-behavior` is set to `do-not-evaluate`, this setting is ignored.
+
+  ## Example
+
+  ```
+  bin/dsconfig set-sideband-api-endpoint-prop \
+    --endpoint-name <your-endpoint-name> \
+    --set access-token-validator:example-token-validator
+  ```
+
+  In this example, the `access-token-validator` property is set to `example-token-validator`.
+
+---
+
+---
+title: Authenticating to the JSON PDP API
+description: The JSON PDP API can require a client to authenticate to it by using a shared secret.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_authenticate_json_pdp_api
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_authenticate_json_pdp_api.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 28, 2025
+section_ids:
+  json_create_shared_secret: Creating a shared secret
+  steps: Steps
+  example: Example:
+  example-2: Example:
+  json_delete_shared_secret: Deleting a shared secret
+  steps-2: Steps
+  example-3: Example:
+  example-4: Example:
+  rotating-shared-secrets: Rotating shared secrets
+  steps-3: Steps
+  customizing-the-shared-secret-header: Customizing the shared secret header
+  steps-4: Steps
+  example-5: Example:
 ---
 
-# About the layout of the Policy Editor folders
+# Authenticating to the JSON PDP API
 
-The following table describes the contents of the Policy Editor distribution file:
+The JSON PDP API can require a client to authenticate to it by using a shared secret.
 
-**Policy Editor directories, files, and tools**
+To define shared secrets, use JSON PDP API Shared Secret configuration objects. To manage shared secrets, use the JSON PDP API HTTP Servlet Extension.
 
-| Directories, files, and tools | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `admin-point-application`     | Stores any `.jar` and library files needed for the server.                                                                                                                                                                                                                                                                                                                                                                   |
-| `bin`                         | Stores UNIX/Linux-based command-line tools for the Policy Editor.                                                                                                                                                                                                                                                                                                                                                            |
-| `build-info.txt`              | Contains build and version information for the Policy Editor.                                                                                                                                                                                                                                                                                                                                                                |
-| `config`                      | Stores the configuration, including the keystore for the web server HTTPS certificate.                                                                                                                                                                                                                                                                                                                                       |
-| `lib`                         | Stores any `.jar` and library files needed by the command-line tools.To make a custom Spring Expression Language (SpEL) resolver available to the Policy Editor, add the resolver's `.jar` library to the `/extensions` subdirectory and add the SpEL Java class to the [allow list](paz_prepare_policies_production.html#paz_add_spel_java_classes). For example, `PingAuthorize-PAP/lib/extensions/addl-spel-classes.jar`. |
-| `logs`                        | Stores log files for the Policy Editor.                                                                                                                                                                                                                                                                                                                                                                                      |
-| `policy-backup`               | Stores H2 [policy database backups](paz_policy_db_backups.html) when such backups are enabled.                                                                                                                                                                                                                                                                                                                               |
-| `resource`                    | Stores supporting files such as policy snapshots.                                                                                                                                                                                                                                                                                                                                                                            |
+## Creating a shared secret
+
+Define the authentication credentials that the JSON PDP API might require a client to present.
+
+### Steps
+
+1. To create a shared secret, run the following example `dsconfig` command, substituting values of your choosing.
+
+   #### Example:
+
+   ```
+   PingAuthorize/bin/dsconfig create-authorization-policy-decision-shared-secret \
+     --secret-name "Shared Secret A" \
+     --set "shared-secret:secret123"
+   ```
+
+   |   |                                                                                                                                                                                                                                                                                          |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | * The `shared-secret` property sets the value that the JSON PDP API requires the client to present. After you set this value, it is no longer visible.
+
+   * The `secret-name` property is a label that allows an administrator to distinguish one JSON PDP API Shared Secret from another. |
+
+2. To update the `shared-secrets` property, run the following example `dsconfig` command.
+
+   #### Example:
+
+   ```
+   PingAuthorize/bin/dsconfig set-http-servlet-extension-prop \
+     --extension-name "JSON PDP API" \
+     --add "shared-secrets:Shared Secret A"
+   ```
+
+   A new JSON PDP API Shared Secret is not used until the `shared-secrets` property of the JSON PDP API HTTP Servlet Extension is updated.
+
+## Deleting a shared secret
+
+You can remove a shared secret from use or delete it entirely.
+
+### Steps
+
+* To remove a JSON PDP API Shared Secret from use, run the following example `dsconfig` command, substituting values of your choosing.
+
+  #### Example:
+
+  ```json
+  {pingauthorize}/bin/dsconfig set-http-servlet-extension-prop \
+    --extension-name "JSON PDP API" \
+    --remove "shared-secrets:Shared Secret A"
+  ```
+
+* To delete a JSON PDP API Shared Secret, run the following example `dsconfig` command.
+
+  #### Example:
+
+  ```json
+  {pingauthorize}/bin/dsconfig delete-authorization-policy-decision-shared-secret \
+    --secret-name "Shared Secret A"
+  ```
+
+## Rotating shared secrets
+
+To avoid service interruptions, the JSON PDP API allows multiple, distinct shared secrets to be accepted at the same time.
+
+You can configure a new shared secret that the JSON PDP API accepts alongside an existing shared secret. This allows time to update the client to use the new shared secret.
+
+### Steps
+
+1. Create a new JSON PDP API shared secret and assign it to the JSON PDP API HTTP Servlet Extension. Learn more in [Creating a shared secret](#json_create_shared_secret).
+
+2. Update the client to use the new shared secret.
+
+3. Remove the previous JSON PDP API shared secret. Learn more in [Deleting a shared secret](#json_delete_shared_secret).
+
+## Customizing the shared secret header
+
+By default, the JSON PDP API accepts a shared secret from a client through the CLIENT-TOKEN header.
+
+### Steps
+
+* To customize a shared secret header, change the value of the JSON PDP API HTTP Servlet Extension's `shared-secret-header` property.
+
+  #### Example:
+
+  The following command changes the shared secret header to `x-shared-secret`.
+
+  ```json
+  {pingauthorize}/bin/dsconfig set-http-servlet-extension-prop \
+    --extension-name "JSON PDP API" \
+    --set shared-secret-header-name:x-shared-secret
+  ```
+
+  The following command resets the shared secret header to its default value.
+
+  ```json
+  {pingauthorize}/bin/dsconfig set-http-servlet-extension-prop \
+    --extension-name "JSON PDP API" \
+    --reset shared-secret-header-name
+  ```
 
 ---
 
 ---
-title: About the manage-certificates tool
-description: "PingAuthorize Server offers a manage-certificates tool that enables interaction with Java KeyStore (JKS) and PKCS #12 key stores."
+title: Auto-healing for unavailable servers
+description: Using gauges, set up auto-healing in a container deployment to address an unavailable server.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_manage_certs_tool
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_manage_certs_tool.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_auto_healing
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_auto_healing.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 29, 2022
+section_ids:
+  steps: Steps
+---
+
+# Auto-healing for unavailable servers
+
+Using gauges, set up auto-healing in a container deployment to address an unavailable server.
+
+## Steps
+
+1. Configure one or more of the gauges described in [Server availability](paz_server_availability.html).
+
+2. Configure the gauges to trigger the UNAVAILABLE status.
+
+   By default, the gauges do not trigger the UNAVAILABLE status.
+
+   As discussed in [Endpoint Average Response Time (Milliseconds) gauge](paz_endpoint_avg_resp.html) and [HTTP Processing (Percent) gauge](paz_http_proc_gauge.html), use the `dsconfig` command to adjust the following values for your environment. Each system is different so you might need to adjust the values several times to determine your ideal configuration.
+
+   1. For the `Endpoint Average Response Time (Milliseconds)` gauge, set `critical-value`.
+
+   2. For the `HTTP Processing (Percent)` gauge, set both `critical-value` and `server-unavailable-severity-level`.
+
+3. Configure the container orchestrator to use the `available-or-degraded-state` endpoint to detect whether the server is alive.
+
+   For information about the endpoint, see [Availability servlet](paz_server_status.html#availability_servlet).
+
+---
+
+---
+title: Automatic backend LDAP server discovery
+description: Instead of explicitly specifying all backend LDAP servers in the configuration as LDAP external servers, you can configure PingAuthorize Server to automatically discover its backend servers.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_auto_backend_discovery
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_auto_backend_discovery.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2022
 ---
 
-# About the manage-certificates tool
+# Automatic backend LDAP server discovery
 
-PingAuthorize Server offers a `manage-certificates` tool that enables interaction with Java KeyStore (JKS) and PKCS #12 key stores.
+Instead of explicitly specifying all backend LDAP servers in the configuration as LDAP external servers, you can configure PingAuthorize Server to automatically discover its backend servers.
 
-Although it behaves similarly to the `keytool` utility that accompanies most Java distributions, `manage-certificates` is easier to use, provides improved usage information, and offers additional functionality.
+|   |                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This feature requires that all backend LDAP servers be PingDirectory Servers running version 8.0.0.0 or later. Automatic backend discovery is not supported for PingDirectoryProxy Server or third-party LDAP servers. |
+
+To configure automatic backend discovery, you must complete these tasks:
+
+* Join the PingAuthorize Server to the same topology as the PingDirectory Servers.
+
+* Configure the PingAuthorize Server's load-balancing algorithm with an LDAP external server template. This template provides the connection and health check settings that PingAuthorize Server uses for all PingDirectory Servers.
+
+* Configure the topology registry entry for each PingDirectory Server to indicate the name of the PingAuthorize Server load-balancing algorithm.
 
 ---
 
 ---
-title: About the SCIM service
-description: PingAuthorize Server's built-in System for Cross-domain Identity Management (SCIM) service provides a REST API for data that is stored in one or more external datastores, based on the SCIM 2.0 standard.
+title: Available gauges
+description: PingAuthorize makes the following gauges available. You can manage these gauges using the administrative console or the dsconfig tool.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_about_scim_service
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_about_scim_service.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_available_gauges
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_available_gauges.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 18, 2025
+revdate: July 29, 2022
 ---
 
-# About the SCIM service
+# Available gauges
 
-PingAuthorize Server's built-in System for Cross-domain Identity Management (SCIM) service provides a REST API for data that is stored in one or more external datastores, based on the [SCIM 2.0 standard](https://datatracker.ietf.org/doc/html/rfc7644).
+PingAuthorize makes the following gauges available. You can manage these gauges using the administrative console or the `dsconfig` tool.
 
-For information about the SCIM service, see the following topics:
-
-* [SCIM API request and response flow](paz_scim_request_response_flow.html)
-
-* [SCIM configuration basics](paz_scim_config_basics.html)
-
-* [SCIM endpoints](paz_scim_endpoints.html)
-
-* [SCIM authentication](paz_scim_authentication.html)
-
-* [SCIM policy requests](paz_scim_policy_requests.html)
-
-* [Lookthrough limit for SCIM searches](paz_lookthrough_limit.html)
-
-* [Disabling the SCIM REST API](paz_disable_scim_rest_api.html)
-
----
+| Gauge name                                    | Enabled by default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available File Descriptors                    | true               | Monitors the number of file descriptors available to the server process. The server allows for an unlimited number of connections by default but is restricted by the file descriptor limit on the operating system.You can configure the number of file descriptors that the server uses by either setting the `NUM_FILE_DESCRIPTORS` environment variable or by creating a `config/num-file-descriptors` file with a single line such as, `NUM_FILE_DESCRIPTORS=12345`. If you do not use either of these options, the server uses the default of 65535.Running out of available file descriptors can lead to unpredictable behavior and severe system instability.                                                                                                                                                                                                             |
+| Certificate Expiration (Days)                 | true               | Monitors the expiration dates of key server certificates.A server certificate expiring can cause server unavailability, degradation, or loss of key server functionality.Replace certificates nearing the end of their validity as soon as possible.For more information about server certificates and how they are managed, see the `status` tool or **Status** in the administrative console.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| CPU Usage (Percent)                           | true               | Monitors server CPU use and provides an averaged percentage for the interval defined.The monitored resource is the host system's CPU, which does not include a resource identifier. If CPU use is high, check the server's current workload and other processes on the system and make any needed adjustments. Reducing the load on the system will lead to better response times.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Disk Busy (Percent)                           | true               | Monitors the percentage of disk use time averaged over the specified update interval.This gauge requires that you enable the Host System Monitor Provider and that you register any monitored disks by using the `disk-devices` property of that configuration object.The resource identifier for this gauge is the disk device name. Use the `iostat` command or a similar system utility to see a list of disk device names. A separate gauge monitor entry is created for each monitored disk.                                                                                                                                                                                                                                                                                                                                                                                 |
+| Endpoint Average Response Time (Milliseconds) | false              | Monitors the average response time across all endpoints since the server was started. This number does not include requests to the upstream server.There is no resource identifier associated with this gauge.The monitored resource is overall response time of all requests to PingAuthorize servlets since the server was started.High response times might be indicative of a number of factors including a disk-bound server, network latency, or misconfiguration. Enabling the Stats Logger plugin can help isolate problems.For more information, see [Endpoint Average Response Time (Milliseconds) gauge](paz_endpoint_avg_resp.html).                                                                                                                                                                                                                                  |
+| HTTP Processing (Percent)                     | true               | Monitors the percentage of time that request handler threads spend processing HTTP requests. This percentage represents the inverse of the server's ability to handle new requests without queueing.For more information, see [HTTP Processing (Percent) gauge](paz_http_proc_gauge.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| JVM Memory Usage (Percent)                    | true               | Monitors the percentage of Java Virtual Machine memory that is in use. This value naturally fluctuates due to garbage collection, so the minimum value within an interval is reported because it is a better indication of overall memory growth.When the memory usage exceeds 90%, open a case with [Ping Identity Support](https://support.pingidentity.com/) because the server is either misconfigured or has a memory leak.As memory usage approaches 100%, the server is more and more likely to experience garbage collection pauses, which leave the server unresponsive for a long time. Restarting the server is likely the only remedy for this situation. Before you restart the server, run `collect-support-data` and capture the output of `jmap -histo <server-pid>` to provide to customer support. The PID of the server is in `<server-root>/logs/server.pid`. |
+| License Expiration (Days)                     | true               | Monitors the expiration date of the product license. An expired license causes warnings to appear in the server's logs and in the `status` tool output.Request a license key through the Ping Identity licensing website <https://www.pingidentity.com/en/account/request-license-key.html> or contact <sales@pingidentity.com>.Use the `dsconfig` tool to update the License configuration's license key property.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Memory Usage (Percent)                        | false              | Monitors the percentage of memory use averaged over the update interval defined. The monitored resource is the host system's memory use, which does not have a resource identifier.Some operating systems, including Linux, use the majority of memory for file system cache, which is freed as applications need it. If memory use is high, check the applications that are running on the server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Policy Decision Service Availability          | true               | Monitors availability of the Policy Decision Service.If the Policy Decision Service is misconfigured or cannot reach the deployment package store, PingAuthorize services will be unavailable.Ensure that the `pdp-mode` and `trust-framework-version` are correctly set, and that the deployment package store is reachable.For more information, see [Policy Decision Service Availability gauge](paz_policy_dec_srv_avial_gauge.html).                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Strong Encryption Not Available               | true               | Indicates the JVM does not appear to support strong encryption algorithms, like 256-bit AES. The server will fall back to using weaker algorithms, like 128-bit AES.To enable support for strong encryption, update your JVM to a newer version that supports it by default; alternatively, install or enable the unlimited encryption strength jurisdiction policy files in your Java installation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| User Store Availability                       | true               | Monitors availability of the SCIM user store.If the LDAP directory servers are unavailable, the "UserStoreAdapter" cannot forward requests. Also, the server cannot process SCIM requests or perform token owner lookups.Ensure that LDAP directory servers are available.For more information, see [User Store Availability gauge](paz_user_store_avail_gauge.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ---
-title: Changing database credentials
-description: To change the policy database credentials after the initial setup, run the setup tool again.
+
+---
+title: Available manage-certificates subcommands
+description: The manage-certificates tool uses the following subcommands to indicate which function to invoke:
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_change_db_creds
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_change_db_creds.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_available_subcmds
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_available_subcmds.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
+revdate: July 29, 2022
 ---
 
-# Changing database credentials
+# Available manage-certificates subcommands
 
-To change the policy database credentials after the initial setup, run the `setup` tool again.
+The `manage-certificates` tool uses the following subcommands to indicate which function to invoke:
 
-## About this task
-
-|   |                                                                                                                         |
-| - | ----------------------------------------------------------------------------------------------------------------------- |
-|   | Running the `setup` tool regenerates the `configuration.yml` file and regenerates any self-signed certificate keystore. |
-
-## Steps
-
-1. Stop the Policy Editor.
-
-   ```
-   bin/stop-server
-   ```
-
-2. Run `setup` with the options desired from the following set and specify the new credentials. To change from the default credentials, run `setup` one time. To change from nondefault credentials, run `setup` combined by double ampersands (`&&`) with a second `setup`; in the first command, specify the current credentials for the admin user and the new credentials for the application user, and then in the second command, specify the new credentials for the admin user and the now-current credentials for the application user. See the examples.
-
-   * `--dbAdminUsername`
-
-   * `--dbAdminPassword`
-
-   * `--dbAppUsername`
-
-   * `--dbAppPassword`
-
-   The first example changes the credentials for the admin and application accounts from their defaults to `admin`/ `Passw0rd` and `app`/ `S3cret`, respectively.
-
-   ```
-   setup --dbAdminUsername admin \
-     --dbAdminPassword Passw0rd \
-     --dbAppUsername app \
-     --dbAppPassword S3cret \
-     --interactive
-   ```
-
-   With the credentials no longer the defaults, to change the credentials, you need two `setup` commands. The first command uses the current admin credentials (`admin`/ `Passw0rd`) and sets new application credentials (`app` and `F0cu5`). The second command then uses the newly set application credentials (`app` and `F0cu5`) to set new admin credentials (`admin` and `S3cure`).
-
-   ```
-   setup --dbAdminUsername admin \
-     --dbAdminPassword Passw0rd \
-     --dbAppUsername app \
-     --dbAppPassword F0cu5 \
-     --interactive \
-     && setup --dbAdminUsername admin \
-     --dbAdminPassword S3cure \
-     --dbAppUsername app \
-     --dbAppPassword F0cu5 \
-     --interactive
-   ```
-
-3. Start the Policy Editor.
-
-   ```
-   bin/start-server
-   ```
+| Subcommand                                 | Function                                                                                                                                                                             |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `list-certificates`                        | Lists the certificates in a keystore.                                                                                                                                                |
+| `import-certificate`                       | Imports a certificate into a trusted certificate entry or imports a certificate chain and private key into a private key entry.                                                      |
+| `export-certificate`                       | Exports a certificate from a keystore.                                                                                                                                               |
+| `export-private-key`                       | Exports a private key from a keystore.                                                                                                                                               |
+| `generate-self-signed-certificate`         | Generates a self-signed certificate.                                                                                                                                                 |
+| `generate-certificate-signing-request`     | Generates a certificate-signing request that can be provided to a certification authority.                                                                                           |
+| `sign-certificate-signing-request`         | Signs a certificate-signing request with a specified issuer certificate.                                                                                                             |
+| `check-certificate-usability`              | Checks a specified certificate in a keystore to verify whether it is suitable for use as a listener certificate.                                                                     |
+| `trust-server-certificate`                 | Initiates the TLS-negotiation process with a specified server to obtain its certificate chain so that a truststore can be updated with the necessary information to trust the chain. |
+| `display-certificate-file`                 | Displays the contents of a file that contains one or more PEM-encoded or DER-encoded X.509 certificates.                                                                             |
+| `display-certificate-signing-request-file` | Displays the contents of a file that contains a PEM-encoded or DER-encoded PKCS #10 certificate-signing request (CSR).                                                               |
+| `change-certificate-alias`                 | Changes the alias for an entry in a keystore.                                                                                                                                        |
+| `change-keystore-password`                 | Changes the password for a keystore.                                                                                                                                                 |
+| `change-private-key-password`              | Changes the password that protects the private key for a specified entry in a keystore.                                                                                              |
 
 ---
 
 ---
-title: Changing the active policy branch
-description: The PingAuthorize Policy Editor can manage multiple sets of Trust Framework attributes and policies by storing data sets in different branches.
+title: Certificate chains
+description: A certificate chain is an ordered list of one or more certificates. In such a chain, each subsequent certificate is the issuer of the previous certificate.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_change_active_policy_branch
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_change_active_policy_branch.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_cert_chains
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_cert_chains.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  example: Example:
+revdate: July 29, 2022
 ---
 
-# Changing the active policy branch
+# Certificate chains
 
-The PingAuthorize Policy Editor can manage multiple sets of Trust Framework attributes and policies by storing data sets in different branches.
+A certificate chain is an ordered list of one or more certificates. In such a chain, each subsequent certificate is the issuer of the previous certificate.
 
-## About this task
+During TLS negotiation, the server presents a certificate chain to the client, which determines whether to trust the chain and continue with the negotiation. The client can also present its own certificate chain to the server.
 
-In a development environment, you might need to quickly reconfigure PingAuthorize Server between policy branches.
+If a certificate is self-signed, its chain contains only that single certificate. If a certificate is signed by a self-signed certificate authority (CA) certificate, such as a root CA, the chain contains two certificates: the server certificate and the CA certificate that follows it. If a single intermediate CA (a CA certificate that is signed by a root CA) is present, the chain contains the server certificate, followed by the intermediate CA, and then the root CA.
 
-## Steps
+Intermediate certificate authorities are useful for security purposes, especially in commercial authorities. If a client trusts a root CA certificate, it is likely to trust anything with that root CA certificate at the base of its chain. Consequently, the root CA certificate must be kept secure.
 
-1. To set up branch changes, you must first [define a Policy External Server configuration](paz_config_external_pdp.html) for each branch.
+|   |                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------- |
+|   | If the root CA certificate is compromised, any certificate that is directly or indirectly signed by it can no longer be trusted. |
 
-2. Change the Policy Decision Service's `policy-server` property as needed.
+With intermediate CA certificates, the root certificate can be kept offline in secure storage and used only when a new intermediate CA certificate must be signed. The intermediate CA certificates can be used to sign end-entity certificates, but must be protected to avoid compromising any of the certificates. A compromised certificate must be revoked along with all of the certificates that it signed. In such a scenario, the root CA can be used to sign a new certificate.
 
-   ### Example:
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The certificate chain that the server presents to the client, or that the client presents to the server, during TLS negotiation does not always need to be the complete chain. If the root CA at the end of the chain is widely trusted, the server can assume that the client already has that root CA in its default set of trusted certificates. The server can leave that root CA off the chain with the assumption that the client will retrieve it from its default trust store. While the same assumption could theoretically be true for intermediate CA certificates, only the root CA certificate is commonly omitted. When a client receives an incomplete chain, the client looks in its default trust store to determine whether the trust store contains the issuer certificate, which it can identify by using properties like the issuer distinguished name (DN) or an authority key identifier extension. |
 
-   Assume that you have two policy branches in the Policy Editor: `Stable Policies` and `Experimental Policies`. Each branch is represented in the PingAuthorize Server configuration as a Policy External Server. During testing, you can switch back and forth between branches by updating the Policy Decision Service's `policy-server` property. To change to the `Experimental Policies` branch, run this command:
-
-   ```
-   dsconfig set-policy-decision-service-prop \
-     --set "policy-server:Experimental Policies"
-   ```
-
-   To change back to the `Stable Policies` branch, run this command:
-
-   ```
-   dsconfig set-policy-decision-service-prop \
-      --set "policy-server:Stable Policies"
-   ```
+The certificate at the head of a certificate chain, which appears as the first one in the list, is often called the end-entity certificate. If this certificate appears at the head of the chain that a server presents during TLS negotiation, it is referred to as the server certificate. If the certificate appears at the head of a chain that a client presents, it is referred to as a client certificate. The certificate at the end of a complete chain must be a root CA certificate. In the case of a self-signed certificate, the chain contains only a single certificate that serves both roles.
 
 ---
 
 ---
-title: Changing the default JWT claim for the OIDC user ID
-description: Change the sub JSON Web Token (JWT) claim for the OpenID Connect (OIDC) user ID under the options.yml file's core section.
+title: Certificate extensions
+description: Extensions provide additional context for a certificate.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_config_jwt_claims
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_config_jwt_claims.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_cert_extensions
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_cert_extensions.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 15, 2025
-section_ids:
-  steps: Steps
+revdate: July 29, 2022
 ---
 
-# Changing the default JWT claim for the OIDC user ID
+# Certificate extensions
 
-Change the `sub` JSON Web Token (JWT) claim for the OpenID Connect (OIDC) user ID under the `options.yml` file's `core` section.
+Extensions provide additional context for a certificate.
 
-By default, when a user signs on to the Policy Editor with OIDC, the Policy Editor uses the `sub` JWT claim to:
+Some of the more common extension types include the following:
 
-* Extract the `sub` claim value from the ID token and:
+* Subject key identifier
 
-  * Record the `sub` claim value in the **Creator** column of the **Commits** table when the user makes commits (see **Branch Manager > Version Control**).
+  Holds a unique identifier for the certificate, which is generally derived from the certificate's public key.
 
-* Make a request to the [UserInfo](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint and:
+* Authority key identifier
 
-  * Use the `sub` claim value from the response as the user data.
+  Holds the subject key identifier for the issuer certificate. This extension type helps to identify the issuer certificate, especially when presented with an incomplete certificate chain.
 
-  * Display the user data in the upper-right corner of the Policy Editor.
+* Subject alternative name
 
-If your organization wants to use a non-default claim for the OIDC user ID, such as `email`, define this claim by completing the following steps.
+  Holds a list of ways that clients are expected to reference a server when establishing a connection to it.
 
-|   |                                                                                                                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You must configure your OIDC provider to include the claim in both the `UserInfo` endpoint and the ID token for the name to display. Refer to your OIDC provider's documentation for instructions. |
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | Clients must take this information into account when deciding whether to trust a server's certificate.The most common types of values include DNS names, IP addresses, and URIs. DNS names must be fully qualified, but can optionally use an asterisk in the leftmost component to match any single name in that component. For example, `*.example.com` could match `www.example.com` or `ldap.example.com`, but would not match `ldap.east.example.com` or `example.com`. |
 
-## Steps
+* Key usage
 
-1. Make a copy of the default options file:
+  Provides information about the manner in which the certificate is expected to be used. The following key usages are allowed:
 
-   ```shell
-   $ cp config/options.yml my-options.yml
-   ```
+  * `digitalSignature`
 
-2. In the `core` section of the new options file, uncomment the example `Authentication.oidcUserIdField` field that uses the `email` claim:
+    Indicates that the certificate can be used for digitally signing data, excluding certificates and certificate revocation lists (CRL).
 
-   ```
-   core:
-     # Use a JWT claim other than "sub" for the OIDC User ID.
-     #
-     # Authentication.oidcUserIdField: jwt_claim
-     #
-     Authentication.oidcUserIdField: "email"
-   ```
+  * `nonRepudiation`
 
-   1. (Optional): Update the `email` claim to your organization's preferred claim.
+    Indicates that the certificate can be used to prevent denying the authenticity of a message. `nonRepudiation` is also known as `contentCommitment`.
 
-3. Stop the Policy Editor:
+  * `keyEncipherment`
 
-   ```shell
-   $ bin/stop-server
-   ```
+    Indicates that the certificate can be used to protect encryption keys, such as symmetric keys that are derived during TLS key agreement.
 
-4. Run `setup` using the `--optionsFile` argument and customize all other options to meet your needs:
+  * `dataEncipherment`
 
-   ```shell
-   $ bin/setup demo \
-     --adminUsername admin \
-     --generateSelfSignedCertificate \
-     --decisionPointSharedSecret pingauthorize \
-     --hostname <pap-hostname>  \
-     --port <pap-port>  \
-     --adminPort <admin-port>  \
-     --licenseKeyFile <path-to-license>  \
-     --optionsFile my-options.yml
-   ```
+    Indicates that the certificate can be used for encrypting data directly.
 
-5. Start the Policy Editor:
+  * `keyAgreement`
 
-   ```shell
-   $ bin/start-server
-   ```
+    Indicates that the certificate's public key can be used for key agreement, such as deriving the symmetric key that protects TLS communication.
 
-6. In the Policy Editor, go to **Branch Manager > Version Control** and commit a policy change.
+  * `keyCertSign`
 
-7. Verify that your claim is being used:
+    Indicates that the certificate can act as a certification authority and be used for signing other certificates.
 
-   1. Select any branch and verify that the new claim value appears in the upper-right corner of the Policy Editor.
+  * `cRLSign`
 
-   2. Verify that the new claim value appears in the **Creator** column of the **Commits** table for the commit you made in step 6.
+    Indicates that the certificate can be used to sign CRLs.
+
+  * `encipherOnly`
+
+    When used in conjunction with `keyEncipherment`, indicates that the public key can be used only for encrypting data during key agreement.
+
+  * `decipherOnly`
+
+    When used in conjunction with `keyEncipherment`, indicates that the public key can be used only for decrypting data during key agreement.
+
+* Extended key usage
+
+  Acts as an alternative to the key usage extension and provides additional high-level functionality. The following extended key usages are allowed:
+
+  * `serverAuth`
+
+    Indicates that the server can present the certificate to the client during TLS negotiation.
+
+  * `clientAuth`
+
+    Indicates that the client can present the certificate to the server during TLS negotiation.
+
+  * `codeSigning`
+
+    Indicates that the certificate can be used to sign source and compiled code.
+
+  * `emailProtection`
+
+    Indicates that the certificate can be used to sign or encrypt email messages.
+
+  * `timeStamping`
+
+    Indicates that the certificate can be used to assert the time that an event occurred.
+
+  * `ocspSigning`
+
+    Indicates that the certificate can be used to sign an online certificate status protocol (OCSP) response.
+
+* Basic constraints
+
+  Indicates whether the certificate can act as a certification authority and, if so, the maximum number of intermediate certificates that can follow it in a certificate chain.
 
 ---
 
 ---
-title: Command-line tools
-description: PingAuthorize Server provides a full suite of command-line tools to administer the server. You can run these tools in interactive, noninteractive, or script mode.
+title: Certificate key pairs
+description: Each certificate contains a key pair that consists of two keys that are linked cryptographically. If you encrypt data with one key, the data can be only decrypted with the other key.
 component: pingauthorize
 version: 11.1
-page_id: pingauthorize:pingauthorize_server_administration_guide:paz_command_line_tools
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_command_line_tools.html
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_cert_key_pairs
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_cert_key_pairs.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 21, 2025
+revdate: July 29, 2022
 ---
 
-# Command-line tools
+# Certificate key pairs
 
-PingAuthorize Server provides a full suite of command-line tools to administer the server. You can run these tools in interactive, noninteractive, or script mode.
+Each certificate contains a key pair that consists of two keys that are linked cryptographically. If you encrypt data with one key, the data can be only decrypted with the other key.
 
-|   |                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Most of these tools are in the `bin` directory for Linux systems and the `bat` directory for Microsoft Windows systems; however, some of the tools are in the root directory of the distribution. |
+Although a key pair can be created easily when both keys are generated simultaneously, the process of deriving one key from the other is extremely difficult, a process categorized in cryptographic terms as computationally infeasible.
 
-**Tools help**
+When generating a key pair, one key is designated as the public key, and the other key is designated the private key. The public key can be made widely available, but the private key must be kept secret and not shared with anyone.
 
-| For                                                       | Use this option              | Example                               |
-| --------------------------------------------------------- | ---------------------------- | ------------------------------------- |
-| Information about arguments and subcommandsUsage examples | `--help`                     | `dsconfig --help`                     |
-| A list of subcommands                                     | `--help-subcommands`         | `dsconfig --help-subcommands`         |
-| More information about a subcommand                       | `--help` with the subcommand | `dsconfig list-log-publishers --help` |
+As long as the secrecy of the private key is maintained, the key pair can be used to perform the following functions:
 
-For more information and examples, see the *PingAuthorize Command-Line Tool Reference* at `docs/cli/index.html`.
+* Encryption, sometimes referred to as confidentiality
 
-**Command-line tools**
+  If someone wants to send you a secret message without anyone else viewing it, the message can be encrypted with your public key. Only you possess the private key, so only you can decrypt the message.
 
-| Tool                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `backup`                                      | Run full or incremental backups on one or more PingAuthorize Server backends.This tools supports the use of a properties file to pass command-line arguments. See [Saving command options in a file](paz_save_options_file.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `base64`                                      | Encode raw data using the base64 algorithm or decode base64-encoded data back to its raw representation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `collect-support-data`                        | Collect and package system information useful in troubleshooting problems. The information is packaged as a zip archive that you can send to a technical support representative.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `config-diff`                                 | Compares PingAuthorize Server configurations and produces a `dsconfig` batch file needed to bring the source inline with the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `create-initial-config`                       | Create an initial PingAuthorize Server configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `create-rc-script`                            | Create a Run Control (RC) script to start, stop, and restart the PingAuthorize Server on UNIX-based systems.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `create-systemd-script`                       | Create a `systemd` script to start and stop the PingAuthorize Server on Linux-based systems.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `docker-pre-start-config`                     | Run this tool before starting PingAuthorize Server to make configuration changes to the server that depend on the running container's environment.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `dsconfig`                                    | View and edit the PingAuthorize Server configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `dsjavaproperties`                            | Configure the JVM options used to run PingAuthorize Server and its associated tools.Before launching the command, edit the properties file located in `config/java.properties` to specify the desired JVM options and `JAVA_HOME` environment variable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `encrypt-file`                                | Encrypt or decrypt data using a key generated from a user-supplied passphrase, a key generated from an encryption settings definition, or a key shared among servers in the topology. The data to be processed can be read from a file or standard input, and the resulting data can be written to a file or standard output. You can use this command to encrypt and subsequently decrypt arbitrary data, or to decrypt encrypted backups, LDIF exports, and log files generated by the server.                                                                                                                                                                                                                                                                                                                                                                                      |
-| `encryption-settings`                         | Manage the server encryption settings database.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `ldap-diff`                                   | Compare the contents of two LDAP servers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `ldap-result-code`                            | Display and query LDAP result codes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `ldapcompare`                                 | Perform compare operations in an LDAP directory server. Compare operations can be used to efficiently determine whether a specified entry has a given value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `ldapdelete`                                  | Delete one or more entries from an LDAP directory server. You can provide the DNs of the entries to delete using named arguments, as trailing arguments, from a file, or from standard input. Alternatively, you can identify entries to delete using a search base DN and filter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `ldapmodify`                                  | Apply a set of add, delete, modify, and/or modify DN operations to a directory server. Supply the changes to apply in LDIF format, either from standard input or from a file specified with the `ldifFile` argument. Change records must be separated by at least one blank line.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ldappasswordmodify`                          | Update the password for a user in an LDAP directory server using the password modify extended operation (as defined in RFC 3062), a standard LDAP modify operation, or an Active Directory-specific modification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ldapsearch`                                  | Process one or more searches in an LDAP directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `ldif-diff`                                   | Compare the contents of two files containing LDIF entries. The output will be an LDIF file containing the add, delete, and modify change records needed to convert the data in the source LDIF file into the data in the target LDIF file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `ldifmodify`                                  | Apply a set of changes (including add, delete, modify, and modify DN operations) to a set of entries contained in an LDIF file. The changes will be read from a second file (containing change records rather than entries), and the updated entries will be written to a third LDIF file. Unlike `ldapmodify`, `ldifmodify` cannot read the changes to apply from standard input.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `ldifsearch`                                  | Search one or more LDIF files to identify entries matching a given set of criteria.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `list-backends`                               | List the backends and base DNs configured in PingAuthorize Server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `make-ldif`                                   | Generate LDIF data based on a definition in a template file. See the server's `config/MakeLDIF` directory for example template files. In particular, the `examples-of-all-tags.template` file shows how to use all of the tags for generating values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `manage-certificates`                         | Manage certificates and private keys in a JKS, PKCS #12, PKCS #11, or BCFKS key store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `manage-extension`                            | Install or update PingAuthorize Server extension bundles.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `manage-profile`                              | Generate, compare, install, and replace server profiles.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `manage-tasks`                                | Access information about pending, running, and completed tasks scheduled in the PingAuthorize Server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `manage-topology`                             | Tool to manage the topology registry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `prepare-external-store`                      | Prepare a PingAuthorize Server and an external server for communication.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `reload-http-connection-handler-certificates` | Reload HTTPS Connection Handler certificates.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `remove-backup`                               | Safely remove a backup and optionally all of its dependent backups from the specified PingAuthorize Server backend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `remove-defunct-server`                       | Remove a server from this server's topology.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `replace-certificate`                         | Replace the listener certificate for this PingAuthorize Server server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `restore`                                     | Restore a backup of a PingAuthorize Server backend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `revert-update`                               | Revert this server package's most recent update.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `review-license`                              | Review and/or indicate your acceptance of the license agreement defined in `legal/LICENSE.txt`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `rotate-log`                                  | Trigger the rotation of one or more log files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `sanitize-log`                                | Sanitize the contents of a server log file to remove potentially sensitive information while still attempting to retain enough information to make it useful for diagnosing problems or understanding load patterns. The sanitization process operates on fields that consist of name-value pairs. The field name is always preserved, but field values might be tokenized or redacted if they might include sensitive information. Supported log file types include the file-based access, error, sync, and resync logs, as well as the operation timing access log and the detailed HTTP operation log.&#xA;&#xA;To sanitize error log content as it's being written, see Log Sanitization.                                                                                                                                                                                         |
-| `schedule-exec-task`                          | Schedule an exec task to run a specified command in the server. To run an exec task, a number of conditions must be satisfied: the server's global configuration must have been updated to include `com.unboundid.directory.server.tasks.ExecTask` in the set of allowed-task values, the requester must have the `exec-task` privilege, and the command to execute must be listed in the `exec-command-whitelist.txt` file in the server's `config` directory. The absolute path (on the server system) of the command to execute must be specified as the first unnamed trailing argument to this program, and the arguments to provide to that command (if any) should be specified as the remaining trailing arguments. The server root is used as the command's working directory, so any arguments that represent relative paths are interpreted as relative to that directory. |
-| `search-logs`                                 | Search across log files to extract lines matching the provided patterns, like the `grep` command-line tool. The benefits of using this tool over `grep` are its ability to handle multi-line log messages, extract log messages within a given time range, and the inclusion of rotated log files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `server-state`                                | View information about the current state of the PingAuthorize Server process.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `setup`                                       | Perform the initial setup for a server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `start-server`                                | Start the PingAuthorize Server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `status`                                      | Display basic server information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `stop-server`                                 | Stop or restart the server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `sum-file-sizes`                              | Calculate the sum of the sizes for a set of files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `uninstall`                                   | Uninstall PingAuthorize Server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `update`                                      | Update a deployed server so its version matches the version of this package.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `validate-file-signature`                     | Validate file signatures. For best results, file signatures should be validated by the same instance used to generate the file. However, it might be possible to validate signatures generated on other instances in a replicated topology.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+* Digital signatures
+
+  If you encrypt data with your private key, it can be decrypted only with your public key. Because your public key can be made widely available, this encryption method does not actually protect the content. However, digital signatures prove that a message came from you because only your private key could have generated it.
+
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                            |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | When generating a digital signature, the entire message is generally not encrypted. Only a hash of the message is encrypted, typically by using a digest algorithm like SHA-256.This approach protects the integrity of a message. A decrypted signature that matches the digest of the original message guarantees that the message came from you and that it has remained unaltered since you signed it. |
+
+The following public key algorithms are used primarily in certificates that facilitate TLS communication:
+
+* RSA, which is based on the multiplication of large prime numbers
+
+* EC, which is based on computations that involve special types of elliptical curves
+
+Although RSA is supported more widely than EC, it is slower and requires larger keys to achieve the same level of security. To support legacy clients, you should use an RSA certificate and choose a key size of at least 2,048 bits.
+
+If all of your clients support EC certificates, you should use an EC certificate with a key size of at least 256 bits.
+
+---
+
+---
+title: Certificate subject DNs
+description: A certificate's subject distinguished name (DN) provides information about how the certificate should be used.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_server_administration_guide:paz_cert_subject_dns
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_cert_subject_dns.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 29, 2022
+---
+
+# Certificate subject DNs
+
+A certificate's subject distinguished name (DN) provides information about how the certificate should be used.
+
+Like an LDAP DN, a certificate's subject DN consists of a comma-delimited series of attribute-value pairs. However, unlike an LDAP DN, the attribute names in a certificate subject DN are typically written in all uppercase characters.
+
+A certificate's subject DN is also referred to as its subject. The following attributes commonly appear in a certificate subject.
+
+| Attribute name | Attribute description                                                                                                                                                                                                                                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CN`           | Common name&#xA;&#xA;For a listener certificate, the CN attribute typically identifies the host name that clients use to access the certificate. However, the subject alternative name extension is recommended more highly for accomplishing the same task. Most certificate subject DNs include at least the CN attribute. |
+| `E`            | Email address                                                                                                                                                                                                                                                                                                                |
+| `OU`           | Name of the organizational unit, such as the relevant department                                                                                                                                                                                                                                                             |
+| `O`            | Name of the organization or company                                                                                                                                                                                                                                                                                          |
+| `L`            | Name of the locality, such as the appropriate city                                                                                                                                                                                                                                                                           |
+| `ST`           | Full name of the state or province                                                                                                                                                                                                                                                                                           |
+| `C`            | ISO 3166 country code                                                                                                                                                                                                                                                                                                        |
+
+A certificate subject includes at least one attribute-value pair, and the `CN` attribute is typically present. Other attributes can be omitted, although the `O` and `C` attributes are also common. For example, a listener certificate for a server with an address of `ldap.example.com`, which is run by the US-based company Example Corp, might have a subject of `CN=ldap.example.com,O=Example Corp,C=US`.

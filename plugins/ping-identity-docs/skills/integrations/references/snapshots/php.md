@@ -4,6 +4,8 @@ description: The following is the change history for the PHP Integration Kit.
 component: php
 page_id: php:release_notes:pf_php_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/php/release_notes/pf_php_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -73,6 +75,8 @@ description: Configure the OpenToken Adapter to determine how PingFederate commu
 component: php
 page_id: php:setup:pf_php_ik_configuring_an_opentoken_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_configuring_an_opentoken_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -127,6 +131,8 @@ description: To see a working demonstration of the PHP Integration Kit, deploy t
 component: php
 page_id: php:setup:pf_php_ik_configuring_pf_and_the_sample_applications
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_configuring_pf_and_the_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -181,6 +187,8 @@ description: To allow your PHP server to work with the PHP Integration Kit, chec
 component: php
 page_id: php:setup:pf_php_ik_configuring_your_php_server
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_configuring_your_php_server.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -220,6 +228,8 @@ description: You can configure theproductto integrate PingFederate with your ide
 component: php
 page_id: php:setup:pf_php_ik_custom_application_setup
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_custom_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -237,6 +247,8 @@ description: You can manually deploy the PHP Integration Kit sample applications
 component: php
 page_id: php:setup:pf_php_ik_deploying_on_linux_or_unix
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_deploying_on_linux_or_unix.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -294,6 +306,8 @@ description: You can deploy the PHP Integration Kit sample applications on Linux
 component: php
 page_id: php:setup:pf_php_ik_deploying_on_red_hat_linux
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_deploying_on_red_hat_linux.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -336,6 +350,8 @@ description: Check that the PHP path environment variable points to the correct 
 component: php
 page_id: php:setup:pf_php_ik_deploying_on_the_php_built_in_web_server
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_deploying_on_the_php_built_in_web_server.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -389,6 +405,8 @@ description: You can manually deploy the PHP Integration Kit sample applications
 component: php
 page_id: php:setup:pf_php_ik_deploying_on_windows
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_deploying_on_windows.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -446,6 +464,8 @@ description: The following files are included in the PHP Integration Kit .zip ar
 component: php
 page_id: php:release_notes:pf_php_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/php/release_notes/pf_php_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -503,6 +523,8 @@ description: When an IdP PingFederate server receives a request for SLO, it redi
 component: php
 page_id: php:setup:pf_php_ik_idp_single_logout_integration
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_idp_single_logout_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -532,6 +554,8 @@ description: When PingFederate is configured as an IdP, it needs to be able to i
 component: php
 page_id: php:setup:pf_php_ik_idp_single_sign_on_integration
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_idp_single_sign_on_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -579,6 +603,8 @@ description: The following are known issues or limtiations for the PHP Integrati
 component: php
 page_id: php:release_notes:pf_php_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/php/release_notes/pf_php_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   known-issues: Known issues
@@ -619,6 +645,8 @@ description: The PHP Integration Kit consists of two parts:
 component: php
 page_id: php::pf_php_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/php/pf_php_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 
@@ -664,6 +692,8 @@ description: The Agent Toolkit for PHP supports passing multi-value attributes t
 component: php
 page_id: php:setup:pf_php_ik_passing_multi_value_attributes
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_passing_multi_value_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 
@@ -706,6 +736,8 @@ description: The PHP Integration Kit allows PHP applications to integrate with a
 component: php
 page_id: php::pf_php_ik
 canonical_url: https://docs.pingidentity.com/integrations/php/pf_php_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   components: Components
@@ -771,6 +803,8 @@ description: The Agent Toolkit for PHP receives multi-value attributes passed in
 component: php
 page_id: php:setup:pf_php_ik_receiving_multi_value_attributes
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_receiving_multi_value_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 
@@ -808,6 +842,8 @@ description: To see a working demonstration of the PHP Integration Kit, you can 
 component: php
 page_id: php:setup:pf_php_ik_sample_application_setup
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_sample_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   components: Components
@@ -879,6 +915,8 @@ description: Below is an example code snippet for processing a logout request an
 component: php
 page_id: php:setup:pf_php_ik_idpslo_sample_code
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_idpslo_sample_code.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 
@@ -926,6 +964,8 @@ description: The code snippet below demonstrates the use of the writeTokenToHTTP
 component: php
 page_id: php:setup:pf_php_ik_idpsso_sample_code
 canonical_url: https://docs.pingidentity.com/integrations/php/setup/pf_php_ik_idpsso_sample_code.html
+llms_txt: https://docs.pingidentity.com/integrations/php/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 ---
 

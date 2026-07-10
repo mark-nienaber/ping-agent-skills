@@ -4,6 +4,8 @@ description: The Agentless Integration Kit allows PingFederate to integrate with
 component: agentless
 page_id: agentless::pf_agentless_ik
 canonical_url: https://docs.pingidentity.com/integrations/agentless/pf_agentless_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 section_ids:
   components: Components
@@ -79,6 +81,8 @@ description: The following is the change history for the Agentless Integration K
 component: agentless
 page_id: agentless:release_notes:pf_agentless_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/agentless/release_notes/pf_agentless_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 23, 2026
 section_ids:
   version-2-3-1: Version 2.3.1
@@ -366,6 +370,8 @@ description: To drop off user attributes to PingFederate, configure your applica
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_attribute_drop_off_process
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_attribute_drop_off_process.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   providing-the-user-attributes: Providing the user attributes
@@ -456,6 +462,8 @@ description: Attribute formatting specifies how attribute names and values are p
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_attribute_formatting
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_attribute_formatting.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 8, 2022
 section_ids:
   incoming-attributes: Incoming attributes
@@ -498,6 +506,8 @@ description: To pick up user attributes from PingFederate, configure your applic
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_attribute_pickup_process
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_attribute_pickup_process.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   requesting-the-user-attributes: Requesting the user attributes
@@ -585,6 +595,8 @@ description: When picking up and dropping off attributes, your application has t
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_authentication_methods
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_authentication_methods.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 section_ids:
   bearer-token-authentication: Bearer token authentication
@@ -722,6 +734,8 @@ description: Configure the Reference ID IdP Adapter to determine how PingFederat
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_a_reference_id_idp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_idp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -784,6 +798,8 @@ description: Configure the Reference ID IdP Adapter to determine how PingFederat
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   steps: Steps
@@ -839,6 +855,8 @@ description: You can configure certificate authentication between your applicati
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_certificate_authentication
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_certificate_authentication.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   steps: Steps
@@ -942,6 +960,8 @@ description: You can integrate PingFederate with your identity provider or servi
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_custom_application_setup
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_custom_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 ---
 
@@ -961,6 +981,8 @@ description: To get started with the integration, deploy the Agentless Integrati
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 section_ids:
   about-this-task: About this task
@@ -1001,6 +1023,8 @@ description: To get started with the integration, deploy the Agentless Integrati
 component: agentless
 page_id: agentless:sample_application_setup:pf_agentless_ik_deploying_the_integration_files_and_sample_applications
 canonical_url: https://docs.pingidentity.com/integrations/agentless/sample_application_setup/pf_agentless_ik_deploying_the_integration_files_and_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 section_ids:
   about-this-task: About this task
@@ -1055,6 +1079,8 @@ description: The sample configuration archive configures a single instance of Pi
 component: agentless
 page_id: agentless:sample_application_setup:pf_agentless_ik_deploying_the_sample_configuration_archive
 canonical_url: https://docs.pingidentity.com/integrations/agentless/sample_application_setup/pf_agentless_ik_deploying_the_sample_configuration_archive.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -1085,6 +1111,8 @@ description: The Agentless Integration Kit doesn't require you to install specia
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_developing_your_application
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_developing_your_application.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   about-this-task: About this task
@@ -1149,6 +1177,8 @@ description: The Agentless Integration Kit does not require you to install speci
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_development_considerations
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_development_considerations.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   reference-id-length: Reference ID length
@@ -1234,6 +1264,8 @@ description: The following files are included in the Agentless Integration Kit .
 component: agentless
 page_id: agentless:release_notes:pf_agentless_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/agentless/release_notes/pf_agentless_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 ---
 
@@ -1277,6 +1309,8 @@ description: Include Reference ID adapter events in the PingFederate server log 
 component: agentless
 page_id: agentless:troubleshooting:pf_agentless_ik_enabling_logging
 canonical_url: https://docs.pingidentity.com/integrations/agentless/troubleshooting/pf_agentless_ik_enabling_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 6, 2025
 section_ids:
   steps: Steps
@@ -1308,6 +1342,8 @@ description: During the OAuth authorization flow, after a user authenticates, Pi
 component: agentless
 page_id: agentless:custom_application_setup:pf_agentless_ik_external_consent_approval
 canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_external_consent_approval.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   identifying-consent-requests: Identifying consent requests
@@ -1352,6 +1388,8 @@ description: The following are known issues or limitations for the Agentless Int
 component: agentless
 page_id: agentless:release_notes:pf_agentless_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/agentless/release_notes/pf_agentless_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 7, 2025
 section_ids:
   known-issues: Known issues
@@ -1378,6 +1416,8 @@ description: You can use the Agentless Integration Kit to extend your sign-on fl
 component: agentless
 page_id: agentless:overview_of_the_identity_provider_integration:pf_agentless_ik_overview_of_the_identity_provider_integration
 canonical_url: https://docs.pingidentity.com/integrations/agentless/overview_of_the_identity_provider_integration/pf_agentless_ik_overview_of_the_identity_provider_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   use-case: Use case

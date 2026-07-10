@@ -4,6 +4,8 @@ description: The following is the change history for the CrowdStrike Integration
 component: crowdstrike
 page_id: crowdstrike:release_notes:pf_crowdstrike_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/release_notes/pf_crowdstrike_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 22, 2025
 section_ids:
   crowdstrike-integration-kit-1-0-1-september-2025: CrowdStrike Integration Kit 1.0.1 - September 2025
@@ -30,6 +32,8 @@ description: Configure the CrowdStrike IdP Adapter to determine how PingFederate
 component: crowdstrike
 page_id: crowdstrike:setup:pf_crowdstrike_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/setup/pf_crowdstrike_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -103,6 +107,8 @@ description: Field descriptions for the CrowdStrike IdP Adapter configuration sc
 component: crowdstrike
 page_id: crowdstrike:setup:pf_crowdstrike_ik_crowdstrike_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/setup/pf_crowdstrike_ik_crowdstrike_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -145,6 +151,8 @@ description: When paired with the Google Chrome Enterprise Integration Kit in Pi
 component: crowdstrike
 page_id: crowdstrike::pf_crowdstrike_ik
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/pf_crowdstrike_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 22, 2025
 section_ids:
   components: Components
@@ -204,6 +212,8 @@ description: To get started with the integration, deploy the CrowdStrike Integra
 component: crowdstrike
 page_id: crowdstrike:setup:pf_crowdstrike_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/setup/pf_crowdstrike_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -249,6 +259,8 @@ description: The following files are included in the CrowdStrike Integration Kit
 component: crowdstrike
 page_id: crowdstrike:release_notes:pf_crowdstrike_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/release_notes/pf_crowdstrike_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -272,6 +284,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: crowdstrike
 page_id: crowdstrike:troubleshooting:pf_crowdstrike_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/troubleshooting/pf_crowdstrike_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   about-this-task: About this task
@@ -355,6 +369,8 @@ description: JavaScript Object Notation (JSON) Pointer defines a syntax for iden
 component: crowdstrike
 page_id: crowdstrike:setup:pf_crowdstrike_ik_json_pointer_syntax_reference
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/setup/pf_crowdstrike_ik_json_pointer_syntax_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   example-crowdstrike-incident-service-api-response-json-payload: Example CrowdStrike Incident service API response JSON payload
@@ -467,6 +483,8 @@ description: The following are known issues or limitations for the CrowdStrike I
 component: crowdstrike
 page_id: crowdstrike:release_notes:pf_crowdstrike_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/release_notes/pf_crowdstrike_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 section_ids:
   known-limitations: Known limitations
@@ -488,6 +506,8 @@ description: The following figure illustrates an example SSO process flow.
 component: crowdstrike
 page_id: crowdstrike::pf_crowdstrike_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/pf_crowdstrike_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -517,6 +537,8 @@ description: Because the CrowdStrike IdP Adapter relies on the CrowdStrike Agent
 component: crowdstrike
 page_id: crowdstrike:setup:pf_crowdstrike_ik_using_crowdstrike_risk_level
 canonical_url: https://docs.pingidentity.com/integrations/crowdstrike/setup/pf_crowdstrike_ik_using_crowdstrike_risk_level.html
+llms_txt: https://docs.pingidentity.com/integrations/crowdstrike/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 

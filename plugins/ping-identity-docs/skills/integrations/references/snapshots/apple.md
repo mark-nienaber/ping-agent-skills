@@ -4,6 +4,8 @@ description: Field descriptions for the Apple IdP Adapter configuration screen.
 component: apple
 page_id: apple:setup:pf_apple_cic_apple_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_apple_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 1, 2024
 ---
 
@@ -59,6 +61,8 @@ description: The Apple Login Integration Kit allows PingFederate to use Apple as
 component: apple
 page_id: apple::pf_apple_cic
 canonical_url: https://docs.pingidentity.com/integrations/apple/pf_apple_cic.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   section_N10039_N10036_N10001: Features
@@ -133,6 +137,8 @@ description: You can use the PingFederate authentication API to integrate the Ap
 component: apple
 page_id: apple::pf_apple_cic_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/apple/pf_apple_cic_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 ---
 
@@ -150,6 +156,8 @@ description: Lists the attributes supported by Sign in with Apple.
 component: apple
 page_id: apple:setup:pf_apple_cic_available_user_attributes
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_available_user_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 1, 2024
 ---
 
@@ -180,6 +188,8 @@ description: The following is the change history for the Apple Login Integration
 component: apple
 page_id: apple:release_notes:pf_apple_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/apple/release_notes/pf_apple_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   section_brq_1ns_k1c: Apple Cloud Identity Connector 1.1.2 – February 2024
@@ -245,6 +255,8 @@ description: Configure the Apple IdP Adapter to determine how PingFederate commu
 component: apple
 page_id: apple:setup:pf_apple_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -284,6 +296,8 @@ description: To allow PingFederate to process social sign-on requests with Apple
 component: apple
 page_id: apple:setup:pf_apple_cic_creating_an_apple_private_key
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_creating_an_apple_private_key.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -325,6 +339,8 @@ description: To get started with the integration, deploy the Apple Login Integra
 component: apple
 page_id: apple:setup:pf_apple_cic_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   context_w741ab1b7b1_w742ab1b7_w743ab1: About this task
@@ -371,6 +387,8 @@ description: The following files are included in the Apple Login Integration Kit
 component: apple
 page_id: apple:release_notes:pf_apple_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/apple/release_notes/pf_apple_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 ---
 
@@ -420,6 +438,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: apple
 page_id: apple:troubleshooting:pf_apple_cic_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/apple/troubleshooting/pf_apple_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   context_w734ab1b7b1_w735ab1b7_w736ab1: About this task
@@ -483,6 +503,8 @@ description: To complete your Sign in with Apple integration, create an SP conne
 component: apple
 page_id: apple:setup:pf_apple_cic_integrating_sign_in_with_apple_into_your_application
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_integrating_sign_in_with_apple_into_your_application.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -545,6 +567,8 @@ description: The following are known issues or limitations for the Apple Cloud I
 component: apple
 page_id: apple:release_notes:pf_apple_cic_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/apple/release_notes/pf_apple_cic_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   section_xnp_ccn_w3b: Known issues
@@ -589,6 +613,8 @@ description: With the Apple Cloud Identity Connector, PingFederate includes an A
 component: apple
 page_id: apple::pf_apple_cic_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/apple/pf_apple_cic_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   section_N1006C_N10024_N10001: Description
@@ -640,6 +666,8 @@ description: To allow PingFederate to process social sign-on requests with Apple
 component: apple
 page_id: apple:setup:pf_apple_cic_registering_an_apple_app
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_registering_an_apple_app.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -675,6 +703,8 @@ description: To allow PingFederate to process social sign-on requests with Apple
 component: apple
 page_id: apple:setup:pf_apple_cic_registering_an_apple_service
 canonical_url: https://docs.pingidentity.com/integrations/apple/setup/pf_apple_cic_registering_an_apple_service.html
+llms_txt: https://docs.pingidentity.com/integrations/apple/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   context_bgd_sg5_wbc: About this task

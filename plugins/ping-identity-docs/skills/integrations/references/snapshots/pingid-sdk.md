@@ -4,6 +4,8 @@ description: Fixed an issue that caused the provisioning engine to see email1 an
 component: pingid-sdk
 page_id: pingid-sdk:release_notes:pf_pid_sdk_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/release_notes/pf_pid_sdk_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   pingid-sdk-connector-1-2-2-october-2020: PingID SDK Connector 1.2.2 – October 2020
@@ -62,6 +64,8 @@ description: Configure PingFederate to provision users to PingID SDK.
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_configure_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_configure_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   context_N10025_N10022_N10001: About this task
@@ -155,6 +159,8 @@ description: This section describes the common steps required to install the Pin
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_deploy_the_provisioning_connector
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_deploy_the_provisioning_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   context_N10025_N10022_N10001: About this task
@@ -207,6 +213,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: pingid-sdk
 page_id: pingid-sdk:release_notes:pf_pid_sdk_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/release_notes/pf_pid_sdk_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 ---
 
@@ -232,6 +240,8 @@ description: PingFederate needs connection information and an application ID fro
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_get_information_from_pid_sdk
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_get_information_from_pid_sdk.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   context_N10025_N10022_N10001: About this task
@@ -272,6 +282,8 @@ description: There are no known issues.
 component: pingid-sdk
 page_id: pingid-sdk:release_notes:pf_pid_sdk_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/release_notes/pf_pid_sdk_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   section_ypj_xnn_phb: Known issues
@@ -320,6 +332,8 @@ description: The PingID SDK Provisioner allows PingFederate to manage users in P
 component: pingid-sdk
 page_id: pingid-sdk::pf_pid_sdk_connector
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/pf_pid_sdk_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   section_cys_3hx_nkb: Features
@@ -398,6 +412,8 @@ description: User Create
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_provisioning_options
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_provisioning_options.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 ---
 
@@ -419,6 +435,8 @@ description: The following table lists the attributes that can be mapped for use
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 ---
 
@@ -463,6 +481,8 @@ description: When the provisioning connector updates users between the data stor
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_synchronize_existing_users
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_synchronize_existing_users.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 ---
 
@@ -488,6 +508,8 @@ description: Upgrading from a previous version of the PingID SDK Connector? Crea
 component: pingid-sdk
 page_id: pingid-sdk:setup:pf_pid_sdk_connector_upgrade_an_existing_connector
 canonical_url: https://docs.pingidentity.com/integrations/pingid-sdk/setup/pf_pid_sdk_connector_upgrade_an_existing_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid-sdk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   context_N10025_N10022_N10001: About this task

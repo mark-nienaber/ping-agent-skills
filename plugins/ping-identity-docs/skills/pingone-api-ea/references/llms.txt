@@ -1,5 +1,8 @@
 # PingOne Platform APIs - Early Access
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Pingone Api Ea
 
 - [Untitled](https://developer.pingidentity.com/pingone-api-ea/introduction.md)
@@ -19,7 +22,7 @@
 - [Create Authorization Rule](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/create-authorization-rule.md)
 - [Create Authorization Service](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/create-authorization-service.md)
 - [Create Authorization Statement](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/create-authorization-statement.md)
-- [Create Experience](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/create-experience.md)
+- [Create Custom Push Provider](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings/create_custom_push_provider.md)
 - [Create Promotion](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/create-promotion.md)
 - [Create Snapshot](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/snapshots/create-snapshot.md)
 - [Create Variable Declaration](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/create-variable-declaration.md)
@@ -31,7 +34,6 @@
 - [Delete Authorization Rule](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/delete-authorization-rule.md)
 - [Delete Authorization Service](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/delete-authorization-service.md)
 - [Delete Authorization Statement](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/delete-authorization-statement.md)
-- [Delete Experience](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/delete-experience.md)
 - [Delete Promotion](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/delete-promotion.md)
 - [Delete Variable Declaration](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-declaration.md)
 - [Delete Variable Definition](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-definition.md)
@@ -39,7 +41,6 @@
 - [Early Access](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access.md)
 - [Early Access](https://developer.pingidentity.com/pingone-api-ea/platform/early-access.md)
 - [Excluded Resources](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/excluded-resources.md)
-- [Experiences](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences.md)
 - [PingOne Authorize - Early Access](https://developer.pingidentity.com/pingone-api-ea/authorize/introduction.md)
 - [PingOne Authorize Admin APIs](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis.md)
 - [PingOne Authorize Editor Policy Management](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management.md)
@@ -50,7 +51,8 @@
 - [Promotion Mappings](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-mappings.md)
 - [Promotion Variables](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables.md)
 - [Promotions](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions.md)
-- [Read All Experiences](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/read-all-experiences.md)
+- [Push Delivery Settings](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings.md)
+- [Read All Custom Push Providers](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings/get_custom_push_providers.md)
 - [Read All Promotions](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/get-all-promotions.md)
 - [Read All Snapshot Versions](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/snapshots/get-all-snapshot-versions.md)
 - [Read All Variable Definitions](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/get-all-variable-definitions.md)
@@ -72,8 +74,6 @@
 - [Read One Authorization Rule](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/read-one-authorization-rule.md)
 - [Read One Authorization Service](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/read-one-authorization-service.md)
 - [Read One Authorization Statement](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/read-one-authorization-statement.md)
-- [Read One Experience by ID](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/read-experience-by-id.md)
-- [Read One Experience by Name](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/read-experience-by-name.md)
 - [Read One Promotion](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/get-one-promotion.md)
 - [Read One Snapshot Version](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/snapshots/get-one-snapshot-version.md)
 - [Read One Variable Definition](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/get-one-variable-definition.md)
@@ -97,7 +97,6 @@
 - [Update Authorization Rule](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/update-authorization-rule.md)
 - [Update Authorization Service](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/update-authorization-service.md)
 - [Update Authorization Statement](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/update-authorization-statement.md)
-- [Update Experience](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/experiences/update-experience.md)
 - [Update Promotion](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/update-promotion.md)
 - [Update Promotion Configuration](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-configuration/update-promotion-configuration.md)
 - [Update Variable Declaration](https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/patch-update-variable-declaration.md)

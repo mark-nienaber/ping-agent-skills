@@ -4,6 +4,8 @@ description: Authorization attributes provide contextual information that inform
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   authorization-attributes-data-model: Authorization attributes data model
   authorization-attributes-resolvers-data-model: Authorization attributes resolvers type data model
@@ -82,3 +84,6032 @@ The audit reporting events applicable to the authorize attribute service are:
 | 401  | You do not have access to this resource.                              |
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Conditions
+description: Conditions in PingOne Authorize define authorization logic by comparing one thing to another. Conditions evaluate to either true or false. The authorization conditions service provides endpoints to create, read, update, test, and delete trust framework authorization conditions.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-conditions-data-model: Authorization conditions data model
+  authorization-condition-conditions-data-model: Authorization conditions condition type data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Conditions
+
+Conditions in PingOne Authorize define authorization logic by comparing one thing to another. Conditions evaluate to either true or false. The authorization conditions service provides endpoints to create, read, update, test, and delete trust framework authorization conditions.
+
+|   |                                                                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information about conditions resources and how to use condition comparators within the PingOne Authorize trust framework, refer to [Conditions](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_conditions.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization conditions data model
+
+| Property                          | Type   | Required | Mutable   | Description                                                                                                                                            |
+| --------------------------------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `condition`                       | Object | Required | Mutable   | The authorization condition object.                                                                                                                    |
+| `condition.type`                  | String | Required | Mutable   | The authorization condition type. Options are `COMPARISON`, `AND`, `OR`, `EMPTY`, `NOT`, `REFERENCE`.                                                  |
+| `condition.conditions[]`          | Object | Required | Mutable   | A set of conditions.                                                                                                                                   |
+| `condition.conditions.type`       | String | Required | Mutable   | The type of condition.                                                                                                                                 |
+| `condition.conditions.comparator` | String | Required | Mutable   | The operator used to evaluate the condition.                                                                                                           |
+| `condition.conditions.left`       | Object | Required | Mutable   | An object that defines the left side of the condition statement.                                                                                       |
+| `condition.conditions.right`      | Object | Required | Mutable   | An object that defines the right side of the condition statement.                                                                                      |
+| `description`                     | String | Optional | Mutable   | The authorization condition resource's description.                                                                                                    |
+| `fullName`                        | String | Required | Mutable   | A unique name generated by the system for each authorization condition resource. It is the concatenation of names in the condition resource hierarchy. |
+| `id`                              | String | N/A      | Read only | The resource's unique identifier.                                                                                                                      |
+| `name`                            | String | Required | Mutable   | A user-friendly authorization condition name.                                                                                                          |
+| `parent`                          | Object | Optional | Mutable   | The authorization condition resource's parent.                                                                                                         |
+| `parent.id`                       | String | Optional | Mutable   | The authorization condition resource's parent ID.                                                                                                      |
+| `type`                            | String | Optional | Mutable   | The condition resource's type. Options are `CONDITION`.                                                                                                |
+| `version`                         | String | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                  |
+
+## Authorization conditions condition type data model
+
+| Condition type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AND`          | The `and` logical condition. Additional properties are:\* `conditions`, the list of conditions that must be met.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `OR`           | The `or` logical condition. Additional properties are:\* `conditions`, the list of conditions of which one must be met.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `NOT`          | The `not` logical condition. Additional properties are:\* `condition`, the list of conditions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `EMPTY`        | The `empty` condition, which specifies no conditions to be met.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `REFERENCE`    | The `reference` condition. Additional properties are:\* `reference`, the reference object.\* `reference.id`, the ID of an authorization condition.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `COMPARISON`   | The comparison condition. Additional properties are:\* `left`, the value on the left side of the comparison operator.\* `right`, the value on the right side of the comparison operator.\* `comparator`, the comparison operator. Options are `IS_MEMBER_OF`, `IS_NOT_MEMBER_OF`, `CONTAINS_GROUP`, `DOES_NOT_CONTAIN_GROUP`, `CONTAINS`, `NOT_CONTAINS`, `EQUALS`, `NOT_EQUALS`, `GREATER_THAN`, `GREATER_THAN_OR_EQUAL`, `LESSER_THAN`, `LESSER_THAN_OR_EQUAL`, `REGULAR_EXPRESSION`, `STARTS_WITH`, `NOT_STARTS_WITH`, `ENDS_WITH`, `NOT_ENDS_WITH`, `MATCHES`, `NOT_MATCHES`, `IS_IN`, `IS_NOT_IN`, `IN_CIDR_BLOCK`, `NOT_IN_CIDR_BLOCK` |
+|                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+## Event types
+
+The audit reporting events applicable to the authorization condition service are:
+
+| Topic             | Event                         |
+| ----------------- | ----------------------------- |
+| `authorize-model` | `AUTHORIZE_CONDITION.CREATED` |
+| `authorize-model` | `AUTHORIZE_CONDITION.UPDATED` |
+| `authorize-model` | `AUTHORIZE_CONDITION.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Connector Templates
+description: This endpoint provides an operation to view the authorization connector templates associated with the specified environment.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  connector-templates-data-model: Connector templates data model
+  response-codes: Response codes
+---
+
+# Authorization Connector Templates
+
+This endpoint provides an operation to view the authorization connector templates associated with the specified environment.
+
+## Connector templates data model
+
+| Property                   | Type    | Required | Mutable   | Description                                                        |
+| -------------------------- | ------- | -------- | --------- | ------------------------------------------------------------------ |
+| `type`                     | String  | Required | Immutable | The type of connector template.                                    |
+| `channel`                  | String  | Required | Mutable   | The connector template channel.                                    |
+| `code`                     | String  | Required | Mutable   | The code associated with the service.                              |
+| `capability`               | String  | Required | Mutable   | The capability associated with the connector `code` and `channel`. |
+| `schemaVersion`            | Integer | Required | Mutable   | The schema version of the connector template.                      |
+| `inputMappings`            | Array   | Required | mutable   | The list of input mappings of the connector template.              |
+| `inputMappings.type`       | String  | Required | mutable   | The type of input mapping. Options are `ATTRIBUTE`, `INPUT`.       |
+| `inputMappings.property`   | string  | Required | mutable   | The property associated with the input mapping.                    |
+| `cacheSettings`            | Object  | Optional | Mutable   | An object that specifies the cache settings.                       |
+| `cacheSettings.ttlSeconds` | Integer | Optional | Mutable   | The time to live setting specified in seconds.                     |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Policies
+description: Authorization policies specify the statements (directives that instruct the policy decision service to perform additional processing in conjunction with an authorization decision), conditions (authorization logic comparing one thing to another), and combining algorithms (the process for combining multiple rules) to determine an authorization decision.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-policies-data-model: Authorization policies data model
+  authorization-embedded-policies-data-model: Authorization embedded policies data model
+  authorization-policies-embedded-rules-data-model: Authorization policies embedded rules data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Policies
+
+Authorization policies specify the statements (directives that instruct the policy decision service to perform additional processing in conjunction with an authorization decision), conditions (authorization logic comparing one thing to another), and combining algorithms (the process for combining multiple rules) to determine an authorization decision.
+
+|   |                                                                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information about policies, refer to [Policies](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_policies.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization policies data model
+
+| Property                       | Type    | Required | Mutable   | Description                                                                                                                                                       |
+| ------------------------------ | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                     | Array   | Optional | Mutable   | The list of child policies or rules. Can be either referenced or embedded.                                                                                        |
+| `combiningAlgorithm`           | Object  | Required | Immutable | The algorithm that determines how rules are combined to produce an authorization decision. For details, refer to [Authorization Rules](authorization-rules.html). |
+| `condition`                    | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../pingauthorize-trust-framework/authorization-conditions.html).             |
+| `description`                  | String  | Optional | Mutable   | The authorization policy resource's description.                                                                                                                  |
+| `enabled`                      | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                                  |
+| `id`                           | String  | N/A      | Read only | The policy resource's unique identifier.                                                                                                                          |
+| `name`                         | String  | Required | Mutable   | A user-friendly policy name. The `name` value must be unique.                                                                                                     |
+| `repetitionSettings`           | Object  | Optional | Mutable   | Applies the policy to each item of the specific attribute, filtered by decision.                                                                                  |
+| `repetitionSettings.source`    | Object  | Optional | Mutable   | The source associated with this rule.                                                                                                                             |
+| `repetitionSettings.source.id` | String  | Optional | Mutable   | The UUID of the repetition source associated with this rule.                                                                                                      |
+| `repetitionSettings.decision`  | String  | Optional | Mutable   | The decision filter. Options are `PERMIT`, `DENY`, `NOT_APPLICABLE`, and `INDETERMINATE`.                                                                         |
+| `statements`                   | Object  | Optional | Mutable   | The authorization statements object. Can be either referenced or embedded. For details, refer to [Authorization Statements](authorization-statements.html).       |
+| `type`                         | String  | Required | Mutable   | The attribute type. Options are `POLICY`.                                                                                                                         |
+| `version`                      | String  | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                             |
+
+## Authorization embedded policies data model
+
+| Property             | Type    | Required | Mutable   | Description                                                                  |
+| -------------------- | ------- | -------- | --------- | ---------------------------------------------------------------------------- |
+| `type`               | String  | Required | Mutable   | The embedded policy type. Options are `POLICY`.                              |
+| `value.id`           | String  | Required | Immutable | The embedded policy ID.                                                      |
+| `name`               | String  | Required | Mutable   | The embedded policy name.                                                    |
+| `description`        | String  | Optional | Mutable   | The embedded policy description.                                             |
+| `enabled`            | Boolean | Optional | Mutable   | Specifies whether the embedded policy is enabled.                            |
+| `statements`         | Object  | Optional | Mutable   | The statements associated with this embedded policy.                         |
+| `conditions`         | Object  | Optional | Mutable   | The conditions associated with this embedded policy.                         |
+| `combiningAlgorithm` | Object  | Required | Mutable   | The combining algorithm for the embedded policy.                             |
+| `children`           | Array   | Optional | Mutable   | The list of sub-child policies or rules associated with the embedded policy. |
+| `repetitionSettings` | Object  | Optional | Mutable   | The repitition settings associated with the embedded policy.                 |
+
+## Authorization policies embedded rules data model
+
+| Property         | Type    | Required | Mutable   | Description                                                                                     |
+| ---------------- | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `type`           | String  | Required | Mutable   | The embedded rule type. Options are `RULE`.                                                     |
+| `value.id`       | String  | Required | Immutable | The embedded rule ID.                                                                           |
+| `name`           | String  | Optional | Mutable   | The embedded rule name.                                                                         |
+| `description`    | String  | Optional | Mutable   | The child policy description.                                                                   |
+| `enabled`        | Boolean | Optional | Mutable   | Specifies whether the child policy is enabled.                                                  |
+| `statements`     | Object  | Optional | Mutable   | The statements associated with this child policy.                                               |
+| `conditions`     | Object  | Optional | Mutable   | The conditions associated with this child policy.                                               |
+| `effectSettings` | Object  | Required | Immutable | The settings that determine how the children are combined to produce an outcome for the policy. |
+
+## Event types
+
+The audit reporting events applicable to the authorize policies service are:
+
+| Topic             | Event                        |
+| ----------------- | ---------------------------- |
+| `authorize-model` | `AUTHORIZE_POLICIES.CREATED` |
+| `authorize-model` | `AUTHORIZE_POLICIES.UPDATED` |
+| `authorize-model` | `AUTHORIZE_POLICIES.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Processors
+description: Authorization processors transform the data coming from the resolvers. Processors manipulate and transform data, including extracting details from structured data, or converting data to different formats. These endpoints provide operations to create, read, update, and delete authorizaton processor resources.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-processors-data-model: Authorization processors data model
+  authorization-processors-processor-data-model: Authorization processors processor type data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Processors
+
+Authorization processors transform the data coming from the resolvers. Processors manipulate and transform data, including extracting details from structured data, or converting data to different formats. These endpoints provide operations to create, read, update, and delete authorizaton processor resources.
+
+|   |                                                                                                                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information about processor resources in the PingOne Authorize trust framework, refer to [Processors](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_processors.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization processors data model
+
+| Property         | Type   | Required | Mutable   | Description                                                                                                                                                                                                                                                                                                                          |
+| ---------------- | ------ | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `description`    | String | Optional | Mutable   | The authorization processor resource's description.                                                                                                                                                                                                                                                                                  |
+| `fullName`       | String | Required | Mutable   | A unique name generated by the system for each authorization processor resource. It is the concatenation of names in the processor resource hierarchy.                                                                                                                                                                               |
+| `id`             | String | N/A      | Read only | The resource's unique identifier.                                                                                                                                                                                                                                                                                                    |
+| `name`           | String | Required | Mutable   | A user-friendly authorization processor name.                                                                                                                                                                                                                                                                                        |
+| `parent`         | Object | Optional | Mutable   | The authorization processor resource's parent.                                                                                                                                                                                                                                                                                       |
+| `parent.id`      | String | Optional | Mutable   | The authorization processor resource's parent ID.                                                                                                                                                                                                                                                                                    |
+| `processor`      | Object | Optional | Mutable   | The authorization processor resource's processor object.                                                                                                                                                                                                                                                                             |
+| `processor.type` | String | Optional | Mutable   | The authorization processor resource's processor type. Options are `JSON_PATH`, `SPEL`, `XPATH`, `COLLECTION_FILTER`, `COLLECTION_TRANSFORM`, `CHAIN`, `REFERENCE`. Refer to [Authorization processors processor type data model](#authorization-processors-processor-data-model) for additional properties for each processor type. |
+| `processor.name` | String | Optional | Mutable   | A user-friendly authorization processor name. The `name` value must be unique.                                                                                                                                                                                                                                                       |
+| `type`           | String | Optional | Mutable   | The processor resource's processor type. Options are `PROCESSOR`.                                                                                                                                                                                                                                                                    |
+| `version`        | String | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                                                                                                                                                                                                |
+
+## Authorization processors processor type data model
+
+| Processor type         | Description                                                                                                                                                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `JSON_PATH`            | The JSON path expression processor. Additional properties are:\* `expression`, the JSON path expression.\* `valueType`, the output type for the value. Options are `BOOLEAN`, `STRING`, `NUMBER`, `XML`, `JSON`, `COLLECTION`, `DATE_TIME`, `LOCAL_TIME`, `LOCAL_DATE`, `LOCAL_DATE_TIME`. |
+| `CHAIN`                | The CHAIN processor. Additional properties are:\* `processors`, the list of processors to apply in the given order.                                                                                                                                                                        |
+| `COLLECTION_FILTER`    | The collection filter processor. Additional properties are:\* `predicate`, the XPath expression.                                                                                                                                                                                           |
+| `COLLECTION_TRANSFORM` | The collection transform processor. Additional properties are:\* `processors`, the list of processors to apply in the given order.                                                                                                                                                         |
+| `REFERENCE`            | The reference processor. Additional properties are:\* `processor`, the `processor` object.\* `processor.id`, the ID of an authorization processor.                                                                                                                                         |
+| `SPEL`                 | The SpEL expression processor. Additional properties are:\* `expression`, the SpEL expression.\* `valueType`, the output type for the value. Options are `BOOLEAN`, `STRING`, `NUMBER`, `XML`, `JSON`, `COLLECTION`, `DATE_TIME`, `LOCAL_TIME`, `LOCAL_DATE`, `LOCAL_DATE_TIME`.           |
+| `XPATH`                | The XPath expression processor. Additional properties are:\* `expression`, the XPath expression.\* `valueType`, the output type for the value. Options are `BOOLEAN`, `STRING`, `NUMBER`, `XML`, `JSON`, `COLLECTION`, `DATE_TIME`, `LOCAL_TIME`, `LOCAL_DATE`, `LOCAL_DATE_TIME`.         |
+
+## Event types
+
+The audit reporting events applicable to the authorize processors service are:
+
+| Topic             | Event                         |
+| ----------------- | ----------------------------- |
+| `authorize-model` | `AUTHORIZE_PROCESSOR.CREATED` |
+| `authorize-model` | `AUTHORIZE_PROCESSOR.UPDATED` |
+| `authorize-model` | `AUTHORIZE_PROCESSOR.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Rules
+description: Rules in PingOne Authorize identify the statements and conditions by which a decision node is evaluated. If the condition is true, the decision node is evaluated. Otherwise, it is not. PingOne Authorize policies can combine multiple rules to produce a Permit, Deny, Indeterminate, or Not Applicable decision.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-rules-data-model: Authorization rules data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Rules
+
+Rules in PingOne Authorize identify the statements and conditions by which a decision node is evaluated. If the condition is true, the decision node is evaluated. Otherwise, it is not. PingOne Authorize policies can combine multiple rules to produce a Permit, Deny, Indeterminate, or Not Applicable decision.
+
+|   |                                                                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information, refer to [Combining algorithms](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_combining_algorithm.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization rules data model
+
+| Property         | Type    | Required | Mutable   | Description                                                                                                                                           |
+| ---------------- | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `condition`      | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../pingauthorize-trust-framework/authorization-conditions.html). |
+| `description`    | String  | Optional | Mutable   | The authorization rule resource's description.                                                                                                        |
+| `effectSettings` | Object  | Required | Immutable | An object that determines how the children are combined to produce an outcome for the policy.                                                         |
+| `enabled`        | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                      |
+| `id`             | UUID    | Required | Read only | The resource's unique identifier.                                                                                                                     |
+| `name`           | String  | Required | Mutable   | A user-friendly authorization rule name. The `name` value must be unique.                                                                             |
+| `statements`     | Object  | Optional | Mutable   | The authorization statements object. For details, refer to [Authorization Statements](authorization-statements.html).                                 |
+| `type`           | String  | Required | Immutable | The condition resource's type. Options are `CONDITION`.                                                                                               |
+| `version`        | UUID    | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                 |
+
+## Event types
+
+The audit reporting events applicable to the authorization rules service are:
+
+| Topic             | Event                     |
+| ----------------- | ------------------------- |
+| `authorize-model` | `AUTHORIZE_RULES.CREATED` |
+| `authorize-model` | `AUTHORIZE_RULES.UPDATED` |
+| `authorize-model` | `AUTHORIZE_RULES.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Services
+description: Authorization services, also referred to as Policy Information Points or PIPs, represent third-party HTTP services or internal PingOne platform services (such as PingOne Protect) that may be called to retrieve data.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-services-data-model: Authorization services data model
+  http-service-type-data-model-properties: HTTP serviceType data model properties
+  http-service-settings-data-model: HTTP ServiceSettings property data model
+  http-service-settings-authentication-data-model: HTTP ServiceSettings authentication property data model
+  connector-data-model-properties: CONNECTOR data model properties
+  connector-servicesettings-property-data-model: CONNECTOR ServiceSettings property data model
+  connector-inputmappings-type-property-data-model: CONNECTOR inputMappings.type property data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Services
+
+Authorization services, also referred to as Policy Information Points or PIPs, represent third-party HTTP services or internal PingOne platform services (such as PingOne Protect) that may be called to retrieve data.
+
+These endpoints provide operations to create, read, update, test, and delete authorization services.
+
+|   |                                                                                                                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information about authorization services resources and service types within the PingOne Authorize trust framework, refer to [Services](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_services.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization services data model
+
+| Property                   | Type    | Required | Mutable   | Description                                                                                                                                                                                         |
+| -------------------------- | ------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cacheSettings`            | Object  | Optional | Mutable   | The service's cache settings.                                                                                                                                                                       |
+| `cacheSettings.ttlSeconds` | integer | Optional | Mutable   | The service's time to live in seconds.                                                                                                                                                              |
+| `description`              | String  | Optional | Mutable   | The authorization service resource's description.                                                                                                                                                   |
+| `fullName`                 | String  | Required | Mutable   | A unique name generated by the system for each service resource. It is the concatenation of names in the service resource hierarchy.                                                                |
+| `id`                       | String  | N/A      | Read only | The resource's unique identifier.                                                                                                                                                                   |
+| `name`                     | String  | Required | Mutable   | A user-friendly service name.                                                                                                                                                                       |
+| `parent`                   | Object  | Optional | Mutable   | The service resource's parent.                                                                                                                                                                      |
+| `parent.id`                | String  | Optional | Mutable   | The service resource's parent ID.                                                                                                                                                                   |
+| `serviceType`              | String  | Required | Mutable   | The type of service. Options are `NONE`, `HTTP`, `CONNECTOR`. Refer to the "serviceType property data model tables" section for information about the properties associated with each service type. |
+| `type`                     | String  | Required | Read only | The resource type. Options are `SERVICE`.                                                                                                                                                           |
+| `version`                  | String  | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                                                               |
+
+The `serviceType` property supports the following three options: `NONE`, `HTTP`, and `CONNECTOR`. The `NONE` option does not require additional configuration. The `HTTP` and `CONNECTOR` service types require additional configuration property values in the request. The following tables describe the data models for these options.
+
+### HTTP serviceType data model properties
+
+| Property                                   | Type    | Required | Mutable | Description                                                                                                                                                                                                                               |
+| ------------------------------------------ | ------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `processor`                                | Object  | Optional | Mutable | The processor to transform the value returned from the resolver. Processor types are `JSON_PATH`, `SPEL`, `XPATH`, `COLLECTION_FILTER`, `COLLECTION_TRANSFORM`, `CHAIN`, and `REFERENCE`.                                                 |
+| `valueType`                                | Object  | Required | Mutable | The final output type of the service. Value types are `BOOLEAN`, `STRING`, `NUMBER`, `XML`, `JSON`, `COLLECTION`, `DATE_TIME`, `LOCAL_TIME`, `LOCAL_DATE`, `LOCAL_DATE_TIME`, `ZONED_DATE_TIME`, `TIME_PERIOD`, `PERIOD`, and `DURATION`. |
+| `serviceSettings`                          | Object  | Required | Mutable | The service settings object.                                                                                                                                                                                                              |
+| `serviceSettings.maximumConcurrentReqests` | Integer | Required | Mutable | The value must be greater than or equal to 1.                                                                                                                                                                                             |
+| `serviceSettings.maximumReqestsPerSecond`  | Decimal | Required | Mutable | The value must be greater than 0.                                                                                                                                                                                                         |
+| `serviceSettings.timeoutMilliseconds`      | Integer | Required | Mutable | The value must be between 0 and 3000 (inclusive).                                                                                                                                                                                         |
+| `serviceSettings.type`                     | String  | Required | Mutable | The service type. Options are `HTTP` and `CONNECTOR`.                                                                                                                                                                                     |
+
+If the `serviceSettings.type` property is `HTTP`, the service supports the following service settings properties:
+
+#### HTTP ServiceSettings property data model
+
+| Property                        | Type   | Required | Mutable   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------- | ------ | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                          | Object | Required | Immutable | The type object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `url`                           | String | Required | Mutable   | The HTTP URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `verb`                          | String | Required | Immutable | The HTTP method. Options are GET\`, POST\`, PUT\`, DELETE\`, and `HEAD`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `body`                          | String | Optional | Mutable   | The HTTP request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `contentType`                   | String | Optional | Mutable   | The HTTP request content type.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `headers[]`                     | Array  | Optional | Mutable   | The HTTP request headers. Each SPECIFIED HTTP header requires `key` and `value` properties. The `value` property input options are `ATTRIBUTE` or `CONSTANT`. If the `value` is an `ATTRIBUTE`, the input is expressed as a JSON object that specifies an attribute UUID. If the `value` is a `CONSTANT`, the input is a string. The optional boolean property, `excludeFromCacheKey`, must be set to `true` to exclude headers from cache key generation. If `excludeFromCacheKey` is omitted or set to `false`, headers are included. |
+| `authentication`                | Object | Required | Mutable   | The authentication object. Authentication options are `NONE`, `BASIC`, `TOKEN`, and `CLIENT_CREDENTIALS`. For information about authentication type properties, refer to the data model table below.                                                                                                                                                                                                                                                                                                                                    |
+| `tlsSettings`                   | Object | Required | Mutable   | The TLS object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `tlsSettings.tlsValidationType` | String | Required | Mutable   | The TLS validation type. Options are `DEFAULT` and `NONE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+#### HTTP ServiceSettings authentication property data model
+
+**BASIC**
+
+| Property      | Type   | Required | Mutable | Description                         |
+| ------------- | ------ | -------- | ------- | ----------------------------------- |
+| `name`        | Object | Required | Mutable | The user object.                    |
+| `name.id`     | UUID   | Required | Mutable | The user name of the authenticator. |
+| `password`    | Object | Required | Mutable | The user object.                    |
+| `password.id` | UUID   | Required | Mutable | The password of the authenticator.  |
+
+**TOKEN**
+
+| Property   | Type   | Required | Mutable | Description                     |
+| ---------- | ------ | -------- | ------- | ------------------------------- |
+| `token`    | Object | Required | Mutable | The token object.               |
+| `token.id` | UUID   | Required | Mutable | The token used to authenticate. |
+
+**CLIENT\_CREDENTIALS**
+
+| Property          | Type   | Required | Mutable | Description                                                                   |
+| ----------------- | ------ | -------- | ------- | ----------------------------------------------------------------------------- |
+| `tokenEndpoint`   | String | Required | Mutable | The token endpoint.                                                           |
+| `clientId`        | String | Required | Mutable | The client ID string.                                                         |
+| `clientSecret`    | Object | Required | Mutable | The client secret object.                                                     |
+| `clientSecret.id` | UUID   | Required | Mutable | The client secret string.                                                     |
+| `scope`           | String | Required | Mutable | The permissions that determine the resources that the application can access. |
+
+### CONNECTOR data model properties
+
+| Property          | Type   | Required | Mutable | Description                                                                   |
+| ----------------- | ------ | -------- | ------- | ----------------------------------------------------------------------------- |
+| `processor`       | Object | Optional | Mutable | The processor object, if specified.                                           |
+| `valueType`       | Object | Required | Mutable | The value type object.                                                        |
+| `serviceSettings` | Object | Required | Mutable | The service settings object for the `CONNECTOR` service type.                 |
+| `clientSecret.id` | UUID   | Required | Mutable | The client secret string.                                                     |
+| `scope`           | String | Required | Mutable | The permissions that determine the resources that the application can access. |
+
+#### CONNECTOR ServiceSettings property data model
+
+| Property             | Type    | Required | Mutable   | Description                                                                                                                                                 |
+| -------------------- | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`               | Object  | Required | Immutable | The type object.                                                                                                                                            |
+| `channel`            | Sting   | Required | Mutable   | The channel value. Options are `AUTHORIZE`.                                                                                                                 |
+| `code`               | String  | Required | Mutable   | The code value. Options are `P1_RISK`.                                                                                                                      |
+| `capability`         | String  | Required | Mutable   | The capability associated with connector code and channel.                                                                                                  |
+| `schemaVersion`      | Integer | Required | Mutable   | The schema version in the connector template.                                                                                                               |
+| `inputMappings[]`    | Array   | Required | Mutable   | The list of input mappings of matching the connector template.                                                                                              |
+| `inputMappings.type` | String  | Required | Mutable   | The input mapping type. Options are `ATTRIBUTE` and `INPUT`. Refer to the data model tables below for information about `ATTRIBUTE` and `INPUT` properties. |
+
+#### CONNECTOR inputMappings.type property data model
+
+**ATTRIBUTE**
+
+| Property   | Type   | Required | Mutable | Description                       |
+| ---------- | ------ | -------- | ------- | --------------------------------- |
+| `type`     | Object | Required | Mutable | The input mapping type.           |
+| `value`    | Object | Required | Mutable | The input mapping value property. |
+| `value.id` | UUID   | Required | Mutable | An attribute ID.                  |
+
+**INPUT**
+
+| Property | Type   | Required | Mutable | Description             |
+| -------- | ------ | -------- | ------- | ----------------------- |
+| `type`   | Object | Required | Mutable | The input mapping type. |
+| `value`  | string | Optional | Mutable | An input value.         |
+
+## Event types
+
+The audit reporting events applicable to the authorization services service are:
+
+| Topic             | Event                       |
+| ----------------- | --------------------------- |
+| `authorize-model` | `AUTHORIZE_SERVICE.CREATED` |
+| `authorize-model` | `AUTHORIZE_SERVICE.UPDATED` |
+| `authorize-model` | `AUTHORIZE_SERVICE.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Authorization Statements
+description: Statements instruct the policy decision service to perform additional processing in conjunction with an authorization decision. In addition to allowing or blocking access to a resource, using statements, the decision service can attach information to decision responses and filter and transform API payloads.
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authorization-statements-data-model: Authorization statements data model
+  event-types: Event types
+  response-codes: Response codes
+---
+
+# Authorization Statements
+
+Statements instruct the policy decision service to perform additional processing in conjunction with an authorization decision. In addition to allowing or blocking access to a resource, using statements, the decision service can attach information to decision responses and filter and transform API payloads.
+
+|   |                                                                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For detailed information about statements resources, refer to [Statements](hhttps://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_policy_statements.html) in the *PingOne Cloud Platform Administrator Guide*. |
+
+## Authorization statements data model
+
+| Property      | Type    | Required | Mutable   | Description                                                                                                                      |
+| ------------- | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `appliesif`   | String  | Required | Mutable   | Specifies when to attach to a final decision. Options are `ANYTHING`, `FINAL_DECISION_MATCHES`, and `PATCH_MATCHES`.             |
+| `appliesTo`   | String  | Required | Mutable   | Specifies what result the statement applies to. Options are `ANYTHING`, `PERMIT`, `DENY`, `PERMIT_OR_DENY`, and `INDETERMINATE`. |
+| `attributes`  | Object  | Required | Mutable   | The attributes attached to the statement.                                                                                        |
+| `code`        | String  | Required | Mutable   | The statement code.                                                                                                              |
+| `description` | String  | Optional | Mutable   | The authorization processor resource's description.                                                                              |
+| `value.id`    | String  | N/A      | Read only | The resource's unique identifier.                                                                                                |
+| `name`        | String  | Required | Mutable   | A user-friendly authorization processor name. The `name` value must be unique.                                                   |
+| `obligatory`  | Boolean | Optional | Mutable   | Specifies that the statement must be fulfilled as a condition of authorizing the decision request. The defaule is `false`.       |
+| `payload`     | String  | Required | Mutable   | The statement payload.                                                                                                           |
+| `services`    | Object  | Required | Mutable   | The services attached to the statement.                                                                                          |
+| `version`     | String  | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                            |
+
+## Event types
+
+The audit reporting events applicable to the authorize statements service are:
+
+| Topic             | Event                         |
+| ----------------- | ----------------------------- |
+| `authorize-model` | `AUTHORIZE_STATEMENT.CREATED` |
+| `authorize-model` | `AUTHORIZE_STATEMENT.UPDATED` |
+| `authorize-model` | `AUTHORIZE_STATEMENT.DELETED` |
+
+## Response codes
+
+| Code | Message                                                               |
+| ---- | --------------------------------------------------------------------- |
+| 200  | Successful operation.                                                 |
+| 201  | Successfully created.                                                 |
+| 204  | Successfully removed. No content.                                     |
+| 400  | The request could not be completed.                                   |
+| 401  | You do not have access to this resource.                              |
+| 403  | You do not have permissions or are not licensed to make this request. |
+| 404  | The requested resource was not found.                                 |
+
+---
+
+---
+title: Create Authorization Attribute
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/create-authorization-attribute
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/create-authorization-attribute.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Attribute
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationAttributes
+```
+
+The POST /environments/{{envID}}/authorizationAttributes\` request creates a new authorization attribute.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization attributes data model](#authorization-attributes-data-model)
+>
+> | Property                   | Type   | Required |
+> | -------------------------- | ------ | -------- |
+> | `defaultValue`             | String | Optional |
+> | `description`              | String | Optional |
+> | `managedEntity`            | Object | Optional |
+> | `name`                     | String | Required |
+> | `parent`                   | Object | Optional |
+> | `parent.id`                | String | Optional |
+> | `processor`                | Object | Optional |
+> | `processor.type`           | String | Optional |
+> | `processor.expression`     | String | Optional |
+> | `processor.valueType`      | Object | Optional |
+> | `processor.valueType.type` | String | Optional |
+> | `repetitionSource`         | Object | Optional |
+> | `resolvers`                | Array  | Optional |
+> | `resolvers.type`           | String | Optional |
+> | `type`                     | String | Required |
+> | `valueType`                | Object | Required |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "resolvers": [
+        {
+            "type": "REQUEST"
+        }
+    ],
+    "valueType": {
+        "type": "JSON"
+    }
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "resolvers": [
+        {
+            "type": "REQUEST"
+        }
+    ],
+    "valueType": {
+        "type": "JSON"
+    }
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""name"": ""Remote API Server 1""," + "\n" +
+@"    ""type"": ""ATTRIBUTE""," + "\n" +
+@"    ""description"": ""Information about the API server backup that was matched to an HTTP request/response.""," + "\n" +
+@"    ""parent"": {" + "\n" +
+@"        ""id"": ""{{authParentID}}""" + "\n" +
+@"    }," + "\n" +
+@"    ""resolvers"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""type"": ""REQUEST""" + "\n" +
+@"        }" + "\n" +
+@"    ]," + "\n" +
+@"    ""valueType"": {" + "\n" +
+@"        ""type"": ""JSON""" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "resolvers": [
+        {
+            "type": "REQUEST"
+        }
+    ],
+    "valueType": {
+        "type": "JSON"
+    }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationAttributes HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "resolvers": [
+        {
+            "type": "REQUEST"
+        }
+    ],
+    "valueType": {
+        "type": "JSON"
+    }
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"Remote API Server 1\",\n    \"type\": \"ATTRIBUTE\",\n    \"description\": \"Information about the API server backup that was matched to an HTTP request/response.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"resolvers\": [\n        {\n            \"type\": \"REQUEST\"\n        }\n    ],\n    \"valueType\": {\n        \"type\": \"JSON\"\n    }\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "resolvers": [
+      {
+        "type": "REQUEST"
+      }
+    ],
+    "valueType": {
+      "type": "JSON"
+    }
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "name": "Remote API Server 1",
+    "type": "ATTRIBUTE",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "resolvers": [
+      {
+        "type": "REQUEST"
+      }
+    ],
+    "valueType": {
+      "type": "JSON"
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes"
+
+payload = json.dumps({
+  "name": "Remote API Server 1",
+  "type": "ATTRIBUTE",
+  "description": "Information about the API server backup that was matched to an HTTP request/response.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "resolvers": [
+    {
+      "type": "REQUEST"
+    }
+  ],
+  "valueType": {
+    "type": "JSON"
+  }
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "name": "Remote API Server 1",\n    "type": "ATTRIBUTE",\n    "description": "Information about the API server backup that was matched to an HTTP request/response.",\n    "parent": {\n        "id": "{{authParentID}}"\n    },\n    "resolvers": [\n        {\n            "type": "REQUEST"\n        }\n    ],\n    "valueType": {\n        "type": "JSON"\n    }\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "name": "Remote API Server 1",
+  "type": "ATTRIBUTE",
+  "description": "Information about the API server backup that was matched to an HTTP request/response.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "resolvers": [
+    {
+      "type": "REQUEST"
+    }
+  ],
+  "valueType": {
+    "type": "JSON"
+  }
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"name\": \"Remote API Server 1\",\n    \"type\": \"ATTRIBUTE\",\n    \"description\": \"Information about the API server backup that was matched to an HTTP request/response.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"resolvers\": [\n        {\n            \"type\": \"REQUEST\"\n        }\n    ],\n    \"valueType\": {\n        \"type\": \"JSON\"\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "type": "ATTRIBUTE",
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationAttributes/746aba7f-2daa-4bf4-8597-3014200a26cb"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        },
+        "parent": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationAttributes/212ff558-dea2-4e0a-be00-91d7707fbad6"
+        }
+    },
+    "id": "746aba7f-2daa-4bf4-8597-3014200a26cb",
+    "version": "9962fb07-acf9-4d2a-83ab-733548a574e4",
+    "name": "Remote API Server 1",
+    "fullName": "PingOne.API Access Management.Remote API Server 5.Remote API Server 1",
+    "description": "Information about the API server backup that was matched to an HTTP request/response.",
+    "parent": {
+        "id": "212ff558-dea2-4e0a-be00-91d7707fbad6"
+    },
+    "resolvers": [
+        {
+            "type": "REQUEST"
+        }
+    ],
+    "valueType": {
+        "type": "JSON"
+    }
+}
+```
+
+---
+
+---
+title: Create Authorization Condition
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/create-authorization-condition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/create-authorization-condition.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Condition
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationConditions
+```
+
+The POST /environments/{{envID}}/authorizationConditions\` request creates a new authorization condition resource.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization conditions data model](#authorization-conditions-data-model)
+>
+> | Property                          | Type   | Required |
+> | --------------------------------- | ------ | -------- |
+> | `condition`                       | Object | Required |
+> | `condition.type`                  | String | Required |
+> | `condition.conditions[]`          | Object | Required |
+> | `condition.conditions.type`       | String | Required |
+> | `condition.conditions.comparator` | String | Required |
+> | `condition.conditions.left`       | Object | Required |
+> | `condition.conditions.right`      | Object | Required |
+> | `description`                     | String | Optional |
+> | `fullName`                        | String | Required |
+> | `name`                            | String | Required |
+> | `parent`                          | Object | Optional |
+> | `parent.id`                       | String | Optional |
+> | `type`                            | String | Optional |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "{{authAttributeID}}"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "value"
+                }
+            }
+        ]
+    }
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationConditions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "{{authAttributeID}}"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "value"
+                }
+            }
+        ]
+    }
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""name"": ""Has Balance""," + "\n" +
+@"    ""type"": ""CONDITION""," + "\n" +
+@"    ""description"": ""Authorize condition description.""," + "\n" +
+@"    ""parent"": {" + "\n" +
+@"        ""id"": ""{{authParentID}}""" + "\n" +
+@"    }," + "\n" +
+@"    ""condition"": {" + "\n" +
+@"        ""type"": ""AND""," + "\n" +
+@"        ""conditions"": [" + "\n" +
+@"            {" + "\n" +
+@"                ""type"": ""COMPARISON""," + "\n" +
+@"                ""left"": {" + "\n" +
+@"                    ""type"": ""ATTRIBUTE""," + "\n" +
+@"                    ""id"": ""{{authAttributeID}}""" + "\n" +
+@"                }," + "\n" +
+@"                ""comparator"": ""EQUALS""," + "\n" +
+@"                ""right"": {" + "\n" +
+@"                    ""type"": ""CONSTANT""," + "\n" +
+@"                    ""value"": ""value""" + "\n" +
+@"                }" + "\n" +
+@"            }" + "\n" +
+@"        ]" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "{{authAttributeID}}"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "value"
+                }
+            }
+        ]
+    }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationConditions HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "{{authAttributeID}}"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "value"
+                }
+            }
+        ]
+    }
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"Has Balance\",\n    \"type\": \"CONDITION\",\n    \"description\": \"Authorize condition description.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"condition\": {\n        \"type\": \"AND\",\n        \"conditions\": [\n            {\n                \"type\": \"COMPARISON\",\n                \"left\": {\n                    \"type\": \"ATTRIBUTE\",\n                    \"id\": \"{{authAttributeID}}\"\n                },\n                \"comparator\": \"EQUALS\",\n                \"right\": {\n                    \"type\": \"CONSTANT\",\n                    \"value\": \"value\"\n                }\n            }\n        ]\n    }\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authAttributeID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "value"
+          }
+        }
+      ]
+    }
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationConditions',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "name": "Has Balance",
+    "type": "CONDITION",
+    "description": "Authorize condition description.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authAttributeID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "value"
+          }
+        }
+      ]
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions"
+
+payload = json.dumps({
+  "name": "Has Balance",
+  "type": "CONDITION",
+  "description": "Authorize condition description.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "value"
+        }
+      }
+    ]
+  }
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationConditions');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "name": "Has Balance",\n    "type": "CONDITION",\n    "description": "Authorize condition description.",\n    "parent": {\n        "id": "{{authParentID}}"\n    },\n    "condition": {\n        "type": "AND",\n        "conditions": [\n            {\n                "type": "COMPARISON",\n                "left": {\n                    "type": "ATTRIBUTE",\n                    "id": "{{authAttributeID}}"\n                },\n                "comparator": "EQUALS",\n                "right": {\n                    "type": "CONSTANT",\n                    "value": "value"\n                }\n            }\n        ]\n    }\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "name": "Has Balance",
+  "type": "CONDITION",
+  "description": "Authorize condition description.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "value"
+        }
+      }
+    ]
+  }
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"name\": \"Has Balance\",\n    \"type\": \"CONDITION\",\n    \"description\": \"Authorize condition description.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"condition\": {\n        \"type\": \"AND\",\n        \"conditions\": [\n            {\n                \"type\": \"COMPARISON\",\n                \"left\": {\n                    \"type\": \"ATTRIBUTE\",\n                    \"id\": \"{{authAttributeID}}\"\n                },\n                \"comparator\": \"EQUALS\",\n                \"right\": {\n                    \"type\": \"CONSTANT\",\n                    \"value\": \"value\"\n                }\n            }\n        ]\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "type": "CONDITION",
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationConditions/0d6da20c-a285-4b58-9122-76cd40e7fa40"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        },
+        "parent": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationConditions/7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+        }
+    },
+    "id": "0d6da20c-a285-4b58-9122-76cd40e7fa40",
+    "version": "62726565-7fb1-4682-ab2a-1993739c8eb2",
+    "name": "Has Balance",
+    "fullName": "PingOne.API Access Management.Has Balance",
+    "description": "Authorize condition description.",
+    "parent": {
+        "id": "7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+    },
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "700fa8e4-f6a1-4269-9de7-43074f49af4d"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "value"
+                }
+            }
+        ]
+    }
+}
+```
+
+---
+
+---
+title: Create Authorization Policy
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/create-authorization-policy
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/create-authorization-policy.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Policy
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationPolicies
+```
+
+The POST `{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies` request creates a new authorization policy.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization policies data model](#authorization-policies-data-model)
+>
+> | Property             | Type    | Required |
+> | -------------------- | ------- | -------- |
+> | `children`           | Array   | Optional |
+> | `combiningAlgorithm` | Object  | Required |
+> | `condition`          | Object  | Optional |
+> | `description`        | String  | Optional |
+> | `enabled`            | Boolean | Optional |
+> | `name`               | String  | Required |
+> | `repetitionSettings` | Object  | Optional |
+> | `statements`         | Object  | Optional |
+> | `type`               | String  | Required |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"" + "\n" +
+@"{" + "\n" +
+@"  ""type"": ""POLICY""," + "\n" +
+@"  ""name"": ""Policy1""," + "\n" +
+@"  ""description"": ""Policy1 description""," + "\n" +
+@"  ""enabled"": true," + "\n" +
+@"  ""statements"": [" + "\n" +
+@"    {" + "\n" +
+@"      ""value"": {" + "\n" +
+@"        ""id"": ""{{authorizationStatementID}}""" + "\n" +
+@"      }" + "\n" +
+@"    }," + "\n" +
+@"    {" + "\n" +
+@"      ""name"": ""Statement1""," + "\n" +
+@"      ""description"": ""Statement1 description""," + "\n" +
+@"      ""code"": ""CODE1""," + "\n" +
+@"      ""appliesTo"": ""PERMIT_OR_DENY""," + "\n" +
+@"      ""appliesIf"": ""FINAL_DECISION_MATCHES""," + "\n" +
+@"      ""payload"": ""Payload1""," + "\n" +
+@"      ""obligatory"": false," + "\n" +
+@"      ""attributes"": []," + "\n" +
+@"      ""services"": []" + "\n" +
+@"    }" + "\n" +
+@"  ]," + "\n" +
+@"  ""condition"": {" + "\n" +
+@"    ""type"": ""AND""," + "\n" +
+@"    ""conditions"": [" + "\n" +
+@"      {" + "\n" +
+@"        ""type"": ""COMPARISON""," + "\n" +
+@"        ""left"": {" + "\n" +
+@"          ""type"": ""ATTRIBUTE""," + "\n" +
+@"          ""id"": ""{{authAttributeID}}""" + "\n" +
+@"        }," + "\n" +
+@"        ""comparator"": ""EQUALS""," + "\n" +
+@"        ""right"": {" + "\n" +
+@"          ""type"": ""CONSTANT""," + "\n" +
+@"          ""value"": ""def""        " + "\n" +
+@"        }" + "\n" +
+@"      }" + "\n" +
+@"    ]" + "\n" +
+@"  }," + "\n" +
+@"  ""combiningAlgorithm"": {" + "\n" +
+@"    ""algorithm"": ""DENY_OVERRIDES""" + "\n" +
+@"  }," + "\n" +
+@"  ""children"": [" + "\n" +
+@"    {" + "\n" +
+@"      ""type"": ""POLICY""," + "\n" +
+@"      ""value"": {" + "\n" +
+@"        ""id"": ""{{authChildPolicyID}}""" + "\n" +
+@"      }" + "\n" +
+@"    }," + "\n" +
+@"    {" + "\n" +
+@"      ""type"": ""POLICY""," + "\n" +
+@"      ""name"": ""Policy2""," + "\n" +
+@"      ""description"": ""Policy2 description""," + "\n" +
+@"      ""enabled"": true," + "\n" +
+@"      ""statements"": []," + "\n" +
+@"      ""combiningAlgorithm"": {" + "\n" +
+@"        ""algorithm"": ""PERMIT_UNLESS_DENY""" + "\n" +
+@"      }," + "\n" +
+@"      ""children"": [" + "\n" +
+@"        {" + "\n" +
+@"          ""type"": ""RULE""," + "\n" +
+@"          ""value"": {" + "\n" +
+@"            ""id"": ""{{authChildRuleID}}""" + "\n" +
+@"          }" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"          ""type"": ""RULE""," + "\n" +
+@"          ""name"": ""Rule1""," + "\n" +
+@"          ""description"": ""Rule1 description""," + "\n" +
+@"          ""enabled"": true," + "\n" +
+@"          ""statements"": []," + "\n" +
+@"          ""effectSettings"": {" + "\n" +
+@"            ""type"": ""UNCONDITIONAL_PERMIT""" + "\n" +
+@"          }" + "\n" +
+@"        }" + "\n" +
+@"      ]," + "\n" +
+@"      ""repetitionSettings"": {" + "\n" +
+@"        ""source"": {" + "\n" +
+@"          ""id"": ""{{authRepetitionSettingsID}}""" + "\n" +
+@"        }," + "\n" +
+@"        ""decision"": ""PERMIT""" + "\n" +
+@"      }" + "\n" +
+@"    }" + "\n" +
+@"  ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationPolicies HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "\n{\n  \"type\": \"POLICY\",\n  \"name\": \"Policy1\",\n  \"description\": \"Policy1 description\",\n  \"enabled\": true,\n  \"statements\": [\n    {\n      \"value\": {\n        \"id\": \"{{authorizationStatementID}}\"\n      }\n    },\n    {\n      \"name\": \"Statement1\",\n      \"description\": \"Statement1 description\",\n      \"code\": \"CODE1\",\n      \"appliesTo\": \"PERMIT_OR_DENY\",\n      \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n      \"payload\": \"Payload1\",\n      \"obligatory\": false,\n      \"attributes\": [],\n      \"services\": []\n    }\n  ],\n  \"condition\": {\n    \"type\": \"AND\",\n    \"conditions\": [\n      {\n        \"type\": \"COMPARISON\",\n        \"left\": {\n          \"type\": \"ATTRIBUTE\",\n          \"id\": \"{{authAttributeID}}\"\n        },\n        \"comparator\": \"EQUALS\",\n        \"right\": {\n          \"type\": \"CONSTANT\",\n          \"value\": \"def\"        \n        }\n      }\n    ]\n  },\n  \"combiningAlgorithm\": {\n    \"algorithm\": \"DENY_OVERRIDES\"\n  },\n  \"children\": [\n    {\n      \"type\": \"POLICY\",\n      \"value\": {\n        \"id\": \"{{authChildPolicyID}}\"\n      }\n    },\n    {\n      \"type\": \"POLICY\",\n      \"name\": \"Policy2\",\n      \"description\": \"Policy2 description\",\n      \"enabled\": true,\n      \"statements\": [],\n      \"combiningAlgorithm\": {\n        \"algorithm\": \"PERMIT_UNLESS_DENY\"\n      },\n      \"children\": [\n        {\n          \"type\": \"RULE\",\n          \"value\": {\n            \"id\": \"{{authChildRuleID}}\"\n          }\n        },\n        {\n          \"type\": \"RULE\",\n          \"name\": \"Rule1\",\n          \"description\": \"Rule1 description\",\n          \"enabled\": true,\n          \"statements\": [],\n          \"effectSettings\": {\n            \"type\": \"UNCONDITIONAL_PERMIT\"\n          }\n        }\n      ],\n      \"repetitionSettings\": {\n        \"source\": {\n          \"id\": \"{{authRepetitionSettingsID}}\"\n        },\n        \"decision\": \"PERMIT\"\n      }\n    }\n  ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "type": "POLICY",
+    "name": "Policy1",
+    "description": "Policy1 description",
+    "enabled": true,
+    "statements": [
+      {
+        "value": {
+          "id": "{{authorizationStatementID}}"
+        }
+      },
+      {
+        "name": "Statement1",
+        "description": "Statement1 description",
+        "code": "CODE1",
+        "appliesTo": "PERMIT_OR_DENY",
+        "appliesIf": "FINAL_DECISION_MATCHES",
+        "payload": "Payload1",
+        "obligatory": false,
+        "attributes": [],
+        "services": []
+      }
+    ],
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authAttributeID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "def"
+          }
+        }
+      ]
+    },
+    "combiningAlgorithm": {
+      "algorithm": "DENY_OVERRIDES"
+    },
+    "children": [
+      {
+        "type": "POLICY",
+        "value": {
+          "id": "{{authChildPolicyID}}"
+        }
+      },
+      {
+        "type": "POLICY",
+        "name": "Policy2",
+        "description": "Policy2 description",
+        "enabled": true,
+        "statements": [],
+        "combiningAlgorithm": {
+          "algorithm": "PERMIT_UNLESS_DENY"
+        },
+        "children": [
+          {
+            "type": "RULE",
+            "value": {
+              "id": "{{authChildRuleID}}"
+            }
+          },
+          {
+            "type": "RULE",
+            "name": "Rule1",
+            "description": "Rule1 description",
+            "enabled": true,
+            "statements": [],
+            "effectSettings": {
+              "type": "UNCONDITIONAL_PERMIT"
+            }
+          }
+        ],
+        "repetitionSettings": {
+          "source": {
+            "id": "{{authRepetitionSettingsID}}"
+          },
+          "decision": "PERMIT"
+        }
+      }
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "type": "POLICY",
+    "name": "Policy1",
+    "description": "Policy1 description",
+    "enabled": true,
+    "statements": [
+      {
+        "value": {
+          "id": "{{authorizationStatementID}}"
+        }
+      },
+      {
+        "name": "Statement1",
+        "description": "Statement1 description",
+        "code": "CODE1",
+        "appliesTo": "PERMIT_OR_DENY",
+        "appliesIf": "FINAL_DECISION_MATCHES",
+        "payload": "Payload1",
+        "obligatory": false,
+        "attributes": [],
+        "services": []
+      }
+    ],
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authAttributeID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "def"
+          }
+        }
+      ]
+    },
+    "combiningAlgorithm": {
+      "algorithm": "DENY_OVERRIDES"
+    },
+    "children": [
+      {
+        "type": "POLICY",
+        "value": {
+          "id": "{{authChildPolicyID}}"
+        }
+      },
+      {
+        "type": "POLICY",
+        "name": "Policy2",
+        "description": "Policy2 description",
+        "enabled": true,
+        "statements": [],
+        "combiningAlgorithm": {
+          "algorithm": "PERMIT_UNLESS_DENY"
+        },
+        "children": [
+          {
+            "type": "RULE",
+            "value": {
+              "id": "{{authChildRuleID}}"
+            }
+          },
+          {
+            "type": "RULE",
+            "name": "Rule1",
+            "description": "Rule1 description",
+            "enabled": true,
+            "statements": [],
+            "effectSettings": {
+              "type": "UNCONDITIONAL_PERMIT"
+            }
+          }
+        ],
+        "repetitionSettings": {
+          "source": {
+            "id": "{{authRepetitionSettingsID}}"
+          },
+          "decision": "PERMIT"
+        }
+      }
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies"
+
+payload = json.dumps({
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": True,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": False,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": True,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": True,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n  "type": "POLICY",\n  "name": "Policy1",\n  "description": "Policy1 description",\n  "enabled": true,\n  "statements": [\n    {\n      "value": {\n        "id": "{{authorizationStatementID}}"\n      }\n    },\n    {\n      "name": "Statement1",\n      "description": "Statement1 description",\n      "code": "CODE1",\n      "appliesTo": "PERMIT_OR_DENY",\n      "appliesIf": "FINAL_DECISION_MATCHES",\n      "payload": "Payload1",\n      "obligatory": false,\n      "attributes": [],\n      "services": []\n    }\n  ],\n  "condition": {\n    "type": "AND",\n    "conditions": [\n      {\n        "type": "COMPARISON",\n        "left": {\n          "type": "ATTRIBUTE",\n          "id": "{{authAttributeID}}"\n        },\n        "comparator": "EQUALS",\n        "right": {\n          "type": "CONSTANT",\n          "value": "def"        \n        }\n      }\n    ]\n  },\n  "combiningAlgorithm": {\n    "algorithm": "DENY_OVERRIDES"\n  },\n  "children": [\n    {\n      "type": "POLICY",\n      "value": {\n        "id": "{{authChildPolicyID}}"\n      }\n    },\n    {\n      "type": "POLICY",\n      "name": "Policy2",\n      "description": "Policy2 description",\n      "enabled": true,\n      "statements": [],\n      "combiningAlgorithm": {\n        "algorithm": "PERMIT_UNLESS_DENY"\n      },\n      "children": [\n        {\n          "type": "RULE",\n          "value": {\n            "id": "{{authChildRuleID}}"\n          }\n        },\n        {\n          "type": "RULE",\n          "name": "Rule1",\n          "description": "Rule1 description",\n          "enabled": true,\n          "statements": [],\n          "effectSettings": {\n            "type": "UNCONDITIONAL_PERMIT"\n          }\n        }\n      ],\n      "repetitionSettings": {\n        "source": {\n          "id": "{{authRepetitionSettingsID}}"\n        },\n        "decision": "PERMIT"\n      }\n    }\n  ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "type": "POLICY",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authAttributeID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "{{authChildPolicyID}}"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "{{authChildRuleID}}"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "{{authRepetitionSettingsID}}"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n  \"type\": \"POLICY\",\n  \"name\": \"Policy1\",\n  \"description\": \"Policy1 description\",\n  \"enabled\": true,\n  \"statements\": [\n    {\n      \"value\": {\n        \"id\": \"{{authorizationStatementID}}\"\n      }\n    },\n    {\n      \"name\": \"Statement1\",\n      \"description\": \"Statement1 description\",\n      \"code\": \"CODE1\",\n      \"appliesTo\": \"PERMIT_OR_DENY\",\n      \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n      \"payload\": \"Payload1\",\n      \"obligatory\": false,\n      \"attributes\": [],\n      \"services\": []\n    }\n  ],\n  \"condition\": {\n    \"type\": \"AND\",\n    \"conditions\": [\n      {\n        \"type\": \"COMPARISON\",\n        \"left\": {\n          \"type\": \"ATTRIBUTE\",\n          \"id\": \"{{authAttributeID}}\"\n        },\n        \"comparator\": \"EQUALS\",\n        \"right\": {\n          \"type\": \"CONSTANT\",\n          \"value\": \"def\"        \n        }\n      }\n    ]\n  },\n  \"combiningAlgorithm\": {\n    \"algorithm\": \"DENY_OVERRIDES\"\n  },\n  \"children\": [\n    {\n      \"type\": \"POLICY\",\n      \"value\": {\n        \"id\": \"{{authChildPolicyID}}\"\n      }\n    },\n    {\n      \"type\": \"POLICY\",\n      \"name\": \"Policy2\",\n      \"description\": \"Policy2 description\",\n      \"enabled\": true,\n      \"statements\": [],\n      \"combiningAlgorithm\": {\n        \"algorithm\": \"PERMIT_UNLESS_DENY\"\n      },\n      \"children\": [\n        {\n          \"type\": \"RULE\",\n          \"value\": {\n            \"id\": \"{{authChildRuleID}}\"\n          }\n        },\n        {\n          \"type\": \"RULE\",\n          \"name\": \"Rule1\",\n          \"description\": \"Rule1 description\",\n          \"enabled\": true,\n          \"statements\": [],\n          \"effectSettings\": {\n            \"type\": \"UNCONDITIONAL_PERMIT\"\n          }\n        }\n      ],\n      \"repetitionSettings\": {\n        \"source\": {\n          \"id\": \"{{authRepetitionSettingsID}}\"\n        },\n        \"decision\": \"PERMIT\"\n      }\n    }\n  ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.pingone.com/v1/environments/{envID}/authorizationPolicies/d735fd88-96a3-4532-bc05-e69a0173dd59"
+    },
+    "policies": [
+      {
+        "href": "https://api.pingone.com/v1/environments/{envID}/authorizationPolicies/6916f0ca-50bd-4025-a16e-c3b5eed62d20"
+      }
+    ],
+    "rules": [
+      {
+        "href": "https://api.pingone.com/v1/environments/{envID}/authorizationRules/4c7aa845-febd-4427-bec2-36813370806d"
+      }
+    ],
+    "statements": [
+      {
+        "href": "https://api.pingone.com/v1/environments/{envID}/authorizationStatements/619243fd-5e18-43e4-a97c-9fda2fcb727a"
+      }
+    ],
+    "attributes": [
+      {
+        "href": "https://api.pingone.com/v1/environments/{envID}/authorizationAttributes/779f8ccb-9f74-4fa2-826a-ecdd64ec4a3b"
+      }
+    ]
+  },
+  "type": "POLICY",
+  "id": "d735fd88-96a3-4532-bc05-e69a0173dd59",
+  "version": "0e8dbef9-b342-4658-8767-6695c1138b57",
+  "name": "Policy1",
+  "description": "Policy1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "value": {
+        "id": "619243fd-5e18-43e4-a97c-9fda2fcb727a"
+      }
+    },
+    {
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "779f8ccb-9f74-4fa2-826a-ecdd64ec4a3b"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "combiningAlgorithm": {
+    "algorithm": "DENY_OVERRIDES"
+  },
+  "children": [
+    {
+      "type": "POLICY",
+      "value": {
+        "id": "6916f0ca-50bd-4025-a16e-c3b5eed62d20"
+      }
+    },
+    {
+      "type": "POLICY",
+      "name": "Policy2",
+      "description": "Policy2 description",
+      "enabled": true,
+      "statements": [],
+      "combiningAlgorithm": {
+        "algorithm": "PERMIT_UNLESS_DENY"
+      },
+      "children": [
+        {
+          "type": "RULE",
+          "value": {
+            "id": "4c7aa845-febd-4427-bec2-36813370806d"
+          }
+        },
+        {
+          "type": "RULE",
+          "name": "Rule1",
+          "description": "Rule1 description",
+          "enabled": true,
+          "statements": [],
+          "effectSettings": {
+            "type": "UNCONDITIONAL_PERMIT"
+          }
+        }
+      ],
+      "repetitionSettings": {
+        "source": {
+          "id": "779f8ccb-9f74-4fa2-826a-ecdd64ec4a3b"
+        },
+        "decision": "PERMIT"
+      }
+    }
+  ]
+}
+```
+
+---
+
+---
+title: Create Authorization Processor
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/create-authorization-processor
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/create-authorization-processor.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Processor
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationProcessors
+```
+
+The POST /environments/{{envID}}/authorizationProcessors\` request creates a new authorization processor resource.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization processors data model](#authorization-processors-data-model)
+>
+> | Property                   | Type   | Required |
+> | -------------------------- | ------ | -------- |
+> | `description`              | String | Optional |
+> | `fullName`                 | String | Required |
+> | `name`                     | String | Required |
+> | `parent`                   | Object | Optional |
+> | `parent.id`                | String | Optional |
+> | `processor`                | Object | Optional |
+> | `processor.type`           | String | Optional |
+> | `processor.expression`     | String | Optional |
+> | `processor.valueType`      | Object | Optional |
+> | `processor.valueType.type` | String | Optional |
+> | `processor.name`           | String | Optional |
+> | `type`                     | String | Optional |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "processor": {
+        "type": "JSON_PATH",
+        "expression": "$.accountNo",
+        "valueType": {
+            "type": "STRING"
+        },
+        "name": "Extract account no"
+    }
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "processor": {
+        "type": "JSON_PATH",
+        "expression": "$.accountNo",
+        "valueType": {
+            "type": "STRING"
+        },
+        "name": "Extract account no"
+    }
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""name"": ""Account Number""," + "\n" +
+@"    ""type"": ""PROCESSOR""," + "\n" +
+@"    ""description"": ""Account number processor""," + "\n" +
+@"    ""parent"": {" + "\n" +
+@"        ""id"": ""{{authParentID}}""" + "\n" +
+@"    }," + "\n" +
+@"    ""processor"": {" + "\n" +
+@"        ""type"": ""JSON_PATH""," + "\n" +
+@"        ""expression"": ""$.accountNo""," + "\n" +
+@"        ""valueType"": {" + "\n" +
+@"            ""type"": ""STRING""" + "\n" +
+@"        }," + "\n" +
+@"        ""name"": ""Extract account no""" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "processor": {
+        "type": "JSON_PATH",
+        "expression": "$.accountNo",
+        "valueType": {
+            "type": "STRING"
+        },
+        "name": "Extract account no"
+    }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationProcessors HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "processor": {
+        "type": "JSON_PATH",
+        "expression": "$.accountNo",
+        "valueType": {
+            "type": "STRING"
+        },
+        "name": "Extract account no"
+    }
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"Account Number\",\n    \"type\": \"PROCESSOR\",\n    \"description\": \"Account number processor\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"processor\": {\n        \"type\": \"JSON_PATH\",\n        \"expression\": \"$.accountNo\",\n        \"valueType\": {\n            \"type\": \"STRING\"\n        },\n        \"name\": \"Extract account no\"\n    }\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "processor": {
+      "type": "JSON_PATH",
+      "expression": "$.accountNo",
+      "valueType": {
+        "type": "STRING"
+      },
+      "name": "Extract account no"
+    }
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "name": "Account Number",
+    "type": "PROCESSOR",
+    "description": "Account number processor",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "processor": {
+      "type": "JSON_PATH",
+      "expression": "$.accountNo",
+      "valueType": {
+        "type": "STRING"
+      },
+      "name": "Extract account no"
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors"
+
+payload = json.dumps({
+  "name": "Account Number",
+  "type": "PROCESSOR",
+  "description": "Account number processor",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "processor": {
+    "type": "JSON_PATH",
+    "expression": "$.accountNo",
+    "valueType": {
+      "type": "STRING"
+    },
+    "name": "Extract account no"
+  }
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "name": "Account Number",\n    "type": "PROCESSOR",\n    "description": "Account number processor",\n    "parent": {\n        "id": "{{authParentID}}"\n    },\n    "processor": {\n        "type": "JSON_PATH",\n        "expression": "$.accountNo",\n        "valueType": {\n            "type": "STRING"\n        },\n        "name": "Extract account no"\n    }\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "name": "Account Number",
+  "type": "PROCESSOR",
+  "description": "Account number processor",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "processor": {
+    "type": "JSON_PATH",
+    "expression": "\$.accountNo",
+    "valueType": {
+      "type": "STRING"
+    },
+    "name": "Extract account no"
+  }
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"name\": \"Account Number\",\n    \"type\": \"PROCESSOR\",\n    \"description\": \"Account number processor\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"processor\": {\n        \"type\": \"JSON_PATH\",\n        \"expression\": \"$.accountNo\",\n        \"valueType\": {\n            \"type\": \"STRING\"\n        },\n        \"name\": \"Extract account no\"\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "type": "PROCESSOR",
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationProcessors/de2f5b4e-f7d6-422e-a244-686d3d11caa9"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        },
+        "parent": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationProcessors/7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+        }
+    },
+    "id": "de2f5b4e-f7d6-422e-a244-686d3d11caa9",
+    "version": "fd2306cf-6d1d-4b66-9e52-6b404892f2ca",
+    "name": "Account Number",
+    "fullName": "PingOne.API Access Management.Account Number",
+    "description": "Account number processor",
+    "parent": {
+        "id": "7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+    },
+    "processor": {
+        "type": "JSON_PATH",
+        "name": "Extract account no",
+        "expression": "$.accountNo",
+        "valueType": {
+            "type": "STRING"
+        }
+    }
+}
+```
+
+---
+
+---
+title: Create Authorization Rule
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/create-authorization-rule
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/create-authorization-rule.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Rule
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationRules
+```
+
+The POST `{{apiPath}}/v1/environments/{{envID}}/authorizationRules` request creates a new authorization rule resource.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization rules data model](#authorization-rules-data-model)
+>
+> | Property         | Type    | Required |
+> | ---------------- | ------- | -------- |
+> | `condition`      | Object  | Optional |
+> | `description`    | String  | Optional |
+> | `effectSettings` | Object  | Optional |
+> | `enabled`        | Boolean | Optional |
+> | `name`           | String  | Required |
+> | `statements`     | Object  | Optional |
+> | `type`           | String  | Optional |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationRules' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationRules")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"  ""type"": ""RULE""," + "\n" +
+@"  ""name"": ""Rule1""," + "\n" +
+@"  ""description"": ""Rule1 description""," + "\n" +
+@"  ""enabled"": true," + "\n" +
+@"  ""statements"": [" + "\n" +
+@"    {" + "\n" +
+@"      ""type"": ""STATEMENT_REFERENCE""," + "\n" +
+@"      ""value"": {" + "\n" +
+@"        ""id"": ""{{authorizationStatementID}}""" + "\n" +
+@"      }" + "\n" +
+@"    }," + "\n" +
+@"    {" + "\n" +
+@"      ""type"": ""EMBEDDED_STATEMENT""," + "\n" +
+@"      ""name"": ""Statement1""," + "\n" +
+@"      ""description"": ""Statement1 description""," + "\n" +
+@"      ""code"": ""CODE1""," + "\n" +
+@"      ""appliesTo"": ""PERMIT_OR_DENY""," + "\n" +
+@"      ""appliesIf"": ""FINAL_DECISION_MATCHES""," + "\n" +
+@"      ""payload"": ""Payload1""," + "\n" +
+@"      ""obligatory"": false," + "\n" +
+@"      ""attributes"": []," + "\n" +
+@"      ""services"": []" + "\n" +
+@"    }" + "\n" +
+@"  ]," + "\n" +
+@"  ""condition"": {" + "\n" +
+@"    ""type"": ""AND""," + "\n" +
+@"    ""conditions"": [" + "\n" +
+@"      {" + "\n" +
+@"        ""type"": ""COMPARISON""," + "\n" +
+@"        ""left"": {" + "\n" +
+@"          ""type"": ""ATTRIBUTE""," + "\n" +
+@"          ""id"": ""{{authConditionsID}}""" + "\n" +
+@"        }," + "\n" +
+@"        ""comparator"": ""EQUALS""," + "\n" +
+@"        ""right"": {" + "\n" +
+@"          ""type"": ""CONSTANT""," + "\n" +
+@"          ""value"": ""def""        " + "\n" +
+@"        }" + "\n" +
+@"      }" + "\n" +
+@"    ]" + "\n" +
+@"  }," + "\n" +
+@"  ""effectSettings"": {" + "\n" +
+@"    ""type"": ""UNCONDITIONAL_PERMIT""" + "\n" +
+@"  }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationRules"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationRules HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n  \"type\": \"RULE\",\n  \"name\": \"Rule1\",\n  \"description\": \"Rule1 description\",\n  \"enabled\": true,\n  \"statements\": [\n    {\n      \"type\": \"STATEMENT_REFERENCE\",\n      \"value\": {\n        \"id\": \"{{authorizationStatementID}}\"\n      }\n    },\n    {\n      \"type\": \"EMBEDDED_STATEMENT\",\n      \"name\": \"Statement1\",\n      \"description\": \"Statement1 description\",\n      \"code\": \"CODE1\",\n      \"appliesTo\": \"PERMIT_OR_DENY\",\n      \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n      \"payload\": \"Payload1\",\n      \"obligatory\": false,\n      \"attributes\": [],\n      \"services\": []\n    }\n  ],\n  \"condition\": {\n    \"type\": \"AND\",\n    \"conditions\": [\n      {\n        \"type\": \"COMPARISON\",\n        \"left\": {\n          \"type\": \"ATTRIBUTE\",\n          \"id\": \"{{authConditionsID}}\"\n        },\n        \"comparator\": \"EQUALS\",\n        \"right\": {\n          \"type\": \"CONSTANT\",\n          \"value\": \"def\"        \n        }\n      }\n    ]\n  },\n  \"effectSettings\": {\n    \"type\": \"UNCONDITIONAL_PERMIT\"\n  }\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationRules")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationRules",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "type": "RULE",
+    "name": "Rule1",
+    "description": "Rule1 description",
+    "enabled": true,
+    "statements": [
+      {
+        "type": "STATEMENT_REFERENCE",
+        "value": {
+          "id": "{{authorizationStatementID}}"
+        }
+      },
+      {
+        "type": "EMBEDDED_STATEMENT",
+        "name": "Statement1",
+        "description": "Statement1 description",
+        "code": "CODE1",
+        "appliesTo": "PERMIT_OR_DENY",
+        "appliesIf": "FINAL_DECISION_MATCHES",
+        "payload": "Payload1",
+        "obligatory": false,
+        "attributes": [],
+        "services": []
+      }
+    ],
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authConditionsID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "def"
+          }
+        }
+      ]
+    },
+    "effectSettings": {
+      "type": "UNCONDITIONAL_PERMIT"
+    }
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationRules',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "type": "RULE",
+    "name": "Rule1",
+    "description": "Rule1 description",
+    "enabled": true,
+    "statements": [
+      {
+        "type": "STATEMENT_REFERENCE",
+        "value": {
+          "id": "{{authorizationStatementID}}"
+        }
+      },
+      {
+        "type": "EMBEDDED_STATEMENT",
+        "name": "Statement1",
+        "description": "Statement1 description",
+        "code": "CODE1",
+        "appliesTo": "PERMIT_OR_DENY",
+        "appliesIf": "FINAL_DECISION_MATCHES",
+        "payload": "Payload1",
+        "obligatory": false,
+        "attributes": [],
+        "services": []
+      }
+    ],
+    "condition": {
+      "type": "AND",
+      "conditions": [
+        {
+          "type": "COMPARISON",
+          "left": {
+            "type": "ATTRIBUTE",
+            "id": "{{authConditionsID}}"
+          },
+          "comparator": "EQUALS",
+          "right": {
+            "type": "CONSTANT",
+            "value": "def"
+          }
+        }
+      ]
+    },
+    "effectSettings": {
+      "type": "UNCONDITIONAL_PERMIT"
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationRules"
+
+payload = json.dumps({
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": True,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": False,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationRules');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n  "type": "RULE",\n  "name": "Rule1",\n  "description": "Rule1 description",\n  "enabled": true,\n  "statements": [\n    {\n      "type": "STATEMENT_REFERENCE",\n      "value": {\n        "id": "{{authorizationStatementID}}"\n      }\n    },\n    {\n      "type": "EMBEDDED_STATEMENT",\n      "name": "Statement1",\n      "description": "Statement1 description",\n      "code": "CODE1",\n      "appliesTo": "PERMIT_OR_DENY",\n      "appliesIf": "FINAL_DECISION_MATCHES",\n      "payload": "Payload1",\n      "obligatory": false,\n      "attributes": [],\n      "services": []\n    }\n  ],\n  "condition": {\n    "type": "AND",\n    "conditions": [\n      {\n        "type": "COMPARISON",\n        "left": {\n          "type": "ATTRIBUTE",\n          "id": "{{authConditionsID}}"\n        },\n        "comparator": "EQUALS",\n        "right": {\n          "type": "CONSTANT",\n          "value": "def"        \n        }\n      }\n    ]\n  },\n  "effectSettings": {\n    "type": "UNCONDITIONAL_PERMIT"\n  }\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationRules")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "type": "RULE",
+  "name": "Rule1",
+  "description": "Rule1 description",
+  "enabled": true,
+  "statements": [
+    {
+      "type": "STATEMENT_REFERENCE",
+      "value": {
+        "id": "{{authorizationStatementID}}"
+      }
+    },
+    {
+      "type": "EMBEDDED_STATEMENT",
+      "name": "Statement1",
+      "description": "Statement1 description",
+      "code": "CODE1",
+      "appliesTo": "PERMIT_OR_DENY",
+      "appliesIf": "FINAL_DECISION_MATCHES",
+      "payload": "Payload1",
+      "obligatory": false,
+      "attributes": [],
+      "services": []
+    }
+  ],
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "COMPARISON",
+        "left": {
+          "type": "ATTRIBUTE",
+          "id": "{{authConditionsID}}"
+        },
+        "comparator": "EQUALS",
+        "right": {
+          "type": "CONSTANT",
+          "value": "def"
+        }
+      }
+    ]
+  },
+  "effectSettings": {
+    "type": "UNCONDITIONAL_PERMIT"
+  }
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n  \"type\": \"RULE\",\n  \"name\": \"Rule1\",\n  \"description\": \"Rule1 description\",\n  \"enabled\": true,\n  \"statements\": [\n    {\n      \"type\": \"STATEMENT_REFERENCE\",\n      \"value\": {\n        \"id\": \"{{authorizationStatementID}}\"\n      }\n    },\n    {\n      \"type\": \"EMBEDDED_STATEMENT\",\n      \"name\": \"Statement1\",\n      \"description\": \"Statement1 description\",\n      \"code\": \"CODE1\",\n      \"appliesTo\": \"PERMIT_OR_DENY\",\n      \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n      \"payload\": \"Payload1\",\n      \"obligatory\": false,\n      \"attributes\": [],\n      \"services\": []\n    }\n  ],\n  \"condition\": {\n    \"type\": \"AND\",\n    \"conditions\": [\n      {\n        \"type\": \"COMPARISON\",\n        \"left\": {\n          \"type\": \"ATTRIBUTE\",\n          \"id\": \"{{authConditionsID}}\"\n        },\n        \"comparator\": \"EQUALS\",\n        \"right\": {\n          \"type\": \"CONSTANT\",\n          \"value\": \"def\"        \n        }\n      }\n    ]\n  },\n  \"effectSettings\": {\n    \"type\": \"UNCONDITIONAL_PERMIT\"\n  }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationRules")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationRules/bdb2f5ac-f0a5-490e-bd01-3aff8682d898"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        }
+    },
+    "id": "bdb2f5ac-f0a5-490e-bd01-3aff8682d898",
+    "name": "Rule10",
+    "description": "Rule10 description",
+    "enabled": true,
+    "statements": [
+        {
+            "value": {
+                "id": "20a1d298-ca8d-4e58-859f-b2b8d123286d"
+            }
+        },
+        {
+            "name": "Statement1",
+            "description": "Statement1 description",
+            "code": "CODE1",
+            "appliesTo": "PERMIT_OR_DENY",
+            "appliesIf": "FINAL_DECISION_MATCHES",
+            "payload": "Payload1",
+            "obligatory": false,
+            "attributes": []
+        }
+    ],
+    "condition": {
+        "type": "AND",
+        "conditions": [
+            {
+                "type": "COMPARISON",
+                "left": {
+                    "type": "ATTRIBUTE",
+                    "id": "a82a932f-f8bd-4b05-8c1f-5cf75c8fc030"
+                },
+                "comparator": "EQUALS",
+                "right": {
+                    "type": "CONSTANT",
+                    "value": "def"
+                }
+            }
+        ]
+    },
+    "effectSettings": {
+        "type": "UNCONDITIONAL_PERMIT"
+    },
+    "version": "5e121ef3-8342-4b4d-bd94-716ba1753a33"
+}
+```
+
+---
+
+---
+title: Create Authorization Service
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/create-authorization-service
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/create-authorization-service.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Service
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationServices
+```
+
+The following sample shows the POST /environments/{{envID}}/authorizationServices\` operation to create a new authorization service resource.
+
+> **Collapse: Request Model**
+>
+> | Property      | Type   | Required |
+> | ------------- | ------ | -------- |
+> | `description` | String | Optional |
+> | `fullName`    | String | Required |
+> | `name`        | String | Required |
+> | `parent`      | Object | Optional |
+> | `parent.id`   | String | Optional |
+> | `serviceType` | String | Required |
+> | `type`        | String | Required |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationServices' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationServices")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""name"": ""Invoice Tracking Service""," + "\n" +
+@"    ""type"": ""SERVICE""," + "\n" +
+@"    ""description"": ""Auth service description.""," + "\n" +
+@"    ""parent"": {" + "\n" +
+@"        ""id"": ""{{authParentID}}""" + "\n" +
+@"    }," + "\n" +
+@"    ""serviceType"": ""NONE""" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationServices"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationServices HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+        "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"Invoice Tracking Service\",\n    \"type\": \"SERVICE\",\n    \"description\": \"Auth service description.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"serviceType\": \"NONE\"\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationServices")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationServices",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationServices',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "name": "Invoice Tracking Service",
+    "type": "SERVICE",
+    "description": "Auth service description.",
+    "parent": {
+      "id": "{{authParentID}}"
+    },
+    "serviceType": "NONE"
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationServices"
+
+payload = json.dumps({
+  "name": "Invoice Tracking Service",
+  "type": "SERVICE",
+  "description": "Auth service description.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "serviceType": "NONE"
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationServices');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "name": "Invoice Tracking Service",\n    "type": "SERVICE",\n    "description": "Auth service description.",\n    "parent": {\n        "id": "{{authParentID}}"\n    },\n    "serviceType": "NONE"\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationServices")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "name": "Invoice Tracking Service",
+  "type": "SERVICE",
+  "description": "Auth service description.",
+  "parent": {
+    "id": "{{authParentID}}"
+  },
+  "serviceType": "NONE"
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"name\": \"Invoice Tracking Service\",\n    \"type\": \"SERVICE\",\n    \"description\": \"Auth service description.\",\n    \"parent\": {\n        \"id\": \"{{authParentID}}\"\n    },\n    \"serviceType\": \"NONE\"\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationServices")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "serviceType": "NONE",
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationServices/981f2eb7-ff26-41ef-b0ac-29f5af835530"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        },
+        "parent": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationServices/7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+        }
+    },
+    "id": "981f2eb7-ff26-41ef-b0ac-29f5af835530",
+    "version": "d1c0880b-a6fe-4920-ad31-b33899669bcf",
+    "name": "Invoice Tracking Service",
+    "fullName": "PingOne.API Access Management.Invoice Tracking Service",
+    "description": "Auth service description.",
+    "parent": {
+        "id": "7dadff8c-795d-4a5a-95f8-7942d3e49e70"
+    },
+    "type": "SERVICE"
+}
+```
+
+---
+
+---
+title: Create Authorization Statement
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/create-authorization-statement
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/create-authorization-statement.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Authorization Statement
+
+##
+
+ 
+
+```none
+POST {{apiPath}}/v1/environments/{{envID}}/authorizationStatements
+```
+
+The POST `{{apiPath}}/v1/environments/{{envID}}/authorizationStatements` request creates a new authorization statement resource.
+
+> **Collapse: Request Model**
+>
+> For property descriptions, refer to [Authorization statements data model](#authorization-statements-data-model)
+>
+> | Property      | Type    | Required |
+> | ------------- | ------- | -------- |
+> | `appliesif`   | String  | Required |
+> | `appliesTo`   | String  | Required |
+> | `attributes`  | Object  | Required |
+> | `code`        | String  | Required |
+> | `description` | String  |          |
+> | `id`          | String  | Required |
+> | `name`        | String  | Required |
+> | `obligatory`  | Boolean | Optional |
+> | `payload`     | String  | Required |
+> | `services`    | Object  | Required |
+> | `version`     | String  | Required |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": false,
+  "attributes": [],
+  "services": []
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/authorizationStatements' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": false,
+  "attributes": [],
+  "services": []
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationStatements")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"  ""name"": ""Authorization Statement1""," + "\n" +
+@"  ""description"": ""Authorization Statement1 description""," + "\n" +
+@"  ""code"": ""CODE1""," + "\n" +
+@"  ""appliesTo"": ""PERMIT_OR_DENY""," + "\n" +
+@"  ""appliesIf"": ""FINAL_DECISION_MATCHES""," + "\n" +
+@"  ""payload"": ""Payload1""," + "\n" +
+@"  ""obligatory"": false," + "\n" +
+@"  ""attributes"": []," + "\n" +
+@"  ""services"": []" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationStatements"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": false,
+  "attributes": [],
+  "services": []
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /v1/environments/{{envID}}/authorizationStatements HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": false,
+  "attributes": [],
+  "services": []
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n  \"name\": \"Authorization Statement1\",\n  \"description\": \"Authorization Statement1 description\",\n  \"code\": \"CODE1\",\n  \"appliesTo\": \"PERMIT_OR_DENY\",\n  \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n  \"payload\": \"Payload1\",\n  \"obligatory\": false,\n  \"attributes\": [],\n  \"services\": []\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationStatements")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationStatements",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "name": "Authorization Statement1",
+    "description": "Authorization Statement1 description",
+    "code": "CODE1",
+    "appliesTo": "PERMIT_OR_DENY",
+    "appliesIf": "FINAL_DECISION_MATCHES",
+    "payload": "Payload1",
+    "obligatory": false,
+    "attributes": [],
+    "services": []
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationStatements',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "name": "Authorization Statement1",
+    "description": "Authorization Statement1 description",
+    "code": "CODE1",
+    "appliesTo": "PERMIT_OR_DENY",
+    "appliesIf": "FINAL_DECISION_MATCHES",
+    "payload": "Payload1",
+    "obligatory": false,
+    "attributes": [],
+    "services": []
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationStatements"
+
+payload = json.dumps({
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": False,
+  "attributes": [],
+  "services": []
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationStatements');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n  "name": "Authorization Statement1",\n  "description": "Authorization Statement1 description",\n  "code": "CODE1",\n  "appliesTo": "PERMIT_OR_DENY",\n  "appliesIf": "FINAL_DECISION_MATCHES",\n  "payload": "Payload1",\n  "obligatory": false,\n  "attributes": [],\n  "services": []\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationStatements")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "name": "Authorization Statement1",
+  "description": "Authorization Statement1 description",
+  "code": "CODE1",
+  "appliesTo": "PERMIT_OR_DENY",
+  "appliesIf": "FINAL_DECISION_MATCHES",
+  "payload": "Payload1",
+  "obligatory": false,
+  "attributes": [],
+  "services": []
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n  \"name\": \"Authorization Statement1\",\n  \"description\": \"Authorization Statement1 description\",\n  \"code\": \"CODE1\",\n  \"appliesTo\": \"PERMIT_OR_DENY\",\n  \"appliesIf\": \"FINAL_DECISION_MATCHES\",\n  \"payload\": \"Payload1\",\n  \"obligatory\": false,\n  \"attributes\": [],\n  \"services\": []\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationStatements")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "_links": {
+        "self": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/authorizationStatements/01207a28-74df-4967-8891-17b3135e02d6"
+        },
+        "environment": {
+            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
+        }
+    },
+    "id": "01207a28-74df-4967-8891-17b3135e02d6",
+    "name": "Authorization Statement1",
+    "description": "Authorization Statement1 description",
+    "code": "CODE1",
+    "appliesTo": "PERMIT_OR_DENY",
+    "appliesIf": "FINAL_DECISION_MATCHES",
+    "payload": "Payload1",
+    "obligatory": false,
+    "attributes": [],
+    "services": [],
+    "version": "017f7fe7-05c2-4182-9607-8cad4a4e5dc6"
+}
+```
+
+---
+
+---
+title: Delete Authorization Attribute
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/delete-authorization-attribute
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/delete-authorization-attribute.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete Authorization Attribute
+
+##
+
+ 
+
+```none
+DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}
+```
+
+The DELETE /environments/{{envID}}/authorizationAttributes/{{authAttributeID}}\` operation deletes the authorization attribute specified by its ID in the request URL.
+
+When successful, the DELETE\` request returns a code `204 No Content` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content
+
+---
+
+---
+title: Delete Authorization Condition
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/delete-authorization-condition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/delete-authorization-condition.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete Authorization Condition
+
+##
+
+ 
+
+```none
+DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}
+```
+
+The DELETE /environments/{{envID}}/authorizationConditions/{{authConditionsID}}\` operation deletes the authorization condition specified by its ID in the request URL.
+
+When successful, the DELETE\` request returns a code `204 No Content` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content
+
+---
+
+---
+title: Delete Authorization Policy
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/delete-authorization-policy
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/delete-authorization-policy.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete Authorization Policy
+
+##
+
+ 
+
+```none
+DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}
+```
+
+The DELETE `{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}` operation deletes the authorization policy specified by its ID in the request URL.
+
+When successful, the DELETE\` request returns a code `204 No Content` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content
+
+---
+
+---
+title: Delete Authorization Processor
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/delete-authorization-processor
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/delete-authorization-processor.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete Authorization Processor
+
+##
+
+ 
+
+```none
+DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}
+```
+
+The DELETE /environments/{{envID}}/authorizationProcessors/{{authProcessorID}}\` operation deletes the authorization processor specified by its ID in the request URL.
+
+When successful, the DELETE\` request returns a code `204 No Content` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content
+
+---
+
+---
+title: Delete Authorization Rule
+component: pingone-api-ea
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/delete-authorization-rule
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/delete-authorization-rule.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete Authorization Rule
+
+##
+
+ 
+
+```none
+DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}
+```
+
+The DELETE `{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}` operation deletes the authorization rule specified by its ID in the request URL.
+
+When successful, the DELETE\` request returns a code `204 No Content` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content

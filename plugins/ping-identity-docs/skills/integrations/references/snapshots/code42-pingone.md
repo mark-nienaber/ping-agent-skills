@@ -4,6 +4,8 @@ description: To allow PingOne to coordinate authentication with Code42, upload y
 component: code42-pingone
 page_id: code42-pingone:single_sign-on_setup:p1_code42_integration_adding_p1_as_an_authentication_provider_in_code42
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/single_sign-on_setup/p1_code42_integration_adding_p1_as_an_authentication_provider_in_code42.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -59,6 +61,8 @@ description: To get your base URL and credentials to access Code42 API, add Ping
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_adding_p1_as_scim_provider_in_code42
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_adding_p1_as_scim_provider_in_code42.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -88,6 +92,8 @@ description: You can integrate PingOne with Code42 for user provisioning and sin
 component: code42-pingone
 page_id: code42-pingone::p1_code42_integration
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/p1_code42_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   features: Features
@@ -142,6 +148,8 @@ description: Complete the following procedures in order:
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_configuring_a_user_filter_on_the_provisioning_rule
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_configuring_a_user_filter_on_the_provisioning_rule.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -223,6 +231,8 @@ description: Complete the following procedures in order:
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_configuring_attribute_mapping_on_the_provisioning_rule
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_configuring_attribute_mapping_on_the_provisioning_rule.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -294,6 +304,8 @@ description: To enable PingOne to manage users in Code42, create a provisioning 
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_creating_a_provisioning_connection_in_p1
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_creating_a_provisioning_connection_in_p1.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -552,6 +564,8 @@ description: Complete the Creating a provisioning connection in PingOne procedur
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_creating_a_provisioning_rule
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_creating_a_provisioning_rule.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -613,6 +627,8 @@ description: To allow PingOne to handle single sign-on (SSO) to Code42, add a Se
 component: code42-pingone
 page_id: code42-pingone:single_sign-on_setup:p1_code42_integration_creating_an_sso_connection_in_p1
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/single_sign-on_setup/p1_code42_integration_creating_an_sso_connection_in_p1.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -692,6 +708,8 @@ description: Check your single sign-on (SSO) connection by adding a user and sig
 component: code42-pingone
 page_id: code42-pingone:single_sign-on_setup:p1_code42_integration_testing_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/single_sign-on_setup/p1_code42_integration_testing_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps
@@ -721,6 +739,8 @@ description: Check your provisioning connection by adding a user.
 component: code42-pingone
 page_id: code42-pingone:provisioning_setup:p1_code42_integration_testing_user_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/code42-pingone/provisioning_setup/p1_code42_integration_testing_user_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/code42-pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2024
 section_ids:
   steps: Steps

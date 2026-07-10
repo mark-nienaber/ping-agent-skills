@@ -4,6 +4,8 @@ description: For internal configuration management, the current release of the S
 component: sap-netweaver
 page_id: sap-netweaver:release_notes:pf_sap_netweaver_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/release_notes/pf_sap_netweaver_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   netweaver-integration-kit-version-2-3-december-2015-current-release: NetWeaver Integration Kit Version 2.3 – December 2015 (Current Release)
@@ -71,6 +73,8 @@ description: The distribution .zip archive for the PingFederate Integration Kit 
 component: sap-netweaver
 page_id: sap-netweaver:release_notes:pf_sap_netweaver_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/release_notes/pf_sap_netweaver_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -112,6 +116,8 @@ description: This section describes how to install and configure the PingFederat
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_idp_installation_and_setup
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_idp_installation_and_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -178,6 +184,8 @@ description: The NetWeaver IdP Adapter uses the SAP SSO extension library to dec
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_implementing_idp_functionality
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_implementing_idp_functionality.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -209,6 +217,8 @@ description: The PingFederate SP server receives an assertion (see Service provi
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_implementing_sp_functionality
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_implementing_sp_functionality.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -238,6 +248,8 @@ description: Known issues and limitations
 component: sap-netweaver
 page_id: sap-netweaver:release_notes:pf_sap_netweaver_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/release_notes/pf_sap_netweaver_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 ---
 
@@ -261,6 +273,8 @@ description: If you have already deployed version 2.5.1 (or later) of the OpenTo
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_opentoken_adapter_setup
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_opentoken_adapter_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   about-this-task: About this task
@@ -309,6 +323,8 @@ description: Configure NetWeaver J2EE to create SSO tickets.
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_sap_j2ee_setup
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_sap_j2ee_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -330,6 +346,8 @@ description: To allow for deep linking for SP-initiated SSO, the login module ap
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_70
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_70.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -395,6 +413,8 @@ description: To allow for deep linking for SP-initiated SSO, the login module ap
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_73
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_73.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -454,6 +474,8 @@ description: To allow for deep linking for SP-initiated SSO, the login module ap
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_73_or_74
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_sap_j2ee_setup_for_netweaver_73_or_74.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -515,6 +537,8 @@ description: The PingFederate Integration Kit for SAP NetWeaver provides Identit
 component: sap-netweaver
 page_id: sap-netweaver::pf_sap_netweaver_ik
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/pf_sap_netweaver_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   intended-audience: Intended audience
@@ -561,6 +585,8 @@ description: You can test this adapter using the samples applications that are i
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_testing_the_idp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_testing_the_idp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   about-this-task: About this task
@@ -618,6 +644,8 @@ description: You can test this adapter using the samples applications that are i
 component: sap-netweaver
 page_id: sap-netweaver:setup:pf_sap_netweaver_ik_testing_the_sp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/sap-netweaver/setup/pf_sap_netweaver_ik_testing_the_sp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/sap-netweaver/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
 section_ids:
   about-this-task: About this task

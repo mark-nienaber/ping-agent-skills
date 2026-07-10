@@ -4,6 +4,8 @@ description: Amazon Web Services (AWS) session tags allow enterprises to use Pin
 component: amazon
 page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_access_control_in_aws_using_session_tags
 canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_access_control_in_aws_using_session_tags.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 ---
 
@@ -21,6 +23,8 @@ description: Field descriptions for the Amazon IdP Adapter configuration page.
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_amazon_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_amazon_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 section_ids:
   standard-fields: Standard fields
@@ -80,6 +84,8 @@ description: The Amazon Login Integration Kit allows PingFederate to use Amazon 
 component: amazon
 page_id: amazon::pf_is_overview_of_amazon_integrations
 canonical_url: https://docs.pingidentity.com/integrations/amazon/pf_is_overview_of_amazon_integrations.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 section_ids:
   amazon-login-integration-kit-formerly-the-amazon-cloud-identity-connector: Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector)
@@ -126,6 +132,8 @@ description: The Amazon Login Integration Kit (formerly the Amazon Cloud Identit
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 section_ids:
   features: Features
@@ -194,6 +202,8 @@ description: The Amazon Web Services (AWS) Connector allows PingFederate to inte
 component: amazon
 page_id: amazon:amazon_web_services_connector:pf_aws_connector
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   features: Features
@@ -271,6 +281,8 @@ description: Amazon Web Services (AWS) session tags allow enterprises to use Pin
 component: amazon
 page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_amazon_web_services_session_tags_integrations_guide
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_amazon_web_services_session_tags_integrations_guide.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 ---
 
@@ -302,6 +314,8 @@ description: You can use the PingFederate authentication API to integrate the Am
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
 ---
 
@@ -321,6 +335,8 @@ description: The following table lists the attributes Amazon supports.
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_available_user_attributes
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_available_user_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 ---
 
@@ -344,6 +360,8 @@ description: The AWS IAM Identity Center Provisioner allows PingFederate to inte
 component: amazon
 page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector
 canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 20, 2026
 section_ids:
   features: Features
@@ -429,6 +447,8 @@ description: The following is the change history for the Amazon Login Integratio
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-1-1-2-january-2026: Version 1.1.2 - January 2026
@@ -487,6 +507,8 @@ description: Amazon Web Services (AWS) Connector 2.0 – April 2019 (current rel
 component: amazon
 page_id: amazon:amazon_web_services_connector:pf_aws_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 ---
 
@@ -524,6 +546,8 @@ description: The following is the change history for the AWS IAM Identity Center
 component: amazon
 page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 20, 2025
 section_ids:
   version-1-1-0-6-january-2026: Version 1.1.0.6 - January 2026
@@ -584,6 +608,8 @@ description: Configure the Amazon IdP Adapter to determine how PingFederate comm
 component: amazon
 page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 section_ids:
   steps: Steps
@@ -631,6 +657,8 @@ description: You can configure AWS Session Tag support for OpenID Connect (OIDC)
 component: amazon
 page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_oidc_connections
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_oidc_connections.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -700,6 +728,8 @@ description: You can configure AWS Identity and Access Management (IAM) and AWS 
 component: amazon
 page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_saml_connections
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_saml_connections.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -772,6 +802,8 @@ description: You can configure AWS session tag support for OpenID Connect (OIDC)
 component: amazon
 page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_oidc_connections
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_oidc_connections.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -814,6 +846,8 @@ description: You can create a custom SAML application to support AWS Identity an
 component: amazon
 page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_saml_connections
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_saml_connections.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -886,6 +920,8 @@ description: To allow PingFederate to act as an identity provider for Amazon Web
 component: amazon
 page_id: amazon:amazon_web_services_connector:pf_aws_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -924,6 +960,8 @@ description: PingFederate needs credentials to manage users and groups in Amazon
 component: amazon
 page_id: amazon:amazon_web_services_connector:pf_aws_connector_create_security_credentials_in_amazon_web_services
 canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_create_security_credentials_in_amazon_web_services.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -966,6 +1004,8 @@ description: To allow PingFederate to act as an identity provider and manage use
 component: amazon
 page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps

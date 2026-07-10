@@ -4,6 +4,8 @@ description: If you have a web application that uses the PingFederate authentica
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_adding_device_profiling_to_a_web_application
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_adding_device_profiling_to_a_web_application.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -47,6 +49,8 @@ description: Instead of using the ID DataWeb IdP Adapter to collect the device p
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_adding_device_profiling_to_an_authentication_page
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_adding_device_profiling_to_an_authentication_page.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
 section_ids:
   about-this-task: About this task
@@ -99,6 +103,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_adding_id_dataweb_policy_decisions_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_adding_id_dataweb_policy_decisions_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -175,6 +181,8 @@ description: The following is the change history for the ID DataWeb Integration 
 component: iddataweb
 page_id: iddataweb:release_notes:pf_iddataweb_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/release_notes/pf_iddataweb_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-1-3-january-2026: Version 1.3 - January 2026
@@ -252,6 +260,8 @@ description: Configure the ID DataWeb IdP Adapter to determine how PingFederate 
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   steps: Steps
@@ -323,6 +333,8 @@ description: To get started with the integration, deploy the ID DataWeb Integrat
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -369,6 +381,8 @@ description: To include ThreatMetrix when producing a policy decision for a sign
 component: iddataweb
 page_id: iddataweb::pf_iddataweb_ik_device_profiling_methods
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/pf_iddataweb_ik_device_profiling_methods.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   direct-authentication-mode-captured-by-the-id-dataweb-idp-adapter: Direct authentication mode - Captured by the ID DataWeb IdP Adapter
@@ -461,6 +475,8 @@ description: The following files are included in the ID DataWeb Integration Kit 
 component: iddataweb
 page_id: iddataweb:release_notes:pf_iddataweb_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/release_notes/pf_iddataweb_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 
@@ -508,6 +524,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: iddataweb
 page_id: iddataweb:troubleshooting:pf_iddataweb_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/troubleshooting/pf_iddataweb_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -583,6 +601,8 @@ description: Field descriptions for the ID DataWeb IdP Adapter configuration scr
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_id_dataweb_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_id_dataweb_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 7, 2026
 ---
 
@@ -638,6 +658,8 @@ description: The ID DataWeb Integration Kit allows PingFederate to communicate w
 component: iddataweb
 page_id: iddataweb::pf_iddataweb_ik
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/pf_iddataweb_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 18, 2025
 section_ids:
   components: Components
@@ -685,6 +707,8 @@ description: Depending on your authentication mode and preferences, complete one
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_integrating_device_profiling
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_integrating_device_profiling.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   about-this-task: About this task
@@ -718,6 +742,8 @@ description: JavaScript Object Notation (JSON) Pointer defines a syntax for iden
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_json_pointer_syntax_reference
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_json_pointer_syntax_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   example-json-payload: Example JSON payload
@@ -826,6 +852,8 @@ description: The following are known issues or limitations for the ID DataWeb In
 component: iddataweb
 page_id: iddataweb:release_notes:pf_iddataweb_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/release_notes/pf_iddataweb_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   known-issues: Known issues
@@ -852,6 +880,8 @@ description: ID DataWeb evaluates the level of security risk for a user sign-on 
 component: iddataweb
 page_id: iddataweb::pf_iddataweb_ik_overview_of_id_dataweb
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/pf_iddataweb_ik_overview_of_id_dataweb.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   device-profile-and-user-attributes: Device profile and user attributes
@@ -900,6 +930,8 @@ description: With the ID DataWeb Integration Kit, PingFederate includes the ID D
 component: iddataweb
 page_id: iddataweb::pf_iddataweb_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/pf_iddataweb_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   description: Description
@@ -941,6 +973,8 @@ description: To use the ID DataWeb Integration Kit with PingFederate, configure 
 component: iddataweb
 page_id: iddataweb:setup:pf_iddataweb_ik_setup
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/setup/pf_iddataweb_ik_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 section_ids:
   steps: Steps
@@ -974,6 +1008,8 @@ description: The following information addresses technical situations that you m
 component: iddataweb
 page_id: iddataweb:troubleshooting:pf_iddataweb_ik_troubleshooting_information
 canonical_url: https://docs.pingidentity.com/integrations/iddataweb/troubleshooting/pf_iddataweb_ik_troubleshooting_information.html
+llms_txt: https://docs.pingidentity.com/integrations/iddataweb/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2024
 ---
 

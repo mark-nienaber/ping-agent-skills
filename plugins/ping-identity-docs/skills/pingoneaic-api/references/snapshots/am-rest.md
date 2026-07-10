@@ -119,3 +119,45 @@ HTTP/2 404
 ```
 
 In this error case, the response body is empty.
+
+---
+
+---
+title: Specify realms in URLs
+description: Specify the realm in the hostname or the path of the URL depending on the settings for the realm.
+component: pingoneaic-api
+page_id: pingoneaic-api:am-rest:rest-realms
+canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-rest/rest-realms.html
+keywords: ["REST API", "Realms"]
+section_ids:
+  in-the-hostname: In the hostname
+  in-the-path: In the path
+---
+
+# Specify realms in URLs
+
+Specify the realm in the hostname or the path of the URL depending on the settings for the realm.
+
+## In the hostname
+
+If you define a [custom domain](https://docs.pingidentity.com/pingoneaic/latest/realms/custom-domains.html) for the realm, you can target the realm using the hostname instead of the path.
+
+For example, suppose the `alpha` realm uses the custom domain `auth.example.com`. Client applications can access a user profile without showing the realm name as in the following example:
+
+```
+https://auth.example.com/am/json/users/a0325ea4-9d9b-4056-931b-ab64704cc3da
+```
+
+## In the path
+
+You can specify the realm in the path of the URL. For example, use the following URL to authenticate in the `alpha` realm:
+
+```
+https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate
+```
+
+If you specify a custom domain and a path, the path determines the realm. For example, the following URL references a user profile in the `bravo` realm, not the realm with custom domain `auth.example.com`:
+
+```
+https://auth.example.com/am/json/realms/root/realms/bravo/users/8cf34972-bdec-4dfa-a34e-536647fb60ff
+```

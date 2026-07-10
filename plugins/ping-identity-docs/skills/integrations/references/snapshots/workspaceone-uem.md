@@ -4,6 +4,8 @@ description: Create an authentication policy to pass the Workspace ONE device ID
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_create_an_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_create_an_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2024
 section_ids:
   about-this-task: About this task
@@ -62,6 +64,8 @@ description: The following is the change history for the Workspace ONE UEM Integ
 component: workspaceone-uem
 page_id: workspaceone-uem:release_notes:pf_workspaceone_uem_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/release_notes/pf_workspaceone_uem_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   workspace-one-uem-integration-kit-1-0-4-november-2021: Workspace ONE UEM Integration Kit 1.0.4 – November 2021
@@ -107,6 +111,8 @@ description: You can find more information in SP connection management in the Pi
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_configure_the_sp_connection_to_use_the_policy_contract
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_configure_the_sp_connection_to_use_the_policy_contract.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   about-this-task: About this task
@@ -177,6 +183,8 @@ description: Configure the Workspace ONE IdP Adapter to determine how PingFedera
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_configuring_a_workspace_one_idp_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_configuring_a_workspace_one_idp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   steps: Steps
@@ -230,6 +238,8 @@ description: Create a policy contract that you will use in the authentication po
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_create_a_policy_contract
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_create_a_policy_contract.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   about-this-task: About this task
@@ -264,6 +274,8 @@ description: Pass the Workspace ONE device ID to PingFederate through an X.509 c
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_create_an_x509_certificate_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_create_an_x509_certificate_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   steps: Steps
@@ -295,6 +307,8 @@ description: To get started with the integration, deploy the Workspace ONE UEM I
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   about-this-task: About this task
@@ -333,6 +347,8 @@ description: The following files are included in the Workspace ONE UEM Integrati
 component: workspaceone-uem
 page_id: workspaceone-uem:release_notes:pf_workspaceone_uem_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/release_notes/pf_workspaceone_uem_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 ---
 
@@ -356,6 +372,8 @@ description: The following are known issues or limitations for the Workspace ONE
 component: workspaceone-uem
 page_id: workspaceone-uem:release_notes:pf_workspaceone_uem_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/release_notes/pf_workspaceone_uem_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   known-issues: Known issues
@@ -382,6 +400,8 @@ description: The following figure shows a basic SSO scenario in which a PingFede
 component: workspaceone-uem
 page_id: workspaceone-uem::pf_workspaceone_uem_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/pf_workspaceone_uem_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
 section_ids:
   description: Description
@@ -413,6 +433,8 @@ description: You can specify criteria to restrict which devices can access resou
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_restrict_device_access_based_on_criteria
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_restrict_device_access_based_on_criteria.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   steps: Steps
@@ -486,6 +508,8 @@ description: The Workspace ONE IdP Adapter retrieves the following attributes:
 component: workspaceone-uem
 page_id: workspaceone-uem::pf_workspaceone_uem_ik_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/pf_workspaceone_uem_ik_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 ---
 
@@ -540,6 +564,8 @@ description: Test your configuration by adding a profile for your device and ass
 component: workspaceone-uem
 page_id: workspaceone-uem:setup:pf_workspaceone_uem_ik_test_the_integration
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/setup/pf_workspaceone_uem_ik_test_the_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   steps: Steps
@@ -587,6 +613,8 @@ description: The Workspace ONE UEM Integration Kit allows PingFederate to integr
 component: workspaceone-uem
 page_id: workspaceone-uem::pf_workspaceone_uem_ik
 canonical_url: https://docs.pingidentity.com/integrations/workspaceone-uem/pf_workspaceone_uem_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/workspaceone-uem/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 9, 2025
 section_ids:
   features: Features

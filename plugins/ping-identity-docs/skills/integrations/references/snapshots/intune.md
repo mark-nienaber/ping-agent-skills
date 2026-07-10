@@ -4,6 +4,8 @@ description: By modifying your PingFederate authentication policy to include the
 component: intune
 page_id: intune:setup:pf_intune_ik_adding_intune_security_posture_results_to_your_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_adding_intune_security_posture_results_to_your_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   about-this-task: About this task
@@ -74,6 +76,8 @@ description: The following is the change history for the Intune Integration Kit.
 component: intune
 page_id: intune:release_notes:pf_intune_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/intune/release_notes/pf_intune_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 ---
 
@@ -97,6 +101,8 @@ description: Configure the Intune IdP Adapter to allow PingFederate to get the s
 component: intune
 page_id: intune:setup:pf_intune_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -149,6 +155,8 @@ description: To complete the configuration, import the certificate authority (CA
 component: intune
 page_id: intune:setup:pf_intune_ik_creating_certificate_profiles_in_intune
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_creating_certificate_profiles_in_intune.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   about-this-task: About this task
@@ -191,6 +199,8 @@ description: The Intune Integration Kit requires the X.509 Certificate Adapter t
 component: intune
 page_id: intune:setup:pf_intune_ik_deploying_and_configuring_the_x509_certificate_i
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_deploying_and_configuring_the_x509_certificate_i.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   steps: Steps
@@ -225,6 +235,8 @@ description: To get started with the integration, deploy the Intune Integration 
 component: intune
 page_id: intune:setup:pf_intune_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   steps: Steps
@@ -256,6 +268,8 @@ description: The following files are included in the Intune Integration Kit:
 component: intune
 page_id: intune:release_notes:pf_intune_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/intune/release_notes/pf_intune_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 ---
 
@@ -281,6 +295,8 @@ description: Field descriptions for the Intune IdP Adapter configuration page.
 component: intune
 page_id: intune:setup:pf_intune_ik_intune_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_intune_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 ---
 
@@ -305,6 +321,8 @@ description: The Intune Integration Kit allows PingFederate to integrate with th
 component: intune
 page_id: intune::pf_intune_ik
 canonical_url: https://docs.pingidentity.com/integrations/intune/pf_intune_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: Mar 5, 2025
 section_ids:
   components: Components
@@ -384,6 +402,8 @@ description: The following are known issues or limitations for the Intune Integr
 component: intune
 page_id: intune:release_notes:pf_intune_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/intune/release_notes/pf_intune_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   known-issues: Known issues
@@ -410,6 +430,8 @@ description: With the Intune Integration Kit, PingFederate parses the user's dev
 component: intune
 page_id: intune::pf_intune_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/intune/pf_intune_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   description: Description
@@ -445,6 +467,8 @@ description: To allow PingFederate to access Intune through the Microsoft Graph 
 component: intune
 page_id: intune:setup:pf_intune_ik_registering_pf_as_an_application_in_azure_active_directory
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_registering_pf_as_an_application_in_azure_active_directory.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   steps: Steps
@@ -470,6 +494,8 @@ description: After you have completed the setup, you can test your Intune integr
 component: intune
 page_id: intune:setup:pf_intune_ik_testing_the_integration
 canonical_url: https://docs.pingidentity.com/integrations/intune/setup/pf_intune_ik_testing_the_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/intune/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 5, 2025
 section_ids:
   steps: Steps

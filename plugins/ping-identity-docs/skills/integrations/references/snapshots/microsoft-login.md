@@ -4,6 +4,8 @@ description: You can use the PingFederate authentication API to integrate the Mi
 component: microsoft-login
 page_id: microsoft-login::pf_microsoft_login_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/pf_microsoft_login_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 23, 2025
 ---
 
@@ -23,6 +25,8 @@ description: The following is the change history for the Microsoft Login Integra
 component: microsoft-login
 page_id: microsoft-login:release_notes:pf_microsoft_login_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/release_notes/pf_microsoft_login_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   microsoft-login-integration-kit-1-2-september-2024: Microsoft Login Integration Kit 1.2 – September 2024
@@ -77,6 +81,8 @@ description: Configure the Microsoft IdP Adapter to determine how PingFederate c
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   steps: Steps
@@ -130,6 +136,8 @@ description: The following are the core contract attributes for the Microsoft Id
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_core_contract_attributes
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_core_contract_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 2, 2025
 ---
 
@@ -162,6 +170,8 @@ description: To get started with the integration, deploy the Microsoft Login Int
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   steps: Steps
@@ -201,6 +211,8 @@ description: The following files are included in the Microsoft Login Integration
 component: microsoft-login
 page_id: microsoft-login:release_notes:pf_microsoft_login_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/release_notes/pf_microsoft_login_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 2, 2025
 ---
 
@@ -252,6 +264,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: microsoft-login
 page_id: microsoft-login:troubleshooting:pf_microsoft_login_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/troubleshooting/pf_microsoft_login_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 2, 2025
 section_ids:
   about-this-task: About this task
@@ -315,6 +329,8 @@ description: To complete your Microsoft sign-on integration, add a sign-on hyper
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_integrating_social_sign_on_into_your_application
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_integrating_social_sign_on_into_your_application.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 23, 2025
 section_ids:
   steps: Steps
@@ -383,6 +399,8 @@ description: The following are known issues or limitations with the Microsoft Lo
 component: microsoft-login
 page_id: microsoft-login:release_notes:pf_microsoft_login_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/release_notes/pf_microsoft_login_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 2, 2025
 section_ids:
   known-issues: Known issues
@@ -409,6 +427,8 @@ description: Field descriptions for the Microsoft IdP Adapter configuration scre
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 ---
 
@@ -484,6 +504,8 @@ description: The Microsoft Login Integration Kit allows PingFederate to use Micr
 component: microsoft-login
 page_id: microsoft-login::pf_microsoft_login_ik
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/pf_microsoft_login_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   features: Features
@@ -554,6 +576,8 @@ description: With the Microsoft Login Integration Kit, PingFederate includes the
 component: microsoft-login
 page_id: microsoft-login::pf_microsoft_login_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/pf_microsoft_login_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 23, 2025
 section_ids:
   description: Description
@@ -597,6 +621,8 @@ description: To allow PingFederate to process social sign-on requests with Micro
 component: microsoft-login
 page_id: microsoft-login:setup:pf_microsoft_login_ik_registering_pf_as_an_application_in_azure
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-login/setup/pf_microsoft_login_ik_registering_pf_as_an_application_in_azure.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-login/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 2, 2025
 section_ids:
   steps: Steps

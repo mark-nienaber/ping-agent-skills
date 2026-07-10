@@ -4,6 +4,8 @@ description: Adjust the OIDC policy configuration to include the access token ma
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_adjusting_the_oidc_policy_configuration
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_adjusting_the_oidc_policy_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   steps: Steps
@@ -89,6 +91,8 @@ description: The following is the change history for the Microsoft EAM Integrati
 component: microsoft-eam
 page_id: microsoft-eam:release_notes:pf_ms_eam_changelog
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/release_notes/pf_ms_eam_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2025
 section_ids:
   microsoft-eam-integration-kit-1-1-september-2025: Microsoft EAM Integration Kit 1.1 – September 2025
@@ -115,6 +119,8 @@ description: Configure a PingFederate authentication policy using the Microsoft 
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_configuring_a_pf_authentication_policy
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_configuring_a_pf_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2025
 section_ids:
   steps: Steps
@@ -190,6 +196,8 @@ description: Configure an access token manager (ATM).
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_configuring_an_atm
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_configuring_an_atm.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 28, 2025
 section_ids:
   steps: Steps
@@ -295,6 +303,8 @@ description: Configure the Microsoft EAM IdP Adapter to determine how PingFedera
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 25, 2024
 section_ids:
   about-this-task: About this task
@@ -386,6 +396,8 @@ description: Enable static signing keys in the OAuth and OpenID Connect (OIDC) k
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_configuring_pf_to_use_the_ms_eam_idp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_configuring_pf_to_use_the_ms_eam_idp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 28, 2025
 section_ids:
   steps: Steps
@@ -415,6 +427,8 @@ description: Configure the downstream adapter you're planning to use as the MFA 
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_exporting_amr_as_an_additional_attribute
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_exporting_amr_as_an_additional_attribute.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 26, 2024
 section_ids:
   steps: Steps
@@ -482,6 +496,8 @@ description: To get started with the integration, deploy the Microsoft EAM Integ
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2024
 section_ids:
   steps: Steps
@@ -516,6 +532,8 @@ description: The following files are included in the Microsoft EAM Integration K
 component: microsoft-eam
 page_id: microsoft-eam:release_notes:pf_ms_eam_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/release_notes/pf_ms_eam_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 29, 2024
 ---
 
@@ -539,6 +557,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: microsoft-eam
 page_id: microsoft-eam:troubleshooting:pf_ms_eam_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/troubleshooting/pf_ms_eam_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 25, 2024
 section_ids:
   about-this-task: About this task
@@ -622,6 +642,8 @@ description: Enable static signing keys in the OAuth and OpenID Connect (OIDC) k
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_enabling_signing_keys
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_enabling_signing_keys.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2025
 section_ids:
   steps: Steps
@@ -651,6 +673,8 @@ description: The following are known issues or limitations with the Microsoft EA
 component: microsoft-eam
 page_id: microsoft-eam:release_notes:pf_ms_eam_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/release_notes/pf_ms_eam_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2025
 section_ids:
   known-issues: Known issues
@@ -679,6 +703,8 @@ description: Field descriptions for the Microsoft EAM IdP Adapter configuration,
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_adapter_settings_ref
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_adapter_settings_ref.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2025
 ---
 
@@ -710,6 +736,8 @@ description: This integration kit enables PingFederate, together with a downstre
 component: microsoft-eam
 page_id: microsoft-eam::pf_ms_eam_ik
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/pf_ms_eam_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2025
 section_ids:
   components: Components
@@ -771,6 +799,8 @@ description: The following figure demonstrates an example single sign-on (SSO) p
 component: microsoft-eam
 page_id: microsoft-eam::pf_ms_eam_sso_flow_overview
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/pf_ms_eam_sso_flow_overview.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 17, 2024
 section_ids:
   description: Description
@@ -816,6 +846,8 @@ description: Register an OAuth Client for Microsoft Entra ID in PingFederate.
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_registering_an_oauth_client_for_ms_entra_id
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_registering_an_oauth_client_for_ms_entra_id.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 28, 2025
 section_ids:
   steps: Steps
@@ -862,6 +894,8 @@ description: Configure tracked HTTP parameters in the PingFederate authenticatio
 component: microsoft-eam
 page_id: microsoft-eam:setup:pf_ms_eam_tracking_http_request_parameters
 canonical_url: https://docs.pingidentity.com/integrations/microsoft-eam/setup/pf_ms_eam_tracking_http_request_parameters.html
+llms_txt: https://docs.pingidentity.com/integrations/microsoft-eam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 28, 2025
 section_ids:
   steps: Steps

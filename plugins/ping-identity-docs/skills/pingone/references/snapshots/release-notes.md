@@ -13,6 +13,19 @@ section_ids:
   2025: 2025
   2026: 2026
   july-2026: July 2026
+  july-9: July 9
+  pingone-provisioner-available-in-early-access: PingOne provisioner available in early access
+  unable-to-pair-pingid-desktop-app-in-the-au-geography: Unable to pair PingID desktop app in the AU geography
+  july-8: July 8
+  pingone-forms-now-supports-custom-images: PingOne Forms now supports custom images
+  pingone-verify-table-of-contents-toc: PingOne Verify table of contents TOC
+  veriff-configuration-in-pingone-verify-policies: Veriff configuration in PingOne Verify policies
+  iad-deactivation-when-liveness-is-disabled: IAD deactivation when liveness is disabled
+  july-6: July 6
+  mobile-driver-licenses: Mobile driver licenses
+  identity-verification-dashboard-enhancements: Identity Verification Dashboard enhancements
+  july-5: July 5
+  custom-push-notification-provider-now-available-for-early-access: Custom push notification provider now available for early access
   july-1: July 1
   davinci-audit-events-in-early-access: DaVinci audit events in early access
   design-center-released-for-general-availability: Design Center released for general availability
@@ -312,9 +325,9 @@ section_ids:
   july-14: July 14
   support-for-multiple-mfa-policies-2: Support for multiple MFA policies
   use-of-risk-policies-with-an-mfa-only-license: Use of risk policies with an MFA-only license
-  july-9: July 9
+  july-9-2: July 9
   provisioning-to-zscaler-using-scim: Provisioning to ZScaler using SCIM
-  july-8: July 8
+  july-8-2: July 8
   using-expressions-to-retrieve-microsoft-entra-attributes: Using expressions to retrieve Microsoft Entra attributes
   july-7: July 7
   targeted-risk-policies: Targeted risk policies
@@ -518,6 +531,86 @@ Subscribe to get automatic updates: [icon: rss-square, set=fa][PingOne Release N
 
 ### July 2026
 
+#### July 9
+
+##### PingOne provisioner available in early access
+
+New PingOne
+
+You can now provision users and groups between two PingOne environments, either within the same organization or across different organizations, as an early access feature. Learn more in [Provisioning the PingOne connection with PingOne environments (early access)](../early-access-features/ea_p1_provisioning_connection_pingone.html).
+
+##### Unable to pair PingID desktop app in the AU geography
+
+Fixed TRIAGE-35343 Strong Authentication (MFA) PingID
+
+We've fixed an issue that was preventing some users from pairing PingID desktop app in the Australia (AU) geography. This fix is available in the following versions and later:
+
+* PingID desktop app 2.1.0 for Mac
+
+* PingID desktop app 1.1.0 for Windows
+
+Download the latest version from the [PingIdentity downloads page](https://www.pingidentity.com/en/resources/downloads/pingid.html).
+
+#### July 8
+
+##### PingOne Forms now supports custom images
+
+New PingOne DaVinci
+
+You can now add your own images in the drag-and-drop form builder. You can provide a public image URL directly in your form or show a dynamic image by providing the URL at runtime in the **Show Form** node.
+
+Images support configurable sizing, positioning, and padding. You can add a static or dynamic hyperlink to an image, as well as HTML attributes, including `id`, `class`, and `referrerpolicy`. Learn more in [Form configuration toolbox](../user_experience/p1_form_configuration.html#toolbox).
+
+##### PingOne Verify table of contents TOC
+
+Improved PingOne Verify
+
+We've restructured the PingOne Verify table of contents to ensure content is easier to find. The updated structure supports a shift toward use cases, including the first documented PingOne Verify use case, and roles instead of user interface (UI) navigation.
+
+Learn more in [Identity Verification using PingOne Verify](../identity_verification_using_pingone_verify/p1_verify_start.html) and [Verifying new employees during onboarding](../identity_verification_using_pingone_verify/p1_verify_onboarding_use_case.html).
+
+##### Veriff configuration in PingOne Verify policies
+
+New PingOne Verify
+
+Veriff is now the default document authentication service when creating a verify policy. However, you can still select Mitek, and existing verify policies are unchanged. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+##### IAD deactivation when liveness is disabled
+
+New PingOne Verify
+
+Disabling **Liveness** in a PingOne Verify policy now automatically deactivates the backend injection attack detection (IAD) process. This update ensures that backend verification checks align with your policy configurations. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+#### July 6
+
+##### Mobile driver licenses
+
+New PingOne Verify
+
+Learn about mobile driver licenses (mDL) and the browser-based Digital Credentials (DC) API in PingOne Verify. This covers the security standards ISO/IEC 18013 and OID4VP, how standards-based wallets compare to proprietary state applications, and how the digital identity verification flow works.
+
+Learn more in [PingOne Verify mobile driver licenses](../identity_verification_using_pingone_verify/p1_verify_mdl_dc_api.html).
+
+##### Identity Verification Dashboard enhancements
+
+New PingOne Verify
+
+You can now use the **Identity Verification Dashboard** to view a summary of identity verification transaction activity for your organization, using the **Verify Dashboard** and **Error Reasons** tabs to switch between data and failure analysis.
+
+These insights allow you to more effectively manage identity verification workflows and the handling of successful or failed verifications. Learn more in [Using the Identity Verification dashboard](../identity_verification_using_pingone_verify/p1_verify_monitoring.html#using-the-identity-verification-dashboard).
+
+#### July 5
+
+##### Custom push notification provider now available for early access
+
+New PingOne MFA
+
+You can now configure a custom push notification provider for PingOne MFA to send push notifications as an early access feature. Learn more in [Configuring a custom push notification provider (early access)](../early-access-features/ea-p1_configure_custom_push_provider.html).
+
+Learn more in [PingOne Early Access Features](../early-access-features/p1_early_access_features.html).
+
+Learn more about opting in to preview early access features in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
+
 #### July 1
 
 ##### DaVinci audit events in early access
@@ -572,7 +665,7 @@ Learn more in [Configuring Platform SSO for macOS (Workforce only)](../strong_au
 
 New Strong Authentication (MFA) PingID
 
-A new version of PingID desktop app (2.0) is available that supports Platform SSO. Download the new version [here](https://www.pingidentity.com/bin/ping/signedDownloadLink?c=eydmaWxlS2V5JzonZ2F0ZWQvU29mdHdhcmUvUGluZ0lEL2Rlc2t0b3AvbWFjL1BpbmdJRF9EZXNrdG9wXzEuMC4wLnBrZycsJ2V1bGFQYXRoJzonJ30=).
+A new version of PingID desktop app (2.0) is available that supports Platform SSO. Download the new version from the [PingIdentity downloads page](https://www.pingidentity.com/en/resources/downloads/pingid.html).
 
 ##### Protect (Signals) SDK 5.6.10
 

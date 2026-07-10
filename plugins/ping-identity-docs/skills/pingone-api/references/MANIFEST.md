@@ -2,49 +2,49 @@
 
 - Product: PingOne API
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://developer.pingidentity.com/pingone-api/llms.txt
 - Guides discovered: 15
 - Guides captured: 15
-- Total pages indexed: 1706
+- Total pages indexed: 1707
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed |
 |---|---|---|---|
-| platform.md | page | https://developer.pingidentity.com/pingone-api/platform/users/user-agreement-consents/accept-agreement.md | 713 |
-| workflow-library.md | page | https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods.md | 327 |
-| auth.md | page | https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/admin-invitations/accept-admin-invite.md | 129 |
-| mfa.md | page | https://developer.pingidentity.com/pingone-api/mfa/users/mfa-devices/activate-mfa-user-device.md | 106 |
-| credentials.md | page | https://developer.pingidentity.com/pingone-api/credentials/credential-issuance-rules/apply-credential-issuance-rule.md | 74 |
-| authorize.md | page | https://developer.pingidentity.com/pingone-api/authorize/api-access-management.md | 68 |
-| verify.md | page | https://developer.pingidentity.com/pingone-api/verify/verify-documents/complete-verification-documents.md | 68 |
-| foundations.md | page | https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles.md | 67 |
-| davinci.md | page | https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flow-versions/add-flow-version-alias.md | 62 |
-| protect.md | page | https://developer.pingidentity.com/pingone-api/protect/risk-evaluations/create-risk-evaluation.md | 42 |
-| getting-started.md | page | https://developer.pingidentity.com/pingone-api/getting-started/introduction.md | 24 |
-| native-sdks.md | page | https://developer.pingidentity.com/pingone-api/native-sdks/introduction.md | 18 |
-| before-you-begin.md | page | https://developer.pingidentity.com/pingone-api/before-you-begin/introduction.md | 6 |
-| changelog-md.md | page | https://developer.pingidentity.com/pingone-api/changelog.md | 1 |
-| introduction-md.md | page | https://developer.pingidentity.com/pingone-api/introduction.md | 1 |
+| platform.md | assembled | <714 pages from platform> | 714 |
+| workflow-library.md | assembled | <327 pages from workflow-library> | 327 |
+| auth.md | assembled | <129 pages from auth> | 129 |
+| mfa.md | assembled | <106 pages from mfa> | 106 |
+| credentials.md | assembled | <74 pages from credentials> | 74 |
+| authorize.md | assembled | <68 pages from authorize> | 68 |
+| verify.md | assembled | <68 pages from verify> | 68 |
+| foundations.md | assembled | <67 pages from foundations> | 67 |
+| davinci.md | assembled | <62 pages from davinci> | 62 |
+| protect.md | assembled | <42 pages from protect> | 42 |
+| getting-started.md | assembled | <24 pages from getting-started> | 24 |
+| native-sdks.md | assembled | <18 pages from native-sdks> | 18 |
+| before-you-begin.md | assembled | <6 pages from before-you-begin> | 6 |
+| changelog-md.md | assembled | <1 pages from changelog.md> | 1 |
+| introduction-md.md | assembled | <1 pages from introduction.md> | 1 |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 2c93ada9a91caf7366d4984bee7bd900ac747225236d2436fc870367837103f6 |
-| snapshots/platform.md | 5648f3d84f7aee9d78f52f823c64e668868119dd0347a4e208f7d3a146495f59 |
-| snapshots/workflow-library.md | b1c64fc9da1a0a2b01318ed56f05b0f16f1277af988025254a365aafe9f4a1dc |
-| snapshots/auth.md | 648b3341641a78ec3f2903c3ae6db27351cfbe87b87662af8b14b0aaf7529d95 |
-| snapshots/mfa.md | 63bca0991615e6f9f2ec769c26afcd4ee8e89338a9d72785daa8831e7b33349b |
-| snapshots/credentials.md | 60bdeddbb067749c154b46e5a699aa58a00435537164b64920835f9f20766cf5 |
-| snapshots/authorize.md | c75eee7e141a2bbd8e6604711cc38e706437db5866169778f981784162b47544 |
-| snapshots/verify.md | e055e973d2c322c50ff061152f65acdb1374011d2a5ae0e986b04f873bd2d4ef |
-| snapshots/foundations.md | a606e213080215319110f3650eed894eae8a88f4b90c45916e6a790237d89996 |
-| snapshots/davinci.md | 4556e356f95f1e360657d1bd6059a36888e9906a14f69342597fe313829ca536 |
-| snapshots/protect.md | d0329633e6e869238257142370cf5f60a59fbc224823ea0bccda9f2218828c6a |
-| snapshots/getting-started.md | 94d315561ab96efaaf191bb52d9ef5b3de94447ad074281a496a5e3af950c23d |
-| snapshots/native-sdks.md | 083e67747a2b567204e7e76fbd1be8b6829bcf0c1ea19b021d2f3e18b1874299 |
-| snapshots/before-you-begin.md | 0d03ea457c8bc43667c9ae639c66de026d375c1b9d4e53c18d0348347b301c27 |
-| snapshots/changelog-md.md | f40414546b7976ee98eec526e4fd84eb5b8453b80dcc32358466b6fcfbbe372b |
-| snapshots/introduction-md.md | 544570071f15c4b5444fee67068fbbee70d0c78f3fa34d89daf77c07436d12f2 |
+| llms.txt | 852b724530f08ad98c61bd587accaa06ef122930543057fb61218e5b57c4c278 |
+| snapshots/platform.md | 4f2ce851ece4949643fbd33a72a91369396d32117907c3362d5e5a75a0eadf33 |
+| snapshots/workflow-library.md | 3b2936a7fe3523f373aea2bbd8fb4b6893930fbaa504dd3d80cbfb08150b7964 |
+| snapshots/auth.md | 1ac91d1e8f5fd46871b950c8dc7f0b0d5003b3ed9bc04cbf2d29bb5452dbf4c5 |
+| snapshots/mfa.md | 9d22fde110e757c100afc782ba75e9dd1bd396f82ed5ed344aa68465ca3649a0 |
+| snapshots/credentials.md | ddac422adf6fc145749f48231a7dc7def71c129e890bab057b1c2e5922d3fc06 |
+| snapshots/authorize.md | ebe9840ce650f707ab40e54d30f85eace2743bd66d6a04825523684e974b9727 |
+| snapshots/verify.md | 49fefc2802b29bf38238e1e2a1cf3fed3c9e1f8584bd170bb8472a389499a7b8 |
+| snapshots/foundations.md | 22d6dafb92ccb8a2cd38a6d4097e34d267965175f1aab92fedd630d67de7f6d1 |
+| snapshots/davinci.md | 73dc4019c3b2726e62bd6c8843603160f0ee0e00c3598dbdf68105b946825d7c |
+| snapshots/protect.md | 0173f0b6db515d3f85e42f44a20f73f1a205ab8658a17b92567afaf72b253054 |
+| snapshots/getting-started.md | f987971b510da685ad59c2dcc271e3df392d4c5a055036768df9246d8ee233f2 |
+| snapshots/native-sdks.md | e6fac2de357edf742e65b867ddbef61f0802e0485321de95ef7742a90fbedc09 |
+| snapshots/before-you-begin.md | 88291d10c4b617a981507a08ab9403518d1b496bffd676e9aa719526c970a851 |
+| snapshots/changelog-md.md | 8bce5bb026b26bffe1f7c20df45a0c5b4ee7c590f1c053e9427a39608e0e3c89 |
+| snapshots/introduction-md.md | f90d2208bfb98bc506117407393dc22931e8be21644797617f92e14afa9e8746 |

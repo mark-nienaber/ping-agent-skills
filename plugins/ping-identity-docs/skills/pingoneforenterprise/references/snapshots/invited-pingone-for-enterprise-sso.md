@@ -43,3 +43,24 @@ Follow this workflow to set up Invited PingOne single sign-on (SSO).
 ## Next steps
 
 If you encounter problems as you configure PingOne for Enterprise, visit the [Ping support portal](https://support.pingidentity.com/s/) to look for answers, or [sign on to your account](https://www.pingidentity.com/en/account/sign-on.html) to file a support case.
+
+---
+
+---
+title: Invited PingOne for Enterprise SSO
+description: Invited SSO allows PingOne SSO for SaaS Apps customers to delegate SSO configurations to their partners.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:invited_pingone_for_enterprise_sso:p14e_invited_sso
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/invited_pingone_for_enterprise_sso/p14e_invited_sso.html
+revdate: April 15, 2024
+---
+
+# Invited PingOne for Enterprise SSO
+
+Invited SSO allows PingOne SSO for SaaS Apps customers to delegate SSO configurations to their partners.
+
+Partners can manage both IdP and SP sides of the connection themselves. Invited SSO also allows partners to connect to non-SAML IdPs using PingOne for Enterprise as a bridge.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Invited SSO is a legacy function that has been improved on by PingOne SSO for SaaS Apps Managed Accounts.Managed Accounts lets you directly manage and monitor partner accounts, and also allows you to delegate management by assigning appropriate administrative roles. This gives your partners the ability to manage their own accounts, but also allows you to access a partner account for onboarding or troubleshooting.To learn more, see [Manage partner accounts](../pingone_sso_for_saas_apps/p14saas_manage_partner_accounts.html). |

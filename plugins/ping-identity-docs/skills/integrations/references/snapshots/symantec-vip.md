@@ -4,6 +4,8 @@ description: The Symantec VIP IdP adapter allows users to add credentials as a s
 component: symantec-vip
 page_id: symantec-vip:user_credential_management:pf_symantec_vip_ik_adding_credentials_as_a_user
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/user_credential_management/pf_symantec_vip_ik_adding_credentials_as_a_user.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   steps: Steps
@@ -41,6 +43,8 @@ description: As an administrator, you can manually add credentials to a user's a
 component: symantec-vip
 page_id: symantec-vip:user_credential_management:pf_symantec_vip_ik_adding_credentials_as_an_administrator
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/user_credential_management/pf_symantec_vip_ik_adding_credentials_as_an_administrator.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   steps: Steps
@@ -78,6 +82,8 @@ description: The following is the change history for the Symantec VIP integratio
 component: symantec-vip
 page_id: symantec-vip:release_notes:pf_symantec_vip_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/release_notes/pf_symantec_vip_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 205
 section_ids:
   symantec-vip-integration-kit-2-0-july-2025: Symantec VIP integration kit 2.0 - July 2025
@@ -205,6 +211,8 @@ description: Configure the Symantec VIP IdP adapter to allow PingFederate to use
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   steps: Steps
@@ -252,6 +260,8 @@ description: The Symantec VIP integration kit includes templates that can displa
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_customizing_templates
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_customizing_templates.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 ---
 
@@ -283,6 +293,8 @@ description: The Symantec VIP integration kit allows you to customize or transla
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_customizing_user_messages
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_customizing_user_messages.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   about-this-task: About this task
@@ -317,6 +329,8 @@ description: To get started with the integration, deploy the Symantec VIP integr
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 6, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -359,6 +373,8 @@ description: The following items are included in the Symantec VIP integration ki
 component: symantec-vip
 page_id: symantec-vip:release_notes:pf_symantec_vip_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/release_notes/pf_symantec_vip_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2025
 ---
 
@@ -434,6 +450,8 @@ description: To allow PingFederate and Symantec VIP to communicate securely, imp
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_importing_the_symantec_certificate_into_pf
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_importing_the_symantec_certificate_into_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   steps: Steps
@@ -467,6 +485,8 @@ description: The following are known issues or limitations for the Symantec VIP 
 component: symantec-vip
 page_id: symantec-vip:release_notes:pf_symantec_vip_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/release_notes/pf_symantec_vip_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2025
 section_ids:
   known-issues: Known issues
@@ -493,6 +513,8 @@ description: With the Symantec VIP integration kit, PingFederate includes the Sy
 component: symantec-vip
 page_id: symantec-vip::pf_symantec_vip_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/pf_symantec_vip_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   description: Description
@@ -546,6 +568,8 @@ description: You can use the PingFederate Authentication API to integrate the Sy
 component: symantec-vip
 page_id: symantec-vip::pf_symantec_vip_ik_pf_authn_api_support
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/pf_symantec_vip_ik_pf_authn_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   models-objects-and-error-codes: Models, objects, and error codes
@@ -873,6 +897,8 @@ description: Users can reset their own credentials after failing to authenticate
 component: symantec-vip
 page_id: symantec-vip:user_credential_management:pf_symantec_vip_ik_resetting_credentials_as_a_user
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/user_credential_management/pf_symantec_vip_ik_resetting_credentials_as_a_user.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   steps: Steps
@@ -906,6 +932,8 @@ description: The following tables show field descriptions for the Symantec VIP A
 component: symantec-vip
 page_id: symantec-vip:setup:pf_symantec_vip_ik_symantec_vip_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/setup/pf_symantec_vip_ik_symantec_vip_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2025
 ---
 
@@ -987,6 +1015,8 @@ description: The Symantec VIP integration kit allows PingFederate to use Symante
 component: symantec-vip
 page_id: symantec-vip::pf_symantec_vip_ik
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/pf_symantec_vip_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   components: Components
@@ -1046,6 +1076,8 @@ description: The following solutions address common situations you might encount
 component: symantec-vip
 page_id: symantec-vip::pf_symantec_vip_ik_troubleshooting
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/pf_symantec_vip_ik_troubleshooting.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 ---
 
@@ -1066,6 +1098,8 @@ description: Users sign on to their Symantec VIP IdP adapter account using a cre
 component: symantec-vip
 page_id: symantec-vip:user_credential_management:pf_symantec_vip_ik_user_credential_management
 canonical_url: https://docs.pingidentity.com/integrations/symantec-vip/user_credential_management/pf_symantec_vip_ik_user_credential_management.html
+llms_txt: https://docs.pingidentity.com/integrations/symantec-vip/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 24, 2025
 section_ids:
   adding-credentials: Adding credentials

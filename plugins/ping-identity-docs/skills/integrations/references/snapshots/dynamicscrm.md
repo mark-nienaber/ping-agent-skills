@@ -4,6 +4,8 @@ description: The Dynamics CRM server may cache the signing certificate, which ca
 component: dynamicscrm
 page_id: dynamicscrm::pf_dynamicscrm_integration_change_signing_certificates
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pf_dynamicscrm_integration_change_signing_certificates.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -36,6 +38,8 @@ description: Click Configure Credentials.
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_configure_credentials
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_configure_credentials.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -69,6 +73,8 @@ description: Click Map New Token Processor Instance and select a configured User
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_configure_idp_token_processor_mapping
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_configure_idp_token_processor_mapping.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -96,6 +102,8 @@ description: Click Configure Protocol Settings on the Protocol Settings screen
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_configure_protocol_settings
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_configure_protocol_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -123,6 +131,8 @@ description: "If you are not using active federation (for native client cases su
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_configure_ws_trust_sts
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_configure_ws_trust_sts.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -161,6 +171,8 @@ description: On the Connection Type screen, select the Browser SSO Profiles chec
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_create_an_sp_connection
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_create_an_sp_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -196,6 +208,8 @@ description: Use the following steps to configure Dynamics CRM to consume the fe
 component: dynamicscrm
 page_id: dynamicscrm::pf_dynamicscrm_integration_dynamics_crm_configuration
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pf_dynamicscrm_integration_dynamics_crm_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -256,6 +270,8 @@ description: The purpose of this document is to guide a PingFederate and Microso
 component: dynamicscrm
 page_id: dynamicscrm::pf_dynamicscrm_integration
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pf_dynamicscrm_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -275,6 +291,8 @@ description: "If you configure Internet-Facing Deployment in the Dynamics CRM De
 component: dynamicscrm
 page_id: dynamicscrm::pf_dynamicscrm_integration_known_issues
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pf_dynamicscrm_integration_known_issues.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -292,6 +310,8 @@ description: Click Map New Adapter Instance and select the HTML Form IdP Adapter
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_map_an_idp_adapter
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_map_an_idp_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -319,6 +339,8 @@ description: Configure PingFederate to include an SP Connection (see SP connecti
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_pf_configuration
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_pf_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -334,6 +356,8 @@ description: The following must be installed and configured in order to complete
 component: dynamicscrm
 page_id: dynamicscrm::pf_dynamicscrm_integration_prerequisites
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pf_dynamicscrm_integration_prerequisites.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -377,6 +401,8 @@ description: Save and activate the connection on the Activation & Summary screen
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_save_and_activate_the_connection
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_save_and_activate_the_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -396,6 +422,8 @@ description: This step is only necessary if WS-Trust is being used.
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_select_ws_trust_encryption_algorithm
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_select_ws_trust_encryption_algorithm.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -430,6 +458,8 @@ description: Click Manage Certificates.
 component: dynamicscrm
 page_id: dynamicscrm:pingfederate_configuration:pf_dynamicscrm_integration_share_the_signing_certificate_with_the_dynamics_crm_server
 canonical_url: https://docs.pingidentity.com/integrations/dynamicscrm/pingfederate_configuration/pf_dynamicscrm_integration_share_the_signing_certificate_with_the_dynamics_crm_server.html
+llms_txt: https://docs.pingidentity.com/integrations/dynamicscrm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps

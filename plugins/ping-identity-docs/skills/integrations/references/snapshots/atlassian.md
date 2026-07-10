@@ -4,6 +4,8 @@ description: The Atlassian Cloud Provisioner allows PingFederate to integrate wi
 component: atlassian
 page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   features: Features
@@ -83,6 +85,8 @@ description: Complete the configuration of the Authenticator Plugin:
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_atlassian_configuration
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_atlassian_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 ---
 
@@ -108,6 +112,8 @@ description: The Atlassian Integration Kit allows PingFederate to coordinate sin
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   components: Components
@@ -171,6 +177,8 @@ description: To integrate PingFederate with Atlassian Cloud for single sign-on (
 component: atlassian
 page_id: atlassian::pf_is_overview_of_atlassian_integrations
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/pf_is_overview_of_atlassian_integrations.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   atlassian-cloud-sso-configuration-guide: Atlassian Cloud SSO configuration guide
@@ -200,6 +208,8 @@ description: Configuring PingFederate for basic authentication
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_basic_authentication
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_basic_authentication.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 ---
 
@@ -217,6 +227,8 @@ description: The following is the change history for the Atlassian Cloud Provisi
 component: atlassian
 page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   atlassian-cloud-provisioner-2-0-february-2025: Atlassian Cloud Provisioner 2.0 - February 2025
@@ -255,6 +267,8 @@ description: Fixed a cross-site scripting (XSS) vulnerability by improving param
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 section_ids:
   atlassian-integration-kit-2-2-april-2021: Atlassian Integration Kit 2.2 – April 2021
@@ -316,6 +330,8 @@ description: The URL to configure the Authenticator is http[s]://atlassian_hostn
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configure_the_plugin
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configure_the_plugin.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 ---
 
@@ -348,6 +364,8 @@ description: Copy the p12 file created in step 2.i from the previous section int
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configuring_atlassian
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configuring_atlassian.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 section_ids:
   steps: Steps
@@ -401,6 +419,8 @@ description: When accessing a direct link to a subpage within Jira with no user 
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configuring_jira
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configuring_jira.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 section_ids:
   about-this-task: About this task
@@ -509,6 +529,8 @@ description: Create an instance of the Reference ID SP Adapter.
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configuring_pf_for_basic_authn
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configuring_pf_for_basic_authn.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -539,6 +561,8 @@ description: Configure a secondary SSL port. See the property pf.secondary.https
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configuring_pf_for_mutual_ssl_authn
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configuring_pf_for_mutual_ssl_authn.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -604,6 +628,8 @@ description: The final step to linking the two systems is to configure the Serap
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_configuring_seraph
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_configuring_seraph.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 2, 2024
 section_ids:
   about-this-task: About this task
@@ -706,6 +732,8 @@ description: To allow PingFederate to act as an identity provider for Atlassian 
 component: atlassian
 page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -738,6 +766,8 @@ description: To allow PingFederate to manage users in Atlassian Cloud, create a 
 component: atlassian
 page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -807,6 +837,8 @@ description: To allow PingFederate to act as an identity provider for Atlassian 
 component: atlassian
 page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
@@ -882,6 +914,8 @@ description: Before using the plugin to configure the authenticator, you must de
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_defining_the_authenticator_configuration_directory
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_defining_the_authenticator_configuration_directory.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   defining-the-authenticator-configuration-directory-unix: Defining the Authenticator configuration directory (Unix)
@@ -959,6 +993,8 @@ description: "Create a directory of your choosing on the Atlassian server. We su
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_defining_the_authenticator_configuration_directory_unix
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_defining_the_authenticator_configuration_directory_unix.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -988,6 +1024,8 @@ description: Create a directory of your choosing on the Atlassian server.
 component: atlassian
 page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_defining_the_authenticator_configuration_directory_windows
 canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_defining_the_authenticator_configuration_directory_windows.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   steps: Steps
@@ -1037,29 +1075,24 @@ section_ids:
 ---
 
 ---
-title: Deploying the Agentless Integration Kit
-description: The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
+title: Download manifest
+description: The following files are included in the Atlassian Cloud Provisioner .zip archive:
 component: atlassian
-page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_deploying_the_agentless_i
-canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_deploying_the_agentless_i.html
+page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_download_manifest
+canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
 ---
 
-# Deploying the Agentless Integration Kit
+# Download manifest
 
-## About this task
+The following files are included in the Atlassian Cloud Provisioner `.zip` archive:
 
-The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
+* `legal/Legal.pdf`: Copyright and license information.
 
-## Steps
+* `dist`: Contains the integration files
 
-1. Download the Agentless Integration Kit `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/agentless-integration-kit).
+  * `pf-atlassian-quickconnection-<version>.jar`: The Atlassian Cloud Provisioner quick connection template.
 
-2. On the sidebar, click **Download Integration**.
-
-3. On the sidebar, click **Get Documentation**.
-
-4. Follow the documentation to deploy the Agentless Integration Kit.
+* `atlassian-saml-metadata.xml`: A modifiable metadata file used to create the connection.

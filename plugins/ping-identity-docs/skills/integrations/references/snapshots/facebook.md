@@ -4,6 +4,8 @@ description: To enable single sign-on (SSO) to Workplace from Facebook, modify t
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_adding_sso_to_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_adding_sso_to_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -50,6 +52,8 @@ description: "The \"app secret proof\" feature can protect your integration from
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_app_secret_proof_feature
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_app_secret_proof_feature.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -73,6 +77,8 @@ description: The following is the change history for the Facebook Login Integrat
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_changelog
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   version-2-1-1-january-2026: Version 2.1.1 - January 2026
@@ -178,6 +184,8 @@ description: The following is the change history for the Workplace from Facebook
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   workplace-from-facebook-provisioner-1-10-october-2022: Workplace from Facebook Provisioner 1.10 - October 2022
@@ -298,6 +306,8 @@ description: Configure the Facebook IdP Adapter to determine how PingFederate co
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 20, 2026
 section_ids:
   steps: Steps
@@ -349,6 +359,8 @@ description: To allow PingFederate to manage users in Workplace from Facebook, c
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_configuring_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_configuring_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -372,6 +384,8 @@ description: To allow PingFederate to act as an identity provider for Workplace 
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   about-this-task: About this task
@@ -402,6 +416,8 @@ description: To enable SSO to an application within the PingFederate domain, con
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_configuring_sso_to_an_application_within_the_pf_domain
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_configuring_sso_to_an_application_within_the_pf_domain.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -442,6 +458,8 @@ description: To enable SSO to a service provider (SP) outside the PingFederate d
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_configuring_sso_to_an_sp_outside_the_pf_domain
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_configuring_sso_to_an_sp_outside_the_pf_domain.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -477,6 +495,8 @@ description: The Facebook IdP Adapter has a set of core contract attributes. The
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_core_contract_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_core_contract_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -527,6 +547,8 @@ description: To allow PingFederate to access the Workplace from Facebook API, cr
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_creating_a_custom_integration_and_access_token_in_workplace
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_creating_a_custom_integration_and_access_token_in_workplace.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -587,6 +609,8 @@ description: To allow PingFederate to manage users in Workplace from Facebook, c
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -664,6 +688,8 @@ description: To allow PingFederate to process sign-on requests using Facebook, a
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_creating_an_app_in_facebook
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_creating_an_app_in_facebook.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -725,6 +751,8 @@ description: To get started with the integration, deploy the Facebook Login Inte
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -768,6 +796,8 @@ description: To get started with the integration, deploy the Workplace from Face
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   steps: Steps
@@ -813,6 +843,8 @@ description: The following files are included in the Facebook Login Integration 
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 ---
 
@@ -864,6 +896,8 @@ description: The following files are included in the Workplace from Facebook Pro
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 ---
 
@@ -887,6 +921,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: facebook
 page_id: facebook:facebook_login_integration_kit:pf_facebook_cic_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/facebook/facebook_login_integration_kit/pf_facebook_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -950,6 +986,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 11, 2024
 section_ids:
   about-this-task: About this task
@@ -1015,6 +1053,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: facebook
 page_id: facebook:workplace_from_facebook_provisioner:pf_workplace_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/facebook/workplace_from_facebook_provisioner/pf_workplace_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/facebook/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
 section_ids:
   steps: Steps

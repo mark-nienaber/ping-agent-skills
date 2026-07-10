@@ -4,6 +4,8 @@ description: "The configuration options for the Apache module are listed in the 
 component: oam
 page_id: oam:setup:pf_oam_ik_apache_module_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_apache_module_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -32,6 +34,8 @@ description: This procedure shows you how to add the mod_pfoam.so module to your
 component: oam
 page_id: oam:setup:pf_oam_ik_apache_module_installation
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_apache_module_installation.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -76,6 +80,8 @@ description: OAM Integration Kit 3.1 – April 2018 (Current Release)
 component: oam
 page_id: oam:release_notes:pf_oam_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/oam/release_notes/pf_oam_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -101,6 +107,8 @@ description: The distribution .zip archive for the OAM Integration Kit contains 
 component: oam
 page_id: oam:release_notes:pf_oam_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/oam/release_notes/pf_oam_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -132,6 +140,8 @@ description: After installing the OAM Integration Kit and the Access Server SDK 
 component: oam
 page_id: oam:setup:pf_oam_ik_idp_adapter_instance_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_idp_adapter_instance_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -183,6 +193,8 @@ description: You can test this adapter using the SP sample application that ship
 component: oam
 page_id: oam:setup:pf_oam_ik_idp_adapter_testing
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_idp_adapter_testing.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -234,6 +246,8 @@ description: This section describes using the OAM Integration Kit as an identity
 component: oam
 page_id: oam:setup:pf_oam_ik_idp_implementation
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_idp_implementation.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -283,6 +297,8 @@ description: Known Issues
 component: oam
 page_id: oam:release_notes:pf_oam_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/oam/release_notes/pf_oam_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -337,6 +353,8 @@ description: These steps are necessary to configure OAM for operation as an iden
 component: oam
 page_id: oam:setup:pf_oam_ik_oam_idp_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_oam_idp_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -369,6 +387,8 @@ description: From the extracted distribution .zip archive, deploy the authentica
 component: oam
 page_id: oam:setup:pf_oam_ik_oam_sp_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_oam_sp_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   steps: Steps
@@ -404,6 +424,8 @@ description: The PingFederate Oracle Access Manager (OAM) Integration Kit adds I
 component: oam
 page_id: oam::pf_oam_ik
 canonical_url: https://docs.pingidentity.com/integrations/oam/pf_oam_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   intended-audience: Intended audience
@@ -446,6 +468,8 @@ description: Unzip the distribution .zip archive and copy this file to the serve
 component: oam
 page_id: oam:setup:pf_oam_ik_pf_idp_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_pf_idp_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -505,6 +529,8 @@ description: Unzip the distribution .zip archive and copy the following file to 
 component: oam
 page_id: oam:setup:pf_oam_ik_pf_sp_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_pf_sp_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   steps: Steps
@@ -542,6 +568,8 @@ description: After installing the OAM Integration Kit, you can configure your SP
 component: oam
 page_id: oam:setup:pf_oam_ik_sp_adapter_instance_configuration
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_sp_adapter_instance_configuration.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -593,6 +621,8 @@ description: You can test this adapter using the IdP sample application that shi
 component: oam
 page_id: oam:setup:pf_oam_ik_sp_adapter_testing
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_sp_adapter_testing.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2024
 section_ids:
   about-this-task: About this task
@@ -642,6 +672,8 @@ description: The OAM SP Adapter uses an authentication scheme deployed within Or
 component: oam
 page_id: oam:setup:pf_oam_ik_sp_implementation
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_sp_implementation.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 ---
 
@@ -683,6 +715,8 @@ description: Use the following instructions to upgrade an existing OAM 3.0 insta
 component: oam
 page_id: oam:setup:pf_oam_ik_upgrade_instructions
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/pf_oam_ik_upgrade_instructions.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task
@@ -737,6 +771,8 @@ description: Use the following instructions to upgrade an existing OAM 3.0 insta
 component: oam
 page_id: oam:setup:szw1563995039121
 canonical_url: https://docs.pingidentity.com/integrations/oam/setup/szw1563995039121.html
+llms_txt: https://docs.pingidentity.com/integrations/oam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 21, 2024
 section_ids:
   about-this-task: About this task

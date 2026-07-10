@@ -7,17 +7,17 @@
 
 - [Untitled](https://docs.pingidentity.com/pingone/early-access-features/ea_p1_create_provisioning_connection_gateway.md)
 - [(Customer Only) Configuring WhatsApp as a sender](https://docs.pingidentity.com/pingone/settings/p1-using-a-custom-whatsapp-sender-account.md)
-- [(Customer Only) Configuring WhatsApp authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1-strong-auth_whatsapp.md)
-- [(Workforce only) Configuring the PingID desktop application](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_start.md)
-- [(Workforce Only) Configuring the PingID mobile application settings](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_pid_mobile_application.md)
-- [(Workforce Only) Configuring YubiKey OTP authentication for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_yubikey.md)
+- [(Customer Only) Configuring WhatsApp authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1-strong-auth_whatsapp.md): How to enable and configure WhatsApp authentication in PingOne to let users receive a one-time passcode via WhatsApp.
+- [(Workforce only) Configuring the PingID desktop application](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_start.md): Learn how to configure the PingID desktop app to provide passwordless authentication using device biometrics on Mac and Windows machines.
+- [(Workforce Only) Configuring the PingID mobile application settings](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_pid_mobile_application.md): How to configure PingID mobile app for Workforce MFA, including biometrics, number matching, device requirements, and MDM integration.
+- [(Workforce Only) Configuring YubiKey OTP authentication for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_yubikey.md): How to configure YubiKey OTP authentication for PingID in Workforce environments, including hardware requirements and pairing.
 - [About groups and populations](https://docs.pingidentity.com/pingone/directory/p1_groups_vs_populations.md): Groups and populations are both used to organize users in PingOne, but they differ in several ways.
 - [Accepting the administrator account registration invitation](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_accept_invitation.md)
 - [Access tokens and ID tokens](https://docs.pingidentity.com/pingone/applications/p1_access_token_id_token.md): Learn how PingOne uses access tokens and ID tokens in OAuth 2 and OIDC requests.
 - [Access user information to send to application developers](https://docs.pingidentity.com/pingone/directory/p1_viewusersapi.md): You can use the API tab on the user details panel to access and copy PingOne user information in a format that's easy for application developers to use.
 - [Accessing the application portal](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_aplication_portal.md)
 - [Accessing the application portal](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_aplication_portal_passwordless.md)
-- [Accessing the legacy PingID admin portal from PingOne](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_access_legacy_pid_admin_portal.md)
+- [Accessing the legacy PingID admin portal from PingOne](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_access_legacy_pid_admin_portal.md): How to access the legacy PingID admin portal from your PingOne environment for configurations not yet available in PingOne.
 - [Accessing the PingOne admin console](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_access_admin_console.md): The main point of entry into PingOne for administrators is the PingOne admin console.
 - [Add custom attributes to a user](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_add_custom_attributes_to_a_user.md)
 - [Adding a certificate](https://docs.pingidentity.com/pingone/settings/p1_addcertificate.md): Learn how to add a certificate in PingOne to establish trust, verify identity, and secure communication with applications and services.
@@ -97,8 +97,8 @@
 - [Adding the agreement to the authentication policy](https://docs.pingidentity.com/pingone/user_experience/p1_add_agreement_to_authentication_policy.md)
 - [Adding the authentication policy to an application](https://docs.pingidentity.com/pingone/integrations/p1_add_the_auth_policy_to_an_application.md)
 - [Adding the LDAP gateway service](https://docs.pingidentity.com/pingone/integrations/p1_add_gateway_windows_service.md)
-- [Adding the PingID mobile app for Android in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_adding_pid_mobile_app_android_in_intune.md)
-- [Adding the PingID mobile app for iOS in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_adding_pid_mobile_app_ios_in_intune.md)
+- [Adding the PingID mobile app for Android in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_adding_pid_mobile_app_android_in_intune.md): How to add the PingID mobile app for Android as an MDM-managed app in Microsoft Intune to push configurations to Android devices.
+- [Adding the PingID mobile app for iOS in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_adding_pid_mobile_app_ios_in_intune.md): How to add the PingID mobile app for iOS as an MDM-managed app in Microsoft Intune to enable configuration management for iOS devices.
 - [Adding the PingOne Authorize service to your environment](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_p1az_service_to_your_environment.md): Add the PingOne Authorize service to a PingOne environment to enable dynamic authorization and API Access Management capabilities.
 - [Adding the RADIUS Gateway service](https://docs.pingidentity.com/pingone/integrations/p1_add_radius_gateway_windows_service.md)
 - [Adding user attributes](https://docs.pingidentity.com/pingone/directory/p1_adduserattributes.md): Use the Attributes page to add a user attribute to your PingOne environment.
@@ -190,6 +190,7 @@
 - [Configure a multi-factor authentication experience using PingOne and PingID](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_config_mfa_experience.md)
 - [Configuring a CIBA flow](https://docs.pingidentity.com/pingone/use_cases/p1_configure_ciba_flow.md): PingOne supports client-initiated backchannel authentication (CIBA), enabling users to approve out-of-band authentication requests.
 - [Configuring a custom notification provider for PingOne](https://docs.pingidentity.com/pingone/settings/p1_sender_configure_custom_provider.md)
+- [Configuring a custom push notification provider (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_configure_custom_push_provider.md): Configure a custom push notification provider for PingOne MFA for sending push notifications.
 - [Configuring a custom SMTP email notification server](https://docs.pingidentity.com/pingone/settings/p1_configure_custom_smtp_server.md)
 - [Configuring a redirect for a device custom verification URI](https://docs.pingidentity.com/pingone/applications/p1_configure_redirect_device_custom_verification_uri.md): Configure a redirect for a device custom verification URI to which PingOne forwards the OIDC response after authentication.
 - [Configuring a registration form](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_registration_form.md)
@@ -208,31 +209,31 @@
 - [Configuring an SMS/Voice sender account with PingOne](https://docs.pingidentity.com/pingone/settings/p1_using_custom_sms_voice_sender_account.md)
 - [Configuring and running a promotion (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_configure_promotion.md): Promote PingOne resources from a source environment to a target environment using the Promotions page.
 - [Configuring and setting up PingOne Verify](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_configuration_setup.md): Configure and set up PingOne Verify as an administrator.
-- [Configuring Android for Work for Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_intune.md)
-- [Configuring Android for Work for MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_mobileiron.md)
-- [Configuring Android for Work for Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_workspace_one_uem.md)
+- [Configuring Android for Work for Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_intune.md): How to configure Android for Work in Microsoft Intune to push PingID mobile app configuration and MDM token to Android devices.
+- [Configuring Android for Work for MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_mobileiron.md): How to configure Android for Work in MobileIron MDM to push PingID mobile app configuration to Android devices.
+- [Configuring Android for Work for Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_android_work_for_workspace_one_uem.md): How to configure Android for Work in Workspace ONE UEM to push PingID mobile app configuration to Android devices.
 - [Configuring Apigee for PingOne Authorize integration](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_configuring_apigee_for_p1az_integration.md): Install the PingAuth shared flow bundle in Apigee and configure it to integrate with PingOne Authorize.
 - [Configuring attribute access control](https://docs.pingidentity.com/pingone/applications/p1_configure_attribute_access_control.md): Configure attribute access control in PingOne using scopes.
-- [Configuring authenticator app authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_configuring_authenticator_app.md)
+- [Configuring authenticator app authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_configuring_authenticator_app.md): How to enable third-party authenticator app authentication in PingOne MFA, using any TOTP-based app such as Google Authenticator or Microsoft Authenticator.
 - [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.md): Configure PingOne forms to show or hide components so that a form can be more modular with conditional component visibility.
-- [Configuring email authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_email.md)
+- [Configuring email authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_email.md): How to enable email as a PingOne MFA authentication method, sending users a one-time passcode to authenticate.
 - [Configuring end user browsers](https://docs.pingidentity.com/pingone/integrations/p1_configuring_end_user_browsers.md): To support Kerberos authentication in PingOne, you must add two trusted URIs to end user browsers.
-- [Configuring FIDO2 authentication (Passkeys)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_configuring_fido.md)
+- [Configuring FIDO2 authentication (Passkeys)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_configuring_fido.md): How to configure FIDO2 authentication in PingOne, including passkeys, biometrics, and security keys, by setting up a FIDO2 policy and MFA policy.
 - [Configuring Google Chrome](https://docs.pingidentity.com/pingone/integrations/p1_configuring_chrome.md)
 - [Configuring Kong Gateway for PingOne Authorize integration](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_configuring_kong_for_p1az_integration.md): Integrate PingOne Authorize with Kong Gateway by installing and configuring the integration kit.
 - [Configuring Kong Konnect for PingOne Authorize integration](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_configuring_konnect_for_integration.md): For Kong Konnect to use PingOne Authorize as an external authorization policy runtime service, you must download, install, and configure the [.codeph]``ping-auth`` plugin.
 - [Configuring localized content](https://docs.pingidentity.com/pingone/user_experience/p1_configure_localized_content.md)
 - [Configuring MFA settings](https://docs.pingidentity.com/pingone/authentication/p1_configure_mfa_settings.md)
 - [Configuring Microsoft Edge](https://docs.pingidentity.com/pingone/integrations/p1_configuring_edge.md): Use the Group Policy Management editor in PingOne to configure Microsoft Edge.
-- [Configuring Microsoft Intune for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_microsoft_intune_for_pid.md)
-- [Configuring mobile applications](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_configure_mobile_applications.md)
-- [Configuring MobileIron for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_mobileiron_for_pid.md)
-- [Configuring MobileIron for PingID MDM integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_mobileiron_for_mdm_integration.md)
+- [Configuring Microsoft Intune for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_microsoft_intune_for_pid.md): How to configure Microsoft Intune to manage the PingID mobile app on iOS and Android, including APNs certificates and configuration policies.
+- [Configuring mobile applications](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_configure_mobile_applications.md): How to configure mobile applications for PingOne MFA, covering Customer native app integration and Workforce PingID mobile app setup.
+- [Configuring MobileIron for PingID](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_mobileiron_for_pid.md): How to configure MobileIron to manage the PingID mobile app, including APNs certificate setup, Android for Work, and MDM integration.
+- [Configuring MobileIron for PingID MDM integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_mobileiron_for_mdm_integration.md): How to configure the PingID mobile app as an MDM-managed app in MobileIron by setting up the MDM token and managed app configuration.
 - [Configuring Mozilla Firefox](https://docs.pingidentity.com/pingone/integrations/p1_configuring_mozilla.md)
 - [Configuring multiple Authorize gateway instances](https://docs.pingidentity.com/pingone/integrations/p1_configure_multiple_authz_gateway_instances.md)
 - [Configuring multiple gateway instances](https://docs.pingidentity.com/pingone/integrations/p1_configure_multiple_gateways_ldap.md)
 - [Configuring multiple gateways](https://docs.pingidentity.com/pingone/integrations/p1_configure_multiple_gateways_radius.md)
-- [Configuring OATH token authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_oath_tokens.md)
+- [Configuring OATH token authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_oath_tokens.md): How to configure OATH hardware token authentication in PingOne for MFA, covering supported token types and seed file requirements.
 - [Configuring OAuth 2.0 token exchange](https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange.md): PingOne supports OAuth 2.0 token exchange as an extension of OAuth 2.0, exchanging one security token for another token.
 - [Configuring outbound group provisioning](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_configuring_outbound_group_provisioning.md): Sync groups along with their memberships out of PingOne.
 - [Configuring PingID desktop app for Safari on macOS](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_v2_mac_sso_extension_integration.md)
@@ -242,19 +243,19 @@
 - [Configuring predictors](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_managing_predictors.md): You can configure and edit the settings for PingOne Protect predictors at any time.
 - [Configuring provisioning](https://docs.pingidentity.com/pingone/integrations/p1_configure_provisioning_overview.md): To configure provisioning, create a connection to the appropriate identity store.
 - [Configuring roles for a worker application](https://docs.pingidentity.com/pingone/applications/p1_configurerolesforworkerapplication.md): Configure roles for a worker application in PingOne.
-- [Configuring SMS and voice authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_sms_voice_authentication.md)
-- [Configuring strong authentication methods (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_strong_authentication_start.md)
+- [Configuring SMS and voice authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_sms_voice_authentication.md): How to enable SMS and voice authentication in PingOne MFA to send users a one-time passcode via SMS or phone call.
+- [Configuring strong authentication methods (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_strong_authentication_start.md): How to configure PingOne MFA methods including FIDO2, PingID mobile app, authenticator apps, SMS, email, OATH tokens, and WhatsApp.
 - [Configuring the application portal](https://docs.pingidentity.com/pingone/applications/p1_configuring_the_application_portal.md): Configure the PingOne application portal.
 - [Configuring the Self Service portal end-user experience](https://docs.pingidentity.com/pingone/user_experience/p1_configure_self_service.md): Configure what information appears to the end user in PingOne Self Service.
 - [Configuring trusted email addresses](https://docs.pingidentity.com/pingone/settings/p1_configure_trusted_email.md)
 - [Configuring web applications](https://docs.pingidentity.com/pingone/applications/p1_strong_auth_configuring_web_apps.md): Configure web applications for Strong Authentication in PingOne.
-- [Configuring Workspace ONE UEM for PingID MDM integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_workspace_one_uem_for_mdm_integration.md)
-- [Configuring Workspace ONE UEM for PingID mobile app](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_workspace_one_uem_for_pid.md)
+- [Configuring Workspace ONE UEM for PingID MDM integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_workspace_one_uem_for_mdm_integration.md): How to configure the PingID mobile app as an MDM-managed app in Workspace ONE UEM by setting up the MDM token and app assignment policies.
+- [Configuring Workspace ONE UEM for PingID mobile app](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_configuring_workspace_one_uem_for_pid.md): How to configure Workspace ONE UEM to manage the PingID mobile app, including APNs certificate setup, Android for Work, and MDM integration.
 - [Connecting a service](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_connecting_a_service.md): Connect PingOne Authorize to HTTP, PingOne Connector, or LDAP Gateway services to define data integrations.
 - [Connecting an HTTP service](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_connecting_an_http_service.md): Configure HTTP settings to connect PingOne Authorize to an HTTP service.
 - [Connecting an LDAP Gateway service](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_connecting_a_gateway_service.md): Connect PingOne Authorize to a PingOne LDAP Gateway to access user profile and group information from an on-premise LDAP directory.
 - [Connecting to PingOne Protect](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_connecting_p1_risk.md): Establish a connection between PingOne Authorize and PingOne Protect to use risk signals in authorization policies and provide risk evaluation feedback.
-- [Considerations after integrating or migrating a PingID account into a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_migrate_pingid_account_postrequisites.md)
+- [Considerations after integrating or migrating a PingID account into a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_migrate_pingid_account_postrequisites.md): Post-migration considerations after integrating a PingID account into PingOne, including checking user accounts and enabling MyAccount.
 - [Control user access](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_p1tutorial_control_user_access.md)
 - [Converting PEM certificates to a different format](https://docs.pingidentity.com/pingone/settings/p1_convertcertificate.md)
 - [Copying the sign-on URLs](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_passwordless_signon_urls.md)
@@ -275,7 +276,7 @@
 - [Creating a provisioning connection](https://docs.pingidentity.com/pingone/integrations/p1_create_provisioning_connection.md): Create a provisioning connection in PingOne.
 - [Creating a registration application](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_passwordless_registration_application.md)
 - [Creating a registration policy](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_passwordless_registration_policy.md)
-- [Creating a risk policy for registration and authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_pid_policy.md)
+- [Creating a risk policy for registration and authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_configuring_pid_policy.md): Create PingOne risk policies for MFA registration and authentication using Protect predictors, MFA-only license options, or the legacy PingID admin portal.
 - [Creating a risk policy with an MFA-only license](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_creating_risk_policies_for_mfa_only.md)
 - [Creating a Salesforce Communities connection](https://docs.pingidentity.com/pingone/integrations/p1_create_connection_salesforce_communities.md): You can set up provisioning in PingOne for a connection to a Salesforce Communities identity store.
 - [Creating a Salesforce connection](https://docs.pingidentity.com/pingone/integrations/p1_create_salesforce_workforce_connection.md): Use a Salesforce connection to enable provisioning from PingOne to Salesforce.
@@ -312,6 +313,7 @@
 - [Creating SPNs](https://docs.pingidentity.com/pingone/integrations/p1_creating_spns.md): To enable Kerberos authentication, you must configure two service principal names (SPNs).
 - [Credential management method comparison](https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_management_method_comparison.md)
 - [Cross-origin resource sharing](https://docs.pingidentity.com/pingone/applications/p1_cors.md): Cross-origin resource sharing (CORS) in PingOne allows devices on one domain to access resources on another domain.
+- [Custom domain impacts and migration considerations](https://docs.pingidentity.com/pingone/settings/p1_custom_domain_impacts.md): Considerations for impacts and migration when configuring a PingOne custom domain.
 - [Custom library functions](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_custom_library_functions.md): Use the following PingOne Expression Language custom library functions to process data in strings, arrays, and collections.
 - [Custom role scenarios](https://docs.pingidentity.com/pingone/directory/p1_custom_roles_scenarios_intro.md): The scenarios in this section detail several uses for PingOne custom administrator roles.
 - [Customize the look and feel of PingOne authentication pages](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_p1tutorial_customize_look_and_feel.md): Use this tutorial to learn how to customize the look and feel of your PingOne authentication experience using themes.
@@ -437,7 +439,7 @@
 - [Fine-tuning assertion validity duration](https://docs.pingidentity.com/pingone/applications/p1_fine-tuning_assertion_validity_duration.md): Configure the SAML assertion validity duration for the Microsoft 365 application in PingOne.
 - [Form configuration](https://docs.pingidentity.com/pingone/user_experience/p1_form_configuration.md): Configuration options for the form builder, including properties, fields, and a toolbox for further customization.
 - [Gateways](https://docs.pingidentity.com/pingone/integrations/p1_gateways.md): PingOne gateways act as a bridge between your on-premise infrastructure and PingOne.
-- [Generate an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_generate_mdm_token.md)
+- [Generate an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_generate_mdm_token.md): How to generate a new MDM token for the PingID mobile app in PingOne and update it in your MDM system.
 - [Generated attributes](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_generated_attributes.md): Generated attributes are child attributes that extract JSON schema properties from a parent attribute or service.
 - [Generating a client secret for a resource](https://docs.pingidentity.com/pingone/applications/p1_generate_client_secret_resource.md): Generate a new client secret for a PingOne resource.
 - [Generating a client secret for an application](https://docs.pingidentity.com/pingone/applications/p1_generate_client_secret_application.md): Generate a new client secret for an OIDC application in PingOne.
@@ -469,15 +471,15 @@
 - [Inbound traffic policies](https://docs.pingidentity.com/pingone/settings/p1_inbound_traffic_policies.md): Use inbound traffic policies in PingOne to process traffic requests to your Cloudflare custom domain based on customized rules.
 - [Including external groups in an application](https://docs.pingidentity.com/pingone/applications/p1_include_external_groups_in_applications.md): Create attribute mappings for groups from external identity providers.
 - [Initiating SSO from PingOne](https://docs.pingidentity.com/pingone/applications/p1_initiating_sso.md): Configure SSO initiated from PingOne to give users one-click access to the applications they need.
-- [Installing an APNs certificate for iOS in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_intune.md)
-- [Installing an APNs certificate for iOS in MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_mobileiron.md)
-- [Installing an APNs certificate for iOS in Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_workspace_one_uem.md)
+- [Installing an APNs certificate for iOS in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_intune.md): How to install an APNs certificate for iOS in Microsoft Intune to enable PingID mobile app configuration to be pushed to iOS devices.
+- [Installing an APNs certificate for iOS in MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_mobileiron.md): How to install an APNs certificate for iOS in MobileIron to enable MDM management of iOS devices for PingID mobile app.
+- [Installing an APNs certificate for iOS in Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_installing_apns_certificate_ios_workspace_one_uem.md): How to install an APNs certificate for iOS in Workspace ONE UEM to enable MDM management of iOS devices for PingID mobile app.
 - [Installing the PingID desktop app](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_v2_installation.md)
 - [Integrate PingOne with a Node.js Express app](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_integrate_nodejs_express_app.md)
-- [Integrating a PingID account with a new PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pid_env_with_new_p1_env_updated.md)
-- [Integrating an existing PingID account with an existing PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pid_existing_account_with_existing_p1_env.md)
+- [Integrating a PingID account with a new PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pid_env_with_new_p1_env_updated.md): How to integrate an existing PingID account with a new PingOne environment to manage users, devices, and FIDO policies from PingOne.
+- [Integrating an existing PingID account with an existing PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pid_existing_account_with_existing_p1_env.md): How to integrate an existing PingID account with an existing PingOne environment to manage users, devices, and FIDO policies from PingOne.
 - [Integrating Customer environments with PingFederate](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_mfa_integrating_with_pf.md): Integration PingFederate with PingOne MFA in the PingOne admin console.
-- [Integrating PingID with PingFederate](https://docs.pingidentity.com/pingone/strong_authentication_mfa/pid_mfa_integrating_with_pf.md)
+- [Integrating PingID with PingFederate](https://docs.pingidentity.com/pingone/strong_authentication_mfa/pid_mfa_integrating_with_pf.md): Learn how to integrate PingID with PingFederate using the PingID adapter to enable multi-factor authentication for PingFederate SSO.
 - [Integrating PingOne Authorize with Amazon Web Services](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_amazon_web_services_integration.md): Integrate PingOne Authorize with Amazon Web Services using a Ping Identity integration kit.
 - [Integrating PingOne Authorize with Apigee](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_apigee_integration.md): Integrate PingOne Authorize with Apigee using Ping Identity’s shared flow to centralize API access control in PingOne Authorize and delegate enforcement to Apigee.
 - [Integrating PingOne Authorize with Kong Gateway](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_kong_gateway_integration.md): Ping Identity’s integration kit for Kong extends Kong’s authorization capabilities through an external policy evaluation service.
@@ -491,7 +493,7 @@
 - [Introduction to PingOne Credentials](https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_introduction.md)
 - [Introduction to PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_introduction.md): PingOne Protect is a cloud-based service that uses machine learning and risk policies to detect threats and calculate risk scores.
 - [Introduction to PingOne Verify](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_introduction.md): PingOne Verify service in PingOne secures user identity verification.
-- [Introduction to strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_intro_to_strong_authentication.md)
+- [Introduction to strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_intro_to_strong_authentication.md): Introduction to PingOne strong authentication (MFA), covering MFA concepts and Workforce and Customer use cases.
 - [Inviting administrators to register](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_invite_admins_register.md)
 - [IP address and domain reference](https://docs.pingidentity.com/pingone/developer_tools/p1_ip_address_domain_reference.md): Configure your network rules for inbound and outbound traffic to ensure that PingOne works properly.
 - [Just-in-time provisioning of external groups](https://docs.pingidentity.com/pingone/directory/p1_provision_external_groups.md): You can use just-in-time provisioning of external groups in PingOne.
@@ -531,7 +533,7 @@
 - [Managing group membership](https://docs.pingidentity.com/pingone/directory/p1_add_members_to_group.md)
 - [Managing group roles](https://docs.pingidentity.com/pingone/directory/p1_add_roles_to_a_group.md): Add, remove, or limit the scope of roles for groups in PingOne from the Groups page.
 - [Managing groups](https://docs.pingidentity.com/pingone/directory/p1_managing_groups.md)
-- [Managing MDM tokens](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_managing_mdm_tokens.md)
+- [Managing MDM tokens](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_managing_mdm_tokens.md): Overview of creating, rotating, and revoking PingID MDM tokens, including multi-key support and rotation best practices.
 - [Managing opt-ins for early access features in PingOne](https://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.md)
 - [Managing password policies](https://docs.pingidentity.com/pingone/authentication/p1_selectpasswordpolicy.md): Use the Password page to manage password requirements and rules for your PingOne environment.
 - [Managing populations](https://docs.pingidentity.com/pingone/directory/p1_manage_populations.md)
@@ -549,15 +551,15 @@
 - [MFA policies](https://docs.pingidentity.com/pingone/authentication/p1_mfa_policies.md)
 - [MFA Settings](https://docs.pingidentity.com/pingone/authentication/p1_mfa_settings.md)
 - [Migrating a custom domain to Cloudflare](https://docs.pingidentity.com/pingone/settings/p1_migrate_custom_domain_to_cloudflare.md): If you have an existing custom domain in PingOne that routes to Amazon CloudFront, you should migrate it to use Cloudflare.
-- [Migrating a PingID account from the legacy PingID admin portal to PingOne](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pingid_with_p1.md)
-- [Migrating PingID management from the legacy PingID admin portal to a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_move_pid_management_to_p1.md)
+- [Migrating a PingID account from the legacy PingID admin portal to PingOne](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_integrate_pingid_with_p1.md): Navigate migration options for integrating an existing PingID account with a new or existing PingOne environment.
+- [Migrating PingID management from the legacy PingID admin portal to a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_move_pid_management_to_p1.md): How to manually migrate PingID management from the legacy PingID admin portal to PingOne for accounts integrated before March 31, 2025.
 - [Modifying translatable keys](https://docs.pingidentity.com/pingone/user_experience/p1_modifying_translatable_keys.md)
 - [Monitoring](https://docs.pingidentity.com/pingone/monitoring/p1_monitoring_menu.md)
 - [Monitoring activity with Splunk](https://docs.pingidentity.com/pingone/developer_tools/p1_monitor_activity_splunk.md): Use Splunk to monitor PingOne activity data.
 - [Monitoring Authorize gateway instance health](https://docs.pingidentity.com/pingone/integrations/p1_monitor_authz_gateway_health.md)
 - [Monitoring PingOne Verify transaction activity and license usage](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_monitoring.md): Monitor and view license information for PingOne Verify.
 - [Moving a user to a different population](https://docs.pingidentity.com/pingone/directory/p1_changeuserpopulation.md): Use the Users page to move a user to a different population in PingOne.
-- [Moving from the PingID API to the PingOne API](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_moving_from_pingid_api_to_pingone_api.md)
+- [Moving from the PingID API to the PingOne API](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_moving_from_pingid_api_to_pingone_api.md): Learn how to transition from the PingID API to the PingOne API, with links to developer guides, workflow examples, and the PingOne Platform API Reference.
 - [Naming an authorization policy version](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_naming_versions.md)
 - [New Authentication Dashboard (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_auth_dashboard.md): The Authentication Dashboard shows a summary of SSO and authentication activity through PingOne authentication.
 - [New email and banner alerts for approaching license entitlement limits (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_license_entitlement_limit_alerts.md)
@@ -571,19 +573,19 @@
 - [OS distribution](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_os_distribution.md): View risk evaluations by operating system type in the PingOne Protect OS Distribution dashboard chart.
 - [Outbound group provisioning](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_outbound_group_provisioning.md)
 - [Outbound provisioning sync summary examples](https://docs.pingidentity.com/pingone/integrations/p1_outbound_group_provisioning_sync_summary_examples.md): Outbound provisioning examples and their sync summaries in PingOne.
-- [Overview of authentication methods](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_authentication_methods_overview.md)
+- [Overview of authentication methods](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_authentication_methods_overview.md): Overview of strong authentication methods in PingOne, including PingID mobile app, FIDO2, SMS, email, WhatsApp, and OATH tokens.
 - [Overview page](https://docs.pingidentity.com/pingone/p1_overview_p1.md)
 - [Password policies](https://docs.pingidentity.com/pingone/authentication/p1_passwordpolicies.md)
 - [Performing the user simulation](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_config_mfa_experience_perform_user_simulation.md)
-- [PingID branding and themes](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_branding_and_themes.md)
-- [PingID desktop app (legacy)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_v1.md)
+- [PingID branding and themes](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_branding_and_themes.md): Overview of where to find information to customize the PingID enrollment page and mobile app logo using PingOne branding and themes settings.
+- [PingID desktop app (legacy)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_v1.md): Learn how to install, configure, and use the legacy PingID desktop app on Windows and Mac to generate one-time passcodes (OTPs) for MFA.
 - [PingID desktop app (workforce only)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_version_overview.md): Understand which version of PingID desktop app to use based on where you manage PingID.
 - [PingID desktop app requirements and limitations](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_prereq.md)
-- [PingID language support](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_language_support.md)
-- [PingID mobile app PIN requirements](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_mobile_app_pin_requirements.md)
-- [PingID Mobile Device Management (MDM)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_mobile_app_mobile_device_requirements.md)
-- [PingID Offline MFA](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_offline_mfa.md)
-- [PingID user life cycle management](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_user_lifecycle_management.md)
+- [PingID language support](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_language_support.md): Reference for PingID language support, listing supported languages for the mobile app, authentication screens, and SMS and voice messages.
+- [PingID mobile app PIN requirements](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_mobile_app_pin_requirements.md): How to configure PingID mobile app PIN requirements, including PIN length, lockout rules, and behavior across multiple organizations.
+- [PingID Mobile Device Management (MDM)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_mobile_app_mobile_device_requirements.md): Overview of PingID mobile app MDM integration flow, covering token configuration, APNs setup, and supported MDM systems.
+- [PingID Offline MFA](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_offline_mfa.md): How to configure PingID offline MFA for use cases including PingFederate SSO, RADIUS, Windows login, Mac login, and SSH.
+- [PingID user life cycle management](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_user_lifecycle_management.md): Overview of PingID user life cycle management tasks, including device management and user provisioning in PingOne and the PingID web portal.
 - [PingOne](https://docs.pingidentity.com/pingone/p1_cloud__platform_main_landing_page.md)
 - [PingOne Authorize API gateway integrations](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_api_gateway_is.md): Connect your API gateway to PingOne Authorize to harness the power of API Access Management and dynamic authorization.
 - [PingOne Authorize event monitoring](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_monitoring_decision_endpoint_events.md): Event subscriptions, or webhooks, allow you to use third-party tools to monitor audit events for PingOne Authorize.
@@ -609,14 +611,15 @@
 - [PingOne Verify and identity data matching](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_identity_data_matching.md): Identity data matching in PingOne Verify manages how identity data is captured and presented across different document types.
 - [PingOne Verify and the American Association of Motor Vehicle Administrator&#8217;s system of record](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_aamva_dldv.md): The American Association of Motor Vehicle Administrator's Driver License Data Verification service in PingOne Verify validates your identity.
 - [PingOne Verify key concepts](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_key_concepts.md): Use the PingOne Verify key concepts to improve understanding of different verification topics.
+- [PingOne Verify mobile driver licenses](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_mdl_dc_api.md): A mobile driver license (mDL) in PingOne Verify is a secure, digital representation of a physical government-issued identification stored on a mobile device.
 - [PingOne Verify Mobile SDKs](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_developers_mobile_sdk.md): PingOne Verify mobile SDKs.
 - [PingOne Verify types of verification](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_types_of_verification.md): PingOne Verify offers different types of verification in PingOne to enable secure user verification.
 - [PKCE enforcement](https://docs.pingidentity.com/pingone/applications/p1_pkce_enforcement.md): Learn about PKCE enforcement options in PingOne.
 - [Policies published to Authorize gateways](https://docs.pingidentity.com/pingone/integrations/p1_policies_published_to_authz_gateways.md)
 - [Policy testing](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_policy_testing.md): Test PingOne Authorize policies end-to-end with visualization tools that show the complete decision flow and statement processing results.
 - [Populations](https://docs.pingidentity.com/pingone/directory/p1_populations.md): A population in PingOne defines a set of users and can simplify user management.
-- [Pre-populating or restricting user registration data](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1-strong-auth-pre-populate-or-restrict.md)
-- [Predictor rules](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_predictor_rules.md): Use rule reference to fine-tune the PingOne Protect Bot Detection, Suspicious Device, Traffic Anomaly, and composite predictors.
+- [Pre-populating or restricting user registration data](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1-strong-auth-pre-populate-or-restrict.md): How to configure PingID to pre-populate or restrict email, SMS, and voice registration fields using your organization's user directory data.
+- [Predictor rules](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_predictor_rules.md): Use this rule reference to fine-tune the PingOne Protect Bot Detection, Suspicious Device, Traffic Anomaly, and composite predictors.
 - [Predictors](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_risk_predictors.md): PingOne Protect predictors learn user behavior and detect anomalies.
 - [Previewing a theme](https://docs.pingidentity.com/pingone/user_experience/p1_preview_theme.md): View a real-time rendering of your PingOne theme and how it affects the appearance of end-user pages in your environment.
 - [Previewing an agreement](https://docs.pingidentity.com/pingone/user_experience/p1_preview_agreement.md)
@@ -639,13 +642,14 @@
 - [Provisioning Duo with PingOne](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_connection_duo.md): Provision Duo with PingOne.
 - [Provisioning OpenLDAP with PingOne](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_connection_openldap.md): Provision OpenLDAP in PingOne.
 - [Provisioning Radiant Logic with PingOne](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_connection_radiant_logic.md): Provision Radiant Logic in PingOne.
+- [Provisioning the PingOne connection with PingOne environments (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea_p1_provisioning_connection_pingone.md): The PingOne provisioning connection links two environments, either within the same organization or across different organizations.
 - [Publishing a policy and configuring an endpoint](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_tutorial_policy_publishing_and_endpoint_configuration.md): Publish a policy to a decision endpoint and configure the endpoint in PingOne Authorize.
 - [Publishing an authorization policy version](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_publishing_versions.md)
 - [Publishing authorization policy versions to Authorize gateways](https://docs.pingidentity.com/pingone/integrations/p1_publish_policy_versions_to_authz_gateway_instances.md)
 - [Pushed authorization requests](https://docs.pingidentity.com/pingone/applications/p1_pushed_authorization_request.md): PingOne applications can use a pushed authorization request (PAR) to securely initiate authorization flows.
 - [RADIUS gateways](https://docs.pingidentity.com/pingone/integrations/p1_radius_gateways_intro.md)
 - [Rate Limits and Allowed IPs](https://docs.pingidentity.com/pingone/settings/p1_rate_limits.md): Use the Rate Limits and Allowed IPs page in PingOne to allow traffic from specific IP addresses to exceed per IP per environment limits.
-- [Recent decisions](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_recent_decisions.md): Examine recent decisions in PingOne Authorize to debug policies deployed to decision endpoints or gateway instances.
+- [Recent decisions](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_recent_decisions.md): Examine recent decisions in PingOne Authorize to debug policies deployed to decision endpoints.
 - [Recovering a deleted Production environment](https://docs.pingidentity.com/pingone/settings/p1_recover_deleted_production_environment.md)
 - [Redirect URIs](https://docs.pingidentity.com/pingone/applications/p1_wildcard_redirect_uri.md): Redirect URIs are the addresses to which PingOne forwards the OIDC response after authentication.
 - [Reference and troubleshooting for Microsoft Entra hybrid join](https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_hybrid_join_troubleshooting.md): Use the reference and troubleshooting information when configuring Microsoft Entra hybrid join in PingOne.
@@ -670,7 +674,7 @@
 - [Reviewing and managing verification](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_managing_verification.md): View or manage a user's ID verification results.
 - [Reviewing risk evaluations](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_reviewing_risk_evaluations.md): Review and analyze PingOne Protect risk evaluations to fine-tune your risk policy.
 - [Reviewing the synchronization of users in PingID](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_tutorial_config_mfa_experience_review_synchronization_pid_users.md)
-- [Revoke an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_revoke_mdm_token.md)
+- [Revoke an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_revoke_mdm_token.md): How to revoke a PingID MDM token in PingOne, with guidance on handling the minimum token requirement.
 - [Revoking a client secret for a custom resource](https://docs.pingidentity.com/pingone/applications/p1_revoke_client_secret_resource.md): Manually revoke a previous client secret for a custom resource in PingOne.
 - [Revoking a client secret for an application](https://docs.pingidentity.com/pingone/applications/p1_revoke_client_secret_application.md): Manually revoke a previous client secret for an OIDC application in PingOne.
 - [Revoking a credential](https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_revoking_a_credential.md): You can revoke a credential in PingOne if it's no longer valid.
@@ -681,7 +685,7 @@
 - [Risk policies for MFA-only licenses](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_risk_policies_mfa_only.md)
 - [Risky IP](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_risky_ip.md): Identify and investigate frequently encountered high-risk IP addresses in PingOne Protect, and add known-safe IPs to predictor allow lists.
 - [Rolling back a promotion (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotion_rolling_back.md): Roll back a promotion to reset the target environment back to the state it was in immediately prior to the promotion.
-- [Rotate an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_rotate_mdm_token.md)
+- [Rotate an MDM token](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_rotate_mdm_token.md): How to rotate a PingID MDM token by generating a new token, distributing it to managed devices, and revoking the old token.
 - [Rotating an API gateway credential](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_rotating_gateway_credential.md): Rotate an API gateway credential in PingOne Authorize to maintain security and prevent unauthorized access.
 - [Rotating the client secret for a resource](https://docs.pingidentity.com/pingone/applications/p1_rotate_client_secret_resource.md): Rotate a client secret for a resource in PingOne.
 - [Rotating the client secret for an application](https://docs.pingidentity.com/pingone/applications/p1_rotate_client_secret.md): Rotate a client secret for an application in PingOne.
@@ -714,13 +718,13 @@
 - [Service caching and timeouts for Authorize gateway instances](https://docs.pingidentity.com/pingone/integrations/p1_service_caching_authz_gateway_instances.md)
 - [Service configuration constraints](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_service_configuration_constraints.md): Review service integration constraints in PingOne Authorize.
 - [Setting the default authentication policy](https://docs.pingidentity.com/pingone/authentication/p1_set_default_auth_policy.md): Use the Authentication policies page to configure the default authentication policy in PingOne.
-- [Setting the PingID mobile app configuration policies for Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_setting_pid_configuration_policies_for_intune.md)
+- [Setting the PingID mobile app configuration policies for Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_setting_pid_configuration_policies_for_intune.md): How to set PingID mobile app configuration policies in Microsoft Intune for iOS and Android using the MDM token.
 - [Setting the WS-Trust version](https://docs.pingidentity.com/pingone/applications/p1_setting_ws-trust_version.md): Specify the WS-Trust version to use for the Microsoft 365 application in PingOne.
 - [Setting up a custom domain](https://docs.pingidentity.com/pingone/settings/p1_set_up_custom_domain.md): Create an entry for the custom domain in PingOne.
 - [Setting up a RADIUS gateway](https://docs.pingidentity.com/pingone/integrations/p1_gateways_setup.md)
 - [Setting up a trusted email domain](https://docs.pingidentity.com/pingone/settings/p1_set_up_trusted_email_domain.md): Configure PingOne to send emails on your organization's behalf.
 - [Setting up an Authorize gateway](https://docs.pingidentity.com/pingone/integrations/p1_set_up_authz_gateway.md)
-- [Setting up an environment for strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_create_environment_strong_authentication_start.md)
+- [Setting up an environment for strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_create_environment_strong_authentication_start.md): How to set up a PingOne environment for MFA for Customer or Workforce use cases, with geography (region)-specific steps, including Singapore.
 - [Setting up an LDAP gateway](https://docs.pingidentity.com/pingone/integrations/p1_gateways_overview.md): Set up a gateway connection in PingOne.
 - [Setting up DaVinci Forms for multi-language support](https://docs.pingidentity.com/pingone/user_experience/p1_setting_up_davinci_forms_language_support.md)
 - [Setting up end-user authentication for the Self Service portal](https://docs.pingidentity.com/pingone/user_experience/p1_setting_up_authentication_self_service.md): Define authentication requirements for end users to authenticate to the PingOne Self-Service - MyAccount app.
@@ -762,20 +766,20 @@
 - [Statements](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_policy_statements.md): Statements extend authorization decisions by instructing the policy decision service to perform additional processing.
 - [Step-up authentication for APIs](https://docs.pingidentity.com/pingone/authentication/p1_stepup_authentication_for_apis.md)
 - [Strong Authentication (MFA)](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started_with_strong_authentication_mfa.md)
-- [Strong Authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_start.md)
-- [Strong authentication (MFA) integrations](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_integrations.md)
-- [Strong authentication monitoring and dashboards](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_monitoring_dashboards.md)
+- [Strong Authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_start.md): How to configure Strong Authentication (MFA), including set up authentication methods and policies.
+- [Strong authentication (MFA) integrations](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_integrations.md): Overview of PingOne strong authentication (MFA) integrations for Customer and Workforce environments, including RADIUS Gateway and API.
+- [Strong authentication monitoring and dashboards](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_monitoring_dashboards.md): Monitor PingOne strong authentication (MFA) usage using dashboards, audit reports, and alerts.
 - [Suppressing the Local Network Access prompt for PingID desktop authentication](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_desktop_app_v2_windows_manage_lna_prompt.md)
 - [Sync status](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_sync_status.md): The sync status in PingOne shows the sync summary and current status of users and groups of a provisioning connection.
 - [Sync users between two environments](https://docs.pingidentity.com/pingone/pingone_tutorials/p1_sync_users_between_two_environments.md): Set up a SCIM connection from one PingOne environment to another.
 - [System applications](https://docs.pingidentity.com/pingone/applications/p1_system_applications.md): PingOne includes several applications that are part of the PingOne platform.
 - [Targets](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_policy_targets.md): Targets define the conditions under which PingOne Authorize policies and rules are applied to decision requests.
-- [Tasks requiring the legacy PingID admin portal](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_manage_pid_in_p1.md)
+- [Tasks requiring the legacy PingID admin portal](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_manage_pid_in_p1.md): Overview of PingID management tasks for Workforce environments that still require the legacy PingID admin portal rather than PingOne.
 - [Testing policies](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_testing_policies.md): Test PingOne Authorize policies end-to-end with visualization tools that show the complete decision flow and result details.
 - [Testing predictors](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_testing_risk_predictors.md): Test PingOne Protect risk predictors by simulating risk events such as geovelocity anomalies, new devices, and anonymous network access.
 - [Testing statement processing](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_testing_statement_processing.md): Test PingOne Authorize statement processing to verify how API request and response transformations are applied without using an external testing service.
 - [Testing Trust Framework elements](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_testing_tf_elements.md): Test PingOne Authorize Trust Framework elements end-to-end with tools that show the complete processing flow.
-- [Third-party MDM system configuration for PingID integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_third_party_mdm_configuration_for_pid.md)
+- [Third-party MDM system configuration for PingID integration](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_third_party_mdm_configuration_for_pid.md): Overview of third-party MDM system configuration steps for PingID integration, including APNs certificates and Android for Work setup.
 - [Threat Protection Dashboard](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_dashboard.md): Explore the PingOne Protect dashboard, including risk totals, heat map, risk events, high-risk models, browser and OS distribution, and risky IPs.
 - [Threat Protection Dashboard filters](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_dashboard_filtering.md): Filter PingOne Protect dashboard charts by policy, event type, flow type, risk level, OS, browser, country, username, and date range.
 - [Threat Protection using PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_overview.md): PingOne Protect helps prevent identity fraud by incorporating advanced features and real-time detection.
@@ -796,10 +800,10 @@
 - [Troubleshooting webhooks](https://docs.pingidentity.com/pingone/integrations/p1_troubleshooting_webhooks.md): Troubleshoot common webhook errors in PingOne.
 - [Trust Framework](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_trust_framework.md): Use the Trust Framework to define the building blocks used in policies and access control decisions.
 - [Typical configuration management workflow (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promote_typical_workflow.md): Follow the recommended configuration management workflow in PingOne to ensure the integrity of your production environments.
-- [Updating a PingID token in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_intune.md)
-- [Updating a PingID token in MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_mobileiron.md)
-- [Updating a PingID token in Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_workspace_one_uem.md)
-- [Updating an existing MFA policy to use FIDO2](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_updating_an_mfa_policy_to_fido2.md)
+- [Updating a PingID token in Microsoft Intune](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_intune.md): How to update the PingID MDM token in Microsoft Intune for iOS and Android app configuration policies.
+- [Updating a PingID token in MobileIron](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_mobileiron.md): How to update the PingID MDM token in MobileIron for iOS and Android managed app configuration.
+- [Updating a PingID token in Workspace ONE UEM](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_updating_token_workspace_one_uem.md): How to update the PingID MDM token in Workspace ONE UEM for iOS and Android managed app configuration.
+- [Updating an existing MFA policy to use FIDO2](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_updating_an_mfa_policy_to_fido2.md): How to update a PingOne MFA policy from the legacy FIDO implementation to the latest FIDO2 policy format for passkey support.
 - [Updating and retesting a policy](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_tutorial_updating_and_retesting_policies.md): Update and retest a policy to iterate on your authorization decisions in PingOne Authorize.
 - [Updating completion status for risk evaluations](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_updating_completion_status_risk_evaluations.md): When PingOne Protect is integrated into a user journey, you can define different paths in the flow based on the risk evaluation response.
 - [Updating the key rotation policy for an application](https://docs.pingidentity.com/pingone/settings/p1_update_key_rotation_for_an_application.md): Use the application details panel to update the key rotation policy for a PingOne application.
@@ -814,7 +818,7 @@
 - [User Demographics Dashboard](https://docs.pingidentity.com/pingone/monitoring/p1_user_demographic_dashboard.md)
 - [User devices and app version charts](https://docs.pingidentity.com/pingone/monitoring/p1_user_devices_and_app_version_chart.md)
 - [User Devices report](https://docs.pingidentity.com/pingone/directory/p1_user_device_reports.md): View and export a list of user devices associated with the users in your PingOne environment.
-- [User directory for PingID Offline MFA](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_user_directory_for_pid_offline_mfa.md)
+- [User directory for PingID Offline MFA](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_user_directory_for_pid_offline_mfa.md): How to configure a user directory for PingID offline MFA to store authentication device details for users authenticating without network access.
 - [User Experience](https://docs.pingidentity.com/pingone/user_experience/p1_user_experience.md): The User Experience branch in PingOne allows you to configure the user experience.
 - [Users](https://docs.pingidentity.com/pingone/directory/p1_aboutusers.md): In PingOne, users are the unique identities that interact with the applications and services in the environment to which the user is assigned.
 - [Using a custom email provider for notifications](https://docs.pingidentity.com/pingone/settings/p1_using_custom_email_provider_for_notifications.md)
@@ -825,7 +829,7 @@
 - [Using audit logs to identify sync issues](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_audit_logs_sync_issues.md): Use the audit logs in the rule details panel to identify specific issues for a particular group.
 - [Using dynamic text](https://docs.pingidentity.com/pingone/user_experience/p1_using_dynamic_text.md)
 - [Using group identity details to identify sync issues](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_group_identity_sync_issues.md)
-- [Using MyAccount to manage PingID devices](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_manage_pid_using_myaccount_selfservice.md)
+- [Using MyAccount to manage PingID devices](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_manage_pid_using_myaccount_selfservice.md): How to use PingOne MyAccount self-service to manage PingID authentication devices, including pairing and unpairing.
 - [Using MyAccount to manage PingID devices (Workforce only)](https://docs.pingidentity.com/pingone/user_experience/p1_using_myaccount_to_manage_wf_devices.md)
 - [Using PingGateway no-code application and API protection](https://docs.pingidentity.com/pingone/use_cases/p1_use_pg_no_code_app_and_api_protection.md)
 - [Using predictors to recreate legacy PingID policy rules](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_recreating_legacy_pingid_rules.md)
@@ -833,7 +837,7 @@
 - [Using the advanced configuration editor](https://docs.pingidentity.com/pingone/applications/p1_using_the_advanced_configuration_editor.md): Use the advanced configuration editor in PingOne to manage attribute mappings.
 - [Using the Cloud Acceleration Toolset](https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.md): The Cloud Acceleration Toolset is a cloud migration tool that helps accelerate the migration to PingOne.
 - [Using the expression builder](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_use_expression_builder.md): Use the expression builder in PingOne to create expressions and test the results of those expressions.
-- [Using the PingID Device Trust agent](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_using_the_workforce_trust_agent.md)
+- [Using the PingID Device Trust agent](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_using_the_workforce_trust_agent.md): How to install and configure the PingID Device Trust agent so the PingID Device Trust predictor can validate trusted devices in a risk policy.
 - [Using translatable keys](https://docs.pingidentity.com/pingone/user_experience/p1_using_translatable_keys.md): Add translatable keys in PingOne for any user-facing text in your forms.
 - [Using Twilio Verify with PingOne](https://docs.pingidentity.com/pingone/settings/p1_using_twilio_verify_for_notifications.md): You can add a Twilio account to use Twilio Verify for sending PingOne notifications.
 - [Using user identity details to identify sync issues](https://docs.pingidentity.com/pingone/integrations/p1_identify_sync_issues_user.md)
@@ -884,8 +888,8 @@
 - [Viewing user details](https://docs.pingidentity.com/pingone/directory/p1_viewusers.md): Use the Users page to view and manage all users in your organization.
 - [Viewing your licenses](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_view_licenses.md): View your licenses in PingOne.
 - [Virtual server IDs for SAML applications](https://docs.pingidentity.com/pingone/applications/p1_virtual_server_ids_saml_apps.md): Use virtual server IDs for SAML applications in PingOne.
-- [Visualizing decisions made by Authorize gateway instances](https://docs.pingidentity.com/pingone/integrations/p1_visualize_decisions_by_authz_gateway_instances.md): Use the PingOne Authorize decision visualizer to examine and debug recent authorization decisions executed by gateway instances.
+- [Visualizing decisions made by Authorize gateway instances](https://docs.pingidentity.com/pingone/integrations/p1_visualize_decisions_by_authz_gateway_instances.md): Use the PingOne Authorize Decision Visualizer to examine and debug recent authorization decisions executed by gateway instances.
 - [Webhooks](https://docs.pingidentity.com/pingone/integrations/p1_webhooks.md): With webhooks, also known as subscriptions, you can use third-party tools to monitor events in PingOne.
-- [What is a typical strong authentication (MFA) workflow?](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_typical_flow.md)
-- [What is the difference between Workforce and Customer environments?](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_what_is_the_difference.md)
-- [What you need to know before integrating or migrating a PingID account into a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_what_to_know_before_integrating_existing_pid_account_to_p1.md)
+- [What is a typical strong authentication (MFA) workflow?](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_authentication_typical_flow.md): Overview of the typical PingOne strong authentication (MFA) workflow, covering configuration steps for Workforce and Customer use cases.
+- [What is the difference between Workforce and Customer environments?](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_pid_what_is_the_difference.md): Understand the difference between strong authentication (MFA) for an organization-focused Workforce environment or a CIAM-focused customer environment
+- [What you need to know before integrating or migrating a PingID account into a PingOne environment](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_what_to_know_before_integrating_existing_pid_account_to_p1.md): Prerequisites and limitations for integrating or migrating a PingID account into a PingOne environment, including admin account and user impact.

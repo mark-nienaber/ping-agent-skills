@@ -4,6 +4,8 @@ description: You can use the PingFederate authentication API to integrate the Pi
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_authentication_api_support
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_authentication_api_support.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 ---
 
@@ -27,6 +29,8 @@ description: The following is the change history for the PingOne Credentials Int
 component: pingone-credentials
 page_id: pingone-credentials:release_notes:pf_p1_credentials_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/release_notes/pf_p1_credentials_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   pingone-credentials-integration-kit-1-0-august-2024: PingOne Credentials Integration Kit 1.0 - August 2024
@@ -64,6 +68,8 @@ description: Configure the PingOne Credentials IdP Adapter to determine how Ping
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_configuring_an_adapter_instance
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 3, 2024
 section_ids:
   steps: Steps
@@ -179,6 +185,8 @@ description: In PingOne, create a set of credentials for PingFederate. For PingF
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_connecting_pf_101_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_connecting_pf_101_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   about-this-task: About this task
@@ -215,6 +223,8 @@ description: Create a connection between PingFederate and PingOne. In PingFedera
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_connecting_pf_102_or_later
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_connecting_pf_102_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   about-this-task: About this task
@@ -257,6 +267,8 @@ description: To allow PingFederate to communicate with PingOne, create a connect
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_connecting_pf_to_p1
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_connecting_pf_to_p1.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   connecting-pingfederate-10-2-or-later: Connecting PingFederate 10.2 or later
@@ -333,6 +345,8 @@ description: To get started with the integration, deploy the PingOne Credentials
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 29, 2024
 section_ids:
   steps: Steps
@@ -372,6 +386,8 @@ description: The following files are included in the PingOne Credentials Integra
 component: pingone-credentials
 page_id: pingone-credentials:release_notes:pf_p1_credentials_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/release_notes/pf_p1_credentials_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 ---
 
@@ -437,6 +453,8 @@ description: To help with troubleshooting or monitoring, you can turn on activit
 component: pingone-credentials
 page_id: pingone-credentials:troubleshooting:pf_p1_credentials_ik_enabling_debug_logging
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/troubleshooting/pf_p1_credentials_ik_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   about-this-task: About this task
@@ -500,6 +518,8 @@ description: Apply the same extended contract changes to the policy contract and
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_configuring_the_extended_contract
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_configuring_the_extended_contract.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 3, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -621,6 +641,8 @@ description: The following are known issues or limitations for the PingOne Crede
 component: pingone-credentials
 page_id: pingone-credentials:release_notes:pf_p1_credentials_ik_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/release_notes/pf_p1_credentials_ik_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   known-issues: Known issues
@@ -647,6 +669,8 @@ description: When using the PingOne Credentials IdP Adapter through the PingFede
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik__models_objects_and_error_codes
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik__models_objects_and_error_codes.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 3, 2024
 section_ids:
   state-models: State models
@@ -704,6 +728,8 @@ description: With the PingOne Credentials Integration Kit, PingFederate includes
 component: pingone-credentials
 page_id: pingone-credentials::pf_p1_credentials_ik_overview_of_the_sso_flow
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/pf_p1_credentials_ik_overview_of_the_sso_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 28, 2024
 section_ids:
   different-device-sso-flow-description: Different device SSO flow description
@@ -772,6 +798,8 @@ description: Field descriptions for the PingOne Credentials IdP Adapter configur
 component: pingone-credentials
 page_id: pingone-credentials:setup:pf_p1_credentials_ik_p1_credentials_idp_adapter_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_p1_credentials_idp_adapter_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 3, 2024
 ---
 
@@ -822,6 +850,8 @@ description: The PingOne Credentials Integration Kit allows PingFederate to veri
 component: pingone-credentials
 page_id: pingone-credentials::pf_p1_credentials_ik
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/pf_p1_credentials_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 27, 2024
 section_ids:
   features: Features

@@ -4,6 +4,8 @@ description: The following is the change history for the PingID Provisioner.
 component: pingid
 page_id: pingid:release_notes:pf_pid_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/pingid/release_notes/pf_pid_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 31, 2026
 section_ids:
   version-1-1-2: Version 1.1.2
@@ -67,6 +69,8 @@ description: To allow PingFederate to manage users in PingID, create a service p
 component: pingid
 page_id: pingid:setup:pf_pid_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -117,6 +121,8 @@ description: To get started with the integration, deploy the PingID Provisioner 
 component: pingid
 page_id: pingid:setup:pf_pid_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   steps: Steps
@@ -158,6 +164,8 @@ description: As part of the provisioning process, the PingID Provisioner can add
 component: pingid
 page_id: pingid::pf_pid_connector_device_management
 canonical_url: https://docs.pingidentity.com/integrations/pingid/pf_pid_connector_device_management.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   nicknames: Nicknames
@@ -243,6 +251,8 @@ description: The following files are included in the PingID Provisioner .zip arc
 component: pingid
 page_id: pingid:release_notes:pf_pid_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/pingid/release_notes/pf_pid_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -266,6 +276,8 @@ description: To use PingFederate for provisioning, configure an external datasto
 component: pingid
 page_id: pingid:setup:pf_pid_connector_enabling_provisioning_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_enabling_provisioning_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   about-this-task: About this task
@@ -319,6 +331,8 @@ description: Download your PingID settings file to make it easier to set up your
 component: pingid
 page_id: pingid:setup:pf_pid_connector_get_your_pid_settings_file
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_get_your_pid_settings_file.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   about-this-task: About this task
@@ -353,6 +367,8 @@ description: The following are known issues or limitations with the PingID Provi
 component: pingid
 page_id: pingid:release_notes:pf_pid_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/pingid/release_notes/pf_pid_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 1, 2024
 section_ids:
   known-issues: Known issues
@@ -383,6 +399,8 @@ description: Field descriptions for the PingID Provisioner configuration.
 component: pingid
 page_id: pingid:setup:pf_pid_connector_pid_connector_settings_reference
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_pid_connector_settings_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -447,6 +465,8 @@ description: The PingID Provisioner allows PingFederate to integrate with PingID
 component: pingid
 page_id: pingid::pf_pid_connector
 canonical_url: https://docs.pingidentity.com/integrations/pingid/pf_pid_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 10, 2026
 section_ids:
   features: Features
@@ -526,6 +546,8 @@ description: The following attributes can be mapped for user provisioning to Pin
 component: pingid
 page_id: pingid:setup:pf_pid_connector_supported_attributes_reference
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -559,6 +581,8 @@ description: If you are upgrading from a previous version of the PingID Provisio
 component: pingid
 page_id: pingid:setup:pf_pid_connector_upgrading_an_existing_deployment
 canonical_url: https://docs.pingidentity.com/integrations/pingid/setup/pf_pid_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   steps: Steps
@@ -614,6 +638,8 @@ description: The PingID Provisioner synchronizes users from your datastore to Pi
 component: pingid
 page_id: pingid::pf_pid_connector_user_management
 canonical_url: https://docs.pingidentity.com/integrations/pingid/pf_pid_connector_user_management.html
+llms_txt: https://docs.pingidentity.com/integrations/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
   synchronizing-existing-users: Synchronizing existing users

@@ -61,7 +61,7 @@ You must set up the following before using the PingOne Authorize node:
 
   * Requires the [Identity Data Admin](https://developer.pingidentity.com/pingone-api/platform/roles.html) role
 
-* [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service)
+* [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html)
 
 ## Configuration
 
@@ -179,7 +179,7 @@ Implement a [Username Collector node](../am-only/username-collector.html) (stand
 
 This node requires a PingOne Worker Service configuration so that it can authenticate to your PingOne instance.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 ## Configuration
 
@@ -472,7 +472,7 @@ The [PingOne Credentials scenarios](https://docs.pingidentity.com/pingone/digita
 
 To use the PingOne Credentials nodes in your authentication journeys, PingOne Advanced Identity Cloud provides the following artifacts :
 
-* [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service)
+* [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html)
 
 * [PingOne Credentials Find Wallets node](pingone-cred-find-wallet.html)
 
@@ -1043,7 +1043,7 @@ Use either of the following nodes to populate the `pingOneUserId` variable in sh
 
 This node requires a PingOne Worker Service configuration so that it can authenticate to your PingOne instance.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 ## Configuration
 
@@ -1158,7 +1158,7 @@ Implement a [Username Collector node](../am-only/username-collector.html) (stand
 
 This node requires a PingOne Worker Service configuration so that it can authenticate to your PingOne instance.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 ## Configuration
 
@@ -1444,7 +1444,7 @@ This node requires that you've initialized PingOne Protect in your client applic
 
 This node requires a PingOne Worker Service configuration to connect to your PingOne instance and send it the necessary data to make risk evaluations.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 The client application must be using Ping SDK 4.4.0 or later.
 
@@ -1820,7 +1820,7 @@ None. This node doesn't read shared state data.
 
 This node requires a PingOne Worker Service configuration so that it can connect to your PingOne instance and send it the necessary data to make risk evaluations as part of the journey.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 Only Ping SDKs v4.4.0 and later support this node.
 
@@ -2012,7 +2012,7 @@ This node requires that you've initialized PingOne Protect. For example, by usin
 
 This node requires a PingOne Worker Service configuration so that it can connect to your PingOne instance and send it the necessary data to make risk evaluations as part of the journey.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 ## Configuration
 
@@ -2052,9 +2052,9 @@ section_ids:
 
 The [PingOne Service](pingone-service.html) lets you integrate PingOne Credentials and PingOne DaVinci in your authentication journeys.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Use this service *only* if you're integrating the PingOne Credentials and PingOne Davinci marketplace nodes.If you're integrating the PingOne Protect and PingOne Verify nodes, use the PingOne Worker service instead.Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service). |
+|   |                                                                                                                                                                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Use this service *only* if you're integrating the PingOne Credentials and PingOne Davinci marketplace nodes.If you're integrating the PingOne Protect and PingOne Verify nodes, use the PingOne Worker service instead.Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html). |
 
 ## Configure the PingOne service
 
@@ -2631,7 +2631,7 @@ You can restrict available inputs using the Script Inputs field when configuring
 
 This node requires a PingOne Worker Service configuration so that it can connect to your PingOne instance and send it the necessary data to perform PingOne Verify evaluations as part of the journey.
 
-Find more information in [PingOne Worker service](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#realm-pingone-worker-service).
+Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
 ## Configuration
 

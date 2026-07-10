@@ -2,11 +2,11 @@
 
 - Product: Connectors
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/connectors/llms.txt
-- Guides discovered: 81
-- Guides captured: 70
-- Total pages indexed: 120
+- Guides discovered: 82
+- Guides captured: 71
+- Total pages indexed: 121
 
 ## Source URLs
 
@@ -42,6 +42,7 @@
 | functions-connector-md.md | assembled | <1 pages from functions_connector.md> | 1 |
 | google-login-connector-md.md | assembled | <1 pages from google_login_connector.md> | 1 |
 | google-workspace-admin-connector-md.md | assembled | <1 pages from google_workspace_admin_connector.md> | 1 |
+| hello-connector-md.md | assembled | <1 pages from hello_connector.md> | 1 |
 | http-connector-md.md | assembled | <1 pages from http_connector.md> | 1 |
 | hypr-connector-md.md | assembled | <1 pages from hypr_connector.md> | 1 |
 | id-dataweb-connector-md.md | assembled | <1 pages from id_dataweb_connector.md> | 1 |
@@ -72,13 +73,13 @@
 | p1-verify-connector-md.md | assembled | <1 pages from p1_verify_connector.md> | 1 |
 | p1az-connector-md.md | assembled | <1 pages from p1az_connector.md> | 1 |
 | pf-connector-md.md | assembled | <1 pages from pf_connector.md> | 1 |
-| pid-connector-md.md | assembled | <1 pages from pid_connector.md> | 1 |
-| pid-legacy-connector-md.md | assembled | <1 pages from pid_legacy_connector.md> | 1 |
-| protect-use-case-connector-md.md | assembled | <1 pages from protect_use_case_connector.md> | 1 |
-| salesforce-connector-md.md | assembled | <1 pages from salesforce_connector.md> | 1 |
-| saml-connector-md.md | assembled | <1 pages from saml_connector.md> | 1 |
-| scrambleid-connector-md.md | assembled | <1 pages from scrambleid_connector.md> | 1 |
-| screen-connector-md.md | assembled | <1 pages from screen_connector.md> | 1 |
+| servicenow-connector-md.md | assembled | <1 pages from servicenow_connector.md> | 1 |
+| socure-connector-md.md | assembled | <1 pages from socure_connector.md> | 1 |
+| splunk-connector-md.md | assembled | <1 pages from splunk_connector.md> | 1 |
+| string-connector-md.md | assembled | <1 pages from string_connector.md> | 1 |
+| teleport-connector-md.md | assembled | <1 pages from teleport_connector.md> | 1 |
+| token-management-connector-md.md | assembled | <1 pages from token_management_connector.md> | 1 |
+| transunion-tloxp-connector-md.md | assembled | <1 pages from transunion_tloxp_connector.md> | 1 |
 | variable-connector-md.md | assembled | <1 pages from variable_connector.md> | 1 |
 | veriff-connector-md.md | assembled | <1 pages from veriff_connector.md> | 1 |
 | yoti-connector-md.md | assembled | <1 pages from yoti_connector.md> | 1 |
@@ -87,9 +88,9 @@
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | f8246ca6561ed0a8c0903971463501e1b622bb9684c04a248a9b31c24c17b967 |
+| llms.txt | 405e4fde4bb679867d2ebb4ed064c24247d847f15176adbfc274a5704dffc6f6 |
 | snapshots/relnotes.md | 58d42043beb6b0be59f0a793013e91914bb47d312e2d1d491dbace331b4df878 |
-| snapshots/type.md | a97e6257d1e9ce39412723fe241540662060f8cc74e36a731a1203f292e57930 |
+| snapshots/type.md | 84632f8ab054df196ca50a575ca481983572e8a34e5ddd3a551146d7fbda81cb |
 | snapshots/accertify-connector-md.md | de229b187f4f4bec02f7b98ec264154d6cdf200eb523252f0c7e7017114a6458 |
 | snapshots/adobe-experience-manager-connector-md.md | 02a134dc61bd29d53a3a2e1df9f72684b289eafb015b3cbff6cebfffda03f87d |
 | snapshots/apple-login-connector-md.md | a550cd82e00da34d9ab1db3ce34fa75b7ffd81421f3eec65ac4b6eaa2b5ad273 |
@@ -112,16 +113,17 @@
 | snapshots/error-message-connector-md.md | b9fa73719d49e35ce20bd68b325e3a463613987ddd7291d8acd1876d3049368a |
 | snapshots/facebook-login-connector-md.md | f548b9110b82a5c5981d70c569a7ed7f8926fc50c54b27c844cb4382fd3bf921 |
 | snapshots/fingerprintjs-connector-md.md | 1653cdc87c256c9a0cd0f4f394bce798bdc00c2bf68b05a54b0ed9cc39bae734 |
-| snapshots/flow-analytics-connector-md.md | 590fad299b57975bbbbbdc25f230579c4fbd91a08c387edb1184ad26683439a6 |
+| snapshots/flow-analytics-connector-md.md | 97b2e6a44d30b2a4d257cdcab422a10648185196fef7a15f2660340b219591f0 |
 | snapshots/flow-conductor-connector-md.md | 7bb84b4c2b58d8525386103d90b8261c4e352f7c9a92541d016201219894d87b |
 | snapshots/form-connector-md.md | 0126ca6233b3397271764575138b45bb65280483558e429f031b4940c0119d1a |
 | snapshots/functions-connector-md.md | a8c976e9c5ee387d946ca180bd41c460fad53baf4bad81f23ca2849455370278 |
 | snapshots/google-login-connector-md.md | 9f4db23a6b11dab16f0a9c6331dfa7a59f1d55687c731887a507ff7a01ea7423 |
 | snapshots/google-workspace-admin-connector-md.md | 7f5a83110d987443ab8455d6d1295cb0e83d890d351502605e8bad12703f547d |
+| snapshots/hello-connector-md.md | 2d24a8e4b933d7a89527c33bcf1de6488c13708f2c5deaa7594e6a2702925330 |
 | snapshots/http-connector-md.md | 8e112f9b0feb9c5afe3388ee31ad9c71f2493198102bfa3fab7476e1555c8648 |
 | snapshots/hypr-connector-md.md | dbd3940dcf7f8b4c5764604d796fe5542bcf71e3464b8eb46cf0fcaa7d30f3cb |
 | snapshots/id-dataweb-connector-md.md | 86ef687b6bd047d1465e0556c0c675838729addfcd1c2273ac1a315e4b098864 |
-| snapshots/index-md.md | 793dcced01fa2ea6cd9a6a5a7b774bc76eba3520c36aaa5f5be6169d12cf2863 |
+| snapshots/index-md.md | 73beab013dd9639b9fa9cb79b4449a8450ab2674c28b1c5d1be1b6452913df15 |
 | snapshots/island-connector-md.md | ee886f54f52d8802f9b1b53fd48643544a425aa4062f74b44f658797706de7f1 |
 | snapshots/jira-connector-md.md | 4b661a7c08e6537db407ec3dc743d51906e6102295f149c278973a5213617ece |
 | snapshots/ldap-connector-md.md | bfcef500176563010f1a707f26ddc5f5a607014012237dd825772f52ec35003c |
@@ -148,13 +150,13 @@
 | snapshots/p1-verify-connector-md.md | ebaf4612b2a99369650a89435f20f399a16d2e85124e89a3c14b17a28a9f4867 |
 | snapshots/p1az-connector-md.md | 6666a902bf37e1cc39b57f0bbcd6edcc405dfa95b0348a1c0c67e53a80946e84 |
 | snapshots/pf-connector-md.md | 15fd03b5b50544b9b40c7684f771ac47afa981f741cedefd3fc0a87f3e15af8c |
-| snapshots/pid-connector-md.md | 002ab1982bd350f5e9869aea70d8e5a2ae3c8c6ebae435abdcf85087394061ed |
-| snapshots/pid-legacy-connector-md.md | 23211e92a18a5cd989d4480d12fea8d2646ccba878512128bb28932b3c619d54 |
-| snapshots/protect-use-case-connector-md.md | b975c728bddf3d7497d567a995118986d80e6cff01ce3cf1ad9c763504001ccd |
-| snapshots/salesforce-connector-md.md | 18d7d3476058ec51f1885fbbaf6125189d0bf220cfdd66de4cfd928c6bf5a2dd |
-| snapshots/saml-connector-md.md | 84b8c6396225a00e4ab9e42a9783354525434acad9cb2d01d44ba297b767d6d9 |
-| snapshots/scrambleid-connector-md.md | 71cf05e39ec87e8523473dd8b1a73217701932cac6e6d86db8aa4c9519a63884 |
-| snapshots/screen-connector-md.md | 4de51ab5465a416b8540a0420840b52f5349f348f3629aaefc1105461a7bcbe6 |
+| snapshots/servicenow-connector-md.md | f184519edeac06be27553fce7cb4092780477b557d7a67c1fa1a4d8964a9114f |
+| snapshots/socure-connector-md.md | aeaab8fa2bf2d548757d02597ca85b69b0666fcd381973b1d8a8bc989ed84a15 |
+| snapshots/splunk-connector-md.md | 67acb4ef1c2e08ff09e1c485fb01ba7a86b949d19a98823ec3104e3a35876709 |
+| snapshots/string-connector-md.md | 1d41233cba724f78857fe1c372e7c84c33959ba85c1b1ee1e5f37e09b3c6148d |
+| snapshots/teleport-connector-md.md | b83675b5b5869ef01622f815a923f521420a0f5555e59ee1bfd85c907024662f |
+| snapshots/token-management-connector-md.md | b803961d55ff6f3b333e3e9f04d7b3b3108dc76c4d5b5130a62ea6ea416c37a4 |
+| snapshots/transunion-tloxp-connector-md.md | 509977b07eb91b13ab3f32c58a9c7987cb237ad307cbbba386b053e47c72eb84 |
 | snapshots/variable-connector-md.md | d0ad28192a3f8b556dc2f7de288577b425a16d6e068fa10333064445c9129e6a |
 | snapshots/veriff-connector-md.md | ddd6730e3bee133ca754d7b5b2b279224d676af68a98238d1417346b6d7f6078 |
 | snapshots/yoti-connector-md.md | d59ebc98aaf82b149d6fcc797d651e3cd25616f84c6d2c860ffad7001c3e2ffd |

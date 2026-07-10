@@ -2,10 +2,10 @@
 
 - Product: ForgeOps
 - Version: 2026.2
-- Sync date: 2026-07-03
+- Sync date: 2026-07-10
 - Source: https://docs.pingidentity.com/forgeops/llms.txt
 - Guides discovered: 12
-- Guides captured: 10
+- Guides captured: 11
 - Total pages indexed: 89
 
 ## Source URLs
@@ -14,6 +14,7 @@
 |---|---|---|---|
 | prepare.md | assembled | <17 pages from prepare> | 17 |
 | reference.md | assembled | <15 pages from reference> | 15 |
+| troubleshoot.md | assembled | <10 pages from troubleshoot> | 10 |
 | customize.md | assembled | <8 pages from customize> | 8 |
 | start.md | assembled | <7 pages from start> | 7 |
 | upgrade.md | assembled | <6 pages from upgrade> | 6 |
@@ -28,8 +29,9 @@
 | File | SHA-256 |
 |---|---|
 | llms.txt | 6fd9a5c93659310a480c4c649bb0b83721b4493350625762a2da5d92170e3f5e |
-| snapshots/prepare.md | 852542c4558fbc1ad9c7b0729c518f8ceba6ad53d565b03e084b745d754dc4b5 |
-| snapshots/reference.md | 5092c86a900f8e35e9bd0124b84546d2eb4da4df325f48b1e2a940103bd94c3e |
+| snapshots/prepare.md | 155d8c8fca127cfa6f116d9a37ccb2537f40174a164f4b4070cbce7d49a09f17 |
+| snapshots/reference.md | 7d531cc08564eaeb9799513bb0ed78518faabd0780a9f2400ca81b523ecf0ea2 |
+| snapshots/troubleshoot.md | ca3736cabbf1a3298d29ba492350b75b484de58d09202469bfc9570a3829b5dc |
 | snapshots/customize.md | 2c4bade74f1836ac9214a9db0fbae85981ad0fd3975684bd0e3ae9280387287e |
 | snapshots/start.md | 47aaec1ca82001d26b730370ac848528a0d3e0d7c902b03c0d52e9261db75655 |
 | snapshots/upgrade.md | 5d6daf608a85db614c28a82dfed55deaa0b0cd9d811654c3743027355b66e824 |

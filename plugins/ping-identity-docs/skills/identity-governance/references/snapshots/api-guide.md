@@ -1,4 +1,2724 @@
 ---
+title: About the Identity Governance API
+description: Identity Governance provides a RESTful application programming interface (API) that lets you use HTTP request methods (GET, PUT, and POST) to interact with the system and its components. The API lets a developer make requests to send or receive data to an Identity Governance endpoint, a point where the API communicates with the system. The data that is sent or returned is in JavaScript Object Notation (JSON) format.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:api-guide:chap-api-intro
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/api-guide/chap-api-intro.html
+---
+
+# About the Identity Governance API
+
+Identity Governance provides a RESTful application programming interface (API) that lets you use HTTP request methods (GET, PUT, and POST) to interact with the system and its components. The API lets a developer make requests to send or receive data to an Identity Governance endpoint, a point where the API communicates with the system. The data that is sent or returned is in JavaScript Object Notation (JSON) format.
+
+Identity Governance provides its API as a Swagger yaml file or a Postman collection. You can download the files on [Ping Identity Download Center](https://backstage.pingidentity.com/downloads/browse/idm/featured).
+
+---
+
+---
+title: Access Request
+description: The following are Identity Governance API Access Request endpoints:
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:api-guide:chap-access-request-api
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/api-guide/chap-access-request-api.html
+section_ids:
+  access_requestuser: access-request/user
+  access_requestitem: access-request/item
+  access_requestbundle: access-request/bundle
+  access_requestrequestfields: access-request/requestFields
+  access_requestrequestable: access-request/requestable
+  access_requestapproval: access-request/approval
+  access_requestrequest: access-request/request
+  access_requestnotification: access-request/notification
+  access_requestprovision: access-request/provision
+  commonsglossary: commons/glossary
+---
+
+# Access Request
+
+The following are Identity Governance API Access Request endpoints:
+
+## access-request/user
+
+Requests against the /user endpoint
+
+* GET Get User
+
+  Allows end users to query against user population
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/user?queryString=john
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password
+  {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  queryString             John
+  _fields
+  _pageSize
+  _pagedResultsOffser
+  _sortKeys
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/user?queryString=John' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password:
+  {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Visible Requestees
+
+  Retrieves the list of user IDs that the authenticated user is allowed to see access for (themselves and their direct reports)
+
+  Endpoint
+
+  ```
+  {{+idmRoot}}/access-request/user/requestees
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _fields
+  _pageSize
+  _pagedResultsOffser
+  _sortKeys
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/user/requestees' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get User BY Id
+
+  Allow end-users to query a specific user.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/user/{{targetUserId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password
+  {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/user/{{targetUserId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+## access-request/item
+
+Requests against the /item endpoint
+
+* GET Get Item
+
+  Allows end users to query individual items.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/item?queryString=Admin
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username  {{endUserUsername}}
+  X-OpenIDM-Password  {{endUserPassword}}
+  Content-Type      application/json
+  ```
+
+  Params
+
+  ```
+  queryString             Admin
+  _fields
+  _pageSize
+  _pagedResultsOffser
+  _sortKeys
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/item?queryString=Admin' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Item By Id
+
+  Allows end users to query a specific item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/{{itemId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type              application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/item/{{itemId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Get Request Fields For Item
+
+  Given a glossary item ID, return the fields that can be submitted with a request for that item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/item/fields/{{itemId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {}
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/item/fields/{{itemId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{}'
+  ```
+
+* POST Get Request Fields For Items
+
+  Given a list of glossary item IDs, return the fields that can be submitted with a request for those items.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/item/fields
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"itemIds": [
+  		"e7997f97-cd00-4f16-b566-01879185eb2e",
+  		"c336c6a5-da19-4078-8ba5-3a297c605564"
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/item/fields' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"itemIds": [
+  		"e7997f97-cd00-4f16-b566-01879185eb2e",
+  		"c336c6a5-da19-4078-8ba5-3a297c605564"
+  	]
+  }'
+  ```
+
+## access-request/bundle
+
+Requests against the /bundle endpoint.
+
+* GET Get Bundle
+
+  Allows end users to query requestable bundles.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/bundle?queryString=Admin
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username  {{endUserUsername}}
+  X-OpenIDM-Password  {{endUserPassword}}
+  Content-Type        application/json
+  ```
+
+  Params
+
+  ```
+  queryString         Admin
+  _fields
+  _pageSize
+  _pagedResultsOffser
+  _sortKeys
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/bundle?queryString=Admin' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Bundle By Id
+
+  Allows end users to query a specific requestable bundle.
+
+  Endpoint
+
+  ```
+  **{{idmRoot}}/access-request/bundle/{{bundleId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/bundle/{{bundleId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Create Bundle
+
+  Allows end users to query a specific requestable bundle.
+
+  Endpoint
+
+  ```
+  **{{idmRoot}}/access-request/bundle/{{bundleId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"name": "Administrator Bundle",
+  	"description": "Collection of administrator roles",
+  	"class": "requestable-item-bundle",
+  	"constraints": {},
+  	"itemIds": [
+  		"{{itemId}}",
+  		"{{itemId2}}"
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/bundle' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"name": "Administrator Bundle",
+  	"description": "Collection of administrator roles",
+  	"class": "requestable-item-bundle",
+  	"constraints": {},
+  	"itemIds": [
+  		"{{itemId}}",
+  		"{{itemId2}}"
+  	]
+  }'
+  ```
+
+* POST Update Bundle
+
+  Update an existing bundle definition.
+
+  Endpoint
+
+  ```
+  **{{idmRoot}}/access-request/bundle/{{bundleId}}?_action=update
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params Body raw
+
+  ```
+  _action             update
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"_id": "{{bundleId}}",
+  	"name": "Administrator Bundle",
+  	"description": "Collection of administrator roles",
+  	"class": "requestable-item-bundle",
+  	"constraints": {},
+  	"itemIds": [
+  		"{{itemId}}",
+  		"{{itemId2}}"
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/bundle/{{bundleId}}?_action=update' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"_id": "{{bundleId}}",
+  	"name": "Administrator Bundle",
+  	"description": "Collection of administrator roles",
+  	"class": "requestable-item-bundle",
+  	"constraints": {},
+  	"itemIds": [
+  		"{{itemId}}",
+  		"{{itemId2}}"
+  	]
+  }'
+  ```
+
+* DEL Delete Bundle
+
+  Allows end users to delete a specific requestable bundle.
+
+  Endpoint
+
+  ```
+  **{{idmRoot}}/access-request/bundle/{{bundleId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {}
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request DELETE '{{idmRoot}}/access-request/bundle/{{bundleId}}' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{}'
+  ```
+
+## access-request/requestFields
+
+Requests against the /requestFields endpoint.
+
+* GET Get Request Fields
+
+  Query for defined request fields that can be assigned to any requestable item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields?pageSize=10&pageNumber=0
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  pageSize                10
+  pageNumber              0
+  sortBy
+  q                       (filter term)
+  name                    (match name property)
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/requestFields?pageSize=10&pageNumber=0' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Create Request Field
+
+  Create a request field that can be assigned to any requestable item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields?_action=create
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             create
+  ```
+
+  Body raw
+
+  ```
+  {
+     "name": "Justification",
+     "description": "Reason for requesting this access",
+     "inputType": "text",
+     "required": true
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/requestFields?_action=create' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "name": "Justification",
+     "description": "Reason for requesting this access",
+     "inputType": "text",
+     "required": true
+  }'
+  ```
+
+* POST Create Request Field - 2
+
+  Create a request field that can be assigned to any requestable item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields?_action=create
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             create
+  ```
+
+  Body raw
+
+  ```
+  {
+     "name": "Location",
+     "description": "Choose the location at which you are working",
+     "inputType": "radio",
+     "inputOptions": [
+     		"New York",
+     		"Miami"
+     	],
+     "required": true
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/requestFields?_action=create' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "name": "Location",
+     "description": "Choose the location at which you are working",
+     "inputType": "radio",
+     "inputOptions": [
+     		"New York",
+     		"Miami"
+     	],
+     "required": true
+  }'
+  ```
+
+* POST Update Request Field
+
+  Update a request field that can be assigned to any requestable item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields//{{requestfieldid}}?_action=update
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             update
+  ```
+
+  Body raw
+
+  ```
+  {
+     "name": "Justification",
+     "description": "Reason for requesting this access",
+     "inputType": "text",
+     "required": true
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/requestFields/{{requestfieldid}}?_action=update' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "name": "Justification",
+     "description": "Reason for requesting this access",
+     "inputType": "text",
+     "required": true
+  }'
+  ```
+
+* POST Delete Request Field
+
+  Delete a request field that can be assigned to any requestable item.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields//{{requestfieldid}}?_action=update
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             delete
+  ```
+
+  Body raw
+
+  ```
+  {
+     "fieldIds": [
+     		"{{requestfieldid}}"
+     	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/requestFields?_action=delete' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "fieldIds": [
+     		"{{requestfieldid}}"
+     	]
+  }'
+  ```
+
+## access-request/requestable
+
+Requests against the /requestable endpoint.
+
+* GET Get Requestable Item
+
+  Query requestable item (item or bundle) by its ID.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestable/{{itemId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/requestable/{{itemId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Requestable Items
+
+  Query requestable items (item or bundle).
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestable
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  userId              Check the requestable item's against the user to see if they are assigned to them.
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/requestable' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+## access-request/approval
+
+Requests against the /approval endpoint.
+
+* GET Get Approval
+
+  Get an approval task its ID.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/approval/{{approvalTaskId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/approval/{{approvalTaskId}}' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Approvals
+
+  Get approval tasks assigned to user.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/approval?pageSize=10&pageNumber=0
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  pageSize                10
+  pageNumber              0
+  _fields
+  sortBy
+  requesteeId
+  requesterId
+  itemId
+  id
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/approval?pageSize=10&pageNumber=0' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Approval Count
+
+  Get current number of active approval tasks assigned to user.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/approval?getResultCount=true
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _fields
+  sortBy
+  requesteeId
+  requesterId
+  itemId
+  getResultCount       true
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/approval?getResultCount=true' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Approvals - Admin
+
+  Get approval tasks, as administrator.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/approval?pageSize=10&pageNumber=0
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  pageSize                10
+  pageNumber              0
+  _fields
+  sortBy
+  approverId
+  requesterId
+  requesteeId
+  itemId
+  id
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/approval/admin?pageSize=10&pageNumber=0' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Create Approval Task
+
+  Manually create an approval task. For use within custom workflows.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/requestFields//{{requestFieldId}}?_action=update
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+     "requestId": "{{requestId}}",
+     "itemIds":[
+  	  "{{itemId}}"
+     ],
+     "approverId": "{{approverId}}",
+     "workflowTaskId": "{{workflowTaskId}}"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/requestFields?_action=delete' \
+  curl --location -g --request POST '{{idmRoot}}/access-request/approval' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "requestId": "{{requestId}}",
+     "itemIds":[
+  	  "{{itemId}}"
+     ],
+     "approverId": "{{approverId}}",
+     "workflowTaskId": "{{workflowTaskId}}"
+  }'
+  ```
+
+* POST Get Autonomous Identity Recommendations For Use
+
+  Queries Autonomous Identity to get recommendations for entitlements for the given user.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/approval?_action=getRecommendations
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             getRecommendations
+  ```
+
+  Body raw
+
+  ```
+  {
+     "userId": "{{requestId}}",
+     "entitlements":[
+  	  "{{itemId}}"
+     ]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/approval?_action=getRecommendations' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "userId": "{{requestId}}",
+     "entitlements":[
+  	  "{{itemId}}"
+     ]
+  }'
+  ```
+
+* GET Get Approval Repository Object
+
+  Directly read an approval task from the repository. Also, supports PUT and DELETE operations.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/repo/governance/approvalTask/
+  {{approvalTaskId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{idmAdminUsername}}
+  X-OpenIDM-Password      {{idmAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/repo/governance/approvalTask/{{approvalTaskId}}' \
+  --header 'X-OpenIDM-Username: {{idmAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{idmAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Query Approval Repository Objects
+
+  Query the repository objects for approval tasks directly.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/repo/governance/approvalTask?_queryFilter=true
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{idmAdminUsername}}
+  X-OpenIDM-Password      {{idmAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  _queryFilter        true
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/repo/governance/approvalTask?_queryFilter=true' \
+  --header 'X-OpenIDM-Username: {{idmAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{idmAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+## access-request/request
+
+Requests against the /request endpoint.
+
+* POST Cancel Request(s)
+
+  As an access request adminstrator, requester, or requestee, cancel the requests provided.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=cancel
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action                 cancel
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestIds": [
+  		"{{requestId}}"
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=cancel' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestIds": [
+  		"{{requestId}}"
+  	]
+  }'
+  ```
+
+* POST Create Request
+
+  Create a request for access.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+     "userIds":[
+        "1sasdaf97-cd00-4f16-b566-01879185eb2e"
+     ],
+     "items":[
+        {
+           "itemId":"{{itemId}}",
+           "requestType":"add",
+           "fields": {
+
+           }
+        }
+     ],
+     "comment": "Comment"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "userIds":[
+        "1sasdaf97-cd00-4f16-b566-01879185eb2e"
+     ],
+     "items":[
+        {
+           "itemId":"{{itemId}}",
+           "requestType":"add",
+           "fields": {
+
+           }
+        }
+     ],
+     "comment": "Comment"
+  }'
+  ```
+
+* POST Create Request Policy Check
+
+  Given a create request payload, check whether the request would result in any policy violations.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/policy
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+     "userIds":[
+        "222"
+     ],
+     "items":[
+        {
+           "itemId":"managed/role/2007",
+           "requestType":"add"
+        }
+     ]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request/policy' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "userIds":[
+        "222"
+     ],
+     "items":[
+        {
+           "itemId":"managed/role/2007",
+           "requestType":"add"
+        }
+     ]
+  }'
+  ```
+
+* GET Get Requests
+
+  Get requests for the user.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?status=active&pageSize=10&pageNumber=0
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  status                  active
+  pageSize                10
+  pageNumber              0
+  sortBy
+  approverId
+  requesteeId
+  requesterId
+  itemId
+  id
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/request?status=active&pageSize=10&pageNumber=0' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Requests - Admin
+
+  Get requests as an administrator.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/admin?status=active&pageSize=10&pageNumbe
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  status                  active
+  pageSize                10
+  pageNumber              0
+  sortBy
+  approverId
+  requesteeId
+  requesterId
+  itemId
+  id
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/request/admin?status=active&pageSize=10&pageNumber=' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Request
+
+  Get requests by ID..
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/{{requestId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/request/{{requestId}}' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Request Repository Object
+
+  Read a request object directly from the repository. Also, supports PUT and DELETE operations.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/repo/governance/request?_queryFilter=true
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{idmAdminUsername}}
+  X-OpenIDM-Password      {{idmAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _queryFilter         true
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/repo/governance/request?_queryFilter=true' \
+  --header 'X-OpenIDM-Username: {{idmAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{idmAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Query Request Repository Objects
+
+  Query repository for request objects directly.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/repo/governance/request?_queryFilter=true
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{idmAdminUsername}}
+  X-OpenIDM-Password      {{idmAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _queryFilter         true
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/repo/governance/request?_queryFilter=true' \
+  --header 'X-OpenIDM-Username: {{idmAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{idmAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Reassign Approval Task
+
+  Reassign a task to a new user/group
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=reassign
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action         reassign
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	],
+  	"newApproverId": "managed/user/211"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=reassign' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	],
+  	"newApproverId": "managed/user/211"
+  }'
+  ```
+
+* POST Consult Approval Task
+
+  Add a consulting user/group to the approval task
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=consult
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action               consult
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	],
+  	"consultId": "managed/user/235"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=consult' \
+  --header 'X-OpenIDM-Username: {{endUserPassword}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	],
+  	"consultId": "managed/user/235"
+  }'
+  ```
+
+* POST Cancel Consult Approval Task
+
+  Cancel a consulting user/group to the approval task
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=cancelconsult
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action               cancelconsult
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=cancelconsult' \
+  --header 'X-OpenIDM-Username: {{endUserPassword}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalIds": [
+  		"{{approvalTaskId}}"
+  	]
+  }'
+  ```
+
+* POST Upload File To Request
+
+  Upload file to a given request. Optionally provide itemIds within the request that the file are specific to.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=upload
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             upload
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestId": "{{requestId}}",
+  	"itemIds": [
+  		"{{itemId}}"
+  	],
+  	"fileName": "report.pdf",
+  	"fileType": "text/plain",
+  	"content": "dGhpcyBpcyBhIGZpbGU="
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=upload' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestId": "{{requestId}}",
+  	"itemIds": [
+  		"{{itemId}}"
+  	],
+  	"fileName": "report.pdf",
+  	"fileType": "text/plain",
+  	"content": "dGhpcyBpcyBhIGZpbGU="
+  }'
+  ```
+
+* GET Download File From Request
+
+  Download a file from a request given a request ID and file name.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/download?fileName&requestId
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  fileName           Name of file
+  requestId          ID of request file is attached to
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/access-request/request/download?fileName=&requestId=' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Download File From Request
+
+  Download a file from a given request
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=download
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             download
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestId": "{{requestId}}",
+  	"fileName": "report.pdf"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=download' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestId": "{{requestId}}",
+  	"fileName": "report.pdf"
+  }'
+  ```
+
+* POST Delete File From Request
+
+  Remove a file from a given request
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=removeFile
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             removeFile
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestId": "{{requestId}}",
+  	"fileName": "report.pdf"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=removeFile' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestId": "{{requestId}}",
+  	"fileName": "report.pdf"
+  }'
+  ```
+
+* POST Comment on Request
+
+  Comment on a request. Optionally provide the specific items within the request that this comment will apply to.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request?_action=comment
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             removeFile
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestId": "{{requestId}}",
+  	"itemIds": [
+  		"{{itemId}}"
+  	],
+  	"comment": "Comment",
+  	"isHidden": false
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request?_action=comment' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestId": "{{requestId}}",
+  	"itemIds": [
+  		"{{itemId}}"
+  	],
+  	"comment": "Comment",
+  	"isHidden": false
+  }'
+  ```
+
+* POST Complete Approval Task
+
+  Complete an approval task as the approver. This endpoint with action 'complete' requires individual item decisions to be included in the request body.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/approval?_action=complete
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             complete
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalId": "{{approvalTaskId}}",
+  	"approvalData": [
+  		{
+  			"itemId": "{{itemId}}",
+  			"outcome": "approved"
+  		}
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request/approval?_action=complete' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalId": "{{approvalTaskId}}",
+  	"approvalData": [
+  		{
+  			"itemId": "{{itemId}}",
+  			"outcome": "approved"
+  		}
+  	]
+  }'
+  ```
+
+* POST Complete Approval Task - Approval All
+
+  Complete an approval task as the approver. This endpoint with action 'complete' requires individual item decisions to be included in the request body.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/approval?_action=approved
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             approval
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalId": "{{approvalTaskId}}",
+  	"comment": "Comment"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request/approval?_action=approved' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalId": "{{approvalTaskId}}",
+  	"comment": "Comment"
+  }'
+  ```
+
+* POST Complete Approval Task - Reject All
+
+  Complete an approval task, rejecting all of the task's items.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/approval?_action=rejected
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             rejected
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"approvalId": "{{approvalTaskId}}",
+  	"comment": "Comment"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request/approval?_action=rejected' \
+  --header 'X-OpenIDM-Username: {{endUserUsername}}' \
+  --header 'X-OpenIDM-Password: {{endUserPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"approvalId": "{{approvalTaskId}}",
+  	"comment": "Comment"
+  }'
+  ```
+
+* POST Update Request's Items
+
+  Complete an approval task, rejecting all of the task's items.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/request/{{requestId}}?_action=asdasd
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{endUserUsername}}
+  X-OpenIDM-Password      {{endUserPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             asdasd
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"items": [
+          {
+              "itemId": "40b83cb6-1749-48eb-9c89-2a3b1fae71ab",
+              "fields": [],
+              "timesApproved": 2,
+              "outcome": "provisioned"
+          }
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/request/{{requestId}}?_action=asdasd' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"items": [
+          {
+              "itemId": "40b83cb6-1749-48eb-9c89-2a3b1fae71ab",
+              "fields": [],
+              "timesApproved": 2,
+              "outcome": "provisioned"
+          }
+  	]
+  }'
+  ```
+
+## access-request/notification
+
+Requests against the /notification endpoint.
+
+* POST Send Notification
+
+  As an access request administrator, send any of the defined Request notifications. To be used within custom workflows if notifications need to be sent at a certain juncture.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/notification/APPROVAL_TASK_CREATED/{{approvalTaskId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {}
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/notification/APPROVAL_TASK_CREATED/{{approvalTaskId}}' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{}'
+  ```
+
+## access-request/provision
+
+Requests against the /provision endpoint.
+
+* POST Provision Access From Request
+
+  As an access request administrator, send any of the defined Request notifications. To be used within custom workflows if notifications need to be sent at a certain juncture.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/access-request/provision
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{arAdminUsername}}
+  X-OpenIDM-Password      {{arAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"requestId": "{{requestId}}",
+  	"itemId": "{{itemId}}",
+  	"requestType": "add"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/access-request/provision' \
+  --header 'X-OpenIDM-Username: {{arAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{arAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"requestId": "{{requestId}}",
+  	"itemId": "{{itemId}}",
+  	"requestType": "add"
+  }'
+  ```
+
+## commons/glossary
+
+Requests against the commons/glossary endpoint.
+
+* GET Get Workflow Definitions
+
+  Query IDM for the available workflow definitions. Used for front-end forms.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/workflow
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{idmAdminUsername}}
+  X-OpenIDM-Password      {{idmAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/commons/workflow' \
+  --header 'X-OpenIDM-Username: {{idmAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{idmAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* GET Get Glossary Entry By ID
+
+  Read a specific glossary entry.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary/{{glossaryEntryId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/commons/glossary/{{glossaryEntryId}}' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* DEL Delete Glossary Entry By ID
+
+  Delete a specific glossary entry.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary/{{glossaryEntryId}}
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Body raw
+
+  ```
+  {
+  	"userId": "c336c6a5-da19-4078-8ba5-3a297c605564",
+  	"attributes": [
+  		{
+  			"attribute": "roles",
+  			"value": "managed/role/2007",
+  			"action": "add"
+  		}
+  	]
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request DELETE '{{idmRoot}}/commons/glossary/{{glossaryEntryId}}' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  	"userId": "c336c6a5-da19-4078-8ba5-3a297c605564",
+  	"attributes": [
+  		{
+  			"attribute": "roles",
+  			"value": "managed/role/2007",
+  			"action": "add"
+  		}
+  	]
+  }'
+  ```
+
+* POST Update Glossary Entry
+
+  Update a specific glossary entry.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary/{{glossaryEntryId}}?_action=update
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             update
+  ```
+
+  Body raw
+
+  ```
+  {
+      "_rev": "2",
+      "requestable": true,
+      "approvers": [
+          "manager",
+          "entitlementOwner"
+      ],
+      "displayName": "Cloud Infrastructure Approver!",
+      "description": "Grants user access required for Cloud Infrastructure Approver",
+      "objectId": "managed/role/2070",
+      "riskLevel": 1,
+      "constraints": {
+          "riskLevel": {
+              "type": "integer"
+          },
+          "highRiskApprover": {
+              "type": "managed object id"
+          },
+          "description": {
+              "type": "string"
+          },
+          "entitlementOwner": {
+              "type": "managed object id"
+          },
+          "approvers": {
+              "type": "array"
+          },
+          "requestable": {
+              "type": "boolean"
+          }
+      },
+      "class": "object",
+      "entitlementOwner": "managed/role/2070",
+      "order": []
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/commons/glossary/{{glossaryEntryId}}?_action=update' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+      "_rev": "2",
+      "requestable": true,
+      "approvers": [
+          "manager",
+          "entitlementOwner"
+      ],
+      "displayName": "Cloud Infrastructure Approver!",
+      "description": "Grants user access required for Cloud Infrastructure Approver",
+      "objectId": "managed/role/2070",
+      "riskLevel": 1,
+      "constraints": {
+          "riskLevel": {
+              "type": "integer"
+          },
+          "highRiskApprover": {
+              "type": "managed object id"
+          },
+          "description": {
+              "type": "string"
+          },
+          "entitlementOwner": {
+              "type": "managed object id"
+          },
+          "approvers": {
+              "type": "array"
+          },
+          "requestable": {
+              "type": "boolean"
+          }
+      },
+      "class": "object",
+      "entitlementOwner": "managed/role/2070",
+      "order": []
+  }'
+  ```
+
+* POST Create Glossary Entry
+
+  Create a new glossary entry.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary?_action=create
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password        {{glossaryAdminPassword}}
+  Content-Type**            application/json
+  ```
+
+  Params
+
+  ```
+  _action             create
+  ```
+
+  Body raw
+
+  ```
+  {
+     "class":"identity-value",
+     "constraints":{
+        "_id":{
+           "type":"id"
+        },
+        "_rev":{
+
+        },
+        "class":{
+           "type":"string"
+        },
+        "constraints":{
+           "type":"object"
+        },
+        "attributeName":{
+           "type":"string"
+        },
+        "attributeValue":{
+
+        },
+        "requestFields":{
+           "type":"array"
+        },
+        "description":{
+           "type":"string"
+        }
+     },
+     "attributeName":"jobCode",
+     "attributeValue":"B456",
+     "requestFields":[
+
+     ],
+     "description":"Marketing job code"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/commons/glossary?_action=create' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "class":"identity-value",
+     "constraints":{
+        "_id":{
+           "type":"id"
+        },
+        "_rev":{
+
+        },
+        "class":{
+           "type":"string"
+        },
+        "constraints":{
+           "type":"object"
+        },
+        "attributeName":{
+           "type":"string"
+        },
+        "attributeValue":{
+
+        },
+        "requestFields":{
+           "type":"array"
+        },
+        "description":{
+           "type":"string"
+        }
+     },
+     "attributeName":"jobCode",
+     "attributeValue":"B456",
+     "requestFields":[
+
+     ],
+     "description":"Marketing job code"
+  }'
+  ```
+
+* GET Query Glossary Entries
+
+  Query entries in the governance glossary
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  queryFilter
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/commons/glossary' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Create Glossary Entry
+
+  Create a new glossary entry.
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary?_action=create
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  _action             create
+  ```
+
+  Body raw
+
+  ```
+  {
+     "class":"identity-value",
+     "constraints":{
+        "_id":{
+           "type":"id"
+        },
+        "_rev":{
+
+        },
+        "class":{
+           "type":"string"
+        },
+        "constraints":{
+           "type":"object"
+        },
+        "attributeName":{
+           "type":"string"
+        },
+        "attributeValue":{
+
+        },
+        "requestFields":{
+           "type":"array"
+        },
+        "description":{
+           "type":"string"
+        }
+     },
+     "attributeName":"jobCode",
+     "attributeValue":"B456",
+     "requestFields":[
+
+     ],
+     "description":"Marketing job code"
+  }
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request POST '{{idmRoot}}/commons/glossary?_action=create' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+     "class":"identity-value",
+     "constraints":{
+        "_id":{
+           "type":"id"
+        },
+        "_rev":{
+
+        },
+        "class":{
+           "type":"string"
+        },
+        "constraints":{
+           "type":"object"
+        },
+        "attributeName":{
+           "type":"string"
+        },
+        "attributeValue":{
+
+        },
+        "requestFields":{
+           "type":"array"
+        },
+        "description":{
+           "type":"string"
+        }
+     },
+     "attributeName":"jobCode",
+     "attributeValue":"B456",
+     "requestFields":[
+
+     ],
+     "description":"Marketing job code"
+  }'
+  ```
+
+* GET Query Glossary Entries
+
+  Query entries in the governance glossary
+
+  Endpoint
+
+  ```
+  {{idmRoot}}/commons/glossary
+  ```
+
+  Headers
+
+  ```
+  X-OpenIDM-Username      {{glossaryAdminUsername}}
+  X-OpenIDM-Password      {{glossaryAdminPassword}}
+  Content-Type            application/json
+  ```
+
+  Params
+
+  ```
+  queryFilter
+  ```
+
+  Example Request
+
+  ```
+  curl --location -g --request GET '{{idmRoot}}/commons/glossary' \
+  --header 'X-OpenIDM-Username: {{glossaryAdminUsername}}' \
+  --header 'X-OpenIDM-Password: {{glossaryAdminPassword}}' \
+  --header 'Content-Type: application/json'
+  ```
+
+* POST Check User Update Against Policies
+
+  Given a userId and a list of attribute changes (in the format of attribute, value, and action), check the system's active policies against the user if their access was changed via the list of attribute changes.
+
+|   |                                                                                     |
+| - | ----------------------------------------------------------------------------------- |
+|   | This is an Access Review endpoint, available with the release of Access Request 2.0 |
+
+\+
+
+Endpoint
+
+```
+{{idmRoot}}/governance/policyScan?_action=check
+```
+
+\+
+
+Headers
+
+```
+X-OpenIDM-Username      {{reviewAdminUsername}}
+X-OpenIDM-Password      {{reviewAdminPassword}}
+Content-Type            application/json
+```
+
+\+
+
+Params
+
+```
+_action              check
+```
+
+\+
+
+Body raw
+
+```
+{
+	"userId": "c336c6a5-da19-4078-8ba5-3a297c605564",
+	"attributes": [
+		{
+			"attribute": "roles",
+			"value": "managed/role/2007",
+			"action": "add"
+		}
+	]
+}
+```
+
+\+
+
+Example Request
+
+```
+curl --location -g --request POST '{{idmRoot}}/governance/policyScan?_action=check' \
+--header 'X-OpenIDM-Username: {{reviewAdminUsername}}' \
+--header 'X-OpenIDM-Password: {{reviewAdminPassword}}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"userId": "c336c6a5-da19-4078-8ba5-3a297c605564",
+	"attributes": [
+		{
+			"attribute": "roles",
+			"value": "managed/role/2007",
+			"action": "add"
+		}
+	]
+}'
+```
+
+---
+
+---
 title: Access Review
 description: The following are Identity Governance API Access Review endpoints:
 component: identity-governance

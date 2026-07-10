@@ -12,7 +12,7 @@ from pathlib import Path
 import subprocess
 
 from ping_docsets import load_docsets
-from routing_proof import SAMPLES, Sample, SkillRoute, route_question
+from routing_proof import Sample, SkillRoute, build_samples, route_question
 
 
 @dataclass(frozen=True)
@@ -180,7 +180,7 @@ def render_report(
         ),
         CommandResult(
             label="Routing proof assertions",
-            command=("scripts/routing-proof.sh", "--assert-defaults"),
+            command=("scripts/routing-proof.sh", "--no-report"),
             returncode=0,
             stdout="",
             stderr="",
@@ -206,9 +206,20 @@ def render_report(
             )
         )
 
+    samples = build_samples(
+        repo_root, "scripts/docsets.yaml", "plugins/ping-identity-docs/skills"
+    )
     routes = [
-        (sample, route_question(sample.question, repo_root, "scripts/docsets.yaml", "plugins/ping-identity-docs/skills"))
-        for sample in SAMPLES
+        (
+            sample,
+            route_question(
+                sample.question,
+                repo_root,
+                "scripts/docsets.yaml",
+                "plugins/ping-identity-docs/skills",
+            ),
+        )
+        for sample in samples
     ]
     enabled_docsets = [
         docset for docset in load_docsets(repo_root / "scripts/docsets.yaml") if docset.enabled
@@ -693,7 +704,7 @@ def html_document(
       <div class="hero-grid">
         <div>
           <h1 class="brand">Ping Agent Skills Routing Proof</h1>
-          <p class="lede">Validation output and diagrammed route evidence for the online-first, snapshot-fallback documentation skills.</p>
+          <p class="lede">Validation output and diagrammed route evidence for every installed online-first, snapshot-fallback documentation skill.</p>
         </div>
         <div class="summary-strip" aria-label="Report summary">
           <div class="metric"><span>Validation</span><strong>{status_text(validation_ok)}</strong></div>
@@ -726,7 +737,7 @@ def html_document(
         </div>
         <div class="validation-grid">
           <div class="status-panel"><b class="{status_class(command_results[0].ok)}">{status_text(command_results[0].ok)}</b><p>Routing tables match the model derived from cached indexes, and all enabled skills are present.</p></div>
-          <div class="status-panel"><b class="{status_class(command_results[1].ok)}">{status_text(command_results[1].ok)}</b><p>Representative complex questions route to the expected product skill and guide.</p></div>
+          <div class="status-panel"><b class="{status_class(command_results[1].ok)}">{status_text(command_results[1].ok)}</b><p>Installed docset checks and curated complex questions route to the expected product skill and guide.</p></div>
           <div class="status-panel"><b class="{status_class(validation_ok)}">{pass_count}/{len(command_results)}</b><p>Command checks passed. Live validation is {escape(live_label)} for this report.</p></div>
         </div>
         <div class="command-list">
@@ -740,7 +751,7 @@ def html_document(
           <p>Each lane shows the decision chain from question to skill, guide, live Markdown URL, and fallback snapshot.</p>
         </div>
         <div class="validation-grid">
-          <div class="status-panel"><b class="{status_class(route_ok)}">{route_pass_count}/{len(routes)}</b><p>Sample routes matched expected skill and guide.</p></div>
+          <div class="status-panel"><b class="{status_class(route_ok)}">{route_pass_count}/{len(routes)}</b><p>Generated and curated routes matched expected skill and guide.</p></div>
           <div class="status-panel"><b class="pass">LIVE</b><p>Selected URLs are online documentation routes from the cached Ping indexes.</p></div>
           <div class="status-panel"><b class="pass">FALLBACK</b><p>Every sample names the snapshot path used if live fetching fails.</p></div>
         </div>
@@ -751,7 +762,7 @@ def html_document(
 
       <footer class="footer">
         <span>Generated {escape(generated_at)}</span>
-        <span>Source: scripts/render-proof-report.sh</span>
+        <span>Source: routing proof scripts</span>
       </footer>
     </main>
   </div>
@@ -769,9 +780,9 @@ def main() -> int:
         help="Path to write the HTML report, relative to repo root unless absolute.",
     )
     parser.add_argument(
-        "--skip-live-validation",
+        "--include-live-validation",
         action="store_true",
-        help="Skip sampled online Markdown URL validation when rendering the report.",
+        help="Include sampled online Markdown URL validation when rendering the report.",
     )
     args = parser.parse_args()
 
@@ -782,7 +793,7 @@ def main() -> int:
     return render_report(
         repo_root=repo_root,
         output_path=output_path,
-        include_live_validation=not args.skip_live_validation,
+        include_live_validation=args.include_live_validation,
     )
 
 

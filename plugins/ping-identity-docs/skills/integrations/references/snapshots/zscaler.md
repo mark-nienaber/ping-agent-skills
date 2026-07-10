@@ -4,6 +4,8 @@ description: The following is the change history for the Zscaler Internet Access
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   zscaler-internet-access-provisioner-1-1-1-october-2023: Zscaler Internet Access Provisioner 1.1.1 – October 2023
@@ -65,6 +67,8 @@ description: Lists the changes made in each version of the Zscaler Private Acces
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   zscaler-private-access-provisioner-1-0-1-october-2023: Zscaler Private Access Provisioner 1.0.1 – October 2023
@@ -103,6 +107,8 @@ description: To enable user provisioning, configure System for Cross-domain Iden
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_configuring_provisioning
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_configuring_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -126,6 +132,8 @@ description: To allow PingFederate to act as an identity provider (IdP) for Zsca
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_configuring_single_sign_on
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -160,6 +168,8 @@ description: To allow PingFederate to manage users in Zscaler Internet Access, c
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -217,6 +227,8 @@ description: To allow PingFederate to manage users in Zscaler Private Access, cr
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_creating_a_provisioning_connection
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -291,6 +303,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to Zscaler Int
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -351,6 +365,8 @@ description: To allow PingFederate to handle single sign-on (SSO) to Zscaler Pri
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_creating_a_single_sign_on_connection
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -411,6 +427,8 @@ description: To get started with the integration, deploy the Zscaler Internet Ac
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -454,6 +472,8 @@ description: To get started with the integration, deploy the Zscaler Private Acc
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_deploying_the_integration_files
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   steps: Steps
@@ -497,6 +517,8 @@ description: The following files are included in the Zscaler Internet Access Pro
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -520,6 +542,8 @@ description: The following files are included in the Zscaler Private Access Prov
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 ---
 
@@ -543,6 +567,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -608,6 +634,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -643,6 +671,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: zscaler
 page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -672,6 +702,8 @@ description: Register PingFederate as an identity provider in Zscaler and downlo
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
@@ -730,6 +762,8 @@ description: Before you can configure single sign-on in Zscaler Private Access, 
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   enabling-single-sign-on-in-pingfederate-10-1-or-later: Enabling single sign-on in PingFederate 10.1 or later
@@ -776,6 +810,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -805,6 +841,8 @@ description: On the PingFederate administrative console, go to System > Protocol
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_enabling_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -828,6 +866,8 @@ description: Export a metadata file that describes your PingFederate identity pr
 component: zscaler
 page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_exporting_saml_metadata_from_pf
 canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_exporting_saml_metadata_from_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 18, 2024
 section_ids:
   about-this-task: About this task

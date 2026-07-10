@@ -4,6 +4,8 @@ description: The following table lists the user attributes that you can map for 
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_attribute_index
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_attribute_index.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -49,6 +51,8 @@ description: The following changes have been implemented for the Coupa Connector
 component: coupa
 page_id: coupa:release_notes:pf_coupa_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/coupa/release_notes/pf_coupa_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   coupa-connector-1-0-february-2015-current-release: Coupa Connector 1.0 — February 2015 (Current Release)
@@ -74,6 +78,8 @@ description: The following steps outline how to complete the configuration of yo
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_complete_setup_of_saml_sso_to_coupa
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_complete_setup_of_saml_sso_to_coupa.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -97,6 +103,8 @@ description: For assistance configuring Coupa for SAML single sign-on (SSO), Cou
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_configuring_coupa_for_saml_sso
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_configuring_coupa_for_saml_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   about-this-task: About this task
@@ -160,6 +168,8 @@ description: This task is only required if you want to enable identity provider 
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_configuring_your_sp_connection_for_idp_initiated_sso
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_configuring_your_sp_connection_for_idp_initiated_sso.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   about-this-task: About this task
@@ -204,6 +214,8 @@ description: The PingFederate Provisioner for Coupa enables an enterprise to pro
 component: coupa
 page_id: coupa::pf_coupa_connector
 canonical_url: https://docs.pingidentity.com/integrations/coupa/pf_coupa_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   features: Features
@@ -239,6 +251,8 @@ description: To allow PingFederate to act as an identity provider (IdP) and mana
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   steps: Steps
@@ -302,6 +316,8 @@ description: The distribution .zip archive for the connector contains the follow
 component: coupa
 page_id: coupa:release_notes:pf_coupa_connector_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/coupa/release_notes/pf_coupa_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -331,6 +347,8 @@ description: To use PingFederate for provisioning and single sign-on, configure 
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   about-this-task: About this task
@@ -396,6 +414,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -431,6 +451,8 @@ description: In the PingFederate administrative console, configure the datastore
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_enabling_provisioning_and_single_sign_on_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -460,6 +482,8 @@ description: The following are known issues and limitations of the Coupa Connect
 component: coupa
 page_id: coupa:release_notes:pf_coupa_connector_known_issues_and_limitations
 canonical_url: https://docs.pingidentity.com/integrations/coupa/release_notes/pf_coupa_connector_known_issues_and_limitations.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -491,6 +515,8 @@ description: Before you can configure this connector, you must complete the foll
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtain_required_information
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtain_required_information.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -518,6 +544,8 @@ description: Export your service provider (SP) connection's metadata.xml file:
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtaining_the_entitydescriptors_id_from_your_sp_connection
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtaining_the_entitydescriptors_id_from_your_sp_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -556,6 +584,8 @@ description: This connector's quick-connection template uses a metadata XML file
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtaining_your_coupa_sp_metadata_file
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtaining_your_coupa_sp_metadata_file.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   about-this-task: About this task
@@ -592,6 +622,8 @@ description: The Coupa Connector's outbound provisioning functionality is built 
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtaining_your_coupa_api_key
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtaining_your_coupa_api_key.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 section_ids:
   about-this-task: About this task
@@ -626,6 +658,8 @@ description: This connector requires your Coupa subdomain to access your Coupa a
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtain_your_coupa_subdomain
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtain_your_coupa_subdomain.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 
@@ -643,6 +677,8 @@ description: Edit the idp-metadata.xml file that is packaged with the Coupa conn
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_preparing_the_idp_metadata_xml_file
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_preparing_the_idp_metadata_xml_file.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -670,6 +706,8 @@ description: If your Coupa account already has users you want to provision with 
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_synchronize_existing_coupa_users
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_synchronize_existing_coupa_users.html
+llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 14, 2024
 ---
 

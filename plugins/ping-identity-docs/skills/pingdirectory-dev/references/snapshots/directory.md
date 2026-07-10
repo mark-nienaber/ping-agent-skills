@@ -4210,6 +4210,814 @@ task.resume()
 ---
 
 ---
+title: Delete an Entry with Controls
+description: This DELETE /directory/v1/{{dn}} operation adds a _controls property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to Controls.
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/delete-an-entry-with-controls
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry-with-controls.html
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete an Entry with Controls
+
+##
+
+```none
+DELETE {{apiPath}}/directory/v1/{{dn}}
+```
+
+This `DELETE /directory/v1/{{dn}}` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](#controls).
+
+When successful, the response for a DELETE with controls returns a `200` status message.
+
+|   |                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Only one entry can be deleted in a delete operation. Subtree delete is not supported. Delete operations on an entry with children results in a `400 BAD REQUEST` response. |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
+            "value-json": {
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
+            }
+        }
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/directory/v1/{{dn}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
+            "value-json": {
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
+            }
+        }
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_controls"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""oid"": ""1.3.6.1.1.13.1""," + "\n" +
+@"            ""control-name"": ""Pre-Read Request Control""," + "\n" +
+@"            ""criticality"": false," + "\n" +
+@"            ""value-json"": {" + "\n" +
+@"                ""attributes"": [" + "\n" +
+@"                    ""uid""," + "\n" +
+@"                    ""givenName""," + "\n" +
+@"                    ""sn""," + "\n" +
+@"                    ""cn""" + "\n" +
+@"                ]" + "\n" +
+@"            }" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "DELETE"
+
+  payload := strings.NewReader(`{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
+            "value-json": {
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
+            }
+        }
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /directory/v1/{{dn}} HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
+            "value-json": {
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
+            }
+        }
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.1.13.1\",\n            \"control-name\": \"Pre-Read Request Control\",\n            \"criticality\": false,\n            \"value-json\": {\n                \"attributes\": [\n                    \"uid\",\n                    \"givenName\",\n                    \"sn\",\n                    \"cn\"\n                ]\n            }\n        }\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("DELETE", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "_controls": [
+      {
+        "oid": "1.3.6.1.1.13.1",
+        "control-name": "Pre-Read Request Control",
+        "criticality": false,
+        "value-json": {
+          "attributes": [
+            "uid",
+            "givenName",
+            "sn",
+            "cn"
+          ]
+        }
+      }
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "_controls": [
+      {
+        "oid": "1.3.6.1.1.13.1",
+        "control-name": "Pre-Read Request Control",
+        "criticality": false,
+        "value-json": {
+          "attributes": [
+            "uid",
+            "givenName",
+            "sn",
+            "cn"
+          ]
+        }
+      }
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1/{{dn}}"
+
+payload = json.dumps({
+  "_controls": [
+    {
+      "oid": "1.3.6.1.1.13.1",
+      "control-name": "Pre-Read Request Control",
+      "criticality": False,
+      "value-json": {
+        "attributes": [
+          "uid",
+          "givenName",
+          "sn",
+          "cn"
+        ]
+      }
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "_controls": [\n        {\n            "oid": "1.3.6.1.1.13.1",\n            "control-name": "Pre-Read Request Control",\n            "criticality": false,\n            "value-json": {\n                "attributes": [\n                    "uid",\n                    "givenName",\n                    "sn",\n                    "cn"\n                ]\n            }\n        }\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_controls": [
+    {
+      "oid": "1.3.6.1.1.13.1",
+      "control-name": "Pre-Read Request Control",
+      "criticality": false,
+      "value-json": {
+        "attributes": [
+          "uid",
+          "givenName",
+          "sn",
+          "cn"
+        ]
+      }
+    }
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.1.13.1\",\n            \"control-name\": \"Pre-Read Request Control\",\n            \"criticality\": false,\n            \"value-json\": {\n                \"attributes\": [\n                    \"uid\",\n                    \"givenName\",\n                    \"sn\",\n                    \"cn\"\n                ]\n            }\n        }\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+200 OK
+
+```json
+{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Response Control",
+            "criticality": false,
+            "value-json": {
+                "_dn": "uid=johnsmith,ou=People,dc=example,dc=com",
+                "sn": [
+                    "Smith"
+                ],
+                "givenName": [
+                    "John"
+                ],
+                "cn": [
+                    "John Smith"
+                ],
+                "uid": [
+                    "johnsmith"
+                ]
+            }
+        }
+    ]
+}
+```
+
+---
+
+---
+title: Deliver one time password
+description: The deliver one-time password (OTP) extended operation uses the POST /directory/v1/deliverOneTimePassword endpoint to generate an OTP and deliver it to the user out of band.
+component: pingdirectory
+page_id: pingdirectory:directory:extended-operations/deliver-one-time-password/deliver-one-time-password
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/deliver-one-time-password.html
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Deliver one time password
+
+##
+
+```none
+POST {{apiPath}}/directory/v1/deliverOneTimePassword
+```
+
+The deliver one-time password (OTP) extended operation uses the `POST /directory/v1/deliverOneTimePassword` endpoint to generate an OTP and deliver it to the user out of band.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/directory/v1/deliverOneTimePassword' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/deliverOneTimePassword")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""dn"": ""uid=jimbob,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""staticPassword"": ""password""," + "\n" +
+@"    ""preferredDeliveryMechanisms"": [" + "\n" +
+@"        ""Local File""," + "\n" +
+@"        ""SMS""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/deliverOneTimePassword"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /directory/v1/deliverOneTimePassword HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"staticPassword\": \"password\",\n    \"preferredDeliveryMechanisms\": [\n        \"Local File\",\n        \"SMS\"\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/deliverOneTimePassword")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/deliverOneTimePassword",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+      "Local File",
+      "SMS"
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1/deliverOneTimePassword',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+      "Local File",
+      "SMS"
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1/deliverOneTimePassword"
+
+payload = json.dumps({
+  "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+  "staticPassword": "password",
+  "preferredDeliveryMechanisms": [
+    "Local File",
+    "SMS"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/deliverOneTimePassword');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "dn": "uid=jimbob,ou=people,dc=example,dc=com",\n    "staticPassword": "password",\n    "preferredDeliveryMechanisms": [\n        "Local File",\n        "SMS"\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/deliverOneTimePassword")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+  "staticPassword": "password",
+  "preferredDeliveryMechanisms": [
+    "Local File",
+    "SMS"
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"staticPassword\": \"password\",\n    \"preferredDeliveryMechanisms\": [\n        \"Local File\",\n        \"SMS\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/deliverOneTimePassword")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+200 OK
+
+```json
+{
+    "resultCode": {
+        "value": 0,
+        "name": "success"
+    },
+    "deliveryMechanism": "Local File",
+    "recipientDN": "uid=jimbob,ou=People,dc=example,dc=com",
+    "recipientID": "/var/folders/example-folder/one-time-password.txt"
+}
+```
+
+---
+
+---
 title: Deliver One Time Password
 description: The deliver one-time password extended operation is used to indicate that the server should generate a one-time password for a user, store it in the user's entry, and deliver it to the user through a method like email or SMS. This operation is heavily based on the DeliverOneTimePasswordExtendedRequest class in the LDAP SDK.
 component: pingdirectory
@@ -4272,125 +5080,245 @@ The response body is created from the [deliver one-time password extended result
 ---
 
 ---
-title: Matched values request control
-description: The standard matched values request control can be included in search requests to indicate that the server should only return values for a specified attribute that match a given filter, instead of returning all values for that attribute. The control has an OID of 1.2.826.0.1.3344810.2.3, and it takes a value. The following fields may be present in the value-json representation of the value:
+title: Deregister YubiKey OTP device
+description: The deregister YubiKey OTP device extended operation uses the POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice endpoint to revoke a YubiKey device for a particular user.
 component: pingdirectory
-page_id: pingdirectory:directory:controls/matched-values-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/matched-values-request-control.html
+page_id: pingdirectory:directory:extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
 ---
 
-# Matched values request control
+# Deregister YubiKey OTP device
 
-The standard matched values request control can be included in search requests to indicate that the server should only return values for a specified attribute that match a given filter, instead of returning all values for that attribute. The control has an OID of 1.2.826.0.1.3344810.2.3, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+##
 
-* `filters`: A mandatory, non-empty array field whose values are the string representations of the matched values filters to use. A matched values filter is very similar to a regular LDAP filter, except that the AND, OR, and NOT filter types cannot be used, and the extensible match filter type cannot use the `dnAttributes` element.
+```none
+POST {{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice
+```
 
-The following sample shows the JSON encoding for the control:
+The deregister YubiKey OTP device extended operation uses the `POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice` endpoint to revoke a YubiKey device for a particular user.
 
-```json
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request POST '{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
 {
-    "oid":"1.2.826.0.1.3344810.2.3",
-    "control-name":"Matched Values Request Control",
-    "criticality":false,
-    "value-json": {
-        "filters": [
-            "(mail=*@example.com)"
-        ]
-    }
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
 }
 ```
 
----
+```http
+POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
 
----
-title: Matching entry count request control
-description: The proprietary matching entry count request control may be included in a search request to indicate that instead of returning the set of matching entries, it should instead return a result with a response control that provides an estimate of the number of matching entries, along with potential debug information describing how the server used indexes to arrive at that result. The control has an OID of 1.3.6.1.4.1.30221.2.5.36, and it takes a value. The following fields may be present in the value-json representation of the value:
-component: pingdirectory
-page_id: pingdirectory:directory:controls/matching-entry-count-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-request-control.html
----
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
+  .method("POST", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
 
-# Matching entry count request control
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
 
-The proprietary matching entry count request control may be included in a search request to indicate that instead of returning the set of matching entries, it should instead return a result with a response control that provides an estimate of the number of matching entries, along with potential debug information describing how the server used indexes to arrive at that result. The control has an OID of 1.3.6.1.4.1.30221.2.5.36, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
 
-* `maximum-candidates-to-examine`: An optional integer field whose value is the maximum number of entries that the server should retrieve and examine to determine whether they actually match the search criteria and whether they would be returned to the client in a normal search operation. If this is not provided, then a default value of zero is used.
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
 
-* `always-examine-candidates`: An optional Boolean field that indicates whether the server should always examine candidate entries to determine whether they would actually be returned to the client (for example, that the requester has permission to retrieve those entries), even if the search is fully indexed and the server knows that all of the candidates match the search criteria. If this is not provided, then a default value of `false` is used.
+```python
+import requests
 
-* `process-search-if-unindexed`: An optional Boolean field that indicates whether the server should actually process the search to identify the set of matching entries if the search is completely unindexed. If this is not provided, then a default value of `false` is used.
+url = "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice"
 
-* `include-debug-info`: An optional Boolean field that indicates whether the server should include debug information in the response that provides additional details about the processing it performed to arrive at that result. If this is not provided, then a default value of `false` is used.
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
 
-* `skip-resolving-exploded-indexes`: An optional Boolean field that indicates whether the server should not resolve exploded indexes in cases where the size of the ID set is known. This can reduce the time required to obtain the final result, but that result may be less accurate. If this is not provided, then a default value of `false` is used.
+response = requests.request("POST", url, headers=headers, data=payload)
 
-* `fast-short-circuit-threshold`: An optional integer field whose value is the short-circuit threshold that the server should use for "fast" filter components (those in which the server may need to only examine a single index key, like presence, equality, and approximate-match components). If this is not provided, the server automatically chooses an appropriate threshold.
+print(response.text)
+```
 
-* `slow-short-circuit-threshold`: An optional integer field whose value is the short-circuit threshold that the server should use for "slow" filter components (those that are not considered "fast" and may require examining multiple index keys, like substring, greater-or-equal, and less-or-equal components). If this is not provided, the server automatically chooses an appropriate threshold.
-
-* `include-extended-response-data`: An optional Boolean field that indicates whether the server should include additional information in the response, like whether all of the identified candidates are known to be within the scope of the search and which components of the filter may not have been evaluated. If this is not provided, then a default value of `false` is used.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{
-    "oid":"1.3.6.1.4.1.30221.2.5.36",
-    "control-name":"Matching Entry Count Request Control",
-    "criticality":true,
-    "value-json": {
-        "maximum-candidates-to-examine":10000,
-        "include-debug-info":true
-    }
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
 }
 ```
 
----
+```ruby
+require "uri"
+require "net/http"
 
----
-title: Matching entry count response control
-description: This control may be included in a search result in response to a matching entry count request control, and it includes the results of the matching entry count processing. The control has an OID of 1.3.6.1.4.1.30221.2.5.37, and it takes a value. The following fields may be present in the value-json representation of the value:
-component: pingdirectory
-page_id: pingdirectory:directory:controls/matching-entry-count-response-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-response-control.html
----
+url = URI("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
 
-# Matching entry count response control
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
 
-This control may be included in a search result in response to a matching entry count request control, and it includes the results of the matching entry count processing. The control has an OID of 1.3.6.1.4.1.30221.2.5.37, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+response = http.request(request)
+puts response.read_body
+```
 
-* `count-type`: A string field whose value will be used to indicate how accurate the entry count is. The value may be one of the following:
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
-  * `examined-count`: Indicates that the provided entry count is known to accurately represent the number of matching entries that would actually be returned to the client.
+request.httpMethod = "POST"
 
-  * `unexamined-count`: Indicates that the provided entry count is known to accurately represent the number of matching entries, but that those entries were not examined to verify that they would all actually have been returned to the client in the course of processing a normal search (for example, because the client didn't have permission to see them, or because they are special types of entries like LDAP subentries that aren't normally returned).
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
 
-  * `upper-bound`: Indicates that the provided entry count represents the maximum number of entries that may match the search criteria, but that the actual matching entry count could be lower.
+task.resume()
+```
 
-  * `unknown`: Indicates that the server was unable to provide any kind of estimate for the number of entries matching the search criteria.
+### Example Response
 
-* `count-value`: An optional integer field that represents the entry count estimate determined by the server. This will be present for `count-type` values of `examined-count`, `unexamined-count`, and `upper-bound`, but will be absent for a `count-type` value of `unknown`.
-
-* `search-indexed`: A Boolean field that indicates whether the server considers the search to be at least partially indexed.
-
-* `fully-indexed`: An optional Boolean field that indicates whether the server considers the search to be fully indexed. This will only be present if extended response information was requested.
-
-* `short-circuited`: An optional Boolean field that indicates whether the server short-circuited at any point in evaluating the search criteria. This will only be present if extended response information was requested.
-
-* `candidates-are-in-scope`: An optional Boolean field that indicates whether the server knows that all candidate entries are within the scope of the search. This will only be present if extended response information was requested.
-
-* `remaining-filter`: An optional string field whose value is the portion of the provided search filter that was not evaluated during the course of coming up with the estimate. This will only be present if extended response information was requested and a remaining filter is available.
-
-* `debug-info`: An optional array field whose values are strings providing debug messages generated by the server in the course of determining the estimated number of matching entries. This will only be present if debug information was requested.
-
-The following represents an example JSON encoding for the control:
+200 OK
 
 ```json
-{ "oid":"1.3.6.1.4.1.30221.2.5.37",
-  "control-name":"Matching Entry Count Response Control",
-  "criticality":false,
-  "value-json":{ "count-type":"unexamined-count",
-                 "count-value":1,
-                 "search-indexed":true,
-                 "debug-info":[ "Sample debug message 1",
-                                "Sample debug message 2" ] } }
+{
+    "resultCode": {
+        "value": 0,
+        "name": "success"
+    }
+}
 ```
