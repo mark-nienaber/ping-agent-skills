@@ -80,10 +80,33 @@ The `description` field is the activation trigger. Product-specific prompts prod
 
 Cross-product prompts may load multiple Ping skills. Use `pingidentity/agent-plugins` first when the product is unknown, then use this repo for product-specific depth.
 
+## Headless Alignment
+
+This repo supports Ping's headless approach, but it is not limited to pure headless implementation work. The skills are deliberately UI-neutral: they route an agent to API, SDK, orchestration, policy, and product documentation instead of assuming hosted sign-on pages, embedded widgets, or any specific application framework.
+
+For headless app work, the most relevant docsets are:
+
+- `orchsdks`: Journey, DaVinci, and OIDC orchestration SDK concepts.
+- `sdks`: Ping SDK entry points and release guidance.
+- `pingone-api`: PingOne platform, application, OAuth, MFA, and authorization APIs.
+- `pingoneaic-api`: PingOne AIC authentication, OAuth2/OIDC, IDM REST, CREST, and scripting APIs.
+- `davinci`, `pingoneaic`, and `pingam`: flow, journey, tree, node, and scripting behavior needed behind the API or SDK integration.
+
+The repo intentionally goes beyond a pure headless-only scope because real Ping deployments usually need more than app-side SDK calls. A headless login or registration experience still depends on correct tenant setup, OAuth client configuration, journey or flow design, policy decisions, identity store behavior, connector trust, promotion, observability, and troubleshooting. Keeping those docsets available lets an agent answer the whole implementation problem without forcing every issue through an SDK-only lens.
+
+Use the broader scope when a question crosses layers, for example:
+
+- A custom mobile app using the Journey SDK fails because the AIC journey script returns the wrong callback shape.
+- A DaVinci-powered registration flow needs PingOne Verify, MFA enrollment, and custom OAuth scopes.
+- A headless app integration is blocked by LDAP connector trust, DS certificates, RCS configuration, or OpenICF connector behavior.
+- A production rollout needs Terraform, configuration promotion, environment variables, and rollback guidance.
+
 ## Example Prompts
 
 - "Using PingAM docs, build an authentication tree that requires WebAuthn after a risk score is high."
 - "From the PingOne API reference, show the request body for creating a worker application and required scopes."
+- "Using the Ping orchestration SDK docs, design a custom React login that renders AIC journey callbacks without the hosted UI."
+- "Create a DaVinci-backed mobile sign-in flow with OIDC token handling, MFA enrollment, and custom app claims."
 - "Use PingGateway docs to design a route that protects an MCP server with OAuth2 bearer tokens."
 - "In PingOne AIC, what is the ESV promotion flow between staging and production tenants?"
 - "Using PingDirectory developer docs, find the SCIM 2.0 endpoint pattern for user lookup by external ID."
@@ -111,7 +134,8 @@ Install both when you want product routing plus docset depth:
 |---|---|---|
 | Product unknown | `ping-quickstart` | matched product skill |
 | Authentication flow design | `ping-orchestration` | `davinci`, `pingoneaic`, `pingam`, `pingfederate` |
-| App integration | `ping-app-integration` | `pingone-api`, `sdks`, `login-widget`, `java-agents`, `web-agents` |
+| Headless app integration | `ping-app-integration` | `orchsdks`, `sdks`, `pingone-api`, `pingoneaic-api`, `davinci`, `pingoneaic` |
+| Hosted, widget, agent, or gateway integration | `ping-app-integration` | `login-widget`, `java-agents`, `web-agents`, `pingaccess`, `pinggateway` |
 | AI-agent identity | `ping-identity-for-ai` | `identity-for-ai`, `pingam`, `pingone-api`, `pingoneaic-api` |
 | Config-as-code | `ping-orchestration` | `config-automation-promotion`, `config-automation-management-sdks`, `terraform`, `devops` |
 
