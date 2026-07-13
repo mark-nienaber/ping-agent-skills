@@ -1,6 +1,6 @@
 {
   "name": "ping-agent-skills",
-  "description": "Per-docset Agent Skills that route AI coding agents to Ping Identity's official live Markdown documentation.",
+  "description": "A compact deep-document retrieval layer for Ping Identity's official live Markdown documentation.",
   "owner": {
     "name": "Mark Nienaber",
     "email": null
@@ -10,8 +10,8 @@
       "name": "ping-identity-docs",
       "displayName": "Ping Identity Docs",
       "source": "./plugins/ping-identity-docs",
-      "description": "Deep per-docset Ping Identity documentation skills. Use alongside pingidentity/agent-plugins umbrella skills for product routing plus exact docs lookup.",
-      "version": "1.0.0",
+      "description": "One efficient retrieval skill for exact Ping product documentation, version-specific APIs, and dated offline fallback.",
+      "version": "2.0.0",
       "author": {
         "name": "Mark Nienaber"
       },

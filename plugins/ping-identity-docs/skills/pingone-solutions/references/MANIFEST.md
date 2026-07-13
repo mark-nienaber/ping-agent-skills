@@ -6,18 +6,22 @@
 - Source: https://docs.pingidentity.com/pingone-solutions/llms.txt
 - Guides discovered: 6
 - Guides captured: 6
+- Guides fully captured: 1
+- Guides partially captured: 5
+- Guides without snapshots: 0
 - Total pages indexed: 122
+- Total snapshot pages captured: 6
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| healthcare.md | page | https://docs.pingidentity.com/pingone-solutions/healthcare/index.md | 30 |
-| pingone-customers-plus.md | page | https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/index.md | 26 |
-| financial-services.md | page | https://docs.pingidentity.com/pingone-solutions/financial-services/index.md | 23 |
-| pingone-customers-passwordless.md | page | https://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/index.md | 22 |
-| gift-card-auth.md | page | https://docs.pingidentity.com/pingone-solutions/gift-card-auth/index.md | 20 |
-| index-md.md | page | https://docs.pingidentity.com/pingone-solutions/index.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| healthcare.md | page | https://docs.pingidentity.com/pingone-solutions/healthcare/index.md | 30 | 1 | partial |
+| pingone-customers-plus.md | page | https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/index.md | 26 | 1 | partial |
+| financial-services.md | page | https://docs.pingidentity.com/pingone-solutions/financial-services/index.md | 23 | 1 | partial |
+| pingone-customers-passwordless.md | page | https://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/index.md | 22 | 1 | partial |
+| gift-card-auth.md | page | https://docs.pingidentity.com/pingone-solutions/gift-card-auth/index.md | 20 | 1 | partial |
+| index-md.md | page | https://docs.pingidentity.com/pingone-solutions/index.md | 1 | 1 | full |
 
 ## Checksums
 

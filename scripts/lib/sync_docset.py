@@ -10,6 +10,7 @@ import tempfile
 import time
 from pathlib import Path
 
+from generate_skill import generate_skill
 from manifest import write_manifest
 from ping_docsets import (
     cluster_entries,
@@ -23,6 +24,7 @@ from ping_docsets import (
 
 USER_AGENT = "ping-agent-skills-sync/1.0 (+https://github.com/mark-nienaber/ping-agent-skills)"
 LAST_CURL_ERROR = ""
+MAX_ASSEMBLED_PAGES = 20
 
 
 def curl_fetch(url: str, destination: Path) -> bool:
@@ -65,22 +67,24 @@ def markdownish(path: Path) -> bool:
     return not (prefix.startswith("<!doctype html") or prefix.startswith("<html"))
 
 
-def assemble_guide_snapshot(cluster, destination: Path, delay: float = 0.02) -> bool:
-    """Assemble a comprehensive guide snapshot by fetching and concatenating all pages in a cluster.
-    
-    Returns True if assembly succeeded, False otherwise.
-    This is a fallback for when single-page.md doesn't exist.
+def assemble_guide_snapshot(cluster, destination: Path, delay: float = 0.02) -> int:
+    """Assemble up to ``MAX_ASSEMBLED_PAGES`` and return the number captured.
+
+    This is a bounded fallback for when ``single-page.md`` does not exist. A
+    zero return value means that no usable page content was fetched.
     """
     if not cluster.entries:
-        return False
-    
+        return 0
+
     assembled_parts: list[str] = []
     successful_fetches = 0
-    
+
     for i, entry in enumerate(cluster.entries):
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".md", mode="w", encoding="utf-8") as tmp:
+        with tempfile.NamedTemporaryFile(
+            delete=False, suffix=".md", mode="w", encoding="utf-8"
+        ) as tmp:
             tmp_path = Path(tmp.name)
-        
+
         try:
             if curl_fetch(entry.url, tmp_path):
                 content = tmp_path.read_text(encoding="utf-8", errors="replace").strip()
@@ -89,19 +93,19 @@ def assemble_guide_snapshot(cluster, destination: Path, delay: float = 0.02) -> 
                     successful_fetches += 1
                     if delay and i < len(cluster.entries) - 1:
                         time.sleep(delay)
-            if successful_fetches >= 20:
-                # Limit assembly to first 20 pages to avoid oversized snapshots
+            if successful_fetches >= MAX_ASSEMBLED_PAGES:
+                # Keep offline fallbacks bounded even for very large guides.
                 break
         finally:
             tmp_path.unlink(missing_ok=True)
-    
+
     # Only write if we got at least some content
     if successful_fetches > 0:
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text("\n\n---\n\n".join(assembled_parts), encoding="utf-8")
-        return True
-    
-    return False
+        return successful_fetches
+
+    return 0
 
 
 def sync_docset(args: argparse.Namespace) -> int:
@@ -132,56 +136,101 @@ def sync_docset(args: argparse.Namespace) -> int:
     )
     clusters = cluster_entries(entries, docset.base_url, selected_version)
     if not clusters:
-        die(f"[{docset.skill_slug}] no guide clusters found for version {selected_version or 'current'}")
+        die(
+            f"[{docset.skill_slug}] no guide clusters found for version "
+            f"{selected_version or 'current'}"
+        )
 
     snapshots: list[dict[str, str]] = []
     captured_files: set[str] = set()
     delay = float(os.environ.get("PING_DOCS_SYNC_DELAY", "0.05"))
     for cluster in clusters:
         snapshot_file = f"{cluster.guide_slug}.md"
+        if snapshot_file in captured_files:
+            print(
+                f"[{docset.skill_slug}] skipped {cluster.guide} ({cluster.version}): "
+                f"snapshot path collides with an earlier cluster: {snapshot_file}"
+            )
+            continue
         snapshot_path = snapshots_root / snapshot_file
-        source_type = ""
-        source_url = ""
-        for candidate_url in cluster.single_page_urls:
-            if curl_fetch(candidate_url, snapshot_path):
+        with tempfile.NamedTemporaryFile(
+            delete=False, dir=snapshots_root, suffix=".md"
+        ) as staged_file:
+            staged_snapshot_path = Path(staged_file.name)
+        try:
+            source_type = ""
+            source_url = ""
+            pages_indexed = len(cluster.entries)
+            pages_captured = 0
+            for candidate_url in cluster.single_page_urls:
+                if not curl_fetch(candidate_url, staged_snapshot_path):
+                    continue
+                if not markdownish(staged_snapshot_path):
+                    print(
+                        f"[{docset.skill_slug}] ignored non-Markdown single-page "
+                        f"response for {cluster.guide}: {candidate_url}"
+                    )
+                    continue
                 source_type = "single-page"
                 source_url = candidate_url
+                # A single-page endpoint represents the complete indexed guide.
+                pages_captured = pages_indexed
                 break
-        
-        if not source_type:
-            if not args.page_fallback:
-                print(f"[{docset.skill_slug}] skipped {cluster.guide}: no single-page.md")
-                continue
-            
-            # Try assembling from individual entries before giving up
-            if assemble_guide_snapshot(cluster, snapshot_path, delay=0.01):
-                source_type = "assembled"
-                source_url = f"<{len(cluster.entries)} pages from {cluster.guide}>"
-            else:
-                # Final fallback: fetch just the first page
-                source_type = "page"
-                source_url = cluster.first_page_url
-                if not curl_fetch(cluster.first_page_url, snapshot_path):
-                    detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
-                    print(f"[{docset.skill_slug}] skipped {cluster.guide}: snapshot fetch failed{detail}")
+
+            if not source_type:
+                if not args.page_fallback:
+                    print(
+                        f"[{docset.skill_slug}] skipped {cluster.guide}: "
+                        "no Markdown single-page response"
+                    )
                     continue
-        
-        if not markdownish(snapshot_path):
-            snapshot_path.unlink(missing_ok=True)
-            print(f"[{docset.skill_slug}] skipped {cluster.guide}: content was not markdown")
-            continue
-        
+
+                # Try assembling from individual entries before giving up.
+                pages_captured = assemble_guide_snapshot(
+                    cluster, staged_snapshot_path, delay=0.01
+                )
+                if pages_captured:
+                    source_type = "assembled"
+                    source_url = llms_url
+                else:
+                    # Final fallback: fetch just the first page.
+                    source_type = "page"
+                    source_url = cluster.first_page_url
+                    if not curl_fetch(cluster.first_page_url, staged_snapshot_path):
+                        detail = f": {LAST_CURL_ERROR}" if LAST_CURL_ERROR else ""
+                        print(
+                            f"[{docset.skill_slug}] skipped {cluster.guide}: "
+                            f"snapshot fetch failed{detail}"
+                        )
+                        continue
+                    pages_captured = 1
+
+            if not markdownish(staged_snapshot_path):
+                print(
+                    f"[{docset.skill_slug}] skipped {cluster.guide}: "
+                    "content was not Markdown"
+                )
+                continue
+            staged_snapshot_path.replace(snapshot_path)
+        finally:
+            staged_snapshot_path.unlink(missing_ok=True)
+
         snapshots.append(
             {
                 "file": snapshot_file,
                 "guide": cluster.guide,
                 "source_type": source_type,
                 "source_url": source_url,
-                "page_count": str(len(cluster.entries)),
+                "pages_indexed": str(pages_indexed),
+                "pages_captured": str(pages_captured),
+                "coverage": "full" if pages_captured >= pages_indexed else "partial",
             }
         )
         captured_files.add(snapshot_file)
-        print(f"[{docset.skill_slug}] captured {snapshot_file} from {source_type} ({len(cluster.entries)} pages)")
+        print(
+            f"[{docset.skill_slug}] captured {snapshot_file} from {source_type} "
+            f"({pages_captured}/{pages_indexed} indexed pages)"
+        )
         if delay:
             time.sleep(delay)
 
@@ -206,6 +255,18 @@ def sync_docset(args: argparse.Namespace) -> int:
         snapshots=snapshots,
     )
 
+    # Keep generated routing metadata in step with the refreshed llms index and
+    # the set of snapshots that this sync actually retained or captured.
+    generate_skill(
+        argparse.Namespace(
+            repo_root=str(repo_root),
+            registry=args.registry,
+            skills_root=args.skills_root,
+            slug=args.slug,
+            max_routes=getattr(args, "max_routes", 12),
+        )
+    )
+
     print(
         f"[{docset.skill_slug}] synced {len(entries)} llms entries; "
         f"{len(snapshots)}/{len(clusters)} snapshots captured"
@@ -226,6 +287,12 @@ def main() -> int:
         action="store_false",
         dest="page_fallback",
         help="Do not fall back to the first page in a guide when single-page.md is absent",
+    )
+    parser.add_argument(
+        "--max-routes",
+        type=int,
+        default=12,
+        help="Maximum routing rows regenerated in SKILL.md after a successful sync",
     )
     parser.set_defaults(page_fallback=True)
     return sync_docset(parser.parse_args())

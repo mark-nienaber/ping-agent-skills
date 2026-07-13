@@ -6,15 +6,19 @@
 - Source: https://developer.pingidentity.com/pingdirectory/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
+- Guides fully captured: 1
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 137
+- Total snapshot pages captured: 56
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| directory.md | assembled | <93 pages from directory> | 93 |
-| directory-proxy-scim.md | assembled | <28 pages from directory-proxy-scim> | 28 |
-| consent.md | assembled | <16 pages from consent> | 16 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| directory.md | assembled | <93 pages from directory> | 93 | 20 | partial |
+| directory-proxy-scim.md | assembled | <28 pages from directory-proxy-scim> | 28 | 20 | partial |
+| consent.md | assembled | <16 pages from consent> | 16 | 16 | full |
 
 ## Checksums
 

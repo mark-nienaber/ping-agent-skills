@@ -6,81 +6,85 @@
 - Source: https://docs.pingidentity.com/integrations/llms.txt
 - Guides discovered: 70
 - Guides captured: 69
+- Guides fully captured: 46
+- Guides partially captured: 23
+- Guides without snapshots: 1
 - Total pages indexed: 1622
+- Total snapshot pages captured: 1030
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingone.md | assembled | <253 pages from pingone> | 253 |
-| amazon.md | assembled | <53 pages from amazon> | 53 |
-| google.md | assembled | <49 pages from google> | 49 |
-| azure.md | assembled | <47 pages from azure> | 47 |
-| atlassian.md | assembled | <44 pages from atlassian> | 44 |
-| github.md | assembled | <44 pages from github> | 44 |
-| salesforce.md | assembled | <44 pages from salesforce> | 44 |
-| java.md | assembled | <40 pages from java> | 40 |
-| facebook.md | assembled | <39 pages from facebook> | 39 |
-| zscaler.md | assembled | <36 pages from zscaler> | 36 |
-| office365.md | assembled | <35 pages from office365> | 35 |
-| webaccessmanagement.md | assembled | <34 pages from webAccessManagement> | 34 |
-| agentless.md | assembled | <29 pages from agentless> | 29 |
-| php.md | assembled | <29 pages from php> | 29 |
-| slack.md | assembled | <26 pages from slack> | 26 |
-| duosecurity.md | assembled | <25 pages from duosecurity> | 25 |
-| apache.md | assembled | <21 pages from apache> | 21 |
-| net.md | assembled | <21 pages from net> | 21 |
-| zendesk.md | assembled | <21 pages from zendesk> | 21 |
-| zoom.md | assembled | <21 pages from zoom> | 21 |
-| box.md | assembled | <20 pages from box> | 20 |
-| contentful.md | assembled | <20 pages from contentful> | 20 |
-| sharepoint-peoplepicker.md | assembled | <20 pages from sharepoint-peoplepicker> | 20 |
-| aquera.md | assembled | <19 pages from aquera> | 19 |
-| coupa.md | assembled | <19 pages from coupa> | 19 |
-| scim.md | assembled | <19 pages from scim> | 19 |
-| x509.md | assembled | <19 pages from x509> | 19 |
-| iddataweb.md | assembled | <18 pages from iddataweb> | 18 |
-| oam.md | assembled | <18 pages from oam> | 18 |
-| servicenow.md | assembled | <18 pages from servicenow> | 18 |
-| threatmetrix.md | assembled | <18 pages from threatmetrix> | 18 |
-| iovation.md | assembled | <17 pages from iovation> | 17 |
-| microsoft-eam.md | assembled | <17 pages from microsoft-eam> | 17 |
-| otp.md | assembled | <17 pages from otp> | 17 |
-| symantec-vip.md | assembled | <17 pages from symantec-vip> | 17 |
-| linkedin.md | assembled | <16 pages from linkedin> | 16 |
-| rsa.md | assembled | <16 pages from rsa> | 16 |
-| apple.md | assembled | <15 pages from apple> | 15 |
-| dropbox.md | assembled | <15 pages from dropbox> | 15 |
-| dynamicscrm.md | assembled | <15 pages from dynamicscrm> | 15 |
-| egnyte.md | assembled | <15 pages from egnyte> | 15 |
-| pingone-credentials.md | assembled | <15 pages from pingone-credentials> | 15 |
-| code42-pingfederate.md | assembled | <14 pages from code42-pingfederate> | 14 |
-| concur.md | assembled | <14 pages from concur> | 14 |
-| evernote.md | assembled | <14 pages from evernote> | 14 |
-| jamf.md | assembled | <14 pages from jamf> | 14 |
-| sap-netweaver.md | assembled | <14 pages from sap-netweaver> | 14 |
-| workspaceone-uem.md | assembled | <14 pages from workspaceone-uem> | 14 |
-| intune.md | assembled | <13 pages from intune> | 13 |
-| lucidchart.md | assembled | <13 pages from lucidchart> | 13 |
-| microsoft-iis.md | assembled | <13 pages from microsoft-iis> | 13 |
-| microsoft-login.md | assembled | <13 pages from microsoft-login> | 13 |
-| pingam.md | assembled | <13 pages from pingam> | 13 |
-| pingid.md | assembled | <13 pages from pingid> | 13 |
-| entrust.md | assembled | <12 pages from entrust> | 12 |
-| opentoken.md | assembled | <12 pages from opentoken> | 12 |
-| twitter.md | assembled | <12 pages from twitter> | 12 |
-| webex.md | assembled | <12 pages from webex> | 12 |
-| citrix-adc.md | assembled | <11 pages from citrix-adc> | 11 |
-| crowdstrike.md | assembled | <11 pages from crowdstrike> | 11 |
-| island-enterprise-browser.md | assembled | <11 pages from island-enterprise-browser> | 11 |
-| pingid-sdk.md | assembled | <11 pages from pingid-sdk> | 11 |
-| code42-pingone.md | assembled | <10 pages from code42-pingone> | 10 |
-| forgerock-intelligent-access.md | assembled | <10 pages from forgerock-intelligent-access> | 10 |
-| akamai.md | assembled | <9 pages from akamai> | 9 |
-| mobileiron.md | assembled | <9 pages from mobileiron> | 9 |
-| websphere.md | assembled | <8 pages from websphere> | 8 |
-| heroku.md | assembled | <5 pages from heroku> | 5 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingone.md | assembled | <253 pages from pingone> | 253 | 20 | partial |
+| amazon.md | assembled | <53 pages from amazon> | 53 | 20 | partial |
+| google.md | assembled | <49 pages from google> | 49 | 20 | partial |
+| azure.md | assembled | <47 pages from azure> | 47 | 20 | partial |
+| atlassian.md | assembled | <44 pages from atlassian> | 44 | 20 | partial |
+| github.md | assembled | <44 pages from github> | 44 | 12 | partial |
+| salesforce.md | assembled | <44 pages from salesforce> | 44 | 20 | partial |
+| java.md | assembled | <40 pages from java> | 40 | 20 | partial |
+| facebook.md | assembled | <39 pages from facebook> | 39 | 20 | partial |
+| zscaler.md | assembled | <36 pages from zscaler> | 36 | 20 | partial |
+| office365.md | assembled | <35 pages from office365> | 35 | 7 | partial |
+| webaccessmanagement.md | assembled | <34 pages from webAccessManagement> | 34 | 20 | partial |
+| agentless.md | assembled | <29 pages from agentless> | 29 | 20 | partial |
+| php.md | assembled | <29 pages from php> | 29 | 20 | partial |
+| slack.md | assembled | <26 pages from slack> | 26 | 20 | partial |
+| duosecurity.md | assembled | <25 pages from duosecurity> | 25 | 19 | partial |
+| apache.md | assembled | <21 pages from apache> | 21 | 20 | partial |
+| net.md | assembled | <21 pages from net> | 21 | 20 | partial |
+| zendesk.md | assembled | <21 pages from zendesk> | 21 | 20 | partial |
+| zoom.md | assembled | <21 pages from zoom> | 21 | 20 | partial |
+| box.md | assembled | <20 pages from box> | 20 | 19 | partial |
+| contentful.md | assembled | <20 pages from contentful> | 20 | 1 | partial |
+| sharepoint-peoplepicker.md | assembled | <20 pages from sharepoint-peoplepicker> | 20 | 3 | partial |
+| aquera.md | assembled | <19 pages from aquera> | 19 | 19 | full |
+| coupa.md | assembled | <19 pages from coupa> | 19 | 19 | full |
+| scim.md | assembled | <19 pages from scim> | 19 | 19 | full |
+| x509.md | assembled | <19 pages from x509> | 19 | 19 | full |
+| iddataweb.md | assembled | <18 pages from iddataweb> | 18 | 18 | full |
+| oam.md | assembled | <18 pages from oam> | 18 | 18 | full |
+| servicenow.md | assembled | <18 pages from servicenow> | 18 | 18 | full |
+| threatmetrix.md | assembled | <18 pages from threatmetrix> | 18 | 18 | full |
+| iovation.md | assembled | <17 pages from iovation> | 17 | 17 | full |
+| microsoft-eam.md | assembled | <17 pages from microsoft-eam> | 17 | 17 | full |
+| otp.md | assembled | <17 pages from otp> | 17 | 17 | full |
+| symantec-vip.md | assembled | <17 pages from symantec-vip> | 17 | 17 | full |
+| linkedin.md | assembled | <16 pages from linkedin> | 16 | 16 | full |
+| rsa.md | assembled | <16 pages from rsa> | 16 | 16 | full |
+| apple.md | assembled | <15 pages from apple> | 15 | 15 | full |
+| dropbox.md | assembled | <15 pages from dropbox> | 15 | 15 | full |
+| dynamicscrm.md | assembled | <15 pages from dynamicscrm> | 15 | 15 | full |
+| egnyte.md | assembled | <15 pages from egnyte> | 15 | 15 | full |
+| pingone-credentials.md | assembled | <15 pages from pingone-credentials> | 15 | 15 | full |
+| code42-pingfederate.md | assembled | <14 pages from code42-pingfederate> | 14 | 14 | full |
+| concur.md | assembled | <14 pages from concur> | 14 | 14 | full |
+| evernote.md | assembled | <14 pages from evernote> | 14 | 14 | full |
+| jamf.md | assembled | <14 pages from jamf> | 14 | 14 | full |
+| sap-netweaver.md | assembled | <14 pages from sap-netweaver> | 14 | 14 | full |
+| workspaceone-uem.md | assembled | <14 pages from workspaceone-uem> | 14 | 14 | full |
+| intune.md | assembled | <13 pages from intune> | 13 | 13 | full |
+| lucidchart.md | assembled | <13 pages from lucidchart> | 13 | 13 | full |
+| microsoft-iis.md | assembled | <13 pages from microsoft-iis> | 13 | 13 | full |
+| microsoft-login.md | assembled | <13 pages from microsoft-login> | 13 | 13 | full |
+| pingam.md | assembled | <13 pages from pingam> | 13 | 13 | full |
+| pingid.md | assembled | <13 pages from pingid> | 13 | 13 | full |
+| entrust.md | assembled | <12 pages from entrust> | 12 | 12 | full |
+| opentoken.md | assembled | <12 pages from opentoken> | 12 | 12 | full |
+| twitter.md | assembled | <12 pages from twitter> | 12 | 12 | full |
+| webex.md | assembled | <12 pages from webex> | 12 | 12 | full |
+| citrix-adc.md | assembled | <11 pages from citrix-adc> | 11 | 11 | full |
+| crowdstrike.md | assembled | <11 pages from crowdstrike> | 11 | 11 | full |
+| island-enterprise-browser.md | assembled | <11 pages from island-enterprise-browser> | 11 | 11 | full |
+| pingid-sdk.md | assembled | <11 pages from pingid-sdk> | 11 | 11 | full |
+| code42-pingone.md | assembled | <10 pages from code42-pingone> | 10 | 10 | full |
+| forgerock-intelligent-access.md | assembled | <10 pages from forgerock-intelligent-access> | 10 | 10 | full |
+| akamai.md | assembled | <9 pages from akamai> | 9 | 9 | full |
+| mobileiron.md | assembled | <9 pages from mobileiron> | 9 | 9 | full |
+| websphere.md | assembled | <8 pages from websphere> | 8 | 8 | full |
+| heroku.md | assembled | <5 pages from heroku> | 5 | 5 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
 
 ## Checksums
 

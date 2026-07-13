@@ -1,6 +1,6 @@
 ---
 name: solution-guides
-description: "Use when working with Solution Guides: single sign on use cases, data and application security use cases, workforce use cases, customer use cases, best practice guides, multi factor authentication use cases. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names Solution Guides or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Identity for AI secures AI agents with agent registration, authentication, autho
 - Snapshot version: current
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -33,18 +34,18 @@ Identity for AI secures AI agents with agent registration, authentication, autho
 | Best Practice Guides: best, practices, passwordless | best_practice_guides | https://docs.pingidentity.com/solution-guides/best_practice_guides/*.md | references/snapshots/best-practice-guides.md |
 | Multi Factor Authentication Use Cases: mfa, pingid, authentication | multi-factor_authentication_use_cases | https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/*.md | references/snapshots/multi-factor-authentication-use-cases.md |
 | Standards And Protocols Use Cases: client, commands, federation | standards_and_protocols_use_cases | https://docs.pingidentity.com/solution-guides/standards_and_protocols_use_cases/*.md | references/snapshots/standards-and-protocols-use-cases.md |
-| Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | references/snapshots/developer-api-use-cases.md |
-| Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | references/snapshots/verified-trust.md |
-| Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | references/snapshots/directory-use-cases.md |
-| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | references/snapshots/htg-overview-md.md |
-| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | references/snapshots/identity-for-ai.md |
+| Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | live-only |
+| Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | live-only |
+| Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | live-only |
+| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | live-only |
+| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | live-only |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

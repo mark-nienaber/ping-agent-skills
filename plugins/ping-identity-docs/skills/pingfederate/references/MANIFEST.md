@@ -6,23 +6,27 @@
 - Source: https://docs.pingidentity.com/pingfederate/llms.txt
 - Guides discovered: 12
 - Guides captured: 11
+- Guides fully captured: 1
+- Guides partially captured: 10
+- Guides without snapshots: 1
 - Total pages indexed: 1211
+- Total snapshot pages captured: 184
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| administrators-reference-guide.md | assembled | <797 pages from administrators_reference_guide> | 797 |
-| introduction-to-pingfederate.md | assembled | <105 pages from introduction_to_pingfederate> | 105 |
-| release-notes.md | assembled | <99 pages from release_notes> | 99 |
-| developers-reference-guide.md | assembled | <56 pages from developers_reference_guide> | 56 |
-| server-clustering-guide.md | assembled | <34 pages from server_clustering_guide> | 34 |
-| sdk-developers-guide.md | assembled | <27 pages from sdk_developers_guide> | 27 |
-| upgrading-pingfederate.md | assembled | <25 pages from upgrading_pingfederate> | 25 |
-| getting-started-with-pingfederate.md | assembled | <22 pages from getting_started_with_pingfederate> | 22 |
-| performance-tuning-guide.md | assembled | <21 pages from performance_tuning_guide> | 21 |
-| installing-and-uninstalling-pingfederate.md | assembled | <12 pages from installing_and_uninstalling_pingfederate> | 12 |
-| pingfederate-monitoring-guide.md | assembled | <12 pages from pingfederate_monitoring_guide> | 12 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| administrators-reference-guide.md | assembled | <797 pages from administrators_reference_guide> | 797 | 20 | partial |
+| introduction-to-pingfederate.md | assembled | <105 pages from introduction_to_pingfederate> | 105 | 20 | partial |
+| release-notes.md | assembled | <99 pages from release_notes> | 99 | 20 | partial |
+| developers-reference-guide.md | assembled | <56 pages from developers_reference_guide> | 56 | 20 | partial |
+| server-clustering-guide.md | assembled | <34 pages from server_clustering_guide> | 34 | 14 | partial |
+| sdk-developers-guide.md | assembled | <27 pages from sdk_developers_guide> | 27 | 12 | partial |
+| upgrading-pingfederate.md | assembled | <25 pages from upgrading_pingfederate> | 25 | 20 | partial |
+| getting-started-with-pingfederate.md | assembled | <22 pages from getting_started_with_pingfederate> | 22 | 20 | partial |
+| performance-tuning-guide.md | assembled | <21 pages from performance_tuning_guide> | 21 | 20 | partial |
+| installing-and-uninstalling-pingfederate.md | assembled | <12 pages from installing_and_uninstalling_pingfederate> | 12 | 12 | full |
+| pingfederate-monitoring-guide.md | assembled | <12 pages from pingfederate_monitoring_guide> | 12 | 6 | partial |
 
 ## Checksums
 

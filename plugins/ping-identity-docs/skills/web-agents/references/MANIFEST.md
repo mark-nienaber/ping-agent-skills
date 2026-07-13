@@ -6,20 +6,24 @@
 - Source: https://docs.pingidentity.com/web-agents/llms.txt
 - Guides discovered: 9
 - Guides captured: 8
+- Guides fully captured: 4
+- Guides partially captured: 4
+- Guides without snapshots: 1
 - Total pages indexed: 244
+- Total snapshot pages captured: 66
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| properties-reference.md | assembled | <156 pages from properties-reference> | 156 |
-| release-notes.md | assembled | <36 pages from release-notes> | 36 |
-| user-guide.md | assembled | <18 pages from user-guide> | 18 |
-| maintenance-guide.md | assembled | <7 pages from maintenance-guide> | 7 |
-| security-guide.md | assembled | <7 pages from security-guide> | 7 |
-| identity-cloud-guide.md | assembled | <4 pages from identity-cloud-guide> | 4 |
-| upgrade.md | assembled | <4 pages from upgrade> | 4 |
-| root.md | assembled | <1 pages from root> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| properties-reference.md | assembled | <156 pages from properties-reference> | 156 | 20 | partial |
+| release-notes.md | assembled | <36 pages from release-notes> | 36 | 20 | partial |
+| user-guide.md | assembled | <18 pages from user-guide> | 18 | 6 | partial |
+| maintenance-guide.md | assembled | <7 pages from maintenance-guide> | 7 | 4 | partial |
+| security-guide.md | assembled | <7 pages from security-guide> | 7 | 7 | full |
+| identity-cloud-guide.md | assembled | <4 pages from identity-cloud-guide> | 4 | 4 | full |
+| upgrade.md | assembled | <4 pages from upgrade> | 4 | 4 | full |
+| root.md | assembled | <1 pages from root> | 1 | 1 | full |
 
 ## Checksums
 

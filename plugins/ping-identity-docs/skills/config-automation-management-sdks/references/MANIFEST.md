@@ -6,16 +6,20 @@
 - Source: https://developer.pingidentity.com/config-automation-management-sdks/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
+- Guides fully captured: 2
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 10
+- Total snapshot pages captured: 4
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| products.md | page | https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md | 6 |
-| develop-with-management-sdks.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md | 2 |
-| develop-with-management-sdks-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | 1 |
-| management-sdks-landing-page-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| products.md | page | https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md | 6 | 1 | partial |
+| develop-with-management-sdks.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md | 2 | 1 | partial |
+| develop-with-management-sdks-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | 1 | 1 | full |
+| management-sdks-landing-page-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | 1 | 1 | full |
 
 ## Checksums
 

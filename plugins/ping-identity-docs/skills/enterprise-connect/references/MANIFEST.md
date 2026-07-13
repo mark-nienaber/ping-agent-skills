@@ -6,13 +6,17 @@
 - Source: https://docs.pingidentity.com/enterprise-connect/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
+- Guides fully captured: 0
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 64
+- Total snapshot pages captured: 20
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| latest.md | assembled | <64 pages from latest> | 64 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| latest.md | assembled | <64 pages from latest> | 64 | 20 | partial |
 
 ## Checksums
 

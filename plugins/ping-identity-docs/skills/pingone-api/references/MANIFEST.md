@@ -6,27 +6,31 @@
 - Source: https://developer.pingidentity.com/pingone-api/llms.txt
 - Guides discovered: 15
 - Guides captured: 15
+- Guides fully captured: 4
+- Guides partially captured: 11
+- Guides without snapshots: 0
 - Total pages indexed: 1707
+- Total snapshot pages captured: 246
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| platform.md | assembled | <714 pages from platform> | 714 |
-| workflow-library.md | assembled | <327 pages from workflow-library> | 327 |
-| auth.md | assembled | <129 pages from auth> | 129 |
-| mfa.md | assembled | <106 pages from mfa> | 106 |
-| credentials.md | assembled | <74 pages from credentials> | 74 |
-| authorize.md | assembled | <68 pages from authorize> | 68 |
-| verify.md | assembled | <68 pages from verify> | 68 |
-| foundations.md | assembled | <67 pages from foundations> | 67 |
-| davinci.md | assembled | <62 pages from davinci> | 62 |
-| protect.md | assembled | <42 pages from protect> | 42 |
-| getting-started.md | assembled | <24 pages from getting-started> | 24 |
-| native-sdks.md | assembled | <18 pages from native-sdks> | 18 |
-| before-you-begin.md | assembled | <6 pages from before-you-begin> | 6 |
-| changelog-md.md | assembled | <1 pages from changelog.md> | 1 |
-| introduction-md.md | assembled | <1 pages from introduction.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| platform.md | assembled | <714 pages from platform> | 714 | 20 | partial |
+| workflow-library.md | assembled | <327 pages from workflow-library> | 327 | 20 | partial |
+| auth.md | assembled | <129 pages from auth> | 129 | 20 | partial |
+| mfa.md | assembled | <106 pages from mfa> | 106 | 20 | partial |
+| credentials.md | assembled | <74 pages from credentials> | 74 | 20 | partial |
+| authorize.md | assembled | <68 pages from authorize> | 68 | 20 | partial |
+| verify.md | assembled | <68 pages from verify> | 68 | 20 | partial |
+| foundations.md | assembled | <67 pages from foundations> | 67 | 20 | partial |
+| davinci.md | assembled | <62 pages from davinci> | 62 | 20 | partial |
+| protect.md | assembled | <42 pages from protect> | 42 | 20 | partial |
+| getting-started.md | assembled | <24 pages from getting-started> | 24 | 20 | partial |
+| native-sdks.md | assembled | <18 pages from native-sdks> | 18 | 18 | full |
+| before-you-begin.md | assembled | <6 pages from before-you-begin> | 6 | 6 | full |
+| changelog-md.md | assembled | <1 pages from changelog.md> | 1 | 1 | full |
+| introduction-md.md | assembled | <1 pages from introduction.md> | 1 | 1 | full |
 
 ## Checksums
 

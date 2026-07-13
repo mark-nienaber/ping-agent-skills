@@ -6,15 +6,19 @@
 - Source: https://developer.pingidentity.com/config-automation-promotion/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
+- Guides fully captured: 2
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 8
+- Total snapshot pages captured: 3
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| concepts.md | page | https://developer.pingidentity.com/config-automation-promotion/concepts/auditing_and_reviewing_changes.md | 6 |
-| configuration-promotion-landing-page-md.md | page | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md | 1 |
-| configuration-promotion-pipeline-examples-md.md | page | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| concepts.md | page | https://developer.pingidentity.com/config-automation-promotion/concepts/auditing_and_reviewing_changes.md | 6 | 1 | partial |
+| configuration-promotion-landing-page-md.md | page | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md | 1 | 1 | full |
+| configuration-promotion-pipeline-examples-md.md | page | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md | 1 | 1 | full |
 
 ## Checksums
 

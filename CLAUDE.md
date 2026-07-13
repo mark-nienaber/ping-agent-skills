@@ -1,6 +1,6 @@
 # Claude Guidance
 
-This repo contains Agent Skills for Ping Identity documentation. Treat `plugins/ping-identity-docs/skills/` as the single source shared by Claude Code, Codex, and other agents.
+This repo contains an efficient deep-documentation layer for Ping Identity Agent Skills. Treat `plugins/ping-identity-docs/runtime-skills/ping-docs/` as the default runtime skill and `plugins/ping-identity-docs/skills/` as its generated docset data plus optional product-specific skills.
 
 ## Operating Rules
 
@@ -8,13 +8,14 @@ This repo contains Agent Skills for Ping Identity documentation. Treat `plugins/
 - `SKILL.md` frontmatter must stay minimal and agentskills-compatible: `name` and `description` are required; `license` is allowed.
 - The frontmatter `name` must match the skill directory.
 - The frontmatter `description` is the activation trigger. Keep it concrete, product-specific, and under 500 characters.
-- Prefer live fetch from the URL selected through `references/llms.txt`; use `references/snapshots/` only when offline or live fetch fails.
+- Use the bundled `search_docs.py` command for top-k discovery. Never load an entire `llms.txt` into model context.
+- Prefer the exact live Markdown URL returned by the search. Use only a manifest-listed snapshot when offline or live fetch fails, and disclose its date and partial/full coverage.
 - Do not rename `scripts/docsets.yaml` slugs without updating every reference.
 - `pingcli` is registered but disabled because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
 
 ## Skill Inventory
 
-Generated skills:
+Generated docset data and optional skills:
 
 - `auth-node-ref` - authentication tree node reference across PingOne and AM/self-managed nodes.
 - `autonomous-identity` - Ping Autonomous Identity administration and APIs.
@@ -79,11 +80,11 @@ Blocked:
 
 ## Composition
 
-Use [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins) for umbrella routing. Use this repo for per-docset depth after the product/docset is known.
+Use [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins) for umbrella routing. Invoke the single `ping-docs` skill for exact documentation after the product is known. Install an individual generated docset skill only for deliberate compatibility or product-isolated use.
 
 Common combinations:
 
-- Product unknown: start with `ping-quickstart`, then load the matching skill here.
-- Authentication flow design: use `ping-orchestration`, then `davinci`, `pingoneaic`, `pingam`, or `pingfederate`.
-- Application integration: use `ping-app-integration`, then `pingone-api`, `sdks`, `login-widget`, `java-agents`, or `web-agents`.
-- AI agent identity: use `ping-identity-for-ai`, then `identity-for-ai`, `pingam`, `pingone-api`, or `pingoneaic-api`.
+- Product unknown: start with `ping-quickstart` and clarify the platform before retrieving detailed docs.
+- Authentication flow design: use `ping-orchestration`, then `ping-docs` with the selected product and task.
+- Application integration: use `ping-app-integration`, then `ping-docs` for exact SDK or API pages.
+- AI agent identity: use `ping-identity-for-ai`, then `ping-docs` for exact implementation references.

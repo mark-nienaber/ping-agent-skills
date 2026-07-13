@@ -6,13 +6,17 @@
 - Source: https://developer.pingidentity.com/pingauthorize/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
+- Guides fully captured: 0
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 206
+- Total snapshot pages captured: 20
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingauthorize.md | assembled | <206 pages from pingauthorize> | 206 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingauthorize.md | assembled | <206 pages from pingauthorize> | 206 | 20 | partial |
 
 ## Checksums
 

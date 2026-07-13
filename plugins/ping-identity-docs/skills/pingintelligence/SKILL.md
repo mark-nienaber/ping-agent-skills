@@ -1,6 +1,6 @@
 ---
 name: pingintelligence
-description: "Use when working with PingIntelligence: pingintelligence reference guide, pingintelligence integrations, installing pingintelligence for apis, managing pingintelligence for apis, release notes, root. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingIntelligence or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ PingIntelligence documentation is indexed in the bundled llms.txt and live Ping 
 - Snapshot version: 5.2
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -32,14 +33,14 @@ PingIntelligence documentation is indexed in the bundled llms.txt and live Ping 
 | Managing Pingintelligence For Apis: discovery, activity, client | managing_pingintelligence_for_apis | https://docs.pingidentity.com/pingintelligence/5.2/managing_pingintelligence_for_apis/*.md | references/snapshots/managing-pingintelligence-for-apis.md |
 | Release Notes: pingintelligence, august, december | release_notes | https://docs.pingidentity.com/pingintelligence/5.2/release_notes/*.md | references/snapshots/release-notes.md |
 | Root: pingintelligence, untitled, introduction | root | https://docs.pingidentity.com/pingintelligence/5.2/*.md | references/snapshots/root.md |
-| Getting Started With Pingintelligence: discovery, ase, configuring | getting_started_with_pingintelligence | https://docs.pingidentity.com/pingintelligence/5.2/getting_started_with_pingintelligence/*.md | references/snapshots/getting-started-with-pingintelligence.md |
+| Getting Started With Pingintelligence: discovery, ase, configuring | getting_started_with_pingintelligence | https://docs.pingidentity.com/pingintelligence/5.2/getting_started_with_pingintelligence/*.md | live-only |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

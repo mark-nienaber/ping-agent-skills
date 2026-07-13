@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 
+from generate_skill import manifest_snapshot_names
 from ping_docsets import (
     Docset,
     GuideCluster,
@@ -323,7 +324,17 @@ def phrase_bonus(query: str, docset: Docset) -> int:
         docset.label.lower(),
     }
     phrases.update(PRODUCT_ALIASES.get(docset.skill_slug, ()))
-    return sum(80 for phrase in phrases if phrase and phrase in normalized)
+    bonus = 0
+    for phrase in phrases:
+        if not phrase:
+            continue
+        position = normalized.find(phrase)
+        if position == -1:
+            continue
+        # Product names are normally stated near the start of a natural task.
+        # Prefer that signal over a later generic noun such as "integrations".
+        bonus += 120 if position < 48 else 80
+    return bonus
 
 
 def rel_url_path(url: str) -> str:
@@ -430,7 +441,14 @@ def route_question(
     guide, guide_score, guide_terms = choose_guide(query_tokens, clusters)
     entry, entry_score, entry_terms = choose_entry(query_tokens, guide)
     snapshot = f"references/snapshots/{guide.guide_slug}.md"
-    if not (skills_root / docset.skill_slug / snapshot).exists():
+    skill_root = skills_root / docset.skill_slug
+    manifested_snapshots = manifest_snapshot_names(
+        skill_root / "references" / "MANIFEST.md"
+    )
+    if (
+        guide.guide_slug + ".md" not in manifested_snapshots
+        or not (skill_root / snapshot).exists()
+    ):
         snapshot = "live-only"
     return SkillRoute(
         docset=docset,

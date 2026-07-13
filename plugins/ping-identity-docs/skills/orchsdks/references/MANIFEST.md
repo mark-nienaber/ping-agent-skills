@@ -6,19 +6,23 @@
 - Source: https://developer.pingidentity.com/orchsdks/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
+- Guides fully captured: 4
+- Guides partially captured: 3
+- Guides without snapshots: 0
 - Total pages indexed: 368
+- Total snapshot pages captured: 80
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| journey.md | assembled | <175 pages from journey> | 175 |
-| davinci.md | assembled | <92 pages from davinci> | 92 |
-| oidc.md | assembled | <81 pages from oidc> | 81 |
-| release-notes.md | assembled | <11 pages from release-notes> | 11 |
-| security.md | assembled | <5 pages from security> | 5 |
-| concepts.md | assembled | <3 pages from concepts> | 3 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| journey.md | assembled | <175 pages from journey> | 175 | 20 | partial |
+| davinci.md | assembled | <92 pages from davinci> | 92 | 20 | partial |
+| oidc.md | assembled | <81 pages from oidc> | 81 | 20 | partial |
+| release-notes.md | assembled | <11 pages from release-notes> | 11 | 11 | full |
+| security.md | assembled | <5 pages from security> | 5 | 5 | full |
+| concepts.md | assembled | <3 pages from concepts> | 3 | 3 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
 
 ## Checksums
 

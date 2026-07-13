@@ -1,7 +1,7 @@
 {
   "name": "ping-identity-docs",
-  "version": "1.0.0",
-  "description": "Per-docset live-doc router skills for Ping Identity documentation.",
+  "version": "2.0.0",
+  "description": "Efficient deep-document retrieval for official Ping Identity documentation.",
   "author": {
     "name": "Mark Nienaber"
   },
@@ -18,5 +18,5 @@
     "documentation",
     "agent-skills"
   ],
-  "skills": "./plugins/ping-identity-docs/skills/"
+  "skills": "./plugins/ping-identity-docs/runtime-skills/"
 }

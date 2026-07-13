@@ -6,16 +6,20 @@
 - Source: https://docs.pingidentity.com/openicf/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
+- Guides fully captured: 2
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 130
+- Total snapshot pages captured: 49
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| connector-reference.md | assembled | <72 pages from connector-reference> | 72 |
-| connector-dev-guide.md | assembled | <48 pages from connector-dev-guide> | 48 |
-| connector-release-notes.md | assembled | <9 pages from connector-release-notes> | 9 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| connector-reference.md | assembled | <72 pages from connector-reference> | 72 | 19 | partial |
+| connector-dev-guide.md | assembled | <48 pages from connector-dev-guide> | 48 | 20 | partial |
+| connector-release-notes.md | assembled | <9 pages from connector-release-notes> | 9 | 9 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
 
 ## Checksums
 

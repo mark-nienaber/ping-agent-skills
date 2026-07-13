@@ -6,19 +6,23 @@
 - Source: https://developer.pingidentity.com/identity-for-ai/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
+- Guides fully captured: 4
+- Guides partially captured: 3
+- Guides without snapshots: 0
 - Total pages indexed: 21
+- Total snapshot pages captured: 7
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| agents.md | page | https://developer.pingidentity.com/identity-for-ai/agents/idai-computer-using-agents.md | 12 |
-| use-cases.md | page | https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.md | 3 |
-| identity.md | page | https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.md | 2 |
-| getting-started.md | page | https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.md | 1 |
-| glossary.md | page | https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.md | 1 |
-| index-md.md | page | https://developer.pingidentity.com/identity-for-ai/index.md | 1 |
-| release-notes.md | page | https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| agents.md | page | https://developer.pingidentity.com/identity-for-ai/agents/idai-computer-using-agents.md | 12 | 1 | partial |
+| use-cases.md | page | https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.md | 3 | 1 | partial |
+| identity.md | page | https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.md | 2 | 1 | partial |
+| getting-started.md | page | https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.md | 1 | 1 | full |
+| glossary.md | page | https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.md | 1 | 1 | full |
+| index-md.md | page | https://developer.pingidentity.com/identity-for-ai/index.md | 1 | 1 | full |
+| release-notes.md | page | https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.md | 1 | 1 | full |
 
 ## Checksums
 

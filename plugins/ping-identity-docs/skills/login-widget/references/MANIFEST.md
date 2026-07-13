@@ -6,15 +6,19 @@
 - Source: https://developer.pingidentity.com/login-widget/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
+- Guides fully captured: 1
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 29
+- Total snapshot pages captured: 3
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| login-widget.md | page | https://developer.pingidentity.com/login-widget/login-widget/widget-api-reference.md | 22 |
-| release-notes.md | page | https://developer.pingidentity.com/login-widget/release-notes/compatibility.md | 6 |
-| index-md.md | page | https://developer.pingidentity.com/login-widget/index.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| login-widget.md | page | https://developer.pingidentity.com/login-widget/login-widget/widget-api-reference.md | 22 | 1 | partial |
+| release-notes.md | page | https://developer.pingidentity.com/login-widget/release-notes/compatibility.md | 6 | 1 | partial |
+| index-md.md | page | https://developer.pingidentity.com/login-widget/index.md | 1 | 1 | full |
 
 ## Checksums
 

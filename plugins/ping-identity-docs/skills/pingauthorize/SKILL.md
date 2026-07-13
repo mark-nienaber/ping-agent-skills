@@ -1,6 +1,6 @@
 ---
 name: pingauthorize
-description: "Use when working with PingAuthorize: pingauthorize server administration guide, pingauthorize policy administration guide, installing and uninstalling pingauthorize, troubleshooting pingauthorize server, pingauthorize integrations, upgrading pingauthorize. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingAuthorize or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Encrypt log files as they're written.
 - Snapshot version: 11.1
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -31,17 +32,17 @@ Encrypt log files as they're written.
 | Installing And Uninstalling Pingauthorize: pingauthorize, policy, editor | installing_and_uninstalling_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/installing_and_uninstalling_pingauthorize/*.md | references/snapshots/installing-and-uninstalling-pingauthorize.md |
 | Troubleshooting Pingauthorize Server: server, http, troubleshooting | troubleshooting_pingauthorize_server | https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/*.md | references/snapshots/troubleshooting-pingauthorize-server.md |
 | Pingauthorize Integrations: pingauthorize, integration, gateway | pingauthorize_integrations | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/*.md | references/snapshots/pingauthorize-integrations.md |
-| Upgrading Pingauthorize: policy, upgrade, pingauthorize | upgrading_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/*.md | references/snapshots/upgrading-pingauthorize.md |
-| Root: pingauthorize, architectural, introduction | root | https://docs.pingidentity.com/pingauthorize/11.1/*.md | references/snapshots/root.md |
-| Getting Started With Pingauthorize Tutorials: access, control, pingauthorize | getting_started_with_pingauthorize_tutorials | https://docs.pingidentity.com/pingauthorize/11.1/getting_started_with_pingauthorize_tutorials/*.md | references/snapshots/getting-started-with-pingauthorize-tutorials.md |
-| Release Notes: notes, release | release_notes | https://docs.pingidentity.com/pingauthorize/11.1/release_notes/*.md | references/snapshots/release-notes.md |
+| Upgrading Pingauthorize: policy, upgrade, pingauthorize | upgrading_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/*.md | live-only |
+| Root: pingauthorize, architectural, introduction | root | https://docs.pingidentity.com/pingauthorize/11.1/*.md | live-only |
+| Getting Started With Pingauthorize Tutorials: access, control, pingauthorize | getting_started_with_pingauthorize_tutorials | https://docs.pingidentity.com/pingauthorize/11.1/getting_started_with_pingauthorize_tutorials/*.md | live-only |
+| Release Notes: notes, release | release_notes | https://docs.pingidentity.com/pingauthorize/11.1/release_notes/*.md | live-only |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

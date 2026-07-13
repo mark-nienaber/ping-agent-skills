@@ -6,21 +6,25 @@
 - Source: https://developer.pingidentity.com/build-with-ai/llms.txt
 - Guides discovered: 9
 - Guides captured: 9
+- Guides fully captured: 7
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 18
+- Total snapshot pages captured: 9
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| davinci-mcp-server.md | page | https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/authentication.md | 6 |
-| aic-mcp-server.md | page | https://developer.pingidentity.com/build-with-ai/aic-mcp-server/authentication.md | 5 |
-| agent-skills.md | page | https://developer.pingidentity.com/build-with-ai/agent-skills/overview.md | 1 |
-| disclaimers-md.md | page | https://developer.pingidentity.com/build-with-ai/disclaimers.md | 1 |
-| docs-for-agents-md.md | page | https://developer.pingidentity.com/build-with-ai/docs-for-agents.md | 1 |
-| index-md.md | page | https://developer.pingidentity.com/build-with-ai/index.md | 1 |
-| release-notes.md | page | https://developer.pingidentity.com/build-with-ai/release_notes/whats-new.md | 1 |
-| tying-it-all-together-md.md | page | https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md | 1 |
-| use-cases.md | page | https://developer.pingidentity.com/build-with-ai/use-cases/build-ios-app.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| davinci-mcp-server.md | page | https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/authentication.md | 6 | 1 | partial |
+| aic-mcp-server.md | page | https://developer.pingidentity.com/build-with-ai/aic-mcp-server/authentication.md | 5 | 1 | partial |
+| agent-skills.md | page | https://developer.pingidentity.com/build-with-ai/agent-skills/overview.md | 1 | 1 | full |
+| disclaimers-md.md | page | https://developer.pingidentity.com/build-with-ai/disclaimers.md | 1 | 1 | full |
+| docs-for-agents-md.md | page | https://developer.pingidentity.com/build-with-ai/docs-for-agents.md | 1 | 1 | full |
+| index-md.md | page | https://developer.pingidentity.com/build-with-ai/index.md | 1 | 1 | full |
+| release-notes.md | page | https://developer.pingidentity.com/build-with-ai/release_notes/whats-new.md | 1 | 1 | full |
+| tying-it-all-together-md.md | page | https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md | 1 | 1 | full |
+| use-cases.md | page | https://developer.pingidentity.com/build-with-ai/use-cases/build-ios-app.md | 1 | 1 | full |
 
 ## Checksums
 

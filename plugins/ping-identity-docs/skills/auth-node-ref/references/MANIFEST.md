@@ -6,17 +6,21 @@
 - Source: https://docs.pingidentity.com/auth-node-ref/llms.txt
 - Guides discovered: 5
 - Guides captured: 5
+- Guides fully captured: 2
+- Guides partially captured: 3
+- Guides without snapshots: 0
 - Total pages indexed: 382
+- Total snapshot pages captured: 75
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| latest.md | assembled | <223 pages from latest> | 223 |
-| root.md | assembled | <121 pages from root> | 121 |
-| pingone.md | assembled | <23 pages from pingone> | 23 |
-| am-only.md | assembled | <12 pages from am-only> | 12 |
-| self-managed.md | assembled | <3 pages from self-managed> | 3 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| latest.md | assembled | <223 pages from latest> | 223 | 20 | partial |
+| root.md | assembled | <121 pages from root> | 121 | 20 | partial |
+| pingone.md | assembled | <23 pages from pingone> | 23 | 20 | partial |
+| am-only.md | assembled | <12 pages from am-only> | 12 | 12 | full |
+| self-managed.md | assembled | <3 pages from self-managed> | 3 | 3 | full |
 
 ## Checksums
 

@@ -1,6 +1,6 @@
 ---
 name: integrations
-description: "Use when working with Integrations: pingone, amazon, google, azure, atlassian, github. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names Integrations or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Descriptions of standard and advanced fields that you can configure for the Akam
 - Snapshot version: current
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,31 +39,13 @@ Descriptions of standard and advanced fields that you can configure for the Akam
 | Zscaler: sign, single, enabling | zscaler | https://docs.pingidentity.com/integrations/zscaler/*.md | references/snapshots/zscaler.md |
 | Office365: configure, provisioning, add | office365 | https://docs.pingidentity.com/integrations/office365/*.md | references/snapshots/office365.md |
 | Webaccessmanagement: configuring, custom, idp | webAccessManagement | https://docs.pingidentity.com/integrations/webAccessManagement/*.md | references/snapshots/webaccessmanagement.md |
-| Agentless: integration, attribute, configuring | agentless | https://docs.pingidentity.com/integrations/agentless/*.md | references/snapshots/agentless.md |
-| Php: deploying, sample, configuring | php | https://docs.pingidentity.com/integrations/php/*.md | references/snapshots/php.md |
-| Slack: slack, sign, single | slack | https://docs.pingidentity.com/integrations/slack/*.md | references/snapshots/slack.md |
-| Duosecurity: duo, security, adapter | duosecurity | https://docs.pingidentity.com/integrations/duosecurity/*.md | references/snapshots/duosecurity.md |
-| Coreblox: coreblox, adapter, configuring | coreblox | https://docs.pingidentity.com/integrations/coreblox/*.md | references/snapshots/coreblox.md |
-| Apache: apache, agent, session | apache | https://docs.pingidentity.com/integrations/apache/*.md | references/snapshots/apache.md |
-| Net: integration, single, opentoken | net | https://docs.pingidentity.com/integrations/net/*.md | references/snapshots/net.md |
-| Zendesk: zendesk, obtain, pingfederate | zendesk | https://docs.pingidentity.com/integrations/zendesk/*.md | references/snapshots/zendesk.md |
-| Zoom: pingfederate, sign, single | zoom | https://docs.pingidentity.com/integrations/zoom/*.md | references/snapshots/zoom.md |
-| Box: box, configure, sso | box | https://docs.pingidentity.com/integrations/box/*.md | references/snapshots/box.md |
-| Contentful: pingfederate, sign, single | contentful | https://docs.pingidentity.com/integrations/contentful/*.md | references/snapshots/contentful.md |
-| Sharepoint Peoplepicker: configuration, search, people | sharepoint-peoplepicker | https://docs.pingidentity.com/integrations/sharepoint-peoplepicker/*.md | references/snapshots/sharepoint-peoplepicker.md |
-| Aquera: pingfederate, sign, single | aquera | https://docs.pingidentity.com/integrations/aquera/*.md | references/snapshots/aquera.md |
-| Coupa: coupa, sso, obtaining | coupa | https://docs.pingidentity.com/integrations/coupa/*.md | references/snapshots/coupa.md |
-| Scim: pingfederate, provisioning, sign | scim | https://docs.pingidentity.com/integrations/scim/*.md | references/snapshots/scim.md |
-| X509: integration, adapter, certificate | x509 | https://docs.pingidentity.com/integrations/x509/*.md | references/snapshots/x509.md |
-| Iddataweb: dataweb, device, profiling | iddataweb | https://docs.pingidentity.com/integrations/iddataweb/*.md | references/snapshots/iddataweb.md |
-| Oam: configuration, idp, adapter | oam | https://docs.pingidentity.com/integrations/oam/*.md | references/snapshots/oam.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

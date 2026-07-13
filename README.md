@@ -1,20 +1,21 @@
 # Ping Agent Skills
 
-Agent Skills for Ping Identity documentation. Each skill is a thin router to Ping's official Markdown docs: it reads a cached `llms.txt`, selects the right live `.md` URL, and falls back to committed snapshots when offline.
+An efficient deep-documentation layer for Ping Identity Agent Skills. The default plugin exposes one `ping-docs` skill, which searches the local documentation indexes deterministically and returns only the best matching official live Markdown pages. Dated snapshots remain available when live documentation cannot be reached.
 
-Use this repo when you want docset-level depth: exact API pages, guide-level detail, per-version content, and offline safety. For cross-product "which Ping product do I need?" routing, use [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins) alongside this repo.
+Use [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins) for intent, platform, and product routing. Use this repository after the product is known and exact API, policy, version, SDK, troubleshooting, or citation detail is required.
 
 ## Coverage
 
 - 57 docsets registered in `scripts/docsets.yaml`; 56 enabled.
-- 56 skills generated under `plugins/ping-identity-docs/skills/`.
+- One consolidated runtime skill under `plugins/ping-identity-docs/runtime-skills/ping-docs/`.
+- 56 generated docset packages under `plugins/ping-identity-docs/skills/`, used as searchable data and optional product-specific installs.
 - `pingcli` disabled: `https://developer.pingidentity.com/pingcli/llms.txt` redirects to a 404. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
-- Snapshot footprint ~19 MB.
+- Snapshot footprint ~39 MB; indexes add ~8 MB.
 - Numeric-version docsets pinned via `preferred_version` in `scripts/docsets.yaml`.
 
-Each generated skill contains:
+Each generated docset package contains:
 
-- `SKILL.md`: activation metadata, fetch strategy, and task-to-route table.
+- `SKILL.md`: an optional product-specific router for selective installation.
 - `references/llms.txt`: cached copy of the official Ping `llms.txt` index.
 - `references/snapshots/*.md`: local fallback Markdown snapshots.
 - `references/MANIFEST.md`: sync date, source URLs, source type, and checksums.
@@ -28,11 +29,14 @@ Each generated skill contains:
 /plugin install ping-identity-docs@ping-agent-skills
 ```
 
+The marketplace plugin exposes only `ping-docs`, so installing it does not add 56 docset descriptions to every turn.
+
 ### Claude Code Local
 
 ```bash
-scripts/setup-claude.sh                          # symlink all skills to ~/.claude/skills/
-scripts/setup-claude.sh pingam pingoneaic        # symlink selected skills
+scripts/setup-claude.sh                          # install consolidated ping-docs
+scripts/setup-claude.sh pingam pingoneaic        # install selected docset skills instead
+scripts/setup-claude.sh --all-docsets            # compatibility/testing only
 scripts/setup-claude.sh --copy pingam            # copy instead of symlink
 scripts/setup-claude.sh --push /path/to/project  # copy into <project>/.claude/skills/
 ```
@@ -42,43 +46,52 @@ Symlinks are the default so local syncs and regenerated skills are visible immed
 ### Codex
 
 ```bash
-scripts/setup-codex.sh                          # symlink all skills to ~/.codex/skills/
-scripts/setup-codex.sh pingam pingoneaic        # symlink selected skills
+scripts/setup-codex.sh                          # install consolidated ping-docs
+scripts/setup-codex.sh pingam pingoneaic        # install selected docset skills instead
+scripts/setup-codex.sh --all-docsets            # compatibility/testing only
 scripts/setup-codex.sh --copy pingam            # copy instead of symlink
 scripts/setup-codex.sh --push /path/to/project  # copy into <project>/.codex/skills/
 ```
 
 ### Other Agentskills-Compatible Tools
 
-Point the tool at `plugins/ping-identity-docs/skills/`. Each subdirectory is a self-contained skill.
+Point the tool at `plugins/ping-identity-docs/runtime-skills/` for the consolidated skill. Point it at a named directory under `plugins/ping-identity-docs/skills/` only when installing one product-specific docset.
 
-## How Skills Resolve Docs
+## How `ping-docs` Resolves Docs
 
-1. The agent loads the matching product skill from `SKILL.md`.
-2. The skill's routing table and bundled `references/llms.txt` identify the official live `.md` page.
-3. The agent fetches the live Ping Markdown URL.
-4. If live fetch is unavailable, the agent reads the closest `references/snapshots/<guide>.md` fallback.
+1. The official umbrella skills establish the Ping product and intent.
+2. `ping-docs` runs `scripts/search_docs.py`, which scans the cached indexes in code rather than loading them into model context.
+3. The search returns up to five ranked pages with product, version, exact live Markdown URL, and a validated local snapshot when one exists.
+4. The agent reads only the best live page. If live access is unavailable, it reads a small relevant section from the returned snapshot and discloses the snapshot date and coverage.
+5. Unrelated queries and low-confidence searches abstain instead of selecting an arbitrary Ping docset.
 
-The live documentation is the source of truth. Snapshots are committed for offline safety and visible doc drift.
+Try the retriever directly:
+
+```bash
+scripts/search-docs.sh --product pingam --top-k 5 \
+  "cache a risk value between scripted decision nodes"
+scripts/search-docs.sh --json "PingAuthorize policy response redaction"
+```
+
+The search command performs no network requests. Live Ping Markdown remains the source of truth; snapshots are an explicit offline fallback.
 
 ## How Activation Works
 
-Every `SKILL.md` starts with agentskills-compliant frontmatter:
+The default plugin contributes one agentskills-compliant trigger:
 
 ```yaml
 ---
-name: pingam
-description: "Use when configuring PingAM access management, authentication journeys, OAuth2/OIDC, SAML2 federation, sessions, security, Amster, REST APIs, or upgrade and install work. Routes to live docs; snapshots fallback."
-license: MIT
+name: ping-docs
+description: Find exact, detailed, version-specific Ping Identity documentation pages and offline snapshots. Use after Ping product or intent routing when implementation, configuration, API, policy, troubleshooting, release, or citation detail is needed across Ping products; also use when live documentation access is unavailable. Do not use for unrelated requests or initial product selection.
 ---
 ```
 
-The `description` field is the activation trigger. Product-specific prompts produce better routing:
+The `description` field is the activation trigger. Product-specific prompts produce better retrieval:
 
 - Good: "Using PingAM docs, configure OAuth2 client authentication."
 - Weaker: "Set up auth."
 
-Cross-product prompts may load multiple Ping skills. Use `pingidentity/agent-plugins` first when the product is unknown, then use this repo for product-specific depth.
+The 56 generated docset skills remain available for deliberate selective installs, but they are no longer the default plugin surface. Their descriptions require an explicitly named product, and their bodies instruct the agent to search at most 20 index matches rather than read an entire `llms.txt`.
 
 ## Headless Alignment
 
@@ -123,21 +136,21 @@ Use the broader scope when a question crosses layers, for example:
 
 ## Composition With `pingidentity/agent-plugins`
 
-Install both when you want product routing plus docset depth:
+Install both when you want product routing plus exact documentation depth:
 
 ```text
 /plugin marketplace add pingidentity/agent-plugins
 /plugin marketplace add mark-nienaber/ping-agent-skills
 ```
 
-| Task type | Umbrella skill | Then depth skill |
+| Task type | Umbrella skill | Deep layer |
 |---|---|---|
-| Product unknown | `ping-quickstart` | matched product skill |
-| Authentication flow design | `ping-orchestration` | `davinci`, `pingoneaic`, `pingam`, `pingfederate` |
-| Headless app integration | `ping-app-integration` | `orchsdks`, `sdks`, `pingone-api`, `pingoneaic-api`, `davinci`, `pingoneaic` |
-| Hosted, widget, agent, or gateway integration | `ping-app-integration` | `login-widget`, `java-agents`, `web-agents`, `pingaccess`, `pinggateway` |
-| AI-agent identity | `ping-identity-for-ai` | `identity-for-ai`, `pingam`, `pingone-api`, `pingoneaic-api` |
-| Config-as-code | `ping-orchestration` | `config-automation-promotion`, `config-automation-management-sdks`, `terraform`, `devops` |
+| Product unknown | `ping-quickstart` | Clarify first; do not invoke docs blindly |
+| Authentication flow design | `ping-orchestration` | `ping-docs` with the selected product |
+| Headless app integration | `ping-app-integration` | `ping-docs` for exact SDK/API pages |
+| Shared Ping service configuration | `ping-universal-services` | `ping-docs` for policy and API detail |
+| AI-agent identity | `ping-identity-for-ai` | `ping-docs` for exact implementation references |
+| Platform administration | `ping-foundation` | `ping-docs` for version-specific procedures |
 
 ## Maintenance
 
@@ -153,10 +166,25 @@ Sync all enabled docsets:
 scripts/sync-all.sh
 ```
 
+Every successful docset sync now regenerates its `SKILL.md`, so route metadata cannot silently drift from the refreshed index.
+
 Regenerate a `SKILL.md` from cached `llms.txt`:
 
 ```bash
 scripts/generate-skill.sh pingam
+```
+
+Regenerate every enabled docset without downloading documentation:
+
+```bash
+scripts/generate-all.sh
+```
+
+Legacy manifests can be migrated once, without changing their original sync dates or snapshot content:
+
+```bash
+scripts/migrate-manifests.sh
+scripts/migrate-manifests.sh --check
 ```
 
 ## Validation And Proof
@@ -171,13 +199,19 @@ scripts/validate.sh --require-all-enabled
 
 `--require-all-enabled` checks that every enabled registry entry has a generated skill. When URL checks are enabled, validation also samples live Markdown URLs and checks each live `llms.txt` endpoint.
 
+Validation now recomputes manifest checksums, rejects duplicate or missing entries, checks captured-versus-indexed page counts, and reports retained snapshots with unknown current provenance as warnings. The consolidated search has focused tests for exact retrieval, version handling, standalone copies, offline fallback, and out-of-domain abstention:
+
+```bash
+scripts/test.sh
+```
+
 Prove routing for every installed docset skill plus curated complex cases:
 
 ```bash
 scripts/routing-proof.sh
 ```
 
-The proof command generates one deterministic route sample for every enabled skill that exists locally, adds curated complex product-knowledge cases, fails on unexpected skill or guide routing, and writes `reports/routing-proof.html` by default. The curated cases cover PingAM, DaVinci, PingFederate, PingDirectory, PingAccess, PingOne application policy configuration, PingOne Authorize OAuth/API policy configuration, PingOne AIC journey scripting, and an AIC/RCS LDAP truststore troubleshooting case that routes to OpenICF connector documentation.
+The legacy proof command generates one deterministic route sample for every optional docset skill and adds curated complex routing cases. It is a routing unit test, not evidence that an LLM answer improved.
 
 Useful options:
 
@@ -189,6 +223,15 @@ scripts/routing-proof.sh --output reports/custom-routing-proof.html
 
 The report includes validation output, route diagrams, selected live URLs, and fallback snapshot paths. Live URL validation is optional so the default proof remains deterministic and works offline.
 
+## A/B Pilot
+
+`evals/` contains a provider-neutral pilot comparing exactly two conditions:
+
+- A: the six official Ping umbrella Agent Skills.
+- B: the same six skills plus `ping-docs`.
+
+There is no MCP condition. The suite contains 15 natural TC prompts, randomized repetitions, isolated skill roots, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token capture, ambiguity and out-of-domain controls, and a blinded SME rubric. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
+
 ## Layout
 
 ```text
@@ -197,6 +240,10 @@ The report includes validation output, route diagrams, selected live URLs, and f
   marketplace.json
 plugins/
   ping-identity-docs/
+    runtime-skills/
+      ping-docs/
+        SKILL.md
+        scripts/search_docs.py
     skills/<docset-slug>/
       SKILL.md
       references/
@@ -205,11 +252,21 @@ plugins/
         snapshots/*.md
 reports/
   routing-proof.html
+evals/
+  pilot.json
+  cases.json
+  run.py
+  score.py
+  validate_sources.py
+  SME_RUBRIC.md
 scripts/
   docsets.yaml
   sync-docset.sh
   sync-all.sh
   generate-skill.sh
+  generate-all.sh
+  migrate-manifests.sh
+  search-docs.sh
   validate.sh
   routing-proof.sh
   render-proof-report.sh
@@ -218,11 +275,12 @@ scripts/
 
 ## Snapshot Policy
 
-Snapshots are committed for offline safety. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembled guide pages, then the first official `.md` page in the guide. Source type is recorded in `references/MANIFEST.md`.
+Snapshots are committed for offline safety. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembles at most 20 guide pages, and finally tries the first official Markdown page. Manifests record pages indexed, pages actually captured, full/partial coverage, source type, sync date, and checksums. Retained files omitted from the current manifest are not offered by `ping-docs` because their current age and provenance are unknown.
 
 ## Troubleshooting
 
-- **Skill not triggering:** name the product in the prompt, such as "Using PingAM docs" or "From the PingOne API reference."
+- **Skill not triggering:** ask for exact product documentation or invoke `ping-docs` explicitly after naming the product.
+- **No search results:** add the Ping product, version, error, endpoint, or policy term. The retriever deliberately abstains on unrelated or underspecified requests.
 - **Live fetch returns 404:** Ping may have moved a page. Snapshot fallback should still provide local context. Run `scripts/sync-docset.sh <slug>` to refresh.
 - **Snapshot missing:** check `references/MANIFEST.md` for the captured source type and run `scripts/sync-docset.sh <slug>`.
 - **`pingcli` skill absent:** disabled by design because the upstream endpoint currently redirects to 404.

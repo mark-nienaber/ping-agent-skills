@@ -1,6 +1,6 @@
 ---
 name: web-agents
-description: "Use when working with Web Agents: properties reference, release notes, user guide, installation guide, maintenance guide, security guide. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names Web Agents or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Overview of PingAM Web Agent: components, configuration locations, request proce
 - Snapshot version: 2026
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -29,7 +30,7 @@ Overview of PingAM Web Agent: components, configuration locations, request proce
 | Properties Reference: agent, url, profile | properties-reference | https://docs.pingidentity.com/web-agents/2026/properties-reference/*.md | references/snapshots/properties-reference.md |
 | Release Notes: agent, web, changes | release-notes | https://docs.pingidentity.com/web-agents/release-notes/*.md | references/snapshots/release-notes.md |
 | User Guide: pingam, agent, web | user-guide | https://docs.pingidentity.com/web-agents/2026/user-guide/*.md | references/snapshots/user-guide.md |
-| Installation Guide: agent, web, pingam | installation-guide | https://docs.pingidentity.com/web-agents/2026/installation-guide/*.md | references/snapshots/installation-guide.md |
+| Installation Guide: agent, web, pingam | installation-guide | https://docs.pingidentity.com/web-agents/2026/installation-guide/*.md | live-only |
 | Maintenance Guide: pingam, agent, web | maintenance-guide | https://docs.pingidentity.com/web-agents/2026/maintenance-guide/*.md | references/snapshots/maintenance-guide.md |
 | Security Guide: agent, pingam, web | security-guide | https://docs.pingidentity.com/web-agents/2026/security-guide/*.md | references/snapshots/security-guide.md |
 | Identity Cloud Guide: advanced, cloud, identity | identity-cloud-guide | https://docs.pingidentity.com/web-agents/2026/identity-cloud-guide/*.md | references/snapshots/identity-cloud-guide.md |
@@ -38,10 +39,10 @@ Overview of PingAM Web Agent: components, configuration locations, request proce
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

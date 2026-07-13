@@ -6,23 +6,27 @@
 - Source: https://docs.pingidentity.com/forgeops/llms.txt
 - Guides discovered: 12
 - Guides captured: 11
+- Guides fully captured: 8
+- Guides partially captured: 3
+- Guides without snapshots: 1
 - Total pages indexed: 89
+- Total snapshot pages captured: 59
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| prepare.md | assembled | <17 pages from prepare> | 17 |
-| reference.md | assembled | <15 pages from reference> | 15 |
-| troubleshoot.md | assembled | <10 pages from troubleshoot> | 10 |
-| customize.md | assembled | <8 pages from customize> | 8 |
-| start.md | assembled | <7 pages from start> | 7 |
-| upgrade.md | assembled | <6 pages from upgrade> | 6 |
-| rn.md | assembled | <5 pages from rn> | 5 |
-| setup.md | assembled | <5 pages from setup> | 5 |
-| backup.md | assembled | <3 pages from backup> | 3 |
-| root.md | assembled | <2 pages from root> | 2 |
-| quick.md | assembled | <1 pages from quick> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| prepare.md | assembled | <17 pages from prepare> | 17 | 14 | partial |
+| reference.md | assembled | <15 pages from reference> | 15 | 1 | partial |
+| troubleshoot.md | assembled | <10 pages from troubleshoot> | 10 | 7 | partial |
+| customize.md | assembled | <8 pages from customize> | 8 | 8 | full |
+| start.md | assembled | <7 pages from start> | 7 | 7 | full |
+| upgrade.md | assembled | <6 pages from upgrade> | 6 | 6 | full |
+| rn.md | assembled | <5 pages from rn> | 5 | 5 | full |
+| setup.md | assembled | <5 pages from setup> | 5 | 5 | full |
+| backup.md | assembled | <3 pages from backup> | 3 | 3 | full |
+| root.md | assembled | <2 pages from root> | 2 | 2 | full |
+| quick.md | assembled | <1 pages from quick> | 1 | 1 | full |
 
 ## Checksums
 

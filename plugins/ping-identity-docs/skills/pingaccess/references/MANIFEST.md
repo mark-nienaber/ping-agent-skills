@@ -6,26 +6,30 @@
 - Source: https://docs.pingidentity.com/pingaccess/llms.txt
 - Guides discovered: 15
 - Guides captured: 14
+- Guides fully captured: 6
+- Guides partially captured: 8
+- Guides without snapshots: 1
 - Total pages indexed: 627
+- Total snapshot pages captured: 177
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingaccess-user-interface-reference-guide.md | assembled | <254 pages from pingaccess_user_interface_reference_guide> | 254 |
-| agents-and-integrations.md | assembled | <114 pages from agents_and_integrations> | 114 |
-| reference-guides.md | assembled | <73 pages from reference_guides> | 73 |
-| configuring-and-customizing-pingaccess.md | assembled | <37 pages from configuring_and_customizing_pingaccess> | 37 |
-| pingaccess-use-cases.md | assembled | <33 pages from pingaccess_use_cases> | 33 |
-| token-providers.md | assembled | <32 pages from token_providers> | 32 |
-| installing-and-uninstalling-pingaccess.md | assembled | <22 pages from installing_and_uninstalling_pingaccess> | 22 |
-| upgrading-pingaccess.md | assembled | <13 pages from upgrading_pingaccess> | 13 |
-| pingaccess-monitoring-guide.md | assembled | <11 pages from pingaccess_monitoring_guide> | 11 |
-| troubleshooting.md | assembled | <8 pages from troubleshooting> | 8 |
-| backing-up-and-restoring-pingaccess.md | assembled | <7 pages from backing_up_and_restoring_pingaccess> | 7 |
-| introduction-to-pingaccess.md | assembled | <6 pages from introduction_to_pingaccess> | 6 |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 |
-| root.md | assembled | <1 pages from root> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingaccess-user-interface-reference-guide.md | assembled | <254 pages from pingaccess_user_interface_reference_guide> | 254 | 20 | partial |
+| agents-and-integrations.md | assembled | <114 pages from agents_and_integrations> | 114 | 20 | partial |
+| reference-guides.md | assembled | <73 pages from reference_guides> | 73 | 20 | partial |
+| configuring-and-customizing-pingaccess.md | assembled | <37 pages from configuring_and_customizing_pingaccess> | 37 | 20 | partial |
+| pingaccess-use-cases.md | assembled | <33 pages from pingaccess_use_cases> | 33 | 20 | partial |
+| token-providers.md | assembled | <32 pages from token_providers> | 32 | 20 | partial |
+| installing-and-uninstalling-pingaccess.md | assembled | <22 pages from installing_and_uninstalling_pingaccess> | 22 | 13 | partial |
+| upgrading-pingaccess.md | assembled | <13 pages from upgrading_pingaccess> | 13 | 10 | partial |
+| pingaccess-monitoring-guide.md | assembled | <11 pages from pingaccess_monitoring_guide> | 11 | 11 | full |
+| troubleshooting.md | assembled | <8 pages from troubleshooting> | 8 | 8 | full |
+| backing-up-and-restoring-pingaccess.md | assembled | <7 pages from backing_up_and_restoring_pingaccess> | 7 | 7 | full |
+| introduction-to-pingaccess.md | assembled | <6 pages from introduction_to_pingaccess> | 6 | 6 | full |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
+| root.md | assembled | <1 pages from root> | 1 | 1 | full |
 
 ## Checksums
 

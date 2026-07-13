@@ -1,6 +1,6 @@
 ---
 name: pingds
-description: "Use when working with PingDS: schemaref, configref, config guide, tools reference, security guide, release notes. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingDS or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,44 +15,37 @@ Introduction to LDAP directory concepts including data model, communication, con
 - Snapshot version: 8.1
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Schemaref: attribute, about, account | schemaref | https://docs.pingidentity.com/pingds/8.1/schemaref/*.md | references/snapshots/schemaref.md |
-| Configref: password, handler, scheme | configref | https://docs.pingidentity.com/pingds/8.1/configref/*.md | references/snapshots/configref.md |
-| Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | references/snapshots/config-guide.md |
-| Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | references/snapshots/tools-reference.md |
-| Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | references/snapshots/security-guide.md |
+| Schemaref: attribute, about, account | schemaref | https://docs.pingidentity.com/pingds/8.1/schemaref/*.md | live-only |
+| Configref: password, handler, scheme | configref | https://docs.pingidentity.com/pingds/8.1/configref/*.md | live-only |
+| Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | live-only |
+| Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | live-only |
+| Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | live-only |
 | Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | live-only |
-| Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | references/snapshots/install-guide.md |
-| Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | references/snapshots/upgrade-guide.md |
-| Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | references/snapshots/getting-started.md |
-| Ldap Guide: ldap, pingds, tools | ldap-guide | https://docs.pingidentity.com/pingds/8.1/ldap-guide/*.md | references/snapshots/ldap-guide.md |
-| Monitoring Guide: pingds, metrics, monitor | monitoring-guide | https://docs.pingidentity.com/pingds/8.1/monitoring-guide/*.md | references/snapshots/monitoring-guide.md |
-| Rest Guide: hdap, pingds, http | rest-guide | https://docs.pingidentity.com/pingds/8.1/rest-guide/*.md | references/snapshots/rest-guide.md |
-| Use Cases: pingds, password, backup | use-cases | https://docs.pingidentity.com/pingds/8.1/use-cases/*.md | references/snapshots/use-cases.md |
-| Deployment Guide: deployment, pingds, project | deployment-guide | https://docs.pingidentity.com/pingds/8.1/deployment-guide/*.md | references/snapshots/deployment-guide.md |
-| Maintenance Guide: pingds, server, account | maintenance-guide | https://docs.pingidentity.com/pingds/8.1/maintenance-guide/*.md | references/snapshots/maintenance-guide.md |
-| Ldap Reference: ldap, supported, reference | ldap-reference | https://docs.pingidentity.com/pingds/8.1/ldap-reference/*.md | references/snapshots/ldap-reference.md |
-| Logging Guide: log, access, logging | logging-guide | https://docs.pingidentity.com/pingds/8.1/logging-guide/*.md | references/snapshots/logging-guide.md |
-| Log Reference: log, message, reference | log-reference | https://docs.pingidentity.com/pingds/8.1/log-reference/*.md | references/snapshots/log-reference.md |
-| Release Notes: notes, release, all | release-notes | https://docs.pingidentity.com/pingds/8.1/release-notes/*.md | live-only |
-| Root: pingds | root | https://docs.pingidentity.com/pingds/8.1/*.md | references/snapshots/root.md |
+| Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | live-only |
+| Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | live-only |
+| Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | live-only |
+| Ldap Guide: ldap, pingds, tools | ldap-guide | https://docs.pingidentity.com/pingds/8.1/ldap-guide/*.md | live-only |
+| Monitoring Guide: pingds, metrics, monitor | monitoring-guide | https://docs.pingidentity.com/pingds/8.1/monitoring-guide/*.md | live-only |
+| Rest Guide: hdap, pingds, http | rest-guide | https://docs.pingidentity.com/pingds/8.1/rest-guide/*.md | live-only |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

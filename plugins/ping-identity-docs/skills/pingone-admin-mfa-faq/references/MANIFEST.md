@@ -6,13 +6,17 @@
 - Source: https://docs.pingidentity.com/pingone-admin-mfa-faq/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
+- Guides fully captured: 1
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 1
+- Total snapshot pages captured: 1
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| p1-mfa-required-for-admins-faq-md.md | page | https://docs.pingidentity.com/pingone-admin-mfa-faq/p1_mfa_required_for_admins_faq.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| p1-mfa-required-for-admins-faq-md.md | page | https://docs.pingidentity.com/pingone-admin-mfa-faq/p1_mfa_required_for_admins_faq.md | 1 | 1 | full |
 
 ## Checksums
 

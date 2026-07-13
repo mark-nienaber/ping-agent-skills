@@ -6,32 +6,36 @@
 - Source: https://docs.pingidentity.com/davinci/llms.txt
 - Guides discovered: 20
 - Guides captured: 20
+- Guides fully captured: 19
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 109
+- Total snapshot pages captured: 91
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| flows.md | assembled | <38 pages from flows> | 38 |
-| davinci-best-practices.md | assembled | <15 pages from davinci_best_practices> | 15 |
-| connectors.md | assembled | <13 pages from connectors> | 13 |
-| applications.md | assembled | <11 pages from applications> | 11 |
-| integrating-flows-into-applications.md | assembled | <7 pages from integrating_flows_into_applications> | 7 |
-| variables.md | assembled | <5 pages from variables> | 5 |
-| use-cases.md | assembled | <4 pages from use_cases> | 4 |
-| users.md | assembled | <3 pages from users> | 3 |
-| usage-terms.md | assembled | <2 pages from usage_terms> | 2 |
-| company-settings.md | assembled | <1 pages from company_settings> | 1 |
-| configuring-siem-streaming.md | assembled | <1 pages from configuring_siem_streaming> | 1 |
-| davinci-adding-p1-admin-users-md.md | assembled | <1 pages from davinci_adding_p1_admin_users.md> | 1 |
-| davinci-audit-trail-md.md | assembled | <1 pages from davinci_audit_trail.md> | 1 |
-| davinci-dashboard-md.md | assembled | <1 pages from davinci_dashboard.md> | 1 |
-| davinci-early-access-md.md | assembled | <1 pages from davinci_early_access.md> | 1 |
-| davinci-forms-md.md | assembled | <1 pages from davinci_forms.md> | 1 |
-| davinci-introduction-md.md | assembled | <1 pages from davinci_introduction.md> | 1 |
-| davinci-landing-page-md.md | assembled | <1 pages from davinci_landing_page.md> | 1 |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 |
-| ui-studio.md | assembled | <1 pages from ui_studio> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| flows.md | assembled | <38 pages from flows> | 38 | 20 | partial |
+| davinci-best-practices.md | assembled | <15 pages from davinci_best_practices> | 15 | 15 | full |
+| connectors.md | assembled | <13 pages from connectors> | 13 | 13 | full |
+| applications.md | assembled | <11 pages from applications> | 11 | 11 | full |
+| integrating-flows-into-applications.md | assembled | <7 pages from integrating_flows_into_applications> | 7 | 7 | full |
+| variables.md | assembled | <5 pages from variables> | 5 | 5 | full |
+| use-cases.md | assembled | <4 pages from use_cases> | 4 | 4 | full |
+| users.md | assembled | <3 pages from users> | 3 | 3 | full |
+| usage-terms.md | assembled | <2 pages from usage_terms> | 2 | 2 | full |
+| company-settings.md | assembled | <1 pages from company_settings> | 1 | 1 | full |
+| configuring-siem-streaming.md | assembled | <1 pages from configuring_siem_streaming> | 1 | 1 | full |
+| davinci-adding-p1-admin-users-md.md | assembled | <1 pages from davinci_adding_p1_admin_users.md> | 1 | 1 | full |
+| davinci-audit-trail-md.md | assembled | <1 pages from davinci_audit_trail.md> | 1 | 1 | full |
+| davinci-dashboard-md.md | assembled | <1 pages from davinci_dashboard.md> | 1 | 1 | full |
+| davinci-early-access-md.md | assembled | <1 pages from davinci_early_access.md> | 1 | 1 | full |
+| davinci-forms-md.md | assembled | <1 pages from davinci_forms.md> | 1 | 1 | full |
+| davinci-introduction-md.md | assembled | <1 pages from davinci_introduction.md> | 1 | 1 | full |
+| davinci-landing-page-md.md | assembled | <1 pages from davinci_landing_page.md> | 1 | 1 | full |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
+| ui-studio.md | assembled | <1 pages from ui_studio> | 1 | 1 | full |
 
 ## Checksums
 

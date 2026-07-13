@@ -6,16 +6,20 @@
 - Source: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
+- Guides fully captured: 2
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 101
+- Total snapshot pages captured: 43
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| authorize.md | assembled | <54 pages from authorize> | 54 |
-| platform.md | assembled | <44 pages from platform> | 44 |
-| auth.md | assembled | <2 pages from auth> | 2 |
-| introduction-md.md | assembled | <1 pages from introduction.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| authorize.md | assembled | <54 pages from authorize> | 54 | 20 | partial |
+| platform.md | assembled | <44 pages from platform> | 44 | 20 | partial |
+| auth.md | assembled | <2 pages from auth> | 2 | 2 | full |
+| introduction-md.md | assembled | <1 pages from introduction.md> | 1 | 1 | full |
 
 ## Checksums
 

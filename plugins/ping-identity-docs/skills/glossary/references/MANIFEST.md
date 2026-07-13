@@ -6,13 +6,17 @@
 - Source: https://docs.pingidentity.com/glossary/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
+- Guides fully captured: 1
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 1
+- Total snapshot pages captured: 1
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| index-md.md | assembled | <1 pages from index.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
 
 ## Checksums
 

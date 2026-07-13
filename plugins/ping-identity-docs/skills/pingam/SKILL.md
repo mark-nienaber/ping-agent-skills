@@ -1,6 +1,6 @@
 ---
 name: pingam
-description: "Use when working with PingAM: entity reference, am oauth2, am authentication, release notes, security, am scripting. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingAM or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Secure your resources and manage user access across your network with PingAM, a 
 - Snapshot version: 8.1
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,28 +39,13 @@ Secure your resources and manage user access across your network with PingAM, a 
 | Am Oidc1: connect, openid, pingam | am-oidc1 | https://docs.pingidentity.com/pingam/8.1/am-oidc1/*.md | references/snapshots/am-oidc1.md |
 | Auth Nodes: authentication, nodes, node | auth-nodes | https://docs.pingidentity.com/pingam/8.1/auth-nodes/*.md | references/snapshots/auth-nodes.md |
 | Uma: uma, user, access | uma | https://docs.pingidentity.com/pingam/8.1/uma/*.md | references/snapshots/uma.md |
-| Am Authorization: policies, policy, pingam | am-authorization | https://docs.pingidentity.com/pingam/8.1/am-authorization/*.md | references/snapshots/am-authorization.md |
-| Am Sessions: sessions, side, session | am-sessions | https://docs.pingidentity.com/pingam/8.1/am-sessions/*.md | references/snapshots/am-sessions.md |
-| Monitoring: monitoring, pingam, logging | monitoring | https://docs.pingidentity.com/pingam/8.1/monitoring/*.md | references/snapshots/monitoring.md |
-| Deployment Planning: deployment, pingam, requirements | deployment-planning | https://docs.pingidentity.com/pingam/8.1/deployment-planning/*.md | references/snapshots/deployment-planning.md |
-| User Self Service: configure, user, self | user-self-service | https://docs.pingidentity.com/pingam/8.1/user-self-service/*.md | references/snapshots/user-self-service.md |
-| Amster: configuration, amster, pingam | amster | https://docs.pingidentity.com/pingam/8.1/amster/*.md | references/snapshots/amster.md |
-| Maintenance: pingam, recording, tuning | maintenance | https://docs.pingidentity.com/pingam/8.1/maintenance/*.md | references/snapshots/maintenance.md |
-| Sts: token, service, security | sts | https://docs.pingidentity.com/pingam/8.1/sts/*.md | references/snapshots/sts.md |
-| Cts: cts, token, tokens | cts | https://docs.pingidentity.com/pingam/8.1/cts/*.md | references/snapshots/cts.md |
-| Upgrade: upgrade, pingam, your | upgrade | https://docs.pingidentity.com/pingam/8.1/upgrade/*.md | references/snapshots/upgrade.md |
-| Evaluation: pingam, user, store | evaluation | https://docs.pingidentity.com/pingam/8.1/evaluation/*.md | references/snapshots/evaluation.md |
-| Am Rest: rest, pingam, endpoints | am-rest | https://docs.pingidentity.com/pingam/8.1/am-rest/*.md | references/snapshots/am-rest.md |
-| Ui Customization: user, customize, pingam | ui-customization | https://docs.pingidentity.com/pingam/8.1/ui-customization/*.md | references/snapshots/ui-customization.md |
-| Am Reference: endpoints, pingam, reference | am-reference | https://docs.pingidentity.com/pingam/8.1/am-reference/*.md | references/snapshots/am-reference.md |
-| Root: access, pingam, your | root | https://docs.pingidentity.com/pingam/8.1/*.md | references/snapshots/root.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

@@ -6,18 +6,22 @@
 - Source: https://docs.pingidentity.com/pingintelligence/llms.txt
 - Guides discovered: 7
 - Guides captured: 6
+- Guides fully captured: 1
+- Guides partially captured: 5
+- Guides without snapshots: 1
 - Total pages indexed: 723
+- Total snapshot pages captured: 91
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingintelligence-reference-guide.md | assembled | <296 pages from pingintelligence_reference_guide> | 296 |
-| pingintelligence-integrations.md | assembled | <218 pages from pingintelligence_integrations> | 218 |
-| installing-pingintelligence-for-apis.md | assembled | <142 pages from installing_pingintelligence_for_apis> | 142 |
-| managing-pingintelligence-for-apis.md | assembled | <47 pages from managing_pingintelligence_for_apis> | 47 |
-| release-notes.md | assembled | <10 pages from release_notes> | 10 |
-| root.md | assembled | <6 pages from root> | 6 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingintelligence-reference-guide.md | assembled | <296 pages from pingintelligence_reference_guide> | 296 | 20 | partial |
+| pingintelligence-integrations.md | assembled | <218 pages from pingintelligence_integrations> | 218 | 20 | partial |
+| installing-pingintelligence-for-apis.md | assembled | <142 pages from installing_pingintelligence_for_apis> | 142 | 20 | partial |
+| managing-pingintelligence-for-apis.md | assembled | <47 pages from managing_pingintelligence_for_apis> | 47 | 20 | partial |
+| release-notes.md | assembled | <10 pages from release_notes> | 10 | 10 | full |
+| root.md | assembled | <6 pages from root> | 6 | 1 | partial |
 
 ## Checksums
 

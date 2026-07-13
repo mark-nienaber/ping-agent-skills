@@ -6,20 +6,24 @@
 - Source: https://docs.pingidentity.com/privilege/llms.txt
 - Guides discovered: 8
 - Guides captured: 8
+- Guides fully captured: 2
+- Guides partially captured: 6
+- Guides without snapshots: 0
 - Total pages indexed: 74
+- Total snapshot pages captured: 8
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| privileged-access-management.md | page | https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/getting-started/accessing-admin-console.md | 32 |
-| configuration.md | page | https://docs.pingidentity.com/privilege/configuration/access-protocols.md | 22 |
-| getting-started.md | page | https://docs.pingidentity.com/privilege/getting-started/accessing-admin-console.md | 7 |
-| integrations.md | page | https://docs.pingidentity.com/privilege/integrations/index.md | 5 |
-| procyonreadpolicy.md | page | https://docs.pingidentity.com/privilege/procyonreadpolicy/create-read-policy.md | 4 |
-| troubleshooting.md | page | https://docs.pingidentity.com/privilege/troubleshooting/index.md | 2 |
-| index-md.md | page | https://docs.pingidentity.com/privilege/index.md | 1 |
-| release-notes.md | page | https://docs.pingidentity.com/privilege/release-notes/index.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| privileged-access-management.md | page | https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/getting-started/accessing-admin-console.md | 32 | 1 | partial |
+| configuration.md | page | https://docs.pingidentity.com/privilege/configuration/access-protocols.md | 22 | 1 | partial |
+| getting-started.md | page | https://docs.pingidentity.com/privilege/getting-started/accessing-admin-console.md | 7 | 1 | partial |
+| integrations.md | page | https://docs.pingidentity.com/privilege/integrations/index.md | 5 | 1 | partial |
+| procyonreadpolicy.md | page | https://docs.pingidentity.com/privilege/procyonreadpolicy/create-read-policy.md | 4 | 1 | partial |
+| troubleshooting.md | page | https://docs.pingidentity.com/privilege/troubleshooting/index.md | 2 | 1 | partial |
+| index-md.md | page | https://docs.pingidentity.com/privilege/index.md | 1 | 1 | full |
+| release-notes.md | page | https://docs.pingidentity.com/privilege/release-notes/index.md | 1 | 1 | full |
 
 ## Checksums
 

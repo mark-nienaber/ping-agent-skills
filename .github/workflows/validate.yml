@@ -17,11 +17,8 @@ jobs:
       - name: Show Python version
         run: python3 --version
 
-      - name: Validate skill structure
-        run: scripts/validate.sh --skip-url-check
-
-      - name: Validate routing proof and report
-        run: scripts/routing-proof.sh
+      - name: Run deterministic unit, integrity, and routing tests
+        run: scripts/test.sh
 
       - name: Validate sampled live URLs
         run: scripts/validate.sh --url-sample-max 5

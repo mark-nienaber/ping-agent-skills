@@ -6,40 +6,44 @@
 - Source: https://docs.pingidentity.com/pingone/llms.txt
 - Guides discovered: 28
 - Guides captured: 28
+- Guides fully captured: 15
+- Guides partially captured: 13
+- Guides without snapshots: 0
 - Total pages indexed: 888
+- Total snapshot pages captured: 336
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| integrations.md | assembled | <168 pages from integrations> | 168 |
-| authorization-using-pingone-authorize.md | assembled | <98 pages from authorization_using_pingone_authorize> | 98 |
-| applications.md | assembled | <88 pages from applications> | 88 |
-| strong-authentication-mfa.md | assembled | <76 pages from strong_authentication_mfa> | 76 |
-| settings.md | assembled | <71 pages from settings> | 71 |
-| user-experience.md | assembled | <58 pages from user_experience> | 58 |
-| directory.md | assembled | <52 pages from directory> | 52 |
-| threat-protection-using-pingone-protect.md | assembled | <36 pages from threat_protection_using_pingone_protect> | 36 |
-| getting-started-with-pingone.md | assembled | <34 pages from getting_started_with_pingone> | 34 |
-| pingone-tutorials.md | assembled | <30 pages from pingone_tutorials> | 30 |
-| authentication.md | assembled | <29 pages from authentication> | 29 |
-| identity-verification-using-pingone-verify.md | assembled | <27 pages from identity_verification_using_pingone_verify> | 27 |
-| early-access-features.md | assembled | <26 pages from early-access-features> | 26 |
-| use-cases.md | assembled | <15 pages from use_cases> | 15 |
-| monitoring.md | assembled | <14 pages from monitoring> | 14 |
-| digital-credentials-using-pingone-credentials.md | assembled | <13 pages from digital_credentials_using_pingone_credentials> | 13 |
-| pingone-expression-language.md | assembled | <13 pages from pingone_expression_language> | 13 |
-| managing-your-pingone-user-profile.md | assembled | <11 pages from managing_your_pingone_user_profile> | 11 |
-| orchestration.md | assembled | <10 pages from orchestration> | 10 |
-| developer-tools.md | assembled | <7 pages from developer_tools> | 7 |
-| ai-agents.md | assembled | <5 pages from ai_agents> | 5 |
-| introduction-to-pingone.md | assembled | <1 pages from introduction_to_pingone> | 1 |
-| migration-tools.md | assembled | <1 pages from migration-tools> | 1 |
-| operational-status.md | assembled | <1 pages from operational_status> | 1 |
-| p1-cloud-platform-main-landing-page-md.md | assembled | <1 pages from p1_cloud__platform_main_landing_page.md> | 1 |
-| p1-open-davinci-console-md.md | assembled | <1 pages from p1_open_davinci_console.md> | 1 |
-| p1-overview-p1-md.md | assembled | <1 pages from p1_overview_p1.md> | 1 |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| integrations.md | assembled | <168 pages from integrations> | 168 | 20 | partial |
+| authorization-using-pingone-authorize.md | assembled | <98 pages from authorization_using_pingone_authorize> | 98 | 20 | partial |
+| applications.md | assembled | <88 pages from applications> | 88 | 20 | partial |
+| strong-authentication-mfa.md | assembled | <76 pages from strong_authentication_mfa> | 76 | 20 | partial |
+| settings.md | assembled | <71 pages from settings> | 71 | 20 | partial |
+| user-experience.md | assembled | <58 pages from user_experience> | 58 | 20 | partial |
+| directory.md | assembled | <52 pages from directory> | 52 | 20 | partial |
+| threat-protection-using-pingone-protect.md | assembled | <36 pages from threat_protection_using_pingone_protect> | 36 | 20 | partial |
+| getting-started-with-pingone.md | assembled | <34 pages from getting_started_with_pingone> | 34 | 20 | partial |
+| pingone-tutorials.md | assembled | <30 pages from pingone_tutorials> | 30 | 6 | partial |
+| authentication.md | assembled | <29 pages from authentication> | 29 | 16 | partial |
+| identity-verification-using-pingone-verify.md | assembled | <27 pages from identity_verification_using_pingone_verify> | 27 | 20 | partial |
+| early-access-features.md | assembled | <26 pages from early-access-features> | 26 | 19 | partial |
+| use-cases.md | assembled | <15 pages from use_cases> | 15 | 15 | full |
+| monitoring.md | assembled | <14 pages from monitoring> | 14 | 14 | full |
+| digital-credentials-using-pingone-credentials.md | assembled | <13 pages from digital_credentials_using_pingone_credentials> | 13 | 13 | full |
+| pingone-expression-language.md | assembled | <13 pages from pingone_expression_language> | 13 | 13 | full |
+| managing-your-pingone-user-profile.md | assembled | <11 pages from managing_your_pingone_user_profile> | 11 | 11 | full |
+| orchestration.md | assembled | <10 pages from orchestration> | 10 | 10 | full |
+| developer-tools.md | assembled | <7 pages from developer_tools> | 7 | 7 | full |
+| ai-agents.md | assembled | <5 pages from ai_agents> | 5 | 5 | full |
+| introduction-to-pingone.md | assembled | <1 pages from introduction_to_pingone> | 1 | 1 | full |
+| migration-tools.md | assembled | <1 pages from migration-tools> | 1 | 1 | full |
+| operational-status.md | assembled | <1 pages from operational_status> | 1 | 1 | full |
+| p1-cloud-platform-main-landing-page-md.md | assembled | <1 pages from p1_cloud__platform_main_landing_page.md> | 1 | 1 | full |
+| p1-open-davinci-console-md.md | assembled | <1 pages from p1_open_davinci_console.md> | 1 | 1 | full |
+| p1-overview-p1-md.md | assembled | <1 pages from p1_overview_p1.md> | 1 | 1 | full |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
 
 ## Checksums
 

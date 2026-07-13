@@ -6,22 +6,26 @@
 - Source: https://docs.pingidentity.com/pingoneforenterprise/llms.txt
 - Guides discovered: 10
 - Guides captured: 10
+- Guides fully captured: 7
+- Guides partially captured: 3
+- Guides without snapshots: 0
 - Total pages indexed: 478
+- Total snapshot pages captured: 71
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingone-for-enterprise-app-catalog.md | assembled | <213 pages from pingone_for_enterprise_app_catalog> | 213 |
-| pingone-for-enterprise.md | assembled | <168 pages from pingone_for_enterprise> | 168 |
-| pingone-sso-for-saas-apps.md | assembled | <86 pages from pingone_sso_for_saas_apps> | 86 |
-| pingone-for-enterprise-release-notes.md | assembled | <4 pages from pingone_for_enterprise_release_notes> | 4 |
-| invited-pingone-for-enterprise-sso.md | assembled | <2 pages from invited_pingone_for_enterprise_sso> | 2 |
-| migrating-from-p14e.md | assembled | <1 pages from migrating_from_p14e> | 1 |
-| p14e-landing-md.md | assembled | <1 pages from p14e_landing.md> | 1 |
-| p14e-monitoring-usage-md.md | assembled | <1 pages from p14e_monitoring_usage.md> | 1 |
-| p14e-requirements-browsers-md.md | assembled | <1 pages from p14e_requirements_browsers.md> | 1 |
-| p14e-which-p14e-am-i-using-md.md | assembled | <1 pages from p14e_which_p14e_am_i_using.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingone-for-enterprise-app-catalog.md | assembled | <213 pages from pingone_for_enterprise_app_catalog> | 213 | 20 | partial |
+| pingone-for-enterprise.md | assembled | <168 pages from pingone_for_enterprise> | 168 | 20 | partial |
+| pingone-sso-for-saas-apps.md | assembled | <86 pages from pingone_sso_for_saas_apps> | 86 | 20 | partial |
+| pingone-for-enterprise-release-notes.md | assembled | <4 pages from pingone_for_enterprise_release_notes> | 4 | 4 | full |
+| invited-pingone-for-enterprise-sso.md | assembled | <2 pages from invited_pingone_for_enterprise_sso> | 2 | 2 | full |
+| migrating-from-p14e.md | assembled | <1 pages from migrating_from_p14e> | 1 | 1 | full |
+| p14e-landing-md.md | assembled | <1 pages from p14e_landing.md> | 1 | 1 | full |
+| p14e-monitoring-usage-md.md | assembled | <1 pages from p14e_monitoring_usage.md> | 1 | 1 | full |
+| p14e-requirements-browsers-md.md | assembled | <1 pages from p14e_requirements_browsers.md> | 1 | 1 | full |
+| p14e-which-p14e-am-i-using-md.md | assembled | <1 pages from p14e_which_p14e_am_i_using.md> | 1 | 1 | full |
 
 ## Checksums
 

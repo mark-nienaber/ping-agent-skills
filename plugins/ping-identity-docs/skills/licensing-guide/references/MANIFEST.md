@@ -6,21 +6,25 @@
 - Source: https://docs.pingidentity.com/licensing-guide/llms.txt
 - Guides discovered: 9
 - Guides captured: 9
+- Guides fully captured: 9
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 9
+- Total snapshot pages captured: 9
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| advanced-identity-software-md.md | assembled | <1 pages from advanced-identity-software.md> | 1 |
-| archive.md | assembled | <1 pages from archive> | 1 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
-| licensing-basics-md.md | assembled | <1 pages from licensing-basics.md> | 1 |
-| multitenant-saas-md.md | assembled | <1 pages from multitenant-saas.md> | 1 |
-| ping-government-identity-cloud-md.md | assembled | <1 pages from ping-government-identity-cloud.md> | 1 |
-| pingone-advanced-identity-cloud-md.md | assembled | <1 pages from pingone-advanced-identity-cloud.md> | 1 |
-| pingone-advanced-services-md.md | assembled | <1 pages from pingone-advanced-services.md> | 1 |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| advanced-identity-software-md.md | assembled | <1 pages from advanced-identity-software.md> | 1 | 1 | full |
+| archive.md | assembled | <1 pages from archive> | 1 | 1 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| licensing-basics-md.md | assembled | <1 pages from licensing-basics.md> | 1 | 1 | full |
+| multitenant-saas-md.md | assembled | <1 pages from multitenant-saas.md> | 1 | 1 | full |
+| ping-government-identity-cloud-md.md | assembled | <1 pages from ping-government-identity-cloud.md> | 1 | 1 | full |
+| pingone-advanced-identity-cloud-md.md | assembled | <1 pages from pingone-advanced-identity-cloud.md> | 1 | 1 | full |
+| pingone-advanced-services-md.md | assembled | <1 pages from pingone-advanced-services.md> | 1 | 1 | full |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
 
 ## Checksums
 

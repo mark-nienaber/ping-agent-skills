@@ -6,16 +6,20 @@
 - Source: https://docs.pingidentity.com/pingcentral/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
+- Guides fully captured: 1
+- Guides partially captured: 3
+- Guides without snapshots: 0
 - Total pages indexed: 301
+- Total snapshot pages captured: 69
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| release-notes.md | assembled | <100 pages from release_notes> | 100 |
-| pingcentral-for-iam-administrators.md | assembled | <99 pages from pingcentral_for_iam_administrators> | 99 |
-| pingcentral-for-application-owners.md | assembled | <93 pages from pingcentral_for_application_owners> | 93 |
-| root.md | assembled | <9 pages from root> | 9 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| release-notes.md | assembled | <100 pages from release_notes> | 100 | 20 | partial |
+| pingcentral-for-iam-administrators.md | assembled | <99 pages from pingcentral_for_iam_administrators> | 99 | 20 | partial |
+| pingcentral-for-application-owners.md | assembled | <93 pages from pingcentral_for_application_owners> | 93 | 20 | partial |
+| root.md | assembled | <9 pages from root> | 9 | 9 | full |
 
 ## Checksums
 

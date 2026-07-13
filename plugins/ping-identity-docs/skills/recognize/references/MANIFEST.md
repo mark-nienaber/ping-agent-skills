@@ -6,22 +6,26 @@
 - Source: https://docs.pingidentity.com/recognize/llms.txt
 - Guides discovered: 10
 - Guides captured: 10
+- Guides fully captured: 4
+- Guides partially captured: 6
+- Guides without snapshots: 0
 - Total pages indexed: 87
+- Total snapshot pages captured: 10
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| mobile-sdk.md | page | https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-account-recovery.md | 35 |
-| web-sdk.md | page | https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-authentication-identifiers.md | 18 |
-| idv-bridge.md | page | https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-component-interoperability.md | 10 |
-| on-premise.md | page | https://docs.pingidentity.com/recognize/on-premise/on-premise-checking-installation-successful.md | 9 |
-| user-guide.md | page | https://docs.pingidentity.com/recognize/user-guide/user-guide-add-account-android.md | 6 |
-| introduction.md | page | https://docs.pingidentity.com/recognize/introduction/account_recovery.md | 5 |
-| folder-example.md | page | https://docs.pingidentity.com/recognize/folder-example/page-in-folder.md | 1 |
-| pingone-recognize-md.md | page | https://docs.pingidentity.com/recognize/pingone-recognize.md | 1 |
-| release-notes.md | page | https://docs.pingidentity.com/recognize/release-notes/index.md | 1 |
-| troubleshooting.md | page | https://docs.pingidentity.com/recognize/troubleshooting/troubleshooting.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| mobile-sdk.md | page | https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-account-recovery.md | 35 | 1 | partial |
+| web-sdk.md | page | https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-authentication-identifiers.md | 18 | 1 | partial |
+| idv-bridge.md | page | https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-component-interoperability.md | 10 | 1 | partial |
+| on-premise.md | page | https://docs.pingidentity.com/recognize/on-premise/on-premise-checking-installation-successful.md | 9 | 1 | partial |
+| user-guide.md | page | https://docs.pingidentity.com/recognize/user-guide/user-guide-add-account-android.md | 6 | 1 | partial |
+| introduction.md | page | https://docs.pingidentity.com/recognize/introduction/account_recovery.md | 5 | 1 | partial |
+| folder-example.md | page | https://docs.pingidentity.com/recognize/folder-example/page-in-folder.md | 1 | 1 | full |
+| pingone-recognize-md.md | page | https://docs.pingidentity.com/recognize/pingone-recognize.md | 1 | 1 | full |
+| release-notes.md | page | https://docs.pingidentity.com/recognize/release-notes/index.md | 1 | 1 | full |
+| troubleshooting.md | page | https://docs.pingidentity.com/recognize/troubleshooting/troubleshooting.md | 1 | 1 | full |
 
 ## Checksums
 

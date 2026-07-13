@@ -1,6 +1,6 @@
 ---
 name: connectors
-description: "Use when working with Connectors: relnotes, type, accertify connector.md, adobe experience manager connector.md, apple login connector.md, authentication connector.md. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names Connectors or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ The Apple Login connector authenticates users with Sign in with Apple and retrie
 - Snapshot version: current
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,31 +39,13 @@ The Apple Login connector authenticates users with Sign in with Apple and retrie
 | Castle Connector.Md: castle, connector | castle_connector.md | https://docs.pingidentity.com/connectors/castle_connector.md | references/snapshots/castle-connector-md.md |
 | Challenge Connector.Md: challenge, connector | challenge_connector.md | https://docs.pingidentity.com/connectors/challenge_connector.md | references/snapshots/challenge-connector-md.md |
 | Clear Connector.Md: clear, connector | clear_connector.md | https://docs.pingidentity.com/connectors/clear_connector.md | references/snapshots/clear-connector-md.md |
-| Cloudflare Connector.Md: cloudflare, connector | cloudflare_connector.md | https://docs.pingidentity.com/connectors/cloudflare_connector.md | references/snapshots/cloudflare-connector-md.md |
-| Code Snippet Connector.Md: code, connector, snippet | code_snippet_connector.md | https://docs.pingidentity.com/connectors/code_snippet_connector.md | references/snapshots/code-snippet-connector-md.md |
-| Constella Connector.Md: connector, constella | constella_connector.md | https://docs.pingidentity.com/connectors/constella_connector.md | references/snapshots/constella-connector-md.md |
-| Cookie Connector.Md: connector, cookie | cookie_connector.md | https://docs.pingidentity.com/connectors/cookie_connector.md | references/snapshots/cookie-connector-md.md |
-| Crowdstrike Connector.Md: connector, crowdstrike | crowdstrike_connector.md | https://docs.pingidentity.com/connectors/crowdstrike_connector.md | references/snapshots/crowdstrike-connector-md.md |
-| Daon Connector.Md: connector, daon | daon_connector.md | https://docs.pingidentity.com/connectors/daon_connector.md | references/snapshots/daon-connector-md.md |
-| Device Policy Connector.Md: connector, device, policy | device_policy_connector.md | https://docs.pingidentity.com/connectors/device_policy_connector.md | references/snapshots/device-policy-connector-md.md |
-| Duo Connector.Md: connector, duo | duo_connector.md | https://docs.pingidentity.com/connectors/duo_connector.md | references/snapshots/duo-connector-md.md |
-| Entrust Connector.Md: connector, entrust | entrust_connector.md | https://docs.pingidentity.com/connectors/entrust_connector.md | references/snapshots/entrust-connector-md.md |
-| Error Message Connector.Md: connector, error, message | error_message_connector.md | https://docs.pingidentity.com/connectors/error_message_connector.md | references/snapshots/error-message-connector-md.md |
-| Facebook Login Connector.Md: facebook, connector, login | facebook_login_connector.md | https://docs.pingidentity.com/connectors/facebook_login_connector.md | references/snapshots/facebook-login-connector-md.md |
-| Fingerprintjs Connector.Md: connector, fingerprintjs | fingerprintjs_connector.md | https://docs.pingidentity.com/connectors/fingerprintjs_connector.md | references/snapshots/fingerprintjs-connector-md.md |
-| Flow Analytics Connector.Md: analytics, connector, flow | flow_analytics_connector.md | https://docs.pingidentity.com/connectors/flow_analytics_connector.md | references/snapshots/flow-analytics-connector-md.md |
-| Flow Conductor Connector.Md: conductor, connector, flow | flow_conductor_connector.md | https://docs.pingidentity.com/connectors/flow_conductor_connector.md | references/snapshots/flow-conductor-connector-md.md |
-| Form Connector.Md: connector, form | form_connector.md | https://docs.pingidentity.com/connectors/form_connector.md | references/snapshots/form-connector-md.md |
-| Functions Connector.Md: connector, functions | functions_connector.md | https://docs.pingidentity.com/connectors/functions_connector.md | references/snapshots/functions-connector-md.md |
-| Google Login Connector.Md: google, connector, login | google_login_connector.md | https://docs.pingidentity.com/connectors/google_login_connector.md | references/snapshots/google-login-connector-md.md |
-| Google Workspace Admin Connector.Md: admin, connector, google | google_workspace_admin_connector.md | https://docs.pingidentity.com/connectors/google_workspace_admin_connector.md | references/snapshots/google-workspace-admin-connector-md.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

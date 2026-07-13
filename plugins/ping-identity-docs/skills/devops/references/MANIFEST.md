@@ -6,26 +6,30 @@
 - Source: https://developer.pingidentity.com/devops/llms.txt
 - Guides discovered: 14
 - Guides captured: 14
+- Guides fully captured: 4
+- Guides partially captured: 10
+- Guides without snapshots: 0
 - Total pages indexed: 292
+- Total snapshot pages captured: 14
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| docker-images.md | page | https://developer.pingidentity.com/devops/docker-images/README.md | 127 |
-| release-notes.md | page | https://developer.pingidentity.com/devops/release-notes/relnotes-2003.md | 79 |
-| how-to.md | page | https://developer.pingidentity.com/devops/how-to/buildPingFederateProfile.md | 28 |
-| deployment.md | page | https://developer.pingidentity.com/devops/deployment/deployK8s-AKS.md | 22 |
-| reference.md | page | https://developer.pingidentity.com/devops/reference/awsStorage.md | 13 |
-| get-started.md | page | https://developer.pingidentity.com/devops/get-started/getStartedExample.md | 5 |
-| home.md | page | https://developer.pingidentity.com/devops/home/supportPolicy.md | 5 |
-| tools.md | page | https://developer.pingidentity.com/devops/tools/commands/kubernetes.md | 5 |
-| contact-us.md | page | https://developer.pingidentity.com/devops/contact-us/community.md | 2 |
-| docker-builds.md | page | https://developer.pingidentity.com/devops/docker-builds/DOCKER_BUILDS_HOOKS.md | 2 |
-| devops-landing-page-md.md | page | https://developer.pingidentity.com/devops/devops-landing-page.md | 1 |
-| overview-md.md | page | https://developer.pingidentity.com/devops/overview.md | 1 |
-| readme-md.md | page | https://developer.pingidentity.com/devops/README.md | 1 |
-| videos.md | page | https://developer.pingidentity.com/devops/videos/videos.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| docker-images.md | page | https://developer.pingidentity.com/devops/docker-images/README.md | 127 | 1 | partial |
+| release-notes.md | page | https://developer.pingidentity.com/devops/release-notes/relnotes-2003.md | 79 | 1 | partial |
+| how-to.md | page | https://developer.pingidentity.com/devops/how-to/buildPingFederateProfile.md | 28 | 1 | partial |
+| deployment.md | page | https://developer.pingidentity.com/devops/deployment/deployK8s-AKS.md | 22 | 1 | partial |
+| reference.md | page | https://developer.pingidentity.com/devops/reference/awsStorage.md | 13 | 1 | partial |
+| get-started.md | page | https://developer.pingidentity.com/devops/get-started/getStartedExample.md | 5 | 1 | partial |
+| home.md | page | https://developer.pingidentity.com/devops/home/supportPolicy.md | 5 | 1 | partial |
+| tools.md | page | https://developer.pingidentity.com/devops/tools/commands/kubernetes.md | 5 | 1 | partial |
+| contact-us.md | page | https://developer.pingidentity.com/devops/contact-us/community.md | 2 | 1 | partial |
+| docker-builds.md | page | https://developer.pingidentity.com/devops/docker-builds/DOCKER_BUILDS_HOOKS.md | 2 | 1 | partial |
+| devops-landing-page-md.md | page | https://developer.pingidentity.com/devops/devops-landing-page.md | 1 | 1 | full |
+| overview-md.md | page | https://developer.pingidentity.com/devops/overview.md | 1 | 1 | full |
+| readme-md.md | page | https://developer.pingidentity.com/devops/README.md | 1 | 1 | full |
+| videos.md | page | https://developer.pingidentity.com/devops/videos/videos.md | 1 | 1 | full |
 
 ## Checksums
 

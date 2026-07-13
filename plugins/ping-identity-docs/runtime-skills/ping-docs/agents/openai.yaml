@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ping Docs"
+  short_description: "Find exact Ping documentation pages offline"
+  default_prompt: "Use $ping-docs to find the exact Ping documentation pages for this task."

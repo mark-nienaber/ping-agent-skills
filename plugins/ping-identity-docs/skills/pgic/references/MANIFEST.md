@@ -6,27 +6,31 @@
 - Source: https://docs.pingidentity.com/pgic/llms.txt
 - Guides discovered: 15
 - Guides captured: 15
+- Guides fully captured: 14
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 64
+- Total snapshot pages captured: 42
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| service-requests.md | assembled | <42 pages from service_requests> | 42 |
-| products-and-self-service-tasks.md | assembled | <9 pages from products_and_self-service_tasks> | 9 |
-| environments.md | assembled | <1 pages from environments> | 1 |
-| identity-federation.md | assembled | <1 pages from identity_federation> | 1 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
-| introduction.md | assembled | <1 pages from introduction> | 1 |
-| maintenance.md | assembled | <1 pages from maintenance> | 1 |
-| network.md | assembled | <1 pages from network> | 1 |
-| penentration-load-testing.md | assembled | <1 pages from penentration_load_testing> | 1 |
-| pgic-data-loading-md.md | assembled | <1 pages from pgic_data_loading.md> | 1 |
-| pgic-infrastructure-md.md | assembled | <1 pages from pgic_infrastructure.md> | 1 |
-| pgic-observability-md.md | assembled | <1 pages from pgic_observability.md> | 1 |
-| pgic-task-summary-table.md | assembled | <1 pages from pgic_task_summary_table> | 1 |
-| pgic-web-servers-md.md | assembled | <1 pages from pgic_web_servers.md> | 1 |
-| secure-containers-md.md | assembled | <1 pages from secure-containers.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| service-requests.md | assembled | <42 pages from service_requests> | 42 | 20 | partial |
+| products-and-self-service-tasks.md | assembled | <9 pages from products_and_self-service_tasks> | 9 | 9 | full |
+| environments.md | assembled | <1 pages from environments> | 1 | 1 | full |
+| identity-federation.md | assembled | <1 pages from identity_federation> | 1 | 1 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| introduction.md | assembled | <1 pages from introduction> | 1 | 1 | full |
+| maintenance.md | assembled | <1 pages from maintenance> | 1 | 1 | full |
+| network.md | assembled | <1 pages from network> | 1 | 1 | full |
+| penentration-load-testing.md | assembled | <1 pages from penentration_load_testing> | 1 | 1 | full |
+| pgic-data-loading-md.md | assembled | <1 pages from pgic_data_loading.md> | 1 | 1 | full |
+| pgic-infrastructure-md.md | assembled | <1 pages from pgic_infrastructure.md> | 1 | 1 | full |
+| pgic-observability-md.md | assembled | <1 pages from pgic_observability.md> | 1 | 1 | full |
+| pgic-task-summary-table.md | assembled | <1 pages from pgic_task_summary_table> | 1 | 1 | full |
+| pgic-web-servers-md.md | assembled | <1 pages from pgic_web_servers.md> | 1 | 1 | full |
+| secure-containers-md.md | assembled | <1 pages from secure-containers.md> | 1 | 1 | full |
 
 ## Checksums
 

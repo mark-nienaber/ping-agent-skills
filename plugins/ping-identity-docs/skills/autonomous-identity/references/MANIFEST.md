@@ -6,19 +6,23 @@
 - Source: https://docs.pingidentity.com/autonomous-identity/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
+- Guides fully captured: 5
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 107
+- Total snapshot pages captured: 83
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| admin-guide.md | assembled | <40 pages from admin-guide> | 40 |
-| api-guide.md | assembled | <24 pages from api-guide> | 24 |
-| install-guide.md | assembled | <14 pages from install-guide> | 14 |
-| release-notes.md | assembled | <11 pages from release-notes> | 11 |
-| users-guide.md | assembled | <8 pages from users-guide> | 8 |
-| deployment-planning.md | assembled | <7 pages from deployment-planning> | 7 |
-| root.md | assembled | <3 pages from root> | 3 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| admin-guide.md | assembled | <40 pages from admin-guide> | 40 | 20 | partial |
+| api-guide.md | assembled | <24 pages from api-guide> | 24 | 20 | partial |
+| install-guide.md | assembled | <14 pages from install-guide> | 14 | 14 | full |
+| release-notes.md | assembled | <11 pages from release-notes> | 11 | 11 | full |
+| users-guide.md | assembled | <8 pages from users-guide> | 8 | 8 | full |
+| deployment-planning.md | assembled | <7 pages from deployment-planning> | 7 | 7 | full |
+| root.md | assembled | <3 pages from root> | 3 | 3 | full |
 
 ## Checksums
 

@@ -6,13 +6,17 @@
 - Source: https://developer.pingidentity.com/terraform/llms.txt
 - Guides discovered: 6
 - Guides captured: 1
+- Guides fully captured: 0
+- Guides partially captured: 1
+- Guides without snapshots: 5
 - Total pages indexed: 22
+- Total snapshot pages captured: 12
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| products.md | assembled | <13 pages from products> | 13 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| products.md | assembled | <13 pages from products> | 13 | 12 | partial |
 
 ## Checksums
 

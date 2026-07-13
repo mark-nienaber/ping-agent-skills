@@ -6,17 +6,21 @@
 - Source: https://docs.pingidentity.com/pingauthorize/llms.txt
 - Guides discovered: 9
 - Guides captured: 5
+- Guides fully captured: 0
+- Guides partially captured: 5
+- Guides without snapshots: 4
 - Total pages indexed: 393
+- Total snapshot pages captured: 93
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingauthorize-server-administration-guide.md | assembled | <240 pages from pingauthorize_server_administration_guide> | 240 |
-| pingauthorize-policy-administration-guide.md | assembled | <76 pages from pingauthorize_policy_administration_guide> | 76 |
-| installing-and-uninstalling-pingauthorize.md | assembled | <25 pages from installing_and_uninstalling_pingauthorize> | 25 |
-| troubleshooting-pingauthorize-server.md | assembled | <23 pages from troubleshooting_pingauthorize_server> | 23 |
-| pingauthorize-integrations.md | assembled | <15 pages from pingauthorize_integrations> | 15 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingauthorize-server-administration-guide.md | assembled | <240 pages from pingauthorize_server_administration_guide> | 240 | 20 | partial |
+| pingauthorize-policy-administration-guide.md | assembled | <76 pages from pingauthorize_policy_administration_guide> | 76 | 20 | partial |
+| installing-and-uninstalling-pingauthorize.md | assembled | <25 pages from installing_and_uninstalling_pingauthorize> | 25 | 20 | partial |
+| troubleshooting-pingauthorize-server.md | assembled | <23 pages from troubleshooting_pingauthorize_server> | 23 | 20 | partial |
+| pingauthorize-integrations.md | assembled | <15 pages from pingauthorize_integrations> | 15 | 13 | partial |
 
 ## Checksums
 

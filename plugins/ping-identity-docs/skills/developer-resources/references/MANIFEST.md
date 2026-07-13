@@ -6,19 +6,23 @@
 - Source: https://docs.pingidentity.com/developer-resources/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
+- Guides fully captured: 7
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 43
+- Total snapshot pages captured: 43
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| oauth-20-developer-guide.md | assembled | <12 pages from oauth_20_developer_guide> | 12 |
-| application-integration-guide.md | assembled | <8 pages from application_integration_guide> | 8 |
-| scim-11-developer-guide.md | assembled | <8 pages from scim_11_developer_guide> | 8 |
-| federated-sso-primer.md | assembled | <7 pages from federated_sso_primer> | 7 |
-| openid-connect-developer-guide.md | assembled | <6 pages from openid_connect_developer_guide> | 6 |
-| dev-jwt-jose-overview-md.md | assembled | <1 pages from dev_jwt_jose_overview.md> | 1 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| oauth-20-developer-guide.md | assembled | <12 pages from oauth_20_developer_guide> | 12 | 12 | full |
+| application-integration-guide.md | assembled | <8 pages from application_integration_guide> | 8 | 8 | full |
+| scim-11-developer-guide.md | assembled | <8 pages from scim_11_developer_guide> | 8 | 8 | full |
+| federated-sso-primer.md | assembled | <7 pages from federated_sso_primer> | 7 | 7 | full |
+| openid-connect-developer-guide.md | assembled | <6 pages from openid_connect_developer_guide> | 6 | 6 | full |
+| dev-jwt-jose-overview-md.md | assembled | <1 pages from dev_jwt_jose_overview.md> | 1 | 1 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
 
 ## Checksums
 

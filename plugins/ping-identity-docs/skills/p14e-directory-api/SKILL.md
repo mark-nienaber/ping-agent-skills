@@ -1,6 +1,6 @@
 ---
 name: p14e-directory-api
-description: "Use when working with P14e Directory API: create requests.md, create resource.md, delete resource.md, directory actions.md, functional overview.md, group actions.md. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names P14e Directory API or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ P14e Directory API documentation is indexed in the bundled llms.txt and live Pin
 - Snapshot version: current
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,22 +39,13 @@ P14e Directory API documentation is indexed in the bundled llms.txt and live Pin
 | Handle Responses.Md: handling, responses | handle-responses.md | https://developer.pingidentity.com/p14e-directory-api/handle-responses.md | references/snapshots/handle-responses-md.md |
 | Index.Md: directory, enterprise, pingone | index.md | https://developer.pingidentity.com/p14e-directory-api/index.md | references/snapshots/index-md.md |
 | Read Resource.Md: reading, resource | read-resource.md | https://developer.pingidentity.com/p14e-directory-api/read-resource.md | references/snapshots/read-resource-md.md |
-| Release Notes: previous, releases | release_notes | https://developer.pingidentity.com/p14e-directory-api/release_notes/*.md | references/snapshots/release-notes.md |
-| Reset Password By Email.Md: email, password, resetting | reset-password-by-email.md | https://developer.pingidentity.com/p14e-directory-api/reset-password-by-email.md | references/snapshots/reset-password-by-email-md.md |
-| Reset Password.Md: password, resetting | reset-password.md | https://developer.pingidentity.com/p14e-directory-api/reset-password.md | references/snapshots/reset-password-md.md |
-| Update Resource.Md: resource, updating | update-resource.md | https://developer.pingidentity.com/p14e-directory-api/update-resource.md | references/snapshots/update-resource-md.md |
-| User Actions.Md: actions, user | user-actions.md | https://developer.pingidentity.com/p14e-directory-api/user-actions.md | references/snapshots/user-actions-md.md |
-| User Authentication.Md: authentication, user | user-authentication.md | https://developer.pingidentity.com/p14e-directory-api/user-authentication.md | references/snapshots/user-authentication-md.md |
-| User Invitation.Md: invitation, user | user-invitation.md | https://developer.pingidentity.com/p14e-directory-api/user-invitation.md | references/snapshots/user-invitation-md.md |
-| User Registration Notifications.Md: notifications, registration, user | user-registration-notifications.md | https://developer.pingidentity.com/p14e-directory-api/user-registration-notifications.md | references/snapshots/user-registration-notifications-md.md |
-| User Resources.Md: resources, user | user-resources.md | https://developer.pingidentity.com/p14e-directory-api/user-resources.md | references/snapshots/user-resources-md.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

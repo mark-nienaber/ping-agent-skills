@@ -6,23 +6,27 @@
 - Source: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
 - Guides discovered: 14
 - Guides captured: 11
+- Guides fully captured: 9
+- Guides partially captured: 2
+- Guides without snapshots: 3
 - Total pages indexed: 93
+- Total snapshot pages captured: 31
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| task-summary-table.md | assembled | <53 pages from task_summary_table> | 53 |
-| release-notes.md | assembled | <22 pages from release_notes> | 22 |
-| limitations-guide.md | assembled | <1 pages from limitations_guide> | 1 |
-| monitoring-and-logging.md | assembled | <1 pages from monitoring_and_logging> | 1 |
-| network-guide.md | assembled | <1 pages from network_guide> | 1 |
-| p1as-home-md.md | assembled | <1 pages from p1as_home.md> | 1 |
-| p1as-how-works-md.md | assembled | <1 pages from p1as_how_works.md> | 1 |
-| p1as-load-testing-md.md | assembled | <1 pages from p1as_load_testing.md> | 1 |
-| p1as-support-policy-md.md | assembled | <1 pages from p1as_support_policy.md> | 1 |
-| renew-certs.md | assembled | <1 pages from renew_certs> | 1 |
-| securing-ai-agents.md | assembled | <1 pages from securing_AI_agents> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| task-summary-table.md | assembled | <53 pages from task_summary_table> | 53 | 16 | partial |
+| release-notes.md | assembled | <22 pages from release_notes> | 22 | 6 | partial |
+| limitations-guide.md | assembled | <1 pages from limitations_guide> | 1 | 1 | full |
+| monitoring-and-logging.md | assembled | <1 pages from monitoring_and_logging> | 1 | 1 | full |
+| network-guide.md | assembled | <1 pages from network_guide> | 1 | 1 | full |
+| p1as-home-md.md | assembled | <1 pages from p1as_home.md> | 1 | 1 | full |
+| p1as-how-works-md.md | assembled | <1 pages from p1as_how_works.md> | 1 | 1 | full |
+| p1as-load-testing-md.md | assembled | <1 pages from p1as_load_testing.md> | 1 | 1 | full |
+| p1as-support-policy-md.md | assembled | <1 pages from p1as_support_policy.md> | 1 | 1 | full |
+| renew-certs.md | assembled | <1 pages from renew_certs> | 1 | 1 | full |
+| securing-ai-agents.md | assembled | <1 pages from securing_AI_agents> | 1 | 1 | full |
 
 ## Checksums
 

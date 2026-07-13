@@ -6,15 +6,19 @@
 - Source: https://docs.pingidentity.com/platform/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
+- Guides fully captured: 1
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 28
+- Total snapshot pages captured: 3
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| sample-setup.md | page | https://docs.pingidentity.com/platform/8/sample-setup/overview.md | 21 |
-| platform-guide.md | page | https://docs.pingidentity.com/platform/8/platform-guide/edge-security.md | 6 |
-| release-notes.md | page | https://docs.pingidentity.com/platform/8/release-notes/preface.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| sample-setup.md | page | https://docs.pingidentity.com/platform/8/sample-setup/overview.md | 21 | 1 | partial |
+| platform-guide.md | page | https://docs.pingidentity.com/platform/8/platform-guide/edge-security.md | 6 | 1 | partial |
+| release-notes.md | page | https://docs.pingidentity.com/platform/8/release-notes/preface.md | 1 | 1 | full |
 
 ## Checksums
 

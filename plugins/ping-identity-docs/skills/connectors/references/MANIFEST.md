@@ -6,83 +6,87 @@
 - Source: https://docs.pingidentity.com/connectors/llms.txt
 - Guides discovered: 82
 - Guides captured: 71
+- Guides fully captured: 70
+- Guides partially captured: 1
+- Guides without snapshots: 11
 - Total pages indexed: 121
+- Total snapshot pages captured: 93
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| relnotes.md | assembled | <37 pages from relnotes> | 37 |
-| type.md | assembled | <4 pages from type> | 4 |
-| accertify-connector-md.md | assembled | <1 pages from accertify_connector.md> | 1 |
-| adobe-experience-manager-connector-md.md | assembled | <1 pages from adobe_experience_manager_connector.md> | 1 |
-| apple-login-connector-md.md | assembled | <1 pages from apple_login_connector.md> | 1 |
-| authentication-connector-md.md | assembled | <1 pages from authentication_connector.md> | 1 |
-| authenticid-connector-md.md | assembled | <1 pages from authenticid_connector.md> | 1 |
-| azure-ad-user-management-connector-md.md | assembled | <1 pages from azure_ad_user_management_connector.md> | 1 |
-| babelstreet-connector-md.md | assembled | <1 pages from babelstreet_connector.md> | 1 |
-| castle-connector-md.md | assembled | <1 pages from castle_connector.md> | 1 |
-| challenge-connector-md.md | assembled | <1 pages from challenge_connector.md> | 1 |
-| clear-connector-md.md | assembled | <1 pages from clear_connector.md> | 1 |
-| cloudflare-connector-md.md | assembled | <1 pages from cloudflare_connector.md> | 1 |
-| code-snippet-connector-md.md | assembled | <1 pages from code_snippet_connector.md> | 1 |
-| constella-connector-md.md | assembled | <1 pages from constella_connector.md> | 1 |
-| cookie-connector-md.md | assembled | <1 pages from cookie_connector.md> | 1 |
-| crowdstrike-connector-md.md | assembled | <1 pages from crowdstrike_connector.md> | 1 |
-| daon-connector-md.md | assembled | <1 pages from daon_connector.md> | 1 |
-| device-policy-connector-md.md | assembled | <1 pages from device_policy_connector.md> | 1 |
-| duo-connector-md.md | assembled | <1 pages from duo_connector.md> | 1 |
-| entrust-connector-md.md | assembled | <1 pages from entrust_connector.md> | 1 |
-| error-message-connector-md.md | assembled | <1 pages from error_message_connector.md> | 1 |
-| facebook-login-connector-md.md | assembled | <1 pages from facebook_login_connector.md> | 1 |
-| fingerprintjs-connector-md.md | assembled | <1 pages from fingerprintjs_connector.md> | 1 |
-| flow-analytics-connector-md.md | assembled | <1 pages from flow_analytics_connector.md> | 1 |
-| flow-conductor-connector-md.md | assembled | <1 pages from flow_conductor_connector.md> | 1 |
-| form-connector-md.md | assembled | <1 pages from form_connector.md> | 1 |
-| functions-connector-md.md | assembled | <1 pages from functions_connector.md> | 1 |
-| google-login-connector-md.md | assembled | <1 pages from google_login_connector.md> | 1 |
-| google-workspace-admin-connector-md.md | assembled | <1 pages from google_workspace_admin_connector.md> | 1 |
-| hello-connector-md.md | assembled | <1 pages from hello_connector.md> | 1 |
-| http-connector-md.md | assembled | <1 pages from http_connector.md> | 1 |
-| hypr-connector-md.md | assembled | <1 pages from hypr_connector.md> | 1 |
-| id-dataweb-connector-md.md | assembled | <1 pages from id_dataweb_connector.md> | 1 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
-| island-connector-md.md | assembled | <1 pages from island_connector.md> | 1 |
-| jira-connector-md.md | assembled | <1 pages from jira_connector.md> | 1 |
-| ldap-connector-md.md | assembled | <1 pages from ldap_connector.md> | 1 |
-| lexisnexis-connector-md.md | assembled | <1 pages from lexisnexis_connector.md> | 1 |
-| location-policy-connector-md.md | assembled | <1 pages from location_policy_connector.md> | 1 |
-| marketo-connector-md.md | assembled | <1 pages from marketo_connector.md> | 1 |
-| mfa-connector-md.md | assembled | <1 pages from mfa_connector.md> | 1 |
-| microsoft-defender-connector-md.md | assembled | <1 pages from microsoft_defender_connector.md> | 1 |
-| microsoft-edge-connector-md.md | assembled | <1 pages from microsoft_edge_connector.md> | 1 |
-| microsoft-teams-connector-md.md | assembled | <1 pages from microsoft_teams_connector.md> | 1 |
-| mitek-connector-md.md | assembled | <1 pages from mitek_connector.md> | 1 |
-| oidc-oauth-idp-connector-md.md | assembled | <1 pages from oidc_oauth_idp_connector.md> | 1 |
-| onetrust-connector-md.md | assembled | <1 pages from onetrust_connector.md> | 1 |
-| p1-advanced-identity-cloud-access-request-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_access_request_connector.md> | 1 |
-| p1-advanced-identity-cloud-login-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_login_connector.md> | 1 |
-| p1-authentication-connector-md.md | assembled | <1 pages from p1_authentication_connector.md> | 1 |
-| p1-connector-md.md | assembled | <1 pages from p1_connector.md> | 1 |
-| p1-credentials-connector-md.md | assembled | <1 pages from p1_credentials_connector.md> | 1 |
-| p1-mfa-connector-md.md | assembled | <1 pages from p1_mfa_connector.md> | 1 |
-| p1-notifications-connector-md.md | assembled | <1 pages from p1_notifications_connector.md> | 1 |
-| p1-protect-connector-md.md | assembled | <1 pages from p1_protect_connector.md> | 1 |
-| p1-radius-gateway-connector-md.md | assembled | <1 pages from p1_radius_gateway_connector.md> | 1 |
-| p1-scope-consent-connector-md.md | assembled | <1 pages from p1_scope_consent_connector.md> | 1 |
-| p1-verify-connector-md.md | assembled | <1 pages from p1_verify_connector.md> | 1 |
-| p1az-connector-md.md | assembled | <1 pages from p1az_connector.md> | 1 |
-| pf-connector-md.md | assembled | <1 pages from pf_connector.md> | 1 |
-| servicenow-connector-md.md | assembled | <1 pages from servicenow_connector.md> | 1 |
-| socure-connector-md.md | assembled | <1 pages from socure_connector.md> | 1 |
-| splunk-connector-md.md | assembled | <1 pages from splunk_connector.md> | 1 |
-| string-connector-md.md | assembled | <1 pages from string_connector.md> | 1 |
-| teleport-connector-md.md | assembled | <1 pages from teleport_connector.md> | 1 |
-| token-management-connector-md.md | assembled | <1 pages from token_management_connector.md> | 1 |
-| transunion-tloxp-connector-md.md | assembled | <1 pages from transunion_tloxp_connector.md> | 1 |
-| variable-connector-md.md | assembled | <1 pages from variable_connector.md> | 1 |
-| veriff-connector-md.md | assembled | <1 pages from veriff_connector.md> | 1 |
-| yoti-connector-md.md | assembled | <1 pages from yoti_connector.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| relnotes.md | assembled | <37 pages from relnotes> | 37 | 20 | partial |
+| type.md | assembled | <4 pages from type> | 4 | 4 | full |
+| accertify-connector-md.md | assembled | <1 pages from accertify_connector.md> | 1 | 1 | full |
+| adobe-experience-manager-connector-md.md | assembled | <1 pages from adobe_experience_manager_connector.md> | 1 | 1 | full |
+| apple-login-connector-md.md | assembled | <1 pages from apple_login_connector.md> | 1 | 1 | full |
+| authentication-connector-md.md | assembled | <1 pages from authentication_connector.md> | 1 | 1 | full |
+| authenticid-connector-md.md | assembled | <1 pages from authenticid_connector.md> | 1 | 1 | full |
+| azure-ad-user-management-connector-md.md | assembled | <1 pages from azure_ad_user_management_connector.md> | 1 | 1 | full |
+| babelstreet-connector-md.md | assembled | <1 pages from babelstreet_connector.md> | 1 | 1 | full |
+| castle-connector-md.md | assembled | <1 pages from castle_connector.md> | 1 | 1 | full |
+| challenge-connector-md.md | assembled | <1 pages from challenge_connector.md> | 1 | 1 | full |
+| clear-connector-md.md | assembled | <1 pages from clear_connector.md> | 1 | 1 | full |
+| cloudflare-connector-md.md | assembled | <1 pages from cloudflare_connector.md> | 1 | 1 | full |
+| code-snippet-connector-md.md | assembled | <1 pages from code_snippet_connector.md> | 1 | 1 | full |
+| constella-connector-md.md | assembled | <1 pages from constella_connector.md> | 1 | 1 | full |
+| cookie-connector-md.md | assembled | <1 pages from cookie_connector.md> | 1 | 1 | full |
+| crowdstrike-connector-md.md | assembled | <1 pages from crowdstrike_connector.md> | 1 | 1 | full |
+| daon-connector-md.md | assembled | <1 pages from daon_connector.md> | 1 | 1 | full |
+| device-policy-connector-md.md | assembled | <1 pages from device_policy_connector.md> | 1 | 1 | full |
+| duo-connector-md.md | assembled | <1 pages from duo_connector.md> | 1 | 1 | full |
+| entrust-connector-md.md | assembled | <1 pages from entrust_connector.md> | 1 | 1 | full |
+| error-message-connector-md.md | assembled | <1 pages from error_message_connector.md> | 1 | 1 | full |
+| facebook-login-connector-md.md | assembled | <1 pages from facebook_login_connector.md> | 1 | 1 | full |
+| fingerprintjs-connector-md.md | assembled | <1 pages from fingerprintjs_connector.md> | 1 | 1 | full |
+| flow-analytics-connector-md.md | assembled | <1 pages from flow_analytics_connector.md> | 1 | 1 | full |
+| flow-conductor-connector-md.md | assembled | <1 pages from flow_conductor_connector.md> | 1 | 1 | full |
+| form-connector-md.md | assembled | <1 pages from form_connector.md> | 1 | 1 | full |
+| functions-connector-md.md | assembled | <1 pages from functions_connector.md> | 1 | 1 | full |
+| google-login-connector-md.md | assembled | <1 pages from google_login_connector.md> | 1 | 1 | full |
+| google-workspace-admin-connector-md.md | assembled | <1 pages from google_workspace_admin_connector.md> | 1 | 1 | full |
+| hello-connector-md.md | assembled | <1 pages from hello_connector.md> | 1 | 1 | full |
+| http-connector-md.md | assembled | <1 pages from http_connector.md> | 1 | 1 | full |
+| hypr-connector-md.md | assembled | <1 pages from hypr_connector.md> | 1 | 1 | full |
+| id-dataweb-connector-md.md | assembled | <1 pages from id_dataweb_connector.md> | 1 | 1 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| island-connector-md.md | assembled | <1 pages from island_connector.md> | 1 | 1 | full |
+| jira-connector-md.md | assembled | <1 pages from jira_connector.md> | 1 | 1 | full |
+| ldap-connector-md.md | assembled | <1 pages from ldap_connector.md> | 1 | 1 | full |
+| lexisnexis-connector-md.md | assembled | <1 pages from lexisnexis_connector.md> | 1 | 1 | full |
+| location-policy-connector-md.md | assembled | <1 pages from location_policy_connector.md> | 1 | 1 | full |
+| marketo-connector-md.md | assembled | <1 pages from marketo_connector.md> | 1 | 1 | full |
+| mfa-connector-md.md | assembled | <1 pages from mfa_connector.md> | 1 | 1 | full |
+| microsoft-defender-connector-md.md | assembled | <1 pages from microsoft_defender_connector.md> | 1 | 1 | full |
+| microsoft-edge-connector-md.md | assembled | <1 pages from microsoft_edge_connector.md> | 1 | 1 | full |
+| microsoft-teams-connector-md.md | assembled | <1 pages from microsoft_teams_connector.md> | 1 | 1 | full |
+| mitek-connector-md.md | assembled | <1 pages from mitek_connector.md> | 1 | 1 | full |
+| oidc-oauth-idp-connector-md.md | assembled | <1 pages from oidc_oauth_idp_connector.md> | 1 | 1 | full |
+| onetrust-connector-md.md | assembled | <1 pages from onetrust_connector.md> | 1 | 1 | full |
+| p1-advanced-identity-cloud-access-request-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_access_request_connector.md> | 1 | 1 | full |
+| p1-advanced-identity-cloud-login-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_login_connector.md> | 1 | 1 | full |
+| p1-authentication-connector-md.md | assembled | <1 pages from p1_authentication_connector.md> | 1 | 1 | full |
+| p1-connector-md.md | assembled | <1 pages from p1_connector.md> | 1 | 1 | full |
+| p1-credentials-connector-md.md | assembled | <1 pages from p1_credentials_connector.md> | 1 | 1 | full |
+| p1-mfa-connector-md.md | assembled | <1 pages from p1_mfa_connector.md> | 1 | 1 | full |
+| p1-notifications-connector-md.md | assembled | <1 pages from p1_notifications_connector.md> | 1 | 1 | full |
+| p1-protect-connector-md.md | assembled | <1 pages from p1_protect_connector.md> | 1 | 1 | full |
+| p1-radius-gateway-connector-md.md | assembled | <1 pages from p1_radius_gateway_connector.md> | 1 | 1 | full |
+| p1-scope-consent-connector-md.md | assembled | <1 pages from p1_scope_consent_connector.md> | 1 | 1 | full |
+| p1-verify-connector-md.md | assembled | <1 pages from p1_verify_connector.md> | 1 | 1 | full |
+| p1az-connector-md.md | assembled | <1 pages from p1az_connector.md> | 1 | 1 | full |
+| pf-connector-md.md | assembled | <1 pages from pf_connector.md> | 1 | 1 | full |
+| servicenow-connector-md.md | assembled | <1 pages from servicenow_connector.md> | 1 | 1 | full |
+| socure-connector-md.md | assembled | <1 pages from socure_connector.md> | 1 | 1 | full |
+| splunk-connector-md.md | assembled | <1 pages from splunk_connector.md> | 1 | 1 | full |
+| string-connector-md.md | assembled | <1 pages from string_connector.md> | 1 | 1 | full |
+| teleport-connector-md.md | assembled | <1 pages from teleport_connector.md> | 1 | 1 | full |
+| token-management-connector-md.md | assembled | <1 pages from token_management_connector.md> | 1 | 1 | full |
+| transunion-tloxp-connector-md.md | assembled | <1 pages from transunion_tloxp_connector.md> | 1 | 1 | full |
+| variable-connector-md.md | assembled | <1 pages from variable_connector.md> | 1 | 1 | full |
+| veriff-connector-md.md | assembled | <1 pages from veriff_connector.md> | 1 | 1 | full |
+| yoti-connector-md.md | assembled | <1 pages from yoti_connector.md> | 1 | 1 | full |
 
 ## Checksums
 

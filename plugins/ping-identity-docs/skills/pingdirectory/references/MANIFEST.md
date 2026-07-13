@@ -6,26 +6,30 @@
 - Source: https://docs.pingidentity.com/pingdirectory/llms.txt
 - Guides discovered: 15
 - Guides captured: 14
+- Guides fully captured: 4
+- Guides partially captured: 10
+- Guides without snapshots: 1
 - Total pages indexed: 1236
+- Total snapshot pages captured: 224
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| pingdirectory-server-administration-guide.md | assembled | <454 pages from pingdirectory_server_administration_guide> | 454 |
-| pingdirectory-security-guide.md | assembled | <176 pages from pingdirectory_security_guide> | 176 |
-| pingdirectoryproxy-server-administration-guide.md | assembled | <173 pages from pingdirectoryproxy_server_administration_guide> | 173 |
-| pingdatasync-server-administration-guide.md | assembled | <158 pages from pingdatasync_server_administration_guide> | 158 |
-| installing-the-pingdirectory-suite-of-products.md | assembled | <48 pages from installing_the_pingdirectory_suite_of_products> | 48 |
-| troubleshooting-the-pingdirectory-suite-of-products.md | assembled | <46 pages from troubleshooting_the_pingdirectory_suite_of_products> | 46 |
-| delegated-admin-application-guide.md | assembled | <45 pages from delegated_admin_application_guide> | 45 |
-| managing-servers-and-certificates.md | assembled | <36 pages from managing_servers_and_certificates> | 36 |
-| managing-access-control.md | assembled | <25 pages from managing_access_control> | 25 |
-| monitoring-the-pingdirectory-suite-of-products.md | assembled | <20 pages from monitoring_the_pingdirectory_suite_of_products> | 20 |
-| managing-scim-11-and-20-servlet-extensions.md | assembled | <14 pages from managing_scim_11_and_20_servlet_extensions> | 14 |
-| root.md | assembled | <7 pages from root> | 7 |
-| fips-140-2-compliance-for-pingdirectory.md | assembled | <3 pages from fips_140-2_compliance_for_pingdirectory> | 3 |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| pingdirectory-server-administration-guide.md | assembled | <454 pages from pingdirectory_server_administration_guide> | 454 | 20 | partial |
+| pingdirectory-security-guide.md | assembled | <176 pages from pingdirectory_security_guide> | 176 | 20 | partial |
+| pingdirectoryproxy-server-administration-guide.md | assembled | <173 pages from pingdirectoryproxy_server_administration_guide> | 173 | 20 | partial |
+| pingdatasync-server-administration-guide.md | assembled | <158 pages from pingdatasync_server_administration_guide> | 158 | 20 | partial |
+| installing-the-pingdirectory-suite-of-products.md | assembled | <48 pages from installing_the_pingdirectory_suite_of_products> | 48 | 20 | partial |
+| troubleshooting-the-pingdirectory-suite-of-products.md | assembled | <46 pages from troubleshooting_the_pingdirectory_suite_of_products> | 46 | 20 | partial |
+| delegated-admin-application-guide.md | assembled | <45 pages from delegated_admin_application_guide> | 45 | 20 | partial |
+| managing-servers-and-certificates.md | assembled | <36 pages from managing_servers_and_certificates> | 36 | 20 | partial |
+| managing-access-control.md | assembled | <25 pages from managing_access_control> | 25 | 20 | partial |
+| monitoring-the-pingdirectory-suite-of-products.md | assembled | <20 pages from monitoring_the_pingdirectory_suite_of_products> | 20 | 20 | full |
+| managing-scim-11-and-20-servlet-extensions.md | assembled | <14 pages from managing_scim_11_and_20_servlet_extensions> | 14 | 14 | full |
+| root.md | assembled | <7 pages from root> | 7 | 6 | partial |
+| fips-140-2-compliance-for-pingdirectory.md | assembled | <3 pages from fips_140-2_compliance_for_pingdirectory> | 3 | 3 | full |
+| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
 
 ## Checksums
 

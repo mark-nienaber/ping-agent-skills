@@ -6,13 +6,17 @@
 - Source: https://docs.pingidentity.com/sdks/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
+- Guides fully captured: 0
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 255
+- Total snapshot pages captured: 1
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| latest.md | page | https://docs.pingidentity.com/sdks/latest/token-vault/getting-started/04-obtain-tokens.md | 255 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| latest.md | page | https://docs.pingidentity.com/sdks/latest/token-vault/getting-started/04-obtain-tokens.md | 255 | 1 | partial |
 
 ## Checksums
 

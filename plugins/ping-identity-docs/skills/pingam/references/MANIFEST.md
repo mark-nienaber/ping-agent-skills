@@ -6,36 +6,40 @@
 - Source: https://docs.pingidentity.com/pingam/llms.txt
 - Guides discovered: 27
 - Guides captured: 24
+- Guides fully captured: 10
+- Guides partially captured: 14
+- Guides without snapshots: 3
 - Total pages indexed: 1117
+- Total snapshot pages captured: 359
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| entity-reference.md | assembled | <546 pages from entity-reference> | 546 |
-| am-oauth2.md | assembled | <63 pages from am-oauth2> | 63 |
-| am-authentication.md | assembled | <55 pages from am-authentication> | 55 |
-| release-notes.md | single-page | https://docs.pingidentity.com/pingam/release-notes/single-page.md | 49 |
-| security.md | assembled | <43 pages from security> | 43 |
-| am-scripting.md | assembled | <37 pages from am-scripting> | 37 |
-| installation.md | assembled | <33 pages from installation> | 33 |
-| am-saml2.md | assembled | <30 pages from am-saml2> | 30 |
-| setup.md | assembled | <30 pages from setup> | 30 |
-| am-oidc1.md | assembled | <29 pages from am-oidc1> | 29 |
-| auth-nodes.md | assembled | <27 pages from auth-nodes> | 27 |
-| uma.md | assembled | <24 pages from uma> | 24 |
-| am-authorization.md | assembled | <21 pages from am-authorization> | 21 |
-| am-sessions.md | assembled | <14 pages from am-sessions> | 14 |
-| monitoring.md | assembled | <14 pages from monitoring> | 14 |
-| deployment-planning.md | assembled | <13 pages from deployment-planning> | 13 |
-| user-self-service.md | assembled | <12 pages from user-self-service> | 12 |
-| amster.md | assembled | <11 pages from amster> | 11 |
-| maintenance.md | assembled | <11 pages from maintenance> | 11 |
-| sts.md | assembled | <10 pages from sts> | 10 |
-| am-rest.md | assembled | <7 pages from am-rest> | 7 |
-| ui-customization.md | assembled | <7 pages from ui-customization> | 7 |
-| am-reference.md | assembled | <4 pages from am-reference> | 4 |
-| root.md | assembled | <1 pages from root> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| entity-reference.md | assembled | <546 pages from entity-reference> | 546 | 20 | partial |
+| am-oauth2.md | assembled | <63 pages from am-oauth2> | 63 | 20 | partial |
+| am-authentication.md | assembled | <55 pages from am-authentication> | 55 | 20 | partial |
+| release-notes.md | single-page | https://docs.pingidentity.com/pingam/release-notes/single-page.md | 49 | 49 | full |
+| security.md | assembled | <43 pages from security> | 43 | 20 | partial |
+| am-scripting.md | assembled | <37 pages from am-scripting> | 37 | 20 | partial |
+| installation.md | assembled | <33 pages from installation> | 33 | 18 | partial |
+| am-saml2.md | assembled | <30 pages from am-saml2> | 30 | 14 | partial |
+| setup.md | assembled | <30 pages from setup> | 30 | 20 | partial |
+| am-oidc1.md | assembled | <29 pages from am-oidc1> | 29 | 20 | partial |
+| auth-nodes.md | assembled | <27 pages from auth-nodes> | 27 | 20 | partial |
+| uma.md | assembled | <24 pages from uma> | 24 | 15 | partial |
+| am-authorization.md | assembled | <21 pages from am-authorization> | 21 | 1 | partial |
+| am-sessions.md | assembled | <14 pages from am-sessions> | 14 | 13 | partial |
+| monitoring.md | assembled | <14 pages from monitoring> | 14 | 14 | full |
+| deployment-planning.md | assembled | <13 pages from deployment-planning> | 13 | 13 | full |
+| user-self-service.md | assembled | <12 pages from user-self-service> | 12 | 12 | full |
+| amster.md | assembled | <11 pages from amster> | 11 | 11 | full |
+| maintenance.md | assembled | <11 pages from maintenance> | 11 | 11 | full |
+| sts.md | assembled | <10 pages from sts> | 10 | 10 | full |
+| am-rest.md | assembled | <7 pages from am-rest> | 7 | 6 | partial |
+| ui-customization.md | assembled | <7 pages from ui-customization> | 7 | 7 | full |
+| am-reference.md | assembled | <4 pages from am-reference> | 4 | 4 | full |
+| root.md | assembled | <1 pages from root> | 1 | 1 | full |
 
 ## Checksums
 

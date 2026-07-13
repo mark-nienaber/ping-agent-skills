@@ -6,14 +6,18 @@
 - Source: https://docs.pingidentity.com/identity-reporting/llms.txt
 - Guides discovered: 2
 - Guides captured: 2
+- Guides fully captured: 1
+- Guides partially captured: 1
+- Guides without snapshots: 0
 - Total pages indexed: 15
+- Total snapshot pages captured: 13
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| identity-reporting.md | assembled | <8 pages from identity-reporting> | 8 |
-| release-notes.md | assembled | <7 pages from release-notes> | 7 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| identity-reporting.md | assembled | <8 pages from identity-reporting> | 8 | 8 | full |
+| release-notes.md | assembled | <7 pages from release-notes> | 7 | 5 | partial |
 
 ## Checksums
 

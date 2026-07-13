@@ -1,6 +1,6 @@
 ---
 name: pingaccess
-description: "Use when working with PingAccess: pingaccess user interface reference guide, agents and integrations, reference guides, configuring and customizing pingaccess, pingaccess use cases, token providers. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingAccess or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Learn how you can use authentication challenge policies and authentication requi
 - Snapshot version: 9.1
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -33,21 +34,18 @@ Learn how you can use authentication challenge policies and authentication requi
 | Pingaccess Use Cases: configuring, host, rule | pingaccess_use_cases | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_use_cases/*.md | references/snapshots/pingaccess-use-cases.md |
 | Token Providers: configuring, pingaccess, creating | token_providers | https://docs.pingidentity.com/pingaccess/9.1/token_providers/*.md | references/snapshots/token-providers.md |
 | Installing And Uninstalling Pingaccess: pingaccess, service, windows | installing_and_uninstalling_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/*.md | references/snapshots/installing-and-uninstalling-pingaccess.md |
-| Pingaccess Zero Downtime Upgrade: key, rolling, disabling | pingaccess_zero_downtime_upgrade | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_zero_downtime_upgrade/*.md | references/snapshots/pingaccess-zero-downtime-upgrade.md |
+| Pingaccess Zero Downtime Upgrade: key, rolling, disabling | pingaccess_zero_downtime_upgrade | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_zero_downtime_upgrade/*.md | live-only |
 | Upgrading Pingaccess: pingaccess, upgrade, upgrading | upgrading_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/*.md | references/snapshots/upgrading-pingaccess.md |
 | Pingaccess Monitoring Guide: connecting, heartbeat, log | pingaccess_monitoring_guide | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_monitoring_guide/*.md | references/snapshots/pingaccess-monitoring-guide.md |
 | Troubleshooting: sso, administrative, disable | troubleshooting | https://docs.pingidentity.com/pingaccess/9.1/troubleshooting/*.md | references/snapshots/troubleshooting.md |
 | Backing Up And Restoring Pingaccess: pingaccess, code, backing | backing_up_and_restoring_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/backing_up_and_restoring_pingaccess/*.md | references/snapshots/backing-up-and-restoring-pingaccess.md |
-| Introduction To Pingaccess: pingaccess, can, what | introduction_to_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/introduction_to_pingaccess/*.md | references/snapshots/introduction-to-pingaccess.md |
-| Release Notes: notes, release | release_notes | https://docs.pingidentity.com/pingaccess/9.1/release_notes/*.md | references/snapshots/release-notes.md |
-| Root: pingaccess | root | https://docs.pingidentity.com/pingaccess/9.1/*.md | references/snapshots/root.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

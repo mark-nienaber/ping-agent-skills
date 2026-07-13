@@ -6,32 +6,36 @@
 - Source: https://developer.pingidentity.com/pingoneaic-api/llms.txt
 - Guides discovered: 22
 - Guides captured: 20
+- Guides fully captured: 18
+- Guides partially captured: 2
+- Guides without snapshots: 2
 - Total pages indexed: 91
+- Total snapshot pages captured: 59
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| idm-rest-api.md | assembled | <20 pages from idm-rest-api> | 20 |
-| am-oauth2.md | assembled | <14 pages from am-oauth2> | 14 |
-| crest.md | assembled | <9 pages from crest> | 9 |
-| am-scripting.md | assembled | <7 pages from am-scripting> | 7 |
-| am-authorization.md | assembled | <4 pages from am-authorization> | 4 |
-| am-rest.md | assembled | <2 pages from am-rest> | 2 |
-| identity-governance.md | assembled | <2 pages from identity-governance> | 2 |
-| am-sessions.md | assembled | <1 pages from am-sessions> | 1 |
-| api-custom-headers-md.md | assembled | <1 pages from api-custom-headers.md> | 1 |
-| api-reference-md.md | assembled | <1 pages from api-reference.md> | 1 |
-| authenticate-to-rest-api-overview-md.md | assembled | <1 pages from authenticate-to-rest-api-overview.md> | 1 |
-| authenticate-to-rest-api-with-access-token-md.md | assembled | <1 pages from authenticate-to-rest-api-with-access-token.md> | 1 |
-| authenticate-to-rest-api-with-api-key-and-secret-md.md | assembled | <1 pages from authenticate-to-rest-api-with-api-key-and-secret.md> | 1 |
-| changelog-md.md | assembled | <1 pages from changelog.md> | 1 |
-| index-md.md | assembled | <1 pages from index.md> | 1 |
-| postman-collection-md.md | assembled | <1 pages from postman-collection.md> | 1 |
-| scripting-auth-md.md | assembled | <1 pages from scripting-auth.md> | 1 |
-| scripting-custom-endpoints-md.md | assembled | <1 pages from scripting-custom-endpoints.md> | 1 |
-| scripting-event-hooks-md.md | assembled | <1 pages from scripting-event-hooks.md> | 1 |
-| scripting-md.md | assembled | <1 pages from scripting.md> | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| idm-rest-api.md | assembled | <20 pages from idm-rest-api> | 20 | 20 | full |
+| am-oauth2.md | assembled | <14 pages from am-oauth2> | 14 | 4 | partial |
+| crest.md | assembled | <9 pages from crest> | 9 | 7 | partial |
+| am-scripting.md | assembled | <7 pages from am-scripting> | 7 | 7 | full |
+| am-authorization.md | assembled | <4 pages from am-authorization> | 4 | 4 | full |
+| am-rest.md | assembled | <2 pages from am-rest> | 2 | 2 | full |
+| identity-governance.md | assembled | <2 pages from identity-governance> | 2 | 2 | full |
+| am-sessions.md | assembled | <1 pages from am-sessions> | 1 | 1 | full |
+| api-custom-headers-md.md | assembled | <1 pages from api-custom-headers.md> | 1 | 1 | full |
+| api-reference-md.md | assembled | <1 pages from api-reference.md> | 1 | 1 | full |
+| authenticate-to-rest-api-overview-md.md | assembled | <1 pages from authenticate-to-rest-api-overview.md> | 1 | 1 | full |
+| authenticate-to-rest-api-with-access-token-md.md | assembled | <1 pages from authenticate-to-rest-api-with-access-token.md> | 1 | 1 | full |
+| authenticate-to-rest-api-with-api-key-and-secret-md.md | assembled | <1 pages from authenticate-to-rest-api-with-api-key-and-secret.md> | 1 | 1 | full |
+| changelog-md.md | assembled | <1 pages from changelog.md> | 1 | 1 | full |
+| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| postman-collection-md.md | assembled | <1 pages from postman-collection.md> | 1 | 1 | full |
+| scripting-auth-md.md | assembled | <1 pages from scripting-auth.md> | 1 | 1 | full |
+| scripting-custom-endpoints-md.md | assembled | <1 pages from scripting-custom-endpoints.md> | 1 | 1 | full |
+| scripting-event-hooks-md.md | assembled | <1 pages from scripting-event-hooks.md> | 1 | 1 | full |
+| scripting-md.md | assembled | <1 pages from scripting.md> | 1 | 1 | full |
 
 ## Checksums
 

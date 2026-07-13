@@ -6,49 +6,53 @@
 - Source: https://docs.pingidentity.com/pingoneaic/llms.txt
 - Guides discovered: 37
 - Guides captured: 37
+- Guides fully captured: 5
+- Guides partially captured: 32
+- Guides without snapshots: 0
 - Total pages indexed: 809
+- Total snapshot pages captured: 37
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| identity-governance.md | page | https://docs.pingidentity.com/pingoneaic/identity-governance/administration/governance-lcm-authorization.md | 99 |
-| release-notes.md | page | https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/akamai-acc-protect-node.md | 70 |
-| am-oauth2.md | page | https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-introspect-macaroon-endpoint.md | 54 |
-| tenants.md | page | https://docs.pingidentity.com/pingoneaic/tenants/analytics-dashboard.md | 49 |
-| app-management.md | page | https://docs.pingidentity.com/pingoneaic/app-management/applications/active-directory.md | 45 |
-| am-authentication.md | page | https://docs.pingidentity.com/pingoneaic/am-authentication/account-lockout.md | 42 |
-| idm-objects.md | page | https://docs.pingidentity.com/pingoneaic/idm-objects/access-data-objects-preface.md | 39 |
-| am-scripting.md | page | https://docs.pingidentity.com/pingoneaic/am-scripting/access-token-modification-api.md | 36 |
-| idm-synchronization.md | page | https://docs.pingidentity.com/pingoneaic/idm-synchronization/clustered-recon.md | 33 |
-| use-cases.md | page | https://docs.pingidentity.com/pingoneaic/use-cases/preface-pages/about-use-case-catalog.md | 32 |
-| am-oidc1.md | page | https://docs.pingidentity.com/pingoneaic/am-oidc1/rest-api-oidc-discovery-webfinger.md | 27 |
-| identities.md | page | https://docs.pingidentity.com/pingoneaic/identities/identity-cloud-identity-schema.md | 24 |
-| am-saml2.md | page | https://docs.pingidentity.com/pingoneaic/am-saml2/choose-persistent-or-transient-federation.md | 23 |
-| idm-rest-api.md | page | https://docs.pingidentity.com/pingoneaic/idm-rest-api/endpoints/rest-bulk-import.md | 21 |
-| idm-scripting.md | page | https://docs.pingidentity.com/pingoneaic/idm-scripting/script-call.md | 21 |
-| developer-docs.md | page | https://docs.pingidentity.com/pingoneaic/developer-docs/crest/action.md | 19 |
-| realms.md | page | https://docs.pingidentity.com/pingoneaic/realms/alpha-bravo-realms.md | 18 |
-| am-authorization.md | page | https://docs.pingidentity.com/pingoneaic/am-authorization/preface.md | 16 |
-| getting-started.md | page | https://docs.pingidentity.com/pingoneaic/getting-started/getting-started-about.md | 15 |
-| product-information.md | page | https://docs.pingidentity.com/pingoneaic/product-information/add-on-capabilities.md | 14 |
-| end-user.md | page | https://docs.pingidentity.com/pingoneaic/end-user/end-user-ux-options-compare.md | 13 |
-| idm-schedules.md | page | https://docs.pingidentity.com/pingoneaic/idm-schedules/configure-schedules.md | 13 |
-| planning.md | page | https://docs.pingidentity.com/pingoneaic/planning/plan-object-modeling-approach.md | 13 |
-| reports.md | page | https://docs.pingidentity.com/pingoneaic/reports/administration/about-reports.md | 12 |
-| am-sessions.md | page | https://docs.pingidentity.com/pingoneaic/am-sessions/client-side-sessions.md | 11 |
-| journeys.md | page | https://docs.pingidentity.com/pingoneaic/journeys/node-designer.md | 10 |
-| self-service.md | page | https://docs.pingidentity.com/pingoneaic/self-service/password-reset.md | 9 |
-| integrations.md | page | https://docs.pingidentity.com/pingoneaic/integrations/pingone.md | 7 |
-| idm-auth.md | page | https://docs.pingidentity.com/pingoneaic/idm-auth/authentication.md | 6 |
-| am-reference.md | page | https://docs.pingidentity.com/pingoneaic/am-reference/prometheus-metrics.md | 5 |
-| am-rest.md | page | https://docs.pingidentity.com/pingoneaic/am-rest/preface.md | 4 |
-| federation.md | page | https://docs.pingidentity.com/pingoneaic/federation/configure-federated-access-for-tenant-administrators.md | 4 |
-| connectors.md | page | https://docs.pingidentity.com/pingoneaic/connectors/connectors.md | 1 |
-| external-services.md | page | https://docs.pingidentity.com/pingoneaic/external-services/external-rest.md | 1 |
-| home-md.md | page | https://docs.pingidentity.com/pingoneaic/home.md | 1 |
-| idm-security.md | page | https://docs.pingidentity.com/pingoneaic/idm-security/secure-sensitive-data.md | 1 |
-| solution-configure-device-profiling-md.md | page | https://docs.pingidentity.com/pingoneaic/solution-configure-device-profiling.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| identity-governance.md | page | https://docs.pingidentity.com/pingoneaic/identity-governance/administration/governance-lcm-authorization.md | 99 | 1 | partial |
+| release-notes.md | page | https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/akamai-acc-protect-node.md | 70 | 1 | partial |
+| am-oauth2.md | page | https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-introspect-macaroon-endpoint.md | 54 | 1 | partial |
+| tenants.md | page | https://docs.pingidentity.com/pingoneaic/tenants/analytics-dashboard.md | 49 | 1 | partial |
+| app-management.md | page | https://docs.pingidentity.com/pingoneaic/app-management/applications/active-directory.md | 45 | 1 | partial |
+| am-authentication.md | page | https://docs.pingidentity.com/pingoneaic/am-authentication/account-lockout.md | 42 | 1 | partial |
+| idm-objects.md | page | https://docs.pingidentity.com/pingoneaic/idm-objects/access-data-objects-preface.md | 39 | 1 | partial |
+| am-scripting.md | page | https://docs.pingidentity.com/pingoneaic/am-scripting/access-token-modification-api.md | 36 | 1 | partial |
+| idm-synchronization.md | page | https://docs.pingidentity.com/pingoneaic/idm-synchronization/clustered-recon.md | 33 | 1 | partial |
+| use-cases.md | page | https://docs.pingidentity.com/pingoneaic/use-cases/preface-pages/about-use-case-catalog.md | 32 | 1 | partial |
+| am-oidc1.md | page | https://docs.pingidentity.com/pingoneaic/am-oidc1/rest-api-oidc-discovery-webfinger.md | 27 | 1 | partial |
+| identities.md | page | https://docs.pingidentity.com/pingoneaic/identities/identity-cloud-identity-schema.md | 24 | 1 | partial |
+| am-saml2.md | page | https://docs.pingidentity.com/pingoneaic/am-saml2/choose-persistent-or-transient-federation.md | 23 | 1 | partial |
+| idm-rest-api.md | page | https://docs.pingidentity.com/pingoneaic/idm-rest-api/endpoints/rest-bulk-import.md | 21 | 1 | partial |
+| idm-scripting.md | page | https://docs.pingidentity.com/pingoneaic/idm-scripting/script-call.md | 21 | 1 | partial |
+| developer-docs.md | page | https://docs.pingidentity.com/pingoneaic/developer-docs/crest/action.md | 19 | 1 | partial |
+| realms.md | page | https://docs.pingidentity.com/pingoneaic/realms/alpha-bravo-realms.md | 18 | 1 | partial |
+| am-authorization.md | page | https://docs.pingidentity.com/pingoneaic/am-authorization/preface.md | 16 | 1 | partial |
+| getting-started.md | page | https://docs.pingidentity.com/pingoneaic/getting-started/getting-started-about.md | 15 | 1 | partial |
+| product-information.md | page | https://docs.pingidentity.com/pingoneaic/product-information/add-on-capabilities.md | 14 | 1 | partial |
+| end-user.md | page | https://docs.pingidentity.com/pingoneaic/end-user/end-user-ux-options-compare.md | 13 | 1 | partial |
+| idm-schedules.md | page | https://docs.pingidentity.com/pingoneaic/idm-schedules/configure-schedules.md | 13 | 1 | partial |
+| planning.md | page | https://docs.pingidentity.com/pingoneaic/planning/plan-object-modeling-approach.md | 13 | 1 | partial |
+| reports.md | page | https://docs.pingidentity.com/pingoneaic/reports/administration/about-reports.md | 12 | 1 | partial |
+| am-sessions.md | page | https://docs.pingidentity.com/pingoneaic/am-sessions/client-side-sessions.md | 11 | 1 | partial |
+| journeys.md | page | https://docs.pingidentity.com/pingoneaic/journeys/node-designer.md | 10 | 1 | partial |
+| self-service.md | page | https://docs.pingidentity.com/pingoneaic/self-service/password-reset.md | 9 | 1 | partial |
+| integrations.md | page | https://docs.pingidentity.com/pingoneaic/integrations/pingone.md | 7 | 1 | partial |
+| idm-auth.md | page | https://docs.pingidentity.com/pingoneaic/idm-auth/authentication.md | 6 | 1 | partial |
+| am-reference.md | page | https://docs.pingidentity.com/pingoneaic/am-reference/prometheus-metrics.md | 5 | 1 | partial |
+| am-rest.md | page | https://docs.pingidentity.com/pingoneaic/am-rest/preface.md | 4 | 1 | partial |
+| federation.md | page | https://docs.pingidentity.com/pingoneaic/federation/configure-federated-access-for-tenant-administrators.md | 4 | 1 | partial |
+| connectors.md | page | https://docs.pingidentity.com/pingoneaic/connectors/connectors.md | 1 | 1 | full |
+| external-services.md | page | https://docs.pingidentity.com/pingoneaic/external-services/external-rest.md | 1 | 1 | full |
+| home-md.md | page | https://docs.pingidentity.com/pingoneaic/home.md | 1 | 1 | full |
+| idm-security.md | page | https://docs.pingidentity.com/pingoneaic/idm-security/secure-sensitive-data.md | 1 | 1 | full |
+| solution-configure-device-profiling-md.md | page | https://docs.pingidentity.com/pingoneaic/solution-configure-device-profiling.md | 1 | 1 | full |
 
 ## Checksums
 

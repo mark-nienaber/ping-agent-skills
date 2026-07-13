@@ -1,5 +1,8 @@
 # PingGateway
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Pinggateway 2026
 
 - [About Common REST](https://docs.pingidentity.com/pinggateway/2026/reference/AboutCrest.md): Reference for the Common REST API framework: CRUDPAQ verbs, query parameters, pagination, PATCH operations, and HTTP status codes
@@ -71,6 +74,7 @@
 - [Decisions with a claimsSubject and PingAM](https://docs.pingidentity.com/pinggateway/2026/gateway-guide/pep-claims-subject.md): Configure PingGateway to enforce a PingAM policy decision using claimsSubject to identify the subject
 - [DefaultRateThrottlingPolicy](https://docs.pingidentity.com/pinggateway/2026/reference/DefaultRateThrottlingPolicy.md): Configure DefaultRateThrottlingPolicy in PingGateway to provide a fallback throttling rate when a delegating throttling rate policy returns null
 - [Delegate](https://docs.pingidentity.com/pinggateway/2026/reference/Delegate.md): Configure the Delegate object in PingGateway to delegate all method calls to a referenced handler, filter, or object for decoration
+- [Deploy FAPI with Kubernetes and Helm](https://docs.pingidentity.com/pinggateway/2026/fapi/kubernetes.md): Deploy PingGateway FAPI components on Kubernetes using evaluation Helm charts and Docker images, as an alternative to manual configuration
 - [Deploying PingGateway with Docker](https://docs.pingidentity.com/pinggateway/2026/devops-guide/preface.md): Deploy PingGateway in a Docker container using the provided Dockerfile for evaluation and production containerized deployments
 - [Discovery and dynamic registration with PingAM](https://docs.pingidentity.com/pinggateway/2026/gateway-guide/oidc-dynamic.md): Configure PingGateway for OIDC discovery and dynamic client registration with PingAM, using signed JWTs to authenticate with an identity provider
 - [DispatchHandler](https://docs.pingidentity.com/pinggateway/2026/reference/DispatchHandler.md): Configure DispatchHandler in PingGateway to evaluate conditions in order and dispatch requests to the first matching handler

@@ -6,32 +6,36 @@
 - Source: https://docs.pingidentity.com/pingidm/llms.txt
 - Guides discovered: 20
 - Guides captured: 20
+- Guides fully captured: 1
+- Guides partially captured: 19
+- Guides without snapshots: 0
 - Total pages indexed: 351
+- Total snapshot pages captured: 20
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| objects-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/objects-guide/data-rest-proxy.md | 49 |
-| synchronization-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/synchronization-guide/chap-asynchronous-sync.md | 34 |
-| install-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/install-guide/register-servlet-filters.md | 32 |
-| audit-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/audit-guide/access-event-prop.md | 31 |
-| samples-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/samples-guide/sync-asynchronous.md | 30 |
-| rest-api-reference.md | page | https://docs.pingidentity.com/pingidm/8.1/rest-api-reference/endpoints/rest-audit-logs.md | 24 |
-| scripting-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/scripting-guide/script-call.md | 22 |
-| security-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/security-guide/security-adjust-log-levels.md | 22 |
-| setup-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/setup-guide/chap-overview.md | 15 |
-| auth-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/auth-guide/admin-users.md | 14 |
-| schedules-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/schedules-guide/activate-deactivate-tasks.md | 14 |
-| pwd-plugin-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/pwd-plugin-guide/conf-ad-pwd-sync.md | 10 |
-| release-notes.md | page | https://docs.pingidentity.com/pingidm/8.1/release-notes/before-you-install.md | 10 |
-| crest.md | page | https://docs.pingidentity.com/pingidm/8.1/crest/crest-action.md | 9 |
-| monitoring-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/monitoring-guide/api-metrics.md | 9 |
-| workflow-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/workflow-guide/about-workflow-tools.md | 9 |
-| upgrade-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/upgrade-guide/about-upgrades.md | 8 |
-| external-services-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/external-services-guide/external-rest.md | 5 |
-| getting-started.md | page | https://docs.pingidentity.com/pingidm/8.1/getting-started/about-idm.md | 3 |
-| root.md | page | https://docs.pingidentity.com/pingidm/8.1/glossary.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| objects-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/objects-guide/data-rest-proxy.md | 49 | 1 | partial |
+| synchronization-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/synchronization-guide/chap-asynchronous-sync.md | 34 | 1 | partial |
+| install-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/install-guide/register-servlet-filters.md | 32 | 1 | partial |
+| audit-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/audit-guide/access-event-prop.md | 31 | 1 | partial |
+| samples-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/samples-guide/sync-asynchronous.md | 30 | 1 | partial |
+| rest-api-reference.md | page | https://docs.pingidentity.com/pingidm/8.1/rest-api-reference/endpoints/rest-audit-logs.md | 24 | 1 | partial |
+| scripting-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/scripting-guide/script-call.md | 22 | 1 | partial |
+| security-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/security-guide/security-adjust-log-levels.md | 22 | 1 | partial |
+| setup-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/setup-guide/chap-overview.md | 15 | 1 | partial |
+| auth-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/auth-guide/admin-users.md | 14 | 1 | partial |
+| schedules-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/schedules-guide/activate-deactivate-tasks.md | 14 | 1 | partial |
+| pwd-plugin-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/pwd-plugin-guide/conf-ad-pwd-sync.md | 10 | 1 | partial |
+| release-notes.md | page | https://docs.pingidentity.com/pingidm/8.1/release-notes/before-you-install.md | 10 | 1 | partial |
+| crest.md | page | https://docs.pingidentity.com/pingidm/8.1/crest/crest-action.md | 9 | 1 | partial |
+| monitoring-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/monitoring-guide/api-metrics.md | 9 | 1 | partial |
+| workflow-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/workflow-guide/about-workflow-tools.md | 9 | 1 | partial |
+| upgrade-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/upgrade-guide/about-upgrades.md | 8 | 1 | partial |
+| external-services-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/external-services-guide/external-rest.md | 5 | 1 | partial |
+| getting-started.md | page | https://docs.pingidentity.com/pingidm/8.1/getting-started/about-idm.md | 3 | 1 | partial |
+| root.md | page | https://docs.pingidentity.com/pingidm/8.1/glossary.md | 1 | 1 | full |
 
 ## Checksums
 

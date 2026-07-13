@@ -6,18 +6,22 @@
 - Source: https://developer.pingidentity.com/helm/llms.txt
 - Guides discovered: 6
 - Guides captured: 6
+- Guides fully captured: 2
+- Guides partially captured: 4
+- Guides without snapshots: 0
 - Total pages indexed: 24
+- Total snapshot pages captured: 6
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| configs.md | page | https://developer.pingidentity.com/helm/configs/container.md | 14 |
-| examples.md | page | https://developer.pingidentity.com/helm/examples/enhanced-sidecar.md | 4 |
-| getting-started.md | page | https://developer.pingidentity.com/helm/getting-started/feedback.md | 2 |
-| release-notes.md | page | https://developer.pingidentity.com/helm/release-notes/index.md | 2 |
-| helm-charts-landing-page-md.md | page | https://developer.pingidentity.com/helm/helm-charts-landing-page.md | 1 |
-| how-to.md | page | https://developer.pingidentity.com/helm/how-to/index.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| configs.md | page | https://developer.pingidentity.com/helm/configs/container.md | 14 | 1 | partial |
+| examples.md | page | https://developer.pingidentity.com/helm/examples/enhanced-sidecar.md | 4 | 1 | partial |
+| getting-started.md | page | https://developer.pingidentity.com/helm/getting-started/feedback.md | 2 | 1 | partial |
+| release-notes.md | page | https://developer.pingidentity.com/helm/release-notes/index.md | 2 | 1 | partial |
+| helm-charts-landing-page-md.md | page | https://developer.pingidentity.com/helm/helm-charts-landing-page.md | 1 | 1 | full |
+| how-to.md | page | https://developer.pingidentity.com/helm/how-to/index.md | 1 | 1 | full |
 
 ## Checksums
 

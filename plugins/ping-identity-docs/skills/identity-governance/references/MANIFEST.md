@@ -6,17 +6,21 @@
 - Source: https://docs.pingidentity.com/identity-governance/llms.txt
 - Guides discovered: 5
 - Guides captured: 5
+- Guides fully captured: 3
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 70
+- Total snapshot pages captured: 38
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| users-guide.md | assembled | <32 pages from users-guide> | 32 |
-| release-notes.md | assembled | <20 pages from release-notes> | 20 |
-| admin-guide.md | assembled | <8 pages from admin-guide> | 8 |
-| api-guide.md | assembled | <8 pages from api-guide> | 8 |
-| root.md | assembled | <2 pages from root> | 2 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| users-guide.md | assembled | <32 pages from users-guide> | 32 | 15 | partial |
+| release-notes.md | assembled | <20 pages from release-notes> | 20 | 5 | partial |
+| admin-guide.md | assembled | <8 pages from admin-guide> | 8 | 8 | full |
+| api-guide.md | assembled | <8 pages from api-guide> | 8 | 8 | full |
+| root.md | assembled | <2 pages from root> | 2 | 2 | full |
 
 ## Checksums
 

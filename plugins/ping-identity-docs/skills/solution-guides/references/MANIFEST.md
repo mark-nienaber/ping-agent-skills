@@ -6,19 +6,23 @@
 - Source: https://docs.pingidentity.com/solution-guides/llms.txt
 - Guides discovered: 12
 - Guides captured: 7
+- Guides fully captured: 2
+- Guides partially captured: 5
+- Guides without snapshots: 5
 - Total pages indexed: 139
+- Total snapshot pages captured: 98
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| single-sign-on-use-cases.md | assembled | <38 pages from single_sign-on_use_cases> | 38 |
-| data-and-application-security-use-cases.md | assembled | <24 pages from data_and_application_security_use_cases> | 24 |
-| workforce-use-cases.md | assembled | <22 pages from workforce_use_cases> | 22 |
-| customer-use-cases.md | assembled | <16 pages from customer_use_cases> | 16 |
-| best-practice-guides.md | assembled | <14 pages from best_practice_guides> | 14 |
-| multi-factor-authentication-use-cases.md | assembled | <9 pages from multi-factor_authentication_use_cases> | 9 |
-| standards-and-protocols-use-cases.md | assembled | <6 pages from standards_and_protocols_use_cases> | 6 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| single-sign-on-use-cases.md | assembled | <38 pages from single_sign-on_use_cases> | 38 | 20 | partial |
+| data-and-application-security-use-cases.md | assembled | <24 pages from data_and_application_security_use_cases> | 24 | 20 | partial |
+| workforce-use-cases.md | assembled | <22 pages from workforce_use_cases> | 22 | 20 | partial |
+| customer-use-cases.md | assembled | <16 pages from customer_use_cases> | 16 | 16 | full |
+| best-practice-guides.md | assembled | <14 pages from best_practice_guides> | 14 | 14 | full |
+| multi-factor-authentication-use-cases.md | assembled | <9 pages from multi-factor_authentication_use_cases> | 9 | 7 | partial |
+| standards-and-protocols-use-cases.md | assembled | <6 pages from standards_and_protocols_use_cases> | 6 | 1 | partial |
 
 ## Checksums
 

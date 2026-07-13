@@ -6,15 +6,19 @@
 - Source: https://docs.pingidentity.com/pingid-user-guide/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
+- Guides fully captured: 3
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 3
+- Total snapshot pages captured: 3
 
 ## Source URLs
 
-| Snapshot | Source type | Source URL | Pages indexed |
-|---|---|---|---|
-| index-md.md | page | https://docs.pingidentity.com/pingid-user-guide/index.md | 1 |
-| ma-lost-or-stolen-mobile-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md | 1 |
-| ma-where-find-qr-code-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md | 1 |
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| index-md.md | page | https://docs.pingidentity.com/pingid-user-guide/index.md | 1 | 1 | full |
+| ma-lost-or-stolen-mobile-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md | 1 | 1 | full |
+| ma-where-find-qr-code-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md | 1 | 1 | full |
 
 ## Checksums
 

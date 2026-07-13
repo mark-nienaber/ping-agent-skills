@@ -1,6 +1,6 @@
 ---
 name: pingidm
-description: "Use when working with PingIDM: objects guide, synchronization guide, install guide, audit guide, samples guide, rest api reference. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingIDM or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Overview of PingIDM: Reconciling user accounts across distributed data stores an
 - Snapshot version: 8.1
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,21 +39,13 @@ Overview of PingIDM: Reconciling user accounts across distributed data stores an
 | Auth Guide: authentication, pingidm, user | auth-guide | https://docs.pingidentity.com/pingidm/8.1/auth-guide/*.md | references/snapshots/auth-guide.md |
 | Schedules Guide: pingidm, tasks, scanning | schedules-guide | https://docs.pingidentity.com/pingidm/8.1/schedules-guide/*.md | references/snapshots/schedules-guide.md |
 | Pwd Plugin Guide: password, synchronization, active | pwd-plugin-guide | https://docs.pingidentity.com/pingidm/8.1/pwd-plugin-guide/*.md | references/snapshots/pwd-plugin-guide.md |
-| Release Notes: pingidm, release, features | release-notes | https://docs.pingidentity.com/pingidm/8.1/release-notes/*.md | references/snapshots/release-notes.md |
-| Crest: rest, common, http | crest | https://docs.pingidentity.com/pingidm/8.1/crest/*.md | references/snapshots/crest.md |
-| Monitoring Guide: pingidm, metrics, prometheus | monitoring-guide | https://docs.pingidentity.com/pingidm/8.1/monitoring-guide/*.md | references/snapshots/monitoring-guide.md |
-| Workflow Guide: workflow, pingidm, workflows | workflow-guide | https://docs.pingidentity.com/pingidm/8.1/workflow-guide/*.md | references/snapshots/workflow-guide.md |
-| Upgrade Guide: pingidm, upgrade, repository | upgrade-guide | https://docs.pingidentity.com/pingidm/8.1/upgrade-guide/*.md | references/snapshots/upgrade-guide.md |
-| External Services Guide: email, rest, external | external-services-guide | https://docs.pingidentity.com/pingidm/8.1/external-services-guide/*.md | references/snapshots/external-services-guide.md |
-| Getting Started: pingidm, management, software | getting-started | https://docs.pingidentity.com/pingidm/8.1/getting-started/*.md | references/snapshots/getting-started.md |
-| Root: glossary, idm, jwt | root | https://docs.pingidentity.com/pingidm/8.1/*.md | references/snapshots/root.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.

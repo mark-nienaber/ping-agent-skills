@@ -1,6 +1,6 @@
 ---
 name: pingoneaic
-description: "Use when working with PingOne Advanced Identity Cloud: identity governance, release notes, am oauth2, tenants, app management, am authentication. Routes to live Ping docs; snapshots fallback."
+description: "Use when the user explicitly names PingOne Advanced Identity Cloud or its exact docset and needs official, version-specific product documentation. Do not use for generic IAM or product-selection questions. Routes to live Ping docs; dated snapshots are the offline fallback."
 license: MIT
 ---
 
@@ -15,12 +15,13 @@ Home page for PingOne Advanced Identity Cloud documentation, linking to release 
 - Snapshot version: current
 - Snapshot manifest: references/MANIFEST.md
 
-## Fetch strategy
+## Retrieval strategy
 
-1. Read references/llms.txt for page discovery.
-2. Match the user task to page titles, page descriptions, and the routing table below.
-3. Fetch the selected live `.md` URL from Ping documentation.
-4. If live fetch is unavailable, read the closest file under references/snapshots/.
+1. Use the routing table to narrow the task to a guide when possible.
+2. Search `references/llms.txt` for task terms and inspect at most 20 matching lines. Never load the whole index. Prefer `rg -i -n --max-count 20 '<term1>|<term2>' references/llms.txt` when shell access is available.
+3. Fetch only the best matching live `.md` page from Ping documentation.
+4. If that URL moved, fetch the live llms.txt index above and repeat the targeted search.
+5. If live access is unavailable, read only the closest snapshot, check `references/MANIFEST.md`, and disclose its version, sync date, and partial-capture status.
 
 ## Task routing
 
@@ -38,31 +39,13 @@ Home page for PingOne Advanced Identity Cloud documentation, linking to release 
 | Use Cases: identity, advanced, cloud | use-cases | https://docs.pingidentity.com/pingoneaic/use-cases/*.md | references/snapshots/use-cases.md |
 | Am Oidc1: connect, openid, oauth2 | am-oidc1 | https://docs.pingidentity.com/pingoneaic/am-oidc1/*.md | references/snapshots/am-oidc1.md |
 | Identities: identity, advanced, configure | identities | https://docs.pingidentity.com/pingoneaic/identities/*.md | references/snapshots/identities.md |
-| Am Saml2: saml, federation, identities | am-saml2 | https://docs.pingidentity.com/pingoneaic/am-saml2/*.md | references/snapshots/am-saml2.md |
-| Idm Rest Api: rest, operations, managed | idm-rest-api | https://docs.pingidentity.com/pingoneaic/idm-rest-api/*.md | references/snapshots/idm-rest-api.md |
-| Idm Scripting: scripts, script, configuration | idm-scripting | https://docs.pingidentity.com/pingoneaic/idm-scripting/*.md | references/snapshots/idm-scripting.md |
-| Developer Docs: identity, advanced, cloud | developer-docs | https://docs.pingidentity.com/pingoneaic/developer-docs/*.md | references/snapshots/developer-docs.md |
-| Realms: identity, advanced, cloud | realms | https://docs.pingidentity.com/pingoneaic/realms/*.md | references/snapshots/realms.md |
-| Am Authorization: policy, policies, authorization | am-authorization | https://docs.pingidentity.com/pingoneaic/am-authorization/*.md | references/snapshots/am-authorization.md |
-| Getting Started: identity, task, advanced | getting-started | https://docs.pingidentity.com/pingoneaic/getting-started/*.md | references/snapshots/getting-started.md |
-| Product Information: identity, cloud, advanced | product-information | https://docs.pingidentity.com/pingoneaic/product-information/*.md | references/snapshots/product-information.md |
-| End User: identity, advanced, cloud | end-user | https://docs.pingidentity.com/pingoneaic/end-user/*.md | references/snapshots/end-user.md |
-| Idm Schedules: schedules, tasks, configure | idm-schedules | https://docs.pingidentity.com/pingoneaic/idm-schedules/*.md | references/snapshots/idm-schedules.md |
-| Planning: identity, cloud, advanced | planning | https://docs.pingidentity.com/pingoneaic/planning/*.md | references/snapshots/planning.md |
-| Reports: custom, reports, create | reports | https://docs.pingidentity.com/pingoneaic/reports/*.md | references/snapshots/reports.md |
-| Am Sessions: sessions, session, side | am-sessions | https://docs.pingidentity.com/pingoneaic/am-sessions/*.md | references/snapshots/am-sessions.md |
-| Journeys: journey, nodes, authentication | journeys | https://docs.pingidentity.com/pingoneaic/journeys/*.md | references/snapshots/journeys.md |
-| Self Service: identity, advanced, cloud | self-service | https://docs.pingidentity.com/pingoneaic/self-service/*.md | references/snapshots/self-service.md |
-| Integrations: pingone, credentials, identity | integrations | https://docs.pingidentity.com/pingoneaic/integrations/*.md | references/snapshots/integrations.md |
-| Idm Auth: authentication, access, authorization | idm-auth | https://docs.pingidentity.com/pingoneaic/idm-auth/*.md | references/snapshots/idm-auth.md |
-| Am Reference: secret, access, across | am-reference | https://docs.pingidentity.com/pingoneaic/am-reference/*.md | references/snapshots/am-reference.md |
 
 ## Composition
 
-- Use alongside pingidentity/agent-plugins umbrella skills when the task needs product routing before deep documentation lookup.
+- Use after pingidentity/agent-plugins has established the product when the task needs deep documentation lookup.
 - For cloud workflows involving PingOne, PingOne AIC, or DaVinci, route at the platform level first, then use this docset skill for exact pages.
 - For SDK or API implementation work, combine this skill with the relevant developer or SDK docset skill.
 
 ## Snapshots
 
-See references/MANIFEST.md for sync date, source URLs, source type, and checksums.
+Treat snapshots as a dated offline fallback, not the source of truth. See references/MANIFEST.md for sync date, source URLs, capture counts, and checksums.
