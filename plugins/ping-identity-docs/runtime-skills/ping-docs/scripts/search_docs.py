@@ -721,8 +721,9 @@ def search(
     if answer_context:
         response["answer_context"] = {
             "instruction": (
-                "Use only snapshot_excerpt for offline page content; do not open or search "
-                "local snapshot files. A null excerpt means the exact page is absent or unavailable."
+                "Fetch each selected live_markdown_url first. Use snapshot_excerpt only when that "
+                "live page cannot be reached; do not open or search local snapshot files. A null "
+                "excerpt means the exact page is absent or unavailable offline."
             ),
             "max_results": ANSWER_CONTEXT_MAX_RESULTS,
             "max_excerpt_lines": SNAPSHOT_EXCERPT_MAX_LINES,

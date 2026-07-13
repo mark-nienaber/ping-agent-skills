@@ -7,7 +7,7 @@
   "timeout_seconds": 300,
   "require_isolation_metadata": true,
   "require_filesystem_sandbox_metadata": true,
-  "prompt_suffix": "\n\nEvaluation requirement: Give a practical answer suitable for a technical consultant. Cite the exact Ping documentation pages you relied on as full URLs. If essential product or version information is missing, ask a focused clarifying question before giving version-specific commands or configuration.",
+  "prompt_suffix": "\n\nEvaluation requirement: Give a practical answer suitable for a technical consultant. Include full source URLs for version-sensitive or implementation-specific claims so the customer can verify them. If essential product or version information is missing, ask a focused clarifying question before giving version-specific commands or configuration.",
   "conditions": [
     {
       "id": "A",

@@ -9,9 +9,11 @@ There is no MCP condition. The runner does not call a model API itself; it invok
 
 ## What is measured
 
-The suite contains 15 natural TC prompts spanning detailed configuration, API workflows, troubleshooting, operations, an underspecified request, and a non-Ping `agent` request. The prompt text does not name a skill or documentation guide. Machine-readable answer keys contain gold source groups, lightweight fact checks, and expected clarification behavior; answer keys are never copied into an agent workspace.
+The suite contains 16 natural TC prompts spanning detailed configuration, API workflows, troubleshooting, operations, an expert end-to-end PingAuthorize/Kong implementation, an underspecified request, and a non-Ping `agent` request. Prompts state realistic context, constraints, and deliverables; they do not name a skill, guide, answer-key page, or retrieval path. Machine-readable answer keys contain gold source groups, lightweight fact checks, and expected clarification behavior; answer keys are never copied into an agent workspace.
 
-Default execution is three repetitions per case and condition: 90 responses total. Job order is deterministically shuffled to reduce time/order bias. Run at concurrency 1 when the provider applies shared rate limits or when latency is a primary outcome.
+Prompt text must be identical in A and B. A case may request source URLs for verifiability, but it must not tell the agent which source, skill, guide, or local file to use. Product and version details should appear only when they are facts a consultant would reasonably receive; discovery itself should be part of the task when current-version selection is being tested.
+
+Default execution is three repetitions per case and condition: 96 responses total. Job order is deterministically shuffled to reduce time/order bias. Run at concurrency 1 when the provider applies shared rate limits or when latency is a primary outcome.
 
 Deterministic reporting includes:
 

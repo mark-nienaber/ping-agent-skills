@@ -1,8 +1,15 @@
 # Ping Agent Skills
 
-An efficient deep-documentation layer for Ping Identity Agent Skills. The default plugin exposes one `ping-docs` skill, which searches the local documentation indexes deterministically and returns only the best matching official live Markdown pages. Dated snapshots remain available when live documentation cannot be reached.
+An efficient, live-first deep-documentation layer for Ping Identity Agent Skills. The default plugin exposes one `ping-docs` skill, which turns a natural technical task into a small set of exact official Ping Markdown URLs. It uses compact local `llms.txt` indexes as routing metadata, fetches the selected live pages as the source of truth, and uses dated exact-page snapshots only when live access fails or the agent is running offline.
 
 Use [`pingidentity/agent-plugins`](https://github.com/pingidentity/agent-plugins) for intent, platform, and product routing. Use this repository after the product is known and exact API, policy, version, SDK, troubleshooting, or citation detail is required.
+
+This repository is not a second documentation site and does not ask the model to read a local copy of every Ping guide. The checked-in files have two bounded purposes:
+
+- `llms.txt` indexes let code rank pages without adding all document descriptions to the model context.
+- Markdown snapshots provide a dated, manifest-checked fallback for restricted or disconnected environments.
+
+When network access exists, answer content comes from the selected live Ping pages. A snapshot does not silently override, update, or masquerade as live documentation.
 
 ## Coverage
 
@@ -59,11 +66,29 @@ Point the tool at `plugins/ping-identity-docs/runtime-skills/` for the consolida
 
 ## How `ping-docs` Resolves Docs
 
-1. The official umbrella skills establish the Ping product and intent.
-2. `ping-docs` runs `scripts/search_docs.py`, which scans the cached indexes in code rather than loading them into model context.
-3. Answer-context mode returns at most three ranked pages, exact live Markdown URLs, exact-page snapshot status, and bounded excerpts for pages actually captured.
-4. The agent uses the returned excerpt directly. It fetches a selected live page only when the exact page is absent from the snapshot or current behavior must be verified.
-5. Unrelated queries and low-confidence searches abstain instead of selecting an arbitrary Ping docset.
+1. The user describes the technical outcome, constraints, symptoms, and deliverables in ordinary language.
+2. The official umbrella skills establish the Ping product and intent.
+3. `ping-docs` runs `scripts/search_docs.py`, which scans cached `llms.txt` indexes in code. These indexes are route maps, not the answer corpus, and are not loaded wholesale into model context.
+4. Answer-context mode returns at most three ranked pages, their exact live Markdown URLs, and bounded exact-page snapshot excerpts held in reserve.
+5. The agent selects at most two relevant results and fetches the live Markdown pages first.
+6. If a selected live URL has moved, the agent checks the current live index or performs one bounded retry. If live access is unavailable, it can use only the exact-page snapshot returned for that result and must disclose the snapshot version and sync date for changeable behavior.
+7. Unrelated and low-confidence queries abstain instead of selecting an arbitrary Ping docset.
+
+```mermaid
+flowchart TD
+    Q["Natural technical request"] --> U["Umbrella skill: product and intent"]
+    U --> R["ping-docs: rank cached llms.txt routing metadata"]
+    R --> S["Select at most two exact live Markdown URLs"]
+    S --> L{"Live page fetch succeeds?"}
+    L -- Yes --> A["Answer from live Ping content with page citations"]
+    L -- "No: moved URL" --> I["Check current live index / one bounded retry"]
+    I --> L2{"Live retry succeeds?"}
+    L2 -- Yes --> A
+    L -- "No: network unavailable" --> F{"Exact-page snapshot is manifest-listed?"}
+    L2 -- No --> F
+    F -- Yes --> O["Answer from dated fallback; disclose version and sync date"]
+    F -- No --> G["State the evidence gap or ask a focused clarification"]
+```
 
 Try the retriever directly:
 
@@ -73,7 +98,7 @@ scripts/search-docs.sh --answer-context --product pingam \
 scripts/search-docs.sh --json --answer-context "PingAuthorize policy response redaction"
 ```
 
-The search command performs no network requests. Live Ping Markdown remains the source of truth; snapshots are an explicit offline fallback.
+The search command itself performs no network requests: it resolves the query to live URLs and prepares bounded fallback excerpts. The agent then attempts the live URLs before it uses any returned snapshot content.
 
 ## How Activation Works
 
@@ -86,9 +111,9 @@ description: Find exact, detailed, version-specific Ping Identity documentation 
 ---
 ```
 
-The `description` field is the activation trigger. Product-specific prompts produce better retrieval:
+The `description` field is the activation trigger. Specific technical context produces better retrieval without telling the model which skill or document to use:
 
-- Good: "Using PingAM docs, configure OAuth2 client authentication."
+- Good: "Our PingAM OAuth client must authenticate with `private_key_jwt`. Give me the configuration, required key material, and a verification sequence."
 - Weaker: "Set up auth."
 
 The 56 generated docset skills remain available for deliberate selective installs, but they are no longer the default plugin surface. Their descriptions require an explicitly named product, and their bodies instruct the agent to search at most 20 index matches rather than read an entire `llms.txt`.
@@ -116,15 +141,15 @@ Use the broader scope when a question crosses layers, for example:
 
 ## Example Prompts
 
-- "Using PingAM docs, build an authentication tree that requires WebAuthn after a risk score is high."
-- "From the PingOne API reference, show the request body for creating a worker application and required scopes."
-- "Using the Ping orchestration SDK docs, design a custom React login that renders AIC journey callbacks without the hosted UI."
+- "We need a PingAM authentication tree that requires WebAuthn only when the external risk score is high. Include the node sequence, shared-state handling, and failure paths."
+- "Create a least-privilege PingOne worker application that can list users in one environment. Include the console setup, token request, required scopes, and a verification call."
+- "Design a custom React login for PingOne AIC that renders journey callbacks without the hosted UI, preserves journey state, and handles recoverable errors."
 - "Create a DaVinci-backed mobile sign-in flow with OIDC token handling, MFA enrollment, and custom app claims."
-- "Use PingGateway docs to design a route that protects an MCP server with OAuth2 bearer tokens."
+- "Design a PingGateway route that protects an MCP server with OAuth2 bearer tokens, validates audience and scopes, and returns safe errors."
 - "In PingOne AIC, what is the ESV promotion flow between staging and production tenants?"
-- "Using PingDirectory developer docs, find the SCIM 2.0 endpoint pattern for user lookup by external ID."
-- "Compare PingOne Verify and PingOne Protect docs for a risk-based identity proofing flow."
-- "Show the PingFederate SDK docs for a custom authentication adapter."
+- "Our PingDirectory-backed SCIM service must look up a user by `externalId`. Give the endpoint pattern, encoding rules, empty-result behavior, and a test request."
+- "Design a risk-based identity-proofing flow using PingOne Verify and PingOne Protect, including the decision boundary and fallback path."
+- "We need a PingFederate IdP adapter that validates a proprietary HTTP header and returns `employeeId` and `assuranceLevel`. Outline the extension points, configuration fields, packaging, and deployment checks."
 
 ## Skill Inventory
 
@@ -167,6 +192,40 @@ scripts/sync-all.sh
 ```
 
 Every successful docset sync now regenerates its `SKILL.md`, so route metadata cannot silently drift from the refreshed index.
+
+### Scheduled online refresh for offline use
+
+The [`Weekly Docs Sync`](.github/workflows/weekly-sync.yml) GitHub Actions workflow runs every Monday at 03:17 UTC and can also be started manually with `workflow_dispatch`. It does not publish upstream changes straight to `main`. It:
+
+1. runs `scripts/sync-all.sh --batch-size 1` against every enabled live Ping `llms.txt` endpoint;
+2. detects the configured/current document version and refreshes the local index;
+3. captures each guide from `single-page.md` where available, otherwise assembles at most 20 indexed pages or records a one-page fallback;
+4. writes `MANIFEST.md` with source URLs, version, sync date, full/partial capture counts, and checksums;
+5. regenerates the optional docset routing skill and validates the refreshed repository; and
+6. opens `automation/weekly-docs-sync` as a reviewable pull request.
+
+```mermaid
+flowchart LR
+    T["Weekly schedule or manual dispatch"] --> X["Fetch live llms.txt for 56 enabled docsets"]
+    X --> V["Detect version and page clusters"]
+    V --> C["Capture bounded Markdown snapshots"]
+    C --> M["Write source, date, coverage, and checksum manifest"]
+    M --> R["Regenerate routes and validate"]
+    R --> P["Open reviewable sync pull request"]
+    P --> D["Merge and distribute an offline-capable copy"]
+```
+
+To prepare a disconnected environment, run the sync while connected, review and merge the generated changes, then copy the consolidated skill and its data into the target agent:
+
+```bash
+scripts/sync-all.sh --batch-size 1
+scripts/validate.sh --skip-url-check
+scripts/setup-claude.sh --copy              # copies ping-docs plus references/docsets
+# or
+scripts/setup-codex.sh --copy
+```
+
+The copied `ping-docs/references/docsets/` tree is self-contained. The retriever discovers it automatically; a separately managed data bundle can instead be selected with `PING_DOCS_DATA_ROOT=/path/to/docsets`. With no network tool, the same query routing runs locally and only manifest-listed exact-page excerpts are eligible as fallback evidence. A missing exact page remains an explicit evidence gap.
 
 Regenerate a `SKILL.md` from cached `llms.txt`:
 
@@ -230,7 +289,21 @@ The report includes validation output, route diagrams, selected live URLs, and f
 - A: the six official Ping umbrella Agent Skills.
 - B: the same six skills plus `ping-docs`.
 
-There is no MCP condition. The suite contains 15 natural TC prompts, randomized repetitions, isolated skill roots, exact staged-skill and filesystem-sandbox protocol checks, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token/cost capture with coverage rates, provider built-in skill inventory comparison, ambiguity and out-of-domain controls, and a blinded SME rubric. A clean-room Claude Code adapter is included for reproducible runs without user skills or MCP servers. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
+There is no MCP condition. The suite contains 16 natural TC prompts, randomized repetitions, isolated skill roots, exact staged-skill and filesystem-sandbox protocol checks, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token/cost capture with coverage rates, provider built-in skill inventory comparison, ambiguity and out-of-domain controls, and a blinded SME rubric. A clean-room Claude Code adapter is included for reproducible runs without user skills or MCP servers. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
+
+### Prompt design rules
+
+Pilot prompts describe a credible consultant task, not the retrieval route. They include the product context that a customer would know, the desired outcome, relevant constraints, and required deliverables. They do not name `ping-docs`, identify a guide or answer-key page, supply a documentation URL, or tell the agent to compare skills. The same rendered prompt is byte-for-byte identical in conditions A and B; titles, tags, gold sources, fact checks, and condition details are not sent to the agent.
+
+| Avoid | Use instead |
+|---|---|
+| "Use the PingAuthorize docs to explain policy import." | "We need to move a tested PingAuthorize policy from integration to production. Give the supported import and deployment sequence, including environment-specific values and rollback checks." |
+| "Search this guide for the Kong headers." | "Tell the Kong team exactly which trusted request data PingAuthorize needs, how each value reaches policy evaluation, and how to prevent client-supplied header spoofing." |
+| "What does this documentation page say?" | "A replica is several hours behind but still serves reads. Give a safe diagnostic sequence, decision points, and recovery precautions." |
+
+Source URLs may be requested as evidence because consultants need verifiable, version-sensitive instructions. That is an answer-quality requirement, not a hint about which document, skill, or route should produce the answer. The complete prompts are in [`evals/cases.json`](evals/cases.json); condition-independent evaluation requirements are in [`evals/pilot.json`](evals/pilot.json).
+
+[`reports/pilot-efficacy-report.html`](reports/pilot-efficacy-report.html) records the completed 15-case baseline run. The added expert PingAuthorize/Kong case and the live-first runtime instruction require a new 16-case run before results can be attributed to the current implementation.
 
 ## Layout
 
@@ -252,6 +325,7 @@ plugins/
         snapshots/*.md
 reports/
   routing-proof.html
+  pilot-efficacy-report.html
 evals/
   adapters/claude_code.py
   pilot.json
@@ -276,7 +350,7 @@ scripts/
 
 ## Snapshot Policy
 
-Snapshots are committed for offline safety. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembles at most 20 guide pages, and finally tries the first official Markdown page. Manifests record pages indexed, pages actually captured, full/partial coverage, source type, sync date, and checksums. `ping-docs` exposes a snapshot only when the exact selected page is present; a partial guide is never presented as an offline copy of a page it did not capture. Retained files omitted from the current manifest are also ignored because their current age and provenance are unknown.
+Snapshots are committed for offline safety, never as the preferred online answer source. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembles at most 20 guide pages, and finally tries the first official Markdown page. Manifests record pages indexed, pages actually captured, full/partial coverage, source type, sync date, and checksums. At query time the agent attempts the selected live page first. `ping-docs` exposes a snapshot only after live access fails and only when the exact selected page is present; a partial guide is never presented as an offline copy of a page it did not capture. Retained files omitted from the current manifest are also ignored because their current age and provenance are unknown.
 
 ## Troubleshooting
 

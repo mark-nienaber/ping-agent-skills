@@ -262,6 +262,7 @@ class SearchDocsTests(unittest.TestCase):
             response = json.loads(completed.stdout)
 
             self.assertEqual(3, len(response["results"]))
+            self.assertIn("Fetch each selected live_markdown_url first", response["answer_context"]["instruction"])
             self.assertIn("do not open or search local snapshot files", response["answer_context"]["instruction"])
             alpha = next(
                 result for result in response["results"] if result["title"].endswith("alpha")
