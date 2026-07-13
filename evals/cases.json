@@ -335,6 +335,88 @@
       }
     },
     {
+      "id": "paz-kong-workload-governance",
+      "title": "Build an importable PingAuthorize workload-governance policy pack for Kong",
+      "case_type": "end_to_end_configuration",
+      "product": "PingAuthorize (current version to discover)",
+      "difficulty": "expert",
+      "prompt": "We are starting with a newly installed PingAuthorize Server and Policy Editor. First determine the current supported product and Policy Editor version from official Ping documentation, state the version and evidence, and use that same version consistently for all configuration, policy formats, APIs, and instructions. Produce a complete implementation pack for a Kong Gateway integration: (1) an idempotent shell script that configures PingAuthorize and the Policy Editor after installation, including the supported Kong sideband integration, token validation, Trust Framework inputs, secrets, and any policy-request mappings that are actually applicable; (2) the policy configuration as JSON and a supported path that turns it into a genuinely importable Policy Editor artifact—if a hand-authored generic JSON document is not itself an importable snapshot, say so and have the script use supported Policy Editor APIs and export a .snapshot rather than mislabelling it; (3) current-version Policy Editor GUI and API instructions for importing the policies, plus the distinct production deployment-package step; and (4) customer-facing instructions for Kong that specify the transport/plugin configuration and the exact headers, token claims, certificate data, data types, allowed values, and trust/spoofing controls needed for evaluation. Keep secrets out of source and use explicit placeholders for environment-specific values.\n\nThe policy set must be deny-by-default and implement these controls with clear precedence: UC-01 certificate-bound workload identity—Keyfactor-issued mTLS certificate plus OAuth client identity; permit only when the certificate is present, trusted, in-date, not revoked, and cryptographically bound to the token, and deny missing, invalid, revoked, or mismatched credentials. UC-02 business-unit isolation—NEM, WEM, and Gas services can access only resources in the same business unit unless an explicit cross-BU allow rule applies. UC-03 risk-aware service restriction—SIEM serviceRiskScore, hostCompromised, and anomalyScore remove write access or deny access at documented thresholds. UC-04 high-impact dual control—deployment, configuration, administrative, and OT-control operations require an approved privileged workload, an approved change window, and acceptable risk. UC-05 cross-zone governance—sourceZone, destinationZone, and resourceZone must match an explicit zone-to-zone allow matrix. UC-06 break-glass lockdown—when incidentState is active, only named emergency and incident-response services retain access; this global gate has the highest precedence without bypassing certificate/token validity.\n\nInclude the policy hierarchy and combining algorithms, Trust Framework attribute/resolver design, example environment data for identities, BU mappings, cross-BU exceptions, risk thresholds, change windows, zone matrix, and emergency identities, plus a positive/negative test matrix covering all six use cases. Distinguish values that PingAuthorize obtains natively from the Kong ping-auth sideband request (access token, client certificate, request headers, method/path) from values Kong or a trusted PIP must derive. In particular, do not claim that certificate SAN, revocation status, or token-to-certificate thumbprint matching is native unless the cited current-version interface actually supplies it. Cite the exact Ping documentation pages used as full URLs.",
+      "answer_key": {
+        "expected_behavior": "answer",
+        "citation_policy": "gold",
+        "gold_source_groups": [
+          {
+            "id": "snapshot-import-export",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_import_export_policies.md",
+              "https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/snapshot-service/import-snapshot.md",
+              "https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/snapshot-service/export-snapshot.md"
+            ]
+          },
+          {
+            "id": "kong-sideband-integration",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_integration.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_prepare_paz.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_setup.md"
+            ]
+          },
+          {
+            "id": "gateway-policy-inputs",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_policy_request_attrs.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_access_token_validators.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_about_sideband_api.md"
+            ]
+          },
+          {
+            "id": "header-mapping-scope",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_policy_request_header_mappings.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_config_pe_request_header_mapping.md"
+            ]
+          },
+          {
+            "id": "policy-composition",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_rules_combine_algs.md"
+            ]
+          },
+          {
+            "id": "production-deployment",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_managing_deployment_packages.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_version_control.md"
+            ]
+          },
+          {
+            "id": "policy-editor-automation",
+            "urls": [
+              "https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/policysets/create-policyset.md",
+              "https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/policies/create-policy.md",
+              "https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/rules/create-rule.md"
+            ]
+          }
+        ],
+        "fact_checks": [
+          {"id": "discovers-current-version", "patterns": ["current|latest", "version|release", "official|documentation|docs"]},
+          {"id": "snapshot-versus-package", "patterns": ["snapshot", "deployment package"]},
+          {"id": "supported-import-path", "patterns": ["Branch Manager|Version Control|/snapshot/", "Import Snapshot|import"]},
+          {"id": "kong-plugins", "patterns": ["ping-auth", "mtls-auth|mTLS"]},
+          {"id": "sideband-authentication", "patterns": ["CLIENT-TOKEN|secret_header_name|Shared Secret Header", "vault|secret store|referenceable secret"]},
+          {"id": "native-request-inputs", "patterns": ["HttpRequest.AccessToken", "HttpRequest.ClientCertificate", "HttpRequest.RequestHeaders"]},
+          {"id": "certificate-token-binding", "patterns": ["cnf|x5t#S256|thumbprint", "match|bind|compare"]},
+          {"id": "certificate-enrichment-limit", "patterns": ["SAN", "revocation|OCSP|CRL", "Kong|Keyfactor|PIP|trusted"]},
+          {"id": "header-spoofing-boundary", "patterns": ["strip|overwrite|spoof|untrusted", "mTLS|TLS|trusted"]},
+          {"id": "lockdown-precedence", "patterns": ["incidentState|incident state", "emergency|incident-response|incident response", "precedence|first applicable|deny override"]},
+          {"id": "business-unit-isolation", "patterns": ["businessUnit|business unit", "NEM|WEM|Gas", "cross-BU|exception"]},
+          {"id": "risk-and-change-window", "patterns": ["serviceRiskScore|anomalyScore|hostCompromised", "change window", "write|POST|PUT|PATCH|DELETE"]},
+          {"id": "zone-allow-matrix", "patterns": ["sourceZone", "destinationZone|resourceZone", "allow matrix|allowlist|allowed"]},
+          {"id": "positive-negative-testing", "patterns": ["positive|permit|valid", "negative|deny|missing|revoked|mismatch"]}
+        ]
+      }
+    },
+    {
       "id": "ambiguous-token-rollover",
       "title": "Ambiguous product and version",
       "case_type": "ambiguous",

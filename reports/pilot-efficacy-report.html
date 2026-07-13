@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Ping Agent Skills A/B Pilot — Efficacy Results</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5c6874;
+      --line: #ccd3da;
+      --line-dark: #8e9aa5;
+      --surface: #f4f6f8;
+      --surface-blue: #edf4f8;
+      --blue: #12618a;
+      --blue-dark: #0b405e;
+      --green: #176b4d;
+      --amber: #865c10;
+      --red: #94443b;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    a { color: var(--blue-dark); }
+
+    .page {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 42px 0 32px;
+      border-bottom: 3px solid var(--blue-dark);
+    }
+
+    .kicker {
+      margin: 0 0 8px;
+      color: var(--blue-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: clamp(32px, 4.2vw, 52px);
+      font-weight: 650;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .subtitle {
+      max-width: 860px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+
+    .run-meta {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin: 28px 0 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .run-meta div {
+      min-height: 74px;
+      padding: 12px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .run-meta dt {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .run-meta dd {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 650;
+      overflow-wrap: anywhere;
+    }
+
+    main { padding-bottom: 64px; }
+
+    section {
+      padding: 44px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .section-intro {
+      max-width: 900px;
+      margin-bottom: 24px;
+      color: var(--muted);
+    }
+
+    .summary {
+      padding: 22px 24px;
+      border-left: 4px solid var(--blue);
+      background: var(--surface-blue);
+    }
+
+    .summary h2 { font-size: 21px; }
+    .summary p:last-child { margin-bottom: 0; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 28px;
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line);
+    }
+
+    .summary-metric {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .summary-metric .value {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--blue-dark);
+      font-size: 27px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-metric .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-top: 1px solid var(--line-dark);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface);
+      color: #35424e;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:hover { background: #fafbfc; }
+
+    td.numeric, th.numeric { text-align: right; white-space: nowrap; }
+    td.better { color: var(--green); font-weight: 700; }
+    td.mixed { color: var(--amber); font-weight: 700; }
+    td.worse { color: var(--red); font-weight: 700; }
+
+    .scenario-name {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      border: 1px solid var(--line-dark);
+      border-radius: 50%;
+      font-weight: 700;
+    }
+
+    .definition-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .definition-list li { margin: 4px 0; }
+
+    .metric-note {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .bar-comparison {
+      display: grid;
+      grid-template-columns: 180px minmax(240px, 1fr) 80px;
+      gap: 10px 14px;
+      align-items: center;
+      max-width: 820px;
+      margin: 28px 0;
+    }
+
+    .bar-label { font-weight: 650; }
+
+    .bar-track {
+      height: 18px;
+      background: #e4e8eb;
+    }
+
+    .bar {
+      height: 100%;
+      background: #6d7d89;
+    }
+
+    .bar.b { background: var(--blue); }
+    .bar-value { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+    .callouts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .callout {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .assessment {
+      display: inline-block;
+      min-width: 80px;
+      padding: 2px 6px;
+      border: 1px solid currentColor;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .05em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .assessment.strong { color: var(--green); }
+    .assessment.limited { color: var(--red); }
+    .assessment.mixed { color: var(--amber); }
+    .assessment.unknown { color: var(--muted); }
+
+    .formula {
+      padding: 10px 12px;
+      background: var(--surface);
+      color: #384651;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .notes {
+      margin: 18px 0 0;
+      padding-left: 22px;
+    }
+
+    .notes li { margin: 8px 0; }
+
+    .claim-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      border-top: 1px solid var(--line-dark);
+    }
+
+    .claim-grid > div {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .claim-grid > div:nth-child(odd) {
+      background: var(--surface);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+    }
+
+    @media (max-width: 860px) {
+      .run-meta { grid-template-columns: repeat(3, 1fr); }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .callouts { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(var(--max), calc(100% - 28px)); }
+      header { padding-top: 28px; }
+      .run-meta { grid-template-columns: repeat(2, 1fr); }
+      .bar-comparison { grid-template-columns: 1fr 60px; }
+      .bar-label { grid-column: 1 / 3; }
+      .claim-grid { grid-template-columns: 1fr; }
+      .claim-grid > div:nth-child(odd) { border-bottom: 0; }
+      section { padding: 34px 0; }
+      th, td { padding: 10px; }
+    }
+
+    @media print {
+      body { font-size: 9.5pt; color: #000; }
+      .page { width: 100%; }
+      header { padding-top: 0; }
+      section { padding: 26pt 0; break-inside: auto; }
+      h1 { font-size: 26pt; }
+      h2 { font-size: 17pt; }
+      .summary, .summary-metric, th, .formula { print-color-adjust: exact; }
+      .table-wrap { overflow: visible; }
+      table { font-size: 8.5pt; }
+      tr, .callout, .summary { break-inside: avoid; }
+      footer { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="kicker">Ping Identity · Agent Skills evaluation</p>
+      <h1>A/B Pilot Efficacy Results</h1>
+      <p class="subtitle">Comparison of the six umbrella Agent Skills alone against the identical skills plus one consolidated deep-documentation retrieval layer.</p>
+      <span class="status">Deterministic scoring complete · SME review pending</span>
+
+      <dl class="run-meta">
+        <div><dt>Run ID</dt><dd>pilot-sonnet46-20260713-j4</dd></div>
+        <div><dt>Model</dt><dd>Claude Sonnet 4.6</dd></div>
+        <div><dt>Cases</dt><dd>15</dd></div>
+        <div><dt>Attempts</dt><dd>90 total</dd></div>
+        <div><dt>Per condition</dt><dd>45</dd></div>
+        <div><dt>Run date</dt><dd>13 July 2026</dd></div>
+      </dl>
+    </header>
+
+    <main>
+      <section id="summary">
+        <div class="summary">
+          <h2>Summary conclusion</h2>
+          <p><strong>Scenario B demonstrated higher operational efficacy under the fixed test conditions.</strong> It completed 41 of 45 attempts versus 32 of 45 for Scenario A, reduced median latency from 246.1 seconds to 96.6 seconds, and used approximately half the reported tokens, tool calls, and cost per metadata-bearing attempt.</p>
+          <p>The pilot does <strong>not</strong> yet establish that Scenario B is more technically correct. Its answer-text fact heuristic improved, but no subject-matter expert has scored correctness, completeness, safety, or actionability. Citation results were mixed.</p>
+        </div>
+
+        <div class="summary-grid" aria-label="Headline efficacy metrics">
+          <div class="summary-metric"><span class="value">+20.0 pp</span><span class="label">execution success</span></div>
+          <div class="summary-metric"><span class="value">−60.7%</span><span class="label">median latency</span></div>
+          <div class="summary-metric"><span class="value">−51.2%</span><span class="label">mean reported tokens</span></div>
+          <div class="summary-metric"><span class="value">−49.2%</span><span class="label">mean reported cost</span></div>
+        </div>
+      </section>
+
+      <section id="conditions">
+        <h2>Test conditions</h2>
+        <p class="section-intro">The only intended difference was availability of the consolidated deep-documentation layer.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Condition</th><th>Capabilities</th><th>Documentation path</th><th>MCP</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="scenario-name">A</span><strong>Umbrella skills</strong></td>
+                <td>Six official Ping umbrella Agent Skills</td>
+                <td>Live web discovery initiated from the umbrella skills</td>
+                <td>None</td>
+              </tr>
+              <tr>
+                <td><span class="scenario-name">B</span><strong>Umbrella + deep docs</strong></td>
+                <td>The same six skills plus one consolidated deep-doc skill</td>
+                <td>Direct product/docset routing; live-first with bounded local fallback</td>
+                <td>None</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="notes">
+          <li>Same prompts, three repetitions, randomised order, pinned model, allowed tools, isolation controls, and time limits.</li>
+          <li>Adapter timeout: 285 seconds. Outer harness timeout: 300 seconds.</li>
+          <li>Four concurrent workers. Provider-bundled skills disabled.</li>
+        </ul>
+      </section>
+
+      <section id="primary-results">
+        <h2>Primary results</h2>
+        <p class="section-intro">Efficiency means are calculated only where the provider returned numeric metadata. Coverage was 32 of 45 records for A and 41 of 45 for B because failed executions did not emit final telemetry.</p>
+
+        <div class="bar-comparison" aria-label="Execution success by condition">
+          <div class="bar-label">A · execution success</div><div class="bar-track"><div class="bar" style="width:71.1%"></div></div><div class="bar-value">71.1%</div>
+          <div class="bar-label">B · execution success</div><div class="bar-track"><div class="bar b" style="width:91.1%"></div></div><div class="bar-value">91.1%</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Metric</th><th class="numeric">A</th><th class="numeric">B</th><th class="numeric">B − A</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Execution success</strong><span class="metric-note">completed under run protocol</span></td><td class="numeric">71.1%<br>32 / 45</td><td class="numeric better">91.1%<br>41 / 45</td><td class="numeric better">+20.0 pp</td><td>B produced nine additional completed responses.</td></tr>
+              <tr><td><strong>Failed attempts</strong><span class="metric-note">timeouts or process error</span></td><td class="numeric">13</td><td class="numeric better">4</td><td class="numeric better">−9</td><td>69.2% fewer failures in B.</td></tr>
+              <tr><td><strong>Median latency</strong><span class="metric-note">all attempts</span></td><td class="numeric">246.1 s</td><td class="numeric better">96.6 s</td><td class="numeric better">−149.5 s</td><td>B reduced median elapsed time by 60.7%.</td></tr>
+              <tr><td><strong>P95 latency</strong></td><td class="numeric">285.2 s</td><td class="numeric">286.0 s</td><td class="numeric mixed">+0.8 s</td><td>No improvement at the tail because both conditions had timeout-bound attempts.</td></tr>
+              <tr><td><strong>Mean tool calls</strong><span class="metric-note">metadata-bearing attempts</span></td><td class="numeric">15.78</td><td class="numeric better">7.51</td><td class="numeric better">−8.27</td><td>52.4% fewer tool calls in B.</td></tr>
+              <tr><td><strong>Mean total tokens</strong><span class="metric-note">metadata-bearing attempts</span></td><td class="numeric">270,354</td><td class="numeric better">131,954</td><td class="numeric better">−138,400</td><td>51.2% lower reported token use in B.</td></tr>
+              <tr><td><strong>Mean cost</strong><span class="metric-note">metadata-bearing attempts</span></td><td class="numeric">$0.417</td><td class="numeric better">$0.212</td><td class="numeric better">−$0.205</td><td>49.2% lower reported cost in B.</td></tr>
+              <tr><td><strong>Total reported cost</strong><span class="metric-note">failed attempts excluded when telemetry missing</span></td><td class="numeric">$13.359</td><td class="numeric better">$8.699</td><td class="numeric better">−$4.660</td><td>Not the full run cost; timeout costs were not returned.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="answer-efficacy">
+        <h2>Answer and citation efficacy</h2>
+        <p class="section-intro">These are deterministic scoring signals. They help locate likely improvements but do not replace expert review of the answer content.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Metric</th><th class="numeric">A</th><th class="numeric">B</th><th class="numeric">B − A</th><th>Assessment</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Fact-coverage heuristic</strong><span class="metric-note">expected answer terms detected</span></td><td class="numeric">63.9%</td><td class="numeric better">84.0%</td><td class="numeric better">+20.1 pp</td><td>Supports a provisional coverage improvement; does not prove correctness.</td></tr>
+              <tr><td><strong>Gold source-group recall</strong><span class="metric-note">expected documentation topics cited</span></td><td class="numeric">32.5%</td><td class="numeric better">39.3%</td><td class="numeric better">+6.8 pp</td><td>B cited a broader share of expected source groups.</td></tr>
+              <tr><td><strong>Gold citation precision</strong><span class="metric-note">diagnostic only</span></td><td class="numeric">20.0%</td><td class="numeric better">31.5%</td><td class="numeric better">+11.5 pp</td><td>A larger share of B citations matched the predefined gold pages.</td></tr>
+              <tr><td><strong>Strict citation-policy pass</strong><span class="metric-note">complete per-case citation requirement</span></td><td class="numeric better">28.6%</td><td class="numeric worse">23.8%</td><td class="numeric worse">−4.8 pp</td><td>B did not improve complete citation compliance.</td></tr>
+              <tr><td><strong>SME correctness</strong></td><td class="numeric">Not scored</td><td class="numeric">Not scored</td><td class="numeric">n/a</td><td>No comparative correctness claim is currently supported.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callouts">
+          <div class="callout">
+            <h3>Why citation results are mixed</h3>
+            <p>A response can cite more relevant source groups while still failing the strict policy because it omitted one required group, used a valid alternative page not represented in the key, or did not provide a full URL.</p>
+          </div>
+          <div class="callout">
+            <h3>What requires manual review</h3>
+            <p>Commands, configuration syntax, version consistency, security boundaries, completeness, and whether cited pages actually support the recommendation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="failures">
+        <h2>Execution failure analysis</h2>
+        <p class="section-intro">There was no affirmative evidence of a filesystem isolation escape. Failed processes could not write final isolation metadata, so the harness correctly treated those records as unverified.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Failure type</th><th class="numeric">A</th><th class="numeric">B</th><th>Effect on interpretation</th></tr></thead>
+            <tbody>
+              <tr><td>Adapter timeout at approximately 285 seconds</td><td class="numeric">13</td><td class="numeric">3</td><td>Direct measure of failure to complete within the operational time budget.</td></tr>
+              <tr><td>Claude process error</td><td class="numeric">0</td><td class="numeric">1</td><td>Execution failure unrelated to deterministic answer scoring.</td></tr>
+              <tr><td><strong>Total execution failures</strong></td><td class="numeric"><strong>13</strong></td><td class="numeric better"><strong>4</strong></td><td>B completed nine more attempts.</td></tr>
+              <tr><td>Isolation metadata absent because process failed</td><td class="numeric">13</td><td class="numeric">4</td><td>Missing verification evidence; not evidence that isolation was bypassed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="case-analysis">
+        <h2>Selected case-level results</h2>
+        <p class="section-intro">These cases show where the aggregate difference came from and where the treatment did not produce a clean improvement.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Case</th><th>Scenario A</th><th>Scenario B</th><th>Observed result</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PingAccess / PingFederate token provider</strong></td><td>0 / 3 completed; all timed out</td><td>3 / 3 completed in 91–115 s; full gold-group recall</td><td class="better">Strong B improvement in completion, latency, and source recall.</td></tr>
+              <tr><td><strong>PingAuthorize policy promotion</strong></td><td>2 / 3 completed in 258–263 s; one timeout</td><td>3 / 3 completed in 89–107 s</td><td class="better">Strong B improvement in completion and latency.</td></tr>
+              <tr><td><strong>PingGateway client credentials</strong></td><td>3 / 3 completed in 170–251 s; recall 0.667</td><td>3 / 3 completed in 64–69 s; recall 0.667</td><td class="better">Same recall with substantially lower latency.</td></tr>
+              <tr><td><strong>PingFederate custom IdP adapter</strong></td><td>0 / 3 completed; all timed out</td><td>2 / 3 completed; one timeout</td><td class="better">B improved completion but did not eliminate the timeout problem.</td></tr>
+              <tr><td><strong>PingAuthorize conditional redaction</strong></td><td>2 / 3 completed; one timeout</td><td>2 / 3 completed; one timeout</td><td class="mixed">No completion-rate improvement for this case.</td></tr>
+              <tr><td><strong>PingID device switch</strong></td><td>2 / 3 completed; successful attempts achieved full recall</td><td>2 / 3 completed; one successful attempt had zero recall</td><td class="mixed">No reliability improvement; citation performance varied.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="efficacy-assessment">
+        <h2>Efficacy assessment by dimension</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Dimension</th><th>Scenario A</th><th>Scenario B</th><th>Supported conclusion</th><th>Evidence confidence</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Completion within time budget</strong></td><td><span class="assessment limited">Limited</span></td><td><span class="assessment strong">Stronger</span></td><td>B is more operationally reliable in this harness.</td><td>High</td></tr>
+              <tr><td><strong>Median response time</strong></td><td><span class="assessment limited">Slow</span></td><td><span class="assessment strong">Faster</span></td><td>B reduces time to a completed answer.</td><td>High</td></tr>
+              <tr><td><strong>Token, tool, and cost efficiency</strong></td><td><span class="assessment limited">Higher</span></td><td><span class="assessment strong">Lower</span></td><td>B is directionally more efficient; exact savings exclude failed-run telemetry.</td><td>Moderate</td></tr>
+              <tr><td><strong>Expected fact coverage</strong></td><td><span class="assessment mixed">Baseline</span></td><td><span class="assessment strong">Higher</span></td><td>B has better heuristic coverage.</td><td>Provisional</td></tr>
+              <tr><td><strong>Citation compliance</strong></td><td><span class="assessment mixed">Mixed</span></td><td><span class="assessment mixed">Mixed</span></td><td>No unqualified winner.</td><td>Moderate</td></tr>
+              <tr><td><strong>Technical correctness</strong></td><td><span class="assessment unknown">Unknown</span></td><td><span class="assessment unknown">Unknown</span></td><td>Requires blind SME scoring.</td><td>Not assessed</td></tr>
+              <tr><td><strong>Offline/isolated operation</strong></td><td><span class="assessment limited">Web-led</span></td><td><span class="assessment strong">Fallback</span></td><td>B includes a local fallback by design, but this run did not test a disconnected environment.</td><td>Not tested</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="limitations">
+        <h2>Limitations</h2>
+        <ul class="notes">
+          <li><strong>No SME grading:</strong> deterministic metrics cannot establish whether an answer is technically correct or safe.</li>
+          <li><strong>Telemetry coverage differs:</strong> efficiency means cover 71.1% of A records and 91.1% of B records because failed attempts did not return metadata.</li>
+          <li><strong>Timeout costs are absent:</strong> reported cost totals understate actual expenditure, particularly for A, which had more timeouts.</li>
+          <li><strong>Isolation is not 100% evidenced:</strong> successful runs emitted verified isolation metadata; failed runs emitted none.</li>
+          <li><strong>Single model and environment:</strong> the result has not yet been replicated on another model, provider, or harness.</li>
+          <li><strong>Gold URL coverage:</strong> some valid alternative documentation pages may not be represented in the current answer key.</li>
+        </ul>
+      </section>
+
+      <section id="conclusion">
+        <h2>Conclusion and next evaluation steps</h2>
+        <div class="claim-grid">
+          <div>Supported now</div>
+          <div>Scenario B is more effective for completing documentation-heavy Ping technical tasks within the tested time budget. It also shows a substantial directional reduction in latency, token use, tool calls, and reported cost.</div>
+          <div>Not supported yet</div>
+          <div>A claim that Scenario B is more technically correct, safer, or fully citation-compliant.</div>
+          <div>Appropriate decision</div>
+          <div>Continue Scenario B as a controlled technical-consultant pilot while retaining live documentation as the source of truth and local snapshots as a fallback.</div>
+        </div>
+
+        <h3 style="margin-top:28px">Required follow-up</h3>
+        <ol class="notes">
+          <li>Blind SME scoring of correctness, completeness, safety, actionability, and evidence.</li>
+          <li>Run the new end-to-end PingAuthorize/Kong workload-governance case as a separate A/B extension.</li>
+          <li>Review citation misses and add canonical URL equivalence only where the alternative page is substantively correct.</li>
+          <li>Repeat the pilot using a second supported model or harness.</li>
+          <li>Run an explicit disconnected-environment test to measure local fallback efficacy.</li>
+        </ol>
+      </section>
+
+      <section id="methodology">
+        <h2>Metric definitions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Metric</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td>Execution success</td><td>Adapter exited successfully and required run/isolation metadata was present.</td></tr>
+              <tr><td>Median / P95 latency</td><td>Elapsed wall-clock time per attempt, including failed attempts.</td></tr>
+              <tr><td>Fact-coverage heuristic</td><td>Share of predefined regex-based answer checks matched. Used for triage only.</td></tr>
+              <tr><td>Gold source-group recall</td><td>Share of expected documentation source groups represented by at least one cited URL.</td></tr>
+              <tr><td>Gold citation precision</td><td>Share of cited Ping documentation URLs that matched a predefined gold URL. Diagnostic because other pages can be valid.</td></tr>
+              <tr><td>Strict citation-policy pass</td><td>Whether the response met the case's complete deterministic citation requirement.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="formula">suite = 15 cases × 3 repetitions × 2 conditions = 90 attempts</p>
+        <p class="formula">reported efficiency means = numeric provider metadata ÷ metadata-bearing records</p>
+      </section>
+    </main>
+
+    <footer>
+      Source run: /Users/mark.nienaber/Documents/ForgeRock/GIT/ping-agent-skills-pilot-results/pilot-sonnet46-20260713-j4<br>
+      Deterministic report generated from summary.json and case-scores.csv. SME review status: pending.
+    </footer>
+  </div>
+</body>
+</html>

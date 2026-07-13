@@ -27,11 +27,11 @@ OFFICIAL_SKILLS = (
 
 
 class PilotHarnessTest(unittest.TestCase):
-    def test_suite_has_fifteen_natural_cases_and_control_cases(self) -> None:
+    def test_suite_has_sixteen_natural_cases_and_control_cases(self) -> None:
         cases_doc = pilot_run.load_json(EVALS_DIR / "cases.json")
         pilot_run.validate_inputs(pilot_run.load_json(EVALS_DIR / "pilot.json"), cases_doc)
         cases = cases_doc["cases"]
-        self.assertEqual(15, len(cases))
+        self.assertEqual(16, len(cases))
         self.assertIn("ambiguous", {case["case_type"] for case in cases})
         self.assertIn("out_of_domain", {case["case_type"] for case in cases})
         for case in cases:
