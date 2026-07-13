@@ -21,6 +21,10 @@ node_modules/
 .claude/
 scripts/__pycache__/
 
+# Local pilot evaluation and generated reports
+/evals/
+/reports/
+
 # Sync working dirs (kept out until we decide commit-snapshots policy)
 # Uncomment to gitignore snapshots:
 # plugins/*/skills/*/references/snapshots/

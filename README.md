@@ -282,29 +282,6 @@ scripts/routing-proof.sh --output reports/custom-routing-proof.html
 
 The report includes validation output, route diagrams, selected live URLs, and fallback snapshot paths. Live URL validation is optional so the default proof remains deterministic and works offline.
 
-## A/B Pilot
-
-`evals/` contains a provider-neutral pilot comparing exactly two conditions:
-
-- A: the six official Ping umbrella Agent Skills.
-- B: the same six skills plus `ping-docs`.
-
-There is no MCP condition. The suite contains 16 natural TC prompts, randomized repetitions, isolated skill roots, exact staged-skill and filesystem-sandbox protocol checks, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token/cost capture with coverage rates, provider built-in skill inventory comparison, ambiguity and out-of-domain controls, and a blinded SME rubric. A clean-room Claude Code adapter is included for reproducible runs without user skills or MCP servers. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
-
-### Prompt design rules
-
-Pilot prompts describe a credible consultant task, not the retrieval route. They include the product context that a customer would know, the desired outcome, relevant constraints, and required deliverables. They do not name `ping-docs`, identify a guide or answer-key page, supply a documentation URL, or tell the agent to compare skills. The same rendered prompt is byte-for-byte identical in conditions A and B; titles, tags, gold sources, fact checks, and condition details are not sent to the agent.
-
-| Avoid | Use instead |
-|---|---|
-| "Use the PingAuthorize docs to explain policy import." | "We need to move a tested PingAuthorize policy from integration to production. Give the supported import and deployment sequence, including environment-specific values and rollback checks." |
-| "Search this guide for the Kong headers." | "Tell the Kong team exactly which trusted request data PingAuthorize needs, how each value reaches policy evaluation, and how to prevent client-supplied header spoofing." |
-| "What does this documentation page say?" | "A replica is several hours behind but still serves reads. Give a safe diagnostic sequence, decision points, and recovery precautions." |
-
-Source URLs may be requested as evidence because consultants need verifiable, version-sensitive instructions. That is an answer-quality requirement, not a hint about which document, skill, or route should produce the answer. The complete prompts are in [`evals/cases.json`](evals/cases.json); condition-independent evaluation requirements are in [`evals/pilot.json`](evals/pilot.json).
-
-[`reports/pilot-efficacy-report.html`](reports/pilot-efficacy-report.html) records the completed 15-case baseline run. The added expert PingAuthorize/Kong case and the live-first runtime instruction require a new 16-case run before results can be attributed to the current implementation.
-
 ## Layout
 
 ```text
@@ -323,17 +300,6 @@ plugins/
         llms.txt
         MANIFEST.md
         snapshots/*.md
-reports/
-  routing-proof.html
-  pilot-efficacy-report.html
-evals/
-  adapters/claude_code.py
-  pilot.json
-  cases.json
-  run.py
-  score.py
-  validate_sources.py
-  SME_RUBRIC.md
 scripts/
   docsets.yaml
   sync-docset.sh
