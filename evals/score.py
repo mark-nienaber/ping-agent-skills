@@ -20,6 +20,17 @@ DEFAULT_CASES = EVALS_DIR / "cases.json"
 URL_RE = re.compile(r"https?://[^\s<>()\[\]{}\"']+", re.IGNORECASE)
 PING_DOC_HOSTS = {"docs.pingidentity.com", "developer.pingidentity.com"}
 SME_DIMENSIONS = ("correctness", "completeness", "evidence", "safety", "actionability")
+NUMERIC_METADATA_FIELDS = (
+    "tool_calls",
+    "input_tokens",
+    "uncached_input_tokens",
+    "cached_tokens",
+    "cached_input_tokens",
+    "cache_creation_input_tokens",
+    "output_tokens",
+    "total_tokens",
+    "cost_usd",
+)
 
 
 class ScoreError(RuntimeError):
@@ -50,6 +61,11 @@ def normalize_url(raw: str) -> str:
     path = re.sub(r"/{2,}", "/", parts.path)
     if path != "/":
         path = path.rstrip("/")
+    # Ping publishes the same generated documentation page as browser-oriented
+    # HTML and agent-oriented Markdown. Treat those representations as one
+    # source while leaving extensions on unrelated sites untouched.
+    if host in PING_DOC_HOSTS and path.lower().endswith(".html"):
+        path = path[:-5] + ".md"
     return urlunsplit((scheme, netloc, path, "", ""))
 
 
@@ -92,7 +108,7 @@ def numeric_metadata(metadata: Any) -> dict[str, float]:
     if not isinstance(metadata, dict):
         return {}
     result: dict[str, float] = {}
-    for key in ("tool_calls", "input_tokens", "output_tokens", "total_tokens", "cached_tokens", "cost_usd"):
+    for key in NUMERIC_METADATA_FIELDS:
         value = metadata.get(key)
         if key == "tool_calls" and isinstance(value, list):
             result[key] = float(len(value))
@@ -101,6 +117,15 @@ def numeric_metadata(metadata: Any) -> dict[str, float]:
     if "tool_calls" not in result and isinstance(metadata.get("tools"), list):
         result["tool_calls"] = float(len(metadata["tools"]))
     return result
+
+
+def skill_inventory_metadata(metadata: Any, key: str) -> list[str] | None:
+    if not isinstance(metadata, dict):
+        return None
+    value = metadata.get(key)
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        return None
+    return sorted(set(value))
 
 
 def score_record(result: dict[str, Any], case: dict[str, Any]) -> dict[str, Any]:
@@ -146,6 +171,7 @@ def score_record(result: dict[str, Any], case: dict[str, Any]) -> dict[str, Any]
         and bool(text.strip())
         and bool(protocol.get("isolation_verified", True))
     )
+    agent_metadata = result.get("agent_metadata")
     row = {
         "run_id": result.get("run_id"),
         "condition": result.get("condition", {}).get("id"),
@@ -169,7 +195,10 @@ def score_record(result: dict[str, Any], case: dict[str, Any]) -> dict[str, Any]
         "fact_check_hits": fact_results,
         "behavior_check_hits": behavior_results,
         "cited_urls": urls,
-        "metadata": numeric_metadata(result.get("agent_metadata")),
+        "metadata": numeric_metadata(agent_metadata),
+        "runtime_builtin_skills": skill_inventory_metadata(
+            agent_metadata, "runtime_builtin_skills"
+        ),
         "prompt": case.get("prompt", ""),
         "response_text": text,
     }
@@ -259,9 +288,45 @@ def aggregate(rows: list[dict[str, Any]], reviews: dict[tuple[str, str, int], di
             "latency_median_seconds": round(statistics.median(latencies), 6) if latencies else None,
             "latency_p95_seconds": percentile(latencies, 0.95),
         }
-        metadata_keys = sorted({key for row in condition_rows for key in row["metadata"]})
+        metadata_keys = list(NUMERIC_METADATA_FIELDS)
         metrics["agent_metadata_means"] = {
             key: metric_mean(row["metadata"].get(key) for row in condition_rows) for key in metadata_keys
+        }
+        metrics["agent_metadata_totals"] = {
+            key: (
+                round(
+                    sum(float(row["metadata"][key]) for row in condition_rows if key in row["metadata"]),
+                    6,
+                )
+                if any(key in row["metadata"] for row in condition_rows)
+                else None
+            )
+            for key in metadata_keys
+        }
+        metrics["agent_numeric_metadata_coverage"] = {
+            key: {
+                "records": sum(key in row["metadata"] for row in condition_rows),
+                "rate": round(
+                    sum(key in row["metadata"] for row in condition_rows) / len(condition_rows),
+                    6,
+                ),
+            }
+            for key in metadata_keys
+        }
+        builtin_inventories = [
+            tuple(row["runtime_builtin_skills"])
+            for row in condition_rows
+            if row["runtime_builtin_skills"] is not None
+        ]
+        unique_builtin_inventories = sorted(set(builtin_inventories))
+        builtin_records = len(builtin_inventories)
+        metrics["runtime_builtin_skills"] = {
+            "metadata_records": builtin_records,
+            "metadata_coverage_rate": round(builtin_records / len(condition_rows), 6),
+            "inventories": [list(inventory) for inventory in unique_builtin_inventories],
+            "internally_consistent": (
+                builtin_records == len(condition_rows) and len(unique_builtin_inventories) == 1
+            ),
         }
         reviewed = []
         for row in condition_rows:
@@ -293,9 +358,58 @@ def aggregate(rows: list[dict[str, Any]], reviews: dict[tuple[str, str, int], di
             a = conditions[baseline].get(metric)
             b = conditions[treatment].get(metric)
             deltas[metric] = round(b - a, 6) if a is not None and b is not None else None
-        comparison = {"baseline": baseline, "treatment": treatment, "treatment_minus_baseline": deltas}
+        metadata_deltas: dict[str, float | None] = {}
+        metadata_keys = sorted(
+            set(conditions[baseline]["agent_metadata_means"])
+            | set(conditions[treatment]["agent_metadata_means"])
+        )
+        for key in metadata_keys:
+            a = conditions[baseline]["agent_metadata_means"].get(key)
+            b = conditions[treatment]["agent_metadata_means"].get(key)
+            metadata_deltas[key] = round(b - a, 6) if a is not None and b is not None else None
+        metadata_coverage_deltas = {
+            key: round(
+                conditions[treatment]["agent_numeric_metadata_coverage"][key]["rate"]
+                - conditions[baseline]["agent_numeric_metadata_coverage"][key]["rate"],
+                6,
+            )
+            for key in NUMERIC_METADATA_FIELDS
+        }
+        comparison = {
+            "baseline": baseline,
+            "treatment": treatment,
+            "treatment_minus_baseline": deltas,
+            "agent_metadata_treatment_minus_baseline": metadata_deltas,
+            "agent_numeric_metadata_coverage_treatment_minus_baseline": metadata_coverage_deltas,
+        }
 
-    return {"conditions": conditions, "comparison": comparison}
+    builtin_comparison: dict[str, Any] = {
+        "comparable": False,
+        "identical_across_conditions": None,
+        "conditions": {
+            condition: metrics["runtime_builtin_skills"]
+            for condition, metrics in conditions.items()
+        },
+    }
+    if len(condition_ids) == 2:
+        baseline, treatment = condition_ids
+        baseline_inventory = conditions[baseline]["runtime_builtin_skills"]
+        treatment_inventory = conditions[treatment]["runtime_builtin_skills"]
+        comparable_builtins = bool(
+            baseline_inventory["internally_consistent"]
+            and treatment_inventory["internally_consistent"]
+        )
+        builtin_comparison["comparable"] = comparable_builtins
+        if comparable_builtins:
+            builtin_comparison["identical_across_conditions"] = (
+                baseline_inventory["inventories"] == treatment_inventory["inventories"]
+            )
+
+    return {
+        "conditions": conditions,
+        "comparison": comparison,
+        "runtime_builtin_skills_comparison": builtin_comparison,
+    }
 
 
 def write_case_scores(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -304,7 +418,7 @@ def write_case_scores(path: Path, rows: list[dict[str, Any]]) -> None:
         "exit_code", "timed_out", "isolation_verified", "elapsed_seconds", "citation_count",
         "ping_doc_citation_count", "gold_group_recall", "gold_citation_precision", "citation_policy_pass",
         "fact_coverage_heuristic", "behavior_heuristic", "gold_group_hits", "fact_check_hits",
-        "behavior_check_hits", "cited_urls", "metadata",
+        "behavior_check_hits", "cited_urls", "metadata", "runtime_builtin_skills",
     ]
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
@@ -362,6 +476,12 @@ def display(value: Any) -> str:
     return str(value)
 
 
+def display_coverage(value: dict[str, Any], total: int) -> str:
+    records = int(value.get("records", 0))
+    rate = float(value.get("rate", 0.0))
+    return f"{records}/{total} ({rate:.1%})"
+
+
 def render_report(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
     conditions = summary["conditions"]
     lines = [
@@ -390,6 +510,78 @@ def render_report(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
     for label, key in metrics:
         lines.append(f"| {label} | " + " | ".join(display(conditions[c].get(key)) for c in sorted(conditions)) + " |")
 
+    metadata_metrics = [
+        ("Mean tool calls", "tool_calls", "mean"),
+        ("Mean input tokens", "input_tokens", "mean"),
+        ("Mean output tokens", "output_tokens", "mean"),
+        ("Mean total tokens", "total_tokens", "mean"),
+        ("Mean cost (USD)", "cost_usd", "mean"),
+        ("Total cost (USD)", "cost_usd", "total"),
+    ]
+    if any(
+        conditions[condition]["agent_metadata_means"].get(key) is not None
+        for _label, key, _kind in metadata_metrics
+        for condition in conditions
+    ):
+        lines.extend(["", "## Agent efficiency", ""])
+        lines.extend([
+            "| Metric | " + " | ".join(sorted(conditions)) + " |",
+            "|---|" + "---:|" * len(conditions),
+        ])
+        for label, key, kind in metadata_metrics:
+            bucket = "agent_metadata_means" if kind == "mean" else "agent_metadata_totals"
+            lines.append(
+                f"| {label} | "
+                + " | ".join(display(conditions[c][bucket].get(key)) for c in sorted(conditions))
+                + " |"
+            )
+
+    lines.extend(["", "## Agent metadata coverage", ""])
+    lines.extend([
+        "| Numeric metadata field | " + " | ".join(sorted(conditions)) + " |",
+        "|---|" + "---:|" * len(conditions),
+    ])
+    for key in NUMERIC_METADATA_FIELDS:
+        lines.append(
+            f"| {key.replace('_', ' ')} | "
+            + " | ".join(
+                display_coverage(
+                    conditions[condition]["agent_numeric_metadata_coverage"][key],
+                    conditions[condition]["records"],
+                )
+                for condition in sorted(conditions)
+            )
+            + " |"
+        )
+
+    builtin_comparison = summary["runtime_builtin_skills_comparison"]
+    if builtin_comparison["comparable"]:
+        builtin_status = (
+            "yes" if builtin_comparison["identical_across_conditions"] else "no"
+        )
+    else:
+        builtin_status = "not comparable because metadata is missing or varies within a condition"
+    lines.extend([
+        "",
+        "## Runtime built-in skill inventory",
+        "",
+        f"Inventories identical across A/B: **{builtin_status}**.",
+        "",
+        "| Condition | Metadata coverage | Internally consistent | Observed inventories |",
+        "|---|---:|---:|---|",
+    ])
+    for condition in sorted(conditions):
+        inventory = conditions[condition]["runtime_builtin_skills"]
+        coverage = {
+            "records": inventory["metadata_records"],
+            "rate": inventory["metadata_coverage_rate"],
+        }
+        lines.append(
+            f"| {condition} | {display_coverage(coverage, conditions[condition]['records'])} | "
+            f"{str(inventory['internally_consistent']).lower()} | "
+            f"`{json.dumps(inventory['inventories'], sort_keys=True)}` |"
+        )
+
     comparison = summary.get("comparison", {})
     if comparison:
         lines.extend(["", "## Treatment minus baseline", ""])
@@ -397,6 +589,8 @@ def render_report(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
         lines.extend(["", "| Metric | Delta |", "|---|---:|"])
         for key, value in comparison["treatment_minus_baseline"].items():
             lines.append(f"| {key.replace('_', ' ')} | {display(value)} |")
+        for key, value in comparison.get("agent_metadata_treatment_minus_baseline", {}).items():
+            lines.append(f"| mean {key.replace('_', ' ')} | {display(value)} |")
 
     lines.extend(["", "## Case-level deterministic results", ""])
     lines.extend([
@@ -418,6 +612,8 @@ def render_report(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
         "- Treat fact and behavior regex scores as triage signals only; an SME must assess technical correctness and completeness.",
         "- Gold citation precision is diagnostic because a correct answer may cite useful, non-gold supporting pages.",
         "- Do not publish comparisons when isolation verification is below 100% in either condition.",
+        "- Treat cost, token, and tool-call comparisons as incomplete when their numeric metadata coverage is below 100%.",
+        "- Provider built-in skill inventories must be fully reported, internally consistent, and identical across A/B before attributing a difference to the deep-doc layer.",
         "- Compare repeated paired cases and inspect failures; aggregate means alone can conceal product-specific regressions.",
         "",
     ])

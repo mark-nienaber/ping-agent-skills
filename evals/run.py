@@ -25,6 +25,7 @@ DEFAULT_MANIFEST = EVALS_DIR / "pilot.json"
 DEFAULT_CASES = EVALS_DIR / "cases.json"
 DEFAULT_RESULTS = EVALS_DIR / "results"
 SAFE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
+SKILL_NAME = re.compile(r"(?m)^name:\s*[\"']?([^\"'\n]+)")
 
 
 class PilotError(RuntimeError):
@@ -66,6 +67,15 @@ def validate_inputs(manifest: dict[str, Any], cases_doc: dict[str, Any]) -> None
         raise PilotError("pilot manifest schema_version must be 1")
     if cases_doc.get("schema_version") != 1:
         raise PilotError("case suite schema_version must be 1")
+    for flag in ("require_isolation_metadata", "require_filesystem_sandbox_metadata"):
+        if flag in manifest and not isinstance(manifest[flag], bool):
+            raise PilotError(f"pilot manifest {flag} must be a boolean")
+    if manifest.get("require_filesystem_sandbox_metadata") and not manifest.get(
+        "require_isolation_metadata"
+    ):
+        raise PilotError(
+            "require_filesystem_sandbox_metadata requires require_isolation_metadata"
+        )
 
     conditions = manifest.get("conditions")
     cases = cases_doc.get("cases")
@@ -195,6 +205,34 @@ def mount_assets(workspace: Path, inventory: list[dict[str, Any]]) -> None:
             raise PilotError(f"Unsupported asset mode {mode!r}; use symlink or copy")
 
 
+def discover_staged_skills(skills_dir: Path) -> list[str]:
+    """Return the declared names of every skill staged below the isolated root."""
+    names: set[str] = set()
+    seen_files: set[Path] = set()
+    for current, dirs, files in os.walk(skills_dir, followlinks=True):
+        dirs.sort()
+        if "SKILL.md" not in files:
+            continue
+        skill_file = Path(current) / "SKILL.md"
+        resolved = skill_file.resolve()
+        if resolved in seen_files:
+            dirs[:] = []
+            continue
+        content = skill_file.read_text(encoding="utf-8", errors="replace")
+        match = SKILL_NAME.search(content)
+        name = (match.group(1).strip() if match else Path(current).name).replace("/", "-")
+        if not name:
+            raise PilotError(f"Staged skill has an empty name: {skill_file}")
+        if name in names:
+            raise PilotError(f"Duplicate staged skill name {name!r} below {skills_dir}")
+        names.add(name)
+        seen_files.add(resolved)
+        dirs[:] = []
+    if not names:
+        raise PilotError(f"No skill directories were staged below {skills_dir}")
+    return sorted(names)
+
+
 def expand_command(command: str, values: dict[str, str]) -> list[str]:
     expanded = command
     for key, value in values.items():
@@ -224,23 +262,45 @@ def verify_protocol(
     metadata: dict[str, Any] | None,
     condition_id: str,
     skills_dir: Path,
-    required: bool,
+    staged_skills: list[str],
+    isolation_required: bool,
+    filesystem_sandbox_required: bool,
 ) -> tuple[bool, list[str]]:
-    if not required:
+    if not isolation_required and not filesystem_sandbox_required:
         return True, []
     issues: list[str] = []
     if metadata is None:
         return False, ["isolation metadata is required but missing"]
-    if metadata.get("condition_id") != condition_id:
-        issues.append("metadata condition_id does not match the assigned condition")
-    roots = metadata.get("loaded_skill_roots")
-    if not isinstance(roots, list) or not roots:
-        issues.append("metadata loaded_skill_roots must be a non-empty list")
-    else:
-        expected = os.path.normcase(os.path.abspath(skills_dir))
-        actual = {os.path.normcase(os.path.abspath(str(root))) for root in roots}
-        if actual != {expected}:
-            issues.append(f"loaded_skill_roots must contain only the isolated root {skills_dir}")
+    if isolation_required:
+        if metadata.get("condition_id") != condition_id:
+            issues.append("metadata condition_id does not match the assigned condition")
+        roots = metadata.get("loaded_skill_roots")
+        if not isinstance(roots, list) or not roots:
+            issues.append("metadata loaded_skill_roots must be a non-empty list")
+        else:
+            expected = os.path.normcase(os.path.abspath(skills_dir))
+            actual = {os.path.normcase(os.path.abspath(str(root))) for root in roots}
+            if actual != {expected}:
+                issues.append(f"loaded_skill_roots must contain only the isolated root {skills_dir}")
+
+        loaded = metadata.get("loaded_skills")
+        if not isinstance(loaded, list) or not loaded or not all(
+            isinstance(name, str) for name in loaded
+        ):
+            issues.append("metadata loaded_skills must be a non-empty list of skill names")
+        else:
+            loaded_names = set(loaded)
+            expected_names = set(staged_skills)
+            if len(loaded_names) != len(loaded):
+                issues.append("metadata loaded_skills must not contain duplicate names")
+            if loaded_names != expected_names:
+                issues.append(
+                    "loaded_skills must exactly match the staged skill inventory; "
+                    f"missing={sorted(expected_names - loaded_names)}, "
+                    f"unexpected={sorted(loaded_names - expected_names)}"
+                )
+    if filesystem_sandbox_required and metadata.get("filesystem_sandbox") is not True:
+        issues.append("metadata filesystem_sandbox must be true")
     return not issues, issues
 
 
@@ -274,6 +334,7 @@ def run_one(
     mount_assets(workspace, inventory)
     skills_dir = workspace / "skills"
     skills_dir.mkdir(exist_ok=True)
+    staged_skills = discover_staged_skills(skills_dir)
 
     rendered_prompt = case["prompt"].rstrip() + str(manifest.get("prompt_suffix", "")) + "\n"
     prompt_file = workspace / "prompt.txt"
@@ -287,6 +348,7 @@ def run_one(
         "description": condition.get("description"),
         "capabilities": condition.get("capabilities", []),
         "skill_root": str(skills_dir),
+        "staged_skills": staged_skills,
         "assets": [{"id": a["id"], "mount": a["mount"], "mode": a["mode"]} for a in inventory],
     }
     condition_file = workspace / "condition.json"
@@ -354,7 +416,9 @@ def run_one(
         metadata,
         condition_id,
         skills_dir,
+        staged_skills,
         bool(manifest.get("require_isolation_metadata", False)),
+        bool(manifest.get("require_filesystem_sandbox_metadata", False)),
     )
     if metadata_error:
         protocol_issues.append(metadata_error)
@@ -386,6 +450,10 @@ def run_one(
         "agent_metadata": metadata,
         "protocol": {
             "isolation_required": bool(manifest.get("require_isolation_metadata", False)),
+            "filesystem_sandbox_metadata_required": bool(
+                manifest.get("require_filesystem_sandbox_metadata", False)
+            ),
+            "expected_loaded_skills": staged_skills,
             "isolation_verified": protocol_ok,
             "issues": protocol_issues,
         },
@@ -483,6 +551,9 @@ def main(argv: Iterable[str] | None = None) -> int:
             "timeout_seconds": timeout_seconds,
             "jobs": args.jobs,
             "require_isolation_metadata": bool(manifest.get("require_isolation_metadata", False)),
+            "require_filesystem_sandbox_metadata": bool(
+                manifest.get("require_filesystem_sandbox_metadata", False)
+            ),
             "agent_command": args.agent_command,
         }
         (run_dir / "run-manifest.json").write_text(

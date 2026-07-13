@@ -28,6 +28,10 @@ TOKEN_RE = re.compile(r"[a-z0-9]+")
 VERSION_RE = re.compile(r"^\d+(?:\.\d+)*$")
 MANIFEST_FIELD_RE = re.compile(r"^- (?P<key>[^:]+):\s*(?P<value>.*)$")
 
+ANSWER_CONTEXT_MAX_RESULTS = 3
+SNAPSHOT_EXCERPT_MAX_LINES = 80
+SNAPSHOT_EXCERPT_MAX_CHARS = 8_000
+
 STOPWORDS = {
     "a",
     "an",
@@ -176,6 +180,14 @@ class Candidate:
             self.url_matches,
             self.product_matches,
         )
+
+
+@dataclass(frozen=True)
+class SnapshotPage:
+    title: str
+    canonical_url: str
+    lines: tuple[str, ...]
+    start_line: int
 
 
 def _compact(value: str) -> str:
@@ -434,6 +446,200 @@ def _snapshot_for(entry: Entry) -> Path | None:
     return None
 
 
+def _normalise_page_url(value: str) -> str:
+    parsed = urlparse(value.strip().strip("<>"))
+    path = parsed.path.rstrip("/")
+    path = re.sub(r"\.(?:html?|md)$", "", path, flags=re.IGNORECASE)
+    return f"{parsed.netloc.lower()}{path}"
+
+
+def _normalise_title(value: str) -> str:
+    return " ".join(unescape(value).strip().strip("\"'").split()).casefold()
+
+
+def _manifest_snapshot_sources(entry: Entry, snapshot: Path) -> tuple[str, ...] | None:
+    """Return sources for a manifest-listed snapshot, or None when it is not listed."""
+    if entry.product.manifest_path is None:
+        return None
+    snapshots_dir = (entry.product.directory / "references" / "snapshots").resolve()
+    try:
+        relative = snapshot.resolve().relative_to(snapshots_dir).as_posix()
+    except ValueError:
+        return None
+    sources = tuple(
+        source
+        for filename, source in entry.product.snapshot_rows
+        if Path(filename).as_posix() == relative
+    )
+    return sources or None
+
+
+def _frontmatter_at(
+    lines: Sequence[str], start: int
+) -> tuple[int, dict[str, str]] | None:
+    if lines[start].strip() != "---":
+        return None
+    fields: dict[str, str] = {}
+    for index in range(start + 1, min(len(lines), start + 100)):
+        stripped = lines[index].strip()
+        if stripped == "---":
+            if fields.get("title") or fields.get("canonical_url"):
+                return index, fields
+            return None
+        if ":" not in lines[index]:
+            continue
+        key, value = lines[index].split(":", 1)
+        key = key.strip().lower()
+        if key in {"title", "canonical_url"}:
+            fields[key] = value.strip().strip("\"'")
+    return None
+
+
+def _trim_page_end(lines: Sequence[str], end: int) -> int:
+    while end > 0 and not lines[end - 1].strip():
+        end -= 1
+    if end > 0 and lines[end - 1].strip() == "---":
+        end -= 1
+        while end > 0 and not lines[end - 1].strip():
+            end -= 1
+    return end
+
+
+def _snapshot_pages(lines: Sequence[str]) -> list[SnapshotPage]:
+    starts: list[tuple[int, int, dict[str, str]]] = []
+    for index, line in enumerate(lines):
+        if line.strip() != "---":
+            continue
+        parsed = _frontmatter_at(lines, index)
+        if parsed is not None:
+            closing, fields = parsed
+            starts.append((index, closing, fields))
+
+    pages: list[SnapshotPage] = []
+    for position, (_start, closing, fields) in enumerate(starts):
+        content_start = closing + 1
+        while content_start < len(lines) and not lines[content_start].strip():
+            content_start += 1
+        next_start = starts[position + 1][0] if position + 1 < len(starts) else len(lines)
+        content_end = _trim_page_end(lines, next_start)
+        pages.append(
+            SnapshotPage(
+                title=fields.get("title", ""),
+                canonical_url=fields.get("canonical_url", ""),
+                lines=tuple(lines[content_start:content_end]),
+                start_line=content_start + 1,
+            )
+        )
+    return pages
+
+
+def _find_snapshot_page(
+    entry: Entry,
+    lines: Sequence[str],
+    manifest_sources: Sequence[str],
+) -> tuple[SnapshotPage, str] | None:
+    target_url = _normalise_page_url(entry.url)
+    target_title = _normalise_title(entry.title)
+    pages = _snapshot_pages(lines)
+
+    for page in pages:
+        if page.canonical_url and _normalise_page_url(page.canonical_url) == target_url:
+            return page, "canonical_url"
+    for page in pages:
+        if not page.canonical_url and _normalise_title(page.title) == target_title:
+            return page, "frontmatter_title"
+
+    # Frontmatter-bearing assembled snapshots identify their captured pages. If none
+    # matched, the selected index page is not present; do not substitute nearby content.
+    if pages:
+        return None
+
+    if any(
+        source.startswith(("http://", "https://"))
+        and _normalise_page_url(source) == target_url
+        for source in manifest_sources
+    ):
+        return SnapshotPage("", "", tuple(lines), 1), "manifest_source"
+
+    for index, line in enumerate(lines):
+        if not line.startswith("# ") or _normalise_title(line[2:]) != target_title:
+            continue
+        end = next(
+            (candidate for candidate in range(index + 1, len(lines)) if lines[candidate].startswith("# ")),
+            len(lines),
+        )
+        end = _trim_page_end(lines, end)
+        return SnapshotPage(entry.title, "", tuple(lines[index:end]), index + 1), "heading_title"
+    return None
+
+
+def _best_excerpt_window(lines: Sequence[str], query_tokens: frozenset[str]) -> tuple[int, int]:
+    if len(lines) <= SNAPSHOT_EXCERPT_MAX_LINES:
+        return 0, len(lines)
+    line_scores: list[int] = []
+    for line in lines:
+        score = len(tokenize(line) & query_tokens)
+        if line.lstrip().startswith("#"):
+            score *= 2
+        line_scores.append(score)
+    window_score = sum(line_scores[:SNAPSHOT_EXCERPT_MAX_LINES])
+    best_score = window_score
+    best_start = 0
+    for start in range(1, len(lines) - SNAPSHOT_EXCERPT_MAX_LINES + 1):
+        window_score += line_scores[start + SNAPSHOT_EXCERPT_MAX_LINES - 1]
+        window_score -= line_scores[start - 1]
+        if window_score > best_score:
+            best_score = window_score
+            best_start = start
+    return best_start, best_start + SNAPSHOT_EXCERPT_MAX_LINES
+
+
+def _snapshot_page_match(
+    entry: Entry,
+    snapshot: Path | None,
+    snapshot_cache: dict[Path, tuple[str, ...]],
+) -> tuple[str, tuple[SnapshotPage, str] | None]:
+    if snapshot is None:
+        return "unavailable", None
+    manifest_sources = _manifest_snapshot_sources(entry, snapshot)
+    if manifest_sources is None:
+        return "unavailable", None
+    snapshot = snapshot.resolve()
+    if snapshot not in snapshot_cache:
+        snapshot_cache[snapshot] = tuple(snapshot.read_text(encoding="utf-8").splitlines())
+    found = _find_snapshot_page(entry, snapshot_cache[snapshot], manifest_sources)
+    if found is None:
+        return "absent", None
+
+    return "present", found
+
+
+def _snapshot_excerpt(
+    page_match: tuple[SnapshotPage, str],
+    query_tokens: frozenset[str],
+) -> dict[str, object]:
+    page, match = page_match
+
+    excerpt_start, excerpt_end = _best_excerpt_window(page.lines, query_tokens)
+    selected = page.lines[excerpt_start:excerpt_end]
+    text = "\n".join(selected)
+    char_truncated = len(text) > SNAPSHOT_EXCERPT_MAX_CHARS
+    if char_truncated:
+        text = text[: SNAPSHOT_EXCERPT_MAX_CHARS - 1].rstrip() + "…"
+    start_line = page.start_line + excerpt_start
+    end_line = start_line + text.count("\n")
+    return {
+        "text": text,
+        "start_line": start_line,
+        "end_line": end_line,
+        "page_lines": len(page.lines),
+        "match": match,
+        "truncated": (
+            excerpt_start > 0 or excerpt_end < len(page.lines) or char_truncated
+        ),
+    }
+
+
 def _entry_version(entry: Entry) -> str:
     parsed_url = urlparse(entry.url)
     base_path = urlparse(entry.product.base_url).path.rstrip("/")
@@ -454,10 +660,21 @@ def _canonical_page_key(entry: Entry) -> tuple[str, str]:
     return entry.product.slug, "/".join(parts)
 
 
-def _result_dict(candidate: Candidate, score: float) -> dict[str, object]:
+def _result_dict(
+    candidate: Candidate,
+    score: float,
+    *,
+    query_tokens: frozenset[str],
+    answer_context: bool,
+    snapshot_cache: dict[Path, tuple[str, ...]],
+) -> dict[str, object]:
     entry = candidate.entry
-    snapshot = _snapshot_for(entry)
-    return {
+    candidate_snapshot = _snapshot_for(entry)
+    page_status, page_match = _snapshot_page_match(entry, candidate_snapshot, snapshot_cache)
+    # A partial assembled guide is not an offline copy of an index page it did not
+    # capture. Only expose a snapshot after an exact page boundary has been found.
+    snapshot = candidate_snapshot if page_status == "present" else None
+    result: dict[str, object] = {
         "product": entry.product.label,
         "product_slug": entry.product.slug,
         "title": entry.title,
@@ -472,6 +689,12 @@ def _result_dict(candidate: Candidate, score: float) -> dict[str, object]:
         "snapshot_sync_date": entry.product.sync_date or None,
         "snapshot_version": entry.product.version or None,
     }
+    if answer_context:
+        result["snapshot_page_status"] = page_status
+        result["snapshot_excerpt"] = (
+            _snapshot_excerpt(page_match, query_tokens) if page_match is not None else None
+        )
+    return result
 
 
 def search(
@@ -480,6 +703,7 @@ def search(
     product_filter: str | None = None,
     top_k: int = 5,
     data_root: str | Path | None = None,
+    answer_context: bool = False,
 ) -> dict[str, object]:
     query = query.strip()
     root = discover_data_root(data_root)
@@ -494,6 +718,16 @@ def search(
         "reason": "",
         "results": [],
     }
+    if answer_context:
+        response["answer_context"] = {
+            "instruction": (
+                "Use only snapshot_excerpt for offline page content; do not open or search "
+                "local snapshot files. A null excerpt means the exact page is absent or unavailable."
+            ),
+            "max_results": ANSWER_CONTEXT_MAX_RESULTS,
+            "max_excerpt_lines": SNAPSHOT_EXCERPT_MAX_LINES,
+            "max_excerpt_chars": SNAPSHOT_EXCERPT_MAX_CHARS,
+        }
     if not query_tokens:
         response["reason"] = "The query has no searchable terms."
         return response
@@ -581,6 +815,7 @@ def search(
             item[1].entry.url,
         )
     )
+    result_limit = min(top_k, ANSWER_CONTEXT_MAX_RESULTS) if answer_context else top_k
     unique: list[tuple[float, Candidate]] = []
     seen_pages: set[tuple[str, str]] = set()
     for item in scored:
@@ -589,7 +824,7 @@ def search(
             continue
         seen_pages.add(page_key)
         unique.append(item)
-        if len(unique) == top_k:
+        if len(unique) == result_limit:
             break
 
     if not unique:
@@ -597,7 +832,17 @@ def search(
         return response
     response["status"] = "ok"
     response["reason"] = None
-    response["results"] = [_result_dict(candidate, score) for score, candidate in unique]
+    snapshot_cache: dict[Path, tuple[str, ...]] = {}
+    response["results"] = [
+        _result_dict(
+            candidate,
+            score,
+            query_tokens=query_tokens,
+            answer_context=answer_context,
+            snapshot_cache=snapshot_cache,
+        )
+        for score, candidate in unique
+    ]
     return response
 
 
@@ -605,6 +850,9 @@ def _print_human(response: dict[str, object]) -> None:
     if response["status"] != "ok":
         print(f"No relevant Ping documentation found: {response['reason']}")
         return
+    answer_context = response.get("answer_context")
+    if isinstance(answer_context, dict):
+        print(f"Answer context: {answer_context['instruction']}")
     for position, result in enumerate(response["results"], start=1):
         assert isinstance(result, dict)
         print(f"{position}. {result['product']} — {result['title']} (score {result['score']})")
@@ -614,6 +862,16 @@ def _print_human(response: dict[str, object]) -> None:
             print(f"   Snapshot: {result['local_snapshot']}{freshness}")
         if result["local_manifest"]:
             print(f"   Manifest: {result['local_manifest']}")
+        if "snapshot_page_status" in result:
+            print(f"   Snapshot page: {result['snapshot_page_status']}")
+            excerpt = result.get("snapshot_excerpt")
+            if isinstance(excerpt, dict):
+                print(
+                    f"   Excerpt lines {excerpt['start_line']}-{excerpt['end_line']} "
+                    f"(truncated: {str(excerpt['truncated']).lower()}):"
+                )
+                for line in str(excerpt["text"]).splitlines():
+                    print(f"      {line}")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -623,6 +881,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--top-k", type=int, default=5, help="Number of results (1-20)")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
     parser.add_argument("--data-root", help="Override the cached docset root")
+    parser.add_argument(
+        "--answer-context",
+        action="store_true",
+        help=(
+            "Include bounded exact-page snapshot excerpts, cap results at 3, and emit "
+            "instructions that prohibit follow-up local snapshot reads"
+        ),
+    )
     args = parser.parse_args(argv)
     if not 1 <= args.top_k <= 20:
         parser.error("--top-k must be between 1 and 20")
@@ -632,6 +898,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             product_filter=args.product,
             top_k=args.top_k,
             data_root=args.data_root,
+            answer_context=args.answer_context,
         )
     except (OSError, ValueError) as exc:
         if args.json:

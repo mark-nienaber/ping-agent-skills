@@ -15,23 +15,28 @@
         "citation_policy": "gold",
         "gold_source_groups": [
           {
-            "id": "policy-structure",
+            "id": "gateway-outbound-processing",
             "urls": [
-              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_policy_sets_rules.md",
-              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_rule_structure.md"
-            ]
-          },
-          {
-            "id": "request-attributes",
-            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_request_response_flow.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw_policy_reqs.md",
               "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_sec_gw_policy_request_attrs.md"
             ]
           },
           {
-            "id": "testing",
+            "id": "response-redaction-statement",
             "urls": [
-              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_trust_framework_testing.md",
-              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_visualize_pol_resp.md"
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_provided_statements.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_statements.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_policy_modify.md"
+            ]
+          },
+          {
+            "id": "verification",
+            "urls": [
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_policy_testing.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_visualize_pol_resp.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_policy_modify.md",
+              "https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/paz_api_security_gw_policy_reqs.md"
             ]
           }
         ],

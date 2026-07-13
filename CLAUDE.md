@@ -8,8 +8,9 @@ This repo contains an efficient deep-documentation layer for Ping Identity Agent
 - `SKILL.md` frontmatter must stay minimal and agentskills-compatible: `name` and `description` are required; `license` is allowed.
 - The frontmatter `name` must match the skill directory.
 - The frontmatter `description` is the activation trigger. Keep it concrete, product-specific, and under 500 characters.
-- Use the bundled `search_docs.py` command for top-k discovery. Never load an entire `llms.txt` into model context.
-- Prefer the exact live Markdown URL returned by the search. Use only a manifest-listed snapshot when offline or live fetch fails, and disclose its date and partial/full coverage.
+- Use `search_docs.py --json --answer-context` for bounded top-k discovery. Never load an entire `llms.txt` into model context.
+- Use only the returned `snapshot_excerpt` when `snapshot_page_status` is `present`; never open, grep, or read snapshot files directly. If the exact page is absent, the excerpt is null, or current information matters, fetch the exact live Markdown URL returned by the search.
+- Keep retrieval proportional: one primary search, at most one narrower retry, and at most two exact live-page fetches before answering or identifying the missing evidence.
 - Do not rename `scripts/docsets.yaml` slugs without updating every reference.
 - `pingcli` is registered but disabled because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
 

@@ -22,7 +22,8 @@ Deterministic reporting includes:
 - citation-policy behavior for the non-Ping case;
 - explicitly labelled regex heuristics for key facts and clarification behavior;
 - median and p95 elapsed time; and
-- tool-call and token metadata when the adapter supplies it.
+- tool-call, token, and cost metadata together with per-field coverage rates; and
+- whether the provider's runtime built-in skill inventory is fully reported, stable, and identical across A/B.
 
 Technical correctness, completeness, evidence quality, safety, and actionability require blinded SME scoring with [SME_RUBRIC.md](SME_RUBRIC.md).
 
@@ -53,7 +54,7 @@ The runner rejects extra staged umbrella skills. This prevents condition A from 
 
 The `--agent-command` is executed once per response in a new isolated working directory. The rendered prompt is sent on standard input and is also available in `PILOT_PROMPT_FILE`.
 
-The command or thin provider adapter must load skills **only** from `PILOT_SKILLS_DIR`. It must disable globally installed, auto-discovered, or marketplace skills for the evaluated process. Network access is allowed because the current deep-doc design is live-doc-first, but both conditions must receive identical network/tool access.
+The command or thin provider adapter must load assigned skills **only** from `PILOT_SKILLS_DIR`. It must disable globally installed, auto-discovered, or marketplace skills for the evaluated process. Provider-bundled skills that cannot be disabled must be identical in both conditions and recorded by the adapter. Network access is allowed for live-page fallback, but both conditions must receive identical network/tool access.
 
 The runner sets these environment variables:
 
@@ -77,6 +78,17 @@ For an auditable run, the adapter must write at least:
 {
   "condition_id": "B",
   "loaded_skill_roots": ["/absolute/path/from/PILOT_SKILLS_DIR"],
+  "loaded_skills": [
+    "ping-app-integration",
+    "ping-docs",
+    "ping-foundation",
+    "ping-identity-for-ai",
+    "ping-orchestration",
+    "ping-quickstart",
+    "ping-universal-services"
+  ],
+  "filesystem_sandbox": true,
+  "runtime_builtin_skills": ["provider-bundled-skill"],
   "model": "provider-model-version",
   "tool_calls": 4,
   "input_tokens": 8200,
@@ -85,7 +97,20 @@ For an auditable run, the adapter must write at least:
 }
 ```
 
-`condition_id` must match the assignment, and `loaded_skill_roots` must contain only the exact `PILOT_SKILLS_DIR` path. Tool and token fields are optional. A missing or mismatched isolation declaration makes the response unsuccessful and prevents a publishable comparison.
+`condition_id` must match the assignment, `loaded_skill_roots` must contain only the exact `PILOT_SKILLS_DIR` path, and `loaded_skills` must exactly match the names declared by the `SKILL.md` files actually staged below that root. The default manifest also requires `filesystem_sandbox: true`; this is a protocol declaration, not a substitute for inspecting the adapter's sandbox configuration. `runtime_builtin_skills` must list provider-bundled skills that could not be disabled, including an empty list when there are none. Tool, token, and cost values are optional, but the report shows their coverage so a partial sample cannot masquerade as a complete efficiency comparison. Missing or mismatched required metadata makes the response unsuccessful and prevents a publishable comparison.
+
+## Bundled Claude Code adapter
+
+`adapters/claude_code.py` runs each response through Claude Code with a fresh home and configuration directory, an isolated temporary working directory, project-local copies of only the assigned skills and deep-doc data, no MCP servers, and an explicit tool allowlist. Claude's OS-level Bash sandbox is mandatory and fails closed; the host home is denied, unsandboxed commands are disabled, and cloud credentials are scrubbed from tool subprocesses. Provider-bundled skills, memory, CLAUDE files, background tasks, and built-in agents are disabled where the CLI supports it. The adapter verifies that Claude's runtime-announced inventory contains every assigned skill and records unavoidable built-ins (currently `doctor`) for the A/B consistency check. It also records native skill invocations, tools, resolved models, tokens, cost, and permission denials. It requires an already authenticated Claude Code installation; credentials are not copied into a result workspace.
+
+The adapter requires an explicit model identifier and rejects mutable aliases such as `sonnet`. Pin it for every run:
+
+```bash
+export PILOT_CLAUDE_MODEL=global.anthropic.claude-sonnet-4-6
+export PILOT_ADAPTER_TIMEOUT=285
+```
+
+Keep the pilot output outside this source checkout. That prevents a shell-capable condition-A agent from discovering the deep-doc repository simply by walking up from its working directory.
 
 ## Validate and run
 
@@ -105,7 +130,8 @@ Run the full randomized pilot with a provider adapter:
 
 ```bash
 python3 evals/run.py \
-  --agent-command '/absolute/path/to/my-agent-adapter' \
+  --agent-command "$PWD/evals/adapters/claude_code.py" \
+  --output /absolute/path/outside/repo/ping-pilot-results \
   --run-id pilot-001 \
   --jobs 1
 ```
@@ -114,7 +140,8 @@ For an iterative smoke test, select cases, one repetition, and both conditions:
 
 ```bash
 python3 evals/run.py \
-  --agent-command '/absolute/path/to/my-agent-adapter' \
+  --agent-command "$PWD/evals/adapters/claude_code.py" \
+  --output /absolute/path/outside/repo/ping-pilot-results \
   --run-id smoke-001 \
   --case paz-conditional-redaction \
   --case ambiguous-token-rollover \
@@ -128,10 +155,10 @@ Use `--resume` to skip records whose `result.json` already exists. Use `--discar
 Generate deterministic results and a blinded SME review packet:
 
 ```bash
-python3 evals/score.py evals/results/pilot-001
+python3 evals/score.py /absolute/path/outside/repo/ping-pilot-results/pilot-001
 ```
 
-Outputs are written under `evals/results/pilot-001/report/`:
+Outputs are written under `<output>/pilot-001/report/`:
 
 - `report.md` and `summary.json` — aggregate comparison;
 - `case-scores.csv` — deterministic per-response metrics;
@@ -145,7 +172,7 @@ python3 evals/score.py evals/results/pilot-001 \
   --sme-reviews /path/to/completed-sme-reviews.csv
 ```
 
-Do not publish aggregate gains if either condition has less than 100% isolation verification. Report paired product-level regressions and critical correctness/safety failures, not only the overall mean.
+Do not publish aggregate gains if either condition has less than 100% isolation verification. Do not attribute differences to the deep-doc layer unless runtime built-in skill inventories have 100% metadata coverage, are internally stable, and are identical across A/B. Treat tool, token, or cost comparisons as incomplete whenever the relevant numeric metadata coverage is below 100%. Report paired product-level regressions and critical correctness/safety failures, not only the overall mean.
 
 ## Harness self-test
 

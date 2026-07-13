@@ -61,16 +61,16 @@ Point the tool at `plugins/ping-identity-docs/runtime-skills/` for the consolida
 
 1. The official umbrella skills establish the Ping product and intent.
 2. `ping-docs` runs `scripts/search_docs.py`, which scans the cached indexes in code rather than loading them into model context.
-3. The search returns up to five ranked pages with product, version, exact live Markdown URL, and a validated local snapshot when one exists.
-4. The agent reads only the best live page. If live access is unavailable, it reads a small relevant section from the returned snapshot and discloses the snapshot date and coverage.
+3. Answer-context mode returns at most three ranked pages, exact live Markdown URLs, exact-page snapshot status, and bounded excerpts for pages actually captured.
+4. The agent uses the returned excerpt directly. It fetches a selected live page only when the exact page is absent from the snapshot or current behavior must be verified.
 5. Unrelated queries and low-confidence searches abstain instead of selecting an arbitrary Ping docset.
 
 Try the retriever directly:
 
 ```bash
-scripts/search-docs.sh --product pingam --top-k 5 \
+scripts/search-docs.sh --answer-context --product pingam \
   "cache a risk value between scripted decision nodes"
-scripts/search-docs.sh --json "PingAuthorize policy response redaction"
+scripts/search-docs.sh --json --answer-context "PingAuthorize policy response redaction"
 ```
 
 The search command performs no network requests. Live Ping Markdown remains the source of truth; snapshots are an explicit offline fallback.
@@ -230,7 +230,7 @@ The report includes validation output, route diagrams, selected live URLs, and f
 - A: the six official Ping umbrella Agent Skills.
 - B: the same six skills plus `ping-docs`.
 
-There is no MCP condition. The suite contains 15 natural TC prompts, randomized repetitions, isolated skill roots, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token capture, ambiguity and out-of-domain controls, and a blinded SME rubric. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
+There is no MCP condition. The suite contains 15 natural TC prompts, randomized repetitions, isolated skill roots, exact staged-skill and filesystem-sandbox protocol checks, gold documentation URLs, deterministic citation/fact metrics, latency/tool/token/cost capture with coverage rates, provider built-in skill inventory comparison, ambiguity and out-of-domain controls, and a blinded SME rubric. A clean-room Claude Code adapter is included for reproducible runs without user skills or MCP servers. See [`evals/README.md`](evals/README.md) for staging, dry-run, execution, and scoring commands.
 
 ## Layout
 
@@ -253,6 +253,7 @@ plugins/
 reports/
   routing-proof.html
 evals/
+  adapters/claude_code.py
   pilot.json
   cases.json
   run.py
@@ -275,7 +276,7 @@ scripts/
 
 ## Snapshot Policy
 
-Snapshots are committed for offline safety. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembles at most 20 guide pages, and finally tries the first official Markdown page. Manifests record pages indexed, pages actually captured, full/partial coverage, source type, sync date, and checksums. Retained files omitted from the current manifest are not offered by `ping-docs` because their current age and provenance are unknown.
+Snapshots are committed for offline safety. Sync tries versioned `single-page.md`, then unversioned `single-page.md`, then assembles at most 20 guide pages, and finally tries the first official Markdown page. Manifests record pages indexed, pages actually captured, full/partial coverage, source type, sync date, and checksums. `ping-docs` exposes a snapshot only when the exact selected page is present; a partial guide is never presented as an offline copy of a page it did not capture. Retained files omitted from the current manifest are also ignored because their current age and provenance are unknown.
 
 ## Troubleshooting
 

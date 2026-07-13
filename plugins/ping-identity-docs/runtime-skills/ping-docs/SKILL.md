@@ -5,30 +5,43 @@ description: Find exact, detailed, version-specific Ping Identity documentation 
 
 # Ping documentation retrieval
 
-Search the cached documentation indexes with the bundled script. Do not read an entire
-`llms.txt` into context.
+Search the cached documentation indexes with the bundled script. Use answer-context mode so the
+script verifies exact-page snapshot coverage and returns bounded excerpts itself.
 
 ```bash
-python3 scripts/search_docs.py --json --top-k 5 "<specific user task>"
+python3 scripts/search_docs.py --json --answer-context "<specific user task>"
 ```
 
 Add `--product <slug-or-name>` when the product is known, for example:
 
 ```bash
-python3 scripts/search_docs.py --json --product pingam "configure account lockout"
+python3 scripts/search_docs.py --json --answer-context --product pingam "configure account lockout"
 ```
 
-## Workflow
+## Bounded workflow
 
-1. Search with the user's concrete task, preserving product names, error text, endpoint names,
-   and version terms.
-2. Select the highest-scoring result that matches the user's product and intent. Treat a
-   `no_results` response as abstention: clarify the product or task instead of guessing.
-3. Read the returned live Markdown URL when live access is available.
-4. Otherwise, read only the returned `local_snapshot` and use `snapshot_sync_date` to disclose
-   its freshness. The snapshot can contain multiple pages, so search within it for the returned
-   title or URL before loading a small relevant section.
-5. Cite the live Markdown URL in the answer even when the local snapshot supplied the content.
+1. Run exactly one answer-context search with the concrete task, preserving the product, version,
+   error text, endpoint, and feature names. Use `--product` whenever the product is known. Execute
+   the script directly; do not read its source.
+2. Select at most two results that directly match the product and intent. Treat `no_results` as
+   abstention: clarify instead of guessing. One narrower retry is allowed when the first result
+   set is irrelevant; do not run additional searches.
+3. Use only the returned `snapshot_excerpt` for offline content. Never open, grep, search, or read
+   a `local_snapshot`, `llms.txt`, the script source, or a per-docset `SKILL.md`. A null excerpt
+   means the exact page is not captured; do not search neighboring snapshot content for it.
+4. For a selected result with a null excerpt, fetch its `live_markdown_url` directly. Fetch at most
+   two selected live pages. Do not broaden into web search unless a selected URL has moved.
+5. Stop when the evidence establishes the relevant feature or configuration surface, the inputs
+   needed, and the main validation or safety constraint. If exact syntax is not documented in the
+   selected excerpts, identify that gap and give a clearly labelled recommendation instead of
+   searching for optional corroboration.
+6. Cite each selected `live_markdown_url` even when its dated local snapshot supplied the content.
+   Disclose `snapshot_sync_date` only when relying on the snapshot for potentially changeable
+   behavior.
+
+Hard retrieval budget per request: at most two answer-context searches, two direct live-page
+fetches, and zero follow-up local file reads. Do not chase alternate terminology after the
+selected evidence supports the answer.
 
 The script performs no network requests. It discovers docsets from the repository layout,
 `references/docsets/` in a copied standalone skill, or `PING_DOCS_DATA_ROOT` when explicitly set.

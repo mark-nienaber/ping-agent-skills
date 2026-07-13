@@ -23,6 +23,19 @@ else:
 metadata = {
     "condition_id": os.environ["PILOT_CONDITION_ID"],
     "loaded_skill_roots": [os.environ["PILOT_SKILLS_DIR"]],
+    "loaded_skills": sorted(
+        [
+            "ping-quickstart",
+            "ping-foundation",
+            "ping-app-integration",
+            "ping-orchestration",
+            "ping-universal-services",
+            "ping-identity-for-ai",
+        ]
+        + (["ping-docs"] if os.environ["PILOT_CONDITION_ID"] == "B" else [])
+    ),
+    "filesystem_sandbox": True,
+    "runtime_builtin_skills": ["provider-help"],
     "model": "mock-agent-v1",
     "tool_calls": 1,
     "input_tokens": 100,
