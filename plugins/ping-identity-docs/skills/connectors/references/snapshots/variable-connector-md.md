@@ -1,12 +1,12 @@
 ---
 title: Variable Connector
-description: The Variable connector lets you store and retrieve flow and user attributes as variables in your PingOne DaVinci flow.
+description: Configure the Variable connector to store and retrieve flow, flow instance, and user variables within your PingOne DaVinci flows
 component: connectors
 page_id: connectors::variable_connector
 canonical_url: https://docs.pingidentity.com/connectors/variable_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -34,17 +34,17 @@ The Variable connector lets you store and retrieve flow and user attributes as v
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Variable connector
 
-In DaVinci, add a Variable connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Variable connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 |   |                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------ |
@@ -52,7 +52,7 @@ In DaVinci, add a Variable connector. Learn more in [Adding a connector](https:/
 
 ## Using the connector in a flow
 
-Variables are values that can be read and modified during a flow. In DaVinci, variables allow users to track and adjust values within flows. They can be read and modified during a flow. Variables can be strings, Boolean values, numbers, or objects.
+Variables are values that can be read and modified during a flow. In PingOne DaVinci, variables allow users to track and adjust values within flows. They can be read and modified during a flow. Variables can be strings, Boolean values, numbers, or objects.
 
 In a flow, variables can be used to track information and a variable's value can be used to determine which nodes are run within the flow. Every variable has a context, which determines how widely its value is shared. There are three types of variables:
 
@@ -66,9 +66,9 @@ Persists across multiple executions of that flow. This is useful for storing com
 
 ### User Variable
 
-A shadow user must be available in order to use this variable. This capability adds a value to the user's details or `userInfo` in DaVinci.
+A shadow user must be available in order to use this variable. This capability adds a value to the user's details or `userInfo` in PingOne DaVinci.
 
-The DaVinci Variable connector has several capabilities that allow you to manage flows, flow instances, and user variables used across flows and instances.
+The PingOne DaVinci Variable connector has several capabilities that allow you to manage flows, flow instances, and user variables used across flows and instances.
 
 ## Capabilities
 

@@ -744,6 +744,32 @@ Define region identfiers and configure cross-region settings for multi-region Pi
 ---
 
 ---
+title: Console configuration push
+description: When multiple PingFederate servers are set up to run as a cluster, the administrative console provides a Cluster Management window.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_console_config_push
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_console_config_push.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 5, 2022
+---
+
+# Console configuration push
+
+When multiple PingFederate servers are set up to run as a cluster, the administrative console provides a **Cluster Management** window.
+
+Whenever applicable changes are made through the administrative console, a message appears at top of the console as a reminder to go to the **Cluster Management** window and to replicate the current console configuration to all server nodes in the cluster.
+
+|   |                                                                                                                                                      |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You must also use the **Replicate Configuration** window to initiate the transmission of the license file from the console node to all server nodes. |
+
+The **Cluster Management** window is also useful for verifying the current member servers of your PingFederate cluster.
+
+---
+
+---
 title: Defining subclusters
 description: Subclustering improves efficient scaling by limiting session-state communication to other nodes within a subcluster.
 component: pingfederate
@@ -776,3 +802,344 @@ In this example, the `preferred.node.indices` property of each server in the clu
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | When PingFederate acts as an OAuth authorization server (AS) and the access token management instance uses a reference token data model, the resource server (RS) must send a request to PingFederate to de-reference the access token for the corresponding identity and security information. Because the OAuth clients and the RS send their requests separately, PingFederate shares reference token information among all engine nodes despite any state server or subcluster setup. |
+
+---
+
+---
+title: Deploying cluster servers
+description: A PingFederate cluster consists of multiple nodes, each of which are likely running on a dedicated host system.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_deploying_cluster_servers
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_deploying_cluster_servers.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 23, 2026
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  result: Result
+---
+
+# Deploying cluster servers
+
+A PingFederate cluster consists of multiple nodes, each of which are likely running on a dedicated host system.
+
+## About this task
+
+In a cluster, there are two types of nodes: engine nodes and administrative console nodes. Engine nodes service end-user traffic, and multiple nodes are recommended to ensure high availability for your deployment. Only one administrative console node can be active in a given cluster. This node provides the user interface and administrative API that you can use to configure the cluster. Additionally, the administrative console node manages the following runtime functions:
+
+* Performing periodic configuration archive backup
+
+* Cleaning expired persistent authentication sessions
+
+* Cleaning expired access grants
+
+* Updating connections from metadata URLs, including PingOne SP connections if configured, and sending email notifications
+
+* Performing automatic rotation of signing certificates if enabled
+
+|   |                                                                                                                                                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Additional steps are required to set up failover for provisioning. If you are grouping servers exclusively to provide for provisioning failover, skip these steps and refer to [Deploy provisioning failover](pf_deploy_provis_failover.html). |
+
+These steps describe how to configure and deploy clustered PingFederate servers by editing each node in the `<pf_install>/pingfederate/bin/run.properties`.
+
+## Steps
+
+1. Install PingFederate on each server in a cluster.
+
+2. Edit the clustering properties of each node in the `<pf_install>/pingfederate/bin/run.properties` file. The following table provides information about each property:
+
+   | Property                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | `pf.operational.mode`                                           | Controls the operational mode of the PingFederate server. PingFederate supports the following modes:- `STANDALONE` (default)
+
+     This server is a standalone instance that operates as the administrative console and runtime engine.&#xA;&#xA;The value STANDALONE should only be used in a cluster where session-state management is not needed for any reason and configuration-archive deployment is used as the configuration synchronization method.- `CLUSTERED_CONSOLE`
+
+     This server is part of a cluster and operates only the administrative console.
+
+     &#xA;&#xA;By default, only one node in a cluster can run the administrative console. If the active/passive admin nodes feature is enabled, you can have more than one CLUSTERED\_CONSOLE.
+
+   - `CLUSTERED_ENGINE`
+
+     This server is part of a cluster and operates only as the runtime engine.                                                                                                                                                                                                                                                                                                                            |
+   | `pf.cluster.node.index`                                         | Defines a unique index number for the server in a cluster. The index number is used to identify peers and optimize inter-node communication. The allowed range is `0` - `65535`.If no value is set for the node index, the system assigns an auto-generated value in the range of `0` to `2147483647`.This property has no default value. If you specify an index number, you can configure instances of the Cluster Node Authentication Selector and place them in authentication policies to customize authentication requirements based on the runtime node servicing a request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   | `pf.cluster.auth.pwd`                                           | Sets the password that each node in the cluster must use to authenticate when joining the cluster. This prevents unauthorized nodes from joining a cluster. You can leave this value blank, but all nodes in the cluster must have the same value.You can also use the obfuscate utility to obfuscate your password. Learn more in [Configuring forward proxy server settings](../administrators_reference_guide/pf_configure_forward_proxy_server_settings.html).&#xA;&#xA;Consider using a randomly-generated password with 22 or more alphanumeric characters. A strong, obfuscated, Jgroups cluster password can be generated with the clusterkey utility (clusterkey.bat for Windows and clusterkey.sh for Linux), located in the \<pf\_install>/pingfederate/bin directory.All nodes in a cluster must share the same value, blank or otherwise.                                                                                                                                                                                                                                                                                                                                      |
+   | `pf.cluster.encrypt`                                            | Indicates whether to encrypt network traffic sent between nodes in a cluster. The possible values are `true` or `false` (default).When set to `true`, communication within the cluster is encrypted with a symmetric key derived from the value of the `pf.cluster.auth.pwd` property.&#xA;&#xA;When the pf.cluster.encrypt property is set to true, you must provide a value for the pf.cluster.auth.pwd property. Otherwise PingFederate aborts during its startup process.All nodes in a cluster must have the same value for this property.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | `pf.cluster.encryption.keysize`                                 | The length of the key that PingFederate takes into consideration when deriving the symmetric key from the value of the `pf.cluster.auth.pwd` property for the purpose of encrypting network traffic sent between nodes in a cluster. Required only when the `pf.cluster.encrypt` is set to `true`.All nodes in a cluster must have the same value set for this property.The default value is `128`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   | `pf.cluster.bind.address`                                       | Defaults to `NON_LOOPBACK`, which leaves the system to choose an available non-loopback IP address. Alternatively, enter an IP address of the network interface to which the cluster communication should bind. For machines with more than one network interface, provide a specific IP address.You can use this property to increase performance (particularly with UDP) and improve security by segmenting cluster-communication traffic onto a private network or VLAN.&#xA;&#xA;Besides NON\_LOOPBACK or an IP address, you can also use other values supported by JGroups. For more information, see the bind\_addr special values in JGroups documentation.	&#xA;&#xA;This field doesn't support DNS name. Use the default value NON\_LOOPBACK or replace it with an IP address.                                                                                                                                                                                                                                                                                                                                                                                                     |
+   | `pf.cluster.bind.port`                                          | Specifies the port associated with the `pf.cluster.bind.address` property or with the default network interface used.This is the port used by other cluster members during their discovery process, usually via the `pf.cluster.tcp.discovery.initial.hosts` property.The default value is `7600`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | `pf.cluster.failure.detection.bind.port`                        | Indicates the bind port of a server socket that's opened on the given node and used by other nodes as part of the cluster's failure-detection mechanisms. If set to `0` or unspecified, a random available port is used. The default value is `7700`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   | `pf.cluster.transport.protocol`                                 | Indicates the transport protocol used for cluster communication. Values are `udp` or `tcp`. The default value is *tcp*. All nodes in a cluster must have the same value set for this property.Use UDP when IP multicasting is enabled in the network environment and the majority of cluster traffic is point-to-full-group. You must also configure both the `pf.cluster.mcast.group.address` and `pf.cluster.mcast.group.port` properties.Use TCP for geographically dispersed servers or when multicast isn't available or disabled for some other reason. For example, when using routers that don't support multicast messaging. TCP might also be appropriate if your cluster configuration employs more point-to-point or point-to-few messaging than point-to-group.You must also configure the `pf.cluster.tcp.discovery.inital.hosts` property.&#xA;&#xA;This property is a reference to a protocol-stack XML configuration file located in the \<pf\_install>/pingfederate/server/default/conf/ directory. Two stacks are provided: one for UDP multicast and one for TCP. You can customize either stack or add to it as needed by modifying the associated configuration file. |
+   | `pf.cluster.mcast.group.address`                                | Defines the IP address shared among nodes in the same cluster for UDP multicast communication; required when UDP is set as the transport protocol. The valid range is `224.0.0.0` - `239.255.255.255`. Some addresses in this range are reserved for other purposes. This property is not used for TCP.All nodes in a cluster must have the same value set for this property.The default value is *239.16.96.69*.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   | `pf.cluster.mcast.group.port`                                   | Defines the port in conjunction with the `pf.cluster.mcast.group.address` property value. This property is not used for TCP configurations.All nodes in a cluster must have the same value set for this property.The default value is `7601`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   | `pf.cluster.tcp.discovery.initial.hosts`                        | Designates a static list of PingFederate servers to be contacted for cluster membership information when discovering, joining, and rejoining the cluster. This value is required when TCP is set as the transport protocol. The value is a comma-separated list of host names (or IP addresses) and their cluster bind ports, for example, `host1[7600],10.0.1.4[7600],host7[1033],10.0.9.45[2231]`.When using static discovery, add at least one node for the cluster to know in advance. This property should contain all nodes in the cluster (including itself) to increase the likelihood of new members finding and joining the cluster.When using dynamic discovery, leave this property blank and enable dynamic discovery in the `<pf_install>/pingfederate/server/default/conf/tcp.xml` file. Learn more in [Enabling dynamic discovery for clustering](pf_enabling_dynamic_discovery_clustering.html).                                                                                                                                                                                                                                                                           |
+   | `pf.cluster.adaptive`                                           | Indicates whether runtime state-management services should use the adaptive clustering architecture.The default value is `true` for new installations and `false` for upgrades.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | `pf.cluster.diagnostics.enabled`                                | `false` turns off JGroups diagnostics. `true` turns it on.The default value is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   | `pf.cluster.diagnostics.addr` and `pf.cluster.diagnostics.port` | The multicast address and port this node listens on for diagnostic messages.The default values are `224.0.75.75` and `7500`, respectively. Do not change the default values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+   | `node.tags`                                                     | Defines the tags associated with this node.Configuration is optional. When configured, PingFederate considers this property when processing requests. For example, you can use tags to determine the datastore location that this PingFederate node communicates with. You can also use tags in conjunction with authentication selectors and policies to define authentication requirements.Node tags only apply to engine nodes (CLUSTERED\_ENGINE). If you configure a node tag for the admin node (CLUSTERED\_ADMIN), it won't appear in the **Cluster Management** overview\.You can specify one tag.```
+   node.tags=north
+   ```You can also specify a list of prioritized, space-separated tags.```
+   node.tags=1 123 234
+   ```Tags can't contain spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+3. (Optional) Edit configuration files in each node that control the cluster protocol and runtime state-management service. For more information, see [Runtime state-management architectures](pf_runtime_state_manage_achitec.html) and [Runtime state-management services](pf_runtime_state_manage_serv.html).
+
+4. (Optional) If outbound provisioning is configured for your site and you want to provide failover capabilities, identify and configure the provisioning failover nodes. For more information, see [Deploy provisioning failover](pf_deploy_provis_failover.html).
+
+5. Start or restart PingFederate on all nodes.
+
+6. Sign on to the administrative console.
+
+7. If you haven't done so, import your PingFederate license. Learn more in [License management](../administrators_reference_guide/help_licensemanagementtasklet_licensemanagementstate.html).
+
+8. On the **System > Server > Cluster Management** page, click **Replicate Configuration** to push the license information from the console node to all engine nodes.
+
+## Result
+
+After you set up the clustered environment, you can start configuring PingFederate through the administrative console. When PingFederate detects a change, it prompts you to replicate the configuration to all engine nodes.
+
+---
+
+---
+title: Deploying provisioning failover
+description: After configuring outbound provisioning, you can set up one or more PingFederate failover servers specifically for provisioning backup.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_deploy_provis_failover
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_deploy_provis_failover.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 8, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Deploying provisioning failover
+
+After configuring outbound provisioning, you can set up one or more PingFederate failover servers specifically for provisioning backup.
+
+## About this task
+
+Provisioning runtime processing and failover is independent of single sign-on (SSO) or single logout (SLO) runtime processing and server clustering. However, if you are already deploying, or have deployed, a cluster for federation-protocol runtime processing, you can use a subset of those servers for provisioning failover. Alternatively, you can mix the configuration or set up provisioning-failover servers independently.
+
+|   |                                                                                             |
+| - | ------------------------------------------------------------------------------------------- |
+|   | Each server in the failover network must be configured to use the same relational database. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Use the built-in HSQLDB only for trial or training environments. For testing and production environments, always use a secured external storage solution for proper functioning in a clustered environment.Testing involving HSQLDB is not a valid test. In both testing and production, it might cause various problems due to its limitations and HSQLDB involved cases are not supported by Ping Identity. |
+
+## Steps
+
+1. Select two or more runtime instances of PingFederate to configure for provisioning failover.
+
+2. For each server instance, edit provisioning properties in the `<pf_install>/pingfederate/bin/run.properties` file as follows:
+
+   | Property                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | `pf.provisioner.mode`                | The status of outbound provisioning. Allowed values are:- `OFF` (default)
+
+     Outbound provisioning is disabled.
+
+   - `STANDALONE`
+
+     Provisioning is enabled, without failover.
+
+   - `FAILOVER`
+
+     Provisioning is enabled, with failover.
+
+     &#xA;&#xA;The value STANDALONE cannot be used for failover configuration. This property must be set to FAILOVER on the primary and secondary servers.                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | `provisioner.node.id`                | The unique index number of the provisioning server.Each server must have a unique index number, which is used to prioritize which server is currently active and which is next in line in case of a failure. Values are any number.If no `provisioner.node.id` value is specified, PingFederate will use the `pf.cluster.node.index` value as the provisioner node ID.If no `pf.cluster.node.index` is specified, PingFederate will automatically generate an index.&#xA;&#xA;The primary active primary server should have an index number of 1. The lowest value in the environment becomes the primary.&#xA;&#xA;These node IDs are not required to start at 1, but it is recommended that they start at 1. The number must not exceed the maximum integer value supported by Java, which is 2147483647. |
+   | `provisioner.failover. grace.period` | The time interval (in seconds) between the first indication that a node is dead and failover to the next server in line. The time period should be greater than the **Synchronization Frequency** set in the **System > Server > Protocol Settings > Outbound Provisioning** tab on the administrative console.The default value is `600`, which is 10 minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+   |   |                                                                                                                                                                                                                                                                     |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | You must seperately configure the failover properties in the `run.properties` file on each provisioning server, because the `run.properties` file is not copied among the provisioning servers automatically or as part of the **Replicate Configuration** process. |
+
+3. Start or restart all of the PingFederate servers.
+
+4. If you have not already done so, set up an external database to facilitate provisioning and then update the **Provisioning Data Store** setting on the **System > Server > Protocol Settings > Outbound Provisioning** tab. See [Configuring outbound provisioning settings](../administrators_reference_guide/pf_configuring_outbound_provisioning_settings.html) for more information.
+
+5. After configuration, if the provisioning servers belong to the same PingFederate clustered environment, go to the **System > Server**. In the **Cluster Management** window, replicate the new **Provisioning Data Store** setting to all nodes. If the provisioning servers are individual PingFederate servers, for each provisioning server, create a datastore connection to the same external database and update the **Provisioning Data Store** setting manually.
+
+---
+
+---
+title: Designating state servers
+description: A state servers clustering deployment model improves scalabiltity by reducing communication between nodes.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_design_state_server
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_design_state_server.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 2, 2024
+---
+
+# Designating state servers
+
+A state servers clustering deployment model improves scalabiltity by reducing communication between nodes.
+
+You can select a few engine nodes as state servers. This deployment approach scales better than the all-nodes approach because additional nodes do not require connections to every existing node, they only require a connection between each server and each state server.
+
+Configure this deployment by setting the `preferred.node.indices` of other servers in a group to those of the state servers. Configure the load balancer to isolate the state-server nodes from end-user traffic.
+
+|   |                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The underlying cluster protocol still requires that all nodes are able to communicate with one another. The topology here is only an optimization for the runtime state-management services that support the concept of preferred nodes. |
+
+The following diagram illustrates the state-server approach.
+
+![Runtime state-management architecture: Designating state servers](_images/nmh1564003645652.png)
+
+In this example, the two state-server nodes have indices of 1 and 2. The `preferred.node.indices` property of the engine nodes handling requests would be `preferred.node.indices=1,2`.
+
+Because the state servers are not processing transactions (based on the setup of the load balancer), the `preferred.node.indices` property for them is not used and can be left blank.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When PingFederate acts as an OAuth authorization server (AS) and the access token management instance uses a reference token data model, the resource server (RS) must send a request to PingFederate to de-reference the access token for the corresponding identity and security information. Because the OAuth clients and the RS send their requests separately, PingFederate shares reference token information among all engine nodes despite any state server or subcluster setup. |
+
+---
+
+---
+title: Directed clustering
+description: This topic provides an overview of manual configuration of PingFederate sever nodes through directed clustering.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_directed_cluster
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_directed_cluster.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 5, 2022
+section_ids:
+  preferred-node-indices: Preferred node indices
+---
+
+# Directed clustering
+
+This topic provides an overview of manual configuration of PingFederate sever nodes through directed clustering.
+
+Directed clustering allows administrators to manually specify which PingFederate nodes should participate in tracking user sessions. Most group Remote Procedure Call (RPC)-based service implementations make use of a preferred-nodes concept, which assigns each node a list of other nodes, identified by index, with which it shares session-state information.
+
+Each service implementation is controlled separately by a configuration file located in the `<pf_install>/pingfederate/server/default/conf` directory. You must replicate any changes manually for each cluster node.
+
+The following tables indicate the configuration file that applies to each implementation and the applicable properties.
+
+|   |                                                                                             |
+| - | ------------------------------------------------------------------------------------------- |
+|   | The Artifact-Message Persistence and Retrieval Service uses only the `rpc.timeout` setting. |
+
+**Configuration file and service implementation**
+
+| Configuration file                         | RPC-based service implementation                                                                |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `cluster-account-locking.conf`             | [Account Locking Service](pf_acc_lock_service.html)                                             |
+| `cluster-artifact.conf`                    | [Artifact-Message Persistence and Retrieval Service](pf_artif_mess_persis_retriev_service.html) |
+| `cluster-assertion-replay-prevention.conf` | [Assertion Replay Prevention Service](pf_assertion_replay_prevention_service.html)              |
+| `cluster-idp-session-registry.conf`        | [IdP Session Registry Service](pf_idp_session_registry_service.html)                            |
+| `cluster-inter-request-state.conf`         | [Inter-Request State-Management (IRSM) Service](pf_irsm_service.html)                           |
+| `cluster-session-revocation.conf`          | [Back-Channel Session Revocation Service](pf_bac_chann_sess_revoc_service.html)                 |
+| `cluster-sp-session-registry.conf`         | [SP Session Registry Service](pf_sp_sess_regist_service.html)                                   |
+
+**Property description**
+
+| Property                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `preferred.node.indices`                                                              | A comma-separated list of indices identifying the nodes with which this node shares session-state information for the associated service. If left blank, this node sends session-state information to all nodes in the cluster as it processes SSO and logout requests.The Artifact-Message Persistence and Retrieval Service and the Back-Channel Session Revocation Service do not support this parameter.Ignored when adaptive clustering is enabled.This property has no default value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `preferred.node.group.id`(found only in the `cluster-idp-session-registry.conf` file) | An alphanumeric group ID for a subcluster. If specified, each subcluster must have a unique group ID. At startup, PingFederate validates that the group ID is not already registered in the cluster by another list of preferred nodes. If the validation fails, PingFederate aborts the startup process and exits.When the group ID is specified, the session identifier contains the information about the originating subcluster. This is helpful in deployments where PingFederate has been configured to manage authentication sessions on the **Authentication > Policies > Sessions** window. When an engine node receives a request to query and extend a session, it can route the request to the corresponding subcluster based on the session identifier value.If subclusters are configured without specifying group IDs, a request to query and extend a session is processed on the subcluster that received the revocation status request, which may be different from the subcluster where the session is being tracked. As a result, the session could reach the idle timeout sooner than expected.Ignored when adaptive clustering is enabled.This property has no default value. |
+| `rpc.timeout`                                                                         | How long, in milliseconds, this node waits before timing out unresponsive RPC invocations.The default value is `500`, or half a second.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `synchronous.retrieve.majority.only`                                                  | Indicates how many responses to wait for when making synchronous remote procedure calls.```
+When set to [.codeph]``true``, this node waits for the majority of recipients to respond. When set to [.codeph]``false``, it waits for all recipients to respond.
+```The default value is `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `bulk.revoked.sris.timeout`(found only in the `cluster-session-revocation.conf` file) | Determines the amount of time (in milliseconds) PingFederate waits before aborting the download of revocation lists and reporting a timeout error. The default value is `10000`, or 10 seconds. NOTE: A node downloads a full revocation list from another node during startup or when it rejoins a cluster after being disconnected from it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `read.local.only`(found only in the `cluster-session-revocation.conf` file)           | Determines how PingFederate processes queries for revocation status.When set to `true`, queries for revocation status are processed locally. When `false`, the processing node pulls revocation status from other engine nodes in the cluster (subject to the **rpc.timeout** value).&#xA;&#xA;When adding a session to the revocation list, the processing node always propagates the information to all engine nodes in the cluster. See Back-Channel Session Revocation Service for more information.The default value is `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+
+## Preferred node indices
+
+Configuring the `preferred.node.indices` property can reduce the network communications and memory footprint. However, transaction volume and distribution can affect the resulting configuration. For more information on performance tuning, see [About Performance Tuning](../performance_tuning_guide/pf_about_performance_tuning.html).
+
+Individual services within a single cluster deployment can use different preferred nodes, meaning you can set different values for the `preferred.node.indices` property for each service.
+
+Using preferred nodes can translate into a variety of deployment configurations. The following sections discuss three primary strategies to consider for meeting your network requirements:
+
+* [Sharing all nodes](pf_sharing_nodes.html)
+
+* [Designating state servers](pf_design_state_server.html)
+
+* [Defining subclusters](pf_defining_subclust.html)
+
+|   |                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It is possible to configure overrides for authentication-adapter processing based on the runtime node servicing a request. See [Configuring the Cluster Node Authentication Selector](../administrators_reference_guide/pf_config_cluster_node_auth_selector.html) for more information. |
+
+---
+
+---
+title: Dynamic cluster discovery
+description: Instead of configuring a static list of known PingFederate nodes in advance, dynamic cluster discovery lets you configure new nodes to pull cluster membership information from a centralized repository.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:server_clustering_guide:pf_dynamic_cluster_discovery
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/pf_dynamic_cluster_discovery.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 23, 2023
+section_ids:
+  dynamic-cluster-discovery-protocols: Dynamic cluster discovery protocols
+  discovery-mechanisms-versus-runtime-state-management-architectures: Discovery mechanisms versus runtime state-management architectures
+  related-links: Related links
+---
+
+# Dynamic cluster discovery
+
+Instead of configuring a static list of known PingFederate nodes in advance, dynamic cluster discovery lets you configure new nodes to pull cluster membership information from a centralized repository.
+
+Dynamic discovery is well-suited for environments where traffic volume could spike and require additional resources during peak hours. Because safe storage and ready accessibility of the information by all nodes is crucial, PingFederate supports identity and access management (IAM) roles for Amazon Elastic Compute Cloud (Amazon EC2), Amazon Simple Storage Service (Amazon S3), and OpenStack Swift. The dynamic discovery method requires only a one-time setup.
+
+For information about configuring dynamic cluster discovery, see [Enabling dynamic discovery for clustering](pf_enabling_dynamic_discovery_clustering.html).
+
+## Dynamic cluster discovery protocols
+
+In addition to the static cluster discovery protocol, `TCPPING`, PingFederate supports the following dynamic discovery protocols:
+
+* `NATIVE_S3_PING`
+
+* `DNS_PING`
+
+* `AWS_PING`
+
+* `SWIFT_PING`
+
+|   |                                                                                                                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `S3_PING` discovery method has been deprecated because of the Amazon Web Services (AWS) deprecation of the SigV2 signing method. When deployed in AWS, the recommended discovery method is `NATIVE_S3_PING`. See the [JGroups documentation](http://www.jgroups.org/manual4/index.html) for alternatives when deployed in other environments. |
+
+`NATIVE_S3_PING` and `SWIFT_PING` enable the flexibility to use both public and private cloud storage. PingFederate maintains cluster membership information in a centralized repository, a bucket in Amazon Simple Storage Service (Amazon S3) or a container in an OpenStack infrastructure.
+
+PingFederate contacts the repository for a list of nodes. If PingFederate receives at least one node, a cluster exists, and it joins the cluster and updates the repository with its information, including its IP address. If PingFederate receives no node, it forms a new cluster and updates the repository with its information so that the next node can find the new cluster. When PingFederate shuts down, it removes itself from the list and pushes an update to the repository.
+
+`NATIVE_S3_PING` uses the AWS SDK and provides a stable connection by using built-in security features, such as obtaining credentials through IAM server instance profiles. This protocol is the recommended dynamic discovery mechanism when you're running in AWS but aren't using Kubernetes.
+
+`DNS_PING` uses DNS `A` or `SRV` records to perform discovery. This protocol is the recommended dynamic discovery mechanism when using Kubernetes. For more information, see the JGroups documentation about the [DNS\_PING](http://www.jgroups.org/manual4/index.html#_dns_ping) protocol.
+
+`AWS_PING` lets you scale your PingFederate infrastructure using Amazon EC2 instances in the AWS cloud, in one or multiple regions. PingFederate queries AWS for a list of eligible EC2 instances. If PingFederate receives at least one node, a cluster exists, and it joins that cluster. If PingFederate receives no node, it forms a new cluster.
+
+You must enable permissions to `ec2:Describe*` actions in the AWS IAM role assigned to the EC2 instance or associate them with the access\_key parameter that you provide as part of the dynamic discovery configuration. You can also use a combination of tags and filters, in which case only EC2 instances that satisfy both criteria are returned.
+
+## Discovery mechanisms versus runtime state-management architectures
+
+Discovery mechanisms are separate from runtime state-management architectures. Discovery mechanisms determine how to find nodes to retrieve cluster information for the purpose of joining and rejoining a cluster. Runtime state-management architectures determine which nodes session-state information is shared to and fetched from.
+
+PingFederate supports adaptive clustering and directed clustering runtime state-management architectures. When opting for dynamic discovery, consider enabling adaptive clustering whenever possible. If multiple regions are involved, configure multi-region support for adaptive clustering as well. For more information and configuration steps, see [Adaptive clustering](pf_adaptiv_cluster.html).
+
+Regardless of the chosen runtime state-management architecture, all nodes must still be able to communicate with other nodes for clustering-protocol messages. For more information, see [Runtime state-management architectures](pf_runtime_state_manage_achitec.html).
+
+## Related links
+
+* [Deploying cluster servers](pf_deploying_cluster_servers.html)

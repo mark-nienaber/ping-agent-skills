@@ -2155,3 +2155,144 @@ The following table summarizes the high-level tasks required to prepare your con
 | Secure the containerThere are many ways to deploy and configure your environment for AM. Enforce HTTPS connections to AM where possible.If a Java Security Manager is enabled for your web application container, add permissions before installing AM. | - [Secure connections to the AM container](configure-container-HTTPS.html)
 
 - [Use stronger encryption algorithms](prepare-aeswrap.html)        |
+
+---
+
+---
+title: Prepare an FQDN
+description: Configure PingAM with a fully qualified domain name and set cookie domain names to ensure proper browser cookie handling
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-networking
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-networking.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Install"]
+page_aliases: ["install-guide:prepare-networking.adoc"]
+---
+
+# Prepare an FQDN
+
+AM requires that you provide an FQDN when you configure it. Before you set up AM, be sure that your system has an FQDN, such as `am.example.com`. For evaluation purposes, you can give your system an alias using the `/etc/hosts` file on UNIX systems or `%SystemRoot%\system32\drivers\etc\hosts` on Windows. For production deployments, make sure the FQDN is properly assigned using DNS.
+
+Do not use the hostname `localhost` for AM, not even for testing purposes. AM relies on browser cookies, which are returned based on the domain name. You can set the cookie domain name value to an empty string for host-only cookies or to any non-top level domain. For example, if you install AM and use `am.example.com` as the host, you can set the cookie domain name as `example.com`.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Do not configure a top-level domain as your cookie domain as browsers will reject them.Top-level domains are browser-specific. Some browsers, like Firefox, also consider special domains like Amazon's web service (for example, ap-southeast-2.compute.amazonaws.com) to be a top-level domain.Check the effective top-level domain list at <https://publicsuffix.org/list/effective_tld_names.dat> to ensure that you do not set your cookie to a domain in the list. |
+
+---
+
+---
+title: Prepare datastores
+description: Configure datastores to separate different types of information in PingAM, including configuration, identity, policy, application, CTS token, and UMA data
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-ext-stores
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-ext-stores.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Install", "Configuration Store", "Policy Store", "Identity Store", "Application Store", "CTS Store (Sessions &amp; Tokens)", "User-Managed Access (UMA)"]
+page_aliases: ["install-guide:prepare-ext-stores.adoc"]
+section_ids:
+  ldap_datastores: LDAP datastores
+  file_based_configuration_store: File-based configuration store
+---
+
+# Prepare datastores
+
+AM stores different types of information. At a high-level, you can divide information into the following types:
+
+* Configuration
+
+  Relatively *static* information that doesn't change frequently after initial setup. Only administrative users can change it.
+
+* Runtime data
+
+  Dynamic information that changes at runtime, often due to end user action. Examples of runtime data are identities, CTS tokens, policies, sessions, and applications.
+
+Apart from identity data, AM stores all data after the installation process in its *configuration store*. This keeps basic deployments simple.
+
+For advanced and high-load deployments, you can configure different sets of replicated DS servers to keep distinct data types separate and to tune DS for different requirements.
+
+AM supports the following datastores:
+
+| Store name                          | Type of data                                                                                                                                                                                                   | Required during installation?                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Configuration store (PingDS or FBC) | Static configuration (properties and settings used by the AM instance).                                                                                                                                        | Yes                                                            |
+| Identity or user store              | Stores identity profiles; that is, information about the users, devices, or things that authenticate to your systems. You can also configure AM to access existing directory servers to get identity profiles. | No, but you can configure one during the installation process. |
+| Policy store                        | Stores policy-related data, such as policies, policy sets, and resource types.                                                                                                                                 | No                                                             |
+| Application store                   | Stores application-related data, such as web and Java agent configurations, federation entities and configuration, and OAuth 2.0 client definitions.                                                           | No                                                             |
+| CTS token store                     | Stores information about sessions, SAML 2.0 assertions, OAuth 2.0 tokens, and session denylists and allowlists.                                                                                                | No                                                             |
+| UMA store                           | Stores information about UMA resources, labels, audit messages, and pending requests.                                                                                                                          | No                                                             |
+
+## LDAP datastores
+
+The following table lists the supported directory servers for storing different data types:
+
+**Supported data stores**
+
+| Directory server           | Versions         | Configuration | Apps / policies | CTS | Identities | UMA |
+| -------------------------- | ---------------- | ------------- | --------------- | --- | ---------- | --- |
+| PingDS                     | 7.3.1 and later  | ✔             | ✔               | ✔   | ✔          | ✔   |
+| PingDirectory              | 9.3 and later    |               |                 |     | ✔          |     |
+| Oracle Unified Directory   | 12c              |               |                 |     | ✔          |     |
+| Microsoft Active Directory | 2019, 2022, 2025 |               |                 |     | ✔          |     |
+
+The procedure for preparing directory servers for AM to use is similar for each data type and includes the following steps:
+
+1. If you don't have an existing directory server, install the directory server software; for example, PingDS.
+
+2. As the directory administrator, you may need to perform the following steps:
+
+   1. Apply the relevant schema to the directory.
+
+   2. Create indexes to optimize data retrieval from the directory server.
+
+   3. Create a user account with the minimum required privileges for AM to bind to the directory server and access necessary data.
+
+To prepare the datastores AM needs during installation, read the following pages:
+
+[icon: handshake, set=fad, size=3x]
+
+#### [Prepare a truststore](prepare-trust-store.html)
+
+Trust datastores' certificates for LDAPS.
+
+[icon: cogs, set=fad, size=3x]
+
+#### [Prepare configuration stores](prepare-configuration-store.html)
+
+Install DS as an AM configuration store.
+
+[icon: user-circle, set=fad, size=3x]
+
+#### [Prepare identity stores](prepare-identity-repository.html)
+
+Install DS as an AM identity store.
+
+> **Collapse: Where do I find more information about the other datastores?**
+>
+> You can configure all datastores except the configuration store after you install AM:
+>
+> * [Prepare policy and application stores](../setup/prepare-policy-and-application-store.html)
+>
+> * [Core Token Service (CTS)](../cts/preface.html)
+>
+> * [Prepare external UMA datastores](../uma/prepare-uma-store.html)
+
+## File-based configuration store
+
+File-based configuration (FBC) is best-suited to a DevOps-style deployment, with the associated tools and practices of that approach.
+
+Static FBC data is written to configuration files in the file system and checked into a source control system, such as Git.
+
+AM instances are created as Docker images, with the FBC incorporated into the image.
+
+![Kubernetes deployment using file-based configuration.](../_images/docker-deployment.png)
+
+You can insert variables into these configuration files before you check them into source control. The variables are substituted with the appropriate values at runtime when you start the Docker container. Using variables lets you reuse the same base configuration files for multiple instances, and different staging environments. For example, development, QA, or pre-production, which are then promoted to production.
+
+Learn more about FBC in [Store configuration data in JSON files](fbc.html).
+
+Learn more about installing AM instances with Kubernetes in the [ForgeOps](https://docs.pingidentity.com/forgeops/2025.1) documentation.

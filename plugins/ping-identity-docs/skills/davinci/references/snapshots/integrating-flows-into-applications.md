@@ -3,8 +3,8 @@ title: Integrating Flows into Applications
 description: After you create a flow, integrate it into a user-facing application. Integrating a flow into an application lets your users launch the flow from that application.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_how_to_implement_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_how_to_implement_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_how_to_implement_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 31, 2024
 section_ids:
@@ -28,13 +28,13 @@ You can integrate a flow in different ways. Each method launches the flow in a d
 
 The following methods can be used to launch a flow:
 
-* [A redirect through PingOne](davinci_launch_flow_redirect.html). This method uses a call to [a PingOne application](http://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) to launch a flow with a redirect. This method is effective for flows with UI components. You should use a redirect through PingOne if you want to launch the flow in a new application page that replaces the current page and if you want to use OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
+* [A redirect through PingOne](davinci_launch_flow_redirect.html). This method uses a call to [a PingOne application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) to launch a flow with a redirect. This method is effective for flows with UI components. You should use a redirect through PingOne if you want to launch the flow in a new application page that replaces the current page and if you want to use OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
   \<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>
   \</div>)* or Security Assertion Markup Language (SAML) *(tooltip: \<div class="paragraph">
   \<p>A standard, XML-based, message-exchange framework enabling the secure transmittal of authentication tokens and other user attributes across domains.\</p>
   \</div>)* authentication.
 
-* [A redirect through PingOne using DaVinci as an external identity provider (IdP)](davinci_launch_flow_redirect_external_idp.html). This method uses a call to [a PingOne application](http://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) to launch a flow with a redirect using an external IdP configuration. This method is effective for flows with UI components, but it's not recommended unless you have already configured your environment for it. If you want to configure your environment to launch flows with a redirect through PingOne, use [this procedure instead](davinci_launch_flow_redirect.html).
+* [A redirect through PingOne using DaVinci as an external identity provider (IdP)](davinci_launch_flow_redirect_external_idp.html). This method uses a call to [a PingOne application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) to launch a flow with a redirect using an external IdP configuration. This method is effective for flows with UI components, but it's not recommended unless you have already configured your environment for it. If you want to configure your environment to launch flows with a redirect through PingOne, use [this procedure instead](davinci_launch_flow_redirect.html).
 
 * [The widget](davinci_launching_a_flow_with_the_widget.html). This method launches a flow inside of a widget on the current page. This method is effective for situations in which you do not want to redirect the user to a new URL.
 
@@ -42,7 +42,7 @@ The following methods can be used to launch a flow:
 
 * [The SDK](davinci_sdk_launching_a_flow_with_the_sdk.html). This method launches a flow from an application that you develop using the DaVinci module for the Ping SDK for JavaScript, Ping SDK for iOS, or Ping SDK for Android. This method is appropriate if you want fine-grained control of a user's mobile experience.
 
-* [The PingFederate integration](http://docs.pingidentity.com/integrations/pingone/pingone_davinci_integration_kit/pf_p1_davinci_ik.html). This method uses the widget to launch a flow from an existing PingFederate deployment.
+* [The PingFederate integration](https://docs.pingidentity.com/integrations/pingone/pingone_davinci_integration_kit/pf_p1_davinci_ik.html). This method uses the widget to launch a flow from an existing PingFederate deployment.
 
 |   |                                                                                                                                                                                                                                    |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -162,8 +162,8 @@ title: Launching a flow with a Ping SDK
 description: Launch a prepared flow through an application built with one of the Ping SDKs.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_sdk_launching_a_flow_with_the_sdk
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_sdk_launching_a_flow_with_the_sdk.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_sdk_launching_a_flow_with_the_sdk.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 13, 2024
 section_ids:
@@ -302,7 +302,7 @@ Prepare a flow to be launched with the Ping SDK for Android, iOS, or JavaScript.
 
 7. If you're using social login, ensure that your flow uses a supported method.
 
-   Social login lets users sign on using a third-party IdP. Apple, Google, and Facebook are natively supported, and other IdPs can be included with a login redirect. You must configure the external IdPs according to the [PingOne documentation](http://docs.pingidentity.com/pingone/integrations/p1_external_idps.html) before including them in a flow.
+   Social login lets users sign on using a third-party IdP. Apple, Google, and Facebook are natively supported, and other IdPs can be included with a login redirect. You must configure the external IdPs according to the [PingOne documentation](https://docs.pingidentity.com/pingone/integrations/p1_external_idps.html) before including them in a flow.
 
    |   |                                                                                                                                                      |
    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -348,7 +348,7 @@ Prepare a flow to be launched with the Ping SDK for Android, iOS, or JavaScript.
 
    4. Select the **p1UserId** property.
 
-9. If you're using an OTP with PingOne MFA, configure your environment and flow according to the [one-time passcode use case in the SDK documentation](http://docs.pingidentity.com/sdks/latest/davinci/use-cases/otp/index.html) and verify that it uses supported elements.
+9. If you're using an OTP with PingOne MFA, configure your environment and flow according to the [one-time passcode use case in the SDK documentation](https://docs.pingidentity.com/sdks/latest/davinci/use-cases/otp/index.html) and verify that it uses supported elements.
 
    1. If you're using email OTP registration or authentication, verify that the flow has screens that:
 
@@ -538,7 +538,7 @@ To create the link, you need the following values:
 
 * OIDC Discovery Endpoint
 
-Learn more about creating the link and launching the flow in the [SDK documentation](http://docs.pingidentity.com/sdks/latest/davinci/tutorials.html).
+Learn more about creating the link and launching the flow in the [SDK documentation](https://docs.pingidentity.com/sdks/latest/davinci/tutorials.html).
 
 ---
 
@@ -547,8 +547,8 @@ title: Launching a flow with an API call
 description: Launch a prepared flow with an API call.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_launching_a_flow_with_an_api_call
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_an_api_call.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_an_api_call.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -778,8 +778,8 @@ title: Launching a flow with the widget
 description: Launch a prepared flow with a widget.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_launching_a_flow_with_the_widget
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_the_widget.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_the_widget.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -1336,8 +1336,8 @@ title: Launching a PingOne flow with a redirect
 description: You can configure PingOne and DaVinci so that you can invoke specifically-configured flows through PingOne.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_launch_flow_redirect
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launch_flow_redirect.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launch_flow_redirect.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -1664,8 +1664,8 @@ title: Launching a PingOne flow with a redirect using an external IdP
 description: You can configure PingOne and DaVinci so that you can invoke specifically-configured flows through PingOne. This method configures DaVinci as an identity provider (IdP) in PingOne.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_launch_flow_redirect_external_idp
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launch_flow_redirect_external_idp.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launch_flow_redirect_external_idp.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -1701,7 +1701,7 @@ Create a set of credentials for adding PingOne connections.
 
 1. Sign on to PingOne.
 
-2. Create a worker app as described in the [PingOne documentation](http://docs.pingidentity.com/pingone/applications/p1_edit_application_worker.html).
+2. Create a worker app as described in the [PingOne documentation](https://docs.pingidentity.com/pingone/applications/p1_edit_application_worker.html).
 
 3. Assign the following roles to the worker app:
 
@@ -1729,25 +1729,25 @@ Add one or more PingOne connectors in DaVinci to enable your flows to use PingOn
 
 4. In the list of available connectors, select one of the PingOne connectors and click **[icon: plus, set=fa]**.
 
-   * [PingOne](http://docs.pingidentity.com/connectors/p1_connector.html)
+   * [PingOne](https://docs.pingidentity.com/connectors/p1_connector.html)
 
-   * [PingOne Authentication](http://docs.pingidentity.com/connectors/p1_authentication_connector.html)
+   * [PingOne Authentication](https://docs.pingidentity.com/connectors/p1_authentication_connector.html)
 
-   * [PingOne Form](http://docs.pingidentity.com/connectors/forms_connector.html)
+   * [PingOne Form](https://docs.pingidentity.com/connectors/forms_connector.html)
 
-   * [PingOne Notifications](http://docs.pingidentity.com/connectors/p1_notifications_connector.html)
+   * [PingOne Notifications](https://docs.pingidentity.com/connectors/p1_notifications_connector.html)
 
-   * [PingOne RADIUS Gateway](http://docs.pingidentity.com/connectors/p1_radius_gateway_connector.html)
+   * [PingOne RADIUS Gateway](https://docs.pingidentity.com/connectors/p1_radius_gateway_connector.html)
 
-   * [PingOne Authorize](http://docs.pingidentity.com/connectors/p1az_connector.html)
+   * [PingOne Authorize](https://docs.pingidentity.com/connectors/p1az_connector.html)
 
-   * [PingOne Credentials](http://docs.pingidentity.com/connectors/p1_credentials_connector.html)
+   * [PingOne Credentials](https://docs.pingidentity.com/connectors/p1_credentials_connector.html)
 
-   * [PingOne MFA](http://docs.pingidentity.com/connectors/p1_mfa_connector.html)
+   * [PingOne MFA](https://docs.pingidentity.com/connectors/p1_mfa_connector.html)
 
-   * [PingOne Protect](http://docs.pingidentity.com/connectors/p1_protect_connector.html)
+   * [PingOne Protect](https://docs.pingidentity.com/connectors/p1_protect_connector.html)
 
-   * [PingOne Verify](http://docs.pingidentity.com/connectors/p1_verify_connector.html)
+   * [PingOne Verify](https://docs.pingidentity.com/connectors/p1_verify_connector.html)
 
    The **New Connector** modal opens.
 
@@ -1979,7 +1979,7 @@ Configure DaVinci as an external IdP *(tooltip: \<div class="paragraph">
 
 1. Sign on to PingOne.
 
-2. Add DaVinci as an OIDC identity provider according to the [PingOne documentation](http://docs.pingidentity.com/pingone/integrations/p1_add_idp_oidc.html).
+2. Add DaVinci as an OIDC identity provider according to the [PingOne documentation](https://docs.pingidentity.com/pingone/integrations/p1_add_idp_oidc.html).
 
    1. For the **Connection Details**, use the values that you noted in [Creating an application](#dv_p1_external_idp_creating_an_application):
 
@@ -2017,7 +2017,7 @@ Configure DaVinci as an external IdP *(tooltip: \<div class="paragraph">
 
    * **Policy ID**
 
-4. Create the external IdP sign-on policy step according to the [PingOne documentation](http://docs.pingidentity.com/pingone/authentication/p1_add_idp_signon_step.html).
+4. Create the external IdP sign-on policy step according to the [PingOne documentation](https://docs.pingidentity.com/pingone/authentication/p1_add_idp_signon_step.html).
 
    1. In the **External Identity Provider** list, select the external IdP application you created in step 1.
 
@@ -2027,7 +2027,7 @@ Configure DaVinci as an external IdP *(tooltip: \<div class="paragraph">
 
    4. Select the external IdP application, and then click **Save** to save your changes.
 
-5. Create an application in PingOne and assign the sign-on policy step to that application according to the [PingOne documentation](http://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html).
+5. Create an application in PingOne and assign the sign-on policy step to that application according to the [PingOne documentation](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html).
 
 6. Add the referring domain to your new application.
 
@@ -2081,7 +2081,7 @@ Add a link to the resource that invokes the flow using a call to PingOne.
 
 1. Open the source file for the resource that will launch the flow.
 
-2. Create a call to your PingOne application according to the [PingOne documentation](http://docs.pingidentity.com/pingoneforenterprise/pingone_sso_for_saas_apps/p14saas_integrate_oidc_application.html) and add it to the launching resource.
+2. Create a call to your PingOne application according to the [PingOne documentation](https://docs.pingidentity.com/pingoneforenterprise/pingone_sso_for_saas_apps/p14saas_integrate_oidc_application.html) and add it to the launching resource.
 
    The general format used for this call is:
 
@@ -2107,8 +2107,8 @@ title: Switching between PingOne and DaVinci widget integrations
 description: Learn how to switch between using a flow for a PingOne redirect integration and an integration using the DaVinci widget.
 component: davinci
 page_id: davinci:integrating_flows_into_applications:davinci_switch_between_flow_integrations
-canonical_url: http://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_switch_between_flow_integrations.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_switch_between_flow_integrations.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 1, 2023
 section_ids:

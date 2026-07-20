@@ -1,6 +1,6 @@
 ---
 title: DevOps at Ping Identity
-description: This documentation exists to enable DevOps professionals, administrators, and developers to deploy Ping Identity software using container technologies. Our goal is to provide tools, frameworks, blueprints, and reference architectures in support of running our products in containerized environments.
+description: Summarize the Ping Identity DevOps program, including Docker images, deployment examples, and configuration management tools for containers
 component: devops
 page_id: devops::devops-landing-page
 canonical_url: https://developer.pingidentity.com/devops/devops-landing-page.html

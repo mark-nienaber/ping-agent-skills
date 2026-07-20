@@ -2,39 +2,39 @@
 
 - Product: PingOne Privilege
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/privilege/llms.txt
 - Guides discovered: 8
 - Guides captured: 8
-- Guides fully captured: 2
-- Guides partially captured: 6
+- Guides fully captured: 7
+- Guides partially captured: 1
 - Guides without snapshots: 0
-- Total pages indexed: 74
-- Total snapshot pages captured: 8
+- Total pages indexed: 72
+- Total snapshot pages captured: 60
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| privileged-access-management.md | page | https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/getting-started/accessing-admin-console.md | 32 | 1 | partial |
-| configuration.md | page | https://docs.pingidentity.com/privilege/configuration/access-protocols.md | 22 | 1 | partial |
-| getting-started.md | page | https://docs.pingidentity.com/privilege/getting-started/accessing-admin-console.md | 7 | 1 | partial |
-| integrations.md | page | https://docs.pingidentity.com/privilege/integrations/index.md | 5 | 1 | partial |
-| procyonreadpolicy.md | page | https://docs.pingidentity.com/privilege/procyonreadpolicy/create-read-policy.md | 4 | 1 | partial |
-| troubleshooting.md | page | https://docs.pingidentity.com/privilege/troubleshooting/index.md | 2 | 1 | partial |
-| index-md.md | page | https://docs.pingidentity.com/privilege/index.md | 1 | 1 | full |
-| release-notes.md | page | https://docs.pingidentity.com/privilege/release-notes/index.md | 1 | 1 | full |
+| privileged-access-management.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 32 | 20 | partial |
+| configuration.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 20 | 20 | full |
+| getting-started.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 7 | 7 | full |
+| integrations.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 5 | 5 | full |
+| procyonreadpolicy.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 4 | 4 | full |
+| troubleshooting.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 2 | 2 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 1 | 1 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/privilege/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 0ec555cfcf20636bf1d462a67d7468f8d05f666128963d5a838f89a8332e1c5e |
-| snapshots/privileged-access-management.md | 72a33288bd6b2285d47db01c8b103d458685fd0201017f401bdf68f7545903b1 |
-| snapshots/configuration.md | cb5c3f6effac476efbac7e7172cbeb4fa4c537194813176e4609ce1dab7d5cb6 |
-| snapshots/getting-started.md | 1370e99ba33b1e7558e1489a8dc78bf993535b200090c838e3ad1b96560091ba |
-| snapshots/integrations.md | 383f0000edb009ea5f9a8c3c8eeae4c62b81332071736d6e08ba680916b7a8b0 |
-| snapshots/procyonreadpolicy.md | 840e66dec1f79a4524c927109c32f84b1ee8572490db9b60316054691e9bb269 |
-| snapshots/troubleshooting.md | 4b9620db78d2324c1e6236203a5cc759ce50b11e7a3716594c308a83ac845497 |
-| snapshots/index-md.md | 53e6486dbba7e6bb959dedf596395c9ef5dda46e61a5a8917d63c68d5b4cd800 |
-| snapshots/release-notes.md | 96ec86522756a41db17a889c329fb8b8a8e03d77de4e5a1b99d381d07ed0ee82 |
+| llms.txt | 80672457e367fe5dfa156f6f316fa0c8d2e39c5f90413bc0e0c61cc7e20c60d3 |
+| snapshots/privileged-access-management.md | 345f6d471a143bb78476bf790205bc86ffb20dee98127dc0dd907507fd4eece3 |
+| snapshots/configuration.md | 9bbcc1a2101b200c4e273602f5789cb4dd2be7147a28ff5ca707bbd4a156e5ed |
+| snapshots/getting-started.md | 151d60321d656d5c1660343aeb2dc3ccdd960c9b7adaf3ac19fb9e27bb06c08b |
+| snapshots/integrations.md | efddd2b1403bb0a04ba6eddf13111e6e8cf2dc0c74d435a4f4477fbd30005b02 |
+| snapshots/procyonreadpolicy.md | 7b0db1373291ad1f5bcfe74da32b520a9a8541d6219d5653733e1de8e96b1871 |
+| snapshots/troubleshooting.md | 8fb4ef3cb971039d0fce5ca44a4a429e7f2ceb00793bd205d403e42d4be30975 |
+| snapshots/index-md.md | f3f7ee558f864ce8b9bfc65cefba0a43e2d268876ba987807d7e99b2d7e54bf6 |
+| snapshots/release-notes.md | f993a237635a9158a405553c4e1ec120ee40f4c5f3cafa905e9f6b610b454d99 |

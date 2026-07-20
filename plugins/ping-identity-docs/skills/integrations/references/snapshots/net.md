@@ -1,9 +1,35 @@
 ---
 title: .NET Integration Kit
+description: The latest .NET Integration Kit supports .NET 8.0 and later, providing compatibility for PingFederate OpenToken-based integration with .NET 8-based IdP and SP applications.
+component: net
+page_id: net::pf_net_ik_versions
+canonical_url: https://docs.pingidentity.com/integrations/net/pf_net_ik_versions.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2026
+section_ids:
+  net-integration-kit-latest: .NET Integration Kit (latest)
+  net-integration-kit-2-5: .NET Integration Kit 2.5
+---
+
+# .NET Integration Kit
+
+## .NET Integration Kit (latest)
+
+The latest .NET Integration Kit supports .NET 8.0 and later, providing compatibility for PingFederate OpenToken-based integration with .NET 8-based IdP and SP applications.
+
+## .NET Integration Kit 2.5
+
+This documentation is available for existing deployments of the .NET Integration 2.x. This version targets the .NET framework 4.0 runtime and won't be supported in future releases.
+
+---
+
+---
+title: .NET Integration Kit 2.5
 description: The .NET Integration Kit allows PingFederate to communicate user attributes with .NET-based web applications.
 component: net
-page_id: net::pf_net_ik
-canonical_url: https://docs.pingidentity.com/integrations/net/pf_net_ik.html
+page_id: net:net-2x:pf_net_2x_ik
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/pf_net_2x_ik.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -13,15 +39,15 @@ section_ids:
   system-requirements: System requirements
 ---
 
-# .NET Integration Kit
+# .NET Integration Kit 2.5
 
 The .NET Integration Kit allows PingFederate to communicate user attributes with .NET-based web applications.
 
 When PingFederate is serving an identity provider (IdP) role, it can receive user attributes from a .NET IdP application. When PingFederate is serving a service provider (SP) role, it can send user attributes to a .NET SP application.
 
-|   |                                                                                                                                                                                                         |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For new integrations, we encourage you to consider the [Agentless Integration Kit](../agentless/pf_agentless_ik.html), which can integrate with a variety of platforms using a modern RESTful approach. |
+|   |                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For new integrations, we encourage you to consider the [Agentless Integration Kit](../../agentless/pf_agentless_ik.html), which can integrate with a variety of platforms using a modern RESTful approach. |
 
 ## Components
 
@@ -58,11 +84,197 @@ Before you start, you should be familiar with the following parts of the PingFed
 ---
 
 ---
+title: .NET Integration Kit 3.0
+description: The .NET Integration Kit allows PingFederate to communicate user attributes with ASP.NET Core 8-based applications.
+component: net
+page_id: net:net:pf_net_ik
+canonical_url: https://docs.pingidentity.com/integrations/net/net/pf_net_ik.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 24, 2026
+section_ids:
+  components: Components
+  intended-audience: Intended audience
+  system-requirements: System requirements
+---
+
+# .NET Integration Kit 3.0
+
+The .NET Integration Kit allows PingFederate to communicate user attributes with ASP.NET Core 8-based applications.
+
+When PingFederate is serving an identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)* role, it receives user attributes from a .NET 8 IdP application. When PingFederate is serving a service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* role, it sends user attributes to a .NET 8 SP application.
+
+|   |                                                                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For new integrations, consider using the [Agentless Integration Kit](../../agentless/pf_agentless_ik.html) instead. The Agentless Integration Kit can integrate with a variety of platforms using a modern RESTful approach. |
+
+## Components
+
+| Component           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenToken Adapter   | An adapter that allows PingFederate to send or receive user attributes in the OpenToken format. Learn more in [OpenToken Adapter](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_opentoken_adapt.html) in the PingFederate documentation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| OpenToken Agent     | An agent that runs within your ASP.NET Core 8 application providing classes for reading, writing, and deleting OpenToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Sample applications | Two sample applications are included to demonstrate end-to-end single sign-on (SSO) *(tooltip: \<div class="paragraph">&#xA;\<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>&#xA;\</div>)* and single logout (SLO) *(tooltip: \<div class="paragraph">&#xA;\<p>The process of signing a user out of multiple sites where the user has started a SSO session.\</p>&#xA;\</div>)*, and to serve as a reference for application developers:- An IdP sample application that authenticates users locally and issues an OpenToken to PingFederate's IdP adapter endpoint.
+
+- An SP sample application that receives an OpenToken from PingFederate's SP adapter, validates it, and establishes a user session.Both applications can be deployed quickly for testing OpenToken processing. Source code and supporting files are included in the distribution and can be modified or used as a starting point for your own implementation. |
+
+## Intended audience
+
+This document is intended for PingFederate administrators and web-application developers.
+
+Before you start, you should be familiar with the following parts of the PingFederate documentation:
+
+* [Managing IdP adapters](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_managing_idp_adapters.html)
+
+* [Managing SP adapters](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_adaptermanagementtasklet_spadaptermanagementstate.html)
+
+* [OpenToken Adapter](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_opentoken_adapt.html)
+
+## System requirements
+
+* PingFederate 11.3 or later.
+
+* Microsoft .NET SDK 8.0 or later.
+
+---
+
+---
+title: Changelog
+description: Added support for .NET 8
+component: net
+page_id: net:net:release_notes/pf_net_ik_changelog
+canonical_url: https://docs.pingidentity.com/integrations/net/net/release_notes/pf_net_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 1, 2026
+section_ids:
+  net-integration-kit-3-0-jun-2026: .NET Integration Kit 3.0 - Jun 2026
+  net-integration-kit-2-5-4-march-2020: .NET Integration Kit 2.5.4 – March 2020
+  net-integration-kit-2-5-3-september-2019: .NET Integration Kit 2.5.3 – September 2019
+  net-integration-kit-2-5-2-january-2016: .NET Integration Kit 2.5.2 – January 2016
+  net-integration-kit-2-5-1-december-2012: .NET Integration Kit 2.5.1 – December 2012
+  net-integration-kit-2-5-june-2012: .NET Integration Kit 2.5 – June 2012
+  net-integration-kit-2-4-march-2010: .NET Integration Kit 2.4 – March 2010
+  net-integration-kit-2-3-november-2008: .NET Integration Kit 2.3 – November 2008
+  net-integration-kit-2-2-june-2008: .NET Integration Kit 2.2 – June 2008
+  net-integration-kit-2-1-april-2008: .NET Integration Kit 2.1 – April 2008
+  net-integration-kit-2-0-december-2007: .NET Integration Kit 2.0 – December 2007
+  net-integration-kit-1-2-1-august-2007: .NET Integration Kit 1.2.1 – August 2007
+  net-integration-kit-1-2-may-2007: .NET Integration Kit 1.2 – May 2007
+---
+
+# Changelog
+
+## .NET Integration Kit 3.0 - Jun 2026
+
+* Added support for .NET 8
+
+## .NET Integration Kit 2.5.4 – March 2020
+
+* Added support for the SameSite cookie flag in web browsers
+
+## .NET Integration Kit 2.5.3 – September 2019
+
+* Updated the included OpenToken Adapter to version 2.5.8
+
+* Updated the included OpenToken Agent to version 2.5.3
+
+* Improved the way token timestamps are handled
+
+## .NET Integration Kit 2.5.2 – January 2016
+
+* Updated sample application data archive
+
+* Updated OpenToken Adapter to version 2.5.7
+
+## .NET Integration Kit 2.5.1 – December 2012
+
+* Updated to address security issue found since the previous release
+
+* Added support for OpenToken 2.5.1 Adapter and the OpenToken 2.5.1 Agent
+
+## .NET Integration Kit 2.5 – June 2012
+
+* Added support for the Microsoft .NET Framework 4.0
+
+* Added support for 64-bit CPUs
+
+* Removed support of the Microsoft .NET Framework 2.0
+
+## .NET Integration Kit 2.4 – March 2010
+
+* Added token Replay Prevention to the OpenToken IdP Adapter Advanced Settings
+
+## .NET Integration Kit 2.3 – November 2008
+
+* Added POST Transport Method for OpenToken when used by a Service Provider
+
+* Added configuration to specify session cookie vs. persistent cookie
+
+* Added option to set the "`Secure`" attribute on an OpenToken when cookie is used
+
+* Added ability to bypass password obfuscation and strength enforcement for backward compatibility with previous .NET OpenToken agents
+
+* Correctly handles `null` parameters for SOAP SLO
+
+* Empty query string (`?`) isn't automatically appended to the URL when redirecting to TargetResource
+
+* TargetResource URL is URL encoded
+
+* Corrected `not-before tolerance processing`
+
+## .NET Integration Kit 2.2 – June 2008
+
+* Added support for SAML 2.0 `isPassive` and `ForceAuthn`
+
+* Enforced UTF-8 encoding within OpenToken
+
+* Symmetric key in the OpenToken agent configuration file is encrypted
+
+* Combined the OpenToken adapter and OpenToken Java library jar files into a single adapter file for easier deployment to PingFederate
+
+## .NET Integration Kit 2.1 – April 2008
+
+* Added `AgentConfiguration` class to simplify Agent instantiation
+
+* Added Agent Toolkit API HTML Help file
+
+## .NET Integration Kit 2.0 – December 2007
+
+Modified to use an open-standard, secure token called OpenToken to pass user information between an application and PingFederate. The OpenToken is passed through the user's browser as a URL query parameter or an HTTP cookie. The data within the OpenToken is a set of key-value pairs, and the data is encrypted using common encryption algorithms.
+
+## .NET Integration Kit 1.2.1 – August 2007
+
+* Fixed buffer overflow issue in OpenToken Agent to allow dynamic buffer size for reading `PFTOKEN`
+
+* OpenToken Agent `extractFromRequest` method corrected to only delete cookie if the `PFTOKEN` transport is cookie
+
+* OpenToken Agent no longer writes messages to the Windows Event Log
+
+* Modified to allow backward compatibility of the Standard Adapter 1.2.1 with PingFederate 4.0
+
+* Bundled .NET sample application with distribution
+
+## .NET Integration Kit 1.2 – May 2007
+
+* Added an option to encode `PFTOKEN` for handling special characters
+
+* Added an additional constructor to allow `PFTOKEN` to use default properties for all configuration options except password, holder name, and max age
+
+* Added `PFTOKEN` time stamp information in the log file
+
+---
+
+---
 title: Changelog
 description: .NET Integration Kit 2.5.4 – March 2020
 component: net
-page_id: net:release_notes:pf_net_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_changelog.html
+page_id: net:net-2x:release_notes/pf_net_ik_changelog
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/release_notes/pf_net_ik_changelog.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -167,11 +379,143 @@ Modified to use an open-standard, secure token called OpenToken to pass user inf
 ---
 
 ---
+title: Configuring an OpenToken IdP Adapter instance
+description: Configure the OpenToken Adapter to determine how PingFederate communicates with your identity provider (IdP) application.
+component: net
+page_id: net:net:setup/pf_net_ik_configuring_opentoken_idp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_configuring_opentoken_idp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 26, 2026
+section_ids:
+  steps: Steps
+---
+
+# Configuring an OpenToken IdP Adapter instance
+
+Configure the OpenToken Adapter to determine how PingFederate communicates with your identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)* application.
+
+## Steps
+
+1. In the PingFederate admin console, go to **Authentication > Integration > IdP Adapters**.
+
+2. Click **Create New Instance**.
+
+3. On the **Type** tab, set the basic adapter instance attributes.
+
+   1. In the **Instance Name** field, enter a name for the adapter instance.
+
+   2. In the **Instance ID** field, enter a unique name for the adapter instance.
+
+   3. In the **Type** list, select **OpenToken IdP Adapter**.
+
+   4. Click **Next**.
+
+4. On the **Instance Configuration** tab, configure the adapter instance.
+
+   Learn more in [Configuring an OpenToken IdP Adapter instance](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_configuring_opentoken_idp_adapter_instance.html) in the PingFederate documentation.
+
+5. Click **Next**.
+
+6. Export the configuration file:
+
+   1. On the **Actions** tab, click **Download**, and then click **Export**.
+
+   2. Save the `agent-config.txt` file.
+
+   3. Click **Next**.
+
+7. On the **Extended Contract** tab, configure additional attributes as needed.
+
+8. Click **Next**.
+
+9. On the **Summary** tab, review your configuration and click **Save**.
+
+10. Create or update a service provider (SP) *(tooltip: \<div class="paragraph">
+    \<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+    \</div>)* connection to use the OpenToken Adapter instance.
+
+    Learn more in the [Identity Provider SSO configuration](http://docs.pingidentity.com/pingfederate/13.0/administrators_reference_guide/pf_ident_provid_sso_config.html) in the PingFederate documentation.
+
+---
+
+---
 title: Configuring an OpenToken SP Adapter instance
 description: Configure the OpenToken Adapter to determine how PingFederate communicates with your service provider application.
 component: net
-page_id: net:setup:pf_net_ik_configuring_an_opentoken_sp_adapter_instance
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_an_opentoken_sp_adapter_instance.html
+page_id: net:net:setup/pf_net_ik_configuring_opentoken_sp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_configuring_opentoken_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  steps: Steps
+---
+
+# Configuring an OpenToken SP Adapter instance
+
+Configure the OpenToken Adapter to determine how PingFederate communicates with your service provider application.
+
+## Steps
+
+1. In the PingFederate administrative console, go to **Application > Integration > SP Adapters**.
+
+2. Click **Create new Instance**.
+
+3. On the **Type** tab, set the basic adapter instance attributes.
+
+   1. In the **Instance Name** field, enter a name for the adapter instance.
+
+   2. In the **Instance ID** field, enter a unique identifier for the adapter instance.
+
+   3. From the **Type** list, select **OpenToken Adapter**.
+
+   4. Click **Next**.
+
+4. On the **Instance Configuration** tab, configure the adapter instance.
+
+   Learn more in [Configuring an OpenToken SP Adapter instance](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_config_opentoken_sp_adapt_instance.html) in the PingFederate documentation.
+
+   |   |                                                                                                                                                                                                 |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you use .NET to protect multiple sites on the same domain, in the OpenToken Adapter instance configuration, select **None** for SameSite Cookie, and select the **Secure Cookie** check box. |
+
+   1. Click **Next**.
+
+5. Export the configuration file:
+
+   1. On the **Actions** tab, click **Download**, and then click **Export**.
+
+   2. Save `agent-config.txt`.
+
+   3. Click **Next**.
+
+6. On the **Extended Contract** tab, add any attributes that you expect to retrieve other than the SAML subject.
+
+   1. Click **Next**.
+
+7. On the **Target App Info** tab, enter the basic information about your SP application.
+
+   1. Click **Next**.
+
+8. On the **Summary** tab, check and save your configuration.
+
+   1. Click **Save**.
+
+9. Create or update an identity provider (IdP) *(tooltip: \<div class="paragraph">
+   \<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+   \</div>)* connection to use the OpenToken Adapter instance as shown in [Service provider SSO configuration](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_servic_provid_sso_config.html) in the PingFederate documentation.
+
+---
+
+---
+title: Configuring an OpenToken SP Adapter instance
+description: Configure the OpenToken Adapter to determine how PingFederate communicates with your service provider application.
+component: net
+page_id: net:net-2x:setup/pf_net_ik_configuring_an_opentoken_sp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_configuring_an_opentoken_sp_adapter_instance.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -221,8 +565,153 @@ Configure the OpenToken Adapter to determine how PingFederate communicates with 
 title: Configuring IIS to use the sample applications
 description: To see a working demonstration of the .NET Integration Kit, deploy the sample applications and configure your Internet Information Services (IIS) server.
 component: net
-page_id: net:setup:pf_net_ik_configuring_iis_to_use_the_sample_applications
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_iis_to_use_the_sample_applications.html
+page_id: net:net:setup/pf_net_ik_configuring_iis_sample_applications
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_configuring_iis_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 29, 2026
+page_aliases: ["pf_net_ik_configuring_iis_to_use_the_sample_applications.adoc"]
+section_ids:
+  before-you-begin: Before you begin
+  setting-up-samples-as-applications-within-a-site: Setting up samples as applications within a site
+---
+
+# Configuring IIS to use the sample applications
+
+To see a working demonstration of the .NET Integration Kit, deploy the sample applications and configure your Internet Information Services (IIS) server.
+
+## Before you begin
+
+* Windows Server 2016 or later with IIS 10.0+
+
+* [.NET 8 Hosting Bundle](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) installed on the IIS server (choose Hosting Bundle, not the runtime or SDK alone)
+
+* An existing IIS website with an HTTPS binding to deploy the applications under
+
+|   |                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Install the .NET 8 Hosting Bundle after IIS. If IIS was installed after the Hosting Bundle, run the Hosting Bundle installer again to register the ASP.NET Core Module. |
+
+## Setting up samples as applications within a site
+
+1. Install the .NET 8 Hosting Bundle.
+
+2. From the .NET Integration Kit `.zip` archive, copy the `sample/IdpSample` and `sample/SpSample` directories to your IIS server, such as `C:\inetpub\wwwroot`.
+
+3. Create application pools.
+
+   Each application requires its own application pool set to `No Managed Code`.
+
+   1. Open IIS Manager.
+
+   2. Click **Application Pools > Add Application Pool**.
+
+   3. For the IdP application:
+
+      |                           |                   |
+      | ------------------------- | ----------------- |
+      | **Name**                  | `IdpSamplePool`   |
+      | **.NET CLR Version**      | `No Managed Code` |
+      | **Managed pipeline mode** | `Integrated`      |
+
+   4. For the SP application:
+
+      |                           |                   |
+      | ------------------------- | ----------------- |
+      | **Name**                  | `SpSamplePool`    |
+      | **.NET CLR Version**      | `No Managed Code` |
+      | **Managed pipeline mode** | `Integrated`      |
+
+4. Add the applications under the existing website.
+
+   In IIS Manager, expand **Sites** and select the website under which you want to host the applications.
+
+   1. Right-click the website and choose **Add Application**.
+
+   2. For the IdP application:
+
+      |                      |                                        |
+      | -------------------- | -------------------------------------- |
+      | **Alias**            | `IdpSample`                            |
+      | **Application pool** | `IdpSamplePool`                        |
+      | **Physical path**    | `C:\inetpub\wwwroot\IdpSample\publish` |
+
+   3. For the SP application:
+
+      |                      |                                       |
+      | -------------------- | ------------------------------------- |
+      | **Alias**            | `SpSample`                            |
+      | **Application pool** | `SpSamplePool`                        |
+      | **Physical path**    | `C:\inetpub\wwwroot\SpSample\publish` |
+
+      The applications will be accessible at:
+
+      IdP: https\://\<your-site>/IdpSample
+
+      SP: https\://\<your-site>/SpSample
+
+5. Configure permissions.
+
+   The application pool identity must have read access to the publish directory and write access to the logs and config directories.
+
+   1. Right-click **C:\inetpub\wwwroot\IdpSample\publish > Security > Edit > Add**
+
+   2. Enter `IIS AppPool\IdpSamplePool`.
+
+   3. Click **Check Names > OK > Read & Execute > OK**
+
+   4. Repeat steps a - c on `C:\inetpub\wwwroot\IdpSample\publish\wwwroot\config`. Select **Modify** instead of **Read & Execute**.
+
+      If application-level logging is enabled through `web.config` and `appsettings.json`, ensure the logs directory has Modify permission granted to the application pool identity.
+
+   5. Repeat steps a - c on `C:\inetpub\wwwroot\SpSample\publish` using IIS `AppPool\SpSamplePool`.
+
+   6. Repeat step d on `C:\inetpub\wwwroot\SpSample\publish\wwwroot\config` using IIS `AppPool\SpSamplePool`.
+
+6. Verify the deployment.
+
+   1. Go to https\://\<your-site>/IdpSample.
+
+      The IdP application landing page should load.
+
+   2. Go to https\://\<your-site>/SpSample.
+
+      The SP application landing page should load.
+
+7. If needed, go to https\://\<yoursite>/IdpSample/Config to review or update the following fields:
+
+   | Field                        | Default                      | Description                                                                                                                                |
+   | ---------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **PingFederate Base URL**    | `https://localhost:9031/`    | Update if PingFederate is running on a different host or port.                                                                             |
+   | **SP Connections**           | `localhost:default:entityId` | Update if your SP connection entity ID differs.                                                                                            |
+   | **IdP Adapter Instances**    | `OTIdPJava`                  | Update if you used a different adapter instance ID.                                                                                        |
+   | **Attribute Names List**     | `authnContext\|email\|role`  | Update to match the attributes configured in your IdP adapter's extended contract.                                                         |
+   | **Agent Configuration File** | N/A                          | Upload a replacement `agent-config.txt` if you downloaded a new one from PingFederate after changing the adapter password or cipher suite. |
+
+   1. Click **Save**.
+
+8. If needed, go to https\://\<yoursite>/SpSample/Config to review or update the following fields:
+
+   | Field                        | Default                                                                                                                                    |
+   | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **PingFederate Base URL**    | `https://localhost:9031/`                                                                                                                  |
+   | **IdP Connections**          | `localhost:default:entityId`                                                                                                               |
+   | **SP Adapter Instances**     | `OTSPJava`                                                                                                                                 |
+   | **Attribute Names List**     | `authnContext\|email\|role`                                                                                                                |
+   | **Agent Configuration File** | Upload a replacement `agent-config.txt` if you downloaded a new one from PingFederate after changing the adapter password or cipher suite. |
+
+9. Ensure the PingFederate configuration is updated to match the domain of Sample App deployed within IIS.
+
+   1. For example, the **Authentication Service** field for the OpenToken IdP Adapter should be set to `https://localhost/IdpSample/Login`.
+
+---
+
+---
+title: Configuring IIS to use the sample applications
+description: To see a working demonstration of the .NET Integration Kit, deploy the sample applications and configure your Internet Information Services (IIS) server.
+component: net
+page_id: net:net-2x:setup/pf_net_ik_configuring_iis_to_use_the_sample_applications
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_configuring_iis_to_use_the_sample_applications.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -278,8 +767,50 @@ To see a working demonstration of the .NET Integration Kit, deploy the sample ap
 title: Configuring PingFederate to use the sample applications
 description: To see a working demonstration of the .NET Integration Kit, deploy the configuration archive and sample applications.
 component: net
-page_id: net:setup:pf_net_ik_configuring_pf_to_use_the_sample_applications
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_configuring_pf_to_use_the_sample_applications.html
+page_id: net:net:setup/pf_net_ik_configuring_pf_to_use_the_sample_applications
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_configuring_pf_to_use_the_sample_applications.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configuring PingFederate to use the sample applications
+
+To see a working demonstration of the .NET Integration Kit, deploy the configuration archive and sample applications.
+
+## About this task
+
+The sample configuration archive configures a single instance of PingFederate with an example integration that uses both the IdP and SP sample applications. It automatically creates two instances of the OpenToken Adapter.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Deploying the configuration archive destroys your existing PingFederate configuration. Test it on a fresh installation of PingFederate, or back up your current configuration as shown in [Exporting an archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_configurationarchiveexportstate.html) in the PingFederate documentation. |
+
+## Steps
+
+1. Start PingFederate.
+
+2. In the Agentless Integration Kit `.zip` archive, copy `sample/data.zip` to `<pf_install>/pingfederate/server/deploy/drop-in-deployer`.
+
+3. If your PingFederate instance is on a different computer than the sample applications, modify your configuration.
+
+   1. In your IdP and SP adapter instance configurations, change any URLs with `http://localhost` to point to the correct host and port for the sample applications on your Internet Information Services (IIS) server.
+
+   2. On the **Identity Provider > Default URL** tab, change `http://localhost` to point to the correct host and port for the sample applications. Repeat for the **Service Provider > Default URL** tab.
+
+   3. In a browser, go to the sample application URL. On the **Configuration Options** page, change the PF Host Name to point to the host and port of your PingFederate server.
+
+---
+
+---
+title: Configuring PingFederate to use the sample applications
+description: To see a working demonstration of the .NET Integration Kit, deploy the configuration archive and sample applications.
+component: net
+page_id: net:net-2x:setup/pf_net_ik_configuring_pf_to_use_the_sample_applications
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_configuring_pf_to_use_the_sample_applications.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -320,8 +851,31 @@ The sample configuration archive configures a single instance of PingFederate wi
 title: Custom application setup
 description: You can configure the .NET Integration Kit to integrate PingFederate with your identity provider (IdP) or service provider (SP) application.
 component: net
-page_id: net:setup:pf_net_ik_custom_application_setup
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_custom_application_setup.html
+page_id: net:net:setup/pf_net_ik_custom_application_setup
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_custom_application_setup.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 24, 2026
+---
+
+# Custom application setup
+
+You can configure the .NET Integration Kit to integrate PingFederate with your identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)* or service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* application.
+
+You can also find a working demonstration of the .NET Integration Kit in the [Sample applications setup](pf_net_ik_sample_applications_setup.html).
+
+---
+
+---
+title: Custom application setup
+description: You can configure the .NET Integration Kit to integrate PingFederate with your identity provider (IdP) or service provider (SP) application.
+component: net
+page_id: net:net-2x:setup/pf_net_ik_custom_application_setup
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_custom_application_setup.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -337,10 +891,48 @@ If you would like to see a working demonstration of the .NET Integration Kit bef
 
 ---
 title: Deploying the OpenToken Agent
+description: Deploy the OpenToken Agent to allow your web application to serialize user attributes into an OpenToken for IdPs, and validate and extract user attributes for SPs. Learn more in Integrating the OpenToken agent into your .NET 8 application.
+component: net
+page_id: net:net:setup/pf_net_ik_deploying_opentoken_agent
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_deploying_opentoken_agent.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 24, 2026
+page_aliases: ["pf_net_ik_deploying_the_opentoken_agent.adoc"]
+section_ids:
+  steps: Steps
+---
+
+# Deploying the OpenToken Agent
+
+Deploy the OpenToken Agent to allow your web application to serialize user attributes into an OpenToken for IdPs, and validate and extract user attributes for SPs. Learn more in [Integrating the OpenToken agent into your .NET 8 application](pf_net_ik_integrating_the_opentoken_agent_into_your_net_application.html).
+
+## Steps
+
+1. From the .NET Integration Kit `.zip` archive, copy the `dist/opentoken-agent.dll` file to a location accessible to your ASP.NET Core 8 project.
+
+2. Add a reference to `opentoken-agent.dll` in your `.csproj` file:
+
+   ```shell
+   <ItemGroup>
+       <Reference Include="opentoken-agent">
+         <HintPath>path/to/opentoken-agent.dll</HintPath>
+       </Reference>
+     </ItemGroup>
+   ```
+
+3. Refer to the API documentation in `dist/docs/` for the full reference of available classes and methods.
+
+4. Refer to the sample application source code in `sample_src/` for end-to-end examples of IdP and SP integration.
+
+---
+
+---
+title: Deploying the OpenToken Agent
 description: To allow your web application to send and receive user attributes in OpenToken format, deploy theplatformOpenToken agent on your application server.
 component: net
-page_id: net:setup:pf_net_ik_deploying_the_opentoken_agent
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_deploying_the_opentoken_agent.html
+page_id: net:net-2x:setup/pf_net_ik_deploying_the_opentoken_agent
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_deploying_the_opentoken_agent.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -372,8 +964,51 @@ To allow your web application to send and receive user attributes in OpenToken f
 title: Download manifest
 description: The following files are included in the .NET Integration Kit .zip archive:
 component: net
-page_id: net:release_notes:pf_net_ik_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_download_manifest.html
+page_id: net:net:release_notes/pf_net_ik_download_manifest
+canonical_url: https://docs.pingidentity.com/integrations/net/net/release_notes/pf_net_ik_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 1, 2026
+---
+
+# Download manifest
+
+The following files are included in the .NET Integration Kit `.zip` archive:
+
+* `Legal.pdf`: Copyright and license information
+
+* `/dist`: Contains the OpenToken agent for .NET:
+
+  * `opentoken-agent.dll`: Agent Toolkit for .NET 8. Reference this library in your ASP.NET Core 8 application to read, write, and delete OpenToken.
+
+  * `docs/` Agent Toolkit API documentation.
+
+* `/sample`: Contains the prebuilt .NET 8 sample applications and the PingFederate configuration archive:
+
+  * `/IdpSample`: IdP sample application binaries, ready to deploy.
+
+  * `/SpSample`: SP sample application binaries, ready to deploy.
+
+  * `data.zip`: PingFederate configuration archive. [Import this into PingFederate](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_configurationarchiveimportstate.html) to configure the OpenToken Adapter instances and SP/IdP connections required to run the sample applications in standalone mode.
+
+* `sample_src/`: Contains the full source code for both sample applications. Use this as a reference when integrating the OpenToken Agent into your own ASP.NET Core 8 application, or modify it to suit your environment.
+
+  * `IdpSample/`: Source code for the IdP sample application.
+
+  * `SpSample/` Source code for the SP sample application.
+
+|   |                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The OpenToken Adapter isn't included in this integration `.zip` archive. Learn more in [Updating the OpenToken Adapter](../setup/pf_net_ik_updating_opentoken_adapter.html). |
+
+---
+
+---
+title: Download manifest
+description: The following files are included in the .NET Integration Kit .zip archive:
+component: net
+page_id: net:net-2x:release_notes/pf_net_ik_download_manifest
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/release_notes/pf_net_ik_download_manifest.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -411,10 +1046,89 @@ The following files are included in the .NET Integration Kit `.zip` archive:
 
 ---
 title: IdP single logout integration
+description: When a PingFederate identity provider (IdP) server receives a single logout (SLO) request, it redirects the user's browser to the Logout Service URL defined in the IdP OpenToken Adapter configuration. The Logout Service is responsible for removing the user's local session and redirecting the user's browser back to PingFederate to complete the logout flow.
+component: net
+page_id: net:net:setup/pf_net_ik_idp_slo_integration
+canonical_url: https://docs.pingidentity.com/integrations/net/net/setup/pf_net_ik_idp_slo_integration.html
+llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 26, 2026
+section_ids:
+  logout-flow: Logout flow
+  processing-logout-requests: Processing logout requests
+---
+
+# IdP single logout integration
+
+When a PingFederate identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)* server receives a single logout (SLO) *(tooltip: \<div class="paragraph">
+\<p>The process of signing a user out of multiple sites where the user has started a SSO session.\</p>
+\</div>)* request, it redirects the user's browser to the Logout Service URL defined in the [IdP OpenToken Adapter configuration](pf_net_ik_configuring_opentoken_idp_adapter_instance.html). The Logout Service is responsible for removing the user's local session and redirecting the user's browser back to PingFederate to complete the logout flow.
+
+## Logout flow
+
+The following diagram shows the flow of IdP-initiated SLO, but the architecture would also support SP-initiated SLO:
+
+![eol1563995496884](../_images/eol1563995496884.jpg)
+
+1. User initiates a single logout request. The request targets the PingFederate server's `/idp/startSLO.ping` endpoint.
+
+2. PingFederate sends a logout requests and receives responses for all SPs registered for the current SSO session.
+
+3. PingFederate redirects the user's browser to the IdP application's Logout Service, passing a resume query parameter.
+
+4. The Logout Service clears the local user session and any OpenToken cookie, then redirects the browser back to PingFederate using the resume path to display a logout success page.
+
+## Processing logout requests
+
+The Logout Service endpoint must:
+
+1. Remove the user's local session.
+
+   If your application uses ASP.NET Core cookie authentication, sign out using `SignOutAsync` and clear the server-side session.
+
+2. Delete the OpenToken cookie using `Agent.DeleteToken`
+
+   This is applicable only when the agent is configured with `use-cookie=true`. If the agent uses query parameter mode, no cookie deletion is necessary.
+
+3. Redirect back to PingFederate using the resume query parameter to complete the logout flow.
+
+The following code snippet shows how to implement the Logout Service in an ASP.NET Core 8 controller:
+
+```shell
+using opentoken;
+
+// 1. Clear local session and sign out (if using ASP.NET Core cookie authentication)
+HttpContext.Session?.Clear();
+await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+// 2. Delete the OpenToken cookie (only applicable when
+// use-cookie=true in agent-config.txt)
+Agent agent = new Agent("<PATH_TO_FILE>/agent-config.txt");
+agent.DeleteToken(Response);
+
+// 3. Redirect back to PingFederate to complete the SLO flow
+string? resumePath = Request.Query["resume"];
+if (!string.IsNullOrEmpty(resumePath))
+{
+    string redirectUrl = "<PingFederate-base-url>".TrimEnd('/') + resumePath;
+    Response.Redirect(redirectUrl, true);
+}
+```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Logout Service URL must match the **Logout Service** endpoint configured in the [IdP OpenToken Adapter instance](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_configuring_opentoken_idp_adapter_instance.html) in PingFederate.In ASP.NET Core 8, `HttpContext.Session?.Clear()` and `SignOutAsync` replace the legacy `Session.Abandon()` call used in the older .NET Framework integration.The `Agent.DeleteToken` method handles removal of both the primary cookie and the legacy fallback cookie written by the agent. |
+
+---
+
+---
+title: IdP single logout integration
 description: When an IdP PingFederate server receives a request for SLO, it redirects the user's browser to the Logout Service defined in the IdP OpenToken Adapter configuration. The redirect URL includes an OpenToken containing the user attributes defined in the IdP OpenToken Adapter instance for the partner connection. The Logout Service should remove the user's session on the application server and redirect the user's browser back to the IdP PingFederate server.
 component: net
-page_id: net:setup:pf_net_ik_idp_single_logout_integration
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_idp_single_logout_integration.html
+page_id: net:net-2x:setup/pf_net_ik_idp_single_logout_integration
+canonical_url: https://docs.pingidentity.com/integrations/net/net-2x/setup/pf_net_ik_idp_single_logout_integration.html
 llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 20, 2024
@@ -431,7 +1145,7 @@ When an IdP PingFederate server receives a request for SLO, it redirects the use
 
 The following diagram shows the flow of IdP-initiated SLO, but the architecture would also support SP-initiated SLO.
 
-![eol1563995496884](_images/eol1563995496884.jpg)
+![eol1563995496884](../_images/eol1563995496884.jpg)
 
 1. User initiates a single logout request. The request targets the PingFederate server's `/idp/startSLO.ping` endpoint.
 
@@ -454,501 +1168,3 @@ userInfo.Add(Agent.TOKEN_SUBJECT, <userId>);
 String returnUrl = "https://<{pingfed} DNS>:9031" + Request["resume"];
 Response.Redirect(returnUrl);
 ```
-
----
-
----
-title: IdP single sign-on integration
-description: When PingFederate is configured as an identity provider (IdP), it needs to be able to identify a user prior to issuing a SAML assertion for that user. When using the OpenToken Adapter with PingFederate, this means that the PingFederate server attempts to read a cookie or query parameter containing an OpenToken and then use the values within to identify the user. The application that starts the SSO must include an OpenToken so that PingFederate can identify the user. Use the Agent API to write an OpenToken. The API is a .NET object that provides access to functionality for writing an OpenToken to a given HTTP response.
-component: net
-page_id: net:setup:pf_net_ik_idp_single_sign_on_integration
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_idp_single_sign_on_integration.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  writing-attributes: Writing attributes
-  passing-multi-value-attributes: Passing multi-value attributes
----
-
-# IdP single sign-on integration
-
-When PingFederate is configured as an identity provider (IdP), it needs to be able to identify a user prior to issuing a SAML assertion for that user. When using the OpenToken Adapter with PingFederate, this means that the PingFederate server attempts to read a cookie or query parameter containing an OpenToken and then use the values within to identify the user. The application that starts the SSO must include an OpenToken so that PingFederate can identify the user. Use the Agent API to write an OpenToken. The API is a .NET object that provides access to functionality for writing an OpenToken to a given HTTP response.
-
-## Writing attributes
-
-The writeToken method takes a `System.Collections.IDictionary` collection of attributes and encodes them into an OpenToken, which is then written to the HTTP response.
-
-The collection of attributes must contain a key named `subject`.
-
-If any errors are encountered while creating or writing the token to the HTTP response, a `TokenException` is thrown.
-
-The following code snippet shows the writeToken method:
-
-```
-IDictionary userInfo = new Dictionary<String, String>();
-// Add userId for the logged on user as the token subject
-userInfo.Add(Agent.TOKEN_SUBJECT, <userId>);
-String returnUrl = "https://<{pingfed} DNS>:9031" + Request["resume"];
-. . . .
-try {
-   UrlHelper urlHelper = new UrlHelper(returnUrl);
-   agent.WriteToken(userInfo,Response,urlHelper,false);
-   returnUrl = urlHelper.ToString();
-}
-catch(TokenException e) {
-  // Handle exception
-}
-```
-
-## Passing multi-value attributes
-
-The Agent Toolkit for .NET supports passing multi-value attributes to PingFederate. Each attribute appears in its own discrete `<AttributeValue>` element in the SAML 2.0 assertion or as a JSON array value in OAuth-based protocols. Multi-value attributes are passed using the `opentoken.MultiStringDictionary` collection.
-
-The following code snippet shows how to pass multi-value attributes:
-
-```
-MultiStringDictionary userInfo = new MultiStringDictionary();
-// Add userId for the logged on user as the token subject
-userInfo.Add(Agent.TOKEN_SUBJECT, <userId>);
-
-// Add an attribute GROUP with multiple values
-userInfo.Add("GROUP", "Administrators");
-userInfo.Add("GROUP", "Users");
-String returnUrl = "https://<{pingfed} DNS>:9031" + Request["resume"];
-. . . .
-try {
-   UrlHelper urlHelper = new UrlHelper(returnUrl);
-   agent.WriteToken(userInfo,Response,urlHelper,false);
-   returnUrl = urlHelper.ToString();
-}
-catch(TokenException e) {
-   // Handle exception
-}
-```
-
----
-
----
-title: Integrating the OpenToken agent into your .NET application
-description: To use the .NET Integration Kit, modify your application to use the OpenToken Agent.
-component: net
-page_id: net:setup:pf_net_ik_integrating_the_opentoken_agent_into_your_net_application
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_integrating_the_opentoken_agent_into_your_net_application.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 27, 2024
-section_ids:
-  sample-code: Sample code
----
-
-# Integrating the OpenToken agent into your .NET application
-
-To use the .NET Integration Kit, modify your application to use the OpenToken Agent.
-
-The agent API allows your web application to directly read or write an OpenToken package.
-
-Instantiate the OpenToken Agent by invoking a constructor and loading the `agent-config.txt` configuration file that you saved in [Configuring an OpenToken SP Adapter instance](pf_net_ik_configuring_an_opentoken_sp_adapter_instance.html). This configuration file includes the name of the cookie that the agent object will write, as well as the key to use when encrypting a new OpenToken. If the agent does not find an agent-config.txt file, it throws an exception.
-
-## Sample code
-
-Modify your .NET application based on the following sample code.
-
-```
-using System;using System.
-Collections.Generic;
-using System.Text;
-using opentoken;
-using System.IO;
-using opentoken.util;
-using System.Collections;
-using System.Collections.Generic;
-. . . .
-Agent agent = new Agent( "<PATH_TO_FILE>/agent-config.txt");
-```
-
----
-
----
-title: Known issues and limitations
-description: There are no known issues.
-component: net
-page_id: net:release_notes:pf_net_ik_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/net/release_notes/pf_net_ik_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-* The OpenToken name given to any one Adapter instance must be unique within the given federation. This however is not enforced in the user interface.
-
-* SP and IdP Sample applications are bundled with the integration kit only from presentation point of view. There is ability to create more than one unique session under the PingFederate IdP associated with a user using the demo sample applications. The situation should not appear in production environment if you are not using the bundled demo sample application in production.
-
-* The SP adapter has the ability to send extended attributes through cookies or query parameters along with the OpenToken. So long as these additional attributes have only one value each, this works fine, however, if there are any multi-value attribute only the first value would be sent, partly because we can only set one cookie per value name.
-
-* After replacing the agent configuration, it is sometimes necessary to disallow and then re-allow IIS write access to the file.
-
----
-
----
-title: Overview of the SSO flow
-description: With the .NET Integration Kit, PingFederate exchanges user attributes with your .NET application through an OpenToken token.
-component: net
-page_id: net::pf_net_ik_overview_of_the_sso_flow
-canonical_url: https://docs.pingidentity.com/integrations/net/pf_net_ik_overview_of_the_sso_flow.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
----
-
-# Overview of the SSO flow
-
-With the .NET Integration Kit, PingFederate exchanges user attributes with your .NET application through an OpenToken token.
-
-The following figure shows a basic identity-provider (IdP)-intiated single sign-on (SSO) scenario in which PingFederate federation servers using the .NET Integration Kit exist on both sides of the identity federation:
-
-![bco1563995493632](_images/bco1563995493632.jpg)
-
-**Description**
-
-1. A user initiates an SSO transaction.
-
-2. The IdP application inserts user attributes into the agent toolkit for .NET, which encrypts the data internally and generates an OpenToken token.
-
-3. A request containing the OpenToken is redirected to the PingFederate IdP server.
-
-4. The server invokes the OpenToken IdP Adapter, which retrieves the OpenToken, decrypts, parses, and passes the user attributes to the PingFederate IdP server. The PingFederate IdP server then generates a SAML assertion.
-
-5. The SAML assertion is sent to the SP site.
-
-6. The PingFederate SP server parses the SAML assertion and passes the user attributes to the OpenToken SP Adapter. The adapter encrypts the data internally and generates an OpenToken.
-
-7. A request containing the OpenToken is redirected to the SP application.
-
-8. The Agent Toolkit for .NET decrypts and parses the OpenToken and makes the user attributes available to the SP Application.
-
----
-
----
-title: Sample applications setup
-description: You can configure the .NET Integration Kit to work with the included sample applications.
-component: net
-page_id: net:setup:pf_net_ik_sample_applications_setup
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sample_applications_setup.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  components: Components
-  system-requirements: System requirements
----
-
-# Sample applications setup
-
-You can configure the .NET Integration Kit to work with the included sample applications.
-
-The applications provide a means of testing an end-to-end Identity Provider (IdP) and Service Provider (SP) integration with PingFederate using this integration kit.
-
-This sample application distribution includes startup components that automatically configure PingFederate to act as both an IdP and an SP:
-
-* The IdP server is configured to look up and send authentication information to the SP.
-
-* The SP server is configured to forward this information to the SP sample application to create the local user session. The SP server will also be configured to send authentication requests to the IdP on behalf of local users.
-
-## Components
-
-* Identity provider (IdP) sample application
-
-  * Acts as an IdP application in your demonstration environment.
-
-* Service provider (SP) sample application
-
-  * Acts as an SP application in your demonstration environment.
-
-* PingFederate configuration archive
-
-  * This `data.zip` archive automatically configures PingFederate with OpenToken Adapter instances to work with the two sample applications.
-
-## System requirements
-
-* PingFederate 9.0 or later.
-
-* The OpenToken Adapter. See [Updating the OpenToken Adapter](pf_net_ik_updating_the_opentoken_adapter.html).
-
-* Windows Server 2008 64-bit or 32-bit.
-
-* Microsoft Internet Information Services (IIS) with the following:
-
-  * Running version 7 or later.
-
-  * The correct time (recently synchronized).
-
-  * The correct time zone.
-
-* Microsoft .NET Framework 4.0 installed and registered with IIS.
-
----
-
----
-title: SP single logout (SLO)
-description: When an SP PingFederate server receives a request for SLO, it redirects the user's browser to the Logout Service as configured in the SP OpenToken Adapter instance. As part of the redirect, PingFederate and the OpenToken Adapter include both an OpenToken and a resumePath query parameter.
-component: net
-page_id: net:setup:pf_net_ik_sp_single_logout_slo
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_logout_slo.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
----
-
-# SP single logout (SLO)
-
-When an SP PingFederate server receives a request for SLO, it redirects the user's browser to the Logout Service as configured in the SP OpenToken Adapter instance. As part of the redirect, PingFederate and the OpenToken Adapter include both an OpenToken and a resumePath query parameter.
-
-* The OpenToken includes attributes about the user.
-
-* The resumePath query parameter provides the target application URL.
-
-A user can have multiple sessions. This logout sequence, as shown in the following diagram, will occur for each of the user's sessions controlled by the SP PingFederate server.
-
-![kcs1563995501655](_images/kcs1563995501655.jpg)
-
-**Sequence**
-
-1. PingFederate receives an SLO request under the SAML 2.0 protocol.
-
-2. PingFederate, via the OpenToken Adapter, redirects the browser to the Application Server's Logout Service.
-
-3. The Logout Service returns to PingFederate, indicating that the logout was successful.
-
-The code needed to perform an SP SLO is identical to that required for an IdP SLO.
-
----
-
----
-title: SP single sign-on integration
-description: When PingFederate is configured as an SP, it takes inbound SAML assertions and converts them to some local format (cookie or otherwise) that can be used by an application to create a user's session. For an OpenToken, the PingFederate adapter takes the attributes and values from the SAML assertion and stores them in an OpenToken cookie or query parameter in the user's browser. The user is then redirected to the target application, which can then identify the user from the OpenToken, using the Agent API.
-component: net
-page_id: net:setup:pf_net_ik_sp_single_sign_on_integration
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_sign_on_integration.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  reading-attributes: Reading attributes
-  receiving-multi-value-attributes: Receiving multi-value attributes
----
-
-# SP single sign-on integration
-
-When PingFederate is configured as an SP, it takes inbound SAML assertions and converts them to some local format (cookie or otherwise) that can be used by an application to create a user's session. For an `OpenToken`, the PingFederate adapter takes the attributes and values from the SAML assertion and stores them in an `OpenToken` cookie or query parameter in the user's browser. The user is then redirected to the target application, which can then identify the user from the `OpenToken`, using the `Agent` API.
-
-As with the IdP, you can use the Agent API to read tokens directly. The Agent API is a .NET class that provides access to functionality for reading an `OpenToken` from a given HTTP request.
-
-## Reading attributes
-
-The readToken method inspects the cookie (or query parameters, depending on the agent configuration), decodes the OpenToken, and returns a collection of attributes.
-
-If there is no token, it returns a `null` result. If an errors occurs while reading the token, it returns a `null` result and a `TokenException` is thrown.
-
-The following code snippet shows the readToken method:
-
-```
-try {
-   IDictionary userInfo = agent.ReadToken(Request);
-   if(userInfo != null) {
-      String username = (String)userInfo[Agent.TOKEN_SUBJECT];
-   }
-}
-catch(TokenException e) {
-   // Handle exception
-}
-```
-
-## Receiving multi-value attributes
-
-The Agent Toolkit for .NET supports receiving multi-value attributes from PingFederate. Multi-value attributes are passed using the `opentoken.MultiStringDictionary` collection.
-
-The following code snippet shows how to process multi-value attributes:
-
-```
-try {
-   MultiStringDictionary userInfo =
-    agent.ReadTokenMultiStringDictionary(Request);
-   if(userInfo != null) {
-      String username = userInfo[Agent.TOKEN_SUBJECT][0];
-      List<String> groups = userInfo["GROUP"];
-   }
-}
-catch(TokenException e) {
-   // Handle exception
-}
-```
-
----
-
----
-title: SP single sign-on integration using account linking
-description: If an SP's SSO implementation employs account linking, the flow of events is somewhat different since a user must authenticate to the SP application the first time SSO is initiated (for more information, see Key concepts in the PingFederate documentation). In this case, PingFederate and the OpenToken Adapter support an integration mechanism to redirect the user to an Account Link Service to which a user can authenticate initially. Upon successful authentication, the user's browser is redirected back to PingFederate with an OpenToken, which PingFederate uses to create an account link for the user. For subsequent SSO requests, PingFederate uses the account link established in the first SSO request to identify the user. It then creates an OpenToken and sends it to the Authentication Service associated with the application.
-component: net
-page_id: net:setup:pf_net_ik_sp_single_sign_on_integration_using_account_linking
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_sp_single_sign_on_integration_using_account_linking.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  linking-accounts: Linking accounts
----
-
-# SP single sign-on integration using account linking
-
-If an SP's SSO implementation employs account linking, the flow of events is somewhat different since a user must authenticate to the SP application the first time SSO is initiated (for more information, see [Key concepts](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_key_conc.html) in the PingFederate documentation). In this case, PingFederate and the OpenToken Adapter support an integration mechanism to redirect the user to an Account Link Service to which a user can authenticate initially. Upon successful authentication, the user's browser is redirected back to PingFederate with an OpenToken, which PingFederate uses to create an account link for the user. For subsequent SSO requests, PingFederate uses the account link established in the first SSO request to identify the user. It then creates an OpenToken and sends it to the Authentication Service associated with the application.
-
-![qww1563995499860](_images/qww1563995499860.jpg)
-
-1. PingFederate receives an assertion under either the SAML 2.0, OpenID Connect, or WS-Federation protocol.
-
-2. If this is the first time the user has initiated SSO to this SP, PingFederate redirects the browser to the Application Server's Account Link Service, where the user must authenticate. Upon successful authentication, an OpenToken is returned to PingFederate, and an account link is established for this user within PingFederate. This account link is used on subsequent SSO transactions.
-
-3. PingFederate retrieves the local user ID from its account link data store. Through the OpenToken Adapter, PingFederate generates an OpenToken based on the assertion and account link. PingFederate then redirects the user's browser to the web application's SSO Authentication Service, passing the OpenToken in the redirect.
-
-4. The Authentication Service extracts the contents of the OpenToken, establishes a session for the user, and redirects the user's browser to the Target Resource (the resumePath URL sent as a query parameter).
-
-## Linking accounts
-
-In an Account Linking event, the user's browser is redirected to the configured Account Linking service in the SP OpenToken Adapter instance. The application should capture the resumePath upon a GET request to this URL with something similar to the following:
-
-```
-IDictionary userInfo = new Dictionary<String, String>();
-// Add userId for the logged on user as the token subject
-userInfo.Add(Agent.TOKEN_SUBJECT, <userId>);
-String returnUrl = "https://<{pingfed} DNS>:9031" + Request["resume"];
-. . . .
-try {
-   UrlHelper urlHelper = new UrlHelper(returnUrl);
-   //For sample code that instantiates and configures an Agent instance, see the
-   //"Integrating the OpenToken Agent into your application" topic in the documentation
-   agent.WriteToken(userInfo,Response,urlHelper,false);
-   returnUrl = urlHelper.ToString();
-}
-catch(TokenException e) {
-    // Handle exception
-}
-Response.Redirect(returnUrl);
-```
-
----
-
----
-title: Testing
-description: You can test the .NET Integration Kit using one of the sample applications bundled with this distribution.
-component: net
-page_id: net:setup:pf_net_ik_testing
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_testing.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
----
-
-# Testing
-
-You can test the .NET Integration Kit using one of the sample applications bundled with this distribution.
-
-See [Sample applications setup](pf_net_ik_sample_applications_setup.html).
-
-|   |                                                                                                                                                                                                                                                        |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Do not install the `data.zip` archive as shown in [Configuring PingFederate to use the sample applications](pf_net_ik_configuring_pf_to_use_the_sample_applications.html). This will overwrite the PingFederate configuration that you just completed. |
-
----
-
----
-title: Updating the OpenToken Adapter
-description: The .NET Integration Kit relies on the OpenToken Adapter that is distributed with the Java Integration Kit. Update the OpenToken Adapter to get the latest feature and security updates.
-component: net
-page_id: net:setup:pf_net_ik_updating_the_opentoken_adapter
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_updating_the_opentoken_adapter.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 20, 2024
-section_ids:
-  steps: Steps
----
-
-# Updating the OpenToken Adapter
-
-The .NET Integration Kit relies on the OpenToken Adapter that is distributed with the Java Integration Kit. Update the OpenToken Adapter to get the latest feature and security updates.
-
-## Steps
-
-1. Download the Java Integration Kit `.zip` archive from the **Add-ons** tab of the [PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html).
-
-2. Stop PingFederate.
-
-3. Delete the `opentoken-adapter-<version>.jar` file from your `<pf_install>/pingfederate/server/default/deploy` directory.
-
-4. From the Java Integration Kit `.zip` archive, copy the contents of `dist/pingfederate` to your `<pf_install>/pingfederate` directory.
-
-   |   |                                                                                                                                                                                                              |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | The `commons-collections`, `commons-beanutils`, and `commons-logging` libraries are provided as a convenience and should be installed only if they are not already contained in the application `CLASSPATH`. |
-
-5. Start PingFederate.
-
-6. If you operate PingFederate in a cluster, repeat steps 2-5 for each engine node.
-
----
-
----
-title: Using the IdP sample application
-description: The .NET Integration Kit identity provider (IdP) sample application demonstrates IdP-initiated single sign-on (SSO) and single logout (SLO) use cases.
-component: net
-page_id: net:setup:pf_net_ik_using_the_idp_sample_application
-canonical_url: https://docs.pingidentity.com/integrations/net/setup/pf_net_ik_using_the_idp_sample_application.html
-llms_txt: https://docs.pingidentity.com/integrations/net/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Using the IdP sample application
-
-The .NET Integration Kit identity provider (IdP) sample application demonstrates IdP-initiated single sign-on (SSO) and single logout (SLO) use cases.
-
-## About this task
-
-The IdP sample application simulates the IdP-initiated SSO/SLO scenario in which users authenticate to an IdP locally in order to access a remote SP application. In this scenario, users may be accessing a company portal that provides links to partner applications such as local news and weather, stock market information, and HR and 401(k) benefits.
-
-When you authenticate locally to the IdP sample application, no communication occurs between that application and PingFederate. The user authenticates using the local user store; no SAML use cases are invoked. However, when you click a link to a third-party application, such as your company's health care provider, the IdP initiates an SSO transaction.
-
-## Steps
-
-1. Start the PingFederate and Internet Information Services (IIS) servers.
-
-2. In a browser, open the sample application:
-
-   `https://hostname/IdpSample`
-
-3. On the main page, click Login Locally.
-
-4. On the Identity Provider Login page, sign on as any of the listed users with a password of `test`.
-
-5. Click Login.
-
-6. On the Identity Provider page, try the following:
-
-   1. **Optional:** To begin an IdP-iniated SSS to the SP sample application, click the Single Sign-On. This starts a user session on the SP and redirects you to the SP sample application. For more information, see [Using the SP Sample Application](pf_net_ik_using_the_sp_sample_application.html).
-
-   2. **Optional:** After signing on to the SP sample application and returning to the Identity Provider main page, click Single Sign-Out to initiate a SLO request to the SP. This ends your user session on the SP as well as your local user session.

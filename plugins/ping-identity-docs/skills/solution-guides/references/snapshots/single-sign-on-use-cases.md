@@ -4,6 +4,8 @@ description: Use your Java Virtual Machine (JVM) to generate SHA-2 certificates 
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_change_certs_from_sha_1_to_sha_2_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_change_certs_from_sha_1_to_sha_2_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -67,6 +69,8 @@ description: For CyberArk and Ping Identity best practices, deploy MFA for all s
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_pf_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_pf_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -179,6 +183,8 @@ description: Set up a SAML connection using PingFederate for CyberArk Password V
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_pf_saml
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_pf_saml.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -378,6 +384,8 @@ description: For CyberArk and Ping Identity best practices, deploy multi-factor 
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_p14e_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_p14e_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -411,6 +419,8 @@ description: Set up SAML using PingOne for Enterprise for CyberArk Password Vaul
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_p14e_saml
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_p14e_saml.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -481,6 +491,8 @@ description: Configure the SAML IdP server profile in NGFW.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_pf_saml_ngfw
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_pf_saml_ngfw.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -608,6 +620,8 @@ description: Configure a trusted certificate using components of PingDirectory s
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_ldaps_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   about-this-task: About this task
@@ -670,6 +684,8 @@ description: For service provider (SP)-initiated single sign-on (SSO), your iden
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_authn_req_sign_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_authn_req_sign_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -737,6 +753,8 @@ description: Create a WS-Federation connection, export the signing certificate, 
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_fed_sharepoint
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_fed_sharepoint.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 page_aliases: ["single_sign-on_use_cases:htg_config_fed_sharepoint_wsfed_pf.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_signing_cert.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_trusted_ip.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_trusted_ip_assign_web_app.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_more_config.adoc"]
 section_ids:
@@ -1061,6 +1079,8 @@ description: Use IdentityIQ's settings to configure SAML-based single sign-on (S
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml_identityiq
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_saml_identityiq.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1114,6 +1134,8 @@ description: To enable PingOne for Enterprise single sign-on (SSO) using PingFed
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_p14e_pfb_identity_repository.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 page_aliases: ["single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_p14e_portal.adoc", "single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_p14e_bridge.adoc", "single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_sso_bridge.adoc"]
 section_ids:
@@ -1316,6 +1338,8 @@ description: This document describes how to integrate PingDirectory and PingFede
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 page_aliases: ["single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml.adoc"]
 section_ids:
@@ -1362,6 +1386,8 @@ description: Configure the URL assigned to your application in PingOne for Enter
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sp_init_sso_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sp_init_sso_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1401,6 +1427,8 @@ description: To set up single sign-on (SSO) for administrators and coordinators 
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_uber_sso_scim_overview
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_uber_sso_scim_overview.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 14, 2023
 page_aliases: ["single_sign-on_use_cases:htg_uber_config_sso.adoc", "single_sign-on_use_cases:htg_uber_config_scim.adoc"]
 section_ids:
@@ -1592,6 +1620,8 @@ description: Next-Generation Firewall (NGFW) supports the ability to enable sing
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 10, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1887,6 +1917,8 @@ description: Next-Generation Firewall (NGFW) supports the ability to enable Sing
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -2081,6 +2113,8 @@ description: Use the IdentityNow configuration functionality to establish a succ
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_identitynow
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_ldaps_identitynow.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 10, 2025
 section_ids:
   steps: Steps
@@ -2211,6 +2245,8 @@ description: Some operations require time synchronization between guest servers 
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_time_sync_pf_others
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_time_sync_pf_others.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 page_aliases: ["single_sign-on_use_cases:htg_config_time_sync_pf_vmware.adoc", "single_sign-on_use_cases:htg_config_time_sync_pf_windows.adoc", "single_sign-on_use_cases:htg_config_time_sync_pf_unix.adoc"]
 section_ids:
@@ -2338,6 +2374,8 @@ description: You must have:
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_workday_sso_p14e_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_workday_sso_p14e_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 4, 2023
 section_ids:
   before-you-begin: Before you begin
@@ -2608,6 +2646,8 @@ description: This solution provides the steps to configure Okta as an identity p
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_connect_okta_idp_saml_pf_sp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 page_aliases: ["single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_okta_idp.adoc", "single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_config_pf.adoc", "single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_troubleshooting.adoc"]
 section_ids:

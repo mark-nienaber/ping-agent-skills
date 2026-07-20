@@ -1,12 +1,12 @@
 ---
 title: ScrambleID Connector
-description: The ScrambleID connector lets you use OpenID Connect (OIDC) login with ScrambleID in your PingOne DaVinci flow.
+description: Configure the ScrambleID connector to enable OIDC-based authentication with ScrambleID in a PingOne DaVinci flow
 component: connectors
 page_id: connectors::scrambleid_connector
 canonical_url: https://docs.pingidentity.com/connectors/scrambleid_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 28, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -38,13 +38,13 @@ The connector redirects users to ScrambleID for authentication, handles the toke
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -58,7 +58,7 @@ To use the connector, you'll need:
 
 ### Configuring the ScrambleID connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -88,7 +88,7 @@ The OIDC scopes to request. Defaults to openid offline\_access.
 
 ##### DaVinci Redirect URI
 
-The redirect URI registered in ScrambleID that allows tokens to be returned to DaVinci.
+The redirect URI registered in ScrambleID that allows tokens to be returned to PingOne DaVinci.
 
 ## Using the connector in a flow
 
@@ -96,7 +96,7 @@ The redirect URI registered in ScrambleID that allows tokens to be returned to D
 
 ![A screen capture of the complete ScrambleID redirect flow.](_images/connector-images/tap-scrambleid-redirecttoscrambleid-flow.png)
 
-This flow redirects the user to ScrambleID for OIDC authentication. After the user signs in, DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
+This flow redirects the user to ScrambleID for OIDC authentication. After the user signs in, PingOne DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
 
 Test the flow by clicking **Save**, **Deploy**, and **Try Flow**.
 

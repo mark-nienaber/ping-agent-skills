@@ -1,12 +1,12 @@
 ---
 title: HTTP Connector
-description: This powerful and versatile connector lets you show custom HTML pages, make REST application programming interface (API) calls, and more in your DaVinci orchestration flow.
+description: Configure the PingOne DaVinci HTTP connector to show custom HTML pages, make REST API calls, and build custom user interfaces in your flow
 component: connectors
 page_id: connectors::http_connector
 canonical_url: https://docs.pingidentity.com/connectors/http_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   configuring-the-http-connector: Configuring the HTTP connector
@@ -44,7 +44,7 @@ section_ids:
 
 This powerful and versatile connector lets you show custom HTML pages, make REST application programming interface (API) *(tooltip: \<div class="paragraph">
 \<p>A specification of interactions available for building software to access an application or service.\</p>
-\</div>)* calls, and more in your DaVinci orchestration flow.
+\</div>)* calls, and more in your PingOne DaVinci orchestration flow.
 
 Use it to create a custom HTML message, show flow progress, or send custom responses in an API-triggered flow. You can use the messages as quick placeholders to help you sketch out a new flow. If you want to craft a memorable user experience, use the **Custom HTML Template** capability to create complete HTML pages with your own structure, style, and scripts.
 
@@ -54,7 +54,7 @@ Because this connector allows you to quickly add API calls and user interfaces, 
 
 ### Configuring the HTTP connector
 
-In DaVinci, add an **HTTP** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add an **HTTP** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 
@@ -128,9 +128,9 @@ The **HTML Template** field lets you read and modify the HTML for your page.
 
 * To access a variety of useful tools, right-click the field when you're in syntax highlighting mode (dark background). |
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For security reasons, the **HTML** field only allows certain HTML elements. You can find the elements on the allow list in the [DOMPurify allow list](https://github.com/cure53/DOMPurify/blob/2.3.6/src/tags.js).Note that custom HTML elements from the `svgDisallowed` and `mathMlDisallowed` lists are not allowed.These restrictions apply to all custom HTML fields in DaVinci. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For security reasons, the **HTML** field only allows certain HTML elements. You can find the elements on the allow list in the [DOMPurify allow list](https://github.com/cure53/DOMPurify/blob/2.3.6/src/tags.js).Note that custom HTML elements from the `svgDisallowed` and `mathMlDisallowed` lists are not allowed.These restrictions apply to all custom HTML fields in PingOne DaVinci. |
 
 If you want your HTML to include values from elsewhere in your flow, switch back to the initial view (white background), click **{}**, and then select the variable that holds the value you want.
 

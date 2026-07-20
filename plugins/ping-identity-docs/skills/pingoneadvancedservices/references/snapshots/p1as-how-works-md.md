@@ -4,6 +4,8 @@ description: A high-level description and diagram that explains how PingOne Adva
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices::p1as_how_works
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/p1as_how_works.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2023
 ---
 

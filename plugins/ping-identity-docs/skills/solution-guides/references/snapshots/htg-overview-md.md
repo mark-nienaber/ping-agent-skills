@@ -4,6 +4,8 @@ description: Learn how to configure Ping products with each other and with selec
 component: solution-guides
 page_id: solution-guides::htg_overview
 canonical_url: https://docs.pingidentity.com/solution-guides/htg_overview.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 10, 2026
 page_aliases: ["getting_started_guides:how_to_guides_near_zero_downtime.adoc", "getting_started_guides:htg_get_started_with_pa.adoc", "getting_started_guides:htg_get_started_with_pf.adoc", "getting_started_guides:htg_get_started_with_pf_install_pf.adoc", "getting_started_guides:htg_get_started_with_pf_mpre_info.adoc", "getting_started_guides:htg_get_started_with_pid.adoc", "getting_started_guides:htg_get_started_with_pid_adv_setup.adoc", "getting_started_guides:htg_get_started_with_pid_quick_setup.adoc", "getting_started_guides:htg_getting_started_guides.adoc"]
 section_ids:

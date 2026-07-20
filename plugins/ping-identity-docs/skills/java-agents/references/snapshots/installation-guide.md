@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:agentadmin
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/agentadmin.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   agentadmin-install: "--install"
   forceinstall: "--forceInstall"
@@ -301,6 +303,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:docker
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/docker.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   deploy_tomcat_java_agent_example: Deploy Tomcat Java Agent example
   upgrade_and_rollback: Upgrade and rollback
@@ -524,6 +528,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:install
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/install.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   install-tomcat-agent: Install Tomcat Java Agent
   install-tomcat-interactive: Install Tomcat Java Agent interactively
@@ -1418,6 +1424,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:preface
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/preface.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc", "release-notes:preface.adoc"]
 section_ids:
   preface-examples: Example installation for this guide
@@ -1448,6 +1456,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:post-installation
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/post-installation.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   review_directories_for_configuration_logs_and_post_data: Review directories for configuration, logs, and POST data
   configure-agent-filter-webapp: Configure the agent filter for a web application
@@ -1553,6 +1563,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:pre-installation
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/pre-installation.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before-install: Before you install
   downloading-agent: Download and unzip Java Agent
@@ -1976,6 +1988,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:uninstallation
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/uninstallation.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   uninstall-tomcat-agent: Remove Tomcat Java Agent
   uninstall-jboss7-agent: Remove JBoss Java Agent
@@ -2209,6 +2223,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:installation-guide:secure-connections
 canonical_url: https://docs.pingidentity.com/java-agents/2026/installation-guide/secure-connections.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configure-HTTPS: Secure communication between the agent and AM
   fips: Integrate with the Bouncy Castle FIPS provider

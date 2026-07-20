@@ -1,12 +1,12 @@
 ---
 title: MFA Connector
-description: The MFA connector provides a fast way to orchestrate flows in PingOne DaVinci for common multi-factor authentication (MFA) use cases.
+description: The MFA connector provides a fast way to orchestrate flows in PingOne DaVinci for common multi-factor authentication (MFA) use cases
 component: connectors
 page_id: connectors::mfa_connector
 canonical_url: https://docs.pingidentity.com/connectors/mfa_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 13, 2025
+revdate: July 9, 2026
 section_ids:
   why-use-the-mfa-connector: Why use the MFA connector?
   setup: Setup

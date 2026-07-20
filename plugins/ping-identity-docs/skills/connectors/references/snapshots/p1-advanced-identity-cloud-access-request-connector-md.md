@@ -1,12 +1,12 @@
 ---
 title: PingOne Advanced Identity Cloud Access Request Connector
-description: The PingOne Advanced Identity Cloud Access Request connector lets you manage users and create access requests in PingOne Advanced Identity Cloud in your PingOne DaVinci flow.
+description: Configure the PingOne Advanced Identity Cloud Access Request connector to manage users and create access requests in PingOne DaVinci flows
 component: connectors
 page_id: connectors::p1_advanced_identity_cloud_access_request_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_access_request_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -60,13 +60,13 @@ Learn more in the following:
 
   * [Identity Governance REST API specification](https://docs.pingidentity.com/pingoneaic/_attachments/api/identity-governance-openapi.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -102,7 +102,7 @@ To use the connector, you'll need:
 
   The end user account acts on behalf of any single user and is required for user-centric capabilities, such as **Get Request**, **Get Requestable Items**, and **Create Request**, as well as for the End User Requests using the **Make a Custom API Call**. This setup is not required for using the connector's user CRUD capabilities or making a custom API call.
 
-  The Frodo command-line interface (CLI) is a Ping Identity-developed utility that allows for advanced management of Advanced Identity Cloud. The following steps create credentials that are unique to your DaVinci environment and you can only have one set of credentials for Advanced Identity Cloud for a given DaVinci environment. If you have multiple environments, such as for staging and production, repeat these steps so each DaVinci environment has its own end user credentials in your Advanced Identity Cloud tenant.
+  The Frodo command-line interface (CLI) is a Ping Identity-developed utility that allows for advanced management of Advanced Identity Cloud. The following steps create credentials that are unique to your PingOne DaVinci environment and you can only have one set of credentials for Advanced Identity Cloud for a given PingOne DaVinci environment. If you have multiple environments, such as for staging and production, repeat these steps so each PingOne DaVinci environment has its own end user credentials in your Advanced Identity Cloud tenant.
 
   To set up an end user account:
 
@@ -156,7 +156,7 @@ To use the connector, you'll need:
 
 ### Configuring the PingOne Advanced Identity Cloud Access Request connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

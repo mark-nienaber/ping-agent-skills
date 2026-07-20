@@ -1,12 +1,12 @@
 ---
 title: Island Connector
-description: The Island connector lets you use Island device trust signals in your PingOne DaVinci flow.
+description: Configure the Island connector to use Island device trust signals in PingOne DaVinci to verify device context and enforce device-based policies
 component: connectors
 page_id: connectors::island_connector
 canonical_url: https://docs.pingidentity.com/connectors/island_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 30, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -39,13 +39,13 @@ You can find more information and setup help in the following:
 
   * [Island Resources](https://www.island.io/resources)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -59,13 +59,13 @@ To use the connector, you'll need:
 
 ### Configuring the Island connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
 ##### Redirect URL
 
-The redirect URL used by DaVinci. This value is provided automatically in the connector as a read-only field.
+The redirect URL used by PingOne DaVinci. This value is provided automatically in the connector as a read-only field.
 
 ##### Island API Key
 
@@ -95,7 +95,7 @@ The **Device Trust** capability initiates a device challenge with Island, then v
 
 At a high level:
 
-1. The capability initializes and redirects the user to the DaVinci OAuth2 callback URL with the Island challenge included in the x-verified-access-challenge header.
+1. The capability initializes and redirects the user to the PingOne DaVinci OAuth2 callback URL with the Island challenge included in the x-verified-access-challenge header.
 
 2. After the user returns to the flow, the capability reads the corresponding x-verified-access-challenge-response value, verifies it with Island, and outputs device trust details you can evaluate in your journey.
 

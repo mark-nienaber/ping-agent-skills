@@ -34,11 +34,11 @@ Descriptions of standard and advanced fields that you can configure for the Akam
 | Atlassian: configuring, atlassian, configuration | atlassian | https://docs.pingidentity.com/integrations/atlassian/*.md | references/snapshots/atlassian.md |
 | Github: provisioning, pingfederate, configure | github | https://docs.pingidentity.com/integrations/github/*.md | references/snapshots/github.md |
 | Salesforce: provisioning, sso, enabling | salesforce | https://docs.pingidentity.com/integrations/salesforce/*.md | references/snapshots/salesforce.md |
+| Net: configuring, integration, opentoken | net | https://docs.pingidentity.com/integrations/net/*.md | references/snapshots/net.md |
 | Java: configuration, sample, applications | java | https://docs.pingidentity.com/integrations/java/*.md | references/snapshots/java.md |
 | Facebook: configuring, pingfederate, provisioning | facebook | https://docs.pingidentity.com/integrations/facebook/*.md | references/snapshots/facebook.md |
 | Zscaler: sign, single, enabling | zscaler | https://docs.pingidentity.com/integrations/zscaler/*.md | references/snapshots/zscaler.md |
 | Office365: configure, provisioning, add | office365 | https://docs.pingidentity.com/integrations/office365/*.md | references/snapshots/office365.md |
-| Webaccessmanagement: configuring, custom, idp | webAccessManagement | https://docs.pingidentity.com/integrations/webAccessManagement/*.md | references/snapshots/webaccessmanagement.md |
 
 ## Composition
 

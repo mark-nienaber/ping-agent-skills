@@ -1,12 +1,12 @@
 ---
 title: Form Connector
-description: The Form connector lets you include branded forms and messages in your PingOne DaVinci flow.
+description: Configure the Form connector to include branded PingOne forms and messages in PingOne DaVinci flows using the drag-and-drop form builder
 component: connectors
 page_id: connectors::form_connector
 canonical_url: https://docs.pingidentity.com/connectors/form_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 27, 2025
+revdate: July 9, 2026
 page_aliases: ["forms_connector.adoc"]
 section_ids:
   setup: Setup
@@ -49,13 +49,13 @@ Learn more in the following documentation:
 
 * [PingOne Forms](https://docs.pingidentity.com/pingone/user_experience/p1_forms.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -73,7 +73,7 @@ If you want to include a branded message in your flow, configure your branding i
 
 ### Setting up the Form connector
 
-In DaVinci, add a Form connector. For help, refer to [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Form connector. For help, refer to [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 
@@ -85,9 +85,9 @@ The **Show Form** capability lets you present any form that you create with the 
 
 Learn more about creating forms in [Creating a form](https://docs.pingidentity.com/pingone/user_experience/p1_creating_form.html).
 
-To add a form to a DaVinci flow:
+To add a form to a PingOne DaVinci flow:
 
-1. In your DaVinci flow, add the Form connector.
+1. In your PingOne DaVinci flow, add the Form connector.
 
 2. Select the **Show Form** capability.
 
@@ -129,11 +129,11 @@ When you select a form, the **Show Form** node generates its outcomes from the c
 
 ### Configuring conditional component visibility
 
-You can configure a form in your PingOne admin console with conditional component visibility. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html). When you include a form with conditional component visibility with the **Show Form** capability, you configure conditional visibility for user-facing forms in your DaVinci flow with the Form connector.
+You can configure a form in your PingOne admin console with conditional component visibility. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html). When you include a form with conditional component visibility with the **Show Form** capability, you configure conditional visibility for user-facing forms in your PingOne DaVinci flow with the Form connector.
 
 To configure conditional component visibility:
 
-1. In your DaVinci flow, add the Form connector.
+1. In your PingOne DaVinci flow, add the Form connector.
 
 2. Select the **Show Form** capability.
 

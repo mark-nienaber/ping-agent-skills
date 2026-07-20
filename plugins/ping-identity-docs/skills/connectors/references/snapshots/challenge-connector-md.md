@@ -1,12 +1,12 @@
 ---
 title: Challenge Connector
-description: The Challenge connector allows you to branch your PingOne DaVinci flow to handle an external event, such as a multi-factor authentication (MFA) step.
+description: Configure the Challenge connector to branch PingOne DaVinci flows and handle external events like MFA challenges using status-based polling
 component: connectors
 page_id: connectors::challenge_connector
 canonical_url: https://docs.pingidentity.com/connectors/challenge_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 16, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   setting-up-the-challenge-connector: Setting up the Challenge connector
@@ -39,7 +39,7 @@ The Challenge connector updates the status of a challenge, which triggers the wa
 
 ### Setting up the Challenge connector
 
-In DaVinci, add a **Challenge** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Challenge** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 
@@ -91,7 +91,7 @@ Before you start, you'll need:
 
      4. In the **Challenge** field, click **{}** and select the `challenge` variable from your **Add Transaction Status** node.
 
-     5. Turn on **Is challenge record complete**. This indicates to DaVinci that our **Custom HTML Template** can stop polling for the status of this challenge.
+     5. Turn on **Is challenge record complete**. This indicates to PingOne DaVinci that our **Custom HTML Template** can stop polling for the status of this challenge.
 
      6. In the **Challenge Status** list, select **approved**.
 

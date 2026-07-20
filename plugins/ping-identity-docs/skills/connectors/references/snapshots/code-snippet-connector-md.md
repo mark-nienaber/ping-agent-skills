@@ -1,12 +1,12 @@
 ---
 title: Code Snippet Connector
-description: The Code Snippet connector lets you create custom JavaScript code that you can reuse across multiple PingOne DaVinci flows. You can use it to provide dynamic messages, get a specific attribute from a JavaScript Object Notation (JSON) payload, or insert any other custom behavior into your flow.
+description: Configure the Code Snippet connector in PingOne DaVinci to create reusable custom JavaScript code that you can share across multiple flows
 component: connectors
 page_id: connectors::code_snippet_connector
 canonical_url: https://docs.pingidentity.com/connectors/code_snippet_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 16, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   configuring-the-code-snippet-connector: Configuring the Code Snippet connector
@@ -48,7 +48,7 @@ Because this code is reusable, it can help in the centralization or automation o
 
 ### Configuring the Code Snippet connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

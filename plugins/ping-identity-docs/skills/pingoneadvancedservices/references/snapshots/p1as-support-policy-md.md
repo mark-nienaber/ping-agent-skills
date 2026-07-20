@@ -4,6 +4,8 @@ description: Information about our support policy.
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices::p1as_support_policy
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/p1as_support_policy.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 3, 2026
 section_ids:
   version-support: Version support

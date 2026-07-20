@@ -4,6 +4,8 @@ description: After you have configured OIDC for EKS, PingOne users can execute t
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_authn_eks
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_authn_eks.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 ---
 
@@ -51,6 +53,8 @@ description: Configure the kubectl command line tool to work with OIDC.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_kubectl
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_kubectl.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -118,6 +122,8 @@ description: PingAccess can interact directly with an OIDC IdP provider, so you 
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_med_grained_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_med_grained_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 section_ids:
   components: Components
@@ -235,6 +241,8 @@ description: Open ID Connect (OIDC) supports authentication for Amazon Web Servi
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 29, 2022
 section_ids:
   components: Components
@@ -435,6 +443,8 @@ description: Add your PingFederate server certificate under Trusted Certificate 
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_web_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_web_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -513,6 +523,8 @@ description: Sign on to your PingFederate administrative console.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_oauth2
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_oauth2.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -627,6 +639,8 @@ description: Configure authentication between PingFederate and PingAccess using 
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 section_ids:
   components: Components
@@ -861,6 +875,8 @@ description: Go to Security → Key Pairs.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_key_pair
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_key_pair.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -895,6 +911,8 @@ description: Go to Applications → Add Application.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_app_host
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_app_host.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -932,6 +950,8 @@ description: Go to Sites → Add Site.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_pa_site
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_pa_site.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -963,6 +983,8 @@ description: Go to Access → Virtual Hosts.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_pa_host
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_pa_host.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -995,6 +1017,8 @@ description: To configure your AWS EKS cluster for OIDC authentication, you must
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_p1_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_p1_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -1053,6 +1077,8 @@ description: Configuring OIDC authentication for AWS EKS clusters
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_data_and_app_security_use_cases
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_data_and_app_security_use_cases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 19, 2024
 ---
 
@@ -1074,6 +1100,8 @@ description: Log in to your PingFederate administration console.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_export_pf_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_export_pf_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1103,6 +1131,8 @@ description: Log in to your PingAccess administration console.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_import_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_import_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1132,6 +1162,8 @@ description: Test your application in a web browser.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_final_steps
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_final_steps.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -1177,6 +1209,8 @@ description: Components
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pa_resources_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pa_resources_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1329,6 +1363,8 @@ description: Learn how to proxy PingAccess to protect PingFederate in a gateway 
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deployment_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deployment_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 19, 2023
 section_ids:
   components: Components
@@ -1544,6 +1580,8 @@ description: Go to System → Token Provider.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_match_token_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_match_token_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1578,6 +1616,8 @@ description: This procedure assumes that you have configured PingFederate and Pi
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_med_grained_app_ad_oidc_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_med_grained_app_ad_oidc_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task

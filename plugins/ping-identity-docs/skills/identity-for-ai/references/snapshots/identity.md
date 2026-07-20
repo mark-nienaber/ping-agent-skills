@@ -135,3 +135,125 @@ Consider the following diagram:
    The worker also accesses the organization's web app to interact and view the status of delivery on inventory.
 
 3. For high-sensitivity transactions, a HITL interaction is required. Additionally, the worker is monitored just like a human user to ensure that the worker has the minimal access it needs to perform its tasks.
+
+---
+
+---
+title: Identifying Agents with Token Exchange
+description: Correctly implement token exchange in your flows to achieve delegation, not impersonation.
+component: identity-for-ai
+page_id: identity-for-ai:identity:idai-token-exhange
+canonical_url: https://developer.pingidentity.com/identity-for-ai/identity/idai-token-exhange.html
+revdate: December 22, 2025
+keywords: ["identity for ai", "ai identity", "ai security", "ai governance", "ai compliance", "ai agent", "ai agent types", "personal agent", "digital assistant", "digital worker"]
+---
+
+# Identifying Agents with Token Exchange
+
+In a standard OAuth flow, an application might impersonate a user, holding a token that allows it to do anything a user can do. This makes the application's behavior indistinguishable from user-performed actions. In complex agentic architectures (where multiple AI agents are collaborating with each other), this is dangerous, especially if rogue agent activity has an inaccurate audit trail.
+
+The OAuth 2.0 Token Exchange protocol ([RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html)) defines how to apply the concept of delegation to token exchange. In simple terms, an agent's authentication token can show "I'm Agent A, and I'm performing a specific action requested by Agent B, to complete a task for User C."
+
+This approach is superior to others, such as secret vault retrieval, as the agent never possesses live credentials. The agent only possesses a finely-scoped access token after the end user triggers token exchange.
+
+The following graphic illustrates a daisy-chain of these delegations, where multiple agents are working together and communicating with a Model Context Protocol (MCP) server to solve a problem on behalf of the user.
+
+![A diagram showing each step of token exchange between a user, two agents, an MCP server and a resource server.](_images/idai-token-exchange.png)
+
+The key to this flow is the `act` (actor) claim within the JSON Web Token (JWT). With each new agent authentication, a new `act` claim is appended, creating a nested audit trail of collaboration between agents and servers.
+
+The following describes each authentication in the flow:
+
+1. User authentication
+
+   The process begins with a human user authenticating with an identity provider (IdP) to use an agent.
+
+   * **The exchange:** Ping Identity (the IdP) issues a JWT.
+
+   * **Key claims:**
+
+     * `sub` (subject): user\@example.com (The human).
+
+     * `aud` (audience): https\://agent1.example.com (The "orchestrator" agent the human is communicating with).
+
+   * **Meaning:** The user is interacting directly with agent 1, so there is no `act` claim yet.
+
+2. Agent 1 delegates to agent 2
+
+   Agent 1 needs to offload a task to agent 2. Agent 1 can't just pass the user's token because that token is scoped for agent 1, not agent 2.
+
+   * **The exchange:** Agent 1 contacts the IdP and requests token exchange. It presents the user's token and asks for a new token valid for agent 2.
+
+   * **Key claims:**
+
+     * `sub`: user\@example.com (Still the user).
+
+     * `aud`: https\://agent2.example.com (Now valid for agent 2).
+
+     * The `act` claim:
+
+       ```json
+       "act":
+       {
+         "sub":"https://agent1.example.com",
+       }
+       ```
+
+   * **Meaning:** Agent 1 is the actor requesting agent 2 to perform a task on behalf of the user.
+
+3. Agent 2 delegates to MCP server
+
+   Agent 2 now needs to access a tool or resource through an MCP server.
+
+   * **The exchange:** Agent 2 sends the token it received from agent 1 to the IdP and requests a token scoped for the MCP server.
+
+   * **Key claims:**
+
+     * `sub`: user\@example.com (Still the user).
+
+     * `aud`: https\://mcp-server1.example.com (Valid for the MCP server).
+
+     * The nested `act` claim:
+
+       ```json
+       "act":
+       {
+         "sub":"https://agent2.example.com",
+         "act":
+         {
+           "sub":"https://agent1.example.com",
+         }
+       }
+       ```
+
+   * **Meaning:** Now, agent 2 is the actor performing token exchange with the MCP server, having been triggered by agent 1. The user is still the original owner of the request.
+
+4. MCP server calls the resource server
+
+   The MCP server now needs to access the resource server to complete the user's task.
+
+   * **The exchange:** The MCP server presents its token from agent 2 and requests a new token scoped for the resource server.
+
+   * **Key claims:**
+
+     * `sub`: user\@example.com (Still the user).
+
+     * `aud`: https\://resource-server.example.com (Valid for the resource server).
+
+     * The nested `act` claim:
+
+       ```json
+       "act":
+       {
+         "sub":"https://mcp-server1.example.com",
+         {
+           "sub":"https://agent2.example.com",
+           "act":
+           {
+             "sub":"https://agent1.example.com",
+           }
+         }
+       }
+       ```
+
+This demonstrates a perfect call stack. Every actor has its own unique token that identifies who it was called by in each stage of the flow. This separates an agent's activity from a human's, and ensures every action is accurately accounted for.

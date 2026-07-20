@@ -1,5 +1,8 @@
 # Use Cases
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Solution Guides
 
 - [Adding multi-factor authentication to secure apps (PingID with PingAccess)](https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_add_mfa_to_secure_apps_pid_with_pa.md)

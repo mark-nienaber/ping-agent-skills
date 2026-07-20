@@ -4,6 +4,8 @@ description: Create a PingFederate workflow to authenticate users from different
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_authn_azure_ad_tenants
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_authn_azure_ad_tenants.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_authn_azure_ad_tenants_oidc_app_for_authn.adoc", "workforce_use_cases:htg_authn_azure_ad_tenants_view_update_app.adoc", "workforce_use_cases:htg_authn_azure_ad_tenants_oidc_idp_pf.adoc"]
 section_ids:
@@ -192,6 +194,8 @@ description: Configure a SAML application in PingFederate, PingOne, and PingOne 
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_saml_app
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_saml_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_saml_app_pf.adoc", "workforce_use_cases:htg_config_saml_app_p1.adoc", "workforce_use_cases:htg_config_saml_app_p14e.adoc"]
 section_ids:
@@ -539,6 +543,8 @@ description: This document explains the conceptual information behind network-ba
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_adaptive_authn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_adaptive_authn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_adaptive_authn_pf_new_selector.adoc"]
 section_ids:
@@ -668,6 +674,8 @@ description: In PingFederate, establish an Active Directory datastore connection
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_ad_datastore_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_ad_datastore_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_ad_datastore_pf_config_ad_datastore.adoc"]
 section_ids:
@@ -781,6 +789,8 @@ description: Create a Microsoft SQL server Java Database Connectivity (JDBC)-con
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_connect_pf_to_ms_sql_jdbc_datastore.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_add_user.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_assign_logon_policy.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_edit_signon_tab.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_deploy_jdbc.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_connect_jdbc.adoc workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_testing.ado"]
 section_ids:
@@ -997,6 +1007,8 @@ description: Learn how to connect PingFederate with your Yahoo developer account
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_connect_pf_with_yahoo_through_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_oidc_app_yahoo.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_oidc_idp_connection.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_local_identity_profile.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_html_idp_adapter.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_policy_contract_lip.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_testing.adoc"]
 section_ids:
@@ -1261,6 +1273,8 @@ description: PingOne provides an authentication policy step that allows you to m
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_delegate_authn_to_external_idp
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_delegate_authn_to_external_idp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_delegate_authn_to_external_idp_config_idp.adoc", "workforce_use_cases:htg_delegate_authn_to_external_idp_create_authn_policy.adoc"]
 section_ids:
@@ -1406,6 +1420,8 @@ description: Learn how to require a sign off of a PingAccess-protected applicati
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_enable_slo_for_pa_protected_app_using_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pa_logout_endpoint.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pa_partial_logout.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_global_slo.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pf_pa_logout.adoc"]
 section_ids:
@@ -1611,6 +1627,8 @@ description: Learn how to integrate Pulse Connect Secure with PingFederate for s
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_integrate_pulse_connect_secure_with_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_metadata.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_signing_cert.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_saml_pf.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_saml_pcs.adoc"]
 section_ids:
@@ -1946,6 +1964,8 @@ description: Configure a proof of concept to protect a web application from unwa
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_protect_web_app_with_pa_using_pf_as_token_provider.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_pf101.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_pa61.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_prep_pf.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_connect_pf_pa.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_protect_web_app.adoc"]
 section_ids:
@@ -2566,6 +2586,8 @@ description: To improve network security posture and provide a true MFA experien
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_protect_vpn_with_pid_mfa
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_protect_vpn_with_pid_mfa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -2683,6 +2705,8 @@ description: Configure a login form in PingFederate that validates credentials a
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_login_form_validating_creds_with_ad_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_datastore.adoc", "workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_pcv.adoc", "workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_adapter.adoc"]
 section_ids:
@@ -2912,6 +2936,8 @@ description: This configuration creates a service provider (SP) connection with 
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_authn_flow_mfa_pf_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_pcv_pf.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_html_adapter_pcv.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_download_props.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_adapter.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_authn_policy_contract.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_sp_connection.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_authn_selector.adoc", "workforce_use_cases:htg_set_up_authn_pid_pf_create_policy.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_testing.adoc"]
 section_ids:
@@ -3125,6 +3151,8 @@ description: You can create an authentication flow that uses multi-factor authen
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_authn_flow_mfa_p14e_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_authn_flow_mfa_p14e_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   steps: Steps
@@ -3156,6 +3184,8 @@ description: Authentication policies are used in PingFederate to implement compl
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_test_custom_authn_policy
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_test_custom_authn_policy.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_test_custom_authn_policy_create_pf_policy.adoc", "workforce_use_cases:htg_set_up_test_custom_authn_policy_test_pf_policy.adoc"]
 section_ids:
@@ -3313,6 +3343,8 @@ description: Set up a Kerberos authentication adapter in PingFederate for a seam
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_kerberos_authn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_kerberos_authn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 15, 2022
 page_aliases: ["workforce_use_cases:htg_set_up_kerberos_authn_pf_config_realm.adoc", "workforce_use_cases:htg_set_up_kerberos_authn_pf_config_idp_adapter.adoc"]
 section_ids:
@@ -3410,6 +3442,8 @@ description: Learn how to set up PingFederate for self-service password reset an
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_pf_password_recovery_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_pf_password_recovery_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2024
 page_aliases: ["workforce_use_cases:htg_pf_password_recovery_setup_ldap.adoc", "workforce_use_cases:htg_pf_password_recovery_setup_ldap_pcv.adoc", "workforce_use_cases:htg_pf_password_recovery_setup_html_form_adapter.adoc"]
 section_ids:
@@ -3575,6 +3609,8 @@ description: Learn how to set up passwordless authentication and eliminate the n
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_p1_passwordless_authn_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_p1_passwordless_authn_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_p1_passwordless_authn_setup_policy_p1.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_no_paired_device.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_add_policies_app.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_testing.adoc"]
 section_ids:
@@ -3682,6 +3718,8 @@ description: Configuring PingFederate as an identity bridge or FedHub (SAML Chai
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_pf_as_fedhub
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_pf_as_fedhub.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_pf_as_fedhub_flow.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_contract.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_sp_connection.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_ip_connection.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_authn_policy.adoc"]
 section_ids:
@@ -3873,6 +3911,8 @@ description: The PingOne Dock gives your users one-click, single sign-on (SSO) a
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_p1_dock_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_p1_dock_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_p1_dock_setup_access_directory.adoc", "workforce_use_cases:htg_p1_dock_setup_config_third_party_ip.adoc", "workforce_use_cases:htg_p1_dock_setup_config_dock.adoc", "workforce_use_cases:htg_p1_dock_setup_branding.adoc"]
 section_ids:

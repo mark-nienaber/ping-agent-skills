@@ -4,6 +4,8 @@ description: "Best Practices: Session Management"
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_best_practice_guides
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_best_practice_guides.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 8, 2025
 ---
 
@@ -27,6 +29,8 @@ description: This document provides an overview of Ping Identity's recommendatio
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pd_elevated_rights
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_elevated_rights.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["best_practice_guides:bp_pd_elevated_rights_capabilities.adoc", "best_practice_guides:bp_pd_elevated_rights_aci_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_privileges_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_client_connection_policy_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_examples.adoc"]
 section_ids:
@@ -384,6 +388,8 @@ description: Learn about how passwordless authentication reduces friction for us
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_journey_to_passwordless
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_journey_to_passwordless.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 13, 2022
 ---
 
@@ -451,6 +457,8 @@ description: This document provides an overview as well as general guidelines re
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pf_performance_testing
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pf_performance_testing.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 1, 2025
 section_ids:
   audience: Audience
@@ -585,6 +593,8 @@ description: PingDirectory ships with several tools that you can use for perform
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pd_performance_testing
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_performance_testing.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   performance-testing: Performance testing
@@ -746,6 +756,8 @@ description: This document contains recommendations and best practices for the P
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pd_operational_support
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_operational_support.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   schema-dictionary: Schema dictionary
@@ -910,6 +922,8 @@ description: "The following reference guide details the best practices for manag
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_best_practice_pf_saml_signing_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_best_practice_pf_saml_signing_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   component: Component
@@ -1018,6 +1032,8 @@ description: Upgrading your software is essential to maintaining a secure enviro
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_plan_software_upgrade
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_plan_software_upgrade.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 25, 2025
 page_aliases: ["best_practice_guides:htg_upgrade_planning_guide.adoc", "best_practice_guides:htg_plan_upgrade_process.adoc", "best_practice_guides:erj1574373609467.adoc", "best_practice_guides:htg_product_specific_upgrades.adoc"]
 section_ids:
@@ -1101,15 +1117,11 @@ This upgrade process is recommended for all Ping products.
 
 1. Identify the key contacts:
 
-   | Ping primary contacts  | Contact phone or email                                                                    |
-   | ---------------------- | ----------------------------------------------------------------------------------------- |
-   | Account executive      |                                                                                           |
-   | Ping Technical Support | * North America: 1-855-355-PING (7464)
-
-   * EMEA: 44 0 808 196 0788
-
-   * APJ: 61 1800 370 672 |
-   | Other                  |                                                                                           |
+   | Ping primary contacts  | Contact phone or email |
+   | ---------------------- | ---------------------- |
+   | Account executive      |                        |
+   | Ping Technical Support |                        |
+   | Other                  |                        |
 
    | Internal primary contacts |         |
    | ------------------------- | ------- |
@@ -1238,6 +1250,8 @@ description: Session management is the process of managing user sessions in a we
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_session_mgmt
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_session_mgmt.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 8, 2025
 page_aliases: ["best_practice_guides:bp_session_mgmt_keyfindings.adoc", "best_practice_guides:bp_session_mgmt_recommendations.adoc"]
 section_ids:
@@ -1405,6 +1419,8 @@ description: To enable passwordless authentication in a PingFederate authenticat
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_enabling_passwordless_pf_authentication_policy
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_enabling_passwordless_pf_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 7, 2022
 section_ids:
   about-this-task: About this task
@@ -1509,6 +1525,8 @@ description: To enable passwordless authentication in the PingID cloud service, 
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_enabling_passwordless_pid_cloud_service
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_enabling_passwordless_pid_cloud_service.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 7, 2022
 section_ids:
   about-this-task: About this task
@@ -1547,6 +1565,8 @@ description: Windows login - passwordless makes it possible for users to sign on
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pid_passwordless_usecases
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pid_passwordless_usecases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   windows-passwordless-login: Windows passwordless login
@@ -1599,6 +1619,8 @@ description: You can use Windows login - passwordless so that users can sign on 
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_setting_up_windows_passwordless_login
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_setting_up_windows_passwordless_login.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["best_practice_guides:bp_setting_up_windows_passwordless_login_connect_pid_p1.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_config_id_store.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_create_issuance_cert.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_create_authn_policy.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_windows_app_p1.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_kdc_cert.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_install_on_client.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_powershell.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_troubleshooting.adoc"]
 section_ids:
@@ -1961,6 +1983,8 @@ description: The journey to passwordless is comprised of many phases and goals.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_workforce_passwordless_journey
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_workforce_passwordless_journey.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["best_practice_guides:bp_planning_workforce_passwordless_journey.adoc", "best_practice_guides:bp_lessons_learned_workforce_passwordless_journey.adoc", "best_practice_guides:bp_deploying_product.adoc"]
 section_ids:

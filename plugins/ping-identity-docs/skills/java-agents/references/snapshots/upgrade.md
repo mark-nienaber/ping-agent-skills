@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:upgrade:drop-in-upgrade
 canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/drop-in-upgrade.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   drop-in-software-update-tomcat: Tomcat Java Agent software update
   drop-in-software-update-jboss: JBoss and WildFly Java Agent software update
@@ -525,6 +527,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:upgrade:major-upgrade
 canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/major-upgrade.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   perform_a_major_upgrade: Perform a major upgrade
   roll_back_from_a_major_upgrade: Roll back from a major upgrade
@@ -620,6 +624,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:upgrade:post-upgrade-tasks
 canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/post-upgrade-tasks.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Post update and upgrade tasks
@@ -637,6 +643,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:upgrade:preface
 canonical_url: https://docs.pingidentity.com/java-agents/2026/upgrade/preface.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 section_ids:
   preface-examples: Example installation for this guide

@@ -3,8 +3,8 @@ title: PingOne DaVinci Early Access Features
 description: This section provides early access documentation for the DaVinci features available to customers who opt in to preview new functionality through PingOne.
 component: davinci
 page_id: davinci::davinci_early_access
-canonical_url: http://docs.pingidentity.com/davinci/davinci_early_access.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_early_access.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
@@ -16,7 +16,7 @@ Early access features can be enabled only at the environment level. You can't en
 
 Not all features are enabled for early access. Additionally, early access features related to services that aren't in the environment or that aren't allowable by the license assigned to the environment aren't available for opt-in.
 
-Learn more in [Managing opt-ins for early access features in PingOne](http://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.html).
+Learn more in [Managing opt-ins for early access features in PingOne](https://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.html).
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -2,7 +2,7 @@
 
 - Product: Glossary
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/glossary/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
@@ -16,7 +16,7 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/glossary/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

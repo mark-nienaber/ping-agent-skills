@@ -3,6 +3,8 @@ description: Install, configure, and test the MS Graph API connector for Azure A
 component: openicf
 page_id: openicf:connector-reference:msgraph-conf
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-conf.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   msgraph-config: Install and configure the MS Graph API connector
   msgraphi-before-you-start: Microsoft Azure requirements
@@ -113,7 +115,7 @@ Before you can use the connector, you must register an application with Azure. Y
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -215,8 +217,6 @@ The connector supports the extension attribute types: `String`, `Integer`, `Bool
 ### MS Graph API remote connector
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the MS Graph API connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the MS Graph API connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
 
 Refer to [Remote connectors](remote-connector.html) for configuring the MS Graph API remote connector.
 
@@ -384,6 +384,8 @@ description: "MS Graph API connector reference for the servicePrincipal resource
 component: openicf
 page_id: openicf:connector-reference:msgraph-servicePrincipal
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-servicePrincipal.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   msgraph-query-all-servicePrincipal: Query all servicePrincipal objects
   msgraph-read-servicePrincipal: Read a servicePrincipal
@@ -683,6 +685,8 @@ description: Configure the Adobe Admin Console connector to manage users, groups
 component: openicf
 page_id: openicf:connector-reference:adobe-admin-console
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/adobe-admin-console.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before_you_start: Before you start
   install_the_adobe_admin_console_connector: Install the Adobe Admin Console connector
@@ -732,7 +736,7 @@ The Adobe admin console connector allows you to manage users and groups, as well
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -1439,6 +1443,8 @@ description: Reference and configuration guide for the Adobe Marketing Cloud con
 component: openicf
 page_id: openicf:connector-reference:adobe
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/adobe.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   adobe-before-you-start: Before you start
   install_the_adobe_marketing_cloud_connector: Install the Adobe Marketing Cloud connector
@@ -1531,7 +1537,7 @@ Configure a new integration on AdobeIO, as shown in the following steps. Note th
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -1664,8 +1670,6 @@ A status of `"ok": true` indicates that the connector can reach the configured A
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the Adobe Marketing Cloud connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
 
-You can download the Adobe Marketing Cloud connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
-
 Refer to [Remote connectors](remote-connector.html) for configuring the Adobe Marketing Cloud remote connector.
 
 ### Configure connection pooling
@@ -1766,6 +1770,8 @@ description: "AWS IAM connector reference for PingIDM: configure and use the con
 component: openicf
 page_id: openicf:connector-reference:aws-iam
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/aws-iam.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before_you_start: Before you start
   install_the_aws_connector: Install the AWS connector
@@ -1852,7 +1858,7 @@ Before you configure the connector, log in to your AWS administrator account and
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -1933,8 +1939,6 @@ If the command returns `"ok": true`, your connector has been configured correctl
 ### AWS remote connector
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the AWS connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the AWS connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
 
 Refer to [Remote connectors](remote-connector.html) for configuring the AWS remote connector.
 
@@ -2916,6 +2920,8 @@ description: How to add and remove application permissions (app role assignments
 component: openicf
 page_id: openicf:connector-reference:msgraph-app-perms
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-app-perms.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   msgraph-add-appRoleAssignment-servicePrincipal: Add an app role assignment to a servicePrincipal
   msgraph-remove-appRoleAssignment-servicePrincipal: Remove an app role assignment from a servicePrincipal
@@ -3239,6 +3245,8 @@ description: How to query, read, create, update, delete, and add client secrets 
 component: openicf
 page_id: openicf:connector-reference:msgraph-applications
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-applications.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   msgraph-query-all-apps: Query all applications
   msgraph-read-app: Read an application
@@ -3638,6 +3646,8 @@ description: "Reference for the AS400 connector: install, configure, and use it 
 component: openicf
 page_id: openicf:connector-reference:as400
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/as400.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before_you_start: Before you start
   install_the_as400_connector: Install the AS400 connector
@@ -3689,7 +3699,7 @@ These instructions assume you have an AS400 administrator account and you have a
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -3766,8 +3776,6 @@ If the command returns `"ok": true`, your connector has been configured correctl
 ### AS400 remote connector
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the AS400 connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the AS400 connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
 
 Refer to [Remote connectors](remote-connector.html) for configuring the AS400 remote connector.
 
@@ -4536,6 +4544,8 @@ description: How to read and manage multi-factor authentication (MFA) methods fo
 component: openicf
 page_id: openicf:connector-reference:msgraph-authentication-methods
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-authentication-methods.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   list_mfa_methods: List MFA methods
   create_or_update_email_mfa_method: Create or update email MFA method
@@ -4780,11 +4790,941 @@ Response
 ---
 
 ---
+title: AWS Bedrock AgentCore connector
+description: "Reference for the AWS Bedrock AgentCore connector: discover AgentCore runtimes, execution identity, workload identity, and inbound access policy."
+component: openicf
+page_id: openicf:connector-reference:aws-bedrock-agentcore
+canonical_url: https://docs.pingidentity.com/openicf/connector-reference/aws-bedrock-agentcore.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  aws_bedrock_agentcore_requirements: AWS Bedrock AgentCore requirements
+  required_permissions: Required permissions
+  create_an_iam_user_for_explicit_credentials: Create an IAM user for explicit credentials
+  install_the_aws_bedrock_agentcore_connector: Install the AWS Bedrock AgentCore connector
+  configure_the_aws_bedrock_agentcore_connector: Configure the AWS Bedrock AgentCore connector
+  connection_details: Connection details
+  example_aws_bedrock_agentcore_configuration: Example AWS Bedrock AgentCore configuration
+  test_the_aws_bedrock_agentcore_connector: Test the AWS Bedrock AgentCore connector
+  aws_bedrock_agentcore_remote_connector: AWS Bedrock AgentCore remote connector
+  implementation_specifics: Implementation specifics
+  collection_architecture: Collection architecture
+  live_data: Live data
+  known_limitations: Known limitations
+  use_the_aws_bedrock_agentcore_connector: Use the AWS Bedrock AgentCore connector
+  account_attributes: __ACCOUNT__ attributes
+  troubleshooting: Troubleshooting
+  connector_initializes_but_reconciliation_fails_immediately: Connector initializes but reconciliation fails immediately
+  no_runtime_objects_are_returned: No runtime objects are returned
+  endpoint_attributes_are_empty: Endpoint attributes are empty
+  resourcepolicy_is_empty: resourcePolicy is empty
+  implemented-interfaces-org-forgerock-openicf-connectors-bedrockagentcore-BedrockAgentCoreConnector-1.5.20.33: OpenICF interfaces implemented by the AWS Bedrock AgentCore connector
+  config-properties-org-forgerock-openicf-connectors-bedrockagentcore-BedrockAgentCoreConnector-1.5.20.33: AWS Bedrock AgentCore connector configuration
+  basic-configuration-properties-org-forgerock-openicf-connectors-bedrockagentcore-BedrockAgentCoreConnector-1.5.20.33: Basic configuration properties
+---
+
+# AWS Bedrock AgentCore connector
+
+AWS Bedrock AgentCore is Amazon Web Services' runtime environment for deploying AI agent workloads. The AWS Bedrock AgentCore connector is a read-only connector that discovers AgentCore runtimes and governance-relevant identity surfaces including execution identity, workload identity, runtime endpoint state, and resource-based inbound access policy.
+
+Contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive to obtain this connector.
+
+## AWS Bedrock AgentCore requirements
+
+The AWS Bedrock AgentCore connector is read-only. It needs Bedrock AgentCore control-plane read permissions in the configured AWS region.
+
+### Required permissions
+
+Use the narrowest policy your environment allows. The following is a starting point:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockAgentCoreConnectorReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock-agentcore:ListAgentRuntimes",
+        "bedrock-agentcore:GetAgentRuntime",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetResourcePolicy"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+`ListAgentRuntimes` requires `Resource: "*"`. The other read actions can be scoped to AgentCore runtime ARNs if your AWS environment supports the narrower resource policy.
+
+The connector doesn't need account-wide Identity and Access Management (IAM) list/read permissions. It doesn't scan IAM roles or policies. Inbound access is collected from the AgentCore runtime resource policy by calling `GetResourcePolicy` on the runtime Amazon Resource Name (ARN).
+
+### Create an IAM user for explicit credentials
+
+If `useDefaultCredentialsProvider` is `false`, create a dedicated IAM user and attach the policy above to it.
+
+1. In the AWS console, go to IAM > Policies > Create policy.
+
+2. On the JSON tab, paste the policy from [Required permissions](#required_permissions), then select Next.
+
+3. Name the policy `iga-bedrock-agentcore-connector-policy`, then select Create policy.
+
+4. Go to IAM > Users > Create user.
+
+5. Enter a username, for example `iga-bedrock-agentcore-connector`.
+
+   |   |                                                                                                                                      |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | Don't select Provide user access to the AWS Management Console. The connector authenticates with an access key, not console sign-on. |
+
+6. Select Next.
+
+7. Under Set permissions, choose Attach policies directly.
+
+8. Search for `iga-bedrock-agentcore-connector-policy`, select it, then select Next > Create user.
+
+To create the access key:
+
+1. Open the user, then select the Security credentials tab.
+
+2. Select Create access key.
+
+3. For Use case, select Application running outside AWS, then select Next.
+
+4. Copy the access key ID and secret access key. You'll need these for the `accessKeyId` and `secretAccessKey` configuration properties.
+
+Before you configure the connector, confirm you have the following:
+
+| Requirement                        | Value                                                                                           |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+| AWS Bedrock AgentCore runtimes     | Configured in the target AWS account and region                                                 |
+| AWS credentials                    | Available through the default AWS credentials provider chain or explicit access key credentials |
+| Bedrock AgentCore read permissions | Required for AgentCore control-plane read APIs                                                  |
+
+## Install the AWS Bedrock AgentCore connector
+
+|   |                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To check for an Advanced Identity Cloud application for this connector, refer to:- [Application management](https://docs.pingidentity.com/pingoneaic/latest/app-management/applications.html)
+
+- [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
+
+To obtain the connector `.jar` file, contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive.
+
+* If you're running the connector locally, place the `.jar` file in the `/path/to/openidm/connectors` directory.
+
+* If you're using a remote connector server (RCS), place the `.jar` file in the `/path/to/openicf/connectors` directory on the RCS.
+
+## Configure the AWS Bedrock AgentCore connector
+
+Create a connector configuration using the IDM admin UI:
+
+1. From the navigation bar, click Configure > Connectors.
+
+2. On the Connectors page, click New Connector.
+
+3. On the New Connector page, type a Connector Name.
+
+4. From the Connector Type list, select AWS Bedrock AgentCore Connector - 1.5.20.33.
+
+5. Complete the Base Connector Details and any applicable Additional Options.
+
+   |   |                                                                                                                                             |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | For a list of all configuration properties, refer to [AWS Bedrock AgentCore Connector Configuration](#bedrockagentcore-config-prop-ezLink). |
+
+6. Click Save.
+
+When your connector is configured correctly, the connector displays as Active in the admin UI.
+
+Refer to [this procedure](configure-connector.html#connector-wiz-REST) to create a connector configuration over REST.
+
+### Connection details
+
+The AWS Bedrock AgentCore connector uses the following configuration properties:
+
+| Property                        | Type          | Required    | Default     | Description                                                                                                                  |
+| ------------------------------- | ------------- | ----------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `region`                        | String        | Yes         | `us-east-1` | AWS region. Deploy one connector configuration per region.                                                                   |
+| `useDefaultCredentialsProvider` | Boolean       | Yes         | `true`      | When `true`, uses the AWS SDK `DefaultCredentialsProvider` chain. When `false`, provide `accessKeyId` and `secretAccessKey`. |
+| `accessKeyId`                   | String        | Conditional | None        | AWS access key ID. Required when `useDefaultCredentialsProvider=false`.                                                      |
+| `secretAccessKey`               | GuardedString | Conditional | None        | AWS secret access key. Required when `useDefaultCredentialsProvider=false`.                                                  |
+
+The default credentials provider chain is the recommended production mode when the connector runs on AWS infrastructure with instance role, task role, or service account based credentials.
+
+### Example AWS Bedrock AgentCore configuration
+
+```json
+{
+  "connectorRef": {
+    "bundleName": "org.forgerock.openicf.connectors.bedrockagentcore-connector",
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "connectorName": "org.forgerock.openicf.connectors.bedrockagentcore.BedrockAgentCoreConnector"
+  },
+  "configurationProperties": {
+    "region": "us-east-1",
+    "useDefaultCredentialsProvider": true
+  }
+}
+```
+
+If you use explicit credentials instead of the default provider chain:
+
+```json
+{
+  "connectorRef": {
+    "bundleName": "org.forgerock.openicf.connectors.bedrockagentcore-connector",
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "connectorName": "org.forgerock.openicf.connectors.bedrockagentcore.BedrockAgentCoreConnector"
+  },
+  "configurationProperties": {
+    "region": "us-east-1",
+    "useDefaultCredentialsProvider": false,
+    "accessKeyId": "AKIA...",
+    "secretAccessKey": {
+      "$crypto": {
+        "type": "x-simple-encryption",
+        "value": {
+          "cipher": "...",
+          "data": "...",
+          "iv": "...",
+          "key": "openidm-sym-default"
+        }
+      }
+    }
+  }
+}
+```
+
+### Test the AWS Bedrock AgentCore connector
+
+Test that the configuration is correct by running the following command:
+
+```
+curl \
+--header "X-OpenIDM-Username: openidm-admin" \
+--header "X-OpenIDM-Password: openidm-admin" \
+--header "Accept-API-Version: resource=1.0" \
+--request POST \
+"http://localhost:8080/openidm/system/bedrockagentcore?_action=test"
+{
+  "name": "bedrockagentcore",
+  "enabled": true,
+  "config": "config/provisioner.openicf/bedrockagentcore",
+  "connectorRef": {
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "bundleName": "org.forgerock.openicf.connectors.bedrockagentcore-connector",
+    "connectorName": "org.forgerock.openicf.connectors.bedrockagentcore.BedrockAgentCoreConnector"
+  },
+  "displayName": "AWS Bedrock AgentCore Connector",
+  "objectTypes": [
+    "__ACCOUNT__",
+    "__ALL__"
+  ],
+  "ok": true
+}
+```
+
+If the command returns `"ok": true`, your connector has been configured correctly.
+
+|   |                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | `TestOp` currently logs that the test operation was called but doesn't call AWS, and always succeeds regardless of credential validity. Validate credentials and IAM permissions by running a reconciliation against a known AgentCore runtime. |
+
+### AWS Bedrock AgentCore remote connector
+
+If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the AWS Bedrock AgentCore connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
+
+Refer to [Remote connectors](remote-connector.html) for configuring the AWS Bedrock AgentCore remote connector.
+
+## Implementation specifics
+
+### Collection architecture
+
+The AWS Bedrock AgentCore connector performs live collection during each reconciliation. There is no offline inventory mechanism for the current AgentCore connector.
+
+For each runtime in the configured region, the connector calls AgentCore control-plane APIs and builds one ICF `__ACCOUNT__` object.
+
+#### Live data
+
+| Data                     | AWS API                                               |
+| ------------------------ | ----------------------------------------------------- |
+| Runtime list             | `ListAgentRuntimes`                                   |
+| Runtime details          | `GetAgentRuntime`                                     |
+| Default runtime endpoint | `GetAgentRuntimeEndpoint` with `endpointName=DEFAULT` |
+| Runtime resource policy  | `GetResourcePolicy` using the runtime ARN             |
+
+For GET-by-UID, the connector skips `ListAgentRuntimes` and calls `GetAgentRuntime` directly for the supplied `agentRuntimeId`, then fetches endpoint and resource policy details.
+
+### Known limitations
+
+| Limitation                                | Impact                                                                                                        |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Read-only connector                       | Can't create, update, or delete AgentCore runtimes.                                                           |
+| No `SyncOp`                               | Every reconciliation is a full discovery pass.                                                                |
+| Single region per instance                | Multi-region coverage requires multiple connector configurations.                                             |
+| Only `__ACCOUNT__` object class           | Runtime, endpoint, workload identity, and resource policy data are flattened onto one object.                 |
+| `TestOp` is a no-op                       | IDM test can pass even when AWS credentials or permissions are invalid.                                       |
+| No retry logic                            | Transient AWS throttling or 5xx failures can fail reconciliation.                                             |
+| `resourcePolicy` is raw JSON              | Downstream IDM policy logic must parse and evaluate policy statements.                                        |
+| Workload identity grants are not expanded | The connector collects `workloadIdentityArn`, but doesn't discover what external systems trust that identity. |
+
+## Use the AWS Bedrock AgentCore connector
+
+The AWS Bedrock AgentCore connector discovers the following resource types:
+
+| ICF Native Type | AWS Bedrock AgentCore Resource Type | Naming Attribute | Notes                                                                                                                                                                                                       |
+| --------------- | ----------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `__ACCOUNT__`   | Bedrock AgentCore runtime           | `__NAME__`       | Represents one AgentCore runtime. UID is `agentRuntimeId`; name is `agentRuntimeName`. Runtime, endpoint, workload identity, code artifact, and resource policy details are flattened onto the same object. |
+
+### `__ACCOUNT__` attributes
+
+| Attribute                     | Type   | Multivalued | Description                                                                                                          |
+| ----------------------------- | ------ | ----------- | -------------------------------------------------------------------------------------------------------------------- |
+| `agentRuntimeArn`             | String | No          | Full AgentCore runtime ARN.                                                                                          |
+| `agentRuntimeVersion`         | String | No          | Runtime version.                                                                                                     |
+| `status`                      | String | No          | Runtime lifecycle status, such as `READY`.                                                                           |
+| `roleArn`                     | String | No          | IAM execution role ARN for the runtime.                                                                              |
+| `networkMode`                 | String | No          | Runtime network mode, such as `PUBLIC`.                                                                              |
+| `createdAt`                   | String | No          | Runtime creation timestamp.                                                                                          |
+| `lastUpdatedAt`               | String | No          | Runtime last updated timestamp.                                                                                      |
+| `description`                 | String | No          | Runtime description. Empty string if absent.                                                                         |
+| `workloadIdentityArn`         | String | No          | AgentCore workload identity ARN. Empty string if absent.                                                             |
+| `lifecycleIdleTimeoutSeconds` | Long   | No          | Idle runtime session timeout. `0` if not set.                                                                        |
+| `lifecycleMaxLifetimeSeconds` | Long   | No          | Maximum runtime lifetime. `0` if not set.                                                                            |
+| `codeS3Bucket`                | String | No          | S3 bucket for the runtime code artifact. Empty string if absent.                                                     |
+| `codeS3Prefix`                | String | No          | S3 prefix for the runtime code artifact. Empty string if absent.                                                     |
+| `codeRuntime`                 | String | No          | Runtime language/runtime value, such as `PYTHON_3_14`. Empty string if absent.                                       |
+| `codeEntryPoint`              | String | Yes         | Runtime entry point command list, when present.                                                                      |
+| `endpointArn`                 | String | No          | Default runtime endpoint ARN. Empty string if the endpoint call fails.                                               |
+| `endpointName`                | String | No          | Endpoint name. The connector requests `DEFAULT`.                                                                     |
+| `endpointId`                  | String | No          | Endpoint ID. The connector expects `DEFAULT` in v1.                                                                  |
+| `endpointLiveVersion`         | String | No          | Runtime version currently serving requests through the endpoint.                                                     |
+| `endpointStatus`              | String | No          | Endpoint lifecycle status. Distinct from runtime `status`.                                                           |
+| `endpointCreatedAt`           | String | No          | Endpoint creation timestamp.                                                                                         |
+| `endpointLastUpdatedAt`       | String | No          | Endpoint last updated timestamp.                                                                                     |
+| `resourcePolicy`              | String | No          | Raw JSON string returned by `GetResourcePolicy`. Empty string when no policy is attached or the policy lookup fails. |
+
+## Troubleshooting
+
+### Connector initializes but reconciliation fails immediately
+
+Check:
+
+1. `region` is valid for Bedrock AgentCore.
+
+2. The connector principal has `bedrock-agentcore:ListAgentRuntimes`.
+
+3. The AWS credentials provider mode is configured correctly.
+
+4. If `useDefaultCredentialsProvider=false`, `accessKeyId` and `secretAccessKey` are populated.
+
+5. The AWS SDK version bundled with the connector supports the `bedrockagentcorecontrol` module.
+
+### No runtime objects are returned
+
+Check:
+
+1. The target region contains AgentCore runtimes.
+
+2. The connector is configured for the same region where the runtimes exist.
+
+3. `ListAgentRuntimes` succeeds for the connector principal.
+
+4. `GetAgentRuntime` succeeds for each runtime ID.
+
+5. Runtime objects are not being filtered out by an IDM-side query filter.
+
+### Endpoint attributes are empty
+
+Check:
+
+1. The runtime has a `DEFAULT` endpoint.
+
+2. The connector principal can call `bedrock-agentcore:GetAgentRuntimeEndpoint`.
+
+3. The endpoint is available in the configured region.
+
+4. Review connector logs; endpoint lookup failures are soft failures and don't suppress the runtime object.
+
+### `resourcePolicy` is empty
+
+Check:
+
+1. A resource policy is attached to the AgentCore runtime ARN.
+
+2. The connector principal can call `bedrock-agentcore:GetResourcePolicy`.
+
+3. The runtime ARN in AWS matches the resource ARN used for policy retrieval.
+
+4. If there is no attached policy, empty `resourcePolicy` is expected.
+
+## OpenICF interfaces implemented by the AWS Bedrock AgentCore connector
+
+The AWS Bedrock AgentCore connector implements the following OpenICF interfaces. You can find additional details in [ICF interfaces](interfaces.html):
+
+* Schema
+
+  Describes the object types, operations, and options that the connector supports.
+
+* Search
+
+  Searches the target resource for all objects that match the specified object class and filter.
+
+* Test
+
+  Tests the connector configuration.
+
+  For this connector, `TestOp` logs that the test was called but does not make any AWS API calls, and always returns success regardless of credential validity. To validate credentials and IAM permissions, run a reconciliation against a known AgentCore runtime.
+
+[]()
+
+## AWS Bedrock AgentCore connector configuration
+
+The AWS Bedrock AgentCore connector has the following configurable properties:
+
+### Basic configuration properties
+
+| Property                                                                                                                                                                      | Type            | Default     | Encrypted(1)             | Required(2)               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ----------- | ------------------------ | ------------------------- |
+| `region`                                                                                                                                                                      | `String`        | `us-east-1` |                          | [icon: check, set=fas]Yes |
+| AWS region where AgentCore runtimes are deployed, for example `us-east-1`.                                                                                                    |                 |             |                          |                           |
+| `useDefaultCredentialsProvider`                                                                                                                                               | `Boolean`       | `true`      |                          | [icon: check, set=fas]Yes |
+| When enabled, uses the AWS SDK DefaultCredentialsProvider chain (environment variables, shared config, EC2/ECS role). When disabled, provide accessKeyId and secretAccessKey. |                 |             |                          |                           |
+| `accessKeyId`                                                                                                                                                                 | `String`        | `null`      |                          | [icon: times, set=fas]No  |
+| AWS access key ID. Required when the default credentials provider is disabled.                                                                                                |                 |             |                          |                           |
+| `secretAccessKey`                                                                                                                                                             | `GuardedString` | `null`      | [icon: lock, set=fas]Yes | [icon: times, set=fas]No  |
+| AWS secret access key. Required when the default credentials provider is disabled.                                                                                            |                 |             |                          |                           |
+
+(1) Whether the property value is considered confidential, and is therefore encrypted in IDM.
+
+(2) A list of operations in this column indicates that the property is required for those operations.
+
+---
+
+---
+title: AWS Bedrock connector
+description: "Reference for the AWS Bedrock connector: discover Bedrock agents, aliases, action groups, knowledge bases, guardrails, and identity bindings."
+component: openicf
+page_id: openicf:connector-reference:aws-bedrock
+canonical_url: https://docs.pingidentity.com/openicf/connector-reference/aws-bedrock.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  aws_bedrock_requirements: AWS Bedrock requirements
+  required_permissions: Required permissions
+  create_an_iam_user_for_explicit_credentials: Create an IAM user for explicit credentials
+  install_the_aws_bedrock_connector: Install the AWS Bedrock connector
+  configure_the_aws_bedrock_connector: Configure the AWS Bedrock connector
+  connection_details: Connection details
+  example_aws_bedrock_configuration: Example AWS Bedrock configuration
+  test_the_aws_bedrock_connector: Test the AWS Bedrock connector
+  aws_bedrock_remote_connector: AWS Bedrock remote connector
+  implementation_specifics: Implementation specifics
+  collection_architecture: Collection architecture
+  live_data: Live data
+  s3_inventory_data: S3 inventory data
+  s3_inventory_behavior: S3 inventory behavior
+  use_the_aws_bedrock_connector: Use the AWS Bedrock connector
+  account_attributes: __ACCOUNT__ attributes
+  agenttool_attributes: agentTool attributes
+  agentknowledgebase_attributes: agentKnowledgeBase attributes
+  agentguardrail_attributes: agentGuardrail attributes
+  agentidentitybinding_attributes: agentIdentityBinding attributes
+  agenttoolcredentials_attributes: agentToolCredentials attributes
+  troubleshooting: Troubleshooting
+  connector_initializes_but_test_fails: Connector initializes but test fails
+  agents_reconcile_but_agentprincipals_is_empty: Agents reconcile but agentPrincipals is empty
+  agents_reconcile_but_toolcredentialids_is_empty: Agents reconcile but toolCredentialIds is empty
+  implemented-interfaces-org-forgerock-openicf-connectors-awsbedrock-AwsBedrockConnector-1.5.20.33: OpenICF interfaces implemented by the AWS Bedrock connector
+  config-properties-org-forgerock-openicf-connectors-awsbedrock-AwsBedrockConnector-1.5.20.33: AWS Bedrock connector configuration
+  basic-configuration-properties-org-forgerock-openicf-connectors-awsbedrock-AwsBedrockConnector-1.5.20.33: Basic configuration properties
+---
+
+# AWS Bedrock connector
+
+AWS Bedrock is Amazon Web Services' managed service for building and deploying AI agents. The AWS Bedrock connector is a read-only connector that discovers Bedrock agents and governance-relevant objects including aliases, action groups, knowledge bases, guardrails, identity bindings, and tool credential classifications.
+
+Contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive to obtain this connector.
+
+|   |                                                                                                                                                                                            |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Retrieval of `agentIdentityBinding` and `agentToolCredentials` is enabled through an offline inventory mechanism that requires an Agent Governance license. Contact your CSOM for details. |
+
+## AWS Bedrock requirements
+
+The AWS Bedrock connector is read-only. It needs Bedrock read permissions and S3 read permission for the inventory bucket.
+
+### Required permissions
+
+Use the narrowest policy your environment allows. The following is a starting point:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadBedrockAgents",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:ListAgents",
+        "bedrock:GetAgent",
+        "bedrock:ListAgentAliases",
+        "bedrock:GetAgentAlias",
+        "bedrock:ListAgentActionGroups",
+        "bedrock:GetAgentActionGroup",
+        "bedrock:ListAgentKnowledgeBases",
+        "bedrock:ListAgentCollaborators",
+        "bedrock:GetGuardrail"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ReadBedrockInventoryArtifacts",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::<inventory-bucket>/latest/*"
+    }
+  ]
+}
+```
+
+Replace `<inventory-bucket>` with the name of your S3 inventory bucket (the value of the `inventoryBucket` configuration property, which defaults to `bedrock-core-inventory`).
+
+The connector doesn't need account-wide IAM list/read permissions when the companion inventory job is deployed. IAM scanning belongs to the inventory job, not to the connector.
+
+### Create an IAM user for explicit credentials
+
+If `useDefaultCredentialsProvider` is `false`, create a dedicated IAM user and attach the policy above to it.
+
+1. In the AWS console, go to IAM > Policies > Create policy.
+
+2. On the JSON tab, paste the policy from [Required permissions](#required_permissions), then select Next.
+
+3. Name the policy `iga-bedrock-connector-policy`, then select Create policy.
+
+4. Go to IAM > Users > Create user.
+
+5. Enter a username, for example `iga-bedrock-connector`.
+
+   |   |                                                                                                                                      |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | Don't select Provide user access to the AWS Management Console. The connector authenticates with an access key, not console sign-on. |
+
+6. Select Next.
+
+7. Under Set permissions, choose Attach policies directly.
+
+8. Search for `iga-bedrock-connector-policy`, select it, then select Next > Create user.
+
+To create the access key:
+
+1. Open the user, then select the Security credentials tab.
+
+2. Select Create access key.
+
+3. For Use case, select Application running outside AWS, then select Next.
+
+4. Copy the access key ID and secret access key. You'll need these for the `accessKeyId` and `secretAccessKey` configuration properties.
+
+Before you configure the connector, confirm you have the following:
+
+| Requirement             | Value                                                                                               |
+| ----------------------- | --------------------------------------------------------------------------------------------------- |
+| AWS Bedrock Agents      | Configured in the target AWS account and region                                                     |
+| S3 inventory bucket     | Required for identity binding and tool credential enrichment                                        |
+| Companion inventory job | Required if you want `agentIdentityBinding`, `agentPrincipals`, or `agentToolCredentials` populated |
+
+## Install the AWS Bedrock connector
+
+|   |                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To check for an Advanced Identity Cloud application for this connector, refer to:- [Application management](https://docs.pingidentity.com/pingoneaic/latest/app-management/applications.html)
+
+- [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
+
+To obtain the connector `.jar` file, contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive.
+
+* If you're running the connector locally, place the `.jar` file in the `/path/to/openidm/connectors` directory.
+
+* If you're using a remote connector server (RCS), place the `.jar` file in the `/path/to/openicf/connectors` directory on the RCS.
+
+## Configure the AWS Bedrock connector
+
+Create a connector configuration using the IDM admin UI:
+
+1. From the navigation bar, click Configure > Connectors.
+
+2. On the Connectors page, click New Connector.
+
+3. On the New Connector page, type a Connector Name.
+
+4. From the Connector Type list, select AWS Bedrock Connector - 1.5.20.33.
+
+5. Complete the Base Connector Details and any applicable Additional Options.
+
+   |   |                                                                                                                             |
+   | - | --------------------------------------------------------------------------------------------------------------------------- |
+   |   | For a list of all configuration properties, refer to [AWS Bedrock Connector Configuration](#awsbedrock-config-prop-ezLink). |
+
+6. Click Save.
+
+When your connector is configured correctly, the connector displays as Active in the admin UI.
+
+Refer to [this procedure](configure-connector.html#connector-wiz-REST) to create a connector configuration over REST.
+
+### Connection details
+
+The AWS Bedrock connector uses the following configuration properties:
+
+| Property                        | Type          | Required    | Default                  | Description                                                                                                                                                  |
+| ------------------------------- | ------------- | ----------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `region`                        | String        | Yes         | `us-east-1`              | AWS region for Bedrock and S3 calls. Deploy one connector configuration per region.                                                                          |
+| `accountId`                     | String        | Yes         | None                     | AWS account ID. Used to construct Bedrock Agent ARNs and relationship identifiers.                                                                           |
+| `useDefaultCredentialsProvider` | Boolean       | Yes         | `true`                   | When `true`, uses the AWS SDK default credential provider chain. When `false`, provide `accessKeyId` and `secretAccessKey`.                                  |
+| `accessKeyId`                   | String        | Conditional | None                     | AWS access key ID. Required when `useDefaultCredentialsProvider=false`.                                                                                      |
+| `secretAccessKey`               | GuardedString | Conditional | None                     | AWS secret access key. Required when `useDefaultCredentialsProvider=false`.                                                                                  |
+| `inventoryBucket`               | String        | Yes         | `bedrock-core-inventory` | S3 bucket containing `latest/agent-bindings.json` and `latest/agent-tool-credentials.json`. Use the bucket name only, don't include `s3://` or a key prefix. |
+| `bindingsCacheTtlSeconds`       | Long          | No          | `300`                    | Cache TTL for S3 inventory artifacts.                                                                                                                        |
+
+### Example AWS Bedrock configuration
+
+```json
+{
+  "connectorRef": {
+    "bundleName": "org.forgerock.openicf.connectors.awsbedrock-connector",
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "connectorName": "org.forgerock.openicf.connectors.awsbedrock.AwsBedrockConnector"
+  },
+  "configurationProperties": {
+    "region": "us-east-1",
+    "accountId": "123456789012",
+    "useDefaultCredentialsProvider": false,
+    "accessKeyId": "AKIA...",
+    "secretAccessKey": {
+      "$crypto": {
+        "type": "x-simple-encryption",
+        "value": {
+          "cipher": "...",
+          "data": "...",
+          "iv": "...",
+          "key": "openidm-sym-default"
+        }
+      }
+    },
+    "inventoryBucket": "bedrock-core-inventory",
+    "bindingsCacheTtlSeconds": 300
+  }
+}
+```
+
+### Test the AWS Bedrock connector
+
+Test that the configuration is correct by running the following command:
+
+```
+curl \
+--header "X-OpenIDM-Username: openidm-admin" \
+--header "X-OpenIDM-Password: openidm-admin" \
+--header "Accept-API-Version: resource=1.0" \
+--request POST \
+"http://localhost:8080/openidm/system/awsbedrock?_action=test"
+{
+  "name": "awsbedrock",
+  "enabled": true,
+  "config": "config/provisioner.openicf/awsbedrock",
+  "connectorRef": {
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "bundleName": "org.forgerock.openicf.connectors.awsbedrock-connector",
+    "connectorName": "org.forgerock.openicf.connectors.awsbedrock.AwsBedrockConnector"
+  },
+  "displayName": "AWS Bedrock Connector",
+  "objectTypes": [
+    "__ACCOUNT__",
+    "__ALL__"
+  ],
+  "ok": true
+}
+```
+
+If the command returns `"ok": true`, your connector has been configured correctly and can authenticate to the Bedrock API.
+
+|   |                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | `TestOp` validates connectivity by calling `listAgents()`. It doesn't prove that the S3 inventory artifacts exist. Verify S3 inventory separately when validating identity bindings or tool credential records. |
+
+### AWS Bedrock remote connector
+
+If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the AWS Bedrock connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
+
+Refer to [Remote connectors](remote-connector.html) for configuring the AWS Bedrock remote connector.
+
+## Implementation specifics
+
+### Collection architecture
+
+The AWS Bedrock connector uses a split collection model.
+
+Live collection runs inside the Java connector during reconciliation, calling AWS Bedrock APIs to list agents, aliases, action groups, knowledge bases, collaborators, and guardrails.
+
+Offline collection is handled by the companion `bedrock-core-tools-inventory` process. That process scans IAM and related AWS resources, writes normalized JSON artifacts to S3, and the connector reads those artifacts during reconciliation. This split keeps reconciliation fast and avoids giving the connector broad IAM enumeration permissions.
+
+#### Live data
+
+| Data                             | AWS API family |
+| -------------------------------- | -------------- |
+| Agents                           | Bedrock Agent  |
+| Agent aliases                    | Bedrock Agent  |
+| Action groups                    | Bedrock Agent  |
+| Knowledge bases                  | Bedrock Agent  |
+| Collaborators / connected agents | Bedrock Agent  |
+| Guardrail details                | Bedrock        |
+
+#### S3 inventory data
+
+| Artifact         | S3 key                               | Used for                                                        |
+| ---------------- | ------------------------------------ | --------------------------------------------------------------- |
+| Agent bindings   | `latest/agent-bindings.json`         | `agentIdentityBinding`, `agentPrincipals`, `identityBindingIds` |
+| Tool credentials | `latest/agent-tool-credentials.json` | `agentToolCredentials`, `toolCredentialIds`                     |
+
+Both artifacts are cached in memory. The cache TTL is controlled by `bindingsCacheTtlSeconds`.
+
+### S3 inventory behavior
+
+| Behavior               | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| Cache TTL              | Controlled by `bindingsCacheTtlSeconds`.                                                         |
+| Cache scope            | Connector instance memory.                                                                       |
+| Identity binding cache | Used for `agentIdentityBinding`, `agentPrincipals`, and `identityBindingIds`.                    |
+| Tool credential cache  | Used for `agentToolCredentials` and `toolCredentialIds`.                                         |
+| Missing S3 key         | Connector logs a warning and returns no S3-backed records. Live Bedrock objects still reconcile. |
+| Read failure           | Connector logs an error or warning and continues with empty S3-backed data.                      |
+
+## Use the AWS Bedrock connector
+
+The AWS Bedrock connector discovers the following resource types:
+
+| ICF Native Type        | AWS Bedrock Resource Type                                           | Naming Attribute | Notes                                                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `__ACCOUNT__`          | Bedrock Agent Alias, or Bedrock Agent when the agent has no aliases | `__NAME__`       | UID is `agentId:aliasId` for aliases, and `agentId` for bare agents.                                                                         |
+| `agentTool`            | Bedrock Agent Action Group                                          | `__NAME__`       | Maps to action groups attached to an agent.                                                                                                  |
+| `agentKnowledgeBase`   | Bedrock Agent Knowledge Base association                            | `__NAME__`       | Represents a knowledge base attached to an agent, not the standalone Bedrock Knowledge Base object.                                          |
+| `agentGuardrail`       | Bedrock Guardrail attached to an agent                              | `__NAME__`       | Derived from the agent's `guardrailConfiguration`, enriched with guardrail details.                                                          |
+| `agentIdentityBinding` | Derived IAM-to-Bedrock invocation binding                           | `__NAME__`       | Not a native Bedrock entity. Represents who can invoke an agent or alias, derived from IAM policies and read from the S3 inventory artifact. |
+| `agentToolCredentials` | Derived action-group credential surface                             | `__NAME__`       | Not a native Bedrock entity. Represents credential-related metadata for an action group. Read from the S3 inventory artifact.                |
+
+### `__ACCOUNT__` attributes
+
+| Attribute                  | Type    | Multivalued | Description                                                   |
+| -------------------------- | ------- | ----------- | ------------------------------------------------------------- |
+| `platform`                 | String  | No          | Connector platform identifier. Current value is `awsbedrock`. |
+| `agentId`                  | String  | No          | Bedrock Agent ID.                                             |
+| `agentName`                | String  | No          | Bedrock Agent name.                                           |
+| `version`                  | String  | No          | Agent version returned by Bedrock.                            |
+| `status`                   | String  | No          | Agent status.                                                 |
+| `description`              | String  | No          | Agent description.                                            |
+| `foundationModel`          | String  | No          | Foundation model configured for the agent.                    |
+| `roleArn`                  | String  | No          | Agent resource role ARN.                                      |
+| `idleSessionTtlSeconds`    | Integer | No          | Idle session TTL in seconds.                                  |
+| `createdAt`                | String  | No          | Agent creation timestamp.                                     |
+| `updatedAt`                | String  | No          | Agent update timestamp.                                       |
+| `preparedAt`               | String  | No          | Agent prepared timestamp.                                     |
+| `agentArn`                 | String  | No          | Agent ARN constructed from region, account ID, and agent ID.  |
+| `region`                   | String  | No          | AWS region configured on this connector instance.             |
+| `customerEncryptionKeyArn` | String  | No          | Customer KMS key ARN, if present.                             |
+| `failureReasons`           | String  | Yes         | Failure reason list from Bedrock.                             |
+| `recommendedActions`       | String  | Yes         | Recommended remediation actions from Bedrock.                 |
+| `guardrailId`              | String  | No          | Guardrail identifier from the agent guardrail configuration.  |
+| `guardrailVersion`         | String  | No          | Guardrail version from the agent guardrail configuration.     |
+| `tools`                    | String  | Yes         | Action group IDs associated with the agent.                   |
+| `knowledgeBases`           | String  | Yes         | Knowledge base IDs associated with the agent.                 |
+| `agentCollaboration`       | String  | No          | Bedrock multi-agent collaboration mode.                       |
+| `connectedAgents`          | String  | Yes         | Collaborator alias ARNs returned by Bedrock.                  |
+| `aliasId`                  | String  | No          | Alias ID. Present only on alias objects.                      |
+| `aliasName`                | String  | No          | Alias name. Present only on alias objects.                    |
+| `agentAliasStatus`         | String  | No          | Alias status. Present only on alias objects.                  |
+| `agentPrincipals`          | String  | Yes         | Computed principal references from S3 identity bindings.      |
+| `identityBindingIds`       | String  | Yes         | Forward pointers to `agentIdentityBinding` records.           |
+| `toolCredentialIds`        | String  | Yes         | Forward pointers to `agentToolCredentials` records.           |
+
+### `agentTool` attributes
+
+| Attribute                    | Type   | Multivalued | Description                                          |
+| ---------------------------- | ------ | ----------- | ---------------------------------------------------- |
+| `platform`                   | String | No          | Connector platform identifier.                       |
+| `agentId`                    | String | No          | Parent agent ID.                                     |
+| `agentVersion`               | String | No          | Agent version used to list action groups.            |
+| `actionGroupId`              | String | No          | Action group ID.                                     |
+| `actionGroupName`            | String | No          | Action group name.                                   |
+| `description`                | String | No          | Action group description.                            |
+| `status`                     | String | No          | Action group state/status.                           |
+| `executorArn`                | String | No          | Lambda executor ARN, when present.                   |
+| `parentActionGroupSignature` | String | No          | Bedrock system action group signature, when present. |
+| `schemaUri`                  | String | No          | S3 schema URI, when present.                         |
+
+### `agentKnowledgeBase` attributes
+
+| Attribute         | Type   | Multivalued | Description                                 |
+| ----------------- | ------ | ----------- | ------------------------------------------- |
+| `platform`        | String | No          | Connector platform identifier.              |
+| `agentId`         | String | No          | Parent agent ID.                            |
+| `agentVersion`    | String | No          | Agent version used to list knowledge bases. |
+| `knowledgeBaseId` | String | No          | Knowledge base ID.                          |
+| `description`     | String | No          | Knowledge base description.                 |
+| `status`          | String | No          | Knowledge base association state/status.    |
+| `updatedAt`       | String | No          | Last update timestamp.                      |
+
+### `agentGuardrail` attributes
+
+| Attribute              | Type   | Multivalued | Description                                                |
+| ---------------------- | ------ | ----------- | ---------------------------------------------------------- |
+| `platform`             | String | No          | Connector platform identifier.                             |
+| `agentId`              | String | No          | Parent agent ID.                                           |
+| `agentVersion`         | String | No          | Agent version.                                             |
+| `guardrailId`          | String | No          | Guardrail identifier.                                      |
+| `guardrailVersion`     | String | No          | Guardrail version.                                         |
+| `guardrailName`        | String | No          | Guardrail display name.                                    |
+| `guardrailDescription` | String | No          | Guardrail description.                                     |
+| `state`                | String | No          | Guardrail state.                                           |
+| `deploymentStatus`     | String | No          | Guardrail deployment status.                               |
+| `inputAction`          | String | No          | Input action / filter information serialized as a string.  |
+| `outputAction`         | String | No          | Output action / filter information serialized as a string. |
+
+### `agentIdentityBinding` attributes
+
+| Attribute     | Type   | Multivalued | Description                                         |
+| ------------- | ------ | ----------- | --------------------------------------------------- |
+| `platform`    | String | No          | Connector platform identifier.                      |
+| `agentId`     | String | No          | Agent ID, or wildcard marker for wildcard bindings. |
+| `kind`        | String | No          | Binding kind.                                       |
+| `principal`   | String | No          | Principal reference.                                |
+| `permissions` | String | Yes         | Permissions associated with the binding.            |
+
+### `agentToolCredentials` attributes
+
+| Attribute                | Type   | Multivalued | Description                                                                                           |
+| ------------------------ | ------ | ----------- | ----------------------------------------------------------------------------------------------------- |
+| `id`                     | String | No          | Tool credential record ID.                                                                            |
+| `agentId`                | String | No          | Parent agent ID.                                                                                      |
+| `agentArn`               | String | No          | Agent ARN.                                                                                            |
+| `agentServiceRoleArn`    | String | No          | Agent service role ARN.                                                                               |
+| `actionGroupId`          | String | No          | Action group ID.                                                                                      |
+| `actionGroupName`        | String | No          | Action group name.                                                                                    |
+| `actionGroupState`       | String | No          | Action group state.                                                                                   |
+| `credentialType`         | String | No          | Credential classification.                                                                            |
+| `credentialRef`          | String | No          | Reference to the credential surface, such as a Lambda ARN or S3 URI. Doesn't contain secret material. |
+| `apiSchemaSource`        | String | No          | API schema source.                                                                                    |
+| `functionSchema`         | String | No          | Whether the action group uses a function schema.                                                      |
+| `accountId`              | String | No          | AWS account ID.                                                                                       |
+| `region`                 | String | No          | AWS region.                                                                                           |
+| `lambdaExecutionRoleArn` | String | No          | Lambda execution role ARN, when available.                                                            |
+
+## Troubleshooting
+
+### Connector initializes but test fails
+
+Check:
+
+1. `region` is valid for Bedrock Agents.
+
+2. `accountId` is populated.
+
+3. Explicit credentials are configured, or `useDefaultCredentialsProvider=true` and the connector runs on AWS infrastructure with an instance role, task role, or service account.
+
+4. The principal has Bedrock read permissions.
+
+5. The target account has Bedrock Agents in the configured region.
+
+### Agents reconcile but `agentPrincipals` is empty
+
+Check:
+
+1. The companion inventory job has run successfully.
+
+2. `latest/agent-bindings.json` exists in the configured S3 bucket.
+
+3. The connector principal can call `s3:GetObject` on the inventory key.
+
+4. `bindingsCacheTtlSeconds` has expired, or the connector has been restarted after a fresh inventory run.
+
+5. IAM policies actually grant `bedrock:InvokeAgent` to the expected principals.
+
+### Agents reconcile but `toolCredentialIds` is empty
+
+Check:
+
+1. `latest/agent-tool-credentials.json` exists in the configured S3 bucket.
+
+2. The inventory job has permissions to inspect action groups and related credential surfaces.
+
+3. The connector principal can read the S3 artifact.
+
+4. The action groups are present for the same region and account as the connector configuration.
+
+## OpenICF interfaces implemented by the AWS Bedrock connector
+
+The AWS Bedrock connector implements the following OpenICF interfaces. You can find additional details in [ICF interfaces](interfaces.html):
+
+* Schema
+
+  Describes the object types, operations, and options that the connector supports.
+
+* Search
+
+  Searches the target resource for all objects that match the specified object class and filter.
+
+* Test
+
+  Tests the connector configuration.
+
+  Testing a configuration checks all elements of the environment that are referred to by the configuration are available. For example, the connector might make a physical connection to a host that is specified in the configuration to verify that it exists and that the credentials that are specified in the configuration are valid.
+
+  This operation might need to connect to a resource, and, as such, might take some time. Do not invoke this operation too often, such as before every provisioning operation. The test operation is not intended to check that the connector is alive (that is, that its physical connection to the resource has not timed out).
+
+  You can invoke the test operation before a connector configuration has been validated.
+
+[]()
+
+## AWS Bedrock connector configuration
+
+The AWS Bedrock connector has the following configurable properties:
+
+### Basic configuration properties
+
+| Property                                                                                                                                                     | Type            | Default                  | Encrypted(1)             | Required(2)               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- | ------------------------ | ------------------------ | ------------------------- |
+| `region`                                                                                                                                                     | `String`        | `us-east-1`              |                          | [icon: check, set=fas]Yes |
+| AWS region where Bedrock Agents are deployed, for example `us-east-1` or `us-west-2`.                                                                        |                 |                          |                          |                           |
+| `accountId`                                                                                                                                                  | `String`        | `null`                   |                          | [icon: check, set=fas]Yes |
+| AWS account ID. Used to construct Bedrock Agent ARNs and relationship identifiers.                                                                           |                 |                          |                          |                           |
+| `useDefaultCredentialsProvider`                                                                                                                              | `Boolean`       | `true`                   |                          | [icon: check, set=fas]Yes |
+| If enabled, the connector uses the AWS SDK DefaultCredentialsProvider chain (environment variables, shared config, EC2/ECS role).                            |                 |                          |                          |                           |
+| `accessKeyId`                                                                                                                                                | `String`        | `null`                   |                          | [icon: times, set=fas]No  |
+| AWS access key ID used to authenticate when the default credentials provider is disabled.                                                                    |                 |                          |                          |                           |
+| `secretAccessKey`                                                                                                                                            | `GuardedString` | `null`                   | [icon: lock, set=fas]Yes | [icon: times, set=fas]No  |
+| AWS secret access key used to authenticate when the default credentials provider is disabled.                                                                |                 |                          |                          |                           |
+| `inventoryBucket`                                                                                                                                            | `String`        | `bedrock-core-inventory` |                          | [icon: check, set=fas]Yes |
+| S3 bucket containing `latest/agent-bindings.json` and `latest/agent-tool-credentials.json`. Use the bucket name only, don't include `s3://` or a key prefix. |                 |                          |                          |                           |
+| `bindingsCacheTtlSeconds`                                                                                                                                    | `Long`          | `300`                    |                          | [icon: times, set=fas]No  |
+| Cache TTL in seconds for S3 inventory artifacts.                                                                                                             |                 |                          |                          |                           |
+
+(1) Whether the property value is considered confidential, and is therefore encrypted in IDM.
+
+(2) A list of operations in this column indicates that the property is required for those operations.
+
+---
+
+---
 title: AWS IAM Identity Center connector
 description: Configure the AWS IAM Identity Center connector to manage users and groups between AWS IAM Identity Center and PingIDM
 component: openicf
 page_id: openicf:connector-reference:aws-iam-identity-center
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/aws-iam-identity-center.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before_you_start: Before you start
   install_the_aws_iam_identity_center_connector: Install the AWS IAM Identity Center connector
@@ -4830,7 +5770,7 @@ Before you configure the connector, log in to your AWS administrator account in 
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -5809,11 +6749,427 @@ The AWS IAM Identity Center Connector has the following configurable properties:
 ---
 
 ---
+title: Azure AI Foundry connector
+description: "Reference for the Azure AI Foundry connector: discover AI agents, tools, knowledge bases, guardrails, service accounts, and identity bindings."
+component: openicf
+page_id: openicf:connector-reference:azure-ai-foundry
+canonical_url: https://docs.pingidentity.com/openicf/connector-reference/azure-ai-foundry.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  azure_ai_foundry_requirements: Azure AI Foundry requirements
+  register_an_app_in_microsoft_entra: Register an app in Microsoft Entra
+  install_the_azure_ai_foundry_connector: Install the Azure AI Foundry connector
+  configure_the_azure_ai_foundry_connector: Configure the Azure AI Foundry connector
+  connection_details: Connection details
+  example_azure_ai_foundry_configuration: Example Azure AI Foundry configuration
+  test_the_azure_ai_foundry_connector: Test the Azure AI Foundry connector
+  azure_ai_foundry_remote_connector: Azure AI Foundry remote connector
+  use_the_azure_ai_foundry_connector: Use the Azure AI Foundry connector
+  account_attributes: __ACCOUNT__ attributes
+  agenttool_attributes: agentTool attributes
+  agentknowledgebase_attributes: agentKnowledgeBase attributes
+  agentguardrail_attributes: agentGuardrail attributes
+  agentidentitybinding_attributes: agentIdentityBinding attributes
+  serviceaccount_attributes: serviceAccount attributes
+  agenttoolcredential_attributes: agentToolCredential attributes
+  agentconnection_attributes: agentConnection attributes
+  implemented-interfaces-org-forgerock-openicf-connectors-azureaifoundry-AzureAIFoundryConnector-1.5.20.33: OpenICF interfaces implemented by the Azure AI Foundry connector
+  config-properties-org-forgerock-openicf-connectors-azureaifoundry-AzureAIFoundryConnector-1.5.20.33: Azure AI Foundry connector configuration
+  basic-configuration-properties-org-forgerock-openicf-connectors-azureaifoundry-AzureAIFoundryConnector-1.5.20.33: Basic configuration properties
+---
+
+# Azure AI Foundry connector
+
+Azure AI Foundry is Microsoft's unified platform for building and deploying AI agents and applications. The Azure AI Foundry connector discovers AI agents created in Azure AI Foundry and governance-relevant objects including tools, knowledge bases, guardrails, connections, service accounts, and identity bindings. It supports `Delete` for agents; all other object classes are read-only.
+
+Contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive to obtain this connector.
+
+|   |                                                                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Retrieval of `agentIdentityBinding`, `serviceAccount`, `agentConnection`, and `agentToolCredential` is enabled through an offline inventory mechanism that requires an Agent Governance license. Contact your CSOM for details. |
+
+## Azure AI Foundry requirements
+
+Before you configure the connector, you must register an application with Microsoft Entra and configure the Azure AI Foundry project. You need a Microsoft Azure subscription to complete this procedure.
+
+### Register an app in Microsoft Entra
+
+1. Sign on to the [Azure portal](https://portal.azure.com/) as an administrative user.
+
+2. Select App registrations under Azure services.
+
+3. On the Register an application page, enter a name for the application and select the supported account types.
+
+4. On the new registration page, make a note of the Application (client) ID and the Directory (tenant) ID.
+
+5. Generate a client secret. Select Certificates & secrets > New client secret, enter a description, and click Add. Copy the client secret value.
+
+6. Note the Azure subscription ID and the resource group where your Azure AI Foundry project resides.
+
+Before you configure the connector, confirm you have the following:
+
+| Requirement            | Value                                                                                                                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Tenant ID              | Microsoft Entra tenant GUID                                                                                          |
+| Subscription ID        | Azure subscription ID                                                                                                |
+| Resource Group         | Azure Resource Group for the Foundry project                                                                         |
+| Project Location       | Location of the Foundry project                                                                                      |
+| Client ID              | Service principal (app registration) client ID                                                                       |
+| Client Secret          | Service principal client secret                                                                                      |
+| Agent Service Endpoint | Azure AI Foundry project endpoint URL, for example `https://<resource>.services.ai.azure.com/api/projects/<project>` |
+
+## Install the Azure AI Foundry connector
+
+|   |                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To check for an Advanced Identity Cloud application for this connector, refer to:- [Application management](https://docs.pingidentity.com/pingoneaic/latest/app-management/applications.html)
+
+- [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
+
+To obtain the connector `.jar` file, contact your Ping Identity Customer Success Outcome Manager (CSOM) or Account Executive.
+
+* If you're running the connector locally, place the `.jar` file in the `/path/to/openidm/connectors` directory.
+
+* If you're using a remote connector server (RCS), place the `.jar` file in the `/path/to/openicf/connectors` directory on the RCS.
+
+## Configure the Azure AI Foundry connector
+
+Create a connector configuration using the IDM admin UI:
+
+1. From the navigation bar, click Configure > Connectors.
+
+2. On the Connectors page, click New Connector.
+
+3. On the New Connector page, type a Connector Name.
+
+4. From the Connector Type list, select Azure AI Foundry Connector - 1.5.20.33.
+
+5. Complete the Base Connector Details and any applicable Additional Options.
+
+   |   |                                                                                                                                      |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | For a list of all configuration properties, refer to [Azure AI Foundry Connector Configuration](#azureaifoundry-config-prop-ezLink). |
+
+6. Click Save.
+
+When your connector is configured correctly, the connector displays as Active in the admin UI.
+
+Refer to [this procedure](configure-connector.html#connector-wiz-REST) to create a connector configuration over REST.
+
+### Connection details
+
+The Azure AI Foundry connector uses the following configuration properties:
+
+| Property                     | Type          | Required    | Default   | Description                                                                                                                                                                                                                                                   |
+| ---------------------------- | ------------- | ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tenantId`                   | String        | Yes         | None      | Microsoft Entra tenant GUID.                                                                                                                                                                                                                                  |
+| `subscriptionId`             | String        | Yes         | None      | Azure subscription ID.                                                                                                                                                                                                                                        |
+| `resourceGroupName`          | String        | No          | None      | Azure Resource Group for the Foundry project.                                                                                                                                                                                                                 |
+| `workspaceName`              | String        | No          | None      | Azure AI Foundry workspace name used for agent discovery and operations.                                                                                                                                                                                      |
+| `defaultLocation`            | String        | Yes         | `eastus`  | Azure region where AI Foundry resources are deployed.                                                                                                                                                                                                         |
+| `useManagedIdentity`         | Boolean       | Yes         | `false`   | When `true`, uses managed identity for authentication instead of `clientId` and `clientSecret`.                                                                                                                                                               |
+| `clientId`                   | String        | Conditional | None      | Service principal (app registration) client ID. Required when `useManagedIdentity=false`.                                                                                                                                                                     |
+| `clientSecret`               | GuardedString | Conditional | None      | Service principal client secret. Required when `useManagedIdentity=false`.                                                                                                                                                                                    |
+| `agentServiceEndpoint`       | String        | Yes         | None      | Azure AI Foundry project endpoint URL, for example `https://<resource>.services.ai.azure.com/api/projects/<project>`.                                                                                                                                         |
+| `agentApiFlavor`             | String        | No          | `classic` | Agent discovery flavor. Use `classic` for the `/agents` API, `new` for the `/assistants` API, or `both`.                                                                                                                                                      |
+| `apiVersion`                 | String        | No          | `v1`      | API version string used when calling the Azure AI Foundry Agents API, for example `2025-01-01`.                                                                                                                                                               |
+| `identityBindingScanEnabled` | Boolean       | No          | `false`   | Enables offline inventory scan for identity bindings, service accounts, connections, and tool credentials. When `false`, those object classes return no data.                                                                                                 |
+| `toolsInventoryUrl`          | String        | No          | None      | HTTPS URL to the tools inventory JSON (Azure Blob SAS URL or Azure Function HTTP trigger URL). Required when `identityBindingScanEnabled=true`.                                                                                                               |
+| `toolsInventoryFilePath`     | String        | No          | None      | Local filesystem path to the tools inventory JSON. Alternative to `toolsInventoryUrl`. Intended for development or test use.                                                                                                                                  |
+| `agentNameFilterRegex`       | String        | No          | None      | Optional regular expression to restrict which agents are returned during discovery based on display name.                                                                                                                                                     |
+| `entraAgentIdLookupEnabled`  | Boolean       | No          | `false`   | When `true`, queries the Microsoft Graph beta API to resolve Entra agent identity service principals and enrich agents with their Entra object IDs. Requires `Application.Read.All` Graph API permission. Correlation is by agent display name (best-effort). |
+
+### Example Azure AI Foundry configuration
+
+```json
+{
+  "connectorRef": {
+    "bundleName": "org.forgerock.openicf.connectors.azureaifoundry-connector",
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "connectorName": "org.forgerock.openicf.connectors.azureaifoundry.AzureAIFoundryConnector"
+  },
+  "configurationProperties": {
+    "tenantId": "00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "my-foundry-rg",
+    "defaultLocation": "eastus",
+    "clientId": "22222222-2222-2222-2222-222222222222",
+    "clientSecret": {
+      "$crypto": {
+        "type": "x-simple-encryption",
+        "value": {
+          "cipher": "...",
+          "data": "...",
+          "iv": "...",
+          "key": "openidm-sym-default"
+        }
+      }
+    },
+    "useManagedIdentity": false,
+    "agentServiceEndpoint": "https://myresource.services.ai.azure.com/api/projects/myproject",
+    "agentApiFlavor": "classic",
+    "identityBindingScanEnabled": false
+  }
+}
+```
+
+### Test the Azure AI Foundry connector
+
+Test that the configuration is correct by running the following command:
+
+```
+curl \
+--header "X-OpenIDM-Username: openidm-admin" \
+--header "X-OpenIDM-Password: openidm-admin" \
+--header "Accept-API-Version: resource=1.0" \
+--request POST \
+"http://localhost:8080/openidm/system/azureaifoundry?_action=test"
+{
+  "name": "azureaifoundry",
+  "enabled": true,
+  "config": "config/provisioner.openicf/azureaifoundry",
+  "connectorRef": {
+    "bundleVersion": "[1.5.0.0,1.6.0.0)",
+    "bundleName": "org.forgerock.openicf.connectors.azureaifoundry-connector",
+    "connectorName": "org.forgerock.openicf.connectors.azureaifoundry.AzureAIFoundryConnector"
+  },
+  "displayName": "Azure AI Foundry Connector",
+  "objectTypes": [
+    "__ACCOUNT__",
+    "__ALL__"
+  ],
+  "ok": true
+}
+```
+
+If the command returns `"ok": true`, your connector has been configured correctly and can authenticate to the Azure AI Foundry API.
+
+### Azure AI Foundry remote connector
+
+If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the Azure AI Foundry connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
+
+Refer to [Remote connectors](remote-connector.html) for configuring the Azure AI Foundry remote connector.
+
+## Use the Azure AI Foundry connector
+
+The Azure AI Foundry connector discovers the following resource types:
+
+| ICF Native Type        | Azure AI Foundry Resource Type                                       | Naming Attribute | Notes                                                                                                                                                                                     |
+| ---------------------- | -------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `__ACCOUNT__`          | Azure AI Foundry agent                                               | `__NAME__`       | Represents one AI Foundry agent. UID is the agent ID. Supports `Delete`; the connector calls the Azure AI Foundry agents API to delete the agent. All other object classes are read-only. |
+| `agentTool`            | Agent tool                                                           | `__NAME__`       | Represents tools attached to an AI Foundry agent.                                                                                                                                         |
+| `agentKnowledgeBase`   | Agent knowledge base                                                 | `__NAME__`       | Represents knowledge bases attached to an AI Foundry agent.                                                                                                                               |
+| `agentIdentityBinding` | Derived IAM-to-agent identity binding                                | `__NAME__`       | Not a native Azure AI Foundry entity. Read from the offline inventory artifact.                                                                                                           |
+| `agentGuardrail`       | Agent guardrail (RAI policy)                                         | `__NAME__`       | Represents the Responsible AI policy associated with an agent.                                                                                                                            |
+| `serviceAccount`       | Azure managed identity or service principal associated with an agent | `__NAME__`       | Read from the offline inventory artifact.                                                                                                                                                 |
+| `agentToolCredential`  | Derived tool credential surface                                      | `__NAME__`       | Read from the offline inventory artifact.                                                                                                                                                 |
+| `agentConnection`      | Azure AI Foundry project connection                                  | `__NAME__`       | Represents connections (such as to Azure OpenAI or storage) configured in the Foundry project.                                                                                            |
+
+### `__ACCOUNT__` attributes
+
+| Attribute            | Type   | Multivalued | Description                                                    |
+| -------------------- | ------ | ----------- | -------------------------------------------------------------- |
+| `platform`           | String | No          | Connector platform identifier.                                 |
+| `agentId`            | String | No          | Azure AI Foundry agent ID.                                     |
+| `agentVersion`       | String | No          | Agent version.                                                 |
+| `description`        | String | No          | Agent description.                                             |
+| `foundationModel`    | String | No          | Foundation model configured for the agent.                     |
+| `instructions`       | String | No          | System prompt / instructions for the agent.                    |
+| `createdAt`          | String | No          | Agent creation timestamp.                                      |
+| `raiPolicyName`      | String | No          | Responsible AI policy name applied to the agent.               |
+| `temperature`        | Number | No          | Model temperature parameter.                                   |
+| `topP`               | Number | No          | Model top-P parameter.                                         |
+| `responseFormat`     | String | No          | Response format configuration.                                 |
+| `toolsRaw`           | String | No          | Raw tools configuration from the agent definition.             |
+| `toolResourcesRaw`   | String | No          | Raw tool resources configuration.                              |
+| `guardrailId`        | String | No          | Forward pointer to the `agentGuardrail` object.                |
+| `entraAgentObjectId` | String | No          | Microsoft Entra object ID associated with the agent.           |
+| `serviceAccount`     | String | No          | Service account or managed identity associated with the agent. |
+| `region`             | String | No          | Azure region where the agent is deployed.                      |
+| `toolIds`            | String | Yes         | Forward pointers to `agentTool` objects.                       |
+| `knowledgeBaseIds`   | String | Yes         | Forward pointers to `agentKnowledgeBase` objects.              |
+| `identityBindingIds` | String | Yes         | Forward pointers to `agentIdentityBinding` records.            |
+| `serviceAccountIds`  | String | Yes         | Forward pointers to `serviceAccount` records.                  |
+| `toolCredentialIds`  | String | Yes         | Forward pointers to `agentToolCredential` records.             |
+| `connectionIds`      | String | Yes         | Forward pointers to `agentConnection` records.                 |
+| `connectedAgents`    | String | Yes         | IDs of connected agents.                                       |
+
+### `agentTool` attributes
+
+| Attribute     | Type   | Multivalued | Description                       |
+| ------------- | ------ | ----------- | --------------------------------- |
+| `platform`    | String | No          | Connector platform identifier.    |
+| `description` | String | No          | Tool description.                 |
+| `toolType`    | String | No          | Tool type classification.         |
+| `executorArn` | String | No          | Executor reference, when present. |
+| `schemaUri`   | String | No          | Schema URI, when present.         |
+
+### `agentKnowledgeBase` attributes
+
+| Attribute            | Type   | Multivalued | Description                                         |
+| -------------------- | ------ | ----------- | --------------------------------------------------- |
+| `platform`           | String | No          | Connector platform identifier.                      |
+| `knowledgeBaseId`    | String | No          | Knowledge base ID.                                  |
+| `knowledgeBaseState` | String | No          | Knowledge base state.                               |
+| `sourceType`         | String | No          | Knowledge base source type.                         |
+| `connectionRef`      | String | No          | Connection reference for the knowledge base source. |
+
+### `agentGuardrail` attributes
+
+| Attribute                | Type   | Multivalued | Description                              |
+| ------------------------ | ------ | ----------- | ---------------------------------------- |
+| `platform`               | String | No          | Connector platform identifier.           |
+| `guardrailId`            | String | No          | Guardrail ID.                            |
+| `raiPolicyName`          | String | No          | Responsible AI policy name.              |
+| `raiPolicyShortName`     | String | No          | Short name for the RAI policy.           |
+| `agentIdsUsingGuardrail` | String | Yes         | Agent IDs that reference this guardrail. |
+
+### `agentIdentityBinding` attributes
+
+| Attribute          | Type    | Multivalued | Description                                                     |
+| ------------------ | ------- | ----------- | --------------------------------------------------------------- |
+| `platform`         | String  | No          | Connector platform identifier.                                  |
+| `agentId`          | String  | No          | Agent ID.                                                       |
+| `agentVersion`     | String  | No          | Agent version.                                                  |
+| `kind`             | String  | No          | Binding kind.                                                   |
+| `principal`        | String  | No          | Principal reference.                                            |
+| `principalId`      | String  | No          | Principal object ID.                                            |
+| `principalType`    | String  | No          | Principal type, such as `User`, `Group`, or `ServicePrincipal`. |
+| `roleName`         | String  | No          | Azure role name.                                                |
+| `roleDefinitionId` | String  | No          | Azure role definition ID.                                       |
+| `iamMember`        | String  | No          | IAM member string.                                              |
+| `permissions`      | String  | Yes         | Permissions associated with the binding.                        |
+| `scope`            | String  | No          | Azure RBAC scope.                                               |
+| `scopeResourceId`  | String  | No          | Resource ID of the scope.                                       |
+| `scopeType`        | String  | No          | Scope type.                                                     |
+| `tenantId`         | String  | No          | Azure tenant ID.                                                |
+| `conditionJson`    | String  | No          | Azure RBAC condition, serialized as JSON.                       |
+| `sourceTag`        | String  | No          | Source tag from the inventory artifact.                         |
+| `confidence`       | String  | No          | Confidence value from the inventory artifact.                   |
+| `expanded`         | Boolean | No          | Whether the principal was expanded by the inventory process.    |
+
+### `serviceAccount` attributes
+
+| Attribute        | Type   | Multivalued | Description                                                     |
+| ---------------- | ------ | ----------- | --------------------------------------------------------------- |
+| `platform`       | String | No          | Connector platform identifier.                                  |
+| `identityType`   | String | No          | Identity type, such as `ManagedIdentity` or `ServicePrincipal`. |
+| `identityScope`  | String | No          | Identity scope.                                                 |
+| `principalId`    | String | No          | Service principal or managed identity object ID.                |
+| `tenantId`       | String | No          | Azure tenant ID.                                                |
+| `clientId`       | String | No          | Client ID of the managed identity or service principal.         |
+| `serviceAccount` | String | No          | Service account reference.                                      |
+| `linkedAgentIds` | String | Yes         | Agent IDs linked to this service account.                       |
+
+### `agentToolCredential` attributes
+
+| Attribute           | Type   | Multivalued | Description                                            |
+| ------------------- | ------ | ----------- | ------------------------------------------------------ |
+| `toolId`            | String | No          | Tool ID.                                               |
+| `toolType`          | String | No          | Tool type classification.                              |
+| `authType`          | String | No          | Authentication type.                                   |
+| `credentialRef`     | String | No          | Credential reference. Doesn't contain secret material. |
+| `connectionId`      | String | No          | Connection ID used by the tool.                        |
+| `connectionName`    | String | No          | Connection name used by the tool.                      |
+| `target`            | String | No          | Target endpoint or resource.                           |
+| `backingResourceId` | String | No          | Azure resource ID backing the tool credential.         |
+| `agentIds`          | String | Yes         | Agent IDs that use this tool credential.               |
+
+### `agentConnection` attributes
+
+| Attribute           | Type    | Multivalued | Description                                             |
+| ------------------- | ------- | ----------- | ------------------------------------------------------- |
+| `platform`          | String  | No          | Connector platform identifier.                          |
+| `connectionType`    | String  | No          | Connection type, such as `AzureOpenAI` or `AzureBlob`.  |
+| `credentialsType`   | String  | No          | Credentials type used by the connection.                |
+| `target`            | String  | No          | Connection target endpoint or resource URI.             |
+| `backingResourceId` | String  | No          | Azure resource ID backing the connection.               |
+| `isDefault`         | Boolean | No          | Whether this is the default connection for the project. |
+
+## OpenICF interfaces implemented by the Azure AI Foundry connector
+
+The Azure AI Foundry connector implements the following OpenICF interfaces. You can find additional details in [ICF interfaces](interfaces.html):
+
+* Delete
+
+  Deletes an object, referenced by its `uid`.
+
+* Schema
+
+  Describes the object types, operations, and options that the connector supports.
+
+* Search
+
+  Searches the target resource for all objects that match the specified object class and filter.
+
+* Test
+
+  Tests the connector configuration.
+
+  Testing a configuration checks all elements of the environment that are referred to by the configuration are available. For example, the connector might make a physical connection to a host that is specified in the configuration to verify that it exists and that the credentials that are specified in the configuration are valid.
+
+  This operation might need to connect to a resource, and, as such, might take some time. Do not invoke this operation too often, such as before every provisioning operation. The test operation is not intended to check that the connector is alive (that is, that its physical connection to the resource has not timed out).
+
+  You can invoke the test operation before a connector configuration has been validated.
+
+[]()
+
+## Azure AI Foundry connector configuration
+
+The Azure AI Foundry connector has the following configurable properties:
+
+### Basic configuration properties
+
+| Property                                                                                                                                                                                                                                                    | Type            | Default   | Encrypted(1)             | Required(2)               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- | ------------------------ | ------------------------- |
+| `tenantId`                                                                                                                                                                                                                                                  | `String`        | `null`    |                          | [icon: check, set=fas]Yes |
+| Microsoft Entra tenant ID (GUID) where Azure AI Foundry resources reside.                                                                                                                                                                                   |                 |           |                          |                           |
+| `subscriptionId`                                                                                                                                                                                                                                            | `String`        | `null`    |                          | [icon: check, set=fas]Yes |
+| Azure subscription ID that contains the Azure AI Foundry workspace.                                                                                                                                                                                         |                 |           |                          |                           |
+| `resourceGroupName`                                                                                                                                                                                                                                         | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| Name of the Azure Resource Group containing the workspace.                                                                                                                                                                                                  |                 |           |                          |                           |
+| `workspaceName`                                                                                                                                                                                                                                             | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| Azure AI Foundry workspace name used for agent discovery and operations.                                                                                                                                                                                    |                 |           |                          |                           |
+| `defaultLocation`                                                                                                                                                                                                                                           | `String`        | `eastus`  |                          | [icon: check, set=fas]Yes |
+| Azure region where AI Foundry resources (agents, tools, KBs, guardrails) are deployed.                                                                                                                                                                      |                 |           |                          |                           |
+| `useManagedIdentity`                                                                                                                                                                                                                                        | `Boolean`       | `false`   |                          | [icon: check, set=fas]Yes |
+| If true, the connector authenticates using a managed identity attached to the runtime environment. If false, a service principal (clientId + clientSecret) is used.                                                                                         |                 |           |                          |                           |
+| `clientId`                                                                                                                                                                                                                                                  | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| Client ID (Application ID) of a service principal when managed identity is not used.                                                                                                                                                                        |                 |           |                          |                           |
+| `clientSecret`                                                                                                                                                                                                                                              | `GuardedString` | `null`    | [icon: lock, set=fas]Yes | [icon: times, set=fas]No  |
+| Client secret for the service principal. Required only when useManagedIdentity=false.                                                                                                                                                                       |                 |           |                          |                           |
+| `identityBindingScanEnabled`                                                                                                                                                                                                                                | `Boolean`       | `false`   |                          | [icon: times, set=fas]No  |
+| Enables scanning Azure RBAC roles to produce identity bindings. Currently optional and may require additional privileges.                                                                                                                                   |                 |           |                          |                           |
+| `agentNameFilterRegex`                                                                                                                                                                                                                                      | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| Optional regular expression used to restrict which agents are returned during discovery.                                                                                                                                                                    |                 |           |                          |                           |
+| `agentServiceEndpoint`                                                                                                                                                                                                                                      | `String`        | `null`    |                          | [icon: check, set=fas]Yes |
+| Base endpoint for Azure AI Foundry Agents API, for example `https://<resource>.services.ai.azure.com/api/projects/<project>`.                                                                                                                               |                 |           |                          |                           |
+| `toolsInventoryUrl`                                                                                                                                                                                                                                         | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| HTTP(S) URL pointing to the tools-inventory JSON document that includes tools, knowledge bases, guardrails, and agent relationships.                                                                                                                        |                 |           |                          |                           |
+| `toolsInventoryFilePath`                                                                                                                                                                                                                                    | `String`        | `null`    |                          | [icon: times, set=fas]No  |
+| Local filesystem path to the tools-inventory JSON document. Used only if `toolsInventoryUrl` is not provided.                                                                                                                                               |                 |           |                          |                           |
+| `agentApiFlavor`                                                                                                                                                                                                                                            | `String`        | `classic` |                          | [icon: times, set=fas]No  |
+| Agent discovery flavor. Use `classic` for the `/agents` API, `new` for the `/assistants` API, or `both`.                                                                                                                                                    |                 |           |                          |                           |
+| `apiVersion`                                                                                                                                                                                                                                                | `String`        | `v1`      |                          | [icon: times, set=fas]No  |
+| API version string used when calling the Azure AI Foundry Agents API, for example `2025-01-01`.                                                                                                                                                             |                 |           |                          |                           |
+| `entraAgentIdLookupEnabled`                                                                                                                                                                                                                                 | `Boolean`       | `false`   |                          | [icon: times, set=fas]No  |
+| When enabled, queries Microsoft Graph beta API to resolve Entra agent identity service principals and enrich agents with their Entra object IDs. Requires `Application.Read.All` Graph API permission. Correlation is by agent `displayName` (best-effort). |                 |           |                          |                           |
+
+(1) Whether the property value is considered confidential, and is therefore encrypted in IDM.
+
+(2) A list of operations in this column indicates that the property is required for those operations.
+
+---
+
+---
 title: Box connector
 description: "Box connector reference for PingIDM: install, configure, and use the connector to manage Box users and groups using the Box API"
 component: openicf
 page_id: openicf:connector-reference:box
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/box.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   box-before-you-install: Before you start
   Box-install: Install the Box connector
@@ -5880,7 +7236,7 @@ The instructions in this guide assume you have a Box Administrator Account and y
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -6020,8 +7376,6 @@ If the command returns `"ok": true`, your connector was configured correctly and
 ### Box remote connector
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the Box connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the Box connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
 
 Refer to [Remote connectors](remote-connector.html) for configuring the Box remote connector.
 
@@ -6910,6 +8264,8 @@ description: Configure the Cerner connector to manage and synchronize healthcare
 component: openicf
 page_id: openicf:connector-reference:cerner
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/cerner.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   before_you_start: Before you start
   install_the_cerner_connector: Install the Cerner connector
@@ -6951,7 +8307,7 @@ Before you configure the connector, log in to your Cerner system account and not
 
 - [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
 
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
+You can download most connectors from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
 
 **Connector included in default deployment**
 
@@ -7030,8 +8386,6 @@ If the command returns `"ok": true`, your connector was configured correctly, an
 ### Cerner remote connector
 
 If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the Cerner connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the Cerner connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
 
 Refer to [Remote connectors](remote-connector.html) for configuring the Cerner remote connector.
 
@@ -7741,6 +9095,8 @@ description: How to configure a Remote Connector Server (RCS) with PingIDM in cl
 component: openicf
 page_id: openicf:connector-reference:configure-server
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/configure-server.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   rcs-properties: RCS configuration properties
   mask-clear-text-passwords-rcs: Mask clear text passwords in RCS
@@ -8702,6 +10058,8 @@ description: How to configure ICF connectors in PingIDM using the admin UI, REST
 component: openicf
 page_id: openicf:connector-reference:configure-connector
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/configure-connector.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   sample-provisioner-files: Sample provisioner files
   connector-wiz-adminui: Configure connectors with the admin UI
@@ -9704,6 +11062,8 @@ description: How to configure and use the ldapGroups virtual attribute in the LD
 component: openicf
 page_id: openicf:connector-reference:ldapgroups
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/ldapgroups.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   ldapgroups-membership: LDAP group membership
   example_memberof_in_ad: "Example: memberOf in AD"
@@ -9942,6 +11302,8 @@ description: Explains ICF connector connection pooling mechanisms (ICF, HTTP, JD
 component: openicf
 page_id: openicf:connector-reference:pooling
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/pooling.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   pooling-mechanisms: Pooling mechanisms
   icf-pooling: ICF pooling
@@ -10061,6 +11423,8 @@ description: Configure ICF connector logging for PingIDM and the Remote Connecto
 component: openicf
 page_id: openicf:connector-reference:icf-logs
 canonical_url: https://docs.pingidentity.com/openicf/connector-reference/icf-logs.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Logs", "Troubleshooting"]
 section_ids:
   logging_levels: Logging levels
@@ -10224,577 +11588,3 @@ To enable logging in the .NET RCS, edit the `ConnectorServer.exe.config` configu
 ```xml
 <add key="logging.proxy" value="true"/>
 ```
-
----
-
----
-title: Connector reference
-description: Installation and configuration reference for the connectors that are supported with PingIDM, PingOne Advanced Identity Cloud, and Remote Connector Server RCS. This reference includes installation and configuration instructions for each connector, and examples that demonstrate how to use the connectors in a deployment
-component: openicf
-page_id: openicf:connector-reference:preface
-canonical_url: https://docs.pingidentity.com/openicf/connector-reference/preface.html
-page_aliases: ["index.adoc"]
-section_ids:
-  saas-common: SaaS common connectors
-  scripted-groovy: Scripted Groovy connectors
----
-
-# Connector reference
-
-Connectors let you connect to external resources such as LDAP, Active Directory, flat files, and others. This guide describes all the connectors supported with Advanced Identity Cloud, PingIDM, and RCS, and how to configure them.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Any available connector works with IDM, either directly or using RCS. Advanced Identity Cloud can use any available connector through RCS.If you are looking for Advanced Identity Cloud applications, refer to:- [Application management](https://docs.pingidentity.com/pingoneaic/latest/app-management/applications.html)
-
-- [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
-
-All connectors are available for download from [Backstage](https://backstage.forgerock.com), but some connectors are included in the default deployment for Advanced Identity Cloud, IDM, and RCS. The following table identifies which connectors are included in the default deployments:
-
-**Connector included in default deployment**
-
-| Connector                                               | IDM                      | RCS                      |
-| ------------------------------------------------------- | ------------------------ | ------------------------ |
-| [Adobe Admin Console](adobe-admin-console.html)         | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Adobe Marketing Cloud](adobe.html)                     | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [Amazon Web Services (AWS)](aws-iam.html)               | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [AWS IAM Identity Center](aws-iam-identity-center.html) | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [AS400](as400.html)                                     | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [Box](box.html)                                         | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Cerner](cerner.html)                                   | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [CSV file](csv.html)                                    | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Database table](dbtable.html)                          | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [DocuSign](docusign.html)                               | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Dropbox](dropbox.html)                                 | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Duo](duo.html)                                         | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Epic](epic.html)                                       | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [Google Apps](google.html)                              | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [Google Cloud Platform (GCP)](gcp.html)                 | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Groovy connector toolkit](groovy.html)                 | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [HubSpot](hubspot.html)                                 | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [IBM RACF](racf.html)                                   | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [Kerberos](kerberos.html)                               | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [LDAP](ldap.html)                                       | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Marketo](marketo.html)                                 | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [Microsoft Graph API](ms-graph-api.html)                | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [MongoDB](mongodb.html)                                 | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Multiple CSV](multicsv.html)                           | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Multiple CSV Cloud](multicsvcloud.html)                | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Oracle EBS](ebs.html)                                  | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [PeopleSoft](peoplesoft.html)                           | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [PingOne](pingone.html)                                 | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [PowerShell connector toolkit](powershell.html)         | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [SaaS REST](rest.html)                                  | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Salesforce](salesforce.html)                           | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [SAP](sap.html)                                         | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [SAP HANA Database](saphanadb.html)                     | [icon: times, set=fa]No  | [icon: check, set=fa]Yes |
-| [SAP S/4HANA](sap-hana.html)                            | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [SAP SuccessFactors](successfactors.html)               | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [SCIM](scim.html)                                       | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Scripted REST](scripted-rest.html)                     | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Scripted SQL](scripted-sql.html)                       | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [ServiceNow](servicenow.html)                           | [icon: check, set=fa]Yes | [icon: times, set=fa]No  |
-| [Snowflake](snowflake.html)                             | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [SSH](ssh.html)                                         | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-| [Webex](webex.html)                                     | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-| [Workday](workday.html)                                 | [icon: times, set=fa]No  | [icon: times, set=fa]No  |
-
-Configurations in this guide are simplified to show essential aspects. Not all resources support all [IDM operations](options.html); however, the resources shown here support most of the CRUD operations, reconciliation, and liveSync.
-
-*Resources* are external systems, databases, directory servers, and other sources of identity data, that are managed and audited by IDM. To connect to resources, IDM loads the ForgeRock Open Identity Connector Framework (ICF). ICF avoids the need to install agents to access resources, instead using the resources' native protocols. For example, ICF connects to database resources using the database's Java connection libraries or JDBC driver, to directory servers over LDAP, and to UNIX systems over `ssh`.
-
-## SaaS common connectors
-
-Software as a Service (SaaS) common connectors enable connection to cloud-based apps, data, and services. SaaS common connectors share certain code and configuration templates. When a procedure, feature, or release notes specify something as SaaS common, it applies to all SaaS common connectors.
-
-SaaS common connectors
-
-* [Adobe Admin Console connector](adobe-admin-console.html)
-
-* [Box connector](box.html)
-
-* [DocuSign connector](docusign.html)
-
-* [Dropbox connector](dropbox.html)
-
-* [PingOne connector](pingone.html)
-
-* [SaaS REST Connector](rest.html)
-
-* [Snowflake connector](snowflake.html)
-
-* [Webex Connector](webex.html)
-
-|   |                                                                                                                                                                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | SaaS common connectors version 1.5.20.29 and later support OAuth JWT Bearer flow with:* Connector framework 1.5.20.24 or later
-
-* RCS 1.5.20.24 or laterLearn more in [Changed functionality](../connector-release-notes/changed-functionality.html#_1-5-20-29-min-versions-map-config). |
-
-## Scripted Groovy connectors
-
-Scripted Groovy connectors are based on the Scripted Groovy connector toolkit and share certain code and configuration templates. When a procedure, feature, or release note specifies something as Scripted Groovy, it applies to all Scripted Groovy connectors.
-
-Scripted Groovy connectors
-
-* [Groovy connector toolkit](groovy.html)
-
-* [Marketo connector](marketo.html)
-
-* [MongoDB connector](mongodb.html)
-
-* [SAP connector](sap.html)
-
-* [Scripted REST connector](scripted-rest.html)
-
-* [Scripted SQL connector](scripted-sql.html)
-
-* [SSH connector](ssh.html)
-
----
-
----
-title: Contacts (MS Graph API)
-description: MS Graph API connector support for Microsoft Outlook contacts on user objects, including write-only attributes and add, read, update, and remove operations
-component: openicf
-page_id: openicf:connector-reference:msgraph-contacts
-canonical_url: https://docs.pingidentity.com/openicf/connector-reference/msgraph-contacts.html
-section_ids:
-  msgraph-add-contacts: Add contacts to a user
-  msgraph-read-user-contacts: Return a user entry with contacts
-  msgraph-update-user-contacts: Update a user's contacts
-  msgraph-remove-contacts: Remove a user's contacts
----
-
-# Contacts (MS Graph API)
-
-A contact is a resource type in Microsoft Outlook used to organize and store information about an associated object. Contacts use the `/user` endpoint. For more information, refer to the [Microsoft Graph documentation](https://learn.microsoft.com/en-us/graph/api/resources/contact?view=graph-rest-1.0).
-
-The MS Graph API connector offers limited support for contacts and includes the following write-only attributes:
-
-```json
-{
-  "type": "array",
-  "items": {
-    "type": "object",
-    "nativeType": "object"
-  },
-  "nativeName": "__addContacts__",
-  "nativeType": "object",
-  "flags": [
-    "NOT_READABLE",
-    "NOT_RETURNED_BY_DEFAULT"
-  ]
-},
-{
-  "type": "array",
-  "items": {
-    "type": "string",
-    "nativeType": "string"
-  },
-  "nativeName": "__removeContacts__",
-  "nativeType": "string",
-  "flags": [
-    "NOT_READABLE",
-    "NOT_RETURNED_BY_DEFAULT"
-  ]
-},
-{
-  "type": "array",
-  "items": {
-    "type": "object",
-    "nativeType": "object"
-  },
-  "nativeName": "__updateContacts__",
-  "nativeType": "object",
-  "flags": [
-    "NOT_READABLE",
-    "NOT_RETURNED_BY_DEFAULT"
-  ]
-}
-```
-
-## Add contacts to a user
-
-|   |                                            |
-| - | ------------------------------------------ |
-|   | You must add contacts to an existing user. |
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---header "If-Match: *" \
---request PUT \
---data '{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "__addContacts__": {
-    "givenName": "Test-Contact",
-    "businessAddress": {
-      "city": "exampleCity",
-      "state": "exampleState",
-      "postalCode": "99999",
-      "street": "example st",
-      "countryOrRegion": "United States"
-    }
-  }
-}' \
-"http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7"
-```
-
-## Return a user entry with contacts
-
-Request
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---request GET \
-'http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7?_fields="_id,contacts"'
-```
-
-Response
-
-```json
-{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "contacts": [
-    {
-      "id": "{CONTACT-ID}",
-      "givenName": "Test-Contact",
-      "businessAddress": {
-        "city": "exampleCity",
-        "state": "exampleState",
-        "postalCode": "99999",
-        "street": "example st",
-        "countryOrRegion": "United States"
-      }
-    }
-  ]
-}
-```
-
-## Update a user's contacts
-
-Request
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---header "If-Match: *" \
---request PUT \
---data '{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "__updateContacts__": {
-    "id": "{CONTACT-ID}",
-    "givenName": "Test-Contact-Updated",
-    "businessAddress": {
-      "city": "exampleCity",
-      "state": "exampleState",
-      "postalCode": "99999",
-      "street": "example st",
-      "countryOrRegion": "United States"
-    }
-  }
-}' \
-"http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7"
-```
-
-After updating the user's contacts, a subsequent read on the user with the contacts field returns the updated contacts:
-
-Request
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---request GET \
-'http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7?_fields="_id,contacts"'
-```
-
-Response
-
-```json
-{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "contacts": [
-    {
-      "id": "{CONTACT-ID}",
-      "givenName": "Test-Contact-Updated",
-      "businessAddress": {
-        "city": "exampleCity",
-        "state": "exampleState",
-        "postalCode": "99999",
-        "street": "example st",
-        "countryOrRegion": "United States"
-      }
-    }
-  ]
-}
-```
-
-## Remove a user's contacts
-
-Request
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---header "If-Match: *" \
---request PUT \
---data '{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "__removeContacts__": [
-    "{CONTACT-ID}"
-  ]
-}' \
-"http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7"
-```
-
-After removing the user's contacts, a subsequent read on the user with the contacts field returns an empty contacts array:
-
-Request
-
-```
-curl \
---header "X-OpenIDM-Username: openidm-admin" \
---header "X-OpenIDM-Password: openidm-admin" \
---header "Accept-API-Version: resource=1.0" \
---header "Content-Type: application/json" \
---request GET \
-'http://localhost:8080/openidm/system/azuread/user/671fa173-ad81-41c3-89bf-af939426eee7?_fields="_id,contacts"'
-```
-
-Response
-
-```json
-{
-  "_id": "671fa173-ad81-41c3-89bf-af939426eee7",
-  "contacts": []
-}
-```
-
----
-
----
-title: CSV file connector
-description: Reference for the CSV file connector, which imports and synchronizes user records from CSV files in PingIDM
-component: openicf
-page_id: openicf:connector-reference:csv
-canonical_url: https://docs.pingidentity.com/openicf/connector-reference/csv.html
-section_ids:
-  install_the_csv_file_connector: Install the CSV file connector
-  csv-connector-config: Configure the CSV file connector
-  csv_file_remote_connector: CSV file remote connector
-  config-connection-pooling-csv: Configure connection pooling
-  implemented-interfaces-org-forgerock-openicf-csvfile-CSVFileConnector-1.5.20.31: OpenICF Interfaces Implemented by the CSV File Connector
-  config-properties-org-forgerock-openicf-csvfile-CSVFileConnector-1.5.20.31: CSV File Connector Configuration
-  configuration-properties-org-forgerock-openicf-csvfile-CSVFileConnector-1.5.20.31: Configuration properties
----
-
-# CSV file connector
-
-The CSV file connector is useful when importing users, either for initial provisioning or for ongoing updates. When used continuously in production, a CSV file serves as a change log, often containing only user records that have changed.
-
-|   |                                                                                                                                                                                                                                                                                                                  |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This connector doesn't verify CSV data before attempting a synchronization. You must ensure that your CSV file is complete and properly formed before using the connector.Do *not* remove or replace CSV files that are the source or target of an active scheduled reconciliation or synchronization operation. |
-
-## Install the CSV file connector
-
-|   |                                                                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To check for an Advanced Identity Cloud application for this connector, refer to:- [Application management](https://docs.pingidentity.com/pingoneaic/latest/app-management/applications.html)
-
-- [App catalog](https://docs.pingidentity.com/pingoneaic/latest/app-management/app-catalog.html) |
-
-You can download any connector from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors), but some are included in the default deployment for Advanced Identity Cloud, IDM, or RCS. When using an included connector, you can skip installing it and move directly to configuration.
-
-**Connector included in default deployment**
-
-| Connector            | IDM                      | RCS                      |
-| -------------------- | ------------------------ | ------------------------ |
-| [CSV file](csv.html) | [icon: check, set=fa]Yes | [icon: check, set=fa]Yes |
-
-Download the connector .jar file from [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
-
-* If you're running the connector locally, place it in the `/path/to/openidm/connectors` directory, for example:
-
-  ```
-  mv ~/Downloads/csvfile-connector-1.5.20.31.jar /path/to/openidm/connectors/
-  ```
-
-* If you're using a remote connector server (RCS), place it in the `/path/to/openicf/connectors` directory on the RCS.
-
-## Configure the CSV file connector
-
-Create a connector configuration using the IDM admin UI:
-
-1. From the navigation bar, click Configure > Connectors.
-
-2. On the Connectors page, click New Connector.
-
-3. On the New Connector page, type a Connector Name.
-
-4. From the Connector Type list, select CSV file Connector - 1.5.20.31.
-
-5. Complete the Base Connector Details and any applicable Additional Options.
-
-   |   |                                                                                                                       |
-   | - | --------------------------------------------------------------------------------------------------------------------- |
-   |   | For a list of all configuration properties, refer to [CSV file Connector Configuration](#csvfile-config-prop-ezLink). |
-
-6. Click Save.
-
-When your connector is configured correctly, the connector displays as Active in the admin UI.
-
-Refer to [this procedure](configure-connector.html#connector-wiz-REST) to create a connector configuration over REST.
-
-Alternatively, use the sample CSV file connector configuration in `openidm/samples/example-configurations/provisioners/provisioner.openicf-csvfile.json` as a basis for your configuration.
-
-The following example shows an excerpt of the connector configuration. The `connectorHostRef` property is optional and must be provided only if the connector runs remotely.
-
-```json
-{
-    "connectorRef": {
-        "connectorHostRef": "#LOCAL",
-        "connectorName": "org.forgerock.openicf.csvfile.CSVFileConnector",
-        "bundleName": "org.forgerock.openicf.connectors.csvfile-connector",
-        "bundleVersion": "[1.5.0.0,1.6.0.0)"
-    }
-}
-```
-
-The only *required* configuration property is the path to the `csvFile`:
-
-```json
-"configurationProperties" : {
-    "csvFile" : "&{idm.instance.dir}/data/csvConnectorData.csv"
-}
-```
-
-For a list of all configuration properties for this connector, refer to [Configuration Properties](#configuration-properties-org-forgerock-openicf-csvfile-CSVFileConnector-1.5.20.31).
-
-|   |                                                                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you change the structure of the CSV file resource, by adding or removing columns, you *must* update the corresponding object `properties` in the connector configuration accordingly. |
-
-### CSV file remote connector
-
-If you want to run this connector outside of PingOne Advanced Identity Cloud or IDM, you can configure the CSV file connector as a remote connector. Java Connectors installed remotely on a Java Connector Server function identically to those bundled locally within PingOne Advanced Identity Cloud or installed locally on IDM.
-
-You can download the CSV file connector [from here](https://backstage.forgerock.com/downloads/browse/idm/all/productId:idm-connectors).
-
-Refer to [Remote connectors](remote-connector.html) for configuring the CSV file remote connector.
-
-### Configure connection pooling
-
-The CSV file connector uses a [non-poolable mechanism](pooling.html#non-poolable-connectors) to manage connections. Learn more about the different pooling mechanisms in [Connectors by pooling mechanism](pooling.html#pooling-table).
-
-## OpenICF Interfaces Implemented by the CSV File Connector
-
-The CSV File Connector implements the following OpenICF interfaces. For additional details, see [ICF interfaces](interfaces.html):
-
-* Authenticate
-
-  Provides simple authentication with two parameters, presumed to be a user name and password.
-
-* Batch
-
-  Execute a series of operations in a single request.
-
-* Create
-
-  Creates an object and its `uid`.
-
-* Delete
-
-  Deletes an object, referenced by its `uid`.
-
-* Resolve Username
-
-  Resolves an object by its username and returns the `uid` of the object.
-
-* Schema
-
-  Describes the object types, operations, and options that the connector supports.
-
-* Script on Connector
-
-  Enables an application to run a script in the context of the connector.
-
-  Any script that runs on the connector has the following characteristics:
-
-  * The script runs in the same execution environment as the connector and has access to all the classes to which the connector has access.
-
-  * The script has access to a `connector` variable that is equivalent to an initialized instance of the connector. At a minimum, the script can access the connector configuration.
-
-  * The script has access to any script arguments passed in by the application.
-
-* Search
-
-  Searches the target resource for all objects that match the specified object class and filter.
-
-* Sync
-
-  Polls the target resource for synchronization events, that is, native changes to objects on the target resource.
-
-* Test
-
-  Tests the connector configuration.
-
-  Testing a configuration checks all elements of the environment that are referred to by the configuration are available. For example, the connector might make a physical connection to a host that is specified in the configuration to verify that it exists and that the credentials that are specified in the configuration are valid.
-
-  This operation might need to connect to a resource, and, as such, might take some time. Do not invoke this operation too often, such as before every provisioning operation. The test operation is not intended to check that the connector is alive (that is, that its physical connection to the resource has not timed out).
-
-  You can invoke the test operation before a connector configuration has been validated.
-
-* Update
-
-  Updates (modifies or replaces) objects on a target resource.
-
-[]()
-
-## CSV File Connector Configuration
-
-The CSV File Connector has the following configurable properties:
-
-### Configuration properties
-
-| Property                                                                                                                 | Type     | Default    | Encrypted(1) | Required(2)               |
-| ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------- | ------------ | ------------------------- |
-| `headerPassword`                                                                                                         | `String` | `password` |              | [icon: times, set=fas]No  |
-| The CSV header that maps to the password for each row. Use this property when password-based authentication is required. |          |            |              |                           |
-| `spaceReplacementString`                                                                                                 | `String` | `_`        |              | [icon: times, set=fas]No  |
-| The character(s) used to replace spaces within column names.                                                             |          |            |              |                           |
-| `csvFile`                                                                                                                | `File`   | `null`     |              | [icon: check, set=fas]Yes |
-| The full path to the CSV file that is the data source for this connector.                                                |          |            |              |                           |
-| `newlineString`                                                                                                          | `String` | `\n`       |              | [icon: times, set=fas]No  |
-| The character string in the CSV file that is used to terminate each line.                                                |          |            |              |                           |
-| `headerUid`                                                                                                              | `String` | `uid`      |              | [icon: times, set=fas]No  |
-| The CSV header that maps to the uid (or name) for each row.                                                              |          |            |              |                           |
-| `quoteCharacter`                                                                                                         | `String` | `"`        |              | [icon: times, set=fas]No  |
-| The character in the CSV file that is used to encapsulate strings.                                                       |          |            |              |                           |
-| `escapeCharacter`                                                                                                        | `String` | `\`        |              | [icon: times, set=fas]No  |
-| The character in the CSV file that is used to escape characters.                                                         |          |            |              |                           |
-| `fieldDelimiter`                                                                                                         | `String` | `,`        |              | [icon: times, set=fas]No  |
-| The character in the CSV file that is used to separate field values.                                                     |          |            |              |                           |
-| `syncFileRetentionCount`                                                                                                 | `int`    | `3`        |              | [icon: times, set=fas]No  |
-| The number of historical copies of the CSV file to retain when performing synchronization operations.                    |          |            |              |                           |
-
-(1) Whether the property value is considered confidential, and is therefore encrypted in IDM.
-
-(2) A list of operations in this column indicates that the property is required for those operations.

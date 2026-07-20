@@ -2,29 +2,29 @@
 
 - Product: Ping Platform
 - Version: 8
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/platform/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
-- Guides fully captured: 1
-- Guides partially captured: 2
+- Guides fully captured: 2
+- Guides partially captured: 1
 - Guides without snapshots: 0
 - Total pages indexed: 28
-- Total snapshot pages captured: 3
+- Total snapshot pages captured: 27
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| sample-setup.md | page | https://docs.pingidentity.com/platform/8/sample-setup/overview.md | 21 | 1 | partial |
-| platform-guide.md | page | https://docs.pingidentity.com/platform/8/platform-guide/edge-security.md | 6 | 1 | partial |
-| release-notes.md | page | https://docs.pingidentity.com/platform/8/release-notes/preface.md | 1 | 1 | full |
+| sample-setup.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 21 | 20 | partial |
+| platform-guide.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 6 | 6 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | cfd211b1d8aea0770a5431c4b92773030239742731e99beffd036dae20b2bdff |
-| snapshots/sample-setup.md | 21938e2040f63b130a145027f23510dbdc2d60abca97550489fa3d0ed324c1e7 |
-| snapshots/platform-guide.md | 917a5b4cba130143eca961d0a7bd7c1fa7fa20a06824d9d44c5e2000d74f6e1c |
-| snapshots/release-notes.md | 18521a8c2814b10810fd2ee67d60c4a4a9734cd81b78d3df23ca13aae3b64e4c |
+| snapshots/sample-setup.md | 37491f42bbcca93abeae2c22aaf81d507300c18acc592608d2adf9c005e91795 |
+| snapshots/platform-guide.md | 0d592422d0a608c42999d1b903ea1072c1354d8b60348e7dca784d972116e56f |
+| snapshots/release-notes.md | 2c2a44fc0274f69a9e3b3241af7e0b6f71bb3385602c18117a6e08aa63f22609 |

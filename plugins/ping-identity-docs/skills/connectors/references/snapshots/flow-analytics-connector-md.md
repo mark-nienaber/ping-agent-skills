@@ -1,12 +1,12 @@
 ---
 title: Flow Analytics Connector
-description: The Flow Analytics connector lets you log details about flow outcomes that you can review in flow analytics.
+description: Configure the PingOne DaVinci Flow Analytics connector to log flow outcomes, track analytics by outcome type, and set error logging policies
 component: connectors
 page_id: connectors::flow_analytics_connector
 canonical_url: https://docs.pingidentity.com/connectors/flow_analytics_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 30, 2026
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -34,17 +34,17 @@ You can use the Flow Analytics connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 
@@ -66,13 +66,7 @@ The following character limits apply to flow outcome fields. Content that exceed
 
 ### Using global variables in flow analytics
 
-The following global variables are available for use in Flow Analytics connector fields:
-
-| Variable                      | Description                           |
-| ----------------------------- | ------------------------------------- |
-| `{{global.flowName}}`         | The name of the current flow          |
-| `{{global.flowVersionId}}`    | The version ID of the current flow    |
-| `{{global.flowVersionAlias}}` | The version alias of the current flow |
+You can use [global variables](https://docs.pingidentity.com/davinci/flows/davinci_global_variables.html#global-variable-reference) in the Flow Analytics connector fields.
 
 You can map these variables into outcome fields like in the following example:
 

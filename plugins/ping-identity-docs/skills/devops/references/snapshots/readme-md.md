@@ -1,6 +1,6 @@
 ---
 title: Welcome
-description: This documentation exists to enable DevOps professionals, administrators, and developers to deploy Ping Identity software using container technologies. Our goal is to provide tools, frameworks, blueprints, and reference architectures in support of running our products in containerized environments.
+description: Introduce the Ping Identity DevOps portal, covering Docker images, deployment examples, and configuration management tools
 component: devops
 page_id: devops::README
 canonical_url: https://developer.pingidentity.com/devops/README.html

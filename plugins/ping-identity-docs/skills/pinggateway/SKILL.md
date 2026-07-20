@@ -27,18 +27,18 @@ Landing page for PingGateway documentation: get started, installation, upgrade, 
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Reference: pinggateway, configure, reference | reference | https://docs.pingidentity.com/pinggateway/2026/reference/*.md | live-only |
-| Gateway Guide: pingam, pinggateway, configure | gateway-guide | https://docs.pingidentity.com/pinggateway/2026/gateway-guide/*.md | live-only |
-| Release Notes: pinggateway, release, version | release-notes | https://docs.pingidentity.com/pinggateway/release-notes/*.md | live-only |
-| Aic: identity, advanced, cloud | aic | https://docs.pingidentity.com/pinggateway/2026/aic/*.md | live-only |
-| Studio Guide: studio, routes, pinggateway | studio-guide | https://docs.pingidentity.com/pinggateway/2026/studio-guide/*.md | live-only |
-| Fapi: fapi, pinggateway, identity | fapi | https://docs.pingidentity.com/pinggateway/2026/fapi/*.md | live-only |
-| Installation Guide: pinggateway, configure, jwt | installation-guide | https://docs.pingidentity.com/pinggateway/2026/installation-guide/*.md | live-only |
-| Maintenance Guide: pinggateway, configure, deployment | maintenance-guide | https://docs.pingidentity.com/pinggateway/2026/maintenance-guide/*.md | live-only |
-| About: pinggateway, proxy, descriptors | about | https://docs.pingidentity.com/pinggateway/2026/about/*.md | live-only |
-| Configure: pinggateway, routes, configure | configure | https://docs.pingidentity.com/pinggateway/2026/configure/*.md | live-only |
-| Getting Started: pinggateway, configure, application | getting-started | https://docs.pingidentity.com/pinggateway/2026/getting-started/*.md | live-only |
-| Security Guide: pinggateway, access, security | security-guide | https://docs.pingidentity.com/pinggateway/2026/security-guide/*.md | live-only |
+| Reference: pinggateway, configure, reference | reference | https://docs.pingidentity.com/pinggateway/2026/reference/*.md | references/snapshots/reference.md |
+| Gateway Guide: pingam, pinggateway, configure | gateway-guide | https://docs.pingidentity.com/pinggateway/2026/gateway-guide/*.md | references/snapshots/gateway-guide.md |
+| Release Notes: pinggateway, release, version | release-notes | https://docs.pingidentity.com/pinggateway/release-notes/*.md | references/snapshots/release-notes.md |
+| Aic: identity, advanced, cloud | aic | https://docs.pingidentity.com/pinggateway/2026/aic/*.md | references/snapshots/aic.md |
+| Studio Guide: studio, routes, pinggateway | studio-guide | https://docs.pingidentity.com/pinggateway/2026/studio-guide/*.md | references/snapshots/studio-guide.md |
+| Fapi: fapi, pinggateway, identity | fapi | https://docs.pingidentity.com/pinggateway/2026/fapi/*.md | references/snapshots/fapi.md |
+| Installation Guide: pinggateway, configure, jwt | installation-guide | https://docs.pingidentity.com/pinggateway/2026/installation-guide/*.md | references/snapshots/installation-guide.md |
+| Maintenance Guide: pinggateway, configure, deployment | maintenance-guide | https://docs.pingidentity.com/pinggateway/2026/maintenance-guide/*.md | references/snapshots/maintenance-guide.md |
+| About: pinggateway, proxy, descriptors | about | https://docs.pingidentity.com/pinggateway/2026/about/*.md | references/snapshots/about.md |
+| Configure: pinggateway, routes, configure | configure | https://docs.pingidentity.com/pinggateway/2026/configure/*.md | references/snapshots/configure.md |
+| Getting Started: pinggateway, configure, application | getting-started | https://docs.pingidentity.com/pinggateway/2026/getting-started/*.md | references/snapshots/getting-started.md |
+| Security Guide: pinggateway, access, security | security-guide | https://docs.pingidentity.com/pinggateway/2026/security-guide/*.md | references/snapshots/security-guide.md |
 
 ## Composition
 

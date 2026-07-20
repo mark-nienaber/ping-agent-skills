@@ -3,8 +3,8 @@ title: UI Studio
 description: The UI Studio lets you create user interface templates that match your company style and branding, which you can include in flows using an HTTP connector.
 component: davinci
 page_id: davinci:ui_studio:davinci_ui_studio
-canonical_url: http://docs.pingidentity.com/davinci/ui_studio/davinci_ui_studio.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/ui_studio/davinci_ui_studio.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 22, 2023
 section_ids:

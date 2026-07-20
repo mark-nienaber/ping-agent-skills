@@ -1,12 +1,12 @@
 ---
 title: Marketo Connector
-description: The Marketo connector lets you add, search, and update leads into Marketo in your PingOne DaVinci flow.
+description: Configure the Marketo connector in PingOne DaVinci to add, search, and update leads and manage lists in Marketo
 component: connectors
 page_id: connectors::marketo_connector
 canonical_url: https://docs.pingidentity.com/connectors/marketo_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -53,13 +53,13 @@ Learn more in the following:
 
   * [Marketo Setup Steps](https://experienceleague.adobe.com/docs/marketo/using/getting-started-with-marketo/setup/setup-steps.html?lang=en)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -75,7 +75,7 @@ Follow the instructions in [Marketo Setup Checklist](https://experienceleague.ad
 
 ### Configuring the Marketo connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

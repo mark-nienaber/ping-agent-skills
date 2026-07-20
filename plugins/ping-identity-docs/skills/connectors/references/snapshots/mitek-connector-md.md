@@ -1,12 +1,12 @@
 ---
 title: Mitek Connector
-description: The Mitek connector lets you create Mitek identity verification journeys in your PingOne DaVinci flow and deliver them by email or SMS.
+description: Configure the Mitek connector in PingOne DaVinci to create identity verification journeys delivered by email or SMS and handle webhook callbacks
 component: connectors
 page_id: connectors::mitek_connector
 canonical_url: https://docs.pingidentity.com/connectors/mitek_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 22, 2026
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -32,13 +32,13 @@ The connector redirects users to Mitek for identity verification and receives ca
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -50,21 +50,21 @@ To use the connector, you'll need:
 
 * Your Mitek Host URL and Request API Version
 
-* Add the DaVinci Redirect Webhook URI to your Mitek tenant configuration.
+* Add the PingOne DaVinci Redirect Webhook URI to your Mitek tenant configuration.
 
 ### Configuring the Mitek connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
-| Setting              | Description                                                                                                                                                         |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Redirect Webhook URI | The DaVinci webhook URL for this connector. This value is provided automatically as a read-only field and should be copied into your Mitek configuration as needed. |
-| Client ID            | Your Mitek Client ID.                                                                                                                                               |
-| Client Secret        | Your Mitek Client Secret.                                                                                                                                           |
-| Mitek Host URL       | The host URL of the Mitek API (do not include https\://).                                                                                                           |
-| Request API Version  | The Mitek request API version used for requests.                                                                                                                    |
+| Setting              | Description                                                                                                                                                                 |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Redirect Webhook URI | The PingOne DaVinci webhook URL for this connector. This value is provided automatically as a read-only field and should be copied into your Mitek configuration as needed. |
+| Client ID            | Your Mitek Client ID.                                                                                                                                                       |
+| Client Secret        | Your Mitek Client Secret.                                                                                                                                                   |
+| Mitek Host URL       | The host URL of the Mitek API (do not include https\://).                                                                                                                   |
+| Request API Version  | The Mitek request API version used for requests.                                                                                                                            |
 
 ## Using the connector in a flow
 

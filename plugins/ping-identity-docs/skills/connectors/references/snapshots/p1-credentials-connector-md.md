@@ -1,12 +1,12 @@
 ---
 title: PingOne Credentials Connector
-description: Use the PingOne Credentials connector to issue, verify, and manage digital verifiable credentials with PingOne Credentials.
+description: Configure the PingOne Credentials connector in PingOne DaVinci to issue, verify, and manage digital verifiable credentials using PingOne
 component: connectors
 page_id: connectors::p1_credentials_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_credentials_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -51,7 +51,7 @@ This connector also helps set up flows that the credential verification service 
 
 ### Resources
 
-Learn more in the following sections of the PingOne Credentials and DaVinci documentation:
+Learn more in the following sections of the PingOne Credentials and PingOne DaVinci documentation:
 
 * PingOne Credentials:
 
@@ -59,7 +59,7 @@ Learn more in the following sections of the PingOne Credentials and DaVinci docu
 
   * [Getting started with PingOne Credentials](https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_getting_started.html)
 
-* DaVinci:
+* PingOne DaVinci:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
@@ -135,7 +135,7 @@ To add a worker app:
 
 #### Getting your environment details
 
-Get your **Environment ID** and **Region** before setting up the PingOne Credentials connector in DaVinci:
+Get your **Environment ID** and **Region** before setting up the PingOne Credentials connector in PingOne DaVinci:
 
 1. In your PingOne environment, go to **Settings > Environment Properties**.
 
@@ -145,7 +145,7 @@ Get your **Environment ID** and **Region** before setting up the PingOne Credent
 
 #### Getting your application credentials
 
-Get the **Client ID** and **Client secret** from the PingOne console before setting up the PingOne Credentials connector in DaVinci:
+Get the **Client ID** and **Client secret** from the PingOne console before setting up the PingOne Credentials connector in PingOne DaVinci:
 
 1. In your PingOne environment, go to **Applications > Applications**. Learn how to add an application in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html).
 
@@ -157,7 +157,7 @@ Get the **Client ID** and **Client secret** from the PingOne console before sett
 
 ### Setting up the connector
 
-In DaVinci, go to **Connections** and add a **PingOne Credentials** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, go to **Connections** and add a **PingOne Credentials** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 

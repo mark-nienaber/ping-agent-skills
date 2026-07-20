@@ -1,12 +1,12 @@
 ---
 title: Yoti Connector
-description: The Yoti connector lets you provide customers with a safe way to prove who they are through Yoti's identity verification, age estimate, and age verification services in your PingOne DaVinci flow.
+description: Configure the Yoti connector in PingOne DaVinci to add identity verification, age estimation, and age verification to your flows
 component: connectors
 page_id: connectors::yoti_connector
 canonical_url: https://docs.pingidentity.com/connectors/yoti_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -53,13 +53,13 @@ Learn more in the following:
 
   * [Age Verification Documentation](https://developers.yoti.com/age-verification/overview)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -75,7 +75,7 @@ Follow the instructions in [Yoti Quick Start](https://developers.yoti.com/age-ve
 
 ### Configuring the Yoti connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

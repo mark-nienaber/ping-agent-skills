@@ -38,7 +38,7 @@ All the pre-runtime architectural and setup tasks necessary to prepare the PingF
 | Performance Tuning Guide: tuning, jvm, memoryoptions | performance_tuning_guide | https://docs.pingidentity.com/pingfederate/13.1/performance_tuning_guide/*.md | references/snapshots/performance-tuning-guide.md |
 | Installing And Uninstalling Pingfederate: pingfederate, installing, windows | installing_and_uninstalling_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/installing_and_uninstalling_pingfederate/*.md | references/snapshots/installing-and-uninstalling-pingfederate.md |
 | Pingfederate Monitoring Guide: connecting, monitoring, jmx | pingfederate_monitoring_guide | https://docs.pingidentity.com/pingfederate/13.1/pingfederate_monitoring_guide/*.md | references/snapshots/pingfederate-monitoring-guide.md |
-| Root: pingfederate | root | https://docs.pingidentity.com/pingfederate/13.1/*.md | live-only |
+| Root: pingfederate | root | https://docs.pingidentity.com/pingfederate/13.1/*.md | references/snapshots/root.md |
 
 ## Composition
 

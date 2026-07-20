@@ -33,7 +33,7 @@ PingIntelligence documentation is indexed in the bundled llms.txt and live Ping 
 | Managing Pingintelligence For Apis: discovery, activity, client | managing_pingintelligence_for_apis | https://docs.pingidentity.com/pingintelligence/5.2/managing_pingintelligence_for_apis/*.md | references/snapshots/managing-pingintelligence-for-apis.md |
 | Release Notes: pingintelligence, august, december | release_notes | https://docs.pingidentity.com/pingintelligence/5.2/release_notes/*.md | references/snapshots/release-notes.md |
 | Root: pingintelligence, untitled, introduction | root | https://docs.pingidentity.com/pingintelligence/5.2/*.md | references/snapshots/root.md |
-| Getting Started With Pingintelligence: discovery, ase, configuring | getting_started_with_pingintelligence | https://docs.pingidentity.com/pingintelligence/5.2/getting_started_with_pingintelligence/*.md | live-only |
+| Getting Started With Pingintelligence: discovery, ase, configuring | getting_started_with_pingintelligence | https://docs.pingidentity.com/pingintelligence/5.2/getting_started_with_pingintelligence/*.md | references/snapshots/getting-started-with-pingintelligence.md |
 
 ## Composition
 

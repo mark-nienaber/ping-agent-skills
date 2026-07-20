@@ -1,12 +1,12 @@
 ---
 title: Accertify Connector
-description: The Accertify connector lets you send identity lifecycle events to the Accertify fraud detection platform from your PingOne DaVinci flow.
+description: Configure the Accertify connector in PingOne DaVinci to send identity events to the Accertify fraud detection platform and receive risk scores
 component: connectors
 page_id: connectors::accertify_connector
 canonical_url: https://docs.pingidentity.com/connectors/accertify_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 15, 2026
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -37,13 +37,13 @@ The connector sends events to the Accertify API at key moments in the user journ
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -63,7 +63,7 @@ To use the connector, you'll need:
 
 ### Configuring the Accertify connector
 
-[Add the connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in DaVinci, then configure it as follows.
+[Add the connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in PingOne DaVinci, then configure it as follows.
 
 #### Connector configuration
 

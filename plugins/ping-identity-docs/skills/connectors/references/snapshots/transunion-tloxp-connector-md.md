@@ -1,12 +1,12 @@
 ---
 title: TransUnion TLOxp Connector
-description: The TransUnion TLOxp connector lets you verify a user's identity information in your PingOne DaVinci flow by checking TransUnion's trusted data sources.
+description: Configure the TransUnion TLOxp connector in PingOne DaVinci to verify identity by matching personal information against TransUnion data
 component: connectors
 page_id: connectors::transunion_tloxp_connector
 canonical_url: https://docs.pingidentity.com/connectors/transunion_tloxp_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -49,13 +49,13 @@ After you have collected a user's personally identifying information, such as th
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -63,7 +63,7 @@ To use the connector, you'll need TransUnion TLO API credentials. For help getti
 
 ### Setting up TransUnion TLOxp
 
-You must contact TransUnion support to get DaVinci and PingOne IP addresses added to the allow list for your TransUnion tenant.
+You must contact TransUnion support to get PingOne DaVinci and PingOne IP addresses added to the allow list for your TransUnion tenant.
 
 Find lists of IP addresses in the following:
 
@@ -73,7 +73,7 @@ Find lists of IP addresses in the following:
 
 ### Configuration and TransUnion TLOxp connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -141,7 +141,7 @@ If you want to follow them exactly as described, use the TransUnion demo API inf
 
 This flow collects user information with an HTML form, uses the connector to send it to TransUnion, then shows the results on an HTML page.
 
-1. Download the [TransUnion TLOxp - VerifyPlus identity lookup](https://marketplace.pingone.com/item/transunion-tloxp-verifyplus-identity-lookup) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [TransUnion TLOxp - VerifyPlus identity lookup](https://marketplace.pingone.com/item/transunion-tloxp-verifyplus-identity-lookup) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the verification form:
 
@@ -197,7 +197,7 @@ This flow collects user information with an HTML form, uses the connector to sen
 
 This flow takes the result of a VerifyPlus lookup and requests additional information about the person.
 
-1. Download the [TransUnion TLOxp - Additional personal information](https://marketplace.pingone.com/item/transunion-tloxp-additional-personal-information) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [TransUnion TLOxp - Additional personal information](https://marketplace.pingone.com/item/transunion-tloxp-additional-personal-information) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the verification form:
 

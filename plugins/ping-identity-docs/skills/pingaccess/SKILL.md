@@ -34,7 +34,7 @@ Learn how you can use authentication challenge policies and authentication requi
 | Pingaccess Use Cases: configuring, host, rule | pingaccess_use_cases | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_use_cases/*.md | references/snapshots/pingaccess-use-cases.md |
 | Token Providers: configuring, pingaccess, creating | token_providers | https://docs.pingidentity.com/pingaccess/9.1/token_providers/*.md | references/snapshots/token-providers.md |
 | Installing And Uninstalling Pingaccess: pingaccess, service, windows | installing_and_uninstalling_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/*.md | references/snapshots/installing-and-uninstalling-pingaccess.md |
-| Pingaccess Zero Downtime Upgrade: key, rolling, disabling | pingaccess_zero_downtime_upgrade | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_zero_downtime_upgrade/*.md | live-only |
+| Pingaccess Zero Downtime Upgrade: key, rolling, disabling | pingaccess_zero_downtime_upgrade | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_zero_downtime_upgrade/*.md | references/snapshots/pingaccess-zero-downtime-upgrade.md |
 | Upgrading Pingaccess: pingaccess, upgrade, upgrading | upgrading_pingaccess | https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/*.md | references/snapshots/upgrading-pingaccess.md |
 | Pingaccess Monitoring Guide: connecting, heartbeat, log | pingaccess_monitoring_guide | https://docs.pingidentity.com/pingaccess/9.1/pingaccess_monitoring_guide/*.md | references/snapshots/pingaccess-monitoring-guide.md |
 | Troubleshooting: sso, administrative, disable | troubleshooting | https://docs.pingidentity.com/pingaccess/9.1/troubleshooting/*.md | references/snapshots/troubleshooting.md |

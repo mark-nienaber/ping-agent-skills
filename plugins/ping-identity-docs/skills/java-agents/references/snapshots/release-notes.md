@@ -5,6 +5,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Archive
@@ -22,6 +24,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-changes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-changes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Changes
@@ -41,6 +45,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-2023
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2023.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2023_11_x: Java Agent 2023.11.x
   java_agent_2023_11_2: Java Agent 2023.11.2
@@ -130,6 +136,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-2024
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2024.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2024_11_x: Java Agent 2024.11.x
   java_agent_2024_11: Java Agent 2024.11
@@ -184,6 +192,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-2025
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2025.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   changes_in_java_agent_2025_11: Changes in Java Agent 2025.11
   changes_in_java_agent_2025_3: Changes in Java Agent 2025.3
@@ -211,6 +221,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-2026
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2026.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   changes_in_java_agent_2026_6: Changes in Java Agent 2026.6
   jdk_11: JDK 11
@@ -238,6 +250,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-510
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-510.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_5_10_4: Java Agent 5.10.4
   url-handling-changes-5104: URL handling
@@ -274,6 +288,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-deprecated
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-deprecated.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Deprecated
@@ -297,6 +313,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::deprecated
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/deprecated.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Deprecated
@@ -328,6 +346,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-fixes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-fixes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Fixes
@@ -347,6 +367,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Fixes
@@ -372,6 +394,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2023
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2023.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2023_11_x: Java Agent 2023.11.x
   java_agent_2023_11_2: Java Agent 2023.11.2
@@ -441,6 +465,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2024
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2024.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2024_11_x: Java Agent 2024.11.x
   java_agent_2024_11_1: Java Agent 2024.11.1
@@ -498,6 +524,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2025
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2025.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2025_11: Java Agent 2025.11
   java_agent_2025_3: Java Agent 2025.3
@@ -530,6 +558,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2026
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2026.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2026_6: Java Agent 2026.6
 ---
@@ -551,6 +581,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-510
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-510.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_5_10_4: Java Agent 5.10.4
   fix-in-5103: Java Agent 5.10.3
@@ -605,6 +637,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::support
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/support.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Getting support
@@ -630,6 +664,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Incompatible changes
@@ -655,6 +691,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-known-issues
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-known-issues.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2023_11: Java Agent 2023.11
   java_agent_2023_9: Java Agent 2023.9
@@ -733,6 +771,8 @@ component: java-agents
 version: release-notes
 page_id: java-agents::known-issues
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java_agent_2026_6: Java Agent 2026.6
   java_agent_2025_11: Java Agent 2025.11

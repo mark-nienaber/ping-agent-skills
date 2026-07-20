@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents::index
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/preface.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   release_notes: Release notes
   get_started_with_java_agent: Get started with Java Agent

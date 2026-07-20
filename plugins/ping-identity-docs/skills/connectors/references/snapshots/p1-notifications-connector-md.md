@@ -1,12 +1,12 @@
 ---
 title: PingOne Notifications Connector
-description: The PingOne Notifications connector enables you to send custom voice, SMS, and email notifications to cover a wide range of use cases for your customers.
+description: Configure the PingOne Notifications connector in PingOne DaVinci to send custom voice, SMS, and email notifications using PingOne templates
 component: connectors
 page_id: connectors::p1_notifications_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_notifications_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -50,7 +50,7 @@ Learn more in the following:
 
   * [Notification templates](https://docs.pingidentity.com/pingone/user_experience/p1_notifications.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
@@ -106,7 +106,7 @@ To add a worker app:
 
 ### Setting up the connector
 
-Add the connector in DaVinci as shown in [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html), then configure it as follows.
 
 #### Connector configuration
 

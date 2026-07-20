@@ -56,7 +56,7 @@ curl -X GET "https://api.pingone.com/v1/environments" \
 
 By default, access tokens have a time to live (TTL) of 60 minutes. However, if you have a custom resource specified in your OIDC appliction's resource grant, you can set `accessTokenValiditySeconds` on that resource's token. For more information, refer to [POST Create Resource](../../platform/resources/resources-1/create-resource.html#post-create-resource).
 
-Refresh tokens have a default lifetime of 30 days. You can change this value by configuring the `refreshTokenDuration` property in your OIDC application. For more information, refer to the [Applications OIDC settings data model](../../platform/applications/application-management.html#applications-oidc-settings-data-model).
+Refresh tokens have a default lifetime of 30 days. You can change this value by configuring the `refreshTokenDuration` property in your OIDC application. For more information, refer to the [Applications OIDC settings data model](../../platform/application-management.html#applications-oidc-settings-data-model).
 
 ID tokens have a lifetime of 60 minutes. This value is not configurable.
 
@@ -1980,7 +1980,7 @@ The request could not be completed. One or more validation errors were in the re
 
 OIDC-based applications in PingOne can now request an access token that accesses scopes from multiple custom resources in a single request. This capability simplifies the application authentication and authorization process and reduces the number of requests an application must make. By default, if more than one resource is associated with the application, actors need to make separate authorization requests to get a token for the desired resource scopes. However, if the `requestScopesForMultipleResourcesEnabled` OIDC property on the application is set to `true`, then the application accepts scopes from multiple custom resources, eliminating the need to make multiple authorize requests.
 
-For more information, refer to [Applications OIDC settings data model](../../../platform/applications/application-management.html#applications-oidc-settings-data-model), [Resource Scopes](../../../platform/resources/resource-scopes.html), and [Create scope](../../../platform/resources/resource-scopes/create-custom-resource-scope.html#post-create-custom-resource-scope) in the *PingOne Platform APIs*.
+For more information, refer to [Applications OIDC settings data model](../../../platform/application-management.html#applications-oidc-settings-data-model), [Resource Scopes](../../../platform/resources/resource-scopes.html), and [Create scope](../../../platform/resources/resource-scopes/create-custom-resource-scope.html#post-create-custom-resource-scope) in the *PingOne Platform APIs*.
 
 ## Custom PingOne API scopes
 

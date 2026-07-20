@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:access
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/access.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   non-essential-features: Remove non-essential features
   non-essential-access: Remove non-essential access
@@ -121,6 +123,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:audit-log
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/audit-log.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   audit: Audit trails
   log: Log files
@@ -153,6 +157,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:keys
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/keys.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   use-strong-keys: Use strong keys
   rotate-keys: Create and rotate keys
@@ -264,6 +270,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:connections
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/connections.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   production-message-level-security: Message-level security
 ---
@@ -302,6 +310,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:os
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/os.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   os-patches: System updates
   os-audit: System audits
@@ -385,6 +395,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:preface
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/preface.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 ---
 
@@ -437,6 +449,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:security-guide:threats
 canonical_url: https://docs.pingidentity.com/java-agents/2026/security-guide/threats.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   out_of_date_software: Out-of-date software
   browser: Cached pages in browsers and web proxies

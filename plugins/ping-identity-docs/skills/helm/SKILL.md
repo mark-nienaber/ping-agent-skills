@@ -6,7 +6,7 @@ license: MIT
 
 # Helm Charts
 
-Helm Charts documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Configure replica count, resource limits, node placement, and liveness, readiness, and startup probes for Ping Identity Helm chart workloads.
 
 ## Live source of truth
 
@@ -27,11 +27,11 @@ Helm Charts documentation is indexed in the bundled llms.txt and live Ping Markd
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Configs: configuration, image, values | configs | https://developer.pingidentity.com/helm/configs/*.md | references/snapshots/configs.md |
-| Examples: examples, chart, csi | examples | https://developer.pingidentity.com/helm/examples/*.md | references/snapshots/examples.md |
-| Getting Started: contributing, devops, getting | getting-started | https://developer.pingidentity.com/helm/getting-started/*.md | references/snapshots/getting-started.md |
-| Release Notes: current, previous, release | release-notes | https://developer.pingidentity.com/helm/release-notes/*.md | references/snapshots/release-notes.md |
-| Helm Charts Landing Page.Md: welcome | helm-charts-landing-page.md | https://developer.pingidentity.com/helm/helm-charts-landing-page.md | references/snapshots/helm-charts-landing-page-md.md |
+| Configs: helm, identity, chart | configs | https://developer.pingidentity.com/helm/configs/*.md | references/snapshots/configs.md |
+| Examples: helm, examples, gateway | examples | https://developer.pingidentity.com/helm/examples/*.md | references/snapshots/examples.md |
+| Getting Started: identity, devops, helm | getting-started | https://developer.pingidentity.com/helm/getting-started/*.md | references/snapshots/getting-started.md |
+| Release Notes: chart, current, devops | release-notes | https://developer.pingidentity.com/helm/release-notes/*.md | references/snapshots/release-notes.md |
+| Helm Charts Landing Page.Md: helm, charts, devops | helm-charts-landing-page.md | https://developer.pingidentity.com/helm/helm-charts-landing-page.md | references/snapshots/helm-charts-landing-page-md.md |
 | How To: image, product, tags | how-to | https://developer.pingidentity.com/helm/how-to/*.md | references/snapshots/how-to.md |
 
 ## Composition

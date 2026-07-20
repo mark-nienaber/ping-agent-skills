@@ -1535,10 +1535,11 @@ task.resume()
 ---
 title: Create Variable Declaration
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/create-variable-declaration
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/create-variable-declaration.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-declarations/create-variable-declaration
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-declarations/create-variable-declaration.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["platform:early-access/promotion-variables/create-variable-declaration.adoc"]
 section_ids:
   headers: Headers
   body: Body
@@ -1556,7 +1557,7 @@ section_ids:
 POST {{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations
 ```
 
-Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations` request to declare (assign a value to) a promotion variable for use in the specified environment. You must first have defined the promotion variable using the [Create Variable Definition](create-variable-definition.html) request.
+Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations` request to declare (assign a value to) a promotion variable for use in the specified environment. You must first have defined the promotion variable using the [Create Variable Definition](../variable-definitions/create-variable-definition.html) request.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                      |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1894,10 +1895,11 @@ task.resume()
 ---
 title: Create Variable Definition
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/create-variable-definition
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/create-variable-definition.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-definitions/create-variable-definition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-definitions/create-variable-definition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["platform:early-access/promotion-variables/create-variable-definition.adoc"]
 section_ids:
   headers: Headers
   body: Body
@@ -1916,11 +1918,11 @@ section_ids:
 POST {{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions
 ```
 
-Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions` request to define a promotion variable to be used in the specified environment. At this point, the promotion variable isn't associated with a configuration resource property. The next step is to use the [Create Variable Declaration](create-variable-declaration.html) request to associate the promotion variable you've defined with a configuration resource property.
+Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions` request to define a promotion variable to be used in the specified environment. At this point, the promotion variable isn't associated with a configuration resource property. The next step is to use the [Create Variable Declaration](../variable-declarations/create-variable-declaration.html) request to associate the promotion variable you've defined with a configuration resource property.
 
 > **Collapse: Request Model**
 >
-> Refer to [Promotion Variables](variable-definitions.html) for complete property descriptions.
+> Refer to [Promotion Variables](../variable-definitions.html) for complete property descriptions.
 >
 > | Property      | Type    | Required |
 > | ------------- | ------- | -------- |
@@ -2504,10 +2506,11 @@ task.resume()
 ---
 title: Delete Variable Declaration
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/delete-variable-declaration
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-declaration.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-declarations/delete-variable-declaration
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-declarations/delete-variable-declaration.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["platform:early-access/promotion-variables/delete-variable-declaration.adoc"]
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2739,10 +2742,11 @@ task.resume()
 ---
 title: Delete Variable Definition
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/delete-variable-definition
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-definition.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-definitions/delete-variable-definition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-definitions/delete-variable-definition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["platform:early-access/promotion-variables/delete-variable-definition.adoc"]
 section_ids:
   headers: Headers
   example-request: Example Request

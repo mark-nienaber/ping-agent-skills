@@ -2,7 +2,7 @@
 
 - Product: Enterprise Connect
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/enterprise-connect/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
@@ -16,7 +16,7 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| latest.md | assembled | <64 pages from latest> | 64 | 20 | partial |
+| latest.md | assembled | https://docs.pingidentity.com/enterprise-connect/llms.txt | 64 | 20 | partial |
 
 ## Checksums
 

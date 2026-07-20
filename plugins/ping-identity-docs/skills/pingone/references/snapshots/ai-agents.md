@@ -81,6 +81,8 @@ section_ids:
   least-privilege-permissions: Least privilege permissions
   human-in-the-loop-hitl-approvals: Human-in-the-loop (HITL) approvals
   attribution-and-auditing: Attribution and auditing
+  auditing-agent-activity: Auditing agent activity
+  auditing-configuration-changes: Auditing configuration changes
 ---
 
 # AI Agents
@@ -125,7 +127,17 @@ Learn more about [configuring a CIBA flow](../use_cases/p1_configure_ciba_flow.h
 
 ## Attribution and auditing
 
-Because agents operate with their own unique identities and utilize delegation tokens, downstream systems and gateways can uniquely identify both the acting agent and the originating user. This generates a centralized audit trail of all agent-initiated activity, ensuring full accountability, traceability, and compliance.
+Because agents use unique identities and delegation tokens, your downstream systems can identify both the user (subject) and the application acting on the user's behalf (actor). This generates a centralized audit trail of all agent-initiated activity, ensuring full accountability, traceability, and compliance.
+
+### Auditing agent activity
+
+When agents use delegation tokens, the `act` claim provides attribution context that enables your downstream systems to audit what each agent is doing on behalf of users. Because PingOne doesn't include the `act` claim by default, you must configure it by adding an attribute mapping with an advanced expression. Learn more in [Configuring OAuth 2.0 token exchange for delegation](../use_cases/p1_oauth_2_token_exchange_delegation.html).
+
+Depending on your downstream systems and security information and event management (SIEM) infrastructure, you can use external systems for analysis and alerting on agent activity.
+
+### Auditing configuration changes
+
+When you create, update, or delete AI agents in PingOne, these changes are logged in the PingOne audit report.
 
 Learn more in [AI agent logging and auditing](p1_ai_agent_logging.html).
 

@@ -7,7 +7,7 @@ page_id: pingaccess:release_notes:pa_release_notes
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/release_notes/pa_release_notes.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 5, 2026
+revdate: July 2, 2026
 section_ids:
   pa-91: PingAccess 9.1.0
   use-cspnonce-to-embed-inline-javascript-into-templates: Use <cspNonce> to embed inline JavaScript into templates
@@ -41,6 +41,15 @@ section_ids:
   fixed-a-post-preservation-encoding-issue-when-not-using-utf-8: Fixed a POST preservation encoding issue when not using UTF-8
   pingaccess-add-on-sdk-class-is-incompatible-in-groovy-script-rules-with-java-17-and-later: PingAccess Add-On SDK class is incompatible in Groovy script rules with Java 17 and later
   fips-mode-validation-doesnt-cover-imported-key-pairs-for-sha1: FIPS mode validation doesn't cover imported key pairs for SHA1
+  pa-904: PingAccess 9.0.4 (June 2026)
+  retry-post-requests-that-failed-because-of-an-unknownhostexception-2: Retry POST requests that failed because of an UnknownHostException
+  updated-component-dependencies-2: Updated component dependencies
+  addressed-potential-request-smuggling-security-vulnerability-2: Addressed potential request smuggling security vulnerability
+  addressed-potential-resource-allocation-security-vulnerability-2: Addressed potential resource allocation security vulnerability
+  fixed-an-issue-with-automatic-resource-ordering-2: Fixed an issue with automatic resource ordering
+  fixed-an-issue-causing-the-admin-console-to-show-a-blank-page-2: Fixed an issue causing the admin console to show a blank page
+  fixed-an-issue-blocking-key-pair-imports-2: Fixed an issue blocking key pair imports
+  fixed-a-post-preservation-encoding-issue-when-not-using-utf-8-2: Fixed a POST preservation encoding issue when not using UTF-8
   pa-903: PingAccess 9.0.3 (May 2026)
   updated-the-apache-log4j-library-to-version-2-25-3-2: Updated the Apache Log4j library to version 2.25.3
   updated-nettys-parsing-behavior-2: Updated Netty's parsing behavior
@@ -371,6 +380,58 @@ Issue PA-16346, PA-16488
 FIPS mode validation doesn't prevent administrators from importing key pairs that contain chained certificates with a SHA1 signature algorithm. SHA1 isn't FIPS-compliant.
 
 As a workaround, set `jdk.sha1.restriction.enabled=true` to enforce exclusion of key pairs that use SHA1 in key pair and certificate imports.
+
+## PingAccess 9.0.4 (June 2026)
+
+### Retry POST requests that failed because of an `UnknownHostException`
+
+New PA-16346
+
+We've added a new availability profile setting, **Retry on Unknown Host**. Select this checkbox to retry a failed POST request against other configured backchannel hosts if the original request failed because of an `UnknownHostException`. This setting can improve service reliability during potential DNS changes.
+
+You can find more information in [Creating availability profiles](../pingaccess_user_interface_reference_guide/pa_creating_availability_profiles.html).
+
+### Updated component dependencies
+
+Security PA-16477
+
+Updated dependency versions to address potential security vulnerabilities.
+
+### Addressed potential request smuggling security vulnerability
+
+Security PA-16521
+
+Addressed a potential security vulnerability related to request smuggling.
+
+### Addressed potential resource allocation security vulnerability
+
+Security PA-16522
+
+Addressed a potential security vulnerability related to resource allocation for multi-part headers.
+
+### Fixed an issue with automatic resource ordering
+
+Fixed PA-16495
+
+Fixed an issue that caused automatic resource ordering to leave out root resources if another resource had been configured with the `/*` path pattern.
+
+### Fixed an issue causing the admin console to show a blank page
+
+Fixed PA-16508
+
+Fixed an issue that caused the PingAccess admin console to show a blank page when trying to view the **References** tab on a key pair, after configuring a JWT identity mapping without giving the **Custom Claims** field a value.
+
+### Fixed an issue blocking key pair imports
+
+Fixed PA-16530
+
+Fixed an issue that prevented PingAccess from importing key pairs that contain `otherName` attributes configured in the **Subject Alternative Name** field.
+
+### Fixed a POST preservation encoding issue when not using UTF-8
+
+Fixed PA-16531
+
+Fixed an issue that sometimes caused PingAccess to end POST parameter processing early if it encountered non-UTF-8 bytes that could be interpreted as valid UTF-8 bytes.
 
 ## PingAccess 9.0.3 (May 2026)
 

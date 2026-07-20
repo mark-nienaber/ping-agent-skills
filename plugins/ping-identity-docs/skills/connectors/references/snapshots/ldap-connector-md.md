@@ -1,12 +1,12 @@
 ---
 title: LDAP Connector
-description: The Lightweight Directory Access Protocol (LDAP) connector for PingOne DaVinci lets you gain access to entries in an LDAP directory to be used in your PingOne DaVinci flow.
+description: Configure the LDAP connector to create, update, delete, and search entries in an LDAP directory store within a PingOne DaVinci flow
 component: connectors
 page_id: connectors::ldap_connector
 canonical_url: https://docs.pingidentity.com/connectors/ldap_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -63,13 +63,13 @@ Learn more in the following documentation:
 
   * [Introduction to PingDirectory Server](https://docs.pingidentity.com/pingdirectory/10.3/pd_ds_intro_pindirectory_server.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -93,7 +93,7 @@ Review the prerequisites in [Before you begin](https://docs.pingidentity.com/pin
 
 ### Setting up the connector configuration
 
-In DaVinci, add an LDAP connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add an LDAP connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 

@@ -184,7 +184,7 @@ Define the information that you want to collect from your customer and customize
 
 ---
 title: Credential management method comparison
-description: The PingOne Credentials service offers Automated and API credential management options.
+description: Compare automated and API credential management options in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_management_method_comparison
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_management_method_comparison.html
@@ -214,7 +214,7 @@ API credential management uses the Credential APIs to issue, edit, and revoke cr
 
 ---
 title: Customizing PingOne Credentials notification templates
-description: Customize notification templates for PingOne Credentials notifications that end users receive.
+description: Customize the PingOne Credentials notification templates that end users receive for credential issuance, revocation, updates, and digital wallet pairing.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_customizing_notification_templates
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_customizing_notification_templates.html
@@ -288,7 +288,7 @@ To customize notification templates for the notifications that groups or populat
 
 ---
 title: Digital Credentials using PingOne Credentials
-description: The PingOne Credentials service allows an issuer to create verifiable credentials that they can send to a compatible wallet app.
+description: Find getting started guides, scenarios, integrations, and developer resources for PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_start
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_start.html
@@ -637,7 +637,7 @@ The mobile app guides the user through the process of accepting and sharing cred
 
 ---
 title: Introduction to PingOne Credentials
-description: PingOne Credentials is a service that allows issuers to customize and issue verifiable digital credentials that users can store in their wallet, eliminating cost and management of issuing physical credentials.
+description: PingOne Credentials is a service that lets issuers create and issue verifiable digital credentials that users store in a wallet app.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_introduction
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_introduction.html
@@ -849,7 +849,7 @@ Manage details about your organization and issuer profile of verifiable credenti
 
 ---
 title: PingOne Credentials scenarios
-description: These scenarios provide high-level examples of how you can use PingOne Credentials.
+description: Explore scenarios for issuing, presenting, verifying, and revoking credentials with PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_intro
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_intro.html
@@ -931,7 +931,7 @@ Credentials for users no longer meeting the criteria are revoked.
 
 ---
 title: "Scenario: Creating and receiving a credential"
-description: In this scenario, a car insurance company, BX Insurance (the issuer) wants to customize an email invitation for digital wallet pairing and create a digital credential they can issue to their customer, John Smith (a user). Afterward, (in a second scenario) John is notified, downloads the digital wallet app, and receives the credential.
+description: Walk through a scenario where an issuer customizes an invitation, creates a credential, and auto-issues it to a user in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_creating_credential_for_auto_issuance
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_creating_credential_for_auto_issuance.html
@@ -1010,7 +1010,7 @@ BX Insurance (the credential issuer) meets the following requirements:
 
 ---
 title: "Scenario: Presenting and verifying a user credential"
-description: In this scenario, John Smith (the user) wants to reserve a car from BX Rental Cars (the credential verification service) for his vacation next month. Before he can complete the reservation, BX Rental Cars requires that John provide proof that he has a car insurance policy that will be valid throughout the rental period.
+description: Walk through a scenario where a user presents a digital credential to a service provider for verification in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_present_verify_cred
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_present_verify_cred.html
@@ -1103,7 +1103,7 @@ Additionally, John Smith has previously received his credential from BX Insuranc
 
 ---
 title: "Scenario: Revoking a credential and notifying the user"
-description: In this scenario, John Smith (the user) decided he had a good experience with BX Rental Cars (the credential verification service) on his previous trip over the summer, and decides to rent with them again when he visits his family over the holidays. However, he missed both a notice from BX Insurance (the credential issuer) prompting him to renew his auto insurance and a later notification in his wallet app that his credential was revoked. He no longer has an active auto policy.
+description: Walk through a scenario where a credential is revoked, the user is notified, and the credential is later reissued in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_revoke_cred_notify_user
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_revoke_cred_notify_user.html

@@ -1,12 +1,12 @@
 ---
 title: Microsoft Teams Connector
-description: The Microsoft Teams connector lets you manage user memberships and send messages in Microsoft Teams from your PingOne DaVinci flow.
+description: Configure the Microsoft Teams connector in PingOne DaVinci to manage team memberships and send messages in channels and chats
 component: connectors
 page_id: connectors::microsoft_teams_connector
 canonical_url: https://docs.pingidentity.com/connectors/microsoft_teams_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -14,7 +14,7 @@ section_ids:
   davinci-microsoft-teams-setting-up-microsoft-teams: Setting up Microsoft Teams
   configuring-the-microsoft-teams-connector: Configuring the Microsoft Teams connector
   connector-configuration: Connector configuration
-  davinci-redirect-url: DaVinci Redirect URL
+  pingone-davinci-redirect-url: PingOne DaVinci Redirect URL
   application-redirect-url: Application Redirect URL
   client-id: Client ID
   client-secret: Client Secret
@@ -63,13 +63,13 @@ Learn more in the following:
 
   * [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -91,13 +91,13 @@ To use the connector, you'll need:
 
    3. On the **Register an Application** page, for **Supported account types**, select **Accounts in any organizational directory and personal Microsoft accounts**.
 
-   4. In the **Redirect URI** section, select **Web** and add the redirect URL for your DaVinci environment, such as:
+   4. In the **Redirect URI** section, select **Web** and add the redirect URL for your PingOne DaVinci environment, such as:
 
       ```
       https://auth.pingone.com/79d0edb0-4421-1bcb-acb5-222e3132eb5b/davinci/oauth2/callback
       ```
 
-      To get your redirect URL, add a **Microsoft Teams** connection in DaVinci, open the connection settings, and copy the **Redirect URL**. Learn more about adding the connection in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+      To get your redirect URL, add a **Microsoft Teams** connection in PingOne DaVinci, open the connection settings, and copy the **Redirect URL**. Learn more about adding the connection in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
       ![A screen capture of the Redirect URL on the Microsoft Teams connector settings window.](_images/connector-images/dvc-microsoft-teams-redirect-url.png)
 
@@ -139,17 +139,17 @@ To use the connector, you'll need:
 
 ### Configuring the Microsoft Teams connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
-##### DaVinci Redirect URL
+##### PingOne DaVinci Redirect URL
 
-Your DaVinci redirect URL. This allows Microsoft to redirect the browser back to DaVinci. after the user authenticates with the **Sign on with Microsoft** capability. Use this in [Setting up Microsoft Teams](#davinci-microsoft-teams-setting-up-microsoft-teams).
+Your PingOne DaVinci redirect URL. This allows Microsoft to redirect the browser back to PingOne DaVinci. after the user authenticates with the **Sign on with Microsoft** capability. Use this in [Setting up Microsoft Teams](#davinci-microsoft-teams-setting-up-microsoft-teams).
 
 ##### Application Redirect URL
 
-Your application's redirect URL, such as `https://app.yourorganization.com`. Enter this URL if you embed the DaVinci widget in your application. This allows DaVinci to redirect the browser back to your application.
+Your application's redirect URL, such as `https://app.yourorganization.com`. Enter this URL if you embed the PingOne DaVinci widget in your application. This allows PingOne DaVinci to redirect the browser back to your application.
 
 ##### Client ID
 
@@ -193,9 +193,9 @@ No special configuration is needed. Add the capability and populate its properti
 
 You can use the connector to send a message to a channel.
 
-This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to DaVinci to continue the flow.
+This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to PingOne DaVinci to continue the flow.
 
-1. Download the [Microsoft Teams Channel Message](https://marketplace.pingone.com/item/microsoft-teams-channel-message-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Microsoft Teams Channel Message](https://marketplace.pingone.com/item/microsoft-teams-channel-message-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Select the **Send Message in Channel** node.
 
@@ -217,11 +217,11 @@ This flow requires the user to sign on with Microsoft and agree to let the conne
 
 You can use the connector to send a message to a chat.
 
-This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to DaVinci to continue the flow.
+This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to PingOne DaVinci to continue the flow.
 
 The flow also requires a chat ID. You can find more information about getting a chat ID, in **Listing a User's Chats**.
 
-1. Download the [Microsoft Teams - Chat message](https://marketplace.pingone.com/item/microsoft-teams-chat-message) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Microsoft Teams - Chat message](https://marketplace.pingone.com/item/microsoft-teams-chat-message) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Select the **Send a Message in a Chat** node.
 
@@ -269,9 +269,9 @@ The flow also requires a chat ID. You can find more information about getting a 
 
 You can use the connector to get a list of chats that the user belongs to. You can use the chat IDs from this flow to send messages to specific chats.
 
-Download the [Microsoft Teams - Chat list](https://marketplace.pingone.com/item/microsoft-teams-chat-list) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+Download the [Microsoft Teams - Chat list](https://marketplace.pingone.com/item/microsoft-teams-chat-list) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
-This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to DaVinci to continue the flow.
+This flow requires the user to sign on with Microsoft and agree to let the connector send messages on their behalf. The **Sign on with Microsoft** node directs the browser to Microsoft. After the user signs on, Microsoft redirects the browser back to PingOne DaVinci to continue the flow.
 
 The **Custom HTML Message** node shows a list of chats. You can copy a chat ID to send messages to that chat on behalf of the user.
 

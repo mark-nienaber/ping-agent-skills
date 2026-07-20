@@ -4,6 +4,8 @@ description: PingOne Advanced Services provides you with your own virtual privat
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices:network_guide:p1as_network_guide
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/network_guide/p1as_network_guide.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
 section_ids:
   _items_not_supported: Items not supported

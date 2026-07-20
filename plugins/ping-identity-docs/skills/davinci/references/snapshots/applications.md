@@ -3,8 +3,8 @@ title: Applications
 description: An application in DaVinci represents one of your applications and gives you fine-grained control over which flows can be run through that application and by what methods.
 component: davinci
 page_id: davinci:applications:davinci_applications
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_applications.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_applications.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 ---
@@ -30,8 +30,8 @@ title: Configuring a flow policy
 description: Configure flow policies to control which flows and flow versions are displayed for users.
 component: davinci
 page_id: davinci:applications:davinci_configuring_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -112,8 +112,8 @@ title: Configuring connection settings
 description: Add connections to an application to enable direct interactions with that connector through REST API calls.
 component: davinci
 page_id: davinci:applications:davinci_configuring_connections
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_connections.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_connections.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -150,8 +150,8 @@ title: Configuring general application settings
 description: Configure an application's general properties and API settings.
 component: davinci
 page_id: davinci:applications:davinci_configuring_general_settings
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_general_settings.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_general_settings.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 section_ids:
@@ -205,8 +205,8 @@ title: Configuring OIDC settings
 description: Configure OpenID Connect (OIDC) for your application to enable it as a method for invoking flows.
 component: davinci
 page_id: davinci:applications:davinci_configuring_openid
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_openid.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_openid.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 section_ids:
@@ -283,8 +283,8 @@ title: Creating an application
 description: Create a new application to enable DaVinci to interact with that application.
 component: davinci
 page_id: davinci:applications:davinci_creating_an_application
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_creating_an_application.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_creating_an_application.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 section_ids:
@@ -324,8 +324,8 @@ title: Deleting a flow policy
 description: Delete an existing flow policy to permanently remove it from use.
 component: davinci
 page_id: davinci:applications:davinci_deleting_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_deleting_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_deleting_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -362,8 +362,8 @@ title: Deleting an application
 description: Delete an application to remove it from the UI and stop all flow use for it.
 component: davinci
 page_id: davinci:applications:davinci_deleting_an_application
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_deleting_an_application.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_deleting_an_application.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 22, 2023
 section_ids:
@@ -398,8 +398,8 @@ title: Editing a flow policy
 description: Edit existing flow policies to update which flows and flow versions are displayed for users.
 component: davinci
 page_id: davinci:applications:davinci_editing_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_editing_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_editing_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -463,8 +463,8 @@ title: Flow Policies
 description: Flow policies let you control which flows are launched through the application.
 component: davinci
 page_id: davinci:applications:davinci_flow_policies
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_flow_policies.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_flow_policies.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 ---
@@ -490,8 +490,8 @@ title: Flow policy metrics
 description: The Flow Comparison Metrics page lets you view data about the flows included in a flow policy. You can view it by locating the flow policy and, in the More options ( ) list, selecting Comparison Metrics.
 component: davinci
 page_id: davinci:applications:davinci_flow_policy_comparison_metrics
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_flow_policy_comparison_metrics.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_flow_policy_comparison_metrics.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 25, 2023
 ---

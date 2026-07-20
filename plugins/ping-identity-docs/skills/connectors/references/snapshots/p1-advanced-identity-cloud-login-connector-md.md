@@ -1,12 +1,12 @@
 ---
 title: PingOne Advanced Identity Cloud Login Connector
-description: The PingOne Advanced Identity Cloud Login connector lets you authenticate users using the default journey in PingOne Advanced Identity Cloud in your PingOne DaVinci flow.
+description: Configure the PingOne Advanced Identity Cloud Login connector to authenticate users via the default journey in Advanced Identity Cloud
 component: connectors
 page_id: connectors::p1_advanced_identity_cloud_login_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_login_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -42,13 +42,13 @@ Learn more in the following:
 
   * [Identity Governance REST API](https://backstage.forgerock.com/docs/idcloud/latest/identity-governance/rest-api/rest-api-preface.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -60,7 +60,7 @@ To use the connector, you'll need:
 
 ### Setting up PingOne Advanced Identity Cloud
 
-To allow DaVinci to access PingOne Advanced Identity Cloud environment, create an application:
+To allow PingOne DaVinci to access PingOne Advanced Identity Cloud environment, create an application:
 
 1. In PingOne Advanced Identity Cloud, go to **Applications**.
 
@@ -82,7 +82,7 @@ To allow DaVinci to access PingOne Advanced Identity Cloud environment, create a
 
 8. On the application details view, go to the **Sign On** tab.
 
-9. In the PingOne Advanced Identity Cloud Login connector configuration, copy the **DaVinci Redirect URL** value from the connector settings and paste it into the **Sign-in URLs** field.
+9. In the PingOne Advanced Identity Cloud Login connector configuration, copy the **PingOne DaVinci Redirect URL** value from the connector settings and paste it into the **Sign-in URLs** field.
 
 10. For **Grant Types**, use the defaults (`Authorization Code`, `Client Credentials`, and `Refresh Token`).
 
@@ -92,7 +92,7 @@ To allow DaVinci to access PingOne Advanced Identity Cloud environment, create a
 
 ### Configuring the PingOne Advanced Identity Cloud Login connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -118,7 +118,7 @@ The OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
 
 ##### Application Redirect URL
 
-Your application's redirect URL, such as "https\://app.yourorganization.com/". Enter this URL if you embed the DaVinci widget in your application. This allows DaVinci to redirect the browser back to your application.
+Your application's redirect URL, such as "https\://app.yourorganization.com/". Enter this URL if you embed the PingOne DaVinci widget in your application. This allows PingOne DaVinci to redirect the browser back to your application.
 
 ##### DaVinci Redirect URL
 
@@ -130,7 +130,7 @@ Enter this URL in your Advanced Identity Cloud console under the **Application**
 
 You can use the **PingOne Advanced Identity Cloud Login** capability to authenticate users, with Advanced Identity Cloud acting as a social identity provider.
 
-The connector redirects the browser to Advanced Identity Cloud, initiates the default journey to allow the user to authenticate, then returns to DaVinci with the authentication result.
+The connector redirects the browser to Advanced Identity Cloud, initiates the default journey to allow the user to authenticate, then returns to PingOne DaVinci with the authentication result.
 
 ## Capabilities
 

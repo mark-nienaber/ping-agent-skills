@@ -1075,24 +1075,31 @@ section_ids:
 ---
 
 ---
-title: Download manifest
-description: The following files are included in the Atlassian Cloud Provisioner .zip archive:
+title: Deploying the Agentless Integration Kit
+description: The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
 component: atlassian
-page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_download_manifest.html
+page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_deploying_the_agentless_i
+canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_deploying_the_agentless_i.html
 llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
 ---
 
-# Download manifest
+# Deploying the Agentless Integration Kit
 
-The following files are included in the Atlassian Cloud Provisioner `.zip` archive:
+## About this task
 
-* `legal/Legal.pdf`: Copyright and license information.
+The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
 
-* `dist`: Contains the integration files
+## Steps
 
-  * `pf-atlassian-quickconnection-<version>.jar`: The Atlassian Cloud Provisioner quick connection template.
+1. Download the Agentless Integration Kit `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/agentless-integration-kit).
 
-* `atlassian-saml-metadata.xml`: A modifiable metadata file used to create the connection.
+2. On the sidebar, click **Download Integration**.
+
+3. On the sidebar, click **Get Documentation**.
+
+4. Follow the documentation to deploy the Agentless Integration Kit.

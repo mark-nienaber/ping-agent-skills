@@ -5,6 +5,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:access
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/access.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   non-essential-features: Remove non-essential features
   non-essential-access: Remove non-essential access
@@ -113,6 +115,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:audit-log
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/audit-log.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   audit: Audit trails
   log: Log files
@@ -127,7 +131,7 @@ For security, troubleshooting, and regulatory compliance, agents are able to aud
 
 The agent audit logging service adheres to the log structure common across the Ping Advanced Identity Software. Learn more in [Audit the deployment](../maintenance-guide/auditing.html).
 
-Web Agent supports propagation of the transaction ID across the Ping Advanced Identity Software, using the HTTP header `X-ForgeRock-TransactionId`. Consider configuring this header to prevent malicious actors from flooding the system with requests using the same transaction ID header to hide their tracks. Learn more in [Trust transaction headers](https://docs.pingidentity.com/pingam/8.1/security/implementing-audit.html#configuring-trusttransactionheader-system-property) in AM's *Security guide*.
+Web Agent supports propagation of the transaction ID across the Ping Advanced Identity Software, using the HTTP header `X-ForgeRock-TransactionId`. Consider configuring this header to prevent malicious actors from flooding the system with requests using the same transaction ID header to hide their tracks. Learn more in [Trust transaction headers](https://docs.pingidentity.com/pingam/8.1/monitoring/implementing-audit.html#configuring-trusttransactionheader-system-property) in AM's *Security guide*.
 
 ## Log files
 
@@ -152,6 +156,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:keys
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/keys.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   use-strong-keys: Use strong keys
   rotate-keys: Rotate keys
@@ -190,6 +196,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:connections
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/connections.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   production-message-level-security: Message-level security
 ---
@@ -226,6 +234,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:os
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/os.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   os-patches: System updates
   os-audit: System audits
@@ -307,6 +317,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:preface
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/preface.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 ---
 
@@ -359,6 +371,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:security-guide:threats
 canonical_url: https://docs.pingidentity.com/web-agents/2026/security-guide/threats.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   out_of_date_software: Out-of-date software
   browser: Cached pages in browsers and web proxies

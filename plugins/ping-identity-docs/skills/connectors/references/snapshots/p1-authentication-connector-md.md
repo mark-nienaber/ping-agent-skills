@@ -1,20 +1,20 @@
 ---
 title: PingOne Authentication Connector
-description: The PingOne Authentication connector lets you authenticate users and manage PingOne user authentication sessions in your PingOne DaVinci flow.
+description: The PingOne Authentication connector lets you authenticate users and manage PingOne user authentication sessions in your PingOne DaVinci flow
 component: connectors
 page_id: connectors::p1_authentication_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_authentication_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 21, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
   requirements: Requirements
   configuring-the-pingone-authentication-connector: Configuring the PingOne Authentication connector
   using-the-connector-in-a-flow: Using the connector in a flow
-  authenticating-users-by-redirecting-the-browser-to-your-davinci-flow: Authenticating users by redirecting the browser to your DaVinci flow
-  authenticating-users-by-embedding-the-davinci-widget-in-your-web-application: Authenticating users by embedding the DaVinci widget in your web application
+  authenticating-users-by-redirecting-the-browser-to-your-pingone-davinci-flow: Authenticating users by redirecting the browser to your PingOne DaVinci flow
+  authenticating-users-by-embedding-the-pingone-davinci-widget-in-your-web-application: Authenticating users by embedding the PingOne DaVinci widget in your web application
   authenticating-users-with-an-external-identity-provider: Authenticating users with an external identity provider
   include-the-skidp-component-in-a-custom-html-template: Include the skIdP component in a Custom HTML Template
   use-the-sign-on-with-external-identity-provider-capability-in-a-flow: Use the Sign On with External Identity Provider capability in a flow
@@ -43,7 +43,7 @@ The PingOne Authentication connector lets you authenticate users and manage Ping
 
 You can use the PingOne Authentication connector to:
 
-* Authenticate users by integrating DaVinci flows into your application using a browser redirect or the DaVinci widget
+* Authenticate users by integrating PingOne DaVinci flows into your application using a browser redirect or the PingOne DaVinci widget
 
 * Authenticate users with external identity providers *(tooltip: \<div class="paragraph">
   \<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
@@ -63,13 +63,13 @@ You can use the PingOne Authentication connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -77,15 +77,15 @@ To use the connector, you'll need a PingOne license.
 
 ### Configuring the PingOne Authentication connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
-The PingOne Authentication connector automatically communicates with the PingOne environment associated with your DaVinci environment.
+The PingOne Authentication connector automatically communicates with the PingOne environment associated with your PingOne DaVinci environment.
 
 ## Using the connector in a flow
 
-### Authenticating users by redirecting the browser to your DaVinci flow
+### Authenticating users by redirecting the browser to your PingOne DaVinci flow
 
-This is the recommended method for integrating a DaVinci flow into your application. It allows you to authenticate users by redirecting the browser from your application, through PingOne, to your DaVinci flow. This method supports either OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
+This is the recommended method for integrating a PingOne DaVinci flow into your application. It allows you to authenticate users by redirecting the browser from your application, through PingOne, to your PingOne DaVinci flow. This method supports either OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
 \<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>
 \</div>)*, Security Assertion Markup Language (SAML) *(tooltip: \<div class="paragraph">
 \<p>A standard, XML-based, message-exchange framework enabling the secure transmittal of authentication tokens and other user attributes across domains.\</p>
@@ -109,9 +109,9 @@ To use this method, end your flow with the following two capabilities:
 
 * Error path: **Return an Error Response (Redirect Flows)**
 
-### Authenticating users by embedding the DaVinci widget in your web application
+### Authenticating users by embedding the PingOne DaVinci widget in your web application
 
-This is an alternate method for integrating a DaVinci flow into your application when a redirect is not possible. It allows you to authenticate users with your DaVinci flow by embedding a widget within your application. The browser stays on your organization's domain throughout the transaction. This method only supports OIDC.
+This is an alternate method for integrating a PingOne DaVinci flow into your application when a redirect is not possible. It allows you to authenticate users with your PingOne DaVinci flow by embedding a widget within your application. The browser stays on your organization's domain throughout the transaction. This method only supports OIDC.
 
 You can find detailed setup instructions in [Launching a flow with the widget](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_the_widget.html).
 

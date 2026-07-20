@@ -3,8 +3,8 @@ title: Configuring SIEM Streaming
 description: Configure SIEM streaming to send DaVinci events to a webhook configured in PingOne.
 component: davinci
 page_id: davinci:configuring_siem_streaming:davinci_configuring_siem_streaming
-canonical_url: http://docs.pingidentity.com/davinci/configuring_siem_streaming/davinci_configuring_siem_streaming.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/configuring_siem_streaming/davinci_configuring_siem_streaming.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 25, 2023
 section_ids:
@@ -36,7 +36,7 @@ After you configure the PingOne webhook, it receives DaVinci events. These event
 
 1. Sign on to PingOne.
 
-2. Create a new webhook as described in the [PingOne documentation](http://docs.pingidentity.com/pingone/integrations/p1_create_webhook.html).
+2. Create a new webhook as described in the [PingOne documentation](https://docs.pingidentity.com/pingone/integrations/p1_create_webhook.html).
 
    In the **Event types** list, select the **DaVinci** event type.
 
@@ -50,7 +50,7 @@ These event types generate a payload.
 
 * Custom Analytics
 
-  This event is sent by a [Flow Analytics connector](http://docs.pingidentity.com/connectors/flow_analytics_connector.html) node within a flow. This node can be configured to send information about the flow outcome.
+  This event is sent by a [Flow Analytics connector](https://docs.pingidentity.com/connectors/flow_analytics_connector.html) node within a flow. This node can be configured to send information about the flow outcome.
 
 * Start Interaction
 

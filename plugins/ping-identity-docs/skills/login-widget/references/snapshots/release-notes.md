@@ -250,3 +250,317 @@ The Advanced Identity Cloud/PingAM Login Widget support the following authentica
 (1) The [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html) and the [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html) both use a `MetaDataCallback` when the Return challenge as JavaScript is *NOT* enabled.
 
 The Advanced Identity Cloud/PingAM Login Widget handles either the `MetaDataCallback` or the JavaScript-based payload.
+
+---
+
+---
+title: Developer Experience changelog
+description: Subscribe to get automatic updates:
+component: login-widget
+page_id: login-widget:release-notes:changelogs/developer_experience_changelog_rss
+canonical_url: https://developer.pingidentity.com/login-widget/release-notes/changelogs/developer_experience_changelog_rss.html
+section_ids:
+  latest_releases: Latest Releases
+  forgerock_login_widget_1_3_0: Advanced Identity Cloud/PingAM Login Widget 1.3.0
+  forgerock_login_widget_1_2: Advanced Identity Cloud/PingAM Login Widget 1.2.1
+  forgerock_login_widget_1_1: Advanced Identity Cloud/PingAM Login Widget 1.1
+  forgerock_login_widget_1_0: Advanced Identity Cloud/PingAM Login Widget 1.0
+---
+
+# Developer Experience changelog
+
+Subscribe to get automatic updates:
+
+* [icon: rss-square, set=fa][Ping (ForgeRock) SDKs Changelog RSS feed](developer_experience_changelog_rss.xml)
+
+* [icon: square-envelope, set=fa][Ping (ForgeRock) SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
+
+## Latest Releases
+
+### Advanced Identity Cloud/PingAM Login Widget 1.3.0
+
+June 5, 2024 `minor`
+
+**Added**
+
+* Added support for integration with PingOne Protect.
+
+* Added the name of the device to the recovery codes page.
+
+**Fixed**
+
+* Corrected an issue that prevented use of the `logLevel` parameter in the Advanced Identity Cloud/PingAM Login Widget configuration.
+
+* Fixed an issue with configuration literals that caused `ZodError` messages in the console.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.2.1
+
+January 8, 2024 `minor`
+
+**Added**
+
+* Support for CAPTCHA nodes.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.1
+
+July 17, 2023 `minor`
+
+**Added**
+
+* Support for device profiling callbacks (`DeviceProfileCallback`)
+
+* Support for web authentication (WebAuthn) journeys and trees.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.0
+
+April 18, 2023 `major`
+
+**Changed**
+
+* First public release
+
+---
+
+---
+title: Getting support
+description: Ping Identity provides support services, professional services, training, and partner services to assist you in setting up and maintaining your deployments. For a general overview of these services, see https://www.pingidentity.com.
+component: login-widget
+page_id: login-widget:release-notes:support
+canonical_url: https://developer.pingidentity.com/login-widget/release-notes/support.html
+keywords: ["Compatibility", "Features", "Source Code", "SDK"]
+section_ids:
+  troubleshooting: Troubleshooting
+  additional_articles: Additional Articles
+---
+
+# Getting support
+
+Ping Identity provides support services, professional services, training, and partner services to assist you in setting up and maintaining your deployments. For a general overview of these services, see <https://www.pingidentity.com>.
+
+Ping Identity has staff members around the globe who support our international customers and partners. For details on Ping Identity's support offering, visit <https://www.pingidentity.com/support>.
+
+Ping Identity publishes comprehensive documentation online:
+
+* The Ping Identity [Knowledge Base](https://support.pingidentity.com/s/knowledge-base) offers a large and increasing number of up-to-date, practical articles that help you deploy and manage Ping Identity Platform software.
+
+  While many articles are visible to everyone, Ping Identity customers have access to much more, including advanced information for customers using Ping Identity Platform software in a mission-critical capacity.
+
+* Ping Identity product documentation, such as this document, aims to be technically accurate and complete with respect to the software documented. It is visible to everyone and covers all product features and examples of how to use them.
+
+## Troubleshooting
+
+For troubleshooting information, see the following articles in the Knowledge Base:
+
+* [Ping (ForgeRock) SDK Troubleshooting](https://support.pingidentity.com/s/article/Troubleshooting-ForgeRock-SDKs)
+
+### Additional Articles
+
+* [How do I troubleshoot issues with the CORS filter in PingAM/OpenAM (All versions)?](https://support.pingidentity.com/s/article/How-do-I-troubleshoot-issues-with-CORS-in-PingAM)
+
+---
+
+---
+title: Interface stability
+description: Interfaces labelled as Evolving in the documentation may change without warning. In addition, the following rules apply:
+component: login-widget
+page_id: login-widget:release-notes:stability
+canonical_url: https://developer.pingidentity.com/login-widget/release-notes/stability.html
+revdate: Tue, 23 May 2023 18:14:09 +0100
+keywords: ["Compatibility", "Features", "Source Code", "SDK"]
+section_ids:
+  release-levels: Product release levels
+  interface-stability: Product stability labels
+---
+
+# Interface stability
+
+Interfaces labelled as *Evolving* in the documentation may change without warning. In addition, the following rules apply:
+
+* Interfaces that are not described in released product documentation should be considered *Internal/Undocumented*.
+
+## Product release levels
+
+Ping Identity defines Major, Minor, Maintenance, and Patch product release levels. The version number reflects release level. The release level tells you what sort of compatibility changes to expect.
+
+**Release level definitions**
+
+| Release Label      | Version Numbers                                               | Characteristics                                                                                                                                                                                                                                                                                                                 |
+| ------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Major              | Version: x\[.0.0] (trailing 0s are optional)                  | * Bring major new features, minor features, and bug fixes.
+
+* Can include changes even to Stable interfaces.
+
+* Can remove previously Deprecated functionality, and in rare cases remove Evolving functionality that has not been explicitly Deprecated.
+
+* Include changes present in previous Minor and Maintenance releases. |
+| Minor              | Version: x.y\[.0] (trailing 0s are optional)                  | - Bring minor features, and bug fixes.
+
+- Can include backwards-compatible changes to Stable interfaces in the same Major release, and incompatible changes to Evolving interfaces.
+
+- Can remove previously Deprecated functionality.
+
+- Include changes present in previous Minor and Maintenance releases.                   |
+| Maintenance, Patch | Version: x.y.z\[.p]The optional *p* reflects a Patch version. | * Bring bug fixes
+
+* Are intended to be fully compatible with previous versions from the same Minor release.                                                                                                                                                                                                                    |
+
+## Product stability labels
+
+Ping Identity Platform software supports many features, protocols, APIs, GUIs, and command-line interfaces. Some of these are standard and very stable. Others offer new functionality that is continuing to evolve.
+
+Ping Identity acknowledges you invest in these features and interfaces and so need to understand when they are expected to change. For that reason, we define stability labels and use these definitions in Ping Identity Platform products.
+
+**Stability label definitions**
+
+| Stability Label       | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stable                | This documented feature or interface is expected to undergo backwards-compatible changes only for major releases.Changes may be announced at least one minor release before they take effect.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Evolving              | This documented feature or interface is continuing to evolve and so is expected to change, potentially in backwards-incompatible ways even in a minor release. Changes are documented at the time of product release.While new protocols and APIs are still in the process of standardization, they are Evolving. This applies, for example, to recent Internet-Draft implementations and to newly developed functionality.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Legacy                | This feature or interface has been replaced with an improved version, and is no longer receiving development effort from Ping Identity.You should migrate to the newer version, however the existing functionality will remain.Legacy features or interfaces will be marked as *Deprecated* if they are scheduled to be removed from the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Deprecated            | This feature or interface is deprecated, and likely to be removed in a future release.For previously stable features or interfaces, the change was likely announced in a previous release.Deprecated features or interfaces will be removed from Ping Identity products.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Removed               | This feature or interface was deprecated in a previous release, and has now been removed from the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Technology Preview    | Technology previews provide access to new features that are considered as new technology that is not yet supported. Technology preview features may be functionally incomplete, and the function as implemented is subject to change without notice.*DO NOT DEPLOY A TECHNOLOGY PREVIEW INTO A PRODUCTION ENVIRONMENT.*Customers are encouraged to test drive the technology preview features in a non-production environment, and are welcome to make comments and suggestions about the features in the associated forums.Ping Identity does not guarantee that a technology preview feature will be present in future releases, the final complete version of the feature is liable to change between preview and the final version. Once a technology preview moves into the completed version, said feature will become part of Ping Identity Platform.Technology previews are provided on an "AS-IS" basis for evaluation purposes only, and Ping Identity accepts no liability or obligations for the use thereof. |
+| Internal/Undocumented | Internal and undocumented features or interfaces can change without notice.If you depend on one of these features or interfaces, contact support to discuss your needs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+---
+
+---
+title: Login Widget changelog
+description: Subscribe to get automatic updates:
+component: login-widget
+page_id: login-widget:release-notes:changelogs/changelog_login_widget
+canonical_url: https://developer.pingidentity.com/login-widget/release-notes/changelogs/changelog_login_widget.html
+revdate: Wed, 05 Jun 2024 10:26:07 +0100
+keywords: ["Features", "Source Code", "SDK", "Login Widget"]
+section_ids:
+  forgerock_login_widget_1_3_0: Advanced Identity Cloud/PingAM Login Widget 1.3.0
+  forgerock_login_widget_1_2: Advanced Identity Cloud/PingAM Login Widget 1.2.1
+  forgerock_login_widget_1_1: Advanced Identity Cloud/PingAM Login Widget 1.1
+  forgerock_login_widget_1_0: Advanced Identity Cloud/PingAM Login Widget 1.0
+---
+
+# Login Widget changelog
+
+Subscribe to get automatic updates:
+
+* [icon: rss-square, set=fa][Ping (ForgeRock) SDKs Changelog RSS feed](developer_experience_changelog_rss.xml)
+
+* [icon: square-envelope, set=fa][Ping (ForgeRock) SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
+
+## Advanced Identity Cloud/PingAM Login Widget 1.3.0
+
+June 5, 2024 `minor`
+
+**Added**
+
+* Added support for integration with PingOne Protect.
+
+* Added the name of the device to the recovery codes page.
+
+**Fixed**
+
+* Corrected an issue that prevented use of the `logLevel` parameter in the Advanced Identity Cloud/PingAM Login Widget configuration.
+
+* Fixed an issue with configuration literals that caused `ZodError` messages in the console.
+
+***
+
+## Advanced Identity Cloud/PingAM Login Widget 1.2.1
+
+January 8, 2024 `minor`
+
+**Added**
+
+* Support for CAPTCHA nodes.
+
+***
+
+## Advanced Identity Cloud/PingAM Login Widget 1.1
+
+July 17, 2023 `minor`
+
+**Added**
+
+* Support for device profiling callbacks (`DeviceProfileCallback`)
+
+* Support for web authentication (WebAuthn) journeys and trees.
+
+***
+
+## Advanced Identity Cloud/PingAM Login Widget 1.0
+
+April 18, 2023 `major`
+
+**Changed**
+
+* First public release
+
+---
+
+---
+title: What&#8217;s New
+description: Subscribe to get automatic updates:
+component: login-widget
+page_id: login-widget:release-notes:index
+canonical_url: https://developer.pingidentity.com/login-widget/release-notes/index.html
+revdate: Fri, 16 May 2025 12:17:11 +0100
+keywords: ["Compatibility", "Features", "Source Code", "SDK"]
+section_ids:
+  latest_updates: Latest updates
+  forgerock_login_widget_1_3_0: Advanced Identity Cloud/PingAM Login Widget 1.3.0
+  forgerock_login_widget_1_2: Advanced Identity Cloud/PingAM Login Widget 1.2.1
+  forgerock_login_widget_1_1: Advanced Identity Cloud/PingAM Login Widget 1.1
+  forgerock_login_widget_1_0: Advanced Identity Cloud/PingAM Login Widget 1.0
+---
+
+# What's New
+
+Subscribe to get automatic updates:
+
+* [icon: rss-square, set=fa][Ping (ForgeRock) SDKs Changelog RSS feed](changelogs/developer_experience_changelog_rss.xml)
+
+* [icon: square-envelope, set=fa][Ping (ForgeRock) SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
+
+## Latest updates
+
+### Advanced Identity Cloud/PingAM Login Widget 1.3.0
+
+June 5, 2024 `minor`
+
+**Added**
+
+* Added support for integration with PingOne Protect.
+
+* Added the name of the device to the recovery codes page.
+
+**Fixed**
+
+* Corrected an issue that prevented use of the `logLevel` parameter in the Advanced Identity Cloud/PingAM Login Widget configuration.
+
+* Fixed an issue with configuration literals that caused `ZodError` messages in the console.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.2.1
+
+January 8, 2024 `minor`
+
+**Added**
+
+* Support for CAPTCHA nodes.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.1
+
+July 17, 2023 `minor`
+
+**Added**
+
+* Support for device profiling callbacks (`DeviceProfileCallback`)
+
+* Support for web authentication (WebAuthn) journeys and trees.
+
+### Advanced Identity Cloud/PingAM Login Widget 1.0
+
+April 18, 2023 `major`
+
+**Changed**
+
+* First public release

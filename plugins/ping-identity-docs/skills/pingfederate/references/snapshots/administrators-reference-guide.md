@@ -348,637 +348,718 @@ A connection is included in the search results so long as its name or ID is a pa
 ---
 
 ---
-title: Choosing a SQL method
-description: PingFederate allows you to map attributes directly to a single database table, the default, or to SQL stored-procedure parameters for Java Database Connectivity (JDBC) datastores,
+title: Account lockout protection
+description: Account lockout protection provides a level of security to the user and can operate in multiple ways based on the PingFederate environment.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_userprovisioningtasklet_userprovisioningsqlmethodstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_userprovisioningtasklet_userprovisioningsqlmethodstate.html
+page_id: pingfederate:administrators_reference_guide:pf_account_lockout_protection
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_account_lockout_protection.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2022
 section_ids:
-  about-this-task: About this task
-  steps: Steps
+  related-links: Related links
 ---
 
-# Choosing a SQL method
+# Account lockout protection
 
-PingFederate allows you to map attributes directly to a single database table, the default, or to SQL stored-procedure parameters for Java Database Connectivity (JDBC) datastores,
+Account lockout protection provides a level of security to the user and can operate in multiple ways based on the PingFederate environment.
 
-## About this task
+Account lockout protection prevents user accounts from locking at the underlying user repository based on too many failed authentication attempts. It also adds a layer of protection against brute force and dictionary attacks because the user is locked out for a time period when the number of failed attempts exceeds the threshold. This protection is enabled in many areas of PingFederate, including the HTML Form Adapter, the Username Token Processor, the OAuth resource owner password credentials grant type, and the native authentication scheme for the administrative console and API.
 
-Choose and configure the preferred method on the **SQL Method** tab.
+|   |                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The HTML Form Adapter and the Username Token Processor provide a per-instance setting for the maximum number of failed attempts such that administrators can use unique values for different instances of the adapter or the token processor. |
 
-![Screen capture of the SQL Method tab showing the Table and Stored Procedure options.](_images/nbx1564003515373.jpg)
+In a PingFederate clustered environment, depending on the chosen runtime state-management architecture, the account locking-state information is shared across a replica set, multiple replica sets, or all nodes in the cluster.
 
-|   |                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------- |
-|   | This tab appears only when you specify Microsoft SQL Server datastore on the **User Repository** tab. |
+Settings for account lockout protection are stored in the `com.pingidentity.common.security.AccountLockingService.xml` configuration file, located in the `<pf_install>/pingfederate/server/default/data/config-store` directory.
 
-## Steps
+## Related links
 
-* Make a selection as needed and click **Next**.
+* [Account Locking Service](../server_clustering_guide/pf_acc_lock_service.html)
 
-  Depending on the selection, different steps appear under the **JIT Provisioning** task. See the sections indicated for more information.
+* [Adaptive clustering](../server_clustering_guide/pf_adaptiv_cluster.html)
 
-* If mapping attributes directly to a table, see the topics sections immediately following:
-
-  * [Specifying a database user-record location](help_userprovisioningtasklet_selectdatabasetableandcolumnsstate.html)
-
-  * [Specifying a unique ID database column](help_userprovisioningtasklet_userprovisioningjdbcuniqueidstate.html)
-
-* If using a stored procedure, skip to [Specifying a stored procedure location](help_userprovisioningtasklet_selectdatabaseschemaandstoredprocstate.html)
+* [Directed clustering](../server_clustering_guide/pf_directed_cluster.html)
 
 ---
 
 ---
-title: Choosing allowable SAML bindings (SAML 2.0)
-description: On the Allowable SAML Bindings tab, you select the one or more bindings that your service provider (SP) partner can use to send SAML authentication requests or single logout (SLO) messages.
+title: Account-linking datastores
+description: Configure where you want to store account links, either internally or externally.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_spprotocolsettingstasklet_allowablesamlbindingsstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_spprotocolsettingstasklet_allowablesamlbindingsstate.html
+page_id: pingfederate:administrators_reference_guide:pf_account_link_datastore
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_account_link_datastore.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 15, 2023
+section_ids:
+  related-links: Related links
+---
+
+# Account-linking datastores
+
+Configure where you want to store account links, either internally or externally.
+
+When a service provider (SP) is configured to use account linking for an identity provider (IdP) connection, by default PingFederate uses the built-in Hyper SQL Database (HSQLDB) as the account-link repository. You can also configure PingFederate to store account links on an external database server or directory server. For specific instructions on how to configure these options, see the following topics:
+
+* [Configuring external databases for account-link storage](pf_config_external_database_for_account_link_storag.html)
+
+* [Configuring directories for account-link storage](pf_config_directori_account_link_storag.html)
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Use the built-in HSQLDB only for trial or training environments. For testing and production environments, always use a secured external storage solution for proper functioning in a clustered environment.Testing involving HSQLDB is not a valid test. In both testing and production, it might cause various problems due to its limitations and HSQLDB involved cases are not supported by Ping Identity. |
+
+## Related links
+
+* [Account linking](../introduction_to_pingfederate/pf_acc_link.html)
+
+* [About Server Clustering](../server_clustering_guide/pf_server_clustering_guide.html)
+
+---
+
+---
+title: Activating tracking ID in templates
+description: You can configure PingFederate to display the tracking ID in the user-facing error Velocity templates. When an error occurs, use the tracking ID to look for the related log messages.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_activat_tracking_id_templates
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_activat_tracking_id_templates.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2022
 section_ids:
-  before-you-begin: Before you begin
   about-this-task: About this task
   steps: Steps
   result: Result
 ---
 
-# Choosing allowable SAML bindings (SAML 2.0)
+# Activating tracking ID in templates
 
-On the **Allowable SAML Bindings** tab, you select the one or more bindings that your service provider (SP) partner can use to send SAML authentication requests or single logout (SLO) messages.
-
-## Before you begin
-
-For prerequisites and initial steps for configuring Browser SSO protocols, see [Configuring protocol settings](help_spbrowserssotasklet_spprotocolsettingsstate.html).
+You can configure PingFederate to display the tracking ID in the user-facing error Velocity templates. When an error occurs, use the tracking ID to look for the related log messages.
 
 ## About this task
 
-This step applies only to SAML 2.0 connections when the SP-initiated SSO profile or either SLO profile is selected on the **SAML Profiles** tab.
+You can find the Velocity template files in the `<pf_install>/pingfederate/server/default/conf/template` directory.
+
+The Velocity variable is `$TrackingId` and is available in the following templates:
+
+* `general.error.page.template.html`
+
+* `generic.error.msg.page.template.html`
+
+* `idp.slo.error.page.template.html`
+
+* `idp.sso.error.page.template.html`
+
+* `sourceid-wsfed-idp-exception-template.html`
+
+* `sp.slo.error.page.template.html`
+
+* `sp.sso.error.page.template.html`
+
+* `state.not.found.error.page.template.html`
 
 ## Steps
 
-1. On the **Allowable SAML Bindings** tab, select the applicable SAML bindings based on your partner agreement.
+1. Open the applicable Velocity template file.
 
-   |   |                                                                                                                                                                                     |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If you have specified an Assertion Consumer Service (ACS) or SLO endpoint using the artifact (outbound) binding, you must including SOAP as one of the allowable (inbound) binding. |
+2. Search for the `$TrackingId` variable.
 
-2. Click **Next** to save changes and proceed to **Artifact Resolver Locations**. For more information, see [Specifying artifact resolver locations (SAML 2.0)](help_spprotocolsettingstasklet_artifactconfigstate.html).
+3. Follow the inline instructions to activate the variable.
+
+   |   |                                                                    |
+   | - | ------------------------------------------------------------------ |
+   |   | Template customization does not require a restart of PingFederate. |
+
+4. For a clustered PingFederate environment, repeat these steps on each engine node.
 
 ## Result
 
-If you are editing an existing connection, you can reconfigure the allowable bindings, which might require additional configuration changes in subsequent tasks.
+The following screen capture demonstrates the user experience after the `$TrackingId` variable is activated and an error has occurred. In this example, `V3IwuUsy8PQp-9ZbE9UfUjOEo9c` is the tracking ID.
+
+![Sample error message with Tracking ID](_images/pyx1564003632972.png)
 
 ---
 
 ---
-title: Choosing an attribute mapping method
-description: You can select if and how PingFederate should query a local datastore to help fulfill the attribute contract in conjunction with attribute values from the single sign-on (SSO) token.
+title: Active Directory and Kerberos
+description: You can configure PingFederate to authenticate users through the following identity provider (IdP) adapters or token processors.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:pf_choosing_attribute_mapping_method
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_choosing_attribute_mapping_method.html
+page_id: pingfederate:administrators_reference_guide:pf_active_directory_kerberos
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_active_directory_kerberos.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 3, 2022
+---
+
+# Active Directory and Kerberos
+
+You can configure PingFederate to authenticate users through the following identity provider (IdP) adapters or token processors.
+
+| Adapter or Token Processor                       | Description                                                                                                                                                                                                           |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PingFederate integrated Kerberos Adapter         | Using the built-in Kerberos Adapter with a configured AD domain allows a PingFederate identity provider (IdP) server to perform single sign-on (SSO) to service provider (SP) applications based on Kerberos tickets. |
+| PingFederate integrated Kerberos Token Processor | The built-in Kerberos Token Processor accepts and validates Kerberos tokens through a configured Kerberos Realm from a web service client.                                                                            |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | As of version 10.3 and above, PingFederate no longer supports the IWA integration kit. You can find more information about Migrating from the IWA Integration Kit to the PingFederate Kerberos adapter in [Migrating from the Integrated Windows Authentication integration kit to the PingFederate Kerberos adapter](https://support.pingidentity.com/s/article/Migrating-from-the-Integrated-Windows-Authentication-integration-kit-to-the-PingFederate-Kerberos-adapter) in the Ping Identity Support Portal. |
+
+---
+
+---
+title: Adapter Mappings
+description: Configuring adapter mappings allows administrators to map attributes from an authentication policy contract directly to a service provider (SP) adapter instance.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_adapt_mappings
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_adapt_mappings.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 5, 2022
+---
+
+# Adapter Mappings
+
+Configuring adapter mappings allows administrators to map attributes from an authentication policy contract directly to a service provider (SP) adapter instance.
+
+This allows the administrators to chain multiple authentication sources in an SP authentication policy, to build an authentication policy contract using attributes from authentication sources in the policy path, and to apply the authentication policy contract to the target application.
+
+---
+
+---
+title: Adapter-to-adapter mappings
+description: PingFederate can act as both identity provider (IdP) and service provider (SP) running on the same server with this configuration.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_adaptertoadapter_mappings
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_adaptertoadapter_mappings.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 8, 2024
+---
+
+# Adapter-to-adapter mappings
+
+PingFederate can act as both identity provider (IdP) and service provider (SP) running on the same server with this configuration.
+
+This configuration is provided for special use cases in which PingFederate is acting as both an IdP and an SP, and user attributes from an IdP adapter are used to create an authenticated session with an SP adapter on the same PingFederate server. Generally, these cases involve software-as-a-service (SaaS) providers who might not support standards-based single sign-on (SSO) but do provide proprietary SSO with "delegated authentication", such as Salesforce and Workday.
+
+In effect, this configuration provides an alternative to setting up complete connections to send SAML assertions and other messages back and forth between an IdP and an SP running on the same PingFederate server in a loop-back configuration to enable nonstandard use cases. Instead, attributes that would normally be sent in an assertion are mapped directly from the IdP authentication adapter to an SP adapter, resulting in a secure SP user session.
+
+To use this configuration, ensure that you have already configured the required IdP and SP adapter instances. You can reuse instances that are also in use for connection configurations.
+
+---
+
+---
+title: Adding a new datastore
+description: On the Data Stores window, you can create and configure a new datastore.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:help_datasourcetasklet_selectdatasourcetypestate
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_datasourcetasklet_selectdatasourcetypestate.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 5, 2022
 section_ids:
+  steps: Steps
+---
+
+# Adding a new datastore
+
+On the **Data Stores** window, you can create and configure a new datastore.
+
+## Steps
+
+1. Go to **System > Data & Credential Stores > Data Stores**.
+
+2. Click **Add New Data Store**.
+
+3. Enter a name for the datastore.
+
+4. From the **Type** list, select the type of datastore.
+
+   Available types are limited to the ones currently installed on your server.
+
+5. (Optional) To mask attribute values returned from this datastore in PingFederate logs, select the **Mask Values in Log** checkbox.
+
+6. Click **Next**.
+
+---
+
+---
+title: Adding Active Directory domains and Kerberos realms
+description: You can configure Active Directory domains or Kerberos realms that PingFederate uses to contact the domain controllers or the key distribution centers (KDCs) for verifying user authentication.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_adding_active_directory_domains_kerberos_realms
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_adding_active_directory_domains_kerberos_realms.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: December 15, 2025
+section_ids:
+  about-this-task: About this task
+  adding-domains-and-realms-in-pingfederate-on-premise-deployments: Adding domains and realms in PingFederate on-premise deployments
+  steps: Steps
+  choose-from: Choose from:
+  adding-domains-and-realms-in-pingfederate-cloud-deployments: Adding domains and realms in PingFederate cloud deployments
   before-you-begin: Before you begin
-  about-this-task: About this task
-  steps: Steps
-  result: Result
+  steps-2: Steps
+  adding-domains-and-realms-without-kdc-connectivity: Adding domains and realms without KDC connectivity
+  steps-3: Steps
+  choose-from-2: Choose from:
 ---
 
-# Choosing an attribute mapping method
+# Adding Active Directory domains and Kerberos realms
 
-You can select if and how PingFederate should query a local datastore to help fulfill the attribute contract in conjunction with attribute values from the single sign-on (SSO) token.
-
-## Before you begin
-
-To determine whether you need to look up additional values, compare the attribute contract against the adapter contract or the authentication policy contract. If the attribute contract does not contain the required information, determine whether a local datastore can supply it.
-
-Alternatively, you can configure datastore queries as part of the fulfillment configuration for the applicable APC if you use authentication policies to route users through a series of authentication sources and end each successful policy path with an APC.
+You can configure Active Directory domains or Kerberos realms that PingFederate uses to contact the domain controllers or the key distribution centers (KDCs) for verifying user authentication.
 
 ## About this task
 
-You make selections on the **Adapter Data Store** tab for service provider (SP) adapter mapping or the **Attribute Retrieval** tab for authentication policy contract (APC) mapping.
+The steps for adding an Active Directory domain or Kerberos realm differ between on-premise PingFederate deployments and cloud PingFederate deployments. Follow the steps in the appropriate section for your deployment.
 
-|   |                                                                                                              |
-| - | ------------------------------------------------------------------------------------------------------------ |
-|   | To learn more about authentication policies, see [Authentication policies](pf_authentication_policies.html). |
+## Adding domains and realms in PingFederate on-premise deployments
 
-## Steps
+Use the following procedure when PingFederate is deployed on-premise.
 
-* If the attribute contract contains all the attributes that your application requires, click **Use only the attributes available in the SSO assertion**.
+### Steps
 
-* To set up a datastore query, click **Use the SSO assertion to look up additional information**, and then follow a series of sub tasks to complete the configuration. See [Choosing a datastore](pf_choosing_datastore.html) for step-by-step instructions.
+1. In the PingFederate admin console, go to the **Manage Domain/Realm** tab.
 
-## Result
+2. In the **Connection Type** list, select **Directly**.
 
-If you are editing a currently mapped adapter instance or APC, you can change the mapping method, which might require additional configuration changes in subsequent tasks.
+3. In the **Domain/Realm Name** field, enter the fully-qualified domain or realm name. For example, companydomain.com.
 
----
-
----
-title: Choosing an encryption certificate (SAML 2.0)
-description: If SAML_SUBJECT is encrypted, either by itself or as part of a whole assertion, then all references to this name identifier in SAML 2.0 single logout (SLO) requests from your site might also be encrypted if the connection uses service provider (SP)-initiated SLO.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_idp_credentialstasklet_selectxmlencryptioncertstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_idp_credentialstasklet_selectxmlencryptioncertstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Choosing an encryption certificate (SAML 2.0)
-
-If `SAML_SUBJECT` is encrypted, either by itself or as part of a whole assertion, then all references to this name identifier in SAML 2.0 single logout (SLO) requests from your site might also be encrypted if the connection uses service provider (SP)-initiated SLO.
-
-## About this task
-
-You must also choose a certificate if encryption of the name identifier is required for an Attribute Request profile. For more information, see [Specifying XML encryption policy (for SAML 2.0)](help_idpprotocolsettingstasklet_selectidpxmlassertionencryptionstate.html).
-
-## Steps
-
-1. (Optional) Select an option under **Block Encryption Algorithm**.
-
-|   |                                                                                                                                                                                                                                              |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For Oracle Java SE Development Kit 11, the JCE jurisdiction policy defaults to unlimited strength. For more information, see the [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/11/migrate/) in Oracle's documentation. |
-
-\+ The default selection is **AES-128**.
-
-\+ For more information about XML block encryption and key transport algorithms, see [XML Encryption Syntax and Processing from W3C](https://www.w3.org/TR/xmlenc-core/).
-
-1. Select an option under **Key Transport Algorithm**.
-
-   |   |                                                                                                                                                                                                                                                                                               |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Due to security risks associated with the RSA-v1.5 algorithm used for key transport, it is no longer available for new connections. Existing connections in which this algorithm is configured continue to support it. However, you should upgrade such connections to use a newer algorithm. |
-
-   The default selection is **RSA-OAEP**.
-
-2. Select a partner certificate from the list.
-
-   If you have not imported the certificate from your partner, click **Manage Certificates** to do so. For more information see [Managing certificates from partners](pf_managing_certificates_from_partners.html).
-
----
-
----
-title: Choosing an event trigger
-description: Choose whether PingFederate initiates user provisioning only when the user identifier is new, or every time your site receives a single sign-on (SSO) token.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_userprovisioningtasklet_eventtriggerstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_userprovisioningtasklet_eventtriggerstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  choose-from: Choose from:
----
-
-# Choosing an event trigger
-
-Choose whether PingFederate initiates user provisioning only when the user identifier is new, or every time your site receives a single sign-on (SSO) token.
-
-## About this task
-
-If you choose to have PingFederate initiate user provisioning every time your site receives an SSO token, for all SSO tokens, an existing user account is always updated with incoming attributes.
-
-![Scree capture of the Event Trigger tab showing the two trigger options.](_images/sqb1564003520072.jpg)
-
-|   |                                                                                                                                                                                                                                                                        |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This tab does not appear for a Microsoft SQL Server datastore if provisioning is accomplished using a stored procedure, because the procedure is always called for all SSO tokens. The procedure should handle both provisioning new users and updating existing ones. |
-
-## Steps
-
-* On the **Event Trigger** tab, in the **Specify the trigger that initiates a user-provisioning event** section, select one of the following:
-
-  ### Choose from:
-
-  * **Only SAML Assertations Containing a New User ID**
-
-  * **All SAML Assertations**
-
----
-
----
-title: Choosing an identity mapping method for IdP SSO
-description: In the Identity Mapping window, you choose the type of name identifier your partner requires. Your selection might affect the way that the service provider (SP) looks up and associates your users at the SP site. You and the SP should decide in advance which option to use.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_assertioncreationtasklet_selectspaccountlinkingstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_assertioncreationtasklet_selectspaccountlinkingstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
----
-
-# Choosing an identity mapping method for IdP SSO
-
-In the **Identity Mapping** window, you choose the type of name identifier your partner requires. Your selection might affect the way that the service provider (SP) looks up and associates your users at the SP site. You and the SP should decide in advance which option to use.
-
-The choices of name-identifier types depend on whether you use the SAML or WS-Federation protocol. For more information, see one of the following.
-
-* [Selecting a SAML Name ID type](pf_select_saml_name_id_type.html)
-
-* [Selecting a WS-Federation Name ID type](help_assertioncreationtasklet_wsfedidentitymappingstate.html)
-
-|   |                                                                                                                                                                                                                                                                                                |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The **Identity Mapping** window does not apply for connections using the WS-Federation protocol in conjunction with JSON web token (JWT)-based single sign-on (SSO) tokens. Instead, work with the SP to define an attribute contract that it can use to map users to accounts at the SP site. |
-
----
-
----
-title: Choosing an identity mapping method for SP SSO
-description: "When configuring service provider (SP) single sign-on (SSO), PingFederate offers two methods of identity mapping you can choose from: account mapping or account linking."
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_usersessioncreationtasklet_selectidpaccountlinkingstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_usersessioncreationtasklet_selectidpaccountlinkingstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  choose-from: Choose from:
----
-
-# Choosing an identity mapping method for SP SSO
-
-When configuring service provider (SP) single sign-on (SSO), PingFederate offers two methods of identity mapping you can choose from: account mapping or account linking.
-
-## About this task
-
-PingFederate allows an SP to use either account linking or account mapping to associate remote users with local accounts for SSO between business partners. For more information, see [Identity mapping](../introduction_to_pingfederate/pf_ident_mapp.html). On the **Identity Mapping** tab, you choose which method to use in this IdP connection. You and your partner should decide in advance which option to use. For more information, see [Federation planning checklist](../introduction_to_pingfederate/pf_fed_plan_checklist.html).
-
-If your site is using account linking, then establishing an attribute contract is not required. Depending on your partner agreement, you can choose to supplement the account link with an attribute contract. In this configuration the account link is used to determine the user's identity, while the additional attributes might be used for authorization decisions, customized web pages, and so on, at the your site. For more information, see [User attributes](../introduction_to_pingfederate/pf_user_attrib.html).
-
-|   |                                                                                                                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you have previously set up a configuration to use an attribute contract and want to change the configuration to use account linking without additional attributes, then the existing attribute contract will be discarded. |
-
-Account linking can be used with either a clear, standard name identifier or an opaque pseudonym.
-
-## Steps
-
-1. Choose which identity mapping method to use in this IdP connection.
+4. For **Credential Storage**, click one of the following:
 
    ### Choose from:
 
-   * If you want to dynamically associate remote users with local accounts using a known attribute to identify a user, such as a username or email address, select **Account Mapping**
+   * Click **Internally Managed** to store credentials in PingFederate.
 
-     Account mapping uses the user identifier, `SAML_SUBJECT` in a SAML assertion or `sub` in an ID token, and associated user attributes to create an association between a remote user and a local account.
+   * Click **Secret Manager** to store credentials in an external secret manager.
 
-     |   |                                                                                                                                                                                                              |
-     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-     |   | If you are using PingFederate's JIT provisioning, choose **Account Mapping**. For more information, see [Configuring just-in-time provisioning](help_idpconnectionconfigtasklet_userprovisioningstate.html). |
+     Learn more in [Secret managers](pf_secret_managers.html).
 
-   * If you want to create a long-term association between a remote user and a local account, select **Account Linking**
+5. In the **Domain/Realm Username** field, enter the ID for the domain or realm account name.
 
-     |   |                                                                                                                                                                                                                                                                                                                                                                                                               |
-     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | Use the built-in HSQLDB only for trial or training environments. For testing and production environments, always use a secured external storage solution for proper functioning in a clustered environment.Testing involving HSQLDB is not a valid test. In both testing and production, it might cause various problems due to its limitations and HSQLDB involved cases are not supported by Ping Identity. |
+6. Depending on the **Credential Storage** option you chose, enter a domain password or reference.
 
-   To set up an attribute contract to use in conjunction with account linking, select the **…​ includes attributes in addition to the unique name identifier** checkbox.
+   1. In the **Domain/Realm Password** field, enter the password for the domain or realm account.
 
-2. If you have selected only the SP-initiated SSO profile and you intend to enforce additional authentication requirements by placing this IdP connection in an SP authentication policy, select **No Mapping**.
+   2. In the **Domain/Realm Password Reference** field, enter the password reference generated by your secret manager.
 
-3. Additionally, select **No Mapping** if you are deploying an IdP connection solely for OAuth attribute mapping without the use of an authentication policy contract. For more information, see [Configuring IdP connection grant mapping](help_idpbrowserssotasklet_oauthattributemappingstate.html).
+7. (Optional) Select the **Retain Previous Keys on Password Change** checkbox and click **Save** to avoid locking out end users with existing Kerberos tickets when the service account password is updated.
 
----
+   PingFederate retains each previous key for the period specified in the **Key Set Retention Period** field on the **Manage Domain/Realm Settings** tab of the **Active Directory Domains/Kerberos Realms** page. The default period is 610 minutes. Learn more in [Managing domain connectivity settings](help_kerberosrealmstasklet_kerberosrealmssettingsstate.html).
 
----
-title: Choosing an IdP connection type
-description: You can use the administrative console to choose an identity provider (IdP) connection type.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_idpconnectionconfigtasklet_connroleandprotocolstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_idpconnectionconfigtasklet_connroleandprotocolstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 5, 2026
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
+   |   |                                                                                      |
+   | - | ------------------------------------------------------------------------------------ |
+   |   | To clear the previous keys from PingFederate, clear the checkbox and click **Save**. |
 
-# Choosing an IdP connection type
+   This checkbox is selected by default.
 
-You can use the administrative console to choose an identity provider (IdP) connection type.
+8. In the **Domain Controller/Key Distribution Center Host Names** field, enter the host name or IP address of your domain controller or KDC, such as `dc01-yvr`, and then click **Add**. Repeat this step to add multiple servers.
 
-## About this task
+   If a host name is used, PingFederate appends the domain to the host name to formulate the fully qualified domain name (FQDN) of the server unless the **Suppress DC/Domain Concatenation** checkbox is selected.
 
-You can indicate on the **Connection Type** tab whether the connection to this partner is for browser single sign-on (SSO) *(tooltip: \<div class="paragraph">
-\<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
-\</div>)*, WS-Trust Security Token Service (STS) *(tooltip: \<div class="paragraph">
-\<p>An entity responsible for responding to WS-Trust requests for validation and issuance of security tokens used for SSO authentication to web services.\</p>
-\</div>)*, OAuth, SAML, inbound provisioning, or a combination of them.
+   If unspecified, PingFederate uses a DNS lookup.
 
-|   |                                                                                                                                                                                                                                |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | You can add STS, OAuth, and outbound provisioning support to any existing SSO connection, or vice versa, at any time. However, when OpenID Connect is the chosen protocol for browser SSO, the other types become unavailable. |
+9. (Optional) Select the **Suppress DC/Domain Concatenation** checkbox to specify the desired FQDNs under **Domain Controller/Key Distribution Center Host Names**.
 
-Select the applicable protocol on the **Connection Type** tab when establishing a new connection.
+   When selected, PingFederate doesn't append the domain to the host names.
 
-|   |                                                                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If your partner's deployment also supports multiple protocols and you intend to communicate using more than one, you must set up a separate connection for each protocol. Each connection must use a unique partner connection ID. |
+10. (Optional) Click **Test Domain/Realm Connectivity** to test access to the domain controller or KDC from the administrative-console server.
 
-## Steps
+    When a connection to any of the configured controllers or KDCs is successful, the message `Test Successful` appears. Otherwise, the test returns error messages near the top of the window.
 
-* On the **Connection Type** tab, indicate the desired type of connection to your partner.
+    |   |                                                                                                                                                                                                              |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    |   | To help resolve connectivity issues, select the **Debug Log Output** checkbox on the **Manage Domain/Realm Settings** tab, run the test again, and review the debug messages in the PingFederate server log. |
 
-  | Choice                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Action                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  | Configure a connection for secure browser-based SSO                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Select the **Browser SSO Profiles** checkbox and a protocol from the list, if necessary.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-  | Configure an STS connection                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Select the **WS-Trust STS** checkbox and the default token type from the list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-  | Configure a connection that exchanges SAML assertions or JSON web tokens (JWTs) for access tokens                                                                                                                                                                                                                                                                                                                                                                                                       | Select the **OAuth Assertion Grant** checkbox.&#xA;&#xA;The OAuth Assertion Grant option is available only if at least one Access Token Manager instance has been configured on the Applications > OAuth > Access Token Management window\.For more information about these standards, see [Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://tools.ietf.org/html/rfc7522) and [JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://tools.ietf.org/html/rfc7523). |
-  | Configure a connection to exchange JSON Web Token (JWT) *(tooltip: \<div class="paragraph">&#xA;\<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>&#xA;\</div>)* for access tokens by delegating JWT Bearer Grant processing to a configured plugin. For example, the macOS SSO Adapter. | Select the **JWT Bearer Grant Processor** checkbox and select a configured [JWT Bearer Grant Processor](pf_jwt_bearer_grant_processors.html) instance in the list.                                                                                                                                                                                                                                                                                                                                                                                                                         |
-  | Configure an inbound provisioning connection                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Select the **Inbound Provisioning** checkbox and choose to support provisioning of users only (**User Support**) or users and groups (**User and Group Support**). For groups, nested group membership, if any, is preserved.                                                                                                                                                                                                                                                                                                                                                              |
+    This test stops at the first successful result when multiple domain controllers or KDCs are specified, so not all servers are necessarily verified. Depending on the network architecture, the engine nodes deployed in a cluster could establish connections differently. As a result, the engine nodes and the console node might connect to different domain controllers or KDCs.
 
-* (Optional) If your PingFederate license manages connections by groups, you can select a group for this connection.
+11. Click **Save**.
 
-  This option isn't displayed for unrestricted or other types of licenses.
+## Adding domains and realms in PingFederate cloud deployments
 
----
+Use the following procedure when PingFederate is deployed in a cloud.
 
----
-title: Choosing an OAuth datastore
-description: You can optionally set up OAuth datastore queries to supplement values returned from the source.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_oauthidpconnection2targetmappingtasklet_oauthidpconnectionselectdatasourcedata
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_oauthidpconnection2targetmappingtasklet_oauthidpconnectionselectdatasourcedata.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  steps: Steps
-  choose-from: Choose from:
----
+### Before you begin
 
-# Choosing an OAuth datastore
+* [Create an LDAP gateway in your PingOne environment](https://docs.pingidentity.com//pingone/integrations/p1_add_ldap_gateway.html)
 
-You can optionally set up OAuth datastore queries to supplement values returned from the source.
+* [Create a connection between your PingFederate and PingOne environments](help_p1connections_p1connectioncreate.html)
 
-## Steps
+* [Configure an LDAP datastore](pf_configuring_p1_ldap_gateway_datastore.html)
 
-1. On the **Data Store** tab, perform one of the following actions.
+### Steps
+
+1. In the PingFederate admin console, go to the **Manage Domain/Realm** page.
+
+2. In the **Connection Type** list, select **Through PingOne LDAP Gateway**.
+
+3. In the **Domain/Realm Name** field, enter the fully-qualified domain or realm name. For example, companydomain.com.
+
+4. In the **PingOne LDAP Gateway Data Store** list, select the datastore that was configured for the PingOne LDAP Gateway.
+
+5. (Optional) Click the **Test Domain/Realm Connectivity** checkbox to test access to the domain controller or KDC from the administrative console server.
+
+   When a connection to the configured PingOne LDAP Gateway is successful, the message `Test Successful` appears. Otherwise, the test returns error messages near the top of the window.
+
+6. Click **Save**.
+
+## Adding domains and realms without KDC connectivity
+
+Use the following procedure when PingFederate is deployed in the cloud without Key Distribution Center (KDC) *(tooltip: \<div class="paragraph">
+\<p>The Kerberos Key Distribution Center (KDC) authenticates the client and issues tickets allowing access to a server on the network.\</p>
+\</div>)* connectivity.
+
+|   |                                                                                                                                                                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Windows gMSA secret manager isn't supported when Kerberos domains and realms are added using the **Local Validation** connection type. If you want to use the Windows gMSA secret manager, use the **Direct** connection type. Learn more in [Configuring a secret manager for Windows gMSA](pf_configuring_secret_manager_windows_gmsa.html). |
+
+### Steps
+
+1. In the PingFederate admin console, go to the **Manage Domain/Realm** page.
+
+2. In the **Connection Type** list, **Local Validation**.
+
+3. In the **Domain/Realm Name** field, enter the fully-qualified domain or realm name. For example, companydomain.com.
+
+4. For **Credential Storage**, click one of the following:
 
    ### Choose from:
 
-   * To set up datastore queries, select a datastore from the **Active Data Store** list and then click **Next**. For configuration steps, see [Datastore query configuration](pf_datastore_query_config.html).
+   * Click **Internally Managed** to store credentials in PingFederate.
 
-   * To skip this optional configuration, select **No Data Store**, and then click **Next**.
+   * Click **Secret Manager** to store credentials in an external secret manager.
+
+     Learn more in [Secret managers](pf_secret_managers.html).
+
+5. In the **Domain/Realm Username** field, enter the ID for the domain or realm account name.
+
+   |   |                                                                                                                                   |
+   | - | --------------------------------------------------------------------------------------------------------------------------------- |
+   |   | **Domain/Realm Username** is case-sensitive. The value must match the username part of the service account's `userPrincipleName`. |
+
+6. Depending on the **Credential Storage** option you chose, enter a domain password or reference.
+
+   1. In the **Domain/Realm Password** field, enter the password for the domain or realm account.
+
+   2. In the **Domain/Realm Password Reference** field, enter the password reference generated by your secret manager.
+
+7. (Optional) Select the **Retain Previous Keys on Password Change** checkbox and click **Save** to avoid locking out end users with existing Kerberos tickets when the service account password is updated.
+
+   PingFederate retains each previous key for the period specified in the **Key Set Retention Period** field on the **Manage Domain/Realm Settings** tab of the **Active Directory Domains/Kerberos Realms** page. The default period is 610 minutes. Learn more in [Managing domain connectivity settings](help_kerberosrealmstasklet_kerberosrealmssettingsstate.html).
+
+   |   |                                                                                      |
+   | - | ------------------------------------------------------------------------------------ |
+   |   | To clear the previous keys from PingFederate, clear the checkbox and click **Save**. |
+
+   This checkbox is selected by default.
+
+8. Click **Save**.
 
 ---
 
 ---
-title: Choosing an SP connection template
-description: The Connection Template tab allows you to choose a quick-connection template for new connection if your installation includes an optional PingFederate SaaS Connector.
+title: Adding custom HTTP response headers
+description: The PingFederate administrative console and runtime server are capable of returning custom HTTP response headers, such as HTTP Strict-Transport-Security (HSTS), to enforce HTTPS-based access and P3P.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_spconnectionconfigtasklet_connectiontemplatestate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_spconnectionconfigtasklet_connectiontemplatestate.html
+page_id: pingfederate:administrators_reference_guide:pf_adding_custom_of_http_headers
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_adding_custom_of_http_headers.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 5, 2022
+section_ids:
+  steps: Steps
+---
+
+# Adding custom HTTP response headers
+
+The PingFederate administrative console and runtime server are capable of returning custom HTTP response headers, such as HTTP Strict-Transport-Security (HSTS), to enforce HTTPS-based access and P3P.
+
+## Steps
+
+1. Edit the `response-header-admin-config.xml` file or the `response-header-runtime-config.xml` file, or both, located in the `<pf_install>/pingfederate/server/default/data/config-store` directory.
+
+2. Save your changes.
+
+3. Restart PingFederate.
+
+   For a clustered PingFederate environment, perform these steps on the console node, and then click **Replicate Configuration** on **System > Server > Cluster Management**.
+
+---
+
+---
+title: Adding virtual issuers for OpenID Connect
+description: You can define one or more virtual issuers for OpenID Connect, with or without a relative path. When minting an ID token, PingFederate populates the issuer claim according to the virtual issuer setting and the authorization request.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_adding_virtual_issuers_openid_connect
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_adding_virtual_issuers_openid_connect.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 10, 2024
 section_ids:
   about-this-task: About this task
   steps: Steps
 ---
 
-# Choosing an SP connection template
+# Adding virtual issuers for OpenID Connect
 
-The **Connection Template** tab allows you to choose a quick-connection template for new connection if your installation includes an optional PingFederate SaaS Connector.
-
-## About this task
-
-|   |                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------- |
-|   | When you select a connection template, many connection settings are configured for you automatically. |
-
-## Steps
-
-1. Go to **Applications > Integration > SP Connections**.
-
-2. Click **Create Connection**.
-
-3. To use a template, select **Use a template for this connection**, then choose the template and enter additional information as required.
-
-   |   |                                                                                                                                                                                          |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | After you click **Next**, you cannot return to this window and make a different selection. If you intended to use a different template or no template, you must create a new connection. |
-
----
-
----
-title: Choosing an SP connection type
-description: You can manually create service provider (SP) connections in PingFederate using browser single sign-on (SSO), WS-Trust security token service (STS), outbound provisioning, or any combination thereof.
-component: pingfederate
-version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_spconnectionconfigtasklet_connroleandprotocolstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_spconnectionconfigtasklet_connroleandprotocolstate.html
-llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Choosing an SP connection type
-
-You can manually create service provider (SP) connections in PingFederate using browser single sign-on (SSO), WS-Trust security token service (STS), outbound provisioning, or any combination thereof.
+You can define one or more virtual issuers for OpenID Connect, with or without a relative path. When minting an ID token, PingFederate populates the issuer claim according to the virtual issuer setting and the authorization request.
 
 ## About this task
 
-If you are not using a connection template, which pre-configures browser-based SSO, indicate on the **Connection Type** tab whether the connection to this partner is for Browser SSO, WS-Trust STS, outbound provisioning, or any combination of them.
+To add a virtual issuer to PingFederate, perform the following procedure. If you have multiple virtual issuers, ensure the combination of host and path values are unique.
 
-|   |                                                                                                                       |
-| - | --------------------------------------------------------------------------------------------------------------------- |
-|   | You can add STS, OAuth, and outbound provisioning support to any existing SSO connection, or vice versa, at any time. |
-
-|   |                                                                                                                                                                                                                                 |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If your partner's deployment supports multiple protocols and you intend to communicate using more than one, you must set up a separate connection for each protocol. Each connection must use a unique (partner) connection ID. |
+|   |                                                                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | After you define virtual issuers, you can map them to sets of ID token signing keys. For more information, see [Mapping ID token signing keys to virtual issuers](pf_mapping_id_token_signing_keys_virtual_issuers.html). |
 
 ## Steps
 
-1. Go to **Applications > Integration > SP Connections**.
+1. Go to **System > OAuth Settings > Virtual Issuers**.
 
-2. Click **Create Connection**.
+2. Click **Add Virtual Issuer**.
 
-3. Select **Do not use a template for this connection**.
+3. Enter a unique issuer **Name**.
 
-4. To configure a connection for secure browser-based SSO, select the **Browser SSO Profiles** checkbox.
+4. Enter the **Host**.
 
-   If you are not using a connection template, you must select the applicable protocol from the list when establishing a new connection.
+5. Optional: Enter the relative **Path**, which must start with the value of the `pf.runtime.context.path` property in the `run.properties` file.
 
-   For a WS-Federation connection, select the desired token type, either **SAML 1.1**, **SAML 2.0**, or **JWT** (JSON Web Token).
-
-   |   |                                                                                                                                                                                               |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Learn more about creating a SAML application in [Configuring a SAML application in PingFederate](https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_saml_app.html). |
-
-   |   |                                                                                                               |
-   | - | ------------------------------------------------------------------------------------------------------------- |
-   |   | If you are creating a WS-Federation connection to Microsoft Windows Azure Pack, select JWT as the token type. |
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | PingFederate can encrypt the subject and attributes of SAML 2.0 assertions.For information about configuring encryption policies on a PingFederate identity provider (IdP), see [Configuring XML encryption policy (SAML 2.0)](help_spprotocolsettingstasklet_selectspxmlassertionencryptionstate.html).For information about configuring encryption policies on a PingFederate SP, see [Specifying XML encryption policy (for SAML 2.0)](help_idpprotocolsettingstasklet_selectidpxmlassertionencryptionstate.html). |
-
-5. (Optional) Choose one or both of the following depending on your configuration needs.
-
-   | Connection Template       | Step                                                                                  |
-   | ------------------------- | ------------------------------------------------------------------------------------- |
-   | **WS-TRUST STS**          | Select the **WS-Trust STS** checkbox.                                                 |
-   | **Outbound Provisioning** | Select **Outbound Provisioning** and then select the provisioning type from the list. |
-
-6. If your PingFederate license manages connections by groups, select a license group for this connection.
-
-   This option is not shown for unrestricted or other types of licenses.
-
-7. To save your settings, click **Next**.
+6. Click **Save**.
 
 ---
 
 ---
-title: Choosing IdP connection options
-description: On the Connection Optionstab, shown only for browser-based single sign-on (SSO) connections, you can enable browser-based SSO in conjunction with Just-in-Time (JIT) provisioning. Additionally, you can also choose to map user attributes for persistent grants used by the optional PingFederate OAuth authorization server.
+title: Administrative accounts
+description: PingFederate supports five authentication schemes for administrative accounts.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_idpconnectionconfigtasklet_connectionoptionsstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_idpconnectionconfigtasklet_connectionoptionsstate.html
+page_id: pingfederate:administrators_reference_guide:help_administrativeaccountstasklet_administrativeaccountsstate
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_administrativeaccountstasklet_administrativeaccountsstate.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
+revdate: September 19, 2023
 section_ids:
-  about-this-task: About this task
-  steps: Steps
+  related-links: Related links
 ---
 
-# Choosing IdP connection options
+# Administrative accounts
 
-On the **Connection Options**tab, shown only for browser-based single sign-on (SSO) connections, you can enable browser-based SSO in conjunction with Just-in-Time (JIT) provisioning. Additionally, you can also choose to map user attributes for persistent grants used by the optional PingFederate OAuth authorization server.
+PingFederate supports five authentication schemes for administrative accounts.
 
-## About this task
+The authentication schemes are:
 
-For SAML 2.0, you can configure the **Attribute Query** profile with or without the browser-based SSO.
+* Native authentication
 
-## Steps
+* LDAP authentication
 
-* On the **Connection Options** tab, make the appropriate selections for your configuration.
+* RADIUS authentication
 
-  | Choice                                                                  | Action                                                                                                                                                   |
-  | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | Create a connection for browser-based SSO.                              | Select the **Browser SSO** checkbox.                                                                                                                     |
-  | Enable JIT provisioning, OAuth attribute mapping, or both.              | Select the appropriate checkbox after selecting the **Browser SSO** checkbox.                                                                            |
-  | Create a connection to facilitate the SAML 2.0 Attribute Query profile. | Select the **Attribute Query** checkbox. For more information, see [Attribute Query and XASP](../introduction_to_pingfederate/pf_attrib_query_xasp.html) |
+* Certificate-based authentication
+
+* OIDC-based authentication
+
+For role-based access control, PingFederate provides two account types and four administrative roles, as shown in the following table.
+
+**PingFederate User Access Control**
+
+| Account type | Administrative role   | Access privileges                                                                                                                                                                                    |
+| ------------ | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Admin        | User Admin            | Create users, deactivate users, change or reset passwords, and install replacement license keys.                                                                                                     |
+| Admin        | Admin                 | Configure partner connections and most system settings, except the management of local accounts and the handling of local keys and certificates.                                                     |
+| Admin        | Expression Admin      | Map user attributes by using the Object-Graph Navigation Language (OGNL) expression language.                                                                                                        |
+| Admin        | Crypto Admin          | Manage local keys and certificates.                                                                                                                                                                  |
+| Admin        | Data Collection Admin | Collects support data using the [Collect Support Data](pf_collecting_support_data_admin_console.html) menu.Administrators must have Admin, User Admin, and Crypto Admin roles to be given this role. |
+| Auditor      | Not applicable        | View-only permissions for all administrative functions. When the **Auditor** role is assigned, no other administrative roles can be set.                                                             |
+
+For native authentication, access and authorization are controlled by the local accounts defined on the **Administrative Accounts** window.
+
+As needed, you can switch from native authentication to an alternative console authentication. Access and authorization are defined in the respective configuration file.
+
+An administrative user can sign on from more than one browser or location, and multiple administrative users can sign on to the PingFederate administrative console at a time. You can optionally restrict the administrative console to one administrative user at a time by modifying the `pf.console.login.mode` property in the `<pf_install>/pingfederate/bin/run.properties` file. Regardless of the property configuration, any number of auditors can sign on at any time.
+
+|   |                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For security, after three failed sign-on attempts from the same location within a short time period, the administrative console and the administrative API will temporarily lock out further attempts by the same user. The user must wait one minute to try again. |
+
+Local accounts defined on the **Administrative Accounts** window are shared between the administrative console and the administrative API if they are both configured to use native authentication, the default. If the administrative console is configured to use an alternative console authentication, the **Administrative Accounts** window appears only if the administrative API is left to use native authentication, and vice versa.
+
+|   |                                                                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | If you have connected PingFederate to PingOne for Enterprise, you can also single sign-on from the PingOne admin portal to the administrative console. |
+
+## Related links
+
+* [Alternative console authentication](pf_alternative_console_authentication.html)
 
 ---
 
 ---
-title: Choosing SAML 2.0 profiles
-description: A SAML profile is the message-interchange scenario that you and your federation partner have agreed to use. SAML binding, by contrast, is the transport protocol of SAML messages.
+title: Administrative API
+description: At System > Administrative API, you can configure the behavior of the PingFederate administrative API.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_spbrowserssotasklet_selectsamlprofilesstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_spbrowserssotasklet_selectsamlprofilesstate.html
+page_id: pingfederate:administrators_reference_guide:pf_administrative_api
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_administrative_api.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  about-this-task: About this task
-  steps: Steps
+revdate: March 27, 2026
 ---
 
-# Choosing SAML 2.0 profiles
+# Administrative API
 
-A SAML profile is the message-interchange scenario that you and your federation partner have agreed to use. SAML binding, by contrast, is the transport protocol of SAML messages.
+At **System > Administrative API**, you can configure the behavior of the PingFederate administrative API.
 
-## About this task
-
-On the **SAML Profiles** tab, select one or more SAML 2.0 profiles for your IdP Browser SSO configuration.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The **SAML Profiles** tab is not shown for SAML 1.x connections because identity provider (IdP) single sign-on (SSO) is assumed, single logout (SLO) profiles are not supported, and the server supports the "destination-first" (SP-initiated) profile SSO automatically. This window is also not presented for WS-Federation connections because profile selection is not required. |
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | When configuring a local loopback connection, in which one PingFederate instance is both the identity provider and the service provider, disable the IdP-Initiated SLO and SP-Initiated SLO options on the Browser SSO window's SAML Profiles tab. These options determine whether SAML logout requests should be sent to the partner during the SLO flow. Those requests aren't necessary and can cause unexpected behavior when the partner connection exists locally. All local sessions for loopback connections are terminated during the SLO flow without the need to send SAML requests. |
-
-For SAML 2.0, PingFederate supports all IdP- and SP-initiated SSO and SLO profiles. For more information on typical SSO and SLO profile configurations, including illustrations, see [SAML 2.0 profiles](../introduction_to_pingfederate/pf_saml20_profile.html).
-
-## Steps
-
-1. Go to **Applications > Integration > SP connections**.
-
-2. Click on the SP connection you want to configure. For more information, see [Accessing SP connections](help_spconnectionstasklet_connmgmtstate.html).
-
-3. On the **Browser SSO** tab, click **Configure Browser SSO**.
-
-4. Select either **IdP-Initiatied SSO** or **SP-Initiated SSO** or both, depending on your partner agreement.
-
-   You must select at least one SSO profile.
-
-5. Select either **IdP-Initiated SLO** or **SP-Initiated SLO** or both, depending on your partner agreement.
-
-   SLO profile options are only enabled after you choose an SSO profile. ![Screen capture of the Browser SSO configuration window with the SAML Profiles tab selected. There is a section for Single Sign-On (SSO) Profiles with IdP-Initatited SSO and SP-Initiated SSO checkboxes. The IdP-Initiated SSO checkbox is selected. There is another section for Single Logout (SLO) Profiles with IdP-Initiated SLO and SP-Initiated SLO checkboxes. The IdP-Initiated SLO checkbox is selected.](_images/swv1628281519684.png)
-
-6. Click **Next** to save your changes.
+You can access documentation for the administrative API from [Accessing the API interactive documentation](../developers_reference_guide/pf_access_api_interact_documentation.html).
 
 ---
 
 ---
-title: Choosing SP connection options
-description: On the Connection Options tab, you can enable browser-based single sign-on (SSO), Attribute Query, or both for the current connection.
+title: Administrative API audit log
+description: PingFederate records actions performed through the administrative API in the <pf_install>/pingfederate/log/admin-api.log file.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:administrators_reference_guide:help_spconnectionconfigtasklet_connectionoptionsstate
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/help_spconnectionconfigtasklet_connectionoptionsstate.html
+page_id: pingfederate:administrators_reference_guide:pf_admin_api_audit_log
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_admin_api_audit_log.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
-section_ids:
-  before-you-begin: Before you begin
-  steps: Steps
+revdate: June 5, 2023
 ---
 
-# Choosing SP connection options
+# Administrative API audit log
 
-On the **Connection Options** tab, you can enable browser-based single sign-on (SSO), Attribute Query, or both for the current connection.
+PingFederate records actions performed through the administrative API in the `<pf_install>/pingfederate/log/admin-api.log` file.
 
-## Before you begin
+While the events are not configurable, Log4j 2 configuration settings in the `<pf_install>/pingfederate/server/default/conf/log4j2.xml` file can be adjusted to deliver the desired level of detail surrounding each event.
 
-For initial steps in creating a service provider (SP) connection, see [Choosing an SP connection type](help_spconnectionconfigtasklet_connroleandprotocolstate.html).
+Each log entry contains information relating to the event, including:
 
-## Steps
+* Time the event occurred on the PingFederate server
 
-1. Choose one or more of the following options.
+* Administrator username performing the action
 
-   | Connection option   | Description                                                                                                                                                                                                                         |
-   | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Browser SSO**     | Select to create a connection for browser-based SSO.                                                                                                                                                                                |
-   | **IdP Discovery**   | Select to enable identity provider (IdP) discovery. This option is only available if you have configured IdP discovery. For more information, see [Configuring standard IdP Discovery](pf_configuring_standard_idp_discovery.html). |
-   | **Attribute Query** | Select to create a connection that facilitates the SAML 2.0 Attribute Query profile. For more information, see [Attribute Query and XASP](../introduction_to_pingfederate/pf_attrib_query_xasp.html).                               |
+* Authentication method
 
-2. To save your changes, click **Next**.
+* Client IP
+
+* HTTP method
+
+* REST endpoint
+
+* HTTP status code
+
+* jti (JWT ID)
+
+  |   |                                                                                                                                                                                                                                        |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The `jti` is the ID of the outbound JSON Web Token (JWT) request. This information is applicable when the PingFederate administrative API authentication scheme is OAuth2 and the client authentication method is *private\_key\_jwt*. |
+
+* The hash of the inbound access token
+
+  |   |                                                                                                                                                                                                                                                 |
+  | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The hash logging is applicable when the PingFederate administrative API authentication scheme is OAuth2. To calculate the hash value for a token or authorization code, run the `calculatehash.sh/bat` script in the PingFederate `bin` folder. |
+
+  |   |                                                                                                                     |
+  | - | ------------------------------------------------------------------------------------------------------------------- |
+  |   | This feature should only be enabled in production environments when actively troubleshooting authentication issues. |
+
+* HTTP request header
+
+* TLS version
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `<pf_install>/pingfederate/log/admin-api.log` does not include the HTTP request header and TLS version values by default. You can customize this log to include additional or less information by modifying the pattern elements in the `log4j2.xml` file. For more information, see [Log4j 2 logging service and configuration](pf_log4j_2_loggin_service_and_config.html). |
+
+Each of these fields is separated by a vertical pipe (`\|`) for ease of parsing.
+
+|   |                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingFederate also records actions performed through the administrative API in the `<pf_install>/pingfederate/log/admin.log` file. For more information, see [Administrator audit logging](pf_admin_audit_loggin.html). |
+
+---
+
+---
+title: Administrative console migration
+description: Use the configcopy tool to migrate data in the administrative console.
+component: pingfederate
+version: 13.1
+page_id: pingfederate:administrators_reference_guide:pf_admin_console_migration
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_admin_console_migration.html
+llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+section_ids:
+  copying-configuration-files: Copying configuration files
+  managing-certificates: Managing Certificates
+---
+
+# Administrative console migration
+
+Use the `configcopy` tool to migrate data in the administrative console.
+
+|   |                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------- |
+|   | As of PingFederate 10.2, the `configcopy` tool has been deprecated and will be removed in a future release. |
+
+For migrating data configured with the source server's administrative console, the `configcopy` tool performs these overall processing steps:
+
+1. Retrieves specified connection and other configuration data (XML) from a source PingFederate server
+
+2. Modifies the configuration with any changes required for the target environment, according to settings in one or more properties files, command-line arguments, or both
+
+3. Imports the updated configuration into the PingFederate target server
+
+The `configcopy` tool can perform these functions in real time, from server to server, or by using an intermediate file. The latter option is useful when both the source and target PingFederate servers are either not running at the same time or not accessible from the same operating system command window.
+
+|   |                                                                                                                                                                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For one-time configuration transfers from one version of PingFederate to a newer version, use a complete configuration archive, either with `configcopy` archive export/import commands, or manually through the administrative console, or the administrative API. Other `configcopy` commands are not supported for this purpose. |
+
+Operational capabilities include:
+
+* Listing of source partner connections, adapter or STS token-translator instances, outbound-provisioning channels, or datastore connections.
+
+  List commands include optional filter settings, when applicable.
+
+* Copying one or more partner connections, outbound-provisioning channels, or instances of adapters or token translators.
+
+* Copying one or more datastore connections.
+
+* Copying server settings.
+
+* Exporting and importing full configuration archives.
+
+## Copying configuration files
+
+The `configcopy` tool supports copying configuration files containing runtime properties, including those needed for server clustering, that might have been manually customized for the source configuration and need to be migrated. The file-copy command can also copy the PingFederate internal, HSQLDB database when needed.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Use the built-in HSQLDB only for trial or training environments. For testing and production environments, always use a secured external storage solution for proper functioning in a clustered environment.Testing involving HSQLDB is not a valid test. In both testing and production, it might cause various problems due to its limitations and HSQLDB involved cases are not supported by Ping Identity. |
+
+## Managing Certificates
+
+Administrators can use the `configcopy` tool to perform the following certificate-management tasks on the target PingFederate server:
+
+* List source trusted certificate authorities (CAs) and target key aliases
+
+* Copy one or all trusted CAs from the source server
+
+* Create certificates
+
+* Create Certificate Signing Requests (CSRs)
+
+* Import CA-signed and PKCS-12 certificates

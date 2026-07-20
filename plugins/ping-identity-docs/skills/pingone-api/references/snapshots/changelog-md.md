@@ -15,6 +15,12 @@ section_ids:
   key-rotation-policy-for-token-signing: Key rotation policy for token signing
   mandatory-typ-header-parameter-for-access-tokens: Mandatory typ header parameter for access tokens
   july: July
+  july-19: July 19
+  mfa-device-response-changes: Changes in responses for Read MFA User Devices and Check Remember Me Device
+  july-15: July 15
+  delete-a-user-credential-request: Delete a user credential request
+  july-14: July 14
+  external-idp-attribute-mapping-to-json-attributes: External IdP attribute mapping to JSON attributes
   july-8: July 8
   images-for-pingone-forms: Images for PingOne forms
   july-1: July 1
@@ -133,7 +139,7 @@ section_ids:
   email-provider-fallback-for-pingone-notifications: Email provider fallback for PingOne notifications
   july-23: July 23
   visibility-control-for-form-fields: Visibility control for form fields
-  july-14: July 14
+  july-14-2: July 14
   access-multiple-custom-resource-scopes-in-a-single-oidc-request: Access multiple custom resource scopes in a single OIDC request
   july-7: July 7
   external-id-support-for-portal-link-applications: External ID support for portal link applications
@@ -238,6 +244,32 @@ On March 2, 2027, PingOne will always include the `typ` header property with the
 ## 2026
 
 ### July
+
+#### July 19
+
+##### Changes in responses for Read MFA User Devices and Check Remember Me Device
+
+Info PingOne MFA
+
+The device type `BROWSER` is used when creating remembered devices. Previously, when you sent an API request to [get MFA user devices](mfa/users/mfa-devices/read-all-mfa-user-devices.html), the list of devices in the response included devices of type `BROWSER`. This has been changed, and these devices are no longer included in the response. If you need to have `BROWSER` devices returned, include the query parameter `expand=accessingDevices` in the URL.
+
+A change has also been made to the response to API requests to [check a if a device is a remembered device](mfa/users/remembered-devices/check_remembered_device.html). Previously, the details of the accessing device were returned in the `_embedded.devices` array. Now, these details are returned in the new `_embedded.accessingDevices` array.
+
+#### July 15
+
+##### Delete a user credential request
+
+New PingOne Credentials PingOne
+
+Administrators can now [delete a user credential](credentials/user-credentials/delete-a-user-credential.html). If an AUTOMATED credential is revoked, it cannot be reissued because revocation prevents the issuance rule from issuing a credential. By deleting that user credential, the credential will be reissued if the user still meets the requirements of the issuance rule.
+
+#### July 14
+
+##### External IdP attribute mapping to JSON attributes
+
+New PingOne
+
+When configuring attribute mapping for an external IdP connection, you can now map inbound attributes to custom PingOne user attributes of type JSON. Single-valued JSON attributes are populated as a JSON object; multi-valued JSON attributes are populated as an array of JSON objects. For SAML IdPs, use an expression to construct the JSON value from inbound attributes. Learn more in [Identity Provider Management](platform/identity-provider-management.html).
 
 #### July 8
 

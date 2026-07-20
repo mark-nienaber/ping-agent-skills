@@ -1,12 +1,12 @@
 ---
 title: PingID Connector
-description: PingID is a cloud-based multi-factor authentication (MFA) service that protects an organization's network, applications, and data resources while providing secure and seamless experiences for your customers and users.
+description: Configure the PingID connector in PingOne DaVinci to add MFA authentication and device enrollment flows to your PingOne environment
 component: connectors
 page_id: connectors::pid_connector
 canonical_url: https://docs.pingidentity.com/connectors/pid_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -67,13 +67,13 @@ The PingID connector supports the use of:
 
 * [PingID documentation](https://docs.pingidentity.com/pingid/pid_landing_page.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -93,7 +93,7 @@ You can find instructions on how to set up PingID in the [PingID documentation](
 
 ### Setting up the connector
 
-In DaVinci, add a **PingID** connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingID** connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 
@@ -129,7 +129,7 @@ Learn more in the [Creating an authentication flow](https://docs.pingidentity.co
 
 ### PingID flow templates
 
-Ping Identity provides out-of-the-box DaVinci subflows that you can add to a main flow to register authentication devices and to use those devices to authenticate with PingID.
+Ping Identity provides out-of-the-box PingOne DaVinci subflows that you can add to a main flow to register authentication devices and to use those devices to authenticate with PingID.
 
 The following PingID flows are available:
 
@@ -245,7 +245,7 @@ This section describes the known limitations relating to the PingID Connector, a
 
 * PingID policy log entries: Log entries do not support multiple users authenticating from the same browser. Log entries for transaction details such as IP address, transaction time, and geolocation are overwritten by the last user that authenticates.
 
-* If you want to disable the OTP fallback or Direct passcode Usage (**Use Code** button) features, you must disable the relevant feature in the flow settings node in DaVinci, and the Admin portal.
+* If you want to disable the OTP fallback or Direct passcode Usage (**Use Code** button) features, you must disable the relevant feature in the flow settings node in PingOne DaVinci, and the Admin portal.
 
 ## PingID Legacy Connector
 
@@ -263,17 +263,17 @@ PingID is a cloud-based authentication service that allows your users to carry o
 
   * [PingID Integrations](https://docs.pingidentity.com/pingid/pingid_integrations/pid_integrations.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 #### Setting up the connector
 
-In DaVinci, add a **PingID** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingID** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 After creating the connector, configure it by going to its **General** tab and pasting in the content of the PingID properties file that you downloaded.
 

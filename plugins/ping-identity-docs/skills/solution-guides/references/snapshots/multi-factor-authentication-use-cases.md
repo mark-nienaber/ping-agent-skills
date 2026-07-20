@@ -4,6 +4,8 @@ description: Learn how to synchronize a session for your web applications betwee
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_add_mfa_to_secure_apps_pid_with_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_add_mfa_to_secure_apps_pid_with_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 24, 2025
 page_aliases: ["multi-factor_authentication_use_cases:pf_saml_authentication_policy_contract.adoc", "multi-factor_authentication_use_cases:pf_creating_authentication_selector.adoc", "multi-factor_authentication_use_cases:pf_creating_authenticationpolicy_tree.adoc", "multi-factor_authentication_use_cases:pf_oauth_authenticationpolicy_mapping.ado", "multi-factor_authentication_use_cases:pa_settings_policyrules.adoc"]
 section_ids:
@@ -175,6 +177,8 @@ description: Components
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_config_offline_mfa_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_config_offline_mfa_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -265,6 +269,8 @@ description: PingFederate 9.3
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_config_pf_for_mfa_only_vpn
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_config_pf_for_mfa_only_vpn.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 24, 2025
 page_aliases: ["multi-factor_authentication_use_cases:htg_config_pf_for_mfa_only_vpn_connect_datastore.adoc", "multi-factor_authentication_use_cases:htg_config_pf_for_mfa_only_vpn_identifier_first.adoc", "multi-factor_authentication_use_cases:htg_config_pf_for_mfa_only_vpn_pid.adoc", "multi-factor_authentication_use_cases:htg_config_pf_for_mfa_only_vpn_authn_policy.adoc"]
 section_ids:
@@ -419,6 +425,8 @@ description: To configure PingOne as an identity provider for Amazon Alexa Skill
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_config_p1_for_amazon_alexa_acct_linking
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_config_p1_for_amazon_alexa_acct_linking.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 section_ids:
   about-this-task: About this task
@@ -549,6 +557,8 @@ description: Establish a quick connection between PingFederate and PingID.
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_integrate_mfa_with_sso_pid_with_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_integrate_mfa_with_sso_pid_with_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 29, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -610,6 +620,8 @@ description: Adding multi-factor authentication to secure apps (PingID with Ping
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_mfa_user_cases
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_mfa_user_cases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 24, 2025
 ---
 
@@ -634,6 +646,8 @@ description: To enable PingID for VPN, use PingFederate Bridge and the PingOne f
 component: solution-guides
 page_id: solution-guides:multi-factor_authentication_use_cases:htg_secure_vpn_with_mfa_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_secure_vpn_with_mfa_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 24, 2025
 page_aliases: ["multi-factor_authentication_use_cases:htg_secure_vpn_with_mfa_pid_p14e.adoc", "multi-factor_authentication_use_cases:htg_secure_vpn_with_mfa_pid_vpn_pfbridge.adoc", "multi-factor_authentication_use_cases:htg_secure_vpn_with_mfa_pid_pfbridge.adoc"]
 section_ids:
@@ -826,3 +840,336 @@ PingID for VPN is enabled in PingFederate Bridge for use.
 |   |                                                                                                                                                                                                                                        |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | You can find more information on configuring your VPN client/server settings in [Integrating PingID with your VPN/Remote access system](https://docs.pingidentity.com/pingid/pingid_integrations/pid_integration_with_vpn_intro.html). |
+
+---
+
+---
+title: Setting up multi-factor authentication with Ping Identity products
+description: "Multi-factor authentication (MFA) is used to ensure that digital users are who they say they are by requiring that they provide at least two pieces of evidence to prove their identity. Each piece of evidence must come from a different category: something they know, something they have, or something they are. Ping Identity provides a number of products and methods for configuring MFA."
+component: solution-guides
+page_id: solution-guides:multi-factor_authentication_use_cases:htg_mfa_with_ping_products
+canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_mfa_with_ping_products.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 2, 2024
+section_ids:
+  configuring-mfa-with-pingid: Configuring MFA with PingID
+  configuring-mfa-with-pingfederate-and-pingone: Configuring MFA with PingFederate and PingOne
+  integrating-mfa-with-sso-using-pingid-and-pingfederate: Integrating MFA with SSO using PingID and PingFederate
+  setting-up-mfa-for-pingone: Setting up MFA for PingOne
+  configuring-mfa-for-the-pingfederate-administrative-console-using-pingid: Configuring MFA for the PingFederate administrative console using PingID
+---
+
+# Setting up multi-factor authentication with Ping Identity products
+
+Multi-factor authentication (MFA) is used to ensure that digital users are who they say they are by requiring that they provide at least two pieces of evidence to prove their identity. Each piece of evidence must come from a different category: something they know, something they have, or something they are. Ping Identity provides a number of products and methods for configuring MFA.
+
+## Configuring MFA with PingID
+
+PingID MFA is a strong authentication solution that allows you to authenticate to your app, application portal, or desktop machine using additional authentication methods, such as your mobile device, to enhance security and provide ease of access to your apps. You can find more information in the following sections in the [*PingID End User Guide*](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_end_user_guide.html).
+
+* [PingID authentication for the web](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_the_web.html): You can use PingID as a second factor of authentication when accessing multiple web applications in your browser or mobile device.
+
+* [PingID authentication for VPN](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_vpn.html): You can use PingID as a second factor of authentication when accessing your VPN or any remote access clients that support the RADIUS protocol.
+
+* [PingID authentication for Windows login](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/ug_pid_authentication_for_windows_login.html): Using a supported, paired device, you can use PingID to authenticate to your Windows machine using either passwordless or second-factor authentication.
+
+* [PingID authentication for Mac login](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_mac_login_auth.html): Using a supported, paired device, you can use PingID as a second factor of authentication when signing on to your Apple Mac machine.
+
+## Configuring MFA with PingFederate and PingOne
+
+The PingOne MFA Integration Kit allows PingFederate to use the PingOne MFA service for multi-factor authentication (MFA). This allows you to integrate MFA into SAML, WS-Fed, OAuth, and OIDC flows in a seamless way leveraging one configuration for all use cases. Learn more in [PingOne MFA Integration Kit](https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik.html).
+
+## Integrating MFA with SSO using PingID and PingFederate
+
+You can configure PingID with PingFederate to establish a connection between the two products for the purpose of integrating MFA with single-signon (SSO) capabilities. This allows you to integrate MFA into SAML, WS-Fed, OAuth, and OIDC flows in a seamless way leveraging one configuration for all use cases. For more information, see [Integrating MFA with SSO (PingID with PingFederate)](https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_integrate_mfa_with_sso_pid_with_pf.html).
+
+## Setting up MFA for PingOne
+
+PingOne MFA is a cloud-based service that enables customers to protect their organization's network, applications, and data resources. You can use the MFA service to integrate MFA into your applications that leverage PingOne SSO. You can find instructions on configuring PingOne MFA in [Getting started with PingOne MFA](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started_with_strong_authentication_mfa.html).
+
+## Configuring MFA for the PingFederate administrative console using PingID
+
+PingID is a cloud service that enables multi-factor authentication using a mobile application. The PingFederate administrative console supports authentication through the RADIUS protocol, which provides a common approach for implementing strong authentication in a client-server configuration.
+
+By combining these two capabilities, you can configure PingID to provide MFA to protect access to the PingFederate administrative console, which meets the requirement of stronger authentication for administrators accessing security-related software products.
+
+You can find instructions on configuring MFA for the PingFederate administrative console in [Multi-factor console authentication using PingID](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_multifactor_console_authentication_using_pid.html).
+
+---
+
+---
+title: Using SAML and token exchange to federate into AWS through the AWS Command Line Interface
+description: This use case shows you how to use PingFederate to issue a token to Amazon Web Services (AWS) to authenticate an end-user for API access.
+component: solution-guides
+page_id: solution-guides:multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws
+canonical_url: https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/htg_use_saml_and_token_exchange_to_federate_into_aws.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 24, 2025
+page_aliases: ["multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_pf_sp_connect.adoc", "multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_download_jar.adoc", "multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_change_sys_props.adoc", "multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_create_token.adoc", "multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_use_ws_trust_sts.adoc", "multi-factor_authentication_use_cases:htg_use_saml_and_token_exchange_to_federate_into_aws_get_security_token.adoc"]
+section_ids:
+  component: Component
+  before-you-begin: Before you begin
+  create-new-sp-connection-in-pf: Creating a new SP connection in PingFederate
+  about-this-task: About this task
+  steps: Steps
+  downloading-aws-jar-files: Downloading AWS .jar files
+  steps-2: Steps
+  modifying-pingfederate-system-properties: Modifying PingFederate system properties
+  about-this-task-2: About this task
+  steps-3: Steps
+  creating-a-token-processor: Creating a token processor
+  steps-4: Steps
+  changing-the-aws-saml-connection-to-use-ws-trust-sts: Changing the AWS SAML connection to use WS-Trust STS
+  about-this-task-3: About this task
+  steps-5: Steps
+  writing-a-script-to-get-the-security-token-from-aws: Writing a script to get the security token from AWS
+  about-this-task-4: About this task
+  steps-6: Steps
+---
+
+# Using SAML and token exchange to federate into AWS through the AWS Command Line Interface
+
+This use case shows you how to use PingFederate to issue a token to Amazon Web Services (AWS) to authenticate an end-user for API access.
+
+You can automate getting the AWS Access Key ID and AWS Secret Access Key (which are your account credentials) by using PingFederate to authenticate against the user store (such as ActiveDirectory), get a SAML assertion to federate into AWS, and then exchange the SAML assertion for an access token to make CLI commands to AWS.
+
+## Component
+
+PingFederate 9.2
+
+## Before you begin
+
+Make sure of the following:
+
+* PingFederate 9.2 is installed and running.
+
+* You have a functioning AWS SP SAML connection in PingFederate. To accomplish this, install the AWS Connector and the AWS CLI tool. For documentation on the AWS Command Line Interface (CLI), see the [Amazon CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html).
+
+  |   |                                                                                                                                                                                                                                                                                                                                  |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The CLI tool is installed on your hard drive (usually in a hidden folder) and includes two files: `config` and `credentials`. The credentials file is where the ID and Key are stored and look similar to this:```
+  aws_access_key_id = ARIAIY4DSCACQLFZSULQ
+  aws_secret_access_key = /zf8dHb2FDJQ0IPxQZeoOLftZ5gif0ve6f8gibtu
+  ``` |
+
+## Creating a new SP connection in PingFederate
+
+### About this task
+
+There are three main contract attributes you need to define in the SP configuration:
+
+* SAML\_SUBJECT
+
+* https\://aws.amazon.com/SAML/Attributes/Role
+
+* https\://aws.amazon.com/SAML/Attributes/RoleSessionName
+
+The AWS metadata URL (<https://signin.aws.amazon.com/static/saml-metadata.xml>) includes these attributes and will simplify making the SP connection in PingFederate.
+
+### Steps
+
+1. Log in to the PingFederate Administration console.
+
+2. In the **SP Connections** section of the **Identity Provider** tab, click **Create New**.
+
+3. Select **Browser SSO Profiles**. Click **Next**.
+
+4. On the **Connection Options** tab, select the **Browser SSO** checkbox and click **Next**.
+
+5. On the **Import Metadata** tab, select `URL`, **Manage Partner Metadata URLs**, then **Add New URL**.
+
+6. Add the AWS metadata URL (https\://signin.aws.amazon.com/static/saml-metadata.xml), then click **Next**. Click **Save**.
+
+7. Select the AWS metadata URL from the **Metadata URL** list on the **Import Metadata** tab and then click **Load Metadata**. Click **Next**.
+
+8. On the **General Info** tab, name your connection in the **Connection Name** field. Click **Next**.
+
+9. On the **Browser SSO** tab, click **Configure Browser SSO**. Select the **IDP-Initiated SSO** and **SP-Initiated SSO** checkboxes and click **Next** until you reach the **Assertion Creation** tab. Click **Configure Assertion Creation**.
+
+10. On the **Attribute Contract** tab, select `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` from the **Subject Name Format** list for `SAML_SUBJECT` . Click **Next**.
+
+    |   |                                                                                                                                                                                                           |
+    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | There are several extra attributes included in the AWS metadata URL (such as `urn:oid:1.3.6.1.4.1.5923.1.1.1.1`). These attributes are not required and can be deleted on the **Attribute Contract** tab. |
+
+11. On the **Authentication Source Mapping** tab, click **Map New Adapter Instance**.
+
+12. Select your adapter instance and click **Next** until you reach the **Attribute Contract Fulfillment** tab.
+
+13. On the **Attribute Contract Fulfillment** tab, select `Text` from the **SAML\_SUBJECT** **Source** list and in the **SAML\_SUBJECT** **Value** field, enter `null`.
+
+14. Select `Text` from the **https\://aws.amazon.com/SAML/Attributes/Role** **Source** field and in the **https\://aws.amazon.com/SAML/Attributes/Role** `Value` field, enter the value using the following example:
+
+    ```
+    arn:aws:iam::<your AWS instance number>:role/<your Role you created in AWS>,arn:aws:iam::<your AWS instance number>:saml-provider/<your SAML Provider you created in AWS>
+    ```
+
+15. Select `Adapter` from the **https\://aws.amazon.com/SAML/Attributes/RoleSessionName** **Source** list and select `username` from the **Value** list. Click **Next** and **Done** until you complete the IdP Adapter Mapping.
+
+16. Click **Next**. Click **Done** to complete the Assertion Creation configuration.
+
+17. On the **Protocol Settings** tab, click **Configure Protocol Settings**.
+
+18. On the **Allowable SAML Bindings** tab, clear the `Artifact` and `Soap` checkboxes and then click **Next** and **Done** until you complete the Protocol Settings configuration.
+
+19. Click **Next** then **Done** to complete the Browser SSO configuration.
+
+20. On the **Credentials** tab, click **Configure Credentials** and then select a signing certificate from the **Signing Certificate** list. Click **Done**.
+
+21. Click **Save** on the **Activation and Summary** tab to complete the SP connection configuration.
+
+## Downloading AWS .jar files
+
+### Steps
+
+* Now that you have a functioning SAML connection between your PingFederate and AWS instances, download and install the following:
+
+  * `aws-java-sdk-1.11.604.jar` from `aws-java-sdk-1.11.604`. This is available from [AWS Downloads](https://sdk-for-java.amazonwebservices.com/latest/aws-java-sdk.zip).
+
+  * All `.jar` files from `lib` of `PingFederate_WS-Trust_STS_Client_SDK-1.1.1`. This is available from PingIdentity.
+
+## Modifying PingFederate system properties
+
+### About this task
+
+Set the `pf.idp.wstrust.samlp.resp` system property to `true`.
+
+### Steps
+
+1. Do one of the following depending on how you are running PingFederate:
+
+   * If your PingFederate is running as a Windows service, this is done in `<PF install location>\pingfederate\sbin\wrapper\PingFederateService.conf`
+
+     1. Find the `# Java Additional Parameters` section.
+
+     2. Attribute the next number in the list to a `wrapper.java.additional` parameter. For example: `wrapper.java.additional.15=-Dpf.idp.wstrust.samlp.resp=true`
+
+   * If you are not running PingFederate as a Windows service, you will need to append the appropriate run file in the bin folder (`run.bat` or `run.sh`). For example, in `run.sh` add `JAVA_OPTS="$JAVA_OPTS -Dcom.ncipher.provider.announcemode=on -Dpf.idp.wstrust.samlp.resp=true"`
+
+2. Restart PingFederate. Learn more in [Start and stop PingFederate](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-92.pdf#page=22) (page 22).
+
+## Creating a token processor
+
+### Steps
+
+1. In the PingFederate Administrative console, click the **System** tab and then click **Protocol Settings.** Click the **Roles & Protocols** tab.
+
+2. Select the **WS-Trust** checkbox for IDP roles. Click **Save**.
+
+3. On the **Identity Provider** tab, click **Token Processors** and then click **Create New Instance**.
+
+4. Enter the appropriate values in the **Instance Name** and **Instance ID** fields. From the **Type** menu, select **Username Token Processor**. Click **Next**.
+
+5. From the `Password Credential Validator Instance` menu, select your password credential validator instance. Click **Next**.
+
+6. Click **Next** and **Done** until you complete the Token Processor Instance configuration.
+
+   |   |                                                            |
+   | - | ---------------------------------------------------------- |
+   |   | Only the `username` attribute is required in the Contract. |
+
+## Changing the AWS SAML connection to use WS-Trust STS
+
+### About this task
+
+Change the AWS SP SAML connection to use the STS processor and map the attributes.
+
+### Steps
+
+1. On the **Identity Provider** tab, from the **SP connections** list, select your AWS connection.
+
+2. Click **Connection Type** and select the **WS-Trust STS** checkbox. Click **Next**.
+
+3. On the **WS-Trust STS** tab, click **Configure WS-Trust STS** and enter `https://signin.aws.amazon.com/saml` in the **Partner Service Identifier** field. Click **Add** and then click **Next**.
+
+4. On the **Token Creation** screen, click **Configure Token Creation**.
+
+5. Enter `https://aws.amazon.com/SAML/Attributes/Role` in the **Extend the Contract** field. Click **Add**.
+
+6. Enter `https://aws.amazon.com/SAML/Attributes/RoleSessionName` in the **Extend the Contract** field and click **Add**. Click **Next**.
+
+7. On the **IdP Token Processor Mapping** tab, click **Map New Token Processor Instance** and specify the token processor. Click **Next**.
+
+8. Map the **Attribute Contract Fulfillment** section. See steps 13 - 15 in [Creating a new SP connection in PingFederate](#create-new-sp-connection-in-pf).
+
+9. Click **Next** and **Save** on the **Summary** tab.
+
+## Writing a script to get the security token from AWS
+
+### About this task
+
+Write a script to automate the authentication and get the security token from AWS.
+
+### Steps
+
+* The following template is an example script written in `.java`, exported as a runnable `.jar` file, and executed in a terminal window.
+
+  |   |                                                       |
+  | - | ----------------------------------------------------- |
+  |   | You can write your automation script in any language. |
+
+  ```java
+  package com.pingidentity.sts;
+  import com.amazonaws.auth.AnonymousAWSCredentials;
+  import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
+  import com.amazonaws.services.securitytoken.model.AssumeRoleWithSAMLRequest;
+  import com.amazonaws.services.securitytoken.model.AssumeRoleWithSAMLResult;
+  import com.pingidentity.sts.clientapi.STSClient;
+  import com.pingidentity.sts.clientapi.STSClientConfiguration;
+  import com.pingidentity.sts.clientapi.model.RequestSecurityTokenData;
+  import com.pingidentity.sts.clientapi.model.STSResponse;
+  import com.pingidentity.sts.clientapi.tokens.wsse.UsernameToken;
+  import java.util.Scanner;
+  public class AssumeRoleWithSAMLSample {
+    private static final String PING_STS = "";
+    https://<pingfedserver>:9031/idp/sts.wst
+    private static final String PRINCIPAL_ARN = "arn:aws:iam::736827903656:saml-provider/PingFed";
+    private static final String ROLE_ARN = "arn:aws:iam::736827903656:role/Administrators";
+  public static void main(String[] args) throws Exception {
+    AssumeRoleWithSAMLSample sample = new AssumeRoleWithSAMLSample();
+    sample.getTemporaryCredential(sample.getSAMLAssertion());
+  }
+  protected String getTemporaryCredential (String assertion) {
+    AWSSecurityTokenServiceClient client = new AWSSecurityTokenServiceClient(new AnonymousAWSCredentials());
+    AssumeRoleWithSAMLRequest assumeRoleRequest = new AssumeRoleWithSAMLRequest();
+    assumeRoleRequest.setPrincipalArn(PRINCIPAL_ARN);
+    assumeRoleRequest.setRoleArn(ROLE_ARN);
+    assumeRoleRequest.setSAMLAssertion(assertion);
+    AssumeRoleWithSAMLResult result = client.assumeRoleWithSAML(assumeRoleRequest);
+    System.out.println(result.toString());
+    return result.toString();
+  }
+  protected String getSAMLAssertion () throws Exception {
+    Scanner user_input = new Scanner( System.in );
+    String username;
+    String password;
+    System.out.print("Enter your AD UserID: ");
+    username = user_input.next();
+    System.out.print("Enter your AD Password: ");
+    password = user_input.next();
+    System.out.println("Getting assertion from PingFederate . . .");
+    STSClientConfiguration stsClientConfiguration = new STSClientConfiguration();
+    stsClientConfiguration.setStsEndpoint(PING_STS);
+    stsClientConfiguration.setIgnoreSSLTrustErrors(true);
+    STSClient client = new STSClient(stsClientConfiguration);
+    RequestSecurityTokenData requestData = new RequestSecurityTokenData();
+    requestData.setRequestType("");
+    http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue
+    requestData.setTokenType("urn:oasis:names:tc:SAML:2.0:profiles:SSO:browser");
+    requestData.setAppliesTo("");
+    https://signin.aws.amazon.com/saml
+    org.w3c.dom.Element token = null;
+    UsernameToken usernameToken = new UsernameToken();
+    usernameToken.setUsername(username);
+    usernameToken.setPassword(password);
+    token = usernameToken.getRoot();
+    STSResponse respData;
+    respData = client.makeRequest(requestData, token, null, null);
+    String result = respData.getRstr().getToken().getFirstChild().getTextContent();
+    System.out.println("Returninig " + result);
+    return result;
+    }
+  }
+  ```

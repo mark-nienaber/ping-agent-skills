@@ -1,12 +1,12 @@
 ---
 title: Jira Connector
-description: The Jira connector lets you manage issues and trigger Jira workflows in your PingOne DaVinci flow.
+description: Configure the Jira connector to manage issues and trigger Jira workflows in your PingOne DaVinci flow
 component: connectors
 page_id: connectors::jira_connector
 canonical_url: https://docs.pingidentity.com/connectors/jira_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -55,13 +55,13 @@ Learn more in the following documentation:
 
   * [Create an API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -73,7 +73,7 @@ Follow the instructions in [Create an API token](https://support.atlassian.com/a
 
 ### Setting up the Jira connector configuration
 
-In DaVinci, add a **Jira** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Jira** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 

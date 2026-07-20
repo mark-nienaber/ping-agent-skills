@@ -2,7 +2,7 @@
 
 - Product: Licensing Guide
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/licensing-guide/llms.txt
 - Guides discovered: 9
 - Guides captured: 9
@@ -16,15 +16,15 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| advanced-identity-software-md.md | assembled | <1 pages from advanced-identity-software.md> | 1 | 1 | full |
-| archive.md | assembled | <1 pages from archive> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
-| licensing-basics-md.md | assembled | <1 pages from licensing-basics.md> | 1 | 1 | full |
-| multitenant-saas-md.md | assembled | <1 pages from multitenant-saas.md> | 1 | 1 | full |
-| ping-government-identity-cloud-md.md | assembled | <1 pages from ping-government-identity-cloud.md> | 1 | 1 | full |
-| pingone-advanced-identity-cloud-md.md | assembled | <1 pages from pingone-advanced-identity-cloud.md> | 1 | 1 | full |
-| pingone-advanced-services-md.md | assembled | <1 pages from pingone-advanced-services.md> | 1 | 1 | full |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
+| advanced-identity-software-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| archive.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| licensing-basics-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| multitenant-saas-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| ping-government-identity-cloud-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| pingone-advanced-identity-cloud-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| pingone-advanced-services-md.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/licensing-guide/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

@@ -2,7 +2,7 @@
 
 - Product: Configuration Guides
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/configuration_guides/llms.txt
 - Guides discovered: 46
 - Guides captured: 46
@@ -16,52 +16,52 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| amazon.md | assembled | <10 pages from amazon> | 10 | 10 | full |
-| github.md | assembled | <4 pages from github> | 4 | 4 | full |
-| salesforce.md | assembled | <4 pages from salesforce> | 4 | 4 | full |
-| tableau.md | assembled | <3 pages from tableau> | 3 | 3 | full |
-| atlassian-cloud.md | assembled | <2 pages from atlassian_cloud> | 2 | 2 | full |
-| bamboohr.md | assembled | <2 pages from bamboohr> | 2 | 2 | full |
-| box.md | assembled | <2 pages from box> | 2 | 2 | full |
-| coupa.md | assembled | <2 pages from coupa> | 2 | 2 | full |
-| docusign.md | assembled | <2 pages from docusign> | 2 | 2 | full |
-| dropbox.md | assembled | <2 pages from dropbox> | 2 | 2 | full |
-| egnyte.md | assembled | <2 pages from egnyte> | 2 | 2 | full |
-| evernote.md | assembled | <2 pages from evernote> | 2 | 2 | full |
-| hubspot.md | assembled | <2 pages from hubspot> | 2 | 2 | full |
-| jamf.md | assembled | <2 pages from jamf> | 2 | 2 | full |
-| jira-confluence.md | assembled | <2 pages from jira_confluence> | 2 | 2 | full |
-| jive.md | assembled | <2 pages from jive> | 2 | 2 | full |
-| marketo.md | assembled | <2 pages from marketo> | 2 | 2 | full |
-| microsoft-365.md | assembled | <2 pages from microsoft_365> | 2 | 2 | full |
-| mimecast.md | assembled | <2 pages from mimecast> | 2 | 2 | full |
-| namely.md | assembled | <2 pages from namely> | 2 | 2 | full |
-| sap-netweaver.md | assembled | <2 pages from sap_netweaver> | 2 | 2 | full |
-| slack.md | assembled | <2 pages from slack> | 2 | 2 | full |
-| splunk.md | assembled | <2 pages from splunk> | 2 | 2 | full |
-| successfactors.md | assembled | <2 pages from successfactors> | 2 | 2 | full |
-| ultipro.md | assembled | <2 pages from ultipro> | 2 | 2 | full |
-| workato.md | assembled | <2 pages from workato> | 2 | 2 | full |
-| workday.md | assembled | <2 pages from workday> | 2 | 2 | full |
-| zendesk.md | assembled | <2 pages from zendesk> | 2 | 2 | full |
-| adobe-creative-suite.md | assembled | <1 pages from adobe_creative_suite> | 1 | 1 | full |
-| aha-ideas.md | assembled | <1 pages from aha!_ideas> | 1 | 1 | full |
-| asana.md | assembled | <1 pages from asana> | 1 | 1 | full |
-| cloudflare.md | assembled | <1 pages from cloudflare> | 1 | 1 | full |
-| config-configuration-guides-md.md | assembled | <1 pages from config_configuration_guides.md> | 1 | 1 | full |
-| datadog.md | assembled | <1 pages from datadog> | 1 | 1 | full |
-| freshworks.md | assembled | <1 pages from freshworks> | 1 | 1 | full |
-| greenhouse.md | assembled | <1 pages from greenhouse> | 1 | 1 | full |
-| heap.md | assembled | <1 pages from heap> | 1 | 1 | full |
-| lookout-secure-access.md | assembled | <1 pages from lookout_secure_access> | 1 | 1 | full |
-| osano.md | assembled | <1 pages from osano> | 1 | 1 | full |
-| ringcentral.md | assembled | <1 pages from ringcentral> | 1 | 1 | full |
-| servicenow.md | assembled | <1 pages from servicenow> | 1 | 1 | full |
-| sumologic.md | assembled | <1 pages from sumologic> | 1 | 1 | full |
-| terraform.md | assembled | <1 pages from terraform> | 1 | 1 | full |
-| workplace-by-facebook.md | assembled | <1 pages from workplace_by_facebook> | 1 | 1 | full |
-| wrike.md | assembled | <1 pages from wrike> | 1 | 1 | full |
-| zoho.md | assembled | <1 pages from zoho> | 1 | 1 | full |
+| amazon.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 10 | 10 | full |
+| github.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 4 | 4 | full |
+| salesforce.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 4 | 4 | full |
+| tableau.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 3 | 3 | full |
+| atlassian-cloud.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| bamboohr.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| box.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| coupa.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| docusign.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| dropbox.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| egnyte.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| evernote.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| hubspot.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jamf.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jira-confluence.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jive.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| marketo.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| microsoft-365.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| mimecast.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| namely.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| sap-netweaver.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| slack.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| splunk.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| successfactors.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| ultipro.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| workato.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| workday.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| zendesk.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| adobe-creative-suite.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| aha-ideas.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| asana.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| cloudflare.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| config-configuration-guides-md.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| datadog.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| freshworks.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| greenhouse.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| heap.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| lookout-secure-access.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| osano.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| ringcentral.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| servicenow.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| sumologic.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| terraform.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| workplace-by-facebook.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| wrike.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| zoho.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

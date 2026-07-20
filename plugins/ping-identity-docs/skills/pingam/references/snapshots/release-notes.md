@@ -2110,7 +2110,6 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 | OPENAM-26360 | Fixed an `invalid_request` error on `/authorize` requests that include `authorization_details` when the Remote Consent Service (RCS) is not configured    |
 | OPENAM-26265 | Fixed a race condition in session quota enforcement that caused a login failure under concurrent authentication requests                                  |
 | OPENAM-26240 | Fixed SAML persistent Name ID value mapping not being honored                                                                                             |
-| OPENAM-26232 | Added a pluggable mechanism for installing and configuring custom session `QuotaExhaustionAction` implementations                                         |
 | OPENAM-26036 | Fixed the `aud` claim in JWT access tokens not being correctly validated for the `/access_token` endpoint                                                 |
 | OPENAM-25994 | Fixed policy evaluation with `LDAPFilterCondition` to use the identity store user instead of the config store user                                        |
 | OPENAM-25911 | Resolved a performance regression where nested Inner Tree Evaluator nodes caused a significant drop in authentication throughput                          |
@@ -4944,7 +4943,9 @@ Releases are cumulative, so if an issue in a previous version isn't listed as [f
 
 #### AM 8.1.1
 
-There are no new issues identified in AM 8.1.1.
+|              |                                                                        |
+| ------------ | ---------------------------------------------------------------------- |
+| OPENAM-28159 | SAML SSO fails when AM uses an external login UI on a different domain |
 
 #### AM 8.1.0
 

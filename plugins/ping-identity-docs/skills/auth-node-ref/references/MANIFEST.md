@@ -2,7 +2,7 @@
 
 - Product: Auth Node Ref
 - Version: 8.1
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/auth-node-ref/llms.txt
 - Guides discovered: 5
 - Guides captured: 5
@@ -16,11 +16,11 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| latest.md | assembled | <223 pages from latest> | 223 | 20 | partial |
-| root.md | assembled | <121 pages from root> | 121 | 20 | partial |
-| pingone.md | assembled | <23 pages from pingone> | 23 | 20 | partial |
-| am-only.md | assembled | <12 pages from am-only> | 12 | 12 | full |
-| self-managed.md | assembled | <3 pages from self-managed> | 3 | 3 | full |
+| latest.md | assembled | https://docs.pingidentity.com/auth-node-ref/llms.txt | 223 | 20 | partial |
+| root.md | assembled | https://docs.pingidentity.com/auth-node-ref/llms.txt | 121 | 20 | partial |
+| pingone.md | assembled | https://docs.pingidentity.com/auth-node-ref/llms.txt | 23 | 20 | partial |
+| am-only.md | assembled | https://docs.pingidentity.com/auth-node-ref/llms.txt | 12 | 12 | full |
+| self-managed.md | assembled | https://docs.pingidentity.com/auth-node-ref/llms.txt | 3 | 3 | full |
 
 ## Checksums
 

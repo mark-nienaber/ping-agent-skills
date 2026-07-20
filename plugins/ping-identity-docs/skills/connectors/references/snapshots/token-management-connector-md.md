@@ -1,12 +1,12 @@
 ---
 title: Token Management Connector
-description: The Token Management connector lets you create and read JSON Web Token (JWT) tokens and manage OpenID Connect (OIDC) redirects in your PingOne DaVinci flow.
+description: Configure the Token Management connector to create and validate JWT tokens and manage OpenID Connect redirects in your PingOne DaVinci flow
 component: connectors
 page_id: connectors::token_management_connector
 canonical_url: https://docs.pingidentity.com/connectors/token_management_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -47,17 +47,17 @@ You can use the Token Management connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Token Management connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 |   |                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------ |
@@ -99,7 +99,7 @@ To validate a JWT token:
 
 2. In the **Token** field, enter the value or select the variable containing the JWT token to validate.
 
-3. Select the **Public Key Type**. This field determines whether to provide a key directly from DaVinci, by pasting **Public Key PEM Contents**, or by pointing to a JWKS file by URL.
+3. Select the **Public Key Type**. This field determines whether to provide a key directly from PingOne DaVinci, by pasting **Public Key PEM Contents**, or by pointing to a JWKS file by URL.
 
 4. (Optional) Toggle the **Validate Expiration Time**. When enabled, the token must not be expired to be considered valid.
 

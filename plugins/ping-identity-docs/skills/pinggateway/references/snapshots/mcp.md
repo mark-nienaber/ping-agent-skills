@@ -5,7 +5,9 @@ component: pinggateway
 version: 2026
 page_id: pinggateway:mcp:index
 canonical_url: https://docs.pingidentity.com/pinggateway/2026/mcp/index.html
-revdate: 2026-03-17T18:00:00Z
+llms_txt: https://docs.pingidentity.com/pinggateway/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T00:00:00Z
 keywords: ["AI", "Model Context Protocol", "OAuth 2.0", "Security"]
 section_ids:
   goals: Goals
@@ -441,6 +443,8 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
 4. Check the PingGateway log to verify the route loads successfully.
 
 You have successfully configured PingGateway to protect the sample MCP server.
+
+If you're using PingFederate as the authorization server, learn more in [Protect an MCP server with PingFederate](../reference/McpProtectionFilter.html#McpProtectionFilter-example-pingfederate).
 
 ### Tutorial task 4: Start the MCP agent
 

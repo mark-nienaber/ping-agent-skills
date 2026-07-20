@@ -583,3 +583,2257 @@ forgeops prereqs prereqs
 ***
 
 [1](#_footnoteref_1). Except for the deprecated `amster` component.
+
+---
+
+---
+title: About ForgeOps benchmarking
+description: ForgeOps benchmarks provides instructions for running lightweight benchmarks to give you a means for validating your own ForgeOps deployment.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/intro
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/intro.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Benchmark"]
+section_ids:
+  next_step: Next step
+---
+
+# About ForgeOps benchmarking
+
+[ForgeOps benchmarks](overview.html) provides instructions for running lightweight benchmarks to give you a means for validating your own ForgeOps deployment.
+
+The ForgeOps team runs the same benchmark tests. Our results are available upon request. To get them, contact your Ping Identity sales representative.
+
+We conduct our tests using the configurations specified for [small, medium, and large clusters](../../deploy/architecture.html#cluster-and-deployment-sizes). We create our clusters using the techniques described in the [Setup documentation](../../setup/overview.html).
+
+Next, we [generate test users](testusers.html):
+
+* 1,000,000 test users for a small cluster.
+
+* 10,000,000 test users for a medium cluster.
+
+* 100,000,000 test users for a large cluster.
+
+Finally, we run tests that measure authentication rates and OAuth 2.0 authorization code flow performance.
+
+If you follow the same method of performing a ForgeOps deployment and running benchmarks, the results you obtain similar results. However, factors beyond the scope of ForgeOps deployment or a failure to use our documented sizing and configuration may affect your benchmark test results. These factors might include (but are not limited to) updates to cloud platform SDKs, changes to third-party software required for Kubernetes, and changes you've made to sizing or configuration to suit your business needs.
+
+ForgeOps deployments are designed to:
+
+* Conform to DevOps best practices
+
+* Facilitate continuous integration and continuous deployment
+
+* Scale and deploy on any Kubernetes environment in the cloud
+
+If you require higher performance than the benchmarks reported here, you can scale your deployment horizontally and vertically. Vertically scaling Ping Advanced Identity Software works particularly well in the cloud. For more information about scaling your deployment, contact your qualified Ping Identity partner or technical consultant.
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: square-o, set=fa]*[Install third-party software](sw.html)*
+
+* [icon: square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: Articles in the <code>forgeops</code> repository
+description: How-to articles in the forgeops repository that augment this documentation:
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:how-tos
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/how-tos.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Amster", "Docker", "Prometheus", "Grafana", "Alertmanager", "Multi-cluster", "Certificates"]
+---
+
+# Articles in the `forgeops` repository
+
+[How-to articles](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos) in the `forgeops` repository that augment this documentation:
+
+* [Configure a ForgeOps deployment with additional DNS alias for the root realm.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/add-additional-dns-alias-to-root-realm.md)
+
+* [Change the FQDN in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/change-fqdn-in-running-deployment.md).
+
+* [Use custom shell environment variables with ForgeOps.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/custom-envs.md)
+
+* [Use custom shell environment variables with ForgeOps.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/custom-envs.md)
+
+* [Use custom secrets with ForgeOps.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/custom-secrets.md)
+
+* [Enable PingAM's REST API.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/enabling-pingam-rest-apis.md)
+
+* [Managing Ping Advanced Identity Software Docker images.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/manage-platform-images.md)
+
+* [Add user supplied certificates to the truststore.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/migrate-custom-certs-to-new-truststore.md)
+
+* [Migrate ForgeOps tooling from legacy (7.x) to new (202x.y.z).](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/migrate-legacy-to-YYYY.md)
+
+* [Workflow for production environments.](https://github.com/ForgeRock/forgeops/tree/2026.2.1/how-tos/production-workflow.md)
+
+* [Recreate the PingDS stateful set.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/recreating-ds-sts.md)
+
+* [Retrieve SBOMs based on original image URL.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/retrieve-SBOMs-based-on-original-image-URL.md)
+
+* [Use an externally deployed PingDS with a ForgeOps deployment.](https://github.com/ForgeRock/forgeops/blob/2026.2.1/how-tos/use-an-externally-deployed-ds-with-a-forgeops-deployment.md)
+
+---
+
+---
+title: Authentication rate
+description: The AMRestAuthNSim.scala simulation tests authentication rates using the REST API. It measures the throughput and response times of an AM server performing REST authentications when AM is configured to use CTS-based sessions.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/authrate
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/authrate.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Benchmark", "Authentication"]
+section_ids:
+  next_step: Next step
+---
+
+# Authentication rate
+
+The `AMRestAuthNSim.scala` simulation tests authentication rates using the REST API. It measures the throughput and response times of an AM server performing REST authentications when AM is configured to use CTS-based sessions.
+
+To run the simulation:
+
+1. Make sure the userstore is provisioned, and the PingDS cache is primed.
+
+   Refer to [Test user generation](testusers.html).
+
+2. Set environment variables that specify the host on which to run the test, the number of concurrent threads to spawn when running the test, the duration of the test (in seconds), the first part of the user ID, and the user password, and the number of users for the test:
+
+   ```
+   $ export TARGET_HOST=
+   $ export CONCURRENCY=100
+   $ export DURATION=60
+   $ export USER_PREFIX=user.
+   $ export USER_PASSWORD=T35tr0ck123
+   $ export USER_POOL=n-users
+   ```
+
+   where *n-users* is `1000000` for a small cluster, `10000000` for a medium cluster, and `100000000` for a large cluster.
+
+3. Configure AM for CTS-based sessions:
+
+   1. Log in to the Ping Advanced Identity Software admin UI as the `amadmin` user. For details, refer to [AM Services](../../deploy/access.html#am-services-cdm).
+
+   2. Access the AM admin UI.
+
+   3. Select the top level realm.
+
+   4. Select Properties.
+
+   5. Make sure the Use Client-based Sessions option is disabled.
+
+      If it's not disabled, disable it, and then select Save Changes.
+
+4. Change to the /path/to/forgeops/docker/gatling directory.
+
+5. Run the simulation:
+
+   ```
+   $ gradle clean; gradle gatlingRun-am.AMRestAuthNSim
+   ```
+
+   When the simulation is complete, the name of a file containing the test results appears near the end of the output.
+
+6. Open the file containing the test results in a browser to review the results.
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: check-square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: check-square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: check-square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa]*[Benchmark the OAuth 2.0 authorization code flow](oauth2.html)*
+
+---
+
+---
+title: Base Docker images
+description: This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:base-docker-images
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/base-docker-images.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Docker", "forgeops Command"]
+section_ids:
+  which_docker_images_do_i_deploy: Which Docker images do I deploy?
+  base-images: Your initial base Docker images
+  create_docker_images_for_use_in_production: Create Docker images for use in production
+---
+
+# Base Docker images
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.Before you begin building custom images, ensure you've installed Java version 25 or 21 on your computer.For example:> **Collapse: When using platform versions 8.x**
+>
+> ```
+> $ java --version
+> openjdk version "25.0.2" 2026-01-20
+> OpenJDK Runtime Environment Homebrew (build 25.0.2)
+> OpenJDK 64-Bit Server VM Homebrew (build 25.0.2, mixed mode, sharing)
+> ```> **Collapse: When using platform versions 7.x**
+>
+> ```
+> $ java --version
+> openjdk 21.0.5 2024-10-15 LTS
+> OpenJDK Runtime Environment Temurin-21.0.5+11 (build 21.0.5+11-LTS)
+> OpenJDK 64-Bit Server VM Temurin-21.0.5+11 (build 21.0.5+11-LTS, mixed mode)
+> ``` |
+
+## Which Docker images do I deploy?
+
+* I am a developer using a single-instance ForgeOps deployment.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy either:
+
+    * The ForgeOps-provided images.
+
+    * Customized Docker images that are based on ForgeOps-provided images and contain customized configuration profile.
+
+* I am doing a proof-of-concept ForgeOps deployment.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy either:
+
+    * The ForgeOps-provided images.
+
+    * Customized Docker images that are based on ForgeOps-provided images and contain customized configuration profile.
+
+* I am deploying the platform in production.
+
+  * UI elements. Deploy the supported images from ForgeOps.
+
+  * Other platform elements. Deploy Docker images you've built that are based on [your own base images](#base-images), but contain your customized configuration profile.
+
+## Your initial base Docker images
+
+|   |                                                                                                                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The procedures here describe the use of:1) Docker container engine to create images for ForgeOps deployment. You can use Podman container engine for the same.
+
+2) The latest ForgeOps-provided Docker images. You can select a specific image release suitable to your environment. |
+
+Perform the following steps to build base images. After you've built your own base images, push them to your Docker repository:
+
+1. Download the latest versions of the AM, Amster, IDM, and DS `.zip` files from [the Ping Identity Download Center](https://backstage.forgerock.com/downloads). Optionally, you can also download the latest version of the PingGateway `.zip` file.
+
+2. If you haven't already done so, clone the `forgeops` and `forgeops-extras` repositories. For example:
+
+   ```
+   $ git clone https://github.com/ForgeRock/forgeops.git
+   $ git clone https://github.com/ForgeRock/forgeops-extras.git
+   ```
+
+   Both repositories are public; you do not need credentials to clone them.
+
+3. Check out the `forgeops` repository's `2026.2.1` tag:
+
+   ```
+   $ cd /path/to/forgeops
+   $ git checkout 2026.2.1
+   ```
+
+4. Check out the `forgeops-extras` repository's `main` tag:
+
+   ```
+   $ cd /path/to/forgeops-extras
+   $ git checkout main
+   ```
+
+5. Build the Java base image, which is required by several of the other Dockerfiles:
+
+   > **Collapse: For platform images 8.x**
+   >
+   > ```
+   > $ cd /path/to/forgeops-extras/images/java-25
+   > $ docker build --tag my-repo/my-java .
+   > ```
+
+   > **Collapse: For platform images 7.x**
+   >
+   > ```
+   > $ cd /path/to/forgeops-extras/images/java-21
+   > $ docker build --tag my-repo/my-java .
+   > ```
+
+6. Build the base Docker image for Amster. The Amster image is required to build the base image for AM in the next step:
+
+   1. Unzip the Amster `.zip` file.
+
+   2. Change to the amster/samples/docker directory in the expanded `.zip` file output.
+
+   3. Run the setup.sh script:
+
+      ```
+      $ ./setup.sh
+
+      + mkdir -p build
+      + find ../.. '!' -name .. '!' -name samples '!' -name docker -maxdepth 1 -exec cp -R '{}' build/ ';'
+      + cp ../../docker/amster-install.sh ../../docker/docker-entrypoint.sh ../../docker/export.sh ../../docker/tar.sh build
+      ```
+
+   4. Edit the Dockerfile in the samples/docker directory. Change the line:
+
+      ```
+      FROM gcr.io/forgerock-io/java-...:latest
+      ```
+
+      to:
+
+      ```
+      FROM my-repo/my-java
+      ```
+
+   5. Build the `amster` Docker image:
+
+      ```
+      $ docker build --tag amster:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile
+      ...
+       ⇒ [1/8] FROM docker.io/my-repo/my-java
+      ...
+       ⇒ exporting to image
+       ⇒ ⇒ exporting layers
+       ⇒ ⇒ writing image sha256:bc47...f9e52                       0.0s
+       ⇒ ⇒ naming to docker.io/library/amster:8.1.0
+      ```
+
+7. Build the empty AM image:
+
+   1. Unzip the AM `.zip` file.
+
+   2. Change to the openam/samples/docker directory in the expanded `.zip` file output.
+
+   3. Change to the images/am-empty directory.
+
+   4. Build the `am-empty` Docker image:
+
+      ```
+      $ docker build --tag am-empty:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+       ⇒ ⇒ transferring dockerfile: 3.60kB                                                                                                         0.0s
+       ⇒ [internal] load .dockerignore                                                                                                             0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                                                0.0s
+       ⇒ [internal] load metadata for docker.io/library/tomcat:9-jdk17-openjdk-slim-bullseye                                                       1.8s
+       ⇒ [internal] load build context                                                                                                             5.6s
+       ⇒ ⇒ transferring context: 231.59MB                                                                                                          5.6s
+       ⇒ [base  1/14] FROM docker.io/library/tomcat:9-jdk17-openjdk-slim-bullseye@...
+      ...
+       ⇒ exporting to image                                                                                                                        1.7s
+       ⇒ ⇒ exporting layers                                                                                                                        1.6s
+       ⇒ ⇒ writing image sha256:9784a73...1d36018c9                                                                                                0.0s
+       ⇒ ⇒ naming to docker.io/library/am-empty:8.1.0
+      ```
+
+8. Build the base image for AM:
+
+   1. Change to the ../am-base directory.
+
+   2. Edit the Dockerfile in the ../am-base directory and change the line:
+
+      ```
+      FROM ${docker.push.repo}/am-empty:${docker.tag}
+      ```
+
+      to:
+
+      ```
+      FROM am-empty:8.1.0
+      ```
+
+   3. Build the `am-base` Docker image:
+
+      ```
+      $ docker build --tag am-base:8.1.0 .
+
+       ⇒ [internal] load build definition from Dockerfile                                                               0.0s
+       ⇒ ⇒ transferring dockerfile: 2.72kB                                                                              0.0s
+       ⇒ [internal] load .dockerignore                                                                                  0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                     0.0s
+       ⇒ [internal] load metadata for docker.io/library/amster:8.1.0                                                    0.0s
+       ⇒ [internal] load metadata for docker.io/library/am-empty:8.1.0                                                  0.0s
+       ⇒ [internal] load build context                                                                                  0.4s
+       ⇒ ⇒ transferring context: 35.66MB                                                                                0.4s
+       ⇒ [generator  1/15] FROM docker.io/library/am-empty:8.1.0                                                        0.4s
+       ⇒ [amster 1/1] FROM docker.io/library/amster:8.1.0                                                               0.2s
+       ⇒ [generator  2/15] RUN apt-get update -y &&     apt-get install -y git jq unzip
+      ...
+       ⇒ [am-base  7/11] COPY --chown=forgerock:root docker-entrypoint.sh /home/forgerock/                              0.0s
+       ⇒ [am-base  8/11] COPY --chown=forgerock:root scripts/import-pem-certs.sh /home/forgerock/                       0.0s
+       ⇒ [am-base  9/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/click-extras-*.jar                           0.2s
+       ⇒ [am-base 10/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/click-nodeps-*.jar                           0.3s
+       ⇒ [am-base 11/11] RUN rm "/usr/local/tomcat"/webapps/am/WEB-INF/lib/velocity-*.jar                               0.2s
+       ⇒ exporting to image                                                                                             0.2s
+       ⇒ ⇒ exporting layers                                                                                             0.2s
+       ⇒ ⇒ writing image sha256:2c06...87c6c                                                                            0.0s
+       ⇒ ⇒ naming to docker.io/library/am-base:8.1.0
+      ```
+
+   4. Change to the ../am-cdk directory.
+
+   5. Edit the Dockerfile in the ../am-cdk directory. Change the line:
+
+      ```
+      FROM ${docker.push.registry}/forgerock-io/am-base/${docker.promotion.folder}:${docker.tag}
+      ```
+
+      to:
+
+      ```
+      FROM am-base:8.1.0
+      ```
+
+   6. Build the `am` Docker image:
+
+      ```
+      $ docker build --tag my-repo/am:8.1.0 .
+      [+] Building 5.1s (10/10) FINISHED                                                                 docker:desktop-linux
+       ⇒ [internal] load build definition from Dockerfile                                                               0.0s
+       ⇒ ⇒ transferring dockerfile: 1.71kB                                                                              0.0s
+       ⇒ [internal] load .dockerignore                                                                                  0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                     0.0s
+       ⇒ [internal] load metadata for docker.io/library/am-base:8.1.0                                                   0.0s
+       ⇒ [1/5] FROM docker.io/library/am-base:8.1.0                                                                     0.2s
+       ⇒ [internal] load build context                                                                                  0.2s
+       ⇒ ⇒ transferring context: 403.07kB                                                                               0.1s
+       ⇒ [2/5] RUN apt-get update         && apt-get install -y git         && apt-get clean         && rm -r /var/lib  3.9s
+       ⇒ [3/5] RUN cp -R /usr/local/tomcat/webapps/am/XUI /usr/local/tomcat/webapps/am/OAuth2_XUI                       0.3s
+       ⇒ [4/5] COPY --chown=forgerock:root /config /home/forgerock/cdk/config                                           0.0s
+       ⇒ [5/5] RUN rm -rf /home/forgerock/openam/config/services &&     mkdir /home/forgerock/openam/config/services    0.5s
+       ⇒ exporting to image                                                                                             0.1s
+       ⇒ ⇒ exporting layers                                                                                             0.1s
+       ⇒ ⇒ writing image sha256:14b43fb5121cee08341130bf502b7841429b057ff406bbe635b23119a74dec45                        0.0s
+       ⇒ ⇒ naming to my-repo/am:8.1.0                                                                                   0.0s
+      ```
+
+9. Now that the AM image is built, tag the base image for Amster in advance of pushing it to your private repository:
+
+   ```
+   $ docker tag amster:8.1.0 my-repo/amster:8.1.0
+   ```
+
+10. Build the `am-config-upgrader` base image:
+
+    1. Change to the `openam` directory in the expanded AM `.zip` file output.
+
+    2. Unzip the `Config-Upgrader-8.1.0.zip` file.
+
+    3. Change to the `amupgrade/samples/docker` directory in the expanded `Config-Upgrader-8.1.0.zip` file output.
+
+    4. Edit the Dockerfile in the amupgrade/samples/docker directory and change line 16 from:
+
+       ```
+       FROM gcr.io/forgerock-io/java-17:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    5. Run the setup.sh script:
+
+       ```
+       $ ./setup.sh
+
+       + mkdir -p build/amupgrade
+       + find ../.. '!' -name .. '!' -name samples '!' -name docker -maxdepth 1 -exec cp -R '{}' build/amupgrade ';'
+       + cp ../../docker/docker-entrypoint.sh .
+       ```
+
+    6. Create the base `am-config-upgrader` image:
+
+       ```
+       $ docker build --tag my-repo/am-config-upgrader:8.1.0 .
+
+       [+] Building 8.5s (9/9) FINISHED                                  docker:desktop-linux
+        ⇒ [internal] load build definition from Dockerfile                               0.0s
+        ⇒ ⇒ transferring dockerfile: 1.10kB                                              0.0s
+        ⇒ [internal] load .dockerignore                                                  0.0s
+        ⇒ ⇒ transferring context: 2B                                                     0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                            0.0s
+        ⇒ CACHED [1/4] FROM my-repo/my-java                                              0.0s
+        ⇒ [internal] load build context                                                  0.3s
+        ⇒ ⇒ transferring context: 20.58MB                                                0.3s
+        ⇒ [2/4] RUN apt-get update &&     apt-get upgrade -y                             8.3s
+        ⇒ [3/4] COPY --chown=forgerock:root docker-entrypoint.sh /home/forgerock/        0.0s
+        ⇒ [4/4] COPY build/ /home/forgerock/                                             0.0s
+        ⇒ exporting to image                                                             0.1s
+        ⇒ ⇒ exporting layers                                                             0.1s
+        ⇒ ⇒ writing image sha256:3f6845…​44011                                            0.0s
+        ⇒ ⇒ naming to my-repo/am-config-upgrader:8.1.0                                   0.0s
+       ```
+
+11. Build the base image for DS:
+
+    1. Unzip the DS `.zip` file.
+
+    2. Change to the opendj directory in the expanded `.zip` file output.
+
+    3. Run the samples/docker/setup.sh script to create a server:
+
+       ```
+       $ ./samples/docker/setup.sh
+
+       + rm -f template/config/tools.properties
+       + cp -r samples/docker/Dockerfile samples/docker/README.md ...
+       + rm -rf — README README.md bat '*.zip' opendj_logo.png setup.bat upgrade.bat setup.sh
+       + ./setup --serverId docker --hostname localhost
+       ...
+
+       Validating parameters... Done
+       Configuring certificates... Done
+       ...
+       ```
+
+    4. Edit the Dockerfile in the opendj directory. Change the line:
+
+       ```
+       FROM gcr.io/forgerock-io/java-...:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    5. Build the `ds` base image:
+
+       ```
+       $ docker build --tag my-repo/ds:8.1.0 .
+
+       [+] Building 11.0s (9/9) FINISHED
+
+        ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+        ⇒ ⇒ transferring dockerfile: 1.23kB                                                                                                         0.0s
+        ⇒ [internal] load .dockerignore                                                                                                             0.0s
+        ⇒ ⇒ transferring context: 2B                                                                                                                0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                       1.7s
+        ⇒ [internal] load build context                                                                                                             1.2s
+        ⇒ ⇒ transferring context: 60.85MB                                                                                                           1.2s
+        ⇒ CACHED [1/4] FROM my-repo/my-java:latest
+       ...
+        ⇒ [4/4] WORKDIR /opt/opendj                                                                                                                 0.0s
+        ⇒ exporting to image                                                                                                                        0.4s
+        ⇒ ⇒ exporting layers                                                                                                                        0.3s
+        ⇒ ⇒ writing image sha256:713ac...b107e0f                                                                                                    0.0s
+        ⇒ ⇒ naming to my-repo/ds:8.1.0
+       ```
+
+12. []()Build the base image for IDM:
+
+    1. Create a new shell script file named build-idm-image.sh and copy the following lines into it:
+
+       ```none
+       #!/bin/bash
+
+       if [ $# -lt 3 ]; then
+         echo "$0 <source image> <new base image> <result image>"
+         exit 0
+       fi
+
+       sourceImage="$1"
+       javaImage="$2"
+       resultImage="$3"
+
+       container_id=$(docker create $sourceImage)
+       docker export $container_id -o image.tar
+       docker rm $container_id
+
+       tar xvf image.tar opt/openidm
+       rm -f image.tar
+
+       cd opt/openidm
+       # use | separators because image names often have / and :
+       sed -i.bak 's|^FROM.*$|FROM '$javaImage'|' bin/Custom.Dockerfile
+       rm bin/Custom.Dockerfile.bak
+
+       docker build . --file bin/Custom.Dockerfile --tag "$resultImage"
+       rm -rf opt
+       ```
+
+    2. Change the mode of the file to be executable and run it.
+
+       ```
+       $ chmod +x build-idm-image.sh
+       $ ./build-idm-image.sh docker.pkg.dev/forgeops-public/images-base/idm:8.1.0 my-repo/my-java my-repo/idm:8.1.0
+       ```
+
+       |   |                                                                                                          |
+       | - | -------------------------------------------------------------------------------------------------------- |
+       |   | The build-idm-image.sh script expands the IDM Docker image, rebuilds the image, and cleans up afterward. |
+
+13. (Optional) Build the base image for PingGateway:
+
+    1. Unzip the PingGateway `.zip` file.
+
+    2. Change to the identity-gateway directory in the expanded `.zip` file output.
+
+    3. Edit the Dockerfile in the identity-gateway/docker directory. Change the line:
+
+       ```
+       FROM gcr.io/forgerock-io/java-...:latest
+       ```
+
+       to:
+
+       ```
+       FROM my-repo/my-java
+       ```
+
+    4. Build the `ig` base image:
+
+       ```
+       $ docker build . --file docker/Dockerfile --tag my-repo/ig:2026.3.0
+
+       [+] Building 2.1s (8/8) FINISHED
+       ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+        ⇒ ⇒ transferring dockerfile: 1.43kB                                                                                                        0.0s
+        ⇒ [internal] load .dockerignore                                                                                                            0.0s
+        ⇒ ⇒ transferring context: 2B                                                                                                               0.0s
+        ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                      0.3s
+        ⇒ [internal] load build context                                                                                                            2.2s
+        ⇒ ⇒ transferring context: 113.60MB                                                                                                         2.2s
+        ⇒ CACHED [1/3] FROM my-repo/my-java:latest
+        ⇒ [2/3] COPY --chown=forgerock:root . /opt/ig                                                                                              0.7s
+        ⇒ [3/3] RUN mkdir -p "/var/ig"     && chown -R forgerock:root "/var/ig" "/opt/ig"     &&  -R g+rwx "/var/ig" "/opt/ig"                     0.9s
+        ⇒ exporting to image                                                                                                                       0.6s
+        ⇒ ⇒ exporting layers                                                                                                                       0.6s
+        ⇒ ⇒ writing image sha256:77fc5...6e63                                                                                                      0.0s
+        ⇒ ⇒ naming to my-repo/ig:2026.3.0
+       ```
+
+14. Run the docker images command to verify that you built the base images:
+
+    ```
+    $ docker images | grep my-repo
+
+    REPOSITORY                   TAG      IMAGE ID        CREATED        SIZE
+    my-repo/am                   8.1.0    552073a1c000    1 hour ago     795MB
+    my-repo/am-config-upgrader   8.1.0    d115125b1c3f    1 hour ago     795MB
+    my-repo/amster               8.1.0    d9e1c735f415    1 hour ago     577MB
+    my-repo/ds                   8.1.0    ac8e8ab0fda6    1 hour ago     196MB
+    my-repo/idm                  8.1.0    0cc1b7f70ce6    1 hour ago     387MB
+    my-repo/ig                   2026.3.0 cc52e9623b3c    1 hour ago     249MB
+    my-repo/java-...             latest   a504925c2672    1 hour ago     144MB
+    ```
+
+15. Push the new base Docker images to your Docker repository.
+
+    Refer to your registry provider documentation for detailed instructions. For most Docker registries, you run the docker login command to log in to the registry. Then, you run the docker push command to push a Docker image to the registry.
+
+    Be sure to configure your Docker registry so that you can successfully push your Docker images. Each cloud-based Docker registry has its own specific requirements. For example, on Amazon ECR, you must create a repository for each image.
+
+    Push the following images to your repository:
+
+    * `my-repo/am:8.1.0`
+
+    * `my-repo/am-config-upgrader:8.1.0`
+
+    * `my-repo/amster:8.1.0`
+
+    * `my-repo/ds:8.1.0`
+
+    * `my-repo/idm:8.1.0`
+
+    * `my-repo/my-java`
+
+    If you're deploying your own PingGateway base image, also push the `my-repo/ig:2026.3.0` image.
+
+## Create Docker images for use in production
+
+After you've [built and pushed your own base images](#base-images) to your Docker registry, you're ready to build customized Docker images that can be used in a production deployment of the Ping Advanced Identity Software. These images:
+
+* Contain customized [configuration profiles](../customize/fr-data.html#configuration-profiles) for AM, IDM, and, optionally, PingGateway.
+
+* Must be based on [your own base Docker images](#base-images).
+
+Create your production-ready Docker images, create a Kubernetes cluster to test them, and delete the cluster when you've finished testing the images:
+
+1. Clone the `forgeops` repository.
+
+2. Obtain custom configuration profiles that you want to use in your Docker images from your developer, and copy them into your `forgeops` repository clone:
+
+   * Obtain the AM configuration profile from the /path/to/forgeops/docker/am/config-profiles directory.
+
+   * Obtain the IDM configuration profile from the /path/to/forgeops/docker/idm/config-profiles directory.
+
+   * (Optional) Obtain the PingGateway configuration profile from the /path/to/forgeops/docker/ig/config-profiles directory.
+
+3. Change the `FROM` lines of Dockerfiles in the `forgeops` repositories to refer to your own base Docker images:
+
+   | In the `forgeops` repository file: | Change the `FROM` line to:                                        |
+   | ---------------------------------- | ----------------------------------------------------------------- |
+   | docker/am/Dockerfile               | `FROM my-repo/am:8.1.0` \[[1](#_footnotedef_1 "View footnote.")]  |
+   | docker/amster/Dockerfile           | `FROM my-repo/amster:8.1.0`                                       |
+   | docker/ds/ds-new/Dockerfile        | `FROM my-repo/ds:8.1.0`                                           |
+   | docker/idm/Dockerfile              | `FROM my-repo/idm:8.1.0` \[[2](#_footnotedef_2 "View footnote.")] |
+   | (Optional) docker/ig/Dockerfile    | `FROM my-repo/ig:2026.3.0`                                        |
+
+4. If necessary, log in to your Docker registry.
+
+5. Enable the Python3 virtual environment:
+
+   ```
+   $ source .venv/bin/activate
+   ```
+
+6. Set up a ForgeOps deployment environment:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops env --env-name my-env --fqdn my-fqdn --cluster-issuer my-cluster-issuer
+   ```
+
+   In the command above, replace my-fqdn and my-cluster-issuer with appropriate values from your environment. If you want to use the issuer provided with the platform for demo, then you can use default-issuer.
+
+7. Build Docker images that are based on your own base images.
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                   |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | While the forgeops build command uses the Docker engine by default for ForgeOps deployments, it supports Podman as well. If you are using Podman engine instead of Docker in your environment, then set the `CONTAINER_ENGINE` environment variable to `podman` before running the forgeops build command, for example:```
+   $ export CONTAINER_ENGINE="podman"
+   ``` |
+
+   The AM and IDM images contain your customized configuration profiles:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops build --env-name my-env ds --push-to my-repo --tag my-tag
+   $ ./forgeops build --env-name my-env amster --push-to my-repo --tag my-tag
+   $ ./forgeops build --env-name my-env am --push-to my-repo --tag my-tag --config-profile my-profile
+   $ ./forgeops build --env-name my-env idm --push-to my-repo --tag my-tag --config-profile my-profile
+   ```
+
+   The forgeops build command:
+
+   * Builds Docker images. The AM and IDM images incorporate customized configuration profiles.
+
+   * Pushes Docker images to the repository specified in the --push-to argument.
+
+   * Updates the image defaulter file, which the forgeops apply command uses to determine which Docker images to run.
+
+8. (Optional) Build and push an PingGateway Docker image that's based on your own base image and contains your customized configuration profile:
+
+   ```
+   $ ./forgeops build --env-name my-env ig --config-profile my-profile --push-to my-repo
+   ```
+
+9. Prepare a Kubernetes cluster to test your images:
+
+   1. Create the cluster. This example assumes that you create a cluster suitable for a small-sized ForgeOps deployment.
+
+   2. Make sure your cluster can [access and pull Docker images](https://kubernetes.io/docs/concepts/containers/images/#configuring-nodes-to-authenticate-to-a-private-registry) from your repository.
+
+   3. Create a namespace in the new cluster, and then make the new namespace the active namespace in your local Kubernetes context.
+
+10. Perform a ForgeOps deployment in your cluster:
+
+    ```
+    $ cd /path/to/forgeops/bin
+    $ ./forgeops apply --env-name my-env --fqdn my-fqdn --namespace my-namespace
+    ```
+
+11. Access the AM admin UI and verify that your customized configuration profiles are active.
+
+12. Delete the Kubernetes cluster that you used to test images.
+
+At the end of this process, the artifacts that you'll need to deploy the Ping Advanced Identity Software in production are available:
+
+* Docker images for the Ping Advanced Identity Software, in your Docker repository
+
+* An updated image defaulter file, in your `forgeops` repository clone
+
+You'll need to copy the image defaulter file to your production deployment, so that when you run the forgeops apply command, it will use the correct Docker images.
+
+Typically, you model the image creation process in a CI/CD pipeline. Then, you run the pipeline at milestones in the development of your customized configuration profile.
+
+***
+
+[1](#_footnoteref_1). The `FROM` statement originally contained `am-cdk` as part of the repository name. Be sure to use `am`, not `am-cdk`, in the revised statement.[2](#_footnoteref_2). The `FROM` statement originally contained `idm-cdk` as part of the repository name. Be sure to use `idm`, not `idm-cdk`, in the revised statement.
+
+---
+
+---
+title: Beyond the docs
+description: Useful links that cover topics beyond the scope of this documentation.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:beyond-the-docs
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/beyond-the-docs.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Amster", "Docker", "Prometheus", "Grafana", "Alertmanager", "Multi-cluster", "Certificates"]
+section_ids:
+  development_topics: Development topics
+  deployment_topics: Deployment topics
+  ds_topics: DS topics
+  troubleshooting: Troubleshooting
+---
+
+# Beyond the docs
+
+Useful links that cover topics beyond the scope of this documentation.
+
+## Development topics
+
+* [Get a full Amster export out of a ForgeOps deployment](https://support.pingidentity.com/s/article/How-do-I-get-a-full-Amster-export-out-of-a-ForgeOps-deployment)
+
+## Deployment topics
+
+* [Deploy and customize Prometheus, Grafana, and Alertmanager in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob/2026.2.1/etc/addons/prometheus#prometheus-and-grafana-deployment)
+
+* [Deploy the platform in a multi-cluster environment using Google Cloud Multi Cluster Ingress and Cloud DNS for GKE](https://github.com/ForgeRock/forgeops-extras/tree/master/samples/multi-cluster/google-cloud/multi-cluster-ingress)
+
+* [Import a certificate into the truststore in a ForgeOps deployment](https://support.pingidentity.com/s/article/How-do-I-import-a-certificate-into-the-truststore-in-a-ForgeOps-deployment) **(Updated)**
+
+* [Enable the IDM workflow in a ForgeOps deployment](https://community.forgerock.com/t/enabling-the-idm-workflow-with-forgeops-v7-x/3949)
+
+* [ForgeOps deployment to minikube on M1 or M2 based Mac running Colima](https://community.forgerock.com/t/deploying-forgeops-to-minikube-on-an-m1-mac-with-colima/3305)
+
+## DS topics
+
+* DS script guide
+
+  * [An overview of DS scripts to customize, build, and deploy DS Docker images](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522)
+
+  * []()The `ds/ds-new/ldif-ext` directory now contains subdirectories matching each DS backend setup-profile. This makes it easier for customers to add custom ldap configuration for backends without having to manipulate the `ds-setup.sh` script.
+
+    Customers can now just add their custom files in:
+
+    * `ldif-ext/am-config/` for the `` am-config` `` backend
+
+    * `ldif-ext/identities/` for the `identities` backend
+
+    * `ldif-ext/tokens/` for the `tokens` backend
+
+    * `ldif-ext/idm-repo/` for the `openidm` backend
+
+* Synchronization of DS data
+
+  * [Synchronize persistent DS data between ForgeOps deployments](https://support.pingidentity.com/s/article/How-to-Replicate-Persistent-DS-Data-Between-ForgeOps-Deployments-Using-Synchronisation).
+
+## Troubleshooting
+
+* [Enable and modify the AM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-am.html)
+
+* [Enable and modify the IDM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-idm/3152)
+
+* [Enable and modify the audit logging level](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops/3263)
+
+---
+
+---
+title: ForgeOps benchmarks
+description: The benchmarking instructions in this part of the documentation give you a method to validate performance of your ForgeOps deployment.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  forgeops_benchmarking_checklist: ForgeOps benchmarking checklist
+---
+
+# ForgeOps benchmarks
+
+The benchmarking instructions in this part of the documentation give you a method to validate performance of your ForgeOps deployment.
+
+The benchmarking techniques we present are a lightweight example, and are not a substitute for load testing a production deployment. Use our benchmarking techniques to help you get started with the task of constructing your own load tests.
+
+When you[create a project plan](../../start/start-here.html#planning), you'll need to think about how you'll put together production-quality load tests that accurately measure your own deployment's performance.
+
+## ForgeOps benchmarking checklist
+
+* [icon: square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: Glossary
+description: AM affinity deployment lets AM spread the LDAP requests load over multiple directory server instances. Once a CTS token is created and assigned to a session, AM sends all further token operations to the same token origin directory server from any AM node. This ensures that the load of CTS token management is spread across directory servers.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:glossary
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/glossary.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Glossary
+
+* affinity (AM)
+
+  AM affinity deployment lets AM spread the LDAP requests load over multiple directory server instances. Once a CTS token is created and assigned to a session, AM sends all further token operations to the same token origin directory server from any AM node. This ensures that the load of CTS token management is spread across directory servers.
+
+  Source: [CTS Affinity Deployment](https://docs.pingidentity.com/pingam/8/cts-guide/cts-deployment-architectures.html#cts-affinity) in the Core Token Service (CTS) documentation
+
+* Amazon EKS
+
+  Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on Amazon Web Services without needing to set up or maintain your own Kubernetes control plane.
+
+  Source: [What is Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) in the Amazon EKS documentation
+
+* ARN (AWS)
+
+  An Amazon Resource Name (ARN) uniquely identifies an Amazon Web Service (AWS) resource. AWS requires an ARN when you need to specify a resource unambiguously across all of AWS, such as in IAM policies and API calls.
+
+  Source: [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the AWS documentation
+
+* AWS IAM Authenticator for Kubernetes
+
+  The AWS IAM Authenticator for Kubernetes is an authentication tool that lets you use Amazon Web Services (AWS) credentials for authenticating to a Kubernetes cluster.
+
+  Source: [AWS IAM Authenticator for Kubernetes](https://github.com/kubernetes-sigs/aws-iam-authenticator/blob/master/README.md) README file on GitHub
+
+* Azure Kubernetes Service (AKS)
+
+  AKS is a managed container orchestration service based on Kubernetes. AKS is available on the Microsoft Azure public cloud. AKS manages your hosted Kubernetes environment, making it quick and easy to deploy and manage containerized applications.
+
+  Source: [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes) in the Microsoft Azure documentation
+
+* BusyBox container
+
+  A BusyBox container is a minimal, lightweight containerized environment that includes a single, small executable file providing a compact implementation of over 300 common UNIX utilities. It's widely used for creating extremely small container images.
+
+  In ForgeOps deployments, the BusyBox container is used as a base image for custom configurations.
+
+  Source: [BusyBox page on Docker Hub](https://hub.docker.com/_/busybox).
+
+* cloud-controller-manager
+
+  The `cloud-controller-manager` daemon runs controllers that interact with the underlying cloud providers. The `cloud-controller-manager` daemon runs provider-specific controller loops only.
+
+  Source: [cloud-controller-manager](https://kubernetes.io/docs/concepts/overview/components/#cloud-controller-manager) in the Kubernetes Concepts documentation
+
+- ForgeOps deployment
+
+  A ForgeOps deployment is a deployment of the Ping Advanced Identity Software on Kubernetes based on Docker images, Helm charts, Kustomize bases and overlays, utility programs, and other artifacts you can find in the `forgeops` repository on GitHub.
+
+  A *single-instance ForgeOps deployment* is a special ForgeOps deployment that you use to [configure AM and IDM and build custom Docker images for the Ping Advanced Identity Software](../customize/overview.html). They are called single-instance deployments because unlike small, medium, and large deployments, they have only single pods that run AM and IDM. They are only suitable for developing the AM and IDM configurations and must not be used for testing performance, monitoring, security, and backup requirements in production environments.
+
+  Source: [Deployment overview](../deploy/overview.html)
+
+- CloudFormation (AWS)
+
+  CloudFormation is a service that helps you model and set up your AWS resources. You create a template that describes all the AWS resources that you want. CloudFormation takes care of provisioning and configuring those resources for you.
+
+  Source: [What is AWS CloudFormation?](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) in the AWS documentation
+
+* CloudFormation template (AWS)
+
+  An AWS CloudFormation template describes the resources that you want to provision in your [AWS stack](#stack-aws). AWS CloudFormation templates are text files formatted in JSON or YAML.
+
+  Source: [Working with AWS CloudFormation Templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html) in the AWS documentation
+
+* cluster
+
+  A container cluster is the foundation of Kubernetes Engine. A cluster consists of at least one [control plane](#control-plane) and multiple worker machines called nodes. The Kubernetes objects that represent your containerized applications all run on top of a cluster.
+
+  Source: [Standard cluster architecture](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture) in the Google Kubernetes Engine (GKE) documentation
+
+* ConfigMap
+
+  A configuration map, called `ConfigMap` in Kubernetes manifests, binds the configuration files, command-line arguments, environment variables, port numbers, and other configuration artifacts to the assigned containers and system components at runtime. The configuration maps are useful for storing and sharing non-sensitive, unencrypted configuration information.
+
+  Source: [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) in the Google Kubernetes Engine (GKE) documentation
+
+- container
+
+  A container is an allocation of resources such as CPU, network I/O, bandwidth, block I/O, and memory that can be "contained" together and made available to specific processes without interference from the rest of the system. Containers decouple applications from underlying host infrastructure.
+
+  Source: [Containers](https://kubernetes.io/docs/concepts/containers/) in the Kubernetes Concepts documentation
+
+* control plane
+
+  A control plane runs the control plane processes, including the Kubernetes API server, scheduler, and core resource controllers. GKE manages the lifecycle of the control plane when you create or delete a cluster.
+
+  Source: [Control plane](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#control_plane) in the Google Kubernetes Engine (GKE) documentation
+
+* DaemonSet
+
+  A set of daemons, called `DaemonSet` in Kubernetes manifests, manages a group of replicated pods. Usually, the daemon set follows a one-pod-per-node model. As you add nodes to a node pool, the daemon set automatically distributes the pod workload to the new nodes as needed.
+
+  Source: [DaemonSet](https://cloud.google.com/kubernetes-engine/docs/concepts/daemonset) in the Google Cloud documentation
+
+* deployment
+
+  A Kubernetes deployment represents a set of multiple, identical pods. Deployment runs multiple replicas of your application and automatically replaces any instances that fail or become unresponsive.
+
+  Source: [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) in the Kubernetes Concepts documentation
+
+* deployment controller
+
+  A deployment controller provides declarative updates for pods and replica sets. You describe a desired state in a deployment object, and the deployment controller changes the actual state to the desired state at a controlled rate. You can define deployments to create new replica sets, or to remove existing deployments and adopt all their resources with new deployments.
+
+  Source: [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) in the Google Cloud documentation
+
+* Docker container
+
+  A Docker container is a runtime instance of a Docker image. The container is isolated from other containers and its host machine. You can control how isolated your container's network, storage, or other underlying subsystems are from other containers or from the host machine.
+
+  Source: [Containers](https://docs.docker.com/get-started/overview/#docker-objects) in the Docker Getting Started documentation
+
+* Docker daemon
+
+  The Docker daemon (`dockerd`) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A Docker daemon can also communicate with other Docker daemons to manage Docker services.
+
+  Source: [The Docker daemon](https://docs.docker.com/get-started/overview/#the-docker-daemon) section in the Docker Overview documentation
+
+* Docker Engine
+
+  Docker Engine is an open source containerization technology for building and containerizing applications. Docker Engine acts as a client-server application with:
+
+  * A server with a long-running daemon process, `dockerd`.
+
+  * APIs, which specify interfaces that programs can use to talk to and instruct the Docker daemon.
+
+  * A command-line interface (CLI) client, `docker`. The CLI uses Docker APIs to control or interact with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI. The daemon creates and manages Docker objects, such as images, containers, networks, and volumes.
+
+  Source: [Docker Engine overview](https://docs.docker.com/engine/) in the Docker documentation
+
+* Dockerfile
+
+  A Dockerfile is a text file that contains the instructions for building a Docker image. Docker uses the Dockerfile to automate the process of building a Docker image.
+
+  Source: [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) in the Docker documentation
+
+- Docker Hub
+
+  Docker Hub provides a place for you and your team to build and ship [Docker images](#docker-image). You can create public repositories that can be accessed by any other Docker Hub user, or you can create private repositories you can control access to.
+
+  Source: [Docker Hub Quickstart](https://docs.docker.com/docker-hub/) section in the Docker Overview documentation
+
+* Docker image
+
+  A Docker image is an application you would like to run. A container is a running instance of an image.
+
+  An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization.
+
+  An image includes the application code, a runtime engine, libraries, environment variables, and configuration files that are required to run the application.
+
+  Source: [Docker objects](https://docs.docker.com/get-started/overview/#docker-objects) section in the Docker Overview documentation
+
+* Docker namespace
+
+  Docker namespaces provide a layer of isolation. When you run a container, Docker creates a set of namespaces for that container. Each aspect of a container runs in a separate namespace and its access is limited to that namespace.
+
+  The `PID` namespace is the mechanism for remapping process IDs inside the container. Other namespaces such as net, mnt, ipc, and uts provide the isolated environments we know as containers. The user namespace is the mechanism for remapping user IDs inside a container.
+
+  Source: [The underlying technology](https://docs.docker.com/get-started/overview/#the-underlying-technology) section in the Docker Overview documentation
+
+* Docker registry
+
+  A Docker registry stores [Docker images](#docker-image). Docker Hub and Docker Cloud are public registries that anyone can use, and Docker is configured to look for images on [Docker Hub](#docker-hub) by default. You can also run your own private registry.
+
+  Source: [Docker registries](https://docs.docker.com/get-started/overview/#docker-registries) section in the Docker Overview documentation
+
+* Docker repository
+
+  A Docker repository is a public, certified repository from vendors and contributors to Docker. It contains [Docker images](#docker-image) that you can use as the foundation to build your applications and services.
+
+  Source: [Manage repositories](https://docs.docker.com/docker-hub/repos/) in the Docker documentation
+
+* dynamic volume provisioning
+
+  The process of creating storage volumes on demand is called dynamic volume provisioning. Dynamic volume provisioning lets you create storage volumes on demand. It automatically provisions storage when it is requested by users.
+
+  Source: [Dynamic Volume Provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) in the Kubernetes Concepts documentation
+
+- egress
+
+  An egress controls access to destinations outside the network from within a Kubernetes network. For an external destination to be accessed from a Kubernetes environment, the destination should be listed as an allowed destination in the allowlist configuration.
+
+  Source: [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) in the Kubernetes Concepts documentation
+
+- firewall rule
+
+  A firewall rule lets you allow or deny traffic to and from your virtual machine instances based on a configuration you specify. Each Kubernetes network has a set of firewall rules controlling access to and from instances in its subnets. Each firewall rule is defined to apply to either incoming ([ingress](#gloss-ingress)) or outgoing ([egress](#egress)) traffic, not both.
+
+  Source: [VPC firewall rules](https://cloud.google.com/firewall/docs) in the Google Cloud documentation
+
+- garbage collection
+
+  Garbage collection is the process of deleting unused objects. [Kubelets](#kubelet) perform garbage collection for containers every minute, and garbage collection for images every five minutes. You can adjust the high and low threshold flags and garbage collection policy to tune image garbage collection.
+
+  Source: [Garbage Collection](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) in the Kubernetes Concepts documentation
+
+- Google Kubernetes Engine (GKE)
+
+  The Google Kubernetes Engine (GKE) is an environment for deploying, managing, and scaling your containerized applications using Google infrastructure. The GKE environment consists of multiple machine instances grouped together to form a container cluster.
+
+  Source: [GKE overview](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview) in the Google Cloud documentation
+
+* horizontal pod autoscaler
+
+  The horizontal pod autoscaler enables the cluster to automatically increase or decrease the number of pods in a replication controller, deployment, replica set, or stateful set based on observed CPU utilization. Users can specify the CPU utilization target to enable the controller to adjust the number of replicas.
+
+  Source: [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) in the Kubernetes documentation
+
+- ingress
+
+  An ingress is a collection of rules that allow inbound connections to reach the cluster services.
+
+  Source: [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) in the Kubernetes Concepts documentation
+
+- instance group
+
+  An instance group is a collection of virtual machine instances. The instance groups lets you easily monitor and control the group of virtual machines together.
+
+  Source: [Instance groups](https://cloud.google.com/compute/docs/instance-groups/) in the Google Cloud documentation
+
+- instance template
+
+  An instance template is a global API resource to create VM instances and managed instance groups. Instance templates define instance properties such as machine type, image, zone, labels, and so on. They are very helpful in replicating the environments.
+
+  Source: [Instance templates](https://cloud.google.com/compute/docs/instance-templates/) in the Google Cloud documentation
+
+- kubectl
+
+  The kubectl command-line tool supports several different ways to create and manage Kubernetes objects.
+
+  Source: [Kubernetes Object Management](https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management/) in the Kubernetes Concepts documentation
+
+- kube-controller-manager
+
+  The Kubernetes controller manager embeds core controllers shipped with Kubernetes. Each controller is a separate process. To reduce complexity, the controllers are compiled into a single binary and run in a single process.
+
+  Source: [kube-controller-manager](https://kubernetes.io/docs/reference/generated/kube-controller-manager/) in the Kubernetes Reference documentation
+
+* kubelet
+
+  A kubelet is an agent that runs on each node in the cluster. It ensures that containers are running in a pod.
+
+  Source: [kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet) in the Kubernetes Concepts documentation
+
+* kube-scheduler
+
+  The `kube-scheduler` component is on the master node. It watches for newly created pods that do not have a node assigned to them, and selects a node for them to run on.
+
+  Source: [kube-scheduler](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler) in the Kubernetes Concepts documentation
+
+* Kubernetes
+
+  Kubernetes is an open source platform designed to automate deploying, scaling, and operating application containers.
+
+  Source: [Overview](https://kubernetes.io/docs/concepts/overview/) in the Kubernetes Concepts documentation
+
+* Kubernetes DNS
+
+  A Kubernetes DNS pod is a pod used by the kubelets and the individual containers to resolve DNS names in the cluster.
+
+  Source: [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) in the Kubernetes Concepts documentation
+
+* Kubernetes namespace
+
+  Kubernetes supports multiple virtual clusters backed by the same physical cluster. A Kubernetes namespace is a virtual cluster that provides a way to divide cluster resources between multiple users. Kubernetes starts with three initial namespaces:
+
+  * **`default`**: The default namespace for user created objects which don't have a namespace.
+
+  * **`kube-system`**: The namespace for objects created by the Kubernetes system.
+
+  * **`kube-public`**: The automatically created namespace that is readable by all users.
+
+  Source: [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in the Kubernetes Concepts documentation
+
+* Let's Encrypt
+
+  Let's Encrypt is a free, automated, and open certificate authority.
+
+  Source: [Let's Encrypt website](https://letsencrypt.org/)
+
+* Microsoft Azure
+
+  Microsoft Azure is the Microsoft cloud platform, including infrastructure as a service (IaaS) and platform as a service (PaaS) offerings.
+
+  Source: [What is Azure?](https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-azure) in the Microsoft Azure documentation
+
+* network policy
+
+  A Kubernetes network policy specifies how groups of pods are allowed to communicate with each other and with other network endpoints.
+
+  Source: [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) in the Kubernetes Concepts documentation
+
+* node (Kubernetes)
+
+  A Kubernetes node is a virtual or physical machine in the cluster. Each node is managed by the master components and includes the services needed to run the pods.
+
+  Source: [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/) in the Kubernetes documentation
+
+* node controller (Kubernetes)
+
+  A Kubernetes node controller is a Kubernetes master component that manages various aspects of the nodes, such as lifecycle operations, operational status, and maintaining an internal list of nodes.
+
+  Source: [Node Controller](https://kubernetes.io/docs/concepts/architecture/nodes/#node-controller) in the Kubernetes Concepts documentation
+
+* node pool (Kubernetes)
+
+  A Kubernetes node pool is a collection of nodes with the same configuration. At the time of creating a cluster, all the nodes created in the `default` node pool. You can create your custom node pools for configuring specific nodes that have different resource requirements such as memory, CPU, and disk types.
+
+  Source: [About node pools](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pools) in the Google Kubernetes Engine (GKE) documentation
+
+* persistent volume
+
+  A persistent volume (PV) is a piece of storage in the cluster that has been provisioned by an administrator. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins that have a lifecycle independent of any individual pod that uses the PV.
+
+  Source: [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in the Kubernetes Concepts documentation
+
+* persistent volume claim
+
+  A persistent volume claim (PVC) is a request for storage by a user. A PVC specifies size and access modes such as:
+
+  * Mounted once for read and write access
+
+  * Mounted many times for read-only access
+
+  Source: [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in the Kubernetes Concepts documentation
+
+* pod anti-affinity (Kubernetes)
+
+  Kubernetes pod anti-affinity constrains which nodes can run your pod, based on labels on the pods that are already running on the node, rather than based on labels on nodes. Pod anti-affinity lets you control the spread of workload across nodes and also isolate failures to nodes.
+
+  Source: [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) in the Kubernetes Concepts documentation
+
+* pod (Kubernetes)
+
+  A Kubernetes pod is the smallest, most basic deployable object in Kubernetes. A pod represents a single instance of a running process in a cluster. Containers within a pod share an IP address and port space.
+
+  Source: [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#understanding-pods) in the Kubernetes Concepts documentation
+
+* region (Azure)
+
+  An Azure region, also known as a location, is an area within a geography, containing one or more data centers.
+
+  Source: [region](https://docs.microsoft.com/en-us/azure/azure-glossary-cloud-terminology#region) in the Microsoft Azure glossary
+
+* replication controller (Kubernetes)
+
+  A replication controller ensures that a specified number of Kubernetes pod replicas are running at any one time. The replication controller ensures that a pod or a homogeneous set of pods is always up and available.
+
+  Source: [ReplicationController](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/) in the Kubernetes Concepts documentation
+
+* resource group (Azure)
+
+  A resource group is a container that holds related resources for an application. The resource group can include all the resources for an application, or only those resources that are logically grouped together.
+
+  Source: [resource group](https://docs.microsoft.com/en-us/azure/azure-glossary-cloud-terminology#resource-group) in the Microsoft Azure glossary
+
+* secret (Kubernetes)
+
+  A Kubernetes secret is a secure object that stores sensitive data, such as passwords, OAuth 2.0 tokens, and SSH keys in your clusters.
+
+  Source: [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) in the Kubernetes Concepts documentation
+
+* security group (AWS)
+
+  A security group acts as a virtual firewall that controls the traffic for one or more compute instances.
+
+  Source: [Amazon EC2 security groups for Linux instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html) in the AWS documentation
+
+* service (Kubernetes)
+
+  A Kubernetes service is an abstraction that defines a logical set of pods and a policy by which to access them. This is sometimes called a microservice.
+
+  Source: [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in the Kubernetes Concepts documentation
+
+* service principal (Azure)
+
+  An Azure service principal is an identity created for use with applications, hosted services, and automated tools to access Azure resources. Service principals let applications access resources with the restrictions imposed by the assigned roles instead of accessing resources as a fully privileged user.
+
+  Source: [Create an Azure service principal with Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-2.4.0) in the Microsoft Azure PowerShell documentation
+
+* shard
+
+  Sharding is a way of partitioning directory data so that the load can be shared by multiple directory servers. Each data partition, also known as a shard, exposes the same set of naming contexts, but only a subset of the data. For example, a distribution might have two shards. The first shard contains all users whose names begin with A-M, and the second contains all users whose names begin with N-Z. Both have the same naming context.
+
+  Source: [Class Partition](https://docs.pingidentity.com/pingds/8/_attachments/javadoc/org/opends/server/discovery/Partition.html) in the DS Javadoc
+
+* single-instance ForgeOps deployment
+
+  Refer to [ForgeOps deployment](#forgeops-deployment).
+
+- stack (AWS)
+
+  A stack is a collection of AWS resources that you can manage as a single unit. You can create, update, or delete a collection of resources by using stacks. The [AWS template](#cloudformation-template) defines all the resources in a stack.
+
+  Source: [Working with stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in the AWS documentation
+
+- stack set (AWS)
+
+  A stack set is a container for stacks. You can provision stacks across AWS accounts and regions by using a single [AWS template](#cloudformation-template). A single template defines the resources included in each stack of a stack set.
+
+  Source: [StackSets concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html) in the AWS documentation
+
+- subscription (Azure)
+
+  An Azure subscription is used for pricing, billing, and payments for Azure cloud services. Organizations can have multiple Azure subscriptions, and subscriptions can span multiple regions.
+
+  Source: [subscription](https://docs.microsoft.com/en-us/azure/azure-glossary-cloud-terminology#subscription) in the Microsoft Azure glossary
+
+- volume (Kubernetes)
+
+  A Kubernetes volume is a storage volume that has the same lifetime as the pod that encloses it. Consequently, a volume outlives any containers that run within the pod, and data is preserved across container restarts. When a pod ceases to exist, the Kubernetes volume also ceases to exist.
+
+  Source: [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) in the Kubernetes Concepts documentation
+
+- volume snapshot (Kubernetes)
+
+  In Kubernetes, you can copy the content of a persistent volume at a point in time, without having to create a new volume. You can efficiently back up your data using volume snapshots.
+
+  Source: [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/) in the Kubernetes Concepts documentation
+
+- VPC (AWS)
+
+  A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud.
+
+  Source: [What Is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the AWS documentation
+
+- worker node (AWS)
+
+  An Amazon Elastic Container Service for Kubernetes (Amazon EKS) worker node is a standard compute instance provisioned in Amazon EKS.
+
+  Source: [Self-managed nodes](https://docs.aws.amazon.com/eks/latest/userguide/worker.html) in the AWS documentation
+
+- workload (Kubernetes)
+
+  A Kubernetes workload is the collection of applications and batch jobs packaged into a container. Before you deploy a workload on a cluster, you must first package the workload into a [container](#container).
+
+  Source: [Workloads](https://kubernetes.io/docs/concepts/workloads) in the Kubernetes Concepts documentation
+
+---
+
+---
+title: Ingress
+description: By default, ForgeOps deployments use Ingress-NGINX controller.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:ingress
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/ingress.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Ingress Controller", "Traefik", "HAProxy"]
+section_ids:
+  haproxy: HAProxy Ingress
+---
+
+# Ingress
+
+By default, ForgeOps deployments use Ingress-NGINX controller.
+
+For deployments on GKE, EKS, and AKS, the tf-apply cluster creation script deploys the Traefik ingress controller when it creates new Kubernetes clusters. Alternatively, you can deploy [HAProxy Ingress](#haproxy) as your ingress controller.
+
+For deployments on minikube, the minikube start command example installs the ingress add-on in your [minikube cluster](../setup/minikube.html).
+
+## HAProxy Ingress
+
+This section lists adjustments you'll need to make if you want to perform a ForgeOps deployment that uses HAProxy Ingress as the ingress controller instead of Ingress-NGINX controller.
+
+When you create your [GKE](../setup/google-cloud.html#gcp-cluster), [EKS](../setup/aws.html#aws-cluster), or [AKS](../setup/azure.html#azure-cluster) cluster:
+
+1. Before you run the tf-apply script, configure Terraform to deploy HAProxy Ingress in your cluster.
+
+   Modify these values under `cluster.tf_cluster_gke_small` in the override.auto.tfvars file:
+
+   1. Set the value of the `helm.ingress-haproxy.deploy` variable to `false`.
+
+2. To get the ingress controller's external IP address on your GKE, EKS, or AKS cluster, specify --namespace haproxy-ingress when you run the kubectl get services command. For example:
+
+   ```
+   $ kubectl get services --namespace haproxy-ingress
+   NAME              TYPE           CLUSTER-IP   EXTERNAL-IP  PORT(S)                      AGE
+   haproxy-ingress   LoadBalancer   10.84.6.68   34.82.11.221 80:32288/TCP,443:32325/TCP   38s
+   ...
+   ```
+
+When you [perform your ForgeOps deployment](../deploy/deploy.html):
+
+1. Specify the --ingress-class haproxy argument. For example:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops apply --small --ingress-class haproxy --fqdn my-fqdn --namespace my-namespace
+   ```
+
+---
+
+---
+title: OAuth 2.0 authorization code flow
+description: The AMAccessTokenSim.scala simulation tests OAuth 2.0 authorization code flow performance. It measures the throughput and response time of an AM server performing authentication, authorization, and session token management when AM is configured to use client-based sessions, and OAuth 2.0 is configured to use client-based tokens. In this test, one transaction includes all three operations.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/oauth2
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/oauth2.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Benchmark", "OAuth 2.0"]
+section_ids:
+  congratulations: Congratulations!
+---
+
+# OAuth 2.0 authorization code flow
+
+The `AMAccessTokenSim.scala` simulation tests OAuth 2.0 authorization code flow performance. It measures the throughput and response time of an AM server performing authentication, authorization, and session token management when AM is configured to use client-based sessions, and OAuth 2.0 is configured to use client-based tokens. In this test, one transaction includes all three operations.
+
+To run the simulation:
+
+1. Make sure the userstore is provisioned, and the PingDS cache is primed.
+
+   Refer to [Test user generation](testusers.html).
+
+2. Set environment variables that specify,
+
+   * the host on which to run the test,
+
+   * the number of concurrent threads to spawn when running the test,
+
+   * the duration of the test (in seconds),
+
+   * the first part of the user ID, and the user password, and
+
+   * the number of users for the test:
+
+   ```
+   $ export TARGET_HOST=my-fqdn
+   $ export CONCURRENCY=100
+   $ export DURATION=60
+   $ export USER_PREFIX=user.
+   $ export USER_PASSWORD=T35tr0ck123
+   $ export USER_POOL=n-users
+   ```
+
+   where *n-users* is `1000000` for a small cluster, `10000000` for a medium cluster, and `100000000` for a large cluster.
+
+3. Configure AM for CTS-based sessions:
+
+   1. Log in to the Ping Advanced Identity Software admin UI as the `amadmin` user. For details, refer to [AM Services](../../deploy/access.html#am-services-cdm).
+
+   2. Access the AM admin UI.
+
+   3. Select the top level realm.
+
+   4. Select Properties.
+
+   5. Make sure the Use Client-based Sessions option is disabled.
+
+      If it's not disabled, disable it, and then select Save Changes.
+
+4. Configure AM for CTS-based OAuth2 tokens:
+
+   1. Select Realms > Top Level Realm.
+
+   2. Select Services > OAuth2 Provider.
+
+   3. Make sure the Use Client-based Access & Refresh Tokens option is disabled.
+
+      If it's not disabled, disable it, and then select Save Changes.
+
+5. Change to the /path/to/forgeops/docker/gatling directory.
+
+6. Run the simulation:
+
+   ```
+   $ gradle clean; gradle gatlingRun-am.AMAccessTokenSim
+   ```
+
+   When the simulation is complete, the name of a file containing the test results appears near the end of the output.
+
+7. Open the file containing the test results in a browser to review the results.
+
+## Congratulations!
+
+You've successfully run the lightweight benchmark tests on a ForgeOps deployment.
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: check-square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: check-square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: check-square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: check-square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: References
+description: This section includes:
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# References
+
+This section includes:
+
+* Steps to create your own [Base Docker images](base-docker-images.html).
+
+* [Reference documentation](forgeops.html) for the forgeops command.
+
+* A [glossary](glossary.html) of terminology used in this documentation.
+
+* [Articles and knowledge base entries](beyond-the-docs.html) pertaining ForgeOps that aren't part of the official ForgeOps documentation.
+
+* [How-to articles in `forgeops` repository](how-tos.html).
+
+---
+
+---
+title: Secrets Reference
+description: To protect network communication and keep data confidential and unalterable, ForgeOps authentication relies on:
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:secrets-reference
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/secrets-reference.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  am_configuration_passwords: AM configuration passwords
+  kubernetes_secret_name_am_env_secret: "Kubernetes secret name: am-env-secret"
+  am_secrets: AM secrets
+  kubernetes_secret_name_am_keystore: "Kubernetes secret name: am-keystore"
+  amster_secrets_keys_and_passwords: Amster secrets, keys, and passwords
+  kubernetes_secret_name_amster: "Kubernetes secret name: amster"
+  kubernetes_secret_name_amster_env_secrets: "Kubernetes secret name: amster-env-secrets"
+  ds_secrets_keys_and_passwords: DS secrets, keys, and passwords
+  kubernetes_secret_name_ds_env_secrets: "Kubernetes secret name: ds-env-secrets"
+  kubernetes_secret_name_ds_passwords: "Kubernetes secret name: ds-passwords"
+  kubernetes_secret_name_ds_master_keypair: "Kubernetes secret name: ds-master-keypair"
+  kubernetes_secret_name_ds_ssl_keypair: "Kubernetes secret name: ds-ssl-keypair"
+  idm_admin_passwords: IDM admin passwords
+  kubernetes_secret_name_idm_env_secrets: "Kubernetes secret name: idm-env-secrets"
+---
+
+# Secrets Reference
+
+To protect network communication and keep data confidential and unalterable, ForgeOps authentication relies on:
+
+* AM and IDM signing
+
+* Encryption methods.
+
+AM and IDM signing and encryption depend on keys or secrets generated using cryptographic algorithms.
+
+This section describes various secrets and keys used in ForgeOps. Secrets, passwords, and keys used in ForgeOps are configured as environment variables or as files mounted on the Kubernetes pods.
+
+## AM configuration passwords
+
+### Kubernetes secret name: `am-env-secret`
+
+* Passwords stored as environment variables in `am` pod
+
+  * Pod: `am`
+
+  * Container: `openam`
+
+  * Type: Environment variable
+
+    | Description or role                                                                                       | Location on container                                                                                                                                                                                                                                                 |
+    | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | **AM\_AUTHENTICATION\_SHARED\_SECRET**                                                                    |                                                                                                                                                                                                                                                                       |
+    | Core authentication secret for the root realm.                                                            | * `cdk/config/services/realm/root/iplanetamauthservice/1.0/organizationconfig/defaultconfig.json`
+
+    * Value: `security.sharedSecret`                                                                                                                                   |
+    | **AM\_ENCRYPTION\_KEY**                                                                                   |                                                                                                                                                                                                                                                                       |
+    | Key used for encrypting information stored in the secure state of authentication trees in AM.             | - `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/http___am_80_am.json`
+
+    - `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json` |
+    | **AM\_OIDC\_CLIENT\_SUBJECT\_IDENTIFIER\_HASH\_SALT**                                                     |                                                                                                                                                                                                                                                                       |
+    | Configuration parameter used to specify the Subject Identifier Hash Salt in the OAuth 2.0 and OIDC flows. | `base/config/services/realm/root/oauth2provider/1.0/organizationconfig/defaultconfig.json`                                                                                                                                                                            |
+    | **AM\_PASSWORDS\_AMADMIN\_CLEAR**                                                                         |                                                                                                                                                                                                                                                                       |
+    | Password for the amadmin user. Updated to AM\_PASSWORDS\_AMADMIN\_HASHED in `docker-entrypoint.sh`.       | `base/config/services/realm/root/sunidentityrepositoryservice/1.0/globalconfig/default/users/amadmin.json`                                                                                                                                                            |
+    | **AM\_SELFSERVICE\_LEGACY\_CONFIRMATION\_EMAIL\_LINK\_SIGNING\_KEY**                                      |                                                                                                                                                                                                                                                                       |
+    | A 256-bit key (base64-encoded) used for HMAC signing of the legacy self-service confirmation email links. | `base/config/services/realm/root/restsecurity/1.0/organizationconfig/defaultconfig.json`                                                                                                                                                                              |
+    | **AM\_SESSION\_STATELESS\_ENCRYPTION\_KEY**                                                               |                                                                                                                                                                                                                                                                       |
+    | Encryption key for encrypting stateless session tokens.                                                   | `base/config/services/realm/root/iplanetamsessionservice/1.0/globalconfig/default.json`                                                                                                                                                                               |
+    | **AM\_SESSION\_STATELESS\_SIGNING\_KEY**                                                                  |                                                                                                                                                                                                                                                                       |
+    | Signing key for validating the security of stateless session tokens.                                      | `base/config/services/realm/root/iplanetamsessionservice/1.0/globalconfig/default.json`                                                                                                                                                                               |
+
+## AM secrets
+
+### Kubernetes secret name: `am-keystore`
+
+* Keystore mounted in `am` pod
+
+  * Description: The default AM keystore with test aliases
+
+  * Container: openam
+
+  * Mount path: /var/run/secrets
+
+|   |                                                                              |
+| - | ---------------------------------------------------------------------------- |
+|   | For use with the secret agent only. Not applicable for the secret generator. |
+
+| Description or role                                                 | Location on container                                                        |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **`.keystore.jceks`**                                               |                                                                              |
+| Default AM keystore with test aliases                               | Copied in `docker-entrypoint.sh` to `/home/forgerock/security/keystores`.    |
+| **`.keystore`**                                                     |                                                                              |
+| Default password for all the key aliases in the default AM keystore | Copied in `` `docker-entrypoint.sh to `/home/forgerock/security/keystore ``. |
+| **`.storepass`**                                                    |                                                                              |
+| Default AM keystore password                                        | Copied in `docker-entrypoint.sh` to `/home/forgerock/security/keystore`.     |
+
+## Amster secrets, keys, and passwords
+
+### Kubernetes secret name: `amster`
+
+* Mounted files on `amster` pod
+
+  * Description: The key-pair for SSH connectivity to PingAM
+
+  * Pod: `amster`
+
+  * Container: `amster` or `pause`
+
+  * Mount path: `/var/run/secrets/amster`
+
+    | Description or role                       | Location on container            |
+    | ----------------------------------------- | -------------------------------- |
+    | **`id_rsa`**                              |                                  |
+    | Private key for SSH connection to PingAM. | `/var/run/secrets/amster/id_rsa` |
+
+* Mounted files on `am` pod
+
+  * Pod: `am`
+
+  * Container: `openam`
+
+  * Mount path: `/var/run/secrets/amster`
+
+    | Description or role                         | Location on container                     |
+    | ------------------------------------------- | ----------------------------------------- |
+    | **`id_rsa.pub`**                            |                                           |
+    | Public key for SSH connections from Amster. | `/var/run/secrets/amster/authorized_keys` |
+
+### Kubernetes secret name: `amster-env-secrets`
+
+* Environment variables in `amster` pod
+
+  * Description: The key pairs for SSH connectivity to PingAM
+
+  * Pod: `amster`
+
+  * Container: `amster`
+
+  * Type: Environment variable
+
+    | Description or role                                                                                                                       | Location on container                                |
+    | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+    | **IDM\_PROVISIONING\_CLIENT\_SECRET**                                                                                                     |                                                      |
+    | AM nodes in authentication journeys use this confidential client to authenticate through AM and provision identities through IDM.         | Used for provisioning Oauth2Client in IDM.           |
+    | **IDM\_RS\_CLIENT\_SECRET**                                                                                                               |                                                      |
+    | IDM uses this confidential client to introspect access tokens through the `am/oauth2/introspect` endpoint to get information about users. | Used in the Oauth2Client of the IDM resource server. |
+
+* Environment variables in `idm` pod
+
+  * Pod: `idm`
+
+  * Container: `openidm`
+
+  * Type: Environment variable
+
+    | Description or role                                                                                                                       | Location on container                                                                                         |
+    | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+    | **IDM\_RS\_CLIENT\_SECRET**                                                                                                               |                                                                                                               |
+    | IDM uses this confidential client to introspect access tokens through the `am/oauth2/introspect` endpoint to get information about users. | Set in `boot.properties: "rs.client.secret"` to communicate with the Oauth2Client of the IDM resource server. |
+
+## DS secrets, keys, and passwords
+
+### Kubernetes secret name: `ds-env-secrets`
+
+Service account passwords for AM connecting to DS backends. `ds-set-passwords` is used to update the passwords on the DS backends.
+
+* Environment variables in `am` pod
+
+  * Pod: `am`
+
+  * Container: `openam`
+
+  * Type: Environment variables
+
+    | Description or role                                              | Location on container                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+    | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | **AM\_STORES\_USER\_PASSWORD**                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | Password for AM to access the identities backend on `ds-idrepo`. | 1. `cdk/config/services/realm/root/sunidentityrepositoryservice/1.0/organizationconfig/default/opendj.json`
+
+    2. `base/config/services/realm/root/amdatastoreservice/1.0/globalconfig/default/datastorecontainer/application-store.json`
+
+    3. `base/config/services/realm/root/iplanetamauthldapservice/1.0/organizationconfig/default.json`
+
+    4. `base/config/services/realm/root/iplanetamauthldapservice/1.0/organizationconfig/defaultconfig.json`
+
+    5. `base/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
+
+    6. `base/config/services/realm/root-sunamhiddenrealmdelegationservicepermissions/iplanetamauthldapservice/1.0/organizationconfig/default.json`
+
+       * **Variables are set in the `docker-entrypoint.sh`** |
+    | **AM\_STORES\_APPLICATION\_PASSWORD**                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | Password for AM to access the config backend on `ds-idrepo`.     | 1) `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
+
+    2) `base/config/services/realm/root/amdatastoreservice/1.0/globalconfig/default/datastorecontainer/application-store.json`
+
+    3) `base/config/services/realm/root/amdatastoreservice/1.0/globalconfig/default/datastorecontainer/policy-store.json`
+
+    4) `base/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
+
+    5) `base/config/services/realm/root/iplanetampolicyconfigservice/1.0/organizationconfig/defaultconfig.json`
+
+    6) `base/config/services/realm/root-sunamhiddenrealmdelegationservicepermissions/iplanetampolicyconfigservice/1.0/organizationconfig/default.json`        |
+    | **AM\_STORES\_CTS\_PASSWORD**                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | Password for AM to access the tokens backend on `ds-cts`.        | 1. `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
+
+    2. `base/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+
+* Environment variables in `ds-set-passwords` pod
+
+  * Pod: `ds-set-passwords`
+
+  * Container: `openidm`
+
+  * Type: Environment variables
+
+    | Name                                  | Description                                                         |
+    | ------------------------------------- | ------------------------------------------------------------------- |
+    | **AM\_STORES\_USER\_PASSWORD**        | Password for AM to access the identity backend on the `ds-idrepo`.  |
+    | **AM\_STORES\_APPLICATION\_PASSWORD** | Password for AM to access the configuration backend on `ds-idrepo`. |
+    | **AM\_STORES\_CTS\_PASSWORD**         | Password for AM to access the tokens backend on `ds-cts`.           |
+
+### Kubernetes secret name: `ds-passwords`
+
+* Passwords mounted in `ds-idrepo` or `ds-cts` pods
+
+  DS management passwords for administration and monitoring.
+
+  * Pod: `ds-idrepo` or `ds-cts`
+
+  * Container: `ds`
+
+  * Mount path: `/var/run/secrets/admin`
+
+    | Description or role                                                                                                                     | Location on container                                                       |
+    | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+    | **dirmanager.pw**                                                                                                                       |                                                                             |
+    | Root password for the `uid=admin` user.                                                                                                 | Set in `/opt/opendj/data/db/rootUser/rootUser.ldif` as `uid-admin`.         |
+    | **monitor.pw**                                                                                                                          |                                                                             |
+    | Password for the monitor backend. The monitor backend allows clients to access information provided by the DS server monitor providers. | Set in `/opt/opendj/data/db/monitorUser/monitorUser.ldif` as `uid=monitor`. |
+
+* Passwords mounted in `idm` pods
+
+  * Pod: `idm`
+
+  * Container: `idm`
+
+  * Type: Environment variables - `OPENIDM_REPO_PASSWORD` and `USERSTORE_PASSWORD`
+
+    | Description or role                                                                           | Location on container |
+    | --------------------------------------------------------------------------------------------- | --------------------- |
+    | **`dirmanager.pw`**                                                                           |                       |
+    | Root password for communicating with DS. Configured in `docker/idm/resolver/boot.properties`. |                       |
+
+### Kubernetes secret name: `ds-master-keypair`
+
+Master SSL key pair for encrypting DS data
+
+* Pod: `ds-idrepo` or `ds-cts`
+
+* Container: `init` and `ds`
+
+* Mount path: `/var/run/secrets/ds-master-keypair`
+
+  | Description or role                                                        | Location on container                                                                                  |
+  | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+  | **`ca.crt`, `tls.crt`, or `tls.key`**                                      |                                                                                                        |
+  | SSL key pair with ca self-signed cert used to encrypt DS data for backups. | `/var/run/secrets/keys/ds/master-key`. Used by `PEM Key Manager` provider configured in `ds-setup.sh`. |
+
+### Kubernetes secret name: `ds-ssl-keypair`
+
+The SSL key pair used for encrypting replication traffic. It also used by AM and IDM as a trust store for LDAPS connections to DS.
+
+* Pod: `ds-idrepo` or `ds-cts`
+
+* Container: `init` and `ds`
+
+* Mount path: `/var/run/secrets/keys/ds/ds-ssl-keypair`
+
+  | Description or role                                                                                                            | Location on container                                                                                          |
+  | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+  | **ca.crt/tls.crt/tls.key**                                                                                                     |                                                                                                                |
+  | SSL key pair with a self-signed certificate of the certificate authority. Used for encrypting data replicated between servers. | `/var/run/secrets/keys/ds/ds-ssl-keypair`. Used by the `PEM Key Manager` provider configured in `ds-setup.sh`. |
+
+* Pod: `idm`
+
+* Container: `truststore-init`
+
+* Mount path: `/var/run/secrets/truststore/ca.crt`
+
+  | Description or role                                                                                                | Location on container                                                                                |
+  | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+  | **ca.crt**                                                                                                         |                                                                                                      |
+  | SSL key pair with a certificate authority signed certificate. Used for encrypting data replicated between servers. | `IDM_PEM_TRUSTSTORE_DS=/var/run/secrets/truststore/cacerts`, copied to `/opt/openidm/idmtruststore`. |
+
+* Pod: `am`
+
+* Container: `truststore-init`
+
+* Mount path: `/var/run/secrets/truststore/ca.crt`
+
+  | Description or role                                                                                                              | Location on container                                                                               |
+  | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+  | **ca.crt**                                                                                                                       |                                                                                                     |
+  | SSL key pair with the self-signed certificate of the certificate authority. Used for encrypting data replicated between servers. | `IDM_PEM_TRUSTSTORE_DS=/var/run/secrets/truststore/ca.crt`, copied to `/opt/openidm/idmtruststore`. |
+
+## IDM admin passwords
+
+### Kubernetes secret name: `idm-env-secrets`
+
+IDM administration and keystore passwords
+
+* Pod: `idm`
+
+* Container: `openidm`
+
+* Type: ENV VARS
+
+  | Description or role             | Location on container                               |
+  | ------------------------------- | --------------------------------------------------- |
+  | **OPENIDM\_ADMIN\_PASSWORD**    |                                                     |
+  | IDM admin password.             | Configured in `repo.init.json`                      |
+  | **OPENIDM\_KEYSTORE\_PASSWORD** |                                                     |
+  | IDM keystore password.          | Configured in `docker/idm/resolver/boot.properties` |
+
+---
+
+---
+title: Test user generation
+description: Running the Authentication rate and OAuth 2.0 authorization code flow benchmarks requires a set of test users. This page provides instructions for generating a set of test users suitable for these two lightweight AM benchmarks. Note that these test users are not necessarily suitable for other benchmarks or load tests, and that they can't be used with IDM.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/testusers
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/testusers.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  for_small_and_medium_clusters: For small and medium clusters
+  for_large_clusters: For large clusters
+  next_step: Next step
+---
+
+# Test user generation
+
+Running the [Authentication rate](authrate.html) and [OAuth 2.0 authorization code flow](oauth2.html) benchmarks requires a set of test users. This page provides instructions for generating a set of test users suitable for these two lightweight AM benchmarks. Note that these test users are not necessarily suitable for other benchmarks or load tests, and that they can't be used with IDM.
+
+## For small and medium clusters
+
+Follow these steps to generate test users for lightweight AM benchmarks, provision the user stores, and prime the directory servers:
+
+1. Set up your Kubernetes context:
+
+   1. Set the `KUBECONFIG` environment variable so that your Kubernetes context references the cluster where you'll perform the ForgeOps deployment.
+
+   2. Set the active namespace in your Kubernetes context to the Kubernetes namespace where you deployed the platform.
+
+2. Obtain the password for the directory superuser, `uid=admin`:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops info | grep uid=admin
+   ```
+
+   Make a note of this password. You'll need it for subsequent steps in this procedure.
+
+3. Change to the directory that contains the source for the `dsutil` Docker container:
+
+   ```
+   $ cd /path/to/forgeops/docker/ds/dsutil
+   ```
+
+   You'll generate test users from a pod you create from the `dsutil` container.
+
+4. Build and push the `dsutil` Docker container to your container registry, and then run the container.
+
+   The my-registry parameter varies, depending on the location of your registry:
+
+   ```
+   $ docker build --tag=my-registry/dsutil .
+   $ docker push my-registry/dsutil
+   $ kubectl run -it dsutil --image=my-registry/dsutil --restart=Never -- bash
+   ```
+
+   The kubectl run command creates the `dsutil` pod, and leaves you in a shell that lets you run commands in the pod.
+
+5. Generate the test users—1,000,000 users for a small cluster and 10,000,000 for a medium cluster:
+
+   Run these substeps from the `dsutil` pod's shell:
+
+   1. Make an LDIF file that has the number of user entries for your cluster size:
+
+      For example, for a small cluster:
+
+      ```
+      $ /opt/opendj/bin/makeldif -o data/entries.ldif \
+       -c numusers=1000000 config/MakeLDIF/ds-idrepo.template
+      Processed 1000 entries
+      Processed 2000 entries
+      Processed 3000 entries
+      ...
+      Processed 1000000 entries
+      LDIF processing complete. 1000003 entries written
+      ```
+
+      When the ForgeOps team ran the makeldif script, it took approximately:
+
+      * 30 seconds to run on a small cluster.
+
+      * 4 minutes to run on a medium cluster.
+
+   2. Create the user entries in the directory:
+
+      ```
+      $ /opt/opendj/bin/ldapmodify \
+       -h ds-idrepo-0.ds-idrepo -p 1389 --useStartTls --trustAll \
+       -D "uid=admin" -w directory-superuser-password --noPropertiesFile \
+       --no-prompt --continueOnError --numConnections 10 data/entries.ldif
+      ```
+
+      `ADD operation successful` messages appear as user entries are added to the directory.
+
+      When the ForgeOps team ran the ldapmodify command, it took approximately:
+
+      * 15 minutes to run on a small cluster.
+
+      * 2 hours 35 minutes to run on a medium cluster.
+
+6. Prime the directory servers:
+
+   1. Open a new terminal window or tab.
+
+      Use this new terminal window—not the one running the `dsutil` pod's shell—for the remaining substeps in this step.
+
+   2. Prime the directory server running in the `ds-idrepo-0` pod:
+
+      1. Start a shell that lets you run commands in the `ds-idrepo-0` pod:
+
+         ```
+         $ kubectl exec ds-idrepo-0 -it -- bash
+         ```
+
+      2. Run the following command:
+
+         ```
+         $ ldapsearch -D "uid=admin" -w directory-superuser-password \
+          -p 1389 -b "ou=identities"  uid=user.*  | grep dn: | wc -l
+         10000000
+         ```
+
+      3. Exit from the `id-dsrepo-0` pod's shell:
+
+         ```
+         $ exit
+         ```
+
+   3. Prime the directory server running in the `ds-idrepo-1` pod.
+
+## For large clusters
+
+Here are some very general steps you can follow if you want to generate test users for benchmarking or load testing a large cluster:
+
+1. Install DS in a VM in the cloud.
+
+2. Run the `makeldif` and `ldapmodify` commands, as described above.
+
+3. Back up your directory.
+
+4. Upload the backup files to cloud storage.
+
+5. Restore an `idrepo` pod from your backup following steps similar to the procedure in [Restore](../../backup/dsbackup.html#dsbackup-restore).
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: check-square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: check-square-o, set=fa][Generate test users](testusers.html)
+
+* [icon: square-o, set=fa]*[Benchmark the authentication rate](authrate.html)*
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)
+
+---
+
+---
+title: "The <span class=\"command\">forgeops</span> command"
+description: forgeops — The new generation utility replaces the previous version of forgeops. The new forgeops utility simplifies deploying and managing Ping Advanced Identity Software components in a Kubernetes cluster.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:forgeops
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/forgeops.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["forgeops Command"]
+section_ids:
+  features_in_forgeops: Features in forgeops
+  discrete_overlays: Discrete overlays
+  image_defaulter_in_every_overlay: image-defaulter in every overlay
+  sub_overlays: Sub-overlays
+  specify_overlay_or_environment_to_target: Specify overlay or environment to target
+  helm_support: Helm Support
+  setup: Setup
+  workflow: Workflow
+  1_create_an_environment: 1. Create an environment
+  2_build_images_for_the_environment: 2. Build images for the environment
+  3_apply_the_environment: 3. Apply the environment
+  forgeops_commands: forgeops commands
+---
+
+# The forgeops command
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | forgeops — The new generation utility replaces the previous version of `forgeops`. The new forgeops utility simplifies deploying and managing Ping Advanced Identity Software components in a Kubernetes cluster.**The previous version of the forgeops utility is not supported in this ForgeOps release. It continues to be supported in ForgeOps 7.5 and 7.4, as long as the corresponding Ping Advanced Identity Software components are supported.** |
+
+You can create and manage custom overlays and Helm values files for each deployment. You can then apply the overlays or value files appropriately using Kustomize or Helm accordingly.
+
+The forgeops utility lets you:
+
+* Use Kustomize natively so you can update and use overlays as expected.
+
+* Generate a Kustomize overlay manually when you need the overlay.
+
+* Generate Helm value files from the same environment set up.
+
+* Build and manage Docker images per overlay to allow different images in an environment.
+
+* Create and manage each ForgeOps deployment configuration.
+
+* Apply the environment configuration changes using either Kustomize or Helm.
+
+## Features in forgeops
+
+### Discrete overlays
+
+The current forgeops command has the following limitations:
+
+* It generates a Kustomize overlay every time it runs.
+
+* It overwrites any post-deployment changes in Kustomize overlays.
+
+* It uses the preconfigured patch files and ignores the customizations during deployment.
+
+The forgeops command doesn't generate overlay files automatically. Instead, overlay files are manually generated as needed.
+
+It is recommended to create an overlay for each environment, such as `test`, `stage`, and `prod`. It is also recommended to create an overlay for each single-instance environment, such as `test-single`, `stage-single`, and `prod-single`. The single-instance overlays help you develop file-based configuration changes, export them, and build new images.
+
+### `image-defaulter` in every overlay
+
+Each overlay includes an `image-defaulter` component. When using Kustomize, you can develop and build and test custom images in your single-instance environment. Once you are satisfied with the image, you can copy the image-defaulter's `kustomization.yaml` file into your running overlay.
+
+### Sub-overlays
+
+To install and delete individual components, ForgeOps provided overlays are composed of sub-overlays. Each Ping Advanced Identity Software product has its own overlay. There are other overlays to handle shared pieces. You can apply or delete sub-overlay or the entire overlay using `kubectl apply -k` or `kubectl delete -k` commands.
+
+### Specify overlay or environment to target
+
+With discrete overlays, you need to specify which overlay you want to target when running the `forgeops` commands. If you forget to specify the overlay, the command exits and lets you know to provide one. Only the apply and info commands allow you to not specify an overlay.
+
+### Helm Support
+
+Both Kustomize and Helm are supported by the forgeops command. Use the forgeops env command to generate Helm `values` file and Kustomize overlays for existing environments. The forgeops build command updates the Helm `values` file and the Kustomize `image-defaulter` overlay file for the specified environment.
+
+|   |                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The forgeops command can generate the `values.yaml` file from an already deployed environment, it cannot generate the `values.yaml` file for a new environment. |
+
+The `values.yaml` file contains all the Helm values. While the `values.yaml` file contains all the Helm values for an environment, few more files are created each containing a group of interrelated values that can be copied and used in other environments, if you need to.
+
+## Setup
+
+The forgeops command is developed using Python. Run the forgeops configure command to ensure the required packages are set up:
+
+```
+$ cd /path/to/forgeops/bin
+$ ./forgeops configure
+```
+
+You need to run the forgeops configure once before creating and managing your ForgeOps deployment environments.
+
+## Workflow
+
+The workflow of `forgeops` is designed to be production first and has three distinct steps:
+
+* [1. Create an environment](#create-env)
+
+  This step is used to manage the overlay and values files on an ongoing basis. Only the requested changes are incorporated, so the customizations are not impacted.
+
+* [2. Build images for the environment](#build-env)
+
+  The `build` step assembles the file-based configuration changes into container images, and updates the `image-defaulter` and `values` files for the targeted environment.
+
+* [3. Apply the environment](#apply-env)
+
+  In this step, you deploy the image you configured.
+
+|   |                                                                                                                                                                             |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It is recommended that you start with a single-instance deployment to develop your AM and IDM configuration, so you can export them and build your custom container images. |
+
+### 1. []()Create an environment
+
+You must create an environment first using the forgeops env command. You need to specify an FQDN (`--fqdn`) and an environment name (`--env-name`).
+
+Previously, the t-shirt sized overlays called `small`, `medium`, and `large` were provided, along with the default overlay `cdk`. With `forgeops`, a `single-instance` overlay replaces `cdk`. The `single-instance` overlay is considered the default and is provided in the kustomize-ng/overlay/default directory.
+
+You can use `--small`, `--medium`, and `--large` flags to configure your overlay, and the forgeops env command populates your environment with the size you requested.
+
+For example, the following command creates a medium-sized stage deployment with an FQDN of stage.example.com:
+
+```
+$ cd /path/to/forgeops
+$ ./bin/forgeops env --fqdn stage.example.com --medium --env-name stage
+```
+
+The default deployment size is `single-instance`. The following example command creates a single-instance environment:
+
+```
+$ cd /path/to/forgeops
+$ ./bin/forgeops env --fqdn stage.example.com --env-name stage-single
+```
+
+You will find the generated Kustomize overlay files in the kustomize-ng/overlay/ENV-NAME folder. If you are modifying an existing Helm-based environment, then you will also find the Helm specific value files in the charts/identity-platform folder.
+
+### 2. []()Build images for the environment
+
+Use the forgeops build command to create a new container image for the environment you created in the [Create an environment](#create-env) step. The forgeops build command applies the config profile from the build docker/am/config-profiles/profile and docker/idm/config-profiles/profile to build AM and IDM container images and push the images to your container registry. It also updates the `image-defaulter` and `values` files for the targeted environment.
+
+To build new AM and IDM images for our stage environment using the stage-cfg profile, run the command:
+
+```
+$ ./bin/forgeops build --env-name stage \
+ --config-profile stage-cfg \
+ --push-to my.registry.com/my-repo/stage am idm
+```
+
+### 3. []()Apply the environment
+
+Use the overlay you created in the [Create an environment](#create-env) step and deploy the environment built in the [Build images for the environment](#build-env) step.
+
+* Kustomize-based deployment
+
+  You have two options to perform ForgeOps deployment in a Kustomize-based environment:
+
+  * Using the kubectl apply command, for example:
+
+    ```
+    $ kubectl apply -k /path/to/forgops/kustomize-ng/overlay/my-overlay
+    ```
+
+  * Using the forgeops apply command, for example:
+
+    ```
+    $ ./bin/forgeops apply --env-name stage
+    ```
+
+|   |                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you are using Helm-based deployment methods, you cannot use the forgeops command to perform ForgeOps deployment. Instead, use the helm install or helm upgrade command with the Helm values file:```
+$ helm upgrade --install ...
+``` |
+
+## `forgeops` commands
+
+The forgeops command is a Bash wrapper script that calls appropriate scripts in `bin/commands`. These scripts are written in either Bash or Python. All the bash scripts support the new `--dryrun` flag which display the command that would be run and enable you to inspect it before actually running the command. The Python scripts `env` and `info` do not support `--dryrun`.
+
+* Helm Support
+
+  Both Kustomize and Helm are supported by the forgeops command. Use the forgeops env command to generate Helm `values` files and Kustomize overlays for each environment. The forgeops build command updates the Helm `values` file and the Kustomize `image-defaulter` overlay file for the specified environment.
+
+  The `values.yaml` file contains all the Helm values. The other files group the different values so that you can use them individually if you need to.
+
+* Custom paths
+
+  By default, forgeops uses the `docker`, `kustomize`, and `helm` directories. You can set up your own locations separately and specify the appropriate flags on the command line or set the appropriate environment variable in the path/to/forgeops/forgeops.conf file.
+
+Learn more about the forgeops command options in the [forgeops command reference](forgeops-cmd-ref.html).
+
+---
+
+---
+title: Third-party software
+description: The ForgeOps team uses Gradle 6.8.3 to benchmark ForgeOps deployments. Before you start running benchmarks, install this version of Gradle in your local environment.
+component: forgeops
+version: 2026.2
+page_id: forgeops:reference:benchmark/sw
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/reference/benchmark/sw.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  next_step: Next step
+---
+
+# Third-party software
+
+The ForgeOps team uses Gradle 6.8.3 to benchmark ForgeOps deployments. Before you start running benchmarks, install this version of Gradle in your local environment.
+
+Earlier and later versions will *probably* work. If you want to try using another version, it is your responsibility to validate it.
+
+In addition to Gradle, you'll need all the third-party software required to perform a ForgeOps deployment
+
+* [GKE](../../setup/google-cloud.html#gcp-third-party-software)
+
+* [EKS](../../setup/aws.html#aws-third-party-software)
+
+* [AKS](../../setup/azure.html#azure-third-party-software)
+
+## Next step
+
+* [icon: check-square-o, set=fa][Become familiar with ForgeOps benchmarking](intro.html)
+
+* [icon: check-square-o, set=fa][Install third-party software](sw.html)
+
+* [icon: square-o, set=fa]*[Generate test users](testusers.html)*
+
+* [icon: square-o, set=fa][Benchmark the authentication rate](authrate.html)
+
+* [icon: square-o, set=fa][Benchmark the OAuth 2.0 authorization code flow](oauth2.html)

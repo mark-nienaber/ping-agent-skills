@@ -3,8 +3,8 @@ title: Actions reference
 description: Actions are predefined sets of nodes designed to perform specific tasks. They are not complete flows, but you can use them during flow creation to simplify the process.
 component: davinci
 page_id: davinci:flows:davinci_actions
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_actions.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_actions.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 21, 2026
 section_ids:
@@ -218,8 +218,8 @@ title: Adding an item to the canvas
 description: When you create or add to a flow, you do so by adding nodes or groups of nodes to the canvas using the icon. This presents the following options for additions to the flow:
 component: davinci
 page_id: davinci:flows:davinci_adding_an_item_to_the_canvas
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_an_item_to_the_canvas.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_an_item_to_the_canvas.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 25, 2023
 ---
@@ -245,8 +245,8 @@ title: Adding annotations
 description: Add annotations to make a flow more comprehensible to yourself and others developing the flow.
 component: davinci
 page_id: davinci:flows:davinci_adding_annotations
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_annotations.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_annotations.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 25, 2023
 section_ids:
@@ -304,8 +304,8 @@ title: Adding SK-Components to a connector
 description: Add an SK-Component to the HTML Template section of a connector such as the HTTP connector to add additional capabilities to the user-facing page for that node.
 component: davinci
 page_id: davinci:flows:davinci_adding_sk_components
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_sk_components.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_sk_components.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 15, 2023
 section_ids:
@@ -369,8 +369,8 @@ title: Changing a connector instance
 description: To use a different instance of a selected connector while retaining its in-flow configuration, change the linked connector.
 component: davinci
 page_id: davinci:flows:davinci_changing_a_linked_connection
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_changing_a_linked_connection.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_changing_a_linked_connection.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 11, 2023
 section_ids:
@@ -412,8 +412,8 @@ title: Cloning a flow
 description: Clone a flow to create an identical new flow.
 component: davinci
 page_id: davinci:flows:davinci_cloning_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_cloning_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_cloning_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -447,8 +447,8 @@ title: Cloning a node
 description: Clone a node to add an identical node to the flow.
 component: davinci
 page_id: davinci:flows:davinci_cloning_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_cloning_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_cloning_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -476,8 +476,8 @@ title: Common flow variables
 description: Flow templates created by Ping Identity use variables to make it easy for you to configure the flow. Although each flow uses a unique set of variables, the most common ones are defined in this list.
 component: davinci
 page_id: davinci:flows:davinci_common_flow_variables
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_common_flow_variables.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_common_flow_variables.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 6, 2023
 ---
@@ -512,8 +512,8 @@ title: Content Security Policies
 description: Content Security Policy (CSP) is a browser security feature that mitigates common web security threats (such as cross-site scripting and clickjacking) by explicitly defining what resources a website can load. CSP can be implemented by defining a set of policy directives in the HTTP headers of a website. It's enforced at the browser level, with all browsers supporting a common set of policy directives.
 component: davinci
 page_id: davinci:flows:davinci_content_security_policies
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_content_security_policies.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_content_security_policies.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2026
 section_ids:
@@ -697,8 +697,8 @@ title: Copying nodes
 description: Copy one or more nodes to paste them into the current flow or into another flow.
 component: davinci
 page_id: davinci:flows:davinci_copying_nodes
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_copying_nodes.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_copying_nodes.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -733,8 +733,8 @@ title: Deleting a flow
 description: Delete an existing flow.
 component: davinci
 page_id: davinci:flows:davinci_deleting_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_deleting_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_deleting_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -765,8 +765,8 @@ title: Deleting a node
 description: Delete a node to remove it from the flow and break any connections to it.
 component: davinci
 page_id: davinci:flows:davinci_deleting_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_deleting_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_deleting_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -798,8 +798,8 @@ title: Disabling or enabling a node
 description: Disable a node to temporarily prevent it from being executed when the flow is run. Enable it to execute the node as normal.
 component: davinci
 page_id: davinci:flows:davinci_disablng_or_enabling_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_disablng_or_enabling_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_disablng_or_enabling_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -827,8 +827,8 @@ title: Editing flow settings
 description: Configure the settings that apply to the flow as a whole.
 component: davinci
 page_id: davinci:flows:davinci_editing_flow_settings
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_flow_settings.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_flow_settings.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 14, 2025
 page_aliases: ["ROOT:davinci-legacy-browser-ea.adoc"]
@@ -968,8 +968,8 @@ title: Editing the input schema
 description: Configure the information that's provided to the flow when it is invoked. This lets you map in external parameters for dynamic content or logic.
 component: davinci
 page_id: davinci:flows:davinci_editing_the_input_schema
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_the_input_schema.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_the_input_schema.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 19, 2024
 section_ids:
@@ -1022,8 +1022,8 @@ title: Editing the output schema
 description: Configure the information included in the output when the flow completes.
 component: davinci
 page_id: davinci:flows:davinci_editing_the_output_schema
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_the_output_schema.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_the_output_schema.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -1081,8 +1081,8 @@ title: Exporting a flow
 description: Export a flow to create a flow backup file that you can analyze or import into another environment.
 component: davinci
 page_id: davinci:flows:davinci_exporting_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_exporting_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_exporting_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 14, 2024
 section_ids:
@@ -1105,7 +1105,7 @@ Exporting a flow creates a JSON version of the flow. You can use this file to:
 
 * Share the flow with colleagues who use a different environment
 
-You can also export forms that are part of the flow. Learn more in [Importing and exporting forms](http://docs.pingidentity.com/pingone/user_experience/p1_import_export_forms.html).
+You can also export forms that are part of the flow. Learn more in [Importing and exporting forms](https://docs.pingidentity.com/pingone/user_experience/p1_import_export_forms.html).
 
 Ping support might also request flows for troubleshooting purposes.
 
@@ -1150,8 +1150,8 @@ title: Flow editing options
 description: You can control many flow properties using the More options ( ) menu while editing a flow.
 component: davinci
 page_id: davinci:flows:davinci_flow_editing_options
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_editing_options.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_editing_options.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 18, 2023
 ---
@@ -1180,8 +1180,8 @@ title: Flow limits
 description: These limits affect the creation of flows.
 component: davinci
 page_id: davinci:flows:davinci_flow_limits
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_limits.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_limits.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 4, 2024
 ---
@@ -1192,7 +1192,7 @@ These limits affect the creation of flows.
 
 Some connectors have additional limitations; see the connector documentation for your connectors to learn more.
 
-For PingOne standard platform limits, see [PingOne standard platform limits](http://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html).
+For PingOne standard platform limits, see [PingOne standard platform limits](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html).
 
 Flow limits
 
@@ -1213,8 +1213,8 @@ title: Flow Validation Rules
 description: The following errors can be identified by flow validation:
 component: davinci
 page_id: davinci:flows:davinci_flow_validation_rules
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_validation_rules.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_validation_rules.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 13, 2025
 section_ids:

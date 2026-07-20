@@ -1021,3 +1021,116 @@ section_ids:
 13. When you have completed the attribute configuration, click **Done**, **Done**, and **Save**.
 
 14. Activate the SP connection to resume outbound provisioning.
+
+---
+
+---
+title: User and group management
+description: The Box Provisioner synchronizes users and groups from your datastore to Box. The following describes the behavior of each provisioning capability.
+component: box
+page_id: box::pf_box_connector_user_and_group_management
+canonical_url: https://docs.pingidentity.com/integrations/box/pf_box_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/box/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  synchronizing-existing-users: Synchronizing existing users
+  user-provisioning: User provisioning
+  user-updates: User updates
+  user-deprovisioning: User deprovisioning
+  synchronizing-existing-groups: Synchronizing existing groups
+  group-provisioning: Group provisioning
+  group-name-updates: Group name updates
+  group-membership-updates: Group membership updates
+  group-deletion: Group deletion
+---
+
+# User and group management
+
+The Box Provisioner synchronizes users and groups from your datastore to Box. The following describes the behavior of each provisioning capability.
+
+|   |                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can configure the following capabilities and specify which users to provision when you get to the [Configure provisioning](setup/pf_box_connector_configure_provisioning.html) part of the setup process. |
+
+## Synchronizing existing users
+
+PingFederate synchronizes users based on the `mail` attribute in Box. If a user already exists in your datastore and Box, mapping this attribute correctly links the two records together.
+
+For example:
+
+* In Box, Janet's `mail` is `jsmith@example.com`.
+
+* In your datastore, Janet's `mail` is `jsmith@example.com`.
+
+* On the **Attribute Mapping** tab of your provisioning connection configuration, map the `mail` attribute to `mail`.
+
+* When the provisioning connector runs, the datastore user is provisioned with a `mail` of `jsmith@example.com`. That matches Janet's existing `mail` in Box, so her information in the datastore is synchronized to her Box account.
+
+## User provisioning
+
+PingFederate provisions users when any of the following happens:
+
+* A user is added to the datastore group or filter that is targeted by the provisioning connector.
+
+* A user with `disabled` status is added to the datastore group or filter that is targeted by the provisioning connector, and the **Provision disabled users** provisioning option is enabled. This feature is not available in all provisioning connector versions.
+
+You can define which users PingFederate targets for provisioning on the **Source Location** tab of your provisioning connection configuration.
+
+## User updates
+
+PingFederate updates users when a user attribute changes in your datastore.
+
+You can define which attributes PingFederate monitors for changes on the **Attribute Mapping** tab of your provisioning connection configuration.
+
+## User deprovisioning
+
+PingFederate deprovisions users when any of the following happens:
+
+* A user is deleted from the user store.
+
+* A user is disabled in the user store.
+
+* A user is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+The **Remove User Action** setting in the connection configuration determines whether the deprovisioning action disables or deletes the user.
+
+## Synchronizing existing groups
+
+PingFederate synchronizes groups from the datastore to the target service based on the group name.
+
+For example:
+
+* In Box, there is a group is named `Accounting`.
+
+* In your datastore, there is a group with a `CN` of `Accounting`.
+
+* When the provisioning connector runs, the two groups are synchronized.
+
+## Group provisioning
+
+PingFederate provisions groups when a group is added to the datastore filter that is targeted by the provisioning connector.
+
+You can define which groups PingFederate targets for provisioning and monitors for changes on the **Source Location** tab in your provisioning connection configuration.
+
+## Group name updates
+
+PingFederate renames groups when they are renamed in the datastore.
+
+## Group membership updates
+
+PingFederate updates group memberships when memberships change in the datastore, whether the change is in the group's properties or a user's properties.
+
+Group memberships in the datastore overwrite the group memberships in Box.
+
+## Group deletion
+
+PingFederate deletes groups when any of the following happens:
+
+* The group is deleted in the datastore.
+
+* The group is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | Group deletions are permanent and cannot be undone. |

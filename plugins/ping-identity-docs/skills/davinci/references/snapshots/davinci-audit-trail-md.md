@@ -3,8 +3,8 @@ title: Audit Trail
 description: DaVinci administrative audit events are now part of the PingOne centralized audit framework. You can view and filter DaVinci events alongside standard PingOne events in the PingOne admin console.
 component: davinci
 page_id: davinci::davinci_audit_trail
-canonical_url: http://docs.pingidentity.com/davinci/davinci_audit_trail.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_audit_trail.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 26, 2026
 section_ids:
@@ -15,11 +15,11 @@ section_ids:
 
 DaVinci administrative audit events are now part of the PingOne centralized audit framework. You can view and filter DaVinci events alongside standard PingOne events in the PingOne admin console.
 
-Learn more in the PingOne [Audit](http://docs.pingidentity.com/pingone/monitoring/p1_reporting.html) documentation.
+Learn more in the PingOne [Audit](https://docs.pingidentity.com/pingone/monitoring/p1_reporting.html) documentation.
 
-|   |                                                                                                                                                                                                                                                                                                                                                |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | During the transition period, DaVinci audit events are written to both the legacy DaVinci **Audit Trail** and [PingOne Audit](http://docs.pingidentity.com/pingone/monitoring/reporting.html) simultaneously for approximately 3–4 months. After the transition period ends, the legacy DaVinci **Audit Trail** tab will stop being populated. |
+|   |                                                                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | During the transition period, DaVinci audit events are written to both the legacy DaVinci **Audit Trail** and [PingOne Audit](https://docs.pingidentity.com/pingone/monitoring/reporting.html) simultaneously for approximately 3–4 months. After the transition period ends, the legacy DaVinci **Audit Trail** tab will stop being populated. |
 
 ## Legacy audit trail
 

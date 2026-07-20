@@ -2,40 +2,42 @@
 
 - Product: PingOne AIC API
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://developer.pingidentity.com/pingoneaic-api/llms.txt
 - Guides discovered: 22
-- Guides captured: 20
-- Guides fully captured: 18
-- Guides partially captured: 2
-- Guides without snapshots: 2
+- Guides captured: 22
+- Guides fully captured: 22
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 91
-- Total snapshot pages captured: 59
+- Total snapshot pages captured: 91
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| idm-rest-api.md | assembled | <20 pages from idm-rest-api> | 20 | 20 | full |
-| am-oauth2.md | assembled | <14 pages from am-oauth2> | 14 | 4 | partial |
-| crest.md | assembled | <9 pages from crest> | 9 | 7 | partial |
-| am-scripting.md | assembled | <7 pages from am-scripting> | 7 | 7 | full |
-| am-authorization.md | assembled | <4 pages from am-authorization> | 4 | 4 | full |
-| am-rest.md | assembled | <2 pages from am-rest> | 2 | 2 | full |
-| identity-governance.md | assembled | <2 pages from identity-governance> | 2 | 2 | full |
-| am-sessions.md | assembled | <1 pages from am-sessions> | 1 | 1 | full |
-| api-custom-headers-md.md | assembled | <1 pages from api-custom-headers.md> | 1 | 1 | full |
-| api-reference-md.md | assembled | <1 pages from api-reference.md> | 1 | 1 | full |
-| authenticate-to-rest-api-overview-md.md | assembled | <1 pages from authenticate-to-rest-api-overview.md> | 1 | 1 | full |
-| authenticate-to-rest-api-with-access-token-md.md | assembled | <1 pages from authenticate-to-rest-api-with-access-token.md> | 1 | 1 | full |
-| authenticate-to-rest-api-with-api-key-and-secret-md.md | assembled | <1 pages from authenticate-to-rest-api-with-api-key-and-secret.md> | 1 | 1 | full |
-| changelog-md.md | assembled | <1 pages from changelog.md> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
-| postman-collection-md.md | assembled | <1 pages from postman-collection.md> | 1 | 1 | full |
-| scripting-auth-md.md | assembled | <1 pages from scripting-auth.md> | 1 | 1 | full |
-| scripting-custom-endpoints-md.md | assembled | <1 pages from scripting-custom-endpoints.md> | 1 | 1 | full |
-| scripting-event-hooks-md.md | assembled | <1 pages from scripting-event-hooks.md> | 1 | 1 | full |
-| scripting-md.md | assembled | <1 pages from scripting.md> | 1 | 1 | full |
+| idm-rest-api.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 20 | 20 | full |
+| am-oauth2.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 14 | 14 | full |
+| am-authentication.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 10 | 10 | full |
+| am-oidc1.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 10 | 10 | full |
+| crest.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 9 | 9 | full |
+| am-scripting.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 7 | 7 | full |
+| am-authorization.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 4 | 4 | full |
+| am-rest.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 2 | 2 | full |
+| identity-governance.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 2 | 2 | full |
+| am-sessions.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| api-custom-headers-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| api-reference-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| authenticate-to-rest-api-overview-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| authenticate-to-rest-api-with-access-token-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| authenticate-to-rest-api-with-api-key-and-secret-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| changelog-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| postman-collection-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| scripting-auth-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| scripting-custom-endpoints-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| scripting-event-hooks-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
+| scripting-md.md | assembled | https://developer.pingidentity.com/pingoneaic-api/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
@@ -43,8 +45,10 @@
 |---|---|
 | llms.txt | 79ff72a1a67c99e5b60b99021bea9213624ea453c092cbe016bfebd5bf2845bd |
 | snapshots/idm-rest-api.md | 74616d5c5778982dc8ab7742aa0eeabc1b8b96e6c4c8d2b9eabf2f413116c747 |
-| snapshots/am-oauth2.md | 986f1c2dcd483144af60fc1469c63694260a7e77a1093a3b08f83f389d9b1223 |
-| snapshots/crest.md | 2b2cc9073b90a395c8fa0619e10074fa4ffb30198e9bc90d6038cb856e79a4ed |
+| snapshots/am-oauth2.md | fd29423f6f211d666c90fc4f4a9d842d7d2a3a841eab05d841250a331161bc12 |
+| snapshots/am-authentication.md | 0525a310b44f987eaaaa012834f79aca368bfe151af816721df5f1f831b247a5 |
+| snapshots/am-oidc1.md | 03c42e1692cec25f31d568bce869f4c7bff3b4e1f51b703118e211b854ea9ef3 |
+| snapshots/crest.md | 1e199bb6920857921815be18f884f5f1098207a574eed7c488c41a79df39aa65 |
 | snapshots/am-scripting.md | 52ea88365b5ceca8f292af79f969a7f6944cfd96243bc6f4132200f668be3b1a |
 | snapshots/am-authorization.md | f5b173e4ea5f0e7cfa8afc24f8183e4d2b7d2436fa04197fa952d9a1d0b4d304 |
 | snapshots/am-rest.md | 2d1ccd49da7a682218a3414cae6fcb863298aa420f7c03ad824b6bca7bb170e6 |

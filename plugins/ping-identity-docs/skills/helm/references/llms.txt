@@ -1,28 +1,31 @@
 # DevOps Helm Charts
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Helm
 
-- [Container Configuration](https://developer.pingidentity.com/helm/configs/container.md)
-- [Contributing to the Ping Identity DevOps Program](https://developer.pingidentity.com/helm/getting-started/feedback.md)
-- [Current Release](https://developer.pingidentity.com/helm/release-notes/index.md)
-- [Enhanced Utility Sidecar Examples](https://developer.pingidentity.com/helm/examples/enhanced-sidecar.md)
-- [External Image Configuration](https://developer.pingidentity.com/helm/configs/external-image.md)
-- [Gateway API LDAPS Example](https://developer.pingidentity.com/helm/examples/gatewayLDAPSWithTCPRroute.md)
-- [Getting Started](https://developer.pingidentity.com/helm/getting-started/getting-started.md)
-- [global: Values](https://developer.pingidentity.com/helm/configs/global.md)
-- [Helm Chart Examples](https://developer.pingidentity.com/helm/examples/index.md)
-- [Image Configuration](https://developer.pingidentity.com/helm/configs/image.md)
-- [Ingress Configuration](https://developer.pingidentity.com/helm/configs/ingress.md)
-- [Introduction](https://developer.pingidentity.com/helm/configs/index.md)
-- [License Configuration](https://developer.pingidentity.com/helm/configs/license.md)
-- [List of Supported Values](https://developer.pingidentity.com/helm/configs/supported-values.md)
-- [OpenShift Configuration](https://developer.pingidentity.com/helm/configs/openshift-config.md)
-- [Previous Releases](https://developer.pingidentity.com/helm/release-notes/previous-releases.md)
-- [PrivateCert Configuration](https://developer.pingidentity.com/helm/configs/privatecerts.md)
-- [Service Configuration](https://developer.pingidentity.com/helm/configs/service.md)
-- [Updating Product Image Tags](https://developer.pingidentity.com/helm/how-to/index.md)
-- [Using Secrets Store CSI Driver with HashiCorp Vault](https://developer.pingidentity.com/helm/examples/vault-spc-walkthrough.md)
-- [Vault Configuration](https://developer.pingidentity.com/helm/configs/vault.md)
-- [VolumeMounts Configuration](https://developer.pingidentity.com/helm/configs/volumemounts.md)
-- [Welcome](https://developer.pingidentity.com/helm/helm-charts-landing-page.md)
-- [Workload Configuration](https://developer.pingidentity.com/helm/configs/workload.md)
+- [Container Configuration](https://developer.pingidentity.com/helm/configs/container.md): Configure replica count, resource limits, node placement, and liveness, readiness, and startup probes for Ping Identity Helm chart workloads
+- [Contributing to the Ping Identity DevOps Program](https://developer.pingidentity.com/helm/getting-started/feedback.md): Explains how to report bugs or suggest enhancements for the Ping Identity Helm charts
+- [Current Release](https://developer.pingidentity.com/helm/release-notes/index.md): Lists features and changes in the current Ping Identity ping-devops Helm chart release
+- [Enhanced Utility Sidecar Examples](https://developer.pingidentity.com/helm/examples/enhanced-sidecar.md): Walk through enhanced utilitySidecar examples for custom commands, envFrom, and fallback volumes in Ping Identity Helm charts
+- [External Image Configuration](https://developer.pingidentity.com/helm/configs/external-image.md): Configure the external pingtoolkit image used by init containers in Ping Identity Helm chart deployments
+- [Gateway API LDAPS Example](https://developer.pingidentity.com/helm/examples/gatewayLDAPSWithTCPRroute.md): Walk through exposing PingDirectory over HTTPS and LDAPS using Gateway API and Traefik with the Ping Identity Helm chart
+- [Getting Started](https://developer.pingidentity.com/helm/getting-started/getting-started.md): Install Helm, add the Ping Identity repository, and deploy the ping-devops chart for the first time
+- [global: Values](https://developer.pingidentity.com/helm/configs/global.md): Configure how the Helm addReleaseNameToResource value prepends, appends, or omits the release name on Kubernetes resource names
+- [Helm Chart Examples](https://developer.pingidentity.com/helm/examples/index.md): List example Helm values files for deploying Ping Identity products, including ingress, vault, and Gateway API configurations
+- [Image Configuration](https://developer.pingidentity.com/helm/configs/image.md): Configure the container image repository, name, tag, and pull policy for Ping Identity Helm chart deployments
+- [Ingress Configuration](https://developer.pingidentity.com/helm/configs/ingress.md): Configure Kubernetes Ingress resources, hostnames, annotations, and TLS settings for Ping Identity Helm chart deployments
+- [Introduction](https://developer.pingidentity.com/helm/configs/index.md): Explains how Helm values files, override files, and --set parameters merge to configure Ping Identity Helm chart deployments
+- [License Configuration](https://developer.pingidentity.com/helm/configs/license.md): Configure the devops-secret used to obtain evaluation licenses for Ping Identity product containers
+- [List of Supported Values](https://developer.pingidentity.com/helm/configs/supported-values.md): Reference list of all global and product-level values supported by the Ping Identity ping-devops Helm chart
+- [OpenShift Configuration](https://developer.pingidentity.com/helm/configs/openshift-config.md): Configure OpenShift-compatible security context settings by unsetting fsGroup and runAsUser in Ping Identity Helm chart values
+- [Previous Releases](https://developer.pingidentity.com/helm/release-notes/previous-releases.md): Lists features, enhancements, and bug fixes from previous Ping Identity ping-devops Helm chart releases
+- [PrivateCert Configuration](https://developer.pingidentity.com/helm/configs/privatecerts.md): Generate an internal TLS certificate and keystore for a Ping Identity product using the Helm chart privateCert settings
+- [Service Configuration](https://developer.pingidentity.com/helm/configs/service.md): Configure Kubernetes Service resources, including ports and cluster or data service types, for Ping Identity Helm chart products
+- [Updating Product Image Tags](https://developer.pingidentity.com/helm/how-to/index.md): Explains recommended blue-green and in-place strategies for updating product image tags in Ping Identity Helm chart deployments
+- [Using Secrets Store CSI Driver with HashiCorp Vault](https://developer.pingidentity.com/helm/examples/vault-spc-walkthrough.md): Walk through deploying PingDirectory and PingFederate with secrets sourced from HashiCorp Vault via the Secrets Store CSI Driver
+- [Vault Configuration](https://developer.pingidentity.com/helm/configs/vault.md): Configure HashiCorp Vault annotations and secret injection for Ping Identity Helm chart deployments
+- [VolumeMounts Configuration](https://developer.pingidentity.com/helm/configs/volumemounts.md): Mount secret and configMap data into a Ping Identity Helm chart workload container using volumes and volumeMounts
+- [Welcome](https://developer.pingidentity.com/helm/helm-charts-landing-page.md): Landing page introducing Ping Identity Helm charts, DevOps resources, and Helm repository prerequisites
+- [Workload Configuration](https://developer.pingidentity.com/helm/configs/workload.md): Configure Deployment and StatefulSet workload settings, including security context and waitFor, in Ping Identity Helm charts

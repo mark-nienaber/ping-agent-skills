@@ -3,8 +3,8 @@ title: PingOne DaVinci
 description: PingOne DaVinci is an orchestration platform that lets you create flows using connections and logical operators. These flows guide users through defined processes that can present customized pages, modify values, or perform other actions.
 component: davinci
 page_id: davinci::davinci_landing_page
-canonical_url: http://docs.pingidentity.com/davinci/davinci_landing_page.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_landing_page.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -22,7 +22,7 @@ PingOne DaVinci is an orchestration platform that lets you create flows using co
 
 * [DaVinci release notes](release_notes/davinci_release_notes.html)
 
-* [Connectors release notes](http://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html)
+* [Connectors release notes](https://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html)
 
 ## Get Started With DaVinci
 

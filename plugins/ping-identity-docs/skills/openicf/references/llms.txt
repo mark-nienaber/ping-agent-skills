@@ -1,5 +1,8 @@
 # ICF 1.5.20.35
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Openicf
 
 - [Untitled](https://docs.pingidentity.com/openicf/connector-reference/msgraph-conf.md): Install, configure, and test the MS Graph API connector for Azure AD, including authentication methods, custom extension attributes, and account sync
@@ -16,7 +19,10 @@
 - [Authenticate operation](https://docs.pingidentity.com/openicf/connector-dev-guide/operations/operation-authenticate.md): How to use and implement the ICF authenticate operation in a connector, including exception handling and unit testing
 - [Authenticate script](https://docs.pingidentity.com/openicf/connector-dev-guide/scripts/script-authenticate.md): How to implement the authenticate script for ICF connectors to enable pass-through authentication, including required input variables and return values
 - [Authentication methods (MS Graph API)](https://docs.pingidentity.com/openicf/connector-reference/msgraph-authentication-methods.md): How to read and manage multi-factor authentication (MFA) methods for Azure AD users using the PingIDM MS Graph API connector
+- [AWS Bedrock AgentCore connector](https://docs.pingidentity.com/openicf/connector-reference/aws-bedrock-agentcore.md): Reference for the AWS Bedrock AgentCore connector: discover AgentCore runtimes, execution identity, workload identity, and inbound access policy.
+- [AWS Bedrock connector](https://docs.pingidentity.com/openicf/connector-reference/aws-bedrock.md): Reference for the AWS Bedrock connector: discover Bedrock agents, aliases, action groups, knowledge bases, guardrails, and identity bindings.
 - [AWS IAM Identity Center connector](https://docs.pingidentity.com/openicf/connector-reference/aws-iam-identity-center.md): Configure the AWS IAM Identity Center connector to manage users and groups between AWS IAM Identity Center and PingIDM
+- [Azure AI Foundry connector](https://docs.pingidentity.com/openicf/connector-reference/azure-ai-foundry.md): Reference for the Azure AI Foundry connector: discover AI agents, tools, knowledge bases, guardrails, service accounts, and identity bindings.
 - [Box connector](https://docs.pingidentity.com/openicf/connector-reference/box.md): Box connector reference for PingIDM: install, configure, and use the connector to manage Box users and groups using the Box API
 - [Cerner connector](https://docs.pingidentity.com/openicf/connector-reference/cerner.md): Configure the Cerner connector to manage and synchronize healthcare accounts, organizations, and personnel groups between Cerner and PingIDM
 - [Changed functionality](https://docs.pingidentity.com/openicf/connector-release-notes/changed-functionality.md): Breaking changes and changed functionality across ICF connectors, the Remote Connector Server, and the connector framework, organized by release version
@@ -58,6 +64,7 @@
 - [Generic exception rules](https://docs.pingidentity.com/openicf/connector-dev-guide/generic-exception-rules.md): Describes the generic exception rules common to all API-level and SPI-level operations for ICF connector development
 - [Google Apps connector](https://docs.pingidentity.com/openicf/connector-reference/google.md): Reference for the Google Apps connector: configuration, OAuth2 setup, supported resource types, user attributes, search filters, and functional limitations for PingIDM
 - [Google Cloud Platform connector](https://docs.pingidentity.com/openicf/connector-reference/gcp.md): Configure the GCP connector to manage and synchronize Google Cloud Platform user accounts with PingIDM using two-legged OAuth
+- [Google Vertex AI connector](https://docs.pingidentity.com/openicf/connector-reference/google-vertex-ai.md): Reference for the Google Vertex AI connector: discover Dialogflow CX agents, Vertex AI Agent Engine reasoning engines, and identity bindings.
 - [Groovy connector toolkit](https://docs.pingidentity.com/openicf/connector-reference/groovy.md): Reference for the Groovy connector toolkit, a scripted framework for running Groovy scripts for ICF operations on any external resource
 - [HubSpot connector](https://docs.pingidentity.com/openicf/connector-reference/hubspot.md): Configure the HubSpot connector to synchronize HubSpot contacts and companies with managed objects in a PingIDM repository
 - [IBM RACF connector](https://docs.pingidentity.com/openicf/connector-reference/racf.md): IBM RACF connector for PingIDM: configure and use the connector to manage users and groups in IBM Resource Access Control Facility on z/OS
@@ -76,6 +83,7 @@
 - [Known issues](https://docs.pingidentity.com/openicf/connector-release-notes/known-issues.md): Open known bugs across ICF connectors, including LDAP, SCIM, MS Graph API, SAP, and others, that remain unresolved at release time
 - [LDAP connector](https://docs.pingidentity.com/openicf/connector-reference/ldap.md): Reference for the PingIDM LDAP connector, which connects to any LDAPv3-compliant directory including PingDS and Active Directory
 - [Marketo connector](https://docs.pingidentity.com/openicf/connector-reference/marketo.md): Reference for the Marketo connector, which synchronizes PingIDM managed users and social-identity-provider users with a Marketo leads database
+- [Microsoft Copilot Studio connector](https://docs.pingidentity.com/openicf/connector-reference/microsoft-copilot-studio.md): Reference for the Microsoft Copilot Studio connector: discover Copilot Studio agents, tools, knowledge sources, owners, and identity bindings.
 - [Microsoft Graph API connector](https://docs.pingidentity.com/openicf/connector-reference/ms-graph-api.md): Microsoft Graph API connector for PingIDM and Advanced Identity Cloud: reads, searches, and provisions data to Microsoft Azure using the MS Graph SDK for Java
 - [MongoDB connector](https://docs.pingidentity.com/openicf/connector-reference/mongodb.md): Configure and use the PingIDM MongoDB connector to manage a MongoDB document database using Groovy scripts for ICF operations
 - [Multiple CSV Cloud connector](https://docs.pingidentity.com/openicf/connector-reference/multicsvcloud.md): Configure and use the Multiple CSV Cloud connector to read user and group resources from CSV files hosted on AWS, Azure, or Google Cloud storage

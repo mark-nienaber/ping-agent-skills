@@ -1,12 +1,12 @@
 ---
 title: Teleport Connector
-description: The Teleport connector lets you visually organize and subdivide a flow within your PingOne DaVinci flow canvas.
+description: Configure the Teleport connector to visually organize and subdivide flows on the PingOne DaVinci flow canvas
 component: connectors
 page_id: connectors::teleport_connector
 canonical_url: https://docs.pingidentity.com/connectors/teleport_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 9, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -34,17 +34,17 @@ The Teleport connector lets you visually organize and subdivide a flow within yo
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Teleport connector
 
-In DaVinci, add a Teleport connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Teleport connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 |   |                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------ |

@@ -1,12 +1,12 @@
 ---
 title: PingOne DaVinci Connectors
-description: Connectors form the building blocks for flows. They connect DaVinci with third parties, HTML pages, and other tools.
+description: Browse and configure PingOne DaVinci connectors to integrate third-party services, HTML pages, and tools into your PingOne DaVinci flows
 component: connectors
 page_id: connectors::index
 canonical_url: https://docs.pingidentity.com/connectors/index.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 20, 2026
+revdate: July 9, 2026
 keywords: ["DaVinci", "Connectors"]
 page_aliases: ["alphabetical/a_c.adoc", "alphabetical/d_f.adoc", "alphabetical/g_i.adoc", "alphabetical/j_l.adoc", "alphabetical/m_o.adoc", "alphabetical/p_r.adoc", "alphabetical/s_u.adoc", "alphabetical/v_z.adoc"]
 section_ids:
@@ -36,11 +36,11 @@ Refer to the [Ping Identity Marketplace](https://marketplace.pingone.com/browse?
 
 Ping Identity offers a variety of connector types to help meet specific needs when building user experiences in PingOne DaVinci.
 
-Flow templates in the Ping Identity Marketplace provide premade solutions for common DaVinci use cases that you can modify or use as examples for orchestration flows. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.adoc).
+Flow templates in the Ping Identity Marketplace provide premade solutions for common PingOne DaVinci use cases that you can modify or use as examples for orchestration flows. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.adoc).
 
 ### Core connectors
 
-Provide the foundation for your DaVinci flows by performing basic functions.
+Provide the foundation for your PingOne DaVinci flows by performing basic functions.
 
 ![](_images/connector-logos/davincicolor-logo.png)
 
@@ -164,7 +164,7 @@ Store and retrieve flow and user attributes as variables in your flow.
 
 ### Ping connectors
 
-Help you integrate other Ping Identity products and features into your DaVinci flows.
+Help you integrate other Ping Identity products and features into your PingOne DaVinci flows.
 
 ![](_images/connector-logos/pingfederate-logo.png)
 
@@ -289,6 +289,12 @@ Manage users, groups, and software licenses in your flow.
 #### [Babel Street Connector](babelstreet_connector.html)
 
 Use the Babel Street Analytics API in your flow.
+
+![](_images/connector-logos/beyondtrust-pra-logo.png)
+
+#### [BeyondTrust Privileged Remote Access Connector](beyondtrust_pra_connector.html)
+
+Terminate BeyondTrust Privileged Remote Access jump sessions by hostname or username in your flow.
 
 ![](_images/connector-logos/castle-logo.png)
 

@@ -1,12 +1,12 @@
 ---
 title: ID DataWeb Connector
-description: The ID DataWeb connector lets you use ID DataWeb for identity verification in your PingOne DaVinci flow.
+description: Configure the ID DataWeb connector to integrate AXN Verify identity verification into a PingOne DaVinci flow
 component: connectors
 page_id: connectors::id_dataweb_connector
 canonical_url: https://docs.pingidentity.com/connectors/id_dataweb_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -32,7 +32,7 @@ section_ids:
 
 The ID DataWeb connector lets you use ID DataWeb for identity verification in your PingOne DaVinci flow.
 
-The connector allows you to direct users to ID DataWeb's AXN Verify service where they can enter their information for identity verification. By mapping attributes from your DaVinci flow, you can pre-populate some of the information requested in the identity verification process. After ID DataWeb verifies the user's identity, it sends the results to DaVinci where you can branch your flow accordingly.
+The connector allows you to direct users to ID DataWeb's AXN Verify service where they can enter their information for identity verification. By mapping attributes from your PingOne DaVinci flow, you can pre-populate some of the information requested in the identity verification process. After ID DataWeb verifies the user's identity, it sends the results to PingOne DaVinci where you can branch your flow accordingly.
 
 ## Setup
 
@@ -44,13 +44,13 @@ Learn more in the following:
 
   * [Getting Started](https://docs.iddataweb.com/docs/getting-started)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -62,17 +62,17 @@ To use the connector, you'll need:
 
 ### Configuring the ID DataWeb connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
 ##### Redirect URL
 
-This URL continues the DaVinci flow when ID DataWeb is finished. Add this URL to the **Redirect URL(s)** list on the **Basic Info** tab of your ID DataWeb verification service configuration. For help, ask an ID DataWeb representative.
+This URL continues the PingOne DaVinci flow when ID DataWeb is finished. Add this URL to the **Redirect URL(s)** list on the **Basic Info** tab of your ID DataWeb verification service configuration. For help, ask an ID DataWeb representative.
 
 ##### Client ID
 
-The client ID provided to you by ID DataWeb. This allows DaVinci to communicate with ID DataWeb.
+The client ID provided to you by ID DataWeb. This allows PingOne DaVinci to communicate with ID DataWeb.
 
 ##### Client Secret
 
@@ -90,15 +90,15 @@ The ID DataWeb AXN Federated Gateway to use. Select the production or preproduct
 
 * Production
 
-  * DaVinci uses the live Gateway.
+  * PingOne DaVinci uses the live Gateway.
 
 * Preproduction
 
-  * DaVinci uses the preproduction Gateway. Use this for testing.
+  * PingOne DaVinci uses the preproduction Gateway. Use this for testing.
 
 * Custom Base URL
 
-**DaVinci uses the Gateway address that you enter in the \[.uicontrol]**Custom Gateway Base URL\*\* field. Use this if your organization has a custom domain or vanity URL configured for ID DataWeb.
+**PingOne DaVinci uses the Gateway address that you enter in the \[.uicontrol]**Custom Gateway Base URL\*\* field. Use this if your organization has a custom domain or vanity URL configured for ID DataWeb.
 
 ##### Custom Gateway Base URL
 
@@ -106,23 +106,23 @@ When **AXN Federated Gateway Base URL** is set to **Custom Gateway Base URL**, t
 
 ##### Data protection
 
-Determines how DaVinci protects the user data it sends to ID DataWeb.
+Determines how PingOne DaVinci protects the user data it sends to ID DataWeb.
 
 * Signed
 
-  * DaVinci sends user data in a signed JSON Web Token (JWT). ID DataWeb can detect whether the data was modified in transit.
+  * PingOne DaVinci sends user data in a signed JSON Web Token (JWT). ID DataWeb can detect whether the data was modified in transit.
 
 * Encrypted
 
-  * DaVinci sends the user data in an encrypted JWT. Only ID DataWeb can read the data. Select this if you want to use a public encryption key provided by ID DataWeb.
+  * PingOne DaVinci sends the user data in an encrypted JWT. Only ID DataWeb can read the data. Select this if you want to use a public encryption key provided by ID DataWeb.
 
 ##### Public Encryption Key
 
-When **Data Protection** is set to **Encrypted**, DaVinci uses this key to encrypt the user data. Enter the a public encryption key provided by ID DataWeb.
+When **Data Protection** is set to **Encrypted**, PingOne DaVinci uses this key to encrypt the user data. Enter the a public encryption key provided by ID DataWeb.
 
 ##### Application Redirect URL
 
-Your application's redirect URL, such as `http://app.yourorganization.com/`. Enter this URL if you embed the DaVinci widget in your application. This allows DaVinci to redirect the browser back to your application.
+Your application's redirect URL, such as `http://app.yourorganization.com/`. Enter this URL if you embed the PingOne DaVinci widget in your application. This allows PingOne DaVinci to redirect the browser back to your application.
 
 ## Using the connector in a flow
 
@@ -132,7 +132,7 @@ Your application's redirect URL, such as `http://app.yourorganization.com/`. Ent
 
 In this flow, an HTML form gathers user data, then the connector directs the browser to ID DataWeb. When the user completes the identity verification process, a simple HTML message shows the result.
 
-1. Download the [ID DataWeb Identity Verification](https://marketplace.pingone.com/item/id-dataweb-identity-verification-davinci-flow) flow template and use it for a new flow. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [ID DataWeb Identity Verification](https://marketplace.pingone.com/item/id-dataweb-identity-verification-davinci-flow) flow template and use it for a new flow. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the registration form:
 

@@ -1,12 +1,12 @@
 ---
 title: Functions Connector
-description: The Functions connector lets you branch your PingOne DaVinci flow using logical conditions or based on the result of custom JavaScript code.
+description: Configure the PingOne DaVinci Functions connector to branch flows using logical conditions, variable comparisons, calculations, or JavaScript
 component: connectors
 page_id: connectors::functions_connector
 canonical_url: https://docs.pingidentity.com/connectors/functions_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   setting-up-the-functions-connector: Setting up the Functions connector
@@ -54,7 +54,7 @@ You can use the Functions connector to:
 
 ### Setting up the Functions connector
 
-In DaVinci, add a **Functions** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Functions** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 
@@ -84,7 +84,7 @@ For example, we can check whether a user is eligible for a senior's discount bas
 
 You can make your flows more powerful and flexible by adding your own custom code. This capability lets you take inputs from your flow, work with them in JavaScript, and make the results available in your flow.
 
-The JavaScript in a custom function runs on the server, not the client. These functions stay with your flow if you export it to another DaVinci environment.
+The JavaScript in a custom function runs on the server, not the client. These functions stay with your flow if you export it to another PingOne DaVinci environment.
 
 For example, we want to know how long until a user turns 65 and gets a senior's discount. We already know their age from earlier in the flow and that they're younger than 65. Our code subtracts their current age from 65 and make the result available in the flow.
 

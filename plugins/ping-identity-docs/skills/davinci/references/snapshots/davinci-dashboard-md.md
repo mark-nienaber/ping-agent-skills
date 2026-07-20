@@ -3,8 +3,8 @@ title: Dashboard
 description: On the PingOne DaVinci dashboard, use the graphs to view your current end-user activity levels.
 component: davinci
 page_id: davinci::davinci_dashboard
-canonical_url: http://docs.pingidentity.com/davinci/davinci_dashboard.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_dashboard.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 22, 2024
 section_ids:

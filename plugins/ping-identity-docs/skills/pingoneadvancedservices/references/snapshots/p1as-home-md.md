@@ -4,6 +4,8 @@ description: The home page for the PingOne Advanced Services guide.
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices::p1as_home
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/p1as_home.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 1, 2024
 section_ids:
   release-notes: Release Notes

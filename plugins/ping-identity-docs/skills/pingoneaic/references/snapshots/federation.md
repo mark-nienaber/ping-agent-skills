@@ -393,3 +393,623 @@ For your development, UAT\[[7](#_footnotedef_7 "View footnote.")], staging, or p
 ***
 
 [1](#_footnoteref_1). A super administrator is a tenant administrator with elevated permissions for configuring tenant administrators and federated tenant access. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[2](#_footnoteref_2). Microsoft Entra ID was previously Microsoft Azure AD. Learn more in [New name for Azure Active Directory](https://learn.microsoft.com/en-us/entra/fundamentals/new-name).[3](#_footnoteref_3). The user info endpoint isn't needed if you configure groups.[4](#_footnoteref_4). A [sandbox environment](../tenants/environments-sandbox.html) is an [add-on capability](../product-information/add-on-capabilities.html).[5](#_footnoteref_5). A tenant auditor is a tenant administrator with read-only permissions. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[6](#_footnoteref_6). A brand administrator is a tenant administrator with permissions to only manage hosted pages settings. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[7](#_footnoteref_7). A [user acceptance testing (UAT) environment](../tenants/environments-uat.html) is an [add-on capability](../product-information/add-on-capabilities.html).
+
+---
+
+---
+title: Set up an OIDC-compliant IdP as a federation IdP
+description: Set up an OIDC-compliant identity provider as a federation IdP for Advanced Identity Cloud by configuring an OIDC client and group membership
+component: pingoneaic
+page_id: pingoneaic:federation:set-up-federation-idp-oidc
+canonical_url: https://docs.pingidentity.com/pingoneaic/federation/set-up-federation-idp-oidc.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Federation", "Authentication", "Setup &amp; Configuration"]
+page_aliases: ["federation:set-up-federation-provider-oidc.adoc"]
+section_ids:
+  configure-oidc-as-a-federation-idp: "Task 1: Configure OIDC-compliant IdP as a federation IdP"
+  use-group-membership-to-enable-federation-in-oidc: "Task 2: Use group membership to enable federation in an OIDC-compliant IdP"
+---
+
+# Set up an OIDC-compliant IdP as a federation IdP
+
+To use an OIDC-compliant IdP as a federation IdP for a PingOne Advanced Identity Cloud tenant environment, you need to create a new OIDC client.
+
+## Task 1: Configure OIDC-compliant IdP as a federation IdP
+
+1. Read your IdP vendor's documentation on configuring an OIDC client.
+
+2. Configure an OIDC client profile:
+
+   1. Choose a client ID or note the automatically generated client ID. Some OIDC IdPs let you choose the client ID while others autogenerate it for you.
+
+      |   |                                                                                |
+      | - | ------------------------------------------------------------------------------ |
+      |   | In Advanced Identity Cloud, use this in an application's Application ID field. |
+
+   2. Choose a client secret or note the automatically generated client secret. Some OIDC IdPs let you choose the client secret while others autogenerate it for you.
+
+      |   |                                                                                                                                    |
+      | - | ---------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter this value in an application's Application Secret field (or set in an ESV mapped to that field). |
+
+   3. Configure the allowed scopes. Recommended scopes: `openid`, `profile`, and `email`.
+
+   4. Configure the client authentication method. Supported authentication methods: `client_secret_post`, `client_secret_basic`, or `none`.
+
+3. Obtain the well-known URL from the OIDC-compliant IdP. You will enter this URL when you enable the IdP in Advanced Identity Cloud.
+
+   |   |                                                                                                                                     |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------- |
+   |   | In Advanced Identity Cloud, enter this value in an application's Well-known Endpoint field (or set in an ESV mapped to that field). |
+
+## Task 2: Use group membership to enable federation in an OIDC-compliant IdP
+
+Groups let you add and remove sets of administrators based on their group membership in your IdP. You can also specify the level of administrator access (super administrator\[[1](#_footnotedef_1 "View footnote.")] or tenant administrator) for groups of users.
+
+1. Read your IdP vendor's documentation on configuring groups in your OIDC client.
+
+2. Obtain the name of the `groups` claim from the OIDC-compliant IdP.
+
+   |   |                                                                                                                                  |
+   | - | -------------------------------------------------------------------------------------------------------------------------------- |
+   |   | In Advanced Identity Cloud, enter this value in an application's Group Claim Name field (or set in an ESV mapped to that field). |
+
+3. (Optional) Set up super administrator\[[1](#_footnotedef_1 "View footnote.")] groups:
+
+   1. Set up one or more groups for users that need to be super administrators\[[1](#_footnotedef_1 "View footnote.")] when they access the tenant using your IdP.
+
+   2. Note the group ID (or group IDs).
+
+      |   |                                                                                                                                                                                  |
+      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Super Admins` (or set in an ESV mapped to that field). |
+
+4. (Optional) Set up tenant administrator groups:
+
+   1. Set up one or more groups for users that need to be tenant administrators when they access the tenant using your IdP.
+
+   2. Note the group ID (or group IDs).
+
+      |   |                                                                                                                                                                                   |
+      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Tenant Admins` (or set in an ESV mapped to that field). |
+
+5. (Optional) Set up tenant auditor\[[2](#_footnotedef_2 "View footnote.")] groups:
+
+   1. Set up one or more groups for users that need to be tenant auditors when they access the tenant using your IdP.
+
+   2. Note the group ID (or group IDs).
+
+      |   |                                                                                                                                                                                    |
+      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Tenant Auditor` (or set in an ESV mapped to that field). |
+
+6. (Optional) Set up brand administrator\[[3](#_footnotedef_3 "View footnote.")] groups:
+
+   1. Set up one or more groups for users that need to be brand administrators when they access the tenant using your IdP.
+
+   2. Note the group ID (or group IDs).
+
+      |   |                                                                                                                                                                                 |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Brand Admin` (or set in an ESV mapped to that field). |
+
+***
+
+[1](#_footnoteref_1). A super administrator is a tenant administrator with elevated permissions for configuring tenant administrators and federated tenant access. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[2](#_footnoteref_2). A tenant auditor is a tenant administrator with read-only permissions. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[3](#_footnoteref_3). A brand administrator is a tenant administrator with permissions to only manage hosted pages settings. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).
+
+---
+
+---
+title: Set up Microsoft Active Directory Federation Services as a federation IdP
+description: Set up Microsoft AD FS as a federation IdP for Advanced Identity Cloud by creating a relying party trust and application group
+component: pingoneaic
+page_id: pingoneaic:federation:set-up-federation-idp-microsoft-ad-fs
+canonical_url: https://docs.pingidentity.com/pingoneaic/federation/set-up-federation-idp-microsoft-ad-fs.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Federation", "Authentication", "Setup &amp; Configuration"]
+page_aliases: ["federation:set-up-federation-provider-microsoft-ad-fs.adoc"]
+section_ids:
+  create-a-relying-party-trust: "Task 1: Create a relying party trust"
+  create-an-application-group: "Task 2: Create an application group"
+  include-additional-identity-claims-in-tokens: "Task 3: Include additional identity claims in tokens"
+  obtain-the-well-known-endpoint-for-the-ad-fs-open-id-connect-service: "Task 4: Obtain the well-known endpoint for the AD FS OpenID Connect service"
+  use-group-membership-to-enable-federation-in-ad-fs: "Task 5: Use group membership to enable federation in AD FS"
+  create-groups-containing-identity-cloud-tenant-administrators-ad-fs: Create groups containing Advanced Identity Cloud tenant administrators
+  include-additional-claims-in-the-tokens-for-identity-cloud-ad-fs: Include additional claims in the tokens for Advanced Identity Cloud
+---
+
+# Set up Microsoft Active Directory Federation Services as a federation IdP
+
+To use Microsoft Active Directory Federation Services (AD FS) as a federation IdP for a PingOne Advanced Identity Cloud tenant environment, you must create a relying party trust. The trust is a set of identifiers, names, and rules that identify the partner or web-application to the federation service.
+
+Afterward, you must create an application group that uses single sign-on (SSO) to access applications that are outside the corporate firewall.
+
+|   |                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The instructions in this document assume that you have a self-hosted instance of AD FS version 4.0, running on Windows Server 2016 or higher. |
+
+## Task 1: Create a relying party trust
+
+In this step, you create a relying party trust. The trust is a set of identifiers, names, and rules that identify the partner or web-application to the federation service.
+
+1. Open the Server Manager console by clicking Server Manager on the Start screen or clicking Server Manager in the taskbar on the desktop.
+
+2. In AD FS Management, select Tools > AD FS.
+
+3. On the AD FS dialog, in the left panel, click Relying Party Trusts.
+
+4. In the Actions pane, select Add Relying Party Trust.
+
+5. On the Welcome page of the Add Relying Party Trust wizard, select Claims aware.
+
+6. On the Select Data Source page, select Enter data about the relying party manually.
+
+7. On the Specify Display Name page, enter a display name.
+
+8. Complete the steps in the wizard until you reach the Configure Identifiers page.
+
+9. On the Configure Identifiers page, add a relying party trust identifier for each of your tenant environments using the following URL format:
+
+   https\://\<tenant-env-fqdn>/am
+
+   For example, if your [tenant environment FQDN](../tenants/environments.html#tenant-environment-fqdns) is `openam-mycompany-ew2.id.forgerock.io`, use `https://openam-mycompany-ew2.id.forgerock.io/am`.
+
+10. On the Choose Access Control Policy page, select the appropriate settings according to your corporate policy.
+
+11. Complete the steps in the wizard until you reach the Finish page.
+
+## Task 2: Create an application group
+
+In this step, you create an application group that uses single sign-on (SSO) to access applications.
+
+1. In the AD FS editor, select Application Groups.
+
+2. In the Actions pane, select Add Application Group.
+
+3. Complete the Add Application Groups wizard as follows:
+
+   1. On the Welcome page of the Add Application Groups wizard, provide a name and a description and select the Server application accessing a web API template.
+
+   2. On the Server application page:
+
+      * Accept the proposed `Name`.
+
+      * Note the `Client Identifier`.
+
+        |   |                                                                                                                                |
+        | - | ------------------------------------------------------------------------------------------------------------------------------ |
+        |   | In Advanced Identity Cloud, enter this value in an application's Application ID field (or set in an ESV mapped to that field). |
+
+      * Add tenant Redirect URIs for each of your tenant environments using the following URL format:
+
+        https\://\<tenant-env-fqdn>/login/admin
+
+        For example, if your [tenant environment FQDN](../tenants/environments.html#tenant-environment-fqdns) is `openam-mycompany-ew2.id.forgerock.io`, use `https://openam-mycompany-ew2.id.forgerock.io/login/admin`.
+
+   3. Click Register to create the application.
+
+   4. On the Configure Application Credentials page:
+
+      1. Select Generate a shared secret. The secret acts as a password for the application.
+
+      2. Use the Copy to clipboard button to copy the secret.
+
+         |   |                                                                                                                                    |
+         | - | ---------------------------------------------------------------------------------------------------------------------------------- |
+         |   | In Advanced Identity Cloud, enter this value in an application's Application Secret field (or set in an ESV mapped to that field). |
+
+   5. Click Next.
+
+   6. On the Configure Web API page, add the `client identifier` you noted earlier.
+
+   7. Click Next.
+
+   8. On the Choose Access Control Policy page, select the appropriate settings according to your corporate policy.
+
+   9. Click Next.
+
+   10. On the Configure Application Permissions page, check the following permitted scopes:
+
+       * allatclaims: Lets the application request the claims in the access token that is added to the ID token.
+
+       * email: Lets the application request an email claim for the signed-in user.
+
+       * openid: Lets the application request use of the OpenID Connect authentication protocol.
+
+       * profile: Lets the application request profile-related claims for the signed-in user.
+
+   11. Click Next.
+
+   12. On the Summary page, review your selections.
+
+   13. Click Next.
+
+   14. On the Complete page, click Close.
+
+## Task 3: Include additional identity claims in tokens
+
+In this step, you configure AD FS to include additional claims in the identity tokens it issues. This is necessary because AD FS does not support the `/userinfo` endpoint.
+
+1. In the AD FS editor, select Application Groups.
+
+2. In the Actions pane, select Add Application Group.
+
+3. Double-click your application group.
+
+4. In the Applications section, in the Web API area, select your application, and click Edit.
+
+5. Click the Issuance Transform Rules tab, and click Add Rule.
+
+6. To include active directory attributes of the users that are accessing Advanced Identity Cloud, in the Claim rule template drop-down field, select Send LDAP Attributes as Claims.
+
+7. In the Claim rule name field, enter a name for the claim rule. For example, Profile Attributes.
+
+8. In the Attribute store drop-down field, select Active Directory.
+
+9. To map LDAP attributes to name spaces in Advanced Identity Cloud, complete the Mapping of LDAP attributes to outgoing claim types table:
+
+   ![Mapping of LDAP attributes to outgoing claim types in the claim rule](_images/federation-map-ldap-attributes.png)
+
+   | LDAP Attribute (Select or type to add more) | Outgoing Claim Type (Select or type to add more) |
+   | ------------------------------------------- | ------------------------------------------------ |
+   | E-Mail Addresses                            | mail                                             |
+   | Given-Name                                  | givenName                                        |
+   | Surname                                     | sn                                               |
+
+10. Click Finish.
+
+11. On the Issuance Transform Rules tab, click Apply.
+
+12. Click OK twice.
+
+## Task 4: Obtain the well-known endpoint for the AD FS OpenID Connect service
+
+In this step, you identify the well-known URI that the AD FS OpenID Connect service uses.
+
+1. In the AD FS editor, select Service > Endpoints.
+
+2. In the middle pane, scroll down to the OpenID Connect section.
+
+3. In the OpenID Connect section, note the URL path. The well-known end point URL is the concatenation of the host name of the machine running AD FS and the URL path you just noted.
+
+   |   |                                                                                                                                     |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------- |
+   |   | In Advanced Identity Cloud, enter this value in an application's Well-known Endpoint field (or set in an ESV mapped to that field). |
+
+## Task 5: Use group membership to enable federation in AD FS
+
+Groups let you add and remove sets of administrators based on their group membership in your IdP. You can also specify the level of administrator access (super administrator\[[1](#_footnotedef_1 "View footnote.")] or tenant administrator) for groups of users.
+
+### Create groups containing Advanced Identity Cloud tenant administrators
+
+In AD FS, create one or more groups of administrators that correspond to these [tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups) in Advanced Identity Cloud:
+
+* Super administrators\[[1](#_footnotedef_1 "View footnote.")]
+
+* Tenant administrators
+
+* Tenant auditors\[[2](#_footnotedef_2 "View footnote.")]
+
+* Brand administrators\[[3](#_footnotedef_3 "View footnote.")]
+
+When naming each group, use a prefix that identifies the group as relevant for Advanced Identity Cloud; this allows the AD FS claim scripts to only include relevant groups. Make sure to include the tenant name as part of the group name to help you identify the tenant the group is for.
+
+Example: group name template
+
+`<prefix>-<tenant identifier>-<admin group>`.
+
+Example: group name
+
+`aic-dev-superadmin`
+
+Example: All group names for a standard promotion group of tenants and a sandbox tenant.
+
+* `aic-dev-superadmin`
+
+* `aic-dev-tenantadmin`
+
+* `aic-dev-tenantauditor`
+
+* `aic-dev-brandadmin`
+
+* `aic-staging-superadmin`
+
+* `aic-staging-tenantadmin`
+
+* `aic-staging-tenantauditor`
+
+* `aic-staging-brandadmin`
+
+* `aic-prod-superadmin`
+
+* `aic-prod-tenantadmin`
+
+* `aic-prod-tenantauditor`
+
+* `aic-prod-brandadmin`
+
+* `aic-sandbox-superadmin`
+
+* `aic-sandbox-tenantadmin`
+
+* `aic-sandbox-tenantauditor`
+
+* `aic-sandbox-brandadmin`
+
+### Include additional claims in the tokens for Advanced Identity Cloud
+
+To use group membership to enable federation, you must add *issuance transform* rules to enable AD FS to add additional group claims.
+
+You must add the following two rules in AD FS:
+
+* **Store Groups rule**: A rule that collects all the user groups and stores them in a claim with the indicated name. The script produces a potentially large claim.
+
+* **Issue Groups rule**: A rule that takes the long list of groups that the Store Groups script creates and only selects the groups with the Group Name Prefix that is relevant for the claim.
+
+  1. In the AD FS editor, select Application Groups.
+
+  2. In the Actions pane, select the group you previously created.
+
+  3. Right-click the group and select Properties.
+
+  4. In the Applications section, in the Web API area, select your application, and click Edit.
+
+  5. Click the Issuance Transform Rules tab.
+
+  6. Click Add Rule.
+
+  7. To include active directory attributes of the users that are accessing Advanced Identity Cloud, in the Claim rule template drop-down field, select Send Claims Using a Custom Rule.
+
+  8. In the Custom rule field, enter the rule definition for the Store Groups rule.
+
+     * Store Groups rule template:
+
+       `c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname", Issuer == "AD AUTHORITY"] ⇒ add(store = "Active Directory", types = ("<Groups Claim Name>"), query = ";tokenGroups;{0}", param = c.Value);`
+
+     * Store Groups rule example:
+
+       `c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname", Issuer == "AD AUTHORITY"] ⇒ add(store = "Active Directory", types = ("groups"), query = ";tokenGroups;{0}", param = c.Value);`
+
+       * "groups" is the name of the resulting claim that you enter into the Groups Claim Name field on the Identity Provider Details page in the Advanced Identity Cloud.
+
+  9. Click Finish.
+
+  10. Click Add Rule.
+
+  11. To include active directory attributes of the users that are accessing Advanced Identity Cloud, in the Claim rule template drop-down field, select Send Claims Using a Custom Rule.
+
+  12. In the Custom rule field, enter the rule definition for the Issue Groups rule.
+
+      * Issue Groups rule template:
+
+        `c:[Type == "<Groups Claim Name>", Value =~ "^<Group Name Prefix>-.+"] ⇒ issue(claim = c);`
+
+      * Issue Groups rule example:
+
+        `c:[Type == "groups", Value =~ "^aic-.+"] ⇒ issue(claim = c);`
+
+        * "groups" is the name of the resulting claim that you enter into the Groups Claim Name field on the Identity Provider Details page in the Advanced Identity Cloud.
+
+        * "aic" is the prefix you chose for the group names.
+
+  13. Click Finish.
+
+***
+
+[1](#_footnoteref_1). A super administrator is a tenant administrator with elevated permissions for configuring tenant administrators and federated tenant access. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[2](#_footnoteref_2). A tenant auditor is a tenant administrator with read-only permissions. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[3](#_footnoteref_3). A brand administrator is a tenant administrator with permissions to only manage hosted pages settings. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).
+
+---
+
+---
+title: Set up Microsoft Entra ID as a federation IdP
+description: Set up Microsoft Entra ID as a federation IdP for Advanced Identity Cloud by registering an application and configuring group membership
+component: pingoneaic
+page_id: pingoneaic:federation:set-up-federation-idp-microsoft-entra-id
+canonical_url: https://docs.pingidentity.com/pingoneaic/federation/set-up-federation-idp-microsoft-entra-id.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Federation", "Authentication", "Setup &amp; Configuration"]
+page_aliases: ["federation:set-up-federation-provider-microsoft-azure-ad.adoc"]
+section_ids:
+  configure-entra-id-as-a-federation-idp: "Task 1: Configure Entra ID as a federation IdP"
+  use-group-membership-to-enable-federation-in-entra-id: "Task 2: Use group membership to enable federation in Entra ID"
+---
+
+# Set up Microsoft Entra ID as a federation IdP
+
+To use Microsoft Entra ID (Entra ID) as a federation IdP for a PingOne Advanced Identity Cloud tenant environment, you need to create a new app registration.
+
+|   |                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Microsoft Entra ID used to be known by the name Microsoft Azure AD. Learn more in [New name for Azure Active Directory](https://learn.microsoft.com/en-us/entra/fundamentals/new-name). |
+
+## Task 1: Configure Entra ID as a federation IdP
+
+1. In a browser, navigate to the [Microsoft Entra admin center](https://entra.microsoft.com/#home).
+
+2. Create a new application:
+
+   1. Click Applications, then click App registrations.
+
+   2. In the top toolbar, click [icon: add, set=material, size=inline] New registration.
+
+   3. On the Register an application page:
+
+      1. Enter the application Name. For example, "Advanced Identity Cloud administrators".
+
+      2. Select Accounts in this organizational directory only (Me only - Single tenant) from the Supported account types list.
+
+      3. In the Redirect URI (optional) section:
+
+         1. In the left-hand field, select Web.
+
+         2. In the right-hand field, enter the redirect URI for an Advanced Identity Cloud environment using the following URL format:
+
+            https\://\<tenant-env-fqdn>/login/admin
+
+            For example, if your [tenant environment FQDN](../tenants/environments.html#tenant-environment-fqdns) is `openam-mycompany-ew2.id.forgerock.io`, use `https://openam-mycompany-ew2.id.forgerock.io/login/admin`.
+
+      4. Click Register to create the application.
+
+3. Find the application ID:
+
+   1. In the application menu, click Overview.
+
+   2. Note the Application (client) ID of the application. For example, `6b05a314-c721-4aa6-baad-7f533cbd25b0`.
+
+      |   |                                                                                                                                |
+      | - | ------------------------------------------------------------------------------------------------------------------------------ |
+      |   | In Advanced Identity Cloud, enter this value in an application's Application ID field (or set in an ESV mapped to that field). |
+
+4. Find the application's well-known endpoint:
+
+   1. In the top toolbar, click Endpoints.
+
+   2. Note the OpenID Connect metadata document endpoint of the application. For example, `https://login.microsoftonline.com/0e076864-135f-4914-9b72-80efaa4c3dcf/v2.0/.well-known/openid-configuration`.
+
+      |   |                                                                                                                                     |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter this value in an application's Well-known Endpoint field (or set in an ESV mapped to that field). |
+
+5. Add the `email` claim to the application's token configuration:
+
+   1. In the application menu, click Token configuration.
+
+   2. Click [icon: add, set=material, size=inline] Add optional claim.
+
+   3. In the Add optional claim modal:
+
+      1. Select the ID token type.
+
+      2. Select the email claim checkbox.
+
+      3. Click Add.
+
+      4. The first time you add the `email` claim, the UI displays an Add optional claim dialog box to let you grant the appropriate API permissions:
+
+         ![Add optional claim dialog box with Turn on the Microsoft Graph profile permission checkbox selected.](_images/entra-id-add-optional-claim-email.png)
+
+         1. Select the Turn on the Microsoft Graph profile permission checkbox.
+
+         2. Click Add.
+
+6. Add an application secret:
+
+   1. In the application menu, click Certificates & secrets.
+
+   2. Click [icon: add, set=material, size=inline] New client secret.
+
+   3. In the Add a client secret modal:
+
+      1. (Optional) Enter a Description.
+
+      2. Select an option from the Expires list (or accept the default selection of 180 days).
+
+      3. Click Add to create the secret.
+
+   4. Note the Value of the new secret. Do this immediately, as it can only be viewed for a short time after creation.
+
+      |   |                                                                                                                                    |
+      | - | ---------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter this value in an application's Application Secret field (or set in an ESV mapped to that field). |
+
+## Task 2: Use group membership to enable federation in Entra ID
+
+Groups let you add and remove sets of administrators based on their group membership in your IdP. You can also specify the level of administrator access (super administrator\[[1](#_footnotedef_1 "View footnote.")] or tenant administrator) for groups of users.
+
+|   |                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you modify group membership in Entra ID, it can take a few minutes for those changes to take effect in Advanced Identity Cloud. |
+
+1. In a browser, navigate to the [Microsoft Entra admin center](https://entra.microsoft.com/#home).
+
+2. Create one or more groups:
+
+   1. (Optional) Create a group for super administrators\[[1](#_footnotedef_1 "View footnote.")]:
+
+      1. Click Groups, then click All groups.
+
+      2. In the top toolbar, click New group.
+
+      3. In the New Group page:
+
+         1. Select Microsoft 365 from the Group type list.
+
+         2. Enter the super administrator Group name. For example, `Super administrators`.
+
+         3. Click Create.
+
+      4. In the All groups page, in the top toolbar, click Refresh.
+
+      5. Click the new group you just created.
+
+      6. Note the Object ID of the group. For example, `8c578f67-cac4-49eb-8f28-8e4f2c22945e`.
+
+         |   |                                                                                                                                   |
+         | - | --------------------------------------------------------------------------------------------------------------------------------- |
+         |   | In Advanced Identity Cloud, enter this value in an application's Group Identifiers field (or set in an ESV mapped to that field). |
+
+   2. (Optional) Repeat step 2a to create a group for tenant administrators.
+
+      |   |                                                                                                                                                                                   |
+      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Tenant Admins` (or set in an ESV mapped to that field). |
+
+   3. (Optional) Repeat step 2a to create a group for tenant auditors\[[2](#_footnotedef_2 "View footnote.")].
+
+      |   |                                                                                                                                                                                    |
+      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Tenant Auditor` (or set in an ESV mapped to that field). |
+
+   4. (Optional) Repeat step 2a to create a group for brand administrators\[[3](#_footnotedef_3 "View footnote.")].
+
+      |   |                                                                                                                                                                                 |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter the group ID (or group IDs) in an application's Group Identifiers field to the left of `Brand Admin` (or set in an ESV mapped to that field). |
+
+3. Set up the application to acquire claims from the identity token instead of the user info endpoint:
+
+   1. Click Applications, then click App registrations.
+
+   2. Click All applications, then click your application.
+
+   3. In the application menu, click Token configuration.
+
+   4. Click [icon: add, set=material, size=inline] Add optional claim.
+
+   5. In the Add optional claim modal:
+
+      1. Select the ID token type.
+
+      2. Select the email, family\_name, and given\_name claim checkboxes.
+
+      3. Click Add.
+
+      4. The first time you add these new claims, the UI displays an Add optional claim dialog box to let you grant the appropriate API permissions:
+
+         ![Add optional claim dialog box with Turn on the Microsoft Graph profile permission checkbox selected.](_images/entra-id-add-optional-claim-additional.png)
+
+         1. Select the Turn on the Microsoft Graph profile permission checkbox.
+
+         2. Click Add.
+
+   6. Click [icon: add, set=material, size=inline] Add groups claim.
+
+   7. In the Edit groups claim modal:
+
+      1. Select Groups assigned to the application.
+
+      2. Click Add.
+
+   8. Confirm the name of the groups claim you added is `groups`.
+
+      |   |                                                                                                                                  |
+      | - | -------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In Advanced Identity Cloud, enter this value in an application's Group Claim Name field (or set in an ESV mapped to that field). |
+
+***
+
+[1](#_footnoteref_1). A super administrator is a tenant administrator with elevated permissions for configuring tenant administrators and federated tenant access. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[2](#_footnoteref_2). A tenant auditor is a tenant administrator with read-only permissions. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).[3](#_footnoteref_3). A brand administrator is a tenant administrator with permissions to only manage hosted pages settings. Learn more in [Tenant administrator groups](../tenants/tenant-administrator-settings.html#tenant-administrator-groups).

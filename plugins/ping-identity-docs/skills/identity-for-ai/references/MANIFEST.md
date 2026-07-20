@@ -2,37 +2,37 @@
 
 - Product: Identity for AI
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://developer.pingidentity.com/identity-for-ai/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
-- Guides fully captured: 4
-- Guides partially captured: 3
+- Guides fully captured: 7
+- Guides partially captured: 0
 - Guides without snapshots: 0
 - Total pages indexed: 21
-- Total snapshot pages captured: 7
+- Total snapshot pages captured: 21
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| agents.md | page | https://developer.pingidentity.com/identity-for-ai/agents/idai-computer-using-agents.md | 12 | 1 | partial |
-| use-cases.md | page | https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.md | 3 | 1 | partial |
-| identity.md | page | https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.md | 2 | 1 | partial |
-| getting-started.md | page | https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.md | 1 | 1 | full |
-| glossary.md | page | https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.md | 1 | 1 | full |
-| index-md.md | page | https://developer.pingidentity.com/identity-for-ai/index.md | 1 | 1 | full |
-| release-notes.md | page | https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.md | 1 | 1 | full |
+| agents.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 12 | 12 | full |
+| use-cases.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 3 | full |
+| identity.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 2 | 2 | full |
+| getting-started.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| glossary.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| release-notes.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 6feb9e09ff6d371d4060a31acc5c51d0e1ccfe51b03d0be2b45c482436e9c2d4 |
-| snapshots/agents.md | ce2078d6945501af6ae7eb08553c36064ca847f357fd72ff708ef6f471f2e28e |
-| snapshots/use-cases.md | 64bb4906b72a46f6148a1c83af1aaa16ca29b519289353be35268a10a37a7dbc |
-| snapshots/identity.md | e54dcf315174db0d1a0f2cba1e7cb16cff7006098e263020d2554ebca4e6e2a4 |
-| snapshots/getting-started.md | a213eb654d277902fa8d176d796f1549bce1a82ccab687412c770943a7d738f4 |
-| snapshots/glossary.md | 3cd640e0809e4d9bea67df7b85640cf0e4d4644180c56286293865feb7d5fbdb |
-| snapshots/index-md.md | ad0843922ef4b79ae46d8f2730ab824b95012e70dfbef7d77fa01a4ca12b2e9e |
-| snapshots/release-notes.md | 00e30a9d93a2241f05a605f45218c3ef0e6d77d5eacc0c907a30801c900d1eae |
+| snapshots/agents.md | 584f00ad7a9203453b28e5aaef9617a2173f82a4afcdcfe6be2497e95d0f90ca |
+| snapshots/use-cases.md | f4cc4394cd47cffe3d46e5762345118137a245828b19dc76c5e7035726a07bac |
+| snapshots/identity.md | 8a2e314f80ef25995c6ddb01a99e1d8e0c1cbffb20406b284ef1fa77e1b4a60a |
+| snapshots/getting-started.md | c6cebd15aecf0c66a6a918b537fb74fc6d441191de963258592d840feef6463b |
+| snapshots/glossary.md | 0cc496d4492b99a6cde1937dace6d0860227f3d01f1f4f510e3769026807f049 |
+| snapshots/index-md.md | fb7c39ddf741abf27426de7f3c77ed27eae88d6605db2d74c9f2abff2788720a |
+| snapshots/release-notes.md | b0e9e7ffcff7c06ea84be4ca106fe76e8515fac707fee6196ba0fa5a1c715c98 |

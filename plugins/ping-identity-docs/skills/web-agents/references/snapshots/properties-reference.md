@@ -5,6 +5,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.config.plain.channels.insecure
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.config.plain.channels.insecure.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Accept Secure Cookies From AM Over HTTP
@@ -39,6 +41,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.accept.sso.token
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.accept.sso.token.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Accept SSO Token
@@ -82,6 +86,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.accept.ipdp.cookie
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.accept.ipdp.cookie.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Accept SSO token cookie (deprecated)
@@ -107,6 +113,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.cache_control_header.enable
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.cache_control_header.enable.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Add Cache-Control Headers
@@ -134,6 +142,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.config.agent.auth.mode
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.config.agent.auth.mode.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Authentication Mode
@@ -170,6 +180,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.debug.file.size
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.debug.file.size.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Debug File Size
@@ -197,6 +209,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.debug.level
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.debug.level.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Debug Level
@@ -224,6 +238,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.agenturi.prefix
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.agenturi.prefix.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Deployment URI Prefix
@@ -261,6 +277,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.agent.logout.url.regex
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.agent.logout.url.regex.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Logout URL Regular Expression (deprecated)
@@ -298,6 +316,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.jwt.aud.whitelist
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.jwt.aud.whitelist.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile ID Allow List
@@ -329,6 +349,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.username
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.username.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Name
@@ -353,6 +375,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.password
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.password.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Password
@@ -385,6 +409,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.key
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.key.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Password Encryption Key
@@ -415,6 +441,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.organization.name
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.organization.name.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Realm
@@ -443,6 +471,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:sunIdentityServerDeviceKeyValue
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/sunIdentityServerDeviceKeyValue.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Root URL for CDSSO
@@ -472,6 +502,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.forgerock.agents.conditional.login.url
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.forgerock.agents.conditional.login.url.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # AM Conditional Login URL
@@ -561,6 +593,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.naming.url
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.naming.url.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # AM Connection URL
@@ -589,6 +623,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.login.url
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.login.url.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # AM Login URL
@@ -638,6 +674,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.logout.url
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.logout.url.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # AM Logout URL
@@ -671,6 +709,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:properties-reference:com.sun.identity.agents.config.anonymous.user.enable
 canonical_url: https://docs.pingidentity.com/web-agents/2026/properties-reference/com.sun.identity.agents.config.anonymous.user.enable.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Anonymous User

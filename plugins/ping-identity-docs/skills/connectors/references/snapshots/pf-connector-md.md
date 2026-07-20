@@ -1,12 +1,12 @@
 ---
 title: PingFederate Connector
-description: Tap into the power of your existing PingFederate authentication policies by including them in your PingOne DaVinci flows.
+description: Configure the PingFederate Connector to embed PingFederate authentication policies in PingOne DaVinci flows using redirectless or redirect methods
 component: connectors
 page_id: connectors::pf_connector
 canonical_url: https://docs.pingidentity.com/connectors/pf_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   redirectless-method: Redirectless method
   redirect-method: Redirect method
@@ -15,7 +15,7 @@ section_ids:
   requirements: Requirements
   setting-up-pingfederate: Setting up PingFederate
   enabling-the-authentication-a-specification-of-interactions-available-for-building-software-to-access-an-application-or-service-application-programming-interface-api: Enabling the authentication application programming interface (API)
-  adding-davinci-as-an-the-application-in-an-oauth-framework-that-requests-access-to-resources-if-the-request-is-approved-by-the-authorization-server-the-client-is-issued-an-access-token-for-the-resources-oauth-client-in-pingfederate: Adding DaVinci as an OAuth client in PingFederate
+  adding-pingone-davinci-as-an-the-application-in-an-oauth-framework-that-requests-access-to-resources-if-the-request-is-approved-by-the-authorization-server-the-client-is-issued-an-access-token-for-the-resources-oauth-client-in-pingfederate: Adding PingOne DaVinci as an OAuth client in PingFederate
   configuring-the-pingfederate-connector: Configuring the PingFederate connector
   connector-configuration: Connector configuration
   redirect-url: Redirect URL
@@ -41,17 +41,17 @@ The connector provides two ways to use PingFederate in your flow:
 
 ## Redirectless method
 
-The connector embeds the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget) in your DaVinci flow. This lets you create a user experience that starts and stays in DaVinci without redirecting the browser.
+The connector embeds the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget) in your PingOne DaVinci flow. This lets you create a user experience that starts and stays in PingOne DaVinci without redirecting the browser.
 
 * The JavaScript Widget provides the user interface and communicates with the PingFederate authentication API.
 
 * Your PingFederate authentication policy can include any of the integrations on the [widget compatibility list](https://github.com/pingidentity/pf-authn-js-widget/blob/master/docs/supportedIntegrations.md).
 
-* To tailor the user experience to match your DaVinci flow or company branding, you can customize the JavaScript Widget's HTML, CSS, and JavaScript.
+* To tailor the user experience to match your PingOne DaVinci flow or company branding, you can customize the JavaScript Widget's HTML, CSS, and JavaScript.
 
 ## Redirect method
 
-This method redirects the browser to PingFederate to complete an authentication policy. When the policy completes, PingFederate redirects the browser back to DaVinci.
+This method redirects the browser to PingFederate to complete an authentication policy. When the policy completes, PingFederate redirects the browser back to PingOne DaVinci.
 
 * The user interface is provided by an authentication application or adapter Velocity HTML templates, as configured in your PingFederate authentication policy.
 
@@ -59,7 +59,7 @@ This method redirects the browser to PingFederate to complete an authentication 
 
 * You can customize these templates in PingFederate. Learn more in [Customizable user-facing pages](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_custom_user_facing_pages.html) and the integration-specific documentation.
 
-With both methods, the PingFederate connector makes the following available in your DaVinci flow:
+With both methods, the PingFederate connector makes the following available in your PingOne DaVinci flow:
 
 * The access token *(tooltip: \<div class="paragraph">
   \<p>A data object by which a client authenticates to a resource server and lays claim to authorizations for accessing particular resources.\</p>
@@ -93,13 +93,13 @@ Learn more in the following:
 
   * [Customizable user-facing pages](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_custom_user_facing_pages.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -139,7 +139,7 @@ Enable the authentication API if:
 
      3. Click **Done**.
 
-#### Adding DaVinci as an OAuth client *(tooltip: \<div class="paragraph">&#xA;\<p>The application in an OAuth framework that requests access to resources. If the request is approved by the authorization server, the client is issued an access token for the resources.\</p>&#xA;\</div>)* in PingFederate
+#### Adding PingOne DaVinci as an OAuth client *(tooltip: \<div class="paragraph">&#xA;\<p>The application in an OAuth framework that requests access to resources. If the request is approved by the authorization server, the client is issued an access token for the resources.\</p>&#xA;\</div>)* in PingFederate
 
 1. In PingFederate, go to **Applications > OAuth Clients > Clients**. Click **Add Client**.
 
@@ -163,21 +163,21 @@ Enable the authentication API if:
 
 ### Configuring the PingFederate connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
 ##### Redirect URL
 
-This connector's redirect URL. If you use the connector with the redirect method, add this URL as a **Redirect URI** in your PingFederate OAuth Client configuration. This lets PingFederate redirect the browser back to this connector to continue the DaVinci flow. You don't need this with the redirectless method.
+This connector's redirect URL. If you use the connector with the redirect method, add this URL as a **Redirect URI** in your PingFederate OAuth Client configuration. This lets PingFederate redirect the browser back to this connector to continue the PingOne DaVinci flow. You don't need this with the redirectless method.
 
 ##### Client ID
 
-The client ID that you noted in **Adding DaVinci as an OAuth Client in PingFederate.**
+The client ID that you noted in **Adding PingOne DaVinci as an OAuth Client in PingFederate.**
 
 ##### Client Secret
 
-The client secret that you noted in **Adding DaVinci as an OAuth Client in PingFederate.**
+The client secret that you noted in **Adding PingOne DaVinci as an OAuth Client in PingFederate.**
 
 ##### Scope
 
@@ -195,7 +195,7 @@ Enter your PingFederate base URL. For example, `https://pf.example.com:9031`.
 
 ![A screen capture that shows the complete flow.](_images/connector-images/dvc-pf-redirectless-authentication-flow.png)
 
-1. Download the [PingFederate - Authentication (Redirectless)](https://marketplace.pingone.com/item/pingfederate-authentication-redirectless) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [PingFederate - Authentication (Redirectless)](https://marketplace.pingone.com/item/pingfederate-authentication-redirectless) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Select the **Authenticate User (Redirectless)** node.
 

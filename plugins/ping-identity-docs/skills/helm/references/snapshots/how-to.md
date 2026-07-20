@@ -1,9 +1,11 @@
 ---
 title: Updating Product Image Tags
-description: This page describes recommendations for updating products and image tags in a Helm installation. The focus is on what is needed to move from one Docker image tag to another in the Helm chart, with some specific steps to follow for certain products. This page does not cover specifics on how to test upgrades or details on how to employ a blue-green update strategy. These processes will depend on the environment where the chart is deployed.
+description: Explains recommended blue-green and in-place strategies for updating product image tags in Ping Identity Helm chart deployments
 component: helm
 page_id: helm::how-to/index
 canonical_url: https://developer.pingidentity.com/helm/how-to/index.html
+llms_txt: https://developer.pingidentity.com/helm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["how-to:index.adoc"]
 section_ids:
   blue-green-update: Blue-Green Update

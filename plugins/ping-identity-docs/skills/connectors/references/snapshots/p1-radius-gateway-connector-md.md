@@ -1,12 +1,12 @@
 ---
 title: PingOne RADIUS Gateway Connector
-description: The PingOne RADIUS Gateway connector enables you to integrate PingOne DaVinci flows with a PingOne RADIUS Gateway.
+description: Configure the PingOne RADIUS Gateway connector to integrate PingOne DaVinci flows with a PingOne RADIUS Gateway for RADIUS authentication
 component: connectors
 page_id: connectors::p1_radius_gateway_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_radius_gateway_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -34,13 +34,13 @@ Learn more in the following:
 
   * [PingOne Gateways documentation](https://docs.pingidentity.com/pingone/integrations/p1_radius_gateways_intro.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -54,11 +54,11 @@ To use the connector, you'll need:
 
 ### Setting up the connector
 
-In DaVinci, go to **Connections** and add a PingOne RADIUS gateway connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, go to **Connections** and add a PingOne RADIUS gateway connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 ## Using the connector in a flow
 
-Use the RADIUS Gateway connector to instruct DaVinci to respond to a RADIUS Gateway authentication session request. The connector can send one of the following responses:
+Use the RADIUS Gateway connector to instruct PingOne DaVinci to respond to a RADIUS Gateway authentication session request. The connector can send one of the following responses:
 
 * **Accept**: Indicates that a user has completed all the required authentication steps. The RADIUS gateway sends an `ACCESS_ACCEPT` response to the RADIUS client, and grants the user access.
 
@@ -74,11 +74,11 @@ Use the RADIUS Gateway connector to instruct DaVinci to respond to a RADIUS Gate
   | - | ---------------------------------------------------------------------------------------------------------- |
   |   | This response type is only supported when using a RADIUS client that supports `ACCESS_CHALLENGE` requests. |
 
-* **Poll**: Indicates that the user is authenticating with the PingID mobile app, and the DaVinci flow is waiting for a push response.
+* **Poll**: Indicates that the user is authenticating with the PingID mobile app, and the PingOne DaVinci flow is waiting for a push response.
 
 ### RADIUS gateway flow templates
 
-PingOne provides out-of-the-box DaVinci flows that you can integrate into your RADIUS gateway.
+PingOne provides out-of-the-box PingOne DaVinci flows that you can integrate into your RADIUS gateway.
 
 |   |                                                                                                                            |
 | - | -------------------------------------------------------------------------------------------------------------------------- |
@@ -124,7 +124,7 @@ To download this flow, search for [RADIUS gateway Authentication](https://market
 
     To customize the RADIUS Gateway authentication flow template:
 
-    1. In the [Ping Identity Marketplace](https://marketplace.pingone.com/home) search for RADIUS gateway authentication flow and import the flow. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+    1. In the [Ping Identity Marketplace](https://marketplace.pingone.com/home) search for RADIUS gateway authentication flow and import the flow. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
        ![RADIUS gateway authentication flow showing the flow settings node](_images/connector-images/dvc-p1-radius-gateway-flow-settings-node.png)
 

@@ -3,8 +3,8 @@ title: Adding social login with PingOne
 description: Adding social login lets your users sign on using existing social accounts, simplifying their sign-on process.
 component: davinci
 page_id: davinci:use_cases:davinci_use_cases_adding_social_login
-canonical_url: http://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_adding_social_login.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_adding_social_login.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 24, 2024
 section_ids:
@@ -39,15 +39,15 @@ This section shows you how to create one or more forms, add social login buttons
 
 #### Before you begin
 
-Create an external identity provider for each social login option that you plan to use. Learn more in [External IDPs](http://docs.pingidentity.com/pingone/integrations/p1_external_idps.html).
+Create an external identity provider for each social login option that you plan to use. Learn more in [External IDPs](https://docs.pingidentity.com/pingone/integrations/p1_external_idps.html).
 
 #### About this task
 
 First, create one or more forms in PingOne.
 
-|   |                                                                                                                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This procedure does not cover all of the options available in the **Forms** section. Learn more about all available options in the [Forms documentation](http://docs.pingidentity.com/pingone/user_experience/p1_forms.html). |
+|   |                                                                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | This procedure does not cover all of the options available in the **Forms** section. Learn more about all available options in the [Forms documentation](https://docs.pingidentity.com/pingone/user_experience/p1_forms.html). |
 
 #### Steps
 
@@ -87,9 +87,9 @@ First, create one or more forms in PingOne.
 
 After adding social login to your forms, add the forms to your flow.
 
-|   |                                                                                                                                                                                                                                            |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | This procedure does not discuss all of the options available for the PingOne Forms connector. Learn more about all available options in the [Forms connector documentation](http://docs.pingidentity.com/connectors/forms_connector.html). |
+|   |                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure does not discuss all of the options available for the PingOne Forms connector. Learn more about all available options in the [Forms connector documentation](https://docs.pingidentity.com/connectors/forms_connector.html). |
 
 #### Steps
 
@@ -134,8 +134,8 @@ title: Creating an authentication flow
 description: Create a flow to authenticate a user and optionally reset their password.
 component: davinci
 page_id: davinci:use_cases:davinci_use_cases_creating_an_authentication_flow
-canonical_url: http://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:
@@ -208,8 +208,8 @@ title: Localizing flows with PingOne
 description: Localizing a flow lets you present a single flow to customers who use multiple languages, providing a better experience for customers and reducing backend complexity.
 component: davinci
 page_id: davinci:use_cases:davinci_use_cases_localizing_flows
-canonical_url: http://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_localizing_flows.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_localizing_flows.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 22, 2023
 section_ids:
@@ -248,9 +248,9 @@ This section shows you how to create one or more forms, add translations for tho
 
 First, create one or more forms in PingOne.
 
-|   |                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This procedure does not cover all of the options available in the **Forms** section. You can find information about all available options in the [Forms documentation](http://docs.pingidentity.com/pingone/user_experience/p1_forms.html). |
+|   |                                                                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure does not cover all of the options available in the **Forms** section. You can find information about all available options in the [Forms documentation](https://docs.pingidentity.com/pingone/user_experience/p1_forms.html). |
 
 #### Steps
 
@@ -292,9 +292,9 @@ First, create one or more forms in PingOne.
 
 After creating your forms, enable one or more languages, then provide translations for the fields in your forms for each enabled language.
 
-|   |                                                                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | This procedure does not discuss all options available in the **Languages** section. For more information about all available options, see the [Languages documentation](http://docs.pingidentity.com/pingone/user_experience/p1_languages.html). |
+|   |                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure does not discuss all options available in the **Languages** section. For more information about all available options, see the [Languages documentation](https://docs.pingidentity.com/pingone/user_experience/p1_languages.html). |
 
 #### Steps
 
@@ -348,9 +348,9 @@ After creating your forms, enable one or more languages, then provide translatio
 
 After adding your languages and translations for your forms, add the forms to your flow.
 
-|   |                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This procedure does not discuss all of the options available for the Form connector. For more information about all available options, see the [Form connector documentation](http://docs.pingidentity.com/connectors/form_connector.html). |
+|   |                                                                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure does not discuss all of the options available for the Form connector. For more information about all available options, see the [Form connector documentation](https://docs.pingidentity.com/connectors/form_connector.html). |
 
 #### Steps
 
@@ -387,8 +387,8 @@ title: Use Cases
 description: These use cases showcase ways in which you can use flows to solve specific business challenges.
 component: davinci
 page_id: davinci:use_cases:davinci_use_cases
-canonical_url: http://docs.pingidentity.com/davinci/use_cases/davinci_use_cases.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 ---
@@ -405,16 +405,16 @@ These use cases showcase ways in which you can use flows to solve specific busin
 
 Some solutions also combine DaVinci with PingOne or other tools to address more complex business challenges.
 
-* PingOne for Customers Passwordless: This solution uses PingOne and a set of tailored DaVinci flows to create a registration and sign-on process that incorporates passwordless, password, and multi-factor authentication (MFA) options. Learn more in the [PingOne for Customers Passwordless documentation](http://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/index.html).
+* PingOne for Customers Passwordless: This solution uses PingOne and a set of tailored DaVinci flows to create a registration and sign-on process that incorporates passwordless, password, and multi-factor authentication (MFA) options. Learn more in the [PingOne for Customers Passwordless documentation](https://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/index.html).
 
-* PingOne for Customers Plus: This solution uses PingOne and a set of tailored DaVinci flows to create a registration and sign-on process that incorporates a variety of MFA options. Learn more in the [PingOne for Customers Plus documentation](http://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/index.html).
+* PingOne for Customers Plus: This solution uses PingOne and a set of tailored DaVinci flows to create a registration and sign-on process that incorporates a variety of MFA options. Learn more in the [PingOne for Customers Plus documentation](https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/index.html).
 
-* Financial Services: This solution uses PingOne and a set of tailored DaVinci flows to provide end users a secure way to make payments and transfers. Learn more in the [Financial Services documentation](http://docs.pingidentity.com/pingone-solutions/financial-services/index.html).
+* Financial Services: This solution uses PingOne and a set of tailored DaVinci flows to provide end users a secure way to make payments and transfers. Learn more in the [Financial Services documentation](https://docs.pingidentity.com/pingone-solutions/financial-services/index.html).
 
-* Gift Card Redemption: This solution uses PingOne and a set of tailored DaVinci flows to provide a secure way for users to redeem gift cards, including step-up authentication and the ability for users to update their email address and other information. Learn more in the [Gift Card Redemption documentation](http://docs.pingidentity.com/pingone-solutions/gift-card-auth/index.html).
+* Gift Card Redemption: This solution uses PingOne and a set of tailored DaVinci flows to provide a secure way for users to redeem gift cards, including step-up authentication and the ability for users to update their email address and other information. Learn more in the [Gift Card Redemption documentation](https://docs.pingidentity.com/pingone-solutions/gift-card-auth/index.html).
 
-* Healthcare: This solution uses PingOne and a set of tailored DaVinci flows to provide a secure way for patients to manage accounts and for customer service representatives to help users with account management. Learn more in the [Healthcare flow pack documentation](http://docs.pingidentity.com/pingone-solutions/healthcare/index.html).
+* Healthcare: This solution uses PingOne and a set of tailored DaVinci flows to provide a secure way for patients to manage accounts and for customer service representatives to help users with account management. Learn more in the [Healthcare flow pack documentation](https://docs.pingidentity.com/pingone-solutions/healthcare/index.html).
 
-* Microsoft Entra ID: This solution lets customers use an external authentication provider for multi-factor authentication (MFA) through Entra ID. In this use case, you'll learn how to set up Entra ID, PingOne SSO, and PingID to support external MFA in Entra ID. In this scenario, Entra ID is the identity provider (IdP), and PingOne SSO and PingID are the external authentication provider. Learn more in [Setting up PingOne SSO, DaVinci, and PingID as the external MFA provider for Microsoft Entra ID](http://docs.pingidentity.com/pingone/use_cases/p1_set_up_external_mfa_provider_microsoft_entra_davinci.html).
+* Microsoft Entra ID: This solution lets customers use an external authentication provider for multi-factor authentication (MFA) through Entra ID. In this use case, you'll learn how to set up Entra ID, PingOne SSO, and PingID to support external MFA in Entra ID. In this scenario, Entra ID is the identity provider (IdP), and PingOne SSO and PingID are the external authentication provider. Learn more in [Setting up PingOne SSO, DaVinci, and PingID as the external MFA provider for Microsoft Entra ID](https://docs.pingidentity.com/pingone/use_cases/p1_set_up_external_mfa_provider_microsoft_entra_davinci.html).
 
-* Client-initiated backchannel authentication (CIBA): CIBA enables an end user to use an application on one device and grants consent to the application on another device. Because PingOne uses DaVinci to orchestrate the out-of-band authentication and authorization experience, you can design a PingOne DaVinci CIBA flow that suits the needs of your organization. Learn more in [Configuring a CIBA flow](http://docs.pingidentity.com/pingone/use_cases/p1_configure_ciba_flow.html).
+* Client-initiated backchannel authentication (CIBA): CIBA enables an end user to use an application on one device and grants consent to the application on another device. Because PingOne uses DaVinci to orchestrate the out-of-band authentication and authorization experience, you can design a PingOne DaVinci CIBA flow that suits the needs of your organization. Learn more in [Configuring a CIBA flow](https://docs.pingidentity.com/pingone/use_cases/p1_configure_ciba_flow.html).

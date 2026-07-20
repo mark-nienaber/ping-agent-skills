@@ -1,12 +1,12 @@
 ---
 title: OneTrust Connector
-description: The OneTrust connector lets you use OneTrust to manage receipts for user consent in your PingOne DaVinci flow.
+description: Configure the OneTrust connector in PingOne DaVinci to create and retrieve user consent receipts for privacy and data governance flows
 component: connectors
 page_id: connectors::onetrust_connector
 canonical_url: https://docs.pingidentity.com/connectors/onetrust_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -17,7 +17,7 @@ section_ids:
   client-id: Client ID
   client-secret: Client Secret
   setting-up-pingone: Setting up PingOne
-  setting-up-onetrust-url-variables-in-davinci: Setting up OneTrust URL variables in DaVinci
+  setting-up-onetrust-url-variables-in-pingone-davinci: Setting up OneTrust URL variables in PingOne DaVinci
   using-the-connector-in-a-flow: Using the connector in a flow
   creating-a-consent-receipt: Creating a consent receipt
   getting-information-about-an-existing-consent-receipt: Getting information about an existing consent receipt
@@ -46,13 +46,13 @@ Learn more in the following:
 
   * [Managing OAuth 2.0 API Keys](https://my.onetrust.com/s/article/UUID-76f55697-ba16-d000-849a-d33e3d217f41)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -84,7 +84,7 @@ To use the connector, you'll need a OneTrust license.
 
 ### Configuring the OneTrust connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -100,7 +100,7 @@ The client secret you created in [Setting up OneTrust consent management](#setti
 
 The example flows below use the PingOne user directory to store consent receipts. To use the provided flow templates:
 
-1. If you don't have an existing PingOne connection in DaVinci, set up the [PingOne Connector](p1_connector.html), including the required PingOne setup.
+1. If you don't have an existing PingOne connection in PingOne DaVinci, set up the [PingOne Connector](p1_connector.html), including the required PingOne setup.
 
 2. In PingOne, add a user attribute to hold a list of the user's consent receipts. Learn more in [Adding user attributes](https://docs.pingidentity.com/pingone/directory/p1_adduserattributes.html). Use the following details:
 
@@ -110,15 +110,15 @@ The example flows below use the PingOne user directory to store consent receipts
 
    * Select **Allow multiple values**
 
-### Setting up OneTrust URL variables in DaVinci
+### Setting up OneTrust URL variables in PingOne DaVinci
 
 The flow templates provided below use variables to populate your organization's OneTrust URLs.
 
-To use the flow templates, set the following variables in DaVinci.
+To use the flow templates, set the following variables in PingOne DaVinci.
 
-|   |                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn more in [Adding a variable](https://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html) in the DaVinci documentation. |
+|   |                                                                                                                                                         |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Learn more in [Adding a variable](https://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html) in the PingOne DaVinci documentation. |
 
 | Name                          | Variable Context | Data Type   | Example Value                                       |
 | ----------------------------- | ---------------- | ----------- | --------------------------------------------------- |
@@ -138,7 +138,7 @@ This flow collects the user's consent and user ID, checks that the user account 
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | This flow uses include::partial$common\_product\_keydefs.adoc\[tags=pingone]as an example user directory. You can modify the flow to use a different directory. |
 
-1. Download the [OneTrust - New consent receipt](https://marketplace.pingone.com/item/onetrust-consent-receipt-retrieval) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [OneTrust - New consent receipt](https://marketplace.pingone.com/item/onetrust-consent-receipt-retrieval) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Customize the consent form:
 
@@ -214,7 +214,7 @@ This flow collects the user's consent and user ID, checks that the user account 
 
 You can use a receipt ID to check for an existing consent receipt in OneTrust. This allows you to check whether a user has consented to your terms before using your service, for example.
 
-1. Download the [OneTrust - Consent receipt retrieval](https://marketplace.pingone.com/item/onetrust-consent-receipt-retrieval) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [OneTrust - Consent receipt retrieval](https://marketplace.pingone.com/item/onetrust-consent-receipt-retrieval) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Test the flow:
 

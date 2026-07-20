@@ -1,1130 +1,2157 @@
 ---
-title: Groovy in PingAccess
-description: PingAccess provides the Groovy script and OAuth Groovy script rule types, which enable the use of Groovy, a dynamic programming language for the Java Virtual Machine (JVM).
+title: Administrative API endpoints
+description: PingAccess ships with interactive documentation for both developers and non-developers to explore the PingAccess application programming interface (API) endpoints, view a reference of the metadata for each API, and experiment with API calls.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_groovy_in_pa
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_groovy_in_pa.html
+page_id: pingaccess:reference_guides:pa_admin_api_endpoints
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_admin_api_endpoints.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 26, 2023
+revdate: November 3, 2023
+section_ids:
+  admin-api-documentation-swagger-ui-specifications: Admin API documentation Swagger-UI specifications
 ---
 
-# Groovy in PingAccess
+# Administrative API endpoints
 
-PingAccess provides the Groovy script and OAuth *(tooltip: \<div class="paragraph">
-\<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-\</div>)* Groovy script rule types, which enable the use of Groovy, a dynamic programming language for the Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
-\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>
+PingAccess ships with interactive documentation for both developers and non-developers to explore the PingAccess application programming interface (API) *(tooltip: \<div class="paragraph">
+\<p>A specification of interactions available for building software to access an application or service.\</p>
+\</div>)* endpoints, view a reference of the metadata for each API, and experiment with API calls.
+
+PingAccess APIs are REST APIs that provide complete administrative capabilities of the product. They can be called from custom applications or from command line tools, such as cURL.
+
+These endpoints are only available on the `admin.port` defined in the `/pa-admin-api/v3/api-docs/<PA_HOME>/conf/run.properties` file. For example, https\://*\<PA\_HOME>*:*\<PORT>*/pa-admin-api/v3/api-docs/.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you selected the **Use context root as reserved resource base path** check box in your PingAccess application, this feature creates an instance of any reserved PingAccess resources under the application's context root. As such, the context root of the application needs to prepend the reserved context application root (`/pa` by default) in any file paths that reference it. If the context root of your application is `myApp`, the file path would start with `/myApp/pa`. |
+
+|   |                                                                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For enhanced API security, you must include `X-XSRF-Header: PingAccess` in all requests and use the `application/json` content type for `PUT` and `POST` requests. |
+
+## Admin API documentation Swagger-UI specifications
+
+The Swagger-UI component that displays the PingAccess admin API documentation uses OpenAPI specification (OAS) 2.0.
+
+|   |                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The specification that the PingAccess admin API docs used previously, Swagger 1.2, has been deprecated. The Swagger 1.2 specification is still available at https\://*\<PA\_HOME>*:*\<PORT>*/pa-admin-api/v3/api-docs/pa/api-docs.json but might be removed from future versions of PingAccess. |
+
+You can find the PingAccess admin API's OAS 2.0 specifications at either of the following:
+
+* https\://*\<PA\_HOME>*:*\<PORT>*/pa-admin-api/v3/api-docs/pa/api-docs-v2.json
+
+* https\://*\<PA\_HOME>*:*\<PORT>*/pa-admin-api/v3/api-docs/pa/api-docs-v2.yaml
+
+|   |                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Access to these specifications simplifies the process of integrating the PingAccess admin API with modern API clients, such as Postman. |
+
+---
+
+---
+title: Agent tuning reference
+description: Modify the properties of your PingAccess agents to improve performance.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_agent_tuning_ref
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_agent_tuning_ref.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 12, 2024
+section_ids:
+  maximum-connections: Maximum Connections
+  maximum-tokens: Maximum Tokens
+---
+
+# Agent tuning reference
+
+Modify the properties of your PingAccess agents to improve performance.
+
+You can configure several properties in the `agent.properties` file for increased performance. For more information on agent configuration and setting properties, see the agent documentation for [Apache](../agents_and_integrations/pa_apache_rhel_configuration.html) or [IIS](../agents_and_integrations/pa_iis_configuration.html).
+
+## Maximum Connections
+
+Connections from the agent to PingAccess are limited by the `agent.engine.configuration.maxConnections` property. Though the default value is set to `10`, the PingAccess policy server sees optimal performance at 50 concurrent requests per CPU. In certain situations it can be advantageous to increase the number of connections. In the event that all connections in the pool are in use, a requesting thread waits for one to become available. Assuming that the response time to PingAccess is sufficiently fast, the time spent waiting for a connection is likely to be less than if the system becomes overloaded.
+
+|   |                                                                                                                                                                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This is the maximum number of connections per worker process, and not simply the total number of workers the agent has access to. Setting the `agent.engine.configuration.maxConnections` value too low might create a bottleneck to PingAccess, and setting the value too high might cause PingAccess to become overloaded. |
+
+## Maximum Tokens
+
+By default, the maximum number of cached tokens in an agent is unlimited. In certain situations, it can be advantageous to limit the size of the cache for the agent, as a smaller cache has a smaller memory footprint, freeing up memory available to the application for servicing requests. However, when the token cache limit is reached, the least-recently used token-policy mapping will be removed from the cache. If that token-policy mapping happens to be needed again, the agent will have a cache miss, resulting in the need to obtain a new token-policy mapping from PingAccess.
+
+---
+
+---
+title: API Access Management Gateway deployment table
+description: The following table describes the important configuration options for deploying an API Gateway. You can find specific use case information in Deploying for Gateway API Access Management.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_api_access_management_gateway_deployment_table
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_api_access_management_gateway_deployment_table.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: November 18, 2025
+---
+
+# API Access Management Gateway deployment table
+
+The following table describes the important configuration options for deploying an API Gateway. You can find specific use case information in [Deploying for Gateway API Access Management](pa_deploy_for_gateway_api_access_management.html).
+
+> **Collapse: Configuration steps**
+>
+> | Step                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                        |
+> | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+> | [Configure the connection to the PingFederate OAuth Authorization Server](../pingaccess_user_interface_reference_guide/pa_configuring_oauth_resource_servers.html).           | PingAccess uses this connection and credentials to validate incoming access tokens for securing application programming interface (API) *(tooltip: \<div class="paragraph">&#xA;\<p>A specification of interactions available for building software to access an application or service.\</p>&#xA;\</div>)* calls. |
+> | [Configure the OpenID Connect Relying Party Client for PingAccess](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_client_management.html). | You must register the client with PingFederate and the client credentials configured in PingAccess to authenticate PingAccess when validating incoming access tokens.                                                                                                                                              |
+> | [Generate or Import Key Pairs and configure HTTP Listeners](../pingaccess_user_interface_reference_guide/pa_key_pairs.html).                                                  | Define the certificates and keys used to secure access to the PingAccess admin console and secure incoming HTTPS requests at runtime.                                                                                                                                                                              |
+> | [Set up your cluster for high availability](pa_clustering_ref_guide.html).                                                                                                    | Configure a cluster to facilitate high availability of critical services and increase performance and overall system throughput.                                                                                                                                                                                   |
+> | [Add trusted CA certificates](../pingaccess_user_interface_reference_guide/pa_importing_certificates.html).                                                                   | Defines trust to certificates presented during outbound secure HTTPS connections.                                                                                                                                                                                                                                  |
+> | [Create a trusted certificate group](../pingaccess_user_interface_reference_guide/pa_creating_trusted_certificate_groups.html).                                               | Provides a trusted set of anchor certificates for use when authenticating outbound secure HTTPS connections.                                                                                                                                                                                                       |
+> | [Define virtual servers for protected applications](../pingaccess_user_interface_reference_guide/pa_creating_new_virtual_hosts.html).                                         | Allow one server to share PingAccess resources without requiring all sites on the server to use the same host name.You can assign specific key pairs to virtual hosts.                                                                                                                                             |
+
+---
+
+---
+title: API access management production deployment architecture
+description: This production deployment environment shows an API access management architecture.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_api_access_management_production_deployment_architecture
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_api_access_management_production_deployment_architecture.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+---
+
+# API access management production deployment architecture
+
+This production deployment environment shows an API access management architecture.
+
+There are many considerations when deploying a production environment. For high availability and redundancy, the environment requires clustering and load-balancing. Load balancers are required as part of the networking infrastructure to achieve high availability by ensuring that requests are sent to available servers they are front-ending. Best practices in network design and security also include firewalls to ensure that only required ports and protocols are permitted across zones.
+
+|   |                                                                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingAccess provides high availability and basic load balancing for the protected web apps in the protected zone. For more information, see [Managing load balancing strategies](../pingaccess_user_interface_reference_guide/pa_load_balancing_strategies.html). |
+
+The following environment example is a recommended production quality deployment architecture for an API access management use case.
+
+![rcz1564006721062](_images/rcz1564006721062.svg)
+
+The following table describes the three zones within this proposed architecture.
+
+|                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| External Zone  | External network where incoming application programming interface (API) *(tooltip: \<div class="paragraph">&#xA;\<p>A specification of interactions available for building software to access an application or service.\</p>&#xA;\</div>)* requests originate.                                                                                                                                                                    |
+| DMZ            | Externally exposing segment where PingAccess is accessible to API clients. A minimum of two PingAccess engine nodes will be deployed in the DMZ to achieve high availability. Depending on your scalability requirements, you might require more nodes.                                                                                                                                                                            |
+| Protected Zone | Backend controlled zone in which Sites hosting the protected APIs are located. All requests to these APIs must be designed to pass through PingAccess. PingFederate is accessible to API clients in this zone. A minimum of two PingFederate engine nodes will be deployed in the protected zone. Administrative nodes for both PingAccess and PingFederate can be co-located on a single machine to reduce hardware requirements. |
+
+---
+
+---
+title: API access management proof of concept deployment architecture
+description: The proof of concept environment emulates an API access management environment for testing purposes.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_api_access_management_proof_of_concept_deployment_architecture
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_api_access_management_proof_of_concept_deployment_architecture.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+---
+
+# API access management proof of concept deployment architecture
+
+The proof of concept environment emulates an API access management environment for testing purposes.
+
+In the test environment, PingAccess can be set up with the minimum hardware requirements. Given these conditions, do not use this proposed architecture in a production deployment because it does not provide high availability.
+
+![quh1564006721035](_images/quh1564006721035.svg)
+
+The following table describes the three zones within this proposed architecture.
+
+| Zone           | Description                                                                                                                                                                                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| External Zone  | External network where incoming application programming interface (API) *(tooltip: \<div class="paragraph">&#xA;\<p>A specification of interactions available for building software to access an application or service.\</p>&#xA;\</div>)* requests originate.                                   |
+| DMZ            | Externally exposing segment where PingAccess is accessible to API clients. PingAccess is a standalone instance in this environment, serving as both a runtime and an administrative port.                                                                                                         |
+| Protected Zone | Backend controlled zone in which sites hosting the protected APIs are located. All requests to these APIs must be designed to pass through PingAccess. PingFederate is accessible to API clients in this zone and is a standalone instance, serving as both a runtime and an administrative port. |
+
+---
+
+---
+title: Auditing and proxying Gateway deployment table
+description: The following table describes the important configuration options for an auditing or proxying deployment. You can find specific use case information in Deploying for Auditing and Proxying.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_auditing_and_proxying_gateway_deployment_table
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_auditing_and_proxying_gateway_deployment_table.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: November 18, 2025
+---
+
+# Auditing and proxying Gateway deployment table
+
+The following table describes the important configuration options for an auditing or proxying deployment. You can find specific use case information in [Deploying for Auditing and Proxying](pa_deploy_for_auditing_and_proxying.html).
+
+> **Collapse: Configuration steps**
+>
+> | Step                                                                                                                               | Description                                                                                                                            |
+> | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+> | [Generate or Import Key Pairs and configure HTTP Listeners](../pingaccess_user_interface_reference_guide/pa_key_pairs.html).       | Defines the certificates and keys used to secure access to the PingAccess admin console and secure incoming HTTPS requests at runtime. |
+> | [Set up your cluster for high availability](pa_clustering_ref_guide.html).                                                         | Configure a cluster to facilitate high availability of critical services and increase performance and overall system throughput.       |
+> | [Add trusted CA certificates](../pingaccess_user_interface_reference_guide/pa_importing_certificates.html).                        | Define trust to certificates presented during outbound secure HTTPS connections.                                                       |
+> | [Create a trusted certificate group](../pingaccess_user_interface_reference_guide/pa_creating_trusted_certificate_groups.html).    | Provide a trusted set of anchor certificates for authenticating outbound secure HTTPS connections.                                     |
+> | [Define virtual servers for protected resources](../pingaccess_user_interface_reference_guide/pa_creating_new_virtual_hosts.html). | Allows one server to share PingAccess resources without requiring all sites on the server to use the same host name.                   |
+
+---
+
+---
+title: Auditing and proxying production deployment architecture
+description: This production deployment environment shows an auditing and proxying architecture in PingAccess.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_auditing_and_proxying_production_deployment_architecture
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_auditing_and_proxying_production_deployment_architecture.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+---
+
+# Auditing and proxying production deployment architecture
+
+This production deployment environment shows an auditing and proxying architecture in PingAccess.
+
+There are many considerations when deploying a production environment. For high availability and redundancy, the environment requires clustering and load-balancing. Load balancers are required as part of the networking infrastructure to achieve high availability by ensuring that requests are sent to available servers they are front-ending. Best practices in network design and security also include firewalls to ensure that only required ports and protocols are permitted across zones.
+
+|   |                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingAccess can provide high availability and basic load balancing for the protected web apps in the protected zone. For more information, see [Managing load balancing strategies](../pingaccess_user_interface_reference_guide/pa_load_balancing_strategies.html). |
+
+The following environment example is a recommended production quality deployment architecture for an auditing and proxying use case.
+
+![wjs1564006721195](_images/wjs1564006721195.svg)
+
+The following table describes the three zones within this proposed architecture.
+
+|                |                                                                                                                                                                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| External Zone  | External network where incoming requests originate.                                                                                                                                                                                                 |
+| DMZ            | Externally exposing segment where PingAccess is accessible to clients. A minimum of two PingAccess engine nodes will be deployed in the DMZ. Depending on your scalability requirements, you might require more nodes.                              |
+| Protected Zone | Contains backend Sites audited and proxied through PingAccess. Audit results are sent to an audit repository or digested by reporting tools. Many types of audit repository tools are supported such as SIEM/GRC, Splunk, database, and flat files. |
+
+---
+
+---
+title: Auditing and proxying proof of concept deployment architecture
+description: This proof of concept deployment environment is used to emulate an auditing and proxying environment for testing purposes in PingAccess.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_auditing_and_proxying_proof_of_concept_deployment_architecture
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_auditing_and_proxying_proof_of_concept_deployment_architecture.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+---
+
+# Auditing and proxying proof of concept deployment architecture
+
+This proof of concept deployment environment is used to emulate an auditing and proxying environment for testing purposes in PingAccess.
+
+In the test environment, you can set up PingAccess with the minimum hardware requirements. Given these conditions, do not use this proposed architecture in a production deployment because it does not provide high availability.
+
+![oyc1564006721175](_images/oyc1564006721175.svg)
+
+The following table describes the three zones within this proposed architecture.
+
+| Zone           | Description                                                                                                                                                                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| External Zone  | External network where incoming requests originate.                                                                                                                                                                                                  |
+| DMZ            | Externally exposing segment where PingAccess is accessible to clients. PingFederate and PingAccess are standalone instances in this environment, serving as both runtime and administrative ports.                                                   |
+| Protected Zone | Contains back-end sites audited and proxied through PingAccess. Audit results are sent to an audit repository or digested by reporting tools. Many types of audit repository/tools are supported such as SIEM/GRC, Splunk, database, and flat files. |
+
+---
+
+---
+title: Authentication Token Management endpoint
+description: This page describes the endpoint used to validate JSON Web Tokens.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_authn_token_management_endpoint
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_authn_token_management_endpoint.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: November 6, 2023
+section_ids:
+  paauthtokenjwks: /pa/authtoken/JWKS
+---
+
+# Authentication Token Management endpoint
+
+This page describes the endpoint used to validate JSON Web Tokens.
+
+## /pa/authtoken/JWKS
+
+Backend sites use the Authentication Token Management endpoint to validate the signature of a JSON Web Token (JWT) *(tooltip: \<div class="paragraph">
+\<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>
 \</div>)*.
 
-Groovy scripts provide advanced rule logic that extends PingAccess rule development beyond the capabilities of the packaged rules. For more information, see the [Groovy documentation](http://groovy-lang.org/documentation.html).
-
-Groovy scripts have access to important PingAccess runtime objects, such as the [Exchange](pa_exchange_object_ref.html) and [PolicyContext](pa_policycontext_object_ref.html) objects, which the scripts can interrogate and modify.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | [Groovy script rules](../pingaccess_user_interface_reference_guide/pa_adding_groovy_script_rules.html) and [OAuth Groovy script rules](../pingaccess_user_interface_reference_guide/pa_adding_oauth_groovy_script_rules.html) must end execution with a matcher instance. For more information, see [Matcher usage reference](pa_matcher_usage_ref.html).Groovy functions treat strings literally, and matchers perform case-sensitive string evaluation unless otherwise specified. For example, in the following line of code, the `caseSensitive` parameter determines whether the Groovy function performs case-sensitive comparison on the value.```
-requestHeaderContains(Map<String, String> fieldValuesMap, boolean caseSensitive)
-``` |
-
-> **Collapse: Rule processing**
->
-> Groovy script rules are invoked during the request processing phase of an exchange, allowing the script to modify the request before it is sent to the server. Groovy script rules are also invoked during the response, allowing the script to modify the response before it is returned to the client.
->
-> |   |                                                                                                                          |
-> | - | ------------------------------------------------------------------------------------------------------------------------ |
-> |   | You can't access a mediated token through a Groovy rule because token mediation occurs after PingAccess rule processing. |
->
-> The following diagram highlights the flow of rule processing.
->
-> ![byy1564006721382](_images/byy1564006721382.png)
-
-> **Collapse: Processing steps**
->
-> 1. During request processing, rules associated with the application are evaluated.
->
-> 2. The request passes through each of the rules before PingAccess allows it to proceed.
->
-> 3. The response passes through the rules in a manner based on your deployment:
->
->    * In a proxy deployment, the response from the site passes through each of the rules.
->
->    * In an agent deployment, the response to the agent indicating the policy approval or denial passes through each of the rules.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you selected the **Use context root as reserved resource base path** check box on your PingAccess application, this feature creates an instance of any reserved PingAccess resources under the application's context root. As such, the context root of the application needs to prepend the reserved context application root (`/pa` by default) in any file paths that reference it.If the context root of your application is `myApp`, the path to the Authentication Token Management endpoint would be `myApp/pa/authtoken/JWKS` instead. |
 
 ---
 
 ---
-title: Groovy script examples
-description: The following examples show possible uses for Groovy scripts.
+title: Backend server connections
+description: PingAccess provides a max connections option to control and optimize connections to the proxied site.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_groovy_script_examples
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_groovy_script_examples.html
+page_id: pingaccess:reference_guides:pa_backend_server_connections
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_backend_server_connections.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 12, 2024
+section_ids:
+  maximum-connections: Maximum Connections
+---
+
+# Backend server connections
+
+PingAccess provides a max connections option to control and optimize connections to the proxied site.
+
+## Maximum Connections
+
+Connections to PingAccess are not explicitly connections to the proxied site. PingAccess creates a pool of connections, unlimited in size by default, that are multiplexed to fulfill client requests. Maintenance of the pool includes creating connections to the site when needed, if none are available, and removing connections when they are closed by the backend server due to inactivity.
+
+In certain situations, it can be advantageous to limit the number of connections in the pool for a given website. If, for example, the website is limited to the number of concurrent connections it can handle or has specific HTTP Keep Alive settings, limiting the number of connections from PingAccess can improve overall performance by not overloading the backend server. In the event that all connections in the pool are in use, a requesting thread waits for one to become available. Assuming that the response time from the backend site is sufficiently fast, the time spent waiting for a connection is likely to be less than if the system becomes overloaded.
+
+|   |                                                                                                                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It is important to understand the limits and tuning of the server application being proxied. Setting the **Maximum Connections** value too low might create a bottleneck to the proxied site, setting the value too high, or unlimited, might cause PingAccess to overload the server. |
+
+For information on setting the **Maximum Connections**, see [Sites documentation](../pingaccess_user_interface_reference_guide/pa_site_field_descriptions_ref.html).
+
+---
+
+---
+title: Body object reference
+description: This object accesses the Body object in Groovy exc?.request?.body or exc?.response?.body.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_body_object_ref
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_body_object_ref.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 6, 2023
-section_ids:
-  oauth-policy-context-example: OAuth Policy context example
----
-
-# Groovy script examples
-
-The following examples show possible uses for Groovy scripts.
-
-## OAuth Policy context example
-
-In some instances, it might be necessary to transmit identity information to sites to provide details of the user attempting to access a site. In such instances, Groovy scripts can be used to inject identity information into various portions of the HTTP request *(tooltip: \<div class="paragraph">
-\<p>A client transaction sent over HTTP to the server specifying a request method, such as GET, POST, and DELETE, to execute against a resource or resources on the server.\</p>
-\</div>)* to the target.
-
-In this example, the site is expecting the identity of the user to be conveyed through the `User` HTTP header *(tooltip: \<div class="paragraph">
-\<p>A section of an HTTP request or response that conveys additional information relevant to the client or server in the transaction.\</p>
-\</div>)*. You can accomplish this using the OAuth *(tooltip: \<div class="paragraph">
-\<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-\</div>)* Groovy script rule and the following Groovy script:
-
-```
-user=policyCtx?.context.get("oauth_token")?.attributes?.get("user")?.get(0)
-exc?.request?.header?.add("User", "$user")
-pass()
-```
-
-* More complex Groovy script logic
-
-  ```
-  test = exc?.request?.header?.getFirstValue("test");
-  if(test != null && test.equals("foo"))
-  {
-    //rule will fail evaluation if Test header has value 'foo'
-    fail()
-  }
-  else
-  {
-    //rule will pass evaluation is Test header has value of anything else
-    //or isn't present
-    pass()
-  }
-  ```
-
-* Set an exchange property named `com.pingidentity.policy.error.info`
-
-  This value will be available for the `$info` variable in error templates when an error is encountered. The `$info` variable can be set by a Groovy Script rule or an OAuth Groovy script rule.
-
-  ```
-  exc?.setProperty("com.pingidentity.policy.error.info", "this value will be passed to the template in $info variable")
-  not(anything())
-  ```
-
-* Create a whitelisting rule for certain characters
-
-  ```
-  if (!exc?.request?.uri?.matches("[\\p{Po}\\p{N}\\p{Z}\\p{L}\\p{M}\\p{Zs}\\./_\\-\\()\\{\\}\\[\\]]*"))
-   {
-    fail()
-   }
-   else
-   {
-    pass()
-   }
-  ```
-
-* Add a cookie to the response
-
-  ```
-  // Construct the cookie value
-  value = "cookie-value"
-  cookieHeaderFieldValue = "ResponseTestCookie=${value}; Path=/"
-
-  // Add the cookie on to the response
-  exc?.response?.header?.add("Set-Cookie", cookieHeaderFieldValue)
-
-  pass()
-  ```
-
-* Combine an `AND` and `OR`, invoking an existing rule matcher
-
-  ```
-  if ((anyOf(containsWebSessionAttribute("engineering", "true"), containsWebSessionAttribute("marketing", "true")) && (containsWebSessionAttribute("manager", "true")))
-  {pass()
-  }
-  else{
-  fail()
-  }
-  ```
-
----
-
----
-title: Groovy Scripts
-description: Groovy scripts provide advanced rule logic that extends PingAccess rule development beyond the capabilities of the packaged rules.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_groovy_scripts
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_groovy_scripts.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
-section_ids:
-  matchers: Matchers
-  objects: Objects
-  debuggingtroubleshooting: Debugging/troubleshooting
----
-
-# Groovy Scripts
-
-Groovy scripts provide advanced rule logic that extends PingAccess rule development beyond the capabilities of the packaged rules.
-
-Groovy scripts have access to important PingAccess runtime objects, such as the [Exchange](pa_exchange_object_ref.html) and [PolicyContext](pa_policycontext_object_ref.html) objects, which the scripts can interrogate and modify. Groovy script rules are invoked during the request processing phase of an exchange, allowing the script to modify the request before it is sent to the server. Groovy script rules are also invoked during the response, allowing the script to modify the response before it is returned to the client. See [Groovy](pa_groovy_in_pa.html) for more information about Groovy.
-
-|   |                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------- |
-|   | Through Groovy scripts, PingAccess administrators can perform sensitive operations that could affect system behavior and security. |
-
-## Matchers
-
-Groovy scripts must end execution with a matcher instance. Matchers provide a framework for establishing declarative rule matching objects. You can use a matcher from the list of [PingAccess Matchers](pa_matcher_usage_ref.html) or from the [Hamcrest library](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/CoreMatchers.html).
-
-The following are Hamcrest method examples for constructing access control policies with the web session attribute rule using evaluations such as an `OR` group membership evaluation.
-
-* allOf
-
-  Matches if the examined object matches all of the specified matchers. In this example, the user needs to be in both the sales and managers groups for this rule to pass.
-
-  ```
-  allOf(containsWebSessionAttribute("group","sales"), containsWebSessionAttribute("group","managers"))
-  ```
-
-* anyOf
-
-  Matches any of the specified matchers. In this example, the rule passes if the user is in any of the specified groups.
-
-  ```
-  anyOf(containsWebSessionAttribute("group","sales"), containsWebSessionAttribute("group","managers"), containsWebSessionAttribute("group","execs"))
-  ```
-
-* not
-
-  Inverts the logic of a matcher to not match. In this example, the rule fails if the user is in both the sales and the managers groups.
-
-  ```
-  not(allOf(containsWebSessionAttribute("group", "sales"), containsWebSessionAttribute("group", "managers")))
-  ```
-
-See [Matchers](pa_matcher_usage_ref.html) for more information.
-
-## Objects
-
-The following objects are available in Groovy. For more information on an object, click the link.
-
-* [Exchange Object](pa_exchange_object_ref.html)
-
-  Contains the HTTP request *(tooltip: \<div class="paragraph">
-  \<p>A client transaction sent over HTTP to the server specifying a request method, such as GET, POST, and DELETE, to execute against a resource or resources on the server.\</p>
-  \</div>)* and the HTTP response for the transaction processed by PingAccess.
-
-* [PolicyContext Object](pa_policycontext_object_ref.html)
-
-  Contains a map of objects needed to perform policy decisions. The contents of the map vary based on the context of the current user flow.
-
-* [Request Object](pa_request_object_ref.html)
-
-  Contains all information related to the HTTP request made to an application.
-
-* [Response Object](pa_response_object_ref.html)
-
-  Contains all information related to the site HTTP response.
-
-* [Method Object](pa_method_object_ref.html)
-
-  Contains the HTTP method name from the request made to an application.
-
-* [Header Object](pa_headers_object_ref.html)
-
-  Contains the HTTP header information from the request made to an application or the HTTP header from a Site response.
-
-* [Body Object](pa_body_object_ref.html)
-
-  Contains the HTTP body from the application request or the HTTP body from the site response.
-
-* [OAuthToken Object](pa_oauth_token_object_ref.html)
-
-  Contains the OAuth *(tooltip: \<div class="paragraph">
-  \<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-  \</div>)* access token and related identity attributes.
-
-* [Logger Object](pa_logger_object_ref.html)
-
-  Configure and view the state of logging.
-
-* [MediaType Object](pa_mediatype_object_ref.html)
-
-  Contains information related to the media type.
-
-## Debugging/troubleshooting
-
-Groovy script rules are evaluated when saved to ensure that they are syntactically valid. If a Groovy script rule fails to save, hover over the information icon to view additional information about the reason for the failure.
-
-If a rule fails when it is run, information about the failure is added to the `<PA_HOME>/log/pingaccess.log` file.
-
-|   |                                                                                                                                      |
-| - | ------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Some error messages about Groovy rule failures are only logged if `DEBUG` level output is enabled for the `com.pingidentity` logger. |
-
----
-
----
-title: Headers object reference
-description: Access the Headers object in Groovy exc?.request?.header or exc?.response?.header.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_headers_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_headers_object_ref.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
 section_ids:
   purpose: Purpose
-  examplegroovy-sample: ExampleGroovy sample
+  groovy-sample: Groovy sample
   method-summary: Method summary
-  groovyheaderfield-object: GroovyHeaderField object
-  examplegroovy-sample-2: ExampleGroovy sample
 ---
 
-# Headers object reference
+# Body object reference
 
-Access the Headers object in Groovy `exc?.request?.header` or `exc?.response?.header`.
+This object accesses the Body object in Groovy `exc?.request?.body` or `exc?.response?.body`.
 
 ## Purpose
 
-The Headers object contains the HTTP header *(tooltip: \<div class="paragraph">
-\<p>A section of an HTTP request or response that conveys additional information relevant to the client or server in the transaction.\</p>
-\</div>)* information from the request made to an application or the HTTP header from a site response. The [Request](pa_request_object_ref.html) HTTP header is sent on to the site after the rules are evaluated. The [Response](pa_response_object_ref.html) HTTP header is returned to the client after the Response rules are evaluated.
-
-Use the Headers object to add custom HTTP headers for a site, as demonstrated in the following example:
-
-## ExampleGroovy sample
-
-```
-if ( !(exc.response) )
-{
-     // Set a custom header for the Site request
-     def header = exc?.request?.header
-     header?.add("X-PINGACCESS-SAMPLE", "SUCCESS")
-}
-pass()
-```
-
-## Method summary
-
-| Method                                                    | Description                                                                                                                                                                                                                                                     |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void add(String key, String val)`                        | Adds HTTP header fields for the request.&#xA;&#xA;If you use Groovy Rules to inject HTTP headers for the backend protected application, the script must sanitize the same headers from the original client request.                                             |
-| `String getAccept()`                                      | Returns the acceptable response Content-Types expected by the User-Agent.                                                                                                                                                                                       |
-| `void setAccept(String value)`                            | Sets the acceptable response Content-Types expected by the User-Agent.                                                                                                                                                                                          |
-| `String getAuthorization()`                               | Returns the authentication credentials for HTTP authentication.                                                                                                                                                                                                 |
-| `void setAuthorization(String username, String password)` | Sets authentication credentials for HTTP authentication.                                                                                                                                                                                                        |
-| `String getConnection()`                                  | Returns the connection type preferred by the User-Agent.                                                                                                                                                                                                        |
-| `void setConnection(List<String> values)`                 | Sets the connection type preferred by the User-Agent.                                                                                                                                                                                                           |
-| `int getContentLength()`                                  | Returns the request body content length.                                                                                                                                                                                                                        |
-| `void setContentLength(int length)`                       | Sets the request body content length.                                                                                                                                                                                                                           |
-| `MediaType getContentType()`                              | Returns media type of Header with content type                                                                                                                                                                                                                  |
-| `void setContentType(String)`                             | Sets the request body MIME type.                                                                                                                                                                                                                                |
-| `Map <String, String[]> getCookies()`                     | Returns all cookies sent with the request.                                                                                                                                                                                                                      |
-| `void setCookie(String)`                                  | Overwrites the request's cookie header with the passed string. This method cannot be used to set cookies in the response header.                                                                                                                                |
-| `String getFirstCookieValue(String)`                      | Returns the first cookie in the cookie header.                                                                                                                                                                                                                  |
-| `String getFirstValue(String)`                            | Returns the first value of the HTTP header specified by the name.                                                                                                                                                                                               |
-| `void setDate(Date date)`                                 | Sets the date of the message in the Date HTTP header.                                                                                                                                                                                                           |
-| `List<GroovyHeaderField> getAllHeaderFields()`            | Returns a list of GroovyHeaderFields.                                                                                                                                                                                                                           |
-| `String getHost()`                                        | Returns the host name specified in the request.                                                                                                                                                                                                                 |
-| `void setHost(String value)`                              | Sets the host name for the request to the Site.                                                                                                                                                                                                                 |
-| `String getLocation()`                                    | Gets the redirect location Uniform Resource Locator (URL) *(tooltip: \<div class="paragraph">&#xA;\<p>Identifies a resource according to its internet location.\</p>&#xA;\</div>)* for the response.                                                            |
-| `void setLocation(String value)`                          | Sets the redirect location URL for the response.                                                                                                                                                                                                                |
-| `String getProxyAuthorization()`                          | Returns the proxy credentials.                                                                                                                                                                                                                                  |
-| `void setProxyAuthorization(String value)`                | Sets the request proxy credentials.                                                                                                                                                                                                                             |
-| `void setServer(String value)`                            | Sets the server name for the response.                                                                                                                                                                                                                          |
-| `List<String> getValues(String name)`                     | Returns a list of string values for the supplied header name.                                                                                                                                                                                                   |
-| `String getXForwardedFor()`                               | Returns the originating Internet Protocol (IP) *(tooltip: \<div class="paragraph">&#xA;\<p>The method by which data is sent across the internet from the source host to the destination host.\</p>&#xA;\</div>)* address of the client and the proxies, if set. |
-| `void setXForwardedFor(String value)`                     | Sets the IP address for the client and the proxies.                                                                                                                                                                                                             |
-| `boolean removeContentEncoding()`                         | Removes the Content-Encoding header value. Returns true if the value has been removed.                                                                                                                                                                          |
-| `boolean removeContentLength()`                           | Removes the Content-Length header value. Returns true if the value has been removed.                                                                                                                                                                            |
-| `boolean removeContentType()`                             | Removes the Content-Type header value. Returns true if the value has been removed.                                                                                                                                                                              |
-| `boolean removeExpect()`                                  | Removes the Expect header value. Returns true if the value has been removed.                                                                                                                                                                                    |
-| `boolean removeFields(String name)`                       | Removes the header value specified by the name parameter. Returns true if the value has been removed.                                                                                                                                                           |
-| `boolean removeTransferEncoding()`                        | Removes the Transfer-Encoding header value. Returns true if the value has been removed.                                                                                                                                                                         |
-
-## GroovyHeaderField object
-
-**Method summary**
-
-| Method                              | Description                 |
-| ----------------------------------- | --------------------------- |
-| `String getValue();`                | Returns the string's value. |
-| `GroovyHeaderName getHeaderName();` | Returns the header's name.  |
-
-## ExampleGroovy sample
-
-The following example demonstrates usage of the `getAllHeaderFields()` method, which includes both request and response logging:
-
-```
-exc?.log.info "Display Headers: "
-exc?.log.info "-->Request Headers"
-reqHdrs = exc?.request?.header?.getAllHeaderFields()
-reqLoop = reqHdrs?.iterator()
-while (reqLoop?.hasNext()) {
-  hdr = reqLoop?.next()
-  exc.log.info "-->reqHeader  Name: "+hdr?.getHeaderName()?.toString()
-  exc.log.info "-->reqHeader Value: "+ hdr?.getValue()
-}
-exc?.log.info "-->Response Headers"
-exc?.log.debug "-->Response HTTP Status: "+ exc?.response?.statusCode
-rspHdrs = exc?.response?.header?.getAllHeaderFields()
-rspLoop = rspHdrs?.iterator()
-while (rspLoop?.hasNext()) {
-  hdr = rspLoop?.next ()
-  exc.log.info "-->rspHeader  Name: "+ hdr?.getHeaderName()?.toString()
-  exc.log.info "-->rspHeader Value: "+ hdr?.getValue()
-}
-exc?.log.info "Display Headers EOF: "
-pass()
-```
-
----
-
----
-title: Heartbeat endpoint
-description: The heartbeat endpoint verifies that the PingAccess server is running and, depending on your security settings, can display configuration details.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_heartbeat_endpoint
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_heartbeat_endpoint.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2026
-section_ids:
-  paheartbeat-ping: /pa/heartbeat.ping
-  making-a-heartbeat-call: Making a heartbeat call
-  interpreting-the-results: Interpreting the results
----
-
-# Heartbeat endpoint
-
-The heartbeat endpoint verifies that the PingAccess server is running and, depending on your security settings, can display configuration details.
-
-## /pa/heartbeat.ping
-
-This endpoint returns a 200 HTTP status code and a message body of `OK` if the target PingAccess server is up and functional. You can customize the message by modifying a PingAccess property and a Velocity template file. Learn more in [Customizing the heartbeat message](../pingaccess_monitoring_guide/customizing_the_heartbeat_message.html).
-
-|   |                                                                                                                                                        |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If a GET request receives a connection error or an HTTP status code other than 200, the server associated with the endpoint is down or malfunctioning. |
-
-Load balancers can use the heartbeat endpoint to determine PingAccess's status.
-
-## Making a heartbeat call
-
-You can make a heartbeat call to any active PingAccess listener and on any node in a PingAccess cluster. For example, with default port configurations:
-
-* A clustered console replica responds to this endpoint on port 9000.
-
-* A clustered engine responds on port 3000.
-
-The URL should begin with the server name and the PingAccess runtime port number. For example, `https://hostname:3000/pa/heartbeat.ping`.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you selected the **Use context root as reserved resource base path** check box on your PingAccess application, this feature creates an instance of any reserved PingAccess resources under the application's context root. As such, the context root of the application needs to prepend the reserved context application root (`/pa` by default) in any file paths that reference it.If the context root of your application is `myApp`, the path to the heartbeat endpoint would be `myApp/pa/heartbeat.ping` and the URL would be `https://hostname:3000/myApp/pa/heartbeat.ping` instead. |
-
-Calls to this endpoint can be logged in the audit log. You can enable heartbeat call logging using the `/httpConfig/monitoring` administrative endpoint. Learn more in [Administrative API endpoints](pa_admin_api_endpoints.html).
-
-## Interpreting the results
-
-The heartbeat endpoint can return either a short or detailed status for the target PingAccess server, based on the value of the `enable.detailed.heartbeat.response` property in the `run.properties` file. The default value is `false`.
-
-* If `enable.detailed.heartbeat.response` is set to `false` and the PingAccess instance is running, the endpoint returns an HTTP 200 status code and a message body of `OK`.
-
-* If `enable.detailed.heartbeat.response` is set to `true` and the PingAccess instance is running, the endpoint returns a configurable status with additional details. The response output format is an Apache Velocity template defined in `<PA_HOME>/conf/template/heartbeat.page.json`. You can modify this template to suit your needs. Learn more in [Customizing the heartbeat message](../pingaccess_monitoring_guide/customizing_the_heartbeat_message.html).
-
-* If the endpoint returns an error, this indicates that the PingAccess instance associated with the endpoint is down.
-
----
-
----
-title: Identity object reference
-description: The Identity object contains information about the authenticated identity associated with the current HTTP request.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_identity_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_identity_object_ref.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
-section_ids:
-  groovy-sample: Groovy sample
-  method-summary: Method summary
----
-
-# Identity object reference
-
-The Identity object contains information about the authenticated identity associated with the current HTTP request.
+The Body object contains the HTTP body from the application request or the HTTP body from the site response. The request HTTP body is sent on to the site after the rules are evaluated. The response HTTP body is sent on to the User-Agent after the response rules are evaluated.
 
 ## Groovy sample
 
 ```
-// Only allow access for an identity with subject "user"
-def subject = exc?.identity?.subject
-
-if ("user".equals(subject)) {
-  pass()
-} else {
-  fail()
-}
+//Checks the actual length of the body content and set the Content-Length response header
+def body = exc?.response?.body;
+def header = exc?.response?.header;
+header?.setContentLength(body?.getLength());
+pass();
 ```
 
 ## Method summary
 
-| Method                      | Description                                                                                                                                                                                                                                                                                                                  |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `String getSubject()`       | Returns the subject of the identity.                                                                                                                                                                                                                                                                                         |
-| `String getMappedSubject()` | Returns the subject set by the identity mapping. If there is no identity mapping associated with the application, the return value will be null. If there is an identity mapping associated with the application, but the identity mapping did not determine a subject to map, the returned value might be the empty string. |
-| `String getTrackingId()`    | Returns the tracking identifier used in PingAccess logs. This value is not guaranteed to be globally unique and should be used for diagnostic purposes only.                                                                                                                                                                 |
-| `String getTokenId()`       | Returns the unique ID for the associated authentication token. This value might change when new tokens are issued for the same identity.                                                                                                                                                                                     |
-| `Date getTokenExpiration()` | Returns a Date object representing the time at which the authentication token expires. This might be null if the authentication provider did not indicate an expiry.                                                                                                                                                         |
-| `JsonNode getAttributes()`  | Returns a JsonNode object representing the attributes of the identity.                                                                                                                                                                                                                                                       |
+| Method               | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| byte\[] getContent() | Returns the body content of the request or response. |
+| int getLength()      | Returns the length of the body content.              |
 
 ---
 
 ---
-title: Increasing file descriptor limits (systemd)
-description: Increase file descriptor limits in a systemd environment to enable PingAccess to handle a high volume of concurrent requests.
+title: Choose between an agent or gateway deployment
+description: Deploy PingAccess using Agents, as a Gateway (or reverse proxy), or using a combination of both. Before choosing a deployment, understand the pros and cons of each deployment scenario and determine how they impact your strategy.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_increasing_file_descriptor_limits_systemd
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_increasing_file_descriptor_limits_systemd.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 12, 2024
-section_ids:
-  steps: Steps
----
-
-# Increasing file descriptor limits (systemd)
-
-Increase file descriptor limits in a systemd environment to enable PingAccess to handle a high volume of concurrent requests.
-
-## Steps
-
-1. Edit the `/etc/systemd/system/pingaccess.service` file.
-
-2. Modify the following line under the `[Service]` section:
-
-   ```
-   LimitNOFILE=<value>
-   ```
-
-   *\<value>* is the new value. The default value of 65536 (64K) should be sufficient for most environments.
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The number of open file descriptors is limited by the physical memory available to the host. You can determine this limit with the following command:```
-   cat /proc/sys/fs/file-max
-   ```If the file-max value is significantly higher than the 65536 limit, consider increasing the file descriptor limit to between 10% and 15% of the system-wide file descriptor limit. For example, if the file-max value is 810752, you can set the file descriptor limit to 100000. If the file-max value is lower than 65536, the host is likely not sized appropriately for PingAccess. |
-
-3. Run the following command as root:
-
-   ```
-   systemctl daemon-reload
-   ```
-
-4. Restart the PingAccess service.
-
----
-
----
-title: Increasing file descriptor limits (systemv)
-description: Increase file descriptor limits in a systemv environment to enable PingAccess to handle a high volume of concurrent requests.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_increasing_file_descriptor_limits_systemv
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_increasing_file_descriptor_limits_systemv.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 12, 2024
-section_ids:
-  steps: Steps
----
-
-# Increasing file descriptor limits (systemv)
-
-Increase file descriptor limits in a systemv environment to enable PingAccess to handle a high volume of concurrent requests.
-
-## Steps
-
-1. Edit the `/etc/security/limits.conf` file.
-
-2. Add or modify the following lines:
-
-   ```
-   <pingAccessAccount>  soft nofile  <value>
-   <pingAccessAccount>  hard nofile  <value>
-   ```
-
-   `<pingAccessAccount>` is the user account used to run the PingAccess java process, or `*` for all users, and *\<value>* is the new value. A value of 65536 (64K) should be sufficient for most environments.
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The number of open file descriptors is limited by the physical memory available to the host. You can determine this limit with the following command:```
-   cat /proc/sys/fs/file-max
-   ```If the file-max value is significantly higher than the 65536 limit, consider increasing the file descriptor limit to between 10% and 15% of the system-wide file descriptor limit. For example, if the file-max value is 810752, you could set the file descriptor limit to 100000. If the file-max value is lower than 65536, the host is likely not sized appropriately for PingAccess. |
-
----
-
----
-title: Increasing the number of available ephemeral ports
-description: Increase the number of available ephemeral ports to prevent deployment issues, particularly in high capacity environments.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_increasing_the_number_of_available_ephemeral_ports
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_increasing_the_number_of_available_ephemeral_ports.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 12, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Increasing the number of available ephemeral ports
-
-Increase the number of available ephemeral ports to prevent deployment issues, particularly in high capacity environments.
-
-## About this task
-
-This setting increases the performance and capacity of network, specifically the TCP socket, connectivity, enabling PingAccess to handle a high volume of concurrent requests.
-
-## Steps
-
-1. View the ephemeral ports with the `netsh int ipv4 show dynamicportrange tcp` command.
-
-2. Increase the ephemeral ports with the `netsh int ipv4 set dynamicport tcp start=1025 num=64510` command.
-
-3. Reboot the machine.
-
-4. View and confirm the updated port range with the `netsh int ipv4 show dynamicportrange tcp` command.
-
----
-
----
-title: Java tuning
-description: One of the most important tuning options you can apply to the Java Virtual Machine (JVM) is to configure how much heap (memory for runtime objects) to use.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_java_tuning
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_java_tuning.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 12, 2024
----
-
-# Java tuning
-
-One of the most important tuning options you can apply to the Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
-\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>
-\</div>)* is to configure how much heap (memory for runtime objects) to use.
-
-The JVM grows the heap from a specified minimum to a specified maximum. If you have sufficient memory, fix the size of the heap by setting minimum and maximum to the same value. This allows the JVM to reserve its entire heap at startup, optimizing organization and eliminating potentially expensive resizing.
-
-By default, PingAccess fixes the Java heap at 512 megabytes (MB). This is a fairly small footprint and not optimal for supporting higher concurrent user loads over extended periods of activity. If you expect your deployment of PingAccess to serve more than 50 concurrent users, per PingAccess node, if deploying a cluster, increase the heap size.
-
-For more information, see the following topics:
-
-* [Configuring JVM crash log in Java startup](pa_configuring_jvm_crash_log_in_java_startup.html)
-
-* [Configuring memory dumps in Java startup](pa_configuring_memory_dumps_in_java_startup.html)
-
-* [Modifying the Java heap size](pa_modifying_the_java_heap_size.html)
-
----
-
----
-title: JsonNode object reference
-description: The JsonNode object represents the attributes of an identity.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_jsonnode_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_jsonnode_object_ref.html
+page_id: pingaccess:reference_guides:pa_choose_between_an_agent_or_gateway_deployment
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_choose_between_an_agent_or_gateway_deployment.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 6, 2023
 section_ids:
-  groovy-sample: Groovy sample
-  method-summary: Method summary
-  remarks: Remarks
+  gateway: Gateway
+  agents: Agents
 ---
 
-# JsonNode object reference
+# Choose between an agent or gateway deployment
 
-The JsonNode object represents the attributes of an identity.
+Deploy PingAccess using Agents, as a Gateway (or reverse proxy), or using a combination of both. Before choosing a deployment, understand the pros and cons of each deployment scenario and determine how they impact your strategy.
 
-## Groovy sample
+## Gateway
 
-```
-// Only allow access if the user is in the group "staff"
-def groups = exc?.identity?.attributes?.get("groups")
+Pros:
 
-foundGroup = falseif (groups) {
-  for (group in groups) {
-    if ("staff".equals(group.asText())) {
-      foundGroup = truebreak
-    }
-  }
-}
+* Fewer number of deployed components that require maintenance
 
-if (foundGroup) {
-  pass()
-} else {
-  fail()
-}
-```
+* Independent of target application platform
 
-## Method summary
+* No impact on web or app server processing and performance
 
-| Method                                    | Description                                                                                                                                                                                                                                                                                           |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `JsonNode get(String fieldName)`          | Gets the JsonNode representing a field of this JsonNode. This method will return null if no field exists with the specified name.                                                                                                                                                                     |
-| `boolean has(String fieldName)`           | Returns true if this JsonNode has a field with the specified name.                                                                                                                                                                                                                                    |
-| `java.util.Iterator<String> fieldNames()` | Returns an java.util.Iterator providing access to the names of all the fields of this JsonNode.                                                                                                                                                                                                       |
-| `boolean isTextual()`                     | Returns true if this JsonNode represents a string value.                                                                                                                                                                                                                                              |
-| `String asText()`                         | Returns a string representation of this JsonNode. If this JsonNode is an array or object, this will return an empty string.                                                                                                                                                                           |
-| `int intValue()`                          | Returns an integer representation of this JsonNode. If this JsonNode does not represent a number, 0 is returned.                                                                                                                                                                                      |
-| `boolean isArray()`                       | Returns true if this JsonNode is an array.                                                                                                                                                                                                                                                            |
-| `boolean isObject()`                      | Returns true if this JsonNode is an object.                                                                                                                                                                                                                                                           |
-| `int size()`                              | For an array JsonNode, returns the number of elements in the array. For an object JsonNode, returns the number of fields in the object. 0 otherwise.                                                                                                                                                  |
-| `java.util.Iterator<JsonNode>iterator()`  | Returns an java.util.Iterator over all JsonNode objects contained in this JsonNode. For an array JsonNode, the returned java.util.Iterator will iterate over all the elements in the array. For an object JsonNode, the returned java.util.Iterator will iterate over all field values in the object. |
+* Works with existing security token types, such as creating third party Web Access Management (WAM) tokens
 
-## Remarks
+Cons:
 
-A JsonNode implements java.lang.Iterable*\<JsonNode>* so a for loop can be used to iterate over all the elements in an array JsonNode or the field values in an object JsonNode.
+* Requires networking changes
 
----
+* Requires strategy for securing direct access to backend web or app servers (network routing or service level authentication)
+
+* Depending on the application, might require content/request/response rewriting
+
+* Another layer that requires HA/DR planning
+
+## Agents
+
+Pros:
+
+* No networking or server level authentication changes required
+
+* Tight integration with web server handling requests
+
+* Scales with application
+
+Cons:
+
+* High cost of ownership when many agent instances are deployed, although should be upgradable or patchable independently of PingAccess policy server
+
+* Policy evaluation is cached, and although periodically flushed or re-evaluated (for new sessions, updates to session token, etc.) , isn't as "real time" as proxy
+
+* Tight dependency on web server version and platform
 
 ---
-title: Linux tuning
-description: This section describes tuning recommendations for the Linux operating system environment.
+
+---
+title: Clustered engine node endpoint
+description: The following endpoint enables clustered PingAccess engine nodes to automatically pull updated certificate information from the admin node.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_linux_tuning
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_linux_tuning.html
+page_id: pingaccess:reference_guides:pa-engine-endpoints
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa-engine-endpoints.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
+revdate: May 18, 2026
+section_ids:
+  enginesrestconfig-query-certificate: /engines/rest/config-query-certificate
 ---
 
-# Linux tuning
+# Clustered engine node endpoint
 
-This section describes tuning recommendations for the Linux operating system environment.
+The following endpoint enables clustered PingAccess engine nodes to automatically pull updated certificate information from the admin node.
 
-Implement these recommendations to prevent deployment issues, particularly in high capacity environments. The following settings will increase the performance and capacity of the networking, particularly TCP, stack, and file descriptor usage, respectively, enabling PingAccess to handle a high volume of concurrent requests.
+This endpoint is available on the `clusterconfig.temp.rotation.port` port defined in the `<PA_HOME>/conf/run.properties` file.
 
-For more information, see the following topics:
+## `/engines/rest/config-query-certificate`
 
-* [Tuning network and TCP settings](pa_tuning_network_and_tcp_settings.html)
+PingAccess engine nodes poll this endpoint continually to detect when the admin node begins using a new key pair for the config query HTTPS listener. If a new key pair is in use, each engine node [automatically rotates](../pingaccess_user_interface_reference_guide/pa_assigning_key_pairs.html#autorotation) the key pair it's using to match the new key pair on the admin node.
 
-* [Increasing file descriptor limits (systemv)](pa_increasing_file_descriptor_limits_systemv.html)
-
-* [Increasing file descriptor limits (systemd)](pa_increasing_file_descriptor_limits_systemd.html)
+During every polling check, the engine node also sends a fingerprint header indicating which key pair the engine is currently using. This lets the admin node track when all engine nodes have switched to the new key pair.
 
 ---
 
 ---
-title: Logger object reference
-description: This object accesses the Logger object.
+title: Clustering in PingAccess
+description: PingAccess provides clustering features that allow a group of PingAccess servers to appear as a single system.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_logger_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_logger_object_ref.html
+page_id: pingaccess:reference_guides:pa_clustering_ref_guide
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_clustering_ref_guide.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 6, 2024
+section_ids:
+  components-of-a-pingaccess-cluster: Components of a PingAccess Cluster
+  node-failure-implications: Node failure implications
+  cluster-properties: Cluster properties
+  cluster-node-status: Cluster node status
+  using-multiple-network-interface-cards-to-route-traffic: Using multiple network interface cards to route traffic
+---
+
+# Clustering in PingAccess
+
+PingAccess provides clustering features that allow a group of PingAccess servers to appear as a single system.
+
+Server clustering can facilitate high availability of critical services and can also increase performance and overall system throughput. However, availability and performance are often at opposite ends of the deployment spectrum. You might need to make some configuration tradeoffs that balance availability with performance to accommodate specific deployment goals.
+
+|   |                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Settings in the configuration file could affect the features documented here. For more information, see the [Configuration file reference](pa_config_file_ref.html) guide. |
+
+## Components of a PingAccess Cluster
+
+PingAccess clusters are made up of three types of nodes:
+
+* The Administrative Node
+
+  Provides the administrator with a configuration interface.
+
+* The Replica Administrative Node
+
+  Provides the administrator with the ability to recover a failed administrative node using a manual failover procedure. For more information, see [Manually promoting the replica administrative node](pa_manually_promoting_the_replica_admin_node.html).
+
+* The Engine Nodes
+
+  Handle incoming client requests and evaluate policy decisions based on the configuration replicated from the administrative node.
+
+|   |                                                                                                                                                                                                                       |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can configure any number of engine nodes in a cluster, but you can configure only one administrative node and one replica administrative node in a cluster. State information is not shared between engine nodes. |
+
+Configuration information from the administrative console and API is replicated to all of the engine nodes and the replica administrative node from the administrative node, as is the license file on the administrative node. Engine nodes do not require a license to function, but some default templates look different depending on the information in the license.
+
+You should manage incoming traffic to the engine nodes using load balancers or other mechanisms. PingAccess clusters do not dynamically manage or load-balance request traffic to individual engine nodes. ![eoc1564006721359](_images/eoc1564006721359.svg)
+
+## Node failure implications
+
+Node failure within a PingAccess cluster can have short-term or long-term implications for your environment, depending on the state of your network and the type of node or nodes that failed. The following table describes some common node issues and recommends what kind of action to take.
+
+| Node issue                                                    | Result                                                                                                                                                                                                                                               | Recommendation                                                                                                       |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Administrative node failure                                   | The engine nodes can function using their stored configurations but cannot update their configurations.                                                                                                                                              | Fail over to the replica administrative node until the administrative node can be restarted.                         |
+| Replica administrative node failure                           | The engine nodes and administrative node can function normally, but you won't be able to fail over to the replica administrative node if something happens to the administrative node.                                                               | Restart the replica administrative node as soon as possible.                                                         |
+| Administrative and replica node failure                       | The engine nodes can function using their stored configurations, but cannot update their configurations. No failover option is available.                                                                                                            | Restart the administrative node as soon as possible, or restart the replica administrative node and fail over to it. |
+| One or more engine nodes cannot reach the administrative node | Affected engine nodes can function using their stored configurations, if any but cannot update their configurations. If the administrative node performs key rolling, the affected engine nodes cannot recognize the new PingAccess internal cookie. | Restore access to the administrative node as soon as possible.                                                       |
+
+## Cluster properties
+
+|   |                                                                                          |
+| - | ---------------------------------------------------------------------------------------- |
+|   | Use the `run.properties` and `bootstrap.properties` files to configure your environment. |
+
+In a cluster, you can configure each PingAccess node to serve as either an administrative node, a replica administrative node, or an engine node in the `run.properties` file. The `run.properties` file for the administrative node also contains server-specific configuration data.
+
+At startup, a clustered PingAccess engine node checks its local configuration and then makes a call to the administrative node to check for changes. You can configure how often each engine node in a cluster checks the administrative node for changes in the engine `run.properties` file.
+
+Information needed to bootstrap an engine node is stored in the `bootstrap.properties` file on each engine node.
+
+**bootstrap.properties**
+
+| Property                                          | Description                                                                                             |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `engine.admin.configuration.host`                 | Defines the host where the administrative console is available. The default is `localhost`.             |
+| `engine.admin.configuration.port`                 | Defines the port where the administrative console is running. The default is `9000`.                    |
+| `engine.admin.configuration.userid`               | Defines the name of the engine.                                                                         |
+| `engine.admin.configuration.keypair`              | Defines an elliptic curve key pair that is in the JSON Web Key (JWK) format.                            |
+| `engine.admin.configuration.bootstrap.truststore` | Defines the trust store, in JWK format, that is used for communication with the administrative console. |
+
+|   |                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can tune the cache using the EHCache Configuration Properties, `pa.ehcache.*`, listed in the [Configuration file reference guide](pa_config_file_ref.html). |
+
+## Cluster node status
+
+The administrative console provides two important visual elements which communicate the current status of the replica administrative node and the engine nodes:
+
+* A status indicator, which communicates whether the node is healthy.
+
+* A **Last Updated** field, which communicates the date and time that the node was last updated.
+
+You can find this information on the **Administrative Nodes** page and the **Engines** page.
+
+Status indicators use the value for *\<admin.polling.delay>* as an interval to measure node health. A node's status can be green (good status), yellow (degraded status), or red (failed status):
+
+* Green (good status)
+
+  The node contacted the administrative node on the last pull request.
+
+* Yellow (degraded status)
+
+  The node contacted the administrative node between 2 and 10 intervals.
+
+* Red (failed status)
+
+  The node has either never contacted the administrative node or it has been more than 10 intervals since the nodes communicated.
+
+## Using multiple network interface cards to route traffic
+
+PingAccess binds to all network interfaces by default to support routing traffic over multiple network interfaces. The default bind address PingAccess uses is 0.0.0.0. To prevent PingAccess from binding to all network interfaces, you can edit one or more of the following parameters in the `conf/run.properties` file:
+
+```
+admin.bindAddress=0.0.0.0
+clusterconfig.bindAddress=0.0.0.0
+engine.http.bindAddress=0.0.0.0
+agent.http.bindAddress=0.0.0.0
+```
+
+Specify a new bind address for the parameter that you want to modify.
+
+---
+
+---
+title: Configuration by use case
+description: Configuration steps vary depending on what type of deployment you are implementing.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_configuration_by_use_case
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_configuration_by_use_case.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 6, 2023
 section_ids:
-  configuration: Configuration
-  method-summary: Method summary
+  next-steps: Next steps
 ---
 
-# Logger object reference
+# Configuration by use case
 
-This object accesses the Logger object.
+Configuration steps vary depending on what type of deployment you are implementing.
 
-## Configuration
+For a detailed discussion of deployment considerations and best practices in designing your architecture, see the [Deployment Guide](pa_deployment_guide.html). The following sections describe the configuration steps for the most common use cases:
 
-PingAccess must be configured to accept logging from Groovy rules.
+* [API Access Management Gateway Deployment](pa_api_access_management_gateway_deployment_table.html)
 
-In the `conf/log4j2.xml` file, uncomment or add the following line to enable debug-level logging from Groovy rules.
+* [Web Access Management Agent Deployment](pa_wam_agent_deployment_table.html)
 
-```
-<AsyncLogger name="GroovyRule" level="DEBUG"/>
-```
+* [Web Access Management Gateway Deployment](pa_wam_gateway_deployment_table.html)
 
-Uncomment or add the following line to enable info-level logging from the *\<RuleName>* Groovy rule.
+* [Auditing and Proxying Gateway Deployment](pa_auditing_and_proxying_gateway_deployment_table.html)
 
-```
-<AsyncLogger name="GroovyRule.<RuleName>" level="INFO"/>
-```
+## Next steps
 
-## Method summary
+After you complete the above configuration settings, the following steps are similar for all use cases:
 
-| Method                                          | Description                                                                |
-| ----------------------------------------------- | -------------------------------------------------------------------------- |
-| `void trace(String format, Object…​ arguments)` | Logs a `TRACE` level message based on the specified format and arguments.  |
-| `void debug(String format, Object…​ arguments)` | Logs a `DEBUG` level message based on the specified format and arguments.  |
-| `void info(String format, Object…​ arguments)`  | Logs an `INFO` level message based on the specified format and arguments.  |
-| `void warn(String format, Object…​ arguments)`  | Logs a `WARN` level message based on the specified format and arguments.   |
-| `void error(String format, Object…​ arguments)` | Logs an `ERROR` level message based on the specified format and arguments. |
-| `boolean isTraceEnabled()`                      | Checks if the logger instance is enabled for the `TRACE` level.            |
-| `boolean isDebugEnabled()`                      | Checks if the logger instance is enabled for the `DEBUG` level.            |
-| `boolean isInfoEnabled()`                       | Checks if the logger instance is enabled for the `INFO` level.             |
-| `boolean isWarnEnabled()`                       | Checks if the logger instance is enabled for the `WARN` level.             |
-| `boolean isErrorEnabled()`                      | Checks if the logger instance is enabled for the `ERROR` level.            |
+* Configure sites and agents to define the target applications you want protected. Sites might need site authenticators to define the credentials the site expects for access control.
+
+* Configure applications and resources to define the assets you want to allow clients to access.
+
+* Create policies for the defined applications and resources to protect them.
 
 ---
 
 ---
-title: Logging and Auditing
-description: PingAccess uses a high performance, asynchronous logging framework to provide logging and auditing services with the lowest possible impact to overall application performance.
+title: Configuration file reference
+description: You can configure any of the following properties used by PingAccess at runtime in the <PA_HOME>/conf/run.properties file.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_logging_and_auditing
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_logging_and_auditing.html
+page_id: pingaccess:reference_guides:pa_config_file_ref
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_config_file_ref.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2024
+revdate: June 17, 2026
 section_ids:
-  logging: Logging
-  auditing: Auditing
+  pa-operational-mode: Operational mode
+  pa-admin-properties: Administrative properties
+  pa-token-provider-communication-settings: Token provider communication settings
+  pa-cluster-config-settings: Cluster configuration settings
+  pa-engine-properties: Engine properties
+  pa-agent-properties: Agent properties
+  pa-sideband-properties: Sideband properties
+  pa-url-filtering-settings: URL filtering settings
+  pa-monitoring: Monitoring
+  pa-tls-ssl: TLS/SSL
+  pa-post-preservation-properties: POST preservation properties
+  pa-config-database-and-key-store-settings: Configuration database and key store settings
+  pa-pf-admin-integration-properties: PingFederate administration integration properties
+  pa-admin-console-settings: Administrative console settings
+  pa-ehcache-config-properties: EHCache configuration properties
+  pa-security-headers-properties: Security headers properties
+  pa-localization-settings: Localization settings
+  pa-cert-rotation: Cert rotation
 ---
 
-# Logging and Auditing
+# Configuration file reference
 
-PingAccess uses a high performance, asynchronous logging framework to provide logging and auditing services with the lowest possible impact to overall application performance.
+You can configure any of the following properties used by PingAccess at runtime in the `<PA_HOME>/conf/run.properties` file.
 
-## Logging
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When making changes to the `run.properties` file, use the following guidelines:- When storing passwords in `run.properties`, obfuscate them using the `obfuscate.bat or obfuscate.sh` utility to mask the password value. You can find this utility in the `<PA_HOME>/bin` folder.
 
-Modify your logging settings to increase performance.
+- In a clustered environment, each node has a unique `run.properties` file. Because changes to the `run.properties` file can significantly impact performance, use an identical `run.properties` configuration on all engine nodes.
 
-Although logging is handled by a high performance, asynchronous logging framework, it is more efficient for the system overall to log the minimum amount of information required. Review the [logging section of the documentation](../configuring_and_customizing_pingaccess/pa_logging_configuration.html) and adjust the logging level to the lowest level that suits your needs.
+- Changes made to the `run.properties` file only take effect after you restart the PingAccess service on the given node. |
 
-## Auditing
+If you're running PingAccess in FIPS mode, PingAccess ignores all Secure Sockets Layer (SSL) *(tooltip: \<div class="paragraph">
+\<p>A protocol for authenticated and encrypted links between networked machines, typically over HTTPS. SSL was deprecated in 1999 in favor of Transport Layer Security (TLS).\</p>
+\</div>)* cipher and protocol settings in the `run.properties` file. Learn more about the protocols and ciphers used in this mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
 
-Modify your environment's auditing settings based on your security and performance needs.
+## Operational mode
 
-As with logging, auditing is provided by the same high performance, asynchronous logging framework. Auditing messages can be written to a database instead of flat files, decreasing file I/O.
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.operational.mode
+>
+>   Controls the operational mode of the PingAccess server in a cluster. The following table describes the acceptable values:
+>
+> > **Collapse: Value**
+> >
+> > | Value                       | Description                                                                                                                                                        |
+> > | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+> > | `STANDALONE`                | Use this value for a standalone (un-clustered) PingAccess instance that runs both the administrative console and the engine. This is the default value.            |
+> > | `CLUSTERED_CONSOLE`         | Use this value for the server instance that you want to use as the administrative console server.	Only one engine in a cluster can run the administrative console. |
+> > | `CLUSTERED_CONSOLE_REPLICA` | Use this value for the server instance that you want to use as the backup administrative console server.                                                           |
+> > | `CLUSTERED_ENGINE`          | Use this value to indicate a server engine.                                                                                                                        |
+>
+> |   |                                                                                                                                                                                                                                                                                                                                                                                                        |
+> | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+> |   | Define the following engine and administrative properties depending on what operational mode an engine is using:- Define all engine and administrative properties when `pa.operational.mode` is set to `STANDALONE`.
+>
+> - Define only administrative properties when using `CLUSTERED_CONSOLE` or `CLUSTERED_CONSOLE_REPLICA` mode.
+>
+> - Define only engine properties when using `CLUSTERED_ENGINE` mode. |
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about configuring nodes using clustered operational mode in the [Clustering Reference Guide](pa_clustering_ref_guide.html).
+> >
+> > * Learn more about installing PingAccess in standalone mode in [Installing and Uninstalling PingAccess](../installing_and_uninstalling_pingaccess/pa_installing_and_uninstalling_pa.html).
 
-If you do not require auditing for interactions with a resource or between PingAccess and PingFederate, it is more efficient to disable audit logging. However, if you do require auditing services and have access to a Relational Database Management System (RDBMS), audit to a database. You will see a decrease in disk I/O, which might result in increased performance, depending on database resources.
+## Administrative properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * admin.port
+>
+>   Defines the TCP port on which the PingAccess administrative console runs. The default value is `9000`.
+>
+> * admin.bindAddress
+>
+>   Defines the Internet Protocol (IP) *(tooltip: \<div class="paragraph">
+>   \<p>The method by which data is sent across the internet from the source host to the destination host.\</p>
+>   \</div>)* address that `admin.port` binds to. Typically required on multi-homed servers with multiple IP addresses. The default value of `0.0.0.0` means that the port will bind to all the server's IP addresses.
+>
+> * admin.ssl.protocols
+>
+>   Defines the protocols for use with administrative HTTPS ports. The default value is `$\{tls.default.protocols}`, which uses the protocols specified by the `tls.default.protocols` property.
+>
+> * admin.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with administrative HTTPS ports. The default value is `$\{tls.default.cipherSuites}`, which uses the ciphers specified by the `tls.default.cipherSuites` property.
+>
+> * admin.acceptors
+>
+>   Defines the number of admin acceptor threads used to establish connections. The default value is `1`.
+>
+> * admin.backlog
+>
+>   Defines the maximum queue length for incoming admin connection indications. The default value is `512`.
+>
+> * admin.httptransport.coreThreadPoolSize
+>
+>   Defines the number of threads to keep in the admin transport pool, even if they're idle. The default value is `5`.
+>
+> * admin.httptransport.ioThreads
+>
+>   Defines the number of I/O threads for the admin host. The default value is `0`, which indicates that PingAccess should automatically calculate the appropriate number of I/O threads for the host.
+>
+> * admin.httptransport.maxThreadPoolSize
+>
+>   Defines the maximum number of threads for the admin transport pool. The default value is `-1`, which denotes no limit.
+>
+> * admin.httptransport.socketTimeout
+>
+>   Defines, in milliseconds, the admin socket timeout. The default value is `30000`.
+>
+> * admin.auth
+>
+>   Overrides the administrator authentication method. For example, if single sign-on (SSO) *(tooltip: \<div class="paragraph">
+>   \<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
+>   \</div>)* authentication is enabled and becomes misconfigured, this property can be used to bypass the database configuration and force the use of Basic authentication. The default value is `default`. A value of `native` overrides the administrator authentication method, meaning that only the local administrator credentials can be used to access the PingAccess console.
+>
+> * admin.reuseAddress
+>
+>   When enabled, allows a process to bind to a port which remains in a `TIME_WAIT` state for the admin transport. The default value is `true`.
+>
+> * admin.max.request.bodylength
+>
+>   Defines, in megabytes, the maximum body length for a request to the administrative application programming interface (API) *(tooltip: \<div class="paragraph">
+>   \<p>A specification of interactions available for building software to access an application or service.\</p>
+>   \</div>)* endpoint *(tooltip: \<div class="paragraph">
+>   \<p>One end in a communication channel, typically a URI.\</p>
+>   \</div>)*. The default value is `15`.
+>
+> * admin.ui.max.sessions
+>
+>   Defines the maximum number of sessions for the admin UI when admin single logout (SLO) *(tooltip: \<div class="paragraph">
+>   \<p>The process of signing a user out of multiple sites where the user has started a SSO session.\</p>
+>   \</div>)* isn't enabled. The default value is `100`.
+>
+> * admin.export.encryption.mode
+>
+>   Specifies how sensitive data should be encrypted on export. The default value is `MASTER_KEY`, which uses the system default master key for encryption.
+>
+>   |   |                                                                                                                                                                                                                                                                                                                                                    |
+>   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | The `PORTABLE_INSECURE` value uses a randomly generated key for each export and includes the key in the export data.This method allows the exported data to be imported anywhere, including another cluster with a different master key. However, because the exported data includes the key, this method can present a significant security risk. |
+>
+> * admin.startup.config.import.failfast
+>
+>   Defines the behavior when attempting to import a configuration file on startup. A value of `true` stops at the first failure, while a value of `false` continues and notes all errors. The default value is `false`.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about how some properties are configured during installation in [Installing and Uninstalling PingAccess](../installing_and_uninstalling_pingaccess/pa_installing_and_uninstalling_pa.html).
+> >
+> > * Learn more about how some properties impact administrative use in [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+> >
+> > * Learn more about how some SSL properties are overridden in FIPS mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
+
+## Token provider communication settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.default.availability.ondemand.maxRetries
+>
+>   Defines the maximum number of retries before marking the target system down. The default value is `2`.
+>
+> * pa.default.availability.ondemand.connectTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before trying to connect to the remote host. The default value is `10000`.
+>
+> * pa.default.availability.ondemand.retryDelay
+>
+>   Defines, in milliseconds, the amount of time to wait after a timeout before retrying the host. The default value is `250`.
+>
+> * pa.default.availability.ondemand.failedRetryTimeout
+>
+>   Defines, in seconds, the amount of time to wait before retrying a failed host. The default value is `60`.
+>
+> * pa.default.availability.ondemand.pooledConnectionTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before timing out the request for a pooled connection to the target site. The default value is `-1`, which indicates no timeout.
+>
+> * pa.default.availability.ondemand.readTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before timing out the read response for a target site. The default value is `-1`, which indicates no timeout.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more in the token providers section of the [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+
+## Cluster configuration settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * clusterconfig.enabled
+>
+>   When enabled, uses the cluster configuration port for cluster replication. When disabled, the admin port is used for cluster configuration replication. The default value is `true`.
+>
+>   |   |                                                                                                                                           |
+>   | - | ----------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | This property is set to `false` by the PingAccess upgrade utility after a PingAccess cluster is upgraded from a version earlier than 4.0. |
+>
+> * clusterconfig.port
+>
+>   Defines the optional port used for cluster configuration. The default value is `9090`.
+>
+> * clusterconfig.temp.rotation.port
+>
+>   Defines the port used during the config query certificate rotation window to keep the old key pair for the config query HTTPS listener active while the PingAccess engines are switching over to the new key pair. The default value is `9095`.
+>
+> * clusterconfig.bindAddress
+>
+>   Defines the optional address used for cluster configuration. The default value is `0.0.0.0`.
+>
+> * clusterconfig.acceptors
+>
+>   Defines the number of cluster configuration acceptor threads used to establish connections. The default value is `1`.
+>
+> * clusterconfig.backlog
+>
+>   Defines the maximum queue length for incoming cluster configuration connection indications. The default value is `512`.
+>
+> * clusterconfig.reuseAddress
+>
+>   When enabled, allows a process to bind to a port, which remains in a `TIME_WAIT` state for the cluster configuration transport. The default value is `true`.
+>
+> * clusterconfig.httptransport.socketTimeout
+>
+>   Defines, in milliseconds, the cluster configuration socket timeout. The default value is `30000`.
+>
+> * clusterconfig.httptransport.ioThreads
+>
+>   Defines the number of I/O threads for the cluster configuration host. The default value is `0`, which indicates that PingAccess should automatically calculate the appropriate number of I/O threads for the host.
+>
+> * clusterconfig.httptransport.coreThreadPoolSize
+>
+>   Defines the number of threads to keep in the cluster configuration transport pool, even if they are idle. The default value is `5`.
+>
+> * clusterconfig.httptransport.maxThreadPoolSize
+>
+>   Defines the maximum number of threads for the cluster configuration transport pool. The default value is `-1`, which denotes no limit.
+>
+> * engine.admin.configuration.audience
+>
+>   Defines the audience used for cluster authentication. This property must be set to the same value on all nodes in a PingAccess cluster. The default value is `PingAccessAdminServer`.
+>
+> * engine.polling.initialdelay
+>
+>   Defines, in milliseconds, how long after the engine starts up before it begins to poll the administrative console for configuration information. The default value is `500`.
+>
+> * engine.polling.delay
+>
+>   Defines, in milliseconds, how long after the prior query to the administrative console that the engine begins a new query for configuration information. The default value is `2000`.
+>
+> * engine.polling.test.delay
+>
+>   Defines, in milliseconds, how long after detecting an engine's `lastUpdated` value to be `null` or `zero` that PingAccess should wait before double-checking the value. The default value is `6000`.
+>
+>   |   |                                                                                                                                                                                                                                                             |
+>   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | This property determines whether a replacement engine should self-register if PingAccess detects that there's an existing engine with the same name that isn't running. Changing this value changes PingAccess's behavior according to the following table: |
+>
+>   > **Collapse: Self-registration settings**
+>   >
+>   > | engine.polling.test.delayvalue                                | PingAccess behavior                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+>   > | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   > | A negative number                                             | Self-registration always fails, even if the existing engine with the same name was never updated or isn't polling.                                                                                                                                                                                                                                                                                                                                                           |
+>   > | A number from `0` up to the `engine.polling.delay` value      | Self-registration happens automatically if the existing engine's `lastUpdated` value is `null` or `0`.                                                                                                                                                                                                                                                                                                                                                                       |
+>   > | A number that's greater than the `engine.polling.delay `value | Self-registration happens if the existing engine's `lastUpdated` value is `null` or `0`. If the value is greater than `0`, PingAccess waits for a number of milliseconds equal to the `engine.polling.test.delay` value, then checks the `lastUpdated` value a second time.If the value doesn't change, PingAccess allows self-registration. Otherwise, this indicates that the existing engine is active, so PingAccess fails self-registration for the replacement engine. |
+>
+> * admin.polling.initialdelay
+>
+>   Defines, in milliseconds, how long after the replica administrative node starts up before it begins to poll the administrative console for configuration information. The default value is `500`.
+>
+> * admin.polling.delay
+>
+>   Defines, in milliseconds, how long after the prior query to the administrative console that the replica administrative node begin a new query for configuration information. The default value is `2000`.
+>
+> * pa.config.replication.readTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before timing out the read response for the administrative node. The default value is `30000`.
+>
+> * pa.config.replication.maxRetries
+>
+>   Defines the maximum number of retries before marking the administrative node system down. The default value is `5`.
+>
+> * pa.config.replication.connectTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before trying to connect to the administrative node. The default value is `5000`.
+>
+> * pa.config.replication.retryDelay
+>
+>   Defines, in milliseconds, the amount of time to wait after a timeout before retrying the administrative node. The default value is `2000`.
+>
+> * pa.config.replication.failedRetryTimeout
+>
+>   Defines, in seconds, the amount of time to wait before retrying a failed connection to the administrative node. The default value is `-1`, which indicates no timeout.
+>
+> * pa.config.replication.pooledConnectionTimeout
+>
+>   Defines, in milliseconds, the amount of time to wait before timing out the request for a pooled connection to the administrative node. The default value is `-1`, which indicates no timeout.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about cluster configuration in the [Clustering Reference Guide](pa_clustering_ref_guide.html).
+
+## Engine properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * engine.http.bindAddress
+>
+>   Defines the address for an engine in a clustered environment. The default value is `0.0.0.0`.
+>
+> * engine.http.acceptors
+>
+>   Defines the number of engine acceptor threads used to establish connections. The default value is `1`.
+>
+> * engine.http.backlog
+>
+>   Defines the maximum queue length for incoming engine connection indications. The default value is `512`.
+>
+> * engine.http.reuseAddress
+>
+>   When enabled, allows a process to bind to a port which remains in a `TIME_WAIT` state for the engine transport. The default value is `true`.
+>
+> * engine.http.enabled
+>
+>   Defines whether the engine node (either `STANDALONE` or `CLUSTERED_ENGINE`, if you're running PingAccess in a cluster) listens for requests on the ports defined by the engine listeners. The default value is `true`.
+>
+> * engine.httptransport.coreThreadPoolSize
+>
+>   Defines the number of threads to keep in the engine transport pool, even if they are idle. The default value is `5`.
+>
+> * engine.httptransport.maxThreadPoolSize
+>
+>   Defines the maximum number of threads for the engine transport pool. The default value is `-1`, which denotes no limit.
+>
+> * engine.httptransport.socketTimeout
+>
+>   Defines, in milliseconds, the engine socket timeout. The default value is `30000`.
+>
+> * engine.httptransport.ioThreads
+>
+>   Defines the number of I/O threads for the engine host. The default value is `0` which denotes that PingAccess should automatically calculate the appropriate number of I/O threads for the host.
+>
+> * engine.websocket.maxConnections
+>
+>   Sets the maximum number of allowed web socket connections. The default value is `-1`, which denotes no limit.
+>
+> * engine.ssl.protocols
+>
+>   Defines the protocols used with engine HTTPS ports. The default value is `TLSv1, TLSv1.1, TLSv1.2, TLSv1.3`.
+>
+> * engine.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with engine HTTPS ports. The default value is `$\{tls.default.cipherSuites}`, which uses the ciphers specified by the `tls.default.cipherSuites` property.
+>
+> * client.ioThreads
+>
+>   Defines the number of threads for client connections to backend sites. The default value is `0`, which denotes no limit.
+>
+> * pa.default.contentRewrite.buffer.min
+>
+>   Defines, in bytes, the minimum buffer size used when using a rewrite content rule. The default value is `1024`.
+>
+> * pa.default.contentRewrite.buffer.default
+>
+>   Defines, in bytes, the default buffer size when using a rewrite content rule to do a search and replace of content. The default value is `2048`.
+>
+> * pa.default.limitRequestLine
+>
+>   Defines the maximum number of bytes to read from the request line. The default value is `8192`.
+>
+> * pa.default.maxHeaderCount
+>
+>   Defines the maximum number of headers to read from a request. The default value is `100`.
+>
+> * pa.default.maxHttpHeaderSize
+>
+>   Defines the maximum number of bytes to read when reading headers. The default value is `8192`.
+>
+> * pa.default.maxRequestBodySize
+>
+>   Defines the maximum number of bytes to read from a request body. The default value is `204800`.
+>
+> * pa.default.maxConnectionsPerSite
+>
+>   Defines the maximum number of connections PingAccess can open to the PingFederate admin or engine. The default value is `-1`, which denotes no limit.
+>
+> * pa.default.session.cookie.attributes.httponly
+>
+>   Defines the default setting for the **HTTP-Only Cookie** setting for newly created web sessions. The default value is `true`.
+>
+> * pa.default.session.cookie.attributes.secure
+>
+>   Defines the default setting for the **Secure Cookie** setting for newly created web sessions. The default value is `true`.
+>
+> * pa.default.session.cookie.size.threshold
+>
+>   Defines, in bytes, the default maximum session cookie size. The default value is `4093`.
+>
+> * pa.websession.cookie.sameSiteExcludedUserAgentPatterns
+>
+>   A comma-separated list of regex that specifies whether an end-user browser should have `SameSite=None` applied to cookies issued to it. If the user-agent header from a request matches any of the values in the list, any PingAccess-issued cookie is set with no `SameSite` attribute if `SameSite=None` would otherwise have been applied. The default value is:
+>
+>   ```
+>   ^.\\(iP.+; CPU .*OS 12[_\\d].\\) AppleWebKit\\/.$,\
+>   ^.Macintosh;.*Mac OS X 10_14.*Version.*Safari.$,\
+>   ^.(Chromium|Chrome)\\/(5[1-9]|6[0-6])\\.(\\d+)(?:\\.(\\d+)|)(?:\\.(\\d+)|).$,\
+>   ^.UCBrowser\\/[0-9][0-1]?.(\\d+)\\.(\\d+)[\\.\\d].$,\
+>   ^.*UCBrowser\\/12.[0-9][0-2]?.(\\d+)[\\.\\d].$,\
+>   ^.*UCBrowser\\/12.13.[0-2][\\.\\d].*$
+>   ```
+>
+> * pa.default.session.cookie.attributes.partitioned
+>
+>   When enabled, adds the `Partitioned` attribute to cookies set by PingAccess. This ensures that cross-site cookies continue to be readable within the same context that they're created in. Learn more in the [PingAccess 8.1 release notes](../release_notes/pa_release_notes.html#previous-releases).
+>
+>   The default value is `false`. If you edit this value, restart PingAccess to make your changes take effect.
+>
+> * pa.default.cookie.attributes.partitioned.excludedUserAgentPatterns
+>
+>   If `pa.default.session.cookie.attributes.partitioned` is enabled, or if you've selected **Partitioned Cookie** on a [web session](../pingaccess_user_interface_reference_guide/pa_advanced_web_session_settings.html) or the [admin web session](../pingaccess_user_interface_reference_guide/pa_configuring_session_properties.html), you can define a comma-separated list of regex to declare any user-agents that don't support the `Partitioned` attribute. If the user-agent header from a request matches any of the values in the list, PingAccess excludes the `Partitioned` attribute from any related cookies that it sets.
+>
+>   For example:
+>
+>   ```
+>   pa.default.cookie.attributes.partitioned.excludedUserAgentPatterns= ^.\\(iP.+; CPU .*OS 12[\\d].\\) AppleWebKit\\/.$,\
+>
+>   ^.Macintosh;.*Mac OS X 10_14.*Version.*Safari.$,\
+>
+>   ^.(Chromium|Chrome)\\/(5[1-9]|6[0-6])\\.(\\d+)(?:\\.(\\d+)|)(?:\\.(\\d+)|).$,\
+>
+>   ^.UCBrowser\\/[0-9][0-1]?.(\\d+)\\.(\\d+)[\\.\\d].$,\
+>
+>   ^.*UCBrowser\\/12.[0-9][0-2]?.(\\d+)[\\.\\d].$,\
+>
+>   ^.*UCBrowser\\/12.13.[0-2][\\.\\d].$,\
+>
+>   ^.\\(Macintosh;.Mac OS X 10_14[\\d].\\) AppleWebKit\\/[\\.\\d]+ \\(KHTML. like Gecko\\)$,\
+>
+>   Box.\\/.+Darwin\\/10.14.$,\
+>
+>   ^.*PAN GlobalProtect.*Mac OS X 10.*14.$
+>   ```
+>
+>   By default, this property doesn't have a value. If you edit this value, restart PingAccess to make your changes take effect.
+>
+> * pa.uri.strict
+>
+>   When enabled, this setting requires that the raw input Uniform Resource Identifier (URI) *(tooltip: \<div class="paragraph">
+>   \<p>Identifies a web resource with a string of characters conforming to a specified format.\</p>
+>   \</div>)* be in strict compliance with the URI spec implemented by `java.net.URI` when generating URIs. The default value is `false`.
+>
+> * pa.uri.canonicalize
+>
+>   When enabled, PingAccess normalizes empty and dot path segments that contain URL-encoded forward slashes (`/`, encoded as `%2f`) or periods (encoded as `%2e`). When this setting has a value of `false`, PingAccess doesn't normalize empty and dot path segments that contain URL-encoded forward slashes or periods. The default value is `true`.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about cluster configuration in the [Clustering Reference Guide](pa_clustering_ref_guide.html).
+> >
+> > * Learn more about how some SSL properties are overridden in FIPS mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
+
+## Agent properties
+
+> **Collapse: Click to expand or collapse**
+>
+> * agent.http.port
+>
+>   Defines the TCP port on which the engine listens for agent requests. The default value is `3030`.
+>
+> * agent.http.bindAddress
+>
+>   Defines the address from which an engine listens for agent requests. The default value is `0.0.0.0`.
+>
+> * agent.http.acceptors
+>
+>   Defines the number of acceptor threads used to establish agent connections. The default value is `1`.
+>
+> * agent.http.secure
+>
+>   Defines whether the engine is using HTTPS for agent requests. The default value is `true`.
+>
+> * agent.http.backlog
+>
+>   Defines the maximum queue length for incoming agent connection indications. The default value is `512`.
+>
+> * agent.http.enabled
+>
+>   Defines whether the engine node (either `STANDALONE` or `CLUSTERED_ENGINE`, if you're running PingAccess in a cluster) listens for agent requests on the port defined by the `agent.http.port` setting. The default value is `true`.
+>
+> * agent.http.reuseAddress
+>
+>   When enabled, allows a process to bind to a port which remains in a `TIME_WAIT` state for the agent transport. The default value is `true`.
+>
+> * agent.ssl.protocols
+>
+>   Defines the protocols used for communication with agent HTTPS ports. The default value is `${tls.default.protocols}`, which uses the protocols specified by the `tls.default.protocols` property.
+>
+> * agent.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with agent HTTPS ports. The default value is `${tls.default.cipherSuites}`, which uses the ciphers specified by the `tls.default.cipherSuites` property.
+>
+> * agent.httptransport.coreThreadPoolSize
+>
+>   Defines the number of threads to keep in the agent transport pool, even if they are idle. The default value is `5`.
+>
+> * agent.httptransport.maxThreadPoolSize
+>
+>   Defines the maximum number of threads for the agent transport pool. The default value is `-1`, which denotes no limit.
+>
+> * agent.httptransport.socketTimeout
+>
+>   Defines, in milliseconds, the agent socket timeout. The default value is `30000`.
+>
+> * agent.httptransport.ioThreads
+>
+>   Defines the number of I/O threads for the agent host. The default value is `0`, which denotes that PingAccess should automatically calculate the appropriate number of I/O threads for the host.
+>
+> * agent.authz.header.required
+>
+>   Defines whether PingAccess server should authenticate agent requests using agent name and shared secret in the vnd-pi-authz header. The default value is `true`. Setting this to `false` is useful for POCs and/or debugging.
+>
+> * agent.default.token.cache.ttl
+>
+>   Defines, in seconds, the time to live for cached agent tokens. The default value is `60`.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about agent settings in [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+> >
+> > * Learn more about agent installation and management for Apache (RHEL) in [PingAccess Agent for Apache (RHEL)](../agents_and_integrations/pa_agent_for_apache_rhel.html).
+> >
+> > * Learn more about agent installation and management for Apache (SLES) in [PingAccess Agent for Apache (SLES)](../agents_and_integrations/pa_agent_for_apache_sles.html).
+> >
+> > * Learn more about agent installation and management for Apache (Windows) in [PingAccess Agent for Apache (Windows)](../agents_and_integrations/pa_agent_for_apache_windows.html).
+> >
+> > * Learn more about agent installation and management for IIS in [PingAccess Agent for IIS](../agents_and_integrations/pa_agent_for_iis.html).
+> >
+> > * Learn more about agent installation and management foe NGINX in [PingAccess Agent for NGINX](../agents_and_integrations/pa_agent_for_nginx.html).
+> >
+> > * Learn more about how some SSL properties are overridden in FIPS mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
+
+## Sideband properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * sideband.http.port
+>
+>   Defines the TCP port on which the engine listens for sideband requests. The default value is `3020`.
+>
+> * sideband.http.bindAddress
+>
+>   Defines the address from which an engine listens for sideband requests. The default value is `0.0.0.0`.
+>
+> * sideband.http.acceptors
+>
+>   Defines the number of acceptor threads used to establish sideband connections. The default value is `1`.
+>
+> * sideband.http.secure
+>
+>   Defines whether the engine is using HTTPS for sideband requests. The default value is `true`.
+>
+> * sideband.http.backlog
+>
+>   Defines the maximum queue length for incoming sideband connection indications. The default value is `512`.
+>
+> * sideband.http.enabled
+>
+>   Defines whether the engine node (either `STANDALONE` or `CLUSTERED_ENGINE`, if you're running PingAccess in a cluster) listens for sideband requests on the port defined by the `sideband.http.port` setting. The default value is `false`.
+>
+> * sideband.http.reuseAddress
+>
+>   When enabled, allows a process to bind to a port which remains in a `TIME_WAIT` state for the sideband transport. The default value is `true`.
+>
+> * sideband.ssl.protocols
+>
+>   Defines the protocols used for communication with sideband HTTPS ports. The default value is `${tls.default.protocols}`, which uses the protocols specified by the `tls.default.protocols` property.
+>
+> * sideband.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with sideband HTTPS ports. The default value is `${tls.default.cipherSuites}`, which uses the ciphers specified by the `tls.default.cipherSuites` property.
+>
+> * sideband.httptransport.coreThreadPoolSize
+>
+>   Defines the number of threads to keep in the sideband transport pool, even if they are idle. The default value is `5`.
+>
+> * sideband.httptransport.maxThreadPoolSize
+>
+>   Defines the maximum number of threads for the sideband transport pool. The default value is `-1`, which denotes no limit.
+>
+> * sideband.httptransport.socketTimeout
+>
+>   Defines, in milliseconds, the sideband socket timeout. The default value is `30000`.
+>
+> * sideband.httptransport.ioThreads
+>
+>   Defines the number of I/O threads for the sideband host. The default value is `0`, which denotes that PingAccess should automatically calculate the appropriate number of I/O threads for the host.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about how to configure a sideband client in the user interface in [Sideband Clients](../pingaccess_user_interface_reference_guide/pa_sideband_clients.html).
+> >
+> > * Learn more about how some SSL properties are overwritten in FIPS mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
+
+## URL filtering settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.interceptors.relativepath.strict
+>
+>   When this property is set to `true`, the incoming URL is matched with the allow list pattern defined in `pa.interceptors.relativepath.decode.regex`. All other request URLs are rejected. The default value is `false`.
+>
+> * pa.interceptors.relativepath.decode.count
+>
+>   Defines the number of times the URL is decoded to check for path traversal characters. The default value is `3`.
+>
+> * pa.interceptors.relativepath.decode.regex
+>
+>   Defines the regular expression to use when checking for a valid path in an incoming request. The default value is:
+>
+>   ```
+>   [\\p{Po}\\p{N}\\p{Z}\\p{L}\\p{M}\\p{Zs}\\./_\\-\\\\~()\\{\\}\\[\\]]*
+>   ```
+>
+>   |   |                                                                                       |
+>   | - | ------------------------------------------------------------------------------------- |
+>   |   | This value is double-escaped as required by the `java.util.regex.Pattern` Java class. |
+>
+> > **Collapse: Learn more**
+> >
+> > * You can find more information about URL filtering in [Adding rewrite URL rules](../pingaccess_user_interface_reference_guide/pa_adding_rewrite_url_rules.html).
+
+## Monitoring
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.mbean.site.connection.pool.enable
+>
+>   When set to `true`, enables Java Management Extensions (JMX) *(tooltip: \<div class="paragraph">
+>   \<p>Java technology that provides tools for managing and monitoring applications, devices, system objects, and service-oriented networks.\</p>
+>   \</div>)* read-only access to backend connection pools. This can be useful when troubleshooting latency issues because it provides information about requests that are waiting for a connection to targets in a site when `maxConnections` isn't unlimited. The default value is `false`.
+>
+> * enable.detailed.heartbeat.response
+>
+>   When enabled, this setting enables a customizable heartbeat response to be returned. When disabled, the heartbeat endpoint returns a `200 OK` response. The default value is `false`.
+>
+> * pa.statistics.window\.seconds
+>
+>   If the `enable.detailed.heartbeat.response` property is set to `true`, this property sets the number of seconds back to collect response statistics. A value less than `1` disables collection. The default value is `0`.
+>
+> > **Collapse: Learn more**
+> >
+> > * You can find more information about monitoring in the [PingAccess Monitoring Guide](../pingaccess_monitoring_guide/pa_monitoring_guide.html).
+
+## TLS/SSL
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * tls.default.protocols
+>
+>   Defines the default protocols used for HTTPS communication. The default value is `TLSv1.1, TLSv1.2, TLSv1.3`.
+>
+> * tls.default.cipherSuites
+>
+>   Defines the default set of ciphers used for HTTPS communication. The default value is:
+>
+>   ```
+>   TLS_CHACHA20_POLY1305_SHA256,\
+>   TLS_AES_256_GCM_SHA384,\
+>   TLS_AES_128_GCM_SHA256,\
+>   TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,\
+>   TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,\
+>   TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,\
+>   TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,\
+>   TLS_RSA_WITH_AES_128_GCM_SHA256,\
+>   TLS_RSA_WITH_AES_128_CBC_SHA256,\
+>   TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,\
+>   TLS_EMPTY_RENEGOTIATION_INFO_SCSV
+>   ```
+>
+>   |   |                                                                                                                                                                                                                                                                                                                              |
+>   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | Legacy browsers might require the addition of SHA1-based ciphers to negotiate a cipher suite with the server. In this case, add the following ciphers to the `run.properties` file and restart PingAccess:- `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA`
+>
+>   - `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`
+>
+>   - `TLS_RSA_WITH_AES_128_CBC_SHA` |
+>
+> * clusterconfig.ssl.protocols
+>
+>   Defines the protocols used for communication with HTTPS ports in a clustered configuration. The default value is `$\{tls.default.protocols}`, which uses the protocols specified by the `tls.default.protocols` property.
+>
+> * clusterconfig.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with HTTPS ports in a clustered configuration. The default value is `$\{tls.default.cipherSuites}`, which uses the ciphers specified by the `tls.default.cipherSuites` property.
+>
+> * site.ssl.protocols
+>
+>   Defines the protocols used for communication with site HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the Java Development Kit (JDK) *(tooltip: \<div class="paragraph">
+>   \<p>A development environment for building applications and components using Java.\</p>
+>   \</div>)*.
+>
+> * site.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with site HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * pf.ssl.protocols
+>
+>   Defines the protocols used for communication with PingFederate HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * pf.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with PingFederate HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * provider.ssl.protocols
+>
+>   Defines the protocols used for communication with provider HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * provider.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with provider HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * as.ssl.protocols
+>
+>   Defines the protocols used for communication with authorization server HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * as.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with authorization server HTTPS ports. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * p14c.ssl.protocols
+>
+>   Defines the protocols used for communication with PingOne. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * p14c.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with PingOne. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * thirdpartyservice.ssl.protocols
+>
+>   Defines the protocols used for communication with third-party services. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> * thirdpartyservice.ssl.ciphers
+>
+>   Defines the type of cryptographic ciphers available for use with third-party services. There is no default value. When not specified, PingAccess uses the protocols defined in the JDK.
+>
+> > **Collapse: Learn more**
+> >
+> > * You can find more information about the use of TLS/SSL settings for security in the [PingAccess Hardening Guide](https://support.pingidentity.com/s/article/PingAccess-Security-Hardening-Guide).
+> >
+> > * Learn more about how some TLS properties are overwritten in FIPS mode in [Managing Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html).
+
+## POST preservation properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.oidc.post.preservation.encrypt
+>
+>   When enabled, PingAccess preserves POST data through a redirection to PingFederate for authentication is encrypted on the client to be used after the authentication is successful. The default value is `false`.
+>
+> * pa.oidc.post.preservation.maxRequestBodySize
+>
+>   Defines, in bytes, the maximum size of the request body for POST preservation. The default value is `8192`.
+>
+> * pa.oidc.post.preservation.paramsAttributeName
+>
+>   Used to store the encoded or encrypted POST payload in the browser session storage during POST preservation. The default value is `postParams`.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about the use of POST preservation in system templates meant to provide information to the end user in [User-facing page customization reference](../configuring_and_customizing_pingaccess/pa_user_facing_page_customization_ref.html).
+> >
+> > * Learn more about the use of POST preservation in system templates meant to provide localized versions of user-facing status messages generated by PingAccess in [User-facing page localization reference](../configuring_and_customizing_pingaccess/pa_user_facing_page_localization_ref.html).
+> >
+> > * Learn more about the use of POST preservation in web sessions in the [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+
+## Configuration database and key store settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * derby.language.statementCacheSize
+>
+>   Defines the number of statements that are stored in memory. The default value is `500`.
+>
+> * derby.storage.pageCacheSize
+>
+>   Defines the number of pages cached in memory. The default value is `1000`.
+>
+> * pa.trust.keystore.type
+>
+>   Defines the truststore type for the `$JAVA_HOME/lib/security/cacerts` keystore. The default value is `JKS`.
+>
+>   |   |                                                                                     |
+>   | - | ----------------------------------------------------------------------------------- |
+>   |   | PKCS#12 isn't supported if you're using FIPS mode, because it isn't FIPS-compliant. |
+>
+> * pa.trust.keystore.path
+>
+>   Defines the path for the `$JAVA_HOME/lib/security/cacerts` keystore. The default value is `${java.home}/lib/security/cacerts`.
+>
+> * pa.keystore.pw
+>
+>   Defines the password for the truststore configured in the `pa.trust.keystore.path` property. The value is encrypted.
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about the initial database settings in [Installing and Uninstalling PingAccess](../installing_and_uninstalling_pingaccess/pa_installing_and_uninstalling_pa.html).
+> >
+> > * Learn more about adjusting PingAccess settings for specific environments in the [Performance Tuning Reference Guide](pa_performance_tuning.html).
+> >
+> > * Learn more about how the native Apache Derby properties are used in the [Apache Derby: Documentation](https://db.apache.org/derby/manuals/) in the Apache documentation.
+
+## PingFederate administration integration properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pf.api.maxRetries
+>
+>   Defines the maximum number of retries PingAccess attempts to make to the PingFederate server before declaring the server unavailable. The default value is `0`.
+>
+> * pf.api.socketTimeout
+>
+>   Defines, in milliseconds, the socket timeout for the PingFederate API endpoint. The default value is `5000`.
+>
+> * pf.api.maxConnections
+>
+>   Defines the maximum number of connections PingAccess will establish to the PingFederate API endpoint. The default value is `-1`, which means there is no limit.
+>
+> * pf.api.keepAliveTimeout
+>
+>   Defines, in milliseconds, the keep alive timeout for the PingFederate API. The default value is `30000`.
+>
+> * pf.api.readTimeout
+>
+>   Defines, in milliseconds, how long the API will wait for responses from PingFederate when making calls to the PingFederate administrative API. The default value is `-1`, which means there is no limit.
+>
+> > **Collapse: Learn more**
+> >
+> > You can find more information about using PingAccess with PingFederate in:
+> >
+> > * [Configure PingFederate as the token provider for PingAccess](../token_providers/pa_configure_pf_as_the_token_provider_for_pa.html).
+> >
+> > * [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+
+## Administrative console settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.backup.filesToKeep
+>
+>   Defines the number of backup files to preserve when the administrator authenticates to PingAccess. The default value is `25`. A value of `0` disables the creation of backup files.
+>
+>   |   |                                                                                                                                                                                                                   |
+>   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | Disabling the creation of backup files can speed up the sign-on process in large environments. If you disable the creation of backup files, use the administrative API backup endpoint to create regular backups. |
+>
+> * pa.admin.user.password.regex
+>
+>   Defines the regex that controls password complexity for the administrative console. The default value is:
+>
+>   ```
+>   ((?=.\\d)(?=.[a-z])(?=.*[A-Z]).{8,20})
+>   ```
+>
+> * pa.admin.user.password.error.message
+>
+>   Defines the message returned when password complexity isn't satisfied. The default value is `Password must be at least 8 characters in length, contain one upper-case letter, one lower-case letter and one digit`.
+>
+> * pa.admin.test.connections
+>
+>   A boolean property that allows the PingAccess administrative console to make HTTP calls to validate that it can reach PingFederate and sites when the user configures them. The default value is `true`.
+>
+> * account.locking.max.consecutive.failures
+>
+>   Defines the maximum number of failed sign-on attempts before locking the account when using basic authentication in the administrative console or administrative REST APIs. The default value is `3`.
+>
+> * account.locking.max.lockout.period
+>
+>   Defines, in minutes, the amount of time to lock an account out from the administrative interfaces after exceeding the `account.locking.max.consecutive.failures`. The default value is `1`.
+>
+> > **Collapse: Learn more**
+> >
+> > * You can find more information about PingAccess administration in the [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+
+## EHCache configuration properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.ehcache.PingFederateReferenceTokenCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for OAuth *(tooltip: \<div class="paragraph">
+>   \<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
+>   \</div>)* tokens. The default value is `10000`.
+>
+> * pa.ehcache.PingFederateReferenceTokenCache.timeToIdleSeconds
+>
+>   Defines, in seconds, the time an entry in the OAuth token cache can be idle before it is expired. The default value is `0`.
+>
+> * pa.ehcache.PingFederateReferenceTokenCache.timeToLiveSeconds
+>
+>   Defines, in seconds, the maximum time an entry can be in the OAuth token cache. The default value is `0`.
+>
+> * pa.ehcache.ServiceTokenCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for token mediation. The default value is `10000`.
+>
+> * pa.ehcache.ServiceTokenCache.timeToIdleSeconds
+>
+>   Defines, in seconds, the time an entry in the token mediation cache can be idle before it is expired. The default value is `1800`.
+>
+> * pa.ehcache.ServiceTokenCache.timeToLiveSeconds
+>
+>   Defines, in seconds, the maximum time an entry can be in the token mediation cache. The default value is `14400`.
+>
+> * pa.ehcache.PATokenValidationCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for decryption of signed or encrypted PingAccess tokens. The default value is `10000`.
+>
+> * pa.ehcache.PATokenValidationCache.timeToIdleSeconds
+>
+>   Defines, in seconds, the time an entry in the token validation cache can be idle before it is expired. The default value is `120`.
+>
+> * pa.ehcache.PATokenValidationCache.timeToLiveSeconds
+>
+>   Defines, in seconds, the maximum time an entry can be in the token validation cache. The default value is `300`.
+>
+> * pa.ehcache.PFSessionValidationCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for the session validation cache. The default value is `10000`.
+>
+> * pa.ehcache.PFSessionValidationCache.timeToIdleSeconds
+>
+>   Defines, in seconds, the time an entry in the session validation cache can be idle before it expires. The default value is `120`.
+>
+> * pa.ehcache.PFSessionValidationCache.timeToLiveSeconds
+>
+>   Defines, in seconds, the maximum time an entry can be in the session validation cache. The default value is `300`.
+>
+> * pa.ehcache.PAWamUserAttributesCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for the PingAccess Web Access Management (WAM) user attribute cache. The default value is `10000`.
+>
+> * pa.ehcache.PAWamUserAttributesCache.timeToIdleSeconds
+>
+>   Defines, in seconds, the time an entry in the PingAccess WAM user attribute cache can be idle before it is expired. The default value is `120` seconds.
+>
+> * pa.ehcache.PAWamUserAttributesCache.timeToLiveSeconds
+>
+>   Defines, in seconds, the maximum time an entry can be in the PingAccess WAM user attribute cache. The default value is `300` seconds.
+>
+> * pa.ehcache.AuthTokenCache.maxEntriesLocalHeap
+>
+>   Defines the maximum size of the JSON Web Token (JWT) *(tooltip: \<div class="paragraph">
+>   \<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>
+>   \</div>)* identity mapping token cache used when sending tokens to a protected site. The default value is `10000`.
+>
+> * pa.ehcache.SessionStateCache.maxEntriesLocalHeap
+>
+>   Defines the maximum size of the identity attribute entry cache when the user's attributes are stored on the server rather than as a cookie. The default value is `10000`.
+>
+> * pa.ehcache.AzureGroupNameCache.maxEntriesLocalHeap
+>
+>   Defines the maximum number of entries in the local heap for the Azure group name cache. The default value is `10000`.
+>
+> > **Collapse: Learn more**
+> >
+> > * You can find more information about EHCache configuration in the [Clustering Reference Guide](pa_clustering_ref_guide.html).
+
+## Security headers properties
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * admin.headers
+>
+>   Additional headers added to responses from the PingAccess administrative console and the administrative API interface. Define header values using the `admin.header` prefix. The default value is:
+>
+>   ```
+>   X-Frame-Options,X-XSS-Protection,X-Content-Type-Options,Strict-Transport-Security,Content-Security-Policy
+>   ```
+>
+>   |   |                                                                                                                                                                                                                                             |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. To enable for this case, add the `Content-Security-Policy` value to this property and uncomment `admin.header.Content-Security-Policy`. |
+>
+> * admin.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser when an admin is interacting with the administrative console. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * admin.header.X-XSS-Protection
+>
+>   Sets the parameters for the `X-XSS-Protection` HTTP response header sent to the browser when an admin is interacting with the administrative console. The default value is `1; mode=block`.
+>
+> * admin.header.X-Content-Type-Options
+>
+>   Sets the parameters for the `X-Content-Type-Options` response header sent to the browser when an admin is interacting with the administrative console. The default value is `nosniff`.
+>
+> * admin.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` response header sent by PingAccess in response to API calls. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; img-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * admin.header.Strict-Transport-Security
+>
+>   Sets the parameters for the `Strict-Transport-Security` response header sent to the browser when an administrator is interacting with the administrative console. This property is commented out by default and should be enabled only if the admin and engine use different host names. The default value is `max-age=31536000; includeSubDomains`.
+>
+> * agent.assets.headers
+>
+>   Additional headers added to responses from PingAccess agents. Header values are defined using the `agent.assets.header` prefix. The default value is `X-Frame-Options`.
+>
+> * agent.assets.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the agent when responding to a request for an asset used by a PingAccess template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * agent.error.headers
+>
+>   Additional headers added to error responses from PingAccess agents. Header values are defined using the `agent.error.header` prefix. The default value is `X-Frame-Options, Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                   |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. To enable for this case, add the `Content-Security-Policy` value to this property and uncomment `agent.error.header.Content-Security-Policy`. |
+>
+> * agent.error.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent to the browser using the agent when responding with a PingAccess error template. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * agent.error.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the agent when responding with a PingAccess error template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * engine.assets.headers
+>
+>   Additional headers added to responses from the PingAccess engine. Header values are defined using the `engine.assets.header` prefix. The default value is `X-Frame-Options`.
+>
+> * engine.assets.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the engine when responding to a request for an asset used by a PingAccess template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * engine.error.headers
+>
+>   Additional headers added to error responses from the PingAccess engine. Define header values using the `engine.error.header` prefix. The default value is `X-Frame-Options, Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                                |
+>   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. If you want to enable for this case, add the `Content-Security-Policy` value to this property and uncomment `engine.error.header.Content-Security-Policy`. |
+>
+> * engine.error.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent to the browser using the engine when responding with a PingAccess error template. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * engine.error.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the engine when responding with a PingAccess error template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * sideband.assets.headers
+>
+>   Additional headers added to responses from PingAccess sideband clients. Define header values using the `sideband.assets.header` prefix. The default value is `X-Frame-Options`.
+>
+> * sideband.assets.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the sideband client when responding to a request for an asset used by a PingAccess template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * sideband.error.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent to the browser using the sideband client when responding with a PingAccess error template. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * sideband.error.headers
+>
+>   Additional headers added to error responses from PingAccess sideband clients. Define header values using the `sideband.error.header` prefix. The default value is `X-Frame-Options,Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                      |
+>   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. To enable for this case, add the `Content-Security-Policy` value to this property and uncomment `sideband.error.header.Content-Security-Policy`. |
+>
+> * sideband.error.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` HTTP response header sent to the browser using the sideband client when responding with a PingAccess error template. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * pf.redirect.use.default.csp
+>
+>   Determines whether PingAccess uses the default CSP for HTML authentication challenge responses (ACRs) for web apps. The default value is `true`.
+>
+>   If you set the `pf.redirect.use.default.csp` property to `false`, you can use the `pf.redirect.headers` to set the CSP that PingAccess uses.
+>
+>   |   |                                                                                                                                                               |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | Make sure to use the `pf.redirect.headers` to configure a value if you set `pf.redirect.use.default.csp` to `false`. Otherwise, PingAccess won't use any CSP. |
+>
+> * pf.redirect.headers
+>
+>   Additional headers added to the redirection response that sends the client to PingFederate for authentication.
+>
+>   These headers are added when using the **SPA Support Disabled** authentication challenge policy (ACP), the global PingFederate Redirect Headers Appender challenge response filter, or an application that's configured without an ACP and has SPA support disabled.
+>
+>   Define header values using the `pf.redirect.header` prefix. The default value is `X-Frame-Options,Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                               |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. If you want to enable for this case, add the `Content-Security-Policy` value to this property and uncomment `pf.redirect.header.Content-Security-Policy`. |
+>
+> * pf.redirect.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent when the user is redirected to PingFederate to authenticate. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * pf.redirect.header.X-Frame-Options
+>
+>   Sets the parameters for the `X-Frame-Options` value sent when the user is redirected to PingFederate to authenticate. The default value is `DENY`.
+>
+>   Learn more about this header and its potential values in [x-frame-options](https://html.spec.whatwg.org/multipage/document-lifecycle.html#x-frame-options).
+>
+> * rule.error.headers
+>
+>   Additional headers added to responses that result from policy rule results. Define header values using the `rule.error.header` prefix. The default value is `Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                  |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. To enable for this case, add the `Content-Security-Policy` value to this property and uncomment `rule.error.header.Content-Security-Policy`. |
+>
+> * rule.error.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent to the browser when the response is generated by a rule failure. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> * oauth.error.headers
+>
+>   Additional headers added to responses that result from requests made to a protected API application that lack a valid OAuth Bearer token. Define header values using the `oauth.error.header` prefix. The default value is `Content-Security-Policy`.
+>
+>   |   |                                                                                                                                                                                                                                                   |
+>   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | `Content-Security-Policy` might be omitted if PingAccess was upgraded with template customizations. To enable for this case, add the `Content-Security-Policy` value to this property and uncomment `oauth.error.header.Content-Security-Policy`. |
+>
+> * oauth.error.header.Content-Security-Policy
+>
+>   Sets the parameters for the `Content-Security-Policy` HTTP response header sent to the browser when PingAccess receives a request made to a protected API application that doesn't contain a valid OAuth Bearer token. The default value is:
+>
+>   ```
+>   default-src 'self'; style-src 'self' \$\\{cspNonce\\}; \
+>     script-src 'self' \$\\{cspNonce\\}; font-src 'self' data:; object-src 'none'; base-uri 'self';
+>   ```
+>
+>   |   |                                                                                               |
+>   | - | --------------------------------------------------------------------------------------------- |
+>   |   | This property might be commented out if PingAccess was upgraded with template customizations. |
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about security headers and the behavior of the administrative API in [PingAccess API endpoints](pa_api_endpoints.html).
+> >
+> > * Learn more about security headers and administrative console settings in the [PingAccess User Interface Reference Guide](../pingaccess_user_interface_reference_guide/pa_ui_ref_guide.html).
+> >
+> > * Learn more about security headers and measures to ensure security in the [PingAccess Hardening Guide](https://support.pingidentity.com/s/article/PingAccess-Security-Hardening-Guide).
+
+## Localization settings
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * pa.localization.resource.bundle.cache.enable
+>
+>   When set to `false`, allows language files in `/conf/localization` to be added or modified. When `true`, enables caching of language files and properties. The default value is `true`.
+>
+> * pa.localization.missing.message.placeholder
+>
+>   Defines the message used when an error message is unresolvable. There is no default value.
+>
+> * pa.enable.distributed.tracing
+>
+>   Enables instrumentation to produce tracing data for requests that pass through PingAccess. PingAccess will also pass current tracing information to supported external systems like PingFederate. The default value is `false`.
+>
+>   |   |                                                                                                                                                                                                                                                     |
+>   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | If you're [running PingAccess as a Windows service](../installing_and_uninstalling_pingaccess/pa_managing_pa_as_a_windows_service.html), you must reinstall the service for changes to the `pa.enable.distributed.tracing` property to take effect. |
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more about localization and customizing PingAccess page templates in [User-facing page customization reference](../configuring_and_customizing_pingaccess/pa_user_facing_page_customization_ref.html). You can also find more information about the differences between customizable templates and system templates.
+> >
+> > * Learn more about localizing user-facing system status messages in [User-facing page localization reference](../configuring_and_customizing_pingaccess/pa_user_facing_page_localization_ref.html).
+> >
+> > * You can find more information on distributed tracing in [Distributed tracing](../troubleshooting/pa_distributed_tracing.html).
+
+## Cert rotation
+
+> **Collapse: Click to expand or collapse the whole section**
+>
+> * cert.rotation.transition.window\.ttl.seconds
+>
+>   Defines, in seconds, how long the config query certificate rotation window stays open. The default value is `300`. While the config query certificate rotation window is open, you can't assign another key pair to the config query listener.
+>
+>   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+>   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>   |   | The config query certificate rotation window closes when all registered PingAccess engines have confirmed the new cert fingerprint or the amount of time specified by the `cert.rotation.transition.window.ttl.seconds` property elapses, whichever comes first. The window doesn't close if the admin restarts the console.- If the primary console goes offline mid-rotation, the replica admin can continue to serve both certificates.
+>
+>   - If an engine node is offline for the entire rotation window or doesn't complete rotating the cert before the TTL elapses, you must update the `bootstrap.properties` file manually, then restart the node, as described in steps 8 - 9 in [Configuring engine nodes](../pingaccess_user_interface_reference_guide/pa_configuring_engine_nodes.html). |
+>
+> > **Collapse: Learn more**
+> >
+> > * Learn more in [Automatic key rotation for config query listeners](../pingaccess_user_interface_reference_guide/pa_assigning_key_pairs.html#autorotation).
 
 ---
 
 ---
-title: Manually promoting the replica administrative node
-description: To promote the replica admin manually:
+title: Configuring a PingAccess cluster
+description: Install and configure PingAccess on each node in a cluster, including the administrative node, a replica administrative node, and one or more engine nodes.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_manually_promoting_the_replica_admin_node
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_manually_promoting_the_replica_admin_node.html
+page_id: pingaccess:reference_guides:pa_configuring_a_pa_cluster
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_configuring_a_pa_cluster.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 10, 2024
+revdate: April 26, 2023
 section_ids:
   about-this-task: About this task
   steps: Steps
   next-steps: Next steps
 ---
 
-# Manually promoting the replica administrative node
+# Configuring a PingAccess cluster
+
+Install and configure PingAccess on each node in a cluster, including the administrative node, a replica administrative node, and one or more engine nodes.
 
 ## About this task
 
-To promote the replica admin manually:
+The initial node you configure becomes the administrative node, which you will use to configure the rest of the cluster.
+
+|   |                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Setting the `pa.operational.mode` property on each node is part of the configuration process. Do not modify this property until directed to do so. |
 
 ## Steps
 
-1. Open the `<PA_HOME>/conf/run.properties` file in a text editor.
+1. Install PingAccess on each cluster node.
 
-2. Locate the `pa.operational.mode` line and change the value from `CLUSTERED_CONSOLE_REPLICA` to `CLUSTERED_CONSOLE`.
+2. Configure the administrative node:
 
-   These properties are case-sensitive.
+   1. Open the `conf/run.properties` file in a text editor and change the `pa.operational.mode` value to `CLUSTERED_CONSOLE`.
 
-   |   |                                                                                                                                                                                                                                      |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | Do not restart the replica node during the promotion process. PingAccess can detect and apply this change without a restart, and restarting the node during its promotion can cause file corruption or failure to promote correctly. |
+      This property is case-sensitive.
+
+   2. Start PingAccess.
+
+   3. Follow steps 1-14 of [Generating new key pairs](../pingaccess_user_interface_reference_guide/pa_generating_new_key_pairs.html) to create a new key pair for the CONFIG QUERY listener. Make the following adjustments to steps 4-5:
+
+      1. To complete step 4, enter the DNS name of the administrative node in the **Common Name** field.
+
+      2. To complete step 5, enter both the DNS name of the replica administrative node and the DNS name of the administrative node in the **Subject Alternative Names** field. Alternately, configure the **Subject Alternative Names** field as a wildcard certificate.
+
+         |   |                                                                                                                                                                                                                                                                                                                                                                                                          |
+         | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+         |   | You can use an Internet Protocol (IP) *(tooltip: \<div class="paragraph">&#xA;\<p>The method by which data is sent across the internet from the source host to the destination host.\</p>&#xA;\</div>)* address as the common name or in the **Subject Alternative Names** field, as long as those values are used in the administrative node fields on the **Administrative Nodes** configuration page. |
+
+         |   |                                                                                      |
+         | - | ------------------------------------------------------------------------------------ |
+         |   | You will need this key pair in step 3a to set up the replica administrative console. |
+
+   4. Follow steps 1-4 of [Assigning key pairs to HTTPS listeners](../pingaccess_user_interface_reference_guide/pa_assigning_key_pairs_to_https_listeners.html) to assign the key pair you just created to the CONFIG QUERY listener.
+
+   5. Follow steps 1-6 in [Configuring administrative nodes](../pingaccess_user_interface_reference_guide/pa_configuring_admin_nodes.html) to configure the administrative node settings, then review the *What to do next* section. Make the following adjustment to step 2:
+
+      1. To complete step 2, define the primary administrative node as a `host:port` pair in the **Host** field.
+
+         |   |                                                                                                                                                                                                                     |
+         | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+         |   | The host you specify must be a resolvable DNS name for the node or the node's IP address. The port must be the TCP port that PingAccess listens to for the administrative interface. By default, this port is 9090. |
+
+   6. Follow steps 1-14 of [Generating new key pairs](../pingaccess_user_interface_reference_guide/pa_generating_new_key_pairs.html) to create a new key pair for the ADMIN listener. Make the following adjustments to steps 4-5:
+
+      1. To complete step 4, enter the DNS name of the administrative node in the **Common Name** field.
+
+      2. To complete step 5, enter both the DNS name of the replica administrative node and the DNS name of the administrative node in the **Subject Alternative Names** field. Alternately, configure the **Subject Alternative Names** field as a wildcard certificate.
+
+         |   |                                                                                                                                                                                                                   |
+         | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+         |   | You can use an IP address as the common name or in the **Subject Alternative Names** field as long as those values are used in the administrative node fields on the **Administrative Nodes** configuration page. |
+
+   7. Follow steps 1-4 of [Assigning key pairs to HTTPS listeners](../pingaccess_user_interface_reference_guide/pa_assigning_key_pairs_to_https_listeners.html) to assign the key pair you just created to the ADMIN listener.
+
+   8. Restart PingAccess.
+
+3. Configure the replica administrative node.
+
+   |   |                                                                                                                                |
+   | - | ------------------------------------------------------------------------------------------------------------------------------ |
+   |   | If you add a replica administrative node after you deploy the cluster, you must update the configuration for each engine node. |
+
+   1. Complete steps 1-11 of [Configuring replica administrative nodes](../pingaccess_user_interface_reference_guide/pa_configuring_replica_administrative_nodes.html). Make the following adjustments to step 2 and step 5:
+
+      1. To complete step 2, the host you specify must be a resolvable DNS name for the node or the node's IP address. The port must be the TCP port that PingAccess listens to for the administrative interface. By default, this port is 9090.
+
+      2. To complete step 5, select the key pair that you created for the CONFIG QUERY listener in step 2c of this topic as the **Replica Administrative Node Trusted Certificate**.
+
+4. Configure the engine nodes in the cluster one at a time. For each engine node:
+
+   1. Complete steps 1-10 of [Configuring engine nodes](../pingaccess_user_interface_reference_guide/pa_configuring_engine_nodes.html).
+
+   2. On the engine node, open the `conf/run.properties` file in a text editor and change the `pa.operational.mode` value to `CLUSTERED_ENGINE`.
+
+   3. Complete step 11 of [Configuring engine nodes](../pingaccess_user_interface_reference_guide/pa_configuring_engine_nodes.html).
+
+      If you specified a proxy for the engine node, see the *What to do next* section also.
+
+   |   |                                                                                                                                                                                                                                                                                      |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | Alternately, you can configure each engine node with an auto-registration file. For more information, see [Configuring engine nodes using an auto-registration file](../pingaccess_user_interface_reference_guide/pa_configuring_engine_nodes_using_an_auto_registration_file.html). |
 
 ## Next steps
 
-Complete [Reinstating a replica administrative node after failing over](pa_reinstating_a_replica_admin_node_after_failing_over.html).
+1. Go to **Settings → System → Clustering** to check your cluster's status. If everything is configured properly, the cluster engine nodes and the replica administrative node should display a green status icon, indicating that the cluster is operational. For more information about status icons, see [Clustering in PingAccess](pa_clustering_ref_guide.html).
+
+2. Optionally, you can configure each node in the cluster to run PingAccess as a service. This set-up prompts PingAccess to run automatically when you start a node. For more information, see [Running PingAccess as a service](../installing_and_uninstalling_pingaccess/pa_running_pa_as_a_service.html) in *Installing and Uninstalling PingAccess*.
 
 ---
 
 ---
-title: Matcher usage reference
-description: Groovy script rules and OAuth Groovy script rules must end execution with a matcher instance. Matchers provide a framework for establishing declarative rule matching objects.
+title: Configuring acceptor threads
+description: Configure the pool of acceptor threads based on your environment.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_matcher_usage_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_matcher_usage_ref.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 26, 2023
-section_ids:
-  pingaccess-matchers: PingAccess matchers
----
-
-# Matcher usage reference
-
-Groovy script rules and OAuth Groovy script rules must end execution with a matcher instance. Matchers provide a framework for establishing declarative rule matching objects.
-
-You can use a matcher from the list of PingAccess matchers or from the [Hamcrest library](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/CoreMatchers.html).
-
-* For more information on Hamcrest, see the [Hamcrest Tutorial](http://code.google.com/p/hamcrest/wiki/Tutorial).
-
-* For more information on creating and troubleshooting Groovy scripts, and examples of how you might use Hamcrest matchers instead of PingAccess matchers, see [Groovy Scripts](pa_groovy_scripts.html).
-
-* For more information on PingAccess matchers, review the following examples and tables.
-
-|   |                                                                                                                                                                                        |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Matcher string evaluation is case sensitive unless otherwise specified. In the PingAccess matchers table, case insensitivity is called out in a matcher's description when applicable. |
-
-> **Collapse: Examples**
->
-> In the following example, the Groovy script rule inserts a custom HTTP header *(tooltip: \<div class="paragraph">
-> \<p>A section of an HTTP request or response that conveys additional information relevant to the client or server in the transaction.\</p>
-> \</div>)* and the script ends with a call to the `pass()` matcher. The `pass()` matcher signals that the rule has passed.
->
-> ```
-> test = "let's get Groovy!"
-> exc?.response?.header?.add("X-Groovy", "$test")
-> pass()
-> ```
->
-> In the following example, the OAuth *(tooltip: \<div class="paragraph">
-> \<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-> \</div>)* Groovy script rule checks the HTTP method and confirms the OAuth scope, and a matcher is evaluated at the end of each line of execution. The first matcher is the `hasScope()` matcher, which confirms whether the OAuth access token has the `WRITE` scope. If it does, the rule passes.
->
-> ```
-> //Get the HTTP method name
-> def methodName = exc?.request?.method?.methodName()
-> if (methodName == "POST") {
->     hasScope("WRITE")
-> } else {
->     fail()
-> }
-> ```
->
-> The `fail()` matcher combination is only evaluated when the `methodName` does not equal `POST`. This matcher combination evaluates to false.
-
-## PingAccess matchers
-
-The following table lists the PingAccess matchers available for the [Groovy script rule](../pingaccess_user_interface_reference_guide/pa_adding_groovy_script_rules.html) and the [OAuth Groovy script rule](../pingaccess_user_interface_reference_guide/pa_adding_oauth_groovy_script_rules.html).
-
-> **Collapse: Groovy and OAuth Groovy script rule matchers**
->
-> | Matcher                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-> | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | `pass()`                                                                                                                                              | Signals that the rule has passed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-> | `fail()`                                                                                                                                              | Signals that the rule has failed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-> | `inIpRange(String cidr)`                                                                                                                              | Validates the source Internet Protocol (IP) *(tooltip: \<div class="paragraph">&#xA;\<p>The method by which data is sent across the internet from the source host to the destination host.\</p>&#xA;\</div>)* address of the request against the `cidr` string parameter in CIDR notation. When source IP headers defined in the [HTTP Requests](../pingaccess_user_interface_reference_guide/pa_http_requests.html) page are found, the source IP address determined from those headers is used as the source address.For agents, this value is potentially controlled by the override options on the agent settings.**Example:** `inIpRange("127.0.0.1/8")`                                                                                                                                                        |
-> | `inIpRange(java.net.InetAddress ipAddress, int prefixSize)`                                                                                           | Validates the source IP address against the `ipAddress` and the `prefixSize` parameters specified individually. When source IP headers defined in the [HTTP Requests](../pingaccess_user_interface_reference_guide/pa_http_requests.html) page are found, the source IP address determined from those headers is used as the source address.For agents, this value is potentially controlled by the override options on the agent settings.**Example:** `inIpRange(InetAddress.getByName("127.0.0.1"),8)`is equivalent to  `inIpRange("127.0.0.1/8")`                                                                                                                                                                                                                                                                |
-> | `inIpRange(String cidr, String listValueLocation, boolean fallBackToLastHopIp, String…​ headerNames)`                                                 | Validates the source IP address in the first of the specified `headerNames` using the `cidr` value. Can be specified as part of a Groovy script as a means of overriding the configuration stored in PingAccess for a specific Groovy script rule.Valid values for the `listValueLocation` parameter are `FIRST`, `LAST`, and `ANY`. This parameter controls where, in a multivalued list of source IP addresses, the last source should be taken from. If `ANY` is used, if any of the source IP addresses in a matching header match the CIDR value, the matcher evaluates to `true`.**Example:** `inIpRange("127.0.0.1/8", "LAST", true, "X-Forwarded-For", "Custom-Source-IP")`                                                                                                                                  |
-> | `inIpRange(java.net.InetAddress address, int prefixSize, String listValueLocation, boolean fallBackToLastHopIp, String…​ headerName)`                 | Validates the source IP address in the first of the specified `headerNames` using the `address` and `prefixSize` values. In all other respects, this matcher behaves the same as the version that uses a `cidr` value for comparison.**Example:** `inIpRange(InetAddress.getByName("127.0.0.1"), 8, "LAST", true, "X-Forwarded-For", "Custom-Source-IP")`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-> | `requestXPathMatches(String xPathString, String xPathValue)`                                                                                          | Validates that the value returned by the `xPathString` parameter is equal to the `xPathValue` parameter.**Example:** `requestXPathMatches("//header[@name='Host']/text()","localhost:3000")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-> | `inTimeRange(String startTime, String endTime)`                                                                                                       | Validates that the current server time is between the `startTime` and `endTime` parameters.**Example:** `inTimeRange("9:00 am","5:00 pm")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-> | `inTimeRange24(String startTime, String endTime)`                                                                                                     | Validates that the current server time is between the specified 24-hour formatted time range between the `startTime` and `endTime` parameters.**Example:** `inTimeRange24("09:00","17:00")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-> | `requestHeaderContains(String field, String value)`                                                                                                   | Validates that the HTTP header field value is equal to the `value` parameter.**Example:** `requestHeaderContains("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-> | `requestHeaderContains(Map<String, String> fieldValuesMap, boolean caseSensitive)`&#xA;&#xA;This matcher can be case sensitive or case insensitive.   | Validates that all of the HTTP header fields map to the associated value. The first `fieldValuesMap` string contains the HTTP header name, and the second string contains the value to compare the incoming request header value with.The `caseSensitive` parameter determines whether a case-sensitive comparison is performed on the value.The second string in the `fieldValuesMap` supports Java regular expressions.If multiple pairs of strings are present in the `fieldValuesMap` parameter, then all conditions must be met in order for the matcher to pass.**Example:** `requestHeaderContains(['User-Agent':'Mozilla/5.0', 'Cookie':'JSESSIONID'], false)`                                                                                                                                               |
-> | `requestPostFormContains(Map<String, String> fieldValuesMap, boolean caseSensitive)`&#xA;&#xA;This matcher can be case sensitive or case insensitive. | Validates that all of the HTTP form fields maps to the associated value. The first `fieldValuesMap` string contains the form header name, and the second string contains the value to compare the incoming request header value with.The `caseSensitive` parameter determines whether a case-sensitive comparison is performed on the value.&#xA;&#xA;This matcher determines whether to use fields passed in the URL or forms with a content-type header of application/x-www-form-urlencoded.The second string in the `fieldValuesMap` supports Java regular expressions.If multiple pairs of strings are present in the `fieldValuesMap` parameter, then all conditions must be met in order for the matcher to pass.**Example:** `requestPostFormContains(['email':'@example.com', 'phonenumber':'720'], false)` |
-> | `requestHeaderDoesntContain(String field, String value)`                                                                                              | Validates that the HTTP header field value is not equal to the `value` parameter.**Example:** `requestHeaderDoesntContain("User-Agent", "InternetExplorer")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-> | `requestBodyContains(String value)`                                                                                                                   | Validates that the HTTP body contains the `value` parameter.**Example:** `requestBodyContains("production")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-> | `requestBodyDoesntContain(String value)`                                                                                                              | Validates that the HTTP body does not contain the value parameter.**Example:** `requestBodyDoesntContain("test")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-> | `containsWebSessionAttribute(String attributeName, String attributeValue)`                                                                            | Validates that the PingAccess token contains the attribute name and value.**Example:** `containsWebSessionAttribute("sub", "sarah")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-> | `containsACRValues(String value)`                                                                                                                     | Validates that the PingAccess token contains a matching ACR value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-
-The following table lists the PingAccess matchers available to only the [OAuth Groovy script rule](../pingaccess_user_interface_reference_guide/pa_adding_oauth_groovy_script_rules.html).
-
-> **Collapse: OAuth Groovy script rule matchers**
->
-> | Matcher                                                                                                                                  | Description                                                                                                         |
-> | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-> | `hasScope(String scope)`                                                                                                                 | Validates that the OAuth access token contains the `scope` parameter.**Example:** `hasScope("access")`              |
-> | `hasScopes(String…​ scopes)`                                                                                                             | Validates that the OAuth access token contains the list of scopes.**Example:** `hasScopes("access","portfolio")`    |
-> | `hasAttribute(String attributeName, String attributeValue)`&#xA;&#xA;This matcher is case insensitive and cannot be made case sensitive. | Checks for an attribute value within the current OAuth2 policy context.**Example:** `hasAttribute("account","joe")` |
-
----
-
----
-title: MediaType object reference
-description: Access the MediaType object.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_mediatype_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_mediatype_object_ref.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
-section_ids:
-  method-summary: Method summary
----
-
-# MediaType object reference
-
-Access the MediaType object.
-
-## Method summary
-
-| Method                        | Description                                                     |
-| ----------------------------- | --------------------------------------------------------------- |
-| `Map getParameters()`         | Returns a list of parameters.                                   |
-| `String getBaseType()`        | Returns the media base type.                                    |
-| `String getSubType()`         | Returns the media sub type.                                     |
-| `String getParameter(String)` | Returns a string containing the value of the request parameter. |
-| `String getPrimaryType()`     | Returns the primary media type.                                 |
-
----
-
----
-title: Method object reference
-description: Access the Method object in Groovy exc?.request?.method.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_method_object_ref
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_method_object_ref.html
-llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
-section_ids:
-  purpose: Purpose
-  groovy-sample: Groovy sample
-  method-summary: Method summary
----
-
-# Method object reference
-
-Access the Method object in Groovy `exc?.request?.method`.
-
-## Purpose
-
-The Method object contains the HTTP method name from the request made to an application. The HTTP method is sent on to the site after the rules are evaluated.
-
-## Groovy sample
-
-```
-//Retrieve the HTTP Method name and make different decisions based on the method name
-def method = exc?.request?.method?.methodName
-switch (method) {
-     case "GET":
-         println("GET")
-         break;
-     case "POST":
-         println("POST")
-         break;
-     case "PUT":
-         println("PUT")
-         break;
-     case "DELETE":
-         println("DELETE")
-         break;
-default:
-     println("DEFAULT")
-     pass()
-}
-```
-
-## Method summary
-
-| Method                 | Description                                                        |
-| ---------------------- | ------------------------------------------------------------------ |
-| String getMethodName() | Returns the name of the HTTP method, GET, PUT, POST, DELETE, HEAD. |
-
----
-
----
-title: Modifying the Java heap size
-description: Modify the Java heap size for both Windows and Linux installations, including the Windows and Linux services.
-component: pingaccess
-version: 9.1
-page_id: pingaccess:reference_guides:pa_modifying_the_java_heap_size
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_modifying_the_java_heap_size.html
+page_id: pingaccess:reference_guides:pa_configuring_acceptor_threads
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_configuring_acceptor_threads.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 12, 2024
 section_ids:
+  about-this-task: About this task
   steps: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
 ---
 
-# Modifying the Java heap size
+# Configuring acceptor threads
 
-Modify the Java heap size for both Windows and Linux installations, including the Windows and Linux services.
+Configure the pool of acceptor threads based on your environment.
+
+## About this task
+
+PingAccess uses a pool of threads to respond to HTTP/S requests made to the TCP ports in use. This applies to both administrative and runtime engine listening ports. Acceptor threads read user requests from the administrative or runtime port and pass the requests to worker threads for processing. For performance, only one acceptor thread need be used in most situations. On larger multiple CPU core machines, more acceptors can be used.
+
+To modify the pool of acceptor threads:
 
 ## Steps
 
-1. Edit the `jvm-memory.options` file located in the `<PA_HOME>/conf` directory.
+1. Open the `run.properties` file located in the `conf` directory of your PingAccess deployment.
 
-2. Specify overall heap size by modifying the `#Minimum heap size` and `#Maximum heap size` parameters.
+2. Specify the number of acceptors you want to use on the following lines, where *\<N>* represents the number of acceptor threads:
 
-   ### Choose from:
+   * `admin.acceptors=<N>`
 
-   * Modify `-Xms512m` to change the `#Minimum heap size` value.
+   * `engine.http.acceptors=<N>`
 
-   * Modify `-Xmx512m` to change the `#Maximum heap size` value.
-
-   Specify units as `m`, megabytes, or `g`, gigabytes.
-
-3. Specify young generation size by modifying the `#Minimum size for the Young Gen space` and `#Maximum size for the Young Gen space` variables.
-
-   ### Choose from:
-
-   * Modify `-XX:NewSize=256m` to change the `#Minimum size for the Young Gen space` value.
-
-   * Modify `-XX:MaxNewSize=256m` to change the `#Maximum size for the Young Gen space` value.
-
-   Set values to 50% of `#Minimum heap size` and `#Maximum heap size`.
-
-   |   |                                                                                                                                                 |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Not advisable if selecting the G1 collector. For more information, see [Garbage Collector Configuration](pa_garbage_collector_config_ref.html). |
-
-4. If you are running PingAccess as a Windows service, run the `generate-wrapper-jvm-options.bat` file located in the `<PA_HOME>/sbin/windows` directory.
-
-   This file applies the changes from the `jvm-memory.options` file to the `wrapper-jvm-options.conf` file, which is used by the Windows service.
+   * `agent.http.acceptors=<N>`
 
 ---
 
 ---
-title: OAuth endpoint
-description: This page describes the endpoint used by an OAuth authorization server to interface with PingAccess as an OAuth resource server.
+title: Configuring JVM crash log in Java startup
+description: Enable or disable the Java Virtual Machine (JVM) crash log.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:reference_guides:pa_oauth_endpoint
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_oauth_endpoint.html
+page_id: pingaccess:reference_guides:pa_configuring_jvm_crash_log_in_java_startup
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_configuring_jvm_crash_log_in_java_startup.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 6, 2023
+revdate: January 12, 2024
 section_ids:
-  paoauthjwks: /pa/oauth/JWKS
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
 ---
 
-# OAuth endpoint
+# Configuring JVM crash log in Java startup
 
-This page describes the endpoint used by an OAuth *(tooltip: \<div class="paragraph">
-\<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-\</div>)* authorization server to interface with PingAccess as an OAuth resource server.
+Enable or disable the Java Virtual Machine (JVM) crash log.
 
-## /pa/oauth/JWKS
+## About this task
 
-An OAuth authorization server uses this endpoint to acquire PingAccess public keys to encrypt access tokens. The output uses the Internet Engineering Task Force (IETF) JSON Web Token (JWT) *(tooltip: \<div class="paragraph">
-\<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>
-\</div>)* format for public keys.
+The Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
+\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>
+\</div>)* crash log is enabled by default. On Windows, the `run.bat` file specifies the JVM crash log location, and on Linux, the `run.sh` file specifies the JVM crash log location.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you selected the **Use context root as reserved resource base path** check box on your PingAccess application, this feature creates an instance of any reserved PingAccess resources under the application's context root. As such, the context root of the application needs to prepend the reserved context application root (`/pa` by default) in any file paths that reference it.If the context root of your application is `myApp`, the path to the OAuth endpoint would be `myApp/pa/oauth/JWKS` instead. |
+## Steps
+
+* Edit the `<PA_HOME>/bin/run.bat` file on Windows, or the `<PA_HOME>/bin/run.sh` file on Linux.
+
+  ### Choose from:
+
+  * To disable JVM crash log reporting, comment out the line that specifies the JVM crash log location. For example:
+
+    ```
+    #ERROR_FILE="-XX:ErrorFile=$PA_HOME/log/java_error%p.log"
+    ```
+
+  * To enable JVM crash log reporting, remove the comment tag and make the line active. For example:
+
+    ```
+    ERROR_FILE="-XX:ErrorFile=$PA_HOME/log/java_error%p.log"
+    ```
+
+---
+
+---
+title: Configuring memory dumps in Java startup
+description: You can enable or disable Java Virtual Machine (JVM) memory dump, or change the memory dump's storage location.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:reference_guides:pa_configuring_memory_dumps_in_java_startup
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/reference_guides/pa_configuring_memory_dumps_in_java_startup.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 12, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+---
+
+# Configuring memory dumps in Java startup
+
+You can enable or disable Java Virtual Machine (JVM) memory dump, or change the memory dump's storage location.
+
+## About this task
+
+The Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
+\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>
+\</div>)* memory dump is disabled by default. On Windows, the `run.bat` file specifies the memory dump location, and on Linux, the `run.sh` file specifies the memory dump location.
+
+## Steps
+
+* Edit `<PA_HOME>/bin/run.bat` on Windows, or `<PA_HOME>/bin/run.sh` on Linux.
+
+  ### Choose from:
+
+  * To enable JVM memory dump, remove the comment tag on the line that specifies the JVM memory dump location. For example:
+
+    ```
+    HEAP_DUMP="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$PA_HOME/log"
+    ```
+
+  * To disable JVM memory dump, comment out the line. For example:
+
+    ```
+    #HEAP_DUMP="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$PA_HOME/log"
+    ```

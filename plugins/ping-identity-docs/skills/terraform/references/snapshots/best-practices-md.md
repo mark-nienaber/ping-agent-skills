@@ -1,9 +1,11 @@
 ---
 title: Best practices
-description: The following provides a set of best practices to apply when writing Terraform with Ping Identity providers and modules in general. This guide is intended to be used alongside provider and service-specific best practices.
+description: General best practices for writing Terraform HCL with Ping Identity providers, covering state security, versioning, and CI/CD workflows
 component: terraform
 page_id: terraform::best_practices
 canonical_url: https://developer.pingidentity.com/terraform/best_practices.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   general-use: General use

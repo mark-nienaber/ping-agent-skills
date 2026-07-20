@@ -5,124 +5,125 @@
 
 ## Connectors
 
-- [Accertify Connector](https://docs.pingidentity.com/connectors/accertify_connector.md)
-- [Adobe Experience Manager Connector](https://docs.pingidentity.com/connectors/adobe_experience_manager_connector.md)
-- [Apple Login Connector](https://docs.pingidentity.com/connectors/apple_login_connector.md): The Apple Login connector authenticates users with Sign in with Apple and retrieves Apple ID attributes for use in DaVinci flows.
-- [April 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-04-April.md)
-- [April 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-04-April.md)
-- [April 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-04-April.md)
-- [April 2026](https://docs.pingidentity.com/connectors/relnotes/2026-04-April.md)
-- [August 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-08-August.md)
-- [August 2025](https://docs.pingidentity.com/connectors/relnotes/2025-08-August.md)
-- [Authentication Connector](https://docs.pingidentity.com/connectors/authentication_connector.md): The Authentication connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases.
-- [AuthenticID Connector](https://docs.pingidentity.com/connectors/authenticid_connector.md)
-- [Azure AD User Management Connector](https://docs.pingidentity.com/connectors/azure_ad_user_management_connector.md)
-- [Babel Street Connector](https://docs.pingidentity.com/connectors/babelstreet_connector.md)
-- [Castle Connector](https://docs.pingidentity.com/connectors/castle_connector.md)
-- [Challenge Connector](https://docs.pingidentity.com/connectors/challenge_connector.md)
-- [CLEAR Connector](https://docs.pingidentity.com/connectors/clear_connector.md)
-- [Cloudflare Connector](https://docs.pingidentity.com/connectors/cloudflare_connector.md)
-- [Code Snippet Connector](https://docs.pingidentity.com/connectors/code_snippet_connector.md)
-- [Constella Connector](https://docs.pingidentity.com/connectors/constella_connector.md)
-- [Cookie Connector](https://docs.pingidentity.com/connectors/cookie_connector.md)
-- [Core connectors](https://docs.pingidentity.com/connectors/type/core_connectors.md)
-- [CrowdStrike Connector](https://docs.pingidentity.com/connectors/crowdstrike_connector.md)
-- [Daon Connector](https://docs.pingidentity.com/connectors/daon_connector.md)
-- [December 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-12-December.md)
-- [December 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-12-December.md)
-- [Device Policy Connector](https://docs.pingidentity.com/connectors/device_policy_connector.md)
-- [Duo Connector](https://docs.pingidentity.com/connectors/duo_connector.md)
-- [Entrust Connector](https://docs.pingidentity.com/connectors/entrust_connector.md)
-- [Error Message Connector](https://docs.pingidentity.com/connectors/error_message_connector.md)
-- [Facebook Login Connector](https://docs.pingidentity.com/connectors/facebook_login_connector.md): The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in DaVinci flows.
-- [February 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-02-February.md)
-- [February 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-02-February.md)
-- [February 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-02-February.md)
-- [February 2026](https://docs.pingidentity.com/connectors/relnotes/2026-02-February.md)
-- [FingerprintJS Connector](https://docs.pingidentity.com/connectors/fingerprintjs_connector.md)
-- [Flow Analytics Connector](https://docs.pingidentity.com/connectors/flow_analytics_connector.md)
-- [Flow Conductor Connector](https://docs.pingidentity.com/connectors/flow_conductor_connector.md)
-- [Form Connector](https://docs.pingidentity.com/connectors/form_connector.md)
-- [Functions Connector](https://docs.pingidentity.com/connectors/functions_connector.md)
-- [Google Login Connector](https://docs.pingidentity.com/connectors/google_login_connector.md): The Google Login connector authenticates users with Google and retrieves user attributes for use in DaVinci flows.
-- [Google Workspace Admin Connector](https://docs.pingidentity.com/connectors/google_workspace_admin_connector.md)
-- [Hellō Connector](https://docs.pingidentity.com/connectors/hello_connector.md)
-- [HTTP Connector](https://docs.pingidentity.com/connectors/http_connector.md)
-- [HYPR Connector](https://docs.pingidentity.com/connectors/hypr_connector.md)
-- [ID DataWeb Connector](https://docs.pingidentity.com/connectors/id_dataweb_connector.md)
-- [Island Connector](https://docs.pingidentity.com/connectors/island_connector.md)
-- [January 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-01-January.md)
-- [January 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-01-January.md)
-- [January 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-01-January.md)
-- [January 2026](https://docs.pingidentity.com/connectors/relnotes/2026-01-January.md)
-- [Jira Connector](https://docs.pingidentity.com/connectors/jira_connector.md)
-- [July 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-07-July.md)
-- [July 2025](https://docs.pingidentity.com/connectors/relnotes/2025-07-July.md)
-- [June 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-06-June.md)
-- [June 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-06-June.md)
-- [June 2025](https://docs.pingidentity.com/connectors/relnotes/2025-06-June.md)
-- [June 2026](https://docs.pingidentity.com/connectors/relnotes/2026-06-June.md)
-- [LDAP Connector](https://docs.pingidentity.com/connectors/ldap_connector.md)
-- [LexisNexis Connector](https://docs.pingidentity.com/connectors/lexisnexis_connector.md)
-- [Location Policy Connector](https://docs.pingidentity.com/connectors/location_policy_connector.md)
-- [March 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-03-March.md)
-- [March 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-03-March.md)
-- [March 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-03-March.md)
-- [March 2026](https://docs.pingidentity.com/connectors/relnotes/2026-03-March.md)
-- [Marketo Connector](https://docs.pingidentity.com/connectors/marketo_connector.md)
-- [May 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-05-May.md)
-- [May 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-05-May.md)
-- [May 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-05-May.md)
-- [May 2026](https://docs.pingidentity.com/connectors/relnotes/2026-05-May.md)
-- [MFA Connector](https://docs.pingidentity.com/connectors/mfa_connector.md): The MFA connector provides a fast way to orchestrate flows in PingOne DaVinci for common multi-factor authentication (MFA) use cases.
-- [Microsoft Defender for Endpoint Connector](https://docs.pingidentity.com/connectors/microsoft_defender_connector.md)
-- [Microsoft Edge for Business Connector](https://docs.pingidentity.com/connectors/microsoft_edge_connector.md)
-- [Microsoft Teams Connector](https://docs.pingidentity.com/connectors/microsoft_teams_connector.md)
-- [Mitek Connector](https://docs.pingidentity.com/connectors/mitek_connector.md)
-- [November 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-11-November.md)
-- [November 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-11-November.md)
-- [October 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-10-October.md)
-- [October 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-10-October.md)
-- [October 2025](https://docs.pingidentity.com/connectors/relnotes/2025-10-October.md)
-- [OIDC and OAuth IdP Connector](https://docs.pingidentity.com/connectors/oidc_oauth_idp_connector.md)
-- [OneTrust Connector](https://docs.pingidentity.com/connectors/onetrust_connector.md)
-- [Ping connectors](https://docs.pingidentity.com/connectors/type/ping_connectors.md)
-- [PingFederate Connector](https://docs.pingidentity.com/connectors/pf_connector.md)
-- [PingID Connector](https://docs.pingidentity.com/connectors/pid_connector.md)
-- [PingID Legacy Connector](https://docs.pingidentity.com/connectors/pid_legacy_connector.md)
-- [PingOne Advanced Identity Cloud Access Request Connector](https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_access_request_connector.md)
-- [PingOne Advanced Identity Cloud Login Connector](https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_login_connector.md)
-- [PingOne Authentication Connector](https://docs.pingidentity.com/connectors/p1_authentication_connector.md): The PingOne Authentication connector lets you authenticate users and manage PingOne user authentication sessions in your PingOne DaVinci flow.
-- [PingOne Authorize Connector](https://docs.pingidentity.com/connectors/p1az_connector.md)
-- [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.md): Use the PingOne DaVinci connector to add PingOne functionality for your DaVinci flow.
-- [PingOne Credentials Connector](https://docs.pingidentity.com/connectors/p1_credentials_connector.md)
-- [PingOne DaVinci Connectors](https://docs.pingidentity.com/connectors/index.md)
-- [PingOne MFA Connector](https://docs.pingidentity.com/connectors/p1_mfa_connector.md)
-- [PingOne Notifications Connector](https://docs.pingidentity.com/connectors/p1_notifications_connector.md)
-- [PingOne Protect Connector](https://docs.pingidentity.com/connectors/p1_protect_connector.md)
-- [PingOne RADIUS Gateway Connector](https://docs.pingidentity.com/connectors/p1_radius_gateway_connector.md)
-- [PingOne Scope Consent Connector](https://docs.pingidentity.com/connectors/p1_scope_consent_connector.md)
-- [PingOne Verify Connector](https://docs.pingidentity.com/connectors/p1_verify_connector.md): Use the PingOne Verify DaVinci connector to securely verify a user's identity.
-- [Protect Use Case Connector](https://docs.pingidentity.com/connectors/protect_use_case_connector.md)
-- [Release Notes](https://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.md)
-- [Salesforce Connector](https://docs.pingidentity.com/connectors/salesforce_connector.md)
-- [SAML IdP Connector](https://docs.pingidentity.com/connectors/saml_connector.md)
-- [ScrambleID Connector](https://docs.pingidentity.com/connectors/scrambleid_connector.md)
-- [Screen Connector](https://docs.pingidentity.com/connectors/screen_connector.md)
-- [Secret Double Octopus Connector](https://docs.pingidentity.com/connectors/secret_double_octopus_connector.md)
-- [SecurID Connector](https://docs.pingidentity.com/connectors/securid_connector.md)
-- [SentinelOne Connector](https://docs.pingidentity.com/connectors/sentinelone_connector.md)
-- [SEON Connector](https://docs.pingidentity.com/connectors/seon_connector.md)
-- [September 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-09-September.md)
-- [Service connectors](https://docs.pingidentity.com/connectors/type/service_connectors.md)
-- [ServiceNow Connector](https://docs.pingidentity.com/connectors/servicenow_connector.md)
-- [Socure Connector](https://docs.pingidentity.com/connectors/socure_connector.md)
-- [Splunk Connector](https://docs.pingidentity.com/connectors/splunk_connector.md)
-- [String Connector](https://docs.pingidentity.com/connectors/string_connector.md)
-- [Teleport Connector](https://docs.pingidentity.com/connectors/teleport_connector.md)
-- [Token Management Connector](https://docs.pingidentity.com/connectors/token_management_connector.md)
-- [TransUnion TLOxp Connector](https://docs.pingidentity.com/connectors/transunion_tloxp_connector.md)
-- [Use case connectors](https://docs.pingidentity.com/connectors/type/use_case_connectors.md)
-- [Variable Connector](https://docs.pingidentity.com/connectors/variable_connector.md)
-- [Veriff Connector](https://docs.pingidentity.com/connectors/veriff_connector.md)
-- [Yoti Connector](https://docs.pingidentity.com/connectors/yoti_connector.md)
+- [Accertify Connector](https://docs.pingidentity.com/connectors/accertify_connector.md): Configure the Accertify connector in PingOne DaVinci to send identity events to the Accertify fraud detection platform and receive risk scores
+- [Adobe Experience Manager Connector](https://docs.pingidentity.com/connectors/adobe_experience_manager_connector.md): Configure the Adobe Experience Manager connector in PingOne DaVinci to manage data privacy and CCPA/CPRA consent within Adobe Experience Platform
+- [Apple Login Connector](https://docs.pingidentity.com/connectors/apple_login_connector.md): The Apple Login connector authenticates users with Sign in with Apple and retrieves Apple ID attributes for use in PingOne DaVinci flows
+- [April 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-04-April.md): Release notes for PingOne DaVinci connectors for April 2023
+- [April 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-04-April.md): Release notes for PingOne DaVinci connectors for April 2024
+- [April 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-04-April.md): Release notes for PingOne DaVinci connectors for April 2025
+- [April 2026](https://docs.pingidentity.com/connectors/relnotes/2026-04-April.md): PingOne DaVinci connector release notes for April 2026
+- [August 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-08-August.md): Release notes for PingOne DaVinci connectors for August 2023
+- [August 2025](https://docs.pingidentity.com/connectors/relnotes/2025-08-August.md): Release notes for PingOne DaVinci connectors for August 2025
+- [Authentication Connector](https://docs.pingidentity.com/connectors/authentication_connector.md): The Authentication connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases
+- [AuthenticID Connector](https://docs.pingidentity.com/connectors/authenticid_connector.md): Configure the AuthenticID connector in PingOne DaVinci to verify identities using document scanning and selfie capture via CFAir or CFWeb
+- [Azure AD User Management Connector](https://docs.pingidentity.com/connectors/azure_ad_user_management_connector.md): Configure the Azure AD User Management connector to manage users, groups, and software licenses in your PingOne DaVinci flow
+- [Babel Street Connector](https://docs.pingidentity.com/connectors/babelstreet_connector.md): Configure the Babel Street connector in PingOne DaVinci to compare name and address similarity, transliterate names, and identify text language
+- [BeyondTrust Privileged Remote Access Connector](https://docs.pingidentity.com/connectors/beyondtrust_pra_connector.md): Configure the BeyondTrust Privileged Remote Access connector to terminate PRA jump sessions by hostname or username in a PingOne DaVinci flow
+- [Castle Connector](https://docs.pingidentity.com/connectors/castle_connector.md): Configure the Castle connector to add fraud and risk signals to PingOne DaVinci flows, block bots, and request risk evaluations from Castle's API
+- [Challenge Connector](https://docs.pingidentity.com/connectors/challenge_connector.md): Configure the Challenge connector to branch PingOne DaVinci flows and handle external events like MFA challenges using status-based polling
+- [CLEAR Connector](https://docs.pingidentity.com/connectors/clear_connector.md): Configure the CLEAR connector in PingOne DaVinci to redirect users to CLEAR's hosted verification UI and retrieve verified identity results
+- [Cloudflare Connector](https://docs.pingidentity.com/connectors/cloudflare_connector.md): Configure the Cloudflare connector in PingOne DaVinci to assess IP and domain threats, enforce Zero Trust policies, and manage user risk scores
+- [Code Snippet Connector](https://docs.pingidentity.com/connectors/code_snippet_connector.md): Configure the Code Snippet connector in PingOne DaVinci to create reusable custom JavaScript code that you can share across multiple flows
+- [Constella Connector](https://docs.pingidentity.com/connectors/constella_connector.md): Configure the Constella connector in PingOne DaVinci to evaluate email risk and detect account takeover attempts using breach data
+- [Cookie Connector](https://docs.pingidentity.com/connectors/cookie_connector.md): Configure the Cookie connector in PingOne DaVinci to set and retrieve session cookies, including HMAC-signed cookies with custom claims
+- [Core connectors](https://docs.pingidentity.com/connectors/type/core_connectors.md): Browse core PingOne DaVinci connectors that provide foundational functions for building PingOne DaVinci flows
+- [CrowdStrike Connector](https://docs.pingidentity.com/connectors/crowdstrike_connector.md): Configure the CrowdStrike connector in PingOne DaVinci to check device management status, assess Zero Trust scores, and manage quarantined devices
+- [Daon Connector](https://docs.pingidentity.com/connectors/daon_connector.md): Configure the Daon connector to use Daon IdentityX for MFA in PingOne DaVinci flows, with results via webhook or polling
+- [December 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-12-December.md): Release notes for PingOne DaVinci connectors for December 2022
+- [December 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-12-December.md): Release notes for PingOne DaVinci connectors for December 2024
+- [Device Policy Connector](https://docs.pingidentity.com/connectors/device_policy_connector.md): Configure the Policy connector in PingOne DaVinci to check user agent, browser, and OS version to allow or deny device access in your flows
+- [Duo Connector](https://docs.pingidentity.com/connectors/duo_connector.md): Configure the Duo connector to add Duo multi-factor authentication to your PingOne DaVinci flows
+- [Entrust Connector](https://docs.pingidentity.com/connectors/entrust_connector.md): Configure the Entrust connector in PingOne DaVinci to add adaptive authentication with MFA via OTP and TOTP to your flows
+- [Error Message Connector](https://docs.pingidentity.com/connectors/error_message_connector.md): Configure the Error Message connector to create and customize error messages displayed to users in your PingOne DaVinci flows
+- [Facebook Login Connector](https://docs.pingidentity.com/connectors/facebook_login_connector.md): The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in PingOne DaVinci flows
+- [February 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-02-February.md): Release notes for PingOne DaVinci connectors for February 2022
+- [February 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-02-February.md): Release notes for PingOne DaVinci connectors for February 2024
+- [February 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-02-February.md): Release notes for PingOne DaVinci connectors for February 2025
+- [February 2026](https://docs.pingidentity.com/connectors/relnotes/2026-02-February.md): Release notes for PingOne DaVinci connectors for February 2026
+- [FingerprintJS Connector](https://docs.pingidentity.com/connectors/fingerprintjs_connector.md): Configure the FingerprintJS connector in PingOne DaVinci to generate unique visitor IDs using browser fingerprinting for fraud detection
+- [Flow Analytics Connector](https://docs.pingidentity.com/connectors/flow_analytics_connector.md): Configure the PingOne DaVinci Flow Analytics connector to log flow outcomes, track analytics by outcome type, and set error logging policies
+- [Flow Conductor Connector](https://docs.pingidentity.com/connectors/flow_conductor_connector.md): Configure the Flow Conductor connector in PingOne DaVinci to initiate out-of-band events with magic links and use other flows as reusable subflows
+- [Form Connector](https://docs.pingidentity.com/connectors/form_connector.md): Configure the Form connector to include branded PingOne forms and messages in PingOne DaVinci flows using the drag-and-drop form builder
+- [Functions Connector](https://docs.pingidentity.com/connectors/functions_connector.md): Configure the PingOne DaVinci Functions connector to branch flows using logical conditions, variable comparisons, calculations, or JavaScript
+- [Google Login Connector](https://docs.pingidentity.com/connectors/google_login_connector.md): The Google Login connector authenticates users with Google and retrieves user attributes for use in PingOne DaVinci flows
+- [Google Workspace Admin Connector](https://docs.pingidentity.com/connectors/google_workspace_admin_connector.md): Configure the Google Workspace Admin connector in PingOne DaVinci to manage Workspace users, groups, and application licenses in your flows
+- [Hellō Connector](https://docs.pingidentity.com/connectors/hello_connector.md): Configure the Hellō connector to add Hellō as an OpenID Connect login option in PingOne DaVinci and receive verified user claims in your flow
+- [HTTP Connector](https://docs.pingidentity.com/connectors/http_connector.md): Configure the PingOne DaVinci HTTP connector to show custom HTML pages, make REST API calls, and build custom user interfaces in your flow
+- [HYPR Connector](https://docs.pingidentity.com/connectors/hypr_connector.md): Configure the HYPR connector in PingOne DaVinci to enable passwordless authentication using HYPR in your identity flows
+- [ID DataWeb Connector](https://docs.pingidentity.com/connectors/id_dataweb_connector.md): Configure the ID DataWeb connector to integrate AXN Verify identity verification into a PingOne DaVinci flow
+- [Island Connector](https://docs.pingidentity.com/connectors/island_connector.md): Configure the Island connector to use Island device trust signals in PingOne DaVinci to verify device context and enforce device-based policies
+- [January 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-01-January.md): Release notes for PingOne DaVinci connectors for January 2023
+- [January 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-01-January.md): Release notes for PingOne DaVinci connectors for January 2024
+- [January 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-01-January.md): Release notes for PingOne DaVinci connectors for January 2025
+- [January 2026](https://docs.pingidentity.com/connectors/relnotes/2026-01-January.md): Release notes for PingOne DaVinci connectors for January 2026
+- [Jira Connector](https://docs.pingidentity.com/connectors/jira_connector.md): Configure the Jira connector to manage issues and trigger Jira workflows in your PingOne DaVinci flow
+- [July 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-07-July.md): Release notes for PingOne DaVinci connectors for July 2023
+- [July 2025](https://docs.pingidentity.com/connectors/relnotes/2025-07-July.md): Release notes for PingOne DaVinci connectors for July 2025
+- [June 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-06-June.md): Release notes for PingOne DaVinci connectors for June 2022
+- [June 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-06-June.md): Release notes for PingOne DaVinci connectors for June 2023
+- [June 2025](https://docs.pingidentity.com/connectors/relnotes/2025-06-June.md): Release notes for PingOne DaVinci connectors for June 2025
+- [June 2026](https://docs.pingidentity.com/connectors/relnotes/2026-06-June.md): Release notes for PingOne DaVinci connectors for June 2026
+- [LDAP Connector](https://docs.pingidentity.com/connectors/ldap_connector.md): Configure the LDAP connector to create, update, delete, and search entries in an LDAP directory store within a PingOne DaVinci flow
+- [LexisNexis Connector](https://docs.pingidentity.com/connectors/lexisnexis_connector.md): Configure the LexisNexis connector in PingOne DaVinci to assess risk with ThreatMetrix, send OTPs, and authenticate with security questions
+- [Location Policy Connector](https://docs.pingidentity.com/connectors/location_policy_connector.md): Configure the Location Policy connector in PingOne DaVinci to check user IP and location, then allow or deny requests from specified locales
+- [March 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-03-March.md): Release notes for PingOne DaVinci connectors for March 2023
+- [March 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-03-March.md): Release notes for PingOne DaVinci connectors for March 2024
+- [March 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-03-March.md): Release notes for PingOne DaVinci connectors for March 2025
+- [March 2026](https://docs.pingidentity.com/connectors/relnotes/2026-03-March.md): PingOne DaVinci connector release notes for March 2026
+- [Marketo Connector](https://docs.pingidentity.com/connectors/marketo_connector.md): Configure the Marketo connector in PingOne DaVinci to add, search, and update leads and manage lists in Marketo
+- [May 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-05-May.md): Release notes for PingOne DaVinci connectors for May 2023
+- [May 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-05-May.md): Release notes for PingOne DaVinci connectors for May 2024
+- [May 2025](https://docs.pingidentity.com/connectors/relnotes/archive/2025-05-May.md): Release notes for PingOne DaVinci connectors for May 2025
+- [May 2026](https://docs.pingidentity.com/connectors/relnotes/2026-05-May.md): Release notes for PingOne DaVinci connectors for May 2026
+- [MFA Connector](https://docs.pingidentity.com/connectors/mfa_connector.md): The MFA connector provides a fast way to orchestrate flows in PingOne DaVinci for common multi-factor authentication (MFA) use cases
+- [Microsoft Defender for Endpoint Connector](https://docs.pingidentity.com/connectors/microsoft_defender_connector.md): Configure the Microsoft Defender for Endpoint connector in PingOne DaVinci to integrate endpoint detection, device trust, and security alerts
+- [Microsoft Edge for Business Connector](https://docs.pingidentity.com/connectors/microsoft_edge_connector.md): Configure the Microsoft Edge for Business connector to collect device signals and strengthen authentication security in a PingOne DaVinci flow
+- [Microsoft Teams Connector](https://docs.pingidentity.com/connectors/microsoft_teams_connector.md): Configure the Microsoft Teams connector in PingOne DaVinci to manage team memberships and send messages in channels and chats
+- [Mitek Connector](https://docs.pingidentity.com/connectors/mitek_connector.md): Configure the Mitek connector in PingOne DaVinci to create identity verification journeys delivered by email or SMS and handle webhook callbacks
+- [November 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-11-November.md): Release notes for PingOne DaVinci connectors for November 2023
+- [November 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-11-November.md): Release notes for PingOne DaVinci connectors for November 2024
+- [October 2022](https://docs.pingidentity.com/connectors/relnotes/archive/2022-10-October.md): Release notes for PingOne DaVinci connectors for October 2022
+- [October 2024](https://docs.pingidentity.com/connectors/relnotes/archive/2024-10-October.md): Release notes for PingOne DaVinci connectors for October 2024
+- [October 2025](https://docs.pingidentity.com/connectors/relnotes/2025-10-October.md): Release notes for PingOne DaVinci connectors for October 2025
+- [OIDC and OAuth IdP Connector](https://docs.pingidentity.com/connectors/oidc_oauth_idp_connector.md): Configure the OIDC and OAuth IdP connector in PingOne DaVinci to authenticate users with an external IdP using OpenID Connect or OAuth 2.0
+- [OneTrust Connector](https://docs.pingidentity.com/connectors/onetrust_connector.md): Configure the OneTrust connector in PingOne DaVinci to create and retrieve user consent receipts for privacy and data governance flows
+- [Ping connectors](https://docs.pingidentity.com/connectors/type/ping_connectors.md): Browse PingOne DaVinci connectors that integrate your flows with PingOne, PingFederate, PingDirectory, and other Ping Identity products
+- [PingFederate Connector](https://docs.pingidentity.com/connectors/pf_connector.md): Configure the PingFederate Connector to embed PingFederate authentication policies in PingOne DaVinci flows using redirectless or redirect methods
+- [PingID Connector](https://docs.pingidentity.com/connectors/pid_connector.md): Configure the PingID connector in PingOne DaVinci to add MFA authentication and device enrollment flows to your PingOne environment
+- [PingID Legacy Connector](https://docs.pingidentity.com/connectors/pid_legacy_connector.md): Configure the PingID Legacy connector in PingOne DaVinci to add MFA and passwordless authentication to flows using PingID
+- [PingOne Advanced Identity Cloud Access Request Connector](https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_access_request_connector.md): Configure the PingOne Advanced Identity Cloud Access Request connector to manage users and create access requests in PingOne DaVinci flows
+- [PingOne Advanced Identity Cloud Login Connector](https://docs.pingidentity.com/connectors/p1_advanced_identity_cloud_login_connector.md): Configure the PingOne Advanced Identity Cloud Login connector to authenticate users via the default journey in Advanced Identity Cloud
+- [PingOne Authentication Connector](https://docs.pingidentity.com/connectors/p1_authentication_connector.md): The PingOne Authentication connector lets you authenticate users and manage PingOne user authentication sessions in your PingOne DaVinci flow
+- [PingOne Authorize Connector](https://docs.pingidentity.com/connectors/p1az_connector.md): Configure the PingOne Authorize connector in PingOne DaVinci to make policy-based, fine-grained authorization decisions within your flows
+- [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.md): Use the PingOne DaVinci connector to add PingOne functionality for your PingOne DaVinci flow
+- [PingOne Credentials Connector](https://docs.pingidentity.com/connectors/p1_credentials_connector.md): Configure the PingOne Credentials connector in PingOne DaVinci to issue, verify, and manage digital verifiable credentials using PingOne
+- [PingOne DaVinci Connectors](https://docs.pingidentity.com/connectors/index.md): Browse and configure PingOne DaVinci connectors to integrate third-party services, HTML pages, and tools into your PingOne DaVinci flows
+- [PingOne MFA Connector](https://docs.pingidentity.com/connectors/p1_mfa_connector.md): Configure the PingOne MFA connector in PingOne DaVinci to add MFA flows, user enrollment, and passwordless authentication to your applications
+- [PingOne Notifications Connector](https://docs.pingidentity.com/connectors/p1_notifications_connector.md): Configure the PingOne Notifications connector in PingOne DaVinci to send custom voice, SMS, and email notifications using PingOne templates
+- [PingOne Protect Connector](https://docs.pingidentity.com/connectors/p1_protect_connector.md): Configure the PingOne Protect connector in PingOne DaVinci to evaluate user risk, apply security policies, and route flows based on risk score or level
+- [PingOne RADIUS Gateway Connector](https://docs.pingidentity.com/connectors/p1_radius_gateway_connector.md): Configure the PingOne RADIUS Gateway connector to integrate PingOne DaVinci flows with a PingOne RADIUS Gateway for RADIUS authentication
+- [PingOne Scope Consent Connector](https://docs.pingidentity.com/connectors/p1_scope_consent_connector.md): Configure the PingOne Scope Consent connector to view, update, and revoke consent records and prompt consent decisions in PingOne DaVinci
+- [PingOne Verify Connector](https://docs.pingidentity.com/connectors/p1_verify_connector.md): Use the PingOne Verify connector with PingOne DaVinci to securely verify a user's identity
+- [Protect Use Case Connector](https://docs.pingidentity.com/connectors/protect_use_case_connector.md): Configure the PingOne Protect Use Case connector in PingOne DaVinci to evaluate risk and apply policy mitigations without extra connectors
+- [Release Notes](https://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.md): PingOne DaVinci connector release notes index listing new features and improvements across all connector releases
+- [Salesforce Connector](https://docs.pingidentity.com/connectors/salesforce_connector.md): Configure the Salesforce connector to read, create, and update users and records in Salesforce from PingOne DaVinci flows
+- [SAML IdP Connector](https://docs.pingidentity.com/connectors/saml_connector.md): Configure the SAML IdP connector to authenticate users with a SAML identity provider in your PingOne DaVinci flow
+- [ScrambleID Connector](https://docs.pingidentity.com/connectors/scrambleid_connector.md): Configure the ScrambleID connector to enable OIDC-based authentication with ScrambleID in a PingOne DaVinci flow
+- [Screen Connector](https://docs.pingidentity.com/connectors/screen_connector.md): Configure the Screen connector to display forms and custom UI elements to collect user information or show PingOne DaVinci flow progress
+- [Secret Double Octopus Connector](https://docs.pingidentity.com/connectors/secret_double_octopus_connector.md): Configure the Secret Double Octopus connector to enable passwordless push authentication in PingOne DaVinci flows
+- [SecurID Connector](https://docs.pingidentity.com/connectors/securid_connector.md): Configure the SecurID connector to use RSA SecurID multi-factor authentication in your PingOne DaVinci flows
+- [SentinelOne Connector](https://docs.pingidentity.com/connectors/sentinelone_connector.md): Configure the SentinelOne connector in PingOne DaVinci to integrate endpoint detection and response for real-time device trust in your flows
+- [SEON Connector](https://docs.pingidentity.com/connectors/seon_connector.md): Configure the SEON connector in PingOne DaVinci to detect fraud using device fingerprinting, request fraud scores, and send feedback to SEON
+- [September 2023](https://docs.pingidentity.com/connectors/relnotes/archive/2023-09-September.md): PingOne DaVinci connector release notes for September 2023
+- [Service connectors](https://docs.pingidentity.com/connectors/type/service_connectors.md): Browse PingOne DaVinci service connectors that integrate your flows with external services, products, and platform features
+- [ServiceNow Connector](https://docs.pingidentity.com/connectors/servicenow_connector.md): Configure the ServiceNow connector to manage users, group memberships, and incidents in ServiceNow from a PingOne DaVinci flow
+- [Socure Connector](https://docs.pingidentity.com/connectors/socure_connector.md): Configure the Socure connector in PingOne DaVinci to verify identity documents and generate fraud scores in your flows
+- [Splunk Connector](https://docs.pingidentity.com/connectors/splunk_connector.md): Configure the Splunk connector in PingOne DaVinci to post events to Splunk and gain real-time operational intelligence in your flows
+- [String Connector](https://docs.pingidentity.com/connectors/string_connector.md): Configure the String connector to transform text in PingOne DaVinci flows by converting case, concatenating strings, changing data types, and more
+- [Teleport Connector](https://docs.pingidentity.com/connectors/teleport_connector.md): Configure the Teleport connector to visually organize and subdivide flows on the PingOne DaVinci flow canvas
+- [Token Management Connector](https://docs.pingidentity.com/connectors/token_management_connector.md): Configure the Token Management connector to create and validate JWT tokens and manage OpenID Connect redirects in your PingOne DaVinci flow
+- [TransUnion TLOxp Connector](https://docs.pingidentity.com/connectors/transunion_tloxp_connector.md): Configure the TransUnion TLOxp connector in PingOne DaVinci to verify identity by matching personal information against TransUnion data
+- [Use case connectors](https://docs.pingidentity.com/connectors/type/use_case_connectors.md): Browse PingOne DaVinci use case connectors that combine flow steps to build common identity experiences such as sign on, registration, and MFA
+- [Variable Connector](https://docs.pingidentity.com/connectors/variable_connector.md): Configure the Variable connector to store and retrieve flow, flow instance, and user variables within your PingOne DaVinci flows
+- [Veriff Connector](https://docs.pingidentity.com/connectors/veriff_connector.md): Configure the Veriff connector in PingOne DaVinci to verify user identity and prevent fraud using AI-powered document verification
+- [Yoti Connector](https://docs.pingidentity.com/connectors/yoti_connector.md): Configure the Yoti connector in PingOne DaVinci to add identity verification, age estimation, and age verification to your flows

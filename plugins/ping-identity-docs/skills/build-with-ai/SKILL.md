@@ -29,13 +29,16 @@ Agent skills that extend AI coding assistants with Ping Identity domain expertis
 |---|---|---|---|
 | Davinci Mcp Server: davinci, mcp, server | davinci-mcp-server | https://developer.pingidentity.com/build-with-ai/davinci-mcp-server/*.md | references/snapshots/davinci-mcp-server.md |
 | Aic Mcp Server: server, aic, mcp | aic-mcp-server | https://developer.pingidentity.com/build-with-ai/aic-mcp-server/*.md | references/snapshots/aic-mcp-server.md |
+| Pingcli: cli, pipelines, configuration | pingcli | https://developer.pingidentity.com/build-with-ai/pingcli/*.md | references/snapshots/pingcli.md |
 | Agent Skills: agent, identity, skills | agent-skills | https://developer.pingidentity.com/build-with-ai/agent-skills/*.md | references/snapshots/agent-skills.md |
+| Agentic Cicd Production.Md: environments, production, agents | agentic-cicd-production.md | https://developer.pingidentity.com/build-with-ai/agentic-cicd-production.md | references/snapshots/agentic-cicd-production-md.md |
+| Agentic Deployment Patterns.Md: deployment, patterns, across | agentic-deployment-patterns.md | https://developer.pingidentity.com/build-with-ai/agentic-deployment-patterns.md | references/snapshots/agentic-deployment-patterns-md.md |
+| Agentic Development Environments.Md: development, agentic, agents | agentic-development-environments.md | https://developer.pingidentity.com/build-with-ai/agentic-development-environments.md | references/snapshots/agentic-development-environments-md.md |
 | Disclaimers.Md: disclaimers, limitations, agent | disclaimers.md | https://developer.pingidentity.com/build-with-ai/disclaimers.md | references/snapshots/disclaimers-md.md |
 | Docs For Agents.Md: agents, alternates, can | docs-for-agents.md | https://developer.pingidentity.com/build-with-ai/docs-for-agents.md | references/snapshots/docs-for-agents-md.md |
-| Index.Md: here, start | index.md | https://developer.pingidentity.com/build-with-ai/index.md | references/snapshots/index-md.md |
+| Index.Md: agent, build, cases | index.md | https://developer.pingidentity.com/build-with-ai/index.md | references/snapshots/index-md.md |
 | Release Notes: announcements, build, new | release_notes | https://developer.pingidentity.com/build-with-ai/release_notes/*.md | references/snapshots/release-notes.md |
-| Tying It All Together.Md: all, together, tying | tying-it-all-together.md | https://developer.pingidentity.com/build-with-ai/tying-it-all-together.md | references/snapshots/tying-it-all-together-md.md |
-| Use Cases: app, build, ios | use-cases | https://developer.pingidentity.com/build-with-ai/use-cases/*.md | references/snapshots/use-cases.md |
+| Terraform: identity, configuration, code | terraform | https://developer.pingidentity.com/build-with-ai/terraform/*.md | references/snapshots/terraform.md |
 
 ## Composition
 

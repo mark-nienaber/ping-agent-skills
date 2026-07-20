@@ -5,6 +5,8 @@ component: web-agents
 version: 2026
 page_id: web-agents::index
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/preface.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   release_notes: Release notes
   get_started_with_web_agent: Get started with Web Agent

@@ -1,12 +1,12 @@
 ---
 title: Entrust Connector
-description: The Entrust connector lets you use Entrust adaptive authentication in your PingOne DaVinci flow.
+description: Configure the Entrust connector in PingOne DaVinci to add adaptive authentication with MFA via OTP and TOTP to your flows
 component: connectors
 page_id: connectors::entrust_connector
 canonical_url: https://docs.pingidentity.com/connectors/entrust_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -44,13 +44,13 @@ You can use the Entrust connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -72,7 +72,7 @@ For a direct link to the documentation, modify the following URL: `https://<your
 
 ### Configuring the Entrust connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -92,7 +92,7 @@ The ID of your Entrust application.
 
 This flow asks a user to authenticate with Entrust. It asks the user to enter their user ID in an HTML form, prompts them to select and complete a Entrust authentication method, then shows the results on an HTML page.
 
-1. Download the [Entrust Authentication](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010wzNIAQ/entrust-authentication-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Entrust Authentication](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010wzNIAQ/entrust-authentication-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Add transaction details:
 

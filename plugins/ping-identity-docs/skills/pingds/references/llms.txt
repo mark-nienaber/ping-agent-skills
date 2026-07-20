@@ -11795,4 +11795,4 @@
 - [Removed](https://docs.pingidentity.com/pingds/release-notes/removed.md): Lists functionality removed in PingDS releases, including commands, APIs, and configuration options no longer available.
 - [Requirements](https://docs.pingidentity.com/pingds/release-notes/requirements.md): Hardware, software, and platform requirements for deploying PingDS, including supported Java versions, OS, and Kubernetes environments.
 - [Security advisories](https://docs.pingidentity.com/pingds/release-notes/security-advisories.md): Links to PingDS security advisories published by Ping Identity to address vulnerabilities in collaboration with customers.
-- [What&#8217;s new](https://docs.pingidentity.com/pingds/release-notes/whats-new.md): Lists new features and enhancements in PingDS releases, with version-specific upgrade notes for 8.1 and earlier versions.
+- [What&#8217;s new](https://docs.pingidentity.com/pingds/release-notes/whats-new.md): Lists new features and enhancements in PingDS releases, with version-specific upgrade notes for 9.0 and earlier versions.

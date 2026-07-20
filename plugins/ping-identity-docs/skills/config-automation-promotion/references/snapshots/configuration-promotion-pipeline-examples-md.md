@@ -1,9 +1,11 @@
 ---
 title: GitOps Pipeline Examples
-description: Use the following template and example resources to get started with GitOps configuration promotion pipelines.
+description: Find example GitOps CI/CD pipeline templates for promoting Ping Identity platform, application, and infrastructure configuration
 component: config-automation-promotion
 page_id: config-automation-promotion::configuration_promotion_pipeline_examples
 canonical_url: https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.html
+llms_txt: https://developer.pingidentity.com/config-automation-promotion/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 24, 2025
 section_ids:
   ping-identity-platform-example-cicd-pipeline: Ping Identity Platform Example CI/CD Pipeline

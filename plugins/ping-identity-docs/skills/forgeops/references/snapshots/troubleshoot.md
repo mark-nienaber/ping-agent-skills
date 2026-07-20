@@ -1,4 +1,155 @@
 ---
+title: <code>kubectl</code> shell autocompletion
+description: The kubectl shell autocompletion extension lets you extend the Tab key completion feature of Bash and Zsh shells to the kubectl commands. While not a troubleshooting tool, this extension can make troubleshooting easier, because it lets you enter kubectl commands more easily.
+component: forgeops
+version: 2026.2
+page_id: forgeops:troubleshoot:tab-completion
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/tab-completion.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# `kubectl` shell autocompletion
+
+The kubectl shell autocompletion extension lets you extend the Tab key completion feature of Bash and Zsh shells to the kubectl commands. While not a troubleshooting tool, this extension can make troubleshooting easier, because it lets you enter kubectl commands more easily.
+
+For more information about the Kubernetes autocompletion extension, see [Enabling shell autocompletion](https://kubernetes.io/docs/tasks/kubectl/install/#enabling-shell-autocompletion) in the Kubernetes documentation.
+
+Note that to install the autocompletion extension in Bash, you must be running version 4 or later of the Bash shell. To determine your bash shell version, run the bash --version command.
+
+---
+
+---
+title: DS diagnostic tools
+description: The bin/ds-debug.sh script lets you obtain diagnostic information for any DS pod running in your cluster. It also lets you perform several cleanup and recovery operations on DS pods.
+component: forgeops
+version: 2026.2
+page_id: forgeops:troubleshoot:debug-tools
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/debug-tools.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Troubleshooting", "Kubernetes", "Directory Server"]
+section_ids:
+  ds-debug: Debug script
+  debug-tools-container: Debug tools container
+---
+
+# DS diagnostic tools
+
+## Debug script
+
+The bin/ds-debug.sh script lets you obtain diagnostic information for any DS pod running in your cluster. It also lets you perform several cleanup and recovery operations on DS pods.
+
+Run bin/ds-debug.sh -h to refer to the command's syntax.
+
+The following bin/ds-debug.sh subcommands provide diagnostic information:
+
+| Subcommand   | Diagnostics                                                   |
+| ------------ | ------------------------------------------------------------- |
+| status       | Server details, connection handlers, backends, and disk space |
+| rstatus      | Replication status                                            |
+| idsearch     | All the DNs in the `ou=identities` branch                     |
+| monitor      | All the directory entries in the `cn=monitor` branch          |
+| list-backups | A list of the backups associated with a DS instance           |
+
+The bin/ds-debug.sh purge command purges all the backups associated with a DS instance.
+
+## Debug tools container
+
+The `ds-util` debug tools container provides a suite of diagnostic tools that you can execute inside of a running Kubernetes cluster.
+
+The container has two types of tools:
+
+* DS tools—A DS instance is installed in the /opt/opendj directory of the `ds-util` container. DS tools, such as the ldapsearch and ldapmodify commands, are available in the /opt/opendj/bin directory.
+
+* Miscellaneous diagnostic tools—A set of diagnostic tools, including `dig`, `netcat`, `nslookup`, `curl`, and `vi`, have been installed in the container. The file, /path/to/forgeops/docker/ds/dsutil/Dockerfile, has the list of operating system packages that have been installed in the debug tools container.
+
+To start the debug tools container:
+
+```
+$ kubectl run -it ds-util --image=gcr.io/forgeops-public/ds-util -- bash
+```
+
+After you start the tools container, a command prompt appears:
+
+```
+root@ds-util:/opt/opendj#
+```
+
+You can access all the tools available in the container from this prompt. For example:
+
+```
+root@ds-util:/opt/opendj# nslookup am
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	am.my-namespace.svc.cluster.local
+Address: 10.100.20.240
+```
+
+---
+
+---
+title: Expanded Kustomize output
+description: If you've modified any of the Kustomize bases and overlays that come with the cdk canonical configuration, you might want to consider how your changes affect deployment. Use the kustomize build command to assess how Kustomize expands your bases and overlays into YAML files.
+component: forgeops
+version: 2026.2
+page_id: forgeops:troubleshoot:kustomize
+canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/kustomize.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Expanded Kustomize output
+
+If you've modified any of the Kustomize bases and overlays that come with the `cdk` canonical configuration, you might want to consider how your changes affect deployment. Use the kustomize build command to assess how Kustomize expands your bases and overlays into YAML files.
+
+For example:
+
+```
+$ cd /path/to/forgeops/kustomize/overlay
+$ kustomize build all
+apiVersion: v1
+data:
+  IDM_ENVCONFIG_DIRS: /opt/openidm/resolver
+  LOGGING_PROPERTIES: /var/run/openidm/logging/logging.properties
+  OPENIDM_ANONYMOUS_PASSWORD: anonymous
+  OPENIDM_AUDIT_HANDLER_JSON_ENABLED: "false"
+  OPENIDM_AUDIT_HANDLER_STDOUT_ENABLED: "true"
+  OPENIDM_CLUSTER_REMOVE_OFFLINE_NODE_STATE: "true"
+  OPENIDM_CONFIG_REPO_ENABLED: "false"
+  OPENIDM_ICF_RETRY_DELAYSECONDS: "10"
+  OPENIDM_ICF_RETRY_MAXRETRIES: "12"
+  PROJECT_HOME: /opt/openidm
+  RCS_AGENT_CONNECTION_CHECK_SECONDS: "5"
+  RCS_AGENT_CONNECTION_GROUP_CHECK_SECONDS: "900"
+  RCS_AGENT_CONNECTION_TIMEOUT_SECONDS: "10"
+  RCS_AGENT_HOST: rcs-agent
+  RCS_AGENT_IDM_PRINCIPAL: idmPrincipal
+  RCS_AGENT_PATH: idm
+  RCS_AGENT_PORT: "80"
+  RCS_AGENT_USE_SSL: "false"
+  RCS_AGENT_WEBSOCKET_CONNECTIONS: "1"
+kind: ConfigMap
+metadata:
+  labels:
+    app: idm
+    app.kubernetes.io/component: idm
+    app.kubernetes.io/instance: idm
+    app.kubernetes.io/name: idm
+    app.kubernetes.io/part-of: forgerock
+    tier: middle
+  name: idm
+---
+apiVersion: v1
+data:
+  logging.properties: |
+...
+```
+
+---
+
+---
 title: Ingress issues
 description: If the pods in a ForgeOps deployment are starting successfully, but you can't reach the services in those pods, you probably have ingress issues.
 component: forgeops

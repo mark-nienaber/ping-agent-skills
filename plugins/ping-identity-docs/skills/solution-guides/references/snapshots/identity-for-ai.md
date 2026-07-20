@@ -4,7 +4,9 @@ description: Identity for AI secures AI agents with agent registration, authenti
 component: solution-guides
 page_id: solution-guides:identity-for-ai:identity-for-ai-solutions
 canonical_url: https://docs.pingidentity.com/solution-guides/identity-for-ai/identity-for-ai-solutions.html
-revdate: May 19, 2026
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 15, 2026
 keywords: ["Identity for AI", "AI identity", "AI security", "AI governance", "AI compliance", "AI agent security", "AI agent identity", "AI agent gateway", "AI agent detection", "AI agent use cases", "AI solutions", "NHI", "non-human identity", "agentic AI", "AI agents", "AI risk", "AI policy", "AI audit", "AI integrations", "MCP security"]
 page_aliases: ["index.adoc"]
 section_ids:
@@ -70,13 +72,13 @@ Secure what agents can do after they authenticate. Explore how to use delegated 
 
 [icon: puzzle, set=far, size=3x]
 
-#### [PingOne](https://developer.pingidentity.com/identity-for-ai/identity/idai-securing-agents-pingone.html)
+#### [PingOne](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingone.html)
 
 Secure digital assistants with delegation and least privilege
 
 [icon: puzzle, set=far, size=3x]
 
-#### [PingFederate](https://developer.pingidentity.com/identity-for-ai/identity/idai-securing-agents-pingfed.html)
+#### [PingFederate](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.html)
 
 Secure digital assistants with delegated access tokens
 

@@ -1,12 +1,12 @@
 ---
 title: PingOne MFA Connector
-description: PingOne MFA is a cloud-based multi-factor authentication (MFA) service that protects an organization's network, applications, and data resources while providing secure and seamless experiences for your customers and users.
+description: Configure the PingOne MFA connector in PingOne DaVinci to add MFA flows, user enrollment, and passwordless authentication to your applications
 component: connectors
 page_id: connectors::p1_mfa_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_mfa_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -90,7 +90,7 @@ The PingOne MFA connector supports the use of:
 
   * [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
@@ -158,7 +158,7 @@ To add a worker app:
 
 ### Setting up the connector
 
-In DaVinci, add a **PingOne MFA** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingOne MFA** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 

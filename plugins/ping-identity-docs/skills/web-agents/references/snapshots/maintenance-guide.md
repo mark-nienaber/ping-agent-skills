@@ -1,10 +1,398 @@
 ---
+title: Audit the deployment
+description: Configure PingAM Web Agent audit logging for security and compliance, including remote, local, and combined audit modes and log format details.
+component: web-agents
+version: 2026
+page_id: web-agents:maintenance-guide:auditing
+canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/auditing.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  remote_and_local_auditing: Remote and local auditing
+  remote_auditing: Remote auditing
+  local_auditing: Local auditing
+  remote_and_local_auditing_2: Remote and local auditing
+  audit_event_logs: Audit event logs
+  audit-configure: Configure auditing
+---
+
+# Audit the deployment
+
+Web Agent logs audit events for security, troubleshooting, and regulatory compliance.
+
+## Remote and local auditing
+
+### Remote auditing
+
+In remote auditing, the agent logs events to the audit event handler configured in the AM realm. In an environment with several AM servers, the agent writes audit logs to the AM server that satisfies the agent request for client authentication or resource authorization.
+
+The agent logs audit events remotely **only** when AM's global audit logging is enabled and configured in the realm where the agent runs.
+
+Set up global audit logging in the AM admin UI:
+
+1. In the AM admin UI, go to Configure > Global Services > Audit logging.
+
+2. Enable Audit logging.
+
+3. Enter values to include in Field whitelist filters or Field blacklist filters.
+
+The following example path in the Field whitelist filters list includes the `Accept-Language` value in the http.request.headers field in *access* events:
+
+```
+/access/http/request/headers/accept-language
+```
+
+Learn more in AM's [Global audit logging](https://docs.pingidentity.com/pingam/8.1/monitoring/implementing-audit.html#configure-global-audit-logging).
+
+### Local auditing
+
+In local auditing, the agent logs audit events in JSON format to `/path/to/web_agents/agent_type/instances/agent_n/logs/audit/audit.log`.
+
+An example agent log file is `/path/to/web_agents/apache24_agent/instances/agent_1/logs/audit/audit.log`.
+
+### Remote *and* local auditing
+
+In remote and local auditing, the agent logs audit events in the following locations:
+
+* To `/path/to/web_agents/agent_type/instances/agent_n/logs/audit/audit.log`
+
+* To the audit event handler configured in the AM realm in which the agent profile is configured.
+
+## Audit event logs
+
+Audit logs are written in UTF-8 format. The following example shows an audit event log for successful access to a resource:
+
+```json
+{
+   "timestamp":"2023-10-30T11:56:57Z",
+   "eventName":"AM-ACCESS-OUTCOME",
+   "transactionId":"608...77e",
+   "userId":"id=bjensen,ou=user,dc=example,dc=com",
+   "trackingIds":[
+      "fd5...095",
+      "fd5...177"
+   ],
+   "component":"Web Policy Agent",
+   "realm":"/",
+   "server":{
+      "ip":"127.0.0.1",
+      "port":8020
+   },
+   "request":{
+      "protocol":"HTTP/1.1",
+      "operation":"GET"
+   },
+   "http":{
+      "request":{
+         "secure":false,
+         "method":"GET",
+         "path":"/examples",
+         "cookies":{
+            "am-auth-jwt":"eyJ...iOi[...]"
+            "i18next":"en",
+            "amlbcookie":"01",
+            "iPlanetDirectoryPro":"Ts2...oxR[...]"
+         }
+      }
+   },
+   "response":{
+      "status":"DENIED"
+   },
+   "_id":"fd5...703" //This ID is internal to AM and available only in remote logs.
+}
+```
+
+The audit log format uses the log structure shared by the Ping Advanced Identity Software. Learn more in [Audit log format](https://docs.pingidentity.com/pingam/8.1/monitoring/audit-logging-ref.html#audit-log-format) in AM's *Security guide*.
+
+Web Agent supports propagation of the transaction ID across the Ping Advanced Identity Software, using the HTTP header `X-ForgeRock-TransactionId`. Learn more in [Trust transaction headers](https://docs.pingidentity.com/pingam/8.1/monitoring/implementing-audit.html#configuring-trusttransactionheader-system-property) in AM's *Security guide*.
+
+## Configure auditing
+
+By default, auditing is disabled. Configure audit logging as follows:
+
+1. On the AM admin UI, select Realms > *Realm Name* > Applications > Agents > Web > *Agent Name*.
+
+2. On the Global tab, select the following options to select the type of audit events to log and the audit location. By default, auditing is disabled:
+
+   * [Audit Access Types](../properties-reference/com.sun.identity.agents.config.audit.accesstype.html)
+
+   * [Audit Log Location](../properties-reference/com.sun.identity.agents.config.log.disposition.html)
+
+3. In `agent.conf`, optionally configure [Audit Path as Full URL](../properties-reference/com.sun.identity.agents.config.audit.path.fullurl.html) to log the full URL of the HTTP request. If not configured, only the path component of the HTTP request is logged.
+
+4. In `agent.conf`, optionally configure the following properties to manage the location and size of the log files:
+
+   * [Local Agent Audit File Name](../properties-reference/com.sun.identity.agents.config.local.audit.logfile.html)
+
+   * [Local Audit Log Rotation Size](../properties-reference/com.sun.identity.agents.config.local.log.size.html)
+
+   |   |                                                                                   |
+   | - | --------------------------------------------------------------------------------- |
+   |   | After changing a bootstrap property, restart the web server where the agent runs. |
+
+---
+
+---
+title: Maintenance guide
+description: Recurring administrative operations for PingAM Web Agent, including auditing, monitoring, connection tuning, notifications, and key rotation.
+component: web-agents
+version: 2026
+page_id: web-agents:maintenance-guide:preface
+canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/preface.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["index.adoc"]
+---
+
+# Maintenance guide
+
+This guide describes how to perform recurring administrative operations in Web Agent.
+
+---
+
+---
+title: Monitor services
+description: Monitor PingAM Web Agent performance using the Prometheus endpoint, with metrics for policy decisions, cache operations, connections, and request latencies.
+component: web-agents
+version: 2026
+page_id: web-agents:maintenance-guide:monitoring
+canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/monitoring.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  monitor-prometheus: Monitor with Prometheus
+  access-prometheus-endpoint: Access the Prometheus endpoint
+  monitor-types: Monitoring types
+  prometheus-metrics: Metrics at the Prometheus endpoint
+  notification-metrics: Notification metrics
+  policy-decision-metrics: Policy decision metrics
+  cache-metrics: Cache metrics
+  connections-metrics: Connection metrics
+  request-metrics: Request metrics
+  monitor-endpoint: Monitor with the monitoring endpoint (deprecated)
+  access-monitoring-endpoint: Access the monitoring endpoint
+  monitor-metrics: Metrics at the monitoring endpoint (deprecated)
+---
+
+# Monitor services
+
+The following sections describe how to set up and maintain monitoring in your deployment to ensure appropriate performance and service availability.
+
+## Monitor with Prometheus
+
+Web Agent automatically exposes a monitoring endpoint where Prometheus can scrape metrics in a standard Prometheus format (version 0.0.4).
+
+You can find information about installing and running Prometheus in the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/).
+
+The Prometheus endpoint is protected by HTTP Basic Authentication. To access it, provide the agent URL, and the agent profile name and password. Always use HTTPS for secure connections to client applications.
+
+The metrics returned are described in [Metrics at the Prometheus endpoint](#prometheus-metrics).
+
+|   |                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Tools such as Grafana are available to create customized charts and graphs based on the information collected by Prometheus. Learn more on the [Grafana website](https://grafana.com). |
+
+### Access the Prometheus endpoint
+
+1. Install a Web Agent as described in the [Installation](../installation-guide/preface.html), and use the agent to protect a web application. For example, set up the example in [Policy enforcement](../user-guide/pep.html).
+
+2. Access the Prometheus endpoint as follows, where `https://agent.example.com:443` is the agent URL, `web-agent` is the agent profile name and `password` is the agent profile password:
+
+   ```none
+   $ curl https://agent.example.com:443/agent/metrics --user web-agent:password
+   ```
+
+   The metrics are displayed:
+
+   ```none
+   # TYPE policy_change counter
+   # HELP policy_change_total number of policy updates
+   policy_change_total{topic="notification"} 0
+   # TYPE config_change counter
+   # HELP config_change_total number of configuration changes
+   config_change_total{topic="notification"} 0
+   # TYPE not_enforced counter
+   # HELP not_enforced_total number of requests that were not enforced
+   not_enforced_total{topic="enforcement"} 0
+   ...
+   ```
+
+## Monitoring types
+
+This section describes the data types used in monitoring:
+
+* Counter
+
+  Cumulative metric for a numerical value that only increases.
+
+* Gauge
+
+  Metric for a numerical value that can increase or decrease.
+
+  The value for a gauge is calculated when requested and represents the state of the metric at that specific time.
+
+* Histogram
+
+  Metric that samples observations, counts them in buckets, and provides a sum of all observed values.
+
+## Metrics at the Prometheus endpoint
+
+### Notification metrics
+
+Web Agent exposes the following notification-related monitoring metrics:
+
+| Metric                | [Type](#monitor-types) | Description                                                                                     |
+| --------------------- | ---------------------- | ----------------------------------------------------------------------------------------------- |
+| policy\_change\_total | Counter                | Number of policy change notifications received from Advanced Identity Cloud or AM.              |
+| config\_change\_total | Counter                | Number of agent configuration change notifications received from Advanced Identity Cloud or AM. |
+
+### Policy decision metrics
+
+Web Agent exposes the following policy decision monitoring metrics:
+
+| Metric                       | [Type](#monitor-types) | Description                                                                                                                                                                                                                                                                     |
+| ---------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| not\_enforced\_total         | Counter                | Number of requests that weren't enforced by the agent because of the not-enforced URL lists.                                                                                                                                                                                    |
+| not\_authorised\_total       | Counter                | Number of requests denied by policy.                                                                                                                                                                                                                                            |
+| not\_authenticated\_total    | Counter                | Number of requests requiring authentication.	Compare this metric to the authenticated\_return\_total metric. When authenticated\_return\_total is very low, it can indicate a Denial of Service (DoS) attack, where repeated requests are made with no authentication attempts. |
+| authenticated\_return\_total | Counter                | Number of requests returning after authentication.                                                                                                                                                                                                                              |
+| local\_decision\_total       | Counter                | Number of policy decisions the agent makes locally.                                                                                                                                                                                                                             |
+| remote\_decision\_total      | Counter                | Number of policy decisions the agent requests from Advanced Identity Cloud or AM.                                                                                                                                                                                               |
+| cache\_decision\_total       | Counter                | Number of policy decisions the agent takes from the cache when the [AM\_POLICY\_CACHE\_MODE](../user-guide/configure-envvars.html#envvar-AM_POLICY_CACHE_MODE) environment variable is set to `on`.                                                                             |
+| url\_cache\_decision\_total  | Counter                | Number of policy decisions the agent takes from the URL cache when the [AM\_POLICY\_CACHE\_MODE](../user-guide/configure-envvars.html#envvar-AM_POLICY_CACHE_MODE) environment variable is set to `off`.                                                                        |
+
+### Cache metrics
+
+Web Agent exposes the following cache-related monitoring metrics:
+
+| Metric               | [Type](#monitor-types) | Description                                   |
+| -------------------- | ---------------------- | --------------------------------------------- |
+| cache\_write\_total  | Counter                | Number of session cache writes.               |
+| cache\_update\_total | Counter                | Number of session cache updates.              |
+| cache\_read\_total   | Counter                | Number of session cache reads.                |
+| cache\_miss\_total   | Counter                | Number of sessions not found in cache.        |
+| cache\_delete\_total | Counter                | Number of sessions deleted from cache.        |
+| cache\_expiry\_total | Counter                | Number of sessions expired from cache.        |
+| cache\_fault\_total  | Counter                | Number of sessions that couldn't be cached.   |
+| cache\_occupancy     | Gauge                  | Proportion of session cache that is occupied. |
+
+### Connection metrics
+
+Web Agent exposes the following connection-related monitoring metrics:
+
+| Metric                   | [Type](#monitor-types) | Description                          |
+| ------------------------ | ---------------------- | ------------------------------------ |
+| connection\_total        | Counter                | Number of connections created.       |
+| connection\_reuse\_total | Counter                | Number of cached connections reused. |
+
+### Request metrics
+
+Web Agent exposes the following request monitoring metrics:
+
+| Metric                    | [Type](#monitor-types) | Description                                             |
+| ------------------------- | ---------------------- | ------------------------------------------------------- |
+| policy\_request\_seconds  | Histogram              | Histogram of policy request times in seconds.           |
+| session\_request\_seconds | Histogram              | Histogram of session request times in seconds.          |
+| config\_request\_seconds  | Histogram              | Histogram of configuration request times in seconds.    |
+| agent\_time\_seconds      | Histogram              | Histogram of agent time in request pipeline in seconds. |
+
+## Monitor with the monitoring endpoint (deprecated)
+
+|   |                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------- |
+|   | The monitoring endpoint described in this section is deprecated. Use it only for diagnostics, in conjunction with Support. |
+
+A monitoring endpoint provides access to metrics for operations within the agent and between the agent an AM.
+
+The monitoring endpoint is protected by HTTP Basic Authentication. To access it, provide the agent URL, and the agent profile name and password. Always use HTTPS for secure connections to client applications.
+
+Metrics are displayed as a JSON response, with the fields described in [Metrics at the monitoring endpoint (deprecated)](#monitor-metrics).
+
+### Access the monitoring endpoint
+
+1. Install a Web Agent as described in the [Installation](../installation-guide/preface.html), and use the agent to protect a web application. For example, set up the example in [Policy enforcement](../user-guide/pep.html).
+
+2. Access the agent monitoring endpoint as follows, where `https://agent.example.com:443` is the agent URL, and `web-agent` is the agent profile name.
+
+   ```none
+   $ curl https://agent.example.com:443/agent/monitor --user web-agent
+
+   Enter host password for user 'web-agent':
+   ```
+
+3. Enter the agent profile password to display the metrics:
+
+   ```json
+   {
+     "cache-invalidation": {
+       "policy": 0,
+       "profile": 1
+     },
+     "policy-decisions": {
+       "neu": 0,
+       "local": 0,
+       "remote": 2,
+       "cache": 0
+       },
+     "gc": {
+       "runs": 1,
+       "released": 0,
+       "release-deferred": 0,
+       "fill": 0.000000
+     },
+     "cache-operations": {
+       "writes": 0,
+       "rewrites": 2,
+       "reads": 2,
+       "misses": 0,
+       "deletes": 0,
+       "write-faults": 0,
+       "expired": 0,
+       "occupancy": 0
+     },
+     "connections": {
+       "added": 2,
+       "reused": 3
+     }
+   }
+   ```
+
+### Metrics at the monitoring endpoint (deprecated)
+
+| Metric               | Submetric         | Count of                                                                                                                              |
+| -------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `cache-invalidation` | `policy`          | Number of policy change notifications received from AM.                                                                               |
+|                      | `profile`         | Number of agent configuration change notifications received from AM.                                                                  |
+| `policy-decisions`   | `neu`             | Number of requests that were not enforced by the agent because of the not-enforced URL lists.                                         |
+|                      | `local`           | Number of policy decisions the agent makes locally.                                                                                   |
+|                      | `remote`          | Number of policy decisions the agent requests from AM.                                                                                |
+|                      | `cache`           | Number of policy decisions the agent takes from the cache.                                                                            |
+| `gc`                 | `runs`            | Number of garbage collection runs.                                                                                                    |
+|                      | `released`        | Number of cache entries released during garbage collection runs.                                                                      |
+|                      | `release-defered` | Number of entries with release deferred until the next garbage collection run.                                                        |
+|                      | `fill`            | Floating point value between 0 and 1, representing the proportion of cache that is free after the most the recent garbage collection. |
+| `cache-operations`   | `writes`          | Number of writes to cache.                                                                                                            |
+|                      | `rewrites`        | Number of updates to cache.                                                                                                           |
+|                      | `reads`           | Number of reads from cache.                                                                                                           |
+|                      | `misses`          | Number of failed searches of the cache.                                                                                               |
+|                      | `deletes`         | Number of deletes from cache.                                                                                                         |
+|                      | `write-faults`    | Number of cache writes that fail because the cache is full.                                                                           |
+|                      | `expired`         | Number of expired cache entries.                                                                                                      |
+|                      | `occupancy`       | Proportion of cache that is occupied.                                                                                                 |
+| `connections`        | `added`           | Number of new connections made.                                                                                                       |
+|                      | `reused`          | Number of times existing connections were reused.                                                                                     |
+
+---
+
+---
 title: Notifications
 description: Configure PingAM Web Agent to receive WebSocket notifications from PingAM for configuration, session, and policy changes.
 component: web-agents
 version: 2026
 page_id: web-agents:maintenance-guide:notifications
 canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/notifications.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   disable_notifications: Disable notifications
 ---
@@ -62,6 +450,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:maintenance-guide:rotate-keys
 canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/rotate-keys.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Maintenance", "Configuration", "Keys &amp; Certificates"]
 section_ids:
   why_and_when_to_rotate_keys: Why and when to rotate keys
@@ -175,6 +565,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:maintenance-guide:troubleshooting
 canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/troubleshooting.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["user-guide:troubleshooting.adoc"]
 section_ids:
   get-info-about-problem: Get information about the problem
@@ -903,6 +1295,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:maintenance-guide:connection-pooling
 canonical_url: https://docs.pingidentity.com/web-agents/2026/maintenance-guide/connection-pooling.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Tune connections

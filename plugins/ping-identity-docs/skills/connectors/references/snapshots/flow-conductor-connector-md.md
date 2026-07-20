@@ -1,12 +1,12 @@
 ---
 title: Flow Conductor Connector
-description: The Flow Conductor connector lets your PingOne DaVinci flow initiate asynchronous events in external systems. It also allows you to use another flow as a subflow.
+description: Configure the Flow Conductor connector in PingOne DaVinci to initiate out-of-band events with magic links and use other flows as reusable subflows
 component: connectors
 page_id: connectors::flow_conductor_connector
 canonical_url: https://docs.pingidentity.com/connectors/flow_conductor_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   interacting-with-external-systems: Interacting with external systems
   links-to-subflows: Links to subflows
@@ -41,7 +41,7 @@ The Flow Conductor also allows you to create a secondary path in your flow that'
 
 2. When the user clicks the magic link, an **Out-of-Band Continue** node starts a secondary flow. You can use this flow to show a confirmation message, and to trigger the main flow to continue by updating the status of the challenge.
 
-The Start and Continue nodes work as a pair, and they are always attached to the same parent node. DaVinci automatically follows the Start node first and activates the Continue node when the user clicks the magic link that contains the matching challenge ID.
+The Start and Continue nodes work as a pair, and they are always attached to the same parent node. PingOne DaVinci automatically follows the Start node first and activates the Continue node when the user clicks the magic link that contains the matching challenge ID.
 
 ## Links to subflows
 
@@ -53,7 +53,7 @@ Subflows are best used for frequently-used groups of nodes that serve a specific
 
 ### Setting up the Flow Conductor connector configuration
 
-In DaVinci, add a **Flow Conductor** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Flow Conductor** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 
@@ -91,7 +91,7 @@ For this flow, you'll need:
 
    2. In our case, we want to send a text link rather than a QR code, so we'll leave **Generate QR Code** turned off.
 
-   3. In the **Challenge Length** field, you can customize the length of the challenge ID. This is a number that DaVinci generates to keep track of this challenge. We'll refer to this ID elsewhere in our flow, but we don't need to know the number. Leave it as the default of 32.
+   3. In the **Challenge Length** field, you can customize the length of the challenge ID. This is a number that PingOne DaVinci generates to keep track of this challenge. We'll refer to this ID elsewhere in our flow, but we don't need to know the number. Leave it as the default of 32.
 
    4. In the **Challenge Expiry** field, specify how long you want the flow to wait before timing out.
 

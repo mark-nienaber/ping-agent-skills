@@ -2,7 +2,7 @@
 
 - Product: PingDirectory (Developer)
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://developer.pingidentity.com/pingdirectory/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
@@ -16,9 +16,9 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| directory.md | assembled | <93 pages from directory> | 93 | 20 | partial |
-| directory-proxy-scim.md | assembled | <28 pages from directory-proxy-scim> | 28 | 20 | partial |
-| consent.md | assembled | <16 pages from consent> | 16 | 16 | full |
+| directory.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 93 | 20 | partial |
+| directory-proxy-scim.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 28 | 20 | partial |
+| consent.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 16 | 16 | full |
 
 ## Checksums
 

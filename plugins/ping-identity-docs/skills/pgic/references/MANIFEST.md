@@ -2,7 +2,7 @@
 
 - Product: PGIC
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/pgic/llms.txt
 - Guides discovered: 15
 - Guides captured: 15
@@ -16,21 +16,21 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| service-requests.md | assembled | <42 pages from service_requests> | 42 | 20 | partial |
-| products-and-self-service-tasks.md | assembled | <9 pages from products_and_self-service_tasks> | 9 | 9 | full |
-| environments.md | assembled | <1 pages from environments> | 1 | 1 | full |
-| identity-federation.md | assembled | <1 pages from identity_federation> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
-| introduction.md | assembled | <1 pages from introduction> | 1 | 1 | full |
-| maintenance.md | assembled | <1 pages from maintenance> | 1 | 1 | full |
-| network.md | assembled | <1 pages from network> | 1 | 1 | full |
-| penentration-load-testing.md | assembled | <1 pages from penentration_load_testing> | 1 | 1 | full |
-| pgic-data-loading-md.md | assembled | <1 pages from pgic_data_loading.md> | 1 | 1 | full |
-| pgic-infrastructure-md.md | assembled | <1 pages from pgic_infrastructure.md> | 1 | 1 | full |
-| pgic-observability-md.md | assembled | <1 pages from pgic_observability.md> | 1 | 1 | full |
-| pgic-task-summary-table.md | assembled | <1 pages from pgic_task_summary_table> | 1 | 1 | full |
-| pgic-web-servers-md.md | assembled | <1 pages from pgic_web_servers.md> | 1 | 1 | full |
-| secure-containers-md.md | assembled | <1 pages from secure-containers.md> | 1 | 1 | full |
+| service-requests.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 42 | 20 | partial |
+| products-and-self-service-tasks.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 9 | 9 | full |
+| environments.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| identity-federation.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| introduction.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| maintenance.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| network.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| penentration-load-testing.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| pgic-data-loading-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| pgic-infrastructure-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| pgic-observability-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| pgic-task-summary-table.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| pgic-web-servers-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| secure-containers-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

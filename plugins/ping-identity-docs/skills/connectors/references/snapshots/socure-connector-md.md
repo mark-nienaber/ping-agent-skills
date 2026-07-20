@@ -1,12 +1,12 @@
 ---
 title: Socure Connector
-description: The Socure connector lets you verify identity documents and get fraud scores in your PingOne DaVinci flows.
+description: Configure the Socure connector in PingOne DaVinci to verify identity documents and generate fraud scores in your flows
 component: connectors
 page_id: connectors::socure_connector
 canonical_url: https://docs.pingidentity.com/connectors/socure_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -18,8 +18,8 @@ section_ids:
   api-url: API URL
   webhook-url: Webhook URL
   dv-socure-connector-setting-up-socure: Setting up Socure
-  allowing-the-davinci-webhook-url-in-your-socure-configuration: Allowing the DaVinci webhook URL in your Socure configuration
-  allowing-the-davinci-domain-in-your-socure-configuration: Allowing the DaVinci domain in your Socure configuration
+  allowing-the-pingone-davinci-webhook-url-in-your-socure-configuration: Allowing the PingOne DaVinci webhook URL in your Socure configuration
+  allowing-the-pingone-davinci-domain-in-your-socure-configuration: Allowing the PingOne DaVinci domain in your Socure configuration
   dv-socure-getting-api-keys: Getting your Socure ID+ and SDK keys
   using-the-connector-in-a-flow: Using the connector in a flow
   verify-identity-documents-with-a-link-or-qr-code: Verify identity documents with a link or QR code
@@ -37,7 +37,7 @@ section_ids:
 
 The Socure connector lets you verify identity documents and get fraud scores in your PingOne DaVinci flows.
 
-The connector allows you to direct users to a unique verification URL where they submit their driver license or passport along with selfie photos. After Socure verifies the user's identity, it sends the results to DaVinci where you can branch your flow accordingly.
+The connector allows you to direct users to a unique verification URL where they submit their driver license or passport along with selfie photos. After Socure verifies the user's identity, it sends the results to PingOne DaVinci where you can branch your flow accordingly.
 
 To make sure a camera is available to scan the documents and take photos, the user typically completes the verification process on a mobile device.
 
@@ -47,13 +47,13 @@ To make sure a camera is available to scan the documents and take photos, the us
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -61,7 +61,7 @@ To use the connector, you'll need a Socure license.
 
 ### Configuring the Socure connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -85,13 +85,13 @@ Get this URL from [Setting up Socure](#dv-socure-connector-setting-up-socure).
 
 ##### Webhook URL
 
-The DaVinci webhook URL for this instance of your connector.
+The PingOne DaVinci webhook URL for this instance of your connector.
 
 Copy this URL. You'll use it in [Setting up Socure](#dv-socure-connector-setting-up-socure).
 
 ### Setting up Socure
 
-#### Allowing the DaVinci webhook URL in your Socure configuration
+#### Allowing the PingOne DaVinci webhook URL in your Socure configuration
 
 1. Sign on to the Socure administrator portal at <https://admin.socure.com>.
 
@@ -109,11 +109,11 @@ Copy this URL. You'll use it in [Setting up Socure](#dv-socure-connector-setting
 
 8. Click **Test**. Check that the test was successful.
 
-#### Allowing the DaVinci domain in your Socure configuration
+#### Allowing the PingOne DaVinci domain in your Socure configuration
 
 Click **Create**.
 
-You can find a list of domains that DaVinci uses in [IP address and domain reference](https://docs.pingidentity.com/pingone/developer_tools/p1_ip_address_domain_reference.html). Follow the steps below to add all the domains for your region:
+You can find a list of domains that PingOne DaVinci uses in [IP address and domain reference](https://docs.pingidentity.com/pingone/developer_tools/p1_ip_address_domain_reference.html). Follow the steps below to add all the domains for your region:
 
 1. Sign on to the Socure administrator portal at <https://admin.socure.com>.
 
@@ -123,7 +123,7 @@ You can find a list of domains that DaVinci uses in [IP address and domain refer
 
 4. In the **IP/DOMAINS** field, enter the domain. Click **Create**.
 
-5. Repeat this process for each DaVinci domain in your region.
+5. Repeat this process for each PingOne DaVinci domain in your region.
 
 #### Getting your Socure ID+ and SDK keys
 
@@ -155,7 +155,7 @@ This flow uses Socure to get a unique verification URL and show it as a link and
 
 This flow creates a "challenge" to pause the main flow on the QR code while a secondary flow continues the verification process. When the verification process is complete, a [Challenge](challenge_connector.html) connector resolves the challenge and triggers the main flow to continue. Learn more about this technique in [Challenge Connector](challenge_connector.html).
 
-1. Download the [Socure - Identity verification with link or QR code](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xc0IAA/socure-identity-verification-with-link-or-qr-code) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Socure - Identity verification with link or QR code](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xc0IAA/socure-identity-verification-with-link-or-qr-code) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. On the flow canvas, select the **Get a Document Verification URL and QR Code** node.
 
@@ -189,7 +189,7 @@ In this flow, Socure prompts the user to enter their phone number in their web b
 
 This flow creates a "challenge" to pause the main flow on the QR code while a secondary flow continues the verification process. When the verification process is complete, a [Challenge Connector](challenge_connector.html) connector resolves the challenge and triggers the main flow to continue. Learn more about this technique in [Challenge Connector](challenge_connector.html).
 
-1. Download the [Socure - Identity verification with SMS prompt](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xc5IAA/socure-identity-verification-with-sms-prompt) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Socure - Identity verification with SMS prompt](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xc5IAA/socure-identity-verification-with-sms-prompt) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the "Check Your Device" message:
 
@@ -223,7 +223,7 @@ You can use the connector to get a variety of risk scores, fraud scores, and oth
 
 This flow sends information about a person to Socure then shows the resulting score. You can customize the information you send to and get from Socure.
 
-1. Download the [Socure - ID+ score check](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xbvIAA/socure-id-score-check) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+1. Download the [Socure - ID+ score check](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xbvIAA/socure-id-score-check) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 2. Select the Socure ID+ modules that you want to use:
 
@@ -231,15 +231,15 @@ This flow sends information about a person to Socure then shows the resulting sc
 
    2. In the **Modules** list, select one or more modules.
 
-      |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
       |   | Socure ID+ modules represent a variety of data sources that verify identities. Learn more in [ID+ Modules](https://developer.socure.com/docs/idplus/modules/modules-overview) in the Socure documentation.When you use the **Get an ID+ Score** capability, you can select as many modules as you want, with the following limitations:- Only select modules that you have a license to use in Socure.
 
       - Only select one **Global Watchlist** module.
 
       - If you select the **Decision** module, you have to select at least one other module. Learn more in [Decision](https://developer.socure.com/docs/idplus/modules/decision) in the Socure documentation.
 
-      - The **Device Risk** capability requires a device session ID. To get a session ID, include the device profiling script in your web app. The script sends a device profile to Socure and provides a session ID that DaVinci uses to get the device risk score. Learn more in [Sigma Device Client-Side Javascript](https://developer.socure.com/docs/sdks/sigma-device/js-sdk/js-overview) in the Socure documentation. |
+      - The **Device Risk** capability requires a device session ID. To get a session ID, include the device profiling script in your web app. The script sends a device profile to Socure and provides a session ID that PingOne DaVinci uses to get the device risk score. Learn more in [Sigma Device Client-Side Javascript](https://developer.socure.com/docs/sdks/sigma-device/js-sdk/js-overview) in the Socure documentation. |
 
 3. Populate the personal attributes by clicking **{ }** and selecting variables from your flow.
 

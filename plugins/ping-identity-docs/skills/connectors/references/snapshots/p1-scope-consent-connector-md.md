@@ -1,12 +1,12 @@
 ---
 title: PingOne Scope Consent Connector
-description: The PingOne Scope Consent connector lets you view consent records on an application or user basis, revoke or update user consent records, or prompt users to provide or decline consent to sign-on policies and record these decisions.
+description: Configure the PingOne Scope Consent connector to view, update, and revoke consent records and prompt consent decisions in PingOne DaVinci
 component: connectors
 page_id: connectors::p1_scope_consent_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_scope_consent_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -65,13 +65,13 @@ Learn more in the following sections of the PingOne documentation:
 
   * [Agreements](https://docs.pingidentity.com/pingone/user_experience/p1_agreements.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -149,7 +149,7 @@ To use the appropriate capabilities, the Worker app used by the connector needs 
 
 #### Getting your application credentials
 
-Get the **Client ID** and **Client secret** from the PingOne console before setting up the PingOne connector in DaVinci:
+Get the **Client ID** and **Client secret** from the PingOne console before setting up the PingOne connector in PingOne DaVinci:
 
 1. In your PingOne environment, go to **Applications > Applications**.
 
@@ -161,7 +161,7 @@ Get the **Client ID** and **Client secret** from the PingOne console before sett
 
 #### Getting your environment details
 
-Get your **Environment ID** and **Region** before setting up the PingOne connector in DaVinci:
+Get your **Environment ID** and **Region** before setting up the PingOne connector in PingOne DaVinci:
 
 1. In your PingOne environment, go to **Settings > Environment Properties**.
 
@@ -169,7 +169,7 @@ Get your **Environment ID** and **Region** before setting up the PingOne connect
 
 ### Setting up the PingOne connector configuration
 
-In DaVinci, add a PingOne connection. Learn more in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html).
+In PingOne DaVinci, add a PingOne connection. Learn more in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html).
 
 #### Connector configuration
 
@@ -193,7 +193,7 @@ The geographic region that hosts your PingOne tenant. Learn how to find the regi
 
 ### Manage user consent
 
-You can use the PingOne Scope Consent connector to view and manage user consent to an application as part of a DaVinci flow policy.
+You can use the PingOne Scope Consent connector to view and manage user consent to an application as part of a PingOne DaVinci flow policy.
 
 No special configuration is needed. Add the capability and populate its properties according to the help text.
 
@@ -209,7 +209,7 @@ Use one of the following capabilities to manage and update user consent records:
 
 * **Revoke User Consent**: Use to update the application consent record for a user as revoked.
 
-Use **Get User Consent** to check, prompt for, and record user decisions regarding consent to application as part of a DaVinci flow policy. Use this capability in a flow at the point where you want to prompt the user for their consent. Use the **Custom Screens** tab to edit the HTML and CSS to customize the appearance and text of the prompt that is displayed to the user. For example, change `Do you approve the request?` to `Do you accept this request?` or change the buttons from `Approve` and `Decline` to `Yes` and `No`.
+Use **Get User Consent** to check, prompt for, and record user decisions regarding consent to application as part of a PingOne DaVinci flow policy. Use this capability in a flow at the point where you want to prompt the user for their consent. Use the **Custom Screens** tab to edit the HTML and CSS to customize the appearance and text of the prompt that is displayed to the user. For example, change `Do you approve the request?` to `Do you accept this request?` or change the buttons from `Approve` and `Decline` to `Yes` and `No`.
 
 ## Capabilities
 

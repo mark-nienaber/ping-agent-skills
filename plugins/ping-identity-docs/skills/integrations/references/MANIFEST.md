@@ -2,122 +2,124 @@
 
 - Product: Integrations
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/integrations/llms.txt
 - Guides discovered: 70
-- Guides captured: 69
-- Guides fully captured: 46
-- Guides partially captured: 23
-- Guides without snapshots: 1
-- Total pages indexed: 1622
-- Total snapshot pages captured: 1030
+- Guides captured: 70
+- Guides fully captured: 49
+- Guides partially captured: 21
+- Guides without snapshots: 0
+- Total pages indexed: 1644
+- Total snapshot pages captured: 1109
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| pingone.md | assembled | <253 pages from pingone> | 253 | 20 | partial |
-| amazon.md | assembled | <53 pages from amazon> | 53 | 20 | partial |
-| google.md | assembled | <49 pages from google> | 49 | 20 | partial |
-| azure.md | assembled | <47 pages from azure> | 47 | 20 | partial |
-| atlassian.md | assembled | <44 pages from atlassian> | 44 | 20 | partial |
-| github.md | assembled | <44 pages from github> | 44 | 12 | partial |
-| salesforce.md | assembled | <44 pages from salesforce> | 44 | 20 | partial |
-| java.md | assembled | <40 pages from java> | 40 | 20 | partial |
-| facebook.md | assembled | <39 pages from facebook> | 39 | 20 | partial |
-| zscaler.md | assembled | <36 pages from zscaler> | 36 | 20 | partial |
-| office365.md | assembled | <35 pages from office365> | 35 | 7 | partial |
-| webaccessmanagement.md | assembled | <34 pages from webAccessManagement> | 34 | 20 | partial |
-| agentless.md | assembled | <29 pages from agentless> | 29 | 20 | partial |
-| php.md | assembled | <29 pages from php> | 29 | 20 | partial |
-| slack.md | assembled | <26 pages from slack> | 26 | 20 | partial |
-| duosecurity.md | assembled | <25 pages from duosecurity> | 25 | 19 | partial |
-| apache.md | assembled | <21 pages from apache> | 21 | 20 | partial |
-| net.md | assembled | <21 pages from net> | 21 | 20 | partial |
-| zendesk.md | assembled | <21 pages from zendesk> | 21 | 20 | partial |
-| zoom.md | assembled | <21 pages from zoom> | 21 | 20 | partial |
-| box.md | assembled | <20 pages from box> | 20 | 19 | partial |
-| contentful.md | assembled | <20 pages from contentful> | 20 | 1 | partial |
-| sharepoint-peoplepicker.md | assembled | <20 pages from sharepoint-peoplepicker> | 20 | 3 | partial |
-| aquera.md | assembled | <19 pages from aquera> | 19 | 19 | full |
-| coupa.md | assembled | <19 pages from coupa> | 19 | 19 | full |
-| scim.md | assembled | <19 pages from scim> | 19 | 19 | full |
-| x509.md | assembled | <19 pages from x509> | 19 | 19 | full |
-| iddataweb.md | assembled | <18 pages from iddataweb> | 18 | 18 | full |
-| oam.md | assembled | <18 pages from oam> | 18 | 18 | full |
-| servicenow.md | assembled | <18 pages from servicenow> | 18 | 18 | full |
-| threatmetrix.md | assembled | <18 pages from threatmetrix> | 18 | 18 | full |
-| iovation.md | assembled | <17 pages from iovation> | 17 | 17 | full |
-| microsoft-eam.md | assembled | <17 pages from microsoft-eam> | 17 | 17 | full |
-| otp.md | assembled | <17 pages from otp> | 17 | 17 | full |
-| symantec-vip.md | assembled | <17 pages from symantec-vip> | 17 | 17 | full |
-| linkedin.md | assembled | <16 pages from linkedin> | 16 | 16 | full |
-| rsa.md | assembled | <16 pages from rsa> | 16 | 16 | full |
-| apple.md | assembled | <15 pages from apple> | 15 | 15 | full |
-| dropbox.md | assembled | <15 pages from dropbox> | 15 | 15 | full |
-| dynamicscrm.md | assembled | <15 pages from dynamicscrm> | 15 | 15 | full |
-| egnyte.md | assembled | <15 pages from egnyte> | 15 | 15 | full |
-| pingone-credentials.md | assembled | <15 pages from pingone-credentials> | 15 | 15 | full |
-| code42-pingfederate.md | assembled | <14 pages from code42-pingfederate> | 14 | 14 | full |
-| concur.md | assembled | <14 pages from concur> | 14 | 14 | full |
-| evernote.md | assembled | <14 pages from evernote> | 14 | 14 | full |
-| jamf.md | assembled | <14 pages from jamf> | 14 | 14 | full |
-| sap-netweaver.md | assembled | <14 pages from sap-netweaver> | 14 | 14 | full |
-| workspaceone-uem.md | assembled | <14 pages from workspaceone-uem> | 14 | 14 | full |
-| intune.md | assembled | <13 pages from intune> | 13 | 13 | full |
-| lucidchart.md | assembled | <13 pages from lucidchart> | 13 | 13 | full |
-| microsoft-iis.md | assembled | <13 pages from microsoft-iis> | 13 | 13 | full |
-| microsoft-login.md | assembled | <13 pages from microsoft-login> | 13 | 13 | full |
-| pingam.md | assembled | <13 pages from pingam> | 13 | 13 | full |
-| pingid.md | assembled | <13 pages from pingid> | 13 | 13 | full |
-| entrust.md | assembled | <12 pages from entrust> | 12 | 12 | full |
-| opentoken.md | assembled | <12 pages from opentoken> | 12 | 12 | full |
-| twitter.md | assembled | <12 pages from twitter> | 12 | 12 | full |
-| webex.md | assembled | <12 pages from webex> | 12 | 12 | full |
-| citrix-adc.md | assembled | <11 pages from citrix-adc> | 11 | 11 | full |
-| crowdstrike.md | assembled | <11 pages from crowdstrike> | 11 | 11 | full |
-| island-enterprise-browser.md | assembled | <11 pages from island-enterprise-browser> | 11 | 11 | full |
-| pingid-sdk.md | assembled | <11 pages from pingid-sdk> | 11 | 11 | full |
-| code42-pingone.md | assembled | <10 pages from code42-pingone> | 10 | 10 | full |
-| forgerock-intelligent-access.md | assembled | <10 pages from forgerock-intelligent-access> | 10 | 10 | full |
-| akamai.md | assembled | <9 pages from akamai> | 9 | 9 | full |
-| mobileiron.md | assembled | <9 pages from mobileiron> | 9 | 9 | full |
-| websphere.md | assembled | <8 pages from websphere> | 8 | 8 | full |
-| heroku.md | assembled | <5 pages from heroku> | 5 | 5 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| pingone.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 253 | 20 | partial |
+| amazon.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 53 | 20 | partial |
+| google.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 49 | 20 | partial |
+| azure.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 47 | 20 | partial |
+| atlassian.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 44 | 20 | partial |
+| github.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 44 | 20 | partial |
+| salesforce.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 44 | 20 | partial |
+| net.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 43 | 20 | partial |
+| java.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 40 | 20 | partial |
+| facebook.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 39 | 20 | partial |
+| zscaler.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 36 | 20 | partial |
+| office365.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 35 | 20 | partial |
+| webaccessmanagement.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 34 | 20 | partial |
+| agentless.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 29 | 20 | partial |
+| php.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 29 | 20 | partial |
+| slack.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 26 | 20 | partial |
+| duosecurity.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 25 | 20 | partial |
+| coreblox.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 22 | 20 | partial |
+| apache.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
+| zendesk.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
+| zoom.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
+| box.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
+| contentful.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
+| sharepoint-peoplepicker.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
+| aquera.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 19 | 19 | full |
+| coupa.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 19 | 19 | full |
+| scim.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 19 | 19 | full |
+| x509.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 19 | 19 | full |
+| iddataweb.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 18 | 18 | full |
+| oam.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 18 | 18 | full |
+| servicenow.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 18 | 18 | full |
+| threatmetrix.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 18 | 18 | full |
+| iovation.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 17 | 17 | full |
+| microsoft-eam.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 17 | 17 | full |
+| otp.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 17 | 17 | full |
+| symantec-vip.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 17 | 17 | full |
+| linkedin.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 16 | 16 | full |
+| rsa.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 16 | 16 | full |
+| apple.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 15 | 15 | full |
+| dropbox.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 15 | 15 | full |
+| dynamicscrm.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 15 | 15 | full |
+| egnyte.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 15 | 15 | full |
+| pingone-credentials.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 15 | 15 | full |
+| code42-pingfederate.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| concur.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| evernote.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| jamf.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| sap-netweaver.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| workspaceone-uem.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 14 | 14 | full |
+| intune.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| lucidchart.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| microsoft-iis.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| microsoft-login.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| pingam.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| pingid.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 13 | 13 | full |
+| entrust.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 12 | 12 | full |
+| opentoken.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 12 | 12 | full |
+| twitter.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 12 | 12 | full |
+| webex.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 12 | 12 | full |
+| citrix-adc.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 11 | 11 | full |
+| crowdstrike.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 11 | 11 | full |
+| island-enterprise-browser.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 11 | 11 | full |
+| pingid-sdk.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 11 | 11 | full |
+| code42-pingone.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 10 | 10 | full |
+| forgerock-intelligent-access.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 10 | 10 | full |
+| akamai.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 9 | 9 | full |
+| mobileiron.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 9 | 9 | full |
+| websphere.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 8 | 8 | full |
+| heroku.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 5 | 5 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | f96a9872a29a96f83c4f8840560042c292bc2452467961a4afd691aa32fa2050 |
-| snapshots/pingone.md | b9c474f709ef59d7e578c5a737b6d14b3969e9e2e7e0964b6b73c29fd0667c9f |
+| llms.txt | 68962a51b22f5484ea609cfd54df17d11c6016eb7180a39bd14267f186c64ef2 |
+| snapshots/pingone.md | 43a1b4900dd15cbd642cf5a80a97a2d859497041aeafe43d5f2b3e1c311bae53 |
 | snapshots/amazon.md | 929085cd0951bf9b7ecf02448d4c2b886634aba03ed4b509a3c1c12a0e4661b0 |
 | snapshots/google.md | 2d8d1d9275f06fe60e2947b17e98251c396866ae22ea24bf0bb6db3d3745bf39 |
 | snapshots/azure.md | 1b3b5b8b6959a11a2f40e3c7cc8afb52b64df36ff1341aef24ed4910655a24ef |
-| snapshots/atlassian.md | cf958dd50c2d4caa1a63d1a393c284804ba1bf1d41a61a8192369fcccd3ce2bb |
-| snapshots/github.md | 8261c96d1f70950fcf027ccba74b5e89aff00b93896cafbba16081830523a478 |
+| snapshots/atlassian.md | e46daeda8473a0279e2c6745620020204b2b1503199625f75204f5423273341f |
+| snapshots/github.md | b9c00512a76308b4596021d28abcfbec1ecc423d991f24358bd11ffa86fb2911 |
 | snapshots/salesforce.md | 8356d7e1ab8b04126ad204e0feabe0b21846911d43730dbc6de83eeff8c7d795 |
+| snapshots/net.md | 05a5c24f8a3842b43083215b419ff5651e29662593d030967debd40e1ee68ffb |
 | snapshots/java.md | c9d28f6542ca82de4220c5cfd9ec35b6842bcb74df66f9d516c2fe85c3c62734 |
 | snapshots/facebook.md | aa8947ed75c4f69562e7128905a3d54490a38e71c3f3417063561f937184abde |
 | snapshots/zscaler.md | 78707b75a7634af99a1d8ba530b7bc49e8e0704d13557eb3e0ad887ac57f604a |
-| snapshots/office365.md | ef9fb3490107fc90a976618cbbc1fbc2a2d747edbb6573332d51df2dc92ca96d |
-| snapshots/webaccessmanagement.md | 80cf1dbc04f93c824ced5e483a534e2567a00254db557cfa80cc534b2fa17a85 |
+| snapshots/office365.md | 2925c81a734a6cdcac757f419472257c96e3e0f7133bc9e8a7b922d3c9d104d1 |
+| snapshots/webaccessmanagement.md | 6536d920020967ddf712d46daab64ae702394482308b1208edc5b72b3357214d |
 | snapshots/agentless.md | 04ff0d0c920eca7378c7f67461ef57d472e5686ec9cdcf4a5557805ca951d8eb |
 | snapshots/php.md | b424823f87de0773997c0ad79f35c11d959d74123c12595540f7c677c29126fd |
 | snapshots/slack.md | 61b62644b3cae4a00d7eeb2b207e5bfafc39b27adff41095973c0de0af76a9b7 |
-| snapshots/duosecurity.md | 9395fbe1ed279fad0d328c4fd7b36547089e0655f298263d30aac5136f05ce69 |
-| snapshots/apache.md | 0afa80bd5143b6b84b64427e61ca0dc3112ad5336629376990cc0711c38ad253 |
-| snapshots/net.md | 9861601f4367f605f6ac4567af1b3565703295adbafd127f78a3cea147bedf07 |
+| snapshots/duosecurity.md | 441651487ddc7efb939e8658f5d033e120006642eae81ad9e632f064c828c0db |
+| snapshots/coreblox.md | 2ec4bce62d7920c51d212e4469037f9e45f1af3c05e8847ac758eb72b3155a23 |
+| snapshots/apache.md | 5c0758ca26fa7ea1d9989a1d32f1713d61a9c54a49ec01bba3a766af47e64f46 |
 | snapshots/zendesk.md | b42010332fa16b0ed7ccbd54711269ff859fbffdeec7049746d1874c8f25b0fc |
 | snapshots/zoom.md | ed6595a542b30d1b2b0670203d82418421f8af292496ca78fb6c1554521ae945 |
-| snapshots/box.md | e1655475f1bc210ca8c9a17df75e741011313cd955d5ccbb92de9ba3eff25bb9 |
-| snapshots/contentful.md | 73070ddf17c55a6902da35d8b5aaf75f556288652c249bac97b5e1ecabfe100e |
-| snapshots/sharepoint-peoplepicker.md | 1b5b09682929b146d332337c86a6d803d74d4b26c5599eb3998c5ee22e742a95 |
+| snapshots/box.md | b21af9b6aec26b1aea0a45bfaa7d6db7b0fed2b6697ddcc60d7b8edc1c3b8e5c |
+| snapshots/contentful.md | 6526f4143480fb1da139da1f9986cf0f09fc823b8ffb437db62b623537190a3a |
+| snapshots/sharepoint-peoplepicker.md | 8758666180aa5b69e9444064e74eaa7562cbf2eaf912a895a2fdc0c438d2f808 |
 | snapshots/aquera.md | ad8652ffb05d48d1c0cfac9b30d91ae81cfe5d3cfb6d64cd5b0349dc026d1a0e |
 | snapshots/coupa.md | 54e324de3488af2ea5a0ed4df1ac53c18f2f07351553e663642b39a6595223db |
 | snapshots/scim.md | b89ce528d1476b6d7e1841caf56ad143abe4d36b4f4fcb8dda98166f12aef623 |
-| snapshots/x509.md | 2215f78a73f30c165306138ac69826d6818bca85f18b071e0dc073daa61bd550 |
+| snapshots/x509.md | 931bdc71bf6cbb7a625d4cf5d9f1e638ccd99aa1c2b6755b3e0af7ec4e859367 |
 | snapshots/iddataweb.md | 85f9e5631e6d19c1c14b30287a99163ae8440efe0828f076c8930b5d7615b35a |
 | snapshots/oam.md | ac73af5b49bbfb52d16f9725568417ebd6ac94fcd87c207bbe931b8ce9124087 |
 | snapshots/servicenow.md | 5d51732de8670ae7c24a1d45a25ef72ed3973ebdc6f828005fbb1c9558520745 |

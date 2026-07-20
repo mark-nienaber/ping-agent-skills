@@ -2,7 +2,7 @@
 
 - Product: PingCentral
 - Version: 3.1.1
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/pingcentral/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
@@ -16,10 +16,10 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| release-notes.md | assembled | <100 pages from release_notes> | 100 | 20 | partial |
-| pingcentral-for-iam-administrators.md | assembled | <99 pages from pingcentral_for_iam_administrators> | 99 | 20 | partial |
-| pingcentral-for-application-owners.md | assembled | <93 pages from pingcentral_for_application_owners> | 93 | 20 | partial |
-| root.md | assembled | <9 pages from root> | 9 | 9 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 100 | 20 | partial |
+| pingcentral-for-iam-administrators.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 99 | 20 | partial |
+| pingcentral-for-application-owners.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 93 | 20 | partial |
+| root.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 9 | 9 | full |
 
 ## Checksums
 

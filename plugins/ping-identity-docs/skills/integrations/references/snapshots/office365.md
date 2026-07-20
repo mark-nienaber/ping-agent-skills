@@ -430,6 +430,280 @@ section_ids:
 ---
 
 ---
+title: Configure federation settings
+description: Set the federation type to SAML.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configure_federation_settings
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configure_federation_settings.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+---
+
+# Configure federation settings
+
+Set the federation type to SAML.
+
+```
+PS> Set-MsolDomainAuthentication -DomainName "$domainName"
+            -Authentication Federated -PreferredAuthenticationProtocol Samlp
+```
+
+---
+
+---
+title: Configure license management
+description: The Office 365 Connector supports the ability to manage the Office 365 licenses assigned to a user.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configure_license_management
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configure_license_management.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configure license management
+
+## About this task
+
+The Office 365 Connector supports the ability to manage the Office 365 licenses assigned to a user.
+
+## Steps
+
+1. The usageLocation field must be set to a static value, or mapped to an attribute containing the `ISO-3166` two-character country code for the location of the user.
+
+2. The skuId field must either be set to a single static value or an attribute containing one or more license keys to be assigned to the user.
+
+   |   |                                                                                                                             |
+   | - | --------------------------------------------------------------------------------------------------------------------------- |
+   |   | Each license specified in the skuId field can be either the actual ID of that license or the specified name of the license. |
+
+3. The disabledPlans field may either be set to a single static value or an attribute containing product keys to be disabled for the user. The disabledPlans field cannot contain a list of product keys. To provide a list of product keys, set the disabledPlans field to a multi-valued LDAP attribute.
+
+   |   |                                                                                                                                                        |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | If no disabledPlans are specified, the user will have access to all products available through their assigned licenses specified in their skuId field. |
+
+   |   |                                                                                                                           |
+   | - | ------------------------------------------------------------------------------------------------------------------------- |
+   |   | Each product specified in the disabledPlans field can be either the actual ID of that product or the name of the product. |
+
+4. Ensure the appropriate option for the Remove Licenses from User when skuID is Empty connection field is configured on the SP Connection configured for the Office 365 Connector:
+
+   * **False** (default) - When disabled, if you choose to not configure the skuId field in your configuration's Attribute Mapping screen, or if the user's skuId field is cleared in the datastore, the user's licenses will not be removed from their account.
+
+   * **True** - When enabled, if you choose to not configure the skuId field in your configuration's Attribute Mapping screen, or if the user's skuId field is cleared in the datastore, the user's licenses will be removed from their account.
+
+---
+
+---
+title: Configure manager assignment
+description: The Office 365 Connector supports the ability to assign a manager to a user.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configure_manager_assignment
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configure_manager_assignment.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  examplean-example-of-how-assigning-a-manager-to-a-user-works: ExampleAn example of how assigning a manager to a user works
+---
+
+# Configure manager assignment
+
+## About this task
+
+The Office 365 Connector supports the ability to assign a manager to a user.
+
+## Steps
+
+1. The pingSourceDn field must be mapped to an attribute containing a unique identifier for the user.
+
+   |   |                                                                                                                          |
+   | - | ------------------------------------------------------------------------------------------------------------------------ |
+   |   | By default this is mapped to the distinguishedName field. We recommend leaving this field mapped to the default mapping. |
+
+2. The manager field must either be set to a static value, or mapped to an attribute containing the value of the assigned manager's pingSourceDn field.
+
+   |   |                                                                                                                |
+   | - | -------------------------------------------------------------------------------------------------------------- |
+   |   | By default this is mapped to the manager field. We recommend leaving this field mapped to the default mapping. |
+
+## ExampleAn example of how assigning a manager to a user works
+
+|   |                                                                                     |
+| - | ----------------------------------------------------------------------------------- |
+|   | The following assumes the default mappings for the pingSourceDn and manager fields. |
+
+1. The manager is provisioned to Azure.
+
+2. The employee is provisioned to Azure.
+
+3. The employee's manager, under their Organization tab in Active Directory (AD), is set to the manager in AD.
+
+4. The Office 365 Connector will assign the manager as the employee's manager in Azure.
+
+   |   |                                                                                                                                |
+   | - | ------------------------------------------------------------------------------------------------------------------------------ |
+   |   | To update or clear the employee's manager in Azure, change or clear the employee's manager under their Organization tab in AD. |
+
+---
+
+---
+title: Configure outbound provisioning
+description: Outbound provisioning details are managed within an SP connection. You can configure outbound provisioning with or without Browser SSO, WS-Trust STS, or both when you create a new SP connection. You also have the option to add outbound provisioning to an existing SP connection.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configure_outbound_provisioning
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configure_outbound_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configure outbound provisioning
+
+## About this task
+
+Outbound provisioning details are managed within an SP connection. You can configure outbound provisioning with or without Browser SSO, WS-Trust STS, or both when you create a new SP connection. You also have the option to add outbound provisioning to an existing SP connection.
+
+For SSO instructions, see [Configure SSO](pf_office365_connector_configure_an_sso_connection.html).
+
+## Steps
+
+1. Create a new SP connection or select an existing SP connection from the SP Configuration menu.
+
+2. On the Connection Template screen, select the Use a template for this connection option and choose Office 365 Connector from the Connection Template drop-down list. You will be asked to provide the `federationmetadata.xml` file you obtained earlier in [Download Office 365 SAML 2.0 metadata file](pf_office365_connector_download_office_365_saml_20_metadata_file.html).
+
+   ![gif1563995507676](_images/gif1563995507676.png)
+
+   |   |                                                                                                 |
+   | - | ----------------------------------------------------------------------------------------------- |
+   |   | If this selection is not available, verify the connector installation and restart PingFederate. |
+
+3. On the Connection Type screen, ensure the Outbound Provisioning checkbox is selected, and the Browser SSO Profiles checkbox is cleared (if appropriate).
+
+4. On the General Info screen, the default values are taken from the metadata file you selected in an earlier step. We recommend using the metadata default values.
+
+   ![knt1563995510393](_images/knt1563995510393.png)
+
+5. Follow the connection wizard to configure the connection.
+
+6. On the Outbound Provisioning screen, click Configure Provisioning.
+
+7. On the Target screen, enter the values for each field as required by the Office 365 Connector.
+
+   ![Image of the Target screen.](_images/bgt1563995515875.png)
+
+   | Field Name                                    | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Application ID                                | The application ID for the application created in Azure. For more information, see [Add application to Azure AD](pf_office365_connector_add_application_to_azure_ad.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   | Application Secret                            | The secret generated during application creation in Azure. For more information, see [Add application to Azure AD](pf_office365_connector_add_application_to_azure_ad.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | Global Default Password                       | The default password. Only used if the password attribute is not mapped, or value of the mapped field is empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   | Do a Base64 Conversion on ImmutableID         | **True** (default) is recommended. Set to false if the ImmutableID is not base64. The conversion assumes it is mapped to a hex number.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+   | Remove Licenses from User when SkuId is Empty | **False** (default) – When disabled, if you choose to not configure the skuId field in your configuration's Attribute Mapping screen, or if the user's skuId field is cleared in the datastore, the user's licenses will not be removed from their account.**True** – When enabled, if you choose to not configure the skuId field in your configuration's Attribute Mapping screen, or if the user's skuId field is cleared in the datastore, the user's licenses will be removed from their account.                                                                                                                                                                                                                                                                                                                                                |
+   | Tenant Domain                                 | The tenant domain configured in Azure, which is retrieved by going to the application properties and selecting view endpoints, and copying the ID from the URL under Windows Azure AD Graph API Endpoint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | **Provisioning Options**                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   | User Create                                   | **True**(default) – Users will be created in Office 365.**False** – Users will not be created in Office 365.&#xA;&#xA;The provisioner.log will display a warning within the create user workflow that the user was not created in Office 365.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   | User Update                                   | **True** (default) – Users will be updated in Office 365.**False** – Users will not be updated in Office 365.&#xA;&#xA;The provisioner.log will display a warning within the update user workflow that the user was not updated in Office 365.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   | User Disable / Delete                         | \[**True** (default) – Users will be disabled or deleted in Office 365.**False** – Users will not be disabled or deleted in Office 365.&#xA;&#xA;The provisioner.log will display a warning indicating that the user was not disabled or deleted in Office 365.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   | Provision Disabled Users                      | This option is only relevant if User Create is True.**True** (default) – Office 365 users will be created in a disabled state.**False** – Office 365 users will not be created in a disabled state. This is desirable for scenarios where there are disabled users in the data store, not intended for creation in Office 365 during initial synchronization.&#xA;&#xA;The provisioner.log will display a warning within the create user workflow indicating that the user was not created in Office 365.                                                                                                                                                                                                                                                                                                                                             |
+   | Remove User Action                            | Select a deprovision method (Disable or Delete). Deprovisioning is triggered when previously provisioned users no longer meet the condition set in the Source Location screen, or when a user has been suspended or deleted from the data store. This option is only applicable if User Disable / Delete is set to True.**Disable** (default) – when selected, if you delete a user from Active Directory, the user will be disabled in Office 365 (also known as a soft delete).**Delete** – when selected, if you delete a user from Active Directory, the user will be deleted in Office 365 (also known as a hard delete).&#xA;&#xA;When a user is deleted in Azure Active Directory, the deleted user is retained for 30 days from the deletion date. During that time, the user and its properties can be restored under Users > Deleted users. |
+
+   |   |                                                                                                              |
+   | - | ------------------------------------------------------------------------------------------------------------ |
+   |   | For user provisioning to succeed, the users' userPrincipalName domain must match a verified domain in Azure. |
+
+8. Click Next to continue the provisioning configuration.
+
+   For more information, see the following sections under [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html):
+
+   * [Manage channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html)
+
+   * [Specifying channel information](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasgeneralinfostate.html)
+
+   * [Identifying the source datastore](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saassourceselectionstate.html)
+
+   * [Modify source settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saassourcesettingsstate.html)
+
+   * [Specify a source location](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saassourcelocationstate.html)
+
+   * [Map attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html)
+
+   * [Review channel settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasactivationstate.html)
+
+     |   |                                                                                                                 |
+     | - | --------------------------------------------------------------------------------------------------------------- |
+     |   | Credentials will be verified when the channel and SP connection is set to Active and provisioning is initiated. |
+
+     |   |                                                                                                                                                                                                                                                      |
+     | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | If you are not ready to complete the provisioning configuration, you can click Save and return to the configuration page later. To return to the configuration page, select the connection from **Identity Provider > SP Connections > Manage All**. |
+
+---
+
+---
+title: Configuring PingFederate to omit line breaks in digital signatures
+description: Configure PingFederate to omit line breaks in digital signatures by performing the following steps.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configuring_pf_to_omit_line_breaks_in_digital_signatures
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configuring_pf_to_omit_line_breaks_in_digital_signatures.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  steps: Steps
+---
+
+# Configuring PingFederate to omit line breaks in digital signatures
+
+Configure PingFederate to omit line breaks in digital signatures by performing the following steps.
+
+## Steps
+
+1. Open `<pf_install>/pingfederate/bin/run.properties` in a text editor.
+
+2. If not already present, add a new line to the file as follows: `org.apache.xml.security.ignoreLineBreaks=true`
+
+3. Save the file.
+
+4. Stop PingFederate and restart it to pick up the change.
+
+---
+
+---
+title: Configuring provisioning
+description: To configure a connection for outbound provisioning to Office 365, complete the instructions the following sections:
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_configuring_provisioning
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_configuring_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+---
+
+# Configuring provisioning
+
+To configure a connection for outbound provisioning to Office 365, complete the instructions the following sections:
+
+1. [Add application to Azure AD](pf_office365_connector_add_application_to_azure_ad.html)
+
+2. [Configure outbound provisioning](pf_office365_connector_configure_outbound_provisioning.html)
+
+3. [Configure license management](pf_office365_connector_configure_license_management.html)
+
+4. [Configure manager assignment](pf_office365_connector_configure_manager_assignment.html)
+
+---
+
+---
 title: Configuring single sign-on
 description: The following section describes the steps for configuring single sign-on (SSO) to Office 365.
 component: office365
@@ -451,3 +725,266 @@ The following section describes the steps for configuring single sign-on (SSO) t
 |   |                                                                                                                                                                                                                                                                                                                                                                                 |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | A SAML connection is limited in functionality for this integration. For more information, see [Choose an SSO configuration path](pf_office365_connector_choose_an_sso_configuration_path.html). If SSO, SLO, and/or active federation are required, see [Azure AD and Office 365 Integration Guide](../../azure/pf_azuread_office365_integration.html) for configuration steps. |
+
+---
+
+---
+title: Create an Azure account
+description: The following steps outline how to create an Azure account for this integration. You will create the Azure account with the same credentials as those used with the Office 365 tenant to provide access to Azure Active Directory. This step is required for both provisioning and SSO.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_create_an_azure_account
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_create_an_azure_account.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Create an Azure account
+
+## About this task
+
+The following steps outline how to create an Azure account for this integration. You will create the Azure account with the same credentials as those used with the Office 365 tenant to provide access to Azure Active Directory. This step is required for both provisioning and SSO.
+
+## Steps
+
+1. Navigate to the [Microsoft Azure Portal](https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fportal.azure.com%2Fsignin%2Findex%2F\&response_type=code%20id_token\&scope=https%3A%2F%2Fmanagement.core.windows.net%2F%2Fuser_impersonation%20openid%20email%20profile\&state=OpenIdConnect.AuthenticationProperties%3DUbvQD2JzApJzBBV52lFIB7hLEG6N2Yr6G-KrUFBfx3UT-xjhlnIStqsmQBTDzjA5FjU6XbcgxP8LBcM17ra05lwZt7XrIe5iu_I4utiEeKQ7ErzRT5cdxIwOvQ-5XeA8IDUSTi7QPv4gXG5GYVpmzYWcTsamCTPnTritI5FoE3D470JD4aZUguCnrIwCgAxb76-eaSNv30N5ikDI7n2FO24-yqt9cPgJVYKYeqfafFqzY0VPJpzDCL7GjjUQcS6lE9o9IA0jxjC7IHqSkBi6NbGZNlPY71beVRCaKMLeXaAwXCgzz1yaRrKy0afrm2GanSwnS7tj_umnK0L-wnYXOS0Fh4lKddze3SG0OCXtlyWknPRxxRwHBH4M-5atc3eYBb7fhATkfbwlSRNk7ry1dA\&response_mode=form_post\&nonce=637752782926851920.YmMyYmY2NTctZDUwZC00YTFkLTk4M2ItMDhmZTFiNjIwNTMzN2FlZmRmOGYtYTJmOC00YjJhLTk5MWMtMDgwMzc3YjQ0NTgw\&client_id=c44b4083-3bb0-49c1-b47d-974e53cbdf3c\&site_id=501430\&client-request-id=d42d7eb7-53d6-4a45-93b8-a5754b557972\&x-client-SKU=ID_NET472\&x-client-ver=6.11.0.0).
+
+2. Create an account using the same credentials as the Office 365 account.
+
+---
+
+---
+title: Deploying the integration files
+description: To get started with the integration, deploy the Office 365 Provisioner files to your PingFederate directory.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_deploying_the_integration_files
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_deploying_the_integration_files.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  steps: Steps
+---
+
+# Deploying the integration files
+
+To get started with the integration, deploy the Office 365 Provisioner files to your PingFederate directory.
+
+## Steps
+
+1. Download the Office 365 Provisioner `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/office-365-single-signon-integration).
+
+2. Stop PingFederate.
+
+3. If you're upgrading an existing deployment, delete the `pf-office365-quickconnection-<version>.jar` file from your `<pf_install>/pingfederate/server/default/deploy` directory.
+
+4. Extract the `.zip` archive and merge the contents of the `dist` directory with your `<pf_install>/pingfederate/server/default/deploy` directory.
+
+5. Enable the PingFederate provisioning engine:
+
+   1. Open your `<pf_install>/pingfederate/bin/run.properties` file.
+
+   2. Change `pf.provisioner.mode` to `STANDALONE`. Save the file.
+
+      |   |                                                                                                                                                                                                                                        |
+      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | To configure the `FAILOVER` mode instead, see [Deploying provisioning failover](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_deploy_provis_failover.html) in the PingFederate Server Clustering Guide. |
+
+6. Start PingFederate.
+
+7. If you operate PingFederate in a cluster, repeat steps 2-4 and step 6 for each engine node.
+
+---
+
+---
+title: DNS updates
+description: Add a DNS redirect from a sub-domain of the federated domain to point to the PingFederate server so that <sub-domain>.<federated_domain_name> points to <PingFederate_domain_name_or_IP> where <sub-domain> is a unique identifier for the PingFederate server.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_dns_updates
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_dns_updates.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 20, 2024
+section_ids:
+  steps: Steps
+---
+
+# DNS updates
+
+## Steps
+
+1. Add a DNS redirect from a sub-domain of the federated domain to point to the PingFederate server so that `<sub-domain>.<federated_domain_name>` points to `<PingFederate_domain_name_or_IP>` where `<sub-domain>` is a unique identifier for the PingFederate server.
+
+   For example, redirect `pf.myfederateddomain.com` to `pfnode.mycompany.com` where `pfnode.mycompany.com` resolves to the PingFederate server.
+
+2. To assist in verification of the domain, add a TXT record to the DNS settings of the federated domain. Insert the domain label prefix recorded recorded in the [Add federated domain](pf_office365_connector_add_federated_domain.html) step where indicated below.
+
+   ```
+   type: TXT, alias/host name: @, destination/points to address: MS=<domain_label_prefix>, ttl: 1hour
+   ```
+
+---
+
+---
+title: Download manifest
+description: The following files are included in the Office 365 Provisioner .zip archive.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_download_manifest
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_download_manifest.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+---
+
+# Download manifest
+
+The following files are included in the Office 365 Provisioner `.zip` archive.
+
+The distribution `.zip` archive for the connector contains the following:
+
+* `/legal`:
+
+  * `Legal.pdf` – copyright and license information.
+
+* `/dist` – contains libraries needed for the connector:
+
+  * `pf-office365-quickconnection-<version>.jar`– PingFederate Office 365 Connector
+
+---
+
+---
+title: Download Office 365 SAML 2.0 metadata file
+description: This connector's quick-connection template uses a metadata .xml file from Office 365 to assist in configuring many settings in the SP Connection. When asked during the SP Connection configuration steps, import the federationmetadata.xml that you downloaded from Office 365.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_download_office_365_saml_20_metadata_file
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_download_office_365_saml_20_metadata_file.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Download Office 365 SAML 2.0 metadata file
+
+## About this task
+
+This connector's quick-connection template uses a metadata `.xml` file from Office 365 to assist in configuring many settings in the SP Connection. When asked during the SP Connection configuration steps, import the `federationmetadata.xml` that you downloaded from Office 365.
+
+## Steps
+
+1. Download the SAML 2.0 metadata for Office 365 from [Microsoft](https://nexus.microsoftonline-p.com/federationmetadata/saml20/federationmetadata.adoc).
+
+2. Save the `.xml`file to a desired location.
+
+---
+
+---
+title: Enabling provisioning and single sign-on in PingFederate
+description: To use PingFederate for provisioning and single sign-on, configure an external datastore and set a SAML entity ID.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_enabling_provisioning_and_single_sign_on_in_pf
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  about-this-task: About this task
+  enabling-provisioning-and-single-sign-on-in-pingfederate-10-1-or-later: Enabling provisioning and single sign-on in PingFederate 10.1 or later
+  steps: Steps
+  enabling-provisioning-and-single-sign-on-in-pingfederate-10-0-or-earlier: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
+  steps-2: Steps
+---
+
+# Enabling provisioning and single sign-on in PingFederate
+
+To use PingFederate for provisioning and single sign-on, configure an external datastore and set a SAML entity ID.
+
+## About this task
+
+Your external datastore acts as the source of data for provisioning. PingFederate also uses an internal datastore to store the state of synchronization between the source datastore and the target datastore.
+
+For more information, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) and [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+
+* PingFederate 10.1 or later
+
+* PingFederate 10.0 or earlier
+
+## Enabling provisioning and single sign-on in PingFederate 10.1 or later
+
+### Steps
+
+1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+
+   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+
+2. Go to System > Server > Protocol Settings > Federation Info.
+
+3. In the SAML 2.0 Entity ID field, enter a name for PingFederate to use when identifying itself to SAML partners.
+
+4. On the Outbound Provisioning tab, in the Provisioner Data Store list, select the internal database that will store the synchronization state. Click Save.
+
+   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+
+## Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
+
+### Steps
+
+1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+
+   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+
+2. Go to System > Protocol Settings > Roles & Protocols.
+
+3. Select the Enable Identity Provider IdP Role and Support the Following check box.
+
+4. Select the SAML 2.0 and Outbound Provisioning check boxes. Click Next.
+
+5. Click the Federation Info tab.
+
+6. In the SAML 2.0 Entity ID field, enter a name for PingFederate to use to identify itself to SAML partners.
+
+7. On the Outbound Provisioning tab, in the Provisioner Data Store list, select the internal database that will store the synchronization state. Click Save.
+
+   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+
+---
+
+---
+title: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
+description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+component: office365
+page_id: office365:office_365_provisioner:pf_office365_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
+canonical_url: https://docs.pingidentity.com/integrations/office365/office_365_provisioner/pf_office365_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/office365/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  steps: Steps
+---
+
+# Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
+
+## Steps
+
+1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+
+   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+
+2. Go to System > Protocol Settings > Roles & Protocols.
+
+3. Select the Enable Identity Provider IdP Role and Support the Following check box.
+
+4. Select the SAML 2.0 and Outbound Provisioning check boxes. Click Next.
+
+5. Click the Federation Info tab.
+
+6. In the SAML 2.0 Entity ID field, enter a name for PingFederate to use to identify itself to SAML partners.
+
+7. On the Outbound Provisioning tab, in the Provisioner Data Store list, select the internal database that will store the synchronization state. Click Save.
+
+   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.

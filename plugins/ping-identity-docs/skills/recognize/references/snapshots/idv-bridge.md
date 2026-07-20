@@ -92,3 +92,1453 @@ This interoperability enables multiple authentication scenarios.
    ```
 
    Use the response results when the customer authenticates on a new device using the Mobile SDK. Refer to [Account Recovery](../mobile-sdk/mobile-sdk-account-recovery.html) for details showing how to authenticate users on a new device. This enables ongoing authentication.
+
+---
+
+---
+title: Encrypting images and keys - Java examples
+description: Examples of how to encrypt images and keys in Java to enroll users into PingOne Recognize with the IDV Bridge SaaS solution.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-encrypting-images-and-keys-java
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-encrypting-images-and-keys-java.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Encrypting images and keys - Java examples
+
+1. Install two libraries required to perform the cryptographic operations in this flow:
+
+   ```java
+   // build.gradle.kts
+   dependencies {
+       // if you're using a JDK version older than 8, check the docs at https://www.bouncycastle.org/documentation/documentation-java/#bouncy-castle-java-documentation
+       implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
+   	implementation("org.apache.wicket:wicket-core:10.2.0")
+   }
+   ```
+
+2. Next, here's how to [encrypt images with AES-GCM-SIV](idv-bridge-saas.html#encrypt-aes-gcm-or-aes-gcm-siv-key):
+
+   ```java
+   public class CypherPoc {
+       public static void main(String[] args) {
+           // Important: make Bouncycastle available as the primary security provider
+           if (Security.getProvider(PROVIDER_NAME) == null) {
+               Security.insertProviderAt(new BouncyCastleProvider(), 1);
+           }
+
+           CypherPoc cypherPoc = new CypherPoc();
+           cypherPoc.aesGcmSiv();
+       }
+
+       public void aesGcmSiv() {
+           // defaults to AES-256-GCM-SIV
+           GCMSIVCrypter crypter = new GCMSIVCrypter();
+           SecretKey secretKey = crypter.generateKey(new SecureRandom());
+           byte[] encrypt = crypter.encrypt("Hello, AES-GCM-SIV!".getBytes(), secretKey, new SecureRandom());
+           byte[] decrypt = crypter.decrypt(encrypt, secretKey);
+           System.out.println("Decrypted Text: " + new String(decrypt));
+       }
+   }
+   ```
+
+3. Finally, here's an example of how to [encrypt with the RSA public key required by the next step](idv-bridge-saas.html#encrypt-aes-gcm-or-aes-gcm-siv-key):
+
+   ```java
+   public class CypherPoc {
+       public static void main(String[] args) throws Exception {
+           if (Security.getProvider(PROVIDER_NAME) == null) {
+               Security.insertProviderAt(new BouncyCastleProvider(), 1);
+           }
+
+           CypherPoc cypherPoc = new CypherPoc();
+           SecretKey keyToEncrypt = cypherPoc.aesGcmSiv();
+
+           // RSAES-OAEP-SHA-256
+           String keyUsedToEncrypt = """
+                   -----BEGIN PUBLIC KEY-----
+                   The public key base64
+                   -----END PUBLIC KEY-----""";
+
+           byte[] encryptedKey = cypherPoc.encryptKey(keyUsedToEncrypt, keyToEncrypt);
+           System.out.println("Encrypted Key: " + HexUtils.toHexString(encryptedKey));
+       }
+
+       public SecretKey aesGcmSiv() {
+           GCMSIVCrypter crypter = new GCMSIVCrypter();
+           SecretKey secretKey = crypter.generateKey(new SecureRandom());
+
+           return secretKey;
+       }
+
+       public byte[] encryptKey(String keyUsedToEncrypt, SecretKey keyToEncrypt) throws Exception {
+           PemReader pemReader = new PemReader(new StringReader(keyUsedToEncrypt));
+           PemObject pemObject = pemReader.readPemObject();
+           byte[] content = pemObject.getContent();
+
+           KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+           X509EncodedKeySpec keySpec = new X509EncodedKeySpec(content);
+           PublicKey publicKey = keyFactory.generatePublic(keySpec);
+
+           Cipher instance = Cipher.getInstance("RSA/ECB/OAEPWITHSHA256ANDMGF1PADDING");
+           instance.init(Cipher.ENCRYPT_MODE, publicKey);
+
+           return instance.doFinal(keyToEncrypt.getEncoded());
+       }
+   }
+   ```
+
+---
+
+---
+title: Exporting the client state to authenticate the enrolled user
+description: Having successfully enrolled a user through IDV Bridge SaaS, it is critical that integrators export the client state to support account recovery and ongoing authentication through the Mobile SDK.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-exporting-client-state
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-exporting-client-state.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  exporting-the-client-state-rsa-wrapped-aes-key: Exporting the client state (RSA-wrapped AES key)
+  overview: Overview
+  endpoint: Endpoint
+  example-implementation-python: Example implementation (Python)
+  example-response: Example response
+  common-errors: Common errors
+---
+
+# Exporting the client state to authenticate the enrolled user
+
+## Exporting the client state (RSA-wrapped AES key)
+
+After a user successfully completes enrollment, you can export their client state. This produces an encrypted backup that can be restored or transferred securely to another device.
+
+### Overview
+
+The export process uses a hybrid encryption flow combining RSA and AES:
+
+1. Generate a random AES-256 symmetric key (`client_state_key`).
+
+2. Encrypt this key using the PingOne Recognize RSA public key with `RSAES-OAEP-SHA-256`.
+
+3. Send the RSA-encrypted AES key (hex-encoded) in the `Kl-Client-State-Key` header.
+
+4. PingOne Recognize decrypts it internally and uses the AES key to encrypt the client state with AES-GCM-SIV.
+
+5. You receive a binary blob which can be decrypted locally using the same AES key.
+
+|   |                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In sandbox environments, the returned ciphertext might also be compatible with AES-GCM, so standard AES-GCM decryption can be used if AES-GCM-SIV support is unavailable. |
+
+### Endpoint
+
+**Method:** `POST`
+
+**Path:**
+
+```
+/v1/users/{customer}/{username}/export-client-state
+```
+
+**Required headers:**
+
+| Header                      | Description                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Kl-Key-Id`                 | Registered RSA key alias (for example, `alias/kl-core-production-authentication-service-image-key-sandbox`) |
+| `Kl-Key-Algorithm`          | Must be `RSAES-OAEP-SHA-256`                                                                                |
+| `Kl-Client-State-Key`       | RSA-encrypted AES key (hex-encoded)                                                                         |
+| `Kl-Client-State-Algorithm` | `AES-GCM-SIV`                                                                                               |
+| `Kl-Client-State-Type`      | `BACKUP`                                                                                                    |
+| `Kl-Api-Key`                | Your PingOne Recognize API key                                                                              |
+| `Accept`                    | `application/octet-stream`                                                                                  |
+
+### Example implementation (Python)
+
+The following is a full working example using `requests` and `cryptography`.
+
+|   |                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------- |
+|   | Replace placeholders (`<your-api-key>`, `<your-customer>`, `<your-username>`, `<your-public-key>`) with real configuration values. |
+
+```python
+import os
+import json
+import requests
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.backends import default_backend
+
+# ----------------------------
+# CONFIGURATION
+# ----------------------------
+URL = "https://<your-keyless-endpoint>/v1/users/<customer>/<username>/export-client-state"
+
+HEADERS_TEMPLATE = {
+    "Kl-Key-Id": "alias/<your-key-alias>",
+    "Kl-Key-Algorithm": "RSAES-OAEP-SHA-256",
+    "Kl-Client-State-Algorithm": "AES-GCM-SIV",  # informational
+    "Kl-Client-State-Type": "BACKUP",
+    "Kl-Api-Key": "<your-api-key>",
+    "Accept": "application/octet-stream",
+}
+
+PUBLIC_KEY_PEM = '''-----BEGIN PUBLIC KEY-----
+<your-public-key>
+-----END PUBLIC KEY-----'''
+
+# ----------------------------
+# STEP 1. Generate AES-256 symmetric key
+# ----------------------------
+sym_key = os.urandom(32)
+print(f"[+] Generated AES key: {sym_key.hex()}")
+
+# ----------------------------
+# STEP 2. Encrypt AES key with RSA public key (OAEP-SHA256)
+# ----------------------------
+public_key = serialization.load_pem_public_key(
+    PUBLIC_KEY_PEM.encode(), backend=default_backend()
+)
+
+encrypted_sym_key = public_key.encrypt(
+    sym_key,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+
+# ----------------------------
+# STEP 3. Send hex-encoded RSA-encrypted AES key
+# ----------------------------
+headers = HEADERS_TEMPLATE.copy()
+headers["Kl-Client-State-Key"] = encrypted_sym_key.hex()
+
+print("[+] Sending request to Export Client State endpoint...")
+response = requests.post(URL, headers=headers)
+print(f"[+] Response status: {response.status_code}")
+
+if response.status_code != 200:
+    print(f"[!] Error {response.status_code}: {response.text}")
+    exit(1)
+
+# ----------------------------
+# STEP 4. Decrypt returned client state with AES-GCM
+# ----------------------------
+encrypted_blob = response.content
+
+if len(encrypted_blob) < 12:
+    raise ValueError("Invalid response: cannot extract nonce and ciphertext")
+
+nonce, ciphertext = encrypted_blob[:12], encrypted_blob[12:]
+aesgcm = AESGCM(sym_key)
+
+try:
+    plaintext = aesgcm.decrypt(nonce, ciphertext, None)
+    print("\n[+] Decrypted client state:")
+    try:
+        print(json.dumps(json.loads(plaintext.decode()), indent=2))
+    except json.JSONDecodeError:
+        print(plaintext.decode(errors='ignore'))
+except Exception as e:
+    print(f"[!] Decryption failed: {e}")
+```
+
+### Example response
+
+**Status:** `200 OK`
+
+**Content-Type:** `application/octet-stream`
+
+Binary blob: `nonce || ciphertext`
+
+After successful decryption, the plaintext contains the user's client state in JSON:
+
+```json
+{
+  "user_id": "12345678",
+  "enrolled_factors": ["face", "device"],
+  "created_at": "2025-10-10T14:32:00Z"
+}
+```
+
+### Common errors
+
+| Code          | Message                              | Explanation                                                                                                 |
+| ------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `422`         | `bytes_invalid_encoding`             | `Kl-Client-State-Key` must be hex-encoded (not Base64).                                                     |
+| `409`         | `IMAGE_ENCRYPTION_ERROR`             | The server couldn't decrypt the key. Ensure your RSA public key matches the alias and OAEP-SHA-256 is used. |
+| `400` / `401` | `Unauthorized`                       | Invalid or missing API key.                                                                                 |
+| —             | `cryptography.exceptions.InvalidTag` | AES key or nonce mismatch. Check byte order and header setup.                                               |
+
+---
+
+---
+title: How to run PingOne Recognize Agent
+description: This page explains how to set up and run IDV Bridge On-Premise (PingOne Recognize Agent) and the required configurations.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-run-p1rcognize-agent
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-run-p1rcognize-agent.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  infrastructure-requirements: Infrastructure requirements
+  pull-the-docker-image: Pull the Docker image
+  running-pingone-recognize-agent: Running PingOne Recognize Agent
+  enable-online-enrollment: Enable online enrollment
+  configure-logs: Configure logs
+  configure-the-http-server: Configure the HTTP server
+  configure-concurrency: Configure concurrency
+  maximum-concurrency-overview: Maximum concurrency overview
+  memory-management: Memory management
+  performance-and-throughput: Performance and throughput
+  understanding-circuits-for-authentication: Understanding circuits for authentication
+---
+
+# How to run PingOne Recognize Agent
+
+## Infrastructure requirements
+
+PingOne Recognize Agent requires the following minimum versions and infrastructure:
+
+* Kubernetes 1.32+
+
+* Helm (if your chosen installation method is Helm)
+
+In terms of performance, a single instance of PingOne Recognize Agent typically performs as follows (2000 mCPUs, 8000 Mi RAM):
+
+* 5 requests in parallel
+
+* 3 seconds per image processed
+
+* Horizontal scaling ready (online mode only)
+
+## Pull the Docker image
+
+The Docker image is available on the PingOne Recognize Quay repository.
+
+1. Run Docker login:
+
+   ```shell
+   docker login -u="keyless_technologies+<PROVIDED_TENANT_NAME>" -p="<PROVIDED_PASSWORD>" quay.io
+   ```
+
+2. Pull the container:
+
+   ```shell
+   docker pull quay.io/keyless_technologies/keyless-agent:v3.0.0
+   ```
+
+   |   |                                                                                                                                            |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | The image can also be installed through the official Helm chart, which can be provided on request through your technical services contact. |
+
+## Running PingOne Recognize Agent
+
+Customers can run this as a Docker image or use the Helm chart.
+
+After the Docker image is set up, configure the service using the following environment variables. If no default is specified, the variable is required.
+
+* `NUM_OF_CIRC` - Number of circuits to create during enrollment (default: `25`)
+
+### Enable online enrollment
+
+The following environment variables are required. If they aren't set, online enrollment is disabled:
+
+* `AUTH_SERVER_URL` - URL of the auth server (same as host passed to SDK)
+
+* `AUTH_SERVER_API_KEY` - API key for the auth server (same as API key passed to SDK)
+
+### Configure logs
+
+* `LOG_FORMAT` - Log format: `json` or `human` (default: `human`)
+
+### Configure the HTTP server
+
+* `PORT` - Port the HTTP server listens on (default: `80`)
+
+### Configure concurrency
+
+* `MAX_CONCURRENCY`: Maximum number of concurrent biometric sessions (default: number of CPUs).
+
+* `MAX_WAIT`: Maximum number of requests waiting for an available biometric session (default: `1`).
+
+### Maximum concurrency overview
+
+Each enrollment request runs a biometric session to extract embeddings. There is a maximum number of biometric sessions that can run concurrently. If requests exceed concurrent sessions, requests are queued and processed when a session becomes available. If requests exceed `MAX_WAIT`, requests are rejected with HTTP `429 Too Many Requests`.
+
+### Memory management
+
+Memory usage is primarily controlled by `MAX_CONCURRENCY`, since it determines how many biometric sessions can run at the same time. Each session consumes memory to load biometric models and run extraction. More concurrent sessions consume more memory.
+
+Other less significant factors are:
+
+* Number of circuits created during enrollment
+
+* Number of waiting requests
+
+* Resolution of photos used for enrollment
+
+Approximate memory consumption for offline enrollment with 25 circuits:
+
+* `MAX_CONCURRENCY=2`: Approximately 0.5 GB
+
+* `MAX_CONCURRENCY=4`: Approximately 1 GB
+
+* `MAX_CONCURRENCY=7`: Approximately 1.5 GB
+
+* `MAX_CONCURRENCY=9`: Approximately 2 GB
+
+### Performance and throughput
+
+Peak performance is approximately 1 second to generate offline enrollment with 25 circuits. Biometric extraction is approximately 0.5 seconds (depending on CPU power), with the remaining time spent on network transfer and request processing.
+
+| Max concurrency | CPU cores | Requests per second |
+| --------------- | --------- | ------------------- |
+| 1               | 1         | 0.6                 |
+| 1               | 2         | 1.7                 |
+| 1               | 4         | 2.2                 |
+| 1               | 8         | 2.2                 |
+| 2               | 2         | 0.7                 |
+| 2               | 4         | 2.3                 |
+| 2               | 8         | 4.5                 |
+
+`MAX_WAIT` controls how many requests can wait for an available biometric session and therefore how the service handles traffic spikes. If requests exceed `MAX_WAIT`, they're rejected with HTTP `429 Too Many Requests`.
+
+|   |                                                                                                                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Service throughput is mostly determined by the number of concurrent biometric sessions and the number of available CPU cores. The benchmarks above demonstrate the relationship between max concurrency, CPU cores, and performance.Always benchmark on your own hardware for the most accurate performance estimates. |
+
+## Understanding circuits for authentication
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Circuits are a key concept in the PingOne Recognize platform to ensure the solution remains 100% privacy-preserving. They ensure the cryptographic transformation is unique for every user, on every device, and for every authentication, which helps prevent reverse engineering attempts.Circuits are generated on the client side (for example, the IDV Bridge) and sent to the server. Each authentication request consumes one circuit, and a successful authentication replenishes the circuit supply. If a user repeatedly fails authentication, circuits can become exhausted and the user must re-enroll.The maximum number of circuits determines the maximum number of consecutive failed authentication attempts allowed before the account is locked and re-enrollment is required. Increasing this maximum too much can affect performance.The default is `25`, and changing it isn't recommended without a clear reason. |
+
+---
+
+---
+title: IDV Bridge introduction
+description: Enroll new and existing users into PingOne Recognize with a selfie, portrait or documented collected from outside of PingOne Recognize.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-introduction
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-introduction.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  use-cases: Use Cases
+  benefits: Benefits
+  deployment-options: Deployment options
+  pingone-recognize-client-state-for-mobile-sdk: PingOne Recognize client state for Mobile SDK
+---
+
+# IDV Bridge introduction
+
+The PingOne Recognize identity verification (IDV) Bridge enables our customers to silently enroll users into PingOne Recognize with a picture of the user that has been collected from another source. We call this the "IDV Bridge" because it is often a bridge between the IDV process where customers collect a selfie during onboarding, and allows PingOne Recognize to authenticate that you are still dealing with the same person.
+
+## Use Cases
+
+Typically clients use this solution in one of two ways:
+
+1. **Bulk upload of selfies** - clients have collected a significant number of "selfies" or identity documents, typically during an onboarding or Know Your Customer (KYC) process and want to use these selfies to passively enroll these users into the PingOne Recognize system to then support ongoing facial biometric authentication and prove the genuine presence of that user.
+
+2. **Single user selfie upload** - clients connect the IDV Bridge solution to an existing selfie capture step in their onboarding flow, enrolling users into PingOne Recognize without having to add an additional step to the process, yet still allowing them to again authenticate.
+
+|   |                                                                                                                                                                                                                                                                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | **Identity Documents** - Note PingOne Recognize customers have successfully used identity documents to enroll customers with IDV Bridge, but enrollment rates are typically lower than when using a portrait or selfie only.For best results, customer images should be submitted in a cropped format as to exclude the rest of the document where possible. |
+
+## Benefits
+
+* Rapid Biometric Adoption: Organizations can rapidly increase biometric adoption rates by automating backend enrollment of new and existing users without requiring additional enrollment.
+
+* End-to-End Identity Lifecycle: Combines identity verification and authentication, eliminating weak points like usernames, passwords, or SMS OTPs.
+
+* Future-Proof Scalability: The IDV Bridge is vendor-agnostic, allowing integration with multiple IDV providers to meet diverse customer needs, regardless of size or scope.
+
+* Privacy-Preserving: Minimizes risks associated with storing personally identifiable information (PII) through PingOne Recognize' unique privacy-preserving technology.
+
+* Cost Reduction: Enhances operational efficiency while lowering authentication costs.
+
+* User-Based Pricing: PingOne Recognize charges based on users. Unlike transaction-based IDV models, this offers a more cost-effective solution preferred by many financial institutions.
+
+* Image-Agnostic: PingOne Recognize can leverage images from either the existing IDV provider or a previous biometric authentication provider that the organization was using.
+
+## Deployment options
+
+Customers can leverage the PingOne Recognize IDV Bridge technology in two ways:
+
+* **IDV Bridge On-Premise** - built on component known as "PingOne Recognize Agent" which customers install in their own infrastructure.
+
+* **IDV Bridge SaaS** - customers can enroll selfies via our publicly available API.
+
+## PingOne Recognize client state for Mobile SDK
+
+PingOne Recognize authentication via Mobile SDK is multi-factor by design - we are authenticating both the possession of the device and that the user is present when capturing their selfie.
+
+In relation to IDV Bridge, the client state is generated and used as temporary key to allow a new device to be activated, provided the user successfully authenticates via a selfie during this flow.
+
+The client state needs to be securely stored after IDV Bridge enrollment to allow for a user to activate a new device.
+
+---
+
+---
+title: IDV Bridge on-premise
+description: This page covers the fundamentals that customers need to be aware of when installing PingOne Recognize Agent - the IDV Bridge On-Premise solution.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-on-premise
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-on-premise.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  introduction: Introduction
+  offline-and-online-enrollment: Offline and online enrollment
+  client-and-server-state: Client and server state
+  high-level-flow: High-level flow
+  installation-through-docker-image: Installation through Docker image
+  installation-through-helm-chart: Installation through Helm chart
+  enrolling-images-through-the-pingone-recognize-agent-apis: Enrolling images through the PingOne Recognize Agent APIs
+  operations-apis-applies-to-offline-enrollment-flow-only: Operations APIs (offline enrollment only)
+  secret-key-for-authentication: Secret key for authentication
+  post-uncommitted-users: POST /uncommitted-users
+  post-uncommitted-usersuseridcommit: POST /uncommitted-users/{userId}/commit
+  authenticating-with-pingone-recognize: Authenticating with PingOne Recognize
+---
+
+# IDV Bridge on-premise
+
+## Introduction
+
+[IDV Bridge](idv-bridge-introduction.html) allows customers to take the user portraits ("selfies") of their users that have been captured in previous identity processes and use these to register them into the PingOne Recognize system. They can be leveraged to support future facial biometric authentication without customers having to take any additional steps.
+
+This guide takes you through the key features and elements within IDV Bridge on-premise ("PingOne Recognize Agent"), including:
+
+* An [integration runbook](idv-bridge-run-p1rcognize-agent.html), which runs PingOne Recognize Agent
+
+* An optimization guide that explains options and expectations.
+
+### Offline and online enrollment
+
+There are two modes that the PingOne Recognize agent can run in:
+
+* **Offline Enrollment**
+
+  * As the name suggests, this mode ensures that at the moment of processing, PingOne Recognize Agent isn't connected to the internet. This is particularly critical if your PII policies dictate that services that access user images can't have internet access while doing so.
+
+  * Note that in this case, it's critical to handle PingOne Recognize server state.
+
+* **Online Enrollment**
+
+  * Still 100% privacy-preserving. All user images are processed within your own infrastructure, ensuring that PingOne Recognize never sees the selfie or biometric template. The registration and creation of the PingOne Recognize ID takes place automatically, ready for a user to authenticate against.
+
+### Client and server state
+
+After you select the appropriate method, the PingOne Recognize agent processes a user's selfie (JPEG, PNG, BMP) and provides two critical outputs that you need to store:
+
+1. **Client State**: Used to initialize a PingOne Recognize device through the PingOne Recognize SDK.
+
+2. **Server State**: Transmitted to the PingOne Recognize infrastructure to create and register a user within the PingOne Recognize ecosystem. Note this is only produced when working in offline mode.
+
+This streamlined approach ensures secure and efficient user onboarding into the PingOne Recognize platform.
+
+## High-level flow
+
+![High-level IDV Bridge on-premise flow](_images/idv-bridge-on-premises-flow.png)
+
+1. User starts the onboarding process through the IDV Vendor Mobile SDK, performing liveness detection, capturing selfie and document data.
+
+2. Captured data are sent to the customer backend.
+
+3. Onboarding data are sent to the IDV Bridge for KYC analysis.
+
+4. The IDV vendor returns a response.
+
+5. User selfie is sent to the PingOne Recognize Agent to create a PingOne Recognize user template.
+
+6. PingOne Recognize Agent sends back a `clientState` (for SDK initialization) and a `serverState` (for PingOne Recognize backend initialization).
+
+   1. Client state is stored on the customer backend for later use (device binding and account recovery).
+
+7. `POST /uncommitted-users` passing the server state to initialize the PingOne Recognize user on PingOne Recognize backend.
+
+8. `POST /uncommitted-users/{userId}/commit` to activate the PingOne Recognize user.
+
+9. The `clientState` is sent to the mobile app to initialize a new PingOne Recognize device for the specific user.
+
+10. Call `Enrollment.withTemporaryState(client-state)`.
+
+11. PingOne Recognize prompts the user to authenticate biometrics and confirm the device binding operation.
+
+## Installation through Docker image
+
+The Docker image is available on the PingOne Recognize Quay repository. First, execute a docker login:
+
+```shell
+docker login -u="keyless_technologies+<PROVIDED_TENANT_NAME>" -p="<PROVIDED_PASSWORD>" quay.io
+```
+
+Then pull the container:
+
+```shell
+docker pull quay.io/keyless_technologies/keyless-agent:v3.0.0
+```
+
+## Installation through Helm chart
+
+IDV Bridge On-Premise can also be installed through a Helm chart. This installation method provides the advantage of using a Kubernetes orchestrator for both scaling and easier maintenance.
+
+1. Add the PingOne Recognize Helm repository to your Helm repository list:
+
+   ```shell
+   $ helm repo add keyless https://example.com (the actual FQDN will be shared upon request)
+   ```
+
+2. List the available charts:
+
+   ```shell
+   $ helm search repo keyless
+   ```
+
+3. Obtain the list of required values for each chart:
+
+   ```shell
+   $ helm show values keyless/keyless-agent
+   ```
+
+4. Save the reference `values.yaml` and configure it to your specific installation needs. After configuration, apply it:
+
+   ```shell
+   $ helm upgrade --install keyless-agent keyless/keyless-agent --atomic --wait
+   ```
+
+5. To allow container images to be pulled from the Quay repository, create a registry secret containing the provided credentials. See the [Kubernetes documentation on Docker config secrets](https://kubernetes.io/docs/concepts/configuration/secret/#docker-config-secrets) for the required format.
+
+## Enrolling images through the PingOne Recognize Agent APIs
+
+We automatically generate the [PingOne Recognize agent APIs in ReDoc](https://keyless-agent.hetzner.core-test.keyless.technology/redoc). This resource can also be accessed once PingOne Recognize Agent has been installed in your infrastructure using the endpoint `/redoc`.
+
+Refer to this guide to understand how to enroll user images into PingOne Recognize for both online and offline enrollment, service health checks, and error details.
+
+## Operations APIs (offline enrollment only)
+
+|   |                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When working in offline mode, the only way to subsequently register a user with PingOne Recognize for ongoing authentication is to follow the guidance in this section. |
+
+After a user image is processed by the IDV Bridge there are two key outputs:
+
+1. **Client State**: Must be securely stored for future use during SDK device enrollment.
+
+2. **Server State**: Must be transmitted to the PingOne Recognize infrastructure to complete the user registration process.
+
+**Base URL:** `api.keyless.io/v2`
+
+### Secret key for authentication
+
+The APIs are secured using an API key, which can be generated from the Access Control section of the PingOne Recognize dashboard. To access PingOne Recognize APIs, generate a secret key from that section.
+
+After obtaining the API key, include it in the request header as `X-Api-Key`.
+
+### POST /uncommitted-users
+
+To create an uncommitted user from a server state generated by the PingOne Recognize IDV Bridge, pass the server state returned by the IDV Bridge as the request body. Content-Type is `application/json`.
+
+The newly created user ID is returned as a JSON response:
+
+```json
+{
+  "userId": "0123456789ABCDEF"
+}
+```
+
+### POST /uncommitted-users/{userId}/commit
+
+After the user has been created with `/uncommitted-users`, activate them with an explicit commit API call. No request body is required. The `userId` is passed as a URL parameter.
+
+## Authenticating with PingOne Recognize
+
+After you've completed the registration of your users through IDV Bridge On-Premise, authenticate them using PingOne Recognize facial biometric authentication. Recommended next steps:
+
+* For customers who want to authenticate users inside their own iOS and Android apps: [Mobile SDK documentation](../mobile-sdk/mobile-sdk-introduction.html)
+
+* For customers who want to authenticate users inside their browser-based apps: [Web SDK documentation](https://docs.keyless.io/web-sdk/)
+
+* For a general understanding of how the core PingOne Recognize components interact (IDV Bridge, Mobile SDK, Web SDK): [IDV Bridge overview](idv-bridge-introduction.html)
+
+---
+
+---
+title: IDV Bridge On-Premise Changelog
+description: Details of IDV Bridge On-Premise (PingOne Recognize Agent) releases.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-on-premise-changelog
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-on-premise-changelog.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  v3-4: v3.4
+  v3-3-1: v3.3.1
+  v3-3-0: v3.3.0
+  v3-2-0: v3.2.0
+  v3-1-0: v3.1.0
+  v3-0-0: v3.0.0
+  highlights: Highlights
+  memory-management: Memory management
+  breaking-changes: Breaking changes
+  v2-x-x: v2.x.x
+  breaking-changes-and-deprecations: Breaking changes and deprecations
+  migration-from-enrollment-data-to-v1offline-enrollment: Migration from /enrollment-data to /v1/offline-enrollment
+---
+
+# IDV Bridge On-Premise Changelog
+
+## v3.4
+
+* **Bug fix:** `KL_BIOM_ERROR_FILTER_TRIGGERED` \[422] is now correctly returned in all cases where the image fails our image quality checks. Previously there were occurrences where `KL_BIOM_ERROR_BAD_INPUT` \[500] was returned.
+
+## v3.3.1
+
+* Minor bug fixes.
+
+## v3.3.0
+
+* The biometric library uses an improved face detector, which should improve successful enrollment rates for customers.
+
+* The default value for `MAX_CONCURENCY` is now aware of CPU limits placed on the Docker container instead of using just the number of CPUs, which should improve both performance and stability.
+
+## v3.2.0
+
+* Updated to the latest biometric library.
+
+* This includes the removal of `filter_face_has_mask`, which is now redundant.
+
+## v3.1.0
+
+* **Added support for device type and origin** - To improve performance metric insights and functionality (whether a device can be safely removed), we are adding `deviceType` and `deviceOrigin` across the PingOne Recognize infrastructure, including IDV Bridge On-Premise in online enrollment mode.
+
+* This type of insight will also be visible in the dashboard soon (Q3 '25).
+
+```yaml
+deviceType:
+  - "SDK"
+  - "BACKUP"
+  - "TEMPORARY_STATE"
+deviceOrigin:
+  - "ANDROID"
+  - "IOS"
+  - "KEYLESS_AGENT"
+  - "WEB"
+```
+
+## v3.0.0
+
+### Highlights
+
+* **Performance** - New memory management system reduces memory leaks and the need for auto-resets.
+
+* **Audibility** - Full JSON logs are now available without non-JSON print statements.
+
+* **Security** - PingOne Recognize can now run in both root and non-root configurations. In addition, we reduced the Docker image size and completed a fresh round of vulnerability scans.
+
+### Memory management
+
+The new memory management system allows integrators to specify how many biometric sessions can run in parallel. This effectively limits maximum memory usage. Where previous versions needed 6GB of memory, this version requires only 1GB for the same throughput. Estimated performance and throughput are summarized in [How to run PingOne Recognize Agent](idv-bridge-run-p1rcognize-agent.html), though actual performance varies depending on the customer's hardware.
+
+### Breaking changes
+
+* The deprecated endpoint `/enrollment-data` has been removed.
+
+* Due to the new memory management system, integrators on 2.x.x need to make a small configuration change outlined in [How to run PingOne Recognize Agent](idv-bridge-run-p1rcognize-agent.html).
+
+***
+
+## v2.x.x
+
+### Breaking changes and deprecations
+
+The original offline enrollment endpoint (`/enrollment-data`) is now deprecated and will be removed. Most of its API remains the same except error reporting. Since IDV Bridge On-Premise now uses a new biometric SDK, error names have changed completely.
+
+Integrators are advised to switch to the new endpoint (`/v1/offline-enrollment`) as soon as possible, or evaluate whether online enrollment better suits their use case.
+
+### Migration from `/enrollment-data` to `/v1/offline-enrollment`
+
+With the new endpoint, the integrator must choose a scenario (using the `Scenario` header). Scenario is similar to the `config` query parameter in the old endpoint.
+
+* `SELFIE` scenario is similar to `config=default` in the old endpoint. This is also the default on the old endpoint.
+
+* `TRUSTED_SOURCE` scenario is similar to `config=less-strict` in the old endpoint.
+
+* `DOCUMENT` scenario has no equivalent in the old endpoint.
+
+Final notes:
+
+* The request body is the same.
+
+* The response now follows camelCase naming conventions and the `stats` field has been removed.
+
+* The error response is now more detailed and follows the same naming convention as the rest of the API.
+
+---
+
+---
+title: IDV Bridge SaaS
+description: Enroll user images through an API to facilitate ongoing authentication through our Mobile or Web SDK.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-saas
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-saas.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  integration-guide: Integration guide
+  performing-the-enrollment: Performing the enrollment
+  setting-headers: Setting headers
+  optional-headers: Optional headers
+  scenarios: Scenarios
+  encrypting-the-image: Encrypting the image
+  create-an-aes-gcm-or-aes-gcm-siv-key: Create an AES-GCM or AES-GCM-SIV key
+  encrypt-aes-gcm-or-aes-gcm-siv-key: Encrypt image with an AES-GCM or AES-GCM-SIV key
+  encrypt-the-aes-gcm-or-aes-gcm-siv-key: Encrypt the AES-GCM or AES-GCM-SIV key
+  exporting-the-client-state: Exporting the client state to authenticate a user through Mobile SDK
+---
+
+# IDV Bridge SaaS
+
+## Integration guide
+
+Enrolling a user with a "selfie" through the authentication service is a straightforward process, but clients must apply appropriate security measures during implementation.
+
+There are three fundamental steps to the process:
+
+1. **Performing the enrollment** - Send the image to our APIs to register the user's face in a privacy-preserving manner.
+
+2. **Encrypting the image** - Ensure the image is encrypted.
+
+3. **Exporting the client state** - Enable users to authenticate successfully by exporting client state, then using it to bind a new device with the [Mobile SDK](../mobile-sdk/mobile-sdk-account-recovery.html) (this isn't required when you authenticate users only with the Web SDK).
+
+### Performing the enrollment
+
+To perform an enrollment, make a POST request to one of these URLs:
+
+* **Sandbox**: `https://authentication-service-sandbox.eks.core-production.keyless.technology//v1/users/{customer}/{username}`
+
+* **Europe**: `https://authentication-service.eks.core-production.keyless.technology//v1/users/{customer}/{username}`
+
+* **Latam**: `https://authentication-service.eks.core-production.latam.keyless.technology/v1/users/{customer}/{username}`
+
+* **US (East Coast)**: `https://authentication-service.eks.core-production.saas-us-east.keyless.technology/v1/users/{customer}/{username}`
+
+* **Singapore**: `https://authentication-service.eks.core-production.sg.keyless.technology/v1/users/{customer}/{username}`
+
+#### Setting headers
+
+These endpoints require authorization through the `kl-api-key: API_KEY` header. You can find this on the [PingOne Recognize dashboard](https://dash.keyless.io/) (Access Control tab), then create a Secret API Key.
+
+The request body is the image, sent as binary data. The following encryption headers are required.
+
+| Key (case-insensitive) | Key value (examples or details)                                        | Description                                                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `kl-key-id`            | `KEYLESS_KEY_ID` Example: `alias/kl-core-staging-remote-sdk-image-key` | Identifier of the key used to encrypt the image encryption key. This ID is provided by PingOne Recognize along with the public key. |
+| `kl-key-algorithm`     | `RSAES-OAEP-SHA-256`                                                   | Algorithm used to encrypt the image encryption key. Currently, only `RSAES-OAEP-SHA-256` is supported.                              |
+| `kl-Image-Key`         | Raw key that must be at least 128 or 256 bits long                     | Encrypted key used to encrypt the image. Must be hex encoded. [Further details](#encrypt-aes-gcm-or-aes-gcm-siv-key).               |
+| `kl-Image-Algorithm`   | Either `AES-GCM` or `AES-GCM-SIV`                                      | Defines the image algorithm used to encrypt the image.                                                                              |
+| `kl-Scenario`          | `SELFIE`, `DOCUMENT`, `TRUSTED_SOURCE`                                 | Defines the source from which the image was captured, allowing IDV Bridge to adapt accordingly.                                     |
+
+#### Optional headers
+
+| Key (case-insensitive) | Key value (examples or details) | Description                                                                                                                                                                                                                |
+| ---------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kl-transaction-data`  | `enrollment-123456`             | Supports creation of an additional JWT signature from a string, signed by PingOne Recognize if enrollment succeeds. The signed data is returned as `transaction_jwt` and can be verified later using your public key.      |
+| `kl-exif-transpose`    | `true` or `false` (default)     | If `true`, instructs IDV Bridge to rotate the image according to available EXIF metadata. Useful when submitted selfies are rotated by 90 degrees. Can adversely impact trusted images, so the default is `false`.         |
+| `kl-seed-entropy`      | `true` or `false` (default)     | Seed entropy is a user-unique value used to generate cryptographic keys or other unique values. If `true`, the user's seed entropy is returned in the response and encrypted with the same key and algorithm as the image. |
+
+#### Scenarios
+
+PingOne Recognize has optimized this service for three primary use cases. Set this using `kl-scenario`.
+
+| Scenario         | Description                                                                                                                        | Example                                                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TRUSTED_SOURCE` | For user faces captured with a consistent quality control process. Some quality checks are removed to minimize false rejections.   | \* Extracted from a passport RFID chip through NFC. \* Captured through a third-party process with quality checks (face clearly visible, good lighting). |
+| `SELFIE`         | For user faces captured by a process with no quality checks. User is asked specifically to capture a selfie instead of a document. | \* Selfies with no additional artifacts, though quality can vary.                                                                                        |
+| `DOCUMENT`       | For identity document images only. Tuned to ignore additional faces that might be present (watermarks, holograms).                 | Images of identity documents that contain a portrait, such as passports, driver's licenses, or identity cards.                                           |
+
+## Encrypting the image
+
+The image must be sent encrypted. Use `AES-GCM` or `AES-GCM-SIV`. `AES-GCM-SIV` is recommended where possible.
+
+The encryption flow is:
+
+### Create an AES-GCM or AES-GCM-SIV key
+
+Generate a new `AES-GCM` or `AES-GCM-SIV` key on your server. Key length can be 128, 192, or 256 bits.
+
+The important requirement is access to the raw key bytes.
+
+```typescript
+import { siv } from '@noble/ciphers/aes'
+import { getRandomValues } from 'crypto'
+
+// fill a 128 bits Uint8Array with cryptographically secure random values
+const key = getRandomValues(new Uint8Array(16))
+
+// fill a 96 bits Uint8Array with cryptographically secure random values
+const nonce = getRandomValues(new Uint8Array(12))
+
+// create the AES-GCM-SIV cipher with key and nonce
+const cipher = siv(key, nonce)
+```
+
+Using `@noble/ciphers` in Node.js, generate the nonce beforehand.
+
+|   |                                                                                                                                                                                                         |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This key is required to symmetrically encrypt the image and transmit it safely over the internet. This is in addition to TLS and makes access to clear image data significantly harder for an attacker. |
+
+### Encrypt image with an AES-GCM or AES-GCM-SIV key
+
+After the `AES-GCM` or `AES-GCM-SIV` key is ready, generate 96 random bits for the nonce and encrypt the image.
+
+Prepend nonce bytes to the encrypted image bytes.
+
+```typescript
+import { siv } from '@noble/ciphers/aes'
+import { getRandomValues } from 'crypto'
+
+// read real image here
+const face = new Uint8Array()
+
+const key = getRandomValues(new Uint8Array(16))
+const nonce = getRandomValues(new Uint8Array(12))
+const cipher = siv(key, nonce)
+
+// encrypt the face Uint8Array
+const encryptedFace = cipher.encrypt(face)
+
+// create a new Uint8Array with enough bytes to contain both nonce and encrypted face bytes
+const encryptedFaceWithNonce = new Uint8Array(nonce.length + encryptedFace.length)
+
+// set the nonce bytes from the first position
+encryptedFaceWithNonce.set(nonce, 0)
+
+// set the encrypted face bytes after the nonce bytes
+encryptedFaceWithNonce.set(encryptedFace, nonce.length)
+```
+
+|   |                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Sending the nonce separately isn't best practice, so prepend it to the encrypted face bytes. This is standard and allows the Web SDK server to decrypt it. |
+
+### Encrypt the AES-GCM or AES-GCM-SIV key
+
+For the Web SDK server to decrypt the image, pass the `AES-GCM` or `AES-GCM-SIV` key in encrypted form using an `RSAES-OAEP-SHA-256` public key.
+
+PingOne Recognize provides the `RSAES-OAEP-SHA-256` public key in SPKI format.
+
+```typescript
+import { getRandomValues, publicEncrypt } from 'crypto'
+
+const key = getRandomValues(new Uint8Array(16))
+
+// put complete public key here
+const publicKey = '-----BEGIN PUBLIC KEY-----...'
+
+// encrypt the key
+const encryptedKey = publicEncrypt(publicKey, key)
+```
+
+This is the final encryption step before sending the request.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The key used to encrypt the image must be sent to the Web SDK server so it can decrypt the image, but it cannot be sent in clear text. Encrypt it first using RSA asymmetric encryption.Only the Web SDK server can use the RSA private key counterpart to decrypt data encrypted with the RSA public key.The Web SDK server doesn't directly know the RSA private key at any time. Decryption is handled by KMS. |
+
+## Exporting the client state to authenticate a user through Mobile SDK
+
+After successful enrollment through IDV Bridge SaaS, integrators should export client state if they plan to run ongoing authentication through the [Mobile SDK](../mobile-sdk/mobile-sdk-introduction.html). Client state is required to execute [Account Recovery](../mobile-sdk/mobile-sdk-account-recovery.html) and new device activation flows.
+
+---
+
+---
+title: PingOne Recognize Agent endpoints
+description: The following endpoints are available for IDV Bridge On-Premise (PingOne Recognize Agent).
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-p1recognize-agent-endpoints
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-p1recognize-agent-endpoints.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  get-health-check: GET /health-check
+  post-v1offline-enrollment: POST /v1/offline-enrollment
+  post-v1online-enrollment: POST /v1/online-enrollment
+  schemas: Schemas
+  offlineenrollment: OfflineEnrollment
+  onlineenrollment: OnlineEnrollment
+  filtertriggered: FilterTriggered
+  filters: Filters
+  example-422-error: Example 422 error
+---
+
+# PingOne Recognize Agent endpoints
+
+The following endpoints are available for IDV Bridge On-Premise (PingOne Recognize Agent).
+
+## `GET /health-check`
+
+**Purpose:** Check if the service is running.
+
+**Response:**
+
+```json
+{
+  "version": "string",
+  "status": "ok"
+}
+```
+
+***
+
+## `POST /v1/offline-enrollment`
+
+**Purpose:** Generate *client* and *server* enrollment states from an image.
+
+The server state is required to register the new user on the PingOne Recognize backend, while client state enables the [account recovery](../mobile-sdk/mobile-sdk-account-recovery.html) flow for ongoing authentication on a camera-enabled device through the Mobile SDK.
+
+**Request:**
+
+* **Headers:**
+
+  * `Exif-Transpose` *(boolean, optional)* — whether to rotate the image according to EXIF metadata.
+
+  * `Content-Encoding` *(optional, const="base64")* — if the image is base64 encoded.
+
+  * `Scenario` *(required)* — `"SELFIE" | "TRUSTED_SOURCE" | "DOCUMENT"`.
+
+* **Body:** `image/*` — binary (JPEG, PNG, BMP, and so on)
+
+**Responses:**
+
+* `200`: Returns **OfflineEnrollment**
+
+* `422`: Returns **FilterTriggered**
+
+* `429`: Too many concurrent enrollments
+
+`scenario` definitions are available [here](idv-bridge-saas.html#scenarios).
+
+***
+
+## `POST /v1/online-enrollment`
+
+**Purpose:** Enroll a user directly from an image (without server state).
+
+Client state enables the [account recovery](../mobile-sdk/mobile-sdk-account-recovery.html) flow for ongoing authentication on a camera-enabled device through the Mobile SDK.
+
+**Request:** Same headers and body as offline enrollment.
+
+**Responses:**
+
+* `200`: Returns **OnlineEnrollment**
+
+* `409`: Not configured for online enrollment
+
+* `422`: Recognition filter error
+
+* `429`: Too many concurrent enrollments
+
+***
+
+## Schemas
+
+### `OfflineEnrollment`
+
+| Field         | Type   | Description                                                                                                                         |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `keylessId`   | string | Unique user ID                                                                                                                      |
+| `clientState` | string | Opaque data for the PingOne Recognize SDK to allow a user to authenticate on a camera-enabled device for the account recovery flow. |
+| `serverState` | string | Uncommitted server data. Required to register the new user on the PingOne Recognize backend.                                        |
+
+### `OnlineEnrollment`
+
+| Field         | Type   | Description                                                                                                                         |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `keylessId`   | string | Unique user ID                                                                                                                      |
+| `clientState` | string | Opaque data for the PingOne Recognize SDK to allow a user to authenticate on a camera-enabled device for the account recovery flow. |
+
+### `FilterTriggered`
+
+| Field        | Type    | Description                           |
+| ------------ | ------- | ------------------------------------- |
+| `title`      | string  | Always `"Filter Triggered"`           |
+| `statusCode` | integer | Always `422`                          |
+| `detail`     | string  | Explanation of why the filters failed |
+| `filters`    | object  | See below                             |
+
+### Filters
+
+Each property represents a possible filter and has one of the following statuses:
+
+* `TRIGGERED` — filter was triggered (failure)
+
+* `NOT_TRIGGERED` — filter passed
+
+* `TURNED_OFF` — filter not active
+
+* `CANNOT_RUN_ON_FRAME` — preprocessing failure
+
+| Filter               | Description                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------- |
+| `faceIsOccluded`     | The facial features are partially covered to the extent that a biometric template couldn't be detected. |
+| `faceMissing`        | No face was detected in the image.                                                                      |
+| `faceMultiple`       | More than one face was detected.                                                                        |
+| `facePartial`        | Only a partial face was detected. For example, the selfie might've been off-center.                     |
+| `faceTooSmall`       | A face was detected, but it was too small to allow an accurate biometric template to be generated.      |
+| `imageBlackAndWhite` | The image is black and white.                                                                           |
+
+#### Example 422 error
+
+```json
+{
+  "title": "Filter Triggered",
+  "statusCode": 422,
+  "detail": "Face occluded by object",
+  "filters": {
+    "faceIsOccluded": "TRIGGERED",
+    "faceMissing": "NOT_TRIGGERED",
+    "faceMultiple": "NOT_TRIGGERED",
+    "facePartial": "NOT_TRIGGERED",
+    "faceTooSmall": "NOT_TRIGGERED",
+    "imageBlackAndWhite": "NOT_TRIGGERED"
+  }
+}
+```
+
+---
+
+---
+title: PingOne Recognize On-Premise enrollment Web SDK authentication tutorial
+description: Tutorial for enrolling user selfies with IDV Bridge On-Premise and then authenticating those users in a web app through the Web SDK.
+component: recognize
+page_id: recognize:idv-bridge:idv-bridge-onprem-enrollment-websdk-authentication-tutorial
+canonical_url: https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-onprem-enrollment-websdk-authentication-tutorial.html
+llms_txt: https://docs.pingidentity.com/recognize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# PingOne Recognize On-Premise enrollment Web SDK authentication tutorial
+
+This tutorial supports integrators in achieving cooperation between the PingOne Recognize Agent and the Authentication Service.
+
+* It's intended to be used as executable tutorial code, which can be run in a Python environment.
+
+* The best way is to read it from top to bottom as concepts are introduced in a sequence.
+
+* If you have a tool like `uv` or `hatch` that can read inline metadata, you can execute this script directly. Otherwise, install the required dependencies.
+
+```python
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cryptography",
+#     "httpx",
+# ]
+# ///
+
+import argparse
+import logging
+import os
+from pathlib import Path
+from pprint import pprint
+from typing import Literal, TypedDict
+
+import httpx
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.ciphers.aead import AESGCMSIV as AES_GCM_SIV
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
+
+logging.basicConfig(level=logging.INFO)
+
+# This tutorial demonstrates the cooperation between the {p1recognize} Agent and the Authentication Service.
+
+# The process is fairly simple:
+# 1. Use {p1recognize} Agent to create a user get client state
+# 2. Import the client state to the Authentication Service
+# 3. Profit.
+
+
+#
+# {p1recognize} Agent
+#
+
+# {p1recognize} agent is a http server that gets the user's face as an image creates
+# and returns a {p1recognize} user.
+#
+# There are two flavors of this functionality, online and offline.
+# This tutorial will cover the offline version.
+
+# To start we need to have user image in a JPEG format (other formats are supported).
+# And we need to have a scenario in mind that describes how the image was taken.
+# Each scenario has different requirements and is used to determine the level of trust in the image.
+#
+# * `SELFIE` - the image was taken by the user themselves, usually just moments ago.
+# * `TRUSTED_SOURCE` - the image was already validated by trusted party.
+# * `DOCUMENT` - the image is taken/copied from a document. Like passport, government ID, and so on.
+
+type Scenario = Literal["SELFIE", "TRUSTED_SOURCE", "DOCUMENT"]
+
+# After that its a simple HTTP POST request to the {p1recognize} Agent.
+# The response is JSON with the user's ID and other information needed to continue.
+
+
+def create_user_offline(
+    keyless_agent_url: str, scenario: Scenario, image_jpeg: bytes
+) -> "OfflineEnrollmentUser":
+    """Create a user on the {p1recognize} Agent using offline flow."""
+    result = httpx.post(
+        f"{keyless_agent_url}/v1/offline-enrollment",
+        headers={"Scenario": scenario, "Content-Type": "image/jpeg"},
+        content=image_jpeg,
+    )
+    assert result.status_code == 200, result.text
+    return result.json()
+
+
+# During this call {p1recognize} Agent process the image and generate two parts of a user
+# client state and server state. As this is the offline flow, the user isn't really
+# registered in the system yet and both parts are needed to continue.
+
+
+class OfflineEnrollmentUser(TypedDict):
+    """Structure of the response from the {p1recognize} Agent."""
+
+    keylessId: str
+    """The id of the user in the {p1recognize} system."""
+
+    clientState: str
+    """Opaque string used to initialize the SDK."""
+
+    serverState: str
+    """Opaque string used to register the user."""
+
+
+#
+# Register the server state and activate user
+#
+
+# As mentioned before, the user isn't really registered in the system yet.
+# To do that we need to send the server state to the Operations Service.
+#
+# Operation service then register the user to be used.
+#
+# Api calls to operations service is authorized using secret key, provided by {p1recognize}.
+#
+# Note: if the {p1recognize} Agent is configured for online flow, then you can use
+# `/v1/online-enrollment` enrollment endpoint. The user is registered
+# automatically and only client state is returned.
+
+
+def register_the_user(
+    operation_service_url: str, secret_key: str, user: OfflineEnrollmentUser
+) -> None:
+    """Register the user on the Operation Service."""
+    #
+    # First we need to send the server state to the operation service.
+    response = httpx.post(
+        f"{operation_service_url}/v2/uncommitted-users",
+        content=user["serverState"].encode("utf-8"),
+        headers={"Content-Type": "application/json", "X-Api-Key": secret_key},
+    )
+    assert response.status_code == 201, response.text
+
+    # Then we need to activate the user.
+    response = httpx.post(
+        f"{operation_service_url}/v2/uncommitted-users/{user['keylessId']}/commit",
+        headers={"X-Api-Key": secret_key},
+    )
+    assert response.status_code == 204, response.text
+
+
+#
+# Add a user to the Authentication Service
+#
+
+# Now the client state can be used in any SDK. This tutorial focuses on the
+# Web SDK. For that we need to import the client state to the Authentication Service.
+#
+# The client state contains sensitive information and must be encrypted before sending.
+# The encryption is done using the public key provided by keyless.
+
+# The client state encryption is done in two steps.
+#
+# 1. The client state is encrypted using random AES key.
+# 2. The AES key is encrypted using the public key provided by {p1recognize}.
+
+# In this tutorial we are using recommended AES-GCM-SIV encryption algorithm.
+
+
+# first generate random AES key, 128 bits is the recommended size
+def generate_aes_key() -> bytes:
+    return AES_GCM_SIV.generate_key(128)
+
+
+# then encrypt the AES key using the public key
+def encrypt_client_state(plain_key: bytes, user: OfflineEnrollmentUser) -> bytes:
+    # then generate random nonce 12 bytes long
+    nonce = os.urandom(12)
+
+    # encrypt the client state using the AES key and nonce
+    encrypted_client_state = AES_GCM_SIV(plain_key).encrypt(
+        nonce, user["clientState"].encode("utf-8"), None
+    )
+
+    # the nonce is prepended to the encrypted data
+    return nonce + encrypted_client_state
+
+
+# Now we need to encrypt the AES key using the public key provided by {p1recognize}.
+#
+# For demos and tutorials, the public key is available at the endpoint `/v1/customers/{customer}/client-state-encryption`.
+# But it shouldn't be used in production to prevent attackers to modify it.
+#
+# customer is the name of the customer/integrator in the {p1recognize} system.
+
+
+def get_client_state_encryption(
+    authentication_service_url: str, secret_key: str, customer: str
+) -> "ClientStateEncryption":
+    response = httpx.get(
+        f"{authentication_service_url}/v1/customers/{customer}/client-state-encryption",
+        headers={"kl-api-key": secret_key},
+    )
+    assert response.status_code == 200, response.text
+    return response.json()
+
+
+class ClientStateEncryption(TypedDict):
+    """Structure of the response from the Authentication Service."""
+
+    keyId: str
+    """The id of the key used to encrypt the client state."""
+    supportedAlgorithms: list[str]
+    """List of supported encryption algorithms."""
+    publicKey: str
+    """The public key used to encrypt the client state."""
+
+
+# Now we can encrypt the AES key using the public key.
+#
+# For this we are using the RSAES-OAEP-SHA-256 algorithm.
+
+
+def encrypt_aes_key(
+    plain_key: bytes, client_state_encryption: ClientStateEncryption
+) -> bytes:
+    key_algorithm = client_state_encryption["supportedAlgorithms"][0]
+
+    # just a sanity check that the algorithm is what we expect
+    assert key_algorithm == "RSAES-OAEP-SHA-256", key_algorithm
+
+    # load the public key
+    pk = load_pem_public_key(client_state_encryption["publicKey"].encode("ascii"))
+
+    # encrypt the AES key using the public key and the RSAES-OAEP-SHA-256 algorithm
+    return pk.encrypt(
+        plain_key,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None,
+        ),
+    )
+
+
+# Now we finally have all the pieces to import the client state to the Authentication Service.
+#
+# Unlike the other SDKs the Web SDK operates on the usernames and not the user ids (keylessId).
+
+
+def import_user(
+    authentication_service_url: str,
+    secret_key: str,
+    customer: str,
+    username: str,
+    client_state_encryption: ClientStateEncryption,
+    user: OfflineEnrollmentUser,
+):
+    plain_key = generate_aes_key()
+    client_state = encrypt_client_state(plain_key, user)
+    encrypted_key = encrypt_aes_key(plain_key, client_state_encryption)
+
+    response = httpx.post(
+        f"{authentication_service_url}/v1/users/{customer}/{username}/import-client-state",
+        headers={
+            "kl-api-key": secret_key,
+            "content-type": "application/octet-stream",
+            # the headers are used to notify the Authentication Service about the encryption
+            # used
+            "Kl-Key-Id": client_state_encryption["keyId"],
+            "Kl-Key-Algorithm": "RSAES-OAEP-SHA-256",
+            "Kl-Client-State-Key": encrypted_key.hex(),
+            "Kl-Client-State-Algorithm": "AES-GCM-SIV",
+        },
+        content=client_state,
+    )
+    assert response.status_code == 200, response.text
+
+    return response.json()
+
+
+# And that is it. The user is now registered in the Authentication Service and can be used in the Web SDK.
+#
+# If you want to try it then run this script.
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--keyless-agent-url", required=True, help="URL of the {p1recognize} Agent"
+    )
+    parser.add_argument(
+        "--operation-service-url", required=True, help="URL of the Operation Service"
+    )
+    parser.add_argument(
+        "--authentication-service-url",
+        required=True,
+        help="URL of the Authentication Service",
+    )
+    parser.add_argument(
+        "--secret-key", required=True, help="Secret key for the API calls"
+    )
+    parser.add_argument("--image-file", required=True)
+
+    parser.add_argument("customer", help="Customer name")
+    parser.add_argument("username", help="Username of the user")
+
+    params = parser.parse_args()
+
+    # now the full flow
+    user = create_user_offline(
+        params.keyless_agent_url, "SELFIE", Path(params.image_file).read_bytes()
+    )
+
+    register_the_user(params.operation_service_url, params.secret_key, user)
+
+    response = import_user(
+        params.authentication_service_url,
+        params.secret_key,
+        params.customer,
+        params.username,
+        get_client_state_encryption(
+            params.authentication_service_url, params.secret_key, params.customer
+        ),  # note: this is just for demo, encryption configuration should be part of the application configuration
+        user,
+    )
+    pprint(response)
+
+
+if __name__ == "__main__":
+    main()
+```

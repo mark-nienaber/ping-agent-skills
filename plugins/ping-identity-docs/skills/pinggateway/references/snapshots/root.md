@@ -5,6 +5,8 @@ component: pinggateway
 version: 2026
 page_id: pinggateway::index
 canonical_url: https://docs.pingidentity.com/pinggateway/release-notes/preface.html
+llms_txt: https://docs.pingidentity.com/pinggateway/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2025-09-25T08:33:29Z
 section_ids:
   release_notes: Release notes

@@ -4,6 +4,8 @@ description: With PingOne Advanced Services, your organization has its own dedic
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices:monitoring_and_logging:p1as_monitoring_logging
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/monitoring_and_logging/p1as_monitoring_logging.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 19, 2025
 page_aliases: ["p1as_product_logs.adoc", "p1as_platform_monitoring.adoc", "p1as_migrating.adoc", "p1as_log_streaming.adoc", "p1as_app_monitoring.adoc"]
 section_ids:

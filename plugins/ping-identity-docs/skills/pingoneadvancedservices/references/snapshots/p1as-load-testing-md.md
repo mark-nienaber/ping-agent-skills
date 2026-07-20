@@ -4,6 +4,8 @@ description: Information about our penetration and load-testing policies.
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices::p1as_load_testing
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/p1as_load_testing.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 15, 2025
 section_ids:
   _penetration_load_testing: Penetration and load-testing policy

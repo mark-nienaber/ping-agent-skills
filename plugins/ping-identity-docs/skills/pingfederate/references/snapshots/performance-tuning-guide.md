@@ -80,22 +80,27 @@ For deployments that have hundreds of connections or OAuth clients, or both, and
 
 ---
 title: Configuring connection pools to datastores
-description: Java Database Connectivity (JDBC) and LDAP datastores use connection pooling to improve the performance and efficiency of communicating with external systems. For optimal performance, a number of connections are required to handle most or all the requests in parallel.
+description: glossry:gJDBC[] and Lightweight Directory Access Protocol (LDAP) datastores use connection pooling to improve the performance and efficiency of communicating with external systems. For optimal performance, a number of connections are required to handle most or all the requests in parallel.
 component: pingfederate
 version: 13.1
-page_id: pingfederate:performance_tuning_guide:pf_config_connec_pool_to_datastor
-canonical_url: https://docs.pingidentity.com/pingfederate/13.1/performance_tuning_guide/pf_config_connec_pool_to_datastor.html
+page_id: pingfederate:performance_tuning_guide:pf_configuring_connection_pools_datastores
+canonical_url: https://docs.pingidentity.com/pingfederate/13.1/performance_tuning_guide/pf_configuring_connection_pools_datastores.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 8, 2022
+revdate: July 14, 2026
 section_ids:
   about-this-task: About this task
-  steps: Steps
+  optimizing-the-connection-pool-size: Optimizing the connection pool size
+  configuring-connection-pools-to-jdbc-datastores: Configuring connection pools to JDBC datastores
+  configuring-connection-pools-to-ldap-datastores: Configuring connection pools to LDAP datastores
+  related-links: Related links
 ---
 
 # Configuring connection pools to datastores
 
-Java Database Connectivity (JDBC) and LDAP datastores use connection pooling to improve the performance and efficiency of communicating with external systems. For optimal performance, a number of connections are required to handle most or all the requests in parallel.
+glossry:gJDBC\[] and Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
+\<p>An open, cross platform protocol used for interacting with directory services.\</p>
+\</div>)* datastores use connection pooling to improve the performance and efficiency of communicating with external systems. For optimal performance, a number of connections are required to handle most or all the requests in parallel.
 
 ## About this task
 
@@ -103,34 +108,49 @@ In the **Data & Credential Stores** page, set the minimum and maximum values for
 
 Connection pools improve efficiency by maintaining persistent connections to the JDBC or LDAP server preventing the expense of creating the connection on demand. Connection pools also allow more control over the load placed on the back-end server. It might not be necessary to have a connection available for every concurrent request received by the server, but having too few available will cause requests to wait when accessing JDBC and LDAP resources.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Size the connection pool based on the capacity and limitation of the database or LDAP server. Sizing the connection pool beyond the capability of the back-end server could lead to PingFederate flooding the datastore without any performance improvement. For optimal performance, size connection pools large enough to handle between 50% and 100% of the number of concurrent requests the server is expected to encounter often. Learn more about optimizing the connection pool in [Best practices for tuning the JDBC connection pool](https://support.pingidentity.com/s/article/Best-practices-for-tuning-the-JDBC-Connection-Pool) in the Ping Identity Knowledge Base. |
+## Optimizing the connection pool size
 
-## Steps
+Size the connection pool based on the capacity and limitation of the database or LDAP server. Sizing the connection pool beyond the capability of the back-end server could lead to PingFederate flooding the datastore without any performance improvement.
 
-1. Choose from configuring connection pools to JDBC or LDAP datastores:
+For optimal performance, size connection pools large enough to handle between 50% and 100% of the number of concurrent requests the server is expected to encounter often.
 
-   | Datastore type                                  | Configuration steps                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-   | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Configuring connection pools to JDBC datastores | 1. Go to **System > Data & Credential Stores > Data Stores**, and select the applicable JDBC datastore.
+Learn more about optimizing the connection pool in [Best practices for tuning the JDBC connection pool](https://support.pingidentity.com/s/article/Best-practices-for-tuning-the-JDBC-Connection-Pool) in the Ping Identity Knowledge Base.
 
-   2. Go to **Database Config > Advanced**.
+## Configuring connection pools to JDBC datastores
 
-   3. On the **Advanced Database Options** page:
+1. Go to **System > Data & Credential Stores > Data Stores**, and select the applicable JDBC datastore.
 
-      1. Set the **Minimum Pool Size** value to 50% of the `maxThreads` value.
+2. Go to **Database Config > Advanced**.
 
-      2. Set the **Maximum Pool Size** value to between 75% and 100% of the `maxThreads` value, subject to the capability of the back-end database server.&#xA;&#xA;The maxThreads value is defined in the \<pf\_install>/pingfederate/etc/run.properties file. Learn more in Tuning the server thread pool. |
-   | Configuring connection pools to LDAP datastores | 1) Go to **System > Data & Credential Stores > Data Stores**, and select the applicable LDAP datastore.
+3. On the **Advanced Database Options** page:
 
-   2) Go to the **LDAP Configuration > Advanced > Advanced LDAP Options**.
+   1. Set the **Minimum Pool Size** value to 50% of the `maxThreads` value.
 
-   3) Set the **Minimum Connections** value to 50% of the `maxThreads` value.
+   2. Set the **Maximum Pool Size** value to between 75% and 100% of the `maxThreads` value, subject to the capability of the back-end database server.
 
-   4) Set the **Maximum Connections** value to between 75% and 100% of the `maxThreads` value, subject to the capability of the back-end database server.                                                                                                                                                                     |
+      |   |                                                                                                                                                                                 |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | The `maxThreads` value is defined in the `<pf_install>/pingfederate/etc/run.properties` file. Learn more in [Tuning the server thread pool](pf_tuning_server_thread_pool.html). |
 
-2. For a clustered PingFederate environment, replicate the changes to all engine nodes on the **System > Server > Cluster Management** page.
+4. For a clustered PingFederate environment, replicate the changes to all engine nodes on the **System > Server > Cluster Management** page.
+
+## Configuring connection pools to LDAP datastores
+
+1. Go to **System > Data & Credential Stores > Data Stores**, and select the applicable LDAP datastore.
+
+2. Go to the **LDAP Configuration > Advanced > Advanced LDAP Options**.
+
+3. Set the **Minimum Connections** value to `1`.
+
+4. Set the **Maximum Connections** value to between 75% and 100% of the `maxThreads` value, subject to the capability of the back-end database server.
+
+5. For a clustered PingFederate environment, replicate the changes to all engine nodes on the **System > Server > Cluster Management** page.
+
+## Related links
+
+* [Setting advanced LDAP options](../administrators_reference_guide/pf_setting_advanced_ldap_options.html)
+
+* [Configuring a JDBC connection](../administrators_reference_guide/pf_configuring_jdbc_connection.html)
 
 ---
 
@@ -171,7 +191,7 @@ Also ensure that the PingFederate host environment can support the additional re
 \<p>A database or directory location containing user account records and associated user attributes.\</p>
 \</div>)* operations. If memory demand grows beyond available system memory, the operating system might terminate the process.
 
-Learn more about sizing `pf.runtime.threads.max` in [Tuning the server thread pool](pf_tuning_server_thread_pool.html), and learn more about connection pool behavior and back-end capacity in [Configuring connection pools to datastores](pf_config_connec_pool_to_datastor.html).
+Learn more about sizing `pf.runtime.threads.max` in [Tuning the server thread pool](pf_tuning_server_thread_pool.html), and learn more about connection pool behavior and back-end capacity in [Configuring connection pools to datastores](pf_configuring_connection_pools_datastores.html).
 
 ## Steps
 

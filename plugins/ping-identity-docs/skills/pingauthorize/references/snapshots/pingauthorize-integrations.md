@@ -1160,3 +1160,220 @@ To allow Apigee to use PingAuthorize as an external runtime authorization servic
 6. In the **New Sideband API Shared Secret** modal, enter a shared secret name and value, and then click **Save**.
 
 7. Click **Save**.
+
+---
+
+---
+title: Troubleshooting the Apigee integration
+description: Troubleshoot the most common issues with the Apigee gateway integration with PingAuthorize.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_integrations:paz_apigee_integration_troubleshooting
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration_troubleshooting.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 28, 2025
+section_ids:
+  troubleshooting-api-client-http-5xx-errors: Troubleshooting API client HTTP 5xx errors
+  steps: Steps
+  troubleshooting-api-client-http-4xx-errors: Troubleshooting API client HTTP 4xx errors
+  setting-up-error-response-handling-in-the-target-server: Setting up error response handling in the target server
+  steps-2: Steps
+  apigee_logging: Enable logging in Apigee
+---
+
+# Troubleshooting the Apigee integration
+
+Troubleshoot the most common issues with the Apigee gateway integration with PingAuthorize.
+
+## Troubleshooting API client HTTP 5xx errors
+
+Apigee might return `HTTP 502` when there is misconfiguration or miscommunication between the PingAuth shared flow for Apigee and PingAuthorize Server.
+
+To address 5xx errors, make adjustments to the **Load KVM Config** policy assigned to **PingAuth** in Apigee X or the key value map that you created for the PingAuth Shared Flow in Apigee Edge or Apigee Private Cloud.
+
+The PingAuth Shared Flow for Apigee logs warning messages to the Apigee error log when it encounters problems communicating with PingAuthorize. Learn more in [Enable logging in Apigee](#apigee_logging).
+
+### Steps
+
+* Check the PingAuth Shared Flow `service_host_port` value.
+
+  If the Apigee `service_host_port` value does not match your PingAuthorize server environment, the Apigee error log message might indicate that the plugin received an invalid response from the server.
+
+  1. Confirm that the value entered for `service_host_port` matches the host name of your PingAuthorize server and the port of the HTTPS connection handler.
+
+     You can find this port number on the **Configuration** page of the PingAuthorize administration console by going to **System → Connection Handlers**.
+
+  2. If necessary, update the `service_host_port` value to match your PingAuthorize server.
+
+* Check the PingAuth Shared Flow shared secret.
+
+  If the shared secret doesn't match the API gateway credential in PingAuthorize, the Apigee error log message might indicate that the plugin received an `HTTP 401` error from PingAuthorize, which gets translated to a 5xx error and then sent to the API client.
+
+  1. Confirm that the value of the **shared\_secret** key that you created in Apigee matches the shared secret value that you created for PingAuthorize.
+
+  2. If necessary, on the **Configuration** page of the PingAuthorize administration console, go to **Web Services and Applications > HTTP Servlet Extensions > Sideband API** and update the value of the shared secret.
+
+  3. Copy the new value of the shared secret and update the value of the Apigee **shared\_secret** key.
+
+## Troubleshooting API client HTTP 4xx errors
+
+The Apigee API gateway might return a 4xx error to the API client if the API client's request can't be authenticated by the PingAuthorize sideband API endpoint.
+
+To troubleshoot 4xx errors caused by authentication issues against the PingAuthorize sideband API, refer to [Sideband API authentication](../pingauthorize_server_administration_guide/paz_authn_sideband_api.html).
+
+## Setting up error response handling in the target server
+
+You should have an Apigee policy that handles errors returned by the target server.
+
+If you don't configure error handling using a policy, the API proxy goes into an error state in the `<TargetEndpoint>` response, and the normal API proxy flow won't continue to the `<ProxyEndpoint>`.
+
+### Steps
+
+1. Go to **API Proxies > httpbin\_bad\_response > Develop** and create a new **ReturnGenericError** policy of type **AssignMessage**. Configure the policy as desired.
+
+   ![Screen capture of the ReturnGenericError policy creation within Apigee](_images/rzw1673906971414.png)
+
+2. Select the **PreFlow** option in the **Target Endpoints** for your API proxy. Add the error policy you just created as a `<Step>` in the `<DefaultFaultRule>`.
+
+   |   |                                                                  |
+   | - | ---------------------------------------------------------------- |
+   |   | There are multiple methods for adding the error handling policy. |
+
+   ![Screen capture of adding the ReturnGenericError policy as a step within the DefaultFaultRule for the API proxy in Apigee](_images/zys1673907502466.png)
+
+## Enable logging in Apigee
+
+To view error log messages, configure Apigee error logging. Learn more in the [View message data with Trace](https://docs.apigee.com/api-platform/tutorials/view-with-trace) in the Apigee documentation.
+
+Apigee also provides debug logging for further troubleshooting. Learn more in [Enabling debug logging](https://docs.apigee.com/private-cloud/v4.18.05/enabling-debug-logging) in the Apigee documentation.
+
+---
+
+---
+title: Troubleshooting the Kong Gateway integration
+description: Consult the following sections to troubleshoot issues with the Kong Gateway integration with PingAuthorize:
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_integrations:paz_kong_gateway_troubleshoot
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_troubleshoot.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 28, 2025
+section_ids:
+  kong_5xx_errors: Troubleshooting API client HTTP 5xx errors
+  steps: Steps
+  example: Example:
+  example-2: Example:
+  kong_4xx_errors: API client HTTP 4xx errors
+  enable_error_logging_kong: Enabling error logging in Kong Gateway
+  steps-2: Steps
+  enable_debug_logging_kong_plugin: Enabling debug logging for the Kong Gateway plugin
+  steps-3: Steps
+---
+
+# Troubleshooting the Kong Gateway integration
+
+Consult the following sections to troubleshoot issues with the Kong Gateway integration with PingAuthorize:
+
+* [Troubleshooting API client HTTP 5xx errors](#kong_5xx_errors)
+
+* [API client HTTP 4xx errors](#kong_4xx_errors)
+
+* [Enabling error logging in Kong Gateway](#enable_error_logging_kong)
+
+* [Enabling debug logging for the Kong Gateway plugin](#enable_debug_logging_kong_plugin)
+
+## Troubleshooting API client HTTP 5xx errors
+
+Kong Gateway might return `HTTP 502` when there is misconfiguration or miscommunication between the Ping Identity plugin for Kong Gateway and PingAuthorize Server.
+
+|   |                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The plugin for Kong Gateway logs warning messages to the Kong Gateway error log when it encounters problems communicating with PingAuthorize.Learn more in [Enabling error logging in Kong Gateway](#enable_error_logging_kong). |
+
+### Steps
+
+1. Check the `ping-auth` shared secret value in Kong Gateway to confirm it matches your PingAuthorize environment.
+
+   #### Example:
+
+   If the `ping-auth` **Config.Shared Secret** value doesn't match the PingAuthorize sideband client's shared secret value, the Kong error log message might indicate that the plugin received an `HTTP 401` error from PingAuthorize, which gets translated to a `5xx` error sent to the API client. For example:
+
+   ```
+   2022/03/28 16:19:49 [warn] 78**0: *85187 [lua] network_handler.lua:145: is_failed_request(): [ping-auth] Sideband request denied with status code 401: The Gateway Token is invalid
+   ```
+
+   1. If there is a shared secret mismatch, go to **Configuration > Web Services and Applications > Sideband API Shared Secrets** in the PingAuthorize administrative console.
+
+   2. Update the shared secret value for PingAuthorize.
+
+   3. Copy the value to the **Config.Shared Secret** field in the Kong Gateway `ping-auth` plugin configuration.
+
+2. Check the `ping-auth` **Config.Service URL** value in Kong Gateway to confirm that it matches your PingAuthorize environment.
+
+   #### Example:
+
+   If the **Config.Service URL** value doesn't contain the hostname and HTTPS Connection Handler port configured for your PingAuthorize server, the Kong error log message might indicate that the plugin received an invalid response from the server. For example:
+
+   ```
+   2022/03/28 16:19:49 [error] 78#0: *90929 [lua] access.lua:114: handle_response(): [ping-auth] Unable to parse JSON body returned from policy provider. Error: Expected value but found T_END at character 1
+   ```
+
+   1. If necessary, confirm that the values entered in the **Config.Service Url** field of the `ping-auth` plugin in Kong Gateway correspond to the hostname and HTTPS Connection Handler port of your PingAuthorize server.
+
+      You can find this port number in the PingAuthorize administrative console by going to **Configuration → System → Connection Handlers**.
+
+   2. Update any mismatched values in **Config.Service Url**.
+
+## API client HTTP 4xx errors
+
+The API gateway could return `4xx` errors to API clients in these situations:
+
+* PingAuthorize cannot match an API client's request to any of the base paths configured for a sideband API endpoint.
+
+* The API client's request cannot be authenticated for a sideband API endpoint.
+
+Learn more in [Sideband API authentication](../pingauthorize_server_administration_guide/paz_authn_sideband_api.html).
+
+## Enabling error logging in Kong Gateway
+
+### Steps
+
+1. To view error log messages, configure Kong Gateway error logging.
+
+   Learn more about logging levels in [Logging Reference](https://docs.konghq.com/gateway/2.8.x/configure/logging/) in the Kong Gateway documentation.
+
+   For example, in a Docker environment, you can set the environment variable `KONG_PROXY_ERROR_LOG` to `/dev/stderr` to send the error log to the container console.
+
+2. View the Kong Gateway error log.
+
+   When using Docker Compose, you can use the `docker compose logs <kong-service> --follow` command.
+
+## Enabling debug logging for the Kong Gateway plugin
+
+Ping Identity Support might ask you to enable debug logging for the Kong Gateway integration kit. Changing these settings logs the full authorization request and response between the `ping-auth` plugin in Kong Gateway and PingAuthorize.
+
+|   |                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Debug logs can contain sensitive and personally identifiable information (PII). Enable debug logging only when troubleshooting and disable it afterward. |
+
+### Steps
+
+1. [Enable error logging](#enable_error_logging_kong) in Kong Gateway.
+
+2. To view debug messages, configure Kong error log verbosity.
+
+   Learn more in [Logging Reference](https://docs.konghq.com/gateway/2.8.x/configure/logging/) in the Kong Gateway documentation.
+
+   For example, in a Docker environment, you can set the environment variable `KONG_LOG_LEVEL` to `debug` to increase the error log verbosity.
+
+3. To enable debug logging, edit settings for the `ping-auth` plugin and select the **Config.Enable Debug Logging** checkbox.
+
+4. View the Kong Gateway error log.
+
+   When using Docker Compose, you can use the `docker compose logs <kong-service> --follow` command.
+
+5. Look for log messages containing `ping-auth`.
+
+   A typical log message looks like: `[ping-auth] Sending sideband request to policy provider`.

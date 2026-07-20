@@ -4,6 +4,8 @@ description: As you're transitioning to the cloud, you might wonder which Ping I
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices:comparison_pingone_advanced_services_and_pingone_cloud_platform:p1as_cloud_comparison
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/comparison_pingone_advanced_services_and_pingone_cloud_platform/p1as_cloud_comparison.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2025
 section_ids:
   _deployment_models: Deployment models

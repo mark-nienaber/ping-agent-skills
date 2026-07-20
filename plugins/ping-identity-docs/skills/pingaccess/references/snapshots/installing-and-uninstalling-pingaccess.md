@@ -1035,3 +1035,618 @@ To install PingAccess on a Windows system using the installer:
 ## Next steps
 
 [Access the administrative console to complete the configuration](pa_accessing_the_admin_console.html).
+
+---
+
+---
+title: Installing PingAccess on your system
+description: Install PingAccess on Linux, on Windows through an installation wizard, or on Windows through the command-line interface (CLI).
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_installing_pa_on_your_system
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_installing_pa_on_your_system.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 6, 2024
+section_ids:
+  before-you-begin: Before you begin
+  installing-pingaccess-on-linux: Installing PingAccess on Linux
+  about-this-task: About this task
+  steps: Steps
+  next-steps: Next steps
+  installing-pingaccess-on-windows-using-the-installer: Installing PingAccess on Windows using the installer
+  about-this-task-2: About this task
+  steps-2: Steps
+  next-steps-2: Next steps
+  installing-pingaccess-on-windows-from-the-command-line: Installing PingAccess on Windows from the command line
+  about-this-task-3: About this task
+  steps-3: Steps
+  next-steps-3: Next steps
+---
+
+# Installing PingAccess on your system
+
+Install PingAccess on Linux, on Windows through an installation wizard, or on Windows through the command-line interface (CLI).
+
+## Before you begin
+
+* Ensure you've met the [installation requirements](pa_installation_requirements.html).
+
+* Ensure you're signed on to your system with appropriate privileges to install and run an application.
+
+  |   |                                                          |
+  | - | -------------------------------------------------------- |
+  |   | On Linux, install and run PingAccess as a non-root user. |
+
+* Install a [supported Java runtime](pa_installation_requirements.html).
+
+* The system or user environment variable `JAVA_HOME` must exist and be set to a value that represents the location of your Java installation, such as `usr/java/jdk 1.8.0_74`.
+
+* Add the relevant Java directory path to the `PATH` variable so it's available for scripts that depend on it:
+
+  * On Linux: Add the Java Runtime Environment (JRE) *(tooltip: \<div class="paragraph">
+    \<p>A software layer that provides the class libraries and resources needed for a Java program to run.\</p>
+    \</div>)* `/bin` directory path (for example, `usr/lib64/jvm/jre/bin`).
+
+  * On Windows installer: Add the `javapath` directory path (for example, `C:\Program Files\Oracle\Java\javapath`).
+
+  * On Windows CLI: Add the `javapath` directory path (for example, `C:\Program Files\Oracle\Java\javapath`).
+
+* You must have a `pingaccess.lic` license file.
+
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | If you do not have a PingAccess license, you can request an evaluation key at <https://support.pingidentity.com/s/>. During the first run of PingAccess, you will be prompted to upload the license file.If you are using an existing configuration file to configure the system, copy the configuration file to the system and rename it `data.json`. For more information about exporting the configuration from an existing system, see [Exporting PingAccess configurations](../pingaccess_user_interface_reference_guide/pa_exporting_pa_configs.html). |
+
+- Linux
+
+- Windows installer
+
+- Windows CLI
+
+## Installing PingAccess on Linux
+
+### About this task
+
+To install PingAccess on a Linux system:
+
+### Steps
+
+1. Download the distribution `.zip` archive from the [PingAccess downloads page](https://www.pingidentity.com/en/resources/downloads/pingaccess.html).
+
+2. Extract the distribution `.zip` archive into your installation directory.
+
+3. **Optional:** If you are using an existing configuration file to configure the system, move the `data.json` file to the `<PA_Home>/data/start-up-deployer` directory.
+
+   |   |                                                                                                                                                                                                                                                    |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | When you start PingAccess for the first time, if this configuration is present it will be imported. After a successful import, the `data.json` file is deleted. If the configuration is present but cannot be imported, PingAccess is not started. |
+
+   |   |                                                                                                                                                         |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you're deploying PingAccess in a cluster configuration, see the [configuration documentation](../reference_guides/pa_configuring_a_pa_cluster.html). |
+
+### Next steps
+
+[Access the administrative console to complete the configuration](pa_accessing_the_admin_console.html).
+
+## Installing PingAccess on Windows using the installer
+
+### About this task
+
+To install PingAccess on a Windows system using the installer:
+
+### Steps
+
+1. Download the PingAccess Windows installer from the [PingAccess downloads page](https://www.pingidentity.com/en/resources/downloads/pingaccess.html).
+
+2. Double-click on the installer icon to launch the PingAccess setup wizard.
+
+3. Click **Next** and follow the prompts to complete the installation using the following information for your selected operational mode.
+
+   | Operational Mode             | Requirements                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Standalone                   | Ports:- PingAccess administrative console: TCP 9000
+
+   - PingAccess agent protocol: TCP 3030                                                                                                                                                                                                                                                                                                                                                                                          |
+   | Clustered admin node         | Ports:- PingAccess administrative console: TCP 9000
+
+   - Configuration query port: TCP 9090                                                                                                                                                                                                                                                                                                                                                                                           |
+   | Clustered replica admin node | Ports:- PingAccess administrative console: TCP 9000
+
+   - Configuration query port: TCP 9090Prerequisites:- You must install and configure a clustered admin node.
+
+   - You must have a configuration data archive file available for the replica admin node. For more information, see [Clustering in PingAccess](../reference_guides/pa_clustering_ref_guide.html) in *Reference Guides*.&#xA;&#xA;Install the clustered replica admin node on a separate machine in the same network. |
+   | Clustered engine node        | Ports:- PingAccess agent protocol: TCP 3030Prerequisites:- You must install a clustered admin node.
+
+   - You must have a configuration data archive file available for the clustered engine node. For more information, see [Clustering in PingAccess](../reference_guides/pa_clustering_ref_guide.html) in *Reference Guides*.                                                                                                                                                       |
+
+4. Copy the Uniform Resource Locator (URL) *(tooltip: \<div class="paragraph">
+   \<p>Identifies a resource according to its internet location.\</p>
+   \</div>)* of the PingAccess administrative console that is displayed on the final page of the PingAccess setup wizard, then click **Finish**.
+
+5. To customize and finalize the PingAccess setup, paste the URL you copied into your web browser and connect to the administrative console of the instance you have just installed.
+
+### Next steps
+
+[Access the administrative console to complete the configuration](pa_accessing_the_admin_console.html).
+
+## Installing PingAccess on Windows from the command line
+
+### About this task
+
+To install PingAccess on a Windows system from the CLI:
+
+### Steps
+
+1. Download the distribution `.zip` archive.
+
+2. Extract the distribution `.zip` archive into your installation directory.
+
+3. **Optional:** If you are using an existing configuration file to configure the system, move the `data.json` file to the `<PA_Home>/data/start-up-deployer` directory.
+
+   |   |                                                                                                                                                                                                                                                    |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | When you start PingAccess for the first time, if this configuration is present it will be imported. After a successful import, the `data.json` file is deleted. If the configuration is present but cannot be imported, PingAccess is not started. |
+
+### Next steps
+
+[Access the administrative console to complete the configuration](pa_accessing_the_admin_console.html).
+
+---
+
+---
+title: Managing the PingAccess Linux service
+description: Configure PingAccess to run as a Linux systemv or systemd service, or remove the PingAccess Linux service.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_managing_pa_as_a_linux_service
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_managing_pa_as_a_linux_service.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 18, 2024
+section_ids:
+  about-this-task: About this task
+  configuring-pingaccess-to-run-as-a-linux-systemv-service: Configuring PingAccess to run as a Linux systemv service
+  about-this-task-2: About this task
+  steps: Steps
+  next-steps: Next steps
+  configuring-pingaccess-to-run-as-a-linux-systemd-service: Configuring PingAccess to run as a Linux systemd service
+  about-this-task-3: About this task
+  steps-2: Steps
+  removing-the-pingaccess-linux-service: Removing the PingAccess Linux service
+  about-this-task-4: About this task
+  steps-3: Steps
+---
+
+# Managing the PingAccess Linux service
+
+Configure PingAccess to run as a Linux systemv or systemd service, or remove the PingAccess Linux service.
+
+## About this task
+
+Configuring PingAccess to run as a Linux systemv or systemd service causes it to start automatically when Linux starts.
+
+|   |                                                                                             |
+| - | ------------------------------------------------------------------------------------------- |
+|   | To configure multiple instances of PingAccess as Linux services, see the Linux systemv tab. |
+
+* Linux systemv
+
+* Linux systemd
+
+## Configuring PingAccess to run as a Linux systemv service
+
+### About this task
+
+|   |                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The service script will only start if *\<JAVA\_HOME>* and *\<PA\_HOME>* are set and if the script can find the PingAccess license file. |
+
+To configure multiple instances of PingAccess on a single host as Linux services, make the following modifications to the script for each service:
+
+* Use a unique script name for each instance.
+
+* Use a separate directory structure for each instance in the file system.
+
+* Configure the following settings in the script file for each instance:
+
+| Setting         | Description                                              |
+| --------------- | -------------------------------------------------------- |
+| *\<APPNAME>*    | A unique value for each instance.                        |
+| *\<PA\_HOME>*   | The path to the PingAccess instance.                     |
+| *\<JAVA\_HOME>* | The path to the Java installation folder.                |
+| *\<USER>*       | Optional value for the username used to run the service. |
+
+To configure PingAccess to run as a Linux systemv service:
+
+### Steps
+
+1. Copy the PingAccess script file from the `<PA_HOME>/sbin/linux/pingaccess` directory to the `/etc/init.d` directory.
+
+2. **Optional:** Create a new user to run PingAccess.
+
+3. Create the `/var/run/pingaccess` directory.
+
+   |   |                                                                                             |
+   | - | ------------------------------------------------------------------------------------------- |
+   |   | Ensure that the user who will run the service has read and write permissions to the folder. |
+
+4. Edit the `/etc/init.d/pingaccess` script file and set the values of the following variables at the beginning of the script:
+
+   | Variable                  | Description                                                           |
+   | ------------------------- | --------------------------------------------------------------------- |
+   | `export <JAVA_HOME>=`     | Specify the Java install folder.                                      |
+   | `export <PA_HOME>=`       | Specify the PingAccess install folder.                                |
+   | `export USER=` (Optional) | Specify a username to run the service or leave empty for the default. |
+
+5. To register the service, from the `/etc/init.d` directory, run:
+
+   ```
+   chkconfig --add pingaccess
+   ```
+
+6. To make the service script executable, run:
+
+   ```
+   chmod +x pingaccess
+   ```
+
+### Next steps
+
+After registering, you can use the `service` command to control the PingAccess service. The available commands are:
+
+* `start`
+
+  Start the PingAccess service.
+
+* `stop`
+
+  Stop the PingAccess service.
+
+* `restart`
+
+  Restart the PingAccess service.
+
+* `status`
+
+  Show the status of the PingAccess service and the service process identifier (PID).
+
+|   |                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------ |
+|   | The `service pingaccess status` command displays the current status of the running PingAccess service. |
+
+## Configuring PingAccess to run as a Linux systemd service
+
+### About this task
+
+|   |                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The service script will only start if *\<JAVA\_HOME>* and *\<PA\_HOME>* are set and if the script can find the PingAccess license file. |
+
+To configure PingAccess to run as a Linux systemd service:
+
+### Steps
+
+1. Copy the configuration file from the `<PA_HOME>/sbin/linux/pingaccess.service` directory to the `/etc/systemd/system/pingaccess.service` directory.
+
+2. In the `pingaccess.service` file, replace the following variables:
+
+   * Replace *<${PA\_HOME}>* with the path to the PingAccess instance.
+
+   * Replace *<${PA\_USER}>* with the username used to run the service.
+
+   * Replace *<${PA\_JAVA\_HOME}>* with the path to the Java installation folder.
+
+3. To allow read-write activity on the service, run:
+
+   ```
+   chmod 644 /etc/systemd/system/pingaccess.service
+   ```
+
+4. To load the systemd service, run:
+
+   ```
+   systemctl daemon-reload
+   ```
+
+5. To enable the service, run:
+
+   ```
+   systemctl enable pingaccess.service
+   ```
+
+6. To start the service, run:
+
+   ```
+   systemctl start pingaccess.service
+   ```
+
+## Removing the PingAccess Linux service
+
+### About this task
+
+|   |                                                         |
+| - | ------------------------------------------------------- |
+|   | You must run the following commands as the `root` user. |
+
+To remove the PingAccess service from a Linux system:
+
+### Steps
+
+1. To stop the service, run the `/etc/init.d/pingaccess stop` command.
+
+2. Run the `chkconfig --delete pingaccess` command.
+
+3. **Optional:** Delete the `/etc/init.d/pingaccess` script.
+
+---
+
+---
+title: Managing the PingAccess Windows service
+description: Configure PingAccess to run as a Windows service through an installer or the command line, or remove the PingAccess Windows service.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_managing_pa_as_a_windows_service
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_managing_pa_as_a_windows_service.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 18, 2024
+section_ids:
+  before-you-begin: Before you begin
+  about-this-task: About this task
+  steps: Steps
+  configuring-pingaccess-to-run-as-a-windows-service: Configuring PingAccess to run as a Windows service
+  about-this-task-2: About this task
+  steps-2: Steps
+  result: Result
+  configuring-pingaccess-to-run-as-a-windows-service-from-the-command-line: Configuring PingAccess to run as a Windows service from the command line
+  about-this-task-3: About this task
+  steps-3: Steps
+  result-2: Result
+  removing-the-pingaccess-windows-service: Removing the PingAccess Windows service
+  before-you-begin-2: Before you begin
+  about-this-task-4: About this task
+  steps-4: Steps
+---
+
+# Managing the PingAccess Windows service
+
+Configure PingAccess to run as a Windows service through an installer or the command line, or remove the PingAccess Windows service.
+
+## Before you begin
+
+[Install PingAccess](pa_installing_pa_on_your_system.html) and manually start the server to make sure that it runs normally. For more information, see [Accessing the administrative console for the first time](pa_accessing_the_admin_console.html).
+
+|   |                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------ |
+|   | If you installed PingAccess using the Windows installer, the service is installed and started automatically. |
+
+## About this task
+
+Configuring PingAccess as a Windows service causes it to start automatically when Windows starts. To configure PingAccess as a service on a Windows 64-bit operating system:
+
+## Steps
+
+1. Ensure that you are signed on with full administrator privileges.
+
+2. Select one of the following tabs to proceed.
+
+* Manual Installation
+
+* From the Command Line
+
+## Configuring PingAccess to run as a Windows service
+
+### About this task
+
+To configure PingAccess to run as a Windows service:
+
+### Steps
+
+1. Open a command prompt as an administrator.
+
+2. In the command prompt, go to the `<PA_HOME>\sbin\windows` directory and run the `install-service.bat` file.
+
+3. In Windows, go to **Control Panel → Administrative Tools → Services**.
+
+4. From the list of available services, right-click **PingAccess Service** and select **Start**.
+
+   You can change the default **Start type** setting in the **Properties** dialog.
+
+### Result
+
+The service starts immediately and restarts automatically on reboot.
+
+## Configuring PingAccess to run as a Windows service from the command line
+
+### About this task
+
+To configure PingAccess to run as a Windows service from the command line:
+
+### Steps
+
+1. Go to the `<PA_HOME>\sbin\windows` directory and run the `install-service.bat` file.
+
+2. To set the PingAccess service to start automatically, run `sc config PingAccess start= auto`.
+
+### Result
+
+The service starts immediately and restarts automatically on reboot.
+
+## Removing the PingAccess Windows service
+
+### Before you begin
+
+Make sure you have PingAccess administrator privileges.
+
+### About this task
+
+To remove the PingAccess service from a Windows system:
+
+### Steps
+
+1. Open a command prompt.
+
+2. Stop the PingAccess service.
+
+3. Go to the `<PA_HOME>\sbin\windows` directory.
+
+4. Run the `uninstall-service.bat` file.
+
+5. After the script runs, remove the *\<PA\_HOME>* environment variable from the system.
+
+---
+
+---
+title: Removing the PingAccess Linux service
+description: You must run the following commands as the root user.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_removing_the_pa_linux_service
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_removing_the_pa_linux_service.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 8, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Removing the PingAccess Linux service
+
+## About this task
+
+|   |                                                         |
+| - | ------------------------------------------------------- |
+|   | You must run the following commands as the `root` user. |
+
+To remove the PingAccess service from a Linux system:
+
+## Steps
+
+1. To stop the service, run the `/etc/init.d/pingaccess stop` command.
+
+2. Run the `chkconfig --delete pingaccess` command.
+
+3. **Optional:** Delete the `/etc/init.d/pingaccess` script.
+
+---
+
+---
+title: Removing the PingAccess Windows service
+description: Make sure you have PingAccess administrator privileges.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_removing_the_pa_windows_service
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_removing_the_pa_windows_service.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 8, 2024
+section_ids:
+  before-you-begin: Before you begin
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Removing the PingAccess Windows service
+
+## Before you begin
+
+Make sure you have PingAccess administrator privileges.
+
+## About this task
+
+To remove the PingAccess service from a Windows system:
+
+## Steps
+
+1. Open a command prompt.
+
+2. Stop the PingAccess service.
+
+3. Go to the `<PA_HOME>\sbin\windows` directory.
+
+4. Run the `uninstall-service.bat` file.
+
+5. After the script runs, remove the *\<PA\_HOME>* environment variable from the system.
+
+---
+
+---
+title: Running PingAccess as a service
+description: PingAccess can run as a service on Linux and Windows 64-bit operating systems, enabling PingAccess to start automatically when the operating system starts.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_running_pa_as_a_service
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_running_pa_as_a_service.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 8, 2024
+---
+
+# Running PingAccess as a service
+
+PingAccess can run as a service on Linux and Windows 64-bit operating systems, enabling PingAccess to start automatically when the operating system starts.
+
+The service runs as the `root` (Linux) or `System` (Windows) user by default.
+
+|   |                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Before setting PingAccess up to run as a service, manually start the server to make sure that PingAccess runs normally. For more information, see [Accessing the administrative console for the first time](pa_accessing_the_admin_console.html). |
+
+* To manage PingAccess as a service on a Linux operating system, see [Managing the PingAccess Linux service](pa_managing_pa_as_a_linux_service.html).
+
+* To manage PingAccess as a service on a Windows 64-bit operating system, see [Managing the PingAccess Windows service](pa_managing_pa_as_a_windows_service.html).
+
+---
+
+---
+title: Starting PingAccess
+description: After installing PingAccess, start the PingAccess service.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:installing_and_uninstalling_pingaccess:pa_starting_pa
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/installing_and_uninstalling_pingaccess/pa_starting_pa.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 8, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  result: Result:
+---
+
+# Starting PingAccess
+
+After installing PingAccess, start the PingAccess service.
+
+## About this task
+
+|   |                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------ |
+|   | If you installed PingAccess using the Windows installer, the service is installed and started automatically. |
+
+## Steps
+
+1. In a command prompt or terminal window, change to the PingAccess `bin` directory:
+
+   ### Choose from:
+
+   * On Linux: `cd <PA_HOME>/bin`
+
+   * On Windows: `cd <PA_HOME>\bin`
+
+2. Start the `run` script for the platform:
+
+   ### Choose from:
+
+   * On Linux: `./run.sh`
+
+   * On Windows: `run.bat`
+
+### Result:
+
+PingAccess starts when you see the message `PingAccess running…​` in the command window.

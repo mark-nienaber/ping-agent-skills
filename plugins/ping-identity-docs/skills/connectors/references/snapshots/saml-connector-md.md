@@ -1,19 +1,19 @@
 ---
 title: SAML IdP Connector
-description: The Security Assertion Markup Language (SAML) IdP connector lets you authenticate users with a SAML IdP-based identity provider in your PingOne DaVinci flow.
+description: Configure the SAML IdP connector to authenticate users with a SAML identity provider in your PingOne DaVinci flow
 component: connectors
 page_id: connectors::saml_connector
 canonical_url: https://docs.pingidentity.com/connectors/saml_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
   requirements: Requirements
   configuring-the-saml-idp-connector: Configuring the SAML IdP connector
   connector-configuration: Connector configuration
-  davinci-saml-sp-metadata-url: DaVinci SAML SP Metadata URL
+  pingone-davinci-saml-sp-metadata-url: PingOne DaVinci SAML SP Metadata URL
   identity-provider-saml-metadata: Identity Provider SAML Metadata
   application-redirect-url: Application Redirect URL
   using-the-connector-in-a-flow: Using the connector in a flow
@@ -37,13 +37,13 @@ SAML 2.0 is a well-supported standard for authentication and authorization. You 
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -51,7 +51,7 @@ To use the connector, you'll need administrator access to your identity provider
 
 ### Configuring the SAML IdP connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -59,9 +59,9 @@ Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingi
 | - | ------------------------------------------------------------------------------------------------------- |
 |   | Consult your identity provider's documentation for help finding and configuring your SAML IdP settings. |
 
-##### DaVinci SAML SP Metadata URL
+##### PingOne DaVinci SAML SP Metadata URL
 
-Your DaVinci SAML IdP SP Metadata URL. This allows an identity provider to redirect the browser back to DaVinci. Enter this URL in your provider's SAML IdP configuration.
+Your PingOne DaVinci SAML IdP SP Metadata URL. This allows an identity provider to redirect the browser back to PingOne DaVinci. Enter this URL in your provider's SAML IdP configuration.
 
 ##### Identity Provider SAML Metadata
 
@@ -77,7 +77,7 @@ This field accepts the SAML IdP metadata provided by your identity provider. Thi
 
 ##### Application Redirect URL
 
-Your application's redirect URL, such as `https://app.yourorganization.com/`. Enter this URL if you [embed the DaVinci widget in your application](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_the_widget.html). This allows DaVinci to redirect the browser back to your application.
+Your application's redirect URL, such as `https://app.yourorganization.com/`. Enter this URL if you [embed the PingOne DaVinci widget in your application](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launching_a_flow_with_the_widget.html). This allows PingOne DaVinci to redirect the browser back to your application.
 
 ## Using the connector in a flow
 

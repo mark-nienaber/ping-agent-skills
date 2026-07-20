@@ -4,6 +4,8 @@ description: You can authenticate using social media providers as an external id
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_authn_with_social_media
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_authn_with_social_media.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_authn_with_social_media_p1.adoc", "customer_use_cases:htg_authn_with_social_media_pf.adoc"]
 section_ids:
@@ -69,6 +71,8 @@ description: Authenticating with social media providers
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_customer
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_customer.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 19, 2024
 ---
 
@@ -96,6 +100,8 @@ description: You can customize the default single sign-on (SSO) end user sign-on
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_customize_sso_user_sign_on_windows_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_customize_sso_user_sign_on_windows_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_default_template.adoc", "customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_custom_css.adoc", "customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_custom_background.adoc"]
 section_ids:
@@ -290,6 +296,8 @@ description: Enable an authentication policy that includes multi-factor authenti
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_enable_mfa_for_app
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_enable_mfa_for_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -354,6 +362,8 @@ description: Sign on to PingOne and select your environment.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_obtain_logging_data_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_obtain_logging_data_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_obtain_logging_data_p1_audit_params.adoc"]
 section_ids:
@@ -507,6 +517,8 @@ description: Configure an SMS provider in an HTML Form Adapter instance in PingF
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_message
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_message.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -568,6 +580,8 @@ description: Change your password through the HTML Form sign-on page.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_html_form
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_html_form.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -595,6 +609,8 @@ description: Reset a password using a one-time link sent to a user's email accou
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_email
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_email.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -708,6 +724,8 @@ description: Reset a password through a user's email account using a one-time pa
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_otp
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_otp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -832,6 +850,8 @@ description: Learn how to set up an agent integration for PingAccess application
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_agent_setup_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_agent_setup_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["customer_use_cases:htg_agent_setup_pa_config_agent.adoc", "customer_use_cases:htg_agent_setup_pa_config_token_provider.adoc", "customer_use_cases:htg_agent_setup_pa_install_agent.adoc"]
 section_ids:
@@ -975,6 +995,8 @@ description: Create a new OAuth or OpenID Connect (OIDC) application in PingFede
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_oidc_app_setup_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_oidc_app_setup_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1236,6 +1258,8 @@ description: Customize the sign-on window in PingOne to match your company's des
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_sign_on_window_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_sign_on_window_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1326,6 +1350,8 @@ description: Learn how to set up password recovery for an application using Ping
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_recovery_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_recovery_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   about-this-task: About this task
@@ -1399,6 +1425,8 @@ description: Learn how to customize the user's sign-on experience by enabling se
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_password_reset_p1_pf_ldaps.adoc", "customer_use_cases:htg_password_reset_p1_pf_html_form.adoc", "customer_use_cases:htg_password_reset_p1_methods.adoc"]
 section_ids:
@@ -1625,6 +1653,8 @@ description: Learn how to configure PingDataSync for Microsoft Active Directory 
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_pds_setup_between_ad_and_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_pds_setup_between_ad_and_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 25, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -2047,6 +2077,8 @@ description: Learn how to set up PingDataSync between PingDirectory and PingOne 
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_pds_setup_between_pd_and_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_pds_setup_between_pd_and_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 25, 2025
 section_ids:
   before-you-begin: Before you begin

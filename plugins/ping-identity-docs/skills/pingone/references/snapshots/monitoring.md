@@ -244,13 +244,13 @@ Specify a secondary filter for your results.
 
 ---
 title: Authentication dashboard
-description: The Authentication dashboard shows a summary of sign-on activity through PingOne sign-on policies for the selected environment.
+description: View a summary of sign-on activity, MFA adoption, total identities, and password resets in the PingOne Authentication dashboard.
 component: pingone
 page_id: pingone:monitoring:p1_auth_dashboard
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_auth_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
+revdate: July 10, 2026
 section_ids:
   cards: Cards
   sign-ons-by-dayhour: Sign-ons by day/hour
@@ -448,13 +448,13 @@ Use the **Alerts** page to edit an existing alert.
 
 ---
 title: MFA dashboard
-description: The MFA dashboard shows a summary of current multi-factor authentication (MFA) activity, SMS and voice usage and costs, and user devices.
+description: View a summary of MFA activity, SMS and voice usage, costs, and user devices in the PingOne MFA dashboard.
 component: pingone
 page_id: pingone:monitoring:p1_mfa_dashboard
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_mfa_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 25, 2026
+revdate: July 10, 2026
 ---
 
 # MFA dashboard
@@ -471,13 +471,13 @@ Learn more about MFA dashboard charts in [MFA Dashboard](../strong_authenticatio
 
 ---
 title: Monitoring
-description: The Monitoring branch provides access to the platform and services dashboards, as well as to the Audit and Alerts pages.
+description: Access PingOne dashboards, audit logs, and alerts from the Monitoring section of the admin console.
 component: pingone
 page_id: pingone:monitoring:p1_monitoring_menu
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_monitoring_menu.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 13, 2023
+revdate: July 10, 2026
 ---
 
 # Monitoring
@@ -593,13 +593,13 @@ The information displayed depends on the date range for which you requested data
 
 ---
 title: User Demographics Dashboard
-description: The User Demographics Dashboard shows a summary of user demographic profiles and activity for the selected environment.
+description: View a summary of user demographic profiles, identity counts, and authentication activity in the User Demographics Dashboard.
 component: pingone
 page_id: pingone:monitoring:p1_user_demographic_dashboard
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_user_demographic_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 4, 2025
+revdate: July 10, 2026
 section_ids:
   filters: Filters
   charts: Charts
@@ -706,13 +706,13 @@ Displays the distribution of MFA attempts by operating system for the selected t
 
 ---
 title: User devices and app version charts
-description: The User Devices chart enables you to view current information for user devices per authentication method, and mobile app users per app version.
+description: View user device usage by authentication method and mobile app usage by version using the User Devices and App Version charts.
 component: pingone
 page_id: pingone:monitoring:p1_user_devices_and_app_version_chart
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_user_devices_and_app_version_chart.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 11, 2024
+revdate: July 10, 2026
 ---
 
 # User devices and app version charts

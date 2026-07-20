@@ -510,8 +510,8 @@ For more information, refer to [Decision Endpoints](authorization-decisions/deci
 title: Authorize Gateway Decision Evaluation
 description: Decision requests to an Authorize gateway instance are used to determine whether a user or system is permitted to perform a specific action.
 component: pingone-api
-page_id: pingone-api:authorize:authorize-gateways/authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorize-gateways/authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation.html
+page_id: pingone-api:authorize:authorize-gateways/authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorize-gateways/authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
@@ -548,7 +548,7 @@ See the following topics for more information:
 
 * [Authorize gateways](https://docs.pingidentity.com/pingone/integrations/p1_authz_gateways.html) in the PingOne admin documentation.
 
-* [Authorize Gateway Decision Evaluation](authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation.html) provides the decision evaluation endpoints for Authorize gateway instances.
+* [Authorize Gateway Decision Evaluation](authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation.html) provides the decision evaluation endpoints for Authorize gateway instances.
 
 In addition, the PingOne gateway endpoints provide capabilities for Authorize gateway management.
 

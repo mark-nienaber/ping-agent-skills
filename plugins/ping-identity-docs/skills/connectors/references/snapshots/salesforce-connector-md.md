@@ -1,12 +1,12 @@
 ---
 title: Salesforce Connector
-description: The Salesforce connector lets you manage users and records in Salesforce from your PingOne DaVinci flows.
+description: Configure the Salesforce connector to read, create, and update users and records in Salesforce from PingOne DaVinci flows
 component: connectors
 page_id: connectors::salesforce_connector
 canonical_url: https://docs.pingidentity.com/connectors/salesforce_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -56,13 +56,13 @@ Learn more in the following:
 
   * [User fields](https://help.salesforce.com/s/articleView?id=sf.user_fields.htm)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -78,7 +78,7 @@ To use the connector, you'll need:
 
 ### Setting up Salesforce
 
-To configure the Salesforce environment to use the Salesforce connector in DaVinci:
+To configure the Salesforce environment to use the Salesforce connector in PingOne DaVinci:
 
 1. Sign on to a Salesforce production, developer, or sandbox account.
 
@@ -146,7 +146,7 @@ To configure the Salesforce environment to use the Salesforce connector in DaVin
       | - | ------------------------------------------------------------------------------------- |
       |   | Be sure to sign on with the administrator account that uses the Salesforce connector. |
 
-6. In DaVinci, add a Salesforce connector to your flow.
+6. In PingOne DaVinci, add a Salesforce connector to your flow.
 
 7. Click **Configure** and complete the following fields:
 
@@ -204,7 +204,7 @@ No special configuration is needed. Add the capability and populate its properti
 
 This flow allows the user to upload a document, such as an image or PDF, to Salesforce.
 
-1. Download the [Salesforce - Document upload](https://marketplace.pingone.com/item/salesforce-document-upload) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Salesforce - Document upload](https://marketplace.pingone.com/item/salesforce-document-upload) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the file upload form.
 

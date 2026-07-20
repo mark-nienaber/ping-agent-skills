@@ -267,6 +267,61 @@ The source server must be a PingDirectory server or a PingDirectoryProxy server 
 ---
 
 ---
+title: Active Directory sync user account
+description: The Sync User created for Active Directory (AD) is added to the cn=Administrators branch and is given most of a root user's permissions. If this account cannot be secured and there is a need to configure the permissions required by the Sync User, the following are required to perform synchronization tasks.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_active_dir_sync_user_acct
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_active_dir_sync_user_acct.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Active Directory sync user account
+
+The Sync User created for Active Directory (AD) *(tooltip: \<div class="paragraph">
+\<p>A directory service for Windows domain networks, included in most Windows Server operation systems.\</p>
+\</div>)* is added to the `cn=Administrators` branch and is given most of a root user's permissions. If this account cannot be secured and there is a need to configure the permissions required by the Sync User, the following are required to perform synchronization tasks.
+
+As a Sync Source, these permissions are needed:
+
+* List contents
+
+* Read all properties
+
+* Read permissions
+
+Deleted items are a special case. For the PingDataSync server to see deleted entries, the user account must have sufficient access to `cn=Deleted Objects,<domain name>`. Giving access to that distinguished name (DN) *(tooltip: \<div class="paragraph">
+\<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
+\</div>)* requires using the `dsacls` tool, such as:
+
+```
+# Take ownership may be required to make the needed changes.
+dsacls "CN=Deleted Objects,DC=example,DC=com" /takeOwnership
+```
+
+```
+# Give the Sync User generic read permission to the domain.
+dsacls "CN=Deleted Objects,DC=example,DC=com" /G "example\SyncUser":GR
+```
+
+```
+# List the permission for the domain.
+dsacls "CN=Deleted Objects,DC=example,DC=com"
+```
+
+To revoke all permissions from the Sync User, run the following `dsacls` command:
+
+```
+dsacls "CN=Deleted Objects,DC=example,DC=com" /R "example\SyncUser"
+```
+
+If Active Directory is used as a destination for synchronization, the Sync User account should not be changed.
+
+---
+
+---
 title: Boolean SCIM 2.0 attribute mappings
 description: Boolean System for Cross-domain Identity Management (SCIM) 2.0 attribute mappings can be used for cases in which the SCIM attribute has a value that is a single JavaScript Object Notation (JSON) Boolean value.
 component: pingdirectory
@@ -317,12 +372,76 @@ dsconfig create-scim2-attribute-mapping \
 ---
 
 ---
-title: Configure the external servers
-description: Perform the following to configure an external server for each host in the deployment:
+title: Change the synchronization state by a specific time duration
+description: The following command will start synchronizing data at the state that occurred 2 hours and 30 minutes before the current time on External Server 1 for Sync Pipe 1. Any changes made before this time will not be synchronized. Specify days (d), hours (h), minutes (m), seconds (s), or milliseconds (ms).
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_external_servers
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_external_servers.html
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_change_sync_state_time_dur
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_change_sync_state_time_dur.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Change the synchronization state by a specific time duration
+
+The following command will start synchronizing data at the state that occurred 2 hours and 30 minutes before the current time on External Server 1 for Sync Pipe 1. Any changes made before this time will not be synchronized. Specify days (d), hours (h), minutes (m), seconds (s), or milliseconds (ms).
+
+Use `realtime-sync` with the `--startpoint-rewind` option to set the synchronization state and begin synchronizing at the specified time.
+
+```shell
+$ bin/realtime-sync set-startpoint \
+  --startpoint-rewind 2h30m \
+  --pipe-name "Sync Pipe 1" \
+  --bindPassword secret \
+  --no-prompt
+```
+
+---
+
+---
+title: Changelog synchronization considerations
+description: If the Sync Source is configured with use-changelog-batch-request=true, PingDataSync will use the get changelog batch request to retrieve changes from the Lightweight Directory Access Protocol (LDAP) changelog. This extended request can contain an optional set of selection criteria, which specifies changelog entries for a specific set of attributes.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_changelog_sync_consids
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_changelog_sync_consids.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Changelog synchronization considerations
+
+If the Sync Source is configured with `use-changelog-batch-request=true`, PingDataSync will use the get changelog batch request to retrieve changes from the Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
+\<p>An open, cross platform protocol used for interacting with directory services.\</p>
+\</div>)* changelog. This extended request can contain an optional set of selection criteria, which specifies changelog entries for a specific set of attributes.
+
+PingDataSync takes the union of the source attributes from PingDataSync distinguished name (DN) *(tooltip: \<div class="paragraph">
+\<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
+\</div>)* mappings, attribute mappings, and the `auto-mapped-source-attributes` property on the Sync Class to create the selection criteria. However, if it encounters the value "-all-" in the `auto-mapped-source-attributes` property, it cannot make use of selection criteria because the Sync Pipe is interested in all possible source attributes.
+
+When the PingDirectory server receives a get changelog request that contains selection criteria, it returns changelog entries for one or more of the attributes that meet the criteria.
+
+* For ADD and MODIFY changelog entries, the changes must include at least one attribute from the selection criteria.
+
+* For MODDN changelog entries, one of the RDN attributes must match the selection criteria.
+
+* For DELETE changelog entries, one of the `deletedEntryAttrs` much match the selection criteria.
+
+If `auto-mapped` is not set to `all` source attributes, at least one should be configured to show up in the `deletedEntryAttrs` (with the `changelog-deleted-entry-include-attribute` property on the changelog backend).
+
+Another way to do this is to set `use-reversible-form` to `true` on the changelog backend. This includes all attributes in the `deletedEntryAttrs`.
+
+---
+
+---
+title: Changing the administrative password
+description: Users that authenticate to the Configuration API or the admin console are stored in cn=RootDNs,cn=config. The setup tool automatically creates one administrative account when performing an installation. Accounts can be added or changed with the dsconfig tool.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_change_admin_password
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_change_admin_password.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
@@ -331,1256 +450,1333 @@ section_ids:
   steps: Steps
 ---
 
-# Configure the external servers
+# Changing the administrative password
+
+Users that authenticate to the Configuration API or the admin console are stored in `cn=RootDNs,cn=config`. The `setup` tool automatically creates one administrative account when performing an installation. Accounts can be added or changed with the `dsconfig` tool.
 
 ## About this task
 
-Perform the following to configure an external server for each host in the deployment:
+Root users are governed by the Root Password Policy and by default, their passwords never expire. However, if a root user's password must be changed, use the `ldappasswordmodify` tool.
 
 ## Steps
 
-1. Configure a PingDirectory server as an external server, which will later be configured as a Sync Source. On PingDataSync, run the following `dsconfig` command:
+1. Open a text editor and create a text file containing the new password. In this example, name the file rootuser.txt.
 
    ```shell
-   $ bin/dsconfig create-external-server \
-     --server-name source-ds \
-     --type ping-identity-ds \
-     --set server-host-name:ds1.example.com \
-     --set server-port:636 \
-     --set "bind-dn:cn=Directory Manager" \
-     --set password:secret \
-     --set connection-security:ssl \
-     --set key-manager-provider:Null \
-     --set trust-manager-provider:JKS
+   $ echo password > rootuser.txt
    ```
 
-2. Configure the System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-   \<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-   \</div>)* server as an external server, which will later be configured as a Sync Destination. The `scim-service-url` property specifies the complete URL used to access the SCIM service provider. The user-name property specifies the account used to connect to the SCIM service provider. By default, the value is `cn=Sync User,cn=Root DNs,cn=config`. Some SCIM service providers might not have the username in distinguished name (DN) *(tooltip: \<div class="paragraph">
-   \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
-   \</div>)* format.
+2. Use `ldappasswordmodify` to change the root user's password.
 
    ```shell
-   $ bin/dsconfig create-external-server \
-     --server-name scim \
-     --type scim \
-     --set scim-service-url:https://scim2.example.com:8443 \
-     --set "user-name:cn=Sync User,cn=Root DNs,cn=config" \
-     --set password:secret \
-     --set connection-security:ssl \
-     --set hostname-verification-method:strict \
-     --set trust-manager-provider:JKS
+   $ bin/ldappasswordmodify --port 1389 --bindDN "cn=Directory Manager" \
+   --bindPassword secret --newPasswordFile rootuser.txt
+   ```
+
+3. Remove the text file.
+
+   ```shell
+   $ rm rootuser.txt
    ```
 
 ---
 
 ---
-title: Configure the Notification sync pipe
-description: The following procedure configures a one-way Sync Pipe with a PingDirectory server as the Sync Source and a generic sync destination. The procedure uses the create-sync-pipe-config tool in interactive command-line mode and highlights the differences for configuring a Sync Pipe in notification mode.
+title: Composed complex SCIM 2.0 attribute mappings
+description: Composed complex System for Cross-domain Identity Management (SCIM) 2.0 attribute mappings can be used to create a single-valued complex attribute in which the sub-attributes are created from other SCIM 2.0 attribute mappings.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_notif_sync_pipe
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_notif_sync_pipe.html
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_composed_complex_scim2_attr_map
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_composed_complex_scim2_attr_map.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
-page_aliases: ["pd_sync_consids_config_sync_classes.adoc", "pd_sync_create_the_sync_pipe.adoc", "pd_sync_config_sync_source_steps.adoc", "pd_sync_config_dest_endpoint_server.adoc"]
-section_ids:
-  considerations-for-configuring-sync-classes: Considerations for configuring sync classes
-  create-the-sync-pipe: Create the sync pipe
-  about-this-task: About this task
-  steps: Steps
-  configure-the-sync-source: Configure the sync source
-  steps-2: Steps
-  configure-the-destination-endpoint-server: Configure the destination endpoint server
-  steps-3: Steps
-  next-steps: Next steps
 ---
 
-# Configure the Notification sync pipe
+# Composed complex SCIM 2.0 attribute mappings
 
-The following procedure configures a one-way Sync Pipe with a PingDirectory server as the Sync Source and a generic sync destination. The procedure uses the `create-sync-pipe-config` tool in interactive command-line mode and highlights the differences for configuring a Sync Pipe in notification mode.
+Composed complex System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
+\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
+\</div>)* 2.0 attribute mappings can be used to create a single-valued complex attribute in which the sub-attributes are created from other SCIM 2.0 attribute mappings.
 
-## Considerations for configuring sync classes
+For example, the `name` complex attribute described in [RFC 7643 section 8.7.1](https://datatracker.ietf.org/doc/html/rfc7643#section-8.7.1) can have sub-attributes, such as `formatted`, `familyName`, and `givenName`, that might correspond to the `cn`, `sn`, and `givenName` Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
+\<p>An open, cross platform protocol used for interacting with directory services.\</p>
+\</div>)* attributes. If you had SCIM 2.0 attribute mappings defined for each of those attributes, then you could use a composed complex SCIM 2.0 attribute mapping that uses those mappings to construct an appropriate value for the name complex attribute.
 
-When configuring a Sync Class for a Sync Pipe in notification mode, consider the following:
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Because the order in which values are presented in multivalued LDAP attributes is not considered significant, you can only use composed complex SCIM 2.0 attribute mappings to generate single-valued complex attributes. If you need a multivalued complex attribute, use the JavaScript Object Notation (JSON) *(tooltip: \<div class="paragraph">&#xA;\<p>An open, lightweight data-interchange format that uses human-readable text to store and transmit data.\</p>&#xA;\</div>)*-formatted complex SCIM 2.0 attribute mapping type. |
 
-* Exclude any operational attributes from synchronizing to the destination so that its before and after values are not recorded in the change log. For example, the following attributes can be excluded: `creatorsName`, `createTimeStamp`, `ds-entry-unique-id`, `modifiersName`, and `modifyTimeStamp`. Filter the changes at the change log level instead of making the changes in the Sync Class to avoid extra configuration settings with the following:
+Additional configuration properties that are available for composed complex SCIM 2.0 attribute mappings include:
 
-  * Use the directory server's `changelog-exclude-attribute` property with `(+)` to exclude all operational attributes (`change-log-exclude-attribute:+`).
+* `sub-attribute-mapping`
 
-  * Configure a Sync Class that sets the `excluded-auto-mapped-source-attributes` property to each operational attribute to exclude from the synchronization process.
+  A reference to one or more attribute mappings for the sub-attributes to include in the complex attribute. This is required.
 
-  * Use the directory server's `changelog-exclude-attribute` property to specify each operational attribute to exclude in the synchronization process. Set the configuration using the `dsconfig` tool on the directory server Change Log Backend menu. For example, `setchangelog-exclude-attribute:modifiersName`.
+You can use the following example configuration change to create a composed complex SCIM 2.0 attribute mapping:
 
-* Use the `destination-create-only-attribute` advanced property on the Sync Class. This property sets the attributes to include on CREATE operations only.
+```
+dsconfig create-scim2-attribute-mapping \
+     --mapping-name "name Complex Attribute" \
+     --type composed-complex \
+     --set scim-attribute-name:name\
+     --set attribute-usage:fetch \
+     --set attribute-usage:create-during-realtime-sync \
+     --set attribute-usage:create-during-resync
+     --set attribute-usage:update-during-realtime-sync \
+     --set attribute-usage:update-during-resync \
+     --set "sub-attribute-mapping:Formatted Name" \
+     --set "sub-attribute-mapping:First Name" \
+     --set "sub-attribute-mapping:Last Name"
+```
 
-* Use the `replace-all-attr-values` advanced property on the Sync Class. This property specifies whether to use the ADD and DELETE modification types (reversible), or the REPLACE modification type (non-reversible) for modifications to destination entries. If set to `true`, REPLACE is used.
+---
 
-* If targeting specific attributes that require higher performance throughput, consider implementing change log indexing. See [Synchronize through PingDirectoryProxy servers](pd_sync_thru_pdproxy_server.html) for more information.
+---
+title: Conditions that trigger immediate failover
+description: Immediate failover occurs when PingDataSync receives one of the following error codes from an external server:
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_conditions_trigger_immed_failover
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_conditions_trigger_immed_failover.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
 
-## Create the sync pipe
+# Conditions that trigger immediate failover
+
+Immediate failover occurs when PingDataSync receives one of the following error codes from an external server:
+
+* BUSY (51)
+
+* UNAVAILABLE (52)
+
+* SERVER CONNECTION CLOSED (81)
+
+* CONNECT ERROR (91)
+
+If PingDataSync attempts a write operation to a target server that returns one of these error codes, PingDataSync will automatically fail over to the server instance with the next-highest priority in the target topology, issue an alert, and then reissue the retry attempt. If the operation is unsuccessful for any reason, the server logs an error.
+
+---
+
+---
+title: Configuration checklist
+description: Before any deployment, determine the configuration parameters necessary for the synchronization topology.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_checklist
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_checklist.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+section_ids:
+  external-servers: External servers
+  sync-pipes: Sync Pipes
+  sync-classes: Sync Classes
+---
+
+# Configuration checklist
+
+Before any deployment, determine the configuration parameters necessary for the synchronization topology.
+
+For a better configuration experience, gather the following information before you start your configuration.
+
+## External servers
+
+|   |                                                                                                                                                         |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | As a best practice, external server definitions should not point at load balancers. Instead, direct connections should be made to the required systems. |
+
+* External server type
+
+  Determine the type of external servers included in the synchronization topology. Supported servers include:
+
+  * PingDirectory server
+
+  * PingDirectoryProxy server
+
+  * Sun Directory Server Enterprise Edition
+
+  * Sun Directory Server
+
+  * Oracle Unified Directory
+
+  * OpenDJ
+
+  * Microsoft Active Directory (AD) *(tooltip: \<div class="paragraph">
+    \<p>A directory service for Windows domain networks, included in most Windows Server operation systems.\</p>
+    \</div>)*
+
+  * Generic LDAP directories
+
+* LDAP connection settings
+
+  Determine the following for each external server instance included in the synchronization topology:
+
+  * Host
+
+  * Port
+
+  * Bind distinguished name (DN)
+
+  * Bind password
+
+* Security and authentication settings
+
+  Determine the following:
+
+  * The secure connection types for each external server, such as SSL or StartTLS
+
+  * The authentication methods for external servers, such as simple authentication or external SASL mechanisms
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you are synchronizing encoded passwords or clear-text passwords in particular, the connection should be secure. To synchronize to or from a Microsoft AD system, establish an SSL or StartTLS connection to PingDataSync. You should also enable password encryption for synchronization from AD or when synchronizing clear-text passwords. For more information, see [Configuring password encryption](pd_sync_config_password_encryption.html). |
+
+## Sync Pipes
+
+A `Sync Pipe` defines a single synchronization path between the source and destination targets. One `Sync Pipe` is needed for each point-to-point synchronization path defined for a topology.
+
+* `Sync Source`
+
+  Determine which external server is the `Sync Source` for the synchronization topology. You can define a prioritized list of external servers for failover purposes.
+
+* `Sync Destination`
+
+  Determine which external server is the `Sync Destination` for the synchronization topology. You can define a prioritized list of external servers for failover purposes.
+
+## Sync Classes
+
+A `Sync Class` defines how attributes and DNs are mapped and how source and destination entries are correlated. For each `Sync Pipe` defined, define one or more `Sync Classes` with the following information:
+
+* Evaluation order
+
+  If you are defining more than one `Sync Class`, the evaluation order of each `Sync Class` must be determined with the `evaluation-order-index` property. If there is an overlap between criteria used to identify a `Sync Class`, the `Sync Class` with the most specific criteria is used first.
+
+* Base DNs
+
+  Determine which base DNs contain entries needed in the `Sync Class`.
+
+* Include filters
+
+  Determine the filters to be used to search for entries in the `Sync Source`.
+
+* Synchronized entry operations
+
+  Determine which operations to synchronize:
+
+  * `create`
+
+  * `modify`
+
+  * `delete`
+
+* DNs
+
+  Determine the differences between the DNs from the `Sync Source` topology to the `Sync Destination` topology. For example, if there are structural differences in each directory information tree (DIT).
+
+* Destination correlation attributes
+
+  Determine the correlation attributes used to associate a source entry to a destination entry during synchronization. During the configuration setup, one or more comma-separated lists of destination correlation attributes are defined and used to search for corresponding source entries. PingDataSync maps all attributes in a detected change from source to destination attributes using the attribute maps defined in the `Sync Class`.
+
+The correlation attributes are flexible enough that several destination searches with different combinations of attributes can be performed until an entry matches. For LDAP server endpoints, use the DN to correlate entries.
+
+For example, to correlate entries in LDAP deployments, specify the attribute lists `dn,uid`, `uid,employeeNumber` and `cn,employeeNumber`. PingDataSync searches for a corresponding entry that has the same `dn` and `uid` values. If the search fails, it then searches for `uid` and `employeeNumber`. If that search fails, it searches for `cn` and `employeeNumber`. If none of these searches are successful, the synchronization change is aborted and a message is logged.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To prevent incorrect matches, the most restrictive attribute lists (those that will never match the wrong entry) should be first in the list, followed by less restrictive attribute lists, which are used when the earlier lists fail. For LDAP-to-LDAP deployments, use the DN with a combination of other unique identifiers in the entry to guarantee correlation. For non-LDAP deployments, determine the attributes that can be synchronized across the network. |
+
+* Attributes
+
+  Determine the differences between the attributes from the `Sync Source` to the `Sync Destination`.
+
+| Attribute consideration                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Attribute mappings                     | Determine how attributes are mapped from the `Sync Source` to the `Sync Destination`.For example, if they're mapped directly, mapped based on attribute values, or mapped based on attributes that store DN values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Automatically mapped source attributes | Determine if there are attributes that can be automatically synchronized with the same name at the `Sync Source` to `Sync Destination`.For example, if you can set direct mappings for `cn`, `uid`, `telephoneNumber`, or for all attributes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Non-auto mapped source attributes      | Determine if there are attributes that shouldn't be automatically mapped.For example, the `Sync Source` might have an attribute, `employee`, while the `Sync Destination` has a corresponding attribute, `employeeNumber`. If an attribute isn't automatically mapped, you must provide a map to synchronize it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Conditional value mapping              | Determine if some mappings should only be applied some of the time as a function of the source attributes.&#xA;&#xA;You can use conditional value mappings with the conditional-value-pattern property, which conditionalizes the attribute mapping based on the subtype of the entry, or on the value of the attribute.For example, this might apply if the `adminName` attribute on the destination should be a copy of the `name` attribute on the source, but only if the `isAdmin` attribute on the source is set to `true`. Conditional mappings are multivalued. Each value is evaluated until one is matched (the condition is `true`). If none of the conditional mappings are matched, the ordinary mappings is used. If there isn't an ordinary mapping, the attribute is not created on the destination. |
+
+---
+
+---
+title: Configuration components
+description: PingDataSync supports the following configuration parameters that determine how synchronization takes place between directories or databases:
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_components
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_components.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Configuration components
+
+PingDataSync supports the following configuration parameters that determine how synchronization takes place between directories or databases:
+
+* Sync pipe
+
+  Defines a single synchronization path between the source and destination topologies. Every Sync Pipe has one or more Sync Classes that control how and what is synchronized. Multiple Sync Pipes can run in a single server instance.
+
+* Sync source
+
+  Defines the directory topology that is the source of the data to be synchronized. A Sync Source can reference one or more supported external servers.
+
+* Sync destination
+
+  Defines the topology of directory servers where changes detected at the Sync Source are applied. A Sync Destination can reference one or more external servers.
+
+* External server
+
+  Defines a single server in a topology of identical, replicated servers to be synchronized. A single external server configuration object can be referenced by multiple Sync Sources and Sync Destinations
+
+* Sync class
+
+  Defines the operation types and attributes that are synchronized, how attributes and DNs are mapped, and how source and destination entries are correlated. A source entry is in one Sync Class and is determined by a base DN and LDAP filters. A Sync Class can reference zero or more Attribute Maps and DN Maps, respectively. Within a Sync Pipe, a Sync Class is defined for each type of entry that needs to be treated differently, such as entries that define attribute mappings, or entries that should not be synchronized at all. A Sync Pipe must have at least one Sync Class but can refer to multiple Sync Class objects.
+
+* DN map
+
+  Defines mappings for use when destination DNs differ from source DNs. These mappings allow the use of wild cards for DN transformations. A single wild card ("\*") matches a single RDN component and can be used any number of times. The double wild card ("\*\*") matches zero or more RDN components and can be used only once. The wild card values can be used in the `to-dn-pattern` attribute using `{1}` and their original index position in the pattern, or `{attr}` to match an attribute value. For example:
+
+  ```
+  **,dc=myexample,dc=com->{1},o=example
+  ```
+
+  Regular expressions and attributes from the user entry can also be used. For example, the following mapping constructs a value for the `uid` attribute, which is the RDN, out of the initials (first letter of `givenname` and `sn`) and the employee ID (`eid` attribute).
+
+  ```
+  uid={givenname:/^(.)(.*)/$1/s}{sn:/^(.)(.*)/$1/s}{eid},{2},o=example
+  ```
+
+  The following figure illustrates how a nested DIT can be mapped to a flattened structure.
+
+  A diagram illustrating the mapping of a nested DIT to a flattened structure.
+
+* Attribute map and attribute mappings
+
+  Defines a mapping for use when destination attributes differ from source attributes. A Sync Class can reference multiple attribute maps. Multiple Sync Classes can share the same attribute map. There are three types of attribute mappings:
+
+  * Direct mapping: Attributes are directly mapped to another attribute: For example:
+
+    ```
+    employeenumber->employeeid
+    ```
+
+  * Constructed mapping: Destination attribute values are derived from source attribute values and static text. For example:
+
+    ```json
+    {givenname}.{sn}@example.com->mail
+    ```
+
+  * DN mapping: Attributes are mapped for DN attributes. The same DN mappings that map entry DNs can be referenced. For example:
+
+    ```
+    uid=jdoe,ou=People,dc=example,dc=com.
+    ```
+
+  * Reference attribute mapping: Allows you to synchronize attributes that reference other entries.
+
+    1. The source attribute references another entry on the source.
+
+    2. The source reference entry gets correlated to a reference entry on the destination.
+
+    3. The final attribute value on the destination gets constructed using data from that referenced destination entry.
+
+    You configure key-value properties to build these correlations and extract the necessary data from the relevant entries. Learn more in [About attribute mappings](pd_sync_about_attr_mapping.html).
+
+    |   |                                                                                                                                                                                             |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | This feature is provided as a **Preview**, which means that it isn't supported and should not be used in production environments. Learn more in [Feature statuses](../feature_status.html). |
+
+---
+
+---
+title: Configuration properties that control failover behavior
+description: There are four important advanced properties to fine tune the failover mechanism:
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_props_ctrl_failover_behavior
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_props_ctrl_failover_behavior.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Configuration properties that control failover behavior
+
+There are four important advanced properties to fine tune the failover mechanism:
+
+* `max-operation-attempts` (Sync Pipe)
+
+* `response-timeout` (source and destination endpoints)
+
+* `max-failover-error-code-frequency` (source and destination endpoints)
+
+* `max-backtrack-replication-latency` (source endpoints only)
+
+These properties apply to the following LDAP error codes:
+
+**LDAP Error Codes**
+
+| Error Code                                   | Description                                                                                                            |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| ADMIN\_LIMIT\_EXCEEDED(11)                   | Indicates that processing on the requested operation could not continue, because an administrative limit was exceeded. |
+| ALIAS\_DEREFERENCING\_PROBLEM(36)            | Indicates that a problem was encountered while attempting to dereference an alias for a search operation.              |
+| CANCELED(118)                                | Indicates that a cancel request was successful, or that the specified operation was canceled.                          |
+| CLIENT\_SIDE\_LOCAL\_ERROR(82)               | Indicates that a local (client-side) error occurred.                                                                   |
+| CLIENT\_SIDE\_ENCODING\_ERROR(83)            | Indicates that an error occurred while encoding a request.                                                             |
+| CLIENT\_SIDE\_DECODING\_ERROR(84)            | Indicates that an error occurred while decoding a request.                                                             |
+| CLIENT\_SIDE\_TIMEOUT(85)                    | Indicates that a client-side timeout occurred.                                                                         |
+| CLIENT\_SIDE\_USER\_CANCELLED(88)            | Indicates that a user canceled a client-side operation.                                                                |
+| CLIENT\_SIDE\_NO\_MEMORY(90)                 | Indicates that the client could not obtain enough memory to perform the requested operation.                           |
+| CLIENT\_SIDE\_CLIENT\_LOOP(96)               | Indicates that a referral loop was detected.                                                                           |
+| CLIENT\_SIDE\_REFERRAL\_LIMIT\_EXCEEDED(97)  | Indicates that the referral hop limit was exceeded.                                                                    |
+| DECODING\_ERROR(84)                          | Indicates that an error occurred while decoding a response.                                                            |
+| ENCODING\_ERROR(83)                          | Indicates that an error occurred while encoding a response.                                                            |
+| INTERACTIVE\_TRANSACTION\_ ABORTED(30221001) | Indicates that an interactive transaction was aborted.                                                                 |
+| LOCAL\_ERROR(82)                             | Indicates that a local error occurred.                                                                                 |
+| LOOP\_DETECT(54)                             | Indicates that a referral or chaining loop was detected while processing a request.                                    |
+| NO\_MEMORY(90)                               | Indicates that not enough memory could be obtained to perform the requested operation.                                 |
+| OPERATIONS\_ERROR(1)                         | Indicates that an internal error prevented the operation from being processed properly.                                |
+| OTHER(80)                                    | Indicates that an error occurred that does not fall into any of the other categories.                                  |
+| PROTOCOL\_ERROR(2)                           | Indicates that the client sent a malformed or illegal request to the server.                                           |
+| TIME\_LIMIT\_EXCEEDED(3)                     | Indicates that a time limit was exceeded while attempting to process the request.                                      |
+| TIMEOUT(85)                                  | Indicates that a timeout occurred.                                                                                     |
+| UNWILLING\_TO\_PERFORM(53)                   | Indicates that the server is unwilling to perform the requested operation.                                             |
+
+---
+
+---
+title: "Configuration with the <code class=\"cmdname\"><strong>dsconfig</strong></code> tool"
+description: The Ping Identity servers provide several command-line tools for management and administration. The command-line tools are available in the bin directory for UNIX or Linux systems and in the bat directory for Microsoft Windows systems.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_with_dsconfig_tool
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_with_dsconfig_tool.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Configuration with the `dsconfig` tool
+
+The Ping Identity servers provide several command-line tools for management and administration. The command-line tools are available in the `bin` directory for UNIX or Linux systems and in the `bat` directory for Microsoft Windows systems.
+
+The `dsconfig` tool is the text-based management tool used to configure the underlying server configuration. The tool has three operational modes:
+
+* Interactive mode
+
+* Non-interactive mode
+
+* Batch mode
+
+The `dsconfig` tool also offers an offline mode using the `--offline` option, in which the server does not have to be running to interact with the configuration. In most cases, the configuration should be accessed with the server running in order for the server to give the user feedback about the validity of the configuration.
+
+Each command-line utility provides a description of the subcommands, arguments, and usage examples needed to run the tool. View detailed argument options and examples by typing `-- help` with the command.
+
+```shell
+$ bin/dsconfig --help
+```
+
+To list the subcommands for each command:
+
+```shell
+$ bin/dsconfig --help-subcommands
+```
+
+To list more detailed subcommand information:
+
+```shell
+$ bin/dsconfig list-log-publishers --help
+```
+
+---
+
+---
+title: Configure a directory-to-database sync pipe
+description: The following topics contain procedures that let you configure a one-way Sync Pipe with a PingDirectory Server as the Sync Source and an RDBMS (Oracle) system as the Sync Destination with the create-sync-pipe-config tool. You can configure Sync Pipes later using the dsconfig command.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_dir_database_sync_pipe
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_dir_database_sync_pipe.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+page_aliases: ["pd_sync_create_sync_pipe.adoc", "pd_sync_configure_sync_pipe_classes.adoc"]
+section_ids:
+  creating-the-sync-pipe: Creating the sync pipe
+  configure-the-sync-source: Configure the sync source
+  configure-the-destination-endpoint-server: Configure the destination endpoint server
+  configuring-the-sync-pipe-and-sync-classes: Configuring the sync pipe and sync classes
+  configure-the-accounts-sync-class: Configure the accounts Sync Class
+  configure-the-groups-sync-class: Configure the groups Sync Class
+---
+
+# Configure a directory-to-database sync pipe
+
+The following topics contain procedures that let you configure a one-way Sync Pipe with a PingDirectory Server as the Sync Source and an RDBMS (Oracle) system as the Sync Destination with the `create-sync-pipe-config` tool. You can configure Sync Pipes later using the `dsconfig` command.
+
+## Creating the sync pipe
+
+The following procedures configure the Sync Pipe, external servers, and Sync Classes. The examples are based on the Complex JDBC sample in the `config/jdbc/samples/oracle-db` directory. The `create-sync-pipe-config` tool can be run with the server offline and the configuration can later be imported.
+
+1. Run the `create-sync-pipe-config` tool.
+
+   `$ bin/create-sync-pipe-config`
+
+2. At the `Initial Synchronization Configuration Tool` prompt, press Enter to continue.
+
+3. On the **Synchronization Mode** menu, select **Standard Mode** or **Notification Mode**.
+
+4. On the **Synchronization Directory** menu, choose one-way or bidirectional synchronization.
+
+### Configure the sync source
+
+1. On the **Source Endpoint Type** menu, enter the number for the sync source corresponding to the type of source external server.
+
+2. Enter a name for the **Source Endpoint**.
+
+3. Enter the base distinguished name (DN) *(tooltip: \<div class="paragraph">
+   \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
+   \</div>)* for the directory server, which is used as the base for Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
+   \<p>An open, cross platform protocol used for interacting with directory services.\</p>
+   \</div>)* searches. For example, enter `dc=example,dc=com`, and then press Enter again to return to the menu. If entering more than one base DN, make sure the DNs do not overlap.
+
+4. On the **Server Security** menu, select the type of communication that PingDataSync will use with the endpoint servers.
+
+5. Enter the host and port of the source endpoint server. The Sync Source can specify a single server or multiple servers in a replicated topology. The server tests that a connection can be established.
+
+6. Enter the DN of the Sync User account and create a password for this account. The Sync User account enables PingDataSync to access the source endpoint server. By default, the Sync User account is stored as `cn=SyncUser,cn=RootDNs,cn=config`.
+
+### Configure the destination endpoint server
+
+1. On the **Destination Endpoint Type** menu, select the type of datastore on the endpoint server. This example is configuring an Oracle Database.
+
+2. Enter a name for the **Destination Endpoint**.
+
+3. On the **JDBC Endpoint Connection Parameters** menu, enter the fully-qualified host name or IP address for the Oracle database server.
+
+4. Enter the listener port for the database server, or press Enter to accept the default (1521).
+
+5. Enter a database name such as `dbsync-test`.
+
+6. The server attempts to locate the JDBC driver in the `lib` directory. If the file is found, a success message is shown.
+
+   ```
+   Successfully found and loaded JDBC driver for:
+   jdbc:oracle:thin:@//dbsync-w2k8-vm-2:1521/dbsync-test
+   ```
+
+   If the server cannot find the JDBC driver, add it later, or quit the `create-sync-pipe-config` tool and add the file to the `lib` directory.
+
+7. Add any additional Java database connectivity (JDBC) *(tooltip: \<div class="paragraph">
+   \<p>A Java API that allows Java programs to interact with databases.\</p>
+   \</div>)* connection properties for the database server, or press Enter to accept the default (no). Consult the JDBC driver's vendor documentation for supported properties.
+
+8. Enter a name for the database user account with which PingDataSync will communicate, or press Enter to accept the default (SyncUser). Enter the password for the account.
+
+9. On the Standard Setup menu, enter the number for the language (Java or Groovy) that was used to write the server extension.
+
+10. Enter the fully qualified name of the Server SDK extension class that implements the `JDBCSyncDestination` API.
+
+    ```
+    Enter the fully qualified name of the Java class that will implement
+    com.unboundid.directory.sdk.sync.api.JDBCSyncDestination:
+    com.unboundid.examples.oracle.ComplexJDBCSyncDestination
+    ```
+
+11. Configure any user-defined arguments needed by the server extension. These are defined in the extension itself and the values are specified in the server configuration. If there are user-defined arguments, enter `yes`.
+
+12. To prepare the Source Endpoint server, which tests the connection to the server with the Sync User account, press Enter to accept the default (yes). For the Sync User account, it will return "Denied" as the account has not been written yet to the PingDirectory server at this time.
+
+    ```
+    Testing connection to server1.example.com:1389	Done
+    Testing 'cn=Sync User,cn=Root DNs,cn=config' access	Denied
+    ```
+
+13. To configure the Sync User account on the directory server, press Enter to accept the default (yes). Enter the bind DN (`cn=DirectoryManager`) and the bind DN password of the directory server so that you can configure the `cn=Sync User` account. PingDataSync creates the Sync User account, tests the base DN, and enables the change log.
+
+    ```
+    Created 'cn=Sync User,cn=Root DNs,cn=config'
+    Verifying base DN 'dc=example,dc=com'	Done
+    Enabling cn=changelog .....
+    ```
+
+14. Enter the maximum age of the change log entries, or press Enter to accept the default.
+
+## Configuring the sync pipe and sync classes
+
+The following procedures define a Sync Pipe and two Sync Classes. The first Sync Class is used to match the `accounts` objects. The second Sync Class matches the `group` objects.
+
+1. Continuing from the previous session, enter a name for the Sync Pipe.
+
+2. When prompted to define one or more Sync Classes, enter `yes`.
+
+### Configure the accounts Sync Class
+
+1. Enter a name for the Sync Class. For example, type `accounts_sync_class`.
+
+2. If restricting entries to specific subtrees, enter one or more base DN *(tooltip: \<div class="paragraph">
+   \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
+   \</div>)*s. If not, press Enter to accept the default (no).
+
+3. To set an LDAP *(tooltip: \<div class="paragraph">
+   \<p>An open, cross platform protocol used for interacting with directory services.\</p>
+   \</div>)* search filter, type `yes` and enter the filter `"(accountid=*)"`. Press Enter again to continue. This property sets the LDAP filters and returns all entries that match the search criteria to be included in the Sync Class. In this example, specify that any entry with an `accountID` attribute be included in the Sync Class. If the entry does not contain any of these values, it will not be synchronized to the target server.
+
+4. Choose to synchronize all attributes, specific attributes, or exclude specific attributes from synchronization, or press Enter to accept the default (all).
+
+5. Specify the operations that will be synchronized for the Sync Class, or press Enter to accept the default.
+
+### Configure the groups Sync Class
+
+For this example, configure another Sync Class to handle the `groups` object class. The procedures are similar to that of the configuration steps for the `account_sync_class` Sync Class.
+
+1. On the **Sync Class** menu, enter a name for a new sync class, such as `groups_sync_class`.
+
+2. To restrict entries to specific subtrees, enter one or more base DNs.
+
+3. Set an LDAP search filter. Type `yes` to set up a filter and enter the filter `"(objectClass=groupOfUniqueNames)"`. This property sets the LDAP filters and returns all entries that match the `groupOfUniqueNames` attribute to be included in the Sync Class. If the entry does not contain any of these values, it will not be synchronized to the target server.
+
+4. Choose to synchronize all attributes, specific attributes, or exclude specific attributes from synchronization, or press Enter to accept the default (all).
+
+5. Specify the operations that will be synchronized for the Sync Class, or press Enter to accept the default.
+
+6. At the prompt to enter the name of another Sync Class, press Enter to continue.
+
+7. On the **Default Sync Class Operations** menu, press Enter to accept the default. The Default Sync Class determines how all entries that do not match any other Sync Class are handled.
+
+8. Review the configuration, and press Enter to write the configuration to the server.
+
+Use the `dsconfig` command to make changes to this configuration. Refer to [Configuring PingDataSync](pd_sync_config_pds.html) for configuration options and details.
+
+---
+
+---
+title: Configure a Kafka sync destination
+description: Use the dsconfig command or the admin console to configure PingDataSync to synchronize changes to an Apache Kafka environment.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_kafka_sync_dest
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_kafka_sync_dest.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 11, 2024
+page_aliases: ["pd_sync_kafka_obscure_sensitive_values.adoc", "pd_sync_ssl_config.adoc"]
+section_ids:
+  obscure_sensitive_producer_values: Obscuring sensitive producer property values
+  about-this-task: About this task
+  steps: Steps
+  example: Example:
+  result: Result:
+  example-2: Example:
+  ssl_configuration: SSL configuration
+---
+
+# Configure a Kafka sync destination
+
+Use the `dsconfig` command or the admin console to configure PingDataSync to synchronize changes to an Apache Kafka environment.
+
+PingDataSync supports synchronization of single and multivalued attributes to Kafka. You can reuse existing PingDirectory sync sources that were created for other sync pipes.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To review an example configuration, refer to the file located at `<server-root>/config/sample-dsconfig-batch-files/reference-sync-pingdirectory-to-kafka.dsconfig`.To configure Kerberos authentication for a Kafka sync destination, supply the `producer-property` attribute with the appropriate values according to the [Apache Kafka documentation](https://kafkaide.com/learn/connect-to-kafka-using-kerberos-auth/). |
+
+The following objects are required to configure a Kafka sync destination:
+
+* **Kafka cluster external server**: Defines the procedure for connecting to a Kafka cluster. The Kafka cluster external server can be referenced from multiple Kafka sync destination and sync source configuration objects. The only required property is `bootstrap-server`, which identifies some of the Kafka brokers in the environment.
+
+  When `use-ssl` is set to `true`, the following configuration changes are made:
+
+  * A `trust-manager-provider` is configured to validate the Kafka broker's SSL certificate.
+
+  * A `key-manager-provider` is configured to let the Kafka broker authenticate the PingDataSync Kafka producer.
+
+* **Kafka sync destination**: References the Kafka cluster external server. The Kafka sync destination must specify the name of the topic to use for publishing messages.
+
+  To adjust Kafka messages beyond the mapping, attribute filtering, and other configuration changes that PingDataSync makes, reference one or more of the `KafkaSyncDestinationPlugin` extension points that are implemented by using the Server SDK.
+
+Run the `prepare-endpoint-server` command for the PingDirectory sync source.
+
+## Obscuring sensitive producer property values
 
 ### About this task
 
-The initial configuration steps show how to set up a single Sync Pipe from a directory server instance to a generic Sync Destination.
+When configuring a PingDataSync Kafka producer, you might add producer properties that contain sensitive values such as keys or passwords. To prevent storing these sensitive values in plain text, you can use the `sensitive-kafka-producer-property` configuration property.
 
-Before starting:
+You create a `sensitive-kafka-producer-property` using the following required arguments:
 
-* Place any third-party libraries in the `<server-root>/lib/extensions` folder.
+* `--property-name`
 
-* Implement a server extension for any custom endpoints and place it in the appropriate directory.
+  Specifies the name of the sensitive Kafka producer property.
 
-### Steps
+* `--set sensitive-producer-key:<key>`
 
-1. If necessary, start PingDataSync:
+  Specifies the name of the valid property key that contains a sensitive value.
 
-   ```shell
-   $ bin/start-server
-   ```
+* `--set sensitive-producer-value:<value>`
 
-2. Run the `create-sync-pipe-config` tool.
-
-   ```shell
-   $ bin/create-sync-pipe-config
-   ```
-
-3. At the Initial Synchronization Configuration Tool prompt, press Enter to continue.
-
-4. On the Synchronization Mode menu, select the option for notification mode.
-
-5. On the Synchronization Directory menu, enter the option to create a one-way Sync Pipe in notification mode from the directory to a generic client application.
-
-## Configure the sync source
+  Specifies the sensitive value associated with the producer key.
 
 ### Steps
 
-1. On the Source Endpoint Type menu, enter the option for the Sync Source type.
+* Create one or more sensitive Kafka producer properties using `dsconfig create-sensitive-kafka-producer-property`.
 
-2. Choose a pre-existing Sync Source, or create a new sync source.
+  #### Example:
 
-3. Enter a name for the Source Endpoint and a name for the Sync Source.
+  ```shell
+  $ bin/dsconfig create-sensitive-kafka-producer-property \
+    --property-name saslConfig \
+    --set "sensitive-producer-key:sasl.jaas.config" \
+    --set "sensitive-producer-value:org.apache.kafka.common.security.scram.ScramLoginModule" \
+      required username="username" password="password";
+  ```
 
-4. Enter the base distinguished name (DN) *(tooltip: \<div class="paragraph">
-   \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
-   \</div>)* for the directory server used for Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
-   \<p>An open, cross platform protocol used for interacting with directory services.\</p>
-   \</div>)* searches, such as `dc=example,dc=com`, and press Enter to return to the menu. If entering more than one base DN, make sure they do not overlap.
+  #### Result:
 
-5. On the Server Security menu, select the type of communication that PingDataSync will use with endpoint servers.
+  Perform an `ldapsearch` for the sensitive property:
 
-6. Enter the host and port of the first Source Endpoint server. The Sync Source can specify a single server or multiple servers in a replicated topology. PingDataSync contacts this first server if it is available, then contacts the next highest priority server if the first server is unavailable. The server tests the connection.
+  ```
+  ldapsearch --baseDN "cn=saslConfig,cn=Sensitive Kafka Producer Property,cn=config" "(objectclass=*)"
+  ```
 
-7. On the Sync User Account menu, enter the DN of the sync user account and password, or press Enter to accept the default, `cn=Sync User,cn=Root DNs,cn=config`. This account allows PingDataSync to access the source endpoint server.
+  The sensitive value is now obscured.
 
-## Configure the destination endpoint server
+  ```
+  dn: cn=saslConfig,cn=Sensitive Kafka Producer Property,cn=config
+  objectClass: top
+  objectClass: ds-cfg-sensitive-kafka-producer-property
+  cn: saslConfig
+  ds-cfg-sensitive-producer-key: sasl.jaas.config
+  ds-cfg-sensitive-producer-value: AADu9yRP8DyrLndvqqDzeQEK9aqqLvDBZZhgHAZbh++KgovN+kUthhyn9+1o9+AqExDmigO14YQnwakqOpTAB4LnbsvwBJos6PZzYlWMNjFNXsDtOUeBsFhVi/nErPJT+cmQijC5P1EUsKWPvjDVauBe
+  ```
+
+  |   |                                                                                                                                    |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The `config-audit.log` file that contains the `dsconfig` change you made to create the sensitive property also obscures the value. |
+
+* (Optional) Delete one or more sensitive Kafka producer properties using `dsconfig delete-sensitive-kafka-producer-property`.
+
+  #### Example:
+
+  ```shell
+  $ bin/dsconfig delete-sensitive-kafka-producer-property \
+  --property-name saslConfig
+  ```
+
+## SSL configuration
+
+The following table identifies the `trust-manager-provider` and `key-manager-provider` properties of the Kafka cluster external server configuration object, as well as the Kafka configuration properties to which they map.
+
+| Configuration object type         | Configuration property                                                                                           | Kafka configuration property |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| File-based trust manager provider | `trust-store-file`                                                                                               | `ssl.truststore.location`    |
+| File-based trust manager provider | `trust-store-pin`, `trust-store-pin-property`, `trust-store-pin-environment-variable`, or `trust-store-pin-file` | `ssl.truststore.password`    |
+| File-based key manager provider   | `key-store-file`                                                                                                 | `ssl.keystore.location`      |
+| File-based key manager provider   | `key-store-pin`, `key-store-pin-property`, `key-store-pin-environment-variable`, or `key-store-pin-file`         | `ssl.keystore.password`      |
+| File-based key manager provider   | `private-key-pin`, `private-key-pin-property`, `private-key-pin-environment-variable`, or `private-key-pin-file` | `ssl.key.password`           |
+
+---
+
+---
+title: Configure a Kafka sync source
+description: Configure a Kafka sync source to consume change events from a Kafka topic and apply them to a sync destination.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_kafka_sync_source
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_kafka_sync_source.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 22, 2026
+section_ids:
+  kafka-cluster-external-server: Kafka cluster external server
+  steps: Steps
+  example: Example:
+  passing-consumer-properties: Passing consumer properties
+  steps-2: Steps
+  example-2: Example:
+  example-3: Example:
+  kafka-sync-source-properties: Kafka sync source properties
+  message-format-semantics-for-sync-sources: Message format semantics for sync sources
+  json-sync-operation-mapping: JSON sync operation mapping
+  dead-letter-queue: Dead letter queue
+  configuring-a-kafka-sync-source: Configuring a Kafka sync source
+  steps-3: Steps
+  example-4: Example:
+  example-5: Example:
+  example-6: Example:
+  example-7: Example:
+  example-8: Example:
+---
+
+# Configure a Kafka sync source
+
+|   |                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This feature is provided as a **Preview**, which means that it isn't supported and should not be used in production environments. Learn more in [Feature statuses](../feature_status.html). |
+
+A Kafka sync source reads change events from a Kafka topic and applies them to a sync destination. This lets you use Kafka as a change feed for propagating updates from an upstream system into PingDataSync. For example, an upstream application can publish change events to a Kafka topic, and PingDataSync can consume those events and apply the changes to a PingDirectory server or another sync destination.
+
+The following objects are required to configure a Kafka sync source:
+
+* **Kafka cluster external server**: Defines the connection parameters for the Kafka cluster. This is the same configuration object used by the Kafka sync destination, and can be shared between both.
+
+* **Kafka sync source**: References the Kafka cluster external server and defines how PingDataSync consumes messages from the topic.
+
+## Kafka cluster external server
+
+The only required property is `bootstrap-server`, which identifies one or more Kafka brokers in the cluster.
+
+When `use-ssl` is set to `true`, you must also configure a `trust-manager-provider` and a `key-manager-provider`. Learn more in [SSL configuration](pd_sync_config_kafka_sync_dest.html#ssl_configuration).
 
 ### Steps
 
-1. On the Destination Endpoint Type menu, select the type of datastore on the endpoint server. In this example, select the option for Custom.
+* Create the Kafka cluster external server.
 
-2. Enter a name for the Destination Endpoint and a name for the Sync Destination.
+  #### Example:
 
-3. On the Notifications Setup menu, select the language (Java or Groovy) used to write the server extension.
+  ```shell
+  $ bin/dsconfig create-external-server \
+    --server-name kafkaServerName \
+    --type kafka-cluster \
+    --set bootstrap-server:kafkaHost:9092 \
+    --set use-ssl:true \
+    --set trust-manager-provider:Kafka \
+    --set key-manager-provider:Kafka \
+    --applyChangeTo server-group
+  ```
 
-4. Enter the fully qualified name of the Server SDK extension that implements the abstract class. A Java, extension should reside in the `/lib/extensions` directory. A Groovy script should reside in the `/lib/groovy-scripted-extensions` directory.
+  |   |                                                                                                                                                     |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | If you already created a Kafka cluster external server for a Kafka sync destination, you can reference the same object from your Kafka sync source. |
 
-5. Configure any user-defined arguments needed by the server extension. Typically, these are connection arguments, which are defined by the extension itself. The values are then entered here and stored in the server configuration.
+### Passing consumer properties
 
-6. Configure the maximum number of before and after values for all changed attributes. Notification mode requires this. Set the cap to something well above the maximum number of values that any synchronized attribute will have. If this cap is exceeded, PingDataSync issues an alert. For this example, we accept the default value of 200.
+Use the `consumer-property` configuration parameter to pass standard Kafka consumer configuration properties to PingDataSync. For sensitive values such as passwords or keys, use `sensitive-consumer-property` instead to prevent storing those values in plain text.
 
-   ```
-   Enter a value for the max changelog before/after values,
-   or -1 for no limit [200]:
-   ```
+Create a `sensitive-consumer-property` using the following required arguments:
 
-7. Configure any key attributes in the change log that must be included in every notification. These attributes can be used to find the destination entry corresponding to the source entry, and are present regardless of whether the attributes changed. Later, any attributes used in a Sync Class include-filter must also be configured as key attributes in the Sync Class.
+* `--property-name`
 
-8. In both standard and notification modes, the Sync Pipe processes the changes concurrently with multiple threads. If changes must be applied strictly in order, the number of Sync Pipe worker threads will be reduced to 1. This will limit the maximum throughput of the Sync Pipe.
+  Specifies the name of the sensitive Kafka consumer property.
 
-### Next steps
+* `--set sensitive-consumer-key:<key>`
 
-The rest of the configuration steps follow the same process as a standard synchronization mode Sync Pipe. For more information see [Sync user account](pd_sync_user_account.html).
+  Specifies the name of the valid property key that contains a sensitive value.
 
----
+* `--set sensitive-consumer-value:<value>`
 
----
-title: Configure the PingDirectory server backend for synchronizing deletes
-description: "The PingDirectory server's change log backend's changelog-deleted-entry-include-attribute property specifies which attributes should be recorded in the change log entry during a DELETE operation. Normally, PingDataSync cannot correlate a deleted entry to the entry on the destination. If a Sync Class is configured with a filter, such as \"include-filter: objectClass=person,\" the objectClass attribute must be recorded in the change log entry. Special correlation attributes (other than DN), will also need to be recorded on the change log entry to be properly synchronized at the endpoint server."
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_ds_backend_sync_deletes
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_ds_backend_sync_deletes.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
+  Specifies the sensitive value associated with the consumer key.
 
-# Configure the PingDirectory server backend for synchronizing deletes
+#### Steps
 
-## About this task
+* Create one or more sensitive Kafka consumer properties using `dsconfig create-sensitive-kafka-consumer-property`.
 
-The PingDirectory server's change log backend's `changelog-deleted-entry-include-attribute` property specifies which attributes should be recorded in the change log entry during a DELETE operation. Normally, PingDataSync cannot correlate a deleted entry to the entry on the destination. If a Sync Class is configured with a filter, such as "`include-filter: objectClass=person`," the `objectClass` attribute must be recorded in the change log entry. Special correlation attributes (other than DN), will also need to be recorded on the change log entry to be properly synchronized at the endpoint server.
+  ##### Example:
 
-On each PingDirectory server backend, use the `dsconfig` command to set the property.
+  ```shell
+  $ bin/dsconfig create-sensitive-kafka-consumer-property \
+    --property-name saslConfig \
+    --set "sensitive-consumer-key:sasl.jaas.config" \
+    --set "sensitive-consumer-value:org.apache.kafka.common.security.scram.ScramLoginModule" \
+      required username="username" password="password";
+  ```
 
-```shell
-$ bin/dsconfig set-backend-prop --backend-name changelog \
-  --set changelog-deleted-entry-include-attribute:objectClass
-```
+* (Optional) Delete one or more sensitive Kafka consumer properties using `dsconfig delete-sensitive-kafka-consumer-property`.
 
-If the destination endpoint is an Oracle/Sun DSEE (or Sun DS) server, the Sun DSEE server does not store the value of the user deleting the entry, specified in the modifiers name attribute. It only stores the value of the user who last modified the entry while it still existed.
+  ##### Example:
 
-To set up a Sun DSEE destination endpoint to record the user who deleted the entry, use the Ping Identity Server SDK to create a plugin, as follows:
+  ```shell
+  $ bin/dsconfig delete-sensitive-kafka-consumer-property \
+    --property-name saslConfig
+  ```
 
-## Steps
+## Kafka sync source properties
 
-1. Update the Sun DSEE schema to include a `deleted-by-syncauxiliary` objectclass. It will only be used as a marker objectclass, and not require or allow additional attributes to be present on an entry.
+Use the following properties to configure the Kafka sync source object:
 
-2. Update the Sun DSEE Retro Change Log plugin to include the `deleted-by-sync auxiliary` objectclass as a value for the `deletedEntryAttrs` attribute.
+* `topic`
 
-3. Write an `LDAPSyncDestinationPlugin` script that in the `preDelete()` method modifies the entry that is being deleted to include the `deleted-by-sync` objectclass.
+  The Kafka topic to read messages from.
 
-4. Update the Sync Class filter that is excluding changes by the Sync User to also include `(!(objectclass=deleted-by-sync))`.
+* `cluster`
 
----
+  The Kafka cluster external server that defines the connection to the Kafka cluster.
 
----
-title: Configure the PingDirectory server sync source
-description: Configure the Sync source for the synchronization network. More than one external server can be configured to act as the Sync source for failover purposes. If the source is a PingDirectory server, also configure the following items:
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_pd_sync_source
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_pd_sync_source.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
+* `consumer-group-id`
 
-# Configure the PingDirectory server sync source
+  Identifies the consumer group this sync source belongs to. Kafka delivers each message once per consumer group. Multiple instances of the same sync source should share a consumer group so that a new instance can take over where a failed instance left off.
 
-## About this task
+* `max-poll-records`
 
-Configure the Sync source for the synchronization network. More than one external server can be configured to act as the Sync source for failover purposes. If the source is a PingDirectory server, also configure the following items:
+  The maximum number of records to return in a single poll request. Larger values can improve throughput but increase memory usage.
 
-* Enable the changelog password encryption plugin on any directory server that will receive password modifications. This plugin intercepts password modifications, encrypts the password, and adds an encrypted attribute to the change log entry.
+## Message format semantics for sync sources
 
-* Configure the `changelog-deleted-entry-include-attribute` property on the changelog backend, so that PingDataSync can record which attributes were removed during a DELETE operation.
+The Kafka sync source uses the same JSON message format as the Kafka sync destination. Learn more in [Message format](pd_sync_message_format.html).
 
-Perform the following steps to configure the Sync source:
+The following additional semantics apply when reading messages as a sync source:
 
-## Steps
+* For modify operations, the `current` field can be a partial entry containing only the modified attributes. Attributes omitted from `current` are left unchanged on the destination entry.
 
-1. Run the `dsconfig` command to configure the external server as the Sync source. Based on the previous example where the PingDirectory server was configured as `source-ds`, run the following command:
+* To delete an attribute value in a modify operation, set the attribute to `null` (single-valued) or an empty array (multivalued) in the `current` field.
+
+* For add operations, the `current` field must be a complete entry.
+
+### JSON sync operation mapping
+
+If your Kafka messages use a different format, you can configure a JSON sync operation mapping object to map your message fields to the fields that PingDataSync requires.
+
+The JSON sync operation mapping uses the existing constructed value syntax to assign values from the incoming JSON message to each required sync operation field.
+
+The following properties are available:
+
+> **Collapse: JSON sync operation mapping properties**
+>
+> * `dn-pattern`
+>
+>   (Required) A constructed value pattern that resolves to a DN identifying the entry. If the source doesn't use LDAP DNs, you can construct a synthetic DN such as `uid=<userId>,ou=people,dc=example,dc=com` and map it to a destination DN using the existing DN map configuration.
+>
+> * `change-id-pattern`
+>
+>   (Required) A constructed value pattern that resolves to a unique identifier for the change.
+>
+> * `source-entry-pattern`
+>
+>   (Required) A constructed value that resolves to a JSON object representing the entry. For modify operations, this can be a partial entry containing only the modified attributes.
+>
+> * `op-type-pattern`
+>
+>   (Required) A constructed value pattern that resolves to the operation type being performed.
+>
+> * `modified-attributes-pattern`
+>
+>   (Optional) A constructed value pattern that lists the attributes modified by the event. If unspecified, all attributes are assumed to be modified.
+>
+> * `create-op-type-value`
+>
+>   (Optional) The value in your message that represents a create operation. Defaults to `create`.
+>
+> * `delete-op-type-value`
+>
+>   (Optional) The value in your message that represents a delete operation. Defaults to `delete`.
+>
+> * `modify-op-type-value`
+>
+>   (Optional) The value in your message that represents a modify operation. Defaults to `modify`.
+
+## Dead letter queue
+
+When PingDataSync can't process a Kafka message (for example, due to a JSON parsing error or mapping failure) it logs an error and moves on to the next message. To preserve failed messages for later inspection or reprocessing, you can configure a dead letter queue (DLQ).
+
+When the DLQ is enabled, failed messages are published to a separate Kafka topic. The original message data is preserved, and error metadata is added to the Kafka record headers.
+
+The following properties configure the DLQ:
+
+* `dlq-enabled`
+
+  Disabled by default. Set to `true` to enable the DLQ. When the DLQ is enabled, you must also specify the `dlq-topic`.
+
+* `dlq-topic`
+
+  The name of the Kafka topic where failed messages are published. Kafka restricts topic names to alphanumeric characters, periods, underscores, and hyphens, with a maximum length of 249 characters.
+
+## Configuring a Kafka sync source
+
+The following steps create a basic Kafka sync source and connect it to a sync destination through a sync pipe.
+
+### Steps
+
+1. Create the [Kafka cluster external server](#kafka-cluster-external-server).
+
+2. Create the Kafka sync source.
+
+   #### Example:
 
    ```shell
-   $ bin/dsconfig create-sync-source --source-name source \
-     --type ping-identity \
-     --set base-dn:dc=example,dc=com \
-     --set server:source-ds \
-     --set use-changelog-batch-request:true
+   $ bin/dsconfig create-sync-source \
+     --source-name kafkaSyncSource \
+     --type kafka \
+     --set topic:topicName \
+     --set cluster:kafkaServerName \
+     --set consumer-group-id:consumerGroupId \
+     --applyChangeTo server-group
    ```
 
-2. Enable the change log password encryption plugin on any server that receives password modifications. The encryption key can be copied from the output, if displayed, or accessed from the `<server-root>/bin/sync-pipe-cfg.txt` file, if the `create-sync-pipe-config` tool was used to create the sync pipe.
+   The `consumer-group-id` should be consistent across all PingDataSync instances in a server group so that a standby instance resumes from the last committed offset if the primary fails.
+
+3. Create the sync destination.
+
+   #### Example:
 
    ```shell
-   $ bin/dsconfig set-plugin-prop \
-     --plugin-name "Changelog Password Encryption" \
-     --set enabled:true \
-     --set changelog-password-encryption-key:<key>
+   $ bin/dsconfig create-sync-destination \
+     --destination-name syncDestinationName \
+     --type ping-directory \
+     --set server:destinationServer \
+     --applyChangeTo server-group
    ```
 
-3. On PingDataSync, set the decryption key used to decrypt the user password value in the change log entries. The key allows the user password to be synchronized to other servers that do not use the same password storage scheme.
+   The sync destination can be any supported type, including PingDirectory.
 
-   ```shell
-   $ bin/dsconfig set-global-sync-configuration-prop \
-     --set changelog-password-decryption-key:ej5u9e39pq-68
-   ```
+4. Create the sync pipe.
 
-4. Configure the `changelog-deleted-entry-include-attribute` property on the changelog backend.
-
-   ```shell
-   $ bin/dsconfig set-backend-prop --backend-name changelog \
-     --set changelog-deleted-entry-include-attribute:objectClass
-   ```
-
----
-
----
-title: Configure the SCIM 2.0 external server
-description: The System for Cross-domain Identity Management (SCIM) 2.0 external server configuration object provides the information that the PingDataSync server needs to connect and authenticate to the SCIM 2.0 service.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_scim2_external_server
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_scim2_external_server.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
-
-# Configure the SCIM 2.0 external server
-
-The System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-\</div>)* 2.0 external server configuration object provides the information that the PingDataSync server needs to connect and authenticate to the SCIM 2.0 service.
-
-First, you must create an HTTP authentication method that allows the PingDataSync server to authenticate to the SCIM 2.0 server to authorize requests. In most cases, this authentication is an OAuth *(tooltip: \<div class="paragraph">
-\<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
-\</div>)* 2.0 bearer token, and you will likely want to obtain that token using the client credentials grant type. This allows you to provide a client ID and client secret to the OAuth authorization server to obtain a bearer token.
-
-In this case, the client secret is sensitive information, so the PingDataSync server uses a passphrase provider to access it, which allows it to be obtained from a variety of sources, like an optionally encrypted file, Amazon Secrets Manager, Azure Key Vault, a CyberArk Conjur instance, or a HashiCorp Vault instance. For example:
-
-```
-dsconfig create-passphrase-provider \
-     --provider-name "SCIMv2 Client Secret" \
-     --type file-based \
-     --set enabled:true \
-     --set password-file:config/scimv2-client-secret.txt
-
-dsconfig create-http-authorization-method \
-     --method-name "SCIMv2 Authorization Method" \
-     --type client-credentials-bearer-token \
-     --set enabled:true \
-     --set oauth-server-token-endpoint-url:https://oauth.example.com/as/token \
-     --set hostname-verification-method:strict \
-     --set oauth-client-id:this-is-the-client-id \
-     --set "oauth-client-secret-passphrase-provider:SCIMv2 Client Secret" \
-     --set request-method:get \
-     --set credentials-submission-method:basic-authorization \
-     --set "maximum-token-lifetime:1 h"
-```
-
-The SCIM 2.0 external server configuration offers the following properties:
-
-* `scim-service-url`
-
-  The base URL to the SCIM 2.0 service to be used. This should not include any endpoint name because that will be appended through the endpoint mapping. This is required.
-
-* `key-manager-provider`
-
-  A key manager provider to use during SSL negotiation with the SCIM 2.0 server. This is optional, and it will likely only be used if the PingDataSync server needs to supply a client certificate to the SCIM 2.0 server.
-
-* `ssl-cert-nickname`
-
-  The nickname (alias) of the client certificate to present to the SCIM 2.0 server. This is only needed if a `key-manager-provider` is specified and only if the associated key store has multiple certificates that could be used.
-
-* `trust-manager-provider`
-
-  A trust manager provider to use to determine whether to trust the certificate chain presented by the SCIM 2.0 server during Secure Sockets Layer (SSL) *(tooltip: \<div class="paragraph">
-  \<p>A protocol for authenticated and encrypted links between networked machines, typically over HTTPS. SSL was deprecated in 1999 in favor of Transport Layer Security (TLS).\</p>
-  \</div>)* negotiation. This is optional, and if you don't specify it, then the PingDataSync server will rely primarily on the Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
-  \<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>
-  \</div>)*'s default set of trusted issuers. If the SCIM 2.0 server is using a certificate signed by one of those trusted issuers, then you can leave this property unset.
-
-* `hostname-verification-method`
-
-  Indicates whether the PingDataSync server should verify that the certificate presented by the SCIM 2.0 server is appropriate for the intended address. A value of `strict`, which is the default, indicates that the connection should only be established if the certificate has a subject alternative name extension with a value that matches the address provided in the `scim-service-url` property (or if the certificate does not have a subject alternative name extension, then it falls back to using the `CN` attribute of the certificate subject). A value of `allow-all` indicates that the PingDataSync server should not attempt to confirm that the certificate was issued for the intended server.
-
-* `http-authorization-method`
-
-  The HTTP authorization method that the PingDataSync server should use to authenticate to and authorize requests in the SCIM 2.0 server. This is required.
-
-* `response-timeout`
-
-  The maximum length of time that the PingDataSync server should wait for a response from the SCIM 2.0 server when issuing requests. If this is not specified, a default of 10 seconds is used.
-
-* `client-reconnect-interval`
-
-  The maximum length of time that a SCIM 2.0 client instance will be used before a new one is created, which might potentially include obtaining new credentials. If the client credentials grant HTTP authorization method is used and the OAuth authorization server specified an expiration time for the bearer token that it issued, then the actual reconnect interval is based on the lesser of the two values. If this is not specified, and if the HTTP authorization method does not indicate a maximum lifetime for its credentials, then the same SCIM 2.0 client instance is used indefinitely.
-
-|   |                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The server will automatically try to refresh the credentials if the SCIM 2.0 service returns a 401 (unauthorized) error in response to any request. |
-
-For example, you can use the following change to configure a SCIM 2.0 external server:
-
-```
-dsconfig create-external-server \
-     --server-name "SCIMv2 Server" \
-     --type scim2 \
-     --set scim-service-url:https://scim2.example.com/scim/v2 \
-     --set "http-authorization-method:SCIMv2 Authorization Method"
-```
-
----
-
----
-title: Configure the SCIM 2.0 sync destination
-description: The System for Cross-domain Identity Management (SCIM) 2.0 sync destination associates a SCIM 2.0 external server with a set of one or more endpoint mappings and can also specify additional configuration properties.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_scimv2_sync_dest
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_scimv2_sync_dest.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
-
-# Configure the SCIM 2.0 sync destination
-
-The System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-\</div>)* 2.0 sync destination associates a SCIM 2.0 external server with a set of one or more endpoint mappings and can also specify additional configuration properties.
-
-Available properties include:
-
-* `server`
-
-  The SCIM 2.0 external server to which changes will be synchronized. This is required.
-
-* `endpoint-mapping`
-
-  A set of one or more SCIM 2.0 endpoint mappings to use when synchronizing changes to the SCIM 2.0 server. This is required.
-
-* `query-method`
-
-  The HTTP request method that should be used when querying the SCIM 2.0 server to fetch existing entries. The value can be one of the following:
-
-  * **`get`** – Use the HTTP GET method to submit the query. This is the default value that will be used if the property is not specified.
-
-  * **`post`** – Use the HTTP POST method to submit the query.
-
-* `update-method`
-
-  The HTTP request method that should be used when applying changes to existing SCIM 2.0 entries. The value can be one of the following:
-
-  * **`put`** – Use the HTTP PUT method to replace the entire entry. SCIM 2.0 servers must support this method, but it is less efficient and more risky than using the PATCH method because it has greater potential of losing changes to the entry made by other SCIM 2.0 clients.
-
-  * **`patch`** – Use the HTTP PATCH method to specify which specific changes should be applied to the entry. This method is an optional part of the SCIM 2.0 specification, so it might not be available in all servers, but it is more efficient and safer than the PUT method, so this is the default that will be used if the property is not specified.
-
-You can use the following example configuration change to create a SCIM 2.0 sync destination:
-
-```
-dsconfig create-sync-destination \
-     --destination-name "SCIMv2 Destination" \
-     --type scim2 \
-     --set "server:SCIMv2 Server" \
-     --set "endpoint-mapping:Users Endpoint"
-```
-
----
-
----
-title: Configure the SCIM sync destination
-description: Configure the System for Cross-domain Identity Management (SCIM) sync destination to synchronize data with a SCIM service provider. Run the dsconfig command:
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_scim_sync_dest
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_scim_sync_dest.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
-
-# Configure the SCIM sync destination
-
-Configure the System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-\</div>)* sync destination to synchronize data with a SCIM service provider. Run the `dsconfig` command:
-
-```shell
-$ bin/dsconfig create-sync-destination \
-  --destination-name scim \
-  --type scim \
-  --set server:scim
-```
-
----
-
----
-title: Configure the source PingDirectory server
-description: The following procedure configures a backend set of directory servers. The procedure is the same for the source servers and the destination servers in a synchronization topology. For directory server installation and configuration details, see the PingDirectory server administration guide.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_source_pd_server
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_source_pd_server.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configure the source PingDirectory server
-
-## About this task
-
-The following procedure configures a backend set of directory servers. The procedure is the same for the source servers and the destination servers in a synchronization topology. For directory server installation and configuration details, see the [PingDirectory server administration guide](../pingdirectory_server_administration_guide/pd_ds_amin_guide.html).
-
-## Steps
-
-1. On each backend PingDirectory server that will participate in synchronization, enable the change log database, either from the command line or by using a `dsconfig` batch file.
-
-   ```shell
-   $ dsconfig --no-prompt set-backend-prop \
-     --backend-name changelog \
-     --set enabled:true
-   ```
-
-2. Stop the server if it is running, and import the dataset for the first backend set into the first server in the backend set before the import.
-
-   ```shell
-   $ bin/stop-server
-   $ bin/import-ldif --backendID userRoot --ldifFile ../dataset.ldif
-   $ bin/start-server
-   ```
-
-3. On the first server instance in the first backend set, configure replication between this server and the second server in the same backend set.
-
-   ```shell
-   $ bin/dsreplication enable --host1 ldap-west-01.example.com \
-     --port1 389 \
-     --bindDN1 "cn=Directory Manager" \
-     --bindPassword1 password \
-     --replicationPort1 8989 \
-     --host2 ldap-west-02.example.com \
-     --port2 389 \
-     --bindDN2 "cn=Directory Manager" \
-     --bindPassword2 password \
-     --replicationPort2 9989 \
-     --adminUID admin \
-     --adminPassword admin \
-     --baseDN dc=example,dc=com \
-     --no-prompt
-   ```
-
-4. Initialize the second server in the backend set with data from the first server in the backend set. This command can be run from either instance.
-
-   ```shell
-   $ bin/dsreplication initialize \
-     --hostSource ldap-west-01.example.com \
-     --portSource 389 \
-     --hostDestination ldap-west-02.example.com \
-     --portDestination 389 \
-     --baseDN "dc=example,dc=com" \
-     --adminUID admin \
-     --adminPassword admin \
-     --no-prompt
-   ```
-
-5. Run the following command to check replica status.
-
-   ```shell
-   $ bin/dsreplication status \
-     --hostname ldap-west-01.example.com \
-     --port 389 \
-     --adminPassword admin \
-     --no-prompt
-   ```
-
-6. Repeat steps 2 through 5 (import, enable replication, initialize replication, check status) for the second backend set.
-
----
-
----
-title: Configure the sync pipe, sync classes, and evaluation order
-description: Configure a Sync Pipe for Lightweight Directory Access Protocol (LDAP) to System for Cross-domain Identity Management (SCIM) synchronization, create Sync classes for the Sync Pipe, and set the evaluation order index for the Sync classes.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_sync_pipe_classes_eval
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_sync_pipe_classes_eval.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configure the sync pipe, sync classes, and evaluation order
-
-## About this task
-
-Configure a Sync Pipe for Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
-\<p>An open, cross platform protocol used for interacting with directory services.\</p>
-\</div>)* to System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-\</div>)* synchronization, create Sync classes for the Sync Pipe, and set the evaluation order index for the Sync classes.
-
-|   |                                                                                               |
-| - | --------------------------------------------------------------------------------------------- |
-|   | The synchronization mode must be set to standard. Notification mode cannot be used with SCIM. |
-
-## Steps
-
-1. After the source and destination endpoints have been configured, configure the Sync Pipe for LDAP to SCIM synchronization. Run `dsconfig` to configure an LDAP-to-SCIM Sync Pipe:
+   #### Example:
 
    ```shell
    $ bin/dsconfig create-sync-pipe \
-     --pipe-name ldap-to-scim \
-     --set sync-source:source \
-     --set sync-destination:scim
+     --pipe-name kafkaPipeName \
+     --set num-worker-threads:10 \
+     --set change-detection-polling-interval:"500 ms" \
+     --set sync-source:kafkaSyncSource \
+     --set sync-destination:syncDestinationName \
+     --applyChangeTo server-group
    ```
 
-2. The next set of steps define three Sync Classes. The first Sync Class is used to match user entries in the Sync Source. The second class is used to match group entries. The third class is a DEFAULT class that is used to match all other entries.
+5. Create the sync class.
 
-   Run `dsconfig` to create the first Sync Class and set the Sync Pipe Name and Sync Class name:
+   #### Example:
 
    ```shell
    $ bin/dsconfig create-sync-class \
-     --pipe-name ldap-to-scim \
-     --class-name user
+     --pipe-name kafkaPipeName \
+     --class-name kafkaSyncClass \
+     --set auto-mapped-source-attribute:all \
+     --applyChangeTo server-group
    ```
 
-3. Run `dsconfig` to set the base distinguished name (DN) *(tooltip: \<div class="paragraph">
+6. Start the sync pipe.
+
+   #### Example:
+
+   ```shell
+   $ bin/dsconfig set-sync-pipe-prop \
+     --pipe-name kafkaPipeName \
+     --set started:true \
+     --applyChangeTo server-group
+   ```
+
+---
+
+---
+title: Configure a proxy server
+description: The following procedure configures a proxy server, including defining the external servers and configuring the client-connection policy. The procedure is the same for the source servers and the destination servers in a synchronization topology.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_proxy_server
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_proxy_server.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configure a proxy server
+
+## About this task
+
+The following procedure configures a proxy server, including defining the external servers and configuring the client-connection policy. The procedure is the same for the source servers and the destination servers in a synchronization topology.
+
+For additional changes, use the `dsconfig` command. For proxy installation and configuration details, see the [PingDirectoryProxy server administration guide](../pingdirectoryproxy_server_administration_guide/pd_proxy_admin_guide.html).
+
+## Steps
+
+1. From the PingDirectoryProxy server root directory, run the `prepare-external-server` command to set up the `cn=Proxy User` account for access to the backend directory servers. The server tests the connection and creates the `cn=Proxy User` account.
+
+   ```shell
+   $ bin/prepare-external-server --no-prompt \
+     --hostname ldap-west-01.example.com \
+     --port 389 --bindDN "cn=Directory Manager" \
+     --bindPassword password \
+     --proxyBindDN "cn=Proxy User,cn=Root DNs,cn=config" \
+     --proxyBindPassword pass \
+     --baseDN "dc=example,dc=com"
+   ```
+
+2. Repeat step 1 for any other directory server instances.
+
+3. Run the `dsconfig` command to define the external servers and their types. For this example, round-robin load balancing algorithms are defined, which do not require health checks or locations to be specified.
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-external-server \
+     --server-name ldap-west-01 \
+     --type "ping-identity-ds" \
+     --set "server-host-name:ldap-west-01.example.com" \
+     --set "server-port:389" \
+     --set "bind-dn:cn=Proxy User" \
+     --set "password:password" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-external-server \
+     --server-name ldap-west-02 \
+     --type "ping-identity-ds" \
+     --set "server-host-name:ldap-west-02.example.com" \
+     --set "server-port:389" \
+     --set "bind-dn:cn=Proxy User" \
+     --set "password:password" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-external-server \
+     --server-name ldap-west-03 \
+     --type "ping-identity-ds" \
+     --set "server-host-name:ldap-west-03.example.com" \
+     --set "server-port:389" \
+     --set "bind-dn:cn=Proxy User" \
+     --set "password:password" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-external-server
+     --server-name ldap-west-04 \
+     --type "ping-identity-ds" \
+     --set "server-host-name:ldap-west-04.example.com" \
+     --set "server-port:389" \
+     --set "bind-dn:cn=Proxy User" \
+     --set "password:password" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+4. Create a load-balancing algorithm for each backend set.
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-load-balancing-algorithm \
+     --algorithm-name "test-lba-1" \
+     --type "round-robin" --set "enabled:true" \
+     --set "backend-server:ldap-west-01" \
+     --set "backend-server:ldap-west-02" \
+     --set "use-location:false" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-load-balancing-algorithm \
+     --algorithm-name "test-lba-2" \
+     --type "round-robin" --set "enabled:true" \
+     --set "backend-server:ldap-west-03"
+     --set "backend-server:ldap-west-04"
+     --set "use-location:false" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+5. Configure the proxying request processors, one for each load-balanced directory server set. A request processor provides the logic to either process the operation directly, forward the request to another server, or hand off the request to another request processor.
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-request-processor \
+     --processor-name "proxying-processor-1" --type "proxying" \
+     --set "load-balancing-algorithm:test-lba-1" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-request-processor \
+     --processor-name "proxying-processor-2" --type "proxying" \
+     --set "load-balancing-algorithm:test-lba-2" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+6. Define an entry-balancing request processor. This request processor is used to distribute entries under a common parent entry among multiple backend sets. A backend set is a collection of replicated directory servers that contain identical portions of the data. Multiple proxying request processors are used to process operations.
+
+   Next, define the placement algorithm, which selects the server set to use for new add operations to create new entries. In this example, a round-robin placement algorithm forwards LDAP add requests to backend sets.
+
+   ```shell
+   $ bin/dsconfig --no-prompt create-placement-algorithm \
+     --processor-name "entry-balancing-processor" \
+     --algorithm-name "round-robin-placement" \
+     --set "enabled:true" \
+     --type "round-robin" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
+   ```
+
+7. Define the subtree view that specifies the base distinguished name (DN) *(tooltip: \<div class="paragraph">
    \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
-   \</div>)* and filter for this Sync class. The `include-base-dn` property specifies the base DN in the source, which is `ou=people,dc=example,dc=com` by default. This Sync Class is invoked only for changes at the `ou=people` level. The include-filter property specifies an LDAP filter that tells PingDataSync to include `inetOrgPerson` entries as user entries. The `destination-correlation-attributes` specifies LDAP attributes that allow PingDataSync to find the destination resource on the SCIM server. The value of this property will vary. See [Identify a SCIM resource at the destination](pd_sync_identify_scim_resource_dest.html) for details.
+   \</div>)* for the entire deployment.
 
    ```shell
-   $ bin/dsconfig set-sync-class-prop \
-     --pipe-name ldap-to-scim \
-     --class-name user \
-     --add include-base-dn:ou=people,dc=example,dc=com \
-     --add "include-filter:(objectClass=inetOrgPerson)" \
-     --set destination-correlation-attributes:externalId
+   $ bin/dsconfig --no-prompt create-subtree-view \
+     --view-name "test-view" \
+     --set "base-dn:dc=example,dc=com" \
+     --set "request-processor: entry-balancing-processor" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
    ```
 
-4. Create a second Sync class, which is used to match group entries:
+8. Finally, define a client connection policy that specifies how the client connects to the proxy server.
 
    ```shell
-   $ bin/dsconfig create-sync-class \
-     --pipe-name ldap-to-scim \
-     --class-name group
-   ```
-
-5. For the second Sync class, set the base DN and the filters to match the group entries.
-
-   ```shell
-   $ bin/dsconfig set-sync-class-prop \
-     --pipe-name ldap-to-scim \
-     --class-name group \
-     --add include-base-dn:ou=groups,dc=example,dc=com \
-     --add "include-filter:(|(objectClass=groupOfEntries)\
-       (objectClass=groupOfNames)(objectClass=groupOfUniqueNames)\
-       (objectClass=groupOfURLs))"
-   ```
-
-6. For the third Sync class, create a DEFAULT Sync class that is used to match all other entries. To synchronize changes from only user and group entries, set `synchronize-creates`, `synchronize-modifies`, and `synchronize-delete` to false.
-
-   ```shell
-   $ bin/dsconfig create-sync-class \
-     --pipe-name ldap-to-scim \
-     --class-name DEFAULT \
-     --set evaluation-order-index:99999 \
-     --set synchronize-creates:false \
-     --set synchronize-modifies:false \
-     --set synchronize-deletes:false
-   ```
-
-7. After all of the Sync classes needed by the Sync Pipe are configured, set the evaluation order index for each Sync class. Classes with a lower number are evaluated first. Run `dsconfig` to set the evaluation order index for the Sync class. The actual number depends on the deployment.
-
-   ```shell
-   $ bin/dsconfig set-sync-class-prop \
-     --pipe-name ldap-to-scim \
-     --class-name user \
-     --set evaluation-order-index:100
+   $ bin/dsconfig --no-prompt set-client-connection-policy-prop \
+     --policy-name "default" \
+     --add "subtree-view:test-view" \
+     --bindDN "cn=Directory Manager" \
+     --bindPassword pxy-pwd
    ```
 
 ---
 
 ---
-title: Configure the sync source
-description: The sync source describes the service from which entries and changes are read so that they can be synchronized to the sync destination.
+title: Configure a sync pipe
+description: A sync pipe associates a sync source, from which changes will be read, with a sync destination, to which corresponding changes will be applied.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_sync_source
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_sync_source.html
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_sync_pipe
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_sync_pipe.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
 ---
 
-# Configure the sync source
+# Configure a sync pipe
 
-The sync source describes the service from which entries and changes are read so that they can be synchronized to the sync destination.
+A sync pipe associates a sync source, from which changes will be read, with a sync destination, to which corresponding changes will be applied.
 
-The process for configuring a sync source varies based on the type of service that you use, such as an LDAP server or a relational database, so you should consult the appropriate documentation for the specific type of sync source that you want to use.
+Although there are many useful configuration properties associated with a sync pipe, including those used to control retry attempts, rate limiting, and the number of worker threads, most of those properties already have good default values. The only properties you need to specify are:
 
-Currently, the `create-sync-pipe-config` tool does not offer support for the System for Cross-domain Identity Management (SCIM) *(tooltip: \<div class="paragraph">
-\<p>An application-level, HTTP-based protocol for provisioning and managing user identity information. SCIM supplies a common schema for representing users and groups and provides a REST API.\</p>
-\</div>)* 2.0 sync destination, so you might need to configure the sync source manually with a tool like `dsconfig` or the admin console. However, if you plan to synchronize from the desired source to another type of destination, and if that destination is one that is supported by the `create-sync-pipe-config` tool, then you can reuse the sync source created for that pipe.
+* `sync-source`
 
-If the sync source server is a PingDirectory server, then you can use the `prepare-endpoint-server` tool to make necessary changes to allow the PingDataSync server to interact with that directory server instance. This includes creating the account that the PingDataSync server uses to authenticate to the PingDirectory server and enabling the changelog to allow the PingDataSync server to retrieve information about changes processed in the PingDirectory server.
+  The sync source from which the changes will be read. This is required.
 
-Running `prepare-endpoint-server --help` shows you the complete usage for the tool, but the following example demonstrates a sample usage:
+* `sync-destination`
 
-```
-bin/prepare-endpoint-server \
-     --hostname ds-source.example.com \
-     --port 636 \
-     --useSSL \
-     --trustStorePath config/truststore \
-     --syncServerBindDN "cn=Sync User,cn=Root DNs,cn=config" \
-     --syncServerBindPasswordFile sync-user-password.txt \
-     --baseDN dc=example,dc=com \
-     --isSource
-```
+  The sync destination to which the corresponding changes will be applied. This is required.
 
-In addition, if the source server is a PingDirectory server instance, then you should enable the Changelog Password Encryption plugin in that server to indicate that it should store an encrypted representation of clear-text passwords in the changelog along with their encoded form. See [Configuring password encryption](pd_sync_config_password_encryption.html).
-
-Doing this allows the PingDataSync server to retrieve those clear-text passwords so that they can be synchronized to the SCIM 2.0 sync destination. You can do this with a change like the following:
+You can use the following example configuration change to create a sync pipe:
 
 ```
-dsconfig set-plugin-prop \
-     --plugin-name "Changelog Password Encryption" \
-     --set enabled:true \
-     --set changelog-password-encryption-key:<this-is-the-key-you-want-to-use>
+dsconfig create-sync-pipe \
+     --pipe-name "LDAP Source to SCIMv2 Destination" \
+     --set "sync-source:LDAP Source" \
+     --set "sync-destination:SCIMv2 Destination"
 ```
 
 ---
 
 ---
-title: "Configure the synchronization environment with <code class=\"cmdname\"><strong>dsconfig</strong></code>"
-description: The dsconfig tool can be used to configure any part of PingDataSync, but will likely be used for more fine-grained adjustments. If configuring a Sync Pipe for the first time, use the create-sync-pipe-config tool to guide through the necessary Sync Pipes creation steps.
+title: Configure an LDAPv3 Sync Source
+description: Synchronization can be performed with an LDAP V3-compliant source, such as IBM SDS (Tivoli Directory Server), Oracle Unified Directory, DSEE, or OpenDJ, by configuring a Generic LDAP Sync Source. PingDataSync relies on the source server having a cn=changelog implementation. If the server does not have a cn=changelog implementation, a Server SDK Change Detector extension can be configured to define the change detection criteria that PingDataSync should use.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_sync_env_dsconfig
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_sync_env_dsconfig.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-page_aliases: ["pd_sync_config_server_groups_dsconfig_interactive.adoc", "pd_sync_start_global_sync_config_dsconfig.adoc"]
-section_ids:
-  configure-server-groups-with-dsconfig-interactive: Configure server groups with dsconfig interactive
-  start-the-global-sync-configuration-with-dsconfig-interactive: Start the Global Sync configuration with dsconfig interactive
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configure the synchronization environment with `dsconfig`
-
-The `dsconfig` tool can be used to configure any part of PingDataSync, but will likely be used for more fine-grained adjustments. If configuring a Sync Pipe for the first time, use the `create-sync-pipe-config` tool to guide through the necessary Sync Pipes creation steps.
-
-## Configure server groups with `dsconfig` interactive
-
-In a typical deployment, one PingDataSync server and one or more redundant failover servers are configured. Primary and secondary servers must have the same configuration settings to ensure proper operation. To enable this, assign all servers to a server group using the `dsconfig` tool. Any change to one server will automatically be applied to the other servers in the group.
-
-Run the `dsconfig` command and set the global configuration property for server groups to `all-servers`. On the primary PingDataSync server, run the following command:
-
-```shell
-$ bin/dsconfig set-global-configuration-prop \
-  --set configuration-server-group:all-servers
-```
-
-Updates to servers in the group are made using the `--applyChangeTo server-group` option of the `dsconfig` command. To apply the change to one server in the group, use the `--applyChangeTo single-server` option. If additional servers are added to the topology, the `setup` tool will copy the configuration from the primary server to the new servers.
-
-## Start the Global Sync configuration with `dsconfig` interactive
-
-### About this task
-
-After the Synchronization topology is configured, perform the following steps to start the Global Sync configuration, which will use only those Sync Pipes that have been started:
-
-### Steps
-
-1. On the `dsconfig` main menu, type the number corresponding to the Global Sync Configuration.
-
-2. On the Global Sync Configuration menu, type the number corresponding to view and edit the configuration.
-
-3. On the GlobalSync Configuration Properties menu, type the number corresponding to setting the started property, and then follow the prompts to set the value to `TRUE`.
-
-4. On the GlobalSync Configuration Properties menu, type `f` to save and apply the changes.
-
----
-
----
-title: Configure traffic through a load balancer
-description: If a PingDataSync server is sitting behind an intermediate HTTP server, such as a load balancer, a reverse proxy, or a cache, it will log incoming requests as originating with the intermediate HTTP server instead of the client that actually sent the request. If the actual client's IP address should be recorded to the trace log, enable X-Forwarded-* handling in both the intermediate HTTP server and the PingDataSync server. See the product documentation for the device type. For PingDataSync servers:
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_traffic_load_balancer
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_traffic_load_balancer.html
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_ldapv3_sync_source
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_ldapv3_sync_source.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
 ---
 
-# Configure traffic through a load balancer
+# Configure an LDAPv3 Sync Source
 
-If a PingDataSync server is sitting behind an intermediate HTTP server, such as a load balancer, a reverse proxy, or a cache, it will log incoming requests as originating with the intermediate HTTP server instead of the client that actually sent the request. If the actual client's IP address should be recorded to the trace log, enable `X-Forwarded-*` handling in both the intermediate HTTP server and the PingDataSync server. See the product documentation for the device type. For PingDataSync servers:
+Synchronization can be performed with an LDAP V3-compliant source, such as IBM SDS (Tivoli Directory Server), Oracle Unified Directory, DSEE, or OpenDJ, by configuring a Generic LDAP Sync Source. PingDataSync relies on the source server having a `cn=changelog` implementation. If the server does not have a `cn=changelog` implementation, a Server SDK Change Detector extension can be configured to define the change detection criteria that PingDataSync should use.
 
-* Edit the appropriate Connection Handler object (HTTPS or HTTP) and set `use-forwarded-headers` to `true`.
+If multiple Generic LDAP Sync Source instances are defined, the order in which they are added is used as a priority order for failover. If server locations are defined, PingDataSync will always fail over to servers that are in the same location. If there are multiple Sync Sources in the same location as PingDataSync, then PingDataSync will fail over to the first local server in the list and proceed down the list.
 
-* When `use-forwarded-headers` is set to `true`, the server will use the client IP address and port information in the `X-Forwarded-*` headers instead of the address and port of the entity that's actually sending the request, the load balancer. This client address information will show up in logs where one would normally expect it to show up, such as in the `from` field of the HTTP REQUEST and HTTP RESPONSE messages.
-
----
+During synchronization, when a change is detected by PingDataSync, the changed entry is fetched from the source. Initially, the DN of the entry is used to search for the entry. If that search fails, then a second search is performed using the `unique-id-attribute` if it is defined. This is typically an operational attribute that is automatically generated by the server, such as `entryUUID`.
 
 ---
-title: Configuring attribute mapping
-description: The following procedure defines an attribute map from the email attribute in the source servers to a mail attribute in the target servers. Both attributes must be valid in the target servers and must be present in their respective schemas.
+
+---
+title: Configure authentication with a SASL external certificate
+description: By default, PingDataSync authenticates to the PingDirectory server using LDAP simple authentication (with a bind DN and a password). However, PingDataSync can be configured to use SASL EXTERNAL to authenticate to the PingDirectory server with a client certificate.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_attribute_mapping
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_attribute_mapping.html
+page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_authn_sasl_ext_cert
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_authn_sasl_ext_cert.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configuring attribute mapping
-
-## About this task
-
-The following procedure defines an attribute map from the `email` attribute in the source servers to a `mail` attribute in the target servers. Both attributes must be valid in the target servers and must be present in their respective schemas.
-
-|   |                                                                                                                                                                                                                                                                                                                                              |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The following can also be done with `dsconfig` in interactive mode. The attribute mapping *(tooltip: \<div class="paragraph">&#xA;\<p>Matching corresponding attributes between an IdP and an SP to identify federated users or add supplemental user information.\</p>&#xA;\</div>)* options are available from the PingDataSync main menu. |
-
-## Steps
-
-1. On PingDataSync, run the `dsconfig` command to create an attribute map for the "SunDS>DS" Sync Class for the "Sun DS to Ping Identity DS" Sync Pipe, and then run the second `dsconfig` command to apply the new attribute map to the Sync Pipe and Sync Class.
-
-   ```shell
-   $ bin/dsconfig --no-prompt create-attribute-map \
-     --map-name "SunDS>DS Attr Map" \
-     --set "description:Attribute Map for SunDS>Ping Identity Sync Class" \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
-   ```shell
-   $ bin/dsconfig --no-prompt set-sync-class-prop \
-     --pipe-name "Sun DS to DS" \
-     --class-name "SunDS>DS" \
-     --set "attribute-map:SunDS>DS Attr Map" \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
-2. Create an attribute mapping (from `email` to `mail`) for the new attribute map.
-
-   ```shell
-   $ bin/dsconfig --no-prompt create-attribute-mapping \
-     --map-name "SunDS>DS Attr Map" \
-     --mapping-name mail --type direct \
-     --set "description:Email>Mail Mapping" \
-     --set from-attribute:email \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
-3. For a bidirectional deployment, repeat steps 1–2 to create an attribute map for the DS>SunDS Sync Class for the Ping Identity DS to Sun DS Sync Pipe, and create an attribute mapping that maps `mail` to `email`.
-
-   ```shell
-   $ bin/dsconfig --no-prompt create-attribute-map \
-     --map-name "DS>SunDS Attr Map" \
-     --set "description:Attribute Map for DS>SunDS Sync Class" \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
-   ```shell
-   $ bin/dsconfig --no-prompt set-sync-class-prop \
-     --pipe-name "Ping Identity DS to Sun DS" \
-     --class-name "DS>SunDS" \
-     --set "attribute-map:DS>SunDS Attr Map" \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
-   ```shell
-   $ bin/dsconfig --no-prompt create-attribute-mapping \
-     --map-name "DS>SunDS Attr Map" \
-     --mapping-name email \
-     --type direct \
-     --set "description:Mail>Email Mapping" \
-     --set from-attribute:mail \
-     --port 7389 \
-     --bindDN "cn=admin,dc=example,dc=com" \
-     --bindPassword secret
-   ```
-
----
-
----
-title: Configuring log signing
-description: PingDirectory servers support the ability to cryptographically sign a log to ensure that it has not been modified. For example, financial institutions require tamper-proof audit logs files to ensure that transactions can be properly validated and ensure that they have not been modified by a third-party entity or internally by an unauthorized person.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_log_signing
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_log_signing.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configuring log signing
-
-## About this task
-
-PingDirectory servers support the ability to cryptographically sign a log to ensure that it has not been modified. For example, financial institutions require tamper-proof audit logs files to ensure that transactions can be properly validated and ensure that they have not been modified by a third-party entity or internally by an unauthorized person.
-
-When enabling signing for a logger that already exists, the first log file will not be completely verifiable because it still contains unsigned content from before signing was enabled. Only log files whose entire content was written with signing enabled will be considered completely valid. For the same reason, if a log file is still open for writing, then signature validation will not indicate that the log is completely valid because the log will not include the necessary "end signed content" indicator at the end of the file.
-
-To validate log file signatures, use the `validate-file-signature` tool provided in the `bin` directory of the server (or the `bat` directory on Windows systems). After this property has been enabled, disable and then re-enable the log publisher for the changes to take effect.
-
-Perform the following steps to configure log signing:
-
-## Steps
-
-1. Use `dsconfig` to enable log signing for a Log Publisher. In this example, set the `sign-log` property on the File-based Audit Log Publisher.
-
-   ```shell
-   $ bin/dsconfig set-log-publisher-prop \
-     --publisher-name "File-Based Audit Logger" \
-     --set sign-log:true
-   ```
-
-2. Disable and then re-enable the Log Publisher for the changes to take effect.
-
-   ```shell
-   $ bin/dsconfig set-log-publisher-prop \
-     --publisher-name "File-Based Audit Logger" \
-     --set enabled:false
-   ```
-
-   ```shell
-   $ bin/dsconfig set-log-publisher-prop \
-     --publisher-name "File-Based Audit Logger" \
-     --set enabled:true
-   ```
-
-3. To validate a signed file, use the `validate-file-signature` tool to check if a signed file has been altered.
-
-   ```shell
-   $ bin/validate-file-signature --file logs/audit
-   ```
-
-   ```
-   All signature information in file 'logs/audit' is valid
-   ```
-
-   If any validation errors occur, a message displays that is similar to this:
-
-   ```
-   One or more signature validation errors were encountered while validating
-   the contents of file 'logs/audit':
-   * The end of the input stream was encountered without encountering the end
-   of an active signature block. The contents of this signed block cannot be
-   trusted because the signature cannot be verified
-   ```
-
----
-
----
-title: Configuring one way synchronization from Active Directory to PingDirectory
-description: Configure a one-way Sync Pipe with the Active Directory (AD) topology as the sync source and a PingDirectory server topology as the Sync Destination.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_configure_sync_pipe_ad
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_configure_sync_pipe_ad.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-page_aliases: ["pd_sync_ad_with_pd.adoc"]
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  result: Result:
-  sync_ad_pd: Synchronizing Active Directory with PingDirectory
-  modifies-as-creates: modifies-as-creates
----
-
-# Configuring one way synchronization from Active Directory to PingDirectory
-
-Configure a one-way Sync Pipe with the Active Directory (AD) *(tooltip: \<div class="paragraph">
-\<p>A directory service for Windows domain networks, included in most Windows Server operation systems.\</p>
-\</div>)* topology as the sync source and a PingDirectory server topology as the Sync Destination.
-
-## About this task
-
-Syncing from AD-LDS to PingDirectory is supported for all features except password syncing. For regular AD, password synchronization requires the [Password Sync Agent](pd_sync_password_sync_agent.html).
-
-|   |                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you are syncing the `lockoutTime`, `userAccountControl & (ACCOUNTDISABLE == 2)`, or `pwdLastSet` AD attributes, or the AD-LDS `ms-DS-User-Account-Disabled` attribute, see [Synchronizing Active Directory with PingDirectory](#sync_ad_pd). |
-
-## Steps
-
-1. From the `server-root` directory, start PingDataSync.
-
-   ```shell
-   $ <server-root>/bin/start-server
-   ```
-
-2. To set up the initial synchronization topology, run the `sync` tool.
-
-   ```shell
-   $ bin/create-sync-pipe-config
-   ```
-
-3. In the **Create Initial Synchronization Configuration** menu, press Enter to continue the configuration.
-
-4. In the **Synchronization Mode** menu, press Enter to accept the default option `1` for `Standard mode`.
-
-5. In the **Synchronization Direction** menu, press Enter to accept the default option `1` for `One way`.
-
-6. In the **Source Endpoint Type** menu, enter option `7` for `Microsoft Active Directory`.
-
-7. In the **Source Endpoint Name** menu, enter a name for the Microsoft AD source server, or press Enter to accept the default value of `Microsoft Active Directory Source`.
-
-8. In the ***\<Source Server>* Server Security** menu, press Enter to accept the default option `1` for `SSL` security.
-
-9. In the ***\<Source Server>* Servers** menu, enter the host name and listener port for Lightweight Directory Access Protocol (LDAP) *(tooltip: \<div class="paragraph">
-   \<p>An open, cross platform protocol used for interacting with directory services.\</p>
-   \</div>)* communication with the source server in the format of `<host name>:<port number>` and press Enter.
-
-   The Data Sync server attempts a connection to the AD source server. After adding the first server, you can add additional servers for the source endpoints that will be prioritized below the first server.
-
-10. When you have finished adding servers, press Enter to continue to the next configuration step.
-
-11. In the **Synchronization User Account for *\<Source Server>*** menu, enter a user account distinguished name (DN) *(tooltip: \<div class="paragraph">
-    \<p>A name uniquely identifying an object within the hierarchy of a directory tree.\</p>
-    \</div>)* for the source servers, or press Enter to accept the default value.
-
-    The account is used exclusively by the Data Sync Server to communicate with the source external servers.
-
-12. Enter a password for the synchronization user account and press Enter.
-
-    |   |                                                                                          |
-    | - | ---------------------------------------------------------------------------------------- |
-    |   | The User Account DN password must meet the minimum password requirements for AD domains. |
-
-13. In the **Destination Endpoint Type** menu, press Enter to select the default option `1` for `Ping Identity Directory Server`.
-
-14. In the **Destination Endpoint Name** menu, enter a name for your destination endpoint, or press Enter to select the default value, `Ping Identity Directory Server Destination`.
-
-15. In the **Base DNs for *\<Endpoint Server>*** menu, enter a base DN where synchronized entries can be found in your endpoint server, or press Enter to accept the default value.
-
-    After your initial entry, you can add additional base DNs by following the prompts.
-
-16. When you have finished entering base DNs for synchronized entries, press Enter to continue the configuration.
-
-17. In the ***\<Endpoint Server>* Server Security** menu, enter the option for the type of security that the Sync Server will use in communication with the endpoint server and press Enter.
-
-18. In the ***\<Endpoint Server>* Servers** menu, enter the host name and port for LDAP communication in the format of `<host name>:<port number>` and press Enter.
-
-    The PingDataSync server attempts a connection to the destination PingDirectory server endpoint. After adding the first server, you can add additional servers for the destination endpoints that will be prioritized below the first server.
-
-19. When you have finished adding servers, press Enter to continue to the next configuration step.
-
-20. In the **Synchronization User Account for *\<Endpoint Server>*** menu, enter a DN for the synchronization user account that will be used in communication with external servers, or press Enter to accept the default value, `[cn=Sync User,cn=Root DNs,cn=config]`.
-
-21. Enter a password for the synchronization user account and press Enter.
-
-22. In the **Prepare Server *\<Source Server>*** menu, press Enter to accept the default option `1` for `Yes` to prepare the source server for synchronization.
-
-23. In the **Prepare Server *\<Endpoint Server>*** menu, press Enter to accept the default option `1` for `Yes` to prepare the endpoint server for synchronization.
-
-24. In the **Sync Pipe Name** menu, enter a name for the Sync Pipe from the source server (AD) to the endpoint server (PingDirectory server), or press Enter to select the default value, `Microsoft_Active_Directory_Source_to_Ping_Identity_Directory_Server_Destination`.
-
-25. In the **Pre-configured Sync Class Configuration for Active Directory Sync Source** menu, follow the prompts to create the basic sync classes and attribute mappings needed to synchronize user accounts, user passwords, and groups to and from AD.
-
-    1. To synchronize user `Create`, `Modify`, and `Delete` operations from AD, follow the prompts.
-
-    2. Enter the object class for user entries at the endpoint, or press Enter to accept the default value, `inetOrgPerson`.
-
-    3. To configure which password policy state attributes to synchronize, follow the prompts.
-
-       For more information on the AD to PingDirectory password policy state attribute mappings, see [Synchronizing Active Directory with PingDirectory](#sync_ad_pd).
-
-       |   |                                                                                                                                                                                         |
-       | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-       |   | For the referenced password policy state attributes, AD is treated as the authoritative source, because synchronization from PingDirectory to AD is not supported for those attributes. |
-
-       |   |                                                                                                                                                                               |
-       | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-       |   | The password policy in PingDirectory must match the password in AD. For example, the `lockout-failure-count` in PingDirectory must match the account lockout threshold in AD. |
-
-    4. To create a DN map for users in the sync pipe, enter `yes` and press Enter. To not create a DN map, press Enter to accept the default option, `no`.
-
-    5. Review the list of basic mappings set up for synchronized user entries and follow the prompts to add any additional attribute mappings. Press Enter to continue.
-
-    6. To synchronize group `Create`, `Modify`, and `Delete` operations from AD, follow the prompts.
-
-26. In the **Sync Pipe Sync Class Definitions** menu, either press Enter to accept the `Microsoft Active Directory Source Users Sync Class`, or enter a value and press Enter to create a new sync class name.
-
-27. Review the **Configuration Summary** and press Enter to write the configuration file as displayed.
-
-    ### Result:
-
-    The server writes the configuration file to a `dsconfig` batch file.
-
-28. To apply the configuration changes to the local PingDataSync server, press Enter. (If you don't want to apply the changes, enter `no` and press Enter.)
-
-## Synchronizing Active Directory with PingDirectory
-
-When you use the `sync-pipe` tool to configure AD *(tooltip: \<div class="paragraph">
-\<p>A directory service for Windows domain networks, included in most Windows Server operation systems.\</p>
-\</div>)* or AD-LDS as a one-way sync with PingDirectory, three AD password policy state attributes require user input to map to a corresponding PingDirectory attribute.
-
-The following table shows these three attributes, the intermediate attribute that is formed between PingDirectory and AD (or AD-LDS), and the extended operation type used by the PingDirectory server to apply the change.
-
-| AD and AD-LDS attribute                                                                                                      | Intermediate attribute            | PingDirectory attribute   | PasswordPolicyStateOperation opType  |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------- | ------------------------------------ |
-| `lockoutTime`                                                                                                                | `pwdAccountLockedTimeFromAD`      | `pwdAccountLockedTime`    | `OP_TYPE_SET_AUTH_FAILURE_TIMES`     |
-| `userAccountControl & (ACCOUNTDISABLE == 2)`&#xA;&#xA;In AD-LDS, the corresponding attribute is ms-DS-User-Account-Disabled. | `ds-pwp-account-disabled-from-ad` | `ds-pwp-account-disabled` | `OP_TYPE_SET_ACCOUNT_DISABLED_STATE` |
-| `pwdLastSet`                                                                                                                 | `pwdChangedTimeFromAD`            | `pwdChangedTime`          | `OP_TYPE_SET_PW_CHANGED_TIME`        |
-
-|   |                                                                                                                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Intermediate attributes only exist in memory on the PingDataSync server so that they can be consumed for attribute mappings. They don't exist on either the AD server or on the PingDirectory server. |
-
-### `modifies-as-creates`
-
-By default, the `modifies-as-creates` sync class property is set to `false`.
-
-Active Directory attributes might not be synchronized as expected when the following is true:
-
-* You are using the `realtime-sync` tool.
-
-* The `modifies-as-creates` sync class property is set to `true`.
-
-* A modification is detected on the source endpoint to a missing entry on the destination endpoint.
-
-* The modification is to attributes other than the three AD password policy state attributes previously mentioned.
-
-To avoid this known issue, you can run the `resync` tool instead of the `realtime-sync` tool. Using `resync` will correctly copy all attributes. For more information, see [The `resync` command](pd_sync_resync_tool.html).
-
----
-
----
-title: Configuring password encryption
-description: You must follow this procedure when synchronizing passwords from a PingDirectory server to Active Directory (AD), or when synchronizing clear text passwords.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_password_encryption
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_password_encryption.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 22, 2024
 section_ids:
   about-this-task: About this task
   steps: Steps
   next-steps: Next steps
 ---
 
-# Configuring password encryption
-
-You must follow this procedure when synchronizing passwords from a PingDirectory server to Active Directory (AD), or when synchronizing clear text passwords.
+# Configure authentication with a SASL external certificate
 
 ## About this task
 
-These steps aren't required for the following scenarios:
+By default, PingDataSync authenticates to the PingDirectory server using LDAP simple authentication (with a bind DN and a password). However, PingDataSync can be configured to use SASL EXTERNAL to authenticate to the PingDirectory server with a client certificate.
 
-* Synchronizing from AD to a PingDirectory server
+|   |                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure assumes that PingDataSync instances are installed and configured to communicate with the backend PingDirectory server instances using either SSL or StartTLS. |
 
-* Excluding password synchronization
+After the servers are configured, perform the following steps to configure SASL EXTERNAL authentication:
 
 ## Steps
 
-1. On the PingDirectory server that will receive the password modifications, enable the Change Log Password Encryption component. The component intercepts password modifications, encrypts the password and adds an encrypted attribute, `ds-changelog- encrypted-password`, to the change log entry. The encryption key can be copied from the output if displayed, or accessed from the `<serverroot>/bin/sync-pipe-cfg.txt` file.
+1. Create a JKS keystore that includes a public and private key pair for a certificate that the PingDataSync instance(s) will use to authenticate to the PingDirectory server instance(s). Run the following command in the instance root of one of the PingDataSync instances. When prompted for a keystore password, enter a strong password to protect the certificate. When prompted for the key password, press ENTER to use the keystore password to protect the private key:
 
    ```shell
-   $ bin/dsconfig set-plugin-prop --plugin-name "Changelog Password
-   Encryption" \
-     --set enabled:true \
-     --set changelog-password-encryption-key:<key>
+   $ keytool -genkeypair \
+     -keystore config/sync-user-keystore \
+     -storetype JKS \
+     -keyalg RSA \
+     -keysize 2048 \
+     -alias sync-user-cert \
+     -dname "cn=Sync User,cn=Root DNs,cn=config" \
+     -validity 7300
    ```
 
-2. On PingDataSync, set the decryption key used to decrypt the user password value in the change log entries. The key allows the user password to be synchronized to other servers that do not use the same password storage scheme.
+2. Create a `config/sync-user-keystore.pin` file that contains a single line that is the keystore password provided in the previous step.
+
+3. If there are other PingDataSync instances in the topology, copy the `sync-user-keystore` and `sync-user-keystore.pin` files into the config directory for all instances.
+
+4. Use the following command to export the public component of the user certificate to a text file:
 
    ```shell
-   $ bin/dsconfig set-global-sync-configuration-prop \
-     --set changelog-password-decryption-key:ej5u9e39pqo68
+   $ keytool -export \
+     -keystore config/sync-user-keystore \
+     -alias sync-user-cert \
+     -file config/sync-user-cert.txt
+   ```
+
+5. Copy the `sync-user-cert.txt` file into the `config` directory of all PingDirectory server instances. Import that certificate into each server's primary trust store by running the following command from the server root. When prompted for the keystore password, enter the password contained in the `config/truststore.pin` file. When prompted to trust the certificate, enter `yes`.
+
+   ```shell
+   $ keytool -import \
+     -keystore config/truststore \
+     -alias sync-user-cert \
+     -file config/sync-user-cert.txt
+   ```
+
+6. Update the configuration for each PingDataSync instance to create a new key manager provider that will obtain its certificate from the `config/sync-user-keystore` file. Run the following `dsconfig` command from the server root:
+
+   ```shell
+   $ dsconfig create-key-manager-provider \
+     --provider-name "Sync User Certificate" \
+     --type file-based \
+     --set enabled:true \
+     --set key-store-file:config/sync-user-keystore \
+     --set key-store-type:JKS \
+     --set key-store-pin-file:config/sync-user-keystore.pin
+   ```
+
+7. Update the configuration for each LDAP external server in each PingDataSync server instance to use the newly created key manager provider, and also to use SASL EXTERNAL authentication instead of LDAP simple authentication. Run the following `dsconfig` command:
+
+   ```shell
+   $ dsconfig set-external-server-prop \
+     --server-name ds1.example.com:636 \
+     --set authentication-method:external \
+     --set "key-manager-provider:Sync User Certificate"
    ```
 
 ## Next steps
 
-Test the configuration or populate data in the destination servers using the [bulk comparison capability of the resync tool](pd_sync_pds_operations.html#bulk_resync). Then, use the `realtime-sync` tool to start synchronizing the data.
-
-|   |                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To synchronize passwords from PingDirectory to AD, you must use the `realtime-sync` tool. The `resync` tool isn't supported for this operation. |
-
----
-
----
-title: Configuring server locations
-description: PingDataSync supports endpoint failover, which is configurable using the location property on the external servers. By default, the server prefers to connect to, and failover to, endpoints in the same location as itself. If there are no location settings configured, PingDataSync will iterate through the configured list of external servers on the Sync Source and Sync Destination when failing over.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdatasync_server_administration_guide:pd_sync_config_server_locations
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/pd_sync_config_server_locations.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configuring server locations
-
-## About this task
-
-PingDataSync supports endpoint failover, which is configurable using the `location` property on the external servers. By default, the server prefers to connect to, and failover to, endpoints in the same location as itself. If there are no location settings configured, PingDataSync will iterate through the configured list of external servers on the Sync Source and Sync Destination when failing over.
-
-|   |                                                                       |
-| - | --------------------------------------------------------------------- |
-|   | Location-based failover is only applicable for LDAP endpoint servers. |
-
-## Steps
-
-1. On PingDataSync, run the `dsconfig` command to set the location for each external server in the Sync Source and Sync Destination. For example, the following command sets the location for six servers in two data centers, `austin` and `dallas`.
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:1389 \
-     --set location:austin
-   ```
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:2389 \
-     --set location:austin
-   ```
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:3389 \
-     --set location:austin
-   ```
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:4389 \
-     --set location:dallas
-   ```
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:5389 \
-     --set location:dallas
-   ```
-
-   ```shell
-   $ bin/dsconfig set-external-server-prop \
-     --server-name example.com:6389 \
-     --set location:dallas
-   ```
-
-2. Run `dsconfig` to set the location on the Global Configuration. This is the location of PingDataSync itself. In this example, set the location to `austin`.
-
-   ```shell
-   $ bin/dsconfig set-global-configuration-prop \
-     --set location:austin
-   ```
+After these changes, PingDataSync should re-establish connections to the LDAP external server and authenticate with SASL EXTERNAL. Verify that PingDataSync is still able to communicate with all backend servers by running the `bin/status` command. All of the servers listed in the "--- LDAP External Servers ---" section should have a status of `Available`. Review the PingDirectory server access log to make sure that the BIND RESULT log messages used to authenticate the connections from PingDataSync include `authType="SASL", saslMechanism="EXTERNAL", resultCode=0`, and `authDN="cn=Sync User,cn=RootDNs,cn=config"`.

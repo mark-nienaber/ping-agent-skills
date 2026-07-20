@@ -1,12 +1,12 @@
 ---
 title: SecurID Connector
-description: The SecurID connector lets you use RSA SecurID for multi-factor authentication (MFA) in your PingOne DaVinci flow.
+description: Configure the SecurID connector to use RSA SecurID multi-factor authentication in your PingOne DaVinci flows
 component: connectors
 page_id: connectors::securid_connector
 canonical_url: https://docs.pingidentity.com/connectors/securid_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -37,13 +37,13 @@ Learn more in the following:
 
   * [Manage the SecurID Authentication API Keys](https://community.securid.com/t5/securid-cloud-authentication/manage-the-securid-authentication-api-keys/ta-p/623093)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -51,7 +51,7 @@ To use the connector, you'll need an RSA SecurID Cloud Authentication license
 
 ### Configuring the SecurID connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -73,7 +73,7 @@ This flow allows a user to authenticate with SecurID. It asks the user to enter 
 
 Because some authentication methods are completed on the user's mobile device, the flow includes a loop that polls SecurID until the authentication challenge is complete.
 
-1. Download the [SecurID - MFA](https://marketplace.pingone.com/item/securid-mfa) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [SecurID - MFA](https://marketplace.pingone.com/item/securid-mfa) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the sign on form.
 

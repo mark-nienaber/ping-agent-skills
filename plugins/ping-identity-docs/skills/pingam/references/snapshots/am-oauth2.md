@@ -590,35 +590,47 @@ By default, AM returns a flat JWT introspection response for backwards compatibi
 
 To enable the `token_introspection` claim, you can configure it at two levels:
 
-* **Realm level**: In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced, and select Use token\_introspection claim for JWT.
+* **Realm level**:
 
-* **Client level**: In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > *client ID* > OAuth2 Provider Overrides. Enable OAuth2 Provider Overrides, then select Use token\_introspection claim for JWT.
+  1. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced.
 
-When enabled, AM wraps the introspected token's claims inside a `token_introspection` claim in the JWT. This separates the JWT's own top-level claims (such as `iss`, `aud`, and `iat` for the introspection response itself) from the introspected token's claims:
+  2. Select Use token\_introspection claim for JWT.
 
-```json
-{
-  "iss": "<authorization-server-issuer>",
-  "aud": "<resource-server-client-id>",
-  "iat": 1234567890,
-  "token_introspection": {
-    "active": true,
-    "scope": "profile",
-    "client_id": "myClient",
-    "aud": ["myClient", "api.example.com"],
-    "sub": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
-    "exp": 1675703376
-  }
-}
-```
+* **Client level**:
 
-When enabled, the `aud` claim of the introspected token is always included in the response, including for stateless (client-side) tokens.
+  1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > *client ID* > OAuth2 Provider Overrides.
 
-When disabled, the `aud` claim is omitted from the response, and a flat JWT structure is used.
+  2. Enable OAuth2 Provider Overrides and select Use token\_introspection claim for JWT.
 
-|   |                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | This setting is disabled by default to preserve existing behavior after upgrades. Enable it for new deployments or when your resource servers are ready to consume RFC 9701-compliant responses. |
+  * When enabled
+
+    AM wraps the introspected token's claims inside a `token_introspection` claim in the JWT. This separates the JWT's own top-level claims (such as `iss`, `aud`, and `iat` for the introspection response itself) from the introspected token's claims:
+
+    ```json
+    {
+      "iss": "<authorization-server-issuer>",
+      "aud": "<resource-server-client-id>",
+      "iat": 1234567890,
+      "token_introspection": {
+        "active": true,
+        "scope": "profile",
+        "client_id": "myClient",
+        "aud": ["myClient", "api.example.com"],
+        "sub": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+        "exp": 1675703376
+      }
+    }
+    ```
+
+    The `aud` claim of the introspected token is always included in the JWT response, including for client-side tokens. The JSON introspection response also includes the `aud` claim of the introspected token, if present.
+
+  * When not enabled
+
+    AM returns a flat JWT structure. The `aud` claim is omitted from the JWT response and the JSON response for client-side tokens.
+
+|   |                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This setting isn't enabled by default to preserve existing behavior after upgrades. Enable it for new deployments or when your resource servers are ready to consume RFC 9701-compliant responses. |
 
 ## Response content
 
@@ -627,6 +639,7 @@ The following table describes fields you may find in the introspection response:
 | Field         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `active`      | Whether the token is active (`true`) or not (`false`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `aud`         | The audience of the token. In a JWT response, the top-level `aud` identifies the audience of the introspection response itself, whereas `token_introspection.aud` is the audience claim from the token being introspected.                                                                                                                                                                                                                                                                                                                                                                              |
 | `auth_level`  | The AM authentication level for the resource owner who granted access to the token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `client_id`   | The client the token was issued to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `cnf`         | The confirmation key claim.The `jwk` type contains the decoded JWK for the access token in the [JWK-based proof-of-possession](oauth2-PoP-JWK.html) flow.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -1702,1098 +1715,1092 @@ To verify that the script modifies the access token as expected, run an OAuth 2.
 ---
 
 ---
-title: Manage consent
-description: Many OAuth 2.0 and OIDC flows require user consent to grant the client access to the user's resources.
+title: AI agent acting autonomously
+description: Use dynamic client registration to create an autonomous AI agent that registers itself and obtains access tokens with appropriate privilege levels
 component: pingam
 version: 8.1
-page_id: pingam:am-oauth2:oauth2-manage-consent
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-manage-consent.html
+page_id: pingam:am-oauth2:ai-agents-autonomous
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/ai-agents-autonomous.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Authorization", "Setup &amp; Configuration"]
-page_aliases: ["oauth2-guide:allowing-clients-to-skip-consent.adoc", "oauth2-guide:allowing-am-to-save-consent.adoc", ":description: Configure OAuth 2.0 and OIDC client applications to use implied consent", "gather user consent", "store consent decisions", "and revoke client access"]
 section_ids:
-  skip-consent: Implied consent
-  gather-consent: Gather consent
-  store-consent-decisions: Store consent decisions
-  revoke_consent: Revoke consent
+  aiagent-autonomous-create-mayact: Create the may act script
+  aiagent-autonomous-create-dcr-script: Create the DCR script
+  aiagent-autonomous-configure-provider: Configure the OAuth 2.0 provider
+  aiagent-autonomous-setup-agent: Register the AI agent
+  aiagent-user-token-exchange-flow: The token exchange flow
+  example_token_exchange: Example token exchange
 ---
 
-# Manage consent
+# AI agent acting autonomously
 
-Many OAuth 2.0 and OIDC flows require user consent to grant the client access to the user's resources.
+This example describes how to use dynamic client registration (DCR) to create an autonomous AI agent.
 
-## Implied consent
+* Use case
 
-OAuth 2.0 and OIDC client applications can use *implied consent*. With implied consent, *AM does not prompt for consent during authorization flows*. This simplifies the flows. The user has only to sign on to grant the client access to protected resources.
+  An automatic software update AI agent is installed on a laptop or a server, registers itself dynamically with AM, and gets its own access token with a read-only scope to check for critical updates.
 
-To enable implied consent, follow these steps:
+  If an update is required, the agent performs a token exchange to get an access token with greater privileges so that it can install the software.
 
-1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Advanced.
+* Prerequisites
 
-2. Select Implied Consent.
+  * [AI agents enabled](ai-agents.html#enable-ai-agents).
 
-3. Save your changes.
+* Steps
 
-4. Make sure AM lets users skip granting consent.
+  * [Create the may act script](#aiagent-autonomous-create-mayact) for the software agent to act autonomously.
 
-   By default, this is enabled in the OAuth 2.0 provider configuration, Realms > *realm name* > Services > OAuth2 Provider > Consent > Allow Clients to Skip Consent.
+  * [Create the DCR script](#aiagent-autonomous-create-dcr-script) to ensure the agent runs the may act script.
 
-   If that is disabled for your deployment, switch to the OAuth2 Provider Overrides tab in the client profile, make the following changes to the settings, and save your work:
+  * [Configure the OAuth 2.0 provider](#aiagent-autonomous-configure-provider) for DCR.
+
+  * [Register the AI agent](#aiagent-autonomous-setup-agent) using DCR.
+
+## Create the may act script
+
+1. Create a [may act script](token-exchange-delegation.html#delegation-script) named `Software agent may act script` that adds the software agent to the `may_act` claim in the subject token:
+
+   * Next-generation
+
+   * Legacy
+
+   ```javascript
+   (function () {
+       var mayAct = {
+           client_id: clientProperties.clientId,
+           sub: `(age!${clientProperties.clientId})`
+     };
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+   ```javascript
+   (function () {
+       var frJava = JavaImporter(
+           org.forgerock.json.JsonValue);
+
+       var mayAct = frJava.JsonValue.json(frJava.JsonValue.object());
+       // the client ID that can exchange the token
+       mayAct.put('client_id', clientProperties.clientId);
+       // the subject of the token that can exchange the token
+       mayAct.put('sub', '(age!' + clientProperties.clientId + ')');
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+   `age`: Stands for agent. It tells the system that the identity following the exclamation mark is an automated agent or a service account, rather than a human user.
+
+2. Save your changes.
+
+3. Make a note of the script `_id`, for example, `4478ca08-5a2a-4b1a-adee-d57c5c032d72`. When you create the DCR script, use this ID to make sure the software agent runs the may act script.
+
+   |   |                                                                                                                       |
+   | - | --------------------------------------------------------------------------------------------------------------------- |
+   |   | You can find the script ID by calling the `/scripts` REST endpoint and checking the JSON output for your script name. |
+
+## Create the DCR script
+
+1. Create a [DCR script](../am-oidc1/dynamic-client-registration-script.html#dcr-create-script) named `Software agent DCR script` that overrides the default behavior of the OAuth 2.0 provider to set the following attributes:
 
    * Enable OAuth2 Provider Overrides
 
-     Enabled
+     *enabled*
 
-   * Allow Clients to Skip Consent
+   * OAuth2 Access Token May Act Script
 
-     Enabled
+     may-act-script-id
 
-To disable implied consent and force users to grant consent during authorization flows, disable the settings described in the previous steps.
+   * Use Client-Side Access & Refresh Tokens
 
-## Gather consent
+     *enabled*
 
-Configure how the client application appears to the user. The following alternatives are available:
+   For example:
 
-* Customize the built-in consent screen:
+   * Next-generation
 
-  1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID*.
+   * Legacy
 
-     Edit the following settings under the Advanced tab, then save your work:
+   ```javascript
+   if (operation === "CREATE" && clientIdentity.isAIAgent()) {
+       clientIdentity.setAttribute("providerOverridesEnabled", ["true"]);
+       clientIdentity.setAttribute("accessTokenMayActScript",["4478ca08-5a2a-4b1a-adee-d57c5c032d72"]);
+       clientIdentity.setAttribute("statelessTokensEnabled", ["true"]);
+       clientIdentity.store();
+   };
+   ```
 
-     * Display name
+   *Not available*
 
-       Display this name to the user when prompting for consent.
+2. Save your changes.
 
-     * Display description
+## Configure the OAuth 2.0 provider
 
-       Explain the decision to the user when prompting for consent.
+1. Complete the steps to [enable DCR in the provider](ai-agents.html#register-ai-agents-dcr).
 
-     * Privacy Policy URI
+2. Configure the provider to use your DCR script:
 
-       Add for the client applications privacy policy.
+   1. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Client Dynamic Registration.
 
-  2. Configure how scopes display.
+   2. Set Dynamic Client Registration Script to `Software agent DCR script`.
 
-     Users grant consent based on *scopes*. Scopes restrict what is shared with the client and limit what the client can do with the user's data. In OAuth 2.0, the meanings of scopes depend on the implementation. In OpenID Connect, scopes map to standard user data claims; for example, the `profile` scope requests access to the user's default profile claims.
+   3. Save your changes.
 
-     For details, refer to [Display scopes in the consent screen](oauth2-scopes.html#configure-scopes).
+## Register the AI agent
 
-* Delegate consent gathering to another service.
+Use the AI agent endpoint to register an agent dynamically.
 
-  For details, refer to [Remote consent](oauth2-remote-consent.html).
+1. Post a DCR request to the AI agent endpoint with the following JSON body, for example:
 
-## Store consent decisions
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --data '{
+     "grant_types": ["client_credentials", "urn:ietf:params:oauth:grant-type:token-exchange"],
+     "client_name": "software agent",
+     "response_types": ["token"],
+     "redirect_uris": ["https://www.example.com:443/callback"],
+     "scopes": ["read", "write"]
+   }' \
+   "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/aiagent/register"
+   ```
 
-AM can store the consent decisions in the user profile. This minimizes redundant prompts and improves the user experience.
+   > **Collapse: Show the response**
+   >
+   > ```bash
+   > {
+   >   "authorization_signed_response_alg": "RS256",
+   >   "request_object_encryption_alg": "",
+   >   "introspection_encrypted_response_alg": "RSA-OAEP-256",
+   >   "default_max_age": 0,
+   >   "application_type": "web",
+   >   "introspection_encrypted_response_enc": "A128CBC-HS256",
+   >   "introspection_signed_response_alg": "RS256",
+   >   "providerOverridesEnabled": true,
+   >   "userinfo_encrypted_response_enc": "",
+   >   "registration_client_uri": "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/aiagent/register?client_id=software-agent-client_id",
+   >   "client_type": "Confidential",
+   >   "userinfo_encrypted_response_alg": "",
+   >   "registration_access_token": "nAn6REdGvAthrKK6EhMo_eT2Rzw",
+   >   "token_endpoint_auth_method": "client_secret_basic",
+   >   "userinfo_signed_response_alg": "",
+   >   "client_id": "software-agent-client_id",
+   >   "enableApplicationContext": false,
+   >   "public_key_selector": "x509",
+   >   "scope": "read write",
+   >   "require_pushed_authorization_requests": false,
+   >   "authorization_code_lifetime": 0,
+   >   "client_secret": "software-agent-client_secret",
+   >   "user_info_response_format_selector": "JSON",
+   >   "tls_client_certificate_bound_access_tokens": false,
+   >   "backchannel_logout_session_required": false,
+   >   "client_name": "Software Agent",
+   >   "grant_types": [
+   >     "client_credentials",
+   >     "urn:ietf:params:oauth:grant-type:token-exchange"
+   >   ],
+   >   "jwt_token_lifetime": 0,
+   >   "id_token_encryption_enabled": false,
+   >   "redirect_uris": [
+   >     "https://www.example.com:443/callback"
+   >   ],
+   >   "jwks_cache_miss_cache_time": 60000,
+   >   "jwks_cache_timeout": 3600000,
+   >   "id_token_encrypted_response_alg": "RSA-OAEP-256",
+   >   "id_token_encrypted_response_enc": "A128CBC-HS256",
+   >   "client_secret_expires_at": 0,
+   >   "access_token_lifetime": 0,
+   >   "refresh_token_lifetime": 0,
+   >   "scopes": [
+   >     "read",
+   >     "write"
+   >   ],
+   >   "request_object_signing_alg": "",
+   >   "response_types": [
+   >     "token"
+   >   ]
+   > }
+   > ```
 
-When an OAuth 2.0 client application requests scopes, AM checks the user profile for scopes the user has already consented to. AM does not prompt the user to consent again to the same scopes, only scopes the user has not consented to.
+   The software agent is now registered and can operate autonomously. The client ID and client secret are automatically generated.
 
-To save consent:
+   When the agent performs a token exchange, the may act script adds the software agent DCR client to the `may_act` claim in the subject token, allowing it to act on behalf of itself.
 
-1. Add a multivalued string syntax attribute, such as `custom_consent`, to user profiles for saving consent decisions.
+## The token exchange flow
 
-   The attribute must be of type `array`.
+![aiagent autonomous](_images/aiagent-autonomous.svg)
 
-   For instructions on adding the attribute, refer to [Update the identity store for a custom attribute](../setup/customizing-data-stores.html#add-attr-to-identity-repository).
+### Example token exchange
 
-2. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider and select the Consent tab.
+1. [Get an agent access token](oauth2-client-cred-grant.html) for the software agent using the client credentials flow:
 
-3. In the Saved Consent Attribute field, add the name of the attribute you created, such as `custom_consent`.
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=client_credentials' \
+   --data 'client_id=software-agent-client_id' \
+   --data 'client_secret=software-agent-client_secret' \
+   --data 'scope=read' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token":"software-agent-access-token",
+     "scope":"read",
+     "token_type":"Bearer",
+     "expires_in":3599
+   }
+   ```
 
-4. Save your changes.
+   The access token gives the software agent read access to protected resources so that it can check software versions.
 
-|   |                                                                                                      |
-| - | ---------------------------------------------------------------------------------------------------- |
-|   | To force AM to prompt for consent for a specific client request, add the `prompt=consent` parameter. |
+2. The software agent detects that the software is out of date and needs to be updated.
 
-## Revoke consent
+   The agent performs a [token exchange](token-exchange-delegation.html) to get the increased permissions (`scope=read write`) required to run a software update:
 
-You can revoke a client application's access at any time through the user dashboard page:
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=software-agent-client_id' \
+   --data 'client_secret=software-agent-client_secret' \
+   --data 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+   --data 'scope=read write' \
+   --data 'subject_token=software-agent-access-token' \
+   --data 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token": "exchanged-id-token",
+     "refresh_token": "new-refresh-token,"
+     "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+     "scope": "read write",
+     "token_type": "Bearer",
+     "expires_in": 3599
+   }
+   ```
 
-1. Sign on as an end user.
-
-   Your dashboard page displays.
-
-2. Expand Authorized Apps.
-
-3. Click the delete icon [icon: times, set=fa]to revoke access:
-
-   ![Revoke client application access through the user dashboard.](_images/xui-oauth2-self-service.png)Figure 1. Authorized Apps pane
+   The `issued_token_type` shows this is an exchanged token.
 
 ---
 
 ---
-title: Mutual TLS
-description: Authenticate OAuth 2.0 clients using mutual TLS with X.509 certificates, either self-signed or PKI-based, to PingAM
+title: AI agent on behalf of a user
+description: Configure an AI agent to obtain a delegation token on behalf of a user using OAuth 2.0 token exchange
 component: pingam
 version: 8.1
-page_id: pingam:am-oauth2:client-auth-mtls
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/client-auth-mtls.html
+page_id: pingam:am-oauth2:ai-agents-user
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/ai-agents-user.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Authentication", "OAuth 2.0", "TLS/SSL", "Federation", "Certificates", "Setup &amp; Configuration"]
-page_aliases: ["oauth2-guide:client-auth-mtls.adoc"]
 section_ids:
-  pki-mtls: Mutual TLS using PKI
-  configure_am_for_mutual_tls_using_pki: Configure AM for mutual TLS using PKI
-  self-signed-mtls: Mutual TLS using self-signed X.509 certificates
-  configure_am_for_mutual_tls_using_self_signed_x_509_certificates: Configure AM for Mutual TLS using self-signed X.509 certificates
-  provide-mtls-certs: Provide client certificates to AM
-  standard_tls_client_certificate_authentication: Standard TLS client certificate authentication
-  trusted_headers: Trusted headers
+  aiagent-user-create-mayact: Create the may act script
+  aiagent-user-oauth2client: Configure the OAuth 2.0 client
+  aiagent-user-setup-agent: Register the AI agent
+  the_token_exchange_flow: The token exchange flow
+  example_token_exchange: Example token exchange
 ---
 
-# Mutual TLS
+# AI agent on behalf of a user
 
-Clients can authenticate to AM by using mutual TLS (mTLS) and X.509 certificates. The certificates are either self-signed or use public key infrastructure (PKI), as per version 12 of the draft specification, [OAuth 2.0 Mutual TLS Client Authentication and Certificate Bound Access Tokens](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-mtls-12).
+This example describes how to configure an AI agent to get a delegation token on behalf of a user using token exchange.
 
-|   |                                                                                                                                                              |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | AM also supports the Certificate Bound Access Tokens part of the specification. Learn more in [Certificate-bound proof-of-possession](oauth2-PoP-Cert.html). |
+* Use case
 
-## Mutual TLS using PKI
+  An employee wants to use an HR digital assistant to update their health plan in a third-party HR system that's protected by AM.
 
-To authenticate OAuth 2.0 clients with mTLS, the certificate presented by the client must have a subject-distinguished name that exactly matches a value specified in the client profile in AM.
+* Prerequisites
 
-The Certificate Authority (CA) specified in the chain must also be trusted by AM. Configure a secret mapping with the secret label `am.services.oauth2.tls.client.cert.authentication` to specify the CAs AM trusts.
+  * [AI agents enabled](ai-agents.html#enable-ai-agents).
 
-### Configure AM for mutual TLS using PKI
+  * An employee user profile, for example, `bjensen`.
 
-Follow these steps to configure AM to support mutual TLS using PKI:
+* Steps
 
-1. If you haven't already done so, create an OAuth 2.0 client profile.
+  * [Create the may act script](#aiagent-user-create-mayact) for the HR agent to act on behalf of the employee.
+
+  * [Configure the OAuth 2.0 client](#aiagent-user-oauth2client), for example, `hr-client`.
+
+  * [Register the AI agent](#aiagent-user-setup-agent), for example, `hr-agent`.
+
+## Create the may act script
+
+1. Write a [may act script](token-exchange-delegation.html#delegation-script) that adds the AI agent, `hr-agent`, to the `may_act` claim in the subject token:
+
+   * Next-generation
+
+   * Legacy
+
+   ```javascript
+   (function () {
+       var mayAct = {
+           "client_id": "hr-agent",
+           "sub": "(age!hr-agent)"
+       };
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+   ```javascript
+   (function () {
+       var frJava = JavaImporter(
+           org.forgerock.json.JsonValue);
+
+       var mayAct = frJava.JsonValue.json(frJava.JsonValue.object());
+       // the client ID that can exchange the token
+       mayAct.put('client_id', 'hr-agent');
+       // the subject claim for the agent / OAuth 2.0 client application
+       mayAct.put('sub', '(age!hr-agent)');
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+2. Save your changes.
+
+## Configure the OAuth 2.0 client
+
+Create a client application that overrides the OAuth 2.0 provider settings. This is the client that the employee uses to log in and get an access token from.
+
+1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > Clients and [register a confidential OAuth 2.0 client](oauth2-register-client.html) in the same realm as the provider and user journeys.
+
+   Provide the following values and click Create:
+
+   * Client ID
+
+     `hr-client`
+
+   * Client secret
+
+     `mySecret`
+
+   * Redirection URIs
+
+     `https://www.example.com:443/callback`
+
+   * Scope(s)
+
+     `read` `write` `delete`
+
+2. On the Advanced tab, verify the following settings:
+
+   * Grant Types
+
+     `Authorization Code`
+
+   * Token Endpoint Authentication Method
+
+     `client_secret_basic`
+
+3. On the OAuth2 Provider Overrides tab, save these settings:
+
+   * Enable OAuth2 Provider Overrides
+
+     *enabled*
+
+   * OAuth2 Access Token May Act Script
+
+     may act script name
+
+## Register the AI agent
+
+Create an OAuth 2.0 AI agent to act as the HR agent that gets a delegation token to act on behalf of the employee.
+
+1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > AI Agents and [register an AI agent](ai-agents.html#register-ai-agents-ui).
+
+   Provide the following values and click Create:
+
+   * Client ID
+
+     `hr-agent`
+
+   * Client secret
+
+     `mySecret`
+
+   * Redirection URIs
+
+     `https://www.example.com:443/callback`
+
+   * Scope(s)
+
+     `read` `write` `delete`
+
+## The token exchange flow
+
+![aiagent on behalf user](_images/aiagent-on-behalf-user.svg)
+
+### Example token exchange
+
+1. [Authenticate](../am-authentication/authn-rest.html) as the employee, `bjensen`, for example:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "X-OpenAM-Username: bjensen" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header 'Accept-API-Version: resource=2.0, protocol=1.0' \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"user-token",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+2. [Request an authorization code](oauth2-authorize-endpoint.html) with the user token:
+
+   ```bash
+   $ curl \
+   --dump-header - \
+   --request POST \
+   --cookie 'iPlanetDirectoryPro=user-token' \
+   --data 'scope=read' \
+   --data 'response_type=code' \
+   --data 'client_id=hr-client' \
+   --data 'csrf=user-token' \
+   --data 'redirect_uri=https://www.example.com:443/callback' \
+   --data 'decision=allow' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/authorize'
+   …​
+   location: https://www.example.com:443/callback?code=authorization-code&iss=https%3A%2F%2F…​
+   …​
+   ```
+
+3. [Get a user access token](oauth2-access_token-endpoint.html) with the authorization code:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=authorization_code' \
+   --data 'client_id=hr-client' \
+   --data 'client_secret=mySecret' \
+   --data 'code=authorization-code' \
+   --data 'redirect_uri=https://www.example.com:443/callback' \
+   --data 'scope=read' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token": "user-access-token",
+     "refresh_token": "refresh-token",
+     "scope": "read",
+     "token_type": "Bearer",
+     "expires_in": 3599
+   }
+   ```
+
+4. [Get an agent access token](oauth2-client-cred-grant.html) for `hr-agent` using the client credentials flow:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=client_credentials' \
+   --data 'client_id=hr-agent' \
+   --data 'client_secret=mySecret' \
+   --data 'scope=read' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token":"agent-access-token",
+     "scope":"read",
+     "token_type":"Bearer",
+     "expires_in":3599
+   }
+   ```
+
+5. [Exchange the two access tokens](token-exchange-delegation.html) to allow the HR agent to act on behalf of `bjensen`, with scopes managed by AM:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=hr-agent' \
+   --data 'client_secret=mySecret' \
+   --data 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+   --data 'scope=read write delete' \
+   --data 'subject_token=user-access-token' \
+   --data 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
+   --data 'actor_token=agent-access-token' \
+   --data 'actor_token_type=urn:ietf:params:oauth:token-type:access_token' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token": "exchanged-id-token",
+     "refresh_token": "new-refresh-token,"
+     "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+     "scope": "read write delete",
+     "token_type": "Bearer",
+     "expires_in": 3599
+   }
+   ```
+
+   The `issued_token_type` shows this is an exchanged token.
+
+---
+
+---
+title: AI agent on behalf of an agent
+description: Configure AI agents where both the subject and actor are machine agents, enabling one agent to act on behalf of another using token exchange and delegation
+component: pingam
+version: 8.1
+page_id: pingam:am-oauth2:ai-agents-agent
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/ai-agents-agent.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  aiagent-agent-create-mayact: Create the may act script
+  aiagent-agent-setup-subject-agent: Register the subject AI agent
+  aiagent-agent-setup-actor-agent: Register the actor AI agent
+  aiagent-user-token-exchange-flow: The token exchange flow
+  example_token_exchange: Example token exchange
+---
+
+# AI agent on behalf of an agent
+
+This example describes how to configure AI agents where both the subject and the actor are machine agents, not end users.
+
+* Use case
+
+  A risk orchestrator AI agent acts on behalf of a data-processing agent to call risk-scoring APIs, select the best result, and log an explanation.
+
+* Prerequisites
+
+  * [AI agents enabled](ai-agents.html#enable-ai-agents).
+
+* Steps
+
+  * [Create the may act script](#aiagent-agent-create-mayact) for the risk operator agent to act on behalf of the data-processing agent.
+
+  * [Register the subject AI agent](#aiagent-agent-setup-subject-agent), for example, `data-agent`.
+
+  * [Register the actor AI agent](#aiagent-agent-setup-actor-agent), for example, `risk-agent`.
+
+## Create the may act script
+
+1. Write a [may act script](token-exchange-delegation.html#delegation-script) that adds the actor AI agent, `risk-agent`, to the `may_act` claim in the subject token:
+
+   * Next-generation
+
+   * Legacy
+
+   ```javascript
+   (function () {
+       var mayAct = {
+           "client_id": "risk-agent",
+           "sub": "(age!risk-agent)"
+       };
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+   ```javascript
+   (function () {
+       var frJava = JavaImporter(
+           org.forgerock.json.JsonValue);
+
+       var mayAct = frJava.JsonValue.json(frJava.JsonValue.object());
+       // the client ID that can exchange the token
+       mayAct.put('client_id', 'risk-agent');
+       // the subject claim for the agent / OAuth 2.0 client application
+       mayAct.put('sub', '(age!risk-agent)');
+       token.setMayAct(mayAct);
+   }());
+   ```
+
+2. Save your changes.
+
+## Register the subject AI agent
+
+Create an OAuth 2.0 AI agent to act as the data-processing agent that delegates tasks to the actor agent.
+
+1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > AI Agents and [register an AI agent](ai-agents.html#register-ai-agents-ui).
+
+   Provide the following values and click Create:
+
+   * Client ID
+
+     `data-agent`
+
+   * Client secret
+
+     `mySecret`
+
+   * Redirection URIs
+
+     `https://www.example.com:443/callback`
+
+   * Scope(s)
+
+     `read` `write` `delete`
+
+2. On the OAuth2 Provider Overrides tab, save these settings:
+
+   * Enable OAuth2 Provider Overrides
+
+     *enabled*
+
+   * OAuth2 Access Token May Act Script
+
+     may act script name
+
+## Register the actor AI agent
+
+Create an OAuth 2.0 AI agent as the risk orchestrator that gets a delegation token to act on behalf of the data-processsing agent.
+
+1. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > AI Agents and [register an AI agent](ai-agents.html#register-ai-agents-ui).
+
+   Provide the following values and click Create:
+
+   * Client ID
+
+     `risk-agent`
+
+   * Client secret
+
+     `mySecret`
+
+   * Redirection URIs
+
+     `https://www.example.com:443/callback`
+
+   * Scope(s)
+
+     `read` `write` `delete`
+
+## The token exchange flow
+
+![aiagent on behalf agent](_images/aiagent-on-behalf-agent.svg)
+
+### Example token exchange
+
+1. [Get an agent access token](oauth2-client-cred-grant.html) for `risk-agent` using the client credentials flow:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=client_credentials' \
+   --data 'client_id=risk-agent' \
+   --data 'client_secret=mySecret' \
+   --data 'scope=read' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token":"risk-agent-access-token",
+     "scope":"read",
+     "token_type":"Bearer",
+     "expires_in":3599
+   }
+   ```
+
+2. [Get an agent access token](oauth2-client-cred-grant.html) for `data-agent` using the client credentials flow:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=client_credentials' \
+   --data 'client_id=data-agent' \
+   --data 'client_secret=mySecret' \
+   --data 'scope=read' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token":"data-agent-access-token",
+     "scope":"read",
+     "token_type":"Bearer",
+     "expires_in":3599
+   }
+   ```
+
+3. [Exchange the two access tokens](token-exchange-delegation.html) to allow the risk-orchestrating agent to act on behalf of the data processing agent, with scopes managed by AM:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=risk-agent' \
+   --data 'client_secret=mySecret' \
+   --data 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+   --data 'scope=read' \
+   --data 'subject_token=data-agent-access-token' \
+   --data 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
+   --data 'actor_token=risk-agent-access-token' \
+   --data 'actor_token_type=urn:ietf:params:oauth:token-type:access_token' \
+   'https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token'
+   {
+     "access_token": "exchanged-id-token",
+     "refresh_token": "new-refresh-token,"
+     "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+     "scope": "read write delete",
+     "token_type": "Bearer",
+     "expires_in": 3599
+   }
+   ```
+
+   The `issued_token_type` shows this is an exchanged token.
+
+---
+
+---
+title: AI agents
+description: Enable AI agents in PingAM to register specialized OAuth 2.0 identities that securely perform delegated tasks on behalf of end users through token exchange
+component: pingam
+version: 8.1
+page_id: pingam:am-oauth2:ai-agents
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/ai-agents.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  how_to_use_an_ai_agent: How to use an AI agent
+  enable-ai-agents: Enable AI agents
+  register-ai-agents-ui: Register an AI agent in the UI
+  create-group-settings: Create group settings
+  register-ai-agents-dcr: Register an AI agent dynamically
+---
+
+# AI agents
+
+AI agents are specialized OAuth 2.0 identities that securely perform tasks on behalf of end users through a delegated token exchange process, ensuring distinct accountability and granular access control.
+
+You can use AI agents to securely build [digital assistants](https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.html#digital-assistant) that operate on behalf of end users, such as a chatbot on a retail website helping a user navigate products, or an internal workforce assistant acting on behalf of an employee to access enterprise tools like Salesforce.
+
+* Token delegation
+
+  Using OAuth 2.0 token exchange, an AI agent can swap an existing access token for a new, constrained, *delegation* token that encodes both the original subject and the acting agent. The AI agent can then complete tasks on behalf of a user or another agent, with scopes and audiences controlled by the authorization server.
+
+* Common use cases
+
+  * **Automated operations:** Use an AI agent to handle routine high-volume tasks, such as triaging tickets or provisioning access.
+
+  * **Digital assistants:** Use AI agents to search products, manage preferences, or place orders.
+
+## How to use an AI agent
+
+To use an AI agent, you must first complete these steps:
+
+* [Enable AI agents](#enable-ai-agents)
+
+* Register the agent in one of the following ways:
+
+  * [Manually in the UI](#register-ai-agents-ui)
+
+  * [Dynamically over REST](#register-ai-agents-dcr).
+
+Once registered, you can use the AI agent in delegation use cases. For example:
+
+* [AI agent on behalf of a user](ai-agents-user.html)
+
+* [AI agent on behalf of an agent](ai-agents-agent.html)
+
+* [AI agent acting autonomously](ai-agents-autonomous.html)
+
+## Enable AI agents
+
+In AM, AI agents are switched off by default.
+
+To enable AI agents:
+
+1. In the AM admin UI, set the [advanced property](../setup/server-advanced.html#org.forgerock.am.oauth2.aiagents.enabled) `org.forgerock.am.oauth2.aiagents.enabled` to `true`, and save your changes.
+
+2. Enable AI agents in the OAuth 2.0 provider.
+
+   1. Go to Realms > *realm name* > Services.
+
+   2. [Create an OAuth 2.0 provider service](oauth2-configure-authz.html) if one doesn't exist already.
+
+   3. On the OAuth 2.0 provider page, select the AI Agents tab, and select Enable AI Agents.
+
+   4. Save your changes.
+
+   5. Refresh the UI for the changes to apply.
+
+3. Go to Applications > OAuth 2.0 and verify that AI Agents appears as the last item in the menu.
+
+## Register an AI agent in the UI
+
+Use the AI agents UI to onboard an AI agent, configure its standard OAuth 2.0 properties as a specialized OAuth 2.0 client, update, or delete an agent.
+
+To create an AI agent:
+
+1. Go to Applications > OAuth 2.0 > AI Agents and click + Add AI Agent.
+
+2. Provide values for Client ID, Client secret, Redirection URIs, Scope(s), and Default Scope(s), and click Create.
+
+   The new AI agent is created with standard OAuth 2.0 client properties, with both the `Client Credentials` and `Token Exchange` grant types enabled by default.
+
+3. Configure the AI agent properties to suit your use case and save your changes.
+
+   Find out more about OAuth 2.0 client properties in [Client application registration](oauth2-register-client.html).
+
+### Create group settings
+
+You can optionally configure shared settings for AI agents by adding them to an AI agent group. They work in the same way as OAuth 2.0 client groups.
+
+Learn about creating groups and inheriting group settings in [Shared application settings](oauth2-register-client.html#shared-application-settings).
+
+## Register an AI agent dynamically
+
+Use [dynamic client registration](../am-oidc1/dynamic-client-registration-script.html) (DCR) when you want to use automation or agents to onboard themselves.
+
+1. Enable DCR in the provider:
+
+   1. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider.
+
+   2. On the Client Dynamic Registration tab, enable Allow Open Dynamic Client Registration and save your changes.
+
+   3. On the Advanced tab, add the scopes the agent can register in the Client Registration Scope Allowlist, for example `read write`.
+
+   4. Save your changes.
+
+2. *Optional*. If you require [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414) compliance, configure your webserver to map the DCR endpoint to appear under the authorization server metadata.
+
+   For example, for an Apache Tomcat deployment:
+
+   1. Edit the `server.xml` to add the mapping:
+
+      `<Valve className="org.apache.catalina.valves.rewrite.RewriteValve" />` to `/Server/Service/Engine/Host`
+
+   2. Create a file called `rewrite.config` and place it under `CATALINA_HOME/conf/Catalina/localhost/`.
+
+   3. Add the following mapping to `rewrite.config`:
+
+      `RewriteRule ^/\.well-known/oauth-authorization-server$ /am/oauth2/realms/root/.well-known/oauth-authorization-server/aiagent [L]`
+
+   4. Save your changes.
+
+   5. Restart Tomcat.
+
+3. *Optional.* You can verify the AI agent registration URL by calling the well-known authorization server endpoint and reading the `registration_endpoint` value.
+
+   * Example URLs
+
+     If the rewrite rule was added:
+
+     ```bash
+     $ curl https://am.example.com:8443/.well-known/oauth-authorization-server
+     {
+       "…​": "…​",
+       "registration_endpoint": "https://am.example.com:8443/am/oauth2/aiagent/register",
+       "…​": "…​"
+     }
+     ```
+
+     Without the rewrite rule:
+
+     ```bash
+     $ curl https://am.example.com:8443/am/oauth2/realms/root/.well-known/oauth-authorization-server/aiagent
+     {
+       "…​": "…​",
+       "registration_endpoint": "https://am.example.com:8443/am/oauth2/aiagent/register",
+       "…​": "…​"
+     }
+     ```
+
+4. To register an agent, you can now post a [DCR request](../am-oidc1/oauth2-dynamic-client-registration.html) to the AI agent endpoint.
+
+   Specify the same parameters as for the DCR `/register` endpoint, for example:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --data '{
+     "grant_types": ["client_credentials", "urn:ietf:params:oauth:grant-type:token-exchange"],
+     "client_name": "DCR AI agent",
+     "response_types": ["token"],
+     "redirect_uris": ["'"https://www.example.com:443/callback"'"],
+     "scopes": ["read", "write", "delete"]
+   }' \
+   "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/aiagent/register"
+   ```
+
+   By default, only the `authorization_code` grant type is set for DCR clients, so you must include `urn:ietf:params:oauth:grant-type:token-exchange` if you want the agent to be able to exchange tokens.
+
+   |   |                                                                                                                                                                                                                                                                                                             |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | You can use [DCR scripting](../am-oidc1/dynamic-client-registration-script.html) to run extra checks and processes after you create, update, or delete an agent.For example, for IDM integrations, verify attribute values or patch the underlying PingIDM object with custom AI agent identity attributes. |
+
+---
+
+---
+title: AM as client and authorization server
+description: Set up PingAM as both an OAuth 2.0 authorization server and client to protect resources on a resource server using a PingAM web agent
+component: pingam
+version: 8.1
+page_id: pingam:am-oauth2:oauth2-client-plus-authz
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-client-plus-authz.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Authorization", "Clients", "Agents", "Setup &amp; Configuration"]
+page_aliases: ["oauth2-guide:oauth2-client-plus-authz.adoc"]
+---
+
+# AM as client and authorization server
+
+You can set up AM as both an OAuth 2.0 authorization server *and* an OAuth 2.0 client to protect resources on a resource server using an AM web agent.
+
+![This example uses an authorization server, a client, and a resource server protected with a web agent.](_images/oauth2-end-to-end-example.png)Figure 1. Authorization server, client, and resource server
+
+This example configuration uses three servers:
+
+| Server | Example URL                          | Role                                                                                                                  |
+| ------ | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| AM1    | `https://authz.example.com:8443/am`  | OAuth 2.0 authorization server                                                                                        |
+| AM2    | `https://client.example.com:8443/am` | OAuth 2.0 client, which also handles policies                                                                         |
+| RS     | `https://www.example.com:8443/`      | OAuth 2.0 resource server protected with an AM web agent, where the protected resources are deployed in Apache Tomcat |
+
+The two AM servers communicate using OAuth 2.0. The web agent on the resource server communicates with AM using AM specific requests. The resource server in this example doesn't need to support OAuth 2.0.
+
+The high-level configuration steps are as follows:
+
+1. On the AM server that acts as an OAuth 2.0 client (AM2), configure an agent profile and the policy used to protect the resources.
+
+2. On the web server or application container that acts as an OAuth 2.0 resource server (RS), install and configure an AM web agent.
+
+   Make sure that you can access the resources when you log in through an authentication tree that you know is working, such as the default `ldapService` tree.
+
+   For example, if you try to access `https://www.example.com:8443/examples/`, the web agent redirects you to the AM login page. After you log in successfully as a user with access rights to the resource, AM redirects you back to `https://www.example.com:8443/examples/` and the web agent lets you access the requested resources.
+
+3. Configure AM1 as an OAuth 2.0 authorization service.
+
+   Learn more in [Authorization server configuration](oauth2-configure-authz.html).
+
+4. Configure AM2 as an OAuth 2.0 client by setting up a social identity provider service.
+
+   Learn more in [Social authentication](../am-authentication/social-registration.html).
+
+5. On AM1, register the OAuth 2.0 or OIDC identity provider as an OAuth 2.0 client.
 
    Learn more in [Client application registration](oauth2-register-client.html).
 
-2. Set up a secret store in the same realm as the OAuth 2.0 client.
+6. Create a social registration journey that references your social authentication provider.
 
-   AM maintains the details of trusted CAs in this secret store.
+   Learn more in [Configure social registration trees](../am-authentication/social-registration.html#basic-social-registration).
 
-   You can use an existing secret store or create a new store as follows:
-
-   1. In the AM admin UI, go to Realms > *realm name* > Secret Stores, and click Add Secret Store.
-
-   2. Enter an ID for the secret store (for example, `TrustStore`), select the store type, complete the required fields, and click Create.
-
-   |   |                                                                                                                                                                                                                                             |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | You might need to configure the credentials for accessing the new store in one of the other configured secret stores. Learn more about configuring secret stores in [Secrets, certificates, and keys](../security/secrets-certs-keys.html). |
-
-3. Import the certificates belonging to the CAs you want the instance of AM to trust.
-
-4. Map the aliases of the imported certificates to the `am.services.oauth2.tls.client.cert.authentication` secret label:
-
-   * In the AM admin UI, go to Realms > *realm name* > Secret Stores > *store name* > Mappings, and click Add Mapping.
-
-   * In the Secret Label field, select `am.services.oauth2.tls.client.cert.authentication`.
-
-   * In the Aliases field, enter the alias of the imported CA certificate to trust and click Add.
-
-   * Repeat the previous step to add the aliases of all the CA certificates to trust, and click Create.
-
-5. Add the subject-distinguished name that must appear in the client certificate to be able to authenticate:
-
-   * In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > *agent name* > Signing and Encryption.
-
-   * In the mTLS Subject DN field, enter the client certificate subject DN. For example, `CN=myOauth2Client`. Certificate tools, such as OpenSSL, can display DN attributes in different orders or formats, so copied output might need adjusting to match the required format.
-
-     |   |                                                                                                                                                        |
-     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-     |   | If this field is left empty, the default value that must be found in a CA-signed client certificate is `CN=client ID`. For example, `CN=myMTLSClient`. |
-
-   * Save your changes.
-
-6. Configure the OAuth 2.0 provider to check whether the certificates presented by the authenticating clients have been revoked:
-
-   * In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced.
-
-   * Enable Check TLS Certificate Revocation Status.
-
-   * In the OCSP Responder URI field, enter the URI of the online certificate status protocol responder service. AM uses this service to check the certificates.
-
-     If not specified, AM determines the appropriate URI from the certificate.
-
-   * In the OCSP Responder Certificate field, enter the PEM-encoded certificate that AM will use to verify all OCSP responses.
-
-     If not specified, AM determines the appropriate certificate from the trusted CA certificates configured in the `am.services.oauth2.tls.client.cert.authentication` secret label.
-
-AM is now configured to accept CA-signed client certificates for authentication. For information on how to present the certificates when authenticating, refer to [Provide client certificates to AM](#provide-mtls-certs).
-
-## Mutual TLS using self-signed X.509 certificates
-
-This method of authenticating OAuth 2.0 clients requires that the self-signed X.509 certificate presented by the client exactly matches a certificate specified in the client profile in AM.
-
-Specify the expected self-signed X.509 certificate in the client profile using one of these methods:
-
-* JSON Web Key Set (JWKS)
-
-  Specify the X.509 certificates in the X.509 Certificate Chain (`x5c`) attribute of the JSON Web Keys specified in the set.
-
-* JSON Web Key Set URI (JWKS\_uri)
-
-  AM periodically retrieves the JWKS from the specified URI, and uses the certificates provided in the X.509 Certificate Chain (`x5c`) attribute to verify the client certificate.
-
-* Store the X.509 certificate as a secret in the secret store.
-
-* Store the X.509 certificate in the configuration.
-
-  Add the exact content of the X.509 certificate in the client profile.
-
-  Unlike the other methods, only a single certificate can be specified using this method.
-
-### Configure AM for Mutual TLS using self-signed X.509 certificates
-
-Follow these steps to configure AM to support mutual TLS using self-signed certificates.
-
-1. If you haven't already done so, [create an OAuth 2.0 client profile in AM](oauth2-register-client.html).
-
-2. To provide the X.509 certificates the client will use to authenticate, go to Applications > OAuth 2.0 > Clients > *client ID* > Signing and Encryption, and then perform one of the following steps:
-
-   * Use a JSON Web Key Set (JWKS) to specify the certificates:
-
-     1. Set the Public key selector property to `JWKs`.
-
-     2. Enter the contents of the JWKS in the Json Web Key property.
-
-   * Use a JSON Web Key Set URI (JWKS\_uri) to specify the certificates:
-
-     1. Set the Public key selector property to `JWKs_uri`.
-
-     2. Enter the JWKS URI in the Json Web Key URI property.
-
-   * Store the X.509 certificate as a secret in a secret store:
-
-     1. Follow the steps in [Secret stores](../security/secret-stores.html) to add the certificate as a secret.
-
-     2. Map this secret to the `am.applications.oauth2.client.identifier.mtls.trusted.cert` secret label, where `identifier` is the value of the Secret Label Identifier configured for the client on the Core tab.
-
-   * Use the contents of an X.509 certificate:
-
-     1. Set the Public key selector property to `X509`.
-
-     2. In the mTLS Self-Signed Certificate field, enter the contents of the X.509 certificate in PEM or DER format.
-
-   |   |                                                                                                                                                                                 |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | OIDC clients must also specify the authentication method they're using in their client profiles. Learn more in [OIDC client authentication](../am-oidc1/oidc-client-auth.html). |
-
-3. Save your changes.
-
-AM is now configured to accept self-signed client certificates for authentication. For information on how to present the certificates when authenticating, refer to [Provide client certificates to AM](#provide-mtls-certs).
-
-## Provide client certificates to AM
-
-The client can provide its certificate to AM using either standard TLS client certificate authentication or trusted headers.
-
-|   |                                                                                                                                                                                                                            |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You must configure the web container in which AM runs to use TLS connections, and to request and accept client certificates.Consult the documentation for your web container to determine the appropriate actions to take. |
-
-### Standard TLS client certificate authentication
-
-The client provides its certificates in the standard servlet client certificate attribute.
-
-This method is preferred because the web container verifies that the client authenticated the TLS session with the private key associated with the certificate.
-
-When you've configured AM to accept client certificates, the client can authenticate to the OAuth 2.0 `access_token` endpoint using one of the X.509 certificates registered in the client.
-
-Any of the [OAuth 2.0 grant flows](oauth2-implementing-flows.html) that makes a call to the `access_token` endpoint can authenticate clients using X.509 certificates.
-
-The following example uses the [Client credentials grant](oauth2-client-cred-grant.html) and attaches the client certificates to the request:
-
-```bash
-$ curl \
---request POST \
---data "client_id=myClient" \
---data "grant_type=client_credentials" \
---data "scope=write" \
---data "response_type=token" \
---cert "myClientCertificate.pem" \
---key "myClientCertificate.key.pem" \
-"https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token"
-{
-  "access_token": "sbQZuveFumUDV5R1vVBl6QAGNB8",
-  "scope": "write",
-  "token_type": "Bearer",
-  "expires_in": 3599
-}
-```
-
-### Trusted headers
-
-AM receives the certificates in a configured, trusted HTTP header.
-
-This method is intended for cases where TLS is being terminated at a reverse proxy or load balancer, so the container in which AM runs can't directly authenticate the client.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | AM can receive certificates in the following formats:- DER-encoded.
-
-- Raw PEM-encoded.
-
-- DER- or PEM-encoded first, then URL-encoded, for compatibility with the NGINX `$ssl_client_escaped_cert` variable.
-
-- DER- or PEM-encoded first, URL-encoded next, then included as a field in a multi-field trusted header, for compatibility with the Envoy `x-forwarded-client-cert` headers. |
-
-You **must** configure the proxy or load balancer to do the following:
-
-1. Forward the certificate to AM in the trusted header.
-
-   To specify the format of the trusted header, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced, and choose the appropriate value in the TLS Client Certificate Header Format drop-down list:
-
-   * Use `BASE64_ENCODED_CERT` for Base64-encoded, URL-encoded certificates in PEM or DER format.
-
-     AM infers the certificate type from the contents of the certificate. For example, a certificate that starts with `-----BEGIN CERTIFICATE-----` and ends with `-----END CERTIFICATE-----` is inferred to be a PEM format certificate. A certificate that starts and ends with a colon (`:`) is inferred to be a DER format certificate.
-
-     NGINX, Google GKE, and AWS provide certificates in this format.
-
-   * Use `X_FORWARDED_CLIENT_CERT` if the proxy provides the certificate in the `X-Forwarded-Client-Cert` header.
-
-     Istio/Envoy proxies provide certificates in this way. Find more information in the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#config-http-conn-man-headers-x-forwarded-client-cert).
-
-2. Strip the trusted header from any incoming requests.
-
-   |   |                                                                                                                          |
-   | - | ------------------------------------------------------------------------------------------------------------------------ |
-   |   | You must do this because AM has no way of authenticating the contents of this header, so will trust whatever is present. |
-
-   To specify the name of the trusted header, in the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced, and enter the header name in the Trusted TLS Client Certificate Header property.
-
-   |   |                                                                                                                                                                                                                                            |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | Specify a strong, random name for the trusted header. A misconfigured proxy or load balancer could let an attacker send malicious header values. A trusted header name that's difficult to guess makes this type of attack more difficult. |
+7. Log out and log in again using the social authentication journey to verify that you can access the protected resources.
 
 ---
 
 ---
-title: OAuth 2.0
-description: Learn OAuth 2.0 concepts, configuration, and usage procedures for PingAM as an authorization server
+title: AM as client and resource server
+description: Configure PingAM as an OAuth 2.0 client to authenticate resource owners and provide sessions for accessing protected resources
 component: pingam
 version: 8.1
-page_id: pingam:am-oauth2:preface
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/preface.html
+page_id: pingam:am-oauth2:openam-oauth2-client
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/openam-oauth2-client.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["index.adoc", "oauth2-guide:preface.adoc"]
+keywords: ["OAuth 2.0", "Clients", "Authorization", "Setup &amp; Configuration"]
+page_aliases: ["oauth2-guide:openam-oauth2-client.adoc"]
 ---
 
-# OAuth 2.0
+# AM as client and resource server
 
-This guide covers concepts, configuration, and usage procedures for working with OAuth 2.0 and PingAM.
+When AM functions as an OAuth 2.0 client, it provides a session after successfully authenticating the resource owner and obtaining authorization. The client can then access resources protected by agents.
 
-[icon: handshake, set=fad, size=3x]
+To configure AM as an OAuth 2.0 client, use a [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/8.1/social-provider-handler.html) as part of the authentication journey.
 
-#### [AM as the authorization server](am-as-authz-server.html)
+The following sequence diagram shows how the client gains access to protected resources in the scenario where AM functions as both authorization server and client:
 
-How AM plays the role of the authorization server.
+![AM as client, where authentication and authorization are handled by the authorization server. On success, an SSO session is created, so that AM access management can happen as it normally does.](_images/oauth2-openam-client.svg)Figure 1. OAuth 2.0 client and authorization server
 
-[icon: edit, set=fad, size=3x]
+Because the OAuth 2.0 client functionality is implemented as an AM authentication node, you don't need to deploy your own resource server implementation when using AM as an OAuth 2.0 client. Use web or Java agents or PingGateway to protect resources.
 
-#### [Configure AM for OAuth 2.0](oauth2-configure-authz.html)
+Find information about configuring AM as an OAuth 2.0 client in [Social authentication](../am-authentication/social-registration.html).
 
-Configure AM as an OAuth 2.0 authorization server.
-
-[icon: random, set=fad, size=3x]
-
-#### [OAuth 2.0 grant flows](oauth2-implementing-flows.html)
-
-Discover the OAuth 2.0 flows and how to implement them in AM.
-
-[icon: exchange-alt, set=fad, size=3x]
-
-#### [OAuth 2.0 endpoints](oauth2-client-endpoints.html)
-
-About endpoints AM exposes as an OAuth 2.0 authorization server.
-
-[icon: check-square, set=fad, size=3x]
-
-#### [OAuth 2.0 consent](oauth2-manage-consent.html)
-
-Allow OAuth 2.0 clients to skip consent, and users to save and revoke consent.
-
-[icon: tags, set=fad, size=3x]
-
-#### [OAuth 2.0 scopes](oauth2-scopes.html)
-
-Learn about scopes and how to configure them in AM.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To use your own client and resource server, make sure the resource server implements the logic for handling access tokens and [refresh tokens](oauth2-refresh-tokens.html).The resource server can use the `/oauth2/introspect` endpoint to determine whether the access token is still valid, and to retrieve the scopes associated with the access token.To design your own scopes implementation, refer to [Customize OAuth 2.0](customizing-oauth2-scopes.html). |
 
 ---
 
 ---
-title: OAuth 2.0 administration REST endpoints
-description: Use PingAM OAuth 2.0 administration REST endpoints to manage clients, resource sets, and application tokens
+title: AM as the authorization server
+description: Use PingAM as an OAuth 2.0 authorization server to authenticate resource owners, obtain their authorization, and issue access tokens to clients
 component: pingam
 version: 8.1
-page_id: pingam:am-oauth2:oauth2-admin-endpoints
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-admin-endpoints.html
+page_id: pingam:am-oauth2:am-as-authz-server
+canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/am-as-authz-server.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Administration", "REST API"]
-page_aliases: ["oauth2-guide:oauth2-admin-endpoints.adoc"]
----
-
-# OAuth 2.0 administration REST endpoints
-
-AM exposes the following administration and supporting REST endpoints:
-
-**OAuth 2.0 administration and supporting endpoints**
-
-| Endpoint                            | Description                                                                                                                                                               |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/realm-config/agents/OAuth2Client` | Register, list, and delete OAuth 2.0 clients (AM specific-endpoint)                                                                                                       |
-| `/users/user/oauth2/resources/sets` | Retrieve data for UMA resources registered to a particular user (AM-specific endpoint)                                                                                    |
-| `/users/user/oauth2/applications`   | List OAuth 2.0 clients holding active tokens granted by specific resource owners, and delete tokens for a combination of resource owner and client (AM-specific endpoint) |
-
----
-
----
-title: OAuth 2.0 client authentication
-description: Configure OAuth 2.0 client applications to authenticate using HTTP Basic authentication, form parameters, JWT, or mutual TLS
-component: pingam
-version: 8.1
-page_id: pingam:am-oauth2:oauth2-client-auth
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-client-auth.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authentication", "REST API"]
-page_aliases: ["oauth2-guide:oauth2-client-auth.adoc"]
----
-
-# OAuth 2.0 client authentication
-
-OAuth 2.0 client applications send their authentication credentials using one of the following mechanisms:
-
-* The [Authorization header (HTTP Basic)](client-auth-header.html) (default)
-
-* [Form parameters (HTTP POST)](client-auth-form.html)
-
-* A [JWT profile](client-auth-jwt.html)
-
-* [Mutual TLS](client-auth-mtls.html)
-
-Authentication depends on the Client type defined in the AM admin UI under Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Core:
-
-* Confidential clients
-
-  These applications include websites and services that make secure connections to AM.
-
-  They can protect their client secret or JSON Web Token (JWT).
-
-  You configure the authentication method for a confidential client in the AM admin UI under Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Advanced as the Token Endpoint Authentication Method.
-
-  When a client authenticates with form parameters, the server can store POST data on the user-agent in an `OAUTH_REQUEST_ATTRIBUTES` cookie. AM uses the cookie to continue the authentication process across redirects. It marks the cookie for deletion on the next successful OAuth 2.0 authorization.
-
-* Public clients
-
-  These are single-page applications and applications running on devices.
-
-  They cannot protect secrets.
-
-  Public clients identify themselves by client ID, but do not fully authenticate.
-
-  Public OIDC clients must specify `none` as their authentication method.
-
----
-
----
-title: OAuth 2.0 endpoint parameters
-description: Reference guide for OAuth 2.0 endpoint parameters used in authorization requests, token requests, and other OAuth 2.0 flows
-component: pingam
-version: 8.1
-page_id: pingam:am-oauth2:oauth2-parameters
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-parameters.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Properties"]
-page_aliases: ["oauth2-guide:oauth2-parameters.adoc"]
+keywords: ["Authorization", "OAuth 2.0", "Federation"]
+page_aliases: ["openam-oauth2-authz-server.adoc", "oauth2-guide:am-as-authz-server.adoc"]
 section_ids:
-  acr-values: acr_values
-  actor-token: actor_token
-  actor-token-type: actor_token_type
-  auth-chain: auth_chain
-  authorization_details: authorization_details
-  claims: claims
-  client-assertion: client_assertion
-  client-assertion-type: client_assertion_type
-  client-id: client_id
-  client-secret: client_secret
-  cnf-key: cnf_key
-  code-challenge: code_challenge
-  code-challenge-method: code_challenge_method
-  code-verifier: code_verifier
-  csrf: csrf
-  decision: decision
-  grant-type: grant_type
-  id-token-hint: id_token_hint
-  login-hint: login_hint
-  nonce: nonce
-  prompt: prompt
-  redirect-uri: redirect_uri
-  response-mode: response_mode
-  response-type: response_type
-  the-request-parameter: request
-  general_validation_rules: General validation rules
-  jar_validation_rules: JAR validation rules
-  oidc_validation_rules: OIDC validation rules
-  par_validation_rules: PAR validation rules
-  example-request-object: Example request object
-  request-uri: request_uri
-  requested-token-type: requested_token_type
-  save-consent: save_consent
-  scope: scope
-  service: service
-  state: state
-  subject-token: subject_token
-  subject-token-type: subject_token_type
-  ui-locales: ui_locales
+  oauth2-introduction: OAuth 2.0 concepts
+  supported_oauth_2_0_features: Supported OAuth 2.0 features
+  oauth2-security-considerations: Security considerations
+  oauth2-sample-mobile-applications: OAuth 2.0 sample mobile applications
 ---
 
-# OAuth 2.0 endpoint parameters
+# AM as the authorization server
 
-Requests to OAuth 2.0 endpoints use the following parameters.
+As an authorization server, AM *authenticates* resource owners and obtains their *authorization* to return access tokens to clients.
 
-Refer to the individual OAuth 2.0 endpoint pages to determine the required and optional parameters for each endpoint.
+Before you configure OAuth 2.0 in your environment, familiarize yourself with the [OAuth 2.0 authorization framework](https://www.rfc-editor.org/info/rfc6749) and the [RFCs, Internet-Drafts, and standards](../am-reference/am-supported-standards.html#standards-oauth2) that AM supports relating to OAuth 2.0.
 
-## `acr_values`
+## OAuth 2.0 concepts
 
-The OpenID Connect authentication context class reference values. [OpenID Connect (OIDC) flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
+RFC 6749, the [OAuth 2.0 authorization framework](https://www.rfc-editor.org/info/rfc6749) lets a third-party application obtain limited access to a resource (usually user data) on behalf of the resource owner or the application itself.
 
-Authentication context class reference values communicate acceptable Levels of Assurance (LoAs) users must satisfy when authenticating to the OpenID provider. For details, refer to [Authentication requirements](../am-oidc1/oidc-authentication-requirements.html).
+The main actors in the OAuth 2.0 authorization framework are the following:
 
-## `actor_token`
+**OAuth 2.0 framework actors**
 
-The token representing a delegate acting on behalf of another identity in [Token exchange](token-exchange.html).
+| Actor                         | Description                                                                                                                                                                                                                                                                                                                             |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Resource owner (RO)**       | The owner of the resource. For example, a user who stores their photos in a photo-sharing service.The resource owner uses a *user-agent*, usually a web-browser, to communicate with the client.                                                                                                                                        |
+| **Client**                    | The third-party application that wants to access the resource. The client makes requests on behalf of the resource owner and with their authorization. For example, a printing service that needs to access the resource owner's photos to print them.AM can act as a client.                                                           |
+| **Authorization server (AS)** | The authorization service that authenticates the resource owner and/or the client, issues access tokens to the client, and tracks their validity. Access tokens prove that the resource owner authorizes the client to act on their behalf over specific resources for a limited period of time.AM can act as the authorization server. |
+| **Resource server (RS)**      | The service hosting the protected resources. For example, a photo-sharing service. The resource server must be able to validate the tokens issued by the authorization server.A website protected by a web or a Java agent can act as the resource server.                                                                              |
 
-## `actor_token_type`
+The following sequence diagram demonstrates the basic OAuth 2.0 flow:
 
-The type of the actor token:
+![AM can function as the authorization server and also as the client.](_images/oauth2-flow.svg)Figure 1. OAuth 2.0 protocol flow
 
-* `urn:ietf:params:oauth:token-type:access_token`
+To use AM as an authorization server, register an OAuth 2.0 client in the AM admin UI. Clients can also register themselves dynamically. For details, refer to [Client application registration](oauth2-register-client.html).
 
-* `urn:ietf:params:oauth:token-type:id_token`
+## Supported OAuth 2.0 features
 
-## `auth_chain`
+As an authorization server, AM supports the following features:
 
-A string naming the journey to authenticate the resource owner for the [Resource owner password credentials grant](oauth2-ropc-grant.html). The journey must permit username-password authentication without UI interaction. Otherwise, the request results in an HTTP 500 Internal Server Error.
+**OAuth 2.0 Features**
 
-Default: The default authentication journey for the realm.
+| Feature                                                    | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Grant types](oauth2-implementing-flows.html)              | * Authorization code
 
-## `authorization_details`
+* Implicit
 
-A valid JSON array containing fine-grained authorization requirements, as specified in [RFC 9396: OAuth 2.0 Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396.html). Each authorization detail object in the array must contain a non-blank `type` string. For example:
+* Resource owner password credentials
 
-```json
-"authorization_details": [{
-      "type": "account_information",
-      "actions": [
-         "list_accounts",
-         "read_balances",
-         "read_transactions"
-      ],
-      "locations": [
-         "https://example.com/accounts"
-      ]
-  }],
-```
+* Client credentials
 
-If the `type` is missing or blank, AM returns an `invalid_authorization_details` error.
+* Device flow
 
-## `claims`
+* SAML 2.0 profile for authorization grant
 
-A JSON object containing the user attributes to return in the ID token. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
+* JWT profile for OAuth 2.0 authorization grants                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [Client authentication standards](oauth2-client-auth.html) | - JWT profile for OAuth 2.0 client authentication
 
-## `client_assertion`
+- Mutual TLS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [Token exchange standards](token-exchange.html).           | OAuth 2.0 token exchange                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Other OAuth 2.0 standards                                  | * [JWT proof-of-possession](oauth2-PoP-JWK.html)
 
-A signed JSON Web Token (JWT) to use as client credentials for [JWT profile](client-auth-jwt.html) authentication.
+* [Certificate-based proof-of-possession](oauth2-PoP-Cert.html)
 
-## `client_assertion_type`
+* [User-managed access (UMA) 2.0](../uma/preface.html)
 
-The type of assertion for [JWT profile](client-auth-jwt.html) authentication.
+* [OpenID Connect](../am-oidc1/preface.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Remote consent services](oauth2-remote-consent.html)      | Delegates the consent-gathering part of an OAuth 2.0 flow to a separate service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Customizable scope grants                                  | You can customize how scopes are granted to the client, regardless of the grant flow used.AM can grant scopes statically or dynamically:* Statically (default)
 
-Set `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`.
+  Configure several OAuth 2.0 clients with different subsets of scopes. Resource owners are redirected to a specific client, depending on the scopes required. As long as the resource owner can authenticate and the client can deliver the same or a subset of the requested scopes, AM issues the token with the scopes requested. Two different users requesting scopes A and B from the same client will always receive scopes A and B.
 
-## `client_id`
+* Dynamically
 
-A unique string identifier for the application making the request.
+  Configure an OAuth 2.0 client with a comprehensive list of scopes. Resource owners authenticate against that client. When AM receives a request for scopes, the authorization service grants or denies access scopes dynamically by evaluating authorization policies. Two different users requesting scopes A and B from the same client can receive different scopes, based on policy conditions.
 
-For a [pushed authorization request](oauth2-authz-grant-par.html) or a [JWT-secured authorization request](https://www.rfc-editor.org/rfc/rfc9101.html) (RFC 9101), this value must match the `client_id` claim in the `request` object.
+  For details, refer to [Authorization and policy decisions](../am-authorization/what-is-authz-decision.html) and [Dynamic OAuth 2.0 authorization](../am-authorization/oauth2-authorization.html). |
 
-## `client_secret`
+## Security considerations
 
-A string password credential for the confidential client application making the request.
+|   |                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | OAuth 2.0 messages involve credentials and access tokens that allow the bearer to retrieve protected resources. You must protect the messages going across the network and prevent attackers from capturing requests or responses. |
 
-Use this parameter for client authentication with [Form parameters (HTTP POST)](client-auth-form.html).
+RFC 6749 includes a number of [security considerations](https://www.rfc-editor.org/rfc/rfc6749.html#section-10) and requires Transport Layer Security (TLS) to protect sensitive messages. Make sure you read these security considerations and implement them in your deployment.
 
-Do not use with the `cnf_key` parameter.
+When you are deploying a combination of other clients and resource servers, pay special attention to the [OAuth 2.0 threat model and security considerations](https://www.rfc-editor.org/info/rfc6819) before putting your service into production.
 
-## `cnf_key`
+## OAuth 2.0 sample mobile applications
 
-A base64-encoded JSON Web Key (JWK) for [JWK-based proof-of-possession](oauth2-PoP-JWK.html) or a base64-encoded SHA-256 hash of the DER-encoded X.509 certificate for [Certificate-bound proof-of-possession](oauth2-PoP-Cert.html).
+Download the sample mobile application to try the capabilities of AM as an authorization server.
 
-Do not use with the `client_secret` parameter.
-
-## `code_challenge`
-
-A generated code verifier string for RFC 7636 [Proof Key for Code Exchange](https://www.rfc-editor.org/rfc/rfc7636) (PKCE).
-
-Learn more in [Generate a code verifier and a code challenge](oauth2-authz-grant-pkce.html#proc-auth-code-generate-pkce).
-
-## `code_challenge_method`
-
-A string specifying the method to derive the PKCE code challenge:
-
-* `plain` (default; plaintext code challenge )
-
-* `S256` (recommended; hashed code challenge)
-
-## `code_verifier`
-
-A random string correlating a PKCE authorization request with the token request.
-
-## `csrf`
-
-The SSO token string linking the request to user session to protect against Cross-Site Request Forgery (CSRF) attacks.
-
-This parameter duplicates the value of the session cookie, the resource owner's SSO token.
-
-Built-in consent pages include this parameter once the resource owner has authenticated, and send it with the resource owner's consent. Custom consent pages and flows that do not use a browser must set this parameter explicitly unless you use a [Remote consent](oauth2-remote-consent.html). For an example, refer to the [Authorization code grant](oauth2-authz-grant.html).
-
-## `decision`
-
-A string indicating whether the resource owner consents to the requested access:
-
-* `allow` to grant consent
-
-* Any other value denies consent
-
-## `grant_type`
-
-A string specifying the type of grant to acquire an access token:
-
-* `authorization_code`
-
-  For [authorization code grants](oauth2-authz-grant.html).
-
-* `client_credentials`
-
-  For the [Client credentials grant](oauth2-client-cred-grant.html).
-
-* `password`
-
-  For the [Resource owner password credentials grant](oauth2-ropc-grant.html).
-
-* `refresh_token`
-
-  To [refresh an access token](oauth2-refresh-tokens.html).
-
-* `urn:ietf:params:oauth:grant-type:device_code`
-
-  For the [Device authorization grant](oauth2-device-flow.html). AM also supports the earlier `http://oauth.net/grant_type/device/1.0` specification.
-
-* `urn:ietf:params:oauth:grant-type:saml2-bearer`
-
-  For the [SAML 2.0 profile for authorization](oauth2-saml2-bearer-grant.html).
-
-* `urn:ietf:params:oauth:grant-type:jwt-bearer`
-
-  For the [JWT profile for authorization](oauth2-jwt-bearer-grant.html).
-
-* `urn:ietf:params:oauth:grant-type:token-exchange`
-
-  For the [Token exchange](token-exchange.html).
-
-* `urn:ietf:params:oauth:grant-type:uma-ticket`
-
-  For the [UMA grant flow](../uma/uma-grant-flow.html).
-
-* `urn:openid:params:grant-type:ciba`
-
-  For the [Backchannel request grant](../am-oidc1/openid-connect-backchannel-request-flow.html).
-
-## `id_token_hint`
-
-A previously issued ID token passed as a hint about the end user's session with the client. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
-
-Set the `response_type` and `prompt` parameters to `none` when using this parameter. Learn more in [Session Management Draft 10](../am-oidc1/session-management.html#session_management_state).
-
-## `login_hint`
-
-A string specifying the ID used to log in. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
-
-The ID depends on the authentication journey.
-
-When provided as part of the OpenID Connect authentication request, an `HttpOnly` cookie (only sent over HTTPS) named `oidcLoginHint` gets the value of `login_hint`. Learn more in [GSMA Mobile Connect](../am-oidc1/oidc-mobile-connect.html).
-
-## `nonce`
-
-A string linking the client session with the ID token to mitigate against replay attacks. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
-
-## `prompt`
-
-A space-separated, case-sensitive list of ASCII strings that indicates whether to prompt the end user for authentication and consent. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
-
-* `consent`
-
-  Prompt the end user for consent even if a consent response was previously saved.
-
-* `login`
-
-  Prompts the end user to authenticate using the journey specified with the [`service`](#service) parameter. AM destroys the original session and creates a new one for the new journey.
-
-  Default: The default journey for the realm.
-
-* `none`
-
-  Don't display authentication or consent pages. Use this only when you set `id_token_hint` and `response_type=none`.
-
-## `redirect_uri`
-
-The URI to return the resource owner to after authorization is complete.
-
-Default: A value from the client profile Redirection URIs setting in the AM admin UI.
-
-## `response_mode`
-
-A string specifying the mechanism for returning response parameters:
-
-* `form_post`
-
-  Return a self-submitting form that contains the code instead of redirecting to the redirect URL with the code as a string parameter. Learn more in [OAuth 2.0 Form Post Response Mode](https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html).
-
-* `fragment`
-
-  Return parameters encoded in the URL fragment; default when `response_type=token`.
-
-* `fragment.jwt`
-
-  Return a JWT in a fragment.
-
-* `jwt`
-
-  Return parameters in a JWT; in a query string for the `code` response type, or appended to the fragment for the `token` response type.
-
-  A JWT-secured authorization response (JARM) returns authorization response parameters in a signed, optionally encrypted, JWT.
-
-  Configure the algorithms to secure the JWT in the AM admin UI under Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Signing and Encryption.
-
-  In addition to claims specific to the response type, such as `code` or `access_token`, the JWT contains these mandatory claims:
-
-  * `iss`: the URL of the issuer—​the authorization server that generated the response
-
-  * `aud`: the audience—​the client ID intended as the response recipient
-
-  * `exp`: the expiration of the JWT—​10 minutes is the recommended maximum
-
-  On error, the JWT contains:
-
-  * An `error` string
-
-  * A `state` string if specified by the client
-
-  * An error description
-
-  Learn more in [JWT-Secured Authorization Response Mode for OAuth 2.0 (JARM)](https://openid.net/specs/openid-financial-api-jarm.html).
-
-* `query`
-
-  Return parameters encoded in the query string; default when `response_type=code`.
-
-* `query.jwt`
-
-  Return a JWT in a query parameter. Do *not* use this with `id_token` or `token` response types unless the response JWT is encrypted.
-
-Learn more in [Response Modes](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes). AM publishes supported response modes as `response_modes_supported` through the [/oauth2/.well-known/openid-configuration](../am-oidc1/rest-api-oidc-discovery-configuration.html) endpoint.
-
-## `response_type`
-
-A string specifying the response expected from the authorization server:
-
-* `code`
-
-  An authorization code for an authorization code grant
-
-* `code id_token`
-
-  An authorization code and an ID token for a hybrid grant
-
-* `code token`
-
-  An authorization code and an access token for a hybrid grant
-
-* `code token id_token`
-
-  An authorization code, an access token, and an ID token for a hybrid grant
-
-* `id_token`
-
-  An ID token for an implicit grant
-
-* `none`
-
-  Do not issue any token or code in the response; for use with [`id_token_hint`](#id-token-hint) only
-
-* `token`
-
-  An access token for an implicit grant
-
-* `token id_token`
-
-  An access token and an ID token for an implicit grant
-
-## `request`
-
-A base64url-encoded JWT whose claims are required for an [OIDC flow](https://openid.net/specs/openid-connect-core-1_0.html), a [JWT-secured authorization (JAR) request](https://www.rfc-editor.org/rfc/rfc9101.html) (RFC 9101), or a [pushed authorization request (PAR)](https://www.rfc-editor.org/info/rfc9126) (RFC 9126).
-
-This JWT is called the *request object*.
-
-AM validates request objects according to:
-
-* The type of request
-
-* The OAuth 2.0 provider configuration (specifically, the [Request Object Processing Specification](../setup/services-configuration.html#config-request-object-proc-spec) setting)
-
-* The value of the [oauth2.provider.request.object.processing.enforced](../setup/server-advanced.html#request.object.processing.enforced) advanced server property
-
-The validation rules apply whether you pass the request object by value with the `request` parameter or as a reference with the `request_uri` parameter.
-
-> **Collapse: How AM determines which rules to apply**
->
-> | Input                 |                   |                   |                   | Behavior     |
-> | --------------------- | ----------------- | ----------------- | ----------------- | ------------ |
-> | Specification value 1 | `enforced` flag 2 | OIDC parameters 3 | `/par` endpoint 4 | Rule applied |
-> | OIDC                  | `false`           | Yes               | No                | OIDC         |
-> | OIDC                  | `false`           | No                | No                | JAR          |
-> | OIDC                  | `true`            | Yes               | No                | OIDC         |
-> | OIDC                  | `true`            | No                | No                | OIDC         |
-> | JAR                   | `false`           | Yes               | No                | JAR          |
-> | JAR                   | `false`           | No                | No                | JAR          |
-> | JAR                   | `true`            | Yes               | No                | JAR          |
-> | JAR                   | `true`            | No                | No                | JAR          |
-> | OIDC                  | `false`           | Yes               | Yes               | PAR          |
-> | OIDC                  | `false`           | No                | Yes               | PAR          |
-> | OIDC                  | `true`            | Yes               | Yes               | PAR          |
-> | OIDC                  | `true`            | No                | Yes               | PAR          |
-> | JAR                   | `false`           | Yes               | Yes               | PAR          |
-> | JAR                   | `false`           | No                | Yes               | PAR          |
-> | JAR                   | `true`            | Yes               | Yes               | PAR          |
-> | JAR                   | `true`            | No                | Yes               | PAR          |
->
-> 1 Value of the Request Object Processing Specification setting
->
-> 2 Value of the `oauth2.provider.request.object.processing.enforced` advanced server property
->
-> 3 Request contains OIDC parameters
->
-> 4 Request is sent to [/oauth2/par](oauth2-par-endpoint.html) endpoint
-
-### General validation rules
-
-These rules apply for all request objects:
-
-* The request object must include a `client_id` that matches the [`client_id`](#client-id) parameter of the request.
-
-* If the request object is signed or encrypted, you *must* include the `iss` and `aud` parameters, as shown in the [Example request object](#example-request-object).
-
-  For the public keys to encrypt a request object JWT, send a request to the realm's [/oauth2/connect/jwk\_uri](../am-oidc1/managing-jwk_uri.html) endpoint.
-
-* The `exp` (expiration time) and `nbf` (not before) claims set the timeframe during which the request object is valid.
-
-  If the OAuth 2.0 provider settings declare them mandatory, you *must* include the `exp` and `nbf` claims.
-
-  If specified, validation uses these claims even when the OAuth 2.0 provider settings don't require them.
-
-  Read the [OAuth 2.0 provider](../setup/services-configuration.html#global-oauth-oidc) configuration reference to make sure the values meet the requirements of the [Financial-grade API (FAPI)](https://openid.net/specs/openid-financial-api-part-2-1_0-final.html#authorization-server) security profile.
-
-* Compressed JWTs mustn't be larger than 32 KiB (32768 bytes) when uncompressed.
-
-### JAR validation rules
-
-* The request object is signed. (It *may* also be encrypted.)
-
-* The authorization request uses only the request object claims, even when the request specifies the same claims in query string parameters.
-
-### OIDC validation rules
-
-* The request object doesn't require signing or encryption.
-
-* You *may* send query string parameters and a request object in the same request.
-
-  You can keep sensitive information protected in the request object, and keep parameters that change frequently, such as `nonce` and `state`, visible and mutable across calls.
-
-  The claims in the request object supersede the query string parameters.
-
-* You *must* include the `response_type` as a query string parameter, even if you include it in the request object.
-
-  The values in the request object must match those passed as query string parameters.
-
-* If the request object contains the `openid` scope, you *must* include the `openid` scope in the request syntax.
-
-  The `scope` claim *may* differ from the `scope` query string parameter. Use this to protect application-related scopes in the request object, but process the request as part of an OpenID Connect flow.
-
-### PAR validation rules
-
-* The request object *must* be signed. It *may* be encrypted.
-
-* You *must* include claims for all other parameters required for the successful completion of the grant flow.
-
-  For example, include the `code_challenge` for an [Authorization code grant with PKCE](oauth2-authz-grant-pkce.html) flow.
-
-* When you include the request object, omit all other parameters except to authenticate the client.
-
-  The request object *must* include claims for all other request details. Otherwise, the response is an `Invalid parameter scope` error.
-
-### Example request object
-
-The following example JWT request object includes OIDC claims and `iss`, `aud`, `nbf`, and `exp` claims. AM ignores keys specified in JWT headers, such as `jku` and `jwe`:
-
-```json
-{
-  "client_id": "myClient",
-  "iss": "myClient",
-  "aud": "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha",
-  "nbf": 1675351332,
-  "exp": 1675351692,
-  "redirect_uri": "https://www.example.com:8443",
-  "scope": "openid profile",
-  "claims": {
-    "id_token": {
-      "acr": {
-        "essential": true,
-        "values": ["example_journey1", "example_journey2"]
-      }
-    }
-  }
-}
-```
-
-To pass the request object by value, specify the encoded JWT as shown in this example OIDC call:
-
-```none
-https://am.example.com:8443/am/oauth2/realms/root/authorize? \
-&request=eyJhbGciOiJSUzI1NiIsImtpZCI6ImsyYmRjIn0.ew0KICJpc3MiOiAiczZCaGRSa3…​. \
-&client_id=myClient \
-&scope=openid profile \
-&response_type=code%20id_token \
-&nonce=abc123 \
-&state=123abc
-```
-
-## `request_uri`
-
-A reference to [JWT request object(s)](#the-request-parameter).
-
-* For [PAR flows](oauth2-authz-grant-par.html), this references the data at the time of the PAR request.
-
-  The authorization request fails if the request URI has expired.
-
-* For [OIDC flows](../am-oidc1/oidc-implementing-flows.html) and [JAR](https://www.rfc-editor.org/rfc/rfc9101.html) requests, this references an array of URIs to retrieve request objects whose claims constitute the request parameters.
-
-  You must pre-register the URIs in the client profile. In the AM admin UI, go to Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Advanced > Request uris. Each request URI must not exceed 512 ASCII characters and must use either HTTP or HTTPS; for example, `https://www.example.com:8443/JWTs/myJWT`.
-
-  AM caches the request objects to avoid requesting them too often. To force AM to flush the cache, add a unique fragment to the `request_uri` parameter; for example, `?request_uri=https://www.example.com:8443/JWTs/myJWT#foo`.
-
-* The [PAR](https://www.rfc-editor.org/rfc/rfc9126.html) and [JAR](https://www.rfc-editor.org/rfc/rfc9101.html#section-5.2) specifications indicate the following:
-
-  * The authorization server should ignore authorize parameters outside the `request_uri`.
-
-  * When sending a JWT-Secured Authorization Request (JAR), the `request_uri` *must* be an `https` URI.
-
-  To enforce this behavior in AM, set the [am.oauth2.request.object.restrictions.enforced](../setup/server-advanced.html#am.oauth2.request.object.restrictions.enforced) advanced server property to `true`.
-
-## `requested_token_type`
-
-The type of token requested for [Token exchange](token-exchange.html):
-
-* `urn:ietf:params:oauth:token-type:access_token` (default)
-
-* `urn:ietf:params:oauth:token-type:id_token`
-
-## `save_consent`
-
-`save_consent=on` means save the scopes the resource owner's consented to.
-
-Saving consent requires prior configuration. Learn more in [Store consent decisions](oauth2-manage-consent.html#store-consent-decisions).
-
-## `scope`
-
-A string specifying the permissions the client application requests from the resource owner. Separate scopes with spaces.
-
-Some grants, such as the authorization code grant, do not call the token endpoint with the scope. The scope is defined in the authorization code. Learn more in the documentation for the flow under [OAuth 2.0 grant flows](oauth2-implementing-flows.html).
-
-Default: The default scopes specified in the client profile or the OAuth 2.0 provider configuration.
-
-## `service`
-
-A string naming the journey to authenticate the resource owner.
-
-Default: The default authentication journey for the realm.
-
-Learn more in [Authentication parameters](../am-authentication/authn-from-browser.html#authn-from-browser-parameters).
-
-## `state`
-
-A string value to maintain state between the request and the callback.
-
-During authentication, the client sends this parameter to the authorization server. The authorization server sends it back unchanged in the response.
-
-Use the value to ensure the response belongs to the user who initiated the requests. This mitigates against CSRF attacks.
-
-Use a base64-encoded string of data that is unique to a user and to this request.
-
-## `subject_token`
-
-The original token to exchange in [Token exchange](token-exchange.html).
-
-## `subject_token_type`
-
-The type of the subject token:
-
-* `urn:ietf:params:oauth:token-type:access_token`
-
-* `urn:ietf:params:oauth:token-type:id_token`
-
-## `ui_locales`
-
-A string indicating the end user's preferred languages for the user interface. [OIDC flows](https://openid.net/specs/openid-connect-core-1_0.html) only.
-
-The `ui_locales` parameter is a space-separated list ordered by preference; for example, `en fr-CA fr`.
-
----
-
----
-title: OAuth 2.0 endpoints
-description: OAuth 2.0 authorization server endpoints for client applications, including authorization, token, device flow, token revocation, and token introspection endpoints
-component: pingam
-version: 8.1
-page_id: pingam:am-oauth2:oauth2-client-endpoints
-canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-client-endpoints.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authorization", "Clients", "REST API"]
-page_aliases: ["oauth2-guide:oauth2-client-endpoints.adoc"]
----
-
-# OAuth 2.0 endpoints
-
-Client applications can use the following OAuth 2.0 authorization server endpoints:
-
-| Endpoint               | Description                                                                                                                |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `/oauth2/par`          | Register a pushed authorization request and get a request URI (RFC 9126 PAR endpoint)                                      |
-| `/oauth2/authorize`    | Obtain consent and an authorization grant (RFC 6749 authorization endpoint)                                                |
-| `/oauth2/bc-authorize` | Initiate backchannel authorization (Backchannel flow endpoint)                                                             |
-| `/oauth2/access_token` | Obtain an access token (RFC 6749 token endpoint)                                                                           |
-| `/oauth2/device/code`  | Obtain a device code (Device flow endpoint)                                                                                |
-| `/oauth2/device/user`  | Obtain consent and authorization grant (Device flow endpoint)                                                              |
-| `/oauth2/token/revoke` | Revoke access tokens and refresh tokens (RFC 7009 endpoint)                                                                |
-| `/oauth2/introspect`   | Retrieve metadata about a token, such as approved scopes and the context in which the token was issued (RFC 7662 endpoint) |
-| `/json/token/macaroon` | Retrieve metadata about a macaroon, and add caveats.                                                                       |
-
-For reference documentation on related endpoints, refer to:
-
-* [OAuth 2.0 administration REST endpoints](oauth2-admin-endpoints.html)
-
-* [OpenID Connect 1.0 endpoints](../am-oidc1/oidc-client-endpoints.html)
-
-* [UMA endpoints](../uma/uma-endpoints.html)
+For access to the source code, refer to [How do I access and build the sample code provided for PingAM?](https://support.pingidentity.com/s/article/How-do-I-access-and-build-the-sample-code-provided-for-PingAM) in the *Knowledge Base*.

@@ -1,12 +1,12 @@
 ---
 title: Daon Connector
-description: The Daon connector lets you use Daon IdentityX for multi-factor authentication (MFA) in your PingOne DaVinci flow.
+description: Configure the Daon connector to use Daon IdentityX for MFA in PingOne DaVinci flows, with results via webhook or polling
 component: connectors
 page_id: connectors::daon_connector
 canonical_url: https://docs.pingidentity.com/connectors/daon_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -32,7 +32,7 @@ The Daon connector lets you use Daon IdentityX for multi-factor authentication (
 \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
 \</div>)* in your PingOne DaVinci flow.
 
-The connector triggers authentication on a user's mobile device using an app that was built with the Daon mobile SDK. DaVinci can get the result of the authentication process by polling Daon or by listening for a webhook response.
+The connector triggers authentication on a user's mobile device using an app that was built with the Daon mobile SDK. PingOne DaVinci can get the result of the authentication process by polling Daon or by listening for a webhook response.
 
 ## Setup
 
@@ -40,13 +40,13 @@ The connector triggers authentication on a user's mobile device using an app tha
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirement
 
@@ -64,7 +64,7 @@ To use the connector, you'll need:
 
 ### Configuring the Daon connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -90,9 +90,9 @@ This flow asks the user to enter their username in an HTML form. The connector g
 
 The user sees a "Check your device" message that stays on screen until as long as the flow challenge remains unresolved.
 
-In a secondary branch, the connector listens for a transaction result that Daon sends using a webhook. When DaVinci receives the result, the flow challenge is updated and the waiting message changes to show the result of the authentication process.
+In a secondary branch, the connector listens for a transaction result that Daon sends using a webhook. When PingOne DaVinci receives the result, the flow challenge is updated and the waiting message changes to show the result of the authentication process.
 
-1. Download the [Daon - Authentication with results via webhook](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xT2IAI/daon-authentication-with-results-via-webhook) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Daon - Authentication with results via webhook](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xT2IAI/daon-authentication-with-results-via-webhook) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Configure the **Create Authentication Request** node by adding your Daon authentication policy in the **Policy URL** field.
 
@@ -104,9 +104,9 @@ In a secondary branch, the connector listens for a transaction result that Daon 
 
 This flow asks the user to enter their username in an HTML form. The connector gets their Daon user ID and initiates the authentication process on the user's mobile device.
 
-The user sees a "Check your device" message, and the flow begins polling Daon until the authentication result is available. When DaVinci gets the result, the flow updates the waiting message to show the result of the authentication process.
+The user sees a "Check your device" message, and the flow begins polling Daon until the authentication result is available. When PingOne DaVinci gets the result, the flow updates the waiting message to show the result of the authentication process.
 
-1. Download the [Daon - Authentication with results via webhook](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xT2IAI/daon-authentication-with-results-via-webhook) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Daon - Authentication with results via webhook](https://support.pingidentity.com/s/marketplace-integration/a7iDo0000010xT2IAI/daon-authentication-with-results-via-webhook) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. Configure the **Create Authentication Request** node by adding your Daon authentication policy in the **Policy URL** field.
 

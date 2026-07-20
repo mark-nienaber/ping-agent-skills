@@ -1,12 +1,12 @@
 ---
 title: Splunk Connector
-description: The Splunk connector lets you gain real-time operational intelligence through Splunk in your PingOne DaVinci flow.
+description: Configure the Splunk connector in PingOne DaVinci to post events to Splunk and gain real-time operational intelligence in your flows
 component: connectors
 page_id: connectors::splunk_connector
 canonical_url: https://docs.pingidentity.com/connectors/splunk_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 25, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -37,13 +37,13 @@ You can find more information and setup help in:
 
   * [Splunk Cloud Platform Documentation](https://help.splunk.com/en/splunk-cloud-platform)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -85,7 +85,7 @@ To set up Splunk, create an HTTP event collector token:
 
 ### Configuring the Splunk connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

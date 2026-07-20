@@ -1,17 +1,21 @@
 ---
 title: Release Notes
-description: New features and improvements in PingOne DaVinci. Updated July 1, 2026.
+description: New features and improvements in PingOne DaVinci. Updated July 17, 2026.
 component: davinci
 page_id: davinci:release_notes:davinci_release_notes
-canonical_url: http://docs.pingidentity.com/davinci/release_notes/davinci_release_notes.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/release_notes/davinci_release_notes.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 19, 2026
 section_ids:
   july-2026: July 2026
+  july-17: July 17
+  pingone-response-header-infrastructure-change: PingOne response header infrastructure change
   july-1: July 1
   davinci-audit-events-in-pingone-early-access: DaVinci audit events in PingOne early access
   june-2026: June 2026
+  june-30: June 30
+  improved-analytics-information-for-flow-timeouts: Improved analytics information for flow timeouts
   june-23: June 23
   improved-content-security-policy-csp-controls: Improved Content Security Policy (CSP) controls
   build-flows-using-the-ai-assistant: Build flows using the AI assistant
@@ -46,6 +50,7 @@ section_ids:
   april-30: April 30
   fixed-idp-redirect-issue-in-widget-flows: Fixed IdP redirect issue in widget flows
   april-28: April 28
+  removed-default-outcome-from-ab-multiple-conditions-nodes: Removed default outcome from A==B Multiple Conditions nodes
   improved-flow-analytics-display: Improved flow analytics display
   april-23: April 23
   content-security-policy-csp-updates-2: Content Security Policy (CSP) updates
@@ -132,13 +137,23 @@ section_ids:
 
 # Release Notes
 
-New features and improvements in PingOne DaVinci. Updated July 1, 2026.
+New features and improvements in PingOne DaVinci. Updated July 17, 2026.
 
 Subscribe to get automatic updates: [icon: rss-square, set=fa][PingOne DaVinci Release Notes RSS feed](davinci_release_notes.xml)
 
-For the latest features and improvements to PingOne DaVinci Connectors, refer to the [Connectors release notes](http://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html).
+For the latest features and improvements to PingOne DaVinci Connectors, refer to the [Connectors release notes](https://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html).
 
 ## July 2026
+
+### July 17
+
+#### PingOne response header infrastructure change
+
+Info PingOne DaVinci
+
+We are performing previously announced changes to the PingOne response header infrastructure beginning July 20. As part of this change, the response headers returned by DaVinci will be changed to lower case. We don't expect any impact to you. If you experience any issues, create a Support Ticket.
+
+For more information, refer to the [support article](#https://support.pingidentity.com/s/article/Upcoming-Infrastructure-Change-for-PingOne-Multi-Tenant-March-April-2026) or "Upcoming Infrastructure Change for PingOne DaVinci Customers" emails that were sent to your Technical Contacts.
 
 ### July 1
 
@@ -152,11 +167,29 @@ DaVinci administrative audit events are now available in PingOne early access. Y
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | The standalone DaVinci [Audit Trail](../davinci_audit_trail.html) tab will be deprecated after the transition period ends. Migrate any audit workflows, reporting, or alerting to the PingOne [Audit Activities API](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html).DaVinci audit events now follow the PingOne audit schema instead of the legacy DaVinci audit format. Update any custom integrations that parse the legacy format. |
 
-Learn more in [DaVinci administrative audit events in PingOne (early access)](http://docs.pingidentity.com/pingone/early-access-features/ea_p1_davinci_audit_events.adoc).
+Learn more in [DaVinci administrative audit events in PingOne (early access)](https://docs.pingidentity.com/pingone/early-access-features/ea_p1_davinci_audit_events.adoc).
 
-Learn more about opting in to preview early access features in [Managing opt-ins for EA features](http://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.adoc).
+Learn more about opting in to preview early access features in [Managing opt-ins for EA features](https://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.adoc).
 
 ## June 2026
+
+### June 30
+
+#### Improved analytics information for flow timeouts
+
+Improved Platform
+
+We've improved the analytics information available when a flow execution times out. If a flow's logging level is **Error** or **Debug**, several new properties contain timeout information for flow executions that timed out:
+
+* The `errorType` property indicates the source of the timeout error
+
+* The `errorCode`
+
+* The `errorMessage`
+
+These properties are visible in analytics and webhook events.
+
+Learn more in [Viewing flow analytics](../flows/davinci_viewing_flow_analytics.html).
 
 ### June 23
 
@@ -166,7 +199,7 @@ Improved Platform
 
 We've improved the controls for content security policies. If your environment uses a custom domain, you can override the baseline report-only CSP with an enforced CSP, a report-only CSP, or both. Learn more in [Content Security Policies](../flows/davinci_content_security_policies.html).
 
-You can use [PingOne early access](http://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.html) to opt in to the improved controls. General availability is expected in 4 - 6 weeks. In September, we'll transition the baseline CSP to enforcement.
+You can use [PingOne early access](https://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.html) to opt in to the improved controls. General availability is expected in 4 - 6 weeks. In September, we'll transition the baseline CSP to enforcement.
 
 #### Build flows using the AI assistant
 
@@ -180,7 +213,7 @@ The PingOne AI Assistant for DaVinci can now create specific categories of flows
 
 Improved Connector
 
-We've made the following improvements to the [Flow Analytics connector](http://docs.pingidentity.com/connectors/flow_analytics_connector.html):
+We've made the following improvements to the [Flow Analytics connector](https://docs.pingidentity.com/connectors/flow_analytics_connector.html):
 
 * **Variable selector in **Outcome** fields**: **Outcome Type**, **Outcome Status**, and **Outcome Status Detail** now support the variable selector, enabling dynamic values to be set at flow runtime. Previously, these fields only accepted static dropdown selections. Now they accept static dropdown selections, custom texts, and variable selection.
 
@@ -204,7 +237,7 @@ When a user completes forms created in **Custom HTML Template** nodes, they can 
 
 ![A screenshot of the Custom HTML Template node settings showing where to add localization keys for validation rules.](_images/html-template-localization.png)
 
-Learn more about **Custom HTML Template** nodes in the [HTTP connector](http://docs.pingidentity.com/connectors/http_connector.html#using-the-connector-in-a-flow) documentation.
+Learn more about **Custom HTML Template** nodes in the [HTTP connector](https://docs.pingidentity.com/connectors/http_connector.html#using-the-connector-in-a-flow) documentation.
 
 ### June 12
 
@@ -214,11 +247,11 @@ Improved Connector
 
 We've added documentation for the following service connectors:
 
-* [Apple Login Connector](http://docs.pingidentity.com/connectors/apple_login_connector.html)
+* [Apple Login Connector](https://docs.pingidentity.com/connectors/apple_login_connector.html)
 
-* [Facebook Login Connector](http://docs.pingidentity.com/connectors/facebook_login_connector.html)
+* [Facebook Login Connector](https://docs.pingidentity.com/connectors/facebook_login_connector.html)
 
-* [Google Login Connector](http://docs.pingidentity.com/connectors/google_login_connector.html)
+* [Google Login Connector](https://docs.pingidentity.com/connectors/google_login_connector.html)
 
 The documentation includes setup instructions and configuration steps for authenticating with each third-party social identity provider (IdP) *(tooltip: \<div class="paragraph">
 \<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
@@ -306,13 +339,13 @@ We've improved the analytics feature to handle high flow volume more efficiently
 
 New Forms
 
-Previously, we made it possible to [import forms when importing a complete flow](http://docs.pingidentity.com/pingone/release_notes/index.html#october-23). Now, you can import forms by pasting nodes on the DaVinci canvas.
+Previously, we made it possible to [import forms when importing a complete flow](https://docs.pingidentity.com/pingone/release_notes/index.html#october-23). Now, you can import forms by pasting nodes on the DaVinci canvas.
 
 This change will allow Ping Identity to add node groups and actions to the [Ping Identity Marketplace](https://marketplace.pingone.com/browse?products=davinci\&contentType=davinciConnectors) that include premade forms.
 
 When you paste any **Show Form** nodes, DaVinci prompts you to choose whether to import the forms to **User Experience** > **Forms**.
 
-Learn more in [Importing and exporting forms](http://docs.pingidentity.com/pinone/user_experience/p1_import_export_forms.html).
+Learn more in [Importing and exporting forms](https://docs.pingidentity.com/pinone/user_experience/p1_import_export_forms.html).
 
 #### Show Form now supports dynamic multiple outcomes
 
@@ -328,7 +361,7 @@ You can switch existing nodes at any time by selecting the new capability in nod
 
 The legacy capability will continue to work normally until a deprecation announcement is made. We recommend migrating to the new **Show Form** capability to receive ongoing enhancements and long-term support.
 
-Learn more in [Branching from Show Form outcomes](http://docs.pingidentity.com/connectors/form_connector.adoc#branching-from-show-form-outcomes).
+Learn more in [Branching from Show Form outcomes](https://docs.pingidentity.com/connectors/form_connector.adoc#branching-from-show-form-outcomes).
 
 #### Increased variable limit
 
@@ -397,6 +430,18 @@ We fixed an issue with flows launched with the widget that used social IdP that 
 This fix is controlled by a feature flag. Contact Ping Identity support to enable it for your environment.
 
 ### April 28
+
+#### Removed default outcome from **A==B Multiple Conditions** nodes
+
+Info DV-19916 Connectors
+
+We've removed the "default" outcome from the Function connector's **A==B Multiple Conditions** capability. This outcome had no clear function and could cause confusion for administrators.
+
+No action is required, and existing flows aren't affected.
+
+If your flow already has a connection from the default outcome, the connection is preserved. When you disconnect it, the outcome is removed and can't be reconnected.
+
+![A==B Multiple Conditions node without the default outcome](_images/abmultipleconditionsdefault.png)
 
 #### Improved flow analytics display
 
@@ -599,7 +644,7 @@ We've updated the Out-of-Band (OOB) process so that when a user clicks an OOB Co
 
 Improved Platform
 
-We've updated the nodes on the DaVinci canvas with softer edges and shadows. For nodes with a list of outcomes, like the [Function connector](http://docs.pingidentity.com/connectors/functions_connector.html)'s **A==B Multiple Conditions** capability, the new look integrates the list into the parent node and provides more room for the outcome labels.
+We've updated the nodes on the DaVinci canvas with softer edges and shadows. For nodes with a list of outcomes, like the [Function connector](https://docs.pingidentity.com/connectors/functions_connector.html)'s **A==B Multiple Conditions** capability, the new look integrates the list into the parent node and provides more room for the outcome labels.
 
 ### February 19
 
@@ -607,7 +652,7 @@ We've updated the nodes on the DaVinci canvas with softer edges and shadows. For
 
 Info Platform
 
-We've updated the DaVinci global variables as part of the second phase of custom domain infrastructure changes. Learn more about custom domain infrastructure changes in the [PingOne release notes](http://docs.pingidentity.com/pingone/release_notes/index.html#phase-2-custom-domain-infrastructure-changes). Learn more about the changes to DaVinci in [Including variables and other data](../flows/davinci_global_variables.html).
+We've updated the DaVinci global variables as part of the second phase of custom domain infrastructure changes. Learn more about custom domain infrastructure changes in the [PingOne release notes](https://docs.pingidentity.com/pingone/release_notes/index.html#phase-2-custom-domain-infrastructure-changes). Learn more about the changes to DaVinci in [Including variables and other data](../flows/davinci_global_variables.html).
 
 ### February 18
 
@@ -623,7 +668,7 @@ We fixed an issue with flows launched with the SDK that used social IdP that cau
 
 Info Connectors
 
-Learn more in the [PingOne connector](http://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html#search-special-character-usernames-toggle) release notes.
+Learn more in the [PingOne connector](https://docs.pingidentity.com/connectors/relnotes/connectors_release_notes.html#search-special-character-usernames-toggle) release notes.
 
 ### February 6
 
@@ -707,7 +752,7 @@ We've added the option to use custom HTML and CSS for the flow timeout error mes
 
 Info
 
-The PingOne Forms connector has been moved to the Core category and named the Form connector. Learn more in the [Form connector](http://docs.pingidentity.com/connectors/form_connector.html).
+The PingOne Forms connector has been moved to the Core category and named the Form connector. Learn more in the [Form connector](https://docs.pingidentity.com/connectors/form_connector.html).
 
 ## September 2025
 

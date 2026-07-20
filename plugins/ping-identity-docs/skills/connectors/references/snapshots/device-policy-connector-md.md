@@ -1,12 +1,12 @@
 ---
 title: Device Policy Connector
-description: The Device Policy connector lets you check the user agent, browser information, and operating system version in your PingOne DaVinci flow.
+description: Configure the Policy connector in PingOne DaVinci to check user agent, browser, and OS version to allow or deny device access in your flows
 component: connectors
 page_id: connectors::device_policy_connector
 canonical_url: https://docs.pingidentity.com/connectors/device_policy_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -49,17 +49,17 @@ You can use the Device Policy connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Device Policy connector
 
-In DaVinci, add a Device Policy connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Device Policy connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 

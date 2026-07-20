@@ -1,9 +1,11 @@
 ---
 title: Develop with Configuration and User Management SDKs
-description: Learn more about how to develop with Ping Identity's Configuration and User Management SDKs.
+description: Learn about interface stability practices and support options for Ping Identity Management and User client SDKs
 component: config-automation-management-sdks
 page_id: config-automation-management-sdks::develop_with_management_sdks
 canonical_url: https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.html
+llms_txt: https://developer.pingidentity.com/config-automation-management-sdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   interface-stability: Interface stability

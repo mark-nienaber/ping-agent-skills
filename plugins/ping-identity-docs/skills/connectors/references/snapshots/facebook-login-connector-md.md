@@ -1,11 +1,12 @@
 ---
 title: Facebook Login Connector
-description: The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in DaVinci flows.
+description: The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in PingOne DaVinci flows
 component: connectors
 page_id: connectors::facebook_login_connector
 canonical_url: https://docs.pingidentity.com/connectors/facebook_login_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -29,7 +30,7 @@ section_ids:
 
 # Facebook Login Connector
 
-The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in DaVinci flows.
+The Facebook Login connector authenticates users with Facebook and retrieves user attributes for use in PingOne DaVinci flows.
 
 ## Setup
 
@@ -37,13 +38,13 @@ The Facebook Login connector authenticates users with Facebook and retrieves use
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -53,7 +54,7 @@ To use the connector, you'll need:
 
 ### Configuring Facebook as an IdP
 
-Before configuring the Facebook Login connector in DaVinci, register the application in **Facebook for Developers** and collect the values that Facebook generates to configure Facebook as an identity provider (IdP) *(tooltip: \<div class="paragraph">
+Before configuring the Facebook Login connector in PingOne DaVinci, register the application in **Facebook for Developers** and collect the values that Facebook generates to configure Facebook as an identity provider (IdP) *(tooltip: \<div class="paragraph">
 \<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
 \</div>)*.
 
@@ -65,7 +66,7 @@ You'll complete two tasks in your **Facebook Developer Account**:
 
 #### Registering your application with Facebook for Developers
 
-Facebook generates an app ID and app secret for your application. You'll need these values to connect the application to DaVinci.
+Facebook generates an app ID and app secret for your application. You'll need these values to connect the application to PingOne DaVinci.
 
 #### Steps
 
@@ -125,19 +126,19 @@ You must enable Facebook Login for your application if it's not enabled already.
 
 ### Configuring the Facebook Login connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
 Use the values from Facebook to populate the connector's general properties.
 
-| Property                      | Description                                                                                                                                                                                         |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **DaVinci Redirect URL**      | `https://auth.pingone.com/[.varname[companyID]/davinci/oauth2/callback`                                                                                                                             |
-| **Application ID**            | The application ID that you copied earlier from the IdP. You can find this information on the **Basic settings** page in the [Facebook for Developers portal](https://developers.facebook.com).     |
-| **Client Secret**             | The application secret that you copied earlier from the IdP. You can find this information on the **Basic settings** page on the [Facebook for Developers portal](https://developers.facebook.com). |
-| **Scope**                     | The default scopes are `openid email profile`. Add additional scopes if you want to retrieve additional attributes that require specific permissions from Facebook.                                 |
-| **Application Return to URL** | The URL of the app that embeds the DaVinci flow. If you're using redirect, leave this blank.                                                                                                        |
+| Property                         | Description                                                                                                                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **PingOne DaVinci Redirect URL** | `https://auth.pingone.com/[.varname[companyID]/davinci/oauth2/callback`                                                                                                                             |
+| **Application ID**               | The application ID that you copied earlier from the IdP. You can find this information on the **Basic settings** page in the [Facebook for Developers portal](https://developers.facebook.com).     |
+| **Client Secret**                | The application secret that you copied earlier from the IdP. You can find this information on the **Basic settings** page on the [Facebook for Developers portal](https://developers.facebook.com). |
+| **Scope**                        | The default scopes are `openid email profile`. Add additional scopes if you want to retrieve additional attributes that require specific permissions from Facebook.                                 |
+| **Application Return to URL**    | The URL of the app that embeds the PingOne DaVinci flow. If you're using redirect, leave this blank.                                                                                                |
 
 #### Attributes
 
@@ -147,14 +148,14 @@ On the **Attributes** tab, review the default attributes available from Facebook
 
 #### Attribute mapping
 
-On the **Attribute Mapping** tab, map the following default Facebook attributes to the DaVinci attributes:
+On the **Attribute Mapping** tab, map the following default Facebook attributes to the PingOne DaVinci attributes:
 
-| **Facebook Login Attributes** | **DaVinci Attributes** |
-| ----------------------------- | ---------------------- |
-| `id`                          | `username`             |
-| `givenName`                   | `firstName`            |
-| `familyName`                  | `lastName`             |
-| `email`                       | `email`                |
+| **Facebook Login Attributes** | **PingOne DaVinci Attributes** |
+| ----------------------------- | ------------------------------ |
+| `id`                          | `username`                     |
+| `givenName`                   | `firstName`                    |
+| `familyName`                  | `lastName`                     |
+| `email`                       | `email`                        |
 
 ## Using the connector in a flow
 
@@ -162,7 +163,7 @@ On the **Attribute Mapping** tab, map the following default Facebook attributes 
 
 ![A screen capture of the Facebook redirect flow.](_images/connector-images/dvc-facebook-login-flow.png)
 
-This flow redirects the user to Facebook for authentication. After the user signs in, DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
+This flow redirects the user to Facebook for authentication. After the user signs in, PingOne DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
 
 Test the flow by clicking **Save**, **Deploy**, and **Try Flow**.
 

@@ -1,12 +1,12 @@
 ---
 title: PingOne Verify Connector
-description: "Use the PingOne Verify DaVinci connector to securely verify a user's identity."
+description: "Use the PingOne Verify connector with PingOne DaVinci to securely verify a user's identity"
 component: connectors
 page_id: connectors::p1_verify_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_verify_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -50,7 +50,7 @@ section_ids:
 
 # PingOne Verify Connector
 
-Use the PingOne Verify DaVinci connector to securely verify a user's identity based on a government-issued document and other user-submitted data, such as a live face capture (selfie).
+Use the PingOne Verify connector to securely verify a user's identity based on a government-issued document and other user-submitted data, such as a live face capture (selfie).
 
 The user ID information is captured using a unique QR code and sent to the PingOne ID Verification service. The PingOne ID Verification service interacts with service providers that verify the submitted user ID information. When a user's ID information is successfully verified, the PingOne ID Verification service approves the user authentication and sends the ID verification status to the browser or to the next connector in the flow.
 
@@ -58,7 +58,7 @@ The user ID information is captured using a unique QR code and sent to the PingO
 
 ### Resources
 
-Learn more about setup help in the following sections of PingOne Verify and DaVinci:
+Learn more about setup help in the following sections of PingOne Verify and PingOne DaVinci:
 
 * PingOne Verify documentation
 
@@ -66,13 +66,13 @@ Learn more about setup help in the following sections of PingOne Verify and DaVi
 
   * [Getting started with PingOne Verify](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_getting_started_with_p1_verify.html)
 
-* DaVinci documentation
+* PingOne DaVinci documentation
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -90,7 +90,7 @@ Sign up for PingOne and configure an environment with PingOne Verify. Learn more
 
 #### Getting your environment details
 
-Get your **Environment ID** and **Region** before setting up the PingOne Verify connector in DaVinci:
+Get your **Environment ID** and **Region** before setting up the PingOne Verify connector in PingOne DaVinci:
 
 1. In the PingOne admin console, go to **Settings > Environment Properties**.
 
@@ -142,7 +142,7 @@ To add a worker app:
 
 #### Getting your application credentials
 
-Get the **Client ID** and **Client secret** from your PingOne admin console before setting up the PingOne Verify connector in DaVinci:
+Get the **Client ID** and **Client secret** from your PingOne admin console before setting up the PingOne Verify connector in PingOne DaVinci:
 
 1. In the PingOne admin console, go to **Applications > Applications**. If you haven't added the application yet, you can find instructions in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) in the PingOne documentation.
 
@@ -154,7 +154,7 @@ Get the **Client ID** and **Client secret** from your PingOne admin console befo
 
 ### Setting up the connector
 
-In DaVinci, go to **Connections** and add a **PingOne Verify** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, go to **Connections** and add a **PingOne Verify** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 
@@ -2204,4 +2204,4 @@ The following resources can help you solve issues with the connector.
 
 * Testing capabilities
 
-  Testing your flows frequently is the key to making them work correctly. Learn more in [Getting Started with DaVinci](https://docs.pingidentity.com/davinci/flows/davinci_getting_started.html).
+  Testing your flows frequently is the key to making them work correctly. Learn more in [Getting Started with PingOne DaVinci](https://docs.pingidentity.com/davinci/flows/davinci_getting_started.html).

@@ -1,5 +1,8 @@
 # PingOne Privilege
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Privilege
 
 - [Access protocols](https://docs.pingidentity.com/privilege/configuration/access-protocols.md): PingOne Privilege supports certificate-based SSH and Remote Desktop Protocol for secure access to your resources.
@@ -22,12 +25,11 @@
 - [Configuring gateways](https://docs.pingidentity.com/privilege/configuration/network-infrastructure/gateways.md): Gateways are entry points for accessing resources on a private network, enabling secure sessions and intelligent routing.
 - [Configuring GCP GKE access](https://docs.pingidentity.com/privilege/configuration/configuring-kubernetes-access/gcp-gke.md): The required configurations within your GCP project to allow PingOne Privilege to discover and manage your GKE clusters.
 - [Configuring Kubernetes access](https://docs.pingidentity.com/privilege/configuration/configuring-kubernetes-access/index.md): Administrators can configure Kubernetes access for onboarded cloud accounts to enable just-in-time access for teams running containerized workloads.
-- [Configuring MCP Gateways](https://docs.pingidentity.com/privilege/configuration/mcp-gateway.md): The PingOne Privilege MCP gateway provides just-in-time access, least-privilege access with full session visibility and control for MCP servers.
+- [Configuring MCP gateways](https://docs.pingidentity.com/privilege/configuration/mcp-gateway.md): The PingOne Privilege MCP gateway provides just-in-time access, least-privilege access, and full session visibility and control for MCP servers.
 - [Configuring network infrastructure](https://docs.pingidentity.com/privilege/configuration/network-infrastructure.md): To provide access to servers and databases in your cloud environment, you might need to configure network infrastructure.
 - [Configuring PingOne Privilege](https://docs.pingidentity.com/privilege/configuration/index.md): Learn how to set up and customize the PingOne Privilege platform to suit your organization's requirements.
 - [Configuring private relays](https://docs.pingidentity.com/privilege/configuration/network-infrastructure/private-relays.md): A private relay is designed for deployment in networks that don't allow inbound connections, enabling access to resources within that private network.
 - [Configuring remote desktop access](https://docs.pingidentity.com/privilege/configuration/access-protocols/rdp.md): When you onboard a cloud account, PingOne Privilege automatically discovers all remote desktop protocol (RDP) instances.
-- [Configuring target relays](https://docs.pingidentity.com/privilege/configuration/network-infrastructure/target-relays.md): A target relay is a component that you deploy directly on a server that can't accept inbound connections, enabling passwordless access.
 - [Create a read policy](https://docs.pingidentity.com/privilege/procyonreadpolicy/create-read-policy.md)
 - [Create a tag policy](https://docs.pingidentity.com/privilege/procyonreadpolicy/create-tag-policy.md)
 - [Dashboard](https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/getting-started/dashboard.md): The dashboard provides quick insights into system activity.
@@ -67,7 +69,6 @@
 - [Setting up your environment in PingOne](https://docs.pingidentity.com/privilege/getting-started/setting-up-environment.md): This topic guides administrators through the process of setting up a new environment for PingOne Privilege.
 - [Slack integration](https://docs.pingidentity.com/privilege/integrations/slack.md): The PingOne Privilege Slack integration allows your teams to receive notifications of access requests or approvals.
 - [Start here](https://docs.pingidentity.com/privilege/getting-started/getting-started-admins.md)
-- [Tenant settings](https://docs.pingidentity.com/privilege/configuration/tenant-settings.md): Administrators can configure tenant-wide settings from the admin console to customize security policies, network configurations, and administrative access.
 - [Tenant settings](https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/getting-started/tenant-settings.md): Administrators can configure tenant-wide settings from the admin console.
 - [Troubleshooting PingOne Privilege](https://docs.pingidentity.com/privilege/troubleshooting/index.md): Basic troubleshooting tips are provided here to help you navigate common difficulties with PingOne Privilege
 - [Troubleshooting the agent](https://docs.pingidentity.com/privilege/troubleshooting/troubleshooting-agent.md): Here are some common problems users have experienced with the PingOne Privilege agent and their solution.

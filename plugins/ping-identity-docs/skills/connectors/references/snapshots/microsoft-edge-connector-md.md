@@ -1,12 +1,12 @@
 ---
 title: Microsoft Edge for Business Connector
-description: The Microsoft Edge for Business connector lets you use Microsoft Edge for Business to improve authentication security in your PingOne DaVinci flow.
+description: Configure the Microsoft Edge for Business connector to collect device signals and strengthen authentication security in a PingOne DaVinci flow
 component: connectors
 page_id: connectors::microsoft_edge_connector
 canonical_url: https://docs.pingidentity.com/connectors/microsoft_edge_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 10, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -39,13 +39,13 @@ You can find information and setup help in the following:
 
   * [Register an application in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -133,7 +133,7 @@ The Microsoft Edge for Business Device Trust is now configured.
 
 ### Configuring the Microsoft Edge for Business connector
 
-1. [Add the connector in DaVinci](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+1. [Add the connector in PingOne DaVinci](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 2. Configure it as follows:
 

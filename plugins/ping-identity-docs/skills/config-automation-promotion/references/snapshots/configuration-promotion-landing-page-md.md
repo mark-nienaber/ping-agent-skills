@@ -1,9 +1,11 @@
 ---
 title: Configuration Promotion at Ping Identity
-description: Effective configuration promotion is paramount to the success and stability of modern Ping Identity solutions within an overall multi-vendor solution. By adopting a systematic and well-planned approach to configuration management and configuration promotion automation, organizations can mitigate deployment risks, ensure consistency, and streamline the configuration promotion process.
+description: Learn how to automate configuration promotion for Ping Identity solutions using GitOps, Terraform, and the Ping CLI command-line tool
 component: config-automation-promotion
 page_id: config-automation-promotion::configuration_promotion_landing_page
 canonical_url: https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.html
+llms_txt: https://developer.pingidentity.com/config-automation-promotion/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 24, 2025
 section_ids:
   learn-about-configuration-promotion-automation: Learn about configuration promotion automation

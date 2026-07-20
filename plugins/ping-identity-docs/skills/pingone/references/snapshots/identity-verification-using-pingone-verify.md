@@ -1316,7 +1316,7 @@ To account for variations in regional data access and compliance standards, Ping
 
 ---
 title: PingOne Verify and documentation authentication
-description: Document authentication in PingOne Verify uses machine learning and multiple verification checks to assess the validity of a document presented by a user.
+description: Document authentication in PingOne Verify uses machine learning to authenticate identity documents, detect tampering, and handle false positives and negatives.
 component: pingone
 page_id: pingone:identity_verification_using_pingone_verify:p1_verify_documentation_authentication
 canonical_url: https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_documentation_authentication.html
@@ -1393,7 +1393,7 @@ In machine learning and document authentication, the terms false positive and fa
 
 ---
 title: PingOne Verify and face verification
-description: Face verification in PingOne Verify uses face matching, liveness detection, and injection attack detection to prevent fraud and ensure that the user presenting an ID is who they say they are.
+description: Face verification in PingOne Verify uses face matching, liveness detection, and injection attack detection to prevent identity fraud.
 component: pingone
 page_id: pingone:identity_verification_using_pingone_verify:p1_verify_face_verification
 canonical_url: https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_face_verification.html

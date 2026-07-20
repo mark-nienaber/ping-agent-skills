@@ -27,7 +27,7 @@ How to enable and configure WhatsApp authentication in PingOne to let users rece
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Integrations: identity, provider, adding | integrations | https://docs.pingidentity.com/pingone/integrations/*.md | references/snapshots/integrations.md |
+| Integrations: identity, provider, pingone | integrations | https://docs.pingidentity.com/pingone/integrations/*.md | references/snapshots/integrations.md |
 | Authorization Using Pingone Authorize: pingone, authorize, adding | authorization_using_pingone_authorize | https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/*.md | references/snapshots/authorization-using-pingone-authorize.md |
 | Applications: application, pingone, applications | applications | https://docs.pingidentity.com/pingone/applications/*.md | references/snapshots/applications.md |
 | Strong Authentication Mfa: pingid, app, authentication | strong_authentication_mfa | https://docs.pingidentity.com/pingone/strong_authentication_mfa/*.md | references/snapshots/strong-authentication-mfa.md |
@@ -35,7 +35,7 @@ How to enable and configure WhatsApp authentication in PingOne to let users rece
 | User Experience: pingone, adding, configuring | user_experience | https://docs.pingidentity.com/pingone/user_experience/*.md | references/snapshots/user-experience.md |
 | Directory: pingone, user, users | directory | https://docs.pingidentity.com/pingone/directory/*.md | references/snapshots/directory.md |
 | Threat Protection Using Pingone Protect: protect, pingone, risk | threat_protection_using_pingone_protect | https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/*.md | references/snapshots/threat-protection-using-pingone-protect.md |
-| Getting Started With Pingone: pingone, administrators, your | getting_started_with_pingone | https://docs.pingidentity.com/pingone/getting_started_with_pingone/*.md | references/snapshots/getting-started-with-pingone.md |
+| Getting Started With Pingone: pingone, your, administrator | getting_started_with_pingone | https://docs.pingidentity.com/pingone/getting_started_with_pingone/*.md | references/snapshots/getting-started-with-pingone.md |
 | Pingone Tutorials: creating, pingone, application | pingone_tutorials | https://docs.pingidentity.com/pingone/pingone_tutorials/*.md | references/snapshots/pingone-tutorials.md |
 | Authentication: authentication, pingone, adding | authentication | https://docs.pingidentity.com/pingone/authentication/*.md | references/snapshots/authentication.md |
 | Identity Verification Using Pingone Verify: verify, pingone, identity | identity_verification_using_pingone_verify | https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/*.md | references/snapshots/identity-verification-using-pingone-verify.md |

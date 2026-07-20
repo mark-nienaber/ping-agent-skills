@@ -1,6 +1,6 @@
 ---
 title: Apple Login Connector
-description: The Apple Login connector authenticates users with Sign in with Apple and retrieves Apple ID attributes for use in DaVinci flows.
+description: The Apple Login connector authenticates users with Sign in with Apple and retrieves Apple ID attributes for use in PingOne DaVinci flows
 component: connectors
 page_id: connectors::apple_login_connector
 canonical_url: https://docs.pingidentity.com/connectors/apple_login_connector.html
@@ -29,7 +29,7 @@ section_ids:
 
 # Apple Login Connector
 
-The Apple Login connector authenticates users with **Sign in with Apple** and retrieves **Apple ID** attributes for use in DaVinci flows.
+The Apple Login connector authenticates users with **Sign in with Apple** and retrieves **Apple ID** attributes for use in PingOne DaVinci flows.
 
 ## Setup
 
@@ -37,13 +37,13 @@ The Apple Login connector authenticates users with **Sign in with Apple** and re
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 * Apple documentation:
 
@@ -57,7 +57,7 @@ To use the connector, you'll need:
 
 ### Configuring Apple as an IdP
 
-Before configuring the Apple Login connector in DaVinci, register the application in the Apple Developer portal and collect the values that Apple generates to configure Apple as an identity provider (IdP) *(tooltip: \<div class="paragraph">
+Before configuring the Apple Login connector in PingOne DaVinci, register the application in the Apple Developer portal and collect the values that Apple generates to configure Apple as an identity provider (IdP) *(tooltip: \<div class="paragraph">
 \<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
 \</div>)*.
 
@@ -71,7 +71,7 @@ You'll complete three tasks in the Apple Developer portal:
 
 #### Creating an App ID
 
-When you register your application, Apple generates an **App ID** to identify the application. You'll need this value to connect the application to DaVinci.
+When you register your application, Apple generates an **App ID** to identify the application. You'll need this value to connect the application to PingOne DaVinci.
 
 #### Steps
 
@@ -99,7 +99,7 @@ When you register your application, Apple generates an **App ID** to identify th
 
 #### Creating a Services ID
 
-The **Services ID** identifies the particular instance of your application. The **Services ID** is equivalent to a client ID in DaVinci.
+The **Services ID** identifies the particular instance of your application. The **Services ID** is equivalent to a client ID in PingOne DaVinci.
 
 #### Steps
 
@@ -127,7 +127,7 @@ The **Services ID** identifies the particular instance of your application. The 
 
 9. Leave the **Return URLs** blank for now.
 
-   This is the path in your application that users are redirected to after they have authenticated with Apple. This value is equivalent to a callback URI. You'll enter this value after you set up your application in DaVinci.
+   This is the path in your application that users are redirected to after they have authenticated with Apple. This value is equivalent to a callback URI. You'll enter this value after you set up your application in PingOne DaVinci.
 
 10. Click **Next**, and then click **Done**.
 
@@ -135,7 +135,7 @@ The **Services ID** identifies the particular instance of your application. The 
 
 #### Creating a private key
 
-When you register your application, Apple generates a private key for client authentication. You'll need this value when you add the application to DaVinci.
+When you register your application, Apple generates a private key for client authentication. You'll need this value when you add the application to PingOne DaVinci.
 
 #### Steps
 
@@ -157,11 +157,11 @@ When you register your application, Apple generates a private key for client aut
 
 9. Copy the **Key ID** to a secure location.
 
-   You'll use this value when you add the IdP in DaVinci.
+   You'll use this value when you add the IdP in PingOne DaVinci.
 
 10. To save the key to the local file system, click **Download**.
 
-    The key is saved as a text file with a `.p8` file extension. The key will be used as the client secret signing key and its identifier will be used as the private key in DaVinci.
+    The key is saved as a text file with a `.p8` file extension. The key will be used as the client secret signing key and its identifier will be used as the private key in PingOne DaVinci.
 
     |   |                                                                                                                                                                                                                                                    |
     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -169,7 +169,7 @@ When you register your application, Apple generates a private key for client aut
 
 ### Configuring the Apple Login connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -185,7 +185,7 @@ Use the values from the Apple Developer portal to populate the connector's gener
 | **Client ID**                 | The **Services ID** from Apple Developer.                                                                                                                                                                                                                                                                                            |
 | **Private Key**               | Paste the contents of the downloaded Apple private key file with the `.p8` extension. Apple generates this file when the **Sign in with Apple** key is created.	The file can be downloaded only once.                                                                                                                                |
 | **Scope**                     | The scopes that determine which user information Apple can return. Configure this property according to the claims required by the application, such as email address or name-related data. Learn more in the [Scope property Apple documentation](https://developer.apple.com/documentation/signinwithapplejs/clientconfigi/scope). |
-| **Application Return to URL** | The URL of the app that embeds the DaVinci flow. If you're using redirect, leave this blank.                                                                                                                                                                                                                                         |
+| **Application Return to URL** | The URL of the app that embeds the PingOne DaVinci flow. If you're using redirect, leave this blank.                                                                                                                                                                                                                                 |
 
 #### Attributes
 
@@ -199,14 +199,14 @@ On the **Attributes** tab, review the default attributes available from Apple an
 
 #### Attribute mapping
 
-On the **Attribute Mapping** tab, map the following default Apple attributes to the DaVinci attributes:
+On the **Attribute Mapping** tab, map the following default Apple attributes to the PingOne DaVinci attributes:
 
-| **Apple Login Attributes** | **DaVinci Attributes** |
-| -------------------------- | ---------------------- |
-| `sub`                      | `username`             |
-| `givenName`                | `firstName`            |
-| `familyName`               | `lastName`             |
-| `email`                    | `email`                |
+| **Apple Login Attributes** | **PingOne DaVinci Attributes** |
+| -------------------------- | ------------------------------ |
+| `sub`                      | `username`                     |
+| `givenName`                | `firstName`                    |
+| `familyName`               | `lastName`                     |
+| `email`                    | `email`                        |
 
 ## Using the connector in a flow
 
@@ -214,7 +214,7 @@ On the **Attribute Mapping** tab, map the following default Apple attributes to 
 
 ![A screen capture of the Apple redirect flow.](_images/connector-images/dvc-apple-login-flow.png)
 
-This flow redirects the user to Apple for authentication. After the user signs in, DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
+This flow redirects the user to Apple for authentication. After the user signs in, PingOne DaVinci automatically completes the token exchange and returns identity claims to the flow for downstream logic.
 
 Test the flow by clicking **Save**, **Deploy**, and **Try Flow**.
 

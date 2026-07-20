@@ -1,4 +1,105 @@
 ---
+title: Action
+description: Actions are a means of extending Advanced Identity Cloud REST APIs and are defined by the resource provider. The actions you can use depend on the implementation.
+component: pingoneaic-api
+page_id: pingoneaic-api::crest/action
+canonical_url: https://developer.pingidentity.com/pingoneaic-api/crest/action.html
+section_ids:
+  parameters: Parameters
+---
+
+# Action
+
+Actions are a means of extending Advanced Identity Cloud REST APIs and are defined by the resource provider. The actions you can use depend on the implementation.
+
+The standard action indicated by `_action=create` is described in [Create](create.html).
+
+## Parameters
+
+You can use the following query string parameters. Other parameters depend on the specific action implementation:
+
+| Parameter                  | Description                                                                                                                                                                                                                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_fields=field[,field...]` | Return only the specified fields in the body of the response.The `field` values are JSON pointers. For example, if the resource is `{"parent":{"child":"value"}}`, `parent/child` refers to the `"child":"value"`.If the `field` is left blank, the endpoint returns all default values. |
+| `_prettyPrint=true`        | Format the body of the response.                                                                                                                                                                                                                                                         |
+
+---
+
+---
+title: Advanced Identity Cloud REST
+description: Advanced Identity Cloud REST is a REST API framework defining common APIs to access web resources and collections of resources.
+component: pingoneaic-api
+page_id: pingoneaic-api::crest/about-crest
+canonical_url: https://developer.pingidentity.com/pingoneaic-api/crest/about-crest.html
+page_aliases: ["crest/index.adoc"]
+section_ids:
+  about-crest-resources: Resources
+  about-crest-verbs: Verbs
+  about-crest-parameters: Query parameters
+  about-crest-extensions: Extension points
+---
+
+# Advanced Identity Cloud REST
+
+Advanced Identity Cloud REST is a REST API framework defining common APIs to access web resources and collections of resources.
+
+## Resources
+
+Endpoints generally return JSON-format resources, though resource formats can depend on the implementation.
+
+Resources in collections can be found by their unique identifiers (IDs). IDs are exposed in the resource URIs. For example, if a service has a user collection under `/users`, you can access a user at `/users/user-id`. The ID is also the value of the `_id` field of the resource.
+
+Resources are versioned using revision numbers. A revision is specified in the resource's `_rev` field. Revisions make it possible to figure out whether to apply changes without resource locking and without distributed transactions.
+
+## Verbs
+
+The Advanced Identity Cloud REST APIs use the following verbs, sometimes referred to collectively as CRUDPAQ. For details and HTTP-based examples of each, follow the links to the sections for each verb.
+
+| Verb                  | Description                                          |
+| --------------------- | ---------------------------------------------------- |
+| [Create](create.html) | Add a new resource with HTTP PUT or HTTP POST.       |
+| [Read](read.html)     | Retrieve a single resource with HTTP GET.            |
+| [Update](update.html) | Replace an existing resource with HTTP PUT.          |
+| [Delete](delete.html) | Remove an existing resource with HTTP DELETE.        |
+| [Patch](patch.html)   | Modify part of an existing resource with HTTP PATCH. |
+| [Action](action.html) | Perform a predefined action with HTTP POST.          |
+| [Query](query.html)   | Search a collection of resources with HTTP GET.      |
+
+## Query parameters
+
+Advanced Identity Cloud REST reserved query string parameter names start with an underscore (`_`).
+
+Reserved query string parameters include, but are not limited to, the following names:
+
+`_action`\
+`_api`\
+`_countOnly`\
+`_crestapi`\
+`_fields`\
+`_mimeType`\
+`_pageSize`\
+`_pagedResultsCookie`\
+`_pagedResultsOffset`\
+`_prettyPrint`\
+`_queryExpression`\
+`_queryFilter`\
+`_queryId`\
+`_sortKeys`\
+`_totalPagedResultsPolicy`
+
+|   |                                                                                        |
+| - | -------------------------------------------------------------------------------------- |
+|   | Some parameter values are not safe for URLs; URL-encode parameter values as necessary. |
+
+## Extension points
+
+The *action* verb is the main vehicle for extensions. For example, to create a new user with HTTP POST rather than HTTP PUT, you might use `/users?_action=create`. An endpoint can define additional actions. For example, `/tasks/1?_action=cancel`.
+
+A service can define *stored queries* to call by ID. For example, `/groups?_queryId=hasDeletedMembers`. Stored queries can call for additional parameters. The parameters are also passed in the query string. Which parameters are valid depends on the stored query.
+
+---
+
+---
 title: Create
 description: "There are two ways to create a resource: HTTP POST or HTTP PUT."
 component: pingoneaic-api

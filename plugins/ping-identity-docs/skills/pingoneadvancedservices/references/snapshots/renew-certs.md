@@ -4,6 +4,8 @@ description: To ensure that communications between PingOne Advanced Services pro
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices:renew_certs:p1as_renew_cert
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/renew_certs/p1as_renew_cert.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 23, 2025
 section_ids:
   adding-the-root-ca-to-the-client-truststore: Adding the root CA to the client truststore

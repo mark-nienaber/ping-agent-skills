@@ -34,11 +34,11 @@ Identity for AI secures AI agents with agent registration, authentication, autho
 | Best Practice Guides: best, practices, passwordless | best_practice_guides | https://docs.pingidentity.com/solution-guides/best_practice_guides/*.md | references/snapshots/best-practice-guides.md |
 | Multi Factor Authentication Use Cases: mfa, pingid, authentication | multi-factor_authentication_use_cases | https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/*.md | references/snapshots/multi-factor-authentication-use-cases.md |
 | Standards And Protocols Use Cases: client, commands, federation | standards_and_protocols_use_cases | https://docs.pingidentity.com/solution-guides/standards_and_protocols_use_cases/*.md | references/snapshots/standards-and-protocols-use-cases.md |
-| Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | live-only |
-| Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | live-only |
-| Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | live-only |
-| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | live-only |
-| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | live-only |
+| Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | references/snapshots/developer-api-use-cases.md |
+| Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | references/snapshots/verified-trust.md |
+| Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | references/snapshots/directory-use-cases.md |
+| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | references/snapshots/htg-overview-md.md |
+| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | references/snapshots/identity-for-ai.md |
 
 ## Composition
 

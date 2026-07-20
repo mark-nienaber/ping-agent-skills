@@ -1479,36 +1479,1590 @@ Continue reading to learn how to register and protect resources with the AM UI a
 ---
 
 ---
-title: UMA stores
-description: Configure PingAM to store User-Managed Access information, audit data, and resource labels in external data stores for production deployments
+title: UMA actors
+description: Configure UMA actors including OAuth 2.0 providers, UMA providers, resource servers, and UMA clients to enable User-Managed Access flows in your environment
 component: pingam
 version: 8.1
-page_id: pingam:uma:configure-uma-storage
-canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/configure-uma-storage.html
+page_id: pingam:uma:uma-set-up-procedures
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-set-up-procedures.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["User-Managed Access (UMA)", "Storage", "Configuration"]
-page_aliases: ["uma-guide:configure-uma-storage.adoc"]
+keywords: ["User-Managed Access (UMA)", "Actors", "OAuth 2.0", "OpenID Connect (OIDC)", "Clients"]
+page_aliases: ["uma-guide:uma-set-up-procedures.adoc"]
 ---
 
-# UMA stores
+# UMA actors
 
-AM stores information about registered resources, audit information generated when users manage access to their protected resources, pending requests, and resource labels. AM stores these items in the configuration store by default.
+To allow UMA flows in your environment, you must first configure the UMA actors. You might already be familiar with some of these actors, such as the OAuth 2.0 provider, and the OAuth 2.0 clients.
 
-For *demo and test purposes*, storing UMA information in the configuration store is sufficient and you do not need to take any additional action. To configure UMA for test purposes, see [UMA use case](uma-example.html).
+Although the *UMA provider* is one of the actors, this role in AM is divided between the OAuth2 provider service and the UMA provider service, as you will see next.
 
-For *production environments*, configure at least one external store to hold UMA information. Configure more stores to separate UMA objects in high-load deployments when data tuning requirements differ.
+|   |                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------- |
+|   | To set up AM as an example UMA provider, resource server, and client, see the [UMA use case](uma-example.html) instead. |
 
-The tasks to configure UMA stores are:
+* The OAuth 2.0/OpenID Connect provider
 
-[icon: database, set=fad, size=3x]
+  As an extension of the OAuth 2.0 and OpenID Connect specifications, the AM authorization server is responsible for providing protection API access tokens (PATs), and requesting party access tokens (RPTs) and ID tokens for UMA clients.
 
-#### [Prepare DS](prepare-uma-store.html)
+  To configure the OAuth 2.0/OpenID Connect provider, see:
 
-Prepare one or more DS instances to hold UMA data.
+  * [Authorization server configuration](../am-oauth2/oauth2-configure-authz.html)
 
-[icon: edit, set=fad, size=3x]
+  * [OpenID provider configuration](../am-oidc1/configure-openid-connect-provider.html)
 
-#### [Configure UMA Stores](configure-external-uma-stores.html)
+* UMA provider
 
-Configure the newly-prepared DS instances in AM.
+  Configure the UMA provider by realm to expose UMA-related endpoints, and to configure UMA-related properties that are not exposed in the OAuth 2.0 provider.
+
+  The service's defaults are suitable for most situations and strike a good balance between security and ease of use.
+
+  To configure the service, in the AM admin UI, go to Realms > *realm name* > Services, and add an UMA Provider service.
+
+  For information about the available attributes, see [UMA Provider](../setup/services-configuration.html#global-uma).
+
+* Resource server
+
+  You need a server to let the end user register their resources and share them. The resource server can be an AM instance, a third-party service, or [PingGateway](https://docs.pingidentity.com/pinggateway/2025.11/gateway-guide/uma.html).
+
+  Regardless of where the resource server is, it needs an *UMA client* that is registered in AM and configured as the UMA provider.
+
+* UMA clients
+
+  Configure OAuth 2.0 clients to work as a resource server agent, a requesting party, and a resource owner.
+
+  Special scopes:
+
+  * The `uma_protection` Scope.
+
+    Clients requiring a protection API access token (PAT) must be configured with the `uma_protection` scope. This scope tells AM that the token is a PAT, and not a regular access token.
+
+  * The `openid` Scope.
+
+    Clients performing the UMA grant require the link:openid scope, since AM will provide the claims that UMA requires inside an ID token.
+
+  For more information about registering clients, see [Client application registration](../am-oauth2/oauth2-register-client.html).
+
+---
+
+---
+title: UMA configuration reference
+description: Reference information for User-Managed Access (UMA) global settings and datastore settings in PingAM
+component: pingam
+version: 8.1
+page_id: pingam:uma:uma-reference
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-reference.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["User-Managed Access (UMA)", "Configuration", "Resources", "Storage", "Audit", "Pending Requests", "Resource Labels"]
+page_aliases: ["uma-guide:uma-reference.adoc"]
+section_ids:
+  server-uma: UMA properties
+  uma-ref-resource-set-store: UMA resource store
+  uma-ref-external-resource-set-store: External UMA resource store configuration
+  uma-ref-audit-store: UMA audit store
+  uma-ref-external-audit-store: External UMA audit store configuration
+  uma-ref-pending-store: Pending requests store
+  uma-ref-external-pending-store: External pending requests store configuration
+  uma-ref-labels-store: UMA resource labels store
+  uma-ref-external-labels-store: External UMA resource labels store configuration
+---
+
+# UMA configuration reference
+
+This topic provides reference information for UMA global settings and UMA datastore settings. See the general [Reference](../am-reference/preface.html) for reference information on global services.
+
+* To configure UMA global settings, go to Configure > Global Settings > UMA Provider.
+
+  For more information, see [UMA provider](../setup/services-configuration.html#global-uma).
+
+* To configure UMA datastore settings:
+
+  * Go to Configure > Server Defaults > UMA to configure the settings for all your servers.
+
+  * Go to Deployment > Servers > *server name* > UMA to configure the settings for one server.
+
+    For more information, see [UMA properties](#server-uma).
+
+## UMA properties
+
+UMA server settings are inherited by default.
+
+### UMA resource store
+
+The following settings appear on the UMA Resource Store tab:
+
+* Store Mode
+
+  Specifies the datastore where AM stores UMA tokens. Possible values are:
+
+  * `Default Token Store`: AM stores UMA tokens in the configuration datastore.
+
+  * `External Token Store`: AM stores UMA tokens in an external datastore.
+
+* Root Suffix
+
+  Specifies the base DN for storage information in LDAP format, such as `dc=uma-resources,dc=example,dc=com`.
+
+* Max Connections
+
+  Specifies the maximum number of connections to the datastore.
+
+### External UMA resource store configuration
+
+AM honors the following properties when `External Token Store` is selected under the Resource Sets Store tab:
+
+* SSL/TLS Enabled
+
+  When enabled, AM uses SSL or TLS to connect to the external datastore. Make sure AM trusts the datastore's certificate when using this option.
+
+* Connection String(s)
+
+  An ordered list of connection strings for external datastores. The format is `HOST:PORT[|SERVERID[|SITEID]]`, where `HOST:PORT` specify the FQDN and port of the datastore, and `SERVERID` and `SITEID` are optional parameters that let you prioritize the particular connection when used by the specified node(s).
+
+  Multiple connection strings must be comma-separated, for example, `uma-ldap1.example.com:1636|1|1, uma-ldap2.example.com:1636|2|1`.
+
+  AM uses the first connection string in the list unless the server is unreachable. In this case, it tries the next connection strings in the order in which they're defined.
+
+  In production environments, you should specify more than one connection string for failover purposes.
+
+* Login Id
+
+  The username AM uses to authenticate to the datastore. For example, `uid=am-uma-bind-account,ou=admins,dc=uma,dc=example,dc=com`. This user must be able to read and write to the root suffix of the datastore.
+
+* Password
+
+  The password associated with the login ID property.
+
+* Heartbeat
+
+  The time period, in seconds, that AM should send a heartbeat request to the datastore to ensure that the connection does not remain idle.
+
+  Default: `10`
+
+### UMA audit store
+
+The following settings appear on the UMA Audit Store tab:
+
+* Store Mode
+
+  Specifies the datastore where AM stores audit information generated when users access UMA resources. Possible values are:
+
+  * `Default Token Store`: AM stores UMA audit information in the configuration datastore.
+
+  * `External Token Store`: AM stores UMA audit information in an external datastore.
+
+* Root Suffix
+
+  Specifies the base DN for storage information in LDAP format, such as `dc=uma-audit,dc=example,dc=com`.
+
+* Max Connections
+
+  Specifies the maximum number of connections to the datastore.
+
+### External UMA audit store configuration
+
+AM honors the following properties when `External Token Store` is selected under the UMA Audit Store tab:
+
+* SSL/TLS Enabled
+
+  When enabled, AM uses SSL or TLS to connect to the external datastore. Make sure AM trusts the datastore's certificate when using this option.
+
+* Connection String(s)
+
+  An ordered list of connection strings for external datastores. The format is `HOST:PORT[|SERVERID[|SITEID]]`, where `HOST:PORT` specify the FQDN and port of the datastore, and `SERVERID` and `SITEID` are optional parameters that let you prioritize the particular connection when used by the specified node(s).
+
+  Multiple connection strings must be comma-separated, for example, `uma-ldap1.example.com:1636|1|1, uma-ldap2.example.com:1636|2|1`.
+
+  AM uses the first connection string in the list unless the server is unreachable. In this case, it tries the next connection strings in the order in which they're defined.
+
+  In production environments, you should specify more than one connection string for failover purposes.
+
+* Login Id
+
+  The username AM uses to authenticate to the datastore. For example, `uid=am-uma-bind-account,ou=admins,dc=uma,dc=example,dc=com`. This user must be able to read and write to the root suffix of the datastore.
+
+* Password
+
+  The password associated with the login ID property.
+
+* Heartbeat
+
+  The time period, in seconds, that AM should send a heartbeat request to the datastore to ensure that the connection does not remain idle.
+
+  Default: `10`
+
+### Pending requests store
+
+The following settings appear on the Pending Requests Store tab:
+
+* Store Mode
+
+  Specifies the datastore where AM stores pending requests to UMA resources. Possible values are:
+
+  * `Default Token Store`: AM stores UMA pending requests in the configuration datastore.
+
+  * `External Token Store`: AM stores UMA pending requests in an external datastore.
+
+* Root Suffix
+
+  Specifies the base DN for storage information in LDAP format, such as `dc=uma-pending,dc=example,dc=com`.
+
+* Max Connections
+
+  Specifies the maximum number of connections to the datastore.
+
+### External pending requests store configuration
+
+AM honors the following properties when `External Token Store` is selected under the Pending Requests Store tab:
+
+* SSL/TLS Enabled
+
+  When enabled, AM uses SSL or TLS to connect to the external datastore. Make sure AM trusts the datastore's certificate when using this option.
+
+* Connection String(s)
+
+  An ordered list of connection strings for external datastores. The format is `HOST:PORT[|SERVERID[|SITEID]]`, where `HOST:PORT` specify the FQDN and port of the datastore, and `SERVERID` and `SITEID` are optional parameters that let you prioritize the particular connection when used by the specified node(s).
+
+  Multiple connection strings must be comma-separated, for example, `uma-ldap1.example.com:1636|1|1, uma-ldap2.example.com:1636|2|1`.
+
+  AM uses the first connection string in the list unless the server is unreachable. In this case, it tries the next connection strings in the order in which they're defined.
+
+  In production environments, you should specify more than one connection string for failover purposes.
+
+* Login Id
+
+  The username AM uses to authenticate to the datastore. For example, `uid=am-uma-bind-account,ou=admins,dc=uma,dc=example,dc=com`. This user must be able to read and write to the root suffix of the datastore.
+
+* Password
+
+  The password associated with the login ID property.
+
+* Heartbeat
+
+  The time period, in seconds, that AM should send a heartbeat request to the datastore to ensure that the connection does not remain idle.
+
+  Default: `10`
+
+### UMA resource labels store
+
+The following settings appear on the UMA Resource Labels Store tab:
+
+* Store Mode
+
+  Specifies the datastore where AM stores user-created labels used for organizing UMA resources. Possible values are:
+
+  * `Default Token Store`: AM stores user-created labels in the configuration datastore.
+
+  * `External Token Store`: AM stores user-created labels in an external datastore.
+
+* Root Suffix
+
+  Specifies the base DN for storage information in LDAP format, such as `dc=uma-resources-labels,dc=example,dc=com`.
+
+* Max Connections
+
+  Specifies the maximum number of connections to the datastore.
+
+### External UMA resource labels store configuration
+
+AM honors the following properties when `External Token Store` is selected under the UMA Resource Labels Store tab.
+
+* SSL/TLS Enabled
+
+  When enabled, AM uses SSL or TLS to connect to the external datastore. Make sure AM trusts the datastore's certificate when using this option.
+
+* Connection String(s)
+
+  An ordered list of connection strings for external datastores. The format is `HOST:PORT[|SERVERID[|SITEID]]`, where `HOST:PORT` specify the FQDN and port of the datastore, and `SERVERID` and `SITEID` are optional parameters that let you prioritize the particular connection when used by the specified node(s).
+
+  Multiple connection strings must be comma-separated, for example, `uma-ldap1.example.com:1636|1|1, uma-ldap2.example.com:1636|2|1`.
+
+  AM uses the first connection string in the list unless the server is unreachable. In this case, it tries the next connection strings in the order in which they're defined.
+
+  In production environments, you should specify more than one connection string for failover purposes.
+
+* Login Id
+
+  The username AM uses to authenticate to the datastore. For example, `uid=am-uma-bind-account,ou=admins,dc=uma,dc=example,dc=com`. This user must be able to read and write to the root suffix of the datastore.
+
+* Password
+
+  The password associated with the login ID property.
+
+* Heartbeat
+
+  The time period, in seconds, that AM should send a heartbeat request to the datastore to ensure that the connection does not remain idle.
+
+  Default: `10`
+
+---
+
+---
+title: UMA endpoints
+description: PingAM exposes User-Managed Access (UMA) endpoints for resource management, permission requests, authorization policies, labels, pending requests, claims gathering, and provider configuration...
+component: pingam
+version: 8.1
+page_id: pingam:uma:uma-endpoints
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-endpoints.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["User-Managed Access (UMA)", "Endpoints"]
+page_aliases: ["uma-guide:uma-endpoints.adoc"]
+---
+
+# UMA endpoints
+
+When acting as an UMA server, AM exposes the following endpoints. Click on them for more information about what they can do, and how to use them:
+
+| Endpoint                                     | Description                                                                                                                                                                                                    |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/uma/resource_set`                          | Lets users register and manage UMA resources ([ Federated Authorization for User-Managed Access (UMA) 2.0](https://docs.kantarainitiative.org/uma/wg/oauth-uma-federated-authz-2.0-08.html) endpoint).         |
+| `/uma/permission_request`                    | Returns permission tickets during the UMA grant flow ([ Federated Authorization for User-Managed Access (UMA) 2.0](https://docs.kantarainitiative.org/uma/wg/oauth-uma-federated-authz-2.0-08.html) endpoint). |
+| `/json/users/{user}/uma/policies`            | Creates and manages UMA-related authorization policies.                                                                                                                                                        |
+| `/json/users/{user}/oauth2/resources/labels` | Creates, queries, and deletes UMA user labels.                                                                                                                                                                 |
+| `/json/users/{user}/uma/pendingrequests`     | Manages UMA resource pending requests.                                                                                                                                                                         |
+| `/uma/claims_gathering`                      | Handles interactive claims-gathering requests during UMA flows.                                                                                                                                                |
+| `/uma/.well-known/uma2-configuration`        | Exposes provider configuration during UMA discovery.                                                                                                                                                           |
+
+|   |                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------- |
+|   | For examples of most of the calls to the endpoints, see [The Postman Collection](uma-example.html#uma-postman-collection). |
+
+---
+
+---
+title: UMA grant flow
+description: Understand the User-Managed Access (UMA) grant flow for issuing requesting party tokens (RPTs) to allow access to protected resources in PingAM
+component: pingam
+version: 8.1
+page_id: pingam:uma:uma-grant-flow
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-grant-flow.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["User-Managed Access (UMA)", "Grant Flow", "REST", "Endpoints"]
+page_aliases: ["uma-guide:uma-grant-flow.adoc"]
+section_ids:
+  acquire_a_pat_on_behalf_of_a_resource_owner: Acquire a PAT on behalf of a resource owner
+  create-permission-ticket: Create a permission ticket
+  gather-claims: Gather claims
+  obtain-rpt: Obtain an RPT
+  gather_claims_interactively: Gather claims interactively
+  enable_interactive_claims_gathering: Enable interactive claims gathering
+  protect_permission_tickets_with_pkce: Protect permission tickets with PKCE
+  protect_pcts_with_certificate_bound_proof_of_possession: Protect PCTs with certificate-bound proof-of-possession
+---
+
+# UMA grant flow
+
+* Endpoints
+
+  * [/oauth2/authorize](../am-oauth2/oauth2-authorize-endpoint.html)
+
+  * [/oauth2/access\_token](../am-oauth2/oauth2-access_token-endpoint.html)
+
+  * [/uma/permission\_request](endpoint-permission_request.html)
+
+  * [/uma/claims\_gathering](endpoint-claims_gathering.html)
+
+The UMA grant flow issues an RPT *(tooltip: requesting party token)* to the requesting party to allow access to a resource.
+
+The implementation in AM covers the following scenarios:
+
+* The requesting party wants to perform an action over a resource (for example, downloading it), and the resource owner has already granted them that permission.
+
+  During the UMA grant flow, AM issues the requesting party an RPT *(tooltip: requesting party token)* that they can present to the resource server to access the resource.
+
+* The requesting party wants to perform an action over a resource (for example, downloading it), and the resource owner has not granted them that permission.
+
+  During the UMA grant flow, AM denies access to the resource, and sends the resource owner a request for permission on behalf of the requesting party.
+
+  If the resource owner grants their permission (which happens asynchronously), the requesting party requests a new permission ticket and applies for another RPT.
+
+This diagram shows the first scenario:
+
+![AM supports the UMA 2.0 Grant Flow.](_images/uma-grant-flow.svg)
+
+> **Collapse: Grant flow explained**
+>
+> * A *requesting party*, using a client application, requests access to an UMA-protected resource (labeled `1` and `2` in the diagram above).
+>
+> * The *resource server* checks the existing token (`3`) and determines that the *requesting party* does not have the correct privileges to access the resource. The *resource server* returns a permission ticket (`4`) to the client.
+>
+> * The client uses the permission ticket and a claim token to send an RPT *(tooltip: requesting party token)* from AM (`5`) and (`6`).
+>
+> * AM makes a policy decision using the requested scopes, the scopes permitted in the registered resource, and the user-created policy, and if successful returns an RPT (`7` and `8`).
+>
+> * The client presents the RPT to the *resource server* (`9`), which must verify the token is valid using the AM introspection endpoint (`10`). If the RPT is confirmed to be valid and not expired (`10`), the *resource server* can return the protected resource to the client for access by the requesting party (`11`).
+
+Perform the steps in the following procedures to issue an RPT *(tooltip: requesting party token)* to a requesting party, and have it rejected as in the second scenario. The resource owner will then grant permission to the resource, and the requesting party will attempt the flow again:
+
+## Acquire a PAT on behalf of a resource owner
+
+This example assumes that a confidential client called *UMA-Resource-Server* is registered in AM with, at least, the following configuration:
+
+* **Client Secret**: `mySecret`
+
+* **Scopes**: `uma_protection`
+
+* **Grant Types**: `Resource Owner Password Credentials`
+
+The example uses the Resource Owner Password Credentials grant, but you can use any grant type to obtain the PAT, except the Client Credentials grant. The example also assumes that an identity for the resource owner,`alice`, exists in AM.
+
+1. Send a POST request to the OAuth 2.0 `access_token` endpoint.
+
+   This example uses the `Resource Owner Password Credentials` grant:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'grant_type=password' \
+   --data 'scope=uma_protection' \
+   --data 'username=alice' \
+   --data 'password=Ch4ng31t' \
+   --data 'client_id=UMA-Resource-Server' \
+   --data 'client_secret=mySecret' \
+   "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token"
+   {
+     "access_token": "oMsRVDXHYsWAC0KClr6dmX2_cIc",
+     "scope": "uma_protection",
+     "token_type": "Bearer",
+     "expires_in": 3599
+   }
+   ```
+
+2. The value returned in `access_token` is the Protection API Token, or PAT Bearer token.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To use the `Resource Owner Password Credentials` grant type, as described in [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.3), the default authentication tree in the relevant realm must allow authentication using only a username and password. If you try to use the `Resource Owner Password Credentials` grant type with a tree that requests additional input, the server returns an HTTP `500 Server Error`. |
+
+## Create a permission ticket
+
+When the resource server receives a request for access to a resource, it contacts the authorization server to acquire a permission ticket. The permission ticket associates a request for a particular resource with the corresponding scopes. The resource owner's PAT bearer token is used to map the request to the correct identity.
+
+The permission ticket and the claim token are used to obtain an RPT *(tooltip: requesting party token)*. A new permission ticket must be used for each attempt to acquire an RPT.
+
+This example assumes that a confidential client called *UmaClient* is registered in AM with, at least, the following configuration:
+
+* **Client Secret**: `mySecret`
+
+* **Scopes**: `openid`, `download`
+
+* **Grant Types**: `Resource Owner Password Credentials`, `UMA`
+
+  This example uses the Resource Owner Password Credentials grant, but you can use any grant type, except the Client Credentials one.
+
+* **Token Endpoint Authentication Method**: `client secret post`
+
+  Confidential OpenID Connect clients can use several methods to authenticate, but this example uses `client secret post` for clarity. For more information, see [OIDC client authentication](../am-oidc1/oidc-client-auth.html).
+
+The example also assumes that an identity for the resource owner, `bob`, exists in AM.
+
+1. Send a POST request to the UMA `permission_request` endpoint:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header 'authorization: Bearer 057ad16f-7dba-4049-9f34-e609d230d43a' \ (1)
+   --header 'cache-control: no-cache' \
+   --header 'content-type: application/json' \
+   --data '[
+       {
+           "resource_id" : "ef4d750e-3831-483b-b395-c6f059b5e15d0", (2)
+           "resource_scopes" : ["download"]
+       }
+   ]' \
+   https://am.example.com:8443/am/uma/realms/root/permission_request
+   {
+       "ticket": "eyJ0eXAiOiJ…​XPeJi3E" (3)
+   }
+   ```
+
+   |       |                                                                                                                                                                                                                |
+   | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **1** | Use the PAT Bearer Token previously acquired on behalf of the resource owner.                                                                                                                                  |
+   | **2** | Specify ID of the registered resource for which this permission ticket will maintain permission state information. See [Register an UMA resource (REST)](uma-resource-sets.html#register-an-uma-resource-set). |
+   | **3** | The value returned in the `ticket` property is the permission ticket, which is used to obtain an RPT. See [Obtain an RPT](#obtain-rpt).                                                                        |
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The default lifetime for an UMA permission ticket is 120 seconds. Attempting to obtain a requesting party token after the permission ticket has expired will fail with the following error message:```json
+   {
+     "error_description": "The provided access grant is invalid, expired, or revoked.",
+     "error": "invalid_grant"
+   }
+   ```To alter the default lifetime of a permission ticket, go to Realms > *realm name* > Services > UMA Provider, and edit the Permission Ticket Lifetime (seconds) property. |
+
+## Gather claims
+
+The UMA specification lets a *requesting party* (Bob, in our example) identify themselves in multiple ways during an UMA grant flow. This process of identification is also called *claims gathering*.
+
+The authorization server must gather claims from the requesting party to create a claim token.
+
+1. Send a POST request to the OAuth 2.0 `access_token` endpoint.
+
+   The value returned in the `id_token` property is the claim token required to obtain an RPT *(tooltip: Requesting party token)*, along with the permission ticket acquired earlier:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=UmaClient' \
+   --data 'client_secret=mySecret' \
+   --data 'grant_type=password' \
+   --data 'scope=openid' \
+   --data 'username=bob' \
+   --data 'password=Ch4ng31t' \
+   https://am.example.com:8443/am/oauth2/realms/root/access_token
+   {
+     "access_token": "f09f55e5-5e9c-48fe-aeaa-d377de88e8e6",
+     "refresh_token": "ee2d35f6-5819-4734-8b3e-9af77a545563",
+     "scope": "openid",
+     "id_token": "eyJ0eXA…​FBznEB5A", (1)
+     "token_type": "Bearer",
+     "expires_in": 4999
+   }
+   ```
+
+   |       |                                                                                                                                     |
+   | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+   | **1** | The value returned in the `id_token` property is the claim token, which is used to obtain an RPT. See [Obtain an RPT](#obtain-rpt). |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To use the `Resource Owner Password Credentials` grant type, as described in [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.3), the default authentication tree in the relevant realm must allow authentication using only a username and password. If you try to use the `Resource Owner Password Credentials` grant type with a tree that requests additional input, the server returns an HTTP `500 Server Error`. |
+
+## Obtain an RPT
+
+The requesting party makes a request using the permission ticket and the claim token, in exchange for an RPT *(tooltip: Requesting party token)*.
+
+1. Send a POST request to the OAuth 2.0 `access_token` endpoint.
+
+   You must include the permission ticket, `ticket`, and the `claim_token`.
+
+   The following example results in an error description, indicating that "The client is not authorised to access the requested resource set." The authorization server then sends a request to the resource owner to allow or deny access to the requesting party.
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=UmaClient' \
+   --data 'client_secret=mySecret' \
+   --data 'grant_type=urn:ietf:params:oauth:grant-type:uma-ticket' \
+   --data 'ticket=eyJ0eXAiOiJ…​XPeJi3E' \ (1)
+   --data 'claim_token=eyJ0eXA…​FBznEB5A' \ (2)
+   --data 'claim_token_format=http://openid.net/specs/openid-connect-core-1_0.html#IDToken' \
+   https://am.example.com:8443/am/oauth2/realms/root/access_token
+   {
+     "ticket": "eyJ0eXAiOiJ…​XPeJi3E",
+     "error_description": "The client is not authorised to access the requested resource set. A request has been submitted to the resource owner requesting access to the resource",
+     "error": "request_submitted"
+   }
+   ```
+
+   |       |                                                                                                              |
+   | ----- | ------------------------------------------------------------------------------------------------------------ |
+   | **1** | Specify the permission ticket acquired earlier. See [Create a permission ticket](#create-permission-ticket). |
+   | **2** | Specify the claim token acquired earlier. See [Gather claims](#gather-claims).                               |
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The default lifetime for an UMA permission ticket is 120 seconds. Attempting to obtain a requesting party token after the permission ticket has expired will fail with an error message as follows:```json
+   {
+     "error_description": "The provided access grant is invalid, expired, or revoked.",
+     "error": "invalid_grant"
+   }
+   ```If the ticket has expired, obtain another by repeating the steps in [Create a permission ticket](#create-permission-ticket).To change the default lifetime of a permission ticket, go to Realms > *realm name* > Services > UMA Provider, and edit Permission Ticket Lifetime (seconds). |
+
+2. The resource owner, Alice, logs into AM to view the access request.
+
+   Alice clicks Shares > Requests, and clicks Allow to grant download access to Bob, the requesting party.
+
+   ![The consent screen requires the resource owner to allow or deny access.](_images/uma-resource-server-access-request.png)Figure 1. Consent Screen Presented to the Resource Owner
+
+3. Because each permission token can only be used once, request a new permission token by performing the steps in [Create a permission ticket](#create-permission-ticket).
+
+4. Resubmit the previous POST request for the RPT, with the new permission ticket obtained in the previous step and the original claim token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --data 'client_id=UmaClient' \
+   --data 'client_secret=mySecret' \
+   --data 'grant_type=urn:ietf:params:oauth:grant-type:uma-ticket' \
+   --data 'ticket=eyJ0efBiOiJ…​XPeJc2A' \ (1)
+   --data 'claim_token=eyJ0eXA…​FBznEB5A' \ (2)
+   --data 'claim_token_format=http://openid.net/specs/openid-connect-core-1_0.html#IDToken' \
+   https://am.example.com:8443/am/oauth2/realms/root/access_token
+   {
+       "access_token": "Aw4a92ZoKsjadWKw2d4Rmcjv7DM",
+       "token_type": "Bearer",
+       "expires_in": 3599
+   }
+   ```
+
+   |       |                                                                                                                                                                                                                                  |
+   | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **1** | Specify a refreshed permission ticket acquired earlier, otherwise you will receive a response such as: `The provided access grant is invalid, expired, or revoked`. See [Create a permission ticket](#create-permission-ticket). |
+   | **2** | Specify the same claim token as the first request for an RPT.                                                                                                                                                                    |
+
+   The `access_token` is the RPT, which lets the requesting party access the resource through a client.
+
+5. You can use the `/oauth2/introspect` endpoint to inspect the properties of the RPT.
+
+   Use the PAT issued to the resource owner for authenticating to the authorization server, and specify the RPT token in a query parameter named `token`, as follows:
+
+   ```bash
+   $ curl \
+   --header 'authorization: Bearer 057ad16f-7dba-4049-9f34-e609d230d43a' \
+   "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/introspect?token=Aw4a92ZoKsjadWKw2d4Rmcjv7DM"
+   {
+       "active": true,
+       "permissions": [
+           {
+               "resource_id": "ef4d750e-3831-483b-b395-c6f059b5e15d0",
+               "resource_scopes": [
+                   "download"
+               ],
+               "exp": 1522334692
+           }
+       ],
+       "token_type": "access_token",
+       "exp": 1522334692,
+       "iss": "https://am.example.com:8443/am/oauth2"
+   }
+   ```
+
+## Gather claims interactively
+
+When claims are gathered [with no user interaction](#gather-claims), AM accepts an `id_token` as the provided `claim_token`. The identity of the requesting party is the subject of the `id_token`.
+
+AM also supports *interactive claims gathering*. In this case, AM redirects the client to a `claims_gathering` endpoint, to request additional claims. The claims gathering endpoint also offers the requesting party the option of a PCT *(tooltip: persisted claims token)*, which persists claims across authorization processes. If the client wants to request another RPT *(tooltip: requesting party
+token)* later, they can simply send the PCT, along with the access token request. The authorization server can opt to re-use the claims from the PCT (provided they have not expired) instead of forcing the user through yet another interactive claims gathering flow.
+
+The claims gathering process can be initiated two ways:
+
+* The client sends an access token request without providing a `claim_token`. AM returns a `need_info` error, and a `redirect_user` hint. The client then constructs a claims gathering request, using the hint, and displays that page to the end user.
+
+* The client locates the URL of the claims gathering endpoint in the UMA discovery metadata (`/uma/.well-known/uma2-configuration`) and initiates the claims gathering flow without first going to the token endpoint.
+
+|   |                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The interactive claims gathering process can take longer than the lifetime of the permission ticket. You should adjust the permission ticket lifetime so that end users are able to authenticate during that lifetime. |
+
+This diagram shows an interactive claims gathering scenario:
+
+![AM supports the UMA 2.0 Grant Flow.](_images/uma-ic-grant-flow.svg)
+
+> **Collapse: Interactive claims gathering grant flow**
+>
+> * A *requesting party*, using a client application, requests access to an UMA-protected resource (labeled `1` and `2` in the diagram above).
+>
+> * The *resource server* checks the existing token (`3`) and determines that the *requesting party* does not have the privileges to access the resource. The *resource server* returns a 401 Unauthorized response, along with a permission ticket (`4`) to the client.
+>
+> * The client uses the permission ticket and a claim token to send an RPT *(tooltip: Requesting party token)* to AM (`5`).
+>
+> * AM determines that additional claims are required and returns a 403 response, with the rotated permission ticket and a redirect to the claims gathering endpoint (`6`).
+>
+> * The client redirects the user to the claims gathering endpoint (`7` and `8`]).
+>
+> * AM determines that the user is not yet authenticated, and redirects the user to the claims gathering tree (`9`).
+>
+> * The user authenticates and is redirected back to the claims gathering endpoint (`10`, `11`, `12`).
+>
+> * The user provides the additional claims and is redirected to the claims redirect URI, with the updated permission ticket (`13` and `14`).
+>
+> * The client requests an RPT, using the updated permission ticket (`15`).
+>
+> * AM makes a policy decision using the requested scopes, the scopes permitted in the registered resource, and the user-created policy. If successful, AM returns an RPT and, optionally, a PCT (`16`).
+>
+> * The client presents the RPT to the *resource server* (`17`), which must verify the token is valid using the AM introspection endpoint (`18`). If the RPT is confirmed to be valid and non-expired, the *resource server* returns the protected resource to the client for access by the requesting party (`19`).
+
+### Enable interactive claims gathering
+
+Interactive claims gathering is disabled by default.
+
+To enable interactive claims gathering across all realms, go to Configure > Global Services > UMA Provider > Claims Gathering and set Interactive Claims Gathering Enabled.
+
+To enable interactive claims gathering for a specific realm, go to Realms > *realm name* > Services > UMA Provider > Claims Gathering and set Interactive Claims Gathering Enabled.
+
+For details of the other configuration options on this tab, see [Claims gathering](../setup/services-configuration.html#global-uma-claims-gathering).
+
+When interactive claims gathering is enabled:
+
+* the `claims_gathering` endpoint is accessible
+
+* the UMA grant type handler returns a `redirect_user` error, redirecting the user to the `claims_gathering` endpoint
+
+* the UMA provider validates PCTs
+
+* the UMA provider does not consult the `claim_token` parameter to gather claims non-interactively
+
+### Protect permission tickets with PKCE
+
+When claims are gathered interactively, the permission ticket can hold sensitive information about the requesting party. You should therefore protect permission tickets obtained in an interactive claims gathering flow, in the same way you would protect other sensitive resources.
+
+You can protect permission tickets with [PKCE](https://www.rfc-editor.org/info/rfc7636), in a similar flow to the [Authorization code grant with PKCE](../am-oauth2/oauth2-authz-grant-pkce.html) flow. In this case, the `code_challenge` and `code_challenge_method` are submitted with the permission ticket, in the request to the `claims_gathering` endpoint.
+
+For example:
+
+```bash
+$ curl --request GET \
+--cookie "iPlanetDirectoryPro=AQIC5wM…​TU3OQ*" \
+--data "claims_redirect_uri=https://www.example.com:443/callback" \
+--data "ticket=eyJ0eXA…​jpY" \
+--data "client_id=UmaClient" \
+--data "csrf=AQIC5wM…​TU3OQ*" \
+--data "state=abc123" \
+--data "code_challenge=j3wKnK2Fa_mc2tgdqa6GtUfCYjdWSA5S23JKTTtPF8Y" \
+--data "code_challenge_method=S256" \
+"https://am.example.com:8443/am/uma/realms/root/realms/alpha/claims_gathering"
+```
+
+To specify that clients must include PKCE challenges in their requests, go to Services > OAuth2 Provider > Advanced, and set the `Code Verifier Parameter Required` property, either for the specific realm, or as a global service parameter. Note that the UMA provider inherits this setting from the OAuth 2.0 provider. As such, it affects all OAuth 2.0 flows, and not just UMA flows.
+
+### Protect PCTs with certificate-bound proof-of-possession
+
+Persisted claims tokens (PCTs) let clients obtain an RPT *(tooltip: requesting party token)* without having to go through the interactive claims gathering process multiple times. They are similar to OAuth 2.0 refresh tokens and, as such, should be protected.
+
+Proof-of-possession (PoP) lets you ensure that the client to whom the PCT was issued is the client that subsequently attempts to use it.
+
+|   |                                                                                                                       |
+| - | --------------------------------------------------------------------------------------------------------------------- |
+|   | In UMA flows, AM supports certificate-bound proof-of-possession only. JWK-based proof-of-possession is not supported. |
+
+You can protect PCTs with PoP in a similar flow to the [OAuth 2.0 certificate-bound proof-of-possession](../am-oauth2/oauth2-PoP-Cert.html) flow.
+
+The confirmation key (`cnf_key`) is sent alongside the request for the RPT, for example:
+
+```bash
+$ curl \
+--request POST \
+--header "content-type: application/json" \
+--data "client_id=UmaClient" \
+--data "client_secret=mySecret" \
+--data "grant_type=urn:ietf:params:oauth:grant-type:uma-ticket" \
+--data "ticket=eyJ0eXA…​jpY" \
+--data "cnf_key=eyJ4NXQ…​==" \
+"https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/access_token" \
+{
+    "access_token": "HexwGYRSK4Dy1yI_aFXirdFT1-I",
+    "pct": "eyJ0eXA…​jpY",
+    "token_type": "Bearer",
+    "expires_in": 3599
+}
+```
+
+---
+
+---
+title: UMA labels
+description: Apply user, system, and favorite labels to UMA resources to organize and locate them more easily, with support for nested hierarchies and multi-resource assignment
+component: pingam
+version: 8.1
+page_id: pingam:uma:uma-manage-resource-set-labels
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-manage-resource-set-labels.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["User-Managed Access (UMA)", "Resource Labels"]
+page_aliases: ["uma-guide:uma-manage-resource-set-labels.adoc"]
+---
+
+# UMA labels
+
+Apply labels to resources to help organize and locate them more easily. You can apply multiple labels to a single resource, and a label can apply to multiple resources.
+
+Resources support three types of labels:
+
+* User labels
+
+  * Managed by the resource owner after the resource has been registered to them.
+
+  * Can be created and deleted. Deleting a label does not delete the resources to which it was applied.
+
+  * Support nested hierarchies. Separate levels of the hierarchy with forward slashes (`/`) when creating a label. For example, `Top Level/Second Level/My Label`.
+
+  * Are only visible to the user who created them. You can manage user labels over REST, or by using the AM admin UI. For more information, see [Manage UMA user and favorite labels](uma-labels-with-REST-users.html).
+
+* System labels
+
+  * Created by the resource server when registering a resource.
+
+  * Cannot be deleted.
+
+  * Do not support a hierarchy of levels.
+
+  * Are only visible to the owner of the resource.
+
+  |   |                                                                                                                                                                                                          |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | Each resource is automatically assigned a system label containing the name of the resource server that registered it, as well as a system label that lets users add the resource to a list of favorites. |
+
+  For information on creating system labels, see [Register an UMA resource (REST)](uma-resource-sets.html#register-an-uma-resource-set).
+
+* Favorite labels
+
+  Users can assign the built-in *star* label to a resource to mark it as a favorite.
+
+  You can manage favorite labels over REST, or by using the AM admin UI. For more information, see [Manage UMA user and favorite labels](uma-labels-with-REST-users.html) and [Label resources as favorites (UI)](uma-labels-with-REST-users.html#apply-user-labels-to-resource-sets).
+
+---
+
+---
+title: UMA policies
+description: Use the UMA policies REST endpoint to create and manage authorization policies that protect registered resources in PingAM
+component: pingam
+version: 8.1
+page_id: pingam:uma:uma-policies
+canonical_url: https://docs.pingidentity.com/pingam/8.1/uma/uma-policies.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["User-Managed Access (UMA)", "Policies", "REST"]
+page_aliases: ["uma-guide:uma-policies.adoc"]
+section_ids:
+  to-create-an-uma-policy: Create an UMA policy (REST)
+  to-read-an-uma-policy: Read an UMA policy (REST)
+  to-update-an-uma-policy: Update an UMA policy (REST)
+  restrict-uma-policy: Restrict an UMA policy (REST)
+  set_an_expiration_date: Set an expiration date
+  specify_a_client_id: Specify a client ID
+  delete-an-uma-policy: Delete an UMA policy (REST)
+  to-query-uma-policies: Query UMA policies (REST)
+  to-share-uma-resources: Manage UMA policies (UI)
+---
+
+# UMA policies
+
+UMA authorization servers must manage the resource owner's authorization policies, so that registered resources can be protected.
+
+The `/json/users/user/uma/policies/` REST endpoint lets users create and manage authorization policies.
+
+|   |                                                                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | UMA policies are designed to be user-managed and not manipulated by AM administrators, using the standard `policy` endpoints. If AM administrators use UMA policies directly, they risk breaking the integrity of the UMA security model. |
+
+To manage an UMA policy over REST, the resource must be registered to the user specified in the URL. For information on registering resource sets, refer to [/uma/resource\_set](endpoint-resource_set.html).
+
+## Create an UMA policy (REST)
+
+To create a policy, the resource owner must be logged in to the authorization server, have an SSO token issued to them, and have the [resource ID](uma-resource-sets.html#to-list-uma-resource-sets) of the resource that will be protected.
+
+|   |                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Only the resource owner can create a policy to protect a resource. Administrative users, such as `amAdmin`, cannot create policies on behalf of a resource owner. |
+
+1. Log in as the resource owner to obtain an SSO token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --header "X-OpenAM-Username: alice" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"AQIC5wM2LY4S…​Q4MTE4NTA2*",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+   The value returned in the `tokenId` element is the SSO token of the resource owner, *Alice*. Use this value as the contents of the `iPlanetDirectoryPro` cookie when you create the policy.
+
+2. Send a PUT request to the UMA `policies` endpoint.
+
+   Include the SSO token in a header based on the configured session cookie name (default: `iPlanetDirectoryPro`). Include the resource ID as the value of `policyId` in the body, and also in the URI.
+
+   This example uses the policy owner's SSO token (`iPlanetDirectoryPro` cookie). The command creates a policy to share a resource belonging to user `alice` with user `bob`:
+
+   ```bash
+   $ curl \
+   --request PUT \
+   --header 'Accept-API-Version: resource=1.0' \
+   --header 'cache-control: no-cache' \
+   --header 'content-type: application/json' \
+   --header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \ (1)
+   --header "If-None-Match: *" \
+   --data '{
+       "policyId": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853", (2)
+       "permissions":
+       [
+           {
+               "subject": "bob",
+               "scopes": [
+                   "view",
+                   "comment"
+               ]
+           }
+       ]
+   }' \
+   https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/uma/policies/0d7790de-9066-4bb6-8e81-25b6f9d0b8853
+   {
+       "_id": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853", (3)
+       "_rev": "-1985914901"
+   }
+   ```
+
+   |       |                                                                                                                                                                                                                                                 |
+   | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **1** | Specify the SSO token of the resource owner. Administrative users such as `amAdmin` cannot create UMA resource policies on behalf of a resource owner.                                                                                          |
+   | **2** | Specify the ID of the registered resource that this policy will protect. The same resource ID must also be included in the URI of the REST call. See [Register an UMA Resource (REST)](uma-resource-sets.html#to-register-an-uma-resource-set). |
+   | **3** | Note that the returned `_id` value of the new policy set is identical to the ID of the registered resource.                                                                                                                                     |
+
+   On success, AM returns an HTTP 201 Created status code with the ID of the created policy.
+
+   If the permissions are not correct, AM returns an HTTP 400 Bad Request error. For example:
+
+   ```json
+   {
+       "code": 400,
+       "reason": "Bad Request",
+       "message": "Invalid UMA policy permission. Missing required attribute, 'subject'."
+   }
+   ```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For simplicity, this example uses `"subject": "bob"` to identify the user with whom the resource is shared. In a production deployment, the attribute that is used to identify the `subject` in an UMA policy *should* be something that can be independently verified as belonging to a specific user; for example, an email address.Any self-service registration process or profile modification process should be configured to assure ownership of that identifier (by using an email address verification node, for example).If your UMA deployment is not designed to verify the identity of the subject, you risk having UMA policies that can be "hijacked" by other users. |
+
+## Read an UMA policy (REST)
+
+To read a policy, the resource owner or an administrative user must be logged in to the authorization server and have an SSO token issued to them. The [policy ID](#to-query-uma-policies) to read must also be known.
+
+|   |                                                                                     |
+| - | ----------------------------------------------------------------------------------- |
+|   | The ID used for a policy is always identical to the ID of the resource it protects. |
+
+1. Log in as the resource owner to obtain an SSO token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --header "X-OpenAM-Username: alice" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"AQIC5wM2LY4S…​Q4MTE4NTA2*",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+   The value returned in the `tokenId` element is the SSO token of the resource owner, *Alice*. Use this value as the contents of the `iPlanetDirectoryPro` cookie in the next step.
+
+2. Send a GET request to the UMA `policies` endpoint, including the SSO token in a header based on the configured session cookie name (default: `iPlanetDirectoryPro`), and the resource ID as part of the URL.
+
+   |   |                                                                                                                                                             |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The SSO token must have been issued to the user specified in the URL, or to an administrative user such as `amAdmin`. In this example, the user is `alice`. |
+
+   The following example uses an SSO token to read a specific policy with ID `43225628-4c5b-4206-b7cc-5164da81decd0` belonging to user `alice`:
+
+   ```bash
+   $ curl \
+   --header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+   --header "Accept-API-Version: resource=1.0" \
+   "https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/uma/policies/0d7790de-9066-4bb6-8e81-25b6f9d0b8853"
+   {
+       "_id": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+       "_rev": "1444644662",
+       "policyId": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+       "name": "Photo Album",
+       "permissions": [
+           {
+               "subject": "bob",
+               "scopes": [
+                   "view",
+                   "comment"
+               ]
+           }
+       ]
+   }
+   ```
+
+   On success, AM returns an HTTP 200 OK status code with a JSON body representing the policy.
+
+   If the policy ID does not exist, an HTTP 404 Not Found status code is returned, as follows:
+
+   ```json
+   {
+       "code": 404,
+       "reason": "Not Found",
+       "message": "UMA Policy not found, 43225628-4c5b-4206-b7cc-5164da81decd0"
+   }
+   ```
+
+## Update an UMA policy (REST)
+
+To update a policy, the resource owner must be logged in to the authorization server and have an SSO token issued to them. The [policy ID](#to-query-uma-policies) to read must also be known.
+
+|   |                                                                                     |
+| - | ----------------------------------------------------------------------------------- |
+|   | The ID used for a policy is always identical to the ID of the resource it protects. |
+
+1. Log in as the resource owner to obtain an SSO token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --header "X-OpenAM-Username: alice" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"AQIC5wM2LY4S…​Q4MTE4NTA2*",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+   The value returned in the `tokenId` element is the SSO token of the resource owner, *Alice*. Use this value as the contents of the `iPlanetDirectoryPro` cookie in the next step.
+
+2. Create a PUT request to the UMA `policies` endpoint, including the SSO token in a header based on the configured session cookie name (default: `iPlanetDirectoryPro`), and the resource ID as both the value of `policyId` in the body and also as part of the URL.
+
+   |   |                                                                                                             |
+   | - | ----------------------------------------------------------------------------------------------------------- |
+   |   | The SSO token must have been issued to the user specified in the URL. In this example, the user is `alice`. |
+
+   The following example uses an SSO token to update a policy with ID `0d7790de-9066-4bb6-8e81-25b6f9d0b8853` belonging to user `alice` with an additional subject, `chris`:
+
+   ```bash
+   $ curl \
+   --request PUT \
+   --header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+   --header "Content-Type: application/json" \
+   --header "If-Match: *" \
+   --header "Accept-API-Version: resource=1.0" \
+   --data \
+   '{
+       "policyId": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+       "permissions":
+       [
+           {
+               "subject": "bob",
+               "scopes": [
+                   "view",
+                   "comment"
+               ]
+           },
+           {
+               "subject": "chris",
+               "scopes": [
+                   "comment"
+               ]
+           }
+       ]
+   }' \
+   "https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/uma/policies/0d7790de-9066-4bb6-8e81-25b6f9d0b8853"
+   {
+       "_id": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+       "_rev": "-1844449592",
+       "policyId": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+       "permissions": [
+           {
+               "subject": "bob",
+               "scopes": [
+                   "view",
+                   "comment"
+               ]
+           },
+           {
+               "subject": "chris",
+               "scopes": [
+                   "view"
+               ]
+           }
+       ]
+   }
+   ```
+
+   On success, AM returns an HTTP 200 OK status code with a JSON representation of the policy in the body as the response.
+
+   If the policy ID does not exist, an HTTP 404 Not Found status code is returned, as follows:
+
+   ```json
+   {
+       "code": 404,
+       "reason": "Not Found",
+       "message": "UMA Policy not found, 43225628-4c5b-4206-b7cc-5164da81decd0"
+   }
+   ```
+
+   If the permissions are not correct, AM returns an HTTP 400 Bad Request status code. For example:
+
+   ```json
+   {
+       "code": 400,
+       "reason": "Bad Request",
+       "message": "Invalid UMA policy permission. Missing required attribute, 'subject'."
+   }
+   ```
+
+   If the policy ID in the URL does not match the policy ID used in the JSON payload, AM returns an HTTP 400 Bad Request status code. For example:
+
+   ```json
+   {
+       "code": 400,
+       "reason": "Bad Request",
+       "message": "Policy ID does not match policy ID in the body."
+   }
+   ```
+
+## Restrict an UMA policy (REST)
+
+You can restrict UMA policies in the following ways:
+
+* Set an expiration date on the authorization.
+
+* Restrict the clients that can obtain an RPT *(tooltip: requesting party token)*.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | - These conditions apply to UMA policies only, and are not available to regular [authorization policies](../am-authorization/policies.html).
+
+  A single UMA policy is generally represented by multiple authorization policies, with one authorization policy per permission array item.
+
+  You apply restrictions to UMA policies at the precise authorization policy for that permission; in other words, at the `json/users/userId/policies` endpoint, and *not* at the `userId/uma/policies` endpoint.
+
+  To obtain the UUID of the precise authorization policy, you can query the user's authorization policies using `baseUrl/json/realms/root/realms/sub_realm/users/resourceOwnerId/policies?_queryFilter=true`
+
+- By default, restrictions on UMA policies do not apply to the resource owner. To change this behavior, set the Resource Owner Implicit Consent flag to `false` in the [UMA provider](../setup/services-configuration.html#global-uma) configuration. |
+
+### Set an expiration date
+
+To add an expiration date to an UMA authorization, send a PUT request to the `json/users/userId/policies` endpoint.
+
+|   |                                          |
+| - | ---------------------------------------- |
+|   | This is not the `uma/policies` endpoint. |
+
+Add a `condition` object similar to the following to the policy definition:
+
+```json
+"condition": {
+    "type": "AND",
+    "conditions": [
+        {
+            "type": "Expiration",
+            "expirationDate": 1638263100
+        }
+    ]
+}
+```
+
+* The second `type` field specifies the condition type; `Expiration` in this case.
+
+* The `expirationDate` field takes a long number, in Unix epoch time format.
+
+This example adds an expiration date to the authorization created in the previous example:
+
+```bash
+$ curl \
+--request PUT \
+--header 'Accept-API-Version: resource=1.0' \
+--header 'content-type: application/json' \
+--header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+--header "If-Match: *" \
+--data '{
+  "_id": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "_rev": "1643374273953",
+  "name": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "active": true,
+  "description": "",
+  "resources": [
+    "uma://50f0d76d-b096-4998-ab55-3b7c900b01290"
+  ],
+  "applicationName": "uma-resource-server",
+  "actionValues": {
+    "view": true,
+    "comment": true
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "Expiration",
+        "expirationDate": 1638263100
+      }
+    ]
+  },
+  "subject": {
+    "type": "Uma",
+    "claimValue": "bob"
+  },
+  "resourceTypeUuid": "",
+  "lastModifiedBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "lastModifiedDate": "2022-01-28T12:51:13.953Z",
+  "createdBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "creationDate": "2022-01-28T10:43:31.608Z"
+}' \
+"https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/policies/Incredible%20Wooden%20Bacon%20-%20alice%20-%2050f0d76d-b096-4998-ab55-3b7c900b01290-97717"
+{
+  "_id": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "_rev": "1643728958220",
+  "name": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "active": true,
+  "description": "",
+  "resources": [
+    "uma://50f0d76d-b096-4998-ab55-3b7c900b01290"
+  ],
+  "applicationName": "uma-resource-server",
+  "actionValues": {
+    "view": true,
+    "comment": true
+  },
+  "subject": {
+    "type": "Uma",
+    "claimValue": "bob"
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "Expiration",
+        "expirationDate": 1638263100
+      }
+    ]
+  },
+  "resourceTypeUuid": "",
+  "lastModifiedBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "lastModifiedDate": "2022-02-01T15:22:38.220Z",
+  "createdBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "creationDate": "2022-01-28T10:43:31.608Z"
+}
+```
+
+|   |                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The request is sent to the `userId/policies` endpoint and the UUID of the policy is not the UMA policy's ID, but the ID of the specific authorization policy. |
+
+### Specify a client ID
+
+To restrict the list of clients that can obtain an RPT *(tooltip: requesting party token)*, send a PUT request to the `json/users/userId/policies` endpoint.
+
+|   |                                          |
+| - | ---------------------------------------- |
+|   | This is not the `uma/policies` endpoint. |
+
+Add a `condition` object similar to the following to the policy definition:
+
+```json
+"condition": {
+    "type": "AND",
+    "conditions": [
+        {
+            "type": "ClientId",
+            "clientIds": [_array-of-ids_]
+        }
+    ]
+}
+```
+
+* The second `type` field specifies the condition type; `ClientId` in this case.
+
+* The `clientIds` field takes an array of client IDs.
+
+This example restricts the clients that can request an RPT *(tooltip: requesting party token)* to `client1` and `client2`:
+
+```bash
+$ curl \
+--request PUT \
+--header 'Accept-API-Version: resource=1.0' \
+--header 'content-type: application/json' \
+--header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+--header "If-Match: *" \
+--data '{
+  "_id": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "_rev": "1643374273953",
+  "name": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "active": true,
+  "description": "",
+  "resources": [
+    "uma://50f0d76d-b096-4998-ab55-3b7c900b01290"
+  ],
+  "applicationName": "uma-resource-server",
+  "actionValues": {
+    "view": true,
+    "comment": true
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "ClientId",
+        "clientIds": [
+          "client1",
+          "client2"
+        ]
+      }
+    ]
+  },
+  "subject": {
+    "type": "Uma",
+    "claimValue": "bob"
+  },
+  "resourceTypeUuid": "",
+  "lastModifiedBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "lastModifiedDate": "2022-01-28T12:51:13.953Z",
+  "createdBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "creationDate": "2022-01-28T10:43:31.608Z"
+}' \
+"https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/policies/Incredible%20Wooden%20Bacon%20-%20alice%20-%2050f0d76d-b096-4998-ab55-3b7c900b01290-97717"
+{
+  "_id": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "_rev": "1643798048205",
+  "name": "Incredible Wooden Bacon - alice - 50f0d76d-b096-4998-ab55-3b7c900b01290-97717",
+  "active": true,
+  "description": "",
+  "resources": [
+    "uma://50f0d76d-b096-4998-ab55-3b7c900b01290"
+  ],
+  "applicationName": "uma-resource-server",
+  "actionValues": {
+    "view": true,
+    "comment": true
+  },
+  "subject": {
+    "type": "Uma",
+    "claimValue": "bob"
+  },
+  "condition": {
+    "type": "AND",
+    "conditions": [
+      {
+        "type": "ClientId",
+        "clientIds": [
+          "client1",
+          "client2"
+        ]
+      }
+    ]
+  },
+  "resourceTypeUuid": "",
+  "lastModifiedBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "lastModifiedDate": "2022-02-02T10:34:08.205Z",
+  "createdBy": "id=alice,ou=user,o=alpha,ou=services,dc=am,dc=example,dc=com",
+  "creationDate": "2022-01-28T10:43:31.608Z"
+}
+```
+
+## Delete an UMA policy (REST)
+
+To delete a policy, the resource owner must be logged in to the authorization server and have an SSO token issued to them. The [policy ID](#to-query-uma-policies) to read must also be known.
+
+|   |                                                                                     |
+| - | ----------------------------------------------------------------------------------- |
+|   | The ID used for a policy is always identical to the ID of the resource it protects. |
+
+1. Log in as the resource owner to obtain an SSO token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --header "X-OpenAM-Username: alice" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"AQIC5wM2LY4S…​Q4MTE4NTA2*",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+   The value returned in the `tokenId` element is the SSO token of the resource owner, *Alice*. Use this value as the contents of the `iPlanetDirectoryPro` cookie in the next step.
+
+2. Send a DELETE request to the UMA `policies` endpoint, including the SSO token in a header based on the configured session cookie name (default: `iPlanetDirectoryPro`), and the resource ID as part of the URL.
+
+   |   |                                                                                                             |
+   | - | ----------------------------------------------------------------------------------------------------------- |
+   |   | The SSO token must have been issued to the user specified in the URL. In this example, the user is `alice`. |
+
+   This example uses an SSO token to delete a policy with ID `0d7790de-9066-4bb6-8e81-25b6f9d0b8853` belonging to user `alice`:
+
+   ```bash
+   $ curl \
+   --request DELETE \
+   --header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+   --header "Accept-API-Version: resource=1.0" \
+   "https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/json/policies/0d7790de-9066-4bb6-8e81-25b6f9d0b8853"
+   {}
+   ```
+
+   On success, AM returns an HTTP 200 OK status code with an empty JSON body as the response.
+
+   If the policy ID does not exist, an HTTP 404 Not Found status code is returned, as follows:
+
+   ```json
+   {
+       "code": 404,
+       "reason": "Not Found",
+       "message": "UMA Policy not found, 43225628-4c5b-4206-b7cc-5164da81decd0"
+   }
+   ```
+
+When an UMA policy is deleted, all nested policies are *deactivated*. If that same policy is recreated, the deactivated policies are reinstated.
+
+For example, to follow on from the [example use case](uma-example.html), Alice grants `view` and `comment` access to her medical records to Dr. Bob. Dr. Bob then creates an UMA policy, granting `view` and `comment` access to Alice's medical records to the Surgery Center:
+
+![Nested UMA policies](_images/uma-delete-policy1.png)
+
+If Alice later deletes the policy between herself and Dr. Bob (that is, she withdraws consent for Dr. Bob to access her medical records) the policy between Dr. Bob and the Surgery Center is deactivated. The policy still exists, but the Surgery Center will not have access to Alice's records.
+
+![Deletion of primary UMA policy](_images/uma-delete-policy2.png)
+
+If Alice later recreates the policy between herself and Dr. Bob, the policy between Dr. Bob and the Surgery Center is reactivated, and the Surgery Center will once again have access to Alice's records:
+
+![Recreated primary UMA policy](_images/uma-delete-policy1.png)
+
+|   |                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Because the deletion of an UMA policy results in a traversal of all the nested UMA policies, deleting a policy when there is a complex graph of nested policies will have a negative performance impact. |
+
+## Query UMA policies (REST)
+
+To query policies, the resource owner or an administrative user must be logged in to the authorization server and have an SSO token issued to them.
+
+1. Log in as the resource owner to obtain an SSO token:
+
+   ```bash
+   $ curl \
+   --request POST \
+   --header "Content-Type: application/json" \
+   --header "X-OpenAM-Username: alice" \
+   --header "X-OpenAM-Password: Ch4ng31t" \
+   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
+   'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+   {
+       "tokenId":"AQIC5wM2LY4S…​Q4MTE4NTA2*",
+       "successUrl":"/am/console",
+       "realm":"/alpha"
+   }
+   ```
+
+   The value returned in the `tokenId` element is the SSO token of the resource owner, *Alice*. Use this value as the contents of the `iPlanetDirectoryPro` cookie in the next step.
+
+2. Create a GET request to the UMA `policies` endpoint, including the SSO token in a header based on the configured session cookie name (default: `iPlanetDirectoryPro`).
+
+   |   |                                                                                                                                                              |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | The SSO token must have been issued to the user specified in the URL, or to an administrative user such as `amAdmin`.In this example, the user is `bjensen`. |
+
+   Use the following query string parameters to affect the returned results:
+
+   * `_sortKeys=[-]field[,field…​]+`
+
+     Sort the results returned, where *field* represents a field in the JSON policy objects returned.
+
+     For UMA policies, only the `policyId` and `name` fields can be sorted.
+
+     Optionally, use the `+` prefix to sort in ascending order (the default), or `-` to sort in descending order.
+
+   * `_pageSize=integer`
+
+     Limit the number of results returned.
+
+   * `_pagedResultsOffset=integer`
+
+     Start the returned results from the specified index.
+
+   * `_queryFilter`
+
+     The *queryFilter parameter can take `true` to match every policy, `false` to match no policies, or a filter of the following form to match field values: `_field operator value`* where *field* represents the field name, *operator* is the operator code, *value* is the value to match, and the entire filter is URL-encoded. Only the equals (`eq`) operator is supported by the `/uma/policies` endpoint.
+
+     The *field* value can be either `resourceServer`, the resource server that created the resource, or `permissions/subject`, the list of subjects that are assigned scopes in the policy.
+
+     Filters can be composed of multiple expressions by a using boolean operator `AND`, and by using parentheses, `(expression)`, to group expressions.
+
+     |   |                                                                                                                                                                                                                                                                                                               |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | You must URL-encode the filter expression in `_queryFilter=filter`. So, for example, the following filter:```
+     resourceServer eq "UMA-Resource-Server" AND permissions/subject eq "bob"
+     ```When URL-encoded becomes:```
+     resourceServer+eq+%22UMA-Resource-Server%22+AND+permissions%2Fsubject+eq+%22bob%22
+     ``` |
+
+     The following example uses an SSO token to query the policies belonging to user `alice`, which have a subject `bob` in the permissions:
+
+     ```bash
+     $ curl \
+     --header "iPlanetDirectoryPro: AQIC5wM2LY4S…​Q4MTE4NTA2*" \
+     --header "Accept-API-Version: resource=1.0" \
+     --request GET \
+     --data-urlencode '_sortKeys=policyId,name' \
+     --data-urlencode '_pageSize=1' \
+     --data-urlencode '_pagedResultsOffset=0' \
+     --data-urlencode '_queryFilter=permissions/subject eq "bob"' \
+     "https://am.example.com:8443/am/json/realms/root/realms/alpha/users/alice/uma/policies"
+     {
+         "result": [
+             {
+                 "_id": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+                 "policyId": "0d7790de-9066-4bb6-8e81-25b6f9d0b8853",
+                 "name": "Photo Album",
+                 "permissions": [
+                     {
+                         "subject": "bob",
+                         "scopes": [
+                             "view",
+                             "comment"
+                         ]
+                     },
+                     {
+                         "subject": "chris",
+                         "scopes": [
+                             "view"
+                         ]
+                     }
+                 ]
+             }
+         ],
+         "resultCount": 1,
+         "pagedResultsCookie": null,
+         "remainingPagedResults": 0
+     }
+     ```
+
+     On success, AM returns an HTTP 200 OK status code with a JSON body representing the policies that match the query.
+
+     If the query is not formatted correctly, for example, an incorrect field is used in the `_queryFilter`, AM returns an HTTP 500 Server Error as follows:
+
+     ```json
+     {
+         "code": 500,
+         "reason": "Internal Server Error",
+         "message": "'/badField' not queryable"
+     }
+     ```
+
+## Manage UMA policies (UI)
+
+1. Log in to AM to access your profile page.
+
+2. From the Shares menu, select Resources to display the list of resources you own.
+
+   ![The My resources page lists the resources that are registered to you.](_images/uma-resource-owner-share-pages.png)Figure 1. The Resources page when logged in
+
+3. To share a resource, click the name of the resource to open the resource details page, then click Share.
+
+   On the Share the resource form:
+
+   * Enter the username of the user with whom to share the resource.
+
+   * From the Select Permission list, choose the permissions to assign to the user for the selected resource.
+
+   * Click Share.
+
+     ![The Share the resource dialog box lets you add users to share the resource with, and which permissions they will have.](_images/uma-resource-owner-share-dialog.png)Figure 2. Sharing an UMA resource
+
+   * Repeat these steps to share the resources with additional users.
+
+     |   |                                                                                                                                                                                                                                                                                                                |
+     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | AM creates a policy set containing a policy representing the resources and identities specified by the resource owner sharing their resources.These policies appear in the AM admin UI as read-only, and cannot be edited by administrative users such as `amAdmin`. They can, however, be viewed and deleted. |
+
+4. Click Close.

@@ -2,31 +2,31 @@
 
 - Product: Config Automation Management SDKs
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://developer.pingidentity.com/config-automation-management-sdks/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
-- Guides fully captured: 2
-- Guides partially captured: 2
+- Guides fully captured: 4
+- Guides partially captured: 0
 - Guides without snapshots: 0
 - Total pages indexed: 10
-- Total snapshot pages captured: 4
+- Total snapshot pages captured: 10
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| products.md | page | https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md | 6 | 1 | partial |
-| develop-with-management-sdks.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md | 2 | 1 | partial |
-| develop-with-management-sdks-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | 1 | 1 | full |
-| management-sdks-landing-page-md.md | page | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | 1 | 1 | full |
+| products.md | assembled | https://developer.pingidentity.com/config-automation-management-sdks/llms.txt | 6 | 6 | full |
+| develop-with-management-sdks.md | assembled | https://developer.pingidentity.com/config-automation-management-sdks/llms.txt | 2 | 2 | full |
+| develop-with-management-sdks-md.md | assembled | https://developer.pingidentity.com/config-automation-management-sdks/llms.txt | 1 | 1 | full |
+| management-sdks-landing-page-md.md | assembled | https://developer.pingidentity.com/config-automation-management-sdks/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | c35158bf04d4595f965059d162e431e4b5e1db1bc40fec97b3a32fe007fdc802 |
-| snapshots/products.md | 0beebb4eb166e6b60c8cb22db4e0df334891ebffb708222af5b47b3518c2a2af |
-| snapshots/develop-with-management-sdks.md | 1c395358627446d1de045be5784eb61ad789d3064c958abc744e0f95cb228624 |
-| snapshots/develop-with-management-sdks-md.md | 47c63f4fa1bfb4cebf922abde0c5bcd8c812a0478334ecbeaaed967fec33c3c3 |
-| snapshots/management-sdks-landing-page-md.md | 97c01d4301f85f8753ea20c21637edca9658ecd3300df88659490a5792c3722d |
+| llms.txt | 38f8038a60780567615732cc908afbe7a02a67046fd85f927e59a6c6981dca04 |
+| snapshots/products.md | 3b6bb26364cb425f43a622614b09f68584bcf7dbe85dcaa501020e2e8ffe873b |
+| snapshots/develop-with-management-sdks.md | 183cfea921d455848c3eded042db63bded92b0c71f9b4ceedd2ec85f3809292f |
+| snapshots/develop-with-management-sdks-md.md | 9e62ca6bb8204b631097ff5bf92f9afdd660688d0c69ef6abdd582b7ea3199ef |
+| snapshots/management-sdks-landing-page-md.md | ca39c89e048fa4fcf8d81cba41c25b88ae4cd2d0ede9e001577318e1e5125a2d |

@@ -4,6 +4,8 @@ description: To enable direct application access to a subset of groups in PingDi
 component: solution-guides
 page_id: solution-guides:directory_use_cases:htg_config_virtual_attrs_pd
 canonical_url: https://docs.pingidentity.com/solution-guides/directory_use_cases/htg_config_virtual_attrs_pd.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 25, 2025
 page_aliases: ["directory_use_cases:htg_config_virtual_attrs_pd_declare_ismemberof.adoc", "directory_use_cases:htg_config_virtual_attrs_pd_create_virtual.adoc", "directory_use_cases:htg_config_virtual_attrs_pd_declare_new_attribute.adoc", "directory_use_cases:htg_config_virtual_attrs_pd_declare_new_attribute_ldif.adoc", "directory_use_cases:htg_config_virtual_attrs_pd_create_virtual_console.adoc", "directory_use_cases:htg_config_virtual_attrs_pd_create_virtual_cli.adoc"]
 section_ids:
@@ -170,3 +172,23 @@ Use your computer's command line to perform commands to create a virtual attribu
   --set attribute-type:<isMemberOfSupport>  \
   --set "included-group-filter:(objectClass=<groupSupport>)"
   ```
+
+---
+
+---
+title: Directory Use Cases
+description: Configuring virtual attributes in PingDirectory
+component: solution-guides
+page_id: solution-guides:directory_use_cases:htg_directory_use_cases
+canonical_url: https://docs.pingidentity.com/solution-guides/directory_use_cases/htg_directory_use_cases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 25, 2025
+---
+
+# Directory Use Cases
+
+| Use case                                                                                                                | Description                                                                                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Configuring virtual attributes in PingDirectory](htg_config_virtual_attrs_pd.html)                                     | To enable direct application access to a subset of groups in PingDirectory, configure conditional virtual attributes. This use case configures a virtual attribute based on a custom group class. |
+| [Get started with PingDirectory on Kubernetes](https://developer.pingidentity.com/devops/get-started/introduction.html) | Learn how to deploy PingDirectory servers in a Kubernetes cluster.                                                                                                                                |

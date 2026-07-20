@@ -1,12 +1,12 @@
 ---
 title: Accepting the administrator account registration invitation
-description: When you receive an email indicating that you were added as an administrator in PingOne, copy the invite code and paste it into PingOne to complete the registration process.
+description: Accept the administrator account registration invitation to activate your PingOne administrator account.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_accept_invitation
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_accept_invitation.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 12, 2025
+revdate: July 10, 2026
 section_ids:
   steps: Steps
   result: Result:
@@ -105,13 +105,13 @@ To access the PingOne admin console home page:
 
 ---
 title: Adding administrators
-description: You can designate an existing user as an administrator or create a new administrator user.
+description: Add administrator users to your PingOne environment and assign them appropriate roles.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_add_admin_user
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_add_admin_user.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 11, 2025
+revdate: July 10, 2026
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -179,13 +179,13 @@ The new administrator completes their account registration.
 
 ---
 title: Adding environments
-description: The first step in building an identity solution is adding an environment to organize your Ping products and services.
+description: Add a PingOne environment for a customer, workforce, or custom identity solution to organize your Ping Identity products and services.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_solution_add_environment
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_solution_add_environment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -429,13 +429,13 @@ These instructions assume that you have already created your PingOne trial envir
 
 ---
 title: Building a workforce solution
-description: With your PingOne trial, you can quickly design single sign-on experiences for your employees, partners, and vendors.
+description: Use your PingOne trial to design single sign-on experiences for employees, partners, and vendors.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_trial_workforce_solution
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_trial_workforce_solution.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 28, 2023
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -483,13 +483,13 @@ After creating a new workforce environment, the solution designer opens, which w
 
 ---
 title: Building solutions
-description: If you have an organization administrator role, you can build powerful identity solutions in minutes. Choose one of the packaged solutions or build your own.
+description: Build identity solutions in PingOne by selecting packaged solutions or creating your own.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_building_solutions
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_building_solutions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 13, 2023
+revdate: July 10, 2026
 section_ids:
   adding-environments: Adding environments
   before-you-begin: Before you begin
@@ -623,13 +623,13 @@ After creating an environment for your Ping products and services, set up the pr
 
 ---
 title: Completing the administrator account registration
-description: When you receive an email indicating that you were added as an administrator in PingOne, verify your email address and update your password to complete the registration process.
+description: Complete the PingOne administrator account registration to gain access to your account and environment.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_complete_admin_registration
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_complete_admin_registration.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 12, 2025
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -689,13 +689,13 @@ Your administrator account registration is complete.
 
 ---
 title: Creating an environment
-description: One of the first things you should do after you start a PingOne trial or purchase a PingOne license is to create an environment. A setup assistant guides you through this process.
+description: Create a PingOne environment using the setup assistant to organize your Ping Identity products and services.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_getting_started_adding_environment
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started_adding_environment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 7, 2025
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -767,13 +767,13 @@ If you did not select the solution designer option, or if you didn't build a wor
 
 ---
 title: Getting Started with PingOne
-description: The PingOne admin console simplifies environment organization and provides access to admin consoles for all Ping products and services.
+description: Get started with the PingOne admin console.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_getting_started
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 30, 2024
+revdate: July 10, 2026
 section_ids:
   environments-page: Environments page
   more-information: More information
@@ -849,13 +849,13 @@ Learn more about authorization flows in [Authorization flow by grant type](https
 
 ---
 title: Getting started with PingOne SSO
-description: The first time you start PingOne, sign on with the default credentials that were set up during provisioning. The initial configuration includes a default organization, environment, and population. You can create additional environments, populations, and users for those populations.
+description: Get started with PingOne SSO by signing on and setting up your organization, environments, applications, and authentication policies.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_gettingstarted
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_gettingstarted.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 21, 2023
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   next-steps: Next steps
@@ -897,13 +897,13 @@ These tasks can help you get started setting up PingOne for your organization:
 
 ---
 title: Inviting administrators to register
-description: You can invite administrators to register with PingOne using their name and email address. These users receive an email containing a verification code, as well as a link to complete the registration process.
+description: Invite other PingOne administrators to register by sending registration invitations.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_invite_admins_register
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_invite_admins_register.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 8, 2025
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -954,13 +954,13 @@ The new administrator accepts the invitation and signs on to the admin console.
 
 ---
 title: License FAQ
-description: The following sections contain frequently asked questions about PingOne licenses.
+description: Find answers to frequently asked questions about PingOne licenses.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_license_faq
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_license_faq.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 13, 2024
+revdate: July 10, 2026
 section_ids:
   license-types-and-expiration: License types and expiration
   license-assignment-and-activation-issues: License Assignment and Activation Issues
@@ -1117,13 +1117,13 @@ PingOne for Customers Passwordless is a solution bundle that is licensed by tran
 
 ---
 title: Licenses and Platform Limits
-description: PingOne licenses define the entitlements a customer has the right to use. That is, which PingOne services, in what quantities, and for what period of time.
+description: PingOne licenses define service entitlements, quantities, and valid periods for your organization.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_licenses
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_licenses.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 4, 2024
+revdate: July 10, 2026
 ---
 
 # Licenses and Platform Limits
@@ -1444,13 +1444,13 @@ You should audit the users in your external directory regularly to ensure that t
 
 ---
 title: Managing administrators
-description: If you use PingOne as your identity provider, have administrator security enabled with PingOne or a hybrid authentication source, and you have the appropriate permissions, you can invite other administrators to register for PingOne.
+description: Invite or add PingOne administrators and assign their permissions using roles.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_manage_administrators
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_manage_administrators.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 15, 2025
+revdate: July 10, 2026
 section_ids:
   invite_admin: Inviting administrators to register
   before-you-begin: Before you begin
@@ -1745,13 +1745,13 @@ Learn more in [Alerts](../monitoring/p1_alerts.html).
 
 ---
 title: PingOne Services logging and reporting
-description: In addition to the core PingOne platform logging, each PingOne service includes a variety of logs that administrators can use to monitor their environments.
+description: Access logs and dashboards for PingOne services.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_services_logging_reporting_overview
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_services_logging_reporting_overview.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
+revdate: July 10, 2026
 section_ids:
   pingone-davinci-logging: PingOne DaVinci logging
   pingone-protect-logging: PingOne Protect logging

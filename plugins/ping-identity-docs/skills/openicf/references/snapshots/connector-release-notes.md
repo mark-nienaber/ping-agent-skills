@@ -4,6 +4,8 @@ description: Release notes for the .NET Remote Connector Server, covering fixes,
 component: openicf
 page_id: openicf:connector-release-notes:dotnet-server-release
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/dotnet-server-release.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_7_0_net_rcs: 1.5.7.0 .NET RCS
 ---
@@ -112,6 +114,8 @@ description: Breaking changes and changed functionality across ICF connectors, t
 component: openicf
 page_id: openicf:connector-release-notes:changed-functionality
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/changed-functionality.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Compatibility"]
 section_ids:
   connectors: Connectors
@@ -248,6 +252,8 @@ description: Release notes for the ICF connector framework, covering changes, bu
 component: openicf
 page_id: openicf:connector-release-notes:framework
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/framework.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_20_35_framework: 1.5.20.35 Framework
   1_5_20_34_framework: 1.5.20.34 Framework
@@ -447,6 +453,8 @@ description: Per-version release notes for ICF connectors, covering new connecto
 component: openicf
 page_id: openicf:connector-release-notes:connectors
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/connectors.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   _1_5_20_35_connectors: 1.5.20.35 Connectors
   updated_connectors_with_change_details: Updated connectors with change details
@@ -2654,6 +2662,8 @@ description: Release notes tracking deprecated ICF connector functionality acros
 component: openicf
 page_id: openicf:connector-release-notes:deprecated-functionality
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/deprecated-functionality.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_20_33: 1.5.20.33
   google_apps_connector: Google Apps connector
@@ -2705,6 +2715,8 @@ description: Release notes for the connectors that are supported with PingIDM an
 component: openicf
 page_id: openicf:connector-release-notes:feed
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/feed.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 20, 2026
 section_ids:
   framework: Connector framework release notes
@@ -5523,6 +5535,8 @@ description: Release notes for the connectors that are supported with PingIDM an
 component: openicf
 page_id: openicf:connector-release-notes:preface
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/preface.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 ---
 
@@ -5742,6 +5756,8 @@ description: Release notes for the Java Remote Connector Server, covering change
 component: openicf
 page_id: openicf:connector-release-notes:connector-server
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/connector-server.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_20_35_java_rcs: 1.5.20.35 Java RCS
   1_5_20_34_java_rcs: 1.5.20.34 Java RCS
@@ -6072,6 +6088,8 @@ description: Open known bugs across ICF connectors, including LDAP, SCIM, MS Gra
 component: openicf
 page_id: openicf:connector-release-notes:known-issues
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Known issues

@@ -1,12 +1,12 @@
 ---
 title: LexisNexis Connector
-description: The LexisNexis connector lets you create a PingOne DaVinci flow that performs risk assessments with ThreatMetrix and other Dynamic Decision Platform services, sends a one-time passcode (OTP), and prompts users with security questions.
+description: Configure the LexisNexis connector in PingOne DaVinci to assess risk with ThreatMetrix, send OTPs, and authenticate with security questions
 component: connectors
 page_id: connectors::lexisnexis_connector
 canonical_url: https://docs.pingidentity.com/connectors/lexisnexis_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -62,13 +62,13 @@ You can use the LexisNexis connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -80,7 +80,7 @@ To use the connector, you'll need:
 
 ### Configuring LexisNexis
 
-To configure the LexisNexis connector in DaVinci, you must create an API Key in DaVinci
+To configure the LexisNexis connector in PingOne DaVinci, you must create an API Key in PingOne DaVinci
 
 To create an API Key:
 
@@ -94,7 +94,7 @@ To create an API Key:
 
 ### Configuring the LexisNexis connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -170,7 +170,7 @@ You can use the **InstantID Q\&A** capability to prompt a user with security que
 
 ### Handling unknown sessions
 
-Unknown sessions occur when the **Get Device Profile** capability tries to get a risk evaluation due to a device profiling failure, therefore causing LexisNexis to not return a review status. Device profiling can be blocked for various reasons, including ad blockers and browsers (such as Firefox). DaVinci attempts to fingerprint the user's device until the time limit defined by the **Timeout** property is reached.
+Unknown sessions occur when the **Get Device Profile** capability tries to get a risk evaluation due to a device profiling failure, therefore causing LexisNexis to not return a review status. Device profiling can be blocked for various reasons, including ad blockers and browsers (such as Firefox). PingOne DaVinci attempts to fingerprint the user's device until the time limit defined by the **Timeout** property is reached.
 
 The **Get Device Profile** capability allows the end user to continue through the flow whether the device profiling succeeded or failed. The **Review Status for Unknown Sessions** property in the **Dynamic Decision Policy** capability allows you to pre-define how unknown sessions are treated. With this property, you assign a static review status, such as **Pass**, **Review**, **Challenge**, or **Reject**, allowing users with unknown sessions to proceed through the flow following the same branching rules as users that received a realtime review status from LexisNexis.
 

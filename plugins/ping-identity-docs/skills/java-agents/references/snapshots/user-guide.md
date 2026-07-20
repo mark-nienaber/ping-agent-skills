@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:about
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/about.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   about-components: Agent components
   configuration: Agent configuration
@@ -275,6 +277,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:passing-attributes
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/passing-attributes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Attribute fetch modes
@@ -294,6 +298,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:authentication-failure
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/authentication-failure.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   manage_notifications_for_authentication_failure: Manage notifications for authentication failure
   login-attempt-limit: Limit the number of failed login attempts
@@ -355,6 +361,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:autonomous
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/autonomous.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Autonomous mode
@@ -404,6 +412,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:caching
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/caching.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configuration-cache: Configuration cache
   session-cache: Session cache
@@ -505,6 +515,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:configure-apache-server
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/configure-apache-server.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   proc-configure-reverse-proxy: Configure Apache as a reverse proxy
 ---
@@ -571,6 +583,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:load-balancers-proxies
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/load-balancers-proxies.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   client-identification: Identify clients behind load balancers and reverse proxies
   comms-am-agents: Agent - load balancer/reverse proxy - AM
@@ -692,7 +706,7 @@ When a load balancer or reverse proxy is situated between the agent and AM, conf
 
      Leave the other fields empty.
 
-     For more information, refer to [Base URL source](https://docs.pingidentity.com/pingam/8.1/am-reference/services-configuration.html#global-baseurl) in AM's *Reference*.
+     For more information, refer to [Base URL source](https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html#global-baseurl) in AM's *Reference*.
 
 5. Save your changes.
 
@@ -871,6 +885,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:continuous-security
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/continuous-security.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   continuous-security-custom: Environment maps with customizable keys
   continuous-security-fixed: Environment maps with fixed keys
@@ -953,6 +969,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:cookie-reset
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/cookie-reset.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Cookie reset
@@ -987,6 +1005,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:cdsso
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/cdsso.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Cross-domain single sign-on
@@ -1010,6 +1030,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:fqdn-checking
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/fqdn-checking.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   examples: Examples
 ---
@@ -1085,6 +1107,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:glossary
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/glossary.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Glossary
@@ -1446,6 +1470,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:query-parameter-handling
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/query-parameter-handling.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Handling query parameters
@@ -1505,6 +1531,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:custom-handler
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/custom-handler.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   example_custom_filter_result_task_handler: Example custom filter result task handler
   example_custom_self_redirect_task_handler: Example custom self-redirect task handler
@@ -1835,6 +1863,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:login-redirect
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/login-redirect.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   login-redirect-default: Default login redirect
   login-redirect-realm: Use the request domain to redirect login to a different realm
@@ -1963,6 +1993,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:logout
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/logout.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   trigger_logout_with_a_url: Trigger logout with a URL
   log_out_of_a_specific_web_application: Log out of a specific web application
@@ -2129,6 +2161,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:not-enforced-rules
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/not-enforced-rules.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configure_not_enforced_rules: Configure not-enforced rules
   conventions_for_not_enforced_rules: Conventions for not-enforced rules
@@ -2618,6 +2652,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:pep
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/pep.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   pep-enforce: Enforce a policy decision from AM
   retrieve_advice_or_response_attributes_from_policy_decisions: Retrieve advice or response attributes from policy decisions
@@ -2772,6 +2808,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:pdp
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/pdp.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configure_post_data_preservation: Configure POST data preservation
   security_considerations_for_storing_post_data_in_files: Security considerations for storing POST data in files
@@ -2863,6 +2901,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:user-guide:url-handling
 canonical_url: https://docs.pingidentity.com/java-agents/2026/user-guide/url-handling.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # URL handling

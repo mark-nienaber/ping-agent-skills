@@ -1,12 +1,12 @@
 ---
 title: Duo Connector
-description: The Duo connector lets you use Duo for multi-factor authentication (MFA) in your PingOne DaVinci flow.
+description: Configure the Duo connector to add Duo multi-factor authentication to your PingOne DaVinci flows
 component: connectors
 page_id: connectors::duo_connector
 canonical_url: https://docs.pingidentity.com/connectors/duo_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -45,13 +45,13 @@ Learn more in the following documentation:
 
   * [What is the Duo Universal Prompt?](https://help.duo.com/s/article/6340?language=en_US)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -73,7 +73,7 @@ To use the connector, you'll need:
 
 ### Setting up the Duo connector configuration
 
-In DaVinci, add a **Duo** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Duo** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 
@@ -97,9 +97,9 @@ The **API hostname** that you noted in **Getting your application credentials**.
 
 Complete the steps below to create a flow that asks the user to enter their username in an HTML form, uses the connector to redirect them to Duo, then shows the results on an HTML page.
 
-|   |                                                                                                                                                                                                                                                                  |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Duo's Universal Prompt experience doesn't provide a "Cancel" option that would let the user exit MFA and return to the DaVinci flow. Because of this, it's possible for Duo to become a dead end in the user experience if they can't successfully complete MFA. |
+|   |                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Duo's Universal Prompt experience doesn't provide a "Cancel" option that would let the user exit MFA and return to the PingOne DaVinci flow. Because of this, it's possible for Duo to become a dead end in the user experience if they can't successfully complete MFA. |
 
 1. Create a sign on form:
 
@@ -179,7 +179,7 @@ Complete the steps below to create a flow that asks the user to enter their user
 
    3. Complete the MFA process with Duo.
 
-      Duo shows a success message, then redirects the browser back to DaVinci.
+      Duo shows a success message, then redirects the browser back to PingOne DaVinci.
 
       ![A screen capture showing the Universal Prompt success message.](_images/connector-images/dvc-duo-universal-prompt-success-message.jpg)
 

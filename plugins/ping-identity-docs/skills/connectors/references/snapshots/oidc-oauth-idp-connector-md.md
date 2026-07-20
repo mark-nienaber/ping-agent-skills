@@ -1,12 +1,12 @@
 ---
 title: OIDC and OAuth IdP Connector
-description: The OIDC and OAuth IdP connector lets you authenticate users with an identity provider (IdP) that supports OpenID Connect (OIDC) or OAuth 2.0 in your PingOne DaVinci flow.
+description: Configure the OIDC and OAuth IdP connector in PingOne DaVinci to authenticate users with an external IdP using OpenID Connect or OAuth 2.0
 component: connectors
 page_id: connectors::oidc_oauth_idp_connector
 canonical_url: https://docs.pingidentity.com/connectors/oidc_oauth_idp_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -52,17 +52,17 @@ You can use the OIDC and OAuth IdP connector to authenticate users with an IdP.
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the OIDC and OAuth IdP connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -76,7 +76,7 @@ The authorization or authentication type, such as **OAuth2** or **OpenId**.
 
 ##### Redirect URL
 
-Include this URL in your IdP configuration to allow it to redirect the browser back to DaVinci. If you use a custom PingOne domain, modify the URL accordingly.
+Include this URL in your IdP configuration to allow it to redirect the browser back to PingOne DaVinci. If you use a custom PingOne domain, modify the URL accordingly.
 
 ##### Issuer URL
 

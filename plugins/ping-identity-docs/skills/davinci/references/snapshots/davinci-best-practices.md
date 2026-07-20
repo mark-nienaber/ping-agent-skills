@@ -3,8 +3,8 @@ title: Best practices for creating subflows
 description: Use these best practices when creating a subflow.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_subflows_creating
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_creating.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_creating.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 17, 2023
 section_ids:
@@ -47,8 +47,8 @@ title: Best practices for data sharing
 description: Follow these best practices when passing data between a flow and a subflow.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_subflows_data_sharing
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_data_sharing.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_data_sharing.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 25, 2025
 section_ids:
@@ -112,8 +112,8 @@ title: Best practices for using subflows
 description: Follow these best practices when using subflows.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_subflows_using
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_using.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows_using.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 22, 2024
 section_ids:
@@ -174,8 +174,8 @@ title: Branching
 description: Use these best practices when creating branches within a flow.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_branching
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_branching.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_branching.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 section_ids:
@@ -317,8 +317,8 @@ title: Building flows
 description: Use these best practices when creating a flow.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_building_flows
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_building_flows.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_building_flows.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 3, 2024
 section_ids:
@@ -462,8 +462,8 @@ title: Change management
 description: Follow these best practices to manage and track changes to your flows.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_change_management
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_change_management.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_change_management.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 23, 2024
 section_ids:
@@ -518,8 +518,8 @@ title: Collaborating
 description: Use these best practices when collaborating with other flow builders to create or update a flow.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_collaborating
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_collaborating.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_collaborating.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 22, 2024
 section_ids:
@@ -546,8 +546,8 @@ title: Creating variables
 description: To preserve variable capacity and reduce administrative overhead, follow these best practices when creating DaVinci variables.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_variables
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_variables.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_variables.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 9, 2023
 section_ids:
@@ -622,8 +622,8 @@ title: DaVinci Best Practices
 description: This document describes best practices for creating and maintaining flows in DaVinci.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 22, 2024
 ---
@@ -671,8 +671,8 @@ title: Debugging and analytics
 description: Use these best practices when troubleshooting issues with flows and reviewing flow analytics data.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_debugging_and_analytics
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 23, 2024
 section_ids:
@@ -836,8 +836,8 @@ title: Gathering support information
 description: Use these best practices to gather information for working with Ping support to resolve issues.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_gathering_support_info
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_gathering_support_info.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_gathering_support_info.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 27, 2025
 section_ids:
@@ -918,8 +918,8 @@ title: Handling sensitive data
 description: Use these best practices to protect sensitive data from internal or external exposure.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci-best-practices-sensitive-data
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci-best-practices-sensitive-data.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci-best-practices-sensitive-data.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 section_ids:
@@ -983,8 +983,8 @@ title: Performance Tuning
 description: Use these best practices to enhance the latency, throughput, and resource efficiency of your flows while minimizing downtime and risk.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci-best-practices-performance-tuning
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci-best-practices-performance-tuning.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci-best-practices-performance-tuning.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 section_ids:
@@ -1053,8 +1053,8 @@ title: Subflows
 description: Use these best practices when creating and using subflows (flows invoked by other flows).
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_subflows
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_subflows.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 21, 2023
 section_ids:
@@ -1068,9 +1068,9 @@ Use these best practices when creating and using subflows (flows invoked by othe
 
 A subflow is a normal flow that does not represent a complete identity orchestration solution or user experience. Instead, it's designed to be used as part of a larger parent flow. For example, a complex sign-on flow might reference subflows to handle password reset requests and user registration. Subflows make flow maintenance and reuse easier.
 
-|   |                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To invoke a subflow, you must use the [Flow Conductor](http://docs.pingidentity.com/connectors/flow_conductor_connector.html) connector. |
+|   |                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To invoke a subflow, you must use the [Flow Conductor](https://docs.pingidentity.com/connectors/flow_conductor_connector.html) connector. |
 
 There are two types of subflows.
 
@@ -1097,8 +1097,8 @@ title: Using custom code safely
 description: Follow these best practices to use custom code in your flows.
 component: davinci
 page_id: davinci:davinci_best_practices:davinci_best_practices_custom_code
-canonical_url: http://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_custom_code.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_custom_code.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 10, 2024
 section_ids:

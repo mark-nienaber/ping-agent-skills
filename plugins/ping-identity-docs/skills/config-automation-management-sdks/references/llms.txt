@@ -1,14 +1,17 @@
-# Documentation
+# Configuration and User Management SDKs
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
 
 ## Config Automation Management Sdks
 
-- [Configuration and User Management SDKs Overview](https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md)
-- [Develop with Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md)
-- [Getting support](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md)
-- [identitycloud-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md)
-- [Interface stability](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/interface_stability.md)
-- [Introduction to PingDirectory Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/introduction.md)
-- [Introduction to PingFederate Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/introduction.md)
-- [Introduction to PingOne Advanced Identity Cloud Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/introduction.md)
-- [pingdirectory-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/languages/go/getting_started.md)
-- [pingfederate-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/languages/go/getting_started.md)
+- [Configuration and User Management SDKs Overview](https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md): Find the available Ping Identity Management and User client SDK libraries for PingOne Advanced Identity Cloud, PingFederate, and PingDirectory
+- [Develop with Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md): Learn about interface stability practices and support options for Ping Identity Management and User client SDKs
+- [Getting support](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/getting_support.md): Find community forum, GitHub issues, and Ping Identity Support options for Ping Identity client SDK projects
+- [identitycloud-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/languages/go/getting_started.md): Install and configure the identitycloud-go-client Go module to connect your application to the Advanced Identity Cloud tenant management API
+- [Interface stability](https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/interface_stability.md): Learn how Ping Identity applies Semantic Versioning to major, minor, and patch releases of its client SDK projects
+- [Introduction to PingDirectory Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/introduction.md): Connect applications to your PingDirectory deployment using the PingDirectory Go client SDK to automate administrative functions
+- [Introduction to PingFederate Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/introduction.md): Connect applications to your PingFederate deployment using the PingFederate Go client SDK to automate administrative functions
+- [Introduction to PingOne Advanced Identity Cloud Configuration and User Management SDKs](https://developer.pingidentity.com/config-automation-management-sdks/products/pingone_advanced_identity_cloud/introduction.md): Connect applications to your PingOne Advanced Identity Cloud tenant using the Go client SDK to automate tenant management
+- [pingdirectory-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingdirectory/languages/go/getting_started.md): Install and configure the pingdirectory-go-client Go module to connect your application to the PingDirectory configuration API
+- [pingfederate-go-client (Go)](https://developer.pingidentity.com/config-automation-management-sdks/products/pingfederate/languages/go/getting_started.md): Install and configure the pingfederate-go-client Go module to connect your application to the PingFederate administrative API

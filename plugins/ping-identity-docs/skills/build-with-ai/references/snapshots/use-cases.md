@@ -1,6 +1,6 @@
 ---
 title: Build an iOS Sample App with AI
-description: PingOne Advanced Identity Cloud iOS
+description: Build an iOS authentication app with device binding using the AIC MCP Server and Ping agent skills in Claude Code through natural language prompts.
 component: build-with-ai
 page_id: build-with-ai:use-cases:build-ios-app
 canonical_url: https://developer.pingidentity.com/build-with-ai/use-cases/build-ios-app.html

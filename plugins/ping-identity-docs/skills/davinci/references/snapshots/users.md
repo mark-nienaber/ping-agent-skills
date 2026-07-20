@@ -3,8 +3,8 @@ title: Deleting a user
 description: Delete a user to remove all information about the user from DaVinci.
 component: davinci
 page_id: davinci:users:davinci_deleting_a_user
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_deleting_a_user.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_deleting_a_user.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 section_ids:
@@ -36,8 +36,8 @@ title: Users
 description: "Users are end users created during flows. You can view and edit users' properties and delete users."
 component: davinci
 page_id: davinci:users:davinci_users
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_users.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_users.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 28, 2024
 ---
@@ -79,8 +79,8 @@ title: Viewing and editing a user
 description: View and edit a user's properties, including variables and user events.
 component: davinci
 page_id: davinci:users:davinci_viewing_and_editing_a_user
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_viewing_and_editing_a_user.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_viewing_and_editing_a_user.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 2, 2023
 section_ids:

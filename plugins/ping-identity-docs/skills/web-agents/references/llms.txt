@@ -1,5 +1,8 @@
 # Web Agents
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Web Agents 2026
 
 - [About Web Agent](https://docs.pingidentity.com/web-agents/2026/user-guide/about.md): Overview of PingAM Web Agent: components, configuration locations, request processing flow, realms, and session management.

@@ -425,7 +425,7 @@ task.resume()
 
 ---
 title: Create a User Credential
-description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials request creates a user credential.
+description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials request creates a user credential from a managed credential type.
 component: pingone-api
 page_id: pingone-api:credentials:user-credentials/create-user-credential
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/user-credentials/create-user-credential.html
@@ -447,7 +447,9 @@ section_ids:
 POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials
 ```
 
-The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials` request creates a user credential.
+The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials` request creates a user credential from a managed credential type.
+
+This request requires a `credentialType.id` with a `management.mode` of `MANAGED` in the body.
 
 ### Prerequisites
 
@@ -490,9 +492,6 @@ raw ( application/json )
     "credentialType": {
         "id": "{{credentialTypeID}}"
     },
-    "data": {
-        "Clearance": "Secret"
-    },
     "demoDataStorage": {
         "storeUntilIssued": true
     }
@@ -533,9 +532,6 @@ curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/users/{{userID}
     "credentialType": {
         "id": "{{credentialTypeID}}"
     },
-    "data": {
-        "Clearance": "Secret"
-    },
     "demoDataStorage": {
         "storeUntilIssued": true
     }
@@ -554,9 +550,6 @@ request.AddHeader("Authorization", "Bearer {{accessToken}}");
 var body = @"{" + "\n" +
 @"    ""credentialType"": {" + "\n" +
 @"        ""id"": ""{{credentialTypeID}}""" + "\n" +
-@"    }," + "\n" +
-@"    ""data"": {" + "\n" +
-@"        ""Clearance"": ""Secret""" + "\n" +
 @"    }," + "\n" +
 @"    ""demoDataStorage"": {" + "\n" +
 @"        ""storeUntilIssued"": true" + "\n" +
@@ -585,9 +578,6 @@ func main() {
   payload := strings.NewReader(`{
     "credentialType": {
         "id": "{{credentialTypeID}}"
-    },
-    "data": {
-        "Clearance": "Secret"
     },
     "demoDataStorage": {
         "storeUntilIssued": true
@@ -631,9 +621,6 @@ Authorization: Bearer {{accessToken}}
     "credentialType": {
         "id": "{{credentialTypeID}}"
     },
-    "data": {
-        "Clearance": "Secret"
-    },
     "demoDataStorage": {
         "storeUntilIssued": true
     }
@@ -644,7 +631,7 @@ Authorization: Bearer {{accessToken}}
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"credentialType\": {\n        \"id\": \"{{credentialTypeID}}\"\n    },\n    \"data\": {\n        \"Clearance\": \"Secret\"\n    },\n    \"demoDataStorage\": {\n        \"storeUntilIssued\": true\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"credentialType\": {\n        \"id\": \"{{credentialTypeID}}\"\n    },\n    \"demoDataStorage\": {\n        \"storeUntilIssued\": true\n    }\n}");
 Request request = new Request.Builder()
   .url("{{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials")
   .method("POST", body)
@@ -666,9 +653,6 @@ var settings = {
   "data": JSON.stringify({
     "credentialType": {
       "id": "{{credentialTypeID}}"
-    },
-    "data": {
-      "Clearance": "Secret"
     },
     "demoDataStorage": {
       "storeUntilIssued": true
@@ -694,9 +678,6 @@ var options = {
     "credentialType": {
       "id": "{{credentialTypeID}}"
     },
-    "data": {
-      "Clearance": "Secret"
-    },
     "demoDataStorage": {
       "storeUntilIssued": true
     }
@@ -718,9 +699,6 @@ url = "{{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials"
 payload = json.dumps({
   "credentialType": {
     "id": "{{credentialTypeID}}"
-  },
-  "data": {
-    "Clearance": "Secret"
   },
   "demoDataStorage": {
     "storeUntilIssued": True
@@ -749,7 +727,7 @@ $request->setHeader(array(
   'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
-$request->setBody('{\n    "credentialType": {\n        "id": "{{credentialTypeID}}"\n    },\n    "data": {\n        "Clearance": "Secret"\n    },\n    "demoDataStorage": {\n        "storeUntilIssued": true\n    }\n}');
+$request->setBody('{\n    "credentialType": {\n        "id": "{{credentialTypeID}}"\n    },\n    "demoDataStorage": {\n        "storeUntilIssued": true\n    }\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -780,9 +758,6 @@ request.body = JSON.dump({
   "credentialType": {
     "id": "{{credentialTypeID}}"
   },
-  "data": {
-    "Clearance": "Secret"
-  },
   "demoDataStorage": {
     "storeUntilIssued": true
   }
@@ -793,7 +768,7 @@ puts response.read_body
 ```
 
 ```swift
-let parameters = "{\n    \"credentialType\": {\n        \"id\": \"{{credentialTypeID}}\"\n    },\n    \"data\": {\n        \"Clearance\": \"Secret\"\n    },\n    \"demoDataStorage\": {\n        \"storeUntilIssued\": true\n    }\n}"
+let parameters = "{\n    \"credentialType\": {\n        \"id\": \"{{credentialTypeID}}\"\n    },\n    \"demoDataStorage\": {\n        \"storeUntilIssued\": true\n    }\n}"
 let postData = parameters.data(using: .utf8)
 
 var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials")!,timeoutInterval: Double.infinity)
@@ -5888,7 +5863,7 @@ A request body is required to create a digital wallet app.
 
 ### Prerequisites
 
-[Create Application (OIDC Mobile App)](../../platform/applications/applications-1/create-application-oidc-mobile-app.html) to get an `application.id` for the body. Refer also to [Application Management](../../platform/applications/application-management.html), especially [Application Operations](../../platform/applications/applications-1.html).
+[Create Application (OIDC Mobile App)](../../platform/applications/applications-1/create-application-oidc-mobile-app.html) to get an `application.id` for the body. Refer also to [Application Management](../../platform/application-management.html), especially [Application Operations](../../platform/applications/applications-1.html).
 
 > **Collapse: Request Model**
 >

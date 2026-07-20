@@ -1,12 +1,12 @@
 ---
 title: HYPR Connector
-description: The HYPR connector lets you use HYPR for passwordless authentication in your PingOne DaVinci flow.
+description: Configure the HYPR connector in PingOne DaVinci to enable passwordless authentication using HYPR in your identity flows
 component: connectors
 page_id: connectors::hypr_connector
 canonical_url: https://docs.pingidentity.com/connectors/hypr_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -33,13 +33,13 @@ The HYPR connector lets you use HYPR for passwordless authentication in your Pin
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -51,7 +51,7 @@ To use the connector, you'll need:
 
 ### Configuring the HYPR connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -81,7 +81,7 @@ The [OpenID Connect scopes](https://www.openid.net/specs/openid-connect-basic-1_
 
 This flow asks the user to enter their username in an HTML form, redirects the user to HYPR for authentication, then shows the results on an HTML page.
 
-1. Download the [HYPR Authentication](https://marketplace.pingone.com/item/hypr-authentication-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [HYPR Authentication](https://marketplace.pingone.com/item/hypr-authentication-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the sign on form:
 
@@ -125,7 +125,7 @@ This flow asks the user to enter their username in an HTML form, redirects the u
 
       ![A screen capture showing the HYPR authentication challenge.](_images/connector-images/dvc-hypr-authentication-challenge.jpg)
 
-      HYPR shows a success message and then redirects the browser back to DaVinci.
+      HYPR shows a success message and then redirects the browser back to PingOne DaVinci.
 
       Your **Custom HTML Message** shows the complete response from HYPR.
 

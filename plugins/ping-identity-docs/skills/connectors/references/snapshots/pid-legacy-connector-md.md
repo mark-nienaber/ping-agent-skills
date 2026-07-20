@@ -1,12 +1,12 @@
 ---
 title: PingID Legacy Connector
-description: You can use the PingID connector to add MFA (multi-factor authentication) to flows, including passwordless login flows.
+description: Configure the PingID Legacy connector in PingOne DaVinci to add MFA and passwordless authentication to flows using PingID
 component: connectors
 page_id: connectors::pid_legacy_connector
 canonical_url: https://docs.pingidentity.com/connectors/pid_legacy_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 8, 2022
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -37,17 +37,17 @@ PingID is a cloud-based authentication service that allows your users to carry o
 
   * [PingID Integrations](https://docs.pingidentity.com/pingid/pingid_integrations/pid_integrations.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Setting up the connector
 
-In DaVinci, add a **PingID** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingID** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 After creating the connector, configure it by going to its **General** tab and pasting in the content of the PingID properties file that you downloaded.
 

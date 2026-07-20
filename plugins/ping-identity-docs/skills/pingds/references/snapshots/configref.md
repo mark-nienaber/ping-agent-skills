@@ -1901,240 +1901,817 @@ Use the `--advanced` option to access advanced properties.
 ---
 
 ---
-title: create-log-rotation-policy
-description: Creates Log Rotation Policies.
+title: Authentication Policy
+description: This is an abstract object type that cannot be instantiated.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-log-rotation-policy
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-log-rotation-policy.html
+page_id: pingds:configref:objects-authentication-policy
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-authentication-policy.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  authentication_policies: Authentication Policies
+  dependencies: Dependencies
+  authentication_policy_properties: Authentication Policy properties
+  basic_properties: Basic properties
+  java-class: java-class
 ---
 
-# create-log-rotation-policy
+# Authentication Policy
 
-Creates Log Rotation Policies.
+*This is an abstract object type that cannot be instantiated.*
 
-In addition to the global `dsconfig` options, the `dsconfig create-log-rotation-policy` subcommand takes the following options:
+Authentication Policies define the policies which should be used for authenticating users and managing the password and other account related state.
 
-* `--policy-name {name}`
+## Authentication Policies
 
-  The name of the new Log Rotation Policy.
+The following Authentication Policies are available:
 
-* `--set {PROP:VALUE}`
+* [LDAP Pass Through Authentication Policy](objects-ldap-pass-through-authentication-policy.html)
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+* [Password Policy](objects-password-policy.html)
 
-* `-t | --type {type}`
+These Authentication Policies inherit the properties described below.
 
-  The type of Log Rotation Policy which should be created. The value for TYPE can be one of: custom | fixed-time | size-limit | time-limit.
+## Dependencies
 
-Properties used in options depend on the type of object to configure.
+The following objects depend on Authentication Policies:
 
-For details about available properties, see [Log Rotation Policy](objects-log-rotation-policy.html).
+* [Global Configuration](objects-global.html)
+
+## Authentication Policy properties
+
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
+
+| Basic Properties          |
+| ------------------------- |
+| [java-class](#java-class) |
+
+### Basic properties
+
+Use the `--advanced` option to access advanced properties.
+
+### java-class
+
+|                         |                                                                                                               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the fully-qualified name of the Java class which provides the Authentication Policy implementation. |
+| *Default value*         | None                                                                                                          |
+| *Allowed values*        | A Java class that extends or implements:- org.opends.server.api.AuthenticationPolicyFactory                   |
+| *Multi-valued*          | No                                                                                                            |
+| *Required*              | Yes                                                                                                           |
+| *Admin action required* | The object must be disabled and re-enabled for changes to take effect.                                        |
+| *Advanced*              | No                                                                                                            |
+| *Read-only*             | No                                                                                                            |
 
 ---
 
 ---
-title: create-mail-server
-description: Creates Mail Servers.
+title: Backend
+description: This is an abstract object type that cannot be instantiated.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-mail-server
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-mail-server.html
+page_id: pingds:configref:objects-backend
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-backend.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  backends: Backends
+  backend_properties: Backend properties
+  basic_properties: Basic properties
+  backend-id: backend-id
+  enabled: enabled
+  java-class: java-class
 ---
 
-# create-mail-server
+# Backend
 
-Creates Mail Servers.
+*This is an abstract object type that cannot be instantiated.*
 
-In addition to the global `dsconfig` options, the `dsconfig create-mail-server` subcommand takes the following options:
+Backends are responsible for providing access to the underlying data presented by the server.
 
-* `--server-name {name}`
+The data may be stored locally in an embedded database, remotely in an external system, or generated on the fly (for example, calculated from other information that is available).
 
-  The name of the new Mail Server.
+## Backends
 
-* `--set {PROP:VALUE}`
+The following Backends are available:
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+* [Local Backend](objects-local-backend.html)
 
-Properties used in options depend on the type of object to configure.
+* [Proxy Backend](objects-proxy-backend.html)
 
-For details about available properties, see [Mail Server](objects-mail-server.html).
+These Backends inherit the properties described below.
+
+## Backend properties
+
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
+
+| Basic Properties                                                        |
+| ----------------------------------------------------------------------- |
+| [backend-id](#backend-id) [enabled](#enabled) [java-class](#java-class) |
+
+### Basic properties
+
+Use the `--advanced` option to access advanced properties.
+
+### backend-id
+
+|                         |                                                                                                                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies a name to identify the associated backend.                                                                                                                                                 |
+| *Description*           | The name must be unique among all backends in the server. The backend ID may not be altered after the backend is created in the server.                                                              |
+| *Default value*         | None                                                                                                                                                                                                 |
+| *Allowed values*        | A string.                                                                                                                                                                                            |
+| *Multi-valued*          | No                                                                                                                                                                                                   |
+| *Required*              | Yes                                                                                                                                                                                                  |
+| *Admin action required* | NoneNo base entry has been created as part of this process. A base entry needs to be created before adding further entries to the backend. Please refer to the documentation to create a base entry. |
+| *Advanced*              | No                                                                                                                                                                                                   |
+| *Read-only*             | Yes                                                                                                                                                                                                  |
+
+### enabled
+
+|                         |                                                                                               |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Indicates whether the backend is enabled in the server.                                       |
+| *Description*           | If a backend is not enabled, then its contents are not accessible when processing operations. |
+| *Default value*         | None                                                                                          |
+| *Allowed values*        | truefalse                                                                                     |
+| *Multi-valued*          | No                                                                                            |
+| *Required*              | Yes                                                                                           |
+| *Admin action required* | None                                                                                          |
+| *Advanced*              | No                                                                                            |
+| *Read-only*             | No                                                                                            |
+
+### java-class
+
+|                         |                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the fully-qualified name of the Java class that provides the backend implementation. |
+| *Default value*         | None                                                                                           |
+| *Allowed values*        | A Java class that extends or implements:- org.opends.server.api.Backend                        |
+| *Multi-valued*          | No                                                                                             |
+| *Required*              | Yes                                                                                            |
+| *Admin action required* | The object must be disabled and re-enabled for changes to take effect.                         |
+| *Advanced*              | No                                                                                             |
+| *Read-only*             | No                                                                                             |
 
 ---
 
 ---
-title: create-password-generator
-description: Creates Password Generators.
+title: Backend Index
+description: Backend Indexes are used to store information that makes it possible to locate entries very quickly when processing search operations.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-password-generator
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-password-generator.html
+page_id: pingds:configref:objects-backend-index
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-backend-index.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  dependencies: Dependencies
+  backend_index_properties: Backend Index properties
+  basic_properties: Basic properties
+  attribute: attribute
+  big-index-extensible-matching-rule: big-index-extensible-matching-rule
+  big-index-included-attribute-value: big-index-included-attribute-value
+  confidentiality-enabled: confidentiality-enabled
+  index-extensible-matching-rule: index-extensible-matching-rule
+  index-type: index-type
+  ttl-age: ttl-age
+  ttl-enabled: ttl-enabled
+  advanced_properties: Advanced properties
+  index-entry-limit: index-entry-limit
+  substring-length: substring-length
 ---
 
-# create-password-generator
+# Backend Index
 
-Creates Password Generators.
+Backend Indexes are used to store information that makes it possible to locate entries very quickly when processing search operations.
 
-In addition to the global `dsconfig` options, the `dsconfig create-password-generator` subcommand takes the following options:
+Indexing is performed on a per-attribute level and different types of indexing may be performed for different kinds of attributes, based on how they are expected to be accessed during search operations.
 
-* `--generator-name {name}`
+## Dependencies
 
-  The name of the new Password Generator.
+The following objects depend on Backend Indexes:
 
-* `--set {PROP:VALUE}`
+* [Pluggable Backend](objects-pluggable-backend.html)
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+## Backend Index properties
 
-* `-t | --type {type}`
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
 
-  The type of Password Generator which should be created. The value for TYPE can be one of: custom | random.
+| Basic Properties                                                                                                                                                                                                                                                                                                                                                            | Advanced Properties                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [attribute](#attribute) [big-index-extensible-matching-rule](#big-index-extensible-matching-rule) [big-index-included-attribute-value](#big-index-included-attribute-value) [confidentiality-enabled](#confidentiality-enabled) [index-extensible-matching-rule](#index-extensible-matching-rule) [index-type](#index-type) [ttl-age](#ttl-age) [ttl-enabled](#ttl-enabled) | [index-entry-limit](#index-entry-limit) [substring-length](#substring-length) |
 
-Properties used in options depend on the type of object to configure.
+### Basic properties
 
-For details about available properties, see [Password Generator](objects-password-generator.html).
+Use the `--advanced` option to access advanced properties.
+
+### attribute
+
+|                         |                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the name of the attribute for which the index is to be maintained. |
+| *Default value*         | None                                                                         |
+| *Allowed values*        | The name of an attribute type defined in the LDAP schema.                    |
+| *Multi-valued*          | No                                                                           |
+| *Required*              | Yes                                                                          |
+| *Admin action required* | None                                                                         |
+| *Advanced*              | No                                                                           |
+| *Read-only*             | Yes                                                                          |
+
+### big-index-extensible-matching-rule
+
+|                         |                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| *Synopsis*              | The extensible matching rule in a big index.                                                   |
+| *Description*           | An extensible matching rule must be specified using either LOCALE or OID of the matching rule. |
+| *Default value*         | No big index extensible matching rules will be indexed.                                        |
+| *Allowed values*        | A Locale or an OID.                                                                            |
+| *Multi-valued*          | Yes                                                                                            |
+| *Required*              | No                                                                                             |
+| *Admin action required* | NoneThe index must be rebuilt before it will reflect the new value.                            |
+| *Advanced*              | No                                                                                             |
+| *Read-only*             | No                                                                                             |
+
+### big-index-included-attribute-value
+
+|                         |                                                                                                                |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | An attribute value which should be indexed in any big indexes.                                                 |
+| *Description*           | Restricts the set of attribute values indexed by big indexes. All attribute values will be indexed by default. |
+| *Default value*         | All attribute values will be indexed.                                                                          |
+| *Allowed values*        | A string.                                                                                                      |
+| *Multi-valued*          | Yes                                                                                                            |
+| *Required*              | No                                                                                                             |
+| *Admin action required* | NoneThe index must be rebuilt before it will reflect the new attribute value(s).                               |
+| *Advanced*              | No                                                                                                             |
+| *Read-only*             | No                                                                                                             |
+
+### confidentiality-enabled
+
+|                         |                                                                                                                                                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies whether contents of the index should be confidential.                                                                                                                                                                                                                 |
+| *Description*           | Setting the flag to true will hash keys for equality type indexes using SHA-1 and encrypt the list of entries matching a substring key for substring indexes.                                                                                                                   |
+| *Default value*         | false                                                                                                                                                                                                                                                                           |
+| *Allowed values*        | truefalse                                                                                                                                                                                                                                                                       |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                              |
+| *Required*              | No                                                                                                                                                                                                                                                                              |
+| *Admin action required* | NoneIf the index for the attribute must be protected for security purposes and values for that attribute already exist in the database, the index must be rebuilt before it will be accurate. The property cannot be set on a backend for which confidentiality is not enabled. |
+| *Advanced*              | No                                                                                                                                                                                                                                                                              |
+| *Read-only*             | No                                                                                                                                                                                                                                                                              |
+
+### index-extensible-matching-rule
+
+|                         |                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| *Synopsis*              | The extensible matching rule in an extensible index.                                           |
+| *Description*           | An extensible matching rule must be specified using either LOCALE or OID of the matching rule. |
+| *Default value*         | No extensible matching rules will be indexed.                                                  |
+| *Allowed values*        | A Locale or an OID.                                                                            |
+| *Multi-valued*          | Yes                                                                                            |
+| *Required*              | No                                                                                             |
+| *Admin action required* | NoneThe index must be rebuilt before it will reflect the new value.                            |
+| *Advanced*              | No                                                                                             |
+| *Read-only*             | No                                                                                             |
+
+### index-type
+
+|                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the type(s) of indexing that should be performed for the associated attribute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| *Description*           | For equality, presence, and substring index types, the associated attribute type must have a corresponding matching rule.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| *Default value*         | None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| *Allowed values*        | * approximate: This index type is used to improve the efficiency of searches using approximate matching search filters.
+
+* big-equality: This index type is used to perform efficient equality filter queries against attributes with few unique values.
+
+* big-extensible: This index type is used to improve the efficiency of searches using extensible matching rule search filters against attributes with few unique values.
+
+* equality: This index type is used to improve the efficiency of searches using equality search filters.
+
+* extensible: This index type is used to improve the efficiency of searches using extensible matching search filters.
+
+* ordering: This index type is used to improve the efficiency of searches using "greater than or equal to" or "less then or equal to" search filters.
+
+* presence: This index type is used to improve the efficiency of searches using the presence search filters.
+
+* substring: This index type is used to improve the efficiency of searches using substring search filters. |
+| *Multi-valued*          | Yes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| *Required*              | Yes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| *Admin action required* | NoneIf any new index types are added for an attribute, and values for that attribute already exist in the database, the index must be rebuilt before it will be accurate.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| *Advanced*              | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+### ttl-age
+
+|                         |                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | After reaching the time of the indexed attribute plus this age, PingDS considers the entry expired and ready for deletion. Use a low setting to quickly delete entries with expiration timestamps, for example, with coreTokenExpirationDate. Use a high setting to delay deleting entries with "last use" timestamps, for example, with lastLoginTime. |
+| *Default value*         | 0s                                                                                                                                                                                                                                                                                                                                                      |
+| *Allowed values*        | Uses [duration syntax](duration-syntax.html).Lower limit: 0 milliseconds.                                                                                                                                                                                                                                                                               |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                                                                                                      |
+| *Required*              | No                                                                                                                                                                                                                                                                                                                                                      |
+| *Admin action required* | None                                                                                                                                                                                                                                                                                                                                                    |
+| *Advanced*              | No                                                                                                                                                                                                                                                                                                                                                      |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                      |
+
+### ttl-enabled
+
+|                         |                                             |
+| ----------------------- | ------------------------------------------- |
+| *Synopsis*              | Enable TTL for this generalized time index. |
+| *Default value*         | false                                       |
+| *Allowed values*        | truefalse                                   |
+| *Multi-valued*          | No                                          |
+| *Required*              | No                                          |
+| *Admin action required* | None                                        |
+| *Advanced*              | No                                          |
+| *Read-only*             | No                                          |
+
+## Advanced properties
+
+Use the `--advanced` option to access advanced properties.
+
+### index-entry-limit
+
+|                         |                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the maximum number of entries that are allowed to match a given index key before that particular index key is no longer maintained.                                                                                                                                                                                                               |
+| *Description*           | This is analogous to the ALL IDs threshold in the Sun Java System Directory Server. If this is specified, its value overrides the JE backend-wide configuration. For no limit, use 0 for the value. Changing the index entry limit significantly can result in serious performance degradation. Please read the documentation before changing this setting. |
+| *Default value*         | 4000                                                                                                                                                                                                                                                                                                                                                        |
+| *Allowed values*        | An integer.Lower limit: 0.Upper limit: 2147483647.                                                                                                                                                                                                                                                                                                          |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                                                                                                          |
+| *Required*              | No                                                                                                                                                                                                                                                                                                                                                          |
+| *Admin action required* | NoneIf any index keys have already reached this limit, indexes must be rebuilt before they will be allowed to use the new limit.                                                                                                                                                                                                                            |
+| *Advanced*              | Yes                                                                                                                                                                                                                                                                                                                                                         |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                          |
+
+### substring-length
+
+|                         |                                                                     |
+| ----------------------- | ------------------------------------------------------------------- |
+| *Synopsis*              | The length of substrings in a substring index.                      |
+| *Default value*         | 6                                                                   |
+| *Allowed values*        | An integer.Lower limit: 3.                                          |
+| *Multi-valued*          | No                                                                  |
+| *Required*              | No                                                                  |
+| *Admin action required* | NoneThe index must be rebuilt before it will reflect the new value. |
+| *Advanced*              | Yes                                                                 |
+| *Read-only*             | No                                                                  |
 
 ---
 
 ---
-title: create-password-policy
-description: Creates Authentication Policies.
+title: Backend VLV Index
+description: Backend VLV Indexes are used to store information about a specific search request that makes it possible to efficiently process them using the VLV control.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-password-policy
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-password-policy.html
+page_id: pingds:configref:objects-backend-vlv-index
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-backend-vlv-index.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  dependencies: Dependencies
+  backend_vlv_index_properties: Backend VLV Index properties
+  basic_properties: Basic properties
+  base-dn: base-dn
+  filter: filter
+  name: name
+  scope: scope
+  sort-order: sort-order
 ---
 
-# create-password-policy
+# Backend VLV Index
 
-Creates Authentication Policies.
+Backend VLV Indexes are used to store information about a specific search request that makes it possible to efficiently process them using the VLV control.
 
-In addition to the global `dsconfig` options, the `dsconfig create-password-policy` subcommand takes the following options:
+A VLV index effectively notifies the server that a virtual list view, with specific query and sort parameters, will be performed. This index also allows the server to collect and maintain the information required to make using the virtual list view faster.
 
-* `--policy-name {name}`
+## Dependencies
 
-  The name of the new Authentication Policy.
+The following objects depend on Backend VLV Indexes:
 
-* `--set {PROP:VALUE}`
+* [Pluggable Backend](objects-pluggable-backend.html)
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+## Backend VLV Index properties
 
-* `-t | --type {type}`
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
 
-  The type of Authentication Policy which should be created. The value for TYPE can be one of: ldap-pass-through | password-policy.
+| Basic Properties                                                                              |
+| --------------------------------------------------------------------------------------------- |
+| [base-dn](#base-dn) [filter](#filter) [name](#name) [scope](#scope) [sort-order](#sort-order) |
 
-Properties used in options depend on the type of object to configure.
+### Basic properties
 
-For details about available properties, see [Password Policy](objects-password-policy.html).
+Use the `--advanced` option to access advanced properties.
+
+### base-dn
+
+|                         |                                                                       |
+| ----------------------- | --------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the base DN used in the search query that is being indexed. |
+| *Default value*         | None                                                                  |
+| *Allowed values*        | A valid DN.                                                           |
+| *Multi-valued*          | No                                                                    |
+| *Required*              | Yes                                                                   |
+| *Admin action required* | NoneThe index must be rebuilt after modifying this property.          |
+| *Advanced*              | No                                                                    |
+| *Read-only*             | No                                                                    |
+
+### filter
+
+|                         |                                                                    |
+| ----------------------- | ------------------------------------------------------------------ |
+| *Synopsis*              | Specifies the LDAP filter used in the query that is being indexed. |
+| *Default value*         | None                                                               |
+| *Allowed values*        | A valid LDAP search filter.                                        |
+| *Multi-valued*          | No                                                                 |
+| *Required*              | Yes                                                                |
+| *Admin action required* | NoneThe index must be rebuilt after modifying this property.       |
+| *Advanced*              | No                                                                 |
+| *Read-only*             | No                                                                 |
+
+### name
+
+|                         |                                                                      |
+| ----------------------- | -------------------------------------------------------------------- |
+| *Synopsis*              | Specifies a unique name for this VLV index.                          |
+| *Default value*         | None                                                                 |
+| *Allowed values*        | A string.                                                            |
+| *Multi-valued*          | No                                                                   |
+| *Required*              | Yes                                                                  |
+| *Admin action required* | NoneThe VLV index name cannot be altered after the index is created. |
+| *Advanced*              | No                                                                   |
+| *Read-only*             | Yes                                                                  |
+
+### scope
+
+|                         |                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the LDAP scope of the query that is being indexed.                                                                                                                                                                                                                                                                                      |
+| *Default value*         | None                                                                                                                                                                                                                                                                                                                                              |
+| *Allowed values*        | * single-level: Search the immediate children of the base object but do not include any of their descendants or the base object itself.
+
+* subordinate-subtree: Search the entire subtree below the base object but do not include the base object itself.
+
+* whole-subtree: Search the base object and the entire subtree below the base object. |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                                                                                                |
+| *Required*              | Yes                                                                                                                                                                                                                                                                                                                                               |
+| *Admin action required* | NoneThe index must be rebuilt after modifying this property.                                                                                                                                                                                                                                                                                      |
+| *Advanced*              | No                                                                                                                                                                                                                                                                                                                                                |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                |
+
+### sort-order
+
+|                         |                                                                                                                                                                                                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the names of the attributes that are used to sort the entries for the query being indexed.                                                                                                                                                              |
+| *Description*           | Multiple attributes can be used to determine the sort order by listing the attribute names from highest to lowest precedence. Optionally, + or - can be prefixed to the attribute name to sort the attribute in ascending order or descending order respectively. |
+| *Default value*         | None                                                                                                                                                                                                                                                              |
+| *Allowed values*        | Valid attribute types defined in the schema, separated by a space and optionally prefixed by + or -.                                                                                                                                                              |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                |
+| *Required*              | Yes                                                                                                                                                                                                                                                               |
+| *Admin action required* | NoneThe index must be rebuilt after modifying this property.                                                                                                                                                                                                      |
+| *Advanced*              | No                                                                                                                                                                                                                                                                |
+| *Read-only*             | No                                                                                                                                                                                                                                                                |
 
 ---
 
 ---
-title: create-password-storage-scheme
-description: Creates Password Storage Schemes.
+title: Base64 Password Storage Scheme (LEGACY)
+description: "LEGACY since 7.0.0: is insecure. Alternative: A strong hash-based scheme such as one of the schemes enabled by default."
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-password-storage-scheme
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-password-storage-scheme.html
+page_id: pingds:configref:objects-base64-password-storage-scheme
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-base64-password-storage-scheme.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  parent: Parent
+  base64_password_storage_scheme_properties: Base64 Password Storage Scheme properties
+  basic_properties: Basic properties
+  enabled: enabled
+  advanced_properties: Advanced properties
+  java-class: java-class
 ---
 
-# create-password-storage-scheme
+# Base64 Password Storage Scheme (LEGACY)
 
-Creates Password Storage Schemes.
+|   |                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------- |
+|   | LEGACY since 7.0.0: is insecure. Alternative: A strong hash-based scheme such as one of the schemes enabled by default. |
 
-In addition to the global `dsconfig` options, the `dsconfig create-password-storage-scheme` subcommand takes the following options:
+The Base64 Password Storage Scheme provides a mechanism for encoding user passwords using the BASE64 encoding mechanism.
 
-* `--scheme-name {name}`
+This scheme contains only an implementation for the user password syntax, with a storage scheme name of "BASE64". The Base64 Password Storage Scheme merely obscures the password so that the clear-text password is not available to casual observers. However, it offers no real protection and should only be used if there are client applications that specifically require this capability.
 
-  The name of the new Password Storage Scheme.
+## Parent
 
-* `--set {PROP:VALUE}`
+The Base64 Password Storage Scheme object inherits from [Password Storage Scheme](objects-password-storage-scheme.html).
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+## Base64 Password Storage Scheme properties
 
-* `-t | --type {type}`
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
 
-  The type of Password Storage Scheme which should be created. The value for TYPE can be one of: aes | argon2 | base64 | bcrypt | blowfish | clear | crypt | custom | custom-cost-based | md5 | pbkdf2 | pbkdf2-hmac-sha256 | pbkdf2-hmac-sha512 | pbkdf2-hmac-sha512-t256 | pkcs5s2 | rc4 | salted-md5 | salted-sha1 | salted-sha256 | salted-sha384 | salted-sha512 | scram-sha256 | scram-sha512 | scrypt | sha1 | triple-des.
+| Basic Properties    | Advanced Properties       |
+| ------------------- | ------------------------- |
+| [enabled](#enabled) | [java-class](#java-class) |
 
-Properties used in options depend on the type of object to configure.
+### Basic properties
 
-For details about available properties, see [Password Storage Scheme](objects-password-storage-scheme.html).
+Use the `--advanced` option to access advanced properties.
+
+### enabled
+
+|                         |                                                                   |
+| ----------------------- | ----------------------------------------------------------------- |
+| *Synopsis*              | Indicates whether the Password Storage Scheme is enabled for use. |
+| *Default value*         | None                                                              |
+| *Allowed values*        | truefalse                                                         |
+| *Multi-valued*          | No                                                                |
+| *Required*              | Yes                                                               |
+| *Admin action required* | None                                                              |
+| *Advanced*              | No                                                                |
+| *Read-only*             | No                                                                |
+
+## Advanced properties
+
+Use the `--advanced` option to access advanced properties.
+
+### java-class
+
+|                         |                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the fully-qualified name of the Java class that provides the Base64 Password Storage Scheme implementation. |
+| *Default value*         | org.opends.server.extensions.Base64PasswordStorageScheme                                                              |
+| *Allowed values*        | A Java class that extends or implements:- org.opends.server.api.PasswordStorageScheme                                 |
+| *Multi-valued*          | No                                                                                                                    |
+| *Required*              | Yes                                                                                                                   |
+| *Admin action required* | None                                                                                                                  |
+| *Advanced*              | Yes                                                                                                                   |
+| *Read-only*             | No                                                                                                                    |
 
 ---
 
 ---
-title: create-password-validator
-description: Creates Password Validators.
+title: Bcrypt Password Storage Scheme
+description: The Bcrypt Password Storage Scheme provides a mechanism for encoding user passwords using the bcrypt message digest algorithm.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-password-validator
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-password-validator.html
+page_id: pingds:configref:objects-bcrypt-password-storage-scheme
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-bcrypt-password-storage-scheme.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  parent: Parent
+  bcrypt_password_storage_scheme_properties: Bcrypt Password Storage Scheme properties
+  basic_properties: Basic properties
+  bcrypt-cost: bcrypt-cost
+  enabled: enabled
+  rehash-policy: rehash-policy
+  version: version
+  advanced_properties: Advanced properties
+  java-class: java-class
+  remote-password-hashing-base-uri: remote-password-hashing-base-uri
+  remote-password-hashing-connection-timeout: remote-password-hashing-connection-timeout
+  remote-password-hashing-enabled: remote-password-hashing-enabled
+  remote-password-hashing-max-connections: remote-password-hashing-max-connections
+  remote-password-hashing-request-timeout: remote-password-hashing-request-timeout
 ---
 
-# create-password-validator
+# Bcrypt Password Storage Scheme
 
-Creates Password Validators.
+The Bcrypt Password Storage Scheme provides a mechanism for encoding user passwords using the bcrypt message digest algorithm.
 
-In addition to the global `dsconfig` options, the `dsconfig create-password-validator` subcommand takes the following options:
+This scheme contains an implementation for the user password syntax, with a storage scheme name of "BCRYPT".
 
-* `--set {PROP:VALUE}`
+## Parent
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+The Bcrypt Password Storage Scheme object inherits from [Cost Based Password Storage Scheme](objects-cost-based-password-storage-scheme.html).
 
-* `-t | --type {type}`
+## Bcrypt Password Storage Scheme properties
 
-  The type of Password Validator which should be created. The value for TYPE can be one of: attribute-value | character-set | custom | dictionary | length-based | repeated-characters | similarity-based | unique-characters.
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
 
-* `--validator-name {name}`
+| Basic Properties                                                                                    | Advanced Properties                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [bcrypt-cost](#bcrypt-cost) [enabled](#enabled) [rehash-policy](#rehash-policy) [version](#version) | [java-class](#java-class) [remote-password-hashing-base-uri](#remote-password-hashing-base-uri) [remote-password-hashing-connection-timeout](#remote-password-hashing-connection-timeout) [remote-password-hashing-enabled](#remote-password-hashing-enabled) [remote-password-hashing-max-connections](#remote-password-hashing-max-connections) [remote-password-hashing-request-timeout](#remote-password-hashing-request-timeout) |
 
-  The name of the new Password Validator.
+### Basic properties
 
-Properties used in options depend on the type of object to configure.
+Use the `--advanced` option to access advanced properties.
 
-For details about available properties, see [Password Validator](objects-password-validator.html).
+### bcrypt-cost
+
+|                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | The cost parameter specifies a key expansion iteration count as a power of two. A default value of 12 (2^12 iterations) is considered in 2016 as a reasonable balance between responsiveness and security for regular users.                                                                                                                                                                                                                                                                                                                                                                                           |
+| *Description*           | By default, changes to this setting impact only newly created and updated passwords. However, if the rehash-policy is set to only-increase or only-decrease, it may cause the server to recalculate the user's password hash on their next authentication, and write the new hash to the user's entry on disk. Changing the number of iterations therefore leads to a short-term spike in CPU and disk use as the server updates each user's password when they next authenticate. Longer term, increasing this setting results in more secure passwords at the expense of longer response times and lower throughput. |
+| *Default value*         | 12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| *Allowed values*        | An integer.Lower limit: 4.Upper limit: 30.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| *Required*              | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| *Admin action required* | None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| *Advanced*              | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+### enabled
+
+|                         |                                                                   |
+| ----------------------- | ----------------------------------------------------------------- |
+| *Synopsis*              | Indicates whether the Password Storage Scheme is enabled for use. |
+| *Default value*         | None                                                              |
+| *Allowed values*        | truefalse                                                         |
+| *Multi-valued*          | No                                                                |
+| *Required*              | Yes                                                               |
+| *Admin action required* | None                                                              |
+| *Advanced*              | No                                                                |
+| *Read-only*             | No                                                                |
+
+### rehash-policy
+
+|                         |                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Indicates whether the server should rehash passwords after the cost has been changed.                                                                                                                                                                                                                                                                                  |
+| *Description*           | Passwords will be rehashed when a user successfully authenticates. Note that rehashing will increase the write load on the server.                                                                                                                                                                                                                                     |
+| *Default value*         | never                                                                                                                                                                                                                                                                                                                                                                  |
+| *Allowed values*        | * never: Never rehash passwords when the cost changes. Only rehash passwords when the password is modified.
+
+* only-decrease: Only rehash passwords when the cost has been decreased (downgrade the security of the hashed password).
+
+* only-increase: Only rehash passwords when the cost has been increased (do not downgrade the security of the hashed password). |
+| *Multi-valued*          | No                                                                                                                                                                                                                                                                                                                                                                     |
+| *Required*              | No                                                                                                                                                                                                                                                                                                                                                                     |
+| *Admin action required* | None                                                                                                                                                                                                                                                                                                                                                                   |
+| *Advanced*              | No                                                                                                                                                                                                                                                                                                                                                                     |
+| *Read-only*             | No                                                                                                                                                                                                                                                                                                                                                                     |
+
+### version
+
+|                         |                                                                                                                                                            |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Indicates the bcrypt algorithm version to use.                                                                                                             |
+| *Description*           | Password hashes are prefixed with a version. The bcrypt authors have defined two versions so far, to fix a problem in the original OpenBSD implementation. |
+| *Default value*         | 2b                                                                                                                                                         |
+| *Allowed values*        | The value can either be '2a' for the original OpenBSD version, or '2b' for the fixed version from 2014.                                                    |
+| *Multi-valued*          | No                                                                                                                                                         |
+| *Required*              | No                                                                                                                                                         |
+| *Admin action required* | None                                                                                                                                                       |
+| *Advanced*              | No                                                                                                                                                         |
+| *Read-only*             | No                                                                                                                                                         |
+
+## Advanced properties
+
+Use the `--advanced` option to access advanced properties.
+
+### java-class
+
+|                         |                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the fully-qualified name of the Java class that provides the Bcrypt Password Storage Scheme implementation. |
+| *Default value*         | org.opends.server.extensions.BcryptPasswordStorageScheme                                                              |
+| *Allowed values*        | A Java class that extends or implements:- org.opends.server.api.PasswordStorageScheme                                 |
+| *Multi-valued*          | No                                                                                                                    |
+| *Required*              | Yes                                                                                                                   |
+| *Admin action required* | None                                                                                                                  |
+| *Advanced*              | Yes                                                                                                                   |
+| *Read-only*             | No                                                                                                                    |
+
+### remote-password-hashing-base-uri
+
+|                         |                                                                         |
+| ----------------------- | ----------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the base URI to connect to the password hashing microservice. |
+| *Default value*         | None                                                                    |
+| *Allowed values*        | A string.                                                               |
+| *Multi-valued*          | No                                                                      |
+| *Required*              | No                                                                      |
+| *Admin action required* | None                                                                    |
+| *Advanced*              | Yes                                                                     |
+| *Read-only*             | No                                                                      |
+
+### remote-password-hashing-connection-timeout
+
+|                         |                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the timeout to use when connecting to the password hashing microservice. |
+| *Default value*         | 10 s                                                                               |
+| *Allowed values*        | Uses [duration syntax](duration-syntax.html).Lower limit: 0 seconds.               |
+| *Multi-valued*          | No                                                                                 |
+| *Required*              | No                                                                                 |
+| *Admin action required* | None                                                                               |
+| *Advanced*              | Yes                                                                                |
+| *Read-only*             | No                                                                                 |
+
+### remote-password-hashing-enabled
+
+|                         |                                                                             |
+| ----------------------- | --------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies whether to delegate password hashing to a dedicated microservice. |
+| *Default value*         | false                                                                       |
+| *Allowed values*        | truefalse                                                                   |
+| *Multi-valued*          | No                                                                          |
+| *Required*              | No                                                                          |
+| *Admin action required* | None                                                                        |
+| *Advanced*              | Yes                                                                         |
+| *Read-only*             | No                                                                          |
+
+### remote-password-hashing-max-connections
+
+|                         |                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the maximum number of connections to the password hashing microservice. |
+| *Default value*         | 64                                                                                |
+| *Allowed values*        | An integer.Lower limit: 0.                                                        |
+| *Multi-valued*          | No                                                                                |
+| *Required*              | No                                                                                |
+| *Admin action required* | None                                                                              |
+| *Advanced*              | Yes                                                                               |
+| *Read-only*             | No                                                                                |
+
+### remote-password-hashing-request-timeout
+
+|                         |                                                                           |
+| ----------------------- | ------------------------------------------------------------------------- |
+| *Synopsis*              | Specifies the timeout for a request to the password hashing microservice. |
+| *Default value*         | 10 s                                                                      |
+| *Allowed values*        | Uses [duration syntax](duration-syntax.html).Lower limit: 0 seconds.      |
+| *Multi-valued*          | No                                                                        |
+| *Required*              | No                                                                        |
+| *Admin action required* | None                                                                      |
+| *Advanced*              | Yes                                                                       |
+| *Read-only*             | No                                                                        |
 
 ---
 
 ---
-title: create-plugin
-description: Creates Plugins.
+title: Blind Trust Manager Provider
+description: The blind trust manager provider always trusts any certificate that is presented to it, regardless of its issuer, subject, and validity dates.
 component: pingds
 version: 8.1
-page_id: pingds:configref:subcommands-create-plugin
-canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/subcommands-create-plugin.html
+page_id: pingds:configref:objects-blind-trust-manager-provider
+canonical_url: https://docs.pingidentity.com/pingds/8.1/configref/objects-blind-trust-manager-provider.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  parent: Parent
+  blind_trust_manager_provider_properties: Blind Trust Manager Provider properties
+  basic_properties: Basic properties
+  enabled: enabled
+  advanced_properties: Advanced properties
+  java-class: java-class
 ---
 
-# create-plugin
+# Blind Trust Manager Provider
 
-Creates Plugins.
+The blind trust manager provider always trusts any certificate that is presented to it, regardless of its issuer, subject, and validity dates.
 
-In addition to the global `dsconfig` options, the `dsconfig create-plugin` subcommand takes the following options:
+Use the blind trust manager provider only for testing purposes, because it allows clients to use forged certificates and authenticate as virtually any user in the server.
 
-* `--plugin-name {name}`
+## Parent
 
-  The name of the new Plugin.
+The Blind Trust Manager Provider object inherits from [Trust Manager Provider](objects-trust-manager-provider.html).
 
-* `--set {PROP:VALUE}`
+## Blind Trust Manager Provider properties
 
-  Assigns a value to a property where PROP is the name of the property and VALUE is the single value to be assigned. Specify the same property multiple times in order to assign more than one value to it.
+You can use configuration expressions to set property values at startup time. For details, see [Property value substitution](expressions.html).
 
-* `-t | --type {type}`
+| Basic Properties    | Advanced Properties       |
+| ------------------- | ------------------------- |
+| [enabled](#enabled) | [java-class](#java-class) |
 
-  The type of Plugin which should be created. The value for TYPE can be one of: attribute-cleanup | change-number-control | custom | entity-tag | entry-uuid | fractional-ldif-import | graphite-monitor-reporter | last-mod | ldap-attribute-description-list | open-telemetry | password-policy-import | referential-integrity | samba-password | seven-bit-clean | unique-attribute.
+### Basic properties
 
-Properties used in options depend on the type of object to configure.
+Use the `--advanced` option to access advanced properties.
 
-For details about available properties, see [Plugin](objects-plugin.html).
+### enabled
+
+|                         |                                                                 |
+| ----------------------- | --------------------------------------------------------------- |
+| *Synopsis*              | Indicate whether the Trust Manager Provider is enabled for use. |
+| *Default value*         | None                                                            |
+| *Allowed values*        | truefalse                                                       |
+| *Multi-valued*          | No                                                              |
+| *Required*              | Yes                                                             |
+| *Admin action required* | None                                                            |
+| *Advanced*              | No                                                              |
+| *Read-only*             | No                                                              |
+
+## Advanced properties
+
+Use the `--advanced` option to access advanced properties.
+
+### java-class
+
+|                         |                                                                                                           |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- |
+| *Synopsis*              | The fully-qualified name of the Java class that provides the Blind Trust Manager Provider implementation. |
+| *Default value*         | org.opends.server.extensions.BlindTrustManagerProvider                                                    |
+| *Allowed values*        | A Java class that extends or implements:- org.opends.server.api.TrustManagerProvider                      |
+| *Multi-valued*          | No                                                                                                        |
+| *Required*              | Yes                                                                                                       |
+| *Admin action required* | None                                                                                                      |
+| *Advanced*              | Yes                                                                                                       |
+| *Read-only*             | No                                                                                                        |

@@ -1,12 +1,12 @@
 ---
 title: Error Message Connector
-description: The Error Message connector lets you create and customize the error messages that appear in your PingOne DaVinci flow.
+description: Configure the Error Message connector to create and customize error messages displayed to users in your PingOne DaVinci flows
 component: connectors
 page_id: connectors::error_message_connector
 canonical_url: https://docs.pingidentity.com/connectors/error_message_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -29,17 +29,17 @@ You can use the Error Message connector to customize an error message shown in t
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Error Message connector
 
-In DaVinci, add an Error Message connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add an Error Message connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 

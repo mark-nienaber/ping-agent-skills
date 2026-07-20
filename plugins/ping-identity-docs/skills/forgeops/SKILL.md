@@ -29,7 +29,7 @@ ForgeOps documentation is indexed in the bundled llms.txt and live Ping Markdown
 |---|---|---|---|
 | Prepare: deployment, monitoring, pinggateway | prepare | https://docs.pingidentity.com/forgeops/2026.2/prepare/*.md | references/snapshots/prepare.md |
 | Reference: forgeops, command, span | reference | https://docs.pingidentity.com/forgeops/2026.2/reference/*.md | references/snapshots/reference.md |
-| Deploy: deploy, deployment, forgeops | deploy | https://docs.pingidentity.com/forgeops/2026.2/deploy/*.md | live-only |
+| Deploy: deploy, deployment, forgeops | deploy | https://docs.pingidentity.com/forgeops/2026.2/deploy/*.md | references/snapshots/deploy.md |
 | Troubleshoot: code, troubleshooting, amster | troubleshoot | https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/*.md | references/snapshots/troubleshoot.md |
 | Customize: code, image, about | customize | https://docs.pingidentity.com/forgeops/2026.2/customize/*.md | references/snapshots/customize.md |
 | Start: forgeops, assess, here | start | https://docs.pingidentity.com/forgeops/2026.2/start/*.md | references/snapshots/start.md |

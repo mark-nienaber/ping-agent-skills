@@ -3,8 +3,8 @@ title: Introduction to PingOne DaVinci
 description: PingOne DaVinci is an orchestration platform that lets you create flows to guide users through IAM activities.
 component: davinci
 page_id: davinci::davinci_introduction
-canonical_url: http://docs.pingidentity.com/davinci/davinci_introduction.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_introduction.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 21, 2024
 ---
@@ -17,7 +17,7 @@ A [flow](flows/davinci_flows.html) is a set of paths that define the user journe
 
 Each node performs a single task in the flow. When you place a node, you associate it with a [connector](connectors/davinci_connections.html) and then select a capability provided by that connector. These capabilities include retrieving information from third parties, presenting customized pages to users, modifying the value of variables, or performing other actions.
 
-You can add new connectors to your environment to make new capabilities available in your flows. These connectors can communicate with other Ping products or third parties. You can also configure multiple instances of a connector to use different environments or settings. The [connector documentation](http://docs.pingidentity.com/connectors/) and the [Ping Identity Marketplace](https://marketplace.pingone.com/home) contain information about the available connectors and the capabilities they provide.
+You can add new connectors to your environment to make new capabilities available in your flows. These connectors can communicate with other Ping products or third parties. You can also configure multiple instances of a connector to use different environments or settings. The [connector documentation](https://docs.pingidentity.com/connectors/) and the [Ping Identity Marketplace](https://marketplace.pingone.com/home) contain information about the available connectors and the capabilities they provide.
 
 After you create a flow, you add it to an [application](applications/davinci_applications.html) and create a flow policy to control how and when the flow gets used. Applications enable you to run flows using a widget, API calls, OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
 \<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>

@@ -1,12 +1,12 @@
 ---
 title: Babel Street Connector
-description: The Babel Street connector lets you use the Babel Street Analytics API in your PingOne DaVinci flow.
+description: Configure the Babel Street connector in PingOne DaVinci to compare name and address similarity, transliterate names, and identify text language
 component: connectors
 page_id: connectors::babelstreet_connector
 canonical_url: https://docs.pingidentity.com/connectors/babelstreet_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 17, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -38,13 +38,13 @@ The connector offers a suite of tools for name and address similarity, name tran
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -52,7 +52,7 @@ To use the connector, you'll need a Babel Street API Key.
 
 ### Configuring the Babel Street connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

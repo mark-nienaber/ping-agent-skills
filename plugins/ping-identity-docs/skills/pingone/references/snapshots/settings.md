@@ -766,6 +766,506 @@ The following topics can help you understand how to view, create, and use certif
 ---
 
 ---
+title: Configuring a custom notification provider for PingOne
+description: Use the information in this section to configure PingOne to use a custom notification provider.
+component: pingone
+page_id: pingone:settings:p1_sender_configure_custom_provider
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_sender_configure_custom_provider.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 19, 2026
+section_ids:
+  steps: Steps
+---
+
+# Configuring a custom notification provider for PingOne
+
+Use the information in this section to configure PingOne to use a custom notification provider.
+
+|   |                                                                                                                                                                                                                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | * You can define up to 10 SMS and Voice custom notification providers.
+
+* When defining more than one custom provider, the first provider on the **SMS/Voice** tab is the one that's used to send notifications unless you specify one of the other providers in the notification policy you're using. |
+
+## Steps
+
+1. Go to **Settings > Senders**.
+
+2. Click **+**, enter the following options, and then click **Next**:
+
+   1. In the **Sender Type** list, select **SMS/Voice**.
+
+   2. In the **Provider Type** list, select **Custom Provider**.
+
+3. In the **Provider Configuration** window, enter the following information:
+
+   * **Provider Name**: Enter a meaningful name for your provider.
+
+   * **Authorization**:
+
+     * To use basic authentication, select **Basic** and enter the username and password.
+
+       |   |                                                                                                                           |
+       | - | ------------------------------------------------------------------------------------------------------------------------- |
+       |   | When editing an existing configuration, click **Change Account** to enter a new password for the custom provider account. |
+
+     * To use bearer token authorization, select **Bearer** and enter the token to use.
+
+     * To use OAuth 2.0 authorization, select **OAuth2 - Client Credentials** and enter the URL of the authorization server that provides the access token, the client's public identifier, and the client's secret.
+
+     * To use OAuth 2.0 JSON Web Tokens (JWT) bearer authentication, select **OAuth2 - JWT Bearer** and enter the URL of the authorization server that provides the access token and the JWT assertion.
+
+     * To use custom header authorization, select **Custom Header** and enter the header name and the value to use for the header.
+
+   * **Scope**: Click **[icon: plus, set=fa]Add Scope** to configure an OAuth 2.0 scope.
+
+   * **Origination**: Click **[icon: plus, set=fa]Add Sender Phone Number** to configure a sender phone number, and for each number entered, select the following:
+
+     1. **Type**: Select the type of phone number
+
+        * **Standard**: The sender **Number** must conform to the valid format of a full international phone number.
+
+        * **Toll-free**: The sender **Number** should be a valid toll-free phone number (United States only). It's the customer's responsibility to confirm that the number is toll-free.
+
+        * **Short code**: The sender **Number** must conform to the valid format of a short code phone number (United States only). It's the customer's responsibility to confirm that the number is a short code.
+
+     2. **Countries**: For **Toll-free** and **Short code** numbers, to configure supported **Countries** for notification recipients do the following:
+
+        * Click in the **Countries** field. The **Configure countries** modal opens.
+
+        * Click in the **Select countries** field to display the list of countries. Select a country from the list.
+
+          |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+          | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+          |   | * **Toll-free**: Add multiple countries in the **Select countries** list. If you don't specify a country, the specified toll-free number is only used to dispatch notifications to recipient numbers in the United States.
+
+          * **Short code**: Select only one country in the **Select countries** list. If you don't specify a country, the specified short code is only used to dispatch notifications to recipient numbers in the United States. |
+
+     3. **Voice**: Mark the checkbox to configure the number to dispatch voice notifications.
+
+     4. **SMS**: Mark the checkbox to configure the number to dispatch SMS notifications.
+
+   Repeat this step to configure additional sender phone numbers.
+
+4. To specify the information required by the API of your provider for SMS messages, select the **SMS** checkbox and then configure the following fields:
+
+   |   |                                                                            |
+   | - | -------------------------------------------------------------------------- |
+   |   | You must select and configure at least one type of message (SMS or Voice). |
+
+   1. **Type**: Choose the type of operation to issue SMS notification requests to the associated vendor **URL** endpoint.
+
+      * **POST** (default)
+
+      * **GET**
+
+   2. **URL**: The vendor endpoint that receives SMS notification requests using the corresponding operation and request body.
+
+   3. **Body** (optional):
+
+      * **None**: The vendor endpoint receives SMS notification requests without a request body.
+
+      * **Form**: The notification request body is in the form of key and value pairs. Click **[icon: plus, set=fa]Add Key, Value** for each new key and value pair that you want to enter.
+
+      * **Raw**: Enter the notification request as free-form JSON text.
+
+        |   |                                                                                                                                                                                                 |
+        | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        |   | Changing the request body format style from **Form** deletes the request body's key and value pairs, and changing the format style from **Raw** deletes the request body's free-form JSON text. |
+
+      * Include the following variables in the customized body:
+
+        * `${from}` - Depending on vendor requirements, the `${from}` variable might be optional.
+
+        * `${to}` - If there is a requirement to send the country code and national (significant) number separately, instead of `${to}`, the body should include:
+
+          * `${to.country-code}`
+
+          * `${to.national-number}`
+
+        * `${message}`
+
+      * You can use the following optional variables:
+
+        * `${locale}` - locale
+
+        * `${otp}` - OTP
+
+      * The Body section supports dynamic variables. Learn more in [Dynamic variables](https://developer.pingidentity.com/pingone-api/platform/notifications/notifications-templates.html#notifications-templates-dynamic-variables) in the PingOne Platform API Reference.
+
+        To prevent problems related to special character encoding when passing PingOne variables to the provider, it's recommended that you specify the type of input your provider expects when you include a PingOne variable. Use the syntax `${variable_name|format_used}`, for example, `${message|json}`.
+
+        The formats you can specify are:
+
+        * json
+
+        * html
+
+        * url
+
+        * base64
+
+   4. **Headers**: Enter any required headers for the SMS notification request. Click **[icon: plus, set=fa]Add Header** for each new header you want to add.
+
+      * For JSON body format, set the header to `content-type=application/json`.
+
+      * For x-www-form-urlencoded body format, set the header to `content-type=application/x-www-form-urlencoded`.
+
+   5. **Plus sign**:
+
+      * **Enabled** (default): Permit the standard number format for the sender and recipient numbers, including a leading plus sign.
+
+      * **Disabled**: For configurations where the provider requires the sender and recipient numbers without a leading plus sign.
+
+   6. Click **Send Test SMS** to verify your configuration.
+
+      The **Send Test SMS** modal opens. Enter a destination phone number to test receiving an SMS notification from your configured custom provider.
+
+      1. In the **Send To** field, select the phone number's country, and enter the destination phone number.
+
+      2. Click **Send**.
+
+         The **Send Test SMS** modal closes.
+
+      3. Verify that you've received a test notification on the destination phone.
+
+5. To specify the information required by the API of your provider for voice messages, select the **Voice** checkbox and then configure the following fields:
+
+   |   |                                                                            |
+   | - | -------------------------------------------------------------------------- |
+   |   | You must select and configure at least one type of message (SMS or Voice). |
+
+   1. **Type**: Choose the type of operation to issue voice notification requests to the associated **URL** endpoint.
+
+      * **POST**
+
+      * **GET**
+
+   2. **URL**: The vendor endpoint that will receive voice notification requests using the corresponding operation and request body.
+
+   3. **Body**:
+
+      * **None**: The vendor endpoint receives voice notification requests without a request body.
+
+      * **Form**: The notification request body is in the form of key and value pairs. Click **[icon: plus, set=fa]Add Key, Value** for each new key and value pair that you want to enter.
+
+      * **Raw**: Enter the notification request as free-form JSON text.
+
+        |   |                                                                                                                                                                                                 |
+        | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        |   | Changing the request body format style from **Form** deletes the request body's key and value pairs, and changing the format style from **Raw** deletes the request body's free-form JSON text. |
+
+        * Include the following variables in the customized body:
+
+          * `${from}` - Depending on vendor requirements, the `${from}` variable might be optional.
+
+          * `${to}` - If there is a requirement to send the country code and national (significant) number separately, instead of `${to}`, the body should include:
+
+            * `${to.country-code}`
+
+            * `${to.national-number}`
+
+          * `${message}`
+
+        * You can use the following optional variables:
+
+          * `${voice}` - the type of voice configured for notifications
+
+          * `${locale}` - locale
+
+          * `${otp}` - OTP
+
+          * `${user.username}` - user's username
+
+          * `${user.name.given}` - user's given name
+
+          * `${user.name.family}` - user's family name
+
+        * The Body section supports dynamic variables. Learn more in [Dynamic variables](https://developer.pingidentity.com/pingone-api/platform/notifications/notifications-templates.html#notifications-templates-dynamic-variables) in the PingOne Platform API Reference.
+
+          To prevent problems related to special character encoding when passing PingOne variables to the provider, it's recommended that you specify the type of input your provider expects when you include a PingOne variable. Use the syntax `${variable_name|format_used}`, for example, `${message|json}`.
+
+          The formats you can specify are:
+
+          * json
+
+          * html
+
+          * url
+
+          * base64
+
+          |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+          | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+          |   | The `<repeatMessage>` and `<pause1sec>` tags aren't supported for custom provider voice one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)* messages. To add a pause in a custom provider voice message, use the **Preceding padding** (`"beforeTag"`) and **Succeeding padding** (`"afterTag"`) parameters, for example: |
+
+   4. **Preceding padding**: Set a custom pause or padding before an OTP character, to leverage vendor capabilities when sending voice notifications. For example:
+
+      ```
+      "beforeTag":"<Say>",
+      ```
+
+   5. **Succeeding padding**: Set a custom pause or padding after an OTP character to leverage vendor capabilities when sending voice notifications. For example:
+
+      ```
+      "afterTag":"</Say> <Pause length=\"1\"/>"
+      ```
+
+   6. **Headers**: Enter any required headers for the voice notification request. Click **[icon: plus, set=fa]Add Header** for each new header you want to add.
+
+      * For JSON body format, set the header to `content-type=application/json`.
+
+      * For x-www-form-urlencoded body format, set the header to `content-type=application/x-www-form-urlencoded`.
+
+   7. **Plus sign**:
+
+      * **Enabled** (default): Permit the standard number format for the sender and recipient numbers, including a leading plus sign.
+
+      * **Disabled**: For configurations where the provider requires the sender and recipient numbers without a leading plus sign.
+
+   8. Click **Send Test Voice** to verify your configuration.
+
+      The **Send Test Voice** modal opens. Enter a destination phone number to test receiving a voice notification from your configured custom provider.
+
+      1. In the **Send To** field, select the phone number's country, and enter the destination phone number.
+
+      2. Click **Send**.
+
+         The **Send Test SMS** modal closes.
+
+      3. Verify that you've received a test notification on the destination phone.
+
+6. Click **Save**.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | * When using a custom provider, if there are repeated errors within a short period or long delays before responses from the provider, PingOne assumes that there is an underlying issue and temporarily activates a circuit breaker, suspending notification attempts for that provider.
+
+* Custom providers use a five-second connect timeout and a three-second read timeout. |
+
+---
+
+---
+title: Configuring a custom SMTP email notification server
+description: Use the Senders page to configure your organization's SMTP server.
+component: pingone
+page_id: pingone:settings:p1_configure_custom_smtp_server
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_configure_custom_smtp_server.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 15, 2026
+section_ids:
+  steps: Steps
+---
+
+# Configuring a custom SMTP email notification server
+
+Use the Senders page to configure your organization's SMTP server.
+
+|   |                                                                                                                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When you use a custom SMTP server, PingOne sends email through your organization's mail infrastructure. Your domain's existing Domain-based Message Authentication, Reporting, and Conformance (DMARC) policies apply to all messages sent by PingOne from this server. |
+
+## Steps
+
+1. Go to **Settings > Senders**.
+
+2. Click **+**, enter the following options, and then click **Next**:
+
+   1. In the **Sender Type** list, select **Email**.
+
+   2. In the **Provider Type** list, select **Custom Server**
+
+3. In the Email Sender **Custom SMTP Server** area, enter the relevant details:
+
+   |   |                                                                                                        |
+   | - | ------------------------------------------------------------------------------------------------------ |
+   |   | Any edit changes on previously saved custom server fields requires re-entry of the **Password** field. |
+
+   | Field                | Type      | Description                                                                                                                                                                                                                    |
+   | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **Username**         | Mandatory | The organization's SMTP server's username.                                                                                                                                                                                     |
+   | **Password**         | Mandatory | The organization's SMTP server's passcode.                                                                                                                                                                                     |
+   | **Server Name**      | Mandatory | The name of the organization's SMTP server.                                                                                                                                                                                    |
+   | **Port**             | Mandatory | The port used by organization's SMTP server to send emails (default: 465). NOTE: The protocol used depends upon the port specified. If you specify port 25,587, or 2525, SMTP with STARTTLS is used. Otherwise, SMTPS is used. |
+   | **From Name**        | Optional  | The name that displays as the sender's name in the email message.                                                                                                                                                              |
+   | **From Address**     | Mandatory | The email address that displays as the sender's email address in the email message.                                                                                                                                            |
+   | **Reply-To Name**    | Optional  | The name that displays as the sender's reply-to name in the email message.                                                                                                                                                     |
+   | **Reply-To Address** | Optional  | The email address that displays as the sender's reply-to address in the email message.                                                                                                                                         |
+
+4. Click **Save**.
+
+   If you haven't yet sent a test email, you might get a warning message indicating that saving SMTP settings without validating credentials using the test email button can cause problems sending emails. You can also send a test email later.
+
+   |   |                                                                                                                                                                  |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | When saving, authentication isn't tested using the new credentials. Follow up with the **Send Test Email** step to confirm successful SMTP server configuration. |
+
+5. To test the SMTP server configuration, edit the Email entry in the **Senders** list and then click **Send Test Email**.
+
+   The **Send Test Email** modal opens.
+
+   ![The Send Test Email modal, showing an option to send a test email message to a specified address.](_images/TestEmailSMTP.png)
+
+6. Enter a recipient email address in **Send to** and click **Send**.
+
+7. Check the destination email box for the test email.
+
+   PingOne returns one of the following status messages:
+
+   * **Success**
+
+     ![A successful status message with the text A test message was successfully sent to some.body at acme.com.](_images/wuh1567784302549.png)
+
+   * **Failure**
+
+     ![A failure status message with the message, Using the credentials you provided, we couldn't authenticate with your email server.](_images/aan1567784303621.png)
+
+---
+
+---
+title: Configuring a Syniverse account for PingOne
+description: Use the information in this section to configure PingOne to use your Syniverse account.
+component: pingone
+page_id: pingone:settings:p1_configure_syniverse_account
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_configure_syniverse_account.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 13, 2026
+section_ids:
+  before-you-begin: Before you begin
+  about-this-task: About this task
+  steps: Steps
+  fallback: Fallback
+  adding-syniverse-notification-tracking-to-pingone-audit-logs: Adding Syniverse notification tracking to PingOne audit logs
+---
+
+# Configuring a Syniverse account for PingOne
+
+Use the information in this section to configure PingOne to use your Syniverse account.
+
+## Before you begin
+
+Ensure that you have:
+
+* Your Syniverse account Access Token from the Syniverse dashboard.
+
+* One or more Syniverse phone numbers that support SMS or Voice.
+
+## About this task
+
+|   |                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------- |
+|   | By enabling your Syniverse account, you're taking responsibility for dispatching SMS and voice messages. |
+
+## Steps
+
+1. Go to **Settings > Senders**.
+
+2. Click **+**, enter the following options, and then click **Next**:
+
+   1. In the **Sender Type** list, select **SMS/Voice**.
+
+   2. In the **Provider Type** list, select **Syniverse**.
+
+   3. In the **Syniverse Account Type** list, select **Syniverse**.
+
+3. In the **Provider Configuration** window, enter the following information to configure your Syniverse account to work with PingOne:
+
+   |   |                                                                                 |
+   | - | ------------------------------------------------------------------------------- |
+   |   | A Syniverse account applies across all PingOne applications of the environment. |
+
+   * **Provider Name**: Enter a meaningful name for the Syniverse account.
+
+   * **Access Token**: Enter the Syniverse Access Token.
+
+   |   |                                                                                                                                                                                                                                                                                                                  |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The system uses your access token to connect to your Syniverse account.Recommended: In your account in the Syniverse portal, define an application that is dedicated to PingOne traffic. Use this application for analyzing PingOne traffic throughput, and troubleshooting SMS or voice message dispatch cases. |
+
+4. Click **Verify**. This validates the account to PingOne and populates the **Organization Numbers** list from your Syniverse account.
+
+   |   |                                                                                                                                                                                                                                                                                    |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | * If the **Access Token** is incorrect, an error message displays.
+
+   * If your Syniverse account isn't fully configured, a warning displays next to the **Access Token** field.
+
+   * If there are no organization numbers in the Syniverse account, it won't be validated to PingOne. |
+
+   Once the account is successfully verified, **Organization Numbers** displays.
+
+5. Select one or more phone numbers available to this Syniverse account.
+
+   1. For **Toll-free** and **Short code** numbers, you can configure supported **Countries** for notification recipients:
+
+      * Click in the **Countries** field. The **Configure countries** modal opens.
+
+      * Click in the **Select countries** field to display the list of countries. Select a country from the list.
+
+        |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+        | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        |   | * **Toll-free**: You can add multiple countries in the **Select countries** list. If no country is specified, the specified toll-free number can only be used to dispatch notifications to United States recipient numbers.
+
+        * **Short code**: You can select only one country in the **Select countries** list. If no country is specified, the specified short code can only be used to dispatch notifications to United States recipient numbers. |
+
+   2. Click the **Show only selected** or **Show all** toggle to show only the marked phone numbers and hide the numbers that aren't selected, or to show selected and unselected numbers.
+
+   3. Click **Select all** or **Unselect all** to select or deselect all the numbers for this account.
+
+      |   |                                                                                                                                                                                                                                                                                                                                                                                            |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+      |   | * If you intend to use both SMS and voice, all your selected numbers must support both SMS and voice.
+
+      * Syniverse allows the use of sender IDs (in place of telephone numbers) for commercial use or to comply with regulations requiring SMSs to be sent as **transactional** and not **promotional**.
+
+      * Sender IDs are displayed according to the Sender IDs sent in the API requests. |
+
+6. Click **Save**. A **Third-party Service Consent** message shows. Click **I Consent** to proceed and save your changes.
+
+   After configuring this sender, add it to a notification policy to control when PingOne uses it for SMS or voice notifications. Learn more in [Notification Policies](../user_experience/p1_creating_a_notification_policy.html).
+
+## Fallback
+
+If PingOne receives an error during the message dispatch process that the used number is invalid, it retries using another configured Syniverse number. After attempting to dispatch the message and receiving an error for all configured numbers, the fallback flow is triggered.
+
+* If there is no way of originating the SMS or voice event with the tenant's own Syniverse account and you defined a fallback, the event will be originated from the configured fallback account.
+
+* The following errors will cause fallback:
+
+  * All API errors (but not SMS delivery errors).
+
+  * No organization number was found on the Syniverse account.
+
+* If a transaction was charged to a specific account, it doesn't imply that subsequent transactions will be charged to the same account. The account charged for each transaction is determined on an individual basis. Preference is always given to the custom account.
+
+## Adding Syniverse notification tracking to PingOne audit logs
+
+To help troubleshoot any potential issues, include Syniverse notification events in the PingOne audit logs. To include Syniverse notification events in the PingOne audit logs:
+
+1. In the list of configured senders, locate your sendert.
+
+2. Click the sender name. The summary of the sender configuration is displayed on the right side of the screen.
+
+3. Copy the URL from the **Address** field.
+
+4. In your Syniverse account:
+
+   1. In the **Delivery Configuration**, paste the URL that you copied from the PingOne **Address** field.
+
+   2. Create two subscriptions: **SCG-Message** and **SCG-Voice-Calls**.
+
+      Learn more in the Syniverse article [How to setup a Webhook for Receiving Messages and Notifications](https://sdcsupport.syniverse.com/hc/en-us/articles/360001528033-How-to-setup-a-Webhook-for-Receiving-Messages-and-Notifications).
+
+   |   |                                                                                                                                                                                                                                                                        |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | These Syniverse configurations are required in order that Ping Identity's dashboards and reports will reflect complete and accurate data. Ping Identity won't be able to troubleshoot SMS or voice events related to Syniverse if these configurations are incomplete. |
+
+---
+
+---
 title: Configuring a Twilio account for PingOne
 description: How to configure your Twilio sender in PingOne to connect your users with SMS or voice notifications.
 component: pingone
@@ -878,818 +1378,358 @@ If PingOne receives an error during the message dispatch process that the used n
 ---
 
 ---
-title: Custom domain impacts and migration considerations
-description: Considerations for impacts and migration when configuring a PingOne custom domain.
+title: Configuring administrator security
+description: Use the Administrator Security page to view or change authentication settings for the PingOne admin console.
 component: pingone
-page_id: pingone:settings:p1_custom_domain_impacts
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_custom_domain_impacts.html
+page_id: pingone:settings:p1_configure_administrator_security
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_configure_administrator_security.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 12, 2026
-keywords: ["custom domain", "impacts", "migration", "considerations", "PingOne services"]
+revdate: June 5, 2025
 section_ids:
-  how-a-custom-domain-changes-your-environment: How a custom domain changes your environment
-  endpoint-mapping-reference: Endpoint mapping reference
-  api-and-cors-guidance: API and CORS guidance
-  transitioning-existing-integrations: Transitioning existing integrations
----
-
-# Custom domain impacts and migration considerations
-
-When you add a custom domain to a PingOne environment, the environment has two sets of URLs:
-
-* Standard PingOne URLs
-
-* Custom domain URLs
-
-Both sets are valid and functional.
-
-## How a custom domain changes your environment
-
-Adding a custom domain affects how PingOne identifies itself to applications and identity providers (IdPs) in the following ways:
-
-**Token issuer changes**: Both the OpenID Connect (OIDC) and SAML issuer defaults to the custom domain. PingOne accepts both the standard and custom domain issuer, but your configuration should be consistent. Use one or the other for a given integration, not a mix of both.
-
-* **URL path structure**: Custom domain URLs omit the `envId` path segment that standard URLs include:
-
-  * Standard URL: https\://auth.pingone.\<region>/\<envId>/as
-
-  * Custom domain URL: `https://<customDomain>/as`
-
-### Endpoint mapping reference
-
-The following table shows how standard PingOne URLs map to custom domain URLs across supported protocols. Assume \[.codeph]`<customDomain>` is your configured domain (for example, `sso.example.com`).
-
-| Protocol                | Purpose                     | Standard URL                                                                               | Custom domain URL                                                          |
-| ----------------------- | --------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| **OIDC app**            | Issuer                      | https\://auth.pingone.\<region>/\<envId>/as                                                | https\://\<customDomain>/as                                                |
-| **OIDC app**            | Token endpoint              | https\://auth.pingone.\<region>/\<envId>/as/token                                          | https\://\<customDomain>/as/token                                          |
-| **SAML app**            | Issuer ID                   | https\://auth.pingone.\<region>/\<envId>                                                   | https\://\<customDomain>                                                   |
-| **SAML app**            | Initiate single sign-on URL | https\://auth.pingone.\<region>/\<envId>/saml20/idp/startsso?spEntityId=\<partnerEntityId> | https\://\<customDomain>/saml20/idp/startsso?spEntityId=\<partnerEntityId> |
-| **Microsoft 365 app**   | IssuerUri                   | https\://auth.pingone.\<region>/\<envId>/applications/\<appId>                             | https\://\<customDomain>/applications/\<appId>                             |
-| **Microsoft 365 app**   | PassiveSignInUri            | https\://auth.pingone.\<region>/\<envId>/wsf/prp/\<appId>                                  | https\://\<customDomain>/wsf/prp/\<appId>                                  |
-| **External IdP (SAML)** | ACS Endpoint                | https\://auth.pingone.\<region>/\<envId>/saml20/sp/acs                                     | https\://\<customDomain>/saml20/sp/acs                                     |
-| **External IdP (SAML)** | SingleLogoutService         | https\://auth.pingone.\<region>/\<envId>/saml20/sp/slo                                     | https\://\<customDomain>/saml20/sp/slo                                     |
-| **External IdP (OIDC)** | Callback URL                | https\://auth.pingone.\<region>/\<envId>/rp/callback/openid\_connect                       | https\://\<customDomain>/rp/callback/openid\_connect                       |
-
-|   |                                                                                                                                                                                               |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The PingOne **(SP) Entity ID** for external SAML IdPs `https://auth.pingone.<region>/<uuid>` is generated by PingOne and doesn't have a custom domain equivalent. Leave this value unchanged. |
-
-You can view the custom domain and standard URL versions of these endpoints on the **Overview** tab for the application. Learn more in [Viewing application details](../applications/p1_viewapplications.html).
-
-## API and CORS guidance
-
-Not all PingOne API host names support custom domains. You can find a complete list of host names that support them in [Custom Domains](https://developer.pingidentity.com/pingone-api/platform/custom-domains.html) in the PingOne API documentation.
-
-**CORS for single-page applications (SPAs)**: If you're integrating PingOne Auth APIs with your own hosted single-page applications, cross-origin resource sharing (CORS) is typically handled automatically through the **Allowed Origins** configured in your PingOne application settings. PingOne DaVinci doesn't have a separate CORS configuration. It uses the allow lists defined in PingOne applications.
-
-* **New integrations**: When you add new applications or IdPs after configuring a custom domain, use the custom domain URLs. This avoids the need for a migration later.
-
-## Transitioning existing integrations
-
-When you add a custom domain to an environment that already has configured applications or IdPs, you don't need to update these integrations to use the custom domain URLs immediately. The standard PingOne URLs remain valid.
-
-|   |                                                                                                                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If your custom domain routes through Cloudflare (either because it was migrated or created after Cloudflare was implemented), use custom domain URLs to take advantage of additional security features, such as inbound traffic policies. Learn more in [Migrating a custom domain to Cloudflare](p1_migrate_custom_domain_to_cloudflare.html). |
-
-|   |                                                                                                                                                                                                                                                                                                                                         |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Changing the **Issuer**, **Issuer ID**, **IssuerUri**, or **ACS URLs** for an existing integration is a breaking change. You must coordinate with your service provider or IdP partners to update their metadata and trust settings before making the switch. Both sides must update at the same time to avoid authentication failures. |
-
----
-
----
-title: Managing a Syniverse account in PingOne
-description: Use the information in this section to manage your Syniverse account.
-component: pingone
-page_id: pingone:settings:p1_manage_syniverse_account
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_manage_syniverse_account.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 9, 2023
-section_ids:
-  about-this-task: About this task
   steps: Steps
+  choose-from: Choose from:
 ---
 
-# Managing a Syniverse account in PingOne
+# Configuring administrator security
 
-Use the information in this section to manage your Syniverse account.
+Use the **Administrator Security** page to view or change the authentication settings for the PingOne admin console.
 
-## About this task
+You can use PingOne, an external identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)*, or a combination of an external IdP and PingOne to provide secure access to the admin console.
 
-Managing an account includes:
+|   |                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This topic only applies to environments that don't include PingID. If your environment includes PingID, go to [Configuring administrator security - PingID](p1_configure_administrator_security_pingid.html). |
 
-* Changing active originating numbers and fallback setting (as in [Configuring a Syniverse account for PingOne](p1_configure_syniverse_account.html))
+Ping Identity requires multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* for all PingOne administrators.
 
-* Changing to another account
+|   |                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Administrators must sign on again after 30 minutes of inactivity in the admin console. MFA is required if the last sign-on is older than 12 hours. These settings aren't configurable. |
 
-* Deleting the custom account
+You must have the Organization Admin role, Environment Admin role, or a custom role with equivalent permissions to configure **Administrator Security**.
 
 ## Steps
 
-1. Go to **Settings > Senders**.
+1. In the PingOne admin console, go to **Settings > Administrator Security**.
 
-   You'll see a list of Senders.
+   ![Screen capture of the Administrator Security page showing PingOne as the authentication source.](_images/vnq1720529762503.png)
 
-2. Click the relevant Syniverse account.
+2. Click the **Pencil** icon to change the security settings.
 
-   The custom Syniverse account configuration displays.
+   ![Screen shot of the Administrator Security page in edit mode. External IdP & PingOne is shown as the selected authentication source, and the PingOne DaVinci IdP is selected under Identity Provider.](_images/spq1720529879991.png)
 
-3. Select at least one originating telephone number to use.
+3. For **Authentication Source**, select one of the following.
 
-4. You can change the **Fallback to Default Account** settings.
+   ### Choose from:
 
-5. To switch to a different account, click **Change Account**. You'll be offered the configuration window for a new account. Proceed as in [Configuring a Syniverse account for PingOne](p1_configure_syniverse_account.html).
+   * **PingOne** (default): PingOne is used as the authentication source. A system-delivered authentication policy requiring MFA is enabled. You can't use a different authentication policy, but you can select which supported methods to use for MFA. Supported MFA methods include email, authenticator app (TOTP), and FIDO2. The first time an administrator signs on to the admin console, they're prompted to configure one of the methods you enable.
 
-6. To delete the active custom account, click the **Custom Provider** radio button.
+     |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | If you haven't updated the MFA policies for your environment to use FIDO2 instead of FIDO, you won't see the FIDO2 option on **Administrator Settings**. Learn more in [Updating an existing MFA policy to use FIDO2](../strong_authentication_mfa/p1_updating_an_mfa_policy_to_fido2.html).FIDO isn't supported for new device registration during just-in-time (JIT) registration of administrators. If existing administrators have a registered FIDO device for MFA, that method is valid as long as your MFA policy is not updated to FIDO2. |
 
-7. To save your settings, click **Save**.
+   * **External IdP**: This option is enabled only if you have configured at least one external IdP in your environment. The selected IdP is used as the authentication source for the admin console. If you select this option, ensure that your external IdP is configured to follow best practice security recommendations.
 
----
+     You should also test the connection to ensure that it's configured correctly. Administrators will be unable to sign on if this connection is configured incorrectly.
 
----
-title: Managing a Twilio account in PingOne
-description: Use the information in this section to manage your Twilio account.
-component: pingone
-page_id: pingone:settings:p1_manage_twilio_account
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_manage_twilio_account.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 9, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
+     |   |                                                                                                                                                                                                                                        |
+     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | You can't make changes to the IdP configuration from this page. Go to **Integrations > External IdPs** if you need to edit the connection. Learn more in [Editing an identity provider](../integrations/p1_editidentityprovider.html). |
 
-# Managing a Twilio account in PingOne
+   * **PingOne & External IdP**: This option is enabled only if you've configured at least one external IdP in your environment. The selected IdP is used as the initial authentication source for the admin console. After the user authenticates through the IdP, PingOne sends a secondary authentication request unless you select **Limit MFA to specific populations** and require secondary authentication only for specific populations.
 
-Use the information in this section to manage your Twilio account.
+     Test the connection to the IdP to ensure that it's configured correctly. If the connection to the IdP fails, the administrator can sign on to PingOne directly, as long as they have valid credentials in PingOne.
 
-## About this task
+   |   |                                                                                                                                                                                                                                                               |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | When configuring an external IdP for administrator single sign-on (SSO), always use the standard pingone.com domains. Using a custom domain for administrator SSO will cause authentication to fail because the admin console doesn't support custom domains. |
 
-Managing a Twilio account includes:
+4. Configure the applicable settings:
 
-* Changing active organization numbers and fallback setting (as in [Configuring a Twilio account for PingOne](p1_configure_twilio_account.html))
+   | Setting                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Allowed Authentication Methods**    | **PingOne** and **PingOne & External IdP** only.Select at least one MFA method for verification.- **Authenticator App (TOTP)**
 
-* Changing to another account
+   - **FIDO2**
 
-* Deleting the account
+   - **Email**
 
-## Steps
+     &#xA;&#xA;The Administrators environment is limited to 100 email notifications per day. If you have a large number of administrators and are concerned about hitting this limit, consider using either the Authenticator App (TOTP) or FIDO2 option for notifications. You can also set one of these options as a secondary method in the event that you reach the email notification limit.&#xA;&#xA;The daily notification counters reset every night at midnight UTC.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   | **Account Recovery**                  | **PingOne** and **PingOne & External IdP** only.If selected, PingOne administrators who forget their password can recover their accounts with a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)* sent to the email address configured in the PingOne user directory.&#xA;&#xA;This setting applies only to the PingOne account and not to the external IdP. Account recovery for the external IdP is managed by the provider.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+   | **Identity Provider**                 | **External IdP** and **PingOne & External IdP** only.Select the IdP to use for authentication.This IdP will be labeled with an **Administrator IDP** badge in **Integrations > External IdPs**. The IdP can't be disabled or deleted while assigned in **Administrator Security**.&#xA;&#xA;If you change the selected IdP, the settings for the new IdP are used for authentication. You should always test the connection configuration when you change this setting to ensure that administrators are able to sign on to PingOne.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   | **Identifier First**                  | **PingOne & External IdP** only.If selected, you can identify users before you authenticate them.Click **Add Discovery Rule** to configure rules that will take different authentication actions based on who the user is. You can also edit existing rules.- **Username Contains**: Enter a domain name to be evaluated by this rule. The rule evaluates to true if the string contains any part of the provided value.
 
-1. Go to **Settings > Senders**.
+     &#xA;&#xA;For increased security, be specific and enter multiple canonical domains, such as @marketing.example.com and @payroll.example.com. To add fewer entries, you could just enter example.com, and the rule would pick up both @marketing.example.com and @payroll.example.com, but that configuration might match users at unintended hosts.
 
-   You'll see a list of Senders.
-
-2. Click the relevant Twilio account.
-
-   The custom Twilio account's configuration displays.
-
-3. Select at least one originating telephone number to use.
-
-4. You can change the **Fallback to Default Account** settings.
-
-5. To switch to a different Twilio account, click **Change Account**. You'll be offered the configuration window for a new account. Proceed as in [Configuring a Twilio account for PingOne](p1_configure_twilio_account.html).
-
-6. To delete the active custom account, click the **Custom Provider** radio button.
-
-7. To save your settings, click **Save** at the bottom of the window.
-
----
-
----
-title: Managing certificate and key pair expiration
-description: Learn how to manage certificate and key pair expiration in PingOne to ensure uninterrupted service and maintain security.
-component: pingone
-page_id: pingone:settings:p1_cert_keypair_expiration_and_alerts
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_cert_keypair_expiration_and_alerts.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 21, 2026
-keywords: ["certificate expiration", "key pair expiration", "certificate lifecycle management", "key pair lifecycle management"]
-section_ids:
-  steps: Steps
-  setting-up-expiration-alerts: Setting up expiration alerts
-  steps-2: Steps
----
-
-# Managing certificate and key pair expiration
-
-PingOne auto-generates new cryptographic keys every 90 days, exceeding best practices. To maintain uninterrupted service for your single sign-on (SSO) and encrypted applications, you must proactively manage the lifecycle of your certificates and key pairs. If these assets expire, authentication requests might fail, and secure connections will be dropped.
-
-## Steps
-
-If a certificate or key pair has already expired, or is nearing its expiration date, perform the following steps:
-
-1. In the PingOne admin console, go to **Settings > Certificates and Key Pairs**.
-
-2. Click the **Certificates** or **Key Pairs** tab to identify any items marked as expired.
-
-3. Create or import a new key pair:
-
-   * Create a key pair: If your organization allows self-signed keys, generate a new one directly in PingOne.
-
-   * Import a key pair: If you require a Trusted CA-signed certificate, import the new files provided by your authority.
-
-4. If the expired key pair was the default key pair for your environment, designate your new key as the default.
-
-5. Ensure any applications are updated with the new public certificate.
-
-## Setting up expiration alerts
-
-You can configure PingOne to automatically notify your team before a certificate or key pair expires.
-
-## Steps
-
-1. In the PingOne admin console, go to **Monitoring > Alerts**.
-
-2. Click the **[icon: plus, set=fa]**icon and configure the following:
-
-   * **Name**: A unique name for the alert.
-
-   * **Email Addresses**: The addresses to which the alert will be sent. You can specify individual email addresses or mailing lists.
-
-3. **Alert Types**: Select the event types that will trigger the alert:
-
-   | Option                   | Description                                                  |
-   | ------------------------ | ------------------------------------------------------------ |
-   | **Certificate Expiring** | Provides an alert when a certificate will expire in 60 days. |
-   | **Certificate Expired**  | Provides an alert when a certificate expires.                |
-   | **KeyPair Expiring**     | Provides an alert when a certificate will expire in 60 days. |
-   | **KeyPair Expired**      | Provides an alert when a key pair expires.                   |
-
-4. Click **Save**.
-
----
-
----
-title: Managing opt-ins for early access features in PingOne
-description: Some PingOne features are available early so that you can try them in your own environments and provide feedback before general availability. Opting in to a feature early lets you use the capability in real-world scenarios and test how it works with your specific environment configuration. You have full control over the features you enable and the environments in which you enable them, and you can remove features you opt in to from the environment at any time during the early access period.
-component: pingone
-page_id: pingone:settings:p1_managing_opt_ins_for_ea_features
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_managing_opt_ins_for_ea_features.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  before-you-begin: Before you begin
-  steps: Steps
-  result: Result
-  result-2: Result
-  learn-more: Learn more
----
-
-# Managing opt-ins for early access features in PingOne
-
-Some PingOne features are available early so that you can try them in your own environments and provide feedback before general availability. Opting in to a feature early lets you use the capability in real-world scenarios and test how it works with your specific environment configuration. You have full control over the features you enable and the environments in which you enable them, and you can remove features you opt in to from the environment at any time during the early access period.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Not all features are enabled for early access. Additionally, early access features can be enabled only at the environment level. You can't enable an early access feature for the entire organization.Early access features related to services that aren't in the environment or that aren't allowable by the license assigned to the environment aren't available for opt-in. If you change the environment type or the license assigned to the environment, some early access features might be removed from the environment, and others might be available. You must perform a hard refresh in the browser to see the list of early access features available after making these changes. |
-
-## Before you begin
-
-You must have one of the following administrator roles to manage early access features for an environment:
-
-* Organization Admin
-
-* Environment Admin
-
-* A custom administrator role with equivalent permissions
-
-## Steps
-
-1. In the PingOne admin console, go to **Settings > Environment Properties**.
-
-2. Scroll to the **Early Access Participation** section and click **Manage Opt-Ins**.
-
-   ![A screen shot of the Early Access Participation section of the Environment Properties page.](_images/p1-env-props-ea-opt-in-section.png)
-
-   ### Result
-
-   A list of early access features that are available for the environment opens.
-
-3. Select the checkboxes for features you want to enable, or clear the checkboxes for features you want to remove.
-
-   ![A screen capture of the Early Access Participation Opt-ins page with a feature selected.](_images/p1-env-settings-manage-opt-ins.png)
-
-4. Click **Save**, and then click **Refresh** on the **Opt-Ins Updated** modal to see the updates in the admin console.
-
-## Result
-
-The early access features you enabled are listed in the **Early Access Participation** section of the **Environment Properties** page and are now ready for use. If you removed a feature, it's no longer displayed in this list.
-
-During the early access period, click **Feedback** to let Ping Identity know if the feature meets your expectations and use case requirements or what changes you might like to see. This early feedback helps Ping understand customer context and consider feature enhancements or new features for future development.
-
-## Learn more
-
-Find draft documentation for early access features in the [Early Access](../early-access-features/p1_early_access_features.html) section of the PingOne documentation.
-
----
-
----
-title: Migrating a custom domain to Cloudflare
-description: If you have an existing custom domain in PingOne that routes to Amazon CloudFront, you should migrate it to use Cloudflare.
-component: pingone
-page_id: pingone:settings:p1_migrate_custom_domain_to_cloudflare
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_migrate_custom_domain_to_cloudflare.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 12, 2025
-section_ids:
-  preparing-for-migration: Preparing for migration
-  before-you-begin: Before you begin
-  steps: Steps
-  result: Result
-  p1-test-locally: Testing the migration locally before applying DNS configuration changes
-  steps-2: Steps
-  next-steps: Next steps
-  completing-the-migration: Completing the migration
-  before-you-begin-2: Before you begin
-  steps-3: Steps
-  result-2: Result
-  p1-enable-mtls-custom-domain: Enabling mTLS for the custom domain (optional)
-  steps-4: Steps
-  result-3: Result
-  disabling-mtls-for-the-custom-domain: Disabling mTLS for the custom domain
-  testing-the-custom-domain: Testing the custom domain
-  steps-5: Steps
----
-
-# Migrating a custom domain to Cloudflare
-
-As part of our continued efforts to support best practice security measures in PingOne, we'll be using Cloudflare instead of Amazon CloudFront as our custom domain ingress infrastructure.
-
-Custom domains configured after March 17, 2025 are already using Cloudflare, and no action is required.
-
-If you configured your custom domain before March 17, 2025, your domain is routing to CloudFront and you should consider migrating your domain to use Cloudflare.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you currently use a reverse proxy or Web Application Firewall (WAF) with a CloudFront custom domain that you plan to migrate, Cloudflare DNS must not be the authoritative nameserver for your custom domain or the provider of the reverse proxy or WAF. Before migrating your custom domain to Cloudflare, consult with your network infrastructure team to discuss these limitations. Note that Cloudflare DNS could be in use directly or through an intermediate supplier.These limitations apply to all custom domains created since March 17, 2025, as well as to any CloudFront custom domains that you are considering for migration to Cloudflare. |
-
-Any custom domains that aren't migrated by late 2026 will be migrated automatically by Ping Identity. Migrating now gives you more control over the timing of the migration and allows you to take advantage of additional security features developed only for Cloudflare domains as soon as they are available.
-
-|   |                                                                                                                                                                                      |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Create a new custom domain in a test environment and ensure that everything works properly for your use cases before you migrate any custom domains in your Production environments. |
-
-The easiest way to migrate your custom domain is to delete your existing domain and create it again. When you add the domain again, it will automatically start routing to Cloudflare. If your custom domain isn't receiving live traffic yet, or if your applications aren't yet configured to use the custom domain, it's safe to delete it and create it again. Learn more in [Deleting a custom domain or trusted email domain](p1_remove_custom_domain.html) and [Setting up a custom domain](p1_set_up_custom_domain.html).
-
-If deleting your existing custom domain might cause an outage, follow the steps in this topic.
-
-## Preparing for migration
-
-To prepare your existing domain for migration, you must renew your TLS/SSL certificate or upload your existing certificate again. If your certificate is expired, you'll need to generate and upload a new one. Messages and labels displayed on the **Custom Domain and Email Trust** page will help you understand where you are in the process.
-
-The following diagram illustrates the different stages of the migration:
-
-![A diagram with the various status labels and the order in which they progress during a custom domain migration.](_images/p1-migrate-custom-domain-diagram.png)
-
-|    |                                                                                                                                                                                                                                                                                                |
-| -- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1. | Your custom domain starts in **Migration Blocked** status and is routing to CloudFront.                                                                                                                                                                                                        |
-| 2. | After you upload your certificate, the domain moves to **Setup in Progress** status. The domain continues to route to CloudFront.2.1.&#xA;&#xA;If there is an issue after uploading your certificate, the domain moves to Review Required status. The domain continues to route to CloudFront. |
-| 3. | When setup completes, the domain moves to **Migration Ready** status and continues to route to CloudFront.                                                                                                                                                                                     |
-| 4. | After you modify your DNS configuration and the changes propagate to the DNS, the domain moves to **Cloudflare Active** status. The migration is complete.                                                                                                                                     |
-
-### Before you begin
-
-Before you begin this process, ensure that:
-
-* You have access to your DNS manager.
-
-* You have a valid TLS/SSL certificate.
-
-* The custom domain is labeled **CloudFront Active**. This label indicates that your custom domain is currently routing to Amazon CloudFront and should be migrated to Cloudflare.
-
-* Any inbound traffic policies are either disabled or deleted. Learn more in [Adding or editing inbound traffic policies for custom domains](p1_configure_inbound_traffic_policies.html).
-
-  If a **Certificate Expired** label is displayed, you must renew your TLS/SSL certificate to continue.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you're using an LDAP gateway with Kerberos, you must add a Cloudflare SPN applicable to the region in which your organization resides. If your custom domain was created between March 17 and August 11, 2025, you must add two SPN references. Custom domains created during that time period have unique references for each custom domain, such as `<uuid>.ping-ccd.com`. Learn more in [Creating SPNs](../integrations/p1_creating_spns.html) and [SPN reference](../integrations/p1_spn_reference.html).If you don't add the necessary SPN references, a Kerberos outage can occur. |
-
-### Steps
-
-1. In the PingOne admin console, go to **Settings > Domains** and go to the applicable step or section based on the labels displayed on the custom domain entry:
-
-   * **Migration Blocked** and **CloudFront Active**: Continue to [step 2](#p1-step-2) in this section.
-
-   * **Certificate Expired**: Continue to [step 2](#p1-step-2) in this section.
-
-   * **Migration Ready** and **CloudFront Active**: Go to [Testing the migration locally before applying DNS configuration changes](#p1-test-locally).
-
-   * **Review Required** and **CloudFront Active**: Go to [Review Required](#p1-review-required).
-
-2. []()Click the custom domain entry to open the details panel.
-
-3. In the **TLS/SSL Certificate** section, click **Renew TLS/SSL certificate**.
-
-   |   |                                                                                                                                                                                                                                                                                                           |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If your existing certificate is still valid, you can upload it again to prepare for the migration.If you don't have a TLS/SSL certificate or it has expired, generate a new certificate outside of PingOne. Learn more in [Generating a CSR for a custom domain](p1_generate_csr_for_custom_domain.html). |
-
-   Ensure that your certificate meets the following requirements:
-
-   * A minimum encryption of RSA-2048 or ECDSA-256 is used.
-
-   * The certificate isn't self-signed.
-
-   * The certificate chain leads to a globally trusted CA. If your certificate was issued by an intermediate CA, include the full intermediate certificate chain. Omitting it can cause validation errors for public clients, including PingOne services.
-
-   * The certificate is valid.
-
-   * If using a wildcard and Subject Alternative Name (SAN) certificate, the certificate matches the domain name.
-
-4. In the **Renew TLS/SSL Certificate** modal, enter the following information and then click **Save**:
-
-   * **Private Key**: A PEM-encoded unencrypted private key that matches the certificate's public key.
-
-   * **Certificate**: A PEM-encoded certificate to import.
-
-   * **Intermediate Certificates**: A PEM-encoded certificate chain that leads to a globally trusted CA.
-
-|   |                                           |
-| - | ----------------------------------------- |
-|   | Don't include the end-entity certificate. |
-
-## Result
-
-A **Valid until** date is listed in the **TLS/SSL Certificate** section of the custom domain details panel, and a **TXT Record** entry is displayed in the **Cloudflare** section under the CNAME fields. One of the following status labels is displayed:
-
-* Setup in Progress
-
-  The steps to prepare your custom domain for migration have been completed, but the domain setup is updating in PingOne. Check back in 10 minutes.
-
-* []()Review Required
-
-  The preparation for migration can't be completed. If your custom domain isn't publicly accessible, possibly because it's behind a VPN or using reverse proxy, you need to complete domain control validation (DCV) for setup to complete. Copy the values from the **TXT Name** and **TXT Value** fields in the **Cloudflare** section of the details panel for the custom domain. Add these values to your DNS configuration.
-
-  |   |                                                                                                                                                                                                                                                            |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | If **Review Required** is still displayed after 10 minutes, try renewing your certificates again. If **Review Required** is still displayed after another 10 minutes, open a Support case. Do not continue with the migration until the issue is resolved. |
-
-After 10 minutes or so, the **Migration Ready** label should be displayed indicating that you can proceed with the migration. The **CloudFront Active** label will also be displayed. Your custom domain is still active and routing traffic to CloudFront.
-
-![A screen capture of the custom domain entry with the Migration Ready and CloudFront Routing labels.](_images/p1-custom-domain-mig-ready.png)
-
-A **Cloudflare** section is displayed on the details panel after the **CloudFront** section. Note that the **CNAME Name** in both sections is the same. The **CNAME Name** for your domain doesn't change for the migration. Only the **CNAME Value** changes.
-
-![A screen capture of the custom domain details panel showing the CloudFront and Cloudflare CNAME records and the Migration Ready and CloudFront Active labels.](_images/p1-custom-domain-mig-ready-details.png)
-
-## Testing the migration locally before applying DNS configuration changes
-
-When you migrate a custom domain by changing the CNAME value in your DNS configuration, you will affect live production environments. To test the changes locally first, you can add a line to your `hosts` file.
-
-Local testing helps you discover unexpected issues that the Cloudflare configuration might cause so that you can resolve them before moving live traffic.
-
-### Steps
-
-To test your changes locally, complete the following steps:
-
-1. In a terminal or command window, run `nslookup` and make sure that traffic is routing to CloudFront by verifying that the response contains `*.cloudfront.net`.
-
-2. In the PingOne admin console, go to **Settings > Domains** and click the custom domain entry to open the details panel.
-
-3. Copy the **CNAME Value** from the **Cloudflare** section.
-
-4. In a terminal window, run `nslookup <cloudflareCNAMEValue>` where `<cloudflareCNAMEValue>` is the value you copied in the previous step:
-
-   The response should look similar to the following:
-
-   Cloudflare routing example
-
-   ```
-   Server:	        127.0.0.1
-   Address:	127.0.0.1#53
-
-   Non-authoritative answer:
-   <cloudflareCNAMEValue>	canonical name = cloudflare.ping-ccd.com.
-   Name:	cloudflare.ping-ccd.com
-   Address: <CustomDomainIPAddress>
-   ```
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If your custom domain was created between March 17, 2025 and August 11, 2025, the name in the response will look something like `<UUID>.ping.ccd.com`.This example assumes the organization resides in the North America (US) region. If your organization is in a different region, the end of the canonical name differs depending on that region:- North America (Canada): `ping-ccd.ca`
-
-   - Europe: `ping-ccd.eu`
-
-   - Australia: `ping-ccd.com.au`
-
-   - Asia-Pacific: `ping-ccd.asia`
-
-   - Singapore: `ping-ccd.sg` |
-
-5. Copy the IP address from the response.
-
-6. Open the applicable `hosts` file for your operating system:
-
-   * For MacOS, open `/etc/hosts`.
-
-   * For Windows, open `C:\Windows\System32\drivers\etc\hosts`.
-
-7. []()On a new line in the `hosts` file, add an entry similar to the following:
-
-   ```
-   <IPAddressFromNslookup>    <cloudflareCNAMEValue>
-   ```
-
-   Local traffic to the custom domain should now be routing to Cloudflare.
-
-8. To verify that traffic is routing to Cloudflare, check the `ping-endpoint.json` file for `"server": "v2"`:
-
-   * From a terminal window, run the following command:
-
-     ```
-     > curl -H "Cache-Control: no-cache, no-store, must-revalidate" \
-         -H "Pragma: no-cache" \
-         -H "Expires: 0" \
-         "https://<customDomainHostname>/.well-known/ping-endpoints.json"
-     ```
-
-     If traffic is routing to Cloudflare, the response will be similar to the following example, in which the `"server": "v2"` JSON property is included at the end of the response:
-
-     ```json
-     {
-       "uploadUrl":
-       "https://uploads.pingone.com/environments/418ffffe-44aa-4072-8535-549a
-       9fffbd0f",
-       "apiUrl":
-       "https://api.pingone.com/v1/environments/418ffffe-44aa-4072-8535-549a9
-       fffbd0f",
-       "authUrl": "https://<customDomainHostname>",
-       "assetsUrl": "https://assets.pingone.com",
-       "server": "v2"
-     }
-     ```
-
-     If traffic is routing to CloudFront, the response will be similar to the following example, which doesn't include the `"server": "v2"` JSON property:
-
-     ```json
-     {
-       "uploadUrl":"https://uploads.pingone.com/environments/418ffffe-44aa-4072-8535-
-       549a9fffbd0f",
-       "apiUrl":"https://api.pingone.com/v1/environments/418ffffe-44aa-4072-8535-549a9fffbd0f",
-       "authUrl":"https://<customDomainHostname>",
-       "assetsUrl":"https://assets.pingone.com"
-     }
-     ```
-
-### Next steps
-
-After you've verified that traffic is routing to Cloudflare using this local setup, test your single sign-on (SSO) use cases using the custom domain. If everything works as expected, remove the line from your `hosts` file that you added in [step 7](#p1-add-entry-hosts) and then complete the migration by updating your DNS configuration.
-
-## Completing the migration
-
-Complete the following steps to update your DNS configuration and complete the migration to Cloudflare.
-
-|   |                                                                |
-| - | -------------------------------------------------------------- |
-|   | The specifics of DNS configuration depend on your DNS manager. |
-
-### Before you begin
-
-If you tested your migration locally, remove the `<IPAddressFromNslookup> <cloudflareCNAMEValue>` line from your `hosts` file before continuing.
-
-### Steps
-
-1. Lower the time-to-live (TTL) setting for the CNAME record in your DNS configuration:
-
-   1. In the PingOne admin console, go to **Settings > Domains**.
-
-   2. Click the custom domain entry to open the details panel.
-
-   3. Locate the CNAME entry in your DNS configuration that matches the **CNAME Name** field of the CNAME entries in the custom domain details panel in PingOne.
-
-   4. Set the TTL to 60 seconds.
-
-      Setting the TTL to 60 seconds ensures that traffic quickly switches from CloudFront to Cloudflare after you update the CNAME record value and prevents a situation where some users are directed to CloudFront and some to Cloudflare. For example, if the TTL is set to 86400 seconds (24 hours), after you change the CNAME record value, DNS servers will continue to cache the old CNAME record value for up to 24 hours.
-
-2. Wait for the period of time that the TTL was set to before you lowered it. For example, if the TTL was originally set to 86400, wait 86400 seconds (24 hours) before continuing.
-
-3. Update the CNAME `value` entry in your DNS configuration:
-
-   1. In the PingOne admin console, go to **Settings > Domains**.
-
-   2. Click the custom domain entry to open the details panel.
-
-   3. In the **Cloudflare** section, copy the entry in the **CNAME Value** field.
-
-   4. Locate the CNAME entry in your DNS configuration that matches the **CNAME Name** field of the CNAME entries in the custom domain details panel in PingOne.
-
-      Replace the CNAME `value` in the DNS configuration with the value you copied in the previous step.
-
-      |   |                                                                                                                                                              |
-      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-      |   | Some DNS providers don't support a trailing period in the CNAME. If you're using one of these DNS providers, omit the trailing period from the CNAME record. |
-
-      |   |                                                                                                                                                      |
-      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | Do not change the CNAME `name` entry in the DNS configuration because that will cause an outage and stop traffic routing through your custom domain. |
-
-### Result
-
-After updating the DNS value, it can take up to an hour for the **Custom Domain and Email Trust** page in PingOne to reflect the change and show the **Cloudflare Active** label. This label indicates that PingOne is detecting traffic to Cloudflare, and no further action is required.
-
-![A screen capture of the custom domain details panel showing the Cloudflare Active label](_images/p1-custom-domain-cloudflare-active-details.png)
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The **Cloudflare Active** and **CloudFront Active** labels are applied based on the response from the custom domain when the **Domains** page is loaded. The response can be affected by DNS and browser caching, especially during an active migration.You can find information about performing a final check to ensure that your custom domain is routing to Cloudflare in [Verifying that custom domain traffic is routing to Cloudflare](p1_verifying_custom_domain_traffic_to_cloudflare.html). |
-
-## Enabling mTLS for the custom domain (optional)
-
-To configure inbound traffic policies to match requests using a certificate's SHA-256 thumbprint, you must enable mTLS for the custom domain.
-
-|   |                                                                          |
-| - | ------------------------------------------------------------------------ |
-|   | Only custom domains routing to Cloudflare can be configured to use mTLS. |
-
-To enable mTLS on the custom domain, do the following.
-
-### Steps
-
-1. In the PingOne admin console, go to **Settings > Domains**.
-
-2. Click the custom domain entry to open the details panel.
-
-3. In the **Mutual TLS (mTLS) Support** section, click **Enable Support**.
-
-4. On the confirmation modal, click **Enable**.
-
-|   |                                                                                                                                                                                                                                      |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Changes might take up to 10 minutes to take effect.mTLS isn't compatible with some clients, including [Microsoft Entra ID hybrid join](../use_cases/p1_microsoft_entra_hybrid_join.html). Verify compatibility before enabling mTLS. |
-
-### Result
-
-You can now configure inbound traffic policies to use mTLS thumbprint as a match criteria for requests. Learn more in [Adding or editing inbound traffic policies for custom domains](p1_configure_inbound_traffic_policies.html).
-
-### Disabling mTLS for the custom domain
-
-To disable mTLS on the custom domain, do the following.
-
-1. In the PingOne admin console, go to **Settings > Domains**.
-
-2. Click the custom domain entry to open the details panel.
-
-3. In the **Mutual TLS (mTLS) Support** section, click **Disable Support**.
-
-4. On the confirmation modal, click **Disable**.
-
-|   |                                                                                                                                                                                                         |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Changes might take up to 10 minutes to take effect.Disabling mTLS can interrupt traffic to your custom domain if you've configured inbound traffic policies to use mTLS thumbprint as a match criteria. |
-
-## Testing the custom domain
-
-Test your custom domain to ensure that it resolves to the correct location.
-
-### Steps
-
-1. Open a web browser and enter the address of your custom domain, such as `https://auth.example.com/myaccount`.
-
-2. Verify that you're presented with the sign-on screen for your application or other applicable resource.
-
-If the domain isn't working as you expected after the migration, you can revert it by replacing the CNAME value in your DNS configuration with the **CNAME Value** from the **CloudFront** section of the custom domain details panel in PingOne.
-
----
-
----
-title: Promoting a Sandbox environment to Production
-description: Use the Environment Properties page to promote a Sandbox environment to Production.
-component: pingone
-page_id: pingone:settings:p1_promote_sandbox_environment_to_prod
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_promote_sandbox_environment_to_prod.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 3, 2025
-page_aliases: ["p1_demoteenvironment.adoc"]
-section_ids:
-  before-you-begin: Before you begin
-  steps: Steps
-  result: Result
----
-
-# Promoting a Sandbox environment to Production
-
-Use the **Environment Properties** page to promote a Sandbox environment to Production.
-
-|   |                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Promoting a Sandbox environment to Production is a permanent change and can't be reversed. You cannot demote a Production environment to Sandbox. |
-
-## Before you begin
-
-To promote an environment, you must have the Environment Admin role or a custom role with equivalent permissions.
-
-|   |                                                                                    |
-| - | ---------------------------------------------------------------------------------- |
-|   | If you have a trial license, you can't promote Sandbox environments to Production. |
-
-Learn more about environment types in [Sandbox and Production environments](../introduction_to_pingone/p1_introduction.html#p1-env-types).
-
-## Steps
-
-1. In the PingOne admin console sidebar, click the Ping Identity logo to open the **Environments** page and browse or search for the applicable environment.
-
-2. Click the environment to view the environment properties and verify that the environment is a Sandbox environment.
-
-   ![A screenshot of the environment details view for the BX Books environment with the Type outlined to show it is a Sandbox environment](_images/p1-env-props-sandbox-env.png)
-
-3. Click the **Pencil** icon.
-
-4. At the bottom of the page, under **Type**, select the **Promote to Production** checkbox.
-
-   ![Screenshot of an environment in edit mode showing the Promote to Production checkbox selected](_images/p1-env-promote-to-prod.png)
+   - **Identity Provider**: Select the IdP to use for authentication if the rule is matched. Discovery rules are evaluated in the order they appear in the list.If the user name matches a configured rule, the system sends the user to a particular external IdP. If the user name doesn't match a configured rule, the user authenticates through PingOne. |
+   | **Limit MFA to specific populations** | **PingOne & External IdP** only.Select this checkbox to require a secondary authentication request from PingOne only for the populations you select in the **Populations Requiring MFA** list. Users in populations that aren't selected will authenticate only once, through the external IdP.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 5. Click **Save**.
 
-6. Click **Promote** on the **Promote to Production** modal to confirm the change.
-
-   |   |                                 |
-   | - | ------------------------------- |
-   |   | This action cannot be reversed. |
-
-## Result
-
-The environment is now a Production environment.
-
 ---
 
 ---
-title: Rate Limits and Allowed IPs
-description: Use the Rate Limits and Allowed IPs page in PingOne to allow traffic from specific IP addresses to exceed per IP per environment limits.
+title: Configuring administrator security - PingID
+description: Use the Administrator Security page to view or change the authentication settings for the PingOne admin console.
 component: pingone
-page_id: pingone:settings:p1_rate_limits
-canonical_url: https://docs.pingidentity.com/pingone/settings/p1_rate_limits.html
+page_id: pingone:settings:p1_configure_administrator_security_pingid
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_configure_administrator_security_pingid.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 4, 2025
+revdate: June 9, 2025
 section_ids:
-  configure-rate-limits: Configuring rate limits and allowed IPs
-  before-you-begin: Before you begin
   steps: Steps
-  result: Result
+  choose-from: Choose from:
 ---
 
-# Rate Limits and Allowed IPs
+# Configuring administrator security - PingID
 
-To ensure that every PingOne customer has the share of resources they need at any given time, PingOne sets rate limits based on your purchased PingOne products, as well as the product APIs licensed in your product license. Rate groups, which are groups of endpoints related to a particular product or service, each have their own rate limit entitlements.
+Use the **Administrator Security** page to view or change the authentication settings for the PingOne admin console.
 
-|   |                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Use the **API Usage Dashboard** to monitor your peak usage against the established entitlements so that you can plan effectively and request a Maximum Throughput Assurance package if necessary. Learn more in [API Usage Dashboard](p1_api_usage_dashboard.html). |
+You can use PingID, an external identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)*, or a combination of external IdP and PingID. Some configuration might need to be done in the PingID console.
 
-In addition to overall API usage limits based on your product license, there are environment-level limits per IP address for traffic that comes from a single IP address or server. An IP address is limited to 35% of the overall license rate by default. This limit prevents a single user, client, or device from consuming the full rate entitlement. If a significant portion of the API usage for your environment comes from a specific set of internal servers or a limited range of IP addresses, you can enter them on the **Rate Limits and Allowed IPs** page to allow traffic from those servers and addresses to exceed the **Per IP Per Environment** limits for the environment.
+|   |                                                                                                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This topic only applies to environments that include PingID. If your environment doesn't include PingID, go to [Configuring administrator security](p1_configure_administrator_security.html). |
 
-|   |                                                                                                                                                                       |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For Trial licenses, an IP address can use 100% of the overall license rate, and the **Server-Sourced Traffic** list doesn't apply, but the overall rate cap is lower. |
+Ping Identity requires multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* for all PingOne administrators.
 
-![A screen capture of the Rate Limits and Allowed IPs page in PingOne showing a sample IP address in the Allowed IP addresses or CIDR ranges field.](_images/p1-rate-limits-allowed-ips.png)
+You must have the Organization Admin role, Environment Admin role, or a custom role with equivalent permissions to configure **Administrator Security**.
 
-You must have the Environment Admin role or a custom role with equivalent permissions to configure these settings. Administrators who have the Configuration Admin role can view this page but cannot edit the settings.
+## Steps
 
-## Configuring rate limits and allowed IPs
+1. In the PingOne admin console, go to **Settings > Administrator Security**.
 
-Use the **Rate Limits and Allowed IPs** page in PingOne to allow traffic from specific IP addresses to exceed the Per IP Per Environment limits for the environment.
+   ![Screen capture of the Administrator Security page showing PingID as the authentication source.](_images/p1-admin-sec-page-pingid.png)
 
-|   |                                                                                                                                                                                                                                                                                                      |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Use this setting to allow traffic concentrated through your company systems before it comes into PingOne to bypass the per IP rate limits. It isn't intended to allow excess traffic from individual user IP addresses.This setting does not allow you to exceed the per license entitlement limits. |
+2. Click the **Pencil** icon to change the settings.
 
-### Before you begin
+   ![Screen shot of the Administrator Security page in edit mode. PingID is shown as the selected authentication source.](_images/p1-admin-sec-edit-pingid.png)
 
-You must have the Environment Admin role or a custom role with equivalent permissions to configure **Rate Limits and Allowed IPs**.
+3. For **Authentication Source**, select one of the following.
 
-### Steps
+   ### Choose from:
 
-1. In the PingOne admin console, go to **Settings > Rate Limits**.
+   * **PingID** (default): PingID is used as the authentication source. You configure the authentication policy and set the allowed MFA methods in the PingID console. Click **Configure Now** to open the PingID admin portal in a separate window and configure the authentication policy. Learn more in the [Authentication Policy](https://docs.pingidentity.com/pingid/pingid_service_management/pid_authentication_policy.html) section of the PingID documentation.
 
-   The **Maximum HTTP Requests from License \<licenseID>** table displays the per license and per IP per environment entitlement limits for each applicable rate group.
+     |   |                                                                                                                                                                                                                                                                                                                                                            |
+     | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | If the environment was created after January 7, 2025, or if your PingID tenant was migrated to PingOne after March 31, 2025, the default MFA policy is managed from **Authentication > MFA** in PingOne. Learn more in [Configuring an MFA policy for strong authentication](../strong_authentication_mfa/p1_creating_an_mfa_policy_for_strong_auth.html). |
 
-   |   |                                                                                        |
-   | - | -------------------------------------------------------------------------------------- |
-   |   | You can click **View API Usage Dashboard** to open the dashboard in a separate window. |
+   * **External IdP**: This option is enabled only if you have configured at least one external IdP in your environment. The selected IdP is used as the authentication source for the admin console. If you select this option, ensure that your external IdP is configured to follow best practice security recommendations.
 
-2. In the **Server-Sourced Traffic** section, enter the IP addresses or address ranges to exclude from the per IP per environment limits.
+     You should also test the connection to ensure that it's configured correctly. Administrators will be unable to sign on if this connection is configured incorrectly.
 
-   |   |                                                                                                                    |
-   | - | ------------------------------------------------------------------------------------------------------------------ |
-   |   | IPv4 addresses, IPv6 addresses, and CIDR ranges are accepted. Enter one IP address or CIDR address range per line. |
+     |   |                                                                                                                                                                                                                                        |
+     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | You can't make changes to the IdP configuration from this page. Go to **Integrations > External IdPs** if you need to edit the connection. Learn more in [Editing an identity provider](../integrations/p1_editidentityprovider.html). |
 
-3. (Optional) Click **+ Add** to add rows and enter more addresses as needed.
+   * **PingID & External IdP**: This option is enabled only if you have configured at least one external IdP in your environment. The selected IdP is used as the initial authentication source for the admin console. After the user authenticates through the IdP, PingID sends a secondary authentication request.
 
-4. Click **Save**.
+     Test the connection to the IdP to ensure that it's configured correctly. If the connection to the IdP fails, as long as the administrator has a recovery account in PingOne, the administrator can sign on to PingOne directly. PingID will then prompt them for secondary authentication.
 
-### Result
+   |   |                                                                                                                                                                                                                                                               |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | When configuring an external IdP for administrator single sign-on (SSO), always use the standard pingone.com domains. Using a custom domain for administrator SSO will cause authentication to fail because the admin console doesn't support custom domains. |
 
-The traffic from the IP addresses or ranges you entered is no longer limited at the per IP per environment level.
+4. Configure the applicable settings:
 
-To view the auditing information for when IP rate limits were exceeded, click **View rate limit alert history**. The IP rate limiting event types are selected by default. Learn more about configuring and running auditing reports in [Running an audit report](../monitoring/p1_running_audit_report.html).
+   | Setting               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Account Recovery**  | **PingID** and **PingID & External IdP** only.If selected, PingOne admins who forget their password can recover their accounts with a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)* sent to the email address configured in the PingOne user directory.&#xA;&#xA;This setting applies only to the PingID account and not to the external IdP. Account recovery for the external IdP is managed by the provider.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   | **Identity Provider** | **External IdP** and **PingID & External IdP** only.Select the IdP to use for authentication.This IdP will be labeled with an **Administrator IDP** badge in **Integrations > External IdPs**. The IdP can't be disabled or deleted while assigned in **Administrator Security**.&#xA;&#xA;If you change the selected IdP, the settings for the new IdP are used for authentication. You should always test the connection configuration when you change this setting to ensure that administrators are able to sign on to PingOne.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   | **Identifier First**  | **PingID & External IdP** only.If selected, you can identify users before you authenticate them.Click **Add Discovery Rule** to configure rules that will take different authentication actions based on who the user is. You can also edit existing rules.- **Username Contains**: Enter a domain name to be evaluated by this rule. The rule evaluates to true if the string contains any part of the provided value.
+
+     &#xA;&#xA;For increased security, be specific and enter multiple canonical domains, such as @marketing.example.com and @payroll.example.com. To add fewer entries, you could just enter example.com, and the rule would pick up both @marketing.example.com and @payroll.example.com, but that configuration might match users at unintended hosts.
+
+   - **Identity Provider**: Select the IdP to use for authentication if the rule is matched. Discovery rules are evaluated in the order they appear in the list.If the user name matches a configured rule, the system sends the user to a particular external IdP. If the user name doesn't match a configured rule, the user authenticates through PingID. |
+
+5. Click **Save**.
+
+---
+
+---
+title: Configuring an SMS/Voice sender account with PingOne
+description: If you have an existing Twilio or Syniverse account, you can configure PingOne to use it for SMS and voice notifications:
+component: pingone
+page_id: pingone:settings:p1_using_custom_sms_voice_sender_account
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_using_custom_sms_voice_sender_account.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 20, 2023
+---
+
+# Configuring an SMS/Voice sender account with PingOne
+
+If you have an existing Twilio or Syniverse account, you can configure PingOne to use it for SMS and voice notifications:
+
+* [Using a Twilio account with PingOne](p1_use_custom_twilio_account.html)
+
+* [Using Twilio Verify with PingOne](p1_using_twilio_verify_for_notifications.html)
+
+* [Using a Syniverse account with PingOne](p1_use_syniverse_account.html)
+
+* You can also view [Sender IDs per country](p1_senderid_per_country.html).
+
+If you have an account with a provider that is not one of the providers natively supported by PingOne (Twilio, Twilio Verify, and Syniverse) you can configure PingOne to use it for SMS and voice notifications:
+
+* [Using a custom provider account with PingOne](p1_use_a_custom_provider.html)
+
+---
+
+---
+title: Configuring trusted email addresses
+description: Ping Identity can send trusted emails on your organization's behalf, from your organization's trusted domain. This option requires that you first Set up a trusted email domain for your environment, and then configure associated trusted email addresses.
+component: pingone
+page_id: pingone:settings:p1_configure_trusted_email
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_configure_trusted_email.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 3, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configuring trusted email addresses
+
+Ping Identity can send trusted emails on your organization's behalf, from your organization's trusted domain. This option requires that you first [Set up a trusted email domain](p1_set_up_trusted_email_domain.html) for your environment, and then configure associated trusted email addresses.
+
+## About this task
+
+|   |                                                                                   |
+| - | --------------------------------------------------------------------------------- |
+|   | You can configure up to 10 trusted email addresses for each trusted email domain. |
+
+## Steps
+
+1. Go to **Settings > Senders**.
+
+2. In the Senders list, in the **Email** area, click **Ping Server**, and then click the **Pencil** icon.
+
+   ![A screen capture showing the Sender page with default options selected.](_images/trusted_email_sender_image.png)
+
+   |   |                                                                                                                                                                                                                                                                                                          |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The default **Ping Server** details are shown, until a trusted email domain and its associated addresses are configured, or alternatively, a **Custom Server** is configured for the organization. The **Ping Server** settings are configurable only when a trusted email domain is already configured. |
+
+   * **Domain**: The email domain name. Default: `pingidentity.com`.
+
+   * **From Name**: The name that appears as the sender's name in the email message. Default: `PingOne`.
+
+   * **From Address**: The email address that appears as the sender's email address in the email message. Default: `noreply@pingidentity.com`.
+
+   * **Reply-To Name**: The name that appears as the sender's reply-to name in the email message. Default: `PingOne`.
+
+   * **Reply-To Address**: The email address that appears as the sender's reply-to address in the email message. Default: `noreply@pingidentity.com`.
+
+3. Select your trusted email domain from the **Domain** dropdown.
+
+4. Enter the sender details:
+
+   1. **From Name**: Enter the name that should appear as the sender's name in the email message.
+
+   2. **From Address**: Select an email address from the dropdown, or click **[icon: plus, set=fa]New Email Address** to open the **New Email Addresses** screen and create a new address.
+
+      In the **New Email Addresses** screen:
+
+      1. Enter the local-part (username) of the trusted email address, and click **Done**. If the `_pingoneemail` text record was not added to your DNS, you'll have to verify the email address by clicking **Next** and carrying out the remaining steps.
+
+      2. When you click **Next**, a verification code is mailed to the trusted email address, and the **Email Verification** screen opens.
+
+      3. Enter the verification code in the **Verification Code** field.
+
+      4. Click **Done**. If verification failed, or if no verification code email was received, click **Resend verification email** to retry.
+
+5. Enter the reply-to details:
+
+   1. **Reply-To Name**: Enter the name that should appear as the reply-to name in the email message.
+
+   2. **Reply-To Address**: Select an email address from the dropdown, or click **[icon: plus, set=fa]New Email Address** to open the **New Email Addresses** screen and create a new address, as described for **From Address**.
+
+6. Click **Save** to save your custom changes, or **Discard Changes** to abandon them.
+
+---
+
+---
+title: Converting PEM certificates to a different format
+description: If needed, you can convert PEM certificates to a different format, such as PFX or PKCS#7.
+component: pingone
+page_id: pingone:settings:p1_convertcertificate
+canonical_url: https://docs.pingidentity.com/pingone/settings/p1_convertcertificate.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 9, 2023
+section_ids:
+  before-you-begin: Before you begin
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+---
+
+# Converting PEM certificates to a different format
+
+If needed, you can convert PEM certificates to a different format, such as PFX or PKCS#7.
+
+## Before you begin
+
+You must have:
+
+* The original private key that was used for the certificate
+
+* A PEM (`.pem`, `.crt`, `.cer`) file
+
+* OpenSSL
+
+## About this task
+
+Certificates are commonly issued as PFX files, with the extension `.pfx` or `.p12`. If you have a certificate in another format, you can convert it to PFX and import it to PingOne.
+
+The PKCS#7 or P7B format is stored in Base64 ASCII format and has a file extension of `.p7b` or `.p7c`. A P7B file contains certificates but not the private key.
+
+## Steps
+
+1. Open a terminal window.
+
+2. Run the command for the conversion you want to perform:
+
+   ### Choose from:
+
+   * PEM to PFX:
+
+     ```
+     openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile more.crt
+     ```
+
+     | Syntax                         | Description                                                                                           |
+     | ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+     | `openssl`                      | The command for executing OpenSSL.                                                                    |
+     | `pkcs12`                       | The file utility for PKCS#12 files in OpenSSL.                                                        |
+     | `-export -out certificate.pfx` | Exports and saves the PFX file as `certificate.pfx.`                                                  |
+     | `-inkey privateKey.key`        | Uses the private key file `privateKey.key` as the private key to combine with the certificate.        |
+     | `-in certificate.crt`          | Uses `certificate.crt` as the certificate to combine with the private key.                            |
+     | `-certfile more.crt`           | (Optional) Use this option if you have more than one certificate you want to include in the PFX file. |
+
+   * PEM to PKCS#7:
+
+     ```
+     openssl crl2pkcs7 -nocrl -certfile certificate.crt -out certificate.p7b -outform DER
+     ```
+
+     | Syntax                      | Description                                                                                                                                                                                                              |
+     | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+     | `openssl`                   | The command for executing OpenSSL.                                                                                                                                                                                       |
+     | `crl2pkcs7`                 | The file utility for PKCS#7 files in OpenSSL.                                                                                                                                                                            |
+     | `-nocrl`                    | Specifies to not include a certificate revocation list (CRL) in the output file and to not read a CRL from the input file.                                                                                               |
+     | `-certfile certificate.crt` | Specifies a filename containing one or more certificates in PEM format. All certificates in the file are added to the PKCS#7 structure. You can use this option more than once to read certificates from multiple files. |
+     | `-out certificate.p7b`      | Outputs the file as `certificate.p7b`.                                                                                                                                                                                   |
+     | `-outform DER`              | Specifies the PKCS#7 structure output format. The distinguished encoding rules (DER) format is a DER-encoded CRL structure.                                                                                              |

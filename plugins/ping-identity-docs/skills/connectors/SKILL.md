@@ -6,7 +6,7 @@ license: MIT
 
 # Connectors
 
-The Apple Login connector authenticates users with Sign in with Apple and retrieves Apple ID attributes for use in DaVinci flows.
+Configure the Accertify connector in PingOne DaVinci to send identity events to the Accertify fraud detection platform and receive risk scores.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ The Apple Login connector authenticates users with Sign in with Apple and retrie
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Relnotes: april, february, january | relnotes | https://docs.pingidentity.com/connectors/relnotes/*.md | references/snapshots/relnotes.md |
-| Type: connectors, case, core | type | https://docs.pingidentity.com/connectors/type/*.md | references/snapshots/type.md |
-| Accertify Connector.Md: accertify, connector | accertify_connector.md | https://docs.pingidentity.com/connectors/accertify_connector.md | references/snapshots/accertify-connector-md.md |
-| Adobe Experience Manager Connector.Md: adobe, connector, experience | adobe_experience_manager_connector.md | https://docs.pingidentity.com/connectors/adobe_experience_manager_connector.md | references/snapshots/adobe-experience-manager-connector-md.md |
+| Relnotes: davinci, notes, pingone | relnotes | https://docs.pingidentity.com/connectors/relnotes/*.md | references/snapshots/relnotes.md |
+| Type: connectors, pingone, davinci | type | https://docs.pingidentity.com/connectors/type/*.md | references/snapshots/type.md |
+| Accertify Connector.Md: accertify, connector, configure | accertify_connector.md | https://docs.pingidentity.com/connectors/accertify_connector.md | references/snapshots/accertify-connector-md.md |
+| Adobe Experience Manager Connector.Md: adobe, experience, connector | adobe_experience_manager_connector.md | https://docs.pingidentity.com/connectors/adobe_experience_manager_connector.md | references/snapshots/adobe-experience-manager-connector-md.md |
 | Apple Login Connector.Md: apple, connector, login | apple_login_connector.md | https://docs.pingidentity.com/connectors/apple_login_connector.md | references/snapshots/apple-login-connector-md.md |
 | Authentication Connector.Md: authentication, connector, cases | authentication_connector.md | https://docs.pingidentity.com/connectors/authentication_connector.md | references/snapshots/authentication-connector-md.md |
-| Authenticid Connector.Md: authenticid, connector | authenticid_connector.md | https://docs.pingidentity.com/connectors/authenticid_connector.md | references/snapshots/authenticid-connector-md.md |
+| Authenticid Connector.Md: authenticid, connector, capture | authenticid_connector.md | https://docs.pingidentity.com/connectors/authenticid_connector.md | references/snapshots/authenticid-connector-md.md |
 | Azure Ad User Management Connector.Md: azure, connector, management | azure_ad_user_management_connector.md | https://docs.pingidentity.com/connectors/azure_ad_user_management_connector.md | references/snapshots/azure-ad-user-management-connector-md.md |
 | Babelstreet Connector.Md: babel, connector, street | babelstreet_connector.md | https://docs.pingidentity.com/connectors/babelstreet_connector.md | references/snapshots/babelstreet-connector-md.md |
-| Castle Connector.Md: castle, connector | castle_connector.md | https://docs.pingidentity.com/connectors/castle_connector.md | references/snapshots/castle-connector-md.md |
-| Challenge Connector.Md: challenge, connector | challenge_connector.md | https://docs.pingidentity.com/connectors/challenge_connector.md | references/snapshots/challenge-connector-md.md |
-| Clear Connector.Md: clear, connector | clear_connector.md | https://docs.pingidentity.com/connectors/clear_connector.md | references/snapshots/clear-connector-md.md |
+| Beyondtrust Pra Connector.Md: access, beyondtrust, connector | beyondtrust_pra_connector.md | https://docs.pingidentity.com/connectors/beyondtrust_pra_connector.md | references/snapshots/beyondtrust-pra-connector-md.md |
+| Castle Connector.Md: castle, connector, risk | castle_connector.md | https://docs.pingidentity.com/connectors/castle_connector.md | references/snapshots/castle-connector-md.md |
+| Challenge Connector.Md: challenge, connector, based | challenge_connector.md | https://docs.pingidentity.com/connectors/challenge_connector.md | references/snapshots/challenge-connector-md.md |
 
 ## Composition
 

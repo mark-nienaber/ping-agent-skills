@@ -1,12 +1,12 @@
 ---
 title: Adobe Experience Manager Connector
-description: The Adobe Experience Manager connector enables your PingOne DaVinci flow to manage data privacy and consent within Adobe Experience Platform (AEP).
+description: Configure the Adobe Experience Manager connector in PingOne DaVinci to manage data privacy and CCPA/CPRA consent within Adobe Experience Platform
 component: connectors
 page_id: connectors::adobe_experience_manager_connector
 canonical_url: https://docs.pingidentity.com/connectors/adobe_experience_manager_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 21, 2025
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -40,13 +40,13 @@ This connector provides two capabilities to help ensure CCPA/CPRA compliance:
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -54,7 +54,7 @@ To use the connector, you'll need an Adobe Experience Cloud license with API cre
 
 ### Configuring the Adobe Experience Manager connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

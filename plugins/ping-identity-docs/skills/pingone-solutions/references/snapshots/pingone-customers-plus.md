@@ -35,3 +35,2148 @@ The solution includes a variety of authentication methods, such as email magic l
 This solution uses PingOne and DaVinci. It also uses PingOne Protect by default, but you can disable it if your environment doesn't include PingOne Protect.
 
 Learn more about managing users and other PingOne tasks in the [PingOne documentation](https://docs.pingidentity.com/pingone/p1_cloud__platform_main_landing_page.html). Learn more about customizing flows in the [DaVinci documentation](https://docs.pingidentity.com/davinci/davinci_landing_page.html).
+
+---
+
+---
+title: Best Practices
+description: These guidelines help you make effective use of the PingOne for Customers Plus solution in your environment.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:ciam_plus_best_practices
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/ciam_plus_best_practices.html
+revdate: September 4, 2024
+section_ids:
+  select-a-user-journey-that-fits-your-users: Select a user journey that fits your users
+  select-an-appropriate-flow-timeout: Select an appropriate flow timeout
+  clone-your-flows-before-using-or-customizing-them: Clone your flows before using or customizing them
+  use-caution-when-customizing-flows: Use caution when customizing flows
+---
+
+# Best Practices
+
+These guidelines help you make effective use of the PingOne for Customers Plus solution in your environment.
+
+## Select a user journey that fits your users
+
+The PingOne for Customers Plus solution includes two user journey options: offer MFA or require MFA.
+
+Offer MFA is appropriate for organizations who want to introduce multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* to users during registration as an option for additional security. Users who already have a registered MFA device should have their MFA attribute enabled in their user profile in PingOne. Use this option if you are planning on or currently issuing MFA to your users.
+
+Require MFA is appropriate for organizations looking to enhance security during the registration and authentication event. Use this option if you are experiencing a high volume of password breaches or credential attacks.
+
+## Select an appropriate flow timeout
+
+When you're configuring your DaVinci flows, you can set a timeout value for the flow as a whole. Because the user's account could be updated later by anyone with access to the device, a flow with a very long or indefinite timeout could be a security risk. Set a value that minimizes that risk.
+
+## Clone your flows before using or customizing them
+
+Flows with the original name can be updated by PingOne when we publish flow updates. These updates are not applied automatically, but they add a new latest version to each flow.
+
+By cloning the flows before you apply any customization or use them with customers, you prevent any of your changes or customizations from being accidentally overwritten.
+
+## Use caution when customizing flows
+
+If you want to customize the flows in the PingOne for Customers Plus solution, do so carefully.
+
+Clone the flows before making customizations so that:
+
+* You can revert to the earlier versions if you encounter breaking changes.
+
+* If you download an updated version of the solution, you don't overwrite your customizations.
+
+Test your customizations in a test environment before importing them into your production environment. Because any additional nodes or flows you add are not part of the standard solution, you must test them to make sure that they're working as you intend.
+
+---
+
+---
+title: CIAM Plus With Protect - Account Recovery - Email - Main Flow
+description: The CIAM Plus With Protect - Account Recovery - Email - Main Flow lets users recover a lost account using the CIAM Plus With Protect - Account Recovery - Email - Subflow.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_account_recovery_email_main
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_account_recovery_email_main.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Account Recovery - Email - Main Flow
+
+The CIAM Plus With Protect - Account Recovery - Email - Main Flow lets users recover a lost account using the CIAM Plus With Protect - Account Recovery - Email - Subflow.
+
+## Purpose
+
+The **CIAM Plus With Protect - Account Recovery - Email - Main Flow** lets users recover a lost account by invoking the **CIAM Plus With Protect - Account Recovery - Email - Subflow**, then directs the user to the **CIAM Plus With Protect - SignOn - Subflow**.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses function nodes to set variables, then progresses to the **Call For Account Recovery Sub-Flow And Offer Sign On Page** section.
+
+* **Call For Account Recovery Sub-Flow And Offer Sign On Page**
+
+  A function node confirms that account recovery is enabled, then a hidden HTML node activates relevant CSS files. The flow then invokes the **CIAM Plus With Protect - Account Recovery - Email - Subflow**, followed by the **CIAM Plus With Protect - SignOn - Subflow**. The flow then progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has no inputs.
+
+## Output schema
+
+This flow has no outputs.
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name                 | Parameter name | Description                                                                                                                                                                                                                                                                                                      |
+| ----------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_logoStyle`              | None           | The HTML style to use for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                   |
+| `ciam_resendOtpLimit`         | None           | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `ciam_recoveryLimit`          | None           | The maximum number of times a user can attempt to recover an account.                                                                                                                                                                                                                                            |
+| `ciam_logoUrl`                | None           | The URL for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                                 |
+| `ciam_companyName`            | None           | Displays the name of your company.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                             |
+| `ciam_accountRecoveryEnabled` | None           | Indicates whether account recovery is enabled.                                                                                                                                                                                                                                                                   |
+| `p1RiskPolicyIdAuthZ`         | None           | The PingOne risk policy ID to use for authorization.                                                                                                                                                                                                                                                             |
+| `p1RiskPolicyIdAuthn`         | None           | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                            |
+| `p1RiskPolicyIdReg`           | None           | The PingOne risk policy ID to use for registration.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAR`            | None           | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                          |
+| `p1MFAPolicyId`               | None           | The ID of the PingOne MFA policy to use in the flow.                                                                                                                                                                                                                                                             |
+| `flowCompanyLogo`             | None           | The URL for your company logo.                                                                                                                                                                                                                                                                                   |
+| `p1AgreementId`               | None           | The ID of the agreement to present to users.                                                                                                                                                                                                                                                                     |
+
+---
+
+---
+title: CIAM Plus With Protect - Account Recovery - Email - Subflow
+description: The CIAM Plus With Protect - Account Recovery - Email - Subflow lets users recover a lost account using an email address.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_account_recovery_email
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_account_recovery_email.html
+revdate: July 1, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Account Recovery - Email - Subflow
+
+The CIAM Plus With Protect - Account Recovery - Email - Subflow lets users recover a lost account using an email address.
+
+## Purpose
+
+The **CIAM Plus With Protect - Account Recovery - Email - Subflow** presents users who have forgotten their password with the ability to reset it using their email address. Users provide and verify their email address. The flow provides a form for the user to enter a new password, then verifies and saves the new password.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Forgot Password Form**
+
+  Presents a custom HTML form on which users can enter the email address of their account. When the user clicks **Submit**, the flow progresses to the **Do Protect Analysis & Send Recovery Code If Applicable** section.
+
+* **Do Protect Analysis & Send Recovery Code If Applicable**
+
+  The flow progresses to the **Threat Detection And Mitigation** section. When this section completes, the flow uses a PingOne node to find a user with the specified email address. If the user is found, is active, and currently has a password, a PingOne node sends a recovery code and the flow progresses to the **Recovery Code Form** section.
+
+* **Recovery Code Form**
+
+  Uses a flow instance variable to begin tracking the number of recovery attempts, then presents the user with an HTML page to the recovery code and enter and confirm a new password;
+
+  * If the user clicks **Submit**, the flow progresses to the **Verify Password** section.
+
+  * If the user clicks **Cancel**, the flow progresses to the **Forgot Password Form** section.
+
+  * If the user clicks **Resend**, the flow progresses to the **Resend Recovery Code** section.
+
+* **Verify Password And Recovery Code**
+
+  Uses function nodes to verify that the new password and the confirmed password match and to validate the new password, displaying an error message if either condition is not met. The flow progresses to the **Update Password and Show Success Message** section.
+
+* **Update Password And Show Success Message**
+
+  The number of recovery attempts is incremented by one and compared to the maximum. If it does not exceed the maximum, PingOne nodes save the new password and send a password change email to the user. The flow then progresses to the **Return Success** section. If the recovery code or new password is incorrect or invalid, function nodes prepare the error details, then an error message is displayed.
+
+* **Resend Recovery Code**
+
+  The number of resend attempts is incremented by one and compared to the maximum. If it does not exceed the maximum, a PingOne node sends a new recovery code. A confirmation message is then displayed.
+
+* **Threat Detection And Mitigation**
+
+  Uses a PingOne node to look up the user, then invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low or medium, the flow returns to the previous section.
+
+  * If the risk level is high, function nodes check if the PingOne user ID is empty or if the high risk was the result of a new device. If neither condition is true, PingOne node notifies the user of the suspicious activity. Regardless of conditions, an error message is then displayed.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, an error message is displayed.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name            | Required? | Description                                                                                                                                                                                                                                                                                                      |
+| --------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyLogo`         | No        | The company logo.Used only when the main flow was launched using the widget.                                                                                                                                                                                                                                     |
+| `protectriskPolicyId` | No        | The ID of the PingOne Protect risk policy to use in the flow.                                                                                                                                                                                                                                                    |
+| `username`            | No        | The username of the account being recovered.                                                                                                                                                                                                                                                                     |
+| `resendOtpLimit`      | Yes       | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `recoveryLimit`       | Yes       | The maximum number of times a user can attempt to recover an account.                                                                                                                                                                                                                                            |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name     | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `p1UserId`      | The user ID of the current user.                           |
+| `subflowResult` | The result status of the flow.                             |
+| `authMethod`    | The authentication method that was configured by the flow. |
+| `errorMessage`  | The error message to display in the parent flow.           |
+| `errorDetails`  | The details of the error that occurred in this flow.       |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable Name                | Description                                                    |
+| ---------------------------- | -------------------------------------------------------------- |
+| `resendOtpAttempts`          | The number of times the user has resent an OTP.                |
+| `recoveryValidationAttempts` | The number of times the user has attempted account validation. |
+| `protectRiskEvalId`          | The risk ID of the current user returned by PingOne Protect.   |
+
+---
+
+---
+title: CIAM Plus With Protect - Account Registration - Subflow
+description: The CIAM Plus With Protect - Account Registration - Subflow lets users register a new account.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_account_registration
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_account_registration.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Account Registration - Subflow
+
+The CIAM Plus With Protect - Account Registration - Subflow lets users register a new account.
+
+## Purpose
+
+The **CIAM Plus With Protect - Account Registration - Subflow** presents users with the ability to create a new account. Depending on your environment's properties, the flow can let a user create a password, add an multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* device using the **CIAM Plus With Protect - Device Registration - Subflow** flow, and view and agree to an agreement.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Fetch User Details for Registration**
+
+  Uses function nodes to set flow instance variables and check whether agreement is enabled. If agreement is enabled, a PingOne node reads the agreement content. The flow then presents users with an HTML form on which to enter their email address.
+
+  If the user clicks **Sign On**, the flow progresses to the **Return Success** section.
+
+  If the user clicks **Register**, a PingOne node verifies that the email address is not already in use, then a function node checks whether the user accepted the agreement if one is in use. If the user accepted the agreement or no agreement is in use, an HTML form lets the user enter a first and last name and click **Register** or **Back**.
+
+  If the user clicks **Register**, a second HTML form lets the user enter and confirm a password, then the flow progresses to the **Create Account** section.
+
+  If the user clicks **Back**, the flow returns to the email address form.
+
+* **Create Account**
+
+  Uses a function node to process the user's selection on the password form. If the user clicked **Back**, the flow returns to the name entry page. If the user clicked **Register**, function nodes verify that the password is valid and matches the confirmed password, then a PingOne node creates the new account. The flow then progresses to the **Accept Agreement and Verify Email** section.
+
+* **Accept Agreement and Verify Email**
+
+  Uses a function node to check whether an agreement is enabled. If an agreement is enabled, a PingOne updates the user's information to include their acceptance of the agreement. The flow then invokes the **CIAM Plus With Protect - Verify Email - Subflow** flow to ensure that the user's email address is verified, then progresses to the **Auto enroll email as a MFA device** section.
+
+* **Auto enroll email as a MFA device**
+
+  Uses PingOne nodes to enroll the user's email as an MFA device, enable MFA for the user, and send a device registration confirmation email. The flow then progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name                  | Required | Description                                                                                                                                                                                                                                                                                              |
+| --------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `email`                     | No       | The user's email address.                                                                                                                                                                                                                                                                                |
+| `agreementEnabled`          | Yes      | Indicates whether agreement is enabled for user registration.                                                                                                                                                                                                                                            |
+| `agreementId`               | Yes      | The ID of the agreement to present to users.                                                                                                                                                                                                                                                             |
+| `socialRegistrationEnabled` | No       | A boolean indicating whether registration through a third-party login is enabled.                                                                                                                                                                                                                        |
+| `googleEnabled`             | No       | A boolean indicating whether authentication through Google is enabled in your environment.                                                                                                                                                                                                               |
+| `facebookEnabled`           | No       | A boolean indicating whether authentication through Facebook is enabled in your environment.                                                                                                                                                                                                             |
+| `appleEnabled`              | No       | A boolean indicating whether authentication through Apple is enabled in your environment.                                                                                                                                                                                                                |
+| `companyLogo`               | No       | The company logo.Used only when the main flow was launched using a redirect.                                                                                                                                                                                                                             |
+| `protectRiskPolicyId`       | No       | The PingOne Protect risk policy ID to use. If not specified, the default policy is used.                                                                                                                                                                                                                 |
+| `verificationLimit`         | No       | The number of times a user can attempt verification.                                                                                                                                                                                                                                                     |
+| `resendOtpLimit`            | No       | The number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name       | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| `subflowResult`   | The result status of the flow.                                        |
+| `p1UserId`        | The user ID of the current user.                                      |
+| `authMethod`      | The authentication method chosen by the user.                         |
+| `isSocialIDpAuth` | A boolean that indicates whether the user signed on using social IdP. |
+| `errorMessage`    | The error message text to display, if any.                            |
+| `errorDetails`    | The details of the error that occurred in this flow.                  |
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name       | Parameter name | Description                                         |
+| ------------------- | -------------- | --------------------------------------------------- |
+| `cachedEmail`       | None           | The user's cached email address.                    |
+| `errorMessage`      | None           | The error message text to display, if any.          |
+| `protectRiskEvalId` | None           | The risk evaluation ID returned by PingOne Protect. |
+
+---
+
+---
+title: CIAM Plus With Protect - Agreement (ToS) - Subflow
+description: The CIAM Plus With Protect - Agreement (ToS) - Subflow lets users read and confirm any agreement required in your environment.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_agreement
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_agreement.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Agreement (ToS) - Subflow
+
+The CIAM Plus With Protect - Agreement (ToS) - Subflow lets users read and confirm any agreement required in your environment.
+
+## Purpose
+
+The **CIAM Plus With Protect - Agreement (ToS) - Subflow** determines whether the user needs to consent to an agreement. If so, it displays the agreement for the user and stores the user's consent if they agree to the agreement.
+
+## Structure
+
+This flow is divided into sections using teleport nodes.
+
+* **Check if agreement form needs to be displayed**
+
+  Uses comparison nodes to check if agreement is enabled in the environment and if agreement is necessary for the current user. If so, a PingOne node checks the user's consent status. If consent is needed, but not present, the flow progresses to the **Present & Accept Agreement** section. Otherwise, the flow progresses to the **Return Success** section.
+
+* **Present & Accept Agreement**
+
+  Uses a PingOne node to retrieve the required agreement, then presents the user with an HTML page on which they can review and accept or decline. A comparison node then branches the flow based on the user's choice. If the user accepts the agreement, a PingOne node stores the user's agreement, then the flow progresses to the **Return Success** section. If the user declines, an error message displays.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name           | Required | Description                                                                      |
+| -------------------- | -------- | -------------------------------------------------------------------------------- |
+| `checkRequired`      | Yes      | Indicates whether to check for existing consent before displaying the agreement. |
+| `p1UserId`           | Yes      | The user ID of the current user.                                                 |
+| `agreementEnabled`   | No       | Indicates whether agreement is enabled for user registration.                    |
+| `agreementID`        | Yes      | The ID of the PingOne agreement to present to users.                             |
+| `showSuccessMessage` | No       | A boolean indicating whether to display a success message after agreement.       |
+| `companyLogo`        | No       | The company logo.Used only when the main flow was launched using a redirect.     |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name     | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `errorMessage`  | The error message to display in the parent flow.     |
+| `errordetails`  | The details of the error that occurred in this flow. |
+| `subflowResult` | The result status of the flow.                       |
+
+## Variables and parameters
+
+This flow uses no variable or parameter values.
+
+---
+
+---
+title: CIAM Plus With Protect - Change Password - Subflow
+description: The CIAM Plus With Protect - Change Password - Subflow lets users change their passwords.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_change_password
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_change_password.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Change Password - Subflow
+
+The CIAM Plus With Protect - Change Password - Subflow lets users change their passwords.
+
+## Purpose
+
+The **CIAM Plus With Protect - Change Password - Subflow** displays a password reset form, letting users enter their current password and enter and verify a new password. If the new passwords match, the user's password is updated in PingOne.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **User Enter Password**
+
+  Presents the user with an HTML password reset form. The flow then progresses to the **Update Password** section.
+
+* **Update Password**
+
+  Compares the new password and confirmed password. If they match, a PingOne node updates the user's password. The flow then either displays a success message for the user or progresses to the **Return Success** section, depending on the value of the `showSuccessMessage` input.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+* **Return Error**
+
+  Sends a JSON error message.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name           | Required? | Description                                                                                                        |
+| -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `p1UserID`           | Yes       | The user ID of the current user.                                                                                   |
+| `showSuccessMessage` | No        | A boolean that indicates whether a success message should be displayed after the user's password has been changed. |
+| `companyLogo`        | No        | The company logo.Used only when the main flow was launched using a redirect.                                       |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name     | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `subflowResult` | The result status of the flow.                       |
+| `errorMessage`  | The error message to display in the parent flow.     |
+| `errorDetails`  | The details of the error that occurred in this flow. |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable Name  | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `errorDetails` | The details of the error that occurred in this flow. |
+
+---
+
+---
+title: CIAM Plus With Protect - Device Authentication - Subflow
+description: The CIAM Plus With Protect - Device Authentication - Subflow lets users authenticate using a known device, including options for voice, email, SMS, mobile authenticator app, Time-based One-Time Password (TOTP), one-time passcode (OTP), FIDO2, and a magic link using the CIAM Plus With Protect - Magic Link Authentication - Subflow.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_device_authentication
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_device_authentication.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Device Authentication - Subflow
+
+The CIAM Plus With Protect - Device Authentication - Subflow lets users authenticate using a known device, including options for voice, email, SMS, mobile authenticator app, Time-based One-Time Password (TOTP) *(tooltip: \<div class="paragraph">
+\<p>A temporary passcode generated by an algorithm that uses the current time of day as one of its authentication factors. Typically, an app or hardware token generates a 6-digit passcode that is valid for less than 1 minute.\</p>
+\</div>)*, one-time passcode (OTP) *(tooltip: \<div class="paragraph">
+\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>
+\</div>)*, FIDO2, and a magic link *(tooltip: \<div class="paragraph">
+\<p>A passwordless authentication method that involves the authentication service sending a single-use sign on link to the user by email or SMS.\</p>
+\</div>)* using the CIAM Plus With Protect - Magic Link Authentication - Subflow.
+
+## Purpose
+
+The CIAM Plus With Protect - Device Authentication - Subflow enables users to authenticate using a known device. The flow evaluates the devices associated with the user account:
+
+* If no devices are present, it invokes the CIAM Plus With Protect - Magic Link Authentication - Subflow flow.
+
+* If more than one device is present, it enables the user to select a device.
+
+* If only one device is present, or if the user has selected a device, it enables the user to select an authentication method and authenticates the user with the selected method.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Gather Browser And Devices Data**
+
+  Uses a PingOne node to gather the user's existing devices. Next, an HTML node evaluates the user's browser to determine if security keys and biometrics are available. The flow then progresses to the **Filter and Mask Devices** section.
+
+* **Filter and Mask Devices**
+
+  Filters the list of available devices to create a list of usable devices, then creates a list of masked devices. The flow then progresses to the **Check If MFA Enabled And Any Device Active** section.
+
+* **Check If MFA Enabled And Any Device Active**
+
+  Uses a PingOne node to check the user's MFA status. If MFA is enabled and the user has active devices, the flow progresses to the **Decide Authentication Path Based On MFA Policy** section. If MFA is not enabled or the user has no active devices, the flow progresses to the **Call Magic Link Authentication** section.
+
+* **Decide Authentication Path Based On MFA Policy**
+
+  Uses a PingOne node to begin MFA authentication, then branches based on the MFA status.
+
+  If the MFA status is `assertion_required`, `OTP_required`, or `push_confirmation_required`, the flow progresses to the **Default Device Enrichment** section.
+
+  If the MFA status is `device_selection_required`, function nodes determine whether the user has only one MFA device and whether magic link is enabled. If the user has more than one device, or if the user has one device and magic link is enabled, the flow progresses to the **Device Selection** section. If the user has only one device and magic link is not enabled, a PingOne node begins MFA with the available device and the flow progresses to the **Default Device Enrichment** section.
+
+* **Call Magic Link Authentication**
+
+  Invokes the **CIAM Plus With Protect - Magic Link Authentication - Subflow** flow if magic link authentication is enabled. The flow then progresses to the **Return Success** section.
+
+* **Device Selection**
+
+  Presents the user with an HTML page on which they can select a device. If the user selected magic link, the **CIAM Plus With Protect - Magic Link Authentication - Subflow** flow is invoked, and the flow then progresses to the **Return Success** section or to the beginning of the **Device Selection** section depending on the subflow results. If the user selected another authentication method, a PingOne records their selection and the flow progresses to the **Default Device Enrichment** section. If the user selected **Cancel**, the flow progresses to the **Return Success** section.
+
+* **Default Device Enrichment**
+
+  Uses a function node to enrich the device details, then the flow progresses to the **Handle TOTP, SMS, VOICE, MOBILE and EMAIL OTP Authentication** section if an OTP is required, to the **Handle FIDO2 Authentication** section if assertion is required, and to the **Mobile Push Flow** section if push confirmation is required.
+
+* **Handle TOTP, SMS, VOICE, MOBILE and EMAIL OTP Authentication**
+
+  Uses function nodes to initialize a variable to track the number of OTP attempts and check the device type, then presents the user with an HTML page with options to enter the passcode, change devices, or resend the OTP.
+
+  The resend option uses function nodes to increment the number of OTP attempts and verify that the limit has not been reached, then uses a PingOne node to resend the OTP. A message indicating that the OTP has been resent is then displayed to the user.
+
+  The change device option progresses the flow to the **Device Selection** section.
+
+  If the user enters a passcode, a function node converts the passcode to lowercase, then a PingOne MFA node evaluates the passcode. If it matches, the flow progresses to the **Return Success** section. If it fails, an error message is displayed.
+
+* **Handle FIDO2 Authentication**
+
+  Performs authentication using a security key or biometrics. It presents users with the option to select a different device or continue with the current device. If the user selects a different device, it progresses to the **Device Selection** section. If the user continues, it uses a PingOne MFA node with FIDO2 assertion to authenticate the user. If the authentication succeeds, the flow progresses to the **Return Success** section. If the authentication fails, an error message is displayed.
+
+* **Mobile Push Flow**
+
+  Displays an HTML page that presents users with multiple options.
+
+  If the user selects **Use Passcode**, the flow progresses to the **Mobile Passcode Flow** section.
+
+  If the user selects **Different Method**, the flow progresses to the **Device Selection** section.
+
+  If the user proceeds using push notification, a PingOne node reads the user's response, then a function node branches the flow based on the device authentication status.
+
+  * If device authentication completed successfully, a function node saves the authentication method value, then the flow progresses to the **Return Success** section.
+
+  * If device authentication failed, the flow progresses to either the **Mobile App Timed Out** section or the **Return Error** section depending on the reason for the failure.
+
+  * If push confirmation is still required, polling continues.
+
+  * If push confirmation timed out, the flow progresses to the **Mobile Passcode Flow** section if OTP fallback is allowed.
+
+* **Mobile Passcode Flow**
+
+  Displays an HTML page that presents users with multiple options.
+
+  If the user selects **Retry Authentication**, a PingOne node retries the authentication and the flow returns to the beginning of this section.
+
+  If the user selects **Different Method**, the flow progresses to the **Device Selection** section.
+
+  If the user submits an OTP, a PingOne node validates the OTP and a function node saves the authentication method value. The flow then progresses to the **Return Success** section.
+
+* **Mobile App timed out**
+
+  Displays an error message that presents the user with multiple authentication options.
+
+  If the user selects **Retry Authentication**, a PingOne node retries the authentication and the flow progresses to the **Mobile Push Flow** section.
+
+  If the user selects **Different Method**, the flow progresses to the **Device Selection** section.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name           | Required | Description                                                                                                     |
+| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `email`              | No       | The PingOne user's email address to use for magic link authentication.                                          |
+| `p1UserId`           | Yes      | The user ID of the current user.                                                                                |
+| `magicLinkEnabled`   | No       | A boolean that indicates whether magic link is enabled.                                                         |
+| `p1MFAPolicyID`      | No       | The ID of the PingOne MFA policy to use in the flow.                                                            |
+| `allowedDeviceTypes` | No       | A string containing any or all of `SMS, EMAIL, FIDO2, VOICE, TOTP, MOBILE` indicating the allowed device types. |
+| `otpFallbackAllowed` | No       | A boolean that indicates whether the user can fall back to a one-time passcode if push confirmation times out.  |
+| `cancelEnabled`      | No       | A boolean that indicates whether the user can cancel MFA authentication.                                        |
+| `resendOtpLimit`     | Yes      | The maximum number of times the user can resend the OTP.                                                        |
+| `companyLogo`        | No       | The company logo. Used only when the main flow was launched using the widget.                                   |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name     | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `subflowResult` | The result status of the flow.                             |
+| `authMethod`    | The authentication method that was configured by the flow. |
+| `errorMessage`  | The error message to display in the parent flow.           |
+| `errorDetails`  | The details of the error that occurred in this flow.       |
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name       | Parameter name | Description                                      |
+| ------------------- | -------------- | ------------------------------------------------ |
+| `resendOtpAttempts` | None           | The number of times the user has resent the OTP. |
+
+---
+
+---
+title: CIAM Plus With Protect - Device Registration - Subflow
+description: The CIAM Plus With Protect - Device Registration - Subflow lets users register a new device.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_device_registration
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_device_registration.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Device Registration - Subflow
+
+The CIAM Plus With Protect - Device Registration - Subflow lets users register a new device.
+
+## Purpose
+
+The CIAM Plus With Protect - Device Registration - Subflow presents users with options to register any available device type. The flow finds the available devices, then uses an HTML node to let the user select one:
+
+* If the user selects **Mobile Application**, the flow creates a pairing key to pair the application with the account.
+
+* If the user selects **Biometrics/Security Key**, the flow pairs the current FIDO-supported device.
+
+* If the user selects **Authenticator App**, the flow uses a key URL to pair an authenticator app with the account.
+
+* If the user selects **Text Message**, the flow gathers the number and uses an one-time passcode (OTP) *(tooltip: \<div class="paragraph">
+  \<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>
+  \</div>)* to verify the SMS number.
+
+* If the user selects **Voice** the flow gathers the number and uses an OTP to verify the phone number.
+
+* If the user selects **Email**, the flow uses an OTP to verify the email address.
+
+After any successful device registration, or if the user selects password, the flow returns to the **CIAM Plus With Protect - Account Registration - Subflow** parent flow.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Gather device types that user can register with**
+
+  Uses a hidden HTML form to gather browser information, then uses a PingOne node to retrieve the user's current devices. If the user has compatible devices and can register at least one device, the flow progresses to the **Check Whether MFA Greetings Required To Be Displayed To User?** section.
+
+* **Check Whether MFA Greetings Required To Be Displayed To User?**
+
+  Uses a function node to check if the greeting page should be displayed.
+
+  If the greeting should be displayed, an HTML node asks for user consent to add an MFA device. If the user clicks **Skip** or **Back**, the flow progresses to the **Return Success** section.
+
+  If the user does not select **Skip** or **Back**, or if the greeting page is not displayed, a function node checks whether the user's email is known. If the user's email address is not known, the flow progresses to the **User select device to register with** section.
+
+  If the user's email address is known, a function node checks whether direct enrollment of the user's email is requested. If direct enrollment is not requested, the flow progresses to the **User select device to register with** section. If direct enrollment is requested, function nodes verify that the email address is not in use and set the `canEnrollOnlyEmail` variable to true, then the flow progresses to the **Prepare to register OTP device** section.
+
+* **User select device to register with**
+
+  Presents the user with an HTML page that provides them with the available authentication method options.
+
+  If the user selects **Voice** or **SMS**, the flow progresses to the **User selected SMS/VOICE** section.
+
+  If the user selects **Email**, the flow progresses to the **User selected email** section.
+
+  If the user selects **TOTP**, the flow progresses to the **Prepare to register OTP device** section.
+
+  If the user selects **FIDO2**, the flow progresses to the **Register FIDO2 device and enable MFA for user** section.
+
+  If the user selects **Mobile**, the flow progresses to the **Mobile app registration flow** section.
+
+  If the user selects **Cancel**, a function node determines whether MFA is required. If MFA is required, the flow progresses to the **Return Success** section with the `cancel` result. If MFA is not required, the flow progresses to the **Return Success** section with the `skip` result.
+
+* **User selected SMS/VOICE**
+
+  Displays an HTML page gives the user the option to provide a voice or SMS number.
+
+  If the user enters a voice or SMS number, a function node verifies that the number is not in use, then the flow progresses to the **Prepare to register OTP device** section.
+
+  If the user clicks **Cancel**, the flow returns to the **User select device to register with** section.
+
+* **User selected email**
+
+  Uses a function node to check for a known user email.
+
+  If the user's email is not present, an HTML node lets the user enter an email and submit it or cancel.
+
+  If the user clicks **Cancel**, the flow returns to the **User select device to register with** section.
+
+  If the user submits an email, or if their email was already present, a function node verifies that the email is not already registered. If the email is not already registered, the flow progresses to the **Prepare to register OTP device** section. If the email is already registered, a function node determines the correct error message to display.
+
+* **Prepare to register OTP device**
+
+  Uses a PingOne node to create an OTP device.
+
+  If the OTP device creation succeeds, a function node sets the device ID, then the flow progress to the **TOTP (Authenticator app) registration flow** section if the device type is TOTP, or to the **Ask for OTP** section if the device is SMS, voice, or email.
+
+  If the OTP device creation fails, an error message is displayed.
+
+* **Ask for OTP**
+
+  Uses function nodes to begin tracking the number of resend attempts, mask the phone number or email, and determine the cancel behavior, then displays an HTML node prompting the user for the OTP.
+
+  If the user submits a code, the flow progresses to the **Activate OTP device and enable MFA for user** section. Otherwise, the flow progresses to the **Resend OTP** section.
+
+* **Resend OTP**
+
+  If the user clicks **Resend** at the OTP prompt screen, function nodes increment the resend attempts and check if the maximum has been reached. If the maximum has not been reached, PingOne nodes delete the previous OTP device and create a new device, a function node updates the device ID, and a message is displayed for the user.
+
+  If the user clicks **Cancel** at the OTP prompt screen, a PingOne node deletes the OTP device. A function node then redirects the flow based on the cancel button behavior. If this value is `Back`, the flow progresses to the **User select device to register with** section. If this value is `Skip`, the flow progresses to the **Return Success** section with the `Skip` result. If this value is `Cancel`, the flow progresses to the **Return Success** section with the `Cancel` result.
+
+* **TOTP (Authenticator app) registration flow**
+
+  Uses a function node to create a QR code for the key URL, then displays an HTML page on which the user can scan the QR code and enter a secret.
+
+  If the user enters the secret, the flow progresses to the **Activate OTP device and enable MFA for user** section.
+
+  If the user clicks **Cancel**, a PingOne node deletes the OTP device, and the flow returns to the **User select device to register with** section.
+
+* **Activate OTP device and enable MFA for user**
+
+  Uses a PingOne node to activate the OTP device. If the new device should be the default, a PingOne node sets it as the default, then another PingOne node updates the user's MFA status. The flow then progresses to the **Return Success** section.
+
+* **Register FIDO2 device and enable MFA for user**
+
+  Uses a PingOne node to create a FIDO2 device, then presents the user with an HTML registration page.
+
+  If the user successfully registers the device, a PingOne node activates the device. If the new device should be the default, a PingOne node sets it as the default, then another PingOne node updates the user's MFA status. The flow then progresses to the **Return Success** section.
+
+  If the user clicks **Cancel**, a PingOne node deletes the device and the flow returns to the **User select device to register with** section.
+
+* **Mobile app registration flow**
+
+  Uses a PingOne node to create a pairing key, then creates a QR code using the key. An HTML node then presents the QR code to the user.
+
+  If the user clicks **Cancel**, a PingOne node deletes the pairing key and the flow returns to the **User select device to register with** section.
+
+  A PingOne node reads the key, then a polling node determines when to proceed. If the polling status is claimed, a function node determines whether the user has any pre-registered devices. If the user has no pre-registered devices, a PingOne node activates MFA for the user and the flow progresses to the **Return Success** section.
+
+  If the user has pre-registered devices, a function node determines whether the new device should be set as the default. If the new device should not be set as default, a PingOne node enables MFA for the user. If the new device should be the default, a PingOne node reads the user's mobile devices, a function node finds the device ID, and a PingOne node sets the device as default. A PingOne node then enables MFA for the user.
+
+  If the polling fails, an error message is displayed, a PingOne node deletes the pairing key, and the flow returns to the **User select device to register with** section.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name                | Required | Description                                                                                                     |
+| ------------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `email`                   | No       | The email address to use for registration.                                                                      |
+| `p1UserId`                | Yes      | The user ID of the current user.                                                                                |
+| `notShowMFAGreetingsPage` | No       | A boolean indicating whether to show the user greetings page.                                                   |
+| `allowOnlyEmail`          | No       | A boolean indicating whether email should be the only permitted MFA device.                                     |
+| `requireMFA`              | No       | A boolean indicating whether MFA is required.                                                                   |
+| `setNewDeviceAsDefault`   | No       | A boolean indicating whether a newly added device should be set as the default device.                          |
+| `allowedDeviceTypes`      | No       | A string containing any or all of `SMS, EMAIL, FIDO2, MOBILE, VOICE, TOTP` indicating the allowed device types. |
+| `companyLogo`             | No       | The company logo.Used only when the main flow was launched using a redirect.                                    |
+| `resendOtpLimit`          | Yes      | The maximum number of times the user can resend the OTP.                                                        |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name     | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `subflowResult` | The result status of the flow.                             |
+| `authMethod`    | The authentication method that was configured by the flow. |
+| `errorMessage`  | The error message to display in the parent flow.           |
+| `errorDetails`  | The details of the error that occurred in this flow.       |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable name        | Description                                                                 |
+| -------------------- | --------------------------------------------------------------------------- |
+| `canEnrollOnlyEmail` | A boolean indicating whether email should be the only permitted MFA device. |
+| `resendOtpAttempts`  | The number of times the user has resent the OTP.                            |
+| `p1MFADeviceId`      | The device ID for the device being registered.                              |
+
+---
+
+---
+title: CIAM Plus With Protect - Magic Link Authentication - Subflow
+description: The CIAM Plus With Protect - Magic Link Authentication - Subflow lets existing users authenticate using a link sent to the email address that's associated with their account.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_magic_link_authentication
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_magic_link_authentication.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Magic Link Authentication - Subflow
+
+The CIAM Plus With Protect - Magic Link Authentication - Subflow lets existing users authenticate using a link sent to the email address that's associated with their account.
+
+## Purpose
+
+The **CIAM Plus With Protect - Magic Link Authentication - Subflow** presents users with the option to send a magic link to the email address associated with their account. After the link is sent, the flow checks the status of the link. If the link is clicked, the flow authenticates the user. If the link expires, the flow presents an error message. The magic link expires after 2.5 minutes (150 seconds).
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Display Magic Link Form**
+
+  Uses a PingOne node to look up the user, then presents an HTML form from which the user can send a magic link. The flow then simultaneously progresses to the **Create Challenge and Send Email** and **Challenge Acceptance By The User** sections.
+
+* **Create Challenge and Send Email**
+
+  Uses a PingOne node to send a magic link email. The flow then progresses to the **Display Magic Link Polling And Check For Challenge Status** section.
+
+* **Challenge Acceptance By The User**
+
+  Checks the challenge status and displays a success message if the magic link is clicked and an error message if the magic link times out.
+
+* **Display Magic Link Polling And Check For Challenge Status**
+
+  Displays a custom HTML template directing users to click the magic link. When the challenge is approved, the flow progresses to the **Go To Success** section.
+
+* **Go To Success**
+
+  Progresses to the **Return Success** section.
+
+* **Challenge Expiration**
+
+  Denies the challenge if the magic link expires. The flow then progresses to the **Return Error** section.
+
+* **Return Success**
+
+  Sends a success JSON response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name        | Required | Description                                                                  |
+| ----------------- | -------- | ---------------------------------------------------------------------------- |
+| `p1UserId`        | Yes      | The user ID of the user to be authenticated.                                 |
+| `canChangeDevice` | Yes      | Indicates whether the user can change the device used for authentication.    |
+| `companyLogo`     | No       | The company logo.Used only when the main flow was launched using a redirect. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name     | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `subflowResult` | The result status of the flow.                       |
+| `errorMessage`  | The error message to display in the parent flow.     |
+| `errorDetails`  | The details of the error that occurred in this flow. |
+
+## Variables
+
+This flow uses no variable or parameter values.
+
+---
+
+---
+title: CIAM Plus With Protect - Profile Management - Agreement TOS - Main Flow
+description: The CIAM Plus With Protect - Profile Management - Agreement TOS - Main Flow flow lets users view the terms of service.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_profile_mgmt_view_agreement_tos
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_profile_mgmt_view_agreement_tos.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Profile Management - Agreement TOS - Main Flow
+
+The CIAM Plus With Protect - Profile Management - Agreement TOS - Main Flow flow lets users view the terms of service.
+
+## Purpose
+
+The CIAM Plus With Protect - Profile Management - Agreement TOS - Main Flow flow checks for an existing session, and uses the **CIAM Plus With Protect - SignOn - Subflow** to let users sign on if they do not already have a session. It uses the **CIAM Plus With Protect - Threat Detection - Subflow** to perform a threat assessment, then displays the terms of service for the user. If the user has not accepted the terms of service, the flow displays a form to allow the user to accept or decline and records the user response.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses function nodes to set variables. Then, if agreement is required, but no agreement ID is present, the flow progresses to the **Check Session, Call To Protect Analysis & MFA Step-Up** section.
+
+* **Check Session, Call To Protect Analysis & MFA Step-Up**
+
+  Uses a PingOne node to check for a valid session:
+
+  * If a session exists, a hidden HTML node captures risk information, then a PingOne node gathers additional information. The flow then progresses to the **Threat Detection & Mitigation** section. When this section completes, the flow progresses to the **MFA Authentication** section. When this section completes, the **CIAM Plus With Protect - Agreement (ToS) - Subflow** is invoked. The flow then progresses to the **Return Success** section.
+
+  * If no session exists, a PingOne node deletes any existing session token, then the **CIAM Plus With Protect - SignOn - Subflow** is invoked. When the flow completes, a PingOne node creates or updates the session while a loading screen is displayed for the user. A PingOne node retrieves user information, then the flow progresses to the **MFA Authentication** section. When this section completes, the **CIAM Plus With Protect - Agreement (ToS) - Subflow** is invoked. The flow then progresses to the **Return Success** section.
+
+* **Threat Detection & Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, the flow returns to the previous section.
+
+  * If the risk level is medium, the flow progresses to the **MFA Authentication** section. The flow then returns to the previous section.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user. The flow then progresses to the **Return Error** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, a function node stores the risk evaluation as a variable, then the flow progresses to the **Return Error** section.
+
+* **MFA Authentication**
+
+  Uses a PingOne node to retrieve the user's devices, then uses a hidden HTML node to check for WebAuthn compatibility. A function node then checks if the user has at least one active device:
+
+  * If the user has at least one active device, the **CIAM Plus With Protect - Device Authentication - Subflow** is invoked, a function node stores the authentication method as a variable, and the flow then returns to the previous section.
+
+  * If the user has no active devices, the flow progresses to the **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication** section.
+
+* **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then a function node evaluates the device registration result:
+
+  * If the device registration was completed, the authentication method is stored as a variable, and the flow returns to the **MFA Authentication** section.
+
+  * If the device registration was skipped, the flow returns to the **MFA Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device and enable MFA for the user. A function node stores the user's authentication method as a variable, and the flow returns to the **MFA Authentication** section.
+
+* **Return Error**
+
+  Displays an error message, then sends a JSON error message.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Required | Description                                                                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters` | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `flowResult`   | The result status of the flow.                       |
+| `p1UserId`     | The user's PingOne user ID.                          |
+| `errorMessage` | The error message to display in the parent flow.     |
+| `errorDetails` | The details of the error that occurred in this flow. |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable name                | Parameter name            | Description                                                            |
+| ---------------------------- | ------------------------- | ---------------------------------------------------------------------- |
+| `ciam_logoStyle`             | None                      | The HTML style to use for your company logo.                           |
+| `ciam_logoUrl`               | None                      | The URL for your company logo.                                         |
+| `ciam_companyName`           | None                      | Displays the name of your company.                                     |
+| `ciam_magicLinkEnabled`      | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.           |
+| `ciam_agreementEnabled`      | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment. |
+| `ciam_sessionLengthInMinute` | None                      | The maximum allowed session length for a user in the flow.             |
+| `p1AgreementId`              | None                      | The ID of the PingOne agreement to present to users.                   |
+| `p1RiskPolicyIdAuthn`        | None                      | The PingOne risk policy ID to use for authentication.                  |
+| `protectRiskEvalId`          | None                      | The risk evaluation ID returned by PingOne Protect.                    |
+| `p1RiskPolicyIdReg`          | None                      | The PingOne risk policy ID to use for registration.                    |
+| `p1RiskPolicyIdAR`           | None                      | The PingOne risk policy ID to use for account recovery.                |
+| `flowCompanyLogo`            | None                      | The company logo to use during the flow.                               |
+| `p1MFAPolicyId`              | None                      | The PingOne MFA policy ID.                                             |
+| `p1RiskPolicyIdAuthZ`        | None                      | The PingOne risk policy ID to use for authorization.                   |
+| `authMethod`                 | None                      | The authentication method used by the user.                            |
+
+---
+
+---
+title: CIAM Plus With Protect - Profile Management - Basic Profile Management - Main Flow
+description: The CIAM Plus With Protect - Profile Management - Basic Profile Management - Main Flow flow lets users update their account information.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_profile_management_main
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_profile_management_main.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Profile Management - Basic Profile Management - Main Flow
+
+The CIAM Plus With Protect - Profile Management - Basic Profile Management - Main Flow flow lets users update their account information.
+
+## Purpose
+
+The CIAM Plus With Protect - Profile Management - Basic Profile Management - Main Flow flow presents users with an option to update their account information. The flow uses the **CIAM Plus With Protect - SignOn - Subflow** to let users sign on if they do not already have a session, and uses the **CIAM Plus With Protect - Threat Detection - Subflow** to perform a threat assessment. Users are then presented are presented with a form that enables them to change the name and address associated with their account. The flow uses PingOne nodes to make the changes to the account.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses function nodes to set variables. Then, if agreement is required but no agreement ID is present, the flow progresses to the **Check Session, Call To Protect Analysis & MFA Step-Up** section.
+
+* **Check Session, Call To Protect Analysis & MFA Step-Up**
+
+  Uses a PingOne node to check for a valid session:
+
+  * If a session exists, a hidden HTML node captures risk information, then a PingOne node gathers additional information. The flow then progresses to the **Threat Detection & Mitigation** section. When this section completes, the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Update Profile** section.
+
+  * If no session exists, a PingOne node deletes any existing session token, then the **CIAM Plus With Protect - SignOn - Subflow** is invoked. When the flow completes, a PingOne node creates or updates the session while a loading screen is displayed for the user. A PingOne node retrieves user information, then the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Update Profile** section.
+
+* **Threat Detection & Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, the flow returns to the previous section.
+
+  * If the risk level is medium, the flow progresses to the **MFA Authentication** section. The flow then returns to the previous section.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user. The flow then progresses to the **Return Error** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, a function node stores the risk evaluation as a variable, then the flow progresses to the **Return Error** section.
+
+* **MFA Authentication**
+
+  Uses a PingOne node to retrieve the user's devices, then uses a hidden HTML node to check for WebAuthn compatibility. A function node then checks if the user has at least one active device:
+
+  * If the user has at least one active device, the **CIAM Plus With Protect - Device Authentication - Subflow** is invoked, a function node stores the authentication method as a variable, and the flow then returns to the previous section.
+
+  * If the user has no active devices, the flow progresses to the **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication** section.
+
+* **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then a function node evaluates the device registration result:
+
+  * If the device registration was completed, the authentication method is stored as a variable, and the flow returns to the **MFA Authentication** section.
+
+  * If the device registration was skipped, the flow returns to the **MFA Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as a multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+  \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+  \</div>)* device and enable MFA for the user. A function node stores the user's authentication method as a variable, and the flow returns to the **MFA Authentication** section.
+
+* **Update Profile**
+
+  Uses a PingOne node to find the user. The flow then presents users with a custom HTML form that lets them enter updated name and address information. When the user submits this information, function nodes determine whether a new address was submitted, then PingOne nodes update the user's information with or without the address. The flow displays a success message on the custom HTML form, then progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+* **Return Error**
+
+  Displays an error message, then sends a JSON error message.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Required | Description                                                                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters` | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `flowResult`   | The result status of the flow.                       |
+| `p1UserId`     | The user's PingOne user ID.                          |
+| `errorMessage` | The error message to display in the parent flow.     |
+| `errorDetails` | The details of the error that occurred in this flow. |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable name                | Parameter name            | Description                                                                                                                                                                                                                                                                                                      |
+| ---------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_logoStyle`             | None                      | The HTML style to use for your company logo.                                                                                                                                                                                                                                                                     |
+| `ciam_logoUrl`               | None                      | The URL for your company logo.                                                                                                                                                                                                                                                                                   |
+| `ciam_companyName`           | None                      | Displays the name of your company.                                                                                                                                                                                                                                                                               |
+| `ciam_magicLinkEnabled`      | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.                                                                                                                                                                                                                                                     |
+| `ciam_agreementEnabled`      | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment.                                                                                                                                                                                                                                           |
+| `ciam_requireMFA`            | None                      | A boolean that controls whether MFA enrollment is required for all users.                                                                                                                                                                                                                                        |
+| `ciam_resendOtpLimit`        | None                      | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `ciam_verificationLimit`     | None                      | The maximum number of times a user can attempt to verify their email address.                                                                                                                                                                                                                                    |
+| `ciam_sessionLengthInMinute` | None                      | The maximum allowed session length for a user in the flow.                                                                                                                                                                                                                                                       |
+| `ciam_otpFallbackAllowed`    | None                      | A boolean indicating whether a user can fall back to an OTP if a mobile push request times out.                                                                                                                                                                                                                  |
+| `p1AgreementId`              | None                      | The ID of the PingOne agreement to present to users.                                                                                                                                                                                                                                                             |
+| `p1RiskPolicyIdAuthn`        | None                      | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                            |
+| `protectRiskEvalId`          | None                      | The risk evaluation ID returned by PingOne Protect.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdReg`          | None                      | The PingOne risk policy ID to use for registration.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAR`           | None                      | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                          |
+| `flowCompanyLogo`            | None                      | The company logo to use during the flow.                                                                                                                                                                                                                                                                         |
+| `p1MFAPolicyId`              | None                      | The PingOne MFA policy ID.                                                                                                                                                                                                                                                                                       |
+| `p1RiskPolicyIdAuthZ`        | None                      | The PingOne risk policy ID to use for authorization.                                                                                                                                                                                                                                                             |
+| `authMethod`                 | None                      | The authentication method used by the user.                                                                                                                                                                                                                                                                      |
+
+---
+
+---
+title: CIAM Plus With Protect - Profile Management - Change Password - Main Flow
+description: The CIAM Plus With Protect - Profile Management - Change Password - Main Flow lets users change their password.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_profile_management_change_password
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_profile_management_change_password.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Profile Management - Change Password - Main Flow
+
+The CIAM Plus With Protect - Profile Management - Change Password - Main Flow lets users change their password.
+
+## Purpose
+
+The CIAM Plus With Protect - Profile Management - Change Password - Main Flow flow presents users with an option to update their password. The flow uses multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* to verify the user and performs a threat assessment with PingOne Protect, then presents users with a form that enables them to change the password associated with their account. The flow uses PingOne nodes to make the changes to the account.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses function nodes to set variables. Then, if agreement is required, but no agreement ID is present, the flow progresses to the **Check Session, Call To Protect Analysis & MFA Step-Up** section.
+
+* **Check Session, Call To Protect Analysis & MFA Step-Up**
+
+  Uses a PingOne node to check for a valid session:
+
+  * If a session exists, a hidden HTML node captures risk information, then a PingOne node gathers additional information. The flow then progresses to the **Threat Detection & Mitigation** section. When this section completes, the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Change Password** section.
+
+  * If no session exists, a PingOne node deletes any existing session token, then the **CIAM Plus With Protect - SignOn - Subflow** is invoked. When the flow completes, a PingOne node creates or updates the session while a loading screen is displayed for the user. A PingOne node retrieves user information, then the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Change Password** section.
+
+* **Threat Detection & Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, the flow returns to the previous section.
+
+  * If the risk level is medium, the flow progresses to the **MFA Authentication** section. The flow then returns to the previous section.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user. The flow then progresses to the **Return Error** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, a function node stores the risk evaluation as a variable, then the flow progresses to the **Return Error** section.
+
+* **MFA Authentication**
+
+  Uses a PingOne node to retrieve the user's devices, then uses a hidden HTML node to check for WebAuthn compatibility. A function node then checks if the user has at least one active device:
+
+  * If the user has at least one active device, the **CIAM Plus With Protect - Device Authentication - Subflow** is invoked, a function node stores the authentication method as a variable, and the flow then returns to the previous section.
+
+  * If the user has no active devices, the flow progresses to the **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication** section.
+
+* **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then a function node evaluates the device registration result:
+
+  * If the device registration was completed, the authentication method is stored as a variable, and the flow returns to the **MFA Authentication** section.
+
+  * If the device registration was skipped, the flow returns to the **MFA Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device and enable MFA for the user. A function node stores the user's authentication method as a variable, and the flow returns to the **MFA Authentication** section.
+
+* **Change Password**
+
+  Uses a PingOne node to find the user. If the user exists and has a password, a hidden HTML node invokes the skpolling component, then the **CIAM Plus With Protect - Change Password - Subflow** is invoked. If the subflow completes successfully, a PingOne node sends a password change email, an HTML success page is displayed, and the flow progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+* **Return Error**
+
+  Displays an error message, then sends a JSON error message.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Required | Description                                                                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters` | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `flowResult`   | The result status of the flow.                       |
+| `p1UserId`     | The user's PingOne user ID.                          |
+| `errorMessage` | The error message to display in the parent flow.     |
+| `errorDetails` | The details of the error that occurred in this flow. |
+
+## Variables
+
+This flow uses the following variables:
+
+| Variable name                | Parameter name            | Description                                                            |
+| ---------------------------- | ------------------------- | ---------------------------------------------------------------------- |
+| `ciam_logoStyle`             | None                      | The HTML style to use for your company logo.                           |
+| `ciam_logoUrl`               | None                      | The URL for your company logo.                                         |
+| `ciam_companyName`           | None                      | Displays the name of your company.                                     |
+| `ciam_magicLinkEnabled`      | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.           |
+| `ciam_agreementEnabled`      | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment. |
+| `ciam_sessionLengthInMinute` | None                      | The maximum allowed session length for a user in the flow.             |
+| `p1AgreementId`              | None                      | The ID of the PingOne agreement to present to users.                   |
+| `p1RiskPolicyIdAuthn`        | None                      | The PingOne risk policy ID to use for authentication.                  |
+| `protectRiskEvalId`          | None                      | The risk evaluation ID returned by PingOne Protect.                    |
+| `p1RiskPolicyIdReg`          | None                      | The PingOne risk policy ID to use for registration.                    |
+| `p1RiskPolicyIdAR`           | None                      | The PingOne risk policy ID to use for account recovery.                |
+| `flowCompanyLogo`            | None                      | The company logo to use during the flow.                               |
+| `p1MFAPolicyId`              | None                      | The PingOne MFA policy ID.                                             |
+| `p1RiskPolicyIdAuthZ`        | None                      | The PingOne risk policy ID to use for authorization.                   |
+| `authMethod`                 | None                      | The authentication method used by the user.                            |
+
+---
+
+---
+title: CIAM Plus With Protect - Profile Management - Manage MFA - Main Flow
+description: The CIAM Plus With Protect - Profile Management - Manage MFA - Main Flow lets users view and manage the devices associated with their account.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_pm_device_management
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_pm_device_management.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Profile Management - Manage MFA - Main Flow
+
+The CIAM Plus With Protect - Profile Management - Manage MFA - Main Flow lets users view and manage the devices associated with their account.
+
+## Purpose
+
+The CIAM Plus With Protect - Profile Management - Manage MFA - Main Flow verifies the user's session or lets the user sign on using the **CIAM Plus With Protect - SignOn - Subflow** and performs a threat assessment using the **CIAM Plus With Protect - Threat Detection - Subflow**. It presents users with their current multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* devices, then presents the options for users to add new devices, change the name or status of existing devices, or remove an existing device.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses function nodes to set variables. Then, if agreement is required, but no agreement ID is present, the flow progresses to the **Check Session, Call To Protect Analysis & MFA Step-Up** section.
+
+* **Check Session, Call To Protect Analysis & MFA Step-Up**
+
+  Uses a PingOne node to check for a valid session:
+
+  * If a session exists, a hidden HTML node captures risk information, then a PingOne node gathers additional information. The flow then progresses to the **Threat Detection & Mitigation** section. When this section completes, the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Display User Devices** section.
+
+  * If no session exists, a PingOne node deletes any existing session token, then the **CIAM Plus With Protect - SignOn - Subflow** is invoked. When the flow completes, a PingOne node creates or updates the session while a loading screen is displayed for the user. A PingOne node retrieves user information, then the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Display User Devices** section.
+
+* **Threat Detection & Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, the flow returns to the previous section.
+
+  * If the risk level is medium, the flow progresses to the **MFA Authentication** section. The flow then returns to the previous section.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user. The flow then progresses to the **Return Error** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, a function node stores the risk evaluation as a variable, then the flow progresses to the **Return Error** section.
+
+* **MFA Authentication**
+
+  Uses a function node to check if MFA is enabled.
+
+  If MFA is enabled, the flow uses a PingOne node to retrieve the user's devices, then uses a hidden HTML node to check for WebAuthn compatibility. Function nodes check if the user has at least one active device:
+
+  * If the user has at least one active device, the **CIAM Plus With Protect - Device Authentication - Subflow** is invoked, a function node stores the authentication method as a variable, and the flow then returns to the previous section.
+
+  * If the user has no active devices, the flow progresses to the **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication** section.
+
+  If MFA is not enabled, an HTML node provides the user with the option to enable MFA. If the user enables MFA, a PingOne node enables MFA and the flow returns to the beginning of the section.
+
+* **Step Up To Register Email MFA Device, If No MFA Devices Found During Authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then a function node evaluates the device registration result:
+
+  * If the device registration was completed, the authentication method is stored as a variable, and the flow returns to the **MFA Authentication** section.
+
+  * If the device registration was skipped, the flow returns to the **MFA Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device and enable MFA for the user. A function node stores the user's authentication method as a variable, and the flow returns to the **MFA Authentication** section.
+
+* **Display User Devices**
+
+  Uses a PingOne node to retrieve the user's known devices. If the user can add devices, a custom HTML template presents the user with device options. If the user selects **Add**, the flow progresses to the **Add Device** section. If the user selects **Done** or **Cancel**, the flow progresses to the **Return Success** section. If the user selects an existing device, the flow progresses to the **Update Device** section.
+
+* **Add Device**
+
+  Invokes the **CIAM Plus With Protect - Device Registration - Subflow** flow. It then progresses to the **Display User Devices** section if the addition was successful or canceled.
+
+* **Update Device**
+
+  Presents users with a custom HTML page showing options for a currently selected device. The **Save** and **Default** options trigger PingOne to save a new device name or set the current device as default. The **Remove** option triggers an HTML node that asks the user to confirm the deletion. If the user confirms the deletion, a PingOne node removes the current device, then the flow progresses to the **Display User Devices** section. If the user cancels, the flow progresses to the **Display User Devices** section.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+* **Return Error**
+
+  Displays an error message, then sends a JSON error response.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Description                                                      |
+| ---------------- | ---------------------------------------------------------------- |
+| `flowParameters` | Parameters passed in when the flow is launched using the widget. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `flowResult`   | The result status of the flow.                       |
+| `p1UserId`     | The user's PingOne user ID.                          |
+| `errorMessage` | The error message to display in the parent flow.     |
+| `errorDetails` | The details of the error that occurred in this flow. |
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name                | Parameter name            | Description                                                                                                                                                                                                                                                                                                      |
+| ---------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_logoStyle`             | None                      | The HTML style to use for your company logo.                                                                                                                                                                                                                                                                     |
+| `ciam_logoUrl`               | None                      | The URL for your company logo.                                                                                                                                                                                                                                                                                   |
+| `ciam_companyName`           | None                      | Displays the name of your company.                                                                                                                                                                                                                                                                               |
+| `ciam_magicLinkEnabled`      | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.                                                                                                                                                                                                                                                     |
+| `ciam_agreementEnabled`      | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment.                                                                                                                                                                                                                                           |
+| `ciam_requireMFA`            | None                      | A boolean that controls whether MFA is required for all users.                                                                                                                                                                                                                                                   |
+| `ciam_resendOtpLimit`        | None                      | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `ciam_verificationLimit`     | None                      | The maximum number of times a user can attempt to verify their email address.                                                                                                                                                                                                                                    |
+| `ciam_sessionLengthInMinute` | None                      | The maximum allowed session length for a user in the flow.                                                                                                                                                                                                                                                       |
+| `ciam_otpFallbackAllowed`    | None                      | A boolean indicating whether a user can fall back to an OTP if a mobile push request times out.                                                                                                                                                                                                                  |
+| `p1AgreementId`              | None                      | The ID of the PingOne agreement to present to users.                                                                                                                                                                                                                                                             |
+| `p1RiskPolicyIdAuthn`        | None                      | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                            |
+| `protectRiskEvalId`          | None                      | The risk evaluation ID returned by PingOne Protect.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdReg`          | None                      | The PingOne risk policy ID to use for registration.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAR`           | None                      | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                          |
+| `flowCompanyLogo`            | None                      | The company logo to use during the flow.                                                                                                                                                                                                                                                                         |
+| `p1MFAPolicyId`              | None                      | The PingOne MFA policy ID.                                                                                                                                                                                                                                                                                       |
+| `p1RiskPolicyIdAuthZ`        | None                      | The PingOne risk policy ID to use for authorization.                                                                                                                                                                                                                                                             |
+| `authMethod`                 | None                      | The authentication method used by the user.                                                                                                                                                                                                                                                                      |
+
+---
+
+---
+title: CIAM Plus With Protect - Registration and Authentication with Username and Password - Main Flow
+description: The CIAM Plus With Protect - Registration and Authentication with Username and Password - Main Flow lets users sign on, create a new account, or recover an account. It can be launched through the widget or through PingOne.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_main
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_main.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Registration and Authentication with Username and Password - Main Flow
+
+The CIAM Plus With Protect - Registration and Authentication with Username and Password - Main Flow lets users sign on, create a new account, or recover an account. It can be launched through the widget or through PingOne.
+
+## Purpose
+
+The CIAM Plus With Protect - Registration and Authentication with Username and Password - Main Flow is the initial flow in the PingOne for Customers Plus solution. It enables existing users to sign on using a password, uses the CIAM Plus With Protect - Account Registration - Subflow flow to let new users register, uses the CIAM Plus With Protect - Account Recovery - Email - Subflow flow to let existing users recover their account, and uses the CIAM Plus With Protect - Device Authentication - Subflow flow to let existing users sign on using a known device.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses multiple function nodes to save the variable and parameter values so that the correct values are available in the flow and in subflows. The flow then progresses to the **Check for Session** section.
+
+* **Check for Session**
+
+  Uses a PingOne node to determine whether the user has an existing session.
+
+  If the user has a session, a hidden HTML node captures risk information and a PingOne node fetches additional user information, then the flow progresses to the **Threat Detection and Mitigation** section. When this section completes, the flow progresses to the **Return Success** section.
+
+  If the user does not have a session, the flow checks for any existing session tokens and uses a PingOne node to delete the prior session before the flow progresses to the **Offer Sign On Page** section.
+
+* **Offer Sign On Page**
+
+  Displays an HTML page with options to sign on using a password, recover from a forgotten password, or register a new account. The sign-on option progresses to the **Password Authentication** section, the forgot password option progresses to the **Call Account Recovery Sub-Flow** section, and the register option progresses to the **Call Account Registration Sub-Flow** section. If no options match, a hidden HTML node activates CSS files for social login, and the flow progresses to the **Call Check Agreement and Email Verification Sub-Flow** section.
+
+* **Call Account Recovery Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Account Recovery - Email - Subflow** flow, then progresses to the **Offer Sign On Page** section.
+
+* **Call Account Registration Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Account Registration - Subflow** flow. If the subflow's result is `signOn`, the flow progresses to the **Offer Sign On Page** section. If the subflow's result is `complete`, the flow invokes the **CIAM Plus With Protect - Device Registration - Subflow** flow, uses a PingOne node to send an account creation email, and then progresses to the **Return Success** section.
+
+* **Threat Detection and Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, a function node sets the `isMFAAuthnReq` variable to false. The flow then progresses to the **Return Success** section if an existing session was found, and to the **Password Authentication** section if no session was found.
+
+  * If the risk level is medium, a function node sets the `isMFAAuthnReq` variable to true. The flow then progresses to the **MFA Authentication** section if an existing session was found, and to the **Password Authentication** section if no session was found.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user and a function node sets the `isMFAAuthnReq` variable to true. The flow then progresses to the **MFA Authentication** section if an existing session was found, and to the **Password Authentication** section if no session was found.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, an error message is displayed, a function node stores the risk evaluation as a variable, and the flow progresses to the **Return Error** section.
+
+* **Password Authentication**
+
+  Uses two PingOne nodes to look up the user and validate the provided password. If the password is correct and current, the flow progresses to the **Return Success** section. If the password is correct, but must be changed or is expired, the flow progresses to the **Call Change Password Sub-Flow** section. If the password is incorrect or the user cannot be found, a comparison node checks whether the account is locked. If the account is locked, the flow progresses to the **Return Error** section. If the account is not locked, an error message is displayed to the user.
+
+* **MFA Authentication**
+
+  Uses a function node to check if multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+  \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+  \</div>)* is required and returns to the calling node if MFA is not required. The flow then uses a PingOne node to look up the user's existing devices. An HTML node then checks the user's current device for Webauthn support, and comparison nodes filter for unusable devices and check if at least one device is configured.
+
+  If the user has no active devices or the user's device information could not be found, the flow progresses to the **Step up to register Email MFA device if no MFA devices found during authentication** section.
+
+  If the user has active devices, the flow invokes the **CIAM Plus With Protect - Device Authentication - Subflow**. If the subflow completes successfully, a function node saves the user's authentication method as a variable, and the flow progresses to the **Return Success** section if an existing session was found, and to the **Password Authentication** section if no session was found. If the user canceled the subflow, the flow progresses to the **Return Error** section if an existing session was found, and to the **Offer Sign On Page** section if no session was found.
+
+* **Call Change Password Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Change Password - Subflow** flow. If the subflow completes successfully, the flow displays a success message and a PingOne node sends a password change email the flow. The flow then progresses to the **Call Check Agreement and Email Verification Sub-Flow** section.
+
+* Step up to register Email MFA device if no MFA devices found during authentication
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**. The section then branches based on the device registration result:
+
+  * If the result is **Complete**, the user's authentication method is stored as a variable and the flow returns to the previous section.
+
+  * If the result is **Skip**, the flow returns to the previous section.
+
+  * If the result is **Cancel**, the flow returns to the **Return Error** section if an existing session was found, and to the **Offer Sign On Page** section if no session was found.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device and enable MFA for the user. The user's authentication method is stored as a variable, and the flow then returns to the previous section.
+
+* **Call Check Agreement and Email Verification Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Agreement (ToS) - Subflow**, then uses a PingOne node to retrieve user information. A function node checks whether email verification is required, and if email verification is required, the **CIAM Plus With Protect - Verify Email - Subflow** is invoked. The flow then progresses to the **Handle Remember Me if Applicable** section.
+
+* **Handle Remember Me if Applicable**
+
+  Adds **Remember Me** as an authentication method if it is enabled, then progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Displays a success message, then uses a function node to determine how the flow was launched. If the flow was launched with the widget, a PingOne node looks up the user. A PingOne Authentication node then sends a success response and creates a session with a duration of two days.
+
+* **Return Error**
+
+  Displays an error screen and sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Required | Description                                                                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters` | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+
+## Output schema
+
+This flow has no outputs.
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name                 | Parameter name             | Description                                                                                                                                                                                                                                                                                                      |
+| ----------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_appleEnabled`           | `isAppleEnabled`           | Indicates whether authentication through Apple is enabled in your environment.                                                                                                                                                                                                                                   |
+| `ciam_facebookEnabled`        | `isFacebookEnabled`        | Indicates whether authentication through Facebook is enabled in your environment.                                                                                                                                                                                                                                |
+| `ciam_googleEnabled`          | `isGoogleEnabled`          | Indicates whether authentication through Google is enabled in your environment.                                                                                                                                                                                                                                  |
+| `ciam_magicLinkEnabled`       | `isEmailMagicLinkEnabled`  | Indicates whether magic link is enabled in your environment.                                                                                                                                                                                                                                                     |
+| `ciam_sessionLengthInMinute`  | None                       | The maximum time a user can spend in the flow before it times out.                                                                                                                                                                                                                                               |
+| `ciam_logoStyle`              | None                       | The HTML style to use for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                   |
+| `ciam_logoUrl`                | None                       | The URL for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                                 |
+| `ciam_companyName`            | None                       | Displays the name of your company.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                             |
+| `ciam_accountRecoveryEnabled` | `isAccountRecoveryEnabled` | A boolean that controls whether account recovery is enabled in your environment.                                                                                                                                                                                                                                 |
+| `ciam_agreementEnabled`       | `isTermsOfServiceEnabled`  | A boolean indicating whether agreement is enabled in your environment.                                                                                                                                                                                                                                           |
+| `p1AgreementId`               | None                       | The ID of the PingOne agreement to present to users.                                                                                                                                                                                                                                                             |
+| `p1RiskPolicyIdAuthn`         | None                       | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                            |
+| `p1RiskPolicyIdAR`            | None                       | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                          |
+| `p1RiskPolicyIdReg`           | None                       | The PingOne risk policy ID to use for registration.                                                                                                                                                                                                                                                              |
+| `p1MFAPolicyId`               | None                       | The PingOne MFA policy ID.                                                                                                                                                                                                                                                                                       |
+| `isMFAAuthnReq`               | None                       | Indicates whether MFA authentication is required.                                                                                                                                                                                                                                                                |
+| `flowRequireMFA`              | None                       | Indicates whether MFA enrollment is required or optional in the flow.                                                                                                                                                                                                                                            |
+| `flowCompanyLogo`             | None                       | The company logo to use during the flow.                                                                                                                                                                                                                                                                         |
+| `protectRiskEvalId`           | None                       | The risk evaluation ID returned by PingOne Protect.                                                                                                                                                                                                                                                              |
+| `authMethod`                  | None                       | The authentication method used by the user.                                                                                                                                                                                                                                                                      |
+| `ciam_resendOtpLimit`         | None                       | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `ciam_recoveryLimit`          | None                       | The maximum number of times a user can attempt to recover an account.                                                                                                                                                                                                                                            |
+| `ciam_otpFallbackAllowed`     | None                       | A boolean indicating whether a user can fall back to an OTP if a mobile push request times out.                                                                                                                                                                                                                  |
+| `ciam_verificationLimit`      | None                       | The maximum number of times a user can attempt to verify their email address.                                                                                                                                                                                                                                    |
+| `ciam_requireMFA`             | `isRequireMFA`             | A boolean that controls whether MFA enrollment is required for all users.                                                                                                                                                                                                                                        |
+
+---
+
+---
+title: CIAM Plus With Protect - Set User Consent Preferences - Main Flow
+description: The CIAM Plus With Protect - Set User Consent Preferences - Main Flow lets users manage their consent settings.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_set_user_consent_preferences
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_set_user_consent_preferences.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Set User Consent Preferences - Main Flow
+
+The CIAM Plus With Protect - Set User Consent Preferences - Main Flow lets users manage their consent settings.
+
+## Purpose
+
+The CIAM Plus With Protect - Set User Consent Preferences - Main Flow enables existing users to update their consent settings. It lets the user sign on if no existing session is found, and performs a threat analysis using PingOne Protect. If the threat level is medium, it also performs MFA authentication, adding a new MFA option if necessary. When the user has been authenticated, they are presented with a form on which they can update their consent settings. The new settings are then saved in PingOne.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses multiple function nodes to save the variable and parameter values so that the correct values are available in the flow and in subflows. The flow then uses a function node to check if agreement is enabled without an agreement ID present. If not, the flow progresses to the **Check Session, Call To Protect Analysis & MFA Step-Up** section. If so, the flow progresses to the **Return Error** section.
+
+* **Check Session, Call To Protect Analysis & MFA Step-Up**
+
+  Uses a PingOne node to check for an existing session.
+
+  If a session is found, an HTML node collects the user's metadata, then a PingOne node retrieves additional user information. The flow then progresses to the **Threat Detection & Mitigation** section. When this section completes, the flow progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Set User Consent Preferences** section.
+
+  If no session is found, a function node looks for an existing token, and a PingOne node deletes the session if a token is found. The flow then invokes the **CIAM Plus With Protect - SignOn - Subflow**. When the subflow completes, a PingOne node creates a new session for the user as a loading screen is displayed for the user. A second PingOne node retrieves additional user information. The flow then progresses to the **MFA Authentication** section. When this section completes, the flow progresses to the **Set User Consent Preferences** section.
+
+* **Threat Detection & Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, the flow returns to the previous section.
+
+  * If the risk level is medium, the flow progresses to the **MFA Authentication** section. The flow then returns to the previous section.
+
+  * If the risk level is high, a function node checks if the high risk was the result of a new device. If not, a PingOne node notifies the user. The flow then progresses to the **Return Error** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, a function node stores the risk evaluation as a variable, then the flow progresses to the **Return Error** section.
+
+* **MFA Authentication**
+
+  Uses a PingOne node to look up the user's existing devices. An HTML node then checks the user's current device for Webauthn support, and comparison nodes filter for unusable devices and check if at least one device is configured.
+
+  If the user has no active devices or the user's device information could not be found, the flow progresses to the **Step up to register Email MFA device if no MFA devices found during authentication** section.
+
+  If the user has active devices, the flow invokes the **CIAM Plus With Protect - Device Authentication - Subflow**. If the subflow completes successfully, a function node saves the user's authentication method as a variable. The flow then returns to the previous section.
+
+* **Step up to register Email MFA device if no MFA devices found during authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then progresses to the **Check Password Status** node in the **Password Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device and enable MFA for the user. A function node stores the user's authentication method as a variable, and the flow returns to the previous section.
+
+* **Set User Consent Preferences**
+
+  Uses a PingOne node to find the user, then displays an HTML form on which the user can select their consent preferences. The flow then branches based on the user's selection.
+
+  If the user clicks **Save**, a function node prepares the information provided by a user, then a PingOne node saves it. An HTML success message is displayed, then the flow progresses to the **Return Success** section.
+
+  If the user clicks **Cancel**, the flow progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Displays an HTML success message to the user, then sends a success response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Displays an error screen and sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name       | Required | Description                                                                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters` | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                         |
+| -------------- | --------------------------------------------------- |
+| `flowResult`   | The result status of the flow.                      |
+| `p1UserId`     | The PingOne user ID of the user.                    |
+| `errorMessage` | The error message to display in the parent flow.    |
+| `errorDetails` | Details about the error that occurred in this flow. |
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name                | Parameter name            | Description                                                                                                                                                                                                                                                                                                           |
+| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_magicLinkEnabled`      | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.                                                                                                                                                                                                                                                          |
+| `ciam_logoStyle`             | None                      | The HTML style to use for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                        |
+| `ciam_logoUrl`               | None                      | The URL for your company logo.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                                      |
+| `ciam_companyName`           | None                      | Displays the name of your company.This value is only used when the flow is launched with a redirect.                                                                                                                                                                                                                  |
+| `ciam_agreementEnabled`      | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment.                                                                                                                                                                                                                                                |
+| `ciam_requireMFA`            | None                      | A boolean that controls whether MFA is required for all users.                                                                                                                                                                                                                                                        |
+| `ciam_resendOtpLimit`        | None                      | The maximum number of times a user can have a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)* resent. |
+| `ciam_verificationLimit`     | None                      | The maximum number of times a user can attempt to verify their email address.                                                                                                                                                                                                                                         |
+| `ciam_sessionLengthInMinute` | None                      | The maximum allowed session length for a user in the flow.                                                                                                                                                                                                                                                            |
+| `ciam_otpFallbackAllowed`    | None                      | A boolean indicating whether a user can fall back to an OTP if a mobile push request times out.                                                                                                                                                                                                                       |
+| `p1AgreementID`              | None                      | The PingOne agreement ID to use in the solution.                                                                                                                                                                                                                                                                      |
+| `p1MFAPolicyID`              | None                      | The ID of the PingOne MFA policy to use in the solution.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAuthn`        | None                      | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                                 |
+| `protectRiskEvalId`          | None                      | The risk evaluation ID returned by PingOne Protect.                                                                                                                                                                                                                                                                   |
+| `p1RiskPolicyIdReg`          | None                      | The PingOne risk policy ID to use for account registration.                                                                                                                                                                                                                                                           |
+| `p1RiskPolicyIdAR`           | None                      | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                               |
+| `flowCompanyLogo`            | None                      | The company logo to use during the flow.                                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAuthZ`        | None                      | The PingOne risk policy ID to use for authorization.                                                                                                                                                                                                                                                                  |
+| `authMethod`                 | None                      | The method used by the user to authenticate.                                                                                                                                                                                                                                                                          |
+
+---
+
+---
+title: CIAM Plus With Protect - SignOn - Subflow
+description: The CIAM Plus With Protect - SignOn - Subflow lets users sign on, create a new account, or recover an account.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_signon
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_signon.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - SignOn - Subflow
+
+The CIAM Plus With Protect - SignOn - Subflow lets users sign on, create a new account, or recover an account.
+
+## Purpose
+
+The CIAM Plus With Protect - SignOn - Subflow enables existing users to sign on using a password, uses the CIAM Plus With Protect - Account Registration - Subflow flow to let new users register, uses the CIAM Plus With Protect - Account Recovery - Email - Subflow flow to let existing users recover their account, and uses the CIAM Plus With Protect - Device Authentication - Subflow flow to let existing users sign on using a known device.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Flow Configuration**
+
+  Uses multiple function nodes to save the variable and parameter values so that the correct values are available in the flow and in subflows. The flow then progresses to the **Offer Sign On Page** section.
+
+* **Offer Sign On Page**
+
+  Displays an HTML page with options to sign on using a password, recover from a forgotten password, or register a new account.
+
+  If the user clicks **Sign On**, a PingOne node looks up the user using their email address. The flow then progresses to the **Threat Detection And Mitigation** section. When this section completes, the flow progresses to the **Password Authentication** section.
+
+  If the user selects the forgot password option, the flow progresses to the **Call Account Recovery Sub-Flow** section.
+
+  If the user selects the registration option, the flow progresses to the **Call Account Registration Sub-Flow** section.
+
+  If no options match, a hidden HTML node activates CSS files for social login, and the flow progresses to the **Call Check Agreement and Email Verification Sub-Flow** section.
+
+* **Call Account Recovery Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Account Recovery - Email - Subflow** flow, then progresses to the **Offer Sign On Page** section.
+
+* **Call Account Registration Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Account Registration - Subflow** flow. If the subflow's result is `signOn`, the flow progresses to the **Offer Sign On Page** section. If the subflow's result is `complete`, the flow invokes the **CIAM Plus With Protect - Device Registration - Subflow** flow, uses a PingOne node to send an account creation email, and then progresses to the **Return Success** section.
+
+* **Threat Detection And Mitigation**
+
+  Invokes the **CIAM Plus With Protect - Threat Detection - Subflow**.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes successfully, a function node stores the risk evaluation as a variable, then a second function node branches the flow based on the risk level:
+
+  * If the risk level is low, a function node sets the `isMFAAuthnReq` variable to false. The flow then progresses to the **Return Success** section if an existing session was found, and to the **Password Authentication** section if no session was found.
+
+  * If the risk level is medium, a function node sets the `isMFAAuthnReq` variable to true. The flow then progresses to the **Password Authentication** section.
+
+  * If the risk level is high, function nodes check if the PingOne user ID is unknown and if the high risk was the result of a new device. If the PingOne ID is unknown and the high risk was not the result of a new device, a PingOne node sends an email notifying the user of suspicious activity. A function node sets the `isMFAAuthnReq` variable to true, and the flow progresses to the **Password Authentication** section.
+
+  If the **CIAM Plus With Protect - Threat Detection - Subflow** completes unsuccessfully, an error message is displayed.
+
+* **Password Authentication**
+
+  Uses two PingOne nodes to look up the user and validate the provided password. If the password is correct and current, the flow progresses to the **Return Success** section. If the password is correct but must be changed or is expired, the flow progresses to the **Call Change Password Sub-Flow** section. If the password is incorrect or the user cannot be found, a comparison node checks whether the account is locked. If the account is locked, the flow progresses to the **Return Error** section. If the account is not locked, an error message is displayed to the user.
+
+* **MFA Authentication**
+
+  Uses a PingOne node to look up the user's existing devices. An HTML node then checks the user's current device for Webauthn support, and comparison nodes filter for unusable devices and check if at least one device is configured.
+
+  If the user has no active devices or the user's device information could not be found, the flow progresses to the **Step up to register Email MFA device if no MFA devices found during authentication** section.
+
+  If the user has active devices, a PingOne node enables MFA, then invokes the **CIAM Plus With Protect - Device Authentication - Subflow**. If the subflow completes successfully, the flow progresses to the **Check Password Status** node in the **Password Authentication** section.
+
+* **Call Change Password Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Change Password - Subflow** flow. If the subflow completes successfully, the flow displays a success message and a PingOne node sends a password change email the flow. The flow then progresses to the **Call Check Agreement and Email Verification Sub-Flow** section.
+
+* **Step up to register Email MFA device if no MFA devices found during authentication**
+
+  A comparison node checks whether email verification is required.
+
+  If email verification is not required, invokes the **CIAM Plus With Protect - Device Registration - Subflow**, then progresses to the **Check Password Status** node in the **Password Authentication** section.
+
+  If email verification is required, invokes the **CIAM Plus With Protect - Verify Email - Subflow**, then uses PingOne nodes to enroll email as an MFA device, enable MFA for the user, and send an email confirming the email device registration. The flow then progresses to the **Check Password Status** node in the **Password Authentication** section.
+
+* **Call Check Agreement and Email Verification Sub-Flow**
+
+  Invokes the **CIAM Plus With Protect - Agreement (ToS) - Subflow**, then uses a PingOne node to retrieve user information. A function node checks whether email verification is required, and if email verification is required, the **CIAM Plus With Protect - Verify Email - Subflow** is invoked. The flow then progresses to the **Handle Remember Me if Applicable** section.
+
+* **Handle Remember Me if Applicable**
+
+  Adds **Remember Me** as an authentication method if it is enabled, then progresses to the **Return Success** section.
+
+* **Return Success**
+
+  Displays an HTML success message to the user, then sends a success response, indicating that the flow completed successfully.
+
+* **Return Error**
+
+  Displays an error screen and sends an error JSON response, indicating that the flow completed unsuccessfully.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name            | Required | Description                                                                                                               |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `flowParameters`      | No       | An object containing parameters passed in if the flow was launched with the widget. This input replaces all other inputs. |
+| `p1AgreementId`       | No       | The ID of the PingOne agreement to present to users.                                                                      |
+| `p1MFAPolicyId`       | No       | The PingOne MFA policy ID.                                                                                                |
+| `p1RiskPolicyIdReg`   | No       | The PingOne risk policy ID to use for registration.                                                                       |
+| `p1RiskPolicyIdAuthn` | No       | The PingOne risk policy ID to use for authentication.                                                                     |
+| `p1RiskPolicyIdAR`    | No       | The PingOne risk policy ID to use for account recovery.                                                                   |
+| `canUserEnableMFA`    | No       | Indicates whether the user can enable MFA for their account.                                                              |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output Name    | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `errorMessage` | The error message to display in the parent flow.     |
+| `errorDetails` | The details of the error that occurred in this flow. |
+| `authMethod`   | The authentication method used in the flow.          |
+| `p1UserId`     | The PingOne user ID of the user.                     |
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name                 | Parameter name            | Description                                                                                                                                                                                                                                                                                                      |
+| ----------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ciam_logoStyle`              | None                      | The HTML style to use for your company logo.                                                                                                                                                                                                                                                                     |
+| `ciam_logoUrl`                | None                      | The URL for your company logo.                                                                                                                                                                                                                                                                                   |
+| `ciam_appleEnabled`           | `isAppleEnabled`          | Indicates whether authentication through Apple is enabled in your environment.                                                                                                                                                                                                                                   |
+| `ciam_facebookEnabled`        | `isFacebookEnabled`       | Indicates whether authentication through Facebook is enabled in your environment.                                                                                                                                                                                                                                |
+| `ciam_googleEnabled`          | `isGoogleEnabled`         | Indicates whether authentication through Google is enabled in your environment.                                                                                                                                                                                                                                  |
+| `ciam_companyName`            | None                      | Displays the name of your company.                                                                                                                                                                                                                                                                               |
+| `ciam_magicLinkEnabled`       | `isEmailMagicLinkEnabled` | Indicates whether magic link is enabled in your environment.                                                                                                                                                                                                                                                     |
+| `ciam_agreementEnabled`       | `isTermsOfServiceEnabled` | A boolean indicating whether agreement is enabled in your environment.                                                                                                                                                                                                                                           |
+| `ciam_requireMFA`             | None                      | A boolean that controls whether MFA is required for all users.                                                                                                                                                                                                                                                   |
+| `ciam_resendOtpLimit`         | None                      | The maximum number of times a user can resend a one-time passcode (OTP) *(tooltip: \<div class="paragraph">&#xA;\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>&#xA;\</div>)*. |
+| `ciam_verificationLimit`      | None                      | The maximum number of times a user can attempt to verify their email address.                                                                                                                                                                                                                                    |
+| `ciam_otpFallbackAllowed`     | None                      | A boolean indicating whether a user can fall back to an OTP if a mobile push request times out.                                                                                                                                                                                                                  |
+| `ciam_recoveryLimit`          | None                      | The maximum number of times a user can attempt to recover an account.                                                                                                                                                                                                                                            |
+| `ciam_accountRecoveryEnabled` | None                      | A boolean that controls whether account recovery is enabled in your environment.                                                                                                                                                                                                                                 |
+| `p1AgreementId`               | None                      | The ID of the PingOne agreement to present to users.                                                                                                                                                                                                                                                             |
+| `p1RiskPolicyIdAuthn`         | None                      | The PingOne risk policy ID to use for authentication.                                                                                                                                                                                                                                                            |
+| `protectRiskEvalId`           | None                      | The risk evaluation ID returned by PingOne Protect.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdReg`           | None                      | The PingOne risk policy ID to use for registration.                                                                                                                                                                                                                                                              |
+| `p1RiskPolicyIdAR`            | None                      | The PingOne risk policy ID to use for account recovery.                                                                                                                                                                                                                                                          |
+| `flowCompanyLogo`             | None                      | The company logo to use during the flow.                                                                                                                                                                                                                                                                         |
+| `p1MFAPolicyId`               | None                      | The PingOne MFA policy ID.                                                                                                                                                                                                                                                                                       |
+| `authMethod`                  | None                      | The authentication method used by the user.                                                                                                                                                                                                                                                                      |
+| `protectDeviceStatus`         | None                      | The status of the user's device as determined by PingOne Protect.                                                                                                                                                                                                                                                |
+| `flowRequireMFA`              | None                      | Indicates whether MFA enrollment is required in the flow.                                                                                                                                                                                                                                                        |
+| `isMFAAuthnReq`               | None                      | Indicates whether MFA authentication is required.                                                                                                                                                                                                                                                                |
+
+---
+
+---
+title: CIAM Plus With Protect - Threat Detection - Subflow
+description: The CIAM Plus With Protect - Threat Detection - Subflow uses PingOne Protect to provide a risk assessment of the current user.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_threat_detection_subflow
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_threat_detection_subflow.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - Threat Detection - Subflow
+
+The CIAM Plus With Protect - Threat Detection - Subflow uses PingOne Protect to provide a risk assessment of the current user.
+
+## Purpose
+
+The CIAM Plus With Protect - Threat Detection - Subflow passes user information to PingOne Protect to perform a risk assessment. The assessment results are made available to other flows.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Detect Threat using PingOne Protect**
+
+  A function node verifies that the username, flow type, and `skriskcomponent` are all present. If any of these values are missing, the flow progresses to the **Return Error** section. If all values are present, a PingOne Protect node performs a risk and bot evaluation.
+
+  If the evaluation fails, the flow progresses to the **Return Error** section. If the evaluation succeeds, a comparison node checks if a new device was found. If so, function nodes verify that the calling flow is not CIAM Plus With Protect - Account Registration - Subflow, that the user's PingOne user ID is known, and that the user is active. If these conditions are met, a PingOne node sends an email to the user notifying them of the new device.
+
+  Regardless of whether a new device was found, the flow then uses a function node to check whether the PingOne Protect analysis found a bot, AITM, or disposable email attack. If so, the flow progresses to the **Disable User And Return Error If BOT/AITM/Disposable Mail Detected** section.
+
+  If no threats are identified, the flow uses function nodes to verify that the user's PingOne user ID is unknown or that their account is enabled if their PingOne user ID is known. The flow progresses to the **Return Success** section if these conditions are met, and progresses to the **Return Error** section otherwise.
+
+* **Disable User And Return Error If BOT/AITM/Disposable Mail Detected**
+
+  A function node checks whether the calling flow was the CIAM Plus With Protect - Account Registration - Subflow. If so, the flow progresses to the **Return Error** section.
+
+  If the calling flow was not CIAM Plus With Protect - Account Registration - Subflow, a function node checks if the user's account is enabled. If it is not enabled, the flow progresses to the **Return Error** section. If it is enabled, PingOne nodes disable the user's account and send a notification to the user regarding their account status. The flow then progresses to the **Return Error** section.
+
+* **Return Success**
+
+  Sends a JSON success message.
+
+* **Return Error**
+
+  Sends a JSON error message, then updates the PingOne Protect risk evaluation to `Failed` if it is not already set.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input name              | Required | Description                                                                                                 |
+| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `skriskcomponent`       | Yes      | The `SKRisk` component to be used in the risk evaluation.                                                   |
+| `p1UserId`              | No       | The user ID to be passed to PingOne Protect.                                                                |
+| `p1UserName`            | Yes      | The username to be evaluated by PingOne Protect.                                                            |
+| `p1UserEmail`           | No       | The email address to be passed to PingOne Protect.                                                          |
+| `p1ProtectRiskPolicyId` | No       | The risk policy ID to be passed to PingOne Protect. If it is not provided, the default risk policy is used. |
+| `flowType`              | Yes      | The flow type to be passed to PingOne Protect.                                                              |
+| `ipAddress`             | Yes      | The user IP address to be passed to PingOne Protect.                                                        |
+| `isAccountEnabled`      | No       | A boolean indicating whether the user's account is enabled.                                                 |
+| `applicationID`         | No       | The application ID to be passed to PingOne Protect.                                                         |
+| `sessionID`             | No       | The session ID to be passed to PingOne Protect.                                                             |
+| `customAttributes`      | No       | Any custom PingOne attributes to be passed to PingOne Protect.                                              |
+| `userAgent`             | No       | The PingOne Protect user agent.                                                                             |
+| `usercookie`            | No       | The PingOne Protect user cookie.                                                                            |
+
+## Output schema
+
+This flow has the following outputs:
+
+| Output name            | Description                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `protectRiskEvalID`    | The risk ID of the current user as used by PingOne Protect.                                                            |
+| `protectActivityState` | The user's state or province, as determined by PingOne Protect.                                                        |
+| `protectActivityCity`  | The user's city, as determined by PingOne Protect.                                                                     |
+| `protectDeviceStatus`  | The status of the user's device as determined by PingOne Protect.                                                      |
+| `protectPredictor`     | The action recommended by PingOne Protect.                                                                             |
+| `protectRiskLevel`     | The risk level of the current user as determined by PingOne Protect.                                                   |
+| `errorMessage`         | The error message returned by the flow. Only sent if the flow progressed to the **Return Error** section.              |
+| `errorDetails`         | The detailed error information returned by the flow. Only sent if the flow progressed to the **Return Error** section. |
+
+## Variables and parameters
+
+This flow does not directly use any variable or parameter values.
+
+---
+
+---
+title: CIAM Plus With Protect - User Consent Report - Main Flow
+description: The CIAM Plus With Protect - User Consent Report - Main Flow lets administrators view user consent information.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_user_consent_report
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_user_consent_report.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables-and-parameters: Variables and parameters
+---
+
+# CIAM Plus With Protect - User Consent Report - Main Flow
+
+The CIAM Plus With Protect - User Consent Report - Main Flow lets administrators view user consent information.
+
+## Purpose
+
+The CIAM Plus With Protect - User Consent Report - Main Flow enables administrators to view user consent information. It continually retrieves and displays consent information about existing users.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **User Consent Report**
+
+  Uses a function node to initialize variables, then progresses to the **View Report** section.
+
+* **View Report**
+
+  Uses a function node to prepare the report query, then displays a loading screen. Uses a PingOne node to retrieve user consent information, then uses a function node to prepare the results. An HTML node then displays the report. The flow then progresses to the beginning of the **View Report** section to gather additional information.
+
+## Input schema
+
+This flow has no inputs.
+
+## Output schema
+
+This flow has no outputs.
+
+## Variables and parameters
+
+This flow uses the following variable or parameter values:
+
+| Variable name      | Parameter name | Description                                                                                                    |
+| ------------------ | -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ciam_logoStyle`   | None           | The HTML style to use for your company logo.This value is only used when the flow is launched with a redirect. |
+| `ciam_logoUrl`     | None           | The URL for your company logo.This value is only used when the flow is launched with a redirect.               |
+| `ciam_companyName` | None           | Displays the name of your company.This value is only used when the flow is launched with a redirect.           |
+| `logoStyle`        | None           | The HTML style to use for your company logo.                                                                   |
+| `companyName`      | None           | Displays the name of your company.                                                                             |
+| `reportUsers`      | None           | An object containing the user consent report.                                                                  |
+| `companyLogo`      | None           | The URL for your company logo.                                                                                 |
+
+---
+
+---
+title: CIAM Plus With Protect - Verify Email - Subflow
+description: The CIAM Plus With Protect - Verify Email - Subflow lets a user verify their email address using a one-time passcode (OTP) sent by the PingOne Single Sign-on connector.
+component: pingone-solutions
+page_id: pingone-solutions:pingone-customers-plus:flow_reference/ciam_plus_ciam_verify_email
+canonical_url: https://docs.pingidentity.com/pingone-solutions/pingone-customers-plus/flow_reference/ciam_plus_ciam_verify_email.html
+revdate: June 28, 2024
+section_ids:
+  purpose: Purpose
+  structure: Structure
+  input-schema: Input schema
+  output-schema: Output schema
+  variables: Variables
+---
+
+# CIAM Plus With Protect - Verify Email - Subflow
+
+The CIAM Plus With Protect - Verify Email - Subflow lets a user verify their email address using a one-time passcode (OTP) *(tooltip: \<div class="paragraph">
+\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>
+\</div>)* sent by the PingOne Single Sign-on connector.
+
+## Purpose
+
+The **CIAM Plus With Protect - Verify Email - Subflow** sends a verification code, then displays an HTML page giving users the option to enter a verification code sent to their email or resend the code. If the user enters the code, a PingOne node verifies the code. If the user requests that the code be resent, a PingOne node resends the code, then the user is returned to the beginning of the flow.
+
+## Structure
+
+This flow is divided into sections using teleport nodes:
+
+* **Prompt for OTP**
+
+  Uses a flow instance variable to track the number of verification attempts. Uses a PingOne to send a verification code, then presents the user with an HTML page on which they can enter the verification code or request that the code be resent. If the user submits a verification code, the flow progresses to the **Verify verification code** section. If the user requests a new code, the flow progresses to the **Resend verification code** section.
+
+* **Validate OTP**
+
+  Increments the number of validation attempts. If the number of attempts has not reached the maximum, a PingOne node validates the verification code. If the validation succeeds, a JSON success message is sent. If the validation fails, an error message is displayed.
+
+* **Resend OTP**
+
+  Increments the number of resend attempts. If the number of attempts has not reached the maximum, a PingOne node sends a new verification code and a confirmation message indicates that the new verification code has been resent.
+
+* **Return Error**
+
+  Sends a JSON error message.
+
+## Input schema
+
+This flow has the following inputs:
+
+| Input Name          | Required? | Description                                                                   |
+| ------------------- | --------- | ----------------------------------------------------------------------------- |
+| `p1UserID`          | Yes       | The user ID of the current user.                                              |
+| `companyLogo`       | No        | The company logo.Used only when the main flow was launched using a redirect.  |
+| `verificationLimit` | Yes       | The maximum number of times a user can attempt to verify their email.         |
+| `resendOtpLimit`    | Yes       | The maximum number of times a user can attempt to resend a verification code. |
+
+## Output schema
+
+This flow has the following outputs.
+
+| Output Name     | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `errorMessage`  | The error message to display in the parent flow.     |
+| `errorDetails`  | The details of the error that occurred in this flow. |
+| `subflowResult` | The result status of the flow.                       |
+
+## Variables
+
+This flow uses the following variables.
+
+| Variable Name                    | Description                                                    |
+| -------------------------------- | -------------------------------------------------------------- |
+| `resendOtpAttempts`              | The number of times the user has resent an OTP.                |
+| `verificationValidationAttempts` | The number of times the user has attempted email verification. |

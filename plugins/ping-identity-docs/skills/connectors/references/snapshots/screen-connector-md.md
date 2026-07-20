@@ -1,12 +1,12 @@
 ---
 title: Screen Connector
-description: The Screen connector lets you display forms and customized UI to retrieve information from a user or show flow progress in your PingOne DaVinci flow.
+description: Configure the Screen connector to display forms and custom UI elements to collect user information or show PingOne DaVinci flow progress
 component: connectors
 page_id: connectors::screen_connector
 canonical_url: https://docs.pingidentity.com/connectors/screen_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -34,17 +34,17 @@ You can use the Screen connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Configuring the Screen connector
 
-In DaVinci, add a Screen connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Screen connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 |   |                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------ |

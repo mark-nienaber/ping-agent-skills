@@ -2,39 +2,41 @@
 
 - Product: Web Agents
 - Version: 2026
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/web-agents/llms.txt
 - Guides discovered: 9
-- Guides captured: 8
-- Guides fully captured: 4
-- Guides partially captured: 4
-- Guides without snapshots: 1
+- Guides captured: 9
+- Guides fully captured: 7
+- Guides partially captured: 2
+- Guides without snapshots: 0
 - Total pages indexed: 244
-- Total snapshot pages captured: 66
+- Total snapshot pages captured: 92
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| properties-reference.md | assembled | <156 pages from properties-reference> | 156 | 20 | partial |
-| release-notes.md | assembled | <36 pages from release-notes> | 36 | 20 | partial |
-| user-guide.md | assembled | <18 pages from user-guide> | 18 | 6 | partial |
-| maintenance-guide.md | assembled | <7 pages from maintenance-guide> | 7 | 4 | partial |
-| security-guide.md | assembled | <7 pages from security-guide> | 7 | 7 | full |
-| identity-cloud-guide.md | assembled | <4 pages from identity-cloud-guide> | 4 | 4 | full |
-| upgrade.md | assembled | <4 pages from upgrade> | 4 | 4 | full |
-| root.md | assembled | <1 pages from root> | 1 | 1 | full |
+| properties-reference.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 156 | 20 | partial |
+| release-notes.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 36 | 20 | partial |
+| user-guide.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 18 | 18 | full |
+| installation-guide.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 11 | 11 | full |
+| maintenance-guide.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 7 | 7 | full |
+| security-guide.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 7 | 7 | full |
+| identity-cloud-guide.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 4 | 4 | full |
+| upgrade.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 4 | 4 | full |
+| root.md | assembled | https://docs.pingidentity.com/web-agents/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | dd467c4eaa71cf822bbddef8a2f95b569e5306f9b0c31412ff9965d2300cee93 |
-| snapshots/properties-reference.md | cc4e80acec19da2e7e84f0620d415436c929f2c8764f5c071c5052c28e401c47 |
-| snapshots/release-notes.md | e09a5aedd1927a725c4245e14ae882befb4a3dfdd736f81519b31e2fae71fae6 |
-| snapshots/user-guide.md | 9c088a6f978320988d0d9f603a4b3ae1e2ed2e0c8a21dd85e812557095a77d9d |
-| snapshots/maintenance-guide.md | ec426353c60fdbf8197c2ba1dd9ef45387847f6089b13807321c16e806c2e9f7 |
-| snapshots/security-guide.md | 6b075af1c12027b1bfbf7de1f9bdbe8f97bf669ddcb114c28ebcdbcd778804e3 |
-| snapshots/identity-cloud-guide.md | 7dabee32ebeb1daca2e4e386a5eb309b87da87a6052448036a355ed3c57ccf39 |
-| snapshots/upgrade.md | d07d1178b05e8b1c0310d312089fc2183d78b27f117f085be4a48d57c131161d |
-| snapshots/root.md | 8655ea04321d880339e8b4a14b2b01cdf027eb746732044d5330f1c5810e2a4a |
+| llms.txt | 00de99bde969be7eedaddce76a7f0800bbc401aac87d8f52edb11778d35d9be7 |
+| snapshots/properties-reference.md | bf82bfdffcfdbd2513808cf18ccb146dbcf7f0a701664c4f2f17a1b833545335 |
+| snapshots/release-notes.md | f20931729741d3154c6b978dae04d38b7a973583e3d54356cdce533088c86a66 |
+| snapshots/user-guide.md | c0977c0871526e8b9cc7b8488dbc653e1f08efe20325f8c3561bbbb5c25cce5b |
+| snapshots/installation-guide.md | e46f12b406c99748d7bd14a90971ca94661a3959bb3509a937a6224e2ea1e211 |
+| snapshots/maintenance-guide.md | ed00453419671ed80ca5fee4761003016a449a000fce0e3bb2169266f7931947 |
+| snapshots/security-guide.md | 83c46d25946fd9e6e307a349c6cefddd42a649b56bf8718679ce8281f0e86517 |
+| snapshots/identity-cloud-guide.md | 96fded93016c6d6e913c41f731f92d4ba711db8c985312ee383d3808c194824b |
+| snapshots/upgrade.md | f86a9f096da741b8b5b8c3362c4543df5fe91912b9aecf97d74c0ffc1c10533b |
+| snapshots/root.md | f4106fb749090857e4c6b1c5e334ecafde74d3af0304c3670c7ca12845f6ba8d |

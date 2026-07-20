@@ -7304,9 +7304,9 @@ The following settings appear on the Advanced tab:
 
   Specifies whether AM wraps the introspected token's claims inside a `token_introspection` claim in the JWT introspection response, as required by RFC 9701.
 
-  When enabled, AM separates the JWT's own top-level claims (`iss`, `aud`, `iat`) from the introspected token's claims, which appear inside `token_introspection`. The `aud` claim of the introspected token is always included.
+  When enabled, AM separates the JWT's own top-level claims (`iss`, `aud`, `iat`) from the introspected token's claims, which appear inside `token_introspection`. The `aud` claim of the introspected token is always included in the JWT response, including for client-side tokens. The JSON introspection response also includes the `aud` claim of the introspected token, if present.
 
-  When disabled, AM returns a flat JWT structure and omits the `aud` claim from the response.
+  When not enabled, AM returns a flat JWT structure and omits the `aud` claim from the response. JSON responses also omit the `aud` claim.
 
   Learn more in [RFC 9701 token\_introspection claim](../am-oauth2/oauth2-introspect-endpoint.html#rfc-9701-token-introspection-claim).
 

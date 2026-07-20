@@ -6,9 +6,13 @@ page_id: build-with-ai:release_notes:whats-new
 canonical_url: https://developer.pingidentity.com/build-with-ai/release_notes/whats-new.html
 llms_txt: https://developer.pingidentity.com/build-with-ai/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2026
+revdate: July 13, 2026
 keywords: ["release notes", "what's new", "MCP", "AIC", "changelog"]
 section_ids:
+  july-2026: July 2026
+  july-13: July 13
+  agentic-deployment-patterns: Agentic deployment patterns
+  ping-cli-and-terraform: Ping CLI and Terraform
   june-2026: June 2026
   june-10: June 10
   ping-identity-agent-plugins: Ping Identity Agent Plugins
@@ -32,13 +36,41 @@ section_ids:
 
 Keep up with new developments in Build with AI and Ping.
 
+## July 2026
+
+### July 13
+
+#### Agentic deployment patterns
+
+New
+
+Guidance on how AI agents interact with Ping Identity platforms across different environments and governance models.
+
+* [Agentic deployment patterns](../agentic-deployment-patterns.html): choosing the right interaction model (MCP, CLI, or IaC) based on environment and governance requirements.
+
+* [Agentic development](../agentic-development-environments.html): direct agent interaction with Ping Identity platforms in sandbox environments.
+
+* [Managing production environments](../agentic-cicd-production.html): how agents operate CI/CD pipelines to promote configuration safely into production.
+
+#### Ping CLI and Terraform
+
+New
+
+Guidance on how to use AI agents with Ping CLI and Terraform to automate and promote Ping Identity platform configuration across sandbox and production environments.
+
+* [Ping CLI overview](../pingcli/overview.html): the workflow execution layer for scripting and automating Ping Identity configuration in agentic development and CI/CD pipelines.
+
+* [Ping CLI in development environments](../pingcli/agentic-development.html): authentication delegation patterns, OAuth client recommendations, and example operations for sandbox use.
+
+* [Ping CLI with CI/CD pipelines](../pingcli/cicd-and-production.html): the full governance model, config-as-code patterns, and a worked production example.
+
+* [Terraform for Ping Identity configuration](../terraform/overview.html): declarative infrastructure-as-code for managing Ping Identity environments, and how it works alongside Ping CLI.
+
 ## June 2026
 
 ### June 10
 
 #### Ping Identity Agent Plugins
-
-New
 
 Initial release of the Ping Identity Agent Plugins, a collection of six composable agent skills covering the full Ping Identity platform. Install in Claude Code or Cursor to get Ping Identity domain expertise alongside automatic registration of the AIC MCP Server and DaVinci MCP Server.
 

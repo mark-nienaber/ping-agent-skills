@@ -1,12 +1,12 @@
 ---
 title: AuthenticID Connector
-description: The AuthenticID connector lets you use AuthenticID for identity verification in your PingOne DaVinci flow.
+description: Configure the AuthenticID connector in PingOne DaVinci to verify identities using document scanning and selfie capture via CFAir or CFWeb
 component: connectors
 page_id: connectors::authenticid_connector
 canonical_url: https://docs.pingidentity.com/connectors/authenticid_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 16, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -41,7 +41,7 @@ The connector supports the AuthenticID CFAir and CFWeb services.
 
 For CFAir, the connector can upload a previously captured identity document and selfie images to AuthenticID.
 
-For CFWeb, the connector allows you to direct users to a unique verification URL where they will submit their driver license or passport along with a selfie photo. After AuthenticID verifies the user's identity, it sends the results to DaVinci where you can branch your flow accordingly.
+For CFWeb, the connector allows you to direct users to a unique verification URL where they will submit their driver license or passport along with a selfie photo. After AuthenticID verifies the user's identity, it sends the results to PingOne DaVinci where you can branch your flow accordingly.
 
 To make sure a camera is available to scan the documents and take photos, the user typically completes the verification process on a mobile device, either in a web browser or using a mobile app:
 
@@ -67,13 +67,13 @@ To make sure a camera is available to scan the documents and take photos, the us
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -89,7 +89,7 @@ To use the connector, you'll need:
 
 ### Configuring the AuthenticID connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -141,7 +141,7 @@ If you're satisfied with your existing document and selfie image capture experie
 
 Both capabilities allow you to associate the images with an existing AuthenticID transaction ID to build a profile.
 
-Download the [Identity verification with AuthenticID CFAir](https://marketplace.pingone.com/item/identity-verification-with-authenticid-cfair-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+Download the [Identity verification with AuthenticID CFAir](https://marketplace.pingone.com/item/identity-verification-with-authenticid-cfair-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 ### Verifying identities with CFWeb
 
@@ -151,7 +151,7 @@ In this flow, you use AuthenticID to generate a unique verification URL and show
 
 This flow uses the **AuthenticID** connector to create a "challenge". This lets you pause the main flow on the QR code while a secondary flow continues the verification process. When the verification process is complete, you use a [Challenge](challenge_connector.html) connector to trigger the main flow to continue. Learn more about this technique,in [Challenge](challenge_connector.html) connector.
 
-1. Download the [AuthenticID Identity verification with CFWeb](https://marketplace.pingone.com/item/authenticid-identity-verification-with-cfweb-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [AuthenticID Identity verification with CFWeb](https://marketplace.pingone.com/item/authenticid-identity-verification-with-cfweb-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the document verification QR code prompt:
 

@@ -2,7 +2,7 @@
 
 - Product: Developer Resources
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/developer-resources/llms.txt
 - Guides discovered: 7
 - Guides captured: 7
@@ -16,13 +16,13 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| oauth-20-developer-guide.md | assembled | <12 pages from oauth_20_developer_guide> | 12 | 12 | full |
-| application-integration-guide.md | assembled | <8 pages from application_integration_guide> | 8 | 8 | full |
-| scim-11-developer-guide.md | assembled | <8 pages from scim_11_developer_guide> | 8 | 8 | full |
-| federated-sso-primer.md | assembled | <7 pages from federated_sso_primer> | 7 | 7 | full |
-| openid-connect-developer-guide.md | assembled | <6 pages from openid_connect_developer_guide> | 6 | 6 | full |
-| dev-jwt-jose-overview-md.md | assembled | <1 pages from dev_jwt_jose_overview.md> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
+| oauth-20-developer-guide.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 12 | 12 | full |
+| application-integration-guide.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 8 | 8 | full |
+| scim-11-developer-guide.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 8 | 8 | full |
+| federated-sso-primer.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 7 | 7 | full |
+| openid-connect-developer-guide.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 6 | 6 | full |
+| dev-jwt-jose-overview-md.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/developer-resources/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

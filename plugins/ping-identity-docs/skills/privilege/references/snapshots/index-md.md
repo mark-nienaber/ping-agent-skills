@@ -4,6 +4,8 @@ description: PingOne Privilege is a cloud-based Privileged Access Management (PA
 component: privilege
 page_id: privilege::index
 canonical_url: https://docs.pingidentity.com/privilege/index.html
+llms_txt: https://docs.pingidentity.com/privilege/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2026
 section_ids:
   release-notes: Release Notes

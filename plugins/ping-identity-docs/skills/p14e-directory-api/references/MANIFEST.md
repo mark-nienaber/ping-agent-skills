@@ -2,7 +2,7 @@
 
 - Product: P14e Directory API
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://developer.pingidentity.com/p14e-directory-api/llms.txt
 - Guides discovered: 21
 - Guides captured: 21
@@ -16,27 +16,27 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| create-requests-md.md | assembled | <1 pages from create-requests.md> | 1 | 1 | full |
-| create-resource-md.md | assembled | <1 pages from create-resource.md> | 1 | 1 | full |
-| delete-resource-md.md | assembled | <1 pages from delete-resource.md> | 1 | 1 | full |
-| directory-actions-md.md | assembled | <1 pages from directory-actions.md> | 1 | 1 | full |
-| functional-overview-md.md | assembled | <1 pages from functional-overview.md> | 1 | 1 | full |
-| group-actions-md.md | assembled | <1 pages from group-actions.md> | 1 | 1 | full |
-| group-membership-count-md.md | assembled | <1 pages from group-membership-count.md> | 1 | 1 | full |
-| group-resources-md.md | assembled | <1 pages from group-resources.md> | 1 | 1 | full |
-| handle-errors-md.md | assembled | <1 pages from handle-errors.md> | 1 | 1 | full |
-| handle-responses-md.md | assembled | <1 pages from handle-responses.md> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
-| read-resource-md.md | assembled | <1 pages from read-resource.md> | 1 | 1 | full |
-| release-notes.md | assembled | <1 pages from release_notes> | 1 | 1 | full |
-| reset-password-by-email-md.md | assembled | <1 pages from reset-password-by-email.md> | 1 | 1 | full |
-| reset-password-md.md | assembled | <1 pages from reset-password.md> | 1 | 1 | full |
-| update-resource-md.md | assembled | <1 pages from update-resource.md> | 1 | 1 | full |
-| user-actions-md.md | assembled | <1 pages from user-actions.md> | 1 | 1 | full |
-| user-authentication-md.md | assembled | <1 pages from user-authentication.md> | 1 | 1 | full |
-| user-invitation-md.md | assembled | <1 pages from user-invitation.md> | 1 | 1 | full |
-| user-registration-notifications-md.md | assembled | <1 pages from user-registration-notifications.md> | 1 | 1 | full |
-| user-resources-md.md | assembled | <1 pages from user-resources.md> | 1 | 1 | full |
+| create-requests-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| create-resource-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| delete-resource-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| directory-actions-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| functional-overview-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| group-actions-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| group-membership-count-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| group-resources-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| handle-errors-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| handle-responses-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| read-resource-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| release-notes.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| reset-password-by-email-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| reset-password-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| update-resource-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| user-actions-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| user-authentication-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| user-invitation-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| user-registration-notifications-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
+| user-resources-md.md | assembled | https://developer.pingidentity.com/p14e-directory-api/llms.txt | 1 | 1 | full |
 
 ## Checksums
 

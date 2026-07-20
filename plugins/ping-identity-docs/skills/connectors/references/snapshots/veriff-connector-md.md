@@ -1,12 +1,12 @@
 ---
 title: Veriff Connector
-description: The Veriff connector lets you verify users with Veriff's artificial intelligence (AI)-powered identity solution for identity fraud prevention in your PingOne DaVinci flow.
+description: Configure the Veriff connector in PingOne DaVinci to verify user identity and prevent fraud using AI-powered document verification
 component: connectors
 page_id: connectors::veriff_connector
 canonical_url: https://docs.pingidentity.com/connectors/veriff_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -53,13 +53,13 @@ Learn more in the following:
 
   * [Getting started with Veriff](https://devdocs.veriff.com/docs/getting-started)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -75,7 +75,7 @@ Follow the instructions in [Getting started with Veriff](https://devdocs.veriff.
 
 ### Configuring the Veriff connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -95,7 +95,7 @@ Your Veriff shared secret key, for example, `123-456-789`
 
 ### Verify a user's age by redirecting to Veriff
 
-The **Redirect to Veriff for Verification** capability provides an alternative to age verification with a custom DaVinci user experience flow, instead redirecting the user to a complete age verification experience hosted by Veriff.
+The **Redirect to Veriff for Verification** capability provides an alternative to age verification with a custom PingOne DaVinci user experience flow, instead redirecting the user to a complete age verification experience hosted by Veriff.
 
 No special configuration is needed. Add the capability and populate its properties according to the help text.
 

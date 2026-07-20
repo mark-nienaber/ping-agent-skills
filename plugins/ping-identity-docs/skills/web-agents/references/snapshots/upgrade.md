@@ -5,6 +5,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:upgrade:drop-in-upgrade
 canonical_url: https://docs.pingidentity.com/web-agents/2026/upgrade/drop-in-upgrade.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   perform_a_drop_in_software_update: Perform a drop-in software update
   roll_back_from_a_drop_in_software_update: Roll back from a drop-in software update
@@ -99,6 +101,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:upgrade:major-upgrade
 canonical_url: https://docs.pingidentity.com/web-agents/2026/upgrade/major-upgrade.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   perform_a_major_upgrade: Perform a major upgrade
   roll_back_from_a_major_upgrade: Roll back from a major upgrade
@@ -210,6 +214,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:upgrade:post-upgrade-tasks
 canonical_url: https://docs.pingidentity.com/web-agents/2026/upgrade/post-upgrade-tasks.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Post update and upgrade tasks
@@ -227,6 +233,8 @@ component: web-agents
 version: 2026
 page_id: web-agents:upgrade:preface
 canonical_url: https://docs.pingidentity.com/web-agents/2026/upgrade/preface.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 section_ids:
   preface-examples: Example installation for this guide

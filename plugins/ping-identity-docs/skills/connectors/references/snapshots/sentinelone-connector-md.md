@@ -1,12 +1,12 @@
 ---
 title: SentinelOne Connector
-description: The SentinelOne connector allows you to integrate endpoint detection and response capabilities into your PingOne DaVinci flows.
+description: Configure the SentinelOne connector in PingOne DaVinci to integrate endpoint detection and response for real-time device trust in your flows
 component: connectors
 page_id: connectors::sentinelone_connector
 canonical_url: https://docs.pingidentity.com/connectors/sentinelone_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 15, 2026
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -35,13 +35,13 @@ This connector provides the following capability to enforce device trust in real
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -53,11 +53,11 @@ To use the connector, you'll need:
 
 ### Configuring the SentinelOne connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
-Before configuring the connector in DaVinci, generate an API token in the SentinelOne Management Console:
+Before configuring the connector in PingOne DaVinci, generate an API token in the SentinelOne Management Console:
 
 1. Log in to your SentinelOne Management Console.
 

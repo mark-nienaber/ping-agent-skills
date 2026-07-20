@@ -250,9 +250,9 @@ PingOne supports the following application types:
 
 * Worker
 
-|   |                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To use a templated service provider integration instead of creating a new application, go to the **Application Catalog**. Learn more in [Application catalog](p1_application_catalog.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To use a templated service provider integration instead of creating a new application, go to the **Application Catalog**. Learn more in [Application catalog](p1_application_catalog.html).For Microsoft 365 federation scenarios that use the WS-Federation and WS-Trust protocols with PingOne, use the Microsoft 365 application integration in the application catalog. Learn more in [Adding Microsoft 365 to allow users to sign on using PingOne](p1_adding_microsoft_365.html). |
 
 ## Steps
 
@@ -576,7 +576,7 @@ section_ids:
 
 # Adding Microsoft 365 to allow users to sign on using PingOne
 
-Use the application catalog to add Microsoft 365 to your application portal and connect the application to a Microsoft Entra ID domain.
+Use the application catalog to add Microsoft 365 to your application portal and connect the application to a Microsoft Entra ID domain using the WS-Federation and WS-Trust protocols.
 
 PingOne supports the Microsoft 365 passive and active profiles for single sign-on (SSO) *(tooltip: \<div class="paragraph">
 \<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
@@ -1138,6 +1138,10 @@ When you add an application, PingOne creates a client ID for the application, wh
 |   | To enable or disable an application, click the toggle in the **Applications** list. |
 
 PingOne supports several application types. Use the application type that best fits your requirements.
+
+|   |                                                                                                                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For Microsoft 365 federation scenarios that use the WS-Federation and WS-Trust protocols with PingOne, use the Microsoft 365 application integration. Learn more in [Adding Microsoft 365 to allow users to sign on using PingOne](p1_adding_microsoft_365.html). |
 
 * SAML application
 

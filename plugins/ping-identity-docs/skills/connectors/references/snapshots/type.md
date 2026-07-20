@@ -1,17 +1,17 @@
 ---
 title: Core connectors
-description: Core connectors provide the foundation for your DaVinci flows by performing basic functions.
+description: Browse core PingOne DaVinci connectors that provide foundational functions for building PingOne DaVinci flows
 component: connectors
 page_id: connectors::type/core_connectors
 canonical_url: https://docs.pingidentity.com/connectors/type/core_connectors.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 20, 2026
+revdate: July 9, 2026
 ---
 
 # Core connectors
 
-Core connectors provide the foundation for your DaVinci flows by performing basic functions.
+Core connectors provide the foundation for your PingOne DaVinci flows by performing basic functions.
 
 For other connector types, you can search the complete list of connectors in the [Ping Identity Marketplace](https://marketplace.pingone.com/browse?products=davinci\&contentType=davinciConnectors).
 
@@ -139,13 +139,13 @@ Store and retrieve flow and user attributes as variables in your flow.
 
 ---
 title: Ping connectors
-description: Ping connectors help you integrate your flows with other Ping Identity products and features.
+description: Browse PingOne DaVinci connectors that integrate your flows with PingOne, PingFederate, PingDirectory, and other Ping Identity products
 component: connectors
 page_id: connectors::type/ping_connectors
 canonical_url: https://docs.pingidentity.com/connectors/type/ping_connectors.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 20, 2026
+revdate: July 9, 2026
 ---
 
 # Ping connectors
@@ -242,13 +242,13 @@ Securely verify a user's identity based on a government-issued document and othe
 
 ---
 title: Service connectors
-description: "Service connectors help you integrate your flows with other services' products and features."
+description: Browse PingOne DaVinci service connectors that integrate your flows with external services, products, and platform features
 component: connectors
 page_id: connectors::type/service_connectors
 canonical_url: https://docs.pingidentity.com/connectors/type/service_connectors.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 20, 2026
+revdate: July 9, 2026
 ---
 
 # Service connectors
@@ -292,6 +292,12 @@ Manage users, groups, and software licenses in your flow.
 #### [Babel Street Connector](../babelstreet_connector.html)
 
 Use the Babel Street Analytics API in your flow.
+
+![](../_images/connector-logos/beyondtrust-pra-logo.png)
+
+#### [BeyondTrust Privileged Remote Access Connector](../beyondtrust_pra_connector.html)
+
+Terminate BeyondTrust Privileged Remote Access jump sessions by hostname or username in your flow.
 
 ![](../_images/connector-logos/castle-logo.png)
 
@@ -507,13 +513,13 @@ Provide customers with a safe way to prove who they are through Yoti's identity 
 
 ---
 title: Use case connectors
-description: Use case connectors combine flow steps to let you quickly build common identity experiences, including sign-on, registration, password reset, account recovery, and MFA. Although the more granular connectors can support complex designs, use case connectors provide simple solutions.
+description: Browse PingOne DaVinci use case connectors that combine flow steps to build common identity experiences such as sign on, registration, and MFA
 component: connectors
 page_id: connectors::type/use_case_connectors
 canonical_url: https://docs.pingidentity.com/connectors/type/use_case_connectors.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 10, 2025
+revdate: July 9, 2026
 ---
 
 # Use case connectors

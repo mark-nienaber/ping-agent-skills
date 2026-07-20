@@ -1,9 +1,11 @@
 ---
 title: Admin Role Management Considerations
-description: When creating and managing environments using Terraform, admin role management must be considered to avoid unexpected errors or unexpected inability to manage platform resources. The following describes admin role management considerations that administrators must take when using the PingOne Terraform provider.
+description: Explains PingOne admin role considerations when using Terraform, including birthright roles, role conflicts, and importing role assignments
 component: terraform
 page_id: terraform::products/pingone/develop_with_terraform/admin_roles
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/develop_with_terraform/admin_roles.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   pingone-admin-role-model: PingOne admin role model
@@ -192,10 +194,12 @@ Roles can be explicitly assigned to any user, group of users, worker application
 
 ---
 title: Best practices
-description: The following sections provide a set of best practices to apply when writing Terraform with the PingOne Terraform provider and associated modules.
+description: PingOne-specific Terraform best practices covering configuration promotion, data protection, multi-team development, and admin role assignment
 component: terraform
 page_id: terraform::products/pingone/best_practices
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/best_practices.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   develop-console-promote-as-code: Develop in the admin console, promote using Configuration as Code
@@ -518,10 +522,12 @@ You can use Terraform to manage custom administrator roles and also manage the a
 
 ---
 title: Configuring the PingOne Self Service application
-description: The following shows an example of how to configure the PingOne Self Service system application.
+description: "Example of configuring the PingOne Self Service application's features using Terraform resource scopes and application resource grants"
 component: terraform
 page_id: terraform::products/pingone/tutorials/configuring_the_self_service_application
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/tutorials/configuring_the_self_service_application.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 ---
 
@@ -620,10 +626,12 @@ You can find the [full runable example](https://github.com/pingidentity/terrafor
 
 ---
 title: Develop with Terraform
-description: Learn about administrator role considerations when using Terraform to manage PingOne environments.
+description: Overview of PingOne-specific guides for admin role considerations, importing to Terraform state, and exporting Terraform HCL configuration
 component: terraform
 page_id: terraform::products/pingone/develop_with_terraform
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/develop_with_terraform.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   administrator-role-considerations: Administrator role considerations
@@ -655,10 +663,12 @@ Generate Terraform HCL configuration for a preconfigured environment. This is us
 
 ---
 title: Frequently Asked Questions
-description: You can find the list of supported PingDirectory versions by provider version the latest provider documentation.
+description: Answers frequently asked questions about supported PingDirectory versions and configuring TLS trust for the PingDirectory Terraform provider
 component: terraform
 page_id: terraform::products/pingdirectory/faq
 canonical_url: https://developer.pingidentity.com/terraform/products/pingdirectory/faq.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   what-versions-are-supported: What versions of PingDirectory are supported?
@@ -679,10 +689,12 @@ You can find details on configuring TLS trust in the [Getting started](getting_s
 
 ---
 title: Frequently Asked Questions
-description: You can find the list of supported PingFederate versions by provider version the latest provider documentation.
+description: Answers frequently asked questions about supported PingFederate versions and configuring TLS trust for the PingFederate Terraform provider
 component: terraform
 page_id: terraform::products/pingfederate/faq
 canonical_url: https://developer.pingidentity.com/terraform/products/pingfederate/faq.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   what-versions-are-supported: What versions of PingFederate are supported?
@@ -703,10 +715,12 @@ You can find details on configuring TLS trust in the [Getting started](getting_s
 
 ---
 title: Frequently Asked Questions
-description: You can export configuration from a PingOne environment using a combination of Ping CLI and Terraform CLI tools.
+description: Answers frequently asked questions about exporting, importing, and troubleshooting common issues with the PingOne Terraform provider
 component: terraform
 page_id: terraform::products/pingone/faq
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/faq.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2026
 section_ids:
   export-from-configured-environment: How do I export configuration from a previously configured environment?
@@ -797,10 +811,315 @@ The PingOne API doesn't allow reading attributes that are considered secrets. Fo
 
 ---
 title: Getting started
-description: The following provides guidance on preparing a PingOne tenant for Terraform access.
+description: Prepare a PingDirectory deployment for Terraform access, including Docker setup, TLS trust, and configuration HTTP servlet requirements
+component: terraform
+page_id: terraform::products/pingdirectory/getting_started
+canonical_url: https://developer.pingidentity.com/terraform/products/pingdirectory/getting_started.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 19, 2025
+section_ids:
+  requirements: Requirements
+  start-pingfederate-docker-container: (Optional) Start a PingDirectory Docker container
+  enable-configuration-http-servlet: Ensure the Configuration HTTP Servlet extension is enabled
+  determine-server-port: Determine what port the server is using for HTTPS connections
+  determine-credentials: Determine credentials that are able to configure the server
+  determine-version: Determine what version of PingDirectory you are running
+  trusting-pingdirectory-certificates: Trusting PingDirectory certificates
+  use-the-provider-to-configure-pingdirectory: Use the provider to configure PingDirectory
+---
+
+# Getting started
+
+The following provides guidance on preparing a PingDirectory deployment for Terraform access.
+
+## Requirements
+
+* Terraform CLI 1.1+
+
+* A running PingDirectory server accessible over HTTPS, or Docker CLI to start one.
+
+* When using Docker to start a PingDirectory server, you must have a DevOps license. [Register for the DevOps program here.](https://devops.pingidentity.com/how-to/devopsRegistration/)
+
+## (Optional) Start a PingDirectory Docker container
+
+|   |                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you already have a running PingDirectory server that you can reach over HTTPS, you can skip this step. The provider can be used with any PingDirectory server. |
+
+1. Start a PingDirectory server. The following example shows how to start a single PingDirectory server using Docker.
+
+   Your DevOps credentials will be read from the `.pingidentity/config` file in the user's home directory. The HTTPS port (default `1443`) must be exposed.
+
+   ```console
+   docker run --name pingdirectory_terraform_provider_container \
+   		-d -p 1443:1443 \
+   		-d -p 1389:1389 \
+   		-e TAIL_LOG_FILES= \
+   		--env-file "${HOME}/.pingidentity/config" \
+   		pingidentity/pingdirectory:latest
+   ```
+
+2. After starting the container, follow the logs until the server becomes available.
+
+   ```console
+   docker logs -f pingdirectory_terraform_provider_container
+   ```
+
+After you see the following message in the container logs, the server is ready to receive requests from the provider:
+
+```
+Setting Server to Available
+```
+
+## Ensure the Configuration HTTP Servlet extension is enabled
+
+The PingDirectory Terraform provider applies configuration using the Configuration HTTP servlet extension, which must be enabled for the server's HTTPS connection handler.
+
+This setting is already configured by default in PingDirectory, including when running in Docker.
+
+If you've disabled the Configuration HTTP servlet extension on your server, you can re-enable it with dsconfig:
+
+```console
+dsconfig set-connection-handler-prop --handler-name "HTTPS Connection Handler" --add http-servlet-extension:Configuration
+```
+
+## Determine what port the server is using for HTTPS connections
+
+The PingDirectory Docker image uses port `1443` for HTTPS by default.
+
+To determine what port you're using, use the `status` command and examine the output for a block containing the HTTPS port:
+
+```console
+dsconfig status
+```
+
+```
+          --- Connection Handlers ---
+Address:Port : Protocol : State    : Name
+-------------:----------:----------:-------------------------
+0.0.0.0:1389 : LDAP     : Enabled  : LDAP Connection Handler
+0.0.0.0:1443 : HTTPS    : Enabled  : HTTPS Connection Handler
+0.0.0.0:1636 : LDAPS    : Enabled  : LDAPS Connection Handler
+```
+
+## Determine credentials that are able to configure the server
+
+The Configuration API used by the provider uses basic authentication. The provider will need the username and password of a user that has permissions to manage server configuration.
+
+|   |                                                                                                                                                                                                     |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When using the Ping Identity Docker images, the default username and password can be used. Learn more in [Deploy an Example Stack](https://devops.pingidentity.com/get-started/getStartedExample/). |
+
+## Determine what version of PingDirectory you are running
+
+The provider requires that the version of PingDirectory is specified through the `product_version` attribute or the `PINGDIRECTORY_PROVIDER_PRODUCT_VERSION` environment variable.
+
+You can view the product version using the `status` command. Look for the Server Details section:
+
+```console
+dsconfig status
+```
+
+```
+          --- Server Details ---
+Host Name:            ...
+Instance Name:        ...
+Administrative Users: cn=administrator
+Installation Path:    /opt/out/instance
+Server Version:       Ping Identity Directory Server 9.2.0.0
+```
+
+## Trusting PingDirectory certificates
+
+PingDirectory generates a self-signed certificate by default, which is presented by the server's HTTPS connection handler. You can replace the default self-signed certificate with a custom certificate. The provider has a few ways of configuring trust for the HTTPS connection with the server.
+
+By default, the provider will trust the host's default root Certificate Authority (CA) set when connecting to the server.
+
+The provider also supports an `insecure_trust_all_tls` boolean attribute (configurable with environment variable `PINGDIRECTORY_PROVIDER_INSECURE_TRUST_ALL_TLS`) that allows simply trusting all certificates when connecting to the server. This option is insecure and should not be used in production.
+
+If you need to provide CA certificates for the provider to trust, you can use the `ca_certificate_pem_files` attribute. This attribute allows you to provide a set of paths to files containing PEM-encoded CA certificates to be trusted. The `PINGDIRECTORY_PROVIDER_CA_CERTIFICATE_PEM_FILES` environment variable can also be used, with commas to delimit multiple PEM file paths if necessary.
+
+If you want to trust the default self-signed certificate of the PingDirectory server, you can export the certificate from the server's keystore using the `manage-certificates` command-line tool.
+
+Write the output of that command to a file. Then you can include the path to that file in the `ca_certificate_pem_files` attribute when using the provider. The following example uses `cert.pem` as the filename:
+
+```console
+manage-certificates export-certificate --keystore config/keystore --alias server-cert > cert.pem
+```
+
+## Use the provider to configure PingDirectory
+
+You are now ready to configure the PingDirectory server with the provider.
+
+You can find examples on configuring the Terraform provider to manage PingDirectory configuration in the [PingDirectory Provider Registry documentation](https://registry.terraform.io/providers/pingidentity/pingdirectory/latest/docs).
+
+---
+
+---
+title: Getting started
+description: Prepare a PingFederate deployment for Terraform access, including Docker setup, API authentication, and TLS trust configuration
+component: terraform
+page_id: terraform::products/pingfederate/getting_started
+canonical_url: https://developer.pingidentity.com/terraform/products/pingfederate/getting_started.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 19, 2025
+section_ids:
+  requirements: Requirements
+  start-pingfederate-docker-container: (Optional) Start a PingFederate Docker container
+  accessing-the-pingfederate-api: Accessing the PingFederate API
+  determine-credentials: Determine credentials that are able to configure the server
+  determine-version: Determine what version of PingFederate you're running
+  trusting-pingfederate-certificates: Trusting PingFederate certificates
+  use-the-provider-to-configure-pingfederate: Use the provider to configure PingFederate
+---
+
+# Getting started
+
+The following provides guidance on preparing a PingFederate deployment for Terraform access.
+
+## Requirements
+
+* Terraform CLI 1.4+
+
+* A running PingFederate server accessible over HTTPS, or Docker CLI to start one.
+
+* If using Docker to start a PingFederate server, you must have a DevOps license. [Register for the DevOps program here.](https://devops.pingidentity.com/how-to/devopsRegistration/)
+
+## (Optional) Start a PingFederate Docker container
+
+|   |                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you already have a running PingFederate server that you can reach over HTTPS, you can skip this step. The provider can be used with any PingFederate server. |
+
+1. Start a PingFederate server. The following example shows how to start a single PingFederate server using Docker.
+
+   Your DevOps credentials will be read from the `.pingidentity/config` file in the user's home directory. The HTTPS port (default `9999`) must be exposed. This example starts the product with the `getting-started/pingfederate` server profile, running the latest version of PingFederate from Docker Hub.
+
+   ```console
+   docker run --name pingfederate_terraform_provider_container \
+     -d -p 9031:9031 \
+     -d -p 9999:9999 \
+     --env-file "${HOME}/.pingidentity/config" \
+     -e SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git \
+     -e SERVER_PROFILE_PATH=getting-started/pingfederate
+     pingidentity/pingfederate:latest
+   ```
+
+2. After starting the container, follow the logs until the server becomes available.
+
+   ```console
+   docker logs -f pingfederate_terraform_provider_container
+   ```
+
+After you see the following message in the container logs, the server is ready to receive requests from the provider:
+
+```
+PingFederate is up
+```
+
+## Accessing the PingFederate API
+
+Gaining access to the API depends on where your PingFederate instance is running. In order to work with the API, you need to authenticate just as you would for performing administrative tasks. To interact directly with the API in the browser and view the documentation, you would typically go to the following URL:
+
+https\://\<pf\_host>:9999/pf-admin-api/api-docs/
+
+where *\<pf\_host>* is the network address of your PingFederate server. This target can be an IP address, a host name, or a fully qualified domain name. It must be reachable from your computer.
+
+If you're using OIDC, you can find information on how to connect in [OIDC authentication](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_enabling_oidc_based_auth.html) in the PingFederate documentation.
+
+When using a local container as shown above, the port mappings result in PingFederate being available at https\://localhost:9999/pingfederate/app#/ by default. The provider supports an attribute `admin_api_path` which defaults to **/pf-admin-api/v1**. If your environment has a load balancer or other network configuration that requires a different path to the API, you can configure the provider to use it.
+
+The PingFederate Terraform provider applies configuration at the API endpoints using the specified port (`9999`) over HTTPS when accessing the product locally under Docker.
+
+## Determine credentials that are able to configure the server
+
+The provider supports basic authentication, OAuth2 client credentials flow authentication, and access token authentication for connection to the configuration API. In this example, basic authentication will be used.
+
+When using basic authentication, the provider will need the `username` and `password` of a user with permission to manage server configuration.
+
+|   |                                                                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When using the Ping Identity Docker images, the default username and password can be used. Learn more in [Deploy an Example Stack](https://devops.pingidentity.com/get-started/getStartedExample/) in the Ping Identity DevOps documenation. |
+
+When using OAuth2 client credentials, the `client_id`, `client_secret`, and `token_url` attributes are required in the provider configuration, with `scopes` being optional.
+
+When using an access token, only `access_token` is required in the provider configuration.
+
+You can find examples of configuring other authentication methods in the [Terraform registry documentation](https://registry.terraform.io/providers/pingidentity/pingfederate/latest/docs).
+
+## Determine what version of PingFederate you're running
+
+The provider requires that the version of PingFederate is specified.
+
+You can do this one of two ways:
+
+1. Using the `product_version` attribute when configuring the provider:
+
+   ```terraform
+   provider "pingfederate" {
+     ...
+     product_version = "12.1"
+   }
+   ```
+
+2. Setting the `PINGFEDERATE_PROVIDER_PRODUCT_VERSION` environment variable to the version of PingFederate you're running:
+
+   ```console
+   export PINGFEDERATE_PROVIDER_PRODUCT_VERSION=12.1
+   ```
+
+If using the container, you can view the product version using by running a shell in the container and searching for the appropriate environment variable:
+
+```console
+docker container exec -it pingfederate_terraform_provider_container /bin/sh
+```
+
+Next, in the container shell, get the version:
+
+```console
+env | grep PING_PRODUCT_VERSION
+```
+
+|   |                                                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `product_version` provider configuration attribute takes precedence over the `PINGFEDERATE_PROVIDER_PRODUCT_VERSION` environment variable. |
+
+If neither is set, the provider will throw an error.
+
+## Trusting PingFederate certificates
+
+PingFederate generates a self-signed certificate by default, which is presented by the server when connecting. The default self-signed certificate can be replaced with a custom certificate. The provider has a few ways of configuring trust for the HTTPS connection with the server.
+
+By default, the provider will trust the host's default root certificate authority (CA) set when connecting to the server.
+
+If you need to provide CA certificates for the provider to trust, you can use the `ca_certificate_pem_files` attribute. This attribute supports providing a set of paths to files containing PEM-encoded CA certificates to be trusted.
+
+You can also use the `PINGFEDERATE_PROVIDER_CA_CERTIFICATE_PEM_FILES` environment variable, with commas to delimit multiple PEM file paths if necessary.
+
+Finally, the provider supports an `insecure_trust_all_tls` boolean attribute that enables it to trust all certificates when connecting to the server.
+
+|   |                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `insecure_trust_all_tls` provider flag, when set to `true`, is insecure and is intended for development and testing only. You should not enable this option for production use. |
+
+## Use the provider to configure PingFederate
+
+You are now ready to configure the PingFederate server using the provider.
+
+You can find examples on configuring the Terraform provider to manage PingFederate configuration in the [PingFederate Provider Registry documentation](https://registry.terraform.io/providers/pingidentity/pingfederate/latest/docs).
+
+---
+
+---
+title: Getting started
+description: Prepare a PingOne tenant for Terraform access by configuring a worker application and finding required IDs for the provider
 component: terraform
 page_id: terraform::products/pingone/getting_started
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/getting_started.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   requirements: Requirements
@@ -904,10 +1223,12 @@ The organization ID and organization name can be used with the [`pingone_organiz
 
 ---
 title: Manage an existing PingOne DaVinci environment
-description: The following guide walks you through the process of using the Ping CLI Terraformer plugin to:
+description: Use the Ping CLI Terraformer plugin to export a live PingOne DaVinci environment to Terraform HCL and establish continuous management
 component: terraform
 page_id: terraform::products/pingone/tutorials/manage-existing-davinci-environment
 canonical_url: https://developer.pingidentity.com/terraform/products/pingone/tutorials/manage-existing-davinci-environment.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2026
 section_ids:
   prerequisites: Prerequisites
@@ -1183,3 +1504,143 @@ git commit -m "Initial Terraform configuration for DaVinci environment"
 * [Terraform import documentation](https://www.terraform.io/docs/cli/import/index.html)
 
 * [PingOne DaVinci documentation](https://docs.pingidentity.com/davinci)
+
+---
+
+---
+title: Role assignment with Terraform
+description: Example of creating a PingOne environment and assigning administrator roles to a group using the PingOne Terraform provider
+component: terraform
+page_id: terraform::products/pingone/tutorials/role_assignment
+canonical_url: https://developer.pingidentity.com/terraform/products/pingone/tutorials/role_assignment.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 19, 2025
+---
+
+# Role assignment with Terraform
+
+The following shows an example of environment creation using the PingOne Terraform provider, followed by role permission assignment to administration users that are members of a group we will create.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne supports assigning administrator roles groups, and members of those groups are assigned administrator roles. Although you can use Terraform to assign administrator roles to individuals directly, Ping Identity recommends that role assignments provisioned by Terraform are assigned to groups instead and that you manage group membership through Joiner/Mover/Leaver Identity Governance processes. |
+
+The example assumes that all relevant admins users will have a role strategy as follows:
+
+* **Environment Admin**, scoped to individual environments (not scoped to the organization)
+
+* **Identity Data Admin**, scoped to individual environments
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The example uses:* The `pingone_admin_environment_id` variable that can be mapped directly or can be found from the environment name from the [`pingone_environment` data source](https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/data-sources/environment)
+
+* The `license_id` variable that can be mapped directly or can be found from the license name from the [`pingone_licenses` data source](https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/data-sources/licenses). |
+
+First, you'll create the group in PingOne to which you'll assign your administrator users. This example uses the [`pingone_group` resource](https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/resources/group).
+
+```terraform
+resource "pingone_group" "my_awesome_admins_group" {
+  environment_id = var.pingone_admin_environment_id
+
+  name        = "My awesome admins group"
+  description = "My new awesome group for admins who are awesome"
+
+  lifecycle {
+    # change the `prevent_destroy` parameter value to `true` to prevent this data carrying resource from being destroyed
+    prevent_destroy = false
+  }
+}
+```
+
+Next, you'll fetch the required roles. You'll need to find the IDs of the **Identity Data Admin** and **Environment Admin** predefined admin roles, which are different between tenant organizations. You can use the [`pingidentity/utils/pingone` helper module](https://registry.terraform.io/modules/pingidentity/utils/pingone/latest) to retrieve the role IDs, so that you can use role IDs in role assignment to the group:
+
+```terraform
+module "admin_utils" {
+  source  = "pingidentity/utils/pingone"
+  version = "0.1.0"
+
+  region_code    = "EU" // Will be either NA, EU, CA, AU or AP depending on your tenant region.
+  environment_id = var.pingone_admin_environment_id
+}
+```
+
+|   |                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------ |
+|   | When including a new module in Terraform HCL, remember to re-run `terraform init` to initialize the module in the Terraform project. |
+
+You can then define the new sandbox environment using the [PingOne Terraform provider](https://registry.terraform.io/providers/pingidentity/pingone/latest) with the [`pingone_environment` resource](https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/resources/environment), with the SSO service enabled. This is the environment to which you want to scope the administrator roles so that your users can manage configuration and data within this environment:
+
+```terraform
+resource "pingone_environment" "my_environment" {
+  name        = "Example PingOne Role Permission Assignment Environment"
+  type        = "SANDBOX"
+  license_id  = var.license_id
+
+  services = [
+    {
+      type = "SSO"
+    }
+  ]
+}
+```
+
+After you've created the new environment, you can assign the roles to the administration users with the [`pingone_group_role_assignment` resource](https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/resources/group_role_assignment).
+
+```terraform
+resource "pingone_group_role_assignment" "admin_sso_identity_admin" {
+  environment_id = var.pingone_admin_environment_id
+  group_id       = pingone_group.my_awesome_admins_group.id
+  role_id        = module.admin_utils.pingone_role_id_identity_data_admin
+
+  scope_environment_id = pingone_environment.my_environment.id
+}
+
+resource "pingone_group_role_assignment" "admin_sso_environment_admin" {
+  environment_id = var.pingone_admin_environment_id
+  group_id       = pingone_group.my_awesome_admins_group.id
+  role_id        = module.admin_utils.pingone_role_id_environment_admin
+
+  scope_environment_id = pingone_environment.my_environment.id
+}
+```
+
+The group "My awesome admins group" has now been assigned the **Identity Data Admin** and **Environment Admin** roles. Any user who is made a member of the group will inherit these administrative roles and their associated permissions.
+
+---
+
+---
+title: Tutorials
+description: Overview of PingOne Terraform tutorials for role assignment, configuring the Self Service application, and managing DaVinci environments
+component: terraform
+page_id: terraform::products/pingone/tutorials
+canonical_url: https://developer.pingidentity.com/terraform/products/pingone/tutorials.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 13, 2026
+section_ids:
+  role-assignment-using-terraform: Role assignment using Terraform
+  configure-the-end-user-self-service-application: Configure the end-user Self Service application
+  manage-pingone-davinci-with-terraform: Manage PingOne DaVinci with Terraform
+---
+
+# Tutorials
+
+## Role assignment using Terraform
+
+Learn how to use Terraform to automatically grant roles to users, groups, worker applications, or gateways.
+
+[Role assignment with Terraform](tutorials/role_assignment.html)
+
+## Configure the end-user Self Service application
+
+Learn how to use Terraform to enable and disable features in the default end-user Self Service application.
+
+[Configuring the PingOne Self Service application](tutorials/configuring_the_self_service_application.html)
+
+## Manage PingOne DaVinci with Terraform
+
+Learn how to bring a live PingOne DaVinci environment under Terraform management and prepare for continuous development.
+
+[Manage an existing PingOne DaVinci environment](tutorials/manage-existing-davinci-environment.html)

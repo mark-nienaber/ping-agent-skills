@@ -1,6 +1,6 @@
 ---
 title: Protect Use Case Connector
-description: Like the standard PingOne Protect connector, the Protect Use Case connector lets you use PingOne Protect in a PingOne DaVinci flow to improve the user experience, reduce multi-factor authentication (MFA) fatigue, lower the probability of unintentional push approvals, and issue challenges or deny access in high-risk situations.
+description: Configure the PingOne Protect Use Case connector in PingOne DaVinci to evaluate risk and apply policy mitigations without extra connectors
 component: connectors
 page_id: connectors::protect_use_case_connector
 canonical_url: https://docs.pingidentity.com/connectors/protect_use_case_connector.html
@@ -49,7 +49,7 @@ Learn more in the following documentation:
 
   * [Getting started with PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_getting_started.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
@@ -71,7 +71,7 @@ To use the PingOne Protect Use Case connector, you'll need:
 
 1. Follow the instructions in [Getting started with PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_getting_started.html).
 
-2. In DaVinci, add a [PingOne Protect Use Case connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+2. In PingOne DaVinci, add a [PingOne Protect Use Case connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 ## Using the connector in a flow
 
@@ -139,11 +139,11 @@ The following diagram illustrates the use of the PingOne Protect Use Case connec
 
    - PingOne Forms connector
 
-   You can manually deploy the Signals (Protect) SDK when integrating using the DaVinci APIs. For mobile applications or integrating your webpage with DaVinci using APIs instead of redirecting, you'll:
+   You can manually deploy the Signals (Protect) SDK when integrating using the PingOne DaVinci APIs. For mobile applications or integrating your webpage with PingOne DaVinci using APIs instead of redirecting, you'll:
 
    * Deploy the Signals (Protect) SDK.
 
-   * Send the SDK payload and the rest of the required data, such as username, user ID, IP address, and any custom attributes to DaVinci using the API.
+   * Send the SDK payload and the rest of the required data, such as username, user ID, IP address, and any custom attributes to PingOne DaVinci using the API.
 
    * Include a variable in your flow that represents the data obtained.
 
@@ -151,9 +151,9 @@ The following diagram illustrates the use of the PingOne Protect Use Case connec
 
    1. Follow the [PingOne Protect Native SDKs](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk.html) documentation to implement the SDK in your mobile app or webpage.
 
-   2. Set global variables using the SDK to pass risk-related information from the SDK and map the information into the risk evaluation in DaVinci.
+   2. Set global variables using the SDK to pass risk-related information from the SDK and map the information into the risk evaluation in PingOne DaVinci.
 
-   3. In DaVinci, click the applicable PingOne Protect connector with the **Create Risk Evaluation** capability in your flow to open its settings.
+   3. In PingOne DaVinci, click the applicable PingOne Protect connector with the **Create Risk Evaluation** capability in your flow to open its settings.
 
       1. On the **Device Configurations** tab, for **Risk input from device**, enter the name of the variable that represents the data obtained from the SDK in your manual implementation.
 
@@ -165,11 +165,11 @@ The following diagram illustrates the use of the PingOne Protect Use Case connec
 
       3. To improve risk analysis, use the **Cookie** field to provide the value of a persistent cookie, if available.
 
-      4. To maintain your own device IDs, you can assign external device IDs that are not managed by the SDK, such as device serial number or mobile application installation ID. External IDs can be sent to DaVinci using the API.
+      4. To maintain your own device IDs, you can assign external device IDs that are not managed by the SDK, such as device serial number or mobile application installation ID. External IDs can be sent to PingOne DaVinci using the API.
 
          For example, in a workforce user flow, you can use the [Google Chrome Device Trust connector](https://marketplace.pingone.com/item/google-chrome-device-trust-connector) to map the user device serial number when using the Chrome browser.
 
-      5. To pass the risk information from the SDK to DaVinci, map the global variables that you set with the SDK into DaVinci:
+      5. To pass the risk information from the SDK to PingOne DaVinci, map the global variables that you set with the SDK into PingOne DaVinci:
 
          1. On the **Log Fields Mapping** tab, click **+ Field**.
 
@@ -187,7 +187,7 @@ The following diagram illustrates the use of the PingOne Protect Use Case connec
 
      For example, you can create a subflow that performs the risk evaluation within a parent flow. In this case, add the `skrisk` component to relevant HTTP connectors in the parent flow that call this subflow.
 
-     You can find subflow templates in the [Integration Directory](https://support.pingidentity.com/s/marketplace-integration-home-page), such as [Login with Self-Service Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000vkfYAA/login-with-selfservice-journey), [PingOne Sign On and Password Reset](https://support.pingidentity.com/s/marketplace-integration/a7i8Z000000bsa3QAA/pingone-sign-on-and-password-reset), and [User Registration Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000gthYAA/user-registration-journey). Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+     You can find subflow templates in the [Integration Directory](https://support.pingidentity.com/s/marketplace-integration-home-page), such as [Login with Self-Service Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000vkfYAA/login-with-selfservice-journey), [PingOne Sign On and Password Reset](https://support.pingidentity.com/s/marketplace-integration/a7i8Z000000bsa3QAA/pingone-sign-on-and-password-reset), and [User Registration Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000gthYAA/user-registration-journey). Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
    Adding the `skrisk` component to multiple connectors in a flow allows the SDK to collect additional data throughout the flow and improves bot detection.
 
@@ -1054,6 +1054,6 @@ To start troubleshooting issues with the PingOne Protect Use Case connector, try
 
 * For mobile applications, if you're using the `skrisk` component to include the data provided by the Signals (Protect) SDK, make sure that you followed the steps in the [SDK documentation](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk.html).
 
-* To use the DaVinci Analytics feature to find where the flow stopped, open your flow and click **Analytics** in the lower-left corner of the flow editor. Learn more in [Debugging and analytics](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html).
+* To use the PingOne DaVinci Analytics feature to find where the flow stopped, open your flow and click **Analytics** in the lower-left corner of the flow editor. Learn more in [Debugging and analytics](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html).
 
 * Open your flow, click the **More Options** (⋮) icon, and click the **Show Node ID** toggle. This makes it easier to identify the source of inputs and outputs.

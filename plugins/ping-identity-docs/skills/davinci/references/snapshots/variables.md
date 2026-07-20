@@ -3,8 +3,8 @@ title: Adding a variable
 description: Add a new variable that can be used in flows.
 component: davinci
 page_id: davinci:variables:davinci_adding_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 section_ids:
@@ -78,8 +78,8 @@ title: Deleting a variable
 description: Delete an existing variable to remove it from the UI and from all flows.
 component: davinci
 page_id: davinci:variables:davinci_deleting_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_deleting_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_deleting_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
@@ -114,8 +114,8 @@ title: Editing a variable
 description: Edit an existing variable to change its properties.
 component: davinci
 page_id: davinci:variables:davinci_editing_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_editing_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_editing_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 section_ids:
@@ -181,8 +181,8 @@ title: Using variables in flows
 description: You can use variables in multiple ways within a flow.
 component: davinci
 page_id: davinci:variables:davinci_using_variables_in_flows
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_using_variables_in_flows.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_using_variables_in_flows.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 19, 2024
 section_ids:
@@ -260,8 +260,8 @@ title: Variables
 description: Variables let you track and adjust values from within your flows.
 component: davinci
 page_id: davinci:variables:davinci_variables
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_variables.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_variables.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 31, 2024
 ---

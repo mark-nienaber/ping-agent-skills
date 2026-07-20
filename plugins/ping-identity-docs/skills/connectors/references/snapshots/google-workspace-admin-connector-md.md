@@ -1,12 +1,12 @@
 ---
 title: Google Workspace Admin Connector
-description: The Google Workspace Admin connector lets you manage Google Workspace users, groups, and application licenses in your PingOne DaVinci flow.
+description: Configure the Google Workspace Admin connector in PingOne DaVinci to manage Workspace users, groups, and application licenses in your flows
 component: connectors
 page_id: connectors::google_workspace_admin_connector
 canonical_url: https://docs.pingidentity.com/connectors/google_workspace_admin_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -51,13 +51,13 @@ Learn more in the following documentation:
 
   * [Using OAuth 2.0 for Server to Server Applications](https://developers.google.com/identity/protocols/oauth2/service-account)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -81,7 +81,7 @@ Follow the instructions in [Using OAuth 2.0 for Server to Server Applications](h
 
 ### Setting up the Google Workspace Admin connector configuration
 
-In DaVinci, add a **Google Workspace Admin** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **Google Workspace Admin** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 

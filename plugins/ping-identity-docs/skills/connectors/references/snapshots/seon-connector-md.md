@@ -1,12 +1,12 @@
 ---
 title: SEON Connector
-description: The SEON connector lets you uncover fraud patterns through SEON's device fingerprinting and intelligent insights in your PingOne DaVinci flow.
+description: Configure the SEON connector in PingOne DaVinci to detect fraud using device fingerprinting, request fraud scores, and send feedback to SEON
 component: connectors
 page_id: connectors::seon_connector
 canonical_url: https://docs.pingidentity.com/connectors/seon_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -48,13 +48,13 @@ Learn more in the following:
 
   * [API Reference](https://docs.seon.io/api-reference)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -70,7 +70,7 @@ Follow the instructions in [Getting Started](https://docs.seon.io/getting-starte
 
 ### Configuring the SEON connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 

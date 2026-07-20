@@ -145,3 +145,79 @@ The behavior for offline situations is determined by the value provided for the 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | In addition to the standard options listed above, if you encounter a situation where PingID is down but the `passive_offline_authentication` option is not prompting users to authenticate offline, you can select the `enforce_offline_authentication` option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
+
+---
+
+---
+title: User directory for PingID offline MFA
+description: PingID offline multi-factor authentication (MFA) supports storage of user authentication device details according to different user directory deployments.
+component: pingid
+page_id: pingid:pingid_offline_mfa:pid_user_directory_for_offline_mfa
+canonical_url: http://docs.pingidentity.com/pingid/pingid_offline_mfa/pid_user_directory_for_offline_mfa.html
+llms_txt: http://docs.pingidentity.com/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 4, 2023
+section_ids:
+  user-directory: User directory
+  priority-of-parameter-settings-during-the-flow-of-pingid-offline-mfa: Priority of parameter settings during the flow of PingID offline MFA
+---
+
+# User directory for PingID offline MFA
+
+PingID offline multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* supports storage of user authentication device details according to different user directory deployments.
+
+## User directory
+
+PingID offline MFA can access device information stored in the directory's user object, or in a directory object separate from the user object, either in the same directory as the user object, or in a different directory.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingID offline MFA feature is designed to work with directories from several vendors, including Active Directory, Oracle Directory, and Ping Directory.Directory setup scripts are provided for Active Directory as part of the PingID Integration Kit 2.0 and later. You must configure other directories manually.For more information on directory configuration, see [Installing the PingID Integration Kit for PingFederate](../pingid_integrations/installing_the_pid_i_for_pf.html). |
+
+Scripts provided in the PingID Integration Kit 2.0 or later add the following attributes to the directory:
+
+* `pf-pingid-state`
+
+  The `pf-pingid-state` attribute holds the authentication state of the user during offline MFA.Administrators can use this attribute to bypass or block individual users.It is an optional attribute. When it is used, it must be coupled with the `user` object class on the main user directory. The optional values, `block` or `bypass`, stored in this attribute are managed by the administrator. For more information, see [Configuring offline MFA (PingID Adapter)](../pingid_integrations/pid_adapter_configuring_offline_mfa.html) or [Configuring offline MFA (RADIUS PCV)](../pingid_integrations/pid_configuring_offline_mfa_radius_pcv.html).PingFederate only requires read access to the `pf-pingid-state` attribute.The value of the `pf-pingid-state` attribute is always stored in the user's object. You can assign a different name to the attribute using the setup script, within the limits permitted by the user directory.When PingID is offline, the identity provider checks the configuration.
+
+  * If the user's `pf-pingid-state` configuration is empty, the authentication flow continues.
+
+  * If `pf-pingid-state` is set to `bypass`, the user bypasses MFA.
+
+  * If `pf-pingid-state` is set to `block`, the user is blocked from logging in.
+
+* `pf-pingid-local-fallback`
+
+  The `pf-pingid-local-fallback` attribute holds the user's authentication devices list information.It is a mandatory attribute.The administrator must decide between:
+
+  * Adding the attribute to the `user` objectClass on the main user directory.
+
+  * Adding the attribute to a separate custom `pf-pingid-device` objectClass.
+
+If you add `pf-pingid-local-fallback` to `pf-pingid-device`, you must decide which directory should hold the `pf-pingid-device` objects. These objects can be stored in the same directory as the users in a different location in the directory tree, or in an entirely separate directory. PingFederate configuration will vary according to the design you choose.
+
+Multiple Adapter/PCV Instances: When running a single PingFederate server with multiple PingID tenants, the `pf-pingid-local-fallback` attribute cannot be linked to the user objectClass. It is mandatory to set up a separate custom `pf-pingid-device` objectClass. The location of the `pf-pingid-device` objects must be different for each Adapter/PCV instance.
+
+If multiple Adapter/PCV instances use the same PingID tenant, there is no restriction on the `pf-pingid-local-fallback` attribute location.
+
+For more information, see [Installing the PingID Integration Kit for PingFederate](../pingid_integrations/installing_the_pid_i_for_pf.html).PingFederate will have read and write access to the `pf-pingid-local-fallback` attribute, because values stored in this attribute are managed by PingFederate.
+
+## Priority of parameter settings during the flow of PingID offline MFA
+
+1. If the `Authentication During Errors` parameter is set to `Bypass` or `Block`, the user's `state` attribute is ignored during offline authentication. All users will either bypass PingID offline MFA or be blocked from authenticating, according to the `Authentication During Errors` setting.
+
+2. If the `Authentication During Errors` parameter is set to `Passive` or `Enforce`, PingFederate checks the user's `state` attribute.
+
+   * The user's `state` attribute is empty
+
+     If the user has a paired mobile device, the flow proceeds to offline MFA.If the user does not have a paired mobile device, the flow proceeds according to the setting in the `Users Without a Paired Device` parameter.
+
+     * The user's `state` attribute is set to `Bypass`
+
+       The user will bypass PingID offline MFA.
+
+     * The user's `state` attribute is set to `Block`
+
+       The user is blocked from authenticating.

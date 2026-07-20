@@ -2,7 +2,7 @@
 
 - Product: PingID User Guide
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-07-20
 - Source: https://docs.pingidentity.com/pingid-user-guide/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
@@ -16,15 +16,15 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| index-md.md | page | https://docs.pingidentity.com/pingid-user-guide/index.md | 1 | 1 | full |
-| ma-lost-or-stolen-mobile-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_lost_or_stolen_mobile.md | 1 | 1 | full |
-| ma-where-find-qr-code-md.md | page | https://docs.pingidentity.com/pingid-user-guide/ma_where_find_qr_code.md | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/pingid-user-guide/llms.txt | 1 | 1 | full |
+| ma-lost-or-stolen-mobile-md.md | assembled | https://docs.pingidentity.com/pingid-user-guide/llms.txt | 1 | 1 | full |
+| ma-where-find-qr-code-md.md | assembled | https://docs.pingidentity.com/pingid-user-guide/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
 | llms.txt | 9f43f208564ef297c28aea36356b59522106aa10ef91a520961c02b378ae4a32 |
-| snapshots/index-md.md | d75fa6c6c24b2406b8e8d3fb16f2fa00fe1c8c80e223360711f768e7ef8709f8 |
-| snapshots/ma-lost-or-stolen-mobile-md.md | 3921f179dc588fa89b0f4826c54e1420ba43e451f08ebbaadecf1df6cb926801 |
-| snapshots/ma-where-find-qr-code-md.md | 96477d4074a9c6767cb59132a84b9231ad6cef659884a777f77880d57123007d |
+| snapshots/index-md.md | 7b592f762b1be6f502a905ec92736307effccda3e8548beae997ea66bc4de781 |
+| snapshots/ma-lost-or-stolen-mobile-md.md | b947aad8cd46c11558ed9929a5bbc1dcd9c27a538584a789041f838a91dd6d58 |
+| snapshots/ma-where-find-qr-code-md.md | 2c98a3d0d7f51e881033ebb91cf6794054b926f94c4f7fdcbf62af6ca8eac8d3 |

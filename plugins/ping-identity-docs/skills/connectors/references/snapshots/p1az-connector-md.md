@@ -1,12 +1,12 @@
 ---
 title: PingOne Authorize Connector
-description: This connector lets you use PingOne Authorize for policy-based authorization decisions in your PingOne DaVinci flow.
+description: Configure the PingOne Authorize connector in PingOne DaVinci to make policy-based, fine-grained authorization decisions within your flows
 component: connectors
 page_id: connectors::p1az_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1az_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: July 9, 2026
 section_ids:
   setup: Setup
   resources: Resources
@@ -38,13 +38,13 @@ PingOne Authorize can integrate with other PingOne services, such as PingOne Pro
 
 Use the PingOne Authorize connector to:
 
-* Externalize authorization from your DaVinci flows, allowing separation of duties between the team controlling the user experience and the team controlling what users are authorized to see and do.
+* Externalize authorization from your PingOne DaVinci flows, allowing separation of duties between the team controlling the user experience and the team controlling what users are authorized to see and do.
 
 * Leverage real-time data in fine-grained policies that go beyond identity and roles.
 
 * Make adaptive, context-aware authorization decisions that result in permit, deny, or challenge outcomes.
 
-* Assemble and provide DaVinci with authorized information used in flows, for example, retrieving the list of accounts that a user is authorized to access.
+* Assemble and provide PingOne DaVinci with authorized information used in flows, for example, retrieving the list of accounts that a user is authorized to access.
 
 ## Setup
 
@@ -58,13 +58,13 @@ For information and setup help, learn more in the following documentation:
 
   * [Getting started with PingOne Authorize](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_getting_started.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -128,7 +128,7 @@ To add a worker app:
 
 ### Setting up the PingOne Authorize connector configuration
 
-In DaVinci, add a **PingOne Authorize** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingOne Authorize** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 

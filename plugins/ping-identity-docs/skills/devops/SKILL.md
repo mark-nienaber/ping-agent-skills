@@ -6,7 +6,7 @@ license: MIT
 
 # DevOps
 
-DevOps documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Explains how to build a PingFederate server profile from a running deployment using bulk API export or configuration archive, plus the bulk config tool.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ DevOps documentation is indexed in the bundled llms.txt and live Ping Markdown p
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Docker Images: untitled, docker, base | docker-images | https://developer.pingidentity.com/devops/docker-images/*.md | references/snapshots/docker-images.md |
-| Release Notes: version | release-notes | https://developer.pingidentity.com/devops/release-notes/*.md | references/snapshots/release-notes.md |
-| How To: pingdirectory, profiles, server | how-to | https://developer.pingidentity.com/devops/how-to/*.md | references/snapshots/how-to.md |
-| Deployment: deploy, cluster, kubernetes | deployment | https://developer.pingidentity.com/devops/deployment/*.md | references/snapshots/deployment.md |
-| Reference: basics, configuration, application | reference | https://developer.pingidentity.com/devops/reference/*.md | references/snapshots/reference.md |
+| Docker Images: untitled, docker, image | docker-images | https://developer.pingidentity.com/devops/docker-images/*.md | references/snapshots/docker-images.md |
+| Release Notes: version, docker, devops | release-notes | https://developer.pingidentity.com/devops/release-notes/*.md | references/snapshots/release-notes.md |
+| How To: server, profile, identity | how-to | https://developer.pingidentity.com/devops/how-to/*.md | references/snapshots/how-to.md |
+| Deployment: deploy, kubernetes, cluster | deployment | https://developer.pingidentity.com/devops/deployment/*.md | references/snapshots/deployment.md |
+| Reference: product, container, learn | reference | https://developer.pingidentity.com/devops/reference/*.md | references/snapshots/reference.md |
 | Get Started: deploy, example, stack | get-started | https://developer.pingidentity.com/devops/get-started/*.md | references/snapshots/get-started.md |
-| Home: devops, disclaimer, license | home | https://developer.pingidentity.com/devops/home/*.md | references/snapshots/home.md |
-| Tools: pingctl, code, utility | tools | https://developer.pingidentity.com/devops/tools/*.md | references/snapshots/tools.md |
-| Contact Us: community, contributing | contact-us | https://developer.pingidentity.com/devops/contact-us/*.md | references/snapshots/contact-us.md |
-| Docker Builds: builds, docker, hooks | docker-builds | https://developer.pingidentity.com/devops/docker-builds/*.md | references/snapshots/docker-builds.md |
-| Devops Landing Page.Md: devops, identity | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md | references/snapshots/devops-landing-page-md.md |
-| Overview.Md: overview | overview.md | https://developer.pingidentity.com/devops/overview.md | references/snapshots/overview-md.md |
+| Home: devops, identity, content | home | https://developer.pingidentity.com/devops/home/*.md | references/snapshots/home.md |
+| Tools: pingctl, command, deprecated | tools | https://developer.pingidentity.com/devops/tools/*.md | references/snapshots/tools.md |
+| Contact Us: community, devops, identity | contact-us | https://developer.pingidentity.com/devops/contact-us/*.md | references/snapshots/contact-us.md |
+| Docker Builds: docker, builds, image | docker-builds | https://developer.pingidentity.com/devops/docker-builds/*.md | references/snapshots/docker-builds.md |
+| Devops Landing Page.Md: devops, identity, configuration | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md | references/snapshots/devops-landing-page-md.md |
+| Overview.Md: overview, configuration, deployment | overview.md | https://developer.pingidentity.com/devops/overview.md | references/snapshots/overview-md.md |
 
 ## Composition
 

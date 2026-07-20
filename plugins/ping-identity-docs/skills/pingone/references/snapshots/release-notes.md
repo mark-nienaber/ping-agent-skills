@@ -13,12 +13,25 @@ section_ids:
   2025: 2025
   2026: 2026
   july-2026: July 2026
+  july-19: July 19
+  mfa-api-changes-to-responses: MFA API - changes  to responses
+  july-15: July 15
+  provisioning-to-zendesk-using-a-rest-connection: Provisioning to Zendesk using a REST connection
+  rest-provisioning-connection: REST provisioning connection
+  added-notification-template-and-variant-name-to-notification-created-event: Added notification template and variant name to notification created event
+  july-14: July 14
+  united-states-driver-license-support-in-pingone-verify: United States driver license support in PingOne Verify
+  updated-selfie-capture-in-pingone-verify: Updated selfie capture in PingOne Verify
+  external-idp-attribute-mapping-to-json-user-attributes: External IdP attribute mapping to JSON user attributes
+  july-13: July 13
+  pingone-privilege-is-now-generally-available: PingOne Privilege is now generally available
+  pingone-mfa-mobile-sdk-2-3-2-ios-only: PingOne MFA mobile SDK 2.3.2 (iOS only)
   july-9: July 9
   pingone-provisioner-available-in-early-access: PingOne provisioner available in early access
   unable-to-pair-pingid-desktop-app-in-the-au-geography: Unable to pair PingID desktop app in the AU geography
   july-8: July 8
   pingone-forms-now-supports-custom-images: PingOne Forms now supports custom images
-  pingone-verify-table-of-contents-toc: PingOne Verify table of contents TOC
+  pingone-verify-table-of-contents: PingOne Verify table of contents
   veriff-configuration-in-pingone-verify-policies: Veriff configuration in PingOne Verify policies
   iad-deactivation-when-liveness-is-disabled: IAD deactivation when liveness is disabled
   july-6: July 6
@@ -320,9 +333,9 @@ section_ids:
   identifier-first-authentication-enabled-in-administrator-security: Identifier First authentication enabled in Administrator Security
   july-16: July 16
   identity-data-matching: Identity data matching
-  july-15: July 15
+  july-15-2: July 15
   support-for-multiple-custom-resources-in-a-single-access-token: Support for multiple custom resources in a single access token
-  july-14: July 14
+  july-14-2: July 14
   support-for-multiple-mfa-policies-2: Support for multiple MFA policies
   use-of-risk-policies-with-an-mfa-only-license: Use of risk policies with an MFA-only license
   july-9-2: July 9
@@ -531,6 +544,72 @@ Subscribe to get automatic updates: [icon: rss-square, set=fa][PingOne Release N
 
 ### July 2026
 
+#### July 19
+
+##### MFA API - changes to responses
+
+Info PingOne MFA
+
+Changes have been made to the responses for API requests to get MFA user devices and to check if an MFA device is a remembered device. If you have code that depends upon the content of these responses, you might have to modify your code accordingly. You can find the full details in the [API changelog](https://developer.pingidentity.com/pingone-api/changelog.html#mfa-device-response-changes) in the PingOne developer documentation.
+
+#### July 15
+
+##### Provisioning to Zendesk using a REST connection
+
+New PingOne
+
+You can now use a REST connection to enable provisioning between PingOne and a REST-based target system. Learn more in [REST certified provisioners](../integrations/p1_provisioning_rest_certified_provisioners.html).
+
+##### REST provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your REST accounts and PingOne. Learn more in [Provisioning REST with PingOne](../integrations/p1_provisioning_connection_rest.html).
+
+##### Added notification template and variant name to notification created event
+
+Improved TRIAGE-26405 TRIAGE-26773 PingOne MFA
+
+The `NOTIFICATION.CREATED` audit log event now includes the notification template, variant name, and locale, making it easier to identify which template and variant triggered a notification when reviewing audit logs.
+
+#### July 14
+
+##### United States driver license support in PingOne Verify
+
+Improved PingOne Verify
+
+We've improved barcode validation in the Mitek document validation service of PingOne Verify. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+##### Updated selfie capture in PingOne Verify
+
+Improved PingOne Verify
+
+We've updated the selfie capture, liveness, and injection detection services in PingOne Verify. Along with other improvements, this update improves false positives related to injection attack detection. Learn more in [PingOne Verify types of verification](../identity_verification_using_pingone_verify/p1_verify_types_of_verification.html).
+
+##### External IdP attribute mapping to JSON user attributes
+
+New PingOne
+
+When configuring external identity providers (IdPs), you can now map inbound attributes to custom JSON user attributes in PingOne. For OIDC IdP connections, you can now select custom JSON attributes in the PingOne attributes list. For SAML IdP connections, you must use an expression to create a JSON object or array from inbound attributes. Learn more in [IdP attributes](../integrations/p1_idp_attributes.html).
+
+#### July 13
+
+##### PingOne Privilege is now generally available
+
+New PingOne Privilege
+
+PingOne Privilege is now generally available. This release marks the official launch of our cloud-based privileged access management (PAM) solution, designed to provide secure, frictionless access for developers and DevOps teams to cloud infrastructure and applications. Learn more in the [PingOne Privilege documentation](https://docs.pingidentity.com/privilege/).
+
+This release also includes two new administrator roles, PingOne Privilege Administrator and PingOne Privilege Read-Only Administrator, for managing access to PingOne Privilege. Learn more in [Administrator Roles](../directory/p1_roles.html).
+
+##### PingOne MFA mobile SDK 2.3.2 (iOS only)
+
+New PingOne MFA
+
+We've released version 2.3.2 of the PingOne MFA mobile SDK for iOS. This version includes a number of bug fixes.
+
+Learn more in the documentation for the [iOS version](https://github.com/pingidentity/pingone-mobile-sdk-ios/blob/master/release-notes.md) of the SDK.
+
 #### July 9
 
 ##### PingOne provisioner available in early access
@@ -561,7 +640,7 @@ You can now add your own images in the drag-and-drop form builder. You can provi
 
 Images support configurable sizing, positioning, and padding. You can add a static or dynamic hyperlink to an image, as well as HTML attributes, including `id`, `class`, and `referrerpolicy`. Learn more in [Form configuration toolbox](../user_experience/p1_form_configuration.html#toolbox).
 
-##### PingOne Verify table of contents TOC
+##### PingOne Verify table of contents
 
 Improved PingOne Verify
 

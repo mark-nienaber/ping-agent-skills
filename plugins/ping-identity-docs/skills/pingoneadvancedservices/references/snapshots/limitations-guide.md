@@ -4,6 +4,8 @@ description: Many of you have used on-premise versions of Ping Identity products
 component: pingoneadvancedservices
 page_id: pingoneadvancedservices:limitations_guide:p1as_limitations
 canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/limitations_guide/p1as_limitations.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 23, 2025
 section_ids:
   p1as_infrastructure: Infrastructure

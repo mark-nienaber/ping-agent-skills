@@ -5,6 +5,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Archive
@@ -22,6 +24,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-changes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-changes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Changes
@@ -41,6 +45,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-2023
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2023.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2023_11_x: Web Agent 2023.11.x
   web_agent_2023_11_3: Web Agent 2023.11.3
@@ -134,6 +140,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-2024
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2024.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2024_11_x: Web Agent 2024.11.x
   web_agent_2024_11_2: Web Agent 2024.11.2
@@ -209,6 +217,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-2025
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2025.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2025_11: Web Agent 2025.11
   web_agent_2025_9: Web Agent 2025.9
@@ -300,6 +310,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-2026
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2026.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2026_6: Web Agent 2026.6
   downloads: Web Agent downloads
@@ -339,6 +351,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-510
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-510.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   changed-in-510: Web Agent 5.10
   regular_expression_pattern_matching_is_platform_dependent: Regular expression pattern matching is platform-dependent
@@ -370,6 +384,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-deprecated
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-deprecated.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Deprecated
@@ -393,6 +409,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::deprecated
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/deprecated.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["deprecated-functionality.adoc"]
 ---
 
@@ -423,6 +441,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-fixes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-fixes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Fixes
@@ -442,6 +462,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Fixes
@@ -467,6 +489,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2023
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2023.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2023_11_x: Web Agent 2023.11.x
   web_agent_2023_11_3: Web Agent 2023.11.3
@@ -552,6 +576,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2024
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2024.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2024_11_x: Web Agent 2024.11.x
   web_agent_2024_11_2: Web Agent 2024.11.2
@@ -635,6 +661,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2025
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2025.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2025_11: Web Agent 2025.11
   web_agent_2025_9: Web Agent 2025.9
@@ -697,6 +725,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2026
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2026.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2026_6: Web Agent 2026.6
 ---
@@ -724,6 +754,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-510
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-510.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_5_10_4: Web Agent 5.10.4
   web_agent_5_10_3: Web Agent 5.10.3
@@ -781,6 +813,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::support
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/support.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Getting support
@@ -806,6 +840,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Incompatible changes
@@ -831,6 +867,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-known-issues
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-known-issues.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2023_11: Web Agent 2023.11
   web_agent_2023_9: Web Agent 2023.9
@@ -947,6 +985,8 @@ component: web-agents
 version: release-notes
 page_id: web-agents::known-issues
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   web_agent_2026_6: Web Agent 2026.6
   web_agent_2025_11: Web Agent 2025.11

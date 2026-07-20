@@ -6,7 +6,7 @@ license: MIT
 
 # Config Automation Management SDKs
 
-Config Automation Management SDKs documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Find the available Ping Identity Management and User client SDK libraries for PingOne Advanced Identity Cloud, PingFederate, and PingDirectory.
 
 ## Live source of truth
 
@@ -27,10 +27,10 @@ Config Automation Management SDKs documentation is indexed in the bundled llms.t
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Products: client, configuration, introduction | products | https://developer.pingidentity.com/config-automation-management-sdks/products/*.md | references/snapshots/products.md |
-| Develop With Management Sdks: getting, interface, stability | develop_with_management_sdks | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/*.md | references/snapshots/develop-with-management-sdks.md |
-| Develop With Management Sdks.Md: configuration, develop, management | develop_with_management_sdks.md | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | references/snapshots/develop-with-management-sdks-md.md |
-| Management Sdks Landing Page.Md: configuration, management, overview | management_sdks_landing_page.md | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | references/snapshots/management-sdks-landing-page-md.md |
+| Products: client, connect, pingdirectory | products | https://developer.pingidentity.com/config-automation-management-sdks/products/*.md | references/snapshots/products.md |
+| Develop With Management Sdks: identity, client, projects | develop_with_management_sdks | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks/*.md | references/snapshots/develop-with-management-sdks.md |
+| Develop With Management Sdks.Md: management, sdks, user | develop_with_management_sdks.md | https://developer.pingidentity.com/config-automation-management-sdks/develop_with_management_sdks.md | references/snapshots/develop-with-management-sdks-md.md |
+| Management Sdks Landing Page.Md: identity, management, user | management_sdks_landing_page.md | https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.md | references/snapshots/management-sdks-landing-page-md.md |
 
 ## Composition
 
