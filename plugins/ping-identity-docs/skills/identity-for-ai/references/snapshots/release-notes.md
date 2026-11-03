@@ -1,13 +1,21 @@
 ---
-title: What&#8217;s New?
+title: What&#8217;s new?
 description: "Learn about new developments in Identity for AI, Ping Identity's solution for securing,  managing, and governing AI systems and data."
 component: identity-for-ai
 page_id: identity-for-ai:release-notes:idai-whats-new
 canonical_url: https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.html
-revdate: May 22, 2026
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-01T13:05:00Z
 keywords: ["Identity for AI", "release notes", "what's new"]
 page_aliases: ["index.adoc"]
 section_ids:
+  october-2026: October 2026
+  october-1: October 1
+  protect-an-mcp-server-with-pingone: Protect an MCP server with PingOne
+  august-2026: August 2026
+  august-24: August 24
+  explore-oauth-2-0-protocols-with-the-authplayground: Explore OAuth 2.0 protocols with the AuthPlayground
   march-2026: March 2026
   march-31: March 31
   identity-for-ai-general-availability: Identity for AI general availability
@@ -23,7 +31,7 @@ section_ids:
   january-2026: January 2026
   january-16: January 16
   secure-a-cloudflare-mcp-with-ping-identity: Secure a Cloudflare MCP with Ping Identity
-  secure-aws-bedrock-agentcore-identity-with-ping-identity: Secure AWS Bedrock AgentCore Identity with Ping Identity
+  secure-amazon-bedrock-agentcore-identity-with-ping-identity: Secure Amazon Bedrock AgentCore Identity with Ping Identity
   december-2025: December 2025
   december-22: December 22
   best-practices: Best practices
@@ -35,11 +43,37 @@ section_ids:
   secure-your-ai-agents-with-identity-for-ai: Secure your AI agents with Identity for AI
 ---
 
-# What's New?
+# What's new?
 
 Keep up with new developments in Identity for AI.
 
 Subscribe to get automatic updates: [icon: rss-square, set=fa][Identity for AI RSS feed](idai-whats-new.xml)
+
+## October 2026
+
+### October 1
+
+#### Protect an MCP server with PingOne
+
+New PingGateway
+
+The [MCP security gateway](https://docs.pingidentity.com/pinggateway/latest/mcp/index.html) tutorial now includes how to protect an MCP server with PingOne as the authorization server, in addition to PingOne Advanced Identity Cloud.
+
+## August 2026
+
+### August 24
+
+#### Explore OAuth 2.0 protocols with the AuthPlayground
+
+New
+
+We've launched the AuthPlayground, an interactive visualization tool designed to help you explore OAuth 2.0 extension protocols.
+
+The AuthPlayground simulates complex interactions between a user and various backend services. By displaying real HTTP requests, responses, and fully decoded JSON Web Tokens (JWT), the playground allows you to inspect every claim and understand exactly how authorization data passes through the flow.
+
+As enterprises integrate AI agents into their infrastructure, understanding how OAuth and identity protocols enable secure, scalable AI interactions becomes critical. Whether you're evaluating a new identity architecture, onboarding an engineer to modern OAuth patterns, or trying to understand why a token exchange request returns a 400 error, the playground provides a controlled environment for safe experimentation.
+
+Learn more in [AuthPlayground](../protocols/authplayground.html).
 
 ## March 2026
 
@@ -69,9 +103,9 @@ Agent identity is made available as part of our new Identity for AI solution. Co
 
 Learn more:
 
-* [AI agents in PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html)
+* [AI agents in PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/identity-for-ai/ai-agent-identities.html)
 
-* [Managing AI agents in PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents-ui.html)
+* [Managing AI agents in PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/identity-for-ai/ai-agent-identities-ui.html)
 
 * [AI agents in PingOne](https://docs.pingidentity.com/pingone/ai_agents/p1_ai_agents.html)
 
@@ -89,7 +123,7 @@ PingGateway now provides runtime security for the backend resources and MCP serv
 
 Acting as a security proxy for MCP servers, the agent gateway:
 
-* Validates delegation tokens and enforces scopes and fine-grained authorization before agent requests reach backend resources.
+* Validates delegation tokens and enforces scopes and coarse-grained authorization before agent requests reach backend resources.
 
 * Audits, throttles, and terminates agent traffic.
 
@@ -103,7 +137,7 @@ Learn more:
 
 * [McpAuditFilter](https://docs.pingidentity.com/pinggateway/latest/reference/McpAuditFilter.html): Record centralized audit trails of all agent requests
 
-* [McpProtectionFilter](https://docs.pingidentity.com/pinggateway/latest/reference/McpProtectionFilter.html): Bind OAuth 2.0 resource server configurations to MCP endpoints
+* [McpProtectionFilter](https://docs.pingidentity.com/pinggateway/latest/reference/McpProtectionFilter.html): Bind OAuth 2.1 resource server configurations to MCP endpoints
 
 * [McpValidationFilter](https://docs.pingidentity.com/pinggateway/latest/reference/McpValidationFilter.html): Validate JSON-RPC payloads and client message formats
 
@@ -111,7 +145,7 @@ Learn more:
 
 Improved PingOne Protect
 
-PingOne Protect now detects agentic automation acting on behalf of a user or system. It can:
+PingOne Protect now detects computer using agents (CUA) acting on behalf of a user or system. Agent detection can:
 
 * Identify a subset of specific agent types in the risk evaluation response.
 
@@ -127,7 +161,7 @@ To start securing your AI agents with Identity for AI:
 
 * Configure runtime identity to secure AI agents with [PingOne](../use-cases/idai-securing-agents-pingone.html) and [PingFederate](../use-cases/idai-securing-agents-pingfed.html)
 
-* Integrate with [AWS Bedrock](../agents/idai-securing-aws-ping.html) and [Cloudflare](../agents/idai-securing-cloudflare-pingfed.html) MCP servers
+* Integrate with [Amazon Bedrock](../integrations/idai-securing-aws-ping.html) and [Cloudflare](../integrations/idai-securing-cloudflare-pingfed.html) MCP servers
 
 * Explore additional [Identity for AI](../index.html) resources
 
@@ -139,7 +173,7 @@ To start securing your AI agents with Identity for AI:
 
 New
 
-We've added documentation on [identifying agents with token exchange](../identity/idai-token-exhange.html).
+We've added documentation on [identifying agents with token exchange](../identity/idai-token-exchange.html).
 
 ### February 5
 
@@ -147,7 +181,7 @@ We've added documentation on [identifying agents with token exchange](../identit
 
 New PingGateway
 
-We've linked to a tutorial on [securing MCP servers](../agents/idai-securing-mcp-servers-gateway.html) with PingGateway.
+We've linked to a tutorial on [securing MCP servers](../identity/idai-securing-mcp-servers-gateway.html) with PingGateway.
 
 ## January 2026
 
@@ -159,25 +193,25 @@ New PingOne PingOne Advanced Identity Cloud DaVinci PingFederate
 
 We've added documentation on how to integrate a Cloudflare Workers MCP server with Ping Identity products:
 
-* [PingOne](../agents/idai-securing-cloudflare-pingone.html)
+* [PingOne](../integrations/idai-securing-cloudflare-pingone.html)
 
-* [PingOne Advanced Identity Cloud](../agents/idai-securing-cloudflare-aic.html)
+* [PingOne Advanced Identity Cloud](../integrations/idai-securing-cloudflare-aic.html)
 
-* [DaVinci](../agents/idai-securing-cloudflare-davinci.html)
+* [DaVinci](../integrations/idai-securing-cloudflare-davinci.html)
 
-* [PingFederate](../agents/idai-securing-cloudflare-pingfed.html)
+* [PingFederate](../integrations/idai-securing-cloudflare-pingfed.html)
 
-#### Secure AWS Bedrock AgentCore Identity with Ping Identity
+#### Secure Amazon Bedrock AgentCore Identity with Ping Identity
 
 New PingOne PingOne Advanced Identity Cloud PingFederate
 
-We've added documentation on how to integrate AWS Bedrock AgentCore Identity with Ping Identity products:
+We've added documentation on how to integrate Amazon Bedrock AgentCore Identity with Ping Identity products:
 
-* [PingOne](../agents/idai-securing-aws-ping.html#p1-steps)
+* [PingOne](../integrations/idai-securing-aws-ping.html#p1-steps)
 
-* [PingOne Advanced Identity Cloud](../agents/idai-securing-aws-ping.html#aic-steps)
+* [PingOne Advanced Identity Cloud](../integrations/idai-securing-aws-ping.html#aic-steps)
 
-* [PingFederate](../agents/idai-securing-aws-ping.html#pf-steps)
+* [PingFederate](../integrations/idai-securing-aws-ping.html#pf-steps)
 
 ## December 2025
 
@@ -209,7 +243,7 @@ New
 
 We're excited to announce the launch of the **Identity for AI** portal, Ping Identity's dedicated resource for securing and governing the next generation of autonomous AI.
 
-The rapid shift to agentic AI introduces countless security challenges. AI agents capable of actions such as booking flights and executing code must become trusted digital users. Our foundational Identity for AI framework integrates AI agents securely into your existing IAM ecosystem and helps you implement core best practices such as delegation, not impersonation and least privilege for every AI agent. Learn more in [What Is Identity for AI?](../getting-started/idai-what-is-identity-for-ai.html)
+The rapid shift to agentic AI introduces countless security challenges. AI agents capable of actions such as booking flights and executing code must become trusted digital users. Our foundational Identity for AI framework integrates AI agents securely into your existing IAM ecosystem and helps you implement core best practices such as delegation, not impersonation and least privilege for every AI agent. Learn more in [What is Identity for AI?](../getting-started/idai-what-is-identity-for-ai.html)
 
 Start building trusted, secure, and compliant AI systems by [securing your digital assistants](../use-cases/idai-securing-digital-assistants.html).
 

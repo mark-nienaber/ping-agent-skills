@@ -432,9 +432,9 @@ Perform the following configuration steps in the ForgeRock Access Management adm
 
       ### Example:
 
-      * https\://*\<my-ping\_url>*:\*/\*
+      * https\://*\<my-ping_url>*:\*/\*
 
-      * https\://*\<my-ping\_url>*:\*/**?**
+      * https\://*\<my-ping_url>*:\*/**?**
 
 3. Configure push authentication journeys by completing the steps in the [push authentication journeys guide](https://backstage.forgerock.com/docs/am/7.4/authentication-guide/authn-mfa-trees-push.html).
 

@@ -1,11 +1,12 @@
 ---
 title: Approve Snapshot
-description: The POST /version-control/snapshots/{{snapshotId}}/addApproval operation adds approval to the snapshot specified by the ID in the request URL.
+description: Add an approval to a PingAuthorize snapshot by ID
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/version-control/snapshot-management/approve-snapshot
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/snapshot-management/approve-snapshot.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -256,12 +257,13 @@ task.resume()
 
 ---
 title: Authentication
-description: Clients authenticate to the SCIM APIs by using bearer token authentication, as defined by RFC 6750. Every request must include an Authorization request header, where the header value uses the form Bearer {access token}.
+description: "Authenticate to the PingAuthorize Server's SCIM APIs using bearer token authentication as defined by RFC 6750"
 component: pingauthorize
-page_id: pingauthorize:pingauthorize:scim/authentication
-canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/scim/authentication.html
+page_id: pingauthorize:pingauthorize:scim/authentication/index
+canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/scim/authentication/index.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authentication
@@ -274,17 +276,18 @@ A bearer token must be obtained from an external authorization server, such as P
 
 ---
 title: Authorization
-description: By default, the access token provided by the client in the request (refer to Authentication) is used to control access to requested resources. The PingAuthorize Server's access control policies are customizable, but in general, the scopes granted by the access token determine which resources and attributes are returned.
+description: "Control access to PingAuthorize Server SCIM API resources using OAuth 2.0 scopes granted by the client's access token"
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:scim/authorization
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/scim/authorization.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization
 
-By default, the access token provided by the client in the request (refer to [Authentication](authentication.html)) is used to control access to requested resources. The PingAuthorize Server's access control policies are customizable, but in general, the scopes granted by the access token determine which resources and attributes are returned.
+By default, the access token provided by the client in the request (refer to [Authentication](authentication/index.html)) is used to control access to requested resources. The PingAuthorize Server's access control policies are customizable, but in general, the scopes granted by the access token determine which resources and attributes are returned.
 
 If access controls determine that the client cannot access the requested resource, then a response with a `403` status code is returned.
 
@@ -307,12 +310,13 @@ For information about how to configure an application appropriately for SCIM API
 
 ---
 title: Authorization
-description: Before calculating a decision, the XACML-JSON PDP API attempts to authorize the client making the XACML-JSON PDP API request by invoking the Policy Decision Service.
+description: Explains how the PingAuthorize XACML-JSON PDP API authorizes the requesting client before calculating a policy decision
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-decision/xacml-json-pdp/authorization
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/xacml-json-pdp/authorization.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization
@@ -336,12 +340,13 @@ The default policies are intended to provide a foundation. You can modify these 
 
 ---
 title: Authorize Client with Batch Decision
-description: The POST /governance-engine/batch operation authorizes the client using an individual request. On successful client authorization, the JSON PDP API invokes the Policy Decision Service.
+description: Authorize a client and invoke the PingAuthorize Policy Decision Service using a batch of individual decision requests
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-decision/json-pdp/batch-requests/authorize-client-with-batch-decision
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/json-pdp/batch-requests/authorize-client-with-batch-decision.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   headers: Headers
   body: Body
@@ -875,12 +880,13 @@ task.resume()
 
 ---
 title: Authorize Client with Individual Decision
-description: The POST /governance-engine operation authorizes the client using an individual request. On successful client authorization, the JSON PDP API invokes the Policy Decision Service.
+description: Authorize a client and invoke the PingAuthorize Policy Decision Service using an individual decision request
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-decision/json-pdp/individual-requests/authorize-client-with-individual-decision
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/json-pdp/individual-requests/authorize-client-with-individual-decision.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   headers: Headers
   body: Body
@@ -1267,12 +1273,13 @@ task.resume()
 
 ---
 title: Authorize Client With MultiRequests JSON Object
-description: The POST /pdp operation authorizes the client using the MultiRequests JSON object. On successful client authorization, the XACML-JSON PDP API invokes the Policy Decision Service with batch decision requests converted from the XACML-JSON request.
+description: Authorize a client and invoke the PingAuthorize Policy Decision Service using the XACML MultiRequests JSON object
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-decision/xacml-json-pdp/requests-and-responses/authorize-client-with-multirequests-json-object
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/xacml-json-pdp/requests-and-responses/authorize-client-with-multirequests-json-object.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   headers: Headers
   body: Body
@@ -2123,12 +2130,13 @@ task.resume()
 
 ---
 title: Batch Requests
-description: "Batch requests consist of an array named \"requests\" of JSON objects, each of which is a standard JSON PDP API single decision request."
+description: Describes the format of batch requests to the PingAuthorize JSON PDP API, which bundle multiple individual decision requests into one call
 component: pingauthorize
-page_id: pingauthorize:pingauthorize:policy-decision/json-pdp/batch-requests
-canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/json-pdp/batch-requests.html
+page_id: pingauthorize:pingauthorize:policy-decision/json-pdp/batch-requests/index
+canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-decision/json-pdp/batch-requests/index.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Batch Requests
@@ -2143,12 +2151,13 @@ The batch decision responses are guaranteed to be returned in the same order as 
 
 ---
 title: Branch Manager
-description: The branch manager provides operations to create snapshots, as well as read, update, and merge policy branches.
+description: Create, read, rename, delete, and merge PingAuthorize policy branches to manage separate sets of Trust Framework definitions and policies
 component: pingauthorize
-page_id: pingauthorize:pingauthorize:policy-editor/version-control/branch-manager
-canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/branch-manager.html
+page_id: pingauthorize:pingauthorize:policy-editor/version-control/branch-manager/index
+canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/branch-manager/index.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   branch-manager-data-model: Branch manager data model
   resolution-data-model: Resolution data model
@@ -2164,9 +2173,9 @@ Policy branches enable you to manage different sets of Trust Framework definitio
 
 To easily switch between policy branches and test configurations, define [Policy External Servers](https://docs.pingidentity.com/pingauthorize/latest/pingauthorize_server_administration_guide/paz_config_external_pdp.html) for each branch and update the Policy Decision Service's `policy-server` property. Learn more in [Changing the active policy branch](https://docs.pingidentity.com/pingauthorize/latest/pingauthorize_server_administration_guide/paz_change_active_policy_branch.html).
 
-|   |                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn about creating a new child branch in [Snapshot Management](snapshot-management/create-child-branch-from-snapshot.html). |
+|   |                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------- |
+|   | Learn about creating a new child branch in [Snapshot Management](../snapshot-management/create-child-branch-from-snapshot.html). |
 
 ## Branch manager data model
 
@@ -2204,12 +2213,13 @@ To easily switch between policy branches and test configurations, define [Policy
 
 ---
 title: Changelog
-description: The following changes have been made to the PingAuthorize SCIM API.
+description: Changelog of updates made to the PingAuthorize SCIM API reference documentation
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:scim/changelog
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/scim/changelog.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Changelog
@@ -2224,12 +2234,13 @@ The following changes have been made to the PingAuthorize SCIM API.
 
 ---
 title: Create A User
-description: "The POST /scim/v2/Users endpoint creates a new user resource, providing a complete representation of the resource in the request body. Read-only attributes such as meta can be omitted. If the request is successful, the PingAuthorize Server returns a response with a status code of 201, with the resource's canonical URI as the value of the Location header. For example, +Location: https://example.com:443/scim/v2/Users/5caa81af-ec05-41ff-a709-c7378007a99c."
+description: Create a new SCIM user resource on the PingAuthorize Server with the POST /scim/v2/Users endpoint
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:scim/user-profile/create-a-user
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/scim/user-profile/create-a-user.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   headers: Headers
   body: Body
@@ -2648,12 +2659,13 @@ task.resume()
 
 ---
 title: Create Child Branch From Snapshot
-description: The POST /version-control/snapshots/{{snapshotId}}/branch operation creates a new child branch. The child branch is forked from the snapshot specified by the ID in the request URL.
+description: Create a new PingAuthorize child branch forked from a specified snapshot
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/version-control/snapshot-management/create-child-branch-from-snapshot
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/snapshot-management/create-child-branch-from-snapshot.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -2673,7 +2685,7 @@ The `POST /version-control/snapshots/{{snapshotId}}/branch` operation creates a 
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Snapshot manager data model](../snapshot-management.html#snapshot-manager-data-model)
+> For property descriptions, refer to [Snapshot manager data model](index.html#snapshot-manager-data-model)
 >
 > | Property | Type   | Required |
 > | -------- | ------ | -------- |
@@ -2975,12 +2987,13 @@ task.resume()
 
 ---
 title: Create Child Test Suite Entity
-description: The POST /test-suite/{{testSuiteEntryId}} operation creates a new child test suite entity. The allowable values for {{testSuiteType}} are TEST_SCENARIO, TEST_CASE, or ASSERTION. The request must provide either a branch ID or a snapshot ID in the request URL to specify where the test suite entity should be created.
+description: Create a child PingAuthorize test suite entity, such as a test scenario, test case, or assertion
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/test-suite/create-child-test-suite-entry
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/test-suite/create-child-test-suite-entry.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-05
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -3014,7 +3027,7 @@ The `POST /test-suite/{{testSuiteEntryId}}` operation creates a new child test s
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Test suite data model](../test-suite.html#test-suite-data-model)
+> For property descriptions, refer to [Test suite data model](index.html#test-suite-data-model)
 >
 > \=== Test scenario request model
 >
@@ -3037,23 +3050,23 @@ The `POST /test-suite/{{testSuiteEntryId}}` operation creates a new child test s
 >
 > \=== Test case request model
 >
-> | Property                                           | Type                                                                       | Required |
-> | -------------------------------------------------- | -------------------------------------------------------------------------- | -------- |
-> | `name`                                             | String                                                                     | Required |
-> | `description`                                      | String                                                                     | Optional |
-> | `objectType`                                       | String                                                                     | Required |
-> | `parentId`                                         | UUID                                                                       | Optional |
-> | `permissions.rolePermissions`                      | JSON\[]                                                                    | Optional |
-> | `permissions.inherit`                              | Boolean                                                                    | Optional |
-> | `testCase.testedEntities`                          | [Test entity](../policy-manager/test-cases.html#test-entity-data-model)\[] | Required |
-> | `testCase.testedEntities.assertions`               | [Assertion](../policy-manager/test-cases.html#assertion-data-model)\[]     | Optional |
-> | `testCase.testScenarioDefinitionId`                | String                                                                     | Optional |
-> | `testCase.testScenario.request.domainId`           | String                                                                     | Optional |
-> | `testCase.testScenario.request.serviceId`          | String                                                                     | Optional |
-> | `testCase.testScenario.request.identityProviderId` | String                                                                     | Optional |
-> | `testCase.testScenario.request.actionId`           | String                                                                     | Optional |
-> | `testCase.testScenario.attributeOverrides`         | JSON                                                                       | Optional |
-> | `testCase.testScenario.serviceOverrides`           | JSON                                                                       | Optional |
+> | Property                                           | Type                                                                             | Required |
+> | -------------------------------------------------- | -------------------------------------------------------------------------------- | -------- |
+> | `name`                                             | String                                                                           | Required |
+> | `description`                                      | String                                                                           | Optional |
+> | `objectType`                                       | String                                                                           | Required |
+> | `parentId`                                         | UUID                                                                             | Optional |
+> | `permissions.rolePermissions`                      | JSON\[]                                                                          | Optional |
+> | `permissions.inherit`                              | Boolean                                                                          | Optional |
+> | `testCase.testedEntities`                          | [Test entity](../policy-manager/test-cases/index.html#test-entity-data-model)\[] | Required |
+> | `testCase.testedEntities.assertions`               | [Assertion](../policy-manager/test-cases/index.html#assertion-data-model)\[]     | Optional |
+> | `testCase.testScenarioDefinitionId`                | String                                                                           | Optional |
+> | `testCase.testScenario.request.domainId`           | String                                                                           | Optional |
+> | `testCase.testScenario.request.serviceId`          | String                                                                           | Optional |
+> | `testCase.testScenario.request.identityProviderId` | String                                                                           | Optional |
+> | `testCase.testScenario.request.actionId`           | String                                                                           | Optional |
+> | `testCase.testScenario.attributeOverrides`         | JSON                                                                             | Optional |
+> | `testCase.testScenario.serviceOverrides`           | JSON                                                                             | Optional |
 >
 > To create an test case group rather than an individual test case, set the `testCase` property to `null`.
 >
@@ -3441,12 +3454,13 @@ task.resume()
 
 ---
 title: Create Deployment Package
-description: The POST /deployment-packages operation creates a new deployment package instance.
+description: Create a PingAuthorize deployment package instance from a snapshot and decision node
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/deployment-package/create-deployment-package
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/deployment-package/create-deployment-package.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-30
 section_ids:
   headers: Headers
   body: Body
@@ -3466,7 +3480,7 @@ The `POST /deployment-packages` operation creates a new deployment package insta
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to the [Authorization deployment package data model](../deployment-package.html#authorization-deployment-package-data-model).
+> For property descriptions, refer to the [Authorization deployment package data model](index.html#authorization-deployment-package-data-model).
 >
 > | Property         | Type   | Required |
 > | ---------------- | ------ | -------- |
@@ -3765,12 +3779,13 @@ task.resume()
 
 ---
 title: Create Deployment Package Approval
-description: The POST /deployment-packages/{{deploymentPackageId}}/approval operation creates an application package approval.
+description: Create an approval for a PingAuthorize deployment package
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/deployment-package/create-deployment-package-approval
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/deployment-package/create-deployment-package-approval.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -4007,12 +4022,13 @@ task.resume()
 
 ---
 title: Create Policy
-description: The POST /v2/policy-manager/policies operation creates a new policy. The request must provide either a branch ID or a snapshot ID in the request URL to specify where the policy should be added.
+description: Create a new PingAuthorize policy on a specified branch or snapshot
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/policy-manager/policies/create-policy
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/policies/create-policy.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4046,7 +4062,7 @@ The `POST /v2/policy-manager/policies` operation creates a new policy. The reque
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Authorization policy data model](../policies.html#authorization-policy-data-model).
+> For property descriptions, refer to [Authorization policy data model](index.html#authorization-policy-data-model).
 >
 > | Property             | Type                                      | Required |
 > | -------------------- | ----------------------------------------- | -------- |
@@ -4426,12 +4442,13 @@ task.resume()
 
 ---
 title: Create PolicySet
-description: The POST /v2/policy-manager/policysets operation creates a new policy set. The request must provide either a branch ID or a snapshot ID in the request URL to specify where the policy set should be added.
+description: Create a new PingAuthorize policy set on a specified branch or snapshot
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/policy-manager/policysets/create-policyset
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/policysets/create-policyset.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4465,7 +4482,7 @@ The `POST /v2/policy-manager/policysets` operation creates a new policy set. The
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Authorization policy set data model](../policysets.html#authorization-policy-set-data-model).
+> For property descriptions, refer to [Authorization policy set data model](index.html#authorization-policy-set-data-model).
 >
 > | Property             | Type                                      | Required |
 > | -------------------- | ----------------------------------------- | -------- |
@@ -4842,12 +4859,13 @@ task.resume()
 
 ---
 title: Create Root Test Suite Entity
-description: The POST /test-suite/roots/{{testSuiteType}} operation creates a new root test suite entity. The allowable values for {{testSuiteType}} are TEST_SCENARIO, TEST_CASE, or ASSERTION. The request must provide either a branch ID or a snapshot ID in the request URL to specify where the test suite entity should be created.
+description: Create a root PingAuthorize test suite entity, such as a test scenario, test case, or assertion
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/test-suite/create-root-test-suite-entry
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/test-suite/create-root-test-suite-entry.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-12
 section_ids:
   prerequisites: Prerequisites
   test-scenario-request-model: Test Scenario Request Model
@@ -4884,7 +4902,7 @@ The `POST /test-suite/roots/{{testSuiteType}}` operation creates a new root test
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Test suite data model](../test-suite.html#test-suite-data-model).
+> For property descriptions, refer to [Test suite data model](index.html#test-suite-data-model).
 >
 > #### Test Scenario Request Model
 >
@@ -4905,21 +4923,21 @@ The `POST /test-suite/roots/{{testSuiteType}}` operation creates a new root test
 >
 > #### Test case request model
 >
-> | Property                                           | Type                                                        | Required |
-> | -------------------------------------------------- | ----------------------------------------------------------- | -------- |
-> | `name`                                             | String                                                      | Required |
-> | `description`                                      | String                                                      | Optional |
-> | `permissions.rolePermissions`                      | JSON\[]                                                     | Optional |
-> | `permissions.inherit`                              | Boolean                                                     | Optional |
-> | `testCase.testedEntities`                          | [Test entity](../test-suite.html#test-entity-data-model)\[] | Required |
-> | `testCase.testedEntities.assertions`               | [Assertion](../test-suite.html#assertion-data-model)\[]     | Optional |
-> | `testCase.testScenarioDefinitionId`                | String                                                      | Optional |
-> | `testCase.testScenario.request.domainId`           | String                                                      | Optional |
-> | `testCase.testScenario.request.serviceId`          | String                                                      | Optional |
-> | `testCase.testScenario.request.identityProviderId` | String                                                      | Optional |
-> | `testCase.testScenario.request.actionId`           | String                                                      | Optional |
-> | `testCase.testScenario.attributeOverrides`         | JSON                                                        | Optional |
-> | `testCase.testScenario.serviceOverrides`           | JSON                                                        | Optional |
+> | Property                                           | Type                                                | Required |
+> | -------------------------------------------------- | --------------------------------------------------- | -------- |
+> | `name`                                             | String                                              | Required |
+> | `description`                                      | String                                              | Optional |
+> | `permissions.rolePermissions`                      | JSON\[]                                             | Optional |
+> | `permissions.inherit`                              | Boolean                                             | Optional |
+> | `testCase.testedEntities`                          | [Test entity](index.html#test-entity-data-model)\[] | Required |
+> | `testCase.testedEntities.assertions`               | [Assertion](index.html#assertion-data-model)\[]     | Optional |
+> | `testCase.testScenarioDefinitionId`                | String                                              | Optional |
+> | `testCase.testScenario.request.domainId`           | String                                              | Optional |
+> | `testCase.testScenario.request.serviceId`          | String                                              | Optional |
+> | `testCase.testScenario.request.identityProviderId` | String                                              | Optional |
+> | `testCase.testScenario.request.actionId`           | String                                              | Optional |
+> | `testCase.testScenario.attributeOverrides`         | JSON                                                | Optional |
+> | `testCase.testScenario.serviceOverrides`           | JSON                                                | Optional |
 >
 > To create an test case group rather than an individual test case, set the `testCase` property to `null`.
 >
@@ -5387,12 +5405,13 @@ task.resume()
 
 ---
 title: Create Rule
-description: The POST /v2/policy-manager/rules operation creates a new rule. The request must provide either a branch ID or a snapshot ID in the request URL to specify where the rule should be added.
+description: Create a new PingAuthorize rule on a specified branch or snapshot
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/policy-manager/rules/create-rule
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/policy-manager/rules/create-rule.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -5428,18 +5447,18 @@ The `POST /v2/policy-manager/rules` operation creates a new rule. The request mu
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Authorization rules data model](../rules.html#authorization-rules-data-model).
+> For property descriptions, refer to [Authorization rules data model](index.html#authorization-rules-data-model).
 >
-> | Property         | Type                                            | Required |
-> | ---------------- | ----------------------------------------------- | -------- |
-> | `condition`      | Condition object                                | Required |
-> | `description`    | String                                          | Required |
-> | `disabled`       | Boolean                                         | Required |
-> | `effectSettings` | [EffectSettings](../rules.html#effect-settings) | Required |
-> | `name`           | String                                          | Required |
-> | `shared`         | Boolean                                         | Required |
-> | `statements`     | Collection of StatementNodeRepresentation       | Required |
-> | `targets`        | Collection of TargetNodeRepresentation          | Required |
+> | Property         | Type                                         | Required |
+> | ---------------- | -------------------------------------------- | -------- |
+> | `condition`      | Condition object                             | Required |
+> | `description`    | String                                       | Required |
+> | `disabled`       | Boolean                                      | Required |
+> | `effectSettings` | [EffectSettings](index.html#effect-settings) | Required |
+> | `name`           | String                                       | Required |
+> | `shared`         | Boolean                                      | Required |
+> | `statements`     | Collection of StatementNodeRepresentation    | Required |
+> | `targets`        | Collection of TargetNodeRepresentation       | Required |
 
 ### Headers
 
@@ -5804,12 +5823,13 @@ task.resume()
 
 ---
 title: Create Snapshot
-description: The POST /version-control/branches/{{branchId}}/commit operation commits all uncommitted changes into a new snapshot. The operation places the snapshot at the head of the branch identified by {{branchId}}.
+description: Commit all uncommitted changes on a PingAuthorize policy branch into a new snapshot
 component: pingauthorize
 page_id: pingauthorize:pingauthorize:policy-editor/version-control/branch-manager/create-snapshot
 canonical_url: https://developer.pingidentity.com/pingauthorize/pingauthorize/policy-editor/version-control/branch-manager/create-snapshot.html
 llms_txt: https://developer.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-05
 section_ids:
   headers: Headers
   body: Body
@@ -5831,7 +5851,7 @@ After committing your changes, you can [create a deployment package](../../deplo
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Branch manager data model](../branch-manager.html#branch-manager-data-model)
+> For property descriptions, refer to [Branch manager data model](index.html#branch-manager-data-model)
 >
 > | Property  | Type   | Required |
 > | --------- | ------ | -------- |

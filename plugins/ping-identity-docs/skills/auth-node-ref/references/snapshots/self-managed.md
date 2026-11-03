@@ -7,12 +7,14 @@ page_id: auth-node-ref:self-managed:authenticate-thing
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/self-managed/authenticate-thing.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Identity Store"]
 page_aliases: ["self-managed/auth-node-authenticate-thing.adoc"]
 section_ids:
   examples: Examples
   availability: Availability
   dependencies: Dependencies
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -65,6 +67,10 @@ The node supports two methods of authentication:
 
    The node collects a JWT Bearer token from the request for authentication and validates the request according to the [JWT Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://www.rfc-editor.org/rfc/rfc7523.html#section-3).
 
+## Callbacks
+
+The node sends a [HiddenValueCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-interactive.html#hiddenvaluecallback), which collects the authentication JWT from the IoT SDK — either a proof-of-possession JWT containing a challenge nonce, or a client assertion JWT, depending on the configured JWT Authentication Method.
+
 ## Outcomes
 
 * `Success`
@@ -104,26 +110,32 @@ page_id: auth-node-ref:self-managed:kerberos
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/self-managed/kerberos.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Kerberos"]
 page_aliases: ["auth-node-kerberos.adoc"]
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Kerberos node
 
-Enables desktop single sign-on such that a user who has already authenticated with a Kerberos Key Distribution Center can authenticate to AM without having to provide the login information again.
+The Kerberos node enables desktop single sign-on (SSO) to AM for users who have already authenticated with a Kerberos Key Distribution Center (KDC).
 
-To achieve this, the user presents a Kerberos token to AM through the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) protocol.
+The user presents a Kerberos token to AM through the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) protocol. AM validates the token and identifies the user.
 
 End users may need to set up Integrated Windows Authentication in Microsoft Edge to benefit from single sign-on when logged on to a Windows desktop.
 
 ## Example
 
-This flow attempts to authenticate the user with Windows Desktop SSO. If unsuccessful, AM requests the username and password for login. Meter nodes are used to track metrics for the various paths through the flow:
+This flow attempts to authenticate the user with Windows Desktop SSO. If authentication is unsuccessful, AM requests the username and password for login. The Kerberos node routes evaluation along the `True` path when Windows Desktop SSO succeeds and along the `False` path otherwise. Meter nodes track metrics for the various paths through the flow without changing the path themselves:
 
 ![An example that uses the Kerberos node](_images/trees-node-kerberos-example.png)
 
@@ -135,26 +147,94 @@ This flow attempts to authenticate the user with Windows Desktop SSO. If unsucce
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | Yes        |
 
+## Inputs
+
+The node receives a Kerberos token through an HTTP request or an `HttpCallback` sent during SPNEGO negotiation.
+
+## Dependencies
+
+The node requires a Kerberos keytab file, service principal, Kerberos realm, and Kerberos server. Configure these properties in the node configuration.
+
+The client must support SPNEGO and be configured for Integrated Windows Authentication. If Lookup User In Realm is enabled, the user must exist and be active in the configured realm.
+
+## Configuration
+
+| Property                          | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Service Principal                 | The Kerberos principal for authentication in the format `HTTP/AM-DOMAIN@AD-DOMAIN`, where *AM-DOMAIN* corresponds to the host and domain names of the AM instance, and *AD-DOMAIN* is the domain name of the Kerberos realm (the FQDN of the Active Directory domain). *AD-DOMAIN* can differ from the domain name for AM.In multi-instance AM deployments, configure *AM-DOMAIN* as the FQDN or IP address of the load balancer in front of the AM instances.For example, `HTTP/AM-LB.example.com@KERBEROSREALM.INTERNAL.COM`. |
+| Key Tab File Path                 | The full, absolute path of the keytab file for the specified Service Principal.&#xA;&#xA;You generate the keytab file using the Windows ktpass utility. For example:&#xA;&#xA;C:\\> ktpass -out fileName.keytab -princ HTTP/am.example.com\@AD_DOMAIN.COM -pass +rdnPass -maxPass 256 -mapuser amKerberos\@frdpcloud.com -crypto AES256-SHA1 -ptype KRB5_NT_PRINCIPAL -kvno 0                                                                                                                                                   |
+| Kerberos Realm                    | The name of the Kerberos (Active Directory) realm used for authentication.Must be specified in ALL CAPS.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Kerberos Server Name              | The fully qualified domain name, or IP address of the Kerberos (Active Directory) server.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Trusted Kerberos realms           | A list of trusted Kerberos realms for user Kerberos tickets. If realms are configured, then Kerberos tickets are only accepted if the realm part of the user principal name of the user's Kerberos ticket matches a realm from the list.Each trusted Kerberos realm must be specified in all caps.                                                                                                                                                                                                                              |
+| Return Principal with Domain Name | When enabled, AM returns the fully qualified name of the authenticated user rather than just the username.                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Lookup User In Realm              | Validates the user against the configured data stores. If the user from the Kerberos token is not found, evaluation continues along the `False` path.This search uses the `Alias Search Attribute Name` from the core realm attributes.Find more information about this property in [Core authentication attributes > User profile](https://docs.pingidentity.com/pingam/8.1/am-authentication/authn-core-settings.html#authn-core-user-profile).                                                                               |
+| Is Initiator                      | When enabled, the node uses *initiator* credentials, which is the default.When not enabled, the node uses *acceptor* credentials.                                                                                                                                                                                                                                                                                                                                                                                               |
+
+## Outputs
+
+On successful authentication, the node sets the `username` shared state property and identifies the authenticated user. If Lookup User In Realm is enabled, it also returns the user's universal ID.
+
+## Callbacks
+
+The node sends an [HttpCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-backchannel.html#httpcallback) containing a `WWW-Authenticate: Negotiate` challenge with HTTP status 401. This prompts the client to initiate SPNEGO negotiation and provide a Kerberos token.
+
 ## Outcomes
 
 * `True`
 
+  The node successfully authenticated the user with Windows Desktop SSO.
+
 * `False`
 
-Evaluation continues along the `True` path if Windows Desktop SSO is successful; otherwise, evaluation continues along the `False` path.
+  The node failed to authenticate the user with Windows Desktop SSO.
 
-## Configuration
+## Errors
 
-| Property                          | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Service Principal                 | Specifies the Kerberos principal for authentication in the format `HTTP/AM-DOMAIN@AD-DOMAIN`, where *AM-DOMAIN* corresponds to the host and domain names of the AM instance, and *AD-DOMAIN* is the domain name of the Kerberos realm (the FQDN of the Active Directory domain). *AD-DOMAIN* can differ from the domain name for AM.In multi-instance AM deployments, configure *AM-DOMAIN* as the FQDN or IP address of the load balancer in front of the AM instances.For example, `HTTP/AM-LB.example.com@KERBEROSREALM.INTERNAL.COM`. |
-| Key Tab File Path                 | Specifies the full, absolute path of the keytab file for the specified Service Principal.&#xA;&#xA;You generate the keytab file using the Windows ktpass utility. For example:&#xA;&#xA;C:\\> ktpass -out fileName.keytab -princ HTTP/am.example.com\@AD\_DOMAIN.COM -pass +rdnPass -maxPass 256 -mapuser amKerberos\@frdpcloud.com -crypto AES256-SHA1 -ptype KRB5\_NT\_PRINCIPAL -kvno 0                                                                                                                                                |
-| Kerberos Realm                    | Specifies the name of the Kerberos (Active Directory) realm used for authentication.Must be specified in ALL CAPS.                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Kerberos Server Name              | Specifies the fully qualified domain name, or IP address of the Kerberos (Active Directory) server.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Trusted Kerberos realms           | Specifies a list of trusted Kerberos realms for user Kerberos tickets. If realms are configured, then Kerberos tickets are only accepted if the realm part of the user principal name of the user's Kerberos ticket matches a realm from the list.Each trusted Kerberos realm must be specified in all caps.                                                                                                                                                                                                                              |
-| Return Principal with Domain Name | When enabled, AM returns the fully qualified name of the authenticated user rather than just the username.                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Lookup User In Realm              | Validates the user against the configured data stores. If the user from the Kerberos token is not found, evaluation continues along the `False` path.This search uses the `Alias Search Attribute Name` from the core realm attributes.Find more information about this property in [Core authentication attributes > User profile](https://docs.pingidentity.com/pingam/8.1/am-authentication/authn-core-settings.html#authn-core-user-profile).                                                                                         |
-| Is Initiator                      | When enabled (`true`), specifies that the node is using *initiator* credentials, which is the default.When disabled (`false`), specifies that the node is using *acceptor* credentials.                                                                                                                                                                                                                                                                                                                                                   |
+The node can log the following:
+
+* Warnings
+
+  * `Http Auth Failed`
+
+    The browser didn't complete HTTP authentication. Check the browser's Integrated Windows Authentication settings.
+
+  * `SPNEGO token is not valid.`
+
+    The request or callback didn't contain a valid SPNEGO token.
+
+  * `Kerberos token is not valid.`
+
+    The SPNEGO token didn't contain a valid Kerberos token.
+
+  * `Kerberos authentication failed`
+
+    Kerberos authentication failed while processing the user's token. Check the Kerberos configuration and logs for the underlying cause.
+
+* Errors
+
+  * `Exception thrown trying to authenticate the user`
+
+    An exception occurred while AM was authenticating the user. Check the full exception in the logs.
+
+  * `Service subject is null`
+
+    AM couldn't create the service credentials needed to validate the Kerberos token. Check the service principal and keytab configuration.
+
+  * `#authenticateToken: Cannot establish context !`
+
+    AM couldn't establish a security context with the Kerberos token. Check the token and Kerberos configuration.
+
+  * `Kerberos token for user principal is not trusted`
+
+    The user's Kerberos realm isn't in the configured trusted realms.
+
+  * `Unable to find the user username in org realm`
+
+    Lookup User In Realm is enabled, but the user doesn't exist or isn't active in the configured realm.
+
+  * `Error while performing service login`
+
+    AM couldn't sign on with the configured service principal and keytab file.
 
 ---
 
@@ -167,11 +247,13 @@ page_id: auth-node-ref:self-managed:register-thing
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/self-managed/register-thing.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["self-managed/auth-node-register-thing.adoc"]
 section_ids:
   availability: Availability
   dependencies: Dependencies
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -203,6 +285,10 @@ If the JWT is valid, the node uses the claims in the JWT to create an identity f
 If the node cannot validate the JWT, evaluation continues through the `Failure` outcome.
 
 For an example on how to use this node, refer to [Authenticate Thing node](authenticate-thing.html).
+
+## Callbacks
+
+The node sends one or more [HiddenValueCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-interactive.html#hiddenvaluecallback) instances depending on the configured JWT Registration Method: a challenge nonce for the IoT thing to include in a signed Proof of Possession JWT, and optionally a Software Statement collector.
 
 ## Outcomes
 

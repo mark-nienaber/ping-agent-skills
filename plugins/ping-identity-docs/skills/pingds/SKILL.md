@@ -27,18 +27,18 @@ Introduction to LDAP directory concepts including data model, communication, con
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Schemaref: attribute, about, account | schemaref | https://docs.pingidentity.com/pingds/8.1/schemaref/*.md | live-only |
-| Configref: password, handler, scheme | configref | https://docs.pingidentity.com/pingds/8.1/configref/*.md | live-only |
-| Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | live-only |
-| Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | live-only |
-| Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | live-only |
-| Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | live-only |
-| Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | live-only |
-| Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | live-only |
-| Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | live-only |
-| Ldap Guide: ldap, pingds, tools | ldap-guide | https://docs.pingidentity.com/pingds/8.1/ldap-guide/*.md | live-only |
-| Monitoring Guide: pingds, metrics, monitor | monitoring-guide | https://docs.pingidentity.com/pingds/8.1/monitoring-guide/*.md | live-only |
-| Rest Guide: hdap, pingds, http | rest-guide | https://docs.pingidentity.com/pingds/8.1/rest-guide/*.md | live-only |
+| Schemaref: attribute, about, account | schemaref | https://docs.pingidentity.com/pingds/8.1/schemaref/*.md | references/snapshots/schemaref.md |
+| Configref: password, handler, scheme | configref | https://docs.pingidentity.com/pingds/8.1/configref/*.md | references/snapshots/configref.md |
+| Config Guide: pingds, replication, configure | config-guide | https://docs.pingidentity.com/pingds/8.1/config-guide/*.md | references/snapshots/config-guide.md |
+| Tools Reference: ldif, about, addrate | tools-reference | https://docs.pingidentity.com/pingds/8.1/tools-reference/*.md | references/snapshots/tools-reference.md |
+| Security Guide: pingds, password, policies | security-guide | https://docs.pingidentity.com/pingds/8.1/security-guide/*.md | references/snapshots/security-guide.md |
+| Release Notes: pingds, fixes, releases | release-notes | https://docs.pingidentity.com/pingds/release-notes/*.md | references/snapshots/release-notes.md |
+| Install Guide: install, pingds, setup | install-guide | https://docs.pingidentity.com/pingds/8.1/install-guide/*.md | references/snapshots/install-guide.md |
+| Upgrade Guide: upgrade, new, pingds | upgrade-guide | https://docs.pingidentity.com/pingds/8.1/upgrade-guide/*.md | references/snapshots/upgrade-guide.md |
+| Getting Started: learn, pingds, access | getting-started | https://docs.pingidentity.com/pingds/8.1/getting-started/*.md | references/snapshots/getting-started.md |
+| Ldap Guide: ldap, pingds, tools | ldap-guide | https://docs.pingidentity.com/pingds/8.1/ldap-guide/*.md | references/snapshots/ldap-guide.md |
+| Monitoring Guide: pingds, metrics, monitor | monitoring-guide | https://docs.pingidentity.com/pingds/8.1/monitoring-guide/*.md | references/snapshots/monitoring-guide.md |
+| Rest Guide: hdap, pingds, http | rest-guide | https://docs.pingidentity.com/pingds/8.1/rest-guide/*.md | references/snapshots/rest-guide.md |
 
 ## Composition
 

@@ -1,9 +1,11 @@
 ---
 title: Develop with Terraform
-description: Learn how to take a preconfigured product environment and import to Terraform state. Importing to Terraform state allows Terraform to manage a product environment without needing to recreate any configuration for that environment. This is useful when bringing a production environment under Terraform control retrospectively.
+description: Overview of guides for importing, exporting, and understanding interface stability and support when developing with Ping Identity Terraform providers
 component: terraform
 page_id: terraform::develop_with_terraform
 canonical_url: https://developer.pingidentity.com/terraform/develop_with_terraform.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   importing-to-terraform-state: Importing to Terraform state

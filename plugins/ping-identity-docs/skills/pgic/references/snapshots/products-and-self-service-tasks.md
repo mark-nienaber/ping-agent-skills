@@ -4,6 +4,8 @@ description: If you are an administrator with Delegated Admin rights, you can si
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_managingpingproductadmins
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_managingpingproductadmins.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 15, 2022
 section_ids:
   steps: Steps
@@ -57,6 +59,8 @@ description: PingAccess is an identity-enabled access management product that pr
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pa_selfservice
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pa_selfservice.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 21, 2021
 ---
 
@@ -96,6 +100,8 @@ description: PingDirectory is a scalable directory used to store identity and ri
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pd_selfservice
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pd_selfservice.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 21, 2021
 ---
 
@@ -115,6 +121,8 @@ description: PingFederate is an enterprise federation server that enables user a
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pf_selfservice
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pf_selfservice.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 21, 2021
 ---
 
@@ -146,6 +154,8 @@ description: You can configure a wide variety of applications in PingFederate an
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pf_manage_apps
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pf_manage_apps.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 ---
 
@@ -173,6 +183,8 @@ description: Authentication policies are processes used to verify that those att
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pf_auth_policies
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pf_auth_policies.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 ---
 
@@ -206,6 +218,8 @@ description: Most customers who use PingFederate as an identity provider (IdP) h
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_pf_manage_data_sources
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_pf_manage_data_sources.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 ---
 
@@ -229,6 +243,8 @@ description: There's a number of tasks you can complete yourself with Ping Gover
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_products_selfservice
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_products_selfservice.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 16, 2025
 section_ids:
   product-self-service-tasks: Product self-service tasks
@@ -283,6 +299,8 @@ description: The activity log displays information about activity that has occur
 component: pgic
 page_id: pgic:products_and_self-service_tasks:p14g_platform_activity_log
 canonical_url: http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_platform_activity_log.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 ---
 

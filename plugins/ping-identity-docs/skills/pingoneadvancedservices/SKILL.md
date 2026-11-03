@@ -12,7 +12,7 @@ The home page for the PingOne Advanced Services guide.
 
 - Product docs: https://docs.pingidentity.com/pingoneadvancedservices/
 - llms.txt index: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
-- Snapshot version: current
+- Snapshot version: 2.2
 - Snapshot manifest: references/MANIFEST.md
 
 ## Retrieval strategy
@@ -27,18 +27,17 @@ The home page for the PingOne Advanced Services guide.
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Task Summary Table: request, instructions, completing | task_summary_table | https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/*.md | references/snapshots/task-summary-table.md |
-| Release Notes: platform, version, march | release_notes | https://docs.pingidentity.com/pingoneadvancedservices/release_notes/*.md | references/snapshots/release-notes.md |
-| Introduction To Pingone Advanced Services: additional, advanced, benefits | introduction_to_pingone_advanced_services | https://docs.pingidentity.com/pingoneadvancedservices/introduction_to_pingone_advanced_services/*.md | live-only |
-| Environments: considerations, data, environments | environments | https://docs.pingidentity.com/pingoneadvancedservices/environments/*.md | live-only |
-| Comparison Pingone Advanced Services And Pingone Cloud Platform: pingone, advanced, cloud | comparison_pingone_advanced_services_and_pingone_cloud_platform | https://docs.pingidentity.com/pingoneadvancedservices/comparison_pingone_advanced_services_and_pingone_cloud_platform/*.md | live-only |
-| Limitations Guide: guide, limitations | limitations_guide | https://docs.pingidentity.com/pingoneadvancedservices/limitations_guide/*.md | references/snapshots/limitations-guide.md |
-| Monitoring And Logging: logging, monitoring | monitoring_and_logging | https://docs.pingidentity.com/pingoneadvancedservices/monitoring_and_logging/*.md | references/snapshots/monitoring-and-logging.md |
-| Network Guide: guide, network | network_guide | https://docs.pingidentity.com/pingoneadvancedservices/network_guide/*.md | references/snapshots/network-guide.md |
-| P1As Home.Md: advanced, pingone, services | p1as_home.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_home.md | references/snapshots/p1as-home-md.md |
-| P1As How Works.Md: advanced, pingone, services | p1as_how_works.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_how_works.md | references/snapshots/p1as-how-works-md.md |
-| P1As Load Testing.Md: load, penetration, testing | p1as_load_testing.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_load_testing.md | references/snapshots/p1as-load-testing-md.md |
-| P1As Support Policy.Md: policy, support, about | p1as_support_policy.md | https://docs.pingidentity.com/pingoneadvancedservices/p1as_support_policy.md | references/snapshots/p1as-support-policy-md.md |
+| Task Summary Table: request, instructions, completing | task_summary_table | https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/*.md | references/snapshots/task-summary-table.md |
+| Release Notes: platform, version, march | release_notes | https://docs.pingidentity.com/pingoneadvancedservices/2.2/release_notes/*.md | references/snapshots/release-notes.md |
+| Introduction To Pingone Advanced Services: additional, advanced, benefits | introduction_to_pingone_advanced_services | https://docs.pingidentity.com/pingoneadvancedservices/2.2/introduction_to_pingone_advanced_services/*.md | references/snapshots/introduction-to-pingone-advanced-services.md |
+| Root: advanced, pingone, services | root | https://docs.pingidentity.com/pingoneadvancedservices/2.2/*.md | references/snapshots/root.md |
+| Environments: considerations, data, environments | environments | https://docs.pingidentity.com/pingoneadvancedservices/2.2/environments/*.md | references/snapshots/environments.md |
+| Comparison Pingone Advanced Services And Pingone Cloud Platform: pingone, advanced, comparison | comparison_pingone_advanced_services_and_pingone_cloud_platform | https://docs.pingidentity.com/pingoneadvancedservices/2.2/comparison_pingone_advanced_services_and_pingone_cloud_platform/*.md | references/snapshots/comparison-pingone-advanced-services-and-pingone-cloud-platform.md |
+| Limitations Guide: guide, limitations | limitations_guide | https://docs.pingidentity.com/pingoneadvancedservices/2.2/limitations_guide/*.md | references/snapshots/limitations-guide.md |
+| Monitoring And Logging: logging, monitoring | monitoring_and_logging | https://docs.pingidentity.com/pingoneadvancedservices/2.2/monitoring_and_logging/*.md | references/snapshots/monitoring-and-logging.md |
+| Network Guide: guide, network | network_guide | https://docs.pingidentity.com/pingoneadvancedservices/2.2/network_guide/*.md | references/snapshots/network-guide.md |
+| Renew Certs: certificates, encrypt, let | renew_certs | https://docs.pingidentity.com/pingoneadvancedservices/2.2/renew_certs/*.md | references/snapshots/renew-certs.md |
+| Securing Ai Agents: advanced, pingone, services | securing_AI_agents | https://docs.pingidentity.com/pingoneadvancedservices/2.2/securing_AI_agents/*.md | references/snapshots/securing-ai-agents.md |
 
 ## Composition
 

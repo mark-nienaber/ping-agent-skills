@@ -7,7 +7,7 @@ page_id: pingds:monitoring-guide:alert-notifications
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/alert-notifications.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring", "Troubleshooting"]
 section_ids:
   jmx_alerts: JMX alerts
@@ -216,7 +216,7 @@ page_id: pingds:monitoring-guide:opentelemetry
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/opentelemetry.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-02-03T12:06:24Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring"]
 section_ids:
   why_use_distributed_tracing: Why use distributed tracing?
@@ -330,7 +330,7 @@ page_id: pingds:monitoring-guide:http-monitoring
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/http-monitoring.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-02-09T09:34:08Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring", "REST API", "Troubleshooting"]
 section_ids:
   basic_availability: Basic availability
@@ -813,7 +813,7 @@ page_id: pingds:monitoring-guide:monitoring-metrics-ldap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/monitoring-metrics-ldap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Monitoring"]
 ---
 
@@ -959,7 +959,7 @@ For examples of common monitoring requests, refer to [LDAP-based monitoring](lda
 | `ds-mon-jvm-threads-new-count`                      | Integer                      | Number of threads in the NEW state                                                                                                                                                                                                                                                    |
 | `ds-mon-jvm-threads-runnable-count`                 | Integer                      | Number of threads in the RUNNABLE state                                                                                                                                                                                                                                               |
 | `ds-mon-jvm-threads-terminated-count`               | Integer                      | Number of threads in the TERMINATED state                                                                                                                                                                                                                                             |
-| `ds-mon-jvm-threads-timed-waiting-count`            | Integer                      | Number of threads in the TIMED\_WAITING state                                                                                                                                                                                                                                         |
+| `ds-mon-jvm-threads-timed-waiting-count`            | Integer                      | Number of threads in the TIMED_WAITING state                                                                                                                                                                                                                                          |
 | `ds-mon-jvm-threads-waiting-count`                  | Integer                      | Number of threads in the WAITING state                                                                                                                                                                                                                                                |
 | `ds-mon-jvm-vendor`                                 | Directory String             | Java virtual machine vendor                                                                                                                                                                                                                                                           |
 | `ds-mon-jvm-version`                                | Directory String             | Java virtual machine version                                                                                                                                                                                                                                                          |
@@ -1068,7 +1068,7 @@ page_id: pingds:monitoring-guide:ldap-monitoring
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/ldap-monitoring.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-02-09T09:34:08Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Monitoring", "Troubleshooting"]
 section_ids:
   basic_availability: Basic availability
@@ -1643,7 +1643,7 @@ page_id: pingds:monitoring-guide:monitoring-types
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/monitoring-types.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Monitoring", "REST API"]
 ---
 
@@ -1768,7 +1768,7 @@ page_id: pingds:monitoring-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring"]
 page_aliases: ["index.adoc"]
 ---
@@ -1824,7 +1824,7 @@ page_id: pingds:monitoring-guide:monitoring-metrics-prometheus
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/monitoring-metrics-prometheus.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring", "REST API"]
 ---
 
@@ -1982,7 +1982,7 @@ Find examples of common monitoring requests in [HTTP-based monitoring](http-moni
 | `ds_jvm_threads_new_count`                                                                                         | Gauge     | Number of threads in the NEW state                                                                                                                                                                                                                                                    |
 | `ds_jvm_threads_runnable_count`                                                                                    | Gauge     | Number of threads in the RUNNABLE state                                                                                                                                                                                                                                               |
 | `ds_jvm_threads_terminated_count`                                                                                  | Gauge     | Number of threads in the TERMINATED state                                                                                                                                                                                                                                             |
-| `ds_jvm_threads_timed_waiting_count`                                                                               | Gauge     | Number of threads in the TIMED\_WAITING state                                                                                                                                                                                                                                         |
+| `ds_jvm_threads_timed_waiting_count`                                                                               | Gauge     | Number of threads in the TIMED_WAITING state                                                                                                                                                                                                                                          |
 | `ds_jvm_threads_waiting_count`                                                                                     | Gauge     | Number of threads in the WAITING state                                                                                                                                                                                                                                                |
 | `ds_max_connections`                                                                                               | Gauge     | Maximum number of simultaneous client connections that have been established with the Directory Server                                                                                                                                                                                |
 | `ds_replication_changelog_connected_changelogs_current_receive_window{changelog_id,domain_name}`                   | Gauge     | Current replication window size for receiving messages, indicating the number of replication messages a remote server can send before waiting on acknowledgement from this server. This does not depend on the TCP window size                                                        |
@@ -2047,7 +2047,7 @@ page_id: pingds:monitoring-guide:graphite
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/graphite.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring"]
 ---
 
@@ -2094,7 +2094,7 @@ page_id: pingds:monitoring-guide:monitoring-status-and-tasks
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/monitoring-status-and-tasks.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Monitoring", "Troubleshooting"]
 ---
 
@@ -2139,7 +2139,7 @@ page_id: pingds:monitoring-guide:security
 canonical_url: https://docs.pingidentity.com/pingds/8.1/monitoring-guide/security.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Monitoring", "Security"]
 ---
 

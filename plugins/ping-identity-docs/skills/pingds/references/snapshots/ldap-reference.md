@@ -7,7 +7,7 @@ page_id: pingds:ldap-reference:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-reference/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Standards"]
 page_aliases: ["index.adoc"]
 ---
@@ -138,7 +138,7 @@ page_id: pingds:ldap-reference:l10n
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-reference/l10n.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP"]
 section_ids:
   sec-locales-subtypes: Locales and language subtypes
@@ -1125,7 +1125,7 @@ page_id: pingds:ldap-reference:controls
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-reference/controls.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Standards"]
 section_ids:
   server_controls: Server controls
@@ -1425,7 +1425,7 @@ page_id: pingds:ldap-reference:extended-ops
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-reference/extended-ops.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Standards"]
 ---
 
@@ -1484,7 +1484,7 @@ page_id: pingds:ldap-reference:standards
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-reference/standards.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-09-02T11:40:14Z
 keywords: ["Features", "LDAP", "Standards"]
 ---
 
@@ -1800,32 +1800,36 @@ DS software implements the following RFCs, Internet-Drafts, and standards:
 
   Platform neutral schema and extension model for representing users and groups in JSON and XML formats. DS supports the JSON format.
 
-- [RFC 7677: SCRAM-SHA-256 and SCRAM-SHA-256-PLUS Simple Authentication and Security Layer (SASL) Mechanisms](https://www.rfc-editor.org/info/rfc7677)
+- [RFC 7662: OAuth 2.0 Token Introspection](https://www.rfc-editor.org/info/rfc7662)
+
+  Specifies the token introspection mechanism DS supports as an HTTP authorization option for HDAP.
+
+* [RFC 7677: SCRAM-SHA-256 and SCRAM-SHA-256-PLUS Simple Authentication and Security Layer (SASL) Mechanisms](https://www.rfc-editor.org/info/rfc7677)
 
   Registers mechanisms for SASL SCRAM, updating RFC 5802.
 
-* [RFC 9106: Argon2 Memory-Hard Function for Password Hashing and Proof-of-Work Applications](https://www.rfc-editor.org/info/rfc9106)
+- [RFC 9106: Argon2 Memory-Hard Function for Password Hashing and Proof-of-Work Applications](https://www.rfc-editor.org/info/rfc9106)
 
   Describes the Argon2 memory-hard function for calculating a password hash.
 
-- FIPS 180-1: Secure Hash Standard (SHA-1)
+* FIPS 180-1: Secure Hash Standard (SHA-1)
 
   Specifies a Secure Hash Algorithm, SHA-1, for computing a condensed representation of a message or a data file.
 
-* FIPS 180-2: Secure Hash Standard (SHA-1, SHA-256, SHA-384, SHA-512)
+- FIPS 180-2: Secure Hash Standard (SHA-1, SHA-256, SHA-384, SHA-512)
 
   Specifies four Secure Hash Algorithms for computing a condensed representation of electronic data.
 
-- [JavaScript Object Notation](http://www.json.org)
+* [JavaScript Object Notation](http://www.json.org)
 
   A data-interchange format that aims to be both "easy for humans to read and write," and "easy for machines to parse and generate."
 
-* [The LDAP Relax Rules Control (Internet-Draft)](https://datatracker.ietf.org/doc/html/draft-zeilenga-ldap-relax)
+- [The LDAP Relax Rules Control (Internet-Draft)](https://datatracker.ietf.org/doc/html/draft-zeilenga-ldap-relax)
 
   Experimental LDAP control allowing a directory client application to request temporary relaxation of data and service model rules.
 
   This control relaxes LDAP constraints, allowing operations that are not normally permitted, such as modifying read-only attributes. To prevent misuse, restrict access to this control to limited administrative accounts.
 
-- [The Proxy Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
+* [The Proxy Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
 
   An HAProxy Technologies protocol that safely transports connection information, such as a client's IP address, through multiple proxy layers.

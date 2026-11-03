@@ -1,12 +1,12 @@
 ---
 title: Accepting the administrator account registration invitation
-description: When you receive an email indicating that you were added as an administrator in PingOne, copy the invite code and paste it into PingOne to complete the registration process.
+description: Accept the administrator account registration invitation to activate your PingOne administrator account.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_accept_invitation
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_accept_invitation.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 12, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   steps: Steps
   result: Result:
@@ -48,7 +48,7 @@ page_id: pingone:getting_started_with_pingone:p1_access_admin_console
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_access_admin_console.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 29, 2025
+revdate: 2025-05-29T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -105,13 +105,13 @@ To access the PingOne admin console home page:
 
 ---
 title: Adding administrators
-description: You can designate an existing user as an administrator or create a new administrator user.
+description: Add administrator users to your PingOne environment and assign them appropriate roles.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_add_admin_user
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_add_admin_user.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 11, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -179,97 +179,140 @@ The new administrator completes their account registration.
 
 ---
 title: Adding environments
-description: The first step in building an identity solution is adding an environment to organize your Ping products and services.
+description: Add a PingOne environment for a customer, workforce, or custom identity solution to organize your Ping Identity products and services.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_solution_add_environment
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_solution_add_environment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
   result: Result:
-  result-2: Result:
-  result-3: Result
+  result-2: Result
   next-steps: Next steps
 ---
 
 # Adding environments
 
-The first step in building an identity solution is adding an environment to organize your Ping products and services.
+The first step in building an identity solution is adding an environment to organize your Ping Identity products and services.
+
+|   |                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------- |
+|   | You must have the Organization Admin role or a custom role with equivalent permissions to create an environment. |
 
 ## Before you begin
 
-Determine what type of solution you're building. Filter the products and services by the type of audience you serve with your identity and access management solution:
+Determine the use case for the solution you're building. The products and services you'll need differ based on the type of audience you serve with your identity and access management solution:
 
 * Customer solutions
 
-  Help you create sign-on experiences for your clients and consumers. Products and services relevant to serving your clients and consumers are added to the environment.
+  Help you create sign-on experiences for your clients and consumers. You'll add products and services relevant to serving your clients and consumers to the environment.
 
 * Workforce solutions
 
-  Help you create sign-on experiences for your organization's employees. Products and services relevant to serving your employees and partners are added to the environment.
+  Help you create sign-on experiences for your organization's employees. You'll add products and services relevant to serving your employees and partners to the environment.
 
-* Build your own solution
-
-  Allows you to build a hybrid solution by selecting from all available products and services.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | When you select **Customer solution** or **Workforce solution**, a combination of preselected services designed to support your customer or workforce use cases is added to the environment. If your license doesn't cover the services that are included, you can select **Build your own solution** to select from products and services for which you have a license. |
+Learn more in [What is the difference between Workforce and Customer environments?](../strong_authentication_mfa/p1_pid_what_is_the_difference.html).
 
 ## Steps
 
 1. In the PingOne admin console sidebar, click the Ping Identity logo to open the **Environments** page.
 
-2. Click the **[icon: plus, set=fa]**icon.
+2. Click the **Plus** icon ([icon: plus, set=fa]).
 
    ![A screenshot of the Environments page in PingOne.](_images/vxj1676308916876.png)
 
    ### Result:
 
-   The **Create Environment** setup assistant starts.
+   The **Add New Environment** setup assistant starts.
 
-3. To indicate whether you are building a customer solution, workforce solution, or custom solution, select the appropriate option.
+   ![A screenshot of the Add New Environment setup assistant in PingOne.](../_images/p1-add-env-step1-clean.png)
 
-   ### Result:
+3. Define your environment by entering the following:
 
-   **Create Environment** lists the main tasks that can be completed using the solution type.
-
-   ![A screenshot of the Create Environment screen in PingOne.](../_images/ppz1683237101125.png)
+   | Field                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+   | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **Name**                                      | A unique identifier for the environment.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | **Description** (optional)                    | A brief description of the environment.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+   | **License Type**                              | Select **Trial** or **Paid**.If you don't already have a trial license for PingOne, selecting the **Trial** option creates a 30-day trial environment which you can use to test and evaluate PingOne services you haven't yet purchased.Select **Paid** to assign a paid license to the environment. Learn more in [Licenses and Platform Limits](p1_licenses.html).                                                                                                     |
+   | **Environment Use Case**                      | Select **Customer** or **Workforce**.**Customer** allows you to design registration and subsequent sign-on experiences for your customers.**Workforce** allows you to design single sign-on experiences for your employees.Learn more in [What is the difference between Workforce and Customer environments?](../strong_authentication_mfa/p1_pid_what_is_the_difference.html).                                                                                         |
+   | **Environment Type**                          | Select **Sandbox** or **Production**.**Sandbox** environments are typically used for configuration and testing before deployment.&#xA;&#xA;If you selected Trial for the License Type, only Sandbox is available.**Production** environments are typically used for live configurations that are deployed for real-world use. Learn more about environment types in [Sandbox and Production environments](../introduction_to_pingone/p1_introduction.html#p1-env-types). |
+   | **Include DaVinci flows for getting started** | (Workforce only) Select this checkbox to include DaVinci flows in the new environment that are used in the getting started experience. This option is only available if you have a license that includes DaVinci.                                                                                                                                                                                                                                                        |
+   | **Generate sample populations and users**     | Select this checkbox to generate two populations and 40 sample users in the new environment.                                                                                                                                                                                                                                                                                                                                                                             |
 
 4. Click **Next**.
 
-   The services that will be deployed to your new environment are listed.
+5. The next steps depend on the **License Type** you selected in step 3:
 
-5. To add or remove them from your solution, select and deselect products and services as necessary, then click **Next**.
+   | License Type | Next Steps                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Trial**    | 1. Click an option on the **Environment Setup** modal:
+
+      * **Guide Me**: PingOne selects capabilities for you based on the **Environment Use Case** you selected.
+
+        **Customer** allows you to design registration and subsequent sign-on experiences for your customers.
+
+        **Workforce** allows you to design single sign-on experiences for your employees.
+
+        &#xA;&#xA;You'll have the option to remove any of these capabilities before you finalize the environment.
+
+      - **Do It Myself**: You select the capabilities you want to add to the environment.
+
+      ![A screenshot of the Environment Setup modal for trial environments in PingOne.](../_images/p1-add-env-envsetup-modal-trials.png)
+
+   2. Select capabilities based on the option you selected in the previous step:
+
+      * If you selected **Guide Me**, a bundle of services applicable to the **Environment Use Case** you selected previously is automatically added to the environment. You can select optional capabilities that might be useful for advanced use cases.
+
+      * If you selected **Do It Myself**, you can select from a list of capabilities available based on the **Environment Use Case** you selected.
+
+   3. Click **Next**. |
+   | **Paid**     | 1) On the **Select Capabilities** page, select a **License** in the list.
+
+      The capabilities available for the selected license are listed.
+
+      For organizations in the Singapore or Canada geographies, the license selection determines the version of PingOne MFA that is available for the environment.
+
+      ![A screenshot of the Select Capabilities page for paid environments in PingOne.](../_images/p1-add-paid-cust-select-capabilities.png)
+
+   2) Select the capabilities you want to include in the new environment.
+
+      &#xA;&#xA;If you select a capability that requires another capability, that capability is automatically selected for you.
+
+   3) Click **Next**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+6. On the **Finalize Setup** page, review the details about the new environment and clear the checkboxes next to any capabilities that you don't want to include.
+
+   ![A screenshot of the Finalize Setup page for paid environments in PingOne.](../_images/p1-add-paid-finalize.png)
+
+7. (Workforce only) The next step depends on the geography in which your organization resides:
+
+   * **Singapore or Canada**: Click **Save** to create the new environment. Learn more in [Multi-factor authentication (MFA)](../strong_authentication_mfa/p1_intro_to_strong_authentication.html#p1-strong-auth-mfa).
+
+   * **All other geographies**:
+
+     * (Trial licenses only) If you're using a trial license for the environment, a new instance of **Workforce Authentication** (PingID) is created automatically and integrated with your new PingOne environment.
+
+     * (Paid licenses only) If you added **Workforce Authentication** (PingID) to the environment and are using a paid license, complete the PingID integration by selecting one of the following options:
+
+       | Option           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+       | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+       | **Create New**   | Click **Create New** to create a new PingID account and integrate it with your new PingOne environment.![A screenshot of the Create New PingID account option in PingOne.](../_images/p1-add-env-pingid-create-new.png)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+       | **Use Existing** | Click **Use Existing** to integrate with an existing PingID environment.&#xA;&#xA;Carefully review Integrating a PingID account with a new PingOne environment before you proceed so that you can properly prepare for this integration.Enter the username and password for the PingID environment you want to integrate, and then click **Validate Account**.![A screenshot of the Use Existing PingID account option in PingOne.](../_images/p1-add-env-pingid-use-existing.png)PingOne performs a validation of your PingID and PingOne accounts.&#xA;&#xA;This step can take several minutes. Don't close the window during the validation process. If you need to fix any issues, follow the instructions in the validation wizard to fix them, and then rerun the validation.A **Validation Successful** status displays.![A screenshot of the Validation Successful status for an existing PingID account in PingOne.](../_images/p1-add-env-validate-existing-pingid-account.png) |
+
+       Click **Save** to create the new environment.
 
    Many of your selections are deployed automatically, but you might be asked how to deploy a connected product. Answer the questions to the best of your ability. You can change them later.
 
-6. Define your environment by entering the following:
-
-   | Field                                                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
-   | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Environment Name**                                                             | A unique identifier for the environment.                                                                                                                                                                                                                                                                                                                                          |
-   | **Description** (optional)                                                       | A brief description of the environment.                                                                                                                                                                                                                                                                                                                                           |
-   | **Environment Type**                                                             | Select **Sandbox** or **Production**.Sandbox environments are typically used for configuration and testing before deployment. Production environments are typically used for live configurations that are deployed for real-world use. Learn more about environment types in [Sandbox and Production environments](../introduction_to_pingone/p1_introduction.html#p1-env-types). |
-   | **Generate sample populations and users in this environment**                    | Select this checkbox to generate two populations and 40 sample users in the new environment.                                                                                                                                                                                                                                                                                      |
-   | **Region**                                                                       | The appropriate geographical region for the environment. The list shows only regions that are included with your license.&#xA;&#xA;You can't change the region after the environment has been created.                                                                                                                                                                            |
-   | **License**                                                                      | Select the license to use for this environment. The available licenses for your organization are shown in the **License** list. For more information, see [Licenses and Platform Limits](p1_licenses.html).                                                                                                                                                                       |
-   | **Include a solution designer to easily design and test experiences** (optional) | Workforce solutions only. If selected, after you create your environment, a solution designer opens and walks you through the process of designing your experiences.                                                                                                                                                                                                              |
-
 ## Result
 
-The new environment is created in your PingOne organization.
-
-If you chose to build a workforce solution, and selected the solution designer option, the solution designer opens and guides you through the process of designing and testing registration and sign-on experiences in less than 5 minutes.
-
-If you did not select the solution designer option, or if you didn't build a workforce solution, the **Environments** page opens. Locate your new environment by sorting the list alphabetically or by date created, or enter the environment name in the search box.
+The new environment is created in your PingOne organization and the **Environments** page opens.
 
 ## Next steps
 
-Deploy your solution. Learn more in [Deploying products and services](p1_building_solutions.html#p1-deploy-products).
+Deploy any products or services that require additional configuration. Learn more in [Deploying products and services](p1_deploy_products.html).
 
 ---
 
@@ -281,7 +324,7 @@ page_id: pingone:getting_started_with_pingone:p1_license_assignment
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_license_assignment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 12, 2024
+revdate: 2024-07-12T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -324,7 +367,7 @@ page_id: pingone:getting_started_with_pingone:p1_trial_customer_solution
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_trial_customer_solution.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 15, 2023
+revdate: 2023-09-15T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -347,7 +390,7 @@ By following the guidance on the **Getting Started** page in your PingOne trial 
 
 ## Before you begin
 
-These instructions assume that you have already created your PingOne trial environment and that you chose the **Customer solution** option. Learn more in [Starting a PingOne trial](p1_start_a_p1_trial.html).
+These instructions assume that you've already created your PingOne trial environment and that you chose **Customer** for the **Environment Use Case**. Learn more in [Starting a PingOne trial](p1_start_a_p1_trial.html).
 
 |   |                                                                                                                                                         |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -429,25 +472,27 @@ These instructions assume that you have already created your PingOne trial envir
 
 ---
 title: Building a workforce solution
-description: With your PingOne trial, you can quickly design single sign-on experiences for your employees, partners, and vendors.
+description: Use your PingOne trial to design single sign-on experiences for employees.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_trial_workforce_solution
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_trial_workforce_solution.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 28, 2023
+revdate: 2026-07-10T00:00:00Z
 section_ids:
-  about-this-task: About this task
+  before-you-begin: Before you begin
   steps: Steps
 ---
 
 # Building a workforce solution
 
-With your PingOne trial, you can quickly design single sign-on experiences for your employees, partners, and vendors.
+With your PingOne trial, you can quickly design single sign-on experiences for your employees.
 
-## About this task
+## Before you begin
 
-After creating a new workforce environment, the solution designer opens, which will walk you through the process of designing your experiences. To return to the designer in the future, click **Get Started** at the top of the page.
+These instructions assume that you have already created your PingOne trial environment and that you chose **Workforce** for the **Environment Use Case**. Learn more in [Starting a PingOne trial](p1_start_a_p1_trial.html).
+
+After creating your workforce environment, the solution designer opens, which walks you through the process of designing your experiences. To return to the designer in the future, click **Get Started** at the top of the page.
 
 ## Steps
 
@@ -483,153 +528,36 @@ After creating a new workforce environment, the solution designer opens, which w
 
 ---
 title: Building solutions
-description: If you have an organization administrator role, you can build powerful identity solutions in minutes. Choose one of the packaged solutions or build your own.
+description: Build identity solutions in PingOne by selecting packaged solutions or creating your own.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_building_solutions
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_building_solutions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 13, 2023
-section_ids:
-  adding-environments: Adding environments
-  before-you-begin: Before you begin
-  steps: Steps
-  result: Result:
-  result-2: Result:
-  result-3: Result
-  next-steps: Next steps
-  p1-deploy-products: Deploying products and services
-  steps-2: Steps
-  result-4: Result:
+revdate: 2026-07-10T00:00:00Z
 ---
 
 # Building solutions
 
-If you have an organization administrator role, you can build powerful identity solutions in minutes. Choose one of the packaged solutions or build your own.
+If you have an Organization Admin role, you can build powerful identity solutions in PingOne in minutes. When you create your environment, you'll choose either the **Customer** or **Workforce** environment use case to add applicable products and services to your solution. You'll also have the option to add or remove services to build a solution that fits your needs.
 
-Regardless of whether your solution includes one software product, one service, or a collection of products and services, wizards guide you through the process of creating new environments for the products and services you select, and instructions are provided for deploying each component.
+Regardless of whether your solution includes one software product, one service, or a collection of products and services, wizards guide you through the process of creating new environments for the products and services you select. If a product requires additional configuration, you can access instructions by clicking the **More Options** icon ([icon: ellipsis-vertical, set=fa]).
 
-For descriptions of each product and service available, click the **Explore** tab. Select a product or service icon to review its description and to access documentation, APIs, code examples, data sheets, and videos for that product or service.
+To view descriptions of each available product and service, click the **Explore** tab in the PingOne admin console. Select a product or service icon to review its description and to access documentation, APIs, code examples, data sheets, and videos for that product or service.
 
 ![A screenshot showing information about PingOne when it is selected on the Explore tab.](_images/nuf1676326739823.png)
-
-## Adding environments
-
-The first step in building an identity solution is adding an environment to organize your Ping products and services.
-
-### Before you begin
-
-Determine what type of solution you're building. Filter the products and services by the type of audience you serve with your identity and access management solution:
-
-* Customer solutions
-
-  Help you create sign-on experiences for your clients and consumers. Products and services relevant to serving your clients and consumers are added to the environment.
-
-* Workforce solutions
-
-  Help you create sign-on experiences for your organization's employees. Products and services relevant to serving your employees and partners are added to the environment.
-
-* Build your own solution
-
-  Allows you to build a hybrid solution by selecting from all available products and services.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | When you select **Customer solution** or **Workforce solution**, a combination of preselected services designed to support your customer or workforce use cases is added to the environment. If your license doesn't cover the services that are included, you can select **Build your own solution** to select from products and services for which you have a license. |
-
-### Steps
-
-1. In the PingOne admin console sidebar, click the Ping Identity logo to open the **Environments** page.
-
-2. Click the **[icon: plus, set=fa]**icon.
-
-   ![A screenshot of the Environments page in PingOne.](_images/vxj1676308916876.png)
-
-   #### Result:
-
-   The **Create Environment** setup assistant starts.
-
-3. To indicate whether you are building a customer solution, workforce solution, or custom solution, select the appropriate option.
-
-   #### Result:
-
-   **Create Environment** lists the main tasks that can be completed using the solution type.
-
-   ![A screenshot of the Create Environment screen in PingOne.](../_images/ppz1683237101125.png)
-
-4. Click **Next**.
-
-   The services that will be deployed to your new environment are listed.
-
-5. To add or remove them from your solution, select and deselect products and services as necessary, then click **Next**.
-
-   Many of your selections are deployed automatically, but you might be asked how to deploy a connected product. Answer the questions to the best of your ability. You can change them later.
-
-6. Define your environment by entering the following:
-
-   | Field                                                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
-   | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Environment Name**                                                             | A unique identifier for the environment.                                                                                                                                                                                                                                                                                                                                          |
-   | **Description** (optional)                                                       | A brief description of the environment.                                                                                                                                                                                                                                                                                                                                           |
-   | **Environment Type**                                                             | Select **Sandbox** or **Production**.Sandbox environments are typically used for configuration and testing before deployment. Production environments are typically used for live configurations that are deployed for real-world use. Learn more about environment types in [Sandbox and Production environments](../introduction_to_pingone/p1_introduction.html#p1-env-types). |
-   | **Generate sample populations and users in this environment**                    | Select this checkbox to generate two populations and 40 sample users in the new environment.                                                                                                                                                                                                                                                                                      |
-   | **Region**                                                                       | The appropriate geographical region for the environment. The list shows only regions that are included with your license.&#xA;&#xA;You can't change the region after the environment has been created.                                                                                                                                                                            |
-   | **License**                                                                      | Select the license to use for this environment. The available licenses for your organization are shown in the **License** list. For more information, see [Licenses and Platform Limits](p1_licenses.html).                                                                                                                                                                       |
-   | **Include a solution designer to easily design and test experiences** (optional) | Workforce solutions only. If selected, after you create your environment, a solution designer opens and walks you through the process of designing your experiences.                                                                                                                                                                                                              |
-
-### Result
-
-The new environment is created in your PingOne organization.
-
-If you chose to build a workforce solution, and selected the solution designer option, the solution designer opens and guides you through the process of designing and testing registration and sign-on experiences in less than 5 minutes.
-
-If you did not select the solution designer option, or if you didn't build a workforce solution, the **Environments** page opens. Locate your new environment by sorting the list alphabetically or by date created, or enter the environment name in the search box.
-
-### Next steps
-
-Deploy your solution. Learn more in [Deploying products and services](#p1-deploy-products).
-
-## Deploying products and services
-
-After creating an environment for your Ping products and services, set up the products and services.
-
-### Steps
-
-1. On the **Environments** page, select the environment that you just created.
-
-   #### Result:
-
-   The environment details pane opens and lists the products and services that are included in the environment, along with details such as the environment ID, environment type, URLs for the environment, license information, and so on. If setup is incomplete for a product, it's grayed out, and a tooltip indicates that configuration is needed.
-
-2. Click **Manage Environment** to go to the **Overview** page for the environment.
-
-3. In the **Services** section, locate the service that requires configuration, expand **View Setup Instructions**, and complete the setup.
-
-   The ways in which you set up products and services vary. The following example displays the instructions for setting up PingFederate.
-
-   ![In this screen capture, PingOne is not yet set up. Setup instructions are provided.](_images/ukn1606923357155.png)
-
-   Cloud software products are most easily deployed using Docker images, so click the **Docker** link and complete the appropriate steps. Learn more about deploying Ping products using Docker on the [Ping Identity DevOps site](https://devops.pingidentity.com/).
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | * PingOne for Enterprise and PingOne services do not require additional setup or deployment after the environment in which they reside is created. PingOne for Enterprise environments are created as part of the procurement process or can be created in a trial using the [sign up link](https://www.pingidentity.com/en/trials/p14e-trial.html).
-
-   * PingOne services are deployed automatically based on what is selected when the environment is added.
-
-   * When you add other Ping products to your environment, you can set up single sign-on and centralize management through PingOne. |
 
 ---
 
 ---
 title: Completing the administrator account registration
-description: When you receive an email indicating that you were added as an administrator in PingOne, verify your email address and update your password to complete the registration process.
+description: Complete the PingOne administrator account registration to gain access to your account and environment.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_complete_admin_registration
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_complete_admin_registration.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 12, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -689,15 +617,14 @@ Your administrator account registration is complete.
 
 ---
 title: Creating an environment
-description: One of the first things you should do after you start a PingOne trial or purchase a PingOne license is to create an environment. A setup assistant guides you through this process.
+description: Create a PingOne environment using the setup assistant to organize your Ping Identity products and services.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_getting_started_adding_environment
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started_adding_environment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 7, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
-  about-this-task: About this task
   steps: Steps
   result: Result:
   result-2: Result
@@ -705,9 +632,7 @@ section_ids:
 
 # Creating an environment
 
-One of the first things you should do after you start a PingOne trial or purchase a PingOne license is to create an environment. A setup assistant guides you through this process.
-
-## About this task
+One of the first things you should do after you create a PingOne organization is create an environment. A setup assistant guides you through this process.
 
 |   |                                                                                                                  |
 | - | ---------------------------------------------------------------------------------------------------------------- |
@@ -717,77 +642,168 @@ One of the first things you should do after you start a PingOne trial or purchas
 
 1. In the PingOne admin console sidebar, click the Ping Identity logo to open the **Environments** page.
 
-2. Click the **[icon: plus, set=fa]**icon.
+2. Click the **Plus** icon ([icon: plus, set=fa]).
 
    ![A screenshot of the Environments page in PingOne.](_images/vxj1676308916876.png)
 
    ### Result:
 
-   The **Create Environment** setup assistant starts.
+   The **Add New Environment** setup assistant starts.
 
-3. Select the type of solution that you want to support in this environment.
+   ![A screenshot of the Add New Environment setup assistant in PingOne.](../_images/p1-add-env-step1-clean.png)
 
-   ![A screenshot of the Create Environment setup assistant in PingOne.](../_images/ppz1683237101125.png)
+3. Define your environment by entering the following:
 
-   | Option                      | Description                                                                                                                                          |
-   | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Customer solution**       | Select to design registration and subsequent sign-on experiences for your customers and test them in a sample application tailored to your industry. |
-   | **Workforce solution**      | Select to design single sign-on experiences for your employees, partners, and vendors.                                                               |
-   | **Build your own solution** | Select to choose from all of our services and products to build a hybrid solution that fits your unique use case.                                    |
+   | Field                                         | Description                                                                                                                                                                                                                                                                                                                                                                      |
+   | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Name**                                      | A unique identifier for the environment.                                                                                                                                                                                                                                                                                                                                         |
+   | **Description** (optional)                    | A brief description of the environment.                                                                                                                                                                                                                                                                                                                                          |
+   | **License Type**                              | Select **Trial**.If you don't already have a trial license for PingOne, selecting the **Trial** option creates a 30-day trial environment which you can use to test and evaluate PingOne services you haven't yet purchased.                                                                                                                                                     |
+   | **Environment Use Case**                      | Select **Customer** or **Workforce**.**Customer** allows you to design registration and subsequent sign-on experiences for your customers.**Workforce** allows you to design single sign-on experiences for your employees.Learn more in [What is the difference between Workforce and Customer environments?](../strong_authentication_mfa/p1_pid_what_is_the_difference.html). |
+   | **Environment Type**                          | **Sandbox** is the only option for **Trial** licenses.                                                                                                                                                                                                                                                                                                                           |
+   | **Include DaVinci flows for getting started** | (Workforce only) Select this checkbox to include DaVinci flows in the new environment that are used in the getting started experience. This option is only available if you have a license that includes DaVinci.                                                                                                                                                                |
+   | **Generate sample populations and users**     | Select this checkbox to generate two populations and 40 sample users in the new environment.                                                                                                                                                                                                                                                                                     |
 
 4. Click **Next**.
 
-   The services that will be deployed to your new environment are listed.
+5. Click an option on the **Environment Setup** modal:
 
-5. Click **Next**.
+   * **Guide Me**: PingOne selects capabilities for you.
 
-6. Define your environment by entering the following:
+     |   |                                                                                                 |
+     | - | ----------------------------------------------------------------------------------------------- |
+     |   | You'll have the option to remove any of these capabilities before you finalize the environment. |
 
-   | Field                                                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
-   | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Environment Name**                                                             | A unique identifier for the environment.                                                                                                                                                                                                                                                                                                                                          |
-   | **Description** (optional)                                                       | A brief description of the environment.                                                                                                                                                                                                                                                                                                                                           |
-   | **Environment Type**                                                             | Select **Sandbox** or **Production**.Sandbox environments are typically used for configuration and testing before deployment. Production environments are typically used for live configurations that are deployed for real-world use. Learn more about environment types in [Sandbox and Production environments](../introduction_to_pingone/p1_introduction.html#p1-env-types). |
-   | **Generate sample populations and users in this environment**                    | Select this checkbox to generate two populations and 40 sample users in the new environment.                                                                                                                                                                                                                                                                                      |
-   | **Region**                                                                       | The appropriate geographical region for the environment. The list shows only regions that are included with your license.&#xA;&#xA;You can't change the region after the environment has been created.                                                                                                                                                                            |
-   | **License**                                                                      | Select the license to use for this environment. The available licenses for your organization are shown in the **License** list. For more information, see [Licenses and Platform Limits](p1_licenses.html).                                                                                                                                                                       |
-   | **Include a solution designer to easily design and test experiences** (optional) | Workforce solutions only. If selected, after you create your environment, a solution designer opens and walks you through the process of designing your experiences.                                                                                                                                                                                                              |
+   * **Do It Myself**: You select the capabilities you want to add to the environment.
 
-7. Click **Finish**.
+   ![A screenshot of the Environment Setup modal for trial environments in PingOne.](../_images/p1-add-env-envsetup-modal-trials.png)
+
+6. Select capabilities based on the option you selected in the previous step:
+
+   * If you selected **Guide Me**, a bundle of services applicable to the **Environment Use Case** you selected previously is automatically added to the environment. You can select optional capabilities that might be useful for advanced use cases.
+
+     ![A screenshot of the optional capabilities for trial environments in PingOne.](../_images/p1-add-env-step2-guide-me-optional.png)
+
+   * If you selected **Do It Myself**, you can select from a list of capabilities available based on the **Environment Use Case** you selected.
+
+     ![A screenshot of the select capabilities option when Do It Myself for trial environments is selected in PingOne.](../_images/p1-add-env-step2-do-myself.png)
+
+   When you're done, click **Next**.
+
+7. On the **Finalize Setup** page, review the details about the new environment and clear the checkboxes next to any capabilities that you don't want to include.
+
+   ![A screenshot of the Finalize Setup page for paid environments in PingOne.](../_images/p1-add-paid-finalize.png)
+
+8. (Workforce only) The next step depends on the geography in which your organization resides:
+
+   * **Singapore or Canada**: Click **Save** to create the new environment. Learn more in [Multi-factor authentication (MFA)](../strong_authentication_mfa/p1_intro_to_strong_authentication.html#p1-strong-auth-mfa).
+
+   * **All other geographies**:
+
+     A new instance of PingID is created automatically and integrated with your new PingOne environment.
+
+     Click **Save** to create the new environment.
 
 ## Result
 
-The new environment is created in your PingOne organization.
+The new environment is created in your PingOne organization and the **Environments** page opens.
 
-If you chose to build a workforce solution, and selected the solution designer option, the solution designer opens and guides you through the process of designing and testing registration and sign-on experiences in less than 5 minutes.
+---
 
-If you did not select the solution designer option, or if you didn't build a workforce solution, the **Environments** page opens. Locate your new environment by sorting the list alphabetically or by date created, or enter the environment name in the search box.
+---
+title: Deploying products and services
+description: After you create a PingOne environment, learn how to set up products that require additional configuration.
+component: pingone
+page_id: pingone:getting_started_with_pingone:p1_deploy_products
+canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_deploy_products.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 6, 2024
+section_ids:
+  before-you-begin: Before you begin
+  steps: Steps
+  result: Result
+---
+
+# Deploying products and services
+
+After creating an environment for your Ping Identity products and services, set up the connections to products that require additional configuration.
+
+## Before you begin
+
+If you haven't already, add the product requiring configuration to your environment. For example, PingOne Advanced Identity Cloud. Learn more in [Adding a service to an environment](../settings/p1_add_a_service.html).
+
+|   |                                                                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne services are deployed automatically based on what's selected when the environment is added and don't require additional setup.Learn more in [Adding a service to an environment](../settings/p1_add_a_service.html). |
+
+## Steps
+
+1. In the PingOne admin console, go to the **Environments** page and browse or search for the environment that you want to update.
+
+2. Click the environment to open the details panel.
+
+   The details panel lists the products and services that are included in the environment, along with details such as the environment ID, environment type, URLs for the environment, license information, and so on.
+
+3. Click **Manage Environment** and click **Overview** in the sidebar.
+
+4. In the **Optional Connections** section, locate the product or service that requires configuration, click the **More Options** icon ([icon: ellipsis-vertical, set=fa]), and then click **Setup Instructions**.
+
+   Products that require additional configuration after they're added to your environment are listed in the **Optional Connections** section and include a **Not Set Up** label.
+
+   ![A screen capture of the Optional Connections section of the Overview page, with a Not Set Up label next to PingFederate.](_images/p1-overview-optional-connections-fed-not-setup.png)
+
+   |   |                                                                                                                                                                                                                                                                              |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Cloud software products are most easily deployed using Docker images, so if it's an option, click **Docker** and complete the appropriate steps. Learn more about deploying Ping products using Docker on the [Ping Identity DevOps site](https://devops.pingidentity.com/). |
+
+   The ways in which you set up products and services vary. The following image displays the instructions for setting up single sign-on (SSO) to PingFederate.
+
+   ![In this screen capture, PingFederate isn't set up. Setup instructions are provided.](_images/p1-add-fed-connection-instructions.png)
+
+5. Complete the setup as instructed.
+
+6. After you've completed the setup, return to the **Optional Connections** section of the **Overview** page.
+
+7. Locate the product in the **Optional Connections** list, click [icon: ellipsis-vertical, set=fa], and then click **Configure**.
+
+8. Complete the configuration as instructed.
+
+## Result
+
+If the configuration is successful, the **Not Set Up** label is removed and a **New** label is added. This label only persists during the session. If you refresh the page or sign out and sign back on, the label is removed.
+
+The name of the product is now a hyperlink that you can click to sign on to the product from PingOne.
+
+![A screen capture of the Optional Connections section of the Overview page, with a hyperlink to PingFederate.](_images/p1-overview-optional-connex-hyperlink.png)
+
+Learn more about deploying specific products in the [Setting up single sign-on](p1_set_up_single_sign_on.html) section of this guide.
 
 ---
 
 ---
 title: Getting Started with PingOne
-description: The PingOne admin console simplifies environment organization and provides access to admin consoles for all Ping products and services.
+description: Get started with the PingOne admin console.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_getting_started
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 30, 2024
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   environments-page: Environments page
-  more-information: More information
+  learn-more: Learn more
 ---
 
 # Getting Started with PingOne
 
-The PingOne admin console simplifies environment organization and provides access to admin consoles for all Ping products and services.
+The PingOne admin console simplifies environment organization and provides access to admin consoles for all Ping Identity products and services.
 
-From the main administrator console, you have one-click access to:
+From the PingOne admin console, you have one-click access to:
 
-* Documentation, the API, code examples, data sheets, and videos for each product and service
+* Documentation, the API, code examples, data sheets, and videos for each capability and product.
 
-* Interactive wizards that make it easy to build custom solutions and configure the Ping platform for any cloud environment scenario
+* Interactive wizards that make it easy to build custom solutions and configure the PingOne platform for any cloud environment scenario.
 
 To access the admin console for your organization, sign on to your account from either pingidentity.com or support.pingidentity.com and complete a few simple steps. Learn more in [Accessing the PingOne admin console](p1_access_admin_console.html).
 
@@ -795,9 +811,9 @@ To access the admin console for your organization, sign on to your account from 
 
 The first time you access the admin console, the **Environments** page displays and lists the environments to which you have access. If you have the Organization Admin role, you'll see all of the environments in your organization.
 
-|   |                                                                                                                                                                                                                              |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Subsequent sign ons take you to the admin console for the environment you last accessed. To return to the **Environments** page, click the Ping Identity logo on the sidebar or the **Home** icon at the top of the console. |
+|   |                                                                                                                                                                                                                                                      |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Subsequent sign-ons take you to the admin console for the environment you last accessed. To return to the **Environments** page, click the Ping Identity logo on the sidebar or the **Home** icon ([icon: house, set=fa]) at the top of the console. |
 
 ![A screen capture of the Environments page, listing the environments you have access to in your organization.](_images/vxj1676308916876.png)
 
@@ -809,35 +825,33 @@ Most organizations include an **Administrators** environment for keeping your ad
 
 Use a combination of the search box and the sorting options to locate the environment you want quickly.
 
-|   |                                                                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The **Administrators** environment stays at the top of the list, regardless of the sort order you choose. However, if you enter search criteria that does not match the **Administrators** environment, it's not displayed in the search results. |
+|   |                                                                                                                                                                                                                                                  |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The **Administrators** environment stays at the top of the list, regardless of the sort order you choose. However, if you enter search criteria that doesn't match the **Administrators** environment, it's not displayed in the search results. |
 
-Click an environment in the list to open the details pane.
+Click an environment in the list to open the details panel.
 
 ![A screenshot of the environment details view of the BX Finance environment showing included services, a connected service that requires configuration, environment and organization IDs, and environment URLs for accessing the console, self-service portal, and the application portal.](_images/dlj1710866077378.png)
 
 To access the dashboard for a particular service or connected product in the environment, click the service or product name under **Services** or **Connected Services**.
 
-|   |                                                                                                                              |
-| - | ---------------------------------------------------------------------------------------------------------------------------- |
-|   | If a connected product or service is not configured, it's grayed out and a tooltip indicates that it requires configuration. |
+|   |                                                                                                                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | If a connected product or service is not configured, it's grayed out and a tooltip indicates that it requires configuration. Learn more in [Deploying products and services](p1_deploy_products.html). |
 
 Click **Manage Environment** to go to the **Overview** page for the environment, which includes:
 
-* A list of the products and services included in the environment
+* A list of the capabilities and products included in the environment.
 
-* A graph showing the activity that has occurred within the environment (if the environment contains PingOne services)
-
-* Links to documentation, APIs, and code examples for each product and service in the environment
+* Links to documentation, APIs, and code examples for each capability and product in the environment.
 
 The menu options in the sidebar vary depending on which products and services are included in the environment.
 
-The following example shows all of the services and most of the top-level menus.
+The following example shows most of the services and top-level menus.
 
-![A screen capture of an environment dashboard that provides an overview of the activity within the environment.](../_images/zla1676309052731.png)
+![A screen capture of the Overview page for an environment.](../_images/p1-overview-most-services-and-sidebar.png)
 
-## More information
+## Learn more
 
 Learn more about the PingOne APIs in the [PingOne Platform API Reference](https://developer.pingidentity.com/pingone-api/platform/introduction.html).
 
@@ -849,23 +863,20 @@ Learn more about authorization flows in [Authorization flow by grant type](https
 
 ---
 title: Getting started with PingOne SSO
-description: The first time you start PingOne, sign on with the default credentials that were set up during provisioning. The initial configuration includes a default organization, environment, and population. You can create additional environments, populations, and users for those populations.
+description: Get started with PingOne SSO by signing on and setting up your organization, environments, applications, and authentication policies.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_gettingstarted
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_gettingstarted.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 21, 2023
+revdate: 2026-07-10T00:00:00Z
 section_ids:
-  about-this-task: About this task
   next-steps: Next steps
 ---
 
 # Getting started with PingOne SSO
 
 The first time you start PingOne, sign on with the default credentials that were set up during provisioning. The initial configuration includes a default organization, environment, and population. You can create additional environments, populations, and users for those populations.
-
-## About this task
 
 After you start PingOne, you can set up your applications to work with PingOne. PingOne manages access to those applications and ensures that authorized users have access to the applications that they need.
 
@@ -897,13 +908,13 @@ These tasks can help you get started setting up PingOne for your organization:
 
 ---
 title: Inviting administrators to register
-description: You can invite administrators to register with PingOne using their name and email address. These users receive an email containing a verification code, as well as a link to complete the registration process.
+description: Invite other PingOne administrators to register by sending registration invitations.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_invite_admins_register
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_invite_admins_register.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 8, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -938,6 +949,10 @@ To invite other administrators to access PingOne, you must use PingOne as your i
 
    Invitations display on the **Users** page. The toggle indicates whether the invitation is still active. Click the user to view details about the invitation.
 
+   |   |                                                                                                                                                                                                              |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | While an invitation is pending, you can't update the user's email address or username. If you need to update these fields, you must revoke the invitation, make the changes, and then resend the invitation. |
+
 6. (Optional) If you want to revoke the invitation or resend it with a new authentication code, click **Revoke** or **Resend**.
 
    |   |                                                                                                                   |
@@ -954,13 +969,13 @@ The new administrator accepts the invitation and signs on to the admin console.
 
 ---
 title: License FAQ
-description: The following sections contain frequently asked questions about PingOne licenses.
+description: Find answers to frequently asked questions about PingOne licenses.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_license_faq
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_license_faq.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 13, 2024
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   license-types-and-expiration: License types and expiration
   license-assignment-and-activation-issues: License Assignment and Activation Issues
@@ -1033,7 +1048,7 @@ page_id: pingone:getting_started_with_pingone:p1_licenses_and_identities
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_licenses_and_identities.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 24, 2025
+revdate: 2025-04-24T00:00:00Z
 section_ids:
   pingone: PingOne
   pingone-authorize: PingOne Authorize
@@ -1117,13 +1132,13 @@ PingOne for Customers Passwordless is a solution bundle that is licensed by tran
 
 ---
 title: Licenses and Platform Limits
-description: PingOne licenses define the entitlements a customer has the right to use. That is, which PingOne services, in what quantities, and for what period of time.
+description: PingOne licenses define service entitlements, quantities, and valid periods for your organization.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_licenses
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_licenses.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 4, 2024
+revdate: 2026-07-10T00:00:00Z
 ---
 
 # Licenses and Platform Limits
@@ -1150,7 +1165,7 @@ page_id: pingone:getting_started_with_pingone:p1_manage_admin_roles
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_manage_admin_roles.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 26, 2024
+revdate: 2024-06-26T00:00:00Z
 section_ids:
   managing-roles-individually: Managing roles individually
   steps: Steps
@@ -1444,13 +1459,13 @@ You should audit the users in your external directory regularly to ensure that t
 
 ---
 title: Managing administrators
-description: If you use PingOne as your identity provider, have administrator security enabled with PingOne or a hybrid authentication source, and you have the appropriate permissions, you can invite other administrators to register for PingOne.
+description: Invite or add PingOne administrators and assign their permissions using roles.
 component: pingone
 page_id: pingone:getting_started_with_pingone:p1_manage_administrators
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_manage_administrators.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 15, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   invite_admin: Inviting administrators to register
   before-you-begin: Before you begin
@@ -1518,6 +1533,10 @@ To invite other administrators to access PingOne, you must use PingOne as your i
 5. Click **Send Invitation**.
 
    Invitations display on the **Users** page. The toggle indicates whether the invitation is still active. Click the user to view details about the invitation.
+
+   |   |                                                                                                                                                                                                              |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | While an invitation is pending, you can't update the user's email address or username. If you need to update these fields, you must revoke the invitation, make the changes, and then resend the invitation. |
 
 6. (Optional) If you want to revoke the invitation or resend it with a new authentication code, click **Revoke** or **Resend**.
 
@@ -1671,7 +1690,7 @@ page_id: pingone:getting_started_with_pingone:p1_logging_reporting_overview
 canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_logging_reporting_overview.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2025
+revdate: 2025-04-23T00:00:00Z
 section_ids:
   audit: Audit
   webhooks: Webhooks
@@ -1740,71 +1759,3 @@ Learn more in [Dashboards](../introduction_to_pingone/p1_introduction.html#p1-da
 Use the **Alerts** page in the PingOne console to set up alert messages based on the status of certain resources. For a complete list of available alerts, in the PingOne admin console, go to **Monitoring > Alerts**.
 
 Learn more in [Alerts](../monitoring/p1_alerts.html).
-
----
-
----
-title: PingOne Services logging and reporting
-description: In addition to the core PingOne platform logging, each PingOne service includes a variety of logs that administrators can use to monitor their environments.
-component: pingone
-page_id: pingone:getting_started_with_pingone:p1_services_logging_reporting_overview
-canonical_url: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_services_logging_reporting_overview.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
-section_ids:
-  pingone-davinci-logging: PingOne DaVinci logging
-  pingone-protect-logging: PingOne Protect logging
-  pingone-sso-and-pingone-directory-logging: PingOne SSO and PingOne Directory logging
-  pingone-verify-logging: PingOne Verify logging
-  pingone-mfa-logging: PingOne MFA logging
-  pingone-authorize-logging: PingOne Authorize logging
----
-
-# PingOne Services logging and reporting
-
-In addition to the core PingOne platform logging, each PingOne service includes a variety of logs that administrators can use to monitor their environments.
-
-## PingOne DaVinci logging
-
-PingOne DaVinci includes manual logging, a Flow Analytics connector, and a Webhook connector. Learn more in:
-
-* [Debugging and Analytics](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html)
-
-* [Flow Analytics Connector](https://marketplace.pingone.com/item/flow-analytics-connector)
-
-* [Webhook Connector](https://marketplace.pingone.com/item/webhook-connector)
-
-* [Dashboard](https://docs.pingidentity.com/davinci/davinci_dashboard.html)
-
-## PingOne Protect logging
-
-For PingOne Protect, you can use the native logging in the PingOne admin console. You can also view real-time data on the **Threat Protection Dashboard**. Learn more in [Threat Protection Dashboard](../threat_protection_using_pingone_protect/p1_protect_dashboard.html).
-
-## PingOne SSO and PingOne Directory logging
-
-For PingOne SSO, you can use the native logging in the PingOne admin console. You can also view real-time data on the **Authentication Dashboard**. Learn more in [Authentication dashboard](../monitoring/p1_auth_dashboard.html).
-
-## PingOne Verify logging
-
-For PingOne Verify, you can use the native logging in the PingOne admin console. You can also view real-time data on the **Identity Verification Dashboard**. Learn more in [using the Identity Verification Dashboard](../identity_verification_using_pingone_verify/p1_verify_monitoring.html#p1_verify_dashboard).
-
-PingOne Verify also includes webhooks and metrics through the PingOne API. Learn more in:
-
-* [Subscriptions](https://developer.pingidentity.com/pingone-api/platform/subscriptions-webhooks.html) in the PingOne Platform API Reference
-
-* [Verification Metrics](https://developer.pingidentity.com/pingone-api/verify/verification-metrics.html) in the PingOne Platform API Reference
-
-## PingOne MFA logging
-
-For PingOne MFA, you can use the native logging in the PingOne admin console. You can also view real-time data on the **MFA Dashboard**. Learn more in [MFA dashboard](../monitoring/p1_mfa_dashboard.html).
-
-PingOne MFA also includes device logs that you can access through the PingOne API. Learn more in [Send MFA Device Logs](https://developer.pingidentity.com/pingone-api/mfa/users/mfa-devices/send-mfa-device-logs.html) in the PingOne Platform API Reference.
-
-## PingOne Authorize logging
-
-For PingOne Authorize, you can use the native logging in the PingOne admin console. You can also view real-time data on the **Authorization Dashboard**. Learn more in:
-
-* [PingOne Authorize event monitoring](../authorization_using_pingone_authorize/p1az_monitoring_decision_endpoint_events.html)
-
-* [Authorization Dashboard](../authorization_using_pingone_authorize/p1_az_dashboard.html)

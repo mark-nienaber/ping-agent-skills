@@ -1,12 +1,12 @@
 ---
 title: CrowdStrike Connector
-description: The CrowdStrike connector lets you use CrowdStrike improve authentication security in your PingOne DaVinci flow.
+description: Configure the CrowdStrike connector in PingOne DaVinci to check device management status, assess Zero Trust scores, manage quarantined devices, and analyze user risk
 component: connectors
 page_id: connectors::crowdstrike_connector
 canonical_url: https://docs.pingidentity.com/connectors/crowdstrike_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 21, 2024
+revdate: 2026-07-14T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -14,34 +14,29 @@ section_ids:
   setting-up-crowdstrike: Setting up CrowdStrike
   configuring-the-crowdstrike-connector: Configuring the CrowdStrike connector
   connector-configuration: Connector configuration
-  crowdstrike-base-url: Crowdstrike Base URL
-  client-id: Client ID
-  client-secret: Client Secret
   using-the-connector-in-a-flow: Using the connector in a flow
   getting-device-details: Getting device details
   getting-device-management-status: Getting device management status
   quarantining-devices: Quarantining devices
-  getting-incident-scores: Getting incident scores
+  getting-alerts-for-a-device: Getting alerts for a device
+  getting-user-risk-analysis: Getting user risk analysis
   capabilities: Capabilities
-  get-incident-score-by-device-id: Get Incident Score by Device ID
-  get-zero-trust-assessment-scores-from-devices: Get Zero Trust Assessment Scores from Devices
-  get-environment-crowdscore: Get Environment CrowdScore
-  check-device-status-by-device-id: Check Device Status by Device ID
-  check-device-status-by-ip: Check Device Status by IP
-  get-devices-from-logins: Get Devices from Logins
-  get-device-details: Get Device Details
-  get-incidents-by-ip: Get Incidents by IP
-  get-incidents-from-logins: Get Incidents from Logins
-  get-incident-scores: Get Incident Scores
-  set-containment-on-devices: Set Containment on Devices
-  lift-containment-on-devices: Lift Containment on Devices
+  zeroTrustAssessmentScore: Get Zero Trust Assessment Scores from Devices
+  deviceManagedById: Check Device Status by Device ID
+  deviceManaged: Check Device Status by IP
+  devicesByLogins: Get Devices from Logins
+  deviceDetails: Get Device Details
+  setContainment: Set Containment on Devices
+  liftContainment: Lift Containment on Devices
+  getUserRiskAnalysis: Get User Risk Analysis
+  alertRiskByDeviceId: Get Alerts by Device ID
 ---
 
 # CrowdStrike Connector
 
-The CrowdStrike connector lets you use CrowdStrike improve authentication security in your PingOne DaVinci flow.
+The CrowdStrike connector lets you use CrowdStrike to improve authentication security in your PingOne DaVinci flow.
 
-CrowdStrike protects the people, processes and technologies that drive modern enterprise. A single agent solution to stop breaches, ransomware, and cyberattacks powered by world-class security expertise and deep industry experience.
+CrowdStrike protects the people, processes, and technologies that drive modern enterprise. A single agent solution to stop breaches, ransomware, and cyberattacks powered by world-class security expertise and deep industry experience.
 
 You can use the CrowdStrike connector to:
 
@@ -49,15 +44,13 @@ You can use the CrowdStrike connector to:
 
 * List the devices associated with a username or IP address
 
-* Get the incident scores for a device
-
-* Get the CrowdStrike scores from multiple incidents
-
 * Get the CrowdStrike Zero Trust Assessment scores for a device
 
-* Get the CrowdScore for an environment
+* Get alert details for a device
 
-* Managed quarantined devices
+* Get a risk analysis for a user
+
+* Manage quarantined devices
 
 ## Setup
 
@@ -69,17 +62,17 @@ Learn more in the following:
 
   * [CrowdStrike OAuth2-Based APIs](https://www.crowdstrike.com/en-us/resources/guides/?lang=1)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
-To use the connector, you'll need a Crowdstrike license.
+To use the connector, you'll need a CrowdStrike license.
 
 ### Setting up CrowdStrike
 
@@ -91,28 +84,29 @@ Follow the steps in [Creating an API client](https://www.crowdstrike.com/en-us/r
   | --------------------- | ----------- |
   | Hosts                 | Read, Write |
   | Falcon Discover       | Read        |
-  | Incidents             | Read        |
   | Zero Trust Assessment | Read        |
+  | Alerts                | Read        |
+  | Identity Protection   | Read        |
 
 * Record your client ID and secret. You'll use them in the connector configuration.
 
 ### Configuring the CrowdStrike connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
-##### Crowdstrike Base URL
+| Setting              | Description                                                                                                                                                                                                                                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CrowdStrike Base URL | The base URL for your CrowdStrike environment. Select from the provided options or enter a custom URL.+ Available options:- <https://api.crowdstrike.com> (US-1)
 
-The base URL for your CrowdStrike environment.
+- <https://api.us-2.crowdstrike.com> (US-2)
 
-##### Client ID
+- <https://api.eu-1.crowdstrike.com> (EU-1)
 
-The client ID you created in Setting up CrowdStrike.
-
-##### Client Secret
-
-The client secret you created in Setting up CrowdStrike.
+- <https://api.laggar.gcw.crowdstrike.com> (US-GOV-1) |
+| Client ID            | The client ID you created in Setting up CrowdStrike.                                                                                                                                                                                                                                                              |
+| Client Secret        | The client secret you created in Setting up CrowdStrike.                                                                                                                                                                                                                                                          |
 
 ## Using the connector in a flow
 
@@ -136,37 +130,19 @@ When you determine a device is safe, you can remove the quarantine with the **Li
 
 In the **Device IDs** field, you can click **{}** and select the `deviceIds` variable from a **Get Devices from Logins** node.
 
-### Getting incident scores
+### Getting alerts for a device
 
-The **Get Incident Scores** lets you find out the highest incident score from a list of incident IDs. In the **Incident IDs** field, you can click **{}** and select the `incidentIds` variable from a **Get Incidents from Logins** node.
+The **Get Alerts by Device ID** capability returns open endpoint protection alerts for a specific device. In the **Device ID** field, enter or reference the CrowdStrike device ID (also known as the agent ID).
 
-The **Get Incident Scores by Device ID** capability lets you find out the highest incident score for a particular device. In the **Device ID** field, you can click **{}** and select a variable from your flow that includes the device ID.
+Use the **Alert Limit** field to control the maximum number of alerts returned. The default is 100.
+
+### Getting user risk analysis
+
+The **Get User Risk Analysis** capability retrieves risk score and risk factor details for an individual user. In the **Username** and **Domain** fields, provide the user's credentials to scope the analysis.
+
+The output includes a `riskScore`, a `riskScoreSeverity` string, and a `riskFactors` array. When no matching user is found, the capability returns a `riskScore` of -1 and a `riskScoreSeverity` of UNKNOWN.
 
 ## Capabilities
-
-### Get Incident Score by Device ID
-
-Get the maximum incident score from a single CrowdStrike device ID.
-
-> **Collapse: Show details**
->
-> * * Properties
->   * Device ID `textField`
->
->   The CrowdStrike device ID (also known as agent ID), such as "f69915c8a8b244a1a7c4e4a4d7870e2f".
->
-> - - Input Schema
->   - default `object`
->   - deviceIdIncidentScore `string` `required`
->
->   A CrowdStrike device ID.
->
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * maxIncidentScore `number`
->   * incidentsOnDevice `boolean`
 
 ### Get Zero Trust Assessment Scores from Devices
 
@@ -174,41 +150,37 @@ Use a list of device IDs to get the most recent Zero Trust Assessment scores.
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Device IDs `textField` `required`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device IDs textField required
 >
 >   List of Device IDs (JSON Array formatted)
 >
-> - - Input Schema
->   - default `object`
->   - deviceIds `string` `required`
+> * default object
 >
->   List of Device IDs
+>   * properties object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * maxOverallScore `number`
+>     * deviceIds string required
 >
->   Maximum Overall Score from Devices
+>       List of Device IDs
 >
-> * maxOSScore `number`
+> - output object
 >
->   Maximum Operating System Score from Devices
-
-### Get Environment CrowdScore
-
-Get the most recent CrowdScore for the CrowdStrike environment.
-
-> **Collapse: Show details**
+>   * rawResponse object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * score `number`
->   * adjustedScore `number`
+>   * statusCode number
+>
+>   * maxOverallScore number
+>
+>     Maximum Overall Score from Devices
+>
+>   * maxOSScore number
+>
+>     Maximum Operating System Score from Devices
 
 ### Check Device Status by Device ID
 
@@ -216,23 +188,33 @@ Use the CrowdStrike Device ID to check whether a device is managed by CrowdStrik
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Device ID `textField`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device ID textField
 >
 >   The CrowdStrike device ID (also known as agent ID), such as "f69915c8a8b244a1a7c4e4a4d7870e2f".
 >
-> - - Input Schema
->   - default `object`
->   - deviceIdDeviceManaged `string` `required`
+> * default object
 >
->   The CrowdStrike Device Id.
+>   * properties object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * deviceManaged `boolean`
->   * deviceDetails `object`
+>     * deviceIdDeviceManaged string required
+>
+>       The CrowdStrike Device Id.
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
+>
+>   * deviceManaged boolean
+>
+>   * deviceDetails object
 
 ### Check Device Status by IP
 
@@ -240,45 +222,51 @@ Use an IP address to check whether a device is managed by CrowdStrike.
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * IP `textField`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - IP textField
 >
 >   The user's IP address
 >
-> * Username `textField`
+> - Username textField
 >
 >   The username associated with the device.
 >
-> * Last Seen Number of Days `textField`
+> - Last Seen Number of Days textField
 >
 >   The number of days to search back in time for a managed device.
 >
->   Default:
+>   Default: `365`
 >
->   ```
->   365
->   ```
+> * default object
 >
-> - - Input Schema
->   - default `object`
->   - ip `string` `required`
+>   * properties object
 >
->   The IP address of the device
+>     * ip string required
 >
-> - username `string`
+>       The IP address of the device
 >
->   The username associated with the device
+>     * username string
 >
-> - lastSeenDays `string/number` `required`
+>       The username associated with the device
 >
->   The number of days to search back in time for a managed device
+>     * lastSeenDays string/number required
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * deviceManaged `boolean`
->   * foundLoginMatch `boolean`
+>       The number of days to search back in time for a managed device
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
+>
+>   * deviceManaged boolean
+>
+>   * foundLoginMatch boolean
 
 ### Get Devices from Logins
 
@@ -286,52 +274,57 @@ Get a list of device IDs from CrowdStrike Logins that match a username, email ad
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Username `textField`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Username textField
 >
 >   The username associated with the device.
 >
-> * Email `textField`
+> - Email textField
 >
 >   The email of the user associated with the device.
 >
-> * IP `textField`
+> - IP textField
 >
 >   The user's IP address
 >
-> * Search Back Number of Days `textField`
+> - Search Back Number of Days textField
 >
 >   The number of days to search back in time for a login
 >
->   Default:
+>   Default: `365`
 >
->   ```
->   365
->   ```
+> * default object
 >
-> - - Input Schema
->   - default `object`
->   - username `string`
+>   * properties object
 >
->   The username associated with the device
+>     * username string
 >
-> - email `string`
+>       The username associated with the device
 >
->   The email of the user associated with the device
+>     * email string
 >
-> - ip `string`
+>       The email of the user associated with the device
 >
->   The user's IP address
+>     * ip string
 >
-> - searchLoginDays `string/number` `required`
+>       The user's IP address
 >
->   The number of days to search back in time for a login
+>     * searchLoginDays string/number required
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * deviceIds `array`
+>       The number of days to search back in time for a login
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
+>
+>   * deviceIds array
 
 ### Get Device Details
 
@@ -339,138 +332,31 @@ Get device details from a list of devices.
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Device IDs `textField` `required`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device IDs textField required
 >
 >   List of Device IDs (JSON Array formatted)
 >
-> - - Input Schema
->   - default `object`
->   - deviceIds `string` `required`
+> * default object
 >
->   List of Device IDs (JSON Array formatted)
+>   * properties object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * devices `array`
-
-### Get Incidents by IP
-
-Use an IP address to get a list of incidents associated with the device.
-
-> **Collapse: Show details**
+>     * deviceIds string required
 >
-> * * Properties
->   * IP `textField`
+>       List of Device IDs (JSON Array formatted)
 >
->   The user's IP address
+> - output object
 >
-> * Last Seen Number of Days `textField`
+>   * rawResponse object
 >
->   The number of days to search back in time for a managed device.
+>   * statusCode number
 >
->   Default:
->
->   ```
->   365
->   ```
->
-> - - Input Schema
->   - default `object`
->   - ip `string` `required`
->
->   The IP address of the device
->
-> - lastSeenDays `string/number` `required`
->
->   The number of days to search back in time for a managed device
->
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * incidentsOnDevice `boolean`
->   * incidentIds `array`
-
-### Get Incidents from Logins
-
-Get a list of incidents from CrowdStrike Logins that match a username, email address, or IP address.
-
-> **Collapse: Show details**
->
-> * * Properties
->   * Username `textField`
->
->   The username associated with the device.
->
-> * Email `textField`
->
->   The email of the user associated with the device.
->
-> * IP `textField`
->
->   The user's IP address
->
-> * Search Back Number of Days `textField`
->
->   The number of days to search back in time for a login
->
->   Default:
->
->   ```
->   365
->   ```
->
-> - - Input Schema
->   - default `object`
->   - username `string`
->
->   The username associated with the device
->
-> - email `string`
->
->   The email of the user associated with the device
->
-> - ip `string`
->
->   The user's IP address
->
-> - searchLoginDays `string/number` `required`
->
->   The number of days to search back in time for a login
->
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * loginsWithIncidents `boolean`
->   * incidentIds `array`
-
-### Get Incident Scores
-
-Get the maximum incident score from a list of incident IDs.
-
-> **Collapse: Show details**
->
-> * * Properties
->   * Incident IDs `textField`
->
->   List of Incident IDs (JSON Array formatted)
->
-> - - Input Schema
->   - default `object`
->   - incidentIds `string` `required`
->
->   List of Incident IDs
->
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
->   * maxIncidentScore `number`
->   * incidents `array`
+>   * devices array
 
 ### Set Containment on Devices
 
@@ -478,21 +364,29 @@ Apply CrowdStrike Network Containment on the Device IDs.
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Device IDs `textField` `required`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device IDs textField required
 >
 >   List of Device IDs (JSON Array formatted)
 >
-> - - Input Schema
->   - default `object`
->   - deviceIds `string` `required`
+> * default object
 >
->   List of Device IDs
+>   * properties object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
+>     * deviceIds string required
+>
+>       List of Device IDs
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
 
 ### Lift Containment on Devices
 
@@ -500,18 +394,110 @@ Remove CrowdStrike Network Containment on the Device IDs.
 
 > **Collapse: Show details**
 >
-> * * Properties
->   * Device IDs `textField` `required`
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device IDs textField required
 >
 >   List of Device IDs (JSON Array formatted)
 >
-> - - Input Schema
->   - default `object`
->   - deviceIds `string` `required`
+> * default object
 >
->   List of Device IDs
+>   * properties object
 >
-> * * Output Schema
->   * output `object`
->   * rawResponse `object`
->   * statusCode `number`
+>     * deviceIds string required
+>
+>       List of Device IDs
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
+
+### Get User Risk Analysis
+
+Retrieve details from an individual user's risk analysis.
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Username textField
+>
+>   Target username for risk analysis.
+>
+> - Domain textField
+>
+>   Target domain for risk analysis.
+>
+> * default object
+>
+>   * properties object
+>
+>     * usernameForAnalysis string required
+>
+>       Target username for risk analysis.
+>
+>     * domainForAnalysis string required
+>
+>       Target domain for risk analysis.
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * statusCode number
+>
+>   * riskScore number
+>
+>   * riskScoreSeverity string
+>
+>   * riskFactors array
+
+### Get Alerts by Device ID
+
+Get the CrowdStrike alert details for a single CrowdStrike device ID.
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Device ID textField
+>
+>   The CrowdStrike device ID (also known as agent ID), such as "f69915c8a8b244a1a7c4e4a4d7870e2f".
+>
+> - Alert Limit textField
+>
+>   The maximum number of CrowdStrike alerts to return for the device. Default is 100.
+>
+>   Default: `100`
+>
+> * default object
+>
+>   * properties object
+>
+>     * deviceIdAlertRisk string required
+>
+>       A CrowdStrike device ID (also known as agent ID).
+>
+> - output object
+>
+>   * statusCode number
+>
+>   * meta object
+>
+>   * errors array
+>
+>   * resources array

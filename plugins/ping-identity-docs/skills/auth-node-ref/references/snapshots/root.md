@@ -7,6 +7,7 @@ page_id: auth-node-ref::accept-terms-and-conditions
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Terms &amp; Conditions"]
 page_aliases: ["auth-node-accept-terms-and-conditions.adoc"]
 section_ids:
@@ -16,6 +17,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -64,6 +66,10 @@ The node writes a `termsAccepted` object to the shared node state. The object co
 
 * `termsVersion`: A string indicating the version of the accepted terms.
 
+## Callbacks
+
+The node sends a [TermsAndConditionsCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-interactive.html#TermsAndConditionsCallback), which prompts the user to accept the current version of the terms and conditions.
+
 ## Outcomes
 
 Single outcome path; the user accepted the terms and conditions.
@@ -83,6 +89,7 @@ page_id: auth-node-ref::account-active-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/account-active-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Accounts"]
 page_aliases: ["auth-node-account-active-decision.adoc"]
 section_ids:
@@ -92,6 +99,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -110,17 +118,31 @@ An account is considered unlocked under this condition:
 
 * The status is active and no duration lockout is set on the account.
 
-The node determines whether the account has been locked through both persistent (physical) lockout and duration lockout.
+The node determines whether the account has been locked, either through persistent (physical) lockout or through duration lockout.
 
 Find more information in [Account lockout](https://docs.pingidentity.com/pingam/8.1/am-authentication/auth-nodes-and-journeys.html#account-lockout-trees).
 
 ## Example
 
-For progressive profiling, include this node after a [Terms and Conditions Decision node](terms-and-conditions-decision.html). If the user has not accepted the latest version of the terms and conditions, evaluation takes them to a page that requires them to accept the current terms and conditions.
+In this simple login journey, authentication fails if the account is assessed to be `inactive` or `locked`.
 
-The [Patch Object node](patch-object.html) stores the acceptance response in the underlying identity service (PingIDM) if the user accepts:
+![Account active Decision node in a simple login journey](_images/account-active-decision-example.png)
 
-![Storing acceptance of terms and conditions](_images/trees-node-accept-terms-conditions-tree-example.png)
+This example uses the following nodes:
+
+* The [Page node](page.html) prompts the user to input their username and password:
+
+  * The [Platform Username node](platform-username.html) collects the username and stores it in the shared state.
+
+  * The [Platform Password node](platform-password.html) collects the password and stores it in the shared state.
+
+* The [Data Store Decision node](data-store-decision.html) uses the username and password to determine whether the account exists.
+
+* The **Account Active Decision** node determines whether the account is active and unlocked.
+
+* If the account is active and unlocked, the [Increment Login Count node](increment-login-count.html) increments the login count and authentication succeeds.
+
+* If the account is inactive or locked, authentication fails.
 
 ## Availability
 
@@ -145,6 +167,10 @@ This node has no configurable properties.
 ## Outputs
 
 This node doesn't change the shared state.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -173,6 +199,7 @@ page_id: auth-node-ref::account-lockout
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/account-lockout.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Accounts", "User Profiles", "Authentication"]
 page_aliases: ["auth-node-account-lockout.adoc"]
 section_ids:
@@ -182,6 +209,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -236,6 +264,10 @@ This node depends on the underlying identity service that stores the user profil
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 Single outcome path; the node updates the account status according to the configured Lock Action:
@@ -254,12 +286,21 @@ If this node fails to set the account status, it logs a `failed to set the user 
 
 This node can also throw exceptions with the following messages:
 
-| Message                                                                     | Notes                                                                               |
-| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `Could not get a valid username from the context`                           | Failed to read the `username` from the shared node state                            |
-| `Could not get a valid realm from the context`                              | Failed to read the `realm` from the shared node state                               |
-| `Could not find the identity based on the information available on context` | Failed to find the account profile with this `username` in this `realm`             |
-| `An error occurred when trying to lock out the user account`                | Failed to update the account status; applies when locking and unlocking the account |
+* `Could not get a valid username from the context`
+
+  Failed to read the `username` from the shared node state.
+
+* `Could not get a valid realm from the context`
+
+  Failed to read the `realm` from the shared node state.
+
+* `Could not find the identity based on the information available on context`
+
+  Failed to find the account profile with this `username` in this `realm`.
+
+* `An error occurred when trying to lock out the user account`
+
+  Failed to update the account status; applies when locking and unlocking the account.
 
 ---
 
@@ -272,6 +313,7 @@ page_id: auth-node-ref::ad-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/ad-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Active Directory"]
 section_ids:
   example: Example
@@ -280,6 +322,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   ad-decision-disabled-locked-accounts: Locked and disabled accounts
   errors: Errors
@@ -333,43 +376,61 @@ This node has no dependencies.
 
 ## Configuration
 
-| Property                                                              | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Primary LDAP Server *(required)*                                      | Specify one or more primary directory servers. Specify each directory server in the following format: `host:port`.For example, `ad.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Secondary LDAP Server                                                 | Specify one or more secondary directory servers. Specify each directory server in the following format: `host:port`.The journey uses the secondary servers when none of the primary servers are available.For example, `ad_backup.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| DN to Start User Search *(required)*                                  | Specify the DN from which to start the user search. More specific DNs, such as `ou=sales,dc=example,dc=com`, result in better search performance.If multiple entries with the same attribute values exist in the directory server, make sure this property is specific enough to return only one entry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Bind User DN, Bind User Password                                      | The credentials used to connect to the directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Attribute Used to Retrieve User Profile *(required)*                  | The attribute used to retrieve a user profile from the directory server.The user search will have already happened, as specified by the Attributes Used to Search for a User to be Authenticated and User Search Filter properties.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Attributes Used to Search for a User to be Authenticated *(required)* | The attributes the node uses to match the credentials provided by the user to an entry in the directory server.For example, a value of `uid` forms the search filter `uid=user`. If you specify multiple values, such as `uid` and `cn`, the node forms a complex search filter `(\|(uid=user)(cn=user))`.Multiple attribute values let the user authenticate with any one of the values. For example, if you set both `uid` and `mail`, then Barbara Jensen can authenticate with either `bjensen` or `bjensen@example.com`.&#xA;&#xA;If you're using account lockout and you set multiple attribute values here, you must add those attributes to the Alias Search Attribute Name property in the User profile. Find more information about this property in Core authentication attributes > User profile.                                                                                                                               |
-| User Search Filter                                                    | A filter to append to user searches.For example, if your search attribute is `mail` and you set User Search Filter to `(objectClass=inetOrgPerson)`, the node uses `(&(mail=address)(objectClass=inetOrgPerson))` as the resulting search filter. In this example, *address* is the mail address provided by the user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Property                                                              | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Primary LDAP Server *(required)*                                      | Specify one or more primary directory servers. Specify each directory server in the following format: `host:port`.For example, `ad.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Secondary LDAP Server                                                 | Specify one or more secondary directory servers. Specify each directory server in the following format: `host:port`.The journey uses the secondary servers when none of the primary servers are available.For example, `ad_backup.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| DN to Start User Search *(required)*                                  | Specify the DN from which to start the user search. More specific DNs, such as `ou=sales,dc=example,dc=com`, result in better search performance.If multiple entries with the same attribute values exist in the directory server, make sure this property is specific enough to return only one entry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Bind User DN, Bind User Password                                      | The credentials used to connect to the directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Attribute Used to Retrieve User Profile *(required)*                  | The attribute used to retrieve a user profile from the directory server.The user search will have already happened, as specified by the Attributes Used to Search for a User to be Authenticated and User Search Filter properties.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Attributes Used to Search for a User to be Authenticated *(required)* | The attributes the node uses to match the credentials provided by the user to an entry in the directory server.For example, a value of `uid` forms the search filter `uid=user`. If you specify multiple values, such as `uid` and `cn`, the node forms a complex search filter `(\|(uid=user)(cn=user))`.Multiple attribute values let the user authenticate with any one of the values. For example, if you set both `uid` and `mail`, then Barbara Jensen can authenticate with either `bjensen` or `bjensen@example.com`.&#xA;&#xA;If you're using account lockout and you set multiple attribute values here, you must add those attributes to the Alias Search Attribute Name property in the User profile. Find more information about this property in Core authentication attributes > User profile.                                                                                                                            |
+| User Search Filter                                                    | A filter to append to user searches.For example, if your search attribute is `mail` and you set User Search Filter to `(objectClass=inetOrgPerson)`, the node uses `(&(mail=address)(objectClass=inetOrgPerson))` as the resulting search filter. In this example, *address* is the mail address provided by the user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Search Scope                                                          | The extent of the search for users in the directory server:- `OBJECT`: The search extends only to the entry specified by the DN to Start User Search.
 
 - `ONELEVEL`: The search extends to the entries that are direct children of the DN to Start User Search.
 
-- `SUBTREE`: The search extends to the DN to Start User Search and every entry under it.Default: `SUBTREE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| LDAP Connection Mode                                                  | Whether to use SSL or StartTLS to connect to the directory server. The node must be able to trust the certificates used.Possible values: `LDAP`, `LDAPS`, and `StartTLS`Default: `LDAP`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+- `SUBTREE`: The search extends to the DN to Start User Search and every entry under it.Default: `SUBTREE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| LDAP Connection Mode                                                  | Whether to use SSL or StartTLS to connect to the directory server. The node must be able to trust the certificates used.Possible values: `LDAP`, `LDAPS`, and `StartTLS`Default: `LDAP`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | mTLS Enabled                                                          | Enables mTLS (mutual TLS) between AM and the directory server.This setting applies to *all* configured LDAP servers; that is, AM uses mTLS to authenticate to all LDAP servers configured for this node.When mTLS is enabled, AM ignores the values for Bind User DN and Bind User Password.If you enable this property, you must:- Set the LDAP Connection Mode to `LDAPS`
 
-- Provide an mTLS Secret Label IdentifierLearn about mapping secrets in [Map and rotate secrets](https://docs.pingidentity.com/pingam/8.1/security/secret-mapping.html).Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                   |
-| mTLS Secret Label Identifier                                          | Identifier used to create a secret label for mapping to the mTLS certificate in the secret store. AM uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.ldap.decision.mtls.identifier.cert` , where `identifier` is the value of mTLS Secret Label Identifier. The identifier can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period. All LDAP servers configured for this node share the same secret label.For more security, you should rotate certificates periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this label. When you rotate a certificate, AM closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required. |
-| Return Account Locked Message                                         | If enabled, the node returns a specific `Account locked` message for locked accounts. Otherwise, it returns a generic `Login failure` message to hide the account's locked status.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Return User DN to DataStore                                           | When enabled, the node returns the DN rather than the User ID. From the DN value, AM uses the RDN to search for the user profile. For example, if a returned DN value is `uid=demo,ou=people,dc=example,dc=com`, AM uses `uid=demo` to search the directory server.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| User Creation Attributes                                              | This list lets you map (external) attribute names from the LDAP directory server to (internal) attribute names used by AM.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Minimum Password Length                                               | The minimum acceptable password length.Default: `8`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Trust All Server Certificates                                         | When enabled, the server blindly trusts server certificates, including self-signed test certificates.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| LDAP Connection Heartbeat Interval                                    | Specifies how often AM should send a heartbeat request to the directory server to ensure that the connection doesn't remain idle.Some network administrators configure firewalls and load balancers to drop connections that are idle for too long. Set the units for the interval in the `LDAP Connection Heartbeat Time Unit` property.&#xA;&#xA;Setting this property to 0 does not disable the heartbeat (keepalive) or load balancer availability checks.&#xA;&#xA;You can only disable these features at the global level.Default: `10`                                                                                                                                                                                                                                                                                                                                                                                               |
-| LDAP Connection Heartbeat Time Unit                                   | The time unit for the `LDAP Connection Heartbeat Interval`.Default: `seconds`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| LDAP Operations Timeout                                               | The timeout, in seconds, that AM should wait for a response from the directory server.Default: `0` (means no timeout)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Use mixed case for password change messages                           | Whether the server returns password reset messages in mixed case (sentence case) or transforms them to uppercase.By default, the server transforms password reset and password change messages to uppercase. Enable this setting to return messages in sentence case.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+- Provide an mTLS Secret Label IdentifierLearn about mapping secrets in [Map and rotate secrets](https://docs.pingidentity.com/pingam/8.1/security/secret-mapping.html).Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                |
+| mTLS Secret Label Identifier                                          | Identifier used to create a secret label for mapping to the mTLS certificate in the secret store. AM uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.ad.decision.mtls.identifier.cert`, where `identifier` is the value of mTLS Secret Label Identifier. The identifier can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period. All LDAP servers configured for this node share the same secret label.For more security, you should rotate certificates periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this label. When you rotate a certificate, AM closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required. |
+| Return Account Locked Message                                         | If enabled, the node returns a specific `Account locked` message for locked accounts. Otherwise, it returns a generic `Login failure` message to hide the account's locked status.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Return User DN to DataStore                                           | When enabled, the node returns the DN rather than the User ID. From the DN value, AM uses the RDN to search for the user profile. For example, if a returned DN value is `uid=demo,ou=people,dc=example,dc=com`, AM uses `uid=demo` to search the directory server.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| User Creation Attributes                                              | This list lets you map (external) attribute names from the LDAP directory server to (internal) attribute names used by AM.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Minimum Password Length                                               | The minimum acceptable password length.Default: `8`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Trust All Server Certificates                                         | When enabled, the server blindly trusts server certificates, including self-signed test certificates.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| LDAP Connection Heartbeat Interval                                    | Specifies how often AM should send a heartbeat request to the directory server to ensure that the connection doesn't remain idle.Some network administrators configure firewalls and load balancers to drop connections that are idle for too long. Set the units for the interval in the `LDAP Connection Heartbeat Time Unit` property.&#xA;&#xA;Setting this property to 0 does not disable the heartbeat (keepalive) or load balancer availability checks.&#xA;&#xA;You can only disable these features at the global level.Default: `10`                                                                                                                                                                                                                                                                                                                                                                                            |
+| LDAP Connection Heartbeat Time Unit                                   | The time unit for the `LDAP Connection Heartbeat Interval`.Default: `seconds`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| LDAP Operations Timeout                                               | The timeout, in seconds, that AM should wait for a response from the directory server.Default: `0` (means no timeout)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Use mixed case for password change messages                           | Whether the server returns password reset messages in mixed case (sentence case) or transforms them to uppercase.By default, the server transforms password reset and password change messages to uppercase. Enable this setting to return messages in sentence case.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | LDAP Affinity Level                                                   | Level of affinity used to balance requests across directory servers.Affinity-based load balancing means that each request for the same user entry goes to the same directory server. The directory server used for a specific operation is determined by the DN of the identity involved.List the directory server instances that form part of the affinity deployment in the Primary LDAP Server and Secondary LDAP Server properties.Options are:- `NONE` – no affinity
 
 - `BIND` – affinity for BIND requests only
 
-- `ALL` – affinity for all requestsDefault: `NONE`                                                                                                                                                                                                                                                                                                                                                                   |
+- `ALL` – affinity for all requestsDefault: `NONE`                                                                                                                                                                                                                                                                                                                                                                |
 
 ## Outputs
 
 If a password reset is required, the node adds a `lastModuleState` property with the value of `changeAfterReset` to shared state.
+
+## Callbacks
+
+The node sends the following callbacks when a password change is required:
+
+* `ConfirmationCallback`
+
+  Prompts the user to submit the password change or to cancel.
+
+* `PasswordCallback`
+
+  Prompts the user for their current password, the new password, and a confirmation of the new password. The node sends three instances of this callback.
+
+* `TextOutputCallback`
+
+  Displays a status message to the user, such as a warning that the password is expiring or an error that the new password doesn't meet requirements.
+
+Learn more in [Supported callbacks](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-supported.html).
 
 ## Outcomes
 
@@ -420,13 +481,19 @@ In contrast, a *disabled account* is a deliberate, long-term administrative acti
 
 ## Errors
 
-The node logs the following exceptions:
+The node can log the following exceptions:
 
-* `Invalid configuration`: If AD returns an unexpected result.
+* `Invalid configuration`
 
-* `Server error`: If an error occurs connecting to AD.
+  AD returns an unexpected result.
 
-* `Unknown login state`: If authentication results in an unknown state.
+* `Server error`
+
+  An error occurs connecting to AD.
+
+* `Unknown login state`
+
+  Authentication results in an unknown state.
 
 ---
 
@@ -439,6 +506,7 @@ page_id: auth-node-ref::agent-data-store-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/agent-data-store-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Agents", "Password", "Data Store"]
 page_aliases: ["auth-node-agent-data-store-decision.adoc"]
 section_ids:
@@ -448,6 +516,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -498,6 +567,10 @@ This node has no configurable properties.
 
 This node copies the shared and transient states into the outgoing node state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `True`
@@ -510,19 +583,27 @@ This node copies the shared and transient states into the outgoing node state.
 
 ## Errors
 
-This node can log the following warnings:
+The node can log the following:
 
-* `Exception in data store decision node`
+* Warnings
 
-  The node couldn't connect to the data store, or another error occurred.
+  * `invalid password error`
 
-* `invalid password error`
+    The password doesn't match.
 
-  The password doesn't match.
+  * `invalid username error`
 
-* `invalid username error`
+    The username doesn't match any profiles found in the data store.
 
-  The username doesn't match any profiles found in the data store.
+  * `Exception in data store decision node`
+
+    The node couldn't connect to the data store, or another error occurred.
+
+* Errors
+
+  * Password is null for username *username*
+
+    The password is missing from the shared state for the user.
 
 ---
 
@@ -535,20 +616,24 @@ page_id: auth-node-ref::anonymous-session-upgrade
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-session-upgrade.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Sessions"]
 page_aliases: ["auth-node-anonymous-session-upgrade.adoc"]
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Anonymous Session Upgrade node
 
-Upgrades an anonymous session to a non-anonymous session.
-
-Use this as the first node in the flow.
+The Anonymous Session Upgrade node lets you upgrade an anonymous session to an identified session.
 
 ## Example
 
@@ -564,13 +649,41 @@ After using the [Anonymous User Mapping node](anonymous-user-mapping.html) to ac
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | Yes        |
 
-## Outcomes
+## Inputs
 
-Single outcome path.
+None. This node doesn't read shared state data.
+
+## Dependencies
+
+The node requires an existing anonymous session. Use it after the [Anonymous User Mapping node](anonymous-user-mapping.html) node or another node that creates an anonymous session.
 
 ## Configuration
 
 This node has no configurable properties.
+
+## Outputs
+
+The node upgrades the current anonymous session when the previous authentication session was created by an anonymous journey.
+
+## Callbacks
+
+This node doesn't send any callbacks.
+
+## Outcomes
+
+Single outcome path.
+
+## Errors
+
+The node can log the following errors:
+
+* `Failed to get previous session`
+
+  The node couldn't retrieve the session identified by the request SSO token.
+
+* `Unable to create AMAuthenticationManager instance`
+
+  The node couldn't load the authentication configuration for the realm. Check that the realm and its authentication configuration are available.
 
 ---
 
@@ -583,26 +696,44 @@ page_id: auth-node-ref::anonymous-user-mapping
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-user-mapping.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Accounts"]
 page_aliases: ["auth-node-anonymous-user-mapping.adoc"]
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Anonymous User Mapping node
 
-Lets users log in to an application or website without providing credentials, by assuming the identity of a specified existing user account. The default user for this purpose is named `anonymous`.
+The Anonymous User Mapping node lets users log in to an application or website without providing credentials, by assuming the identity of a specified existing user account. The default user for this purpose is named `anonymous`.
 
 Take care to limit access for such users. For example, grant anonymous users access to public downloads on your site.
 
 ## Example
 
-The following example uses this node to grant access as an anonymous user to users who have performed social authentication access and do not have an existing profile:
+The following example uses this node to grant users access as an anonymous user if they've completed social authentication but don't have an existing profile:
 
-![Optionally authenticating as an anonymous user](_images/trees-node-anonymous-user-mapping-tree-example-platform.png)
+![Example journey using the Anonymous User Mapping node](_images/anonymous-user-mapping-journey.png)
+
+* The [Page node](page.html) containing the [Platform Username node](platform-username.html), [Platform Password node](platform-password.html), and [Select Identity Provider node](select-identity-provider.html) prompts the user to authenticate with a username and password, or to select a social identity provider.
+
+* If the user enters their username and password, the [Data Store Decision node](data-store-decision.html) validates the username-password credentials, and authentication succeeds if their credentials are valid.
+
+* If the user selects social authentication, the [Social Provider Handler node](social-provider-handler.html) does the following:
+
+  * If the user has an existing user account, authenticates that user.
+
+  * If the user doesn't have a user account, the Anonymous User Mapping node provides limited access as an anonymous user.
+
+  * If the user interrupts the social authentication, they are routed back to the Page node to try again.
 
 ## Availability
 
@@ -612,15 +743,45 @@ The following example uses this node to grant access as an anonymous user to use
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | Yes        |
 
+## Inputs
+
+This node requires the `realm` property in the incoming node state, which AM sets by default.
+
+## Dependencies
+
+The configured anonymous user must already exist in the realm, and its user status must be `active`.
+
+## Configuration
+
+| Property            | Usage                                                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Anonymous User Name | The username of an account that represents anonymous users. This user must already exist in the realm, and its user status must be `active`. |
+
+## Outputs
+
+The node sets the following values:
+
+* `username`: The configured anonymous username.
+
+* The universal ID of the configured user.
+
+* An anonymous authentication marker used when upgrading the session.
+
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 Single outcome path.
 
-## Configuration
+## Errors
 
-| Property            | Usage                                                                                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Anonymous User Name | Specifies the username of an account that represents anonymous users. This user must already exist in the realm, and its user status must be `active`. |
+The node can log the following error:
+
+* `Anonymous user name could not be found in the configuration`
+
+  The Anonymous User Name property is empty. Enter the username of an existing active user account.
 
 ---
 
@@ -633,6 +794,7 @@ page_id: auth-node-ref::app-policy-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/app-policy-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 section_ids:
   example: Example
@@ -661,10 +823,10 @@ You don't need to configure the node because it automatically identifies the pol
 
 * A policy with that resource is defined within the `Customer Application Policy Set`.
 
-The outcome of the policy evaluation, to accept or reject access, map to the node's outcomes. It doesn't handle advices or environment conditions.
+The outcome of the policy evaluation, to accept or reject access, maps to the node's outcomes. It doesn't handle advices or environment conditions.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Consider the following security risks when designing journeys that include policy evaluation:- Brute force information disclosure
 
   An authenticated user can probe the policy framework by submitting different inputs to determine who or what passes or fails a policy evaluation.
@@ -677,7 +839,7 @@ The outcome of the policy evaluation, to accept or reject access, map to the nod
 
   To reduce this risk: \* Protect the deployment at the container or network edge, for example, with a reverse proxy. \* Place the policy node after the user has authenticated whenever possible, to limit the attack surface.
 
-  + This can also prevent information disclosure, such as exposing group membership based on submitted usernames. |
+  \+ This can also prevent information disclosure, such as exposing group membership based on submitted usernames. |
 
 ## Example
 
@@ -779,7 +941,7 @@ The following setup is assumed:
       "type": "OR",
       "conditions": [
         {
-          "type": "IdmUser"
+          "type": "IdmUser",
           "identityResource": "managed/alpha_user",
           "queryField": "/_id",
           "decisionField": "/effectiveGroups/*/_refResourceId",
@@ -836,7 +998,7 @@ The following setup is assumed:
 >
 >    2. Click the checkmark ([icon: check, set=fa]) button to finish.
 >
->    3. Click Add a Logical Operator, select `Any of..`, and move the enviromment condition into the logical block.
+>    3. Click Add a Logical Operator, select `Any of..`, and move the environment condition into the logical block.
 >
 >    4. Save your changes.
 >
@@ -937,6 +1099,7 @@ page_id: auth-node-ref::attribute-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Schema", "Policy", "Custom Attributes"]
 page_aliases: ["auth-node-attribute-collector.adoc"]
 section_ids:
@@ -948,6 +1111,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1073,6 +1237,24 @@ This node depends on the underlying identity service (PingIDM) to store the user
 
 The node writes the attributes and their values to the shared node state.
 
+## Callbacks
+
+The node sends the following callbacks:
+
+* `BooleanAttributeInputCallback`
+
+  Prompts the user to select a boolean value for the attribute being collected.
+
+* `NumberAttributeInputCallback`
+
+  Prompts the user to enter a number value for the attribute being collected.
+
+* `StringAttributeInputCallback`
+
+  Prompts the user to enter a string value for the attribute being collected.
+
+Learn more in [Supported callbacks](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-supported.html).
+
 ## Outcomes
 
 Single outcome path; on success, downstream nodes can read the attributes from the shared node state.
@@ -1092,6 +1274,7 @@ page_id: auth-node-ref::attribute-present-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-present-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Account", "Custom Attributes", "Update Passwords"]
 page_aliases: ["auth-node-attribute-present-decision.adoc"]
 section_ids:
@@ -1101,6 +1284,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1166,6 +1350,10 @@ This node depends on the underlying identity service (PingIDM) to look up the us
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `True`
@@ -1191,11 +1379,13 @@ page_id: auth-node-ref::attribute-value-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-value-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Custom Attributes"]
 page_aliases: ["auth-node-attribute-value-decision.adoc"]
 section_ids:
   availability: Availability
   configuration: Configuration
+  callbacks: Callbacks
 ---
 
 # Attribute Value Decision node
@@ -1237,6 +1427,10 @@ Use [Attribute Present Decision node](attribute-present-decision.html) instead w
 | Comparison Value     | When Comparison Operation is `EQUALS`, compare this value to the provided attribute value.                                                                                                                                  |
 | Identity Attribute   | The attribute used to identify the managed object in the underlying identity service (PingIDM).                                                                                                                             |
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ---
 
 ---
@@ -1248,10 +1442,12 @@ page_id: auth-node-ref::auth-level-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/auth-level-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["auth-node-auth-level-decision.adoc"]
 section_ids:
   availability: Availability
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -1267,6 +1463,10 @@ Compares the current authentication level value against a configured value.
 | PingOne Advanced Identity Cloud       | Yes        |
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | Yes        |
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -1291,6 +1491,7 @@ page_id: auth-node-ref::overview
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/overview.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 section_ids:
   basic_authentication_nodes: Basic authentication nodes
   mfa_nodes: MFA nodes
@@ -1486,7 +1687,7 @@ section_ids:
 
 * [KBA Verification node](kba-verification.html)
 
-* [Pass-through Authentication node](passthrough-authentication.html)
+* [Passthrough Authentication node](passthrough-authentication.html)
 
 * [Patch Object node](patch-object.html)
 
@@ -1623,6 +1824,7 @@ page_id: auth-node-ref::backchannel-initialize
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-initialize.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T13:50:13Z
 section_ids:
   example: Example
   main_journey: Main journey
@@ -1632,6 +1834,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1786,9 +1989,9 @@ This node has no dependencies.
 
 ## Configuration
 
-| Property            | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Journey             | The asynchronous journey to initialize.Select a journey from the list of configured journeys.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Property            | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Journey             | The asynchronous journey to initialize.Select a journey from the list of configured journeys.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Subject Type        | The type of subject to initialize the journey for:- User
 
   The subject is a user identity.
@@ -1799,27 +2002,27 @@ This node has no dependencies.
 
 - None
 
-  Setting the Subject Type to `None` means any subject can log in using the initialized journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Subject Name Key    | The `nodeState` key that contains the user ID of the subject you're initializing the journey for.This property is ignored if the Subject Type is `None`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Data Object Key     | The node state key that contains the data object (if present) to pass to the journey at the root level of the shared state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Redirect URL Type   | The type of redirect URL to save to node state:By default, the base URL of the redirect URI is retrieved from the incoming HTTP request.- Get
+  Setting the Subject Type to `None` means any subject can log in using the initialized journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Subject Name Key    | The `nodeState` key that contains the user ID of the subject you're initializing the journey for.This property is ignored if the Subject Type is `None`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Data Object Key     | The node state key that contains the data object (if present) to pass to the journey at the root level of the shared state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Redirect URL Type   | The type of redirect URI to generate and save to node state in the `backchannel-redirectUri` key. The journey or client can use this URI to redirect the user.Possible values are:- Get
 
-  The node redirects the user to a URL based on the base URL service. The redirect uses a GET request to the `/XUI/Login` endpoint.
+  The node generates a redirect URI based on the base URL service. The redirect uses a GET request to the `/UI/Login` endpoint.
 
 - Post
 
-  The node redirects the user to a URL based on the base URL service. The redirect uses a POST request to the `authenticate` endpoint.
+  The node generates a redirect URI based on the base URL service. The redirect uses a POST request to the `json/authenticate` endpoint.
 
 - Custom
 
-  The node redirects the user to the URL specified in the Custom Redirect URL field.
+  The node generates a redirect URI based on the URL specified in the Custom Redirect URL field.
 
 - None
 
-  If none of the redirect URL mechanisms (`Get`, `Post`, or `Custom`) meet your business requirements, you can use the transaction ID stored in state to make your own redirect URL outside of the functionality of this node. Connect this output to a [Scripted Decision node](scripted-decision.html) to achieve this. |
-| Custom Redirect URL | If Redirect URL Type is `Custom`, set this field to the custom redirect URL for the authentication journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Max Time (Seconds)  | The maximum number of seconds to wait for the backchannel journey to complete before timing out. This lets you set a specific timeout for each backchannel journey, depending on the expected completion time for the journey.	This value doesn't affect the authentication session timeout.If you don't set a value here, the backchannel journey times out after the Time to Live set for the realm.You can change this under Realms> *Realm Name* > Services > Transaction Authentication Service > Time to Live.                                                                                                                                                                                                                                                                                                                                                  |
-| Allow Retry         | When enabled, the end user can retry the backchannel journey if it fails. There's no maximum *number* of retries, but the retry window ends after the configured `Max Time`.If you disable this option, the backchannel authentication token goes into the `Failure` state the first time the backchannel journey fails. In this case, calls to the [Backchannel Status node](backchannel-status.html) go to the Failure outcome.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                     |
+  The node doesn't generate a redirect URI. Use the transaction ID stored in state to construct your own redirect URL outside of the functionality of this node. Connect the node's outcome to a [Scripted Decision node](scripted-decision.html) to achieve this. |
+| Custom Redirect URL | If Redirect URL Type is `Custom`, set this field to the custom redirect URL for the authentication journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Max Time (Seconds)  | The maximum number of seconds to wait for the backchannel journey to complete before timing out. This lets you set a specific timeout for each backchannel journey, depending on the expected completion time for the journey.	This value doesn't affect the authentication session timeout.If you don't set a value here, the backchannel journey times out after the Time to Live set for the realm.You can change this under Realms> *Realm Name* > Services > Transaction Authentication Service > Time to Live.                                                                                                                                                                                                                                                                                                                                               |
+| Allow Retry         | When enabled, the end user can retry the backchannel journey if it fails. There's no maximum *number* of retries, but the retry window ends after the configured `Max Time`.If you disable this option, the backchannel authentication token goes into the `Failure` state the first time the backchannel journey fails. In this case, calls to the [Backchannel Status node](backchannel-status.html) go to the Failure outcome.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ## Outputs
 
@@ -1830,6 +2033,10 @@ The node writes the following to the shared state:
 | `backchannel-transaction` | The transaction ID of the backchannel authentication request.                      |
 | `backchannel-redirectUri` | The generated redirect URI.                                                        |
 | `backchannel-data`        | An optional data object with additional information about the authenticating user. |
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -1847,17 +2054,19 @@ The node writes the following to the shared state:
 
 ## Errors
 
-* If the node can't retrieve the subject from the incoming state, it logs the following warning:
+The node can log the following:
 
-  ```none
-  Error retrieving subject from node state.
-  ```
+* Warnings
 
-* If the node can't initialize the backchannel authentication journey, it logs the following error:
+  * `Error retrieving subject from node state.`
 
-  ```none
-  Error initializing back channel transaction.
-  ```
+    The node can't retrieve the subject from the incoming state.
+
+* Errors
+
+  * `Error initializing back channel transaction.`
+
+    The node can't initialize the backchannel authentication journey.
 
 ---
 
@@ -1870,6 +2079,7 @@ page_id: auth-node-ref::backchannel-notification
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-notification.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Backchannel"]
 section_ids:
   example: Example
@@ -2269,21 +2479,23 @@ This node doesn't send any callbacks.
 
 ## Errors
 
-The node can log the following errors:
+The node can log the following:
 
-* `Failed to update backchannel transaction`
+* Warnings
 
-  An error occurred when the node attempted to update the backchannel transaction with the data from the incoming node state.
+  * `Transaction ID not found in context`
 
-The node can log the following warnings:
+    The transaction ID is missing from the incoming request context.
 
-* `Transaction ID not found in context`
+  * `Data in state at dataKey data key was not found or incorrect type, not updating transaction.`
 
-  The transaction ID is missing from the incoming request context.
+    The Data Key configured for the node doesn't exist in the incoming node state, or it exists but contains invalid data.
 
-* `Data in state at dataKey data key was not found or incorrect type, not updating transaction.`
+* Errors
 
-  The Data Key configured for the node doesn't exist in the incoming node state, or it exists but contains invalid data.
+  * `Failed to update backchannel transaction`
+
+    An error occurred when the node attempted to update the backchannel transaction with the data from the incoming node state.
 
 ---
 
@@ -2296,6 +2508,7 @@ page_id: auth-node-ref::backchannel-status
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-status.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   main_journey: Main journey
@@ -2305,6 +2518,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -2477,6 +2691,10 @@ This node has no dependencies.
 
   This data includes anything added to the transaction by the [Backchannel Notification node](backchannel-notification.html) for real-time updates.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * Pending
@@ -2522,6 +2740,7 @@ page_id: auth-node-ref::captcha
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/captcha.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "CAPTCHA"]
 page_aliases: ["auth-node-captcha.adoc"]
 section_ids:
@@ -2531,6 +2750,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -2607,6 +2827,10 @@ You need to sign up for access to the [reCAPTCHA API](https://www.google.com/rec
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+The node sends a [ReCaptchaCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-interactive.html#ReCaptchaCallback), which the client uses to render the CAPTCHA widget and collect the user's response.
+
 ## Outcomes
 
 * `True`
@@ -2640,6 +2864,7 @@ page_id: auth-node-ref::certificate-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/certificate-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Certificates"]
 page_aliases: ["self-managed/auth-node-certificate-collector.adoc"]
 section_ids:
@@ -2746,13 +2971,15 @@ This node doesn't send any callbacks.
 
 ## Errors
 
-* If no certificates are provided in the configured location (either header or request), the node logs the following error:
+The node can log the following errors:
 
-  `Certificate was not successfully collected based on node configuration and client request`
+* `Certificate was not successfully collected based on node configuration and client request`
 
-* If there's a problem with the certificates provided in the header or in the request, the node logs the following error:
+  No certificates are provided in the configured location (either header or request).
 
-  `CertificateFromParameter decode failed, possibly invalid Base64 input`
+* `CertificateFromParameter decode failed, possibly invalid Base64 input`
+
+  There's a problem with the certificates provided in the header or in the request.
 
 ---
 
@@ -2765,6 +2992,7 @@ page_id: auth-node-ref::certificate-user-extractor
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/certificate-user-extractor.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Certificates", "Identity Store", "Users", "User Profiles"]
 page_aliases: ["self-managed/auth-node-certificate-user-extractor.adoc"]
 section_ids:
@@ -2890,6 +3118,7 @@ page_id: auth-node-ref::certificate-validation
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/certificate-validation.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Certificates", "LDAP", "TLS/SSL"]
 page_aliases: ["self-managed/certificate-validation.adoc"]
 section_ids:
@@ -2998,7 +3227,7 @@ This node has no dependencies.
 | mTLS Enabled                                                            | Enables mTLS (mutual TLS) between AM and the directory server.When mTLS is enabled, the node ignores the values for LDAP Server Authentication User and LDAP Server Authentication Password.If you enable this property, you must:- Enable Use SSL/TLS for LDAP Access.
 
 - Provide an mTLS Secret Label Identifier.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| mTLS Secret Label Identifier                                            | An identifier used to create a secret label for mapping to the mTLS certificate in the secret store. AM uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.certificate.validation.mtls.identifier.cert` , where `identifier` is the value of mTLS Secret Label Identifier. The label can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period.For greater security, you should [rotate certificates](https://docs.pingidentity.com/pingam/8.1/security/secret-mapping.html) periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this identifier. When you rotate a certificate, AM closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required.                                                  |
+| mTLS Secret Label Identifier                                            | An identifier used to create a secret label for mapping to the mTLS certificate in the secret store. AM uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.certificate.validation.mtls.identifier.cert`, where `identifier` is the value of mTLS Secret Label Identifier. The label can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period.For greater security, you should [rotate certificates](https://docs.pingidentity.com/pingam/8.1/security/secret-mapping.html) periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this identifier. When you rotate a certificate, AM closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required.                                                   |
 | Use SSL/TLS for LDAP Access                                             | When enabled, AM uses SSL/TLS to access the LDAP directory. Make sure that AM trusts the certificate from the LDAP server when enabling this option.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ## Outputs

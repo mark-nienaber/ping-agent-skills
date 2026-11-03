@@ -1,9 +1,11 @@
 ---
 title: Authentication using browser redirect (PPM request)
-description: PingID APIs are typically used to create custom authentication request flows.
+description: Authentication using browser redirect (PPM request)
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiPpmrequest
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiPpmrequest.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   ppm-request: PPM request
   ppm-request-workflow: PPM request workflow
@@ -92,7 +94,7 @@ The following steps illustrate the PPM request workflow:
 
    | Parameter    | Description                                                                                                                                                                                                                              |
    | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org\_alias from the organization's settings.                                                   |
+   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org_alias from the organization's settings.                                                    |
    | iss          | Issuer (sender) of the request, for example "PingFed".                                                                                                                                                                                   |
    | sub          | The PingOne system-level username.                                                                                                                                                                                                       |
    | aud          | The destination application that the request should go to, which is the MFA authenticating app. For example, "pingidauthenticator".                                                                                                      |
@@ -109,22 +111,22 @@ The following steps illustrate the PPM request workflow:
 
    Optional sub-attributes in the "attributes" object:
 
-   | Parameter                                               | Description                                                                                                                                      |
-   | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-   | fname                                                   | User's first name. Used by PingID.                                                                                                               |
-   | lname                                                   | User's last name. Used by PingID.                                                                                                                |
-   | email/mail/USER\_ATTRIBUTE\_EMAIL/dirMail               | User's mail. Used by PingID.                                                                                                                     |
-   | phone/phoneNumber/USER\_ATTRIBUTE\_PHONE/dirPhoneNumber | User's phone. Used by PingID.                                                                                                                    |
-   | isUserAuthenticated                                     | Validates first factor authentication. Must be set to true in order to pass authentication.                                                      |
-   | appName                                                 | The application name that is passed to the adapter, to enable PingID to mutually authenticate the user.                                          |
-   | appIconUrl                                              | The application icon URL passed to the adapter to enable PingID to authenticate the user. For example, a branded icon for the PingID Mobile App. |
-   | pingidIp                                                | The IP of the accessing device. Used by PingID policy, if configured.                                                                            |
-   | saasid                                                  | The application's ID. Used by PingID policy, if configured.                                                                                      |
-   | pingidSpAlias                                           | The calling app. If empty, its value will default to "pingone".                                                                                  |
-   | pingidHostName                                          | RDP (reserved for future use).                                                                                                                   |
-   | pingidOpSystem                                          | RDP (reserved for future use).                                                                                                                   |
-   | pingidInstallVer                                        | RDP (reserved for future use).                                                                                                                   |
-   | pingidIsRemote                                          | RDP (reserved for future use).                                                                                                                   |
+   | Parameter                                             | Description                                                                                                                                      |
+   | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | fname                                                 | User's first name. Used by PingID.                                                                                                               |
+   | lname                                                 | User's last name. Used by PingID.                                                                                                                |
+   | email/mail/USER_ATTRIBUTE_EMAIL/dirMail               | User's mail. Used by PingID.                                                                                                                     |
+   | phone/phoneNumber/USER_ATTRIBUTE_PHONE/dirPhoneNumber | User's phone. Used by PingID.                                                                                                                    |
+   | isUserAuthenticated                                   | Validates first factor authentication. Must be set to true in order to pass authentication.                                                      |
+   | appName                                               | The application name that is passed to the adapter, to enable PingID to mutually authenticate the user.                                          |
+   | appIconUrl                                            | The application icon URL passed to the adapter to enable PingID to authenticate the user. For example, a branded icon for the PingID Mobile App. |
+   | pingidIp                                              | The IP of the accessing device. Used by PingID policy, if configured.                                                                            |
+   | saasid                                                | The application's ID. Used by PingID policy, if configured.                                                                                      |
+   | pingidSpAlias                                         | The calling app. If empty, its value will default to "pingone".                                                                                  |
+   | pingidHostName                                        | RDP (reserved for future use).                                                                                                                   |
+   | pingidOpSystem                                        | RDP (reserved for future use).                                                                                                                   |
+   | pingidInstallVer                                      | RDP (reserved for future use).                                                                                                                   |
+   | pingidIsRemote                                        | RDP (reserved for future use).                                                                                                                   |
 
 3. Sign the request's JSON representation. Signing is mandatory, to ensure the request's reliability. The signature requires:
 
@@ -142,27 +144,27 @@ The following steps illustrate the PPM request workflow:
 
    Pass the following HTTP parameters in the POST request:
 
-   | Parameter        | Description                                                                                                                  |
-   | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-   | idp\_account\_id | The IDP account ID and organization alias. This is identical to the value of the PPMRequest object's idpAccountId attribute. |
-   | iss              | The sender application. This is identical to the value of the PPMRequest object's iss attribute.                             |
-   | ppm\_request     | The signed JWT.                                                                                                              |
+   | Parameter      | Description                                                                                                                  |
+   | -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+   | idp_account_id | The IDP account ID and organization alias. This is identical to the value of the PPMRequest object's idpAccountId attribute. |
+   | iss            | The sender application. This is identical to the value of the PPMRequest object's iss attribute.                             |
+   | ppm_request    | The signed JWT.                                                                                                              |
 
    The authentication response will be passed to the address in the return URL which is defined in the request object.
 
    The PPM response will return either a successful authentication status, or one of the following error codes in the case of a failure:
 
-   | Error code  | Description                  |
-   | ----------- | ---------------------------- |
-   | AUTH\_001   | System error                 |
-   | AUTH\_002   | Configuration error          |
-   | PINGID\_001 | General authentication error |
-   | PINGID\_002 | Invalid state                |
-   | PINGID\_003 | Request expired              |
-   | PINGID\_004 | Invalid session              |
-   | PINGID\_005 | Invalid phone number         |
-   | PINGID\_006 | Enrollment general error     |
-   | PINGID\_007 | Device not enabled           |
+   | Error code | Description                  |
+   | ---------- | ---------------------------- |
+   | AUTH_001   | System error                 |
+   | AUTH_002   | Configuration error          |
+   | PINGID_001 | General authentication error |
+   | PINGID_002 | Invalid state                |
+   | PINGID_003 | Request expired              |
+   | PINGID_004 | Invalid session              |
+   | PINGID_005 | Invalid phone number         |
+   | PINGID_006 | Enrollment general error     |
+   | PINGID_007 | Device not enabled           |
 
    **Response payload parameters**
 
@@ -335,7 +337,7 @@ The following steps illustrate the PPM request workflow for FIDO pairing with a 
 
    | Parameter    | Description                                                                                                                                                                                                                              |
    | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org\_alias from the organization's settings.                                                   |
+   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org_alias from the organization's settings.                                                    |
    | iss          | Issuer (sender) of the request, for example "PingFed".                                                                                                                                                                                   |
    | sub          | The PingOne system-level username.                                                                                                                                                                                                       |
    | aud          | The destination application that the request should go to, which is the MFA authenticating app. For example, "pingidauthenticator".                                                                                                      |
@@ -352,7 +354,7 @@ The following steps illustrate the PPM request workflow for FIDO pairing with a 
 
    | Parameter              | Description                                                                                                                                                                                                                                                                                                                                                  |
    | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   | webauthnEnrollmentType | Valid values:\<ul>\<li>"webauthn" for pairing a FIDO security key.\</li>\<li>"webauthn\_platform" for pairing a FIDO biometric device.\</li>\</ul>                                                                                                                                                                                                           |
+   | webauthnEnrollmentType | Valid values:\<ul>\<li>"webauthn" for pairing a FIDO security key.\</li>\<li>"webauthn_platform" for pairing a FIDO biometric device.\</li>\</ul>                                                                                                                                                                                                            |
    | webauthnName           | Provide a value for this parameter if you would like to display specific user information text on the account selection screen instead of the default information displayed by the device for the name field. The string can be up to 100 characters. (Keep in mind that the actual number of characters that will be displayed is device-dependent.)        |
    | webauthnDisplayName    | Provide a value for this parameter if you would like to display specific user information text on the account selection screen instead of the default information displayed by the device for the displayName field. The string can be up to 100 characters. (Keep in mind that the actual number of characters that will be displayed is device-dependent.) |
 
@@ -373,20 +375,20 @@ The following steps illustrate the PPM request workflow for FIDO pairing with a 
 
    Pass the following HTTP parameters in the POST request:
 
-| Parameter    | Description                                                                                                                                                            |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| orgUuid      | The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org\_alias from the organization's settings. |
-| ppm\_request | The signed JWT.                                                                                                                                                        |
+| Parameter   | Description                                                                                                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orgUuid     | The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org_alias from the organization's settings. |
+| ppm_request | The signed JWT.                                                                                                                                                       |
 
 The authentication response will be passed to the address in the return URL which is defined in the request object.
 
 The PPM response will return either a successful authentication status, or one of the following error codes in the case of a failure:
 
-| Error code              | Description                                                       |
-| ----------------------- | ----------------------------------------------------------------- |
-| BROWSER\_NOT\_SUPPORTED | The web browser is not supported for WebAuthn operations.         |
-| INVALID\_PPM            | The request payload sent in the PPM request is not valid.         |
-| MAX\_DEVICES            | The maximum number of permitted paired devices has been exceeded. |
+| Error code            | Description                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| BROWSER_NOT_SUPPORTED | The web browser is not supported for WebAuthn operations.         |
+| INVALID_PPM           | The request payload sent in the PPM request is not valid.         |
+| MAX_DEVICES           | The maximum number of permitted paired devices has been exceeded. |
 
 **Response payload parameters**
 
@@ -541,7 +543,7 @@ The following steps illustrate the PPM request workflow for FIDO authentication 
 
    | Parameter    | Description                                                                                                                                                                                                                              |
    | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org\_alias from the organization's settings.                                                   |
+   | idpAccountId | CAS account ID. The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org_alias from the organization's settings.                                                    |
    | iss          | Issuer (sender) of the request, for example "PingFed".                                                                                                                                                                                   |
    | sub          | The PingOne system-level username.                                                                                                                                                                                                       |
    | aud          | The destination application that the request should go to, which is the MFA authenticating app. For example, "pingidauthenticator".                                                                                                      |
@@ -579,26 +581,26 @@ The following steps illustrate the PPM request workflow for FIDO authentication 
 
    Pass the following HTTP parameters in the POST request:
 
-| Parameter        | Description                                                                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| idp\_account\_id | The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org\_alias from the organization's settings. |
-| ppm\_request     | The signed JWT.                                                                                                                                                        |
-| iss              | Issuer (sender) of the request, for example "PingFed".                                                                                                                 |
+| Parameter      | Description                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| idp_account_id | The unique ID of the local instance that enables PingID to identify the tenant instance in its services. Its value is the org_alias from the organization's settings. |
+| ppm_request    | The signed JWT.                                                                                                                                                       |
+| iss            | Issuer (sender) of the request, for example "PingFed".                                                                                                                |
 
 The authentication response will be passed to the address in the return URL which is defined in the request object.
 
 The PPM response will return either a successful authentication status, or one of the following error codes in the case of a failure:
 
-| Error code              | Description                                                                                                             |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| ABORT\_ERROR            | The authentication was canceled.                                                                                        |
-| AUTH\_GENERIC\_ERROR    | Error occurred during authentication with PingID. Try again.                                                            |
-| BROWSER\_NOT\_SUPPORTED | This browser doesn't support your current authentication method. Try a different browser or contact your administrator. |
-| INVALID\_PPM            | PPM request is invalid.\<br>PPM request has expired.                                                                    |
-| INVALID\_STATE\_ERROR   | We didn't recognize the security key you used. Try again with the correct key.                                          |
-| NOT\_ALLOWED\_ERROR     | The authentication was canceled.                                                                                        |
-| SECURITY\_ERROR         | You have been blocked due to an attempted security violation. Contact your administrator for more information.          |
-| USER\_DOES\_NOT\_EXIST  | User does not exist.                                                                                                    |
+| Error code            | Description                                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| ABORT_ERROR           | The authentication was canceled.                                                                                        |
+| AUTH_GENERIC_ERROR    | Error occurred during authentication with PingID. Try again.                                                            |
+| BROWSER_NOT_SUPPORTED | This browser doesn't support your current authentication method. Try a different browser or contact your administrator. |
+| INVALID_PPM           | PPM request is invalid.\<br>PPM request has expired.                                                                    |
+| INVALID_STATE_ERROR   | We didn't recognize the security key you used. Try again with the correct key.                                          |
+| NOT_ALLOWED_ERROR     | The authentication was canceled.                                                                                        |
+| SECURITY_ERROR        | You have been blocked due to an attempted security violation. Contact your administrator for more information.          |
+| USER_DOES_NOT_EXIST   | User does not exist.                                                                                                    |
 
 **Response payload parameters**
 

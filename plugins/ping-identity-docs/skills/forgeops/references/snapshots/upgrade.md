@@ -1,12 +1,13 @@
 ---
-title: Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.2 tag
-description: If you've already installed Ping Advanced Identity Software using the previous release branch of the forgeops repository, such as release/7.4-20240126 or release/7.5-20240608, follow the steps provided on this page to upgrade to the latest platform 8.1.0 branch.
+title: Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.3 tag
+description: Migrate ForgeOps from a 7.4 or 7.5 release branch to a newer tag
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:mig-74-75
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/mig-74-75.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/mig-74-75.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 keywords: ["Upgrade", "ForgeOps"]
 section_ids:
   prerequisites_and_assumptions: Prerequisites and assumptions
@@ -19,7 +20,7 @@ section_ids:
   rebuild_your_new_images: Rebuild your new images
 ---
 
-# Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.2 tag
+# Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.3 tag
 
 If you've already installed Ping Advanced Identity Software using the previous release branch of the `forgeops` repository, such as `release/7.4-20240126` or `release/7.5-20240608`, follow the steps provided on this page to upgrade to the latest platform 8.1.0 branch.
 
@@ -65,9 +66,9 @@ When you perform the upgrade:
 
 ## Subscribe to release note updates
 
-Get updates from ForgeOps when there are changes to ForgeOps 2026.2.
+Get updates from ForgeOps when there are changes to ForgeOps 2026.3.
 
-For more information about getting notifications or subscribing to the ForgeOps 2026.2 RSS feed, refer to [ForgeOps release notes](../rn/rn.html).
+For more information about getting notifications or subscribing to the ForgeOps 2026.3 RSS feed, refer to [ForgeOps release notes](../rn/rn.html).
 
 ## Back up critical data
 
@@ -238,13 +239,14 @@ If you are using ForgeOps deployment in production, you must rebuild base Docker
 
 ---
 title: Migrate your Kustomize configurations
-description: This section covers steps required to migrate your Kustomize overlays from legacy ForgeOps artifacts, such as 7.4 or 7.5, to the new ForgeOps deployment environment.
+description: Migrate ForgeOps Kustomize overlays from legacy releases to the new release
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:migrate-forgeops
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/migrate-forgeops.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/migrate-forgeops.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-03T11:30:02Z
 keywords: ["Kustomize configuration", "ForgeOps"]
 section_ids:
   considerations: Considerations
@@ -255,11 +257,9 @@ section_ids:
 
 This section covers steps required to migrate your Kustomize overlays from legacy ForgeOps artifacts, such as [7.4](https://github.com/ForgeRock/forgeops/tree/release/7.4-20240805) or [7.5](https://github.com/ForgeRock/forgeops/tree/release/7.5-20240618), to the new ForgeOps deployment environment.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | 1. If you are using DS Operator in your deployment, then use [step 3 in Upgrade from version 7.3](https://docs.pingidentity.com/forgeops/7.4/how-to/73to74.html#upgrade_the_7_3_pods_to_7_4_and_build_custom_7_4_docker_images) to migrate away from using the DS Operator and then perform the migration.
-
-2. When you migrate Kustomize overlays, **don't copy the files from the old overlay**. Create a new overlay and then copy the content in the old overlay to the new overlay. |
+|   |                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When you migrate Kustomize overlays, **don't copy the files from the old overlay**. Create a new overlay and then copy the content in the old overlay to the new overlay. |
 
 The format and layout of the overlays in the new **main** branch have changed from the previous ForgeOps releases. The main changes are:
 
@@ -275,7 +275,7 @@ Using the new forgeops command, you can select the version of products you want 
 
 1. Migrate your overlay to the new overlay layout using the steps below.
 
-2. Upgrade your images to a new version once your overlay is updated. Learn more at [Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.2 tag](mig-74-75.html).
+2. Upgrade your images to a new version once your overlay is updated. Learn more at [Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.3 tag](mig-74-75.html).
 
 ## Migrating your Kustomize overlays
 
@@ -287,16 +287,16 @@ To migrate your Kustomize overlays from previous versions, you need either of:
 
 Steps:
 
-1. Ensure your custom overlay or custom deployment environment directory is saved locally so it's accessible when you check out the 2026.2.1 tag.
+1. Ensure your custom overlay or custom deployment environment directory is saved locally so it's accessible when you check out the 2026.3.2 tag.
 
-2. Check out the 2026.2.1 tag.
+2. Check out the 2026.3.2 tag.
 
    ```
    $ cd /path/to/forgeops/
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-3. Create a new overlay specifying your FQDN and the certificate issuer. Add the --deployment-size flag that most closely represents your old deployment.
+3. Create a new overlay specifying your FQDN and the certificate issuer. Add the --deployment-size flag, such as `--small`, `--medium`, or `--large` that most closely represents your old deployment.
 
    This adds the configuration into the Helm values file for you, so it's easy to edit the Helm values to match your Kustomize environment.
 
@@ -314,7 +314,7 @@ Steps:
 4. Using the forgeops env command incorporate the modifications you made in your previous ForgeOps deployment. The following example shows how to set up AM replicas to 3:
 
    ```
-   $ ./bin/forgeops env --env-name my-env am-rep 3
+   $ ./bin/forgeops env --env-name my-env --am-rep 3
 
    Updating existing overlay.
    Updating existing helm values.
@@ -367,19 +367,20 @@ Steps:
 
 ---
 title: Update Helm Chart
-description: In ForgeOps deployments using Helm chart version 2025.1.0 version or later, the customized values.yaml files are independent of the Helm chart versions. Therefore, you can update the version of a Helm chart and continue to work with your customized values.yaml files in your ForgeOps deployment environment.
+description: Update ForgeOps Helm chart versions while preserving customized values.yaml files
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:update-helm
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/update-helm.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/update-helm.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T12:54:27Z
 keywords: ["Upgrade", "ForgeOps", "Helm chart"]
 ---
 
 # Update Helm Chart
 
-In ForgeOps deployments using Helm chart version 2025.1.0 version or later, the customized values.yaml files are independent of the Helm chart versions. Therefore, you can update the version of a Helm chart and continue to work with your customized `values.yaml` files in your ForgeOps deployment environment.
+In ForgeOps deployments using Helm chart version 2025.1.0 or later, the customized values.yaml files are independent of the Helm chart versions. Therefore, you can update the version of a Helm chart and continue to work with your customized `values.yaml` files in your ForgeOps deployment environment.
 
 |   |                                                                                                                                                                                                                                                                                                                               |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -403,13 +404,14 @@ In ForgeOps deployments using Helm chart version 2025.1.0 version or later, the 
 
 ---
 title: Upgrade and Migration Overview
-description: This section provides the conceptual and procedural details for upgrading your ForgeOps deployment environment or migrating utilities therein.
+description: Understand upgrade and migration options for ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:upgrade-overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-03T15:39:08Z
 keywords: ["Upgrade", "ForgeOps"]
 ---
 
@@ -433,23 +435,26 @@ Upgrading ForgeOps deployments involves three main sections:
 
   * [Upgrade Ping Advanced Identity Software Docker image to new patch release](upgrade-patch.html).
 
-* Upgrade from previous ForgeOps releases
+* Migrate from previous ForgeOps releases
 
-  * [Migrate Kustomize configurations](migrate-forgeops.html).
+  * [Kustomize configurations](migrate-forgeops.html).
 
-  * [Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.2 tag](mig-74-75.html).
+  * [From 7.4 to 7.5](mig-74-75.html).
+
+[Migrate secrets from Secret Agent to Helm-based secrets](../prepare/security/migrate-helmsec.html).
 
 ---
 
 ---
 title: Upgrade Ping Advanced Identity Software Docker image to new patch release
-description: Patched images are released for each Ping Advanced Identity Software product separately. So you may need to update each of PingAM, PingIDM, or PingDS images to a newer image patch release separately.
+description: Upgrade PingAM, PingIDM, PingDS, and PingGateway images to newer ForgeOps patch releases
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:upgrade-patch
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-patch.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-patch.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 keywords: ["Upgrade Forgeops", "Patch"]
 section_ids:
   prerequisites_and_assumptions: Prerequisites and assumptions
@@ -542,7 +547,7 @@ This section covers the steps to upgrade AM, Amster, IDM, or DS to a new patch r
         $ ./bin/forgeops image --release 7.5.1 --release-name my-custom-release am
         ```
 
-2. If you're upgrading AM, upgrade your custom AM configuration profile to the new version.
+2. If you're upgrading AM, upgrade your custom AM configuration profile to the new version using the forgeops upgrade-am-config command. Learn more about the forgeops upgrade-am-config command in the [`forgeops upgrade-am-config` command reference](../reference/forgeops-cmd-ref.html#upgrade-am-config).
 
    |   |                                                                                                                                        |
    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -633,13 +638,14 @@ Use the steps in this section to upgrade platform UIs in a ForgeOps deployment. 
 
 ---
 title: Upgrade Ping Advanced Identity Software Docker images to new major or minor version
-description: If you've performed ForgeOps deployment using the older AM, IDM, and DS Docker images, you should upgrade your ForgeOps deployment to use the newer version of Ping Advanced Identity Software product Docker images.
+description: Upgrade ForgeOps PingAM, PingIDM, and PingDS Docker images to a new major or minor Ping Advanced Identity Software version
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:upgrade:upgrade-product
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-product.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-product.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-12T08:46:00Z
 keywords: ["Upgrade", "ForgeOps"]
 section_ids:
   prerequisites_and_assumptions: Prerequisites and assumptions
@@ -722,20 +728,20 @@ After you've started upgrading, you might not be able to roll back directory dat
 
    ```
    $ cd /path/to/forgeops
-   $ *./bin/forgeops image --release 8.1.0 \
+   $ ./bin/forgeops image --release 8.1.0 \
      --release-name my-custom-release am-config-upgrader
    ```
 
-3. Upgrade your custom AM configuration profile to the new version:
+3. Upgrade your custom AM configuration profile to the new version using the forgeops upgrade-am-config command:
 
-   |   |                                                                                                                        |
-   | - | ---------------------------------------------------------------------------------------------------------------------- |
-   |   | Use the `--release-name` option to ensure you use the version of the `upgrade-am-config` that matches your deployment. |
+   |   |                                                                                                                                                                                                                                                                                               |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Use the `--release-name` option to ensure you use the version of the `upgrade-am-config` that matches your deployment. Learn more about the forgeops upgrade-am-config command in the [`forgeops upgrade-am-config` command reference](../reference/forgeops-cmd-ref.html#upgrade-am-config). |
 
    ```
    $ cd /path/to/forgeops
-   $ ./bin/forgeops upgrade-am-config --release-name my-custom-release \
-    --config-profile docker/am/config-profiles/my-config-profile
+   $ ./bin/forgeops upgrade-am-config --env-name my-custom-env \
+     my-config-profile
    ```
 
 4. Build new custom images for AM and IDM using your release files and custom configuration profile:

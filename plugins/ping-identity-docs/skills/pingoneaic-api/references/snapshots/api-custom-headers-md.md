@@ -4,6 +4,8 @@ description: in the X-Client-Region header to enforce MFA in a sign-on journey f
 component: pingoneaic-api
 page_id: pingoneaic-api::api-custom-headers
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/api-custom-headers.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: you might use the country code
 section_ids:
   debugging: Debugging

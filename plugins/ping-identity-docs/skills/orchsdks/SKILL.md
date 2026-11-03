@@ -27,11 +27,11 @@ Use the FIDO module to register and authenticate FIDO authenticators in JavaScri
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Journey: configure, identity, device | journey | https://developer.pingidentity.com/orchsdks/journey/*.md | references/snapshots/journey.md |
+| Journey: identity, device, configure | journey | https://developer.pingidentity.com/orchsdks/journey/*.md | references/snapshots/journey.md |
 | Davinci: davinci, configure, pingone | davinci | https://developer.pingidentity.com/orchsdks/davinci/*.md | references/snapshots/davinci.md |
-| Oidc: oidc, before, sign | oidc | https://developer.pingidentity.com/orchsdks/oidc/*.md | references/snapshots/oidc.md |
+| Oidc: before, oidc, sign | oidc | https://developer.pingidentity.com/orchsdks/oidc/*.md | references/snapshots/oidc.md |
 | Release Notes: orchestration, sdk, release | release-notes | https://developer.pingidentity.com/orchsdks/release-notes/*.md | references/snapshots/release-notes.md |
-| Security: security, orchestration, sdks | security | https://developer.pingidentity.com/orchsdks/security/*.md | references/snapshots/security.md |
+| Security: security, oauth, orchestration | security | https://developer.pingidentity.com/orchsdks/security/*.md | references/snapshots/security.md |
 | Concepts: concepts, multiple, system | concepts | https://developer.pingidentity.com/orchsdks/concepts/*.md | references/snapshots/concepts.md |
 | Index.Md: orchestration, sdks, advanced | index.md | https://developer.pingidentity.com/orchsdks/index.md | references/snapshots/index-md.md |
 

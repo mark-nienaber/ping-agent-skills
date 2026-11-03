@@ -1,25 +1,154 @@
 ---
 title: PingOne Release Notes
-description: Review release notes for the PingOne Cloud Platform and PingOne Services.
+description: Review release notes for the PingOne Platform and PingOne Services.
 component: pingone
 page_id: pingone:release_notes:index
 canonical_url: https://docs.pingidentity.com/pingone/release_notes/index.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 2, 2026
+revdate: 2026-10-30T20:28:33Z
 page_aliases: ["p1_release_notes_main.adoc"]
 section_ids:
   2024: 2024
   2025: 2025
   2026: 2026
+  november-2026: November 2026
+  november-2: November 2
+  mcp-authorization-in-pingone-authorize: MCP authorization in PingOne Authorize
+  www-authenticate-header-for-scope-rule-denials: WWW-Authenticate header for scope rule denials
+  bot-detection-predictor-fallback-value-when-sdk-payload-missing: Bot detection predictor - fallback value when SDK payload missing
+  november-1: November 1
+  predictor-rule-for-muse-ai-agent-detection: Predictor rule for Muse AI agent detection
+  october-2026: October 2026
+  october-29: October 29
+  voice-verification-removed-from-pingone-verify: Voice verification removed from PingOne Verify
+  agent-detection-cua-dashboard-available-for-early-access: Agent Detection (CUA) Dashboard available for early access
+  october-28: October 28
+  pingone-protect-signals-sdk-new-version-for-android: PingOne Protect (Signals) SDK - new version for Android
+  increase-in-kerberos-header-size-limit: Increase in Kerberos header size limit
+  october-27: October 27
+  fix-for-iphone-18-camera-selfie-capture: Fix for iPhone 18 camera selfie capture
+  microsoft-entra-id-hybrid-join-support-for-pingid-windows-login-passwordless: Microsoft Entra ID hybrid join support for PingID Windows login passwordless
+  option-to-keep-access-and-refresh-tokens-valid-after-session-ends: Option to keep access and refresh tokens valid after session ends
+  october-21: October 21
+  session-token-cookie-persistence: Session token cookie persistence
+  modules-in-pingone-authorize: Modules in PingOne Authorize
+  october-16: October 16
+  pingone-forms-now-supports-json-contents-in-dynamic-text: PingOne Forms now supports JSON contents in dynamic text
+  october-15: October 15
+  shopify-provisioning-connection: Shopify provisioning connection
+  october-14: October 14
+  updated-ldap-gateway-client-application: Updated LDAP gateway client application
+  custom-redirect-uris-for-pingone-remote-mcp-server-early-access: Custom redirect URIs for PingOne Remote MCP Server (early access)
+  october-12: October 12
+  upcoming-trusted-email-domain-requirement-for-customizing-notification-templates: Upcoming trusted email domain requirement for customizing notification templates
+  october-4: October 4
+  improved-removal-of-devices-after-interrupted-device-change: Improved removal of devices after interrupted device change
+  october-1: October 1
+  webhook-status-and-delivery-update: Webhook status and delivery update
+  september-2026: September 2026
+  september-30: September 30
+  auto-enrollment-in-pingone-recognize-from-pingone-verify-policies-released-for-general-availability: Auto-enrollment in PingOne Recognize from PingOne Verify policies released for general availability
+  account-updated-notification-template: Account Updated notification template
+  september-29: September 29
+  updated-language-packs-available: Updated language packs available
+  september-28: September 28
+  authorize-gateway-1-2-2: Authorize gateway 1.2.2
+  gateway-instance-shutdown-behavior: Gateway instance shutdown behavior
+  end-of-support-notice: End of support notice
+  september-24: September 24
+  nfc-verification-from-pingone-verify-available-for-early-access: NFC verification from PingOne Verify available for early access
+  september-22: September 22
+  provisioning-sync-status-enhancement: Provisioning sync status enhancement
+  external-oidc-idp-support-for-id-token-encryption: External OIDC IdP support for ID token encryption
+  improved-authentication-dashboard-released-for-general-availability: Improved Authentication Dashboard released for general availability
+  september-17: September 17
+  improvements-to-environment-creation-workflow: Improvements to environment creation workflow
+  overview-page-ui-enhancements: Overview page UI enhancements
+  outbound-group-sync-provisioning-for-external-groups: Outbound group sync provisioning for external groups
+  september-16: September 16
+  custom-domain-infrastructure-updates: Custom domain infrastructure updates
+  september-15: September 15
+  custom-client-ids-and-client-secrets-for-imported-applications-and-custom-resources: Custom client IDs and client secrets for imported applications and custom resources
+  updated-ui-for-audit: Updated UI for Audit
+  protect-signals-sdk-5-6-11: Protect (Signals) SDK 5.6.11
+  september-14: September 14
+  ai-agent-type-detection: AI agent type detection
+  pingid-device-trust-agent-v1-2: PingID Device Trust agent v1.2
+  september-10: September 10
+  advanced-identity-cloud-tenant-auditor-role-added: Advanced Identity Cloud Tenant Auditor role added
+  september-9: September 9
+  aadhaar-verification-using-pingone-verify: Aadhaar verification using PingOne Verify
+  september-3: September 3
+  updates-to-administrator-invitations: Updates to administrator invitations
+  september-2: September 2
+  api-tab-for-authorize-gateways: API tab for Authorize gateways
+  september-1: September 1
+  updates-to-pingone-forms-rendering: Updates to PingOne Forms rendering
+  pingone-for-workforce-service-available-in-canada: PingOne for Workforce service available in Canada
+  august-2026: August 2026
+  august-31: August 31
+  pingone-remote-mcp-server-available-for-early-access: PingOne Remote MCP Server available for early access
+  automatic-handling-of-risk-evaluation-update-step: Automatic handling of risk evaluation update step
+  august-25: August 25
+  increased-client-secret-retention-period: Increased client secret retention period
+  snowflake-provisioning-connection: Snowflake provisioning connection
+  august-24: August 24
+  fido2-client-errors-now-route-to-structured-outputs-in-the-form-connector: FIDO2 client errors now route to structured outputs in the Form connector
+  august-19: August 19
+  microsoft-entra-id-provisioning-connection: Microsoft Entra ID provisioning connection
+  reset-and-delete-credential-capabilities: Reset and delete credential capabilities
+  august-18: August 18
+  microsoft-entra-id-external-group-name-mapping: Microsoft Entra ID external group name mapping
+  august-11: August 11
+  attribute-mapping-for-custom-resource-scopes: Attribute mapping for custom resource scopes
+  august-10: August 10
+  auto-enrollment-in-pingone-recognize-from-pingone-verify-policies-available-in-early-access: Auto-enrollment in PingOne Recognize from PingOne Verify policies available in early access
+  august-6: August 6
+  pingone-provisioning-connection: PingOne provisioning connection
+  august-5: August 5
+  http-post-support-for-app-initiated-sign-offs: HTTP POST support for app-initiated sign-offs
+  pingone-protect-signals-sdk-new-version-for-android-2: PingOne Protect (Signals) SDK - new version for Android
+  august-3: August 3
+  pingone-mfa-mobile-sdk-2-4-1-ios-only: PingOne MFA mobile SDK 2.4.1 (iOS only)
   july-2026: July 2026
+  july-31: July 31
+  davinci-audit-events-released-for-general-availability: DaVinci audit events released for general availability
+  july-30: July 30
+  hubspot-provisioning-connection: HubSpot provisioning connection
+  import-and-export-individual-forms: Import and export individual forms
+  new-alert-for-webhook-destination-failure: New alert for webhook destination failure
+  webhook-test-connection-functionality: Webhook test connection functionality
+  pingone-mfa-mobile-sdk-2-4: PingOne MFA mobile SDK 2.4
+  android: Android
+  ios: iOS
+  sample-applications: Sample applications
+  apple-app-attest-ios-device-integrity-checking: Apple App Attest iOS device integrity checking
+  july-28: July 28
+  document-capture-updates-in-pingone-verify: Document capture updates in PingOne Verify
+  webex-provisioning-connection: Webex provisioning connection
+  july-24: July 24
+  updated-ldap-gateway-client-application-2: Updated LDAP gateway client application
+  bulk-decision-requests-in-pingone-authorize: Bulk decision requests in PingOne Authorize
+  july-19: July 19
+  mfa-api-changes-to-responses: MFA API - changes to responses
+  july-15: July 15
+  provisioning-to-zendesk-using-a-rest-connection: Provisioning to Zendesk using a REST connection
+  rest-provisioning-connection: REST provisioning connection
+  added-notification-template-and-variant-name-to-notification-created-event: Added notification template and variant name to notification created event
+  july-14: July 14
+  united-states-driver-license-support-in-pingone-verify: United States driver license support in PingOne Verify
+  updated-selfie-capture-in-pingone-verify: Updated selfie capture in PingOne Verify
+  external-idp-attribute-mapping-to-json-user-attributes: External IdP attribute mapping to JSON user attributes
+  july-13: July 13
+  pingone-privilege-is-now-generally-available: PingOne Privilege is now generally available
+  pingone-mfa-mobile-sdk-2-3-2-ios-only: PingOne MFA mobile SDK 2.3.2 (iOS only)
   july-9: July 9
-  pingone-provisioner-available-in-early-access: PingOne provisioner available in early access
   unable-to-pair-pingid-desktop-app-in-the-au-geography: Unable to pair PingID desktop app in the AU geography
   july-8: July 8
   pingone-forms-now-supports-custom-images: PingOne Forms now supports custom images
-  pingone-verify-table-of-contents-toc: PingOne Verify table of contents TOC
-  veriff-configuration-in-pingone-verify-policies: Veriff configuration in PingOne Verify policies
+  pingone-verify-table-of-contents: PingOne Verify table of contents
+  verify-configuration-in-pingone-verify-policies: Verify configuration in PingOne Verify policies
   iad-deactivation-when-liveness-is-disabled: IAD deactivation when liveness is disabled
   july-6: July 6
   mobile-driver-licenses: Mobile driver licenses
@@ -42,7 +171,7 @@ section_ids:
   phone-number-or-email-ownership-verification-in-pingone-verify: Phone number or email ownership verification in PingOne Verify
   new-audit-event-type-for-password-locked: New audit event type for password locked
   june-25: June 25
-  updated-ldap-gateway-client-application: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-3: Updated LDAP gateway client application
   june-17: June 17
   pingone-forms-rich-text-component: PingOne Forms Rich Text component
   smtp-provider-timeout-settings-update: SMTP provider timeout settings update
@@ -61,12 +190,14 @@ section_ids:
   pingone-notifications-twilio-messaging-services: PingOne notifications - Twilio Messaging Services
   custom-provider-oauth-2-0-jwt-bearer-authentication: Custom provider OAuth 2.0 JWT Bearer authentication
   june-5: June 5
-  updated-ldap-gateway-client-application-2: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-4: Updated LDAP gateway client application
   improved-failover-resiliency: Improved failover resiliency
   support-for-java-25-lts: Support for Java 25 LTS
   new-health-metrics: New health metrics
   gateway-alerts-for-long-running-requests: Gateway alerts for long-running requests
   security-updates: Security updates
+  june-4: June 4
+  improved-dynamic-theme-selection-in-the-form-connector: Improved dynamic theme selection in the Form connector
   june-3: June 3
   excluding-predictor-rules: Excluding predictor rules
   creating-a-credential: Creating a credential
@@ -87,7 +218,7 @@ section_ids:
   security-updates-2: Security updates
   structured-errors-for-invalid-decision-requests: Structured errors for invalid decision requests
   gateway-instance-startup-message: Gateway instance startup message
-  end-of-support-notice: End of support notice
+  end-of-support-notice-2: End of support notice
   may-19: May 19
   support-for-the-typ-header-parameter-in-access-tokens: Support for the typ header parameter in access tokens
   pingone-protect-dashboard-date-range: PingOne Protect dashboard - date range
@@ -101,6 +232,7 @@ section_ids:
   box-docusign-and-dropbox-provisioning-connections: Box, Docusign, and Dropbox provisioning connections
   may-11: May 11
   import-and-export-forms-when-copying-and-pasting-davinci-nodes: Import and export forms when copying and pasting DaVinci nodes
+  show-form-now-supports-dynamic-multiple-outcomes: Show Form now supports dynamic multiple outcomes
   may-10: May 10
   custom-provider-oauth2-scope: Custom provider OAuth2 scope
   may-7: May 7
@@ -108,7 +240,7 @@ section_ids:
   improved-saml-interoperability-with-external-idps: Improved SAML interoperability with external IdPs
   may-6: May 6
   notification-template-localization-improvements-2: Notification template localization improvements
-  aadhaar-verification-using-pingone-verify: Aadhaar verification using PingOne Verify
+  aadhaar-verification-using-pingone-verify-2: Aadhaar verification using PingOne Verify
   may-4: May 4
   audit-notification-event-changes-2: Audit - notification event changes
   april-2026: April 2026
@@ -116,7 +248,7 @@ section_ids:
   application-request-redirect_uri-parameter-echoed-in-pi-flow-responses: Application request redirect_uri parameter echoed in pi.flow responses
   cloning-a-provisioning-rule: Cloning a provisioning rule
   april-28: April 28
-  updated-ldap-gateway-client-application-3: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-5: Updated LDAP gateway client application
   provisioning-inbound-group-sync: Provisioning inbound group sync
   april-27: April 27
   forms-mfa-device-selection-supports-new-device-types: Forms MFA Device Selection supports new device types
@@ -127,7 +259,7 @@ section_ids:
   april-19: April 19
   define-a-secondary-email-address-for-backup-authentication: Define a secondary email address for backup authentication
   april-14: April 14
-  updated-ldap-gateway-client-application-4: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-6: Updated LDAP gateway client application
   april-13: April 13
   increased-limit-for-custom-language-key-value-pairs-in-davinci: Increased limit for custom language key-value pairs in DaVinci
   april-9: April 9
@@ -171,7 +303,7 @@ section_ids:
   provisioning-dashboard: Provisioning Dashboard
   february-2026: February 2026
   p1_february2026_release_notes: February 27
-  updated-ldap-gateway-client-application-5: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-7: Updated LDAP gateway client application
   february-25: February 25
   anonymous-network-detection-fewer-false-positives: Anonymous network detection - fewer false positives
   february-24: February 24
@@ -181,7 +313,7 @@ section_ids:
   disable-the-pingid-mobile-app-as-an-allowed-method: Disable the PingID mobile app as an allowed method
   configurable-grace-period-for-totp-passcodes: Configurable grace period for TOTP passcodes
   february-19: February 19
-  phase-2-custom-domain-infrastructure-changes: "Phase 2: Custom domain infrastructure changes"
+  p1-cloudflare-phase2: "Phase 2: Custom domain infrastructure changes"
   new-inbound-traffic-policies-ui-for-cloudflare-custom-domains: New Inbound Traffic Policies UI for Cloudflare custom domains
   pingone-forms-now-support-an-extension-in-the-phone-number-field: PingOne Forms now support an extension in the phone number field
   february-18: February 18
@@ -222,9 +354,9 @@ section_ids:
   december-2025: December 2025
   december-14: December 14
   pingone-mfa-mobile-sdk-2-2: PingOne MFA mobile SDK 2.2
-  android: Android
-  ios: iOS
-  sample-applications: Sample applications
+  android-2: Android
+  ios-2: iOS
+  sample-applications-2: Sample applications
   december-7: December 7
   custom-mail-from-domains: Custom MAIL FROM domains
   time-zones-for-fields-in-user-device-reports: Time zones for fields in User Device reports
@@ -249,23 +381,23 @@ section_ids:
   october-30: October 30
   forms-can-only-contain-a-single-agreement-component: Forms can only contain a single Agreement component
   data-based-identity-verification: Data-Based Identity Verification
-  october-29: October 29
+  october-29-2: October 29
   audit-data-retrieval-changes: Audit data retrieval changes
   querying-recent-data: Querying recent data
   retrieving-older-data: Retrieving older data
   querying-older-data: Querying older data
-  october-28: October 28
-  support-for-microsoft-entra-id-hybrid-join: Support for Microsoft Entra ID hybrid join
+  october-28-2: October 28
+  support-for-microsoft-entra-id-hybrid-join: Support for Microsoft Entra ID hybrid join in the North America (US) geography
   improved-pingone-davinci-integration: Improved PingOne DaVinci integration
   october-26: October 26
   updates-to-mfa-status-following-migration-of-an-existing-pingid-account-to-an-existing-pingone-environment: Updates to MFA status following migration of an existing PingID account to an existing PingOne environment
   october-24: October 24
-  updated-ldap-gateway-client-application-6: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-8: Updated LDAP gateway client application
   october-23: October 23
   import-and-export-forms-with-davinci-flows: Import and export forms with DaVinci Flows
   october-22: October 22
   support-added-for-up-to-100-million-identities-per-environment: Support added for up to 100 million identities per environment
-  october-21: October 21
+  october-21-2: October 21
   oauth-2-0-authorization-server-metadata: OAuth 2.0 authorization server metadata
   october-20: October 20
   groups-ui-enhancements: Groups UI enhancements
@@ -273,25 +405,26 @@ section_ids:
   audit-data-retrieval-changes-deployed-in-singapore-region: Audit data retrieval changes deployed in Singapore region
   october-7: October 7
   option-to-accept-acs-urls-found-in-signed-saml-authnrequests: Option to accept ACS URLs found in signed SAML AuthnRequests
+  pingone-forms-connector-renamed-to-form-connector: PingOne Forms connector renamed to Form connector
   october-2: October 2
   audit-data-retrieval-changes-coming: Audit data retrieval changes coming
   september-2025: September 2025
-  september-30: September 30
+  september-30-2: September 30
   domains: Domains
-  updated-ldap-gateway-client-application-7: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-9: Updated LDAP gateway client application
   authorize-gateway-1-2-0: Authorize gateway 1.2.0
   bulk-decision-requests: Bulk decision requests
-  end-of-support-notice-2: End of support notice
+  end-of-support-notice-3: End of support notice
   improve-cache-performance-with-header-exclusions: Improve cache performance with header exclusions
-  september-15: September 15
+  september-15-2: September 15
   api-usage-dashboard-and-maximum-throughput-assurance: API Usage Dashboard and Maximum Throughput Assurance
-  september-14: September 14
+  september-14-2: September 14
   migration-now-completes-successfully-even-if-some-user-accounts-fail-to-migrate: Migration now completes successfully even if some user accounts fail to migrate
-  september-9: September 9
+  september-9-2: September 9
   backward-compatibility-for-fallback-to-next-device-for-pingid-accounts: Backward compatibility for fallback to next device for PingID accounts
   september-5: September 5
   bring-your-own-authorization-server: Bring your own authorization server
-  september-2: September 2
+  september-2-2: September 2
   require-users-to-perform-mfa-to-manage-myaccount: Require users to perform MFA to manage MyAccount
   custom-notification-providers-support-for-additional-authorization-methods: Custom notification providers - support for additional authorization methods
   august-2025: August 2025
@@ -300,17 +433,17 @@ section_ids:
   more-powerful-policy-authoring: More powerful policy authoring
   more-granular-control-over-administrator-permissions: More granular control over administrator permissions
   enhanced-logging: Enhanced logging
-  end-of-support-notice-3: End of support notice
+  end-of-support-notice-4: End of support notice
   august-26: August 26
   support-added-for-rfc-7914-password-encoding-format: Support added for RFC 7914 password encoding format
-  august-19: August 19
+  august-19-2: August 19
   detection-of-compromised-accounts: Detection of compromised accounts
-  august-18: August 18
+  august-18-2: August 18
   evaluate-all-child-authorization-policies-or-rules: Evaluate all child authorization policies or rules
-  august-10: August 10
+  august-10-2: August 10
   passcode-grace-period: Passcode grace period
   july-2025: July 2025
-  july-31: July 31
+  july-31-2: July 31
   simplified-native-mobile-app-configuration-and-integration: Simplified native mobile app configuration and integration
   july-27: July 27
   senders-ui-enhancements: Senders UI enhancements
@@ -320,9 +453,9 @@ section_ids:
   identifier-first-authentication-enabled-in-administrator-security: Identifier First authentication enabled in Administrator Security
   july-16: July 16
   identity-data-matching: Identity data matching
-  july-15: July 15
+  july-15-2: July 15
   support-for-multiple-custom-resources-in-a-single-access-token: Support for multiple custom resources in a single access token
-  july-14: July 14
+  july-14-2: July 14
   support-for-multiple-mfa-policies-2: Support for multiple MFA policies
   use-of-risk-policies-with-an-mfa-only-license: Use of risk policies with an MFA-only license
   july-9-2: July 9
@@ -334,8 +467,8 @@ section_ids:
   mitigations-in-risk-policies: Mitigations in risk policies
   external-applications: External applications
   pingone-mfa-mobile-sdk-2-1-1: PingOne MFA mobile SDK 2.1.1
-  android-2: Android
-  ios-2: iOS:
+  android-3: Android
+  ios-3: iOS:
   july-3: July 3
   new-pingone-verify-settings-available-in-themes: New PingOne Verify settings available in themes
   july-2: July 2
@@ -353,7 +486,7 @@ section_ids:
   pingone-notifications-twilio-verify: PingOne Notifications - Twilio Verify
   june-12: June 12
   ability-to-delete-translatable-keys-for-language-management: Ability to delete translatable keys for language management
-  june-4: June 4
+  june-4-2: June 4
   signals-pingone-protect-sdk-new-version-for-web: Signals (PingOne Protect) SDK - new version for web
   multi-factor-authentication-enforced-for-all-access-to-the-admin-console: Multi-factor authentication enforced for all access to the admin console
   june-3-2: June 3
@@ -415,7 +548,7 @@ section_ids:
   manually-enter-number-for-number-matching: Manually enter number for number matching
   expanded-management-capabilities-for-migrated-pingid-accounts-in-pingone: Expanded management capabilities for migrated PingID accounts in PingOne
   march-26-2: March 26
-  updated-ldap-gateway-client-application-8: Updated LDAP gateway client application
+  updated-ldap-gateway-client-application-10: Updated LDAP gateway client application
   march-25: March 25
   specify-preferred-language-for-populations: Specify preferred language for populations
   manage-microsoft-active-directory-user-passwords: Manage Microsoft Active Directory user passwords
@@ -529,15 +662,743 @@ Subscribe to get automatic updates: [icon: rss-square, set=fa][PingOne Release N
 
 ## 2026
 
-### July 2026
+### November 2026
 
-#### July 9
+#### November 2
 
-##### PingOne provisioner available in early access
+##### MCP authorization in PingOne Authorize
+
+New PingOne Authorize
+
+You can now use PingOne Authorize to protect Model Context Protocol (MCP) servers that AI agents access. Define an MCP server in API Access Management to represent the RPC endpoints that you want to protect, and use custom policies to authorize inbound MCP requests, such as tool calls.
+
+Each MCP server definition supports multiple RPC endpoint URLs, so you can use one configuration to protect a server hosted on multiple origins. To support client discovery, challenge responses include the protected resource metadata (PRM) URL. MCP clients can use this URL to find the authorization server and supported scopes.
+
+Learn more in [MCP servers](../authorization_using_pingone_authorize/p1az_mcp_servers.html).
+
+##### WWW-Authenticate header for scope rule denials
+
+New PingOne Authorize
+
+PingOne Authorize now adds a `WWW-Authenticate` response header when authorization fails because of the built-in authorized OAuth scopes rule.
+
+The header includes the `error` and `error_description` parameters. For rules configured to require all selected scopes, it also includes the `scope` parameter, which lists the scopes required by the rule.
+
+Learn more in [Defining operations for protected actions](../authorization_using_pingone_authorize/p1az_add_api_service_operations.html).
+
+##### Bot detection predictor - fallback value when SDK payload missing
+
+Info PingOne Protect
+
+In cases where the PingOne Protect (Signals) SDK payload was missing, PingOne Protect assigned a risk level of Low to the bot detection predictor, rather than using the fallback value that was defined. This issue has been fixed, and now the fallback value for the predictor is used.
+
+As a result, you might find that risk evaluations for some of your risk policies are resulting in higher levels of risk.
+
+#### November 1
+
+##### Predictor rule for Muse AI agent detection
+
+New PingOne Protect
+
+PingOne Protect now includes a Bot Detection predictor rule that detects browser activity from Muse, Meta's personal AI agent. Learn more in [Bot Detection predictor rules](../threat_protection_using_pingone_protect/p1_protect_predictor_rules.html#bot-detection-predictor).
+
+### October 2026
+
+#### October 29
+
+##### Voice verification removed from PingOne Verify
+
+Removed PingOne Verify
+
+Voice verification has been removed from PingOne Verify. Users will no longer be able to use voice samples for either verification or enrollment. All references to voice verification in the PingOne documentation have been removed accordingly.
+
+##### Agent Detection (CUA) Dashboard available for early access
+
+New Early Access PingOne PingOne Protect
+
+We've released the **Agent Detection (CUA) Dashboard** for early access. This new dashboard tracks computer-using agent (CUA) activity detected by PingOne Protect in the environment based on risk evaluations using the Bot Detection predictor. Learn more in [Agent Detection (CUA) Dashboard (early access)](../early-access-features/ea-p1_agent_detection_dashboard.html).
+
+#### October 28
+
+##### PingOne Protect (Signals) SDK - new version for Android
+
+New PingOne Protect SDK
+
+We've released version 5.4.1 of the PingOne Protect (Signals) SDK for Android.
+
+You can find details in the [SDK Changelog](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/protect_sdk_changelog.html).
+
+##### Increase in Kerberos header size limit
+
+Improved PingOne
+
+Authentication policies and DaVinci flows that use the PingOne connector's **Authenticate User via Kerberos** capability now support Kerberos-based integrated Windows authentication for users who are members of large numbers of groups. Previously, these users would experience a form-based login because their Kerberos header would exceed the 6 KB platform limit for request headers. The Kerberos header size limit is now increased to 64 KB, only for customers using Cloudflare-based custom domains.
+
+#### October 27
+
+##### Fix for iPhone 18 camera selfie capture
+
+Fixed TRIAGE-37590 PingOne Verify
+
+We've fixed a detection issue being caused by ultra-wide front camera settings on iPhone 18 devices. The device now auto-detects and selects the preferred front-facing camera when capturing selfies.
+
+##### Microsoft Entra ID hybrid join support for PingID Windows login passwordless
+
+New PingOne SSO PingID
+
+After you [configure PingOne as the federated IdP for Microsoft Entra ID hybrid join](../use_cases/p1_microsoft_entra_hybrid_join.html), you can enable PingID Windows login passwordless for hybrid-joined devices. PingOne can now accept X.509 client certificate tokens from PingID, allowing users to sign on to or unlock hybrid-joined Windows devices with PingID without a password. Entra ID then issues a primary refresh token (PRT) for the user.
+
+This new capability is available in all geographies and requires a PingOne for Workforce Plus or Premium license. Contact your account team if you need to upgrade.
+
+Learn more in [Enabling PingID Windows login passwordless support for Entra hybrid-joined devices](../use_cases/p1_microsoft_hybrid_join_pingid_windows_login_passwordless.html).
+
+##### Option to keep access and refresh tokens valid after session ends
+
+New PingOne SSO
+
+You can now choose whether PingOne keeps access and refresh tokens for OIDC-based applications valid after a user's session becomes invalid. When enabled, these tokens remain valid if the session expires, is deleted through the API, is purged by the system, or the user signs off. Learn more about the **Keep tokens valid after session ends** setting in [Editing an application - OIDC](../applications/p1_edit_application_oidc.html#p1_keep_tokens_valid).
+
+#### October 21
+
+##### Session token cookie persistence
+
+New PingOne SSO
+
+You can now choose whether PingOne uses a persistent or non-persistent session token (ST) cookie for each environment. PingOne uses persistent ST cookies by default that remain in the browser until they expire or are removed.
+
+Non-persistent ST cookies are discarded when the browser closes and are useful for kiosk or shared workstation use cases. Learn more in [Authentication Settings](../authentication/p1_authentication_settings.html).
+
+##### Modules in PingOne Authorize
+
+New PingOne Authorize
+
+You can now use modules in PingOne Authorize to group related authorization resources by application team. Teams can manage the contents of their modules independently, while administrators maintain centralized governance of authorization requirements.
+
+|   |                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Authorization resources that predate the modules feature are automatically migrated to the **Default** module. You can't move these resources to other modules. |
+
+Learn more in [Modules](../authorization_using_pingone_authorize/p1az_modules.html).
+
+#### October 16
+
+##### PingOne Forms now supports JSON contents in dynamic text
+
+Fixed PingOne DaVinci
+
+Previously in PingOne Forms, including a JSON-formatted value in dynamic text had unexpected results. Now, JSON contents will render as text on the end user form. This makes it easier to use **Show Form** nodes to check outputs during flow development.
+
+Learn more in [Using dynamic text](../user_experience/p1_using_dynamic_text.html).
+
+#### October 15
+
+##### Shopify provisioning connection
 
 New PingOne
 
-You can now provision users and groups between two PingOne environments, either within the same organization or across different organizations, as an early access feature. Learn more in [Provisioning the PingOne connection with PingOne environments (early access)](../early-access-features/ea_p1_provisioning_connection_pingone.html).
+You can now provision users and groups between your Shopify account and PingOne. Learn more in [Provisioning Shopify with PingOne](../integrations/p1_provisioning_connection_shopify.html).
+
+#### October 14
+
+##### Updated LDAP gateway client application
+
+New PingOne
+
+We've released LDAP gateway client application version 4.5.0. This version adds support for custom objectClass filters in LDAP inbound provisioning rules so that users and groups with custom directory schemas can be synced. This version also updates the Docker base image and software dependencies to address security vulnerabilities. Learn more in [Creating an inbound rule for a connection through an LDAP gateway](../integrations/p1_create_inbound_provisioning_rule_gateway.html).
+
+##### Custom redirect URIs for PingOne Remote MCP Server (early access)
+
+New PingOne
+
+You can now add custom redirect URIs to the PingOne Remote MCP Server. This capability provides deployment flexibility and enables smoother onboarding and environment promotion.
+
+This hosted Model Context Protocol (MCP) server is available for early access. Learn more about enabling the MCP server in your environment and configuring custom redirect URIs in [PingOne Remote MCP Server (early access)](../early-access-features/ea-p1_mcp_server_settings_app.html).
+
+Learn more about using the MCP server in [PingOne Remote MCP Server](https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-overview.html) in the Build with AI documentation.
+
+#### October 12
+
+##### Upcoming trusted email domain requirement for customizing notification templates
+
+Info PingOne
+
+Soon a validated trusted email domain or a custom email sender will be required to customize email notification templates to help protect email reputation. Customized emails won't be sent from the PingOne sender domain, and the template editor will be read-only for email templates.
+
+In existing environments, any already customized email templates will be retained. However, a validated trusted email domain or a custom email sender will be required to further customize existing customized templates.
+
+#### October 4
+
+##### Improved removal of devices after interrupted device change
+
+Fixed TRIAGE-37308 PingOne
+
+We've fixed an issue that could prevent administrators from removing PingID devices from the PingOne admin console in certain PingOne environments integrated with PingID. This issue occurred when a user started, but didn't complete, the process of switching their paired device.
+
+#### October 1
+
+##### Webhook status and delivery update
+
+Improved PingOne
+
+You can now see the status and last successful delivery of each webhook to which you're subscribed displayed on the **Webhooks** page in PingOne. Learn more in [Viewing a webhook](../integrations/p1_view_webhook.html).
+
+### September 2026
+
+#### September 30
+
+##### Auto-enrollment in PingOne Recognize from PingOne Verify policies released for general availability
+
+New PingOne Verify PingOne Recognize
+
+You can now automatically enroll a user's verified selfie into PingOne Recognize immediately after a successful verification transaction in PingOne Verify. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+##### **Account Updated** notification template
+
+New PingOne PingOne DaVinci
+
+We've introduced a new template for **Account Updated** notifications on PingOne. You can now use this template in the PingOne connector in DaVinci to send an email notification to a user when their account has been updated or modified. Learn more in [Notification Templates](../user_experience/p1_notifications.html) and in the [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.html) documentation.
+
+#### September 29
+
+##### Updated language packs available
+
+New PingOne
+
+We've added new translation language packs for use in the PingOne admin console. This capability lets end users interact with the UI in their preferred language. Learn more in [Configuring and setting up PingOne Verify](../identity_verification_using_pingone_verify/p1_verify_configuration_setup.html) and [Languages](../user_experience/p1_languages.html).
+
+#### September 28
+
+##### Authorize gateway 1.2.2
+
+New PingOne PingOne Authorize
+
+###### Gateway instance shutdown behavior
+
+If a gateway instance can't retrieve the latest authorization policy version from PingOne or the locally stored deployment configuration, it now logs an error message and shuts down. Previously, a gateway instance in this situation stayed alive in an unhealthy state but couldn't serve decision requests.
+
+###### End of support notice
+
+Support for the previous Authorize gateway version (1.2.1) will end on September 30, 2027. Learn more in [Authorize gateway support lifecycle](../integrations/p1_authz_gateway_support_lifecycle.html).
+
+#### September 24
+
+##### NFC verification from PingOne Verify available for early access
+
+New PingOne Verify
+
+**NFC Verification** is now available for early access. This capability lets users use near-field communication (NFC) verification on their mobile device to read a secure NFC chip on their government-issued ID or passport. Learn more in [NFC verification from PingOne Verify (early access)](../early-access-features/ea-p1_verify_nfc_verification.html).
+
+#### September 22
+
+##### Provisioning sync status enhancement
+
+Improved PingOne
+
+We've updated the provisioning sync status UI to include a **Sync Updates Only** field, which displays information about changes made since the last successful sync. This field applies to inbound rules when the source is a directory service, such as Active Directory (AD), PingDirectory, or OpenLDAP. Learn more in [Viewing sync status](../integrations/p1_view_sync_status.html).
+
+##### External OIDC IdP support for ID token encryption
+
+New PingOne
+
+PingOne now supports signed-and-then-encrypted ID tokens and user information returned by external OIDC identity providers (IdPs). This strengthens privacy and compliance when connecting to external OpenID providers. Learn more in [Adding an identity provider - OIDC](../integrations/p1_add_idp_oidc.html).
+
+##### Improved Authentication Dashboard released for general availability
+
+Improved PingOne PingOne SSO DaVinci
+
+We've released the improved PingOne Authentication Dashboard for general availability. The enhanced dashboard now includes PingOne DaVinci-triggered authentication activity, providing a single, consistent view of sign-on activity from PingOne and DaVinci flows. Learn more in [Authentication Dashboard](../monitoring/p1_authentication_dashboard.html).
+
+#### September 17
+
+##### Improvements to environment creation workflow
+
+Improved PingOne
+
+We've improved the environment creation workflow to make it easier to create and configure new environments. The new workflow includes a modern, simplified UI and is license-driven to ensure that you can only select services and products that are included in your agreement and can clearly distinguish between paid and trial environments. Learn more in [Adding an environment](../settings/p1_addenvironment.html).
+
+##### Overview page UI enhancements
+
+Improved PingOne
+
+We've updated the environment **Overview** page with a new look and feel for a more streamlined experience. The updated design provides quick access to the environment settings and resources. Learn more in [Overview page](../p1_overview_p1.html).
+
+##### Outbound group sync provisioning for external groups
+
+New PingOne
+
+You can now sync external groups from your directory to third-party applications, such as AWS, through outbound provisioning rules.
+
+This release includes the following changes:
+
+* A new **Provisioning** tab on the **Groups** page that shows **Group Settings** and **Sync Status**.
+
+* A new **Outbound Name** field that defaults to the common name (CN) part of the group name. You can edit it to meet unique name requirements and prevent duplicates.
+
+Learn more in [Viewing group details](../directory/p1_view_groups.html) and [Editing an outbound rule](../integrations/p1_edit_outbound_provisioning_rule.html).
+
+#### September 16
+
+##### Custom domain infrastructure updates
+
+Info PingOne
+
+As previously announced, we're transitioning to using Cloudflare instead of Amazon CloudFront as our custom domain ingress infrastructure. In February, we announced Phase 2, which enabled you to migrate your custom domains yourself. At that time, we stated that any custom domains that hadn't been migrated would be migrated automatically by Ping Identity in late 2026. This timeline has shifted, and custom domains that you haven't migrated will be migrated automatically starting in the middle of 2027.
+
+Migrating now gives you more control over the timing of the migration and allows you to take advantage of additional security features developed only for Cloudflare domains as soon as they're available.
+
+Learn more in the [February 19, 2026](#p1-cloudflare-phase2) release note and [Migrating a custom domain to Cloudflare](../settings/p1_migrate_custom_domain_to_cloudflare.html).
+
+#### September 15
+
+##### Custom client IDs and client secrets for imported applications and custom resources
+
+New PingOne
+
+You can now use the PingOne API to import OIDC-based applications and custom resources from other solutions, such as PingFederate or third-party solutions, into PingOne and set a custom client ID and client secret. You can only set a custom client ID or client secret for newly imported applications and custom resources, not for existing ones created through the admin console or API.
+
+This new capability improves the migration process from other solutions and allows you to recover an accidentally deleted PingOne application or custom resource. Learn more in [Setting a custom client ID and client secret for an imported application or custom resource](../applications/p1_setting_custom_client_id_client_secret.html).
+
+##### Updated UI for Audit
+
+Improved PingOne
+
+We've updated the **Audit** UI to deliver a more modern, intuitive experience while keeping the core functionality consistent. We've also simplified the time zone selector to make it easier to use. Learn more in [Audit](../monitoring/p1_reporting.html).
+
+##### Protect (Signals) SDK 5.6.11
+
+New PingOne Protect
+
+We've released version 5.6.11 of the Protect (Signals) SDK for Web.
+
+Learn more in the documentation for [the Signals SDK](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/protect_sdk_changelog.html) and the documentation for [the Signals SDK npm package](https://www.npmjs.com/package/@ping-identity/pingone-signals-web-sdk).
+
+#### September 14
+
+##### AI agent type detection
+
+New PingOne Protect
+
+We've enhanced the PingOne Protect Bot Detection predictor with new rules to identify specific computer-using agent (CUA) types. This enhancement provides more granular visibility and better monitoring of AI-driven activity.
+
+To take advantage of the AI agent type detection capabilities, use version 5.6.10 of the [PingOne Signals (Protect) SDK](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/protect_sdk_changelog.html). Some rules in workforce flows require the [PingID Device Trust agent](../strong_authentication_mfa/p1_using_the_workforce_trust_agent.html) version 1.2 or later.
+
+Learn more in [Bot Detection predictor rules](../threat_protection_using_pingone_protect/p1_protect_predictor_rules.html#bot-detection-predictor).
+
+##### PingID Device Trust agent v1.2
+
+New PingOne PingID
+
+We've released version 1.2 of the PingID Device Trust agent. This version includes improved data collection.
+
+Learn more in [Using the PingID Device Trust agent](../strong_authentication_mfa/p1_using_the_workforce_trust_agent.html).
+
+#### September 10
+
+##### Advanced Identity Cloud Tenant Auditor role added
+
+New PingOne PingOne Advanced Identity Cloud
+
+For PingOne environments that include single-sign on to PingOne Advanced Identity Cloud, we've added the **Advanced Identity Cloud Tenant Auditor** role. This role has read-only access to the Advanced Identity Cloud tenant configuration and settings and can be assigned by administrators with the Advanced Identity Cloud Super Admin role.
+
+Learn more in [Administrator Roles](../directory/p1_roles.html).
+
+#### September 9
+
+##### Aadhaar verification using PingOne Verify
+
+Improved PingOne Verify
+
+You can now use PingOne Verify to perform Aadhaar eID verification. This method allows users to share official identity attributes from their Aadhaar card through their government-backed digital wallet. By using this electronic path instead of image-only checks, this update provides a more secure and reliable process that improves verification success while reducing manual reviews and errors.
+
+Learn more in [PingOne Verify types of verification](../identity_verification_using_pingone_verify/p1_verify_types_of_verification.html) and [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+#### September 3
+
+##### Updates to administrator invitations
+
+Improved PingOne
+
+To ensure that administrator invitations are delivered to the intended recipient, PingOne now prevents username or email address updates in the user record when an invitation to that user is pending. If you need to update these fields, you must revoke the pending invitation, make the changes, and then resend the invitation.
+
+Learn more in [Inviting administrators to register](../getting_started_with_pingone/p1_invite_admins_register.html).
+
+#### September 2
+
+##### API tab for Authorize gateways
+
+New PingOne Authorize
+
+The Authorize gateway details page now includes an **API** tab. You can use this tab to easily view and copy API details for the gateway, including the gateway ID, environment ID, and API URL.
+
+Learn more in [Adding an Authorize gateway](../integrations/p1_add_authz_gateway.html).
+
+#### September 1
+
+##### Updates to PingOne Forms rendering
+
+Improved PingOne DaVinci
+
+We've made technical improvements to PingOne Forms that modernize the way it renders forms. These updates don't change the end-user experience.
+
+This work enhances the accessibility standards for the forms, making it easier for users to interact with the experiences you create. Accessibility improvements include:
+
+* More comprehensive Accessible Rich Internet Applications (ARIA) attribute usage
+
+* Improved focus management and keyboard navigation
+
+* Enhanced screen reader support with proper role assignments
+
+* Better error messaging and validation feedback
+
+The changes also provide a necessary technical foundation for upcoming improvements and features.
+
+Learn more in [Updates to PingOne Forms Rendering](https://support.pingidentity.com/s/article/Updates-to-PingOne-Forms-Rendering-June-2026) in the Ping Identity Support Knowledge Base.
+
+The previously-mentioned [preview period](#june-29) has ended and the **Preview Rendering Updates for Forms** option has been removed from **Flow Settings**.
+
+##### PingOne for Workforce service available in Canada
+
+New PingOne MFA
+
+The PingOne for Workforce service is now available in the Canada geography. When creating a new environment in this geography, select the PingOne MFA service. The environment type is automatically determined by the license you select. Learn more in [Strong authentication (MFA)](../strong_authentication_mfa/p1_strong_authentication_start.html).
+
+### August 2026
+
+#### August 31
+
+##### PingOne Remote MCP Server available for early access
+
+New PingOne
+
+We've released the PingOne Remote MCP Server for early access. This hosted Model Context Protocol (MCP) server allows identity builders to support AI-first identity operations when configuring, managing, and monitoring the platform.
+
+The PingOne Remote MCP Server provides:
+
+* A single, administrator-restricted endpoint on PingOne infrastructure for accessing MCP resources maintained by Ping Identity.
+
+* A dedicated **PingOne MCP Server** system application for managing administrator authentication and agent authorization.
+
+* Support for MCP hosts such as Claude, Cursor, Visual Studio Code, Codex, and others.
+
+* Per-environment settings for enabling or disabling the server.
+
+* Dual-context audit logging for MCP activity with attribution to both the MCP platform client and the authorizing administrator identity for every create, update, delete, and sensitive read operation performed by an agent.
+
+* PingOne DaVinci and PingOne platform management MCP tools.
+
+Learn more about enabling the server for your environment in [PingOne Remote MCP Server (early access)](../early-access-features/ea-p1_mcp_server_settings_app.html).
+
+Learn more about using the MCP server, including a full list of supported platform management tools, in [PingOne Remote MCP Server](https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-overview.html) in the Build with AI documentation.
+
+##### Automatic handling of risk evaluation update step
+
+New PingOne Protect DaVinci
+
+For DaVinci flows that contain risk evaluations, the required evaluation update step is now handled automatically in most cases. You can find the details in the documentation for the [PingOne Protect connector](https://docs.pingidentity.com/connectors/p1_protect_connector.html).
+
+#### August 25
+
+##### Increased client secret retention period
+
+Improved PingOne SSO
+
+We've increased the maximum retention period for client secrets for applications and custom resources from 30 days to 90 days. Learn more in [Generating a client secret for an application](../applications/p1_generate_client_secret_application.html) and [Generating a client secret for a resource](../applications/p1_generate_client_secret_resource.html).
+
+##### Snowflake provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your Snowflake account and PingOne. Learn more in [Provisioning Snowflake with PingOne](../integrations/p1_provisioning_connection_snowflake.html).
+
+#### August 24
+
+##### FIDO2 client errors now route to structured outputs in the Form connector
+
+New PingOne DaVinci
+
+Client-side FIDO2/WebAuthn errors are now structured, typed outputs in PingOne DaVinci flows, so you can branch on specific failure conditions without custom [Functions connector](https://docs.pingidentity.com/connectors/functions_connector.html) logic.
+
+* For the **Show Form** capability, client-side errors automatically route to the error outcome as a typed `error` object containing the error `name`, `code`, and `message`.
+
+* For the **Show Form (Legacy)** capability, a new **Use Legacy FIDO2 Error Handling** toggle controls the behavior. The toggle is disabled by default. When enabled, client errors continue to the success (true) path. We recommend enabling the toggle for easier decisioning based on client-side FIDO2 errors.
+
+Learn more in [Configuring FIDO2 client error routing](https://docs.pingidentity.com/connectors/form_connector.html#configuring-fido2-client-error-routing).
+
+#### August 19
+
+##### Microsoft Entra ID provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your Microsoft Entra ID account and PingOne. Learn more in [Provisioning Microsoft Entra ID with PingOne](../integrations/p1_provisioning_connection_entra_id.html).
+
+##### Reset and delete credential capabilities
+
+New PingOne Credentials
+
+We've added the capability to reset or delete a credential record from a user's profile in PingOne.
+
+Learn more in [Managing a credential](../digital_credentials_using_pingone_credentials/p1_credentials_managing_a_credential.html).
+
+#### August 18
+
+##### Microsoft Entra ID external group name mapping
+
+New PingOne SSO
+
+You can now map attributes from Microsoft Entra ID to the **External Group Names** attribute in PingOne. This attribute mapping allows you to use group membership information from Microsoft across PingOne, such as controlling access to applications based on groups. Learn more in [Adding an identity provider - Microsoft](../integrations/p1_add_idp_microsoft.html).
+
+#### August 11
+
+##### Attribute mapping for custom resource scopes
+
+New PingOne SSO
+
+You can now map attributes to scopes defined for a custom resource. This capability allows you to control which attributes are included in access tokens based on the requested scopes. Learn more in [Editing a resource](../applications/p1_editresource.html).
+
+#### August 10
+
+##### Auto-enrollment in PingOne Recognize from PingOne Verify policies available in early access
+
+New PingOne Verify PingOne Recognize
+
+You can now automatically enroll a user's verified selfie into PingOne Recognize immediately after a successful verification in PingOne Verify, as an early access feature. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+#### August 6
+
+##### PingOne provisioning connection
+
+New PingOne
+
+You can now provision users and groups between two PingOne environments within the same organization. Learn more in [Provisioning the PingOne connection with a PingOne environment](../integrations/p1_provisioning_connection_pingone.html).
+
+#### August 5
+
+##### HTTP POST support for app-initiated sign-offs
+
+New PingOne SSO
+
+The `/as/signoff` endpoint now accepts HTTP POST requests in addition to HTTP GET requests for OpenID Connect (OIDC) relying party (RP)-initiated sign-offs. This endpoint provides more options when configuring how your applications handle user sign-offs. Learn more in [Signoff (POST)](https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/signoff-post.html) in the PingOne API documentation.
+
+##### PingOne Protect (Signals) SDK - new version for Android
+
+New PingOne Protect SDK
+
+We've released version 5.4.0 of the PingOne Protect (Signals) SDK for Android.
+
+You can find details in the [SDK Changelog](https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/protect_sdk_changelog.html).
+
+#### August 3
+
+##### PingOne MFA mobile SDK 2.4.1 (iOS only)
+
+New PingOne MFA
+
+We've released version 2.4.1 of the PingOne MFA mobile SDK for iOS. This version contains bug fixes.
+
+Learn more in the documentation for the [iOS version](https://github.com/pingidentity/pingone-mobile-sdk-ios/blob/master/release-notes.md) of the SDK.
+
+### July 2026
+
+#### July 31
+
+##### DaVinci audit events released for general availability
+
+New PingOne DaVinci
+
+We've released DaVinci administrative audit events for general availability. You can find them listed in **Monitoring > Audit** alongside standard PingOne events. Each event includes actor identity, client name, IP address, resource name, result status, and a DaVinci-specific event detail payload.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The standalone DaVinci [Audit Trail](https://docs.pingidentity.com/davinci/davinci_audit_trail.html) tab will be deprecated after the transition period ends. Migrate any audit workflows, reporting, or alerting to the PingOne [Audit Activities API](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html).DaVinci audit events now follow the PingOne audit schema instead of the legacy DaVinci audit format. Update any custom integrations that parse the legacy format. |
+
+Learn more in [DaVinci administrative audit events](../monitoring/p1_davinci_audit_events.html).
+
+#### July 30
+
+##### HubSpot provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your HubSpot account and PingOne. Learn more in [Provisioning HubSpot with PingOne](../integrations/p1_provisioning_connection_hubspot.html).
+
+##### Import and export individual forms
+
+New PingOne DaVinci
+
+Previously, we made it possible to import forms in DaVinci when [importing a complete flow](#october-23) and [pasting Form nodes on the canvas](#may-11). Now, you can directly import and export individual forms in **User Experience > Forms**.
+
+This change will allow Ping Identity to add forms to the [Ping Identity Marketplace](https://marketplace.pingone.com/browse?products=davinci\&contentType=davinciConnectors) to support more use cases.
+
+Learn more in [Importing and exporting individual forms](../user_experience/p1_import_export_forms.html#importing-and-exporting-individual-forms).
+
+##### New alert for webhook destination failure
+
+New PingOne
+
+We've added a new alert option in the webhooks UI that lets users receive an alert when there's a webhook delivery failure. Users who subscribe to this alert will receive an email notification for any webhook destination failure. Learn more in [Troubleshooting webhooks](../integrations/p1_troubleshooting_webhooks.html).
+
+##### Webhook test connection functionality
+
+PingOne Improved
+
+We've added a test connection feature to the webhooks configuration in PingOne. Users can now review the latest delivery status of a webhook and validate connectivity to the destination. Learn more in [Viewing a webhook](../integrations/p1_view_webhook.html).
+
+##### PingOne MFA mobile SDK 2.4
+
+New PingOne MFA
+
+We've released version 2.4 of the PingOne MFA mobile SDK. In addition to security enhancements and minor bug fixes, this version includes the following changes.
+
+###### Android
+
+* New
+
+  The SDK now includes support for structured concurrency by providing `suspend` functions in addition to the existing callback-based functions.
+
+* Improved
+
+  To enhance security and improve performance, the MFA SDK now uses the "standard" requests provided by the Google Play Integrity API, rather than the API's "classic" requests.
+
+* Fixed TRIAGE-29267
+
+  Calls were being made to the Google Play Integrity API even for apps for which integrity checking was disabled. This issue has been fixed.
+
+* Fixed TRIAGE-35151
+
+  There were cases where apps using the MFA SDK crashed upon launch due to the Android Keystore TEE being low on memory. Now, in such situations, the app is launched with MFA features disabled and an appropriate error message is displayed.
+
+* Fixed TRIAGE-34723
+
+  There were cases where the `PingOne.pair` function was called but the relevant callback function was not called, so the user never received a success or failure message. This issue has been fixed.
+
+Learn more in the documentation for the [Android version](https://github.com/pingidentity/pingone-mobile-sdk-android/blob/master/release-notes.md) of the SDK.
+
+###### iOS
+
+* New
+
+  The SDK now includes support for the Swift Concurrency framework by providing `async` functions in addition to the existing callback-based functions.
+
+* New
+
+  The SDK now supports the use of Apple App Attest for device integrity checking for iOS apps.
+
+* Info
+
+  For apps developed with the MFA SDK, the minimum iOS version required is now iOS 16.
+
+Learn more in the documentation for the [iOS version](https://github.com/pingidentity/pingone-mobile-sdk-ios/blob/master/release-notes.md) of the SDK.
+
+###### Sample applications
+
+The sample applications for Android and iOS have been updated to use the new support for concurrency frameworks (suspend/async functions). The older versions of the sample apps are still available in the same location if you need to see the usage of the older functions.
+
+Learn more in the documentation for the [Android sample app](https://github.com/pingidentity/pingone-sample-app-android) and the documentation for the [iOS sample app](https://github.com/pingidentity/pingone-sample-app-ios).
+
+##### Apple App Attest iOS device integrity checking
+
+New PingOne PingOne MFA
+
+PingOne now supports Apple App Attest–based iOS device integrity checking. This enables native mobile applications to verify iOS device integrity.
+
+Learn more in [Editing an application - Native](../applications/p1_edit_application_native.html).
+
+#### July 28
+
+##### Document capture updates in PingOne Verify
+
+New PingOne Verify
+
+We've released Microblink version 8.0. This version updates the PingOne Verify document capture service and includes expanded barcode support, document-specific improvements, and bug fixes. Learn more in [PingOne Verify and documentation authentication](../identity_verification_using_pingone_verify/p1_verify_documentation_authentication.html).
+
+##### Webex provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your Webex account and PingOne. Learn more in [Provisioning Webex with PingOne](../integrations/p1_provisioning_connection_webex.html).
+
+#### July 24
+
+##### Updated LDAP gateway client application
+
+New PingOne
+
+We've released LDAP gateway client application version 4.4.1. This version updates the Java base image and software dependencies to improve security. Learn more in [LDAP gateways](../integrations/p1_ldap_gateways.html).
+
+##### Bulk decision requests in PingOne Authorize
+
+New PingOne Authorize
+
+PingOne Authorize decision endpoints now support bulk decision requests, allowing you to evaluate multiple access scenarios in a single API call. Bulk requests reduce both network overhead and overall decision latency, improving performance in high-throughput environments. Learn more in the [PingOne Authorize API reference](https://developer.pingidentity.com/pingone-api/authorize/authorization-decisions/decision-evaluation/execute-a-bulk-decision-request.html) documentation.
+
+#### July 19
+
+##### MFA API - changes to responses
+
+Info PingOne MFA
+
+Changes have been made to the responses for API requests to get MFA user devices and to check if an MFA device is a remembered device. If you have code that depends upon the content of these responses, you might have to modify your code accordingly. You can find the full details in the [API changelog](https://developer.pingidentity.com/pingone-api/changelog.html#mfa-device-response-changes) in the PingOne developer documentation.
+
+#### July 15
+
+##### Provisioning to Zendesk using a REST connection
+
+New PingOne
+
+You can now use a REST connection to enable provisioning between PingOne and a REST-based target system. Learn more in [REST certified provisioners](../integrations/p1_provisioning_rest_certified_provisioners.html).
+
+##### REST provisioning connection
+
+New PingOne
+
+You can now provision users and groups between your REST accounts and PingOne. Learn more in [Provisioning REST with PingOne](../integrations/p1_provisioning_connection_rest.html).
+
+##### Added notification template and variant name to notification created event
+
+Improved TRIAGE-26405 TRIAGE-26773 PingOne MFA
+
+The `NOTIFICATION.CREATED` audit log event now includes the notification template, variant name, and locale, making it easier to identify which template and variant triggered a notification when reviewing audit logs.
+
+#### July 14
+
+##### United States driver license support in PingOne Verify
+
+Improved PingOne Verify
+
+We've improved barcode validation in the Mitek document validation service of PingOne Verify. Learn more in [Creating a verify policy](../identity_verification_using_pingone_verify/p1_verify_creating_verify_policy.html).
+
+##### Updated selfie capture in PingOne Verify
+
+Improved PingOne Verify
+
+We've updated the selfie capture, liveness, and injection detection services in PingOne Verify. Along with other improvements, this update improves false positives related to injection attack detection. Learn more in [PingOne Verify types of verification](../identity_verification_using_pingone_verify/p1_verify_types_of_verification.html).
+
+##### External IdP attribute mapping to JSON user attributes
+
+New PingOne
+
+When configuring external identity providers (IdPs), you can now map inbound attributes to custom JSON user attributes in PingOne. For OIDC IdP connections, you can now select custom JSON attributes in the PingOne attributes list. For SAML IdP connections, you must use an expression to create a JSON object or array from inbound attributes. Learn more in [IdP attributes](../integrations/p1_idp_attributes.html).
+
+#### July 13
+
+##### PingOne Privilege is now generally available
+
+New PingOne Privilege
+
+PingOne Privilege is now generally available. This release marks the official launch of our cloud-based privileged access management (PAM) solution, designed to provide secure, frictionless access for developers and DevOps teams to cloud infrastructure and applications. Learn more in the [PingOne Privilege documentation](https://docs.pingidentity.com/privilege/).
+
+This release also includes two new administrator roles, PingOne Privilege Administrator and PingOne Privilege Read-Only Administrator, for managing access to PingOne Privilege. Learn more in [Administrator Roles](../directory/p1_roles.html).
+
+##### PingOne MFA mobile SDK 2.3.2 (iOS only)
+
+New PingOne MFA
+
+We've released version 2.3.2 of the PingOne MFA mobile SDK for iOS. This version includes a number of bug fixes.
+
+Learn more in the documentation for the [iOS version](https://github.com/pingidentity/pingone-mobile-sdk-ios/blob/master/release-notes.md) of the SDK.
+
+#### July 9
 
 ##### Unable to pair PingID desktop app in the AU geography
 
@@ -561,7 +1422,7 @@ You can now add your own images in the drag-and-drop form builder. You can provi
 
 Images support configurable sizing, positioning, and padding. You can add a static or dynamic hyperlink to an image, as well as HTML attributes, including `id`, `class`, and `referrerpolicy`. Learn more in [Form configuration toolbox](../user_experience/p1_form_configuration.html#toolbox).
 
-##### PingOne Verify table of contents TOC
+##### PingOne Verify table of contents
 
 Improved PingOne Verify
 
@@ -569,7 +1430,7 @@ We've restructured the PingOne Verify table of contents to ensure content is eas
 
 Learn more in [Identity Verification using PingOne Verify](../identity_verification_using_pingone_verify/p1_verify_start.html) and [Verifying new employees during onboarding](../identity_verification_using_pingone_verify/p1_verify_onboarding_use_case.html).
 
-##### Veriff configuration in PingOne Verify policies
+##### Verify configuration in PingOne Verify policies
 
 New PingOne Verify
 
@@ -597,7 +1458,7 @@ New PingOne Verify
 
 You can now use the **Identity Verification Dashboard** to view a summary of identity verification transaction activity for your organization, using the **Verify Dashboard** and **Error Reasons** tabs to switch between data and failure analysis.
 
-These insights allow you to more effectively manage identity verification workflows and the handling of successful or failed verifications. Learn more in [Using the Identity Verification dashboard](../identity_verification_using_pingone_verify/p1_verify_monitoring.html#using-the-identity-verification-dashboard).
+These insights allow you to more effectively manage identity verification workflows and the handling of successful or failed verifications. Learn more in [Using the Identity Verification dashboard](../identity_verification_using_pingone_verify/p1_verify_monitoring.html#p1_verify_dashboard).
 
 #### July 5
 
@@ -607,7 +1468,7 @@ New PingOne MFA
 
 You can now configure a custom push notification provider for PingOne MFA to send push notifications as an early access feature. Learn more in [Configuring a custom push notification provider (early access)](../early-access-features/ea-p1_configure_custom_push_provider.html).
 
-Learn more in [PingOne Early Access Features](../early-access-features/p1_early_access_features.html).
+Learn more in [Early Access Features in PingOne](../early-access-features/p1_early_access_features.html).
 
 Learn more about opting in to preview early access features in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
 
@@ -623,7 +1484,7 @@ DaVinci administrative audit events are now available in early access. You can f
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | The standalone DaVinci [Audit Trail](https://docs.pingidentity.com/davinci/davinci_audit_trail.html) tab will be deprecated after the transition period ends. Migrate any audit workflows, reporting, or alerting to the PingOne [Audit Activities API](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html).DaVinci audit events now follow the PingOne audit schema instead of the legacy DaVinci audit format. Update any custom integrations that parse the legacy format. |
 
-Learn more in [DaVinci administrative audit events in PingOne (early access)](../early-access-features/ea_p1_davinci_audit_events.html).
+Learn more in [DaVinci administrative audit events](../monitoring/p1_davinci_audit_events.html).
 
 Learn more about opting in to preview early access features in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
 
@@ -717,7 +1578,7 @@ Review and report on these events in the [audit](../monitoring/p1_reporting.html
 
 New PingOne
 
-We've released LDAP gateway client application version 4.4.0. This version supports group LDAP filters for inbound provisioning, enabling you to sync LDAP groups selectively into PingOne based on configurable filter criteria.
+We've released LDAP gateway client application version 4.4.0. This version supports group LDAP filters for inbound provisioning, enabling you to sync LDAP groups selectively into PingOne based on configurable filter criteria. Learn more in [LDAP gateways](../integrations/p1_ldap_gateways.html).
 
 #### June 17
 
@@ -799,7 +1660,7 @@ The initial release includes use cases for PingOne SSO, PingOne MFA, PingOne Pro
 
 Access the **Design Center** from the new **Orchestration** menu in the sidebar of the PingOne admin console.
 
-Learn more in [PingOne Early Access Features](../early-access-features/p1_early_access_features.html).
+Learn more in [Design Center](../orchestration/p1_design_center_experiences.html).
 
 Learn more about opting in to preview early access features in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
 
@@ -866,6 +1727,18 @@ We've added two new alerts to flag slow or long-running requests, which usually 
 ###### Security updates
 
 We've added updates the Docker base image and software dependencies to improve security.
+
+#### June 4
+
+##### Improved dynamic theme selection in the Form connector
+
+New PingOne DaVinci
+
+Previously, the DaVinci **Show Form** capability allowed you to select a static theme or provide a dynamic theme ID at runtime.
+
+A new **Use Active Theme** option applies whichever theme is currently active when the flow runs, letting you control the theming for all flows from **Branding & Themes**.
+
+The previous **PingOne Active Theme** option is now renamed to ***\<theme name>* (Active)** and moved to a new **Static Selection** section. If the environment's active theme changes, the **(Active)** indicator will move to the correct theme in the list, but your static theme selection won't change in the node configuration.
 
 #### June 3
 
@@ -1080,6 +1953,20 @@ This change will allow Ping Identity to add node groups and actions to the [Ping
 When you paste any **Show Form** nodes, DaVinci prompts you to choose whether to import the forms to **User Experience > Forms**.
 
 Learn more in [Importing and exporting forms](../user_experience/p1_import_export_forms.html).
+
+##### Show Form now supports dynamic multiple outcomes
+
+New PingOne DaVinci
+
+We've added a new **Show Form** capability in DaVinci that generates outcomes dynamically based on the selected form configuration. Outcomes appear in a list below the node and you can branch directly from each outcome.
+
+The previous capability is now **Show Form (Legacy)**.
+
+You can switch existing nodes at any time by selecting the new capability in node settings and clicking **Apply**. The existing configuration carries over, and the dynamic outcomes appear so you can rewire the flow as needed.
+
+The legacy capability will continue to work normally until a deprecation announcement is made. We recommend migrating to the new **Show Form** capability to receive ongoing enhancements and long-term support.
+
+Learn more in [Branching from Show Form outcomes](https://docs.pingidentity.com/connectors/form_connector.adoc#branching-from-show-form-outcomes).
 
 #### May 10
 
@@ -1391,7 +2278,7 @@ We've enhanced the MFA dashboard with improved chart rendering and interactivity
 
 Improved PingOne PingOne SSO DaVinci
 
-We've enhanced the PingOne Authentication Dashboard (early access) to include PingOne DaVinci-triggered authentication activity, providing a single, consistent view of sign-on activity from PingOne and DaVinci flows. Learn more in [New Authentication Dashboard (early access)](../early-access-features/ea-p1_auth_dashboard.html).
+We've enhanced the PingOne Authentication Dashboard (early access) to include PingOne DaVinci-triggered authentication activity, providing a single, consistent view of sign-on activity from PingOne and DaVinci flows. Learn more in [Authentication Dashboard](../monitoring/p1_authentication_dashboard.html).
 
 #### March 17
 
@@ -1589,6 +2476,10 @@ Building on the migration to Cloudflare, we've also added a new **Inbound Traffi
 
 In the coming months, we'll be releasing additional custom domain features that will be available only if your domain is configured for Cloudflare. Approximately a year from now, any custom domains that haven't been migrated will be migrated automatically.
 
+|   |                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | As of September, 2026, this timeline has shifted. Any custom domains that you haven't migrated will be migrated automatically by Ping Identity starting in the middle of 2027. |
+
 ##### PingOne Forms now support an extension in the phone number field
 
 Improved PingOne DaVinci
@@ -1601,7 +2492,7 @@ We've added an **Extension** field to the **Phone Number Input** component in th
 
 Improved PingOne
 
-We've made improvements and added more expiry, recovery, and troubleshooting information to the **Gateway Version Deprecating** email alert. Learn more in [Monitoring gateways](../integrations/p1_gateways.html#monitoring-gateways).
+We've made improvements and added more expiry, recovery, and troubleshooting information to the **Gateway Version Deprecating** email alert. Learn more in [Monitoring gateways](../integrations/p1_gateways.html#p1-monitoring-gateways).
 
 ##### New audit event types for Languages
 
@@ -1971,11 +2862,13 @@ Previously announced changes to how audit events older than 14 days are retrieve
 
 #### October 28
 
-##### Support for Microsoft Entra ID hybrid join
+##### Support for Microsoft Entra ID hybrid join in the North America (US) geography
 
 New PingOne PingOne SSO
 
-As organizations expand their on-premise Active Directory (AD) infrastructure to Microsoft Entra ID in the cloud, you can optionally hybrid join your organization's Windows devices to Entra ID to simplify device management. As an identity provider (IdP) federated with Entra ID, PingOne can now issue security tokens for the hybrid join process, helping to accelerate adoption of Entra ID features and cloud services. This new capability is available as a limited access release for customers with a PingOne for Workforce Plus or Premium license in the North America region only. Learn more in [Setting up PingOne as the federated IdP for Microsoft Entra ID](../use_cases/p1_microsoft_entra_hybrid_join.html).
+As your organization expands from on-premise Active Directory (AD) infrastructure to Microsoft Entra ID in the cloud, you can optionally hybrid join your organization's Windows devices to Entra ID to simplify device management. As an identity provider (IdP) federated with Entra ID, PingOne can now issue security tokens for the hybrid join process, helping to accelerate adoption of Entra ID features and cloud services.
+
+This new capability is available as a limited access release for customers with a PingOne for Workforce Plus or Premium license in the North America (US) geography only. Learn more in [Setting up PingOne as the federated IdP for Microsoft Entra ID](../use_cases/p1_microsoft_entra_hybrid_join.html).
 
 ##### Improved PingOne DaVinci integration
 
@@ -2060,6 +2953,12 @@ The audit retrieval changes announced on [October 2](#audit-data-retrieval-chang
 New PingOne PingOne SSO
 
 PingOne now supports always accepting an assertion consumer service (ACS) URL in a signed SAML AuthnRequest regardless of whether the ACS URL is added on the application's **Configuration** tab. This new setting is useful if a service provider (SP) generates ACS URLs dynamically. Learn more in [Editing an application - SAML](../applications/p1_edit_application_saml.html).
+
+##### PingOne Forms connector renamed to Form connector
+
+Info PingOne DaVinci
+
+The PingOne Forms connector has been moved to the Core category and named the Form connector. Learn more in the [Form connector](https://docs.pingidentity.com/connectors/form_connector.html).
 
 #### October 2
 
@@ -2835,7 +3734,7 @@ We modernized **External IdPs** in PingOne with a new look and feel. Learn more 
 
 New PingOne
 
-You can now try out new PingOne features before they're released and provide feedback directly to Ping from the admin console. You decide which features to enable during the early access period and the environments in which to enable them. You can also opt out of a previously enabled feature during the early access period. Learn more in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html) and [PingOne Early Access Features](../early-access-features/p1_early_access_features.html).
+You can now try out new PingOne features before they're released and provide feedback directly to Ping from the admin console. You decide which features to enable during the early access period and the environments in which to enable them. You can also opt out of a previously enabled feature during the early access period. Learn more in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html) and [Early Access Features in PingOne](../early-access-features/p1_early_access_features.html).
 
 |   |                                                                                                                                                                                                                                                                                                                                                          |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2984,6 +3883,10 @@ As part of our continued efforts to support best practice security measures in P
 * **Phase 2**: Some time in the next quarter, Ping will release a migration option that will enable you to migrate your existing custom domains to Cloudflare on your own schedule. When Phase 2 is released, detailed migration instructions will be provided.
 
 * **Phase 3**: Approximately 1 year after the completion of Phase 2, any custom domains that you haven't yet migrated will be migrated to Cloudflare automatically.
+
+  |   |                                                                                                                                                                                |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | As of September, 2026, this timeline has shifted. Any custom domains that you haven't migrated will be migrated automatically by Ping Identity starting in the middle of 2027. |
 
 ###### Action required
 
@@ -3135,7 +4038,7 @@ When adding a new native application, PingOne creates the application with the f
 
 * **Grant Type**: **Authorization Code**
 
-* **PKCE Enforcement**: **S256\_REQUIRED**
+* **PKCE Enforcement**: **S256_REQUIRED**
 
 Existing native applications won't be updated to use the new defaults. You can update the settings for new and existing native applications as needed. Learn more in [Editing an application - Native](../applications/p1_edit_application_native.html).
 
@@ -3341,7 +4244,7 @@ We've added the ability to configure **Alternative Identifiers** for **Populatio
 
 New PingOne
 
-You can add custom attributes from Workday into PingOne. Learn more in [integrations:p1\_create\_workday\_connection.adoc#p1\_workday\_system\_field](../integrations/p1_create_workday_connection.html#p1_workday_system_field), [Workday system Ids](../integrations/p1_create_workday_connection.html#p1_workday_system_ids), and [Syncing custom attributes from Workday into PingOne](../integrations/p1_create_workday_connection.html#p1_sync_workday_attribute).
+You can add custom attributes from Workday into PingOne. Learn more in [integrations:p1_create_workday_connection.adoc#p1_workday_system_field](../integrations/p1_create_workday_connection.html#p1_workday_system_field), [Workday system Ids](../integrations/p1_create_workday_connection.html#p1_workday_system_ids), and [Syncing custom attributes from Workday into PingOne](../integrations/p1_create_workday_connection.html#p1_sync_workday_attribute).
 
 #### December 9
 

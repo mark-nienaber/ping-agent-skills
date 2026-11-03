@@ -1,13 +1,13 @@
 ---
 title: Adding a user to a group
-description: You can add users to groups from the Manage Users page and from the Manage Groups page in the Delegated Admin GUI.
+description: Add users to groups from the Manage Users or Manage Groups pages in the Delegated Admin GUI.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_add_user_to_group
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/pd_da_add_user_to_group.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_da_add_user_to_configured_group.adoc", "pd_da_add_user_from_manage_users_window.adoc", "pd_da_add_user_from_manage_groups_window.adoc"]
 section_ids:
   adding-a-new-user-to-a-configured-group: Adding a new user to a configured group
@@ -57,7 +57,7 @@ You can add users to groups using the **Manage Users** window in the Delegated A
 
 1. In the Delegated Admin GUI, go to the **Manage Users** window.
 
-2. Use to search field to search for the user to add to a group.
+2. Use the search field to search for the user to add to a group.
 
 3. Click the **Expand** icon on the appropriate user profile.
 
@@ -109,7 +109,7 @@ You can add users to groups using the **Manage Groups** window in the Delegated 
 
 ---
 title: Authentication configuration
-description: The delegated administrator signs on to Delegated Admin through your chosen identity provider (IdP), which is configured as the authentication server and OpenID Connect (OIDC) provider.
+description: Learn how authentication works in Delegated Admin, which validates user credentials through an identity provider and OpenID Connect access tokens.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_authn_config
@@ -148,7 +148,7 @@ After validation, the PingDirectory server checks the Delegated Admin configurat
 
 ---
 title: Changing the application logo
-description: You can change the Ping Identity logo to your corporate logo.
+description: Change the default Ping Identity logo in the Delegated Admin application to your corporate logo.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_change_application_logo
@@ -200,7 +200,7 @@ The corporate logo appears in the header, and the Ping Identity logo relegates t
 
 ---
 title: Changing the default OIDC grant type
-description: To change the Delegated Admin application's default OpenID Connect (OIDC) grant type, use the PingFederate admin console and the Delegated Admin config.js file.
+description: Change the Delegated Admin default OpenID Connect grant type to Authorization Code with PKCE to hide access tokens during authentication.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_change_oidc_grant_type
@@ -262,7 +262,7 @@ The following example changes the default OIDC grant type from **Implicit** to *
 
 ---
 title: Compatibility matrix
-description: The following matrix identifies the minimum versions of the PingDirectory server required to access the full functionality provided by each release of Delegated Admin.
+description: Review the minimum PingDirectory server versions required for the full functionality of each Delegated Admin release.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_compatibility_matrix
@@ -298,7 +298,7 @@ The following matrix identifies the minimum versions of the PingDirectory server
 
 ---
 title: Configuration overview
-description: To operate Delegated Admin, you must install and configure PingDirectory server and have one of the following identity provider (IdP) options available:
+description: Review the PingDirectory server and identity provider configuration tasks required to operate Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_overview
@@ -352,7 +352,7 @@ To configure support for [using an OIDC provider as the IdP](pd_da_config_oidc_i
 
 ---
 title: Configuring a resource&#8217;s summary display in the Delegated Admin GUI
-description: The Delegated Admin GUI provides a summary of attributes for a resource. For example, the user and group resource profiles show a summary.
+description: "Configure which attributes appear in a resource's summary display in the Delegated Admin GUI."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_resource_summary_display_gui
@@ -386,7 +386,7 @@ To configure an attribute to appear in the summary, either use `dsconfig` to set
 
   * Use `dsconfig`.
 
-    Use the `set-delegated-admin-attribute-prop` subcommand, where *\<name\_of\_type>* is the resource type and *\<type\_of\_attribute>* is the name of an existing attribute for the given resource.
+    Use the `set-delegated-admin-attribute-prop` subcommand, where *\<name_of_type>* is the resource type and *\<type_of_attribute>* is the name of an existing attribute for the given resource.
 
     ```shell
     $ bin/dsconfig set-delegated-admin-attribute-prop \
@@ -430,14 +430,14 @@ To configure an attribute to appear in the summary, either use `dsconfig` to set
 
 ---
 title: Configuring attributes and attribute search on the PingDirectory server
-description: Use the Delegated Admin installation file to configure attributes and attribute search.
+description: Configure user attributes and attribute search on the PingDirectory server using the Delegated Admin installation file.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_attr_search_pd_server
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/pd_da_config_attr_search_pd_server.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 18, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_da_constructed_attributes.adoc", "pd_da_set_attribute_read_only.adoc"]
 section_ids:
   about-this-task: About this task
@@ -650,7 +650,7 @@ As with standard attributes, constructed attributes are stored as LDAP *(tooltip
 
 ### About this task
 
-Beginning with Delegated Admin 3.5.0 and PingDirectory 7.3.0.1, you can set user access to standard and constructed attributes to `read-only` and `read/write`. You should restrict access to constructed attributes to `read-only`. Read-only attributes do not appear on the UI pages that are associated with the creation of users groups and other objects.
+Beginning with Delegated Admin 3.5.0 and PingDirectory 7.3.0.1, you can set user access to standard and constructed attributes to `read-only` and `read/write`. You should restrict access to constructed attributes to `read-only`. Read-only attributes do not appear on the UI pages that are associated with the creation of users, groups, and other objects.
 
 ### Steps
 
@@ -680,7 +680,7 @@ Beginning with Delegated Admin 3.5.0 and PingDirectory 7.3.0.1, you can set user
 
 ---
 title: Configuring Delegated Admin
-description: This section describes the necessary configuration to support Delegated Admin after the application is installed successfully.
+description: Configure the PingDirectory server properties, administrator rights, resource types, and identity provider support required for Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_delegated_admin
@@ -706,7 +706,7 @@ At a minimum, you must configure the following properties on the PingDirectory s
 
 ---
 title: Configuring Delegated Admin as a new client (create OAuth client for Delegated Admin)
-description: The following task configures Delegated Admin as a new client and outlines how to create an OAuth client for Delegated Admin.
+description: Configure Delegated Admin as a new client in the PingFederate admin console by creating an OAuth client for the application.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_delegated_admin_new_client
@@ -797,14 +797,14 @@ After completing the previous steps, configure the following settings to display
 
 ---
 title: Configuring delegated administrator rights on the PingDirectory server
-description: To delegate users or groups as administrators, use the PingDirectory admin console (Delegated Admin rights and resource rights) or the dsconfig create-delegated-admin-rights and create-delegated-admin-resource-rights commands.
+description: Configure delegated administrator rights on the PingDirectory server using the admin console or the dsconfig create-delegated-admin-rights command.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_delegated_admin_rights_pd_server
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/pd_da_config_delegated_admin_rights_pd_server.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 18, 2023
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -845,7 +845,7 @@ To use Delegated Admin, an administrator must possess rights that are designated
 
   * `update-profile`
 
-    The administrator can update user profiles but isn't allowed password- change-related privileges.
+    The administrator can update user profiles but isn't allowed password-change-related privileges.
 
     For group and generic type resources, the `update-profile` permission gives the same rights as the `update` permission.
 
@@ -976,6 +976,7 @@ page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_oidc_idp
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/pd_da_config_oidc_idp.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 04, 2026
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -1026,6 +1027,7 @@ page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_oidc_pd
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/pd_da_config_oidc_pd.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 04, 2026
 section_ids:
   steps: Steps
 ---
@@ -1121,7 +1123,7 @@ The following steps provide a sample configuration for completing these tasks. T
 
 ---
 title: Configuring PingFederate as the identity provider
-description: The following task configures the PingFederate server as the identity provider (IdP) for the PingDirectory server.
+description: Configure the PingFederate server as the identity provider for Delegated Admin authentication.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_pf_as_idp
@@ -1268,7 +1270,7 @@ Download the LDAPS certificate from the PingDirectory server. For more informati
 
 ---
 title: Configuring the OAuth server
-description: The following task configures the PingFederate server for OAuth and OpenID Connect (OIDC) authentication.
+description: Configure the PingFederate server for OAuth and OpenID Connect authentication with Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_oauth_server
@@ -1307,10 +1309,10 @@ The following task configures the PingFederate server for OAuth and OpenID Conne
 
    4. On the **Contract Fulfillment** tab, set the contracts as shown in the following table:
 
-      | Contract       | Source      | Value         |
-      | -------------- | ----------- | ------------- |
-      | **USER\_KEY**  | **Adapter** | **entryUUID** |
-      | **USER\_NAME** | **Adapter** | **cn**        |
+      | Contract      | Source      | Value         |
+      | ------------- | ----------- | ------------- |
+      | **USER_KEY**  | **Adapter** | **entryUUID** |
+      | **USER_NAME** | **Adapter** | **cn**        |
 
    5. Click **Next** and then click **Next** again.
 
@@ -1360,7 +1362,7 @@ The following task configures the PingFederate server for OAuth and OpenID Conne
 
       * In the **Source** list, select **Persistent Grant**.
 
-      * In the **Value** list, select **USER\_KEY**.
+      * In the **Value** list, select **USER_KEY**.
 
    5. Click **Next** until you reach the **Summary** section. Click **Save**.
 
@@ -1402,7 +1404,7 @@ The following task configures the PingFederate server for OAuth and OpenID Conne
 
 ---
 title: Configuring the PingDirectory server as the token validator (create OAuth client for PingDirectory)
-description: When creating a PingFederate access token validator in the PingDirectory server, use the pingdirectory client ID and secret.
+description: Configure the PingDirectory server as the access token validator by creating an OAuth client in the PingFederate admin console.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_pd_server_token_validator
@@ -1451,7 +1453,7 @@ To configure the PingDirectory server as the token validator:
 
 ---
 title: Configuring the PingFederate server
-description: PingFederate offers many configuration options. This section provides an example PingFederate 10.1 configuration that supports Delegated Admin.
+description: Review an example PingFederate configuration that supports Delegated Admin, including identity provider and OAuth client setup.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_pf_server
@@ -1485,7 +1487,7 @@ Configuring the PingFederate server includes the following:
 
 ---
 title: Configuring the session timeout
-description: By default, Delegated Admin has an idle session timeout value of 30 minutes. To adjust this value, perform the following steps.
+description: Configure the idle session timeout for Delegated Admin, which defaults to 30 minutes.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_session_timeout
@@ -1521,7 +1523,7 @@ By default, Delegated Admin has an idle session timeout value of 30 minutes. To 
 
 ---
 title: Configuring user self-service
-description: The PingFederate server provides end users with the ability to self-service their own profiles.
+description: Configure PingFederate and PingDirectory so that users created by delegated administrators can manage their own profiles through self-service.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_config_user_self_service
@@ -1669,7 +1671,7 @@ To enable users created by delegated administrators to manage their own profiles
 
 ---
 title: Creating a group
-description: You can add users as members to groups that delegated administrators create and manage. You can also add subgroups as members to a group.
+description: Create groups that Delegated Admin delegated administrators manage, configuring the group REST resource type, parent, and attributes.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:delegated_admin_application_guide:pd_da_create_group

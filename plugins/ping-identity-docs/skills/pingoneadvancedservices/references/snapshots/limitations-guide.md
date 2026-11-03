@@ -2,9 +2,13 @@
 title: Limitations guide
 description: Many of you have used on-premise versions of Ping Identity products, such as PingFederate, PingAccess, PingCentral, and the PingDirectory suite of products. Many of you have also used a variety of different cloud services, including Amazon Web Services (AWS).
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:limitations_guide:p1as_limitations
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/limitations_guide/p1as_limitations.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/limitations_guide/p1as_limitations.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 23, 2025
+page_aliases: ["index.adoc"]
 section_ids:
   p1as_infrastructure: Infrastructure
   p1as_product_features: Product features and configurations
@@ -221,37 +225,37 @@ The log names that you might be used to seeing in PingFederate, PingAccess, and 
 
 **PingAccess**
 
-| On-premise log name                          | PingOne Advanced Services log name |
-| -------------------------------------------- | ---------------------------------- |
-| pingaccess.log                               | pa-pingaccess-\*                   |
-| pingaccess\_engine\_audit.log                | pa-engine-audit-\*                 |
-| pingaccess\_agent\_audit.log                 | pa-agent-audit-\*                  |
-| pingaccess\_api\_audit\_har.log              | pa-api-audit-har-\*                |
-| pingaccess\_api\_audit.log                   | pa-api-audit-log-\*                |
-| pingaccess\_sideband\_audit.log              | pa-sideband-audit-\*               |
-| pingaccess\_sideband\_client\_audit.log      | pa-sideband-client-audit-\*        |
-| pingaccess.log                               | pa-was-pingaccess-\*               |
-| audit.log                                    | pa-was-engine-audit-\*             |
-| pingaccess\_was\_api\_audit\_har.log         | pa-was-api-audit-har-\*            |
-| pingaccess\_was\_api\_audit.log              | pa-was-api-audit-log-\*            |
-| pingaccess\_was\_sideband\_audit.log         | pa-was-sideband-audit-\*           |
-| pingaccess\_was\_sideband\_client\_audit.log | pa-was-sideband-audit-\*           |
+| On-premise log name                      | PingOne Advanced Services log name |
+| ---------------------------------------- | ---------------------------------- |
+| pingaccess.log                           | pa-pingaccess-\*                   |
+| pingaccess_engine_audit.log              | pa-engine-audit-\*                 |
+| pingaccess_agent_audit.log               | pa-agent-audit-\*                  |
+| pingaccess_api_audit_har.log             | pa-api-audit-har-\*                |
+| pingaccess_api_audit.log                 | pa-api-audit-log-\*                |
+| pingaccess_sideband_audit.log            | pa-sideband-audit-\*               |
+| pingaccess_sideband_client_audit.log     | pa-sideband-client-audit-\*        |
+| pingaccess.log                           | pa-was-pingaccess-\*               |
+| audit.log                                | pa-was-engine-audit-\*             |
+| pingaccess_was_api_audit_har.log         | pa-was-api-audit-har-\*            |
+| pingaccess_was_api_audit.log             | pa-was-api-audit-log-\*            |
+| pingaccess_was_sideband_audit.log        | pa-was-sideband-audit-\*           |
+| pingaccess_was_sideband_client_audit.log | pa-was-sideband-audit-\*           |
 
 **PingAccess Web Application Security (WAS)**
 
-| On-premise log name                     | PingOne Advanced Services log name |
-| --------------------------------------- | ---------------------------------- |
-| pingaccess.log                          | pa-was-system\*                    |
-| audit.log                               | pa-was-audit\*                     |
-| pingaccess\_engine\_audit.log           | pa-was-audit\*                     |
-| pingaccess\_api\_audit.log              | pa-was-audit\*                     |
-| pingaccess\_agent\_audit.log            | pa-was-audit\*                     |
-| pingaccess\_sideband\_audit.log         | pa-was-audit\*                     |
-| pingaccess\_sideband\_client\_audit.log | pa-was-audit\*                     |
-| pingaccess.log                          | pa-was-admin-system\*              |
-| audit.log                               | pa-was-admin-audit\*               |
-| pingaccess\_engine\_audit.log           | pa-was-admin-audit\*               |
-| pingaccess\_api\_audit.log              | pa-was-admin-audit\*               |
+| On-premise log name                  | PingOne Advanced Services log name |
+| ------------------------------------ | ---------------------------------- |
+| pingaccess.log                       | pa-was-system\*                    |
+| audit.log                            | pa-was-audit\*                     |
+| pingaccess_engine_audit.log          | pa-was-audit\*                     |
+| pingaccess_api_audit.log             | pa-was-audit\*                     |
+| pingaccess_agent_audit.log           | pa-was-audit\*                     |
+| pingaccess_sideband_audit.log        | pa-was-audit\*                     |
+| pingaccess_sideband_client_audit.log | pa-was-audit\*                     |
+| pingaccess.log                       | pa-was-admin-system\*              |
+| audit.log                            | pa-was-admin-audit\*               |
+| pingaccess_engine_audit.log          | pa-was-admin-audit\*               |
+| pingaccess_api_audit.log             | pa-was-admin-audit\*               |
 
 **PingDirectory**
 

@@ -7,6 +7,7 @@ page_id: pingam:am-reference:glossary
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/glossary.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["CIAM", "Training"]
 page_aliases: ["reference:glossary.adoc"]
 ---
@@ -330,6 +331,7 @@ page_id: pingam:am-reference:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Administration", "Configuration"]
 page_aliases: ["index.adoc", "reference:preface.adoc"]
 ---
@@ -385,6 +387,7 @@ page_id: pingam:am-reference:endpoints-reference
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/endpoints-reference.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Endpoints", "JSP"]
 page_aliases: ["reference:endpoints-reference.adoc"]
 section_ids:
@@ -538,6 +541,7 @@ page_id: pingam:am-reference:am-supported-standards
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-reference/am-supported-standards.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Standards", "Federation", "SAML 2.0", "OAuth 2.0", "OpenID Connect (OIDC)"]
 page_aliases: ["reference:am-supported-standards.adoc"]
 ---

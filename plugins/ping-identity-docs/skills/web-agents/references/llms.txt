@@ -1,5 +1,8 @@
 # Web Agents
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Web Agents 2026
 
 - [About Web Agent](https://docs.pingidentity.com/web-agents/2026/user-guide/about.md): Overview of PingAM Web Agent: components, configuration locations, request processing flow, realms, and session management.
@@ -213,7 +216,6 @@
 
 ## Web Agents 2025.11
 
-- [Untitled](https://docs.pingidentity.com/web-agents/2025.11/user-guide/configure-nginx-server.md)
 - [About Web Agent](https://docs.pingidentity.com/web-agents/2025.11/user-guide/about.md): Overview of PingAM Web Agent: components, configuration locations, request processing flow, realms, and session management.
 - [About Web Agent and PingOne Advanced Identity Cloud](https://docs.pingidentity.com/web-agents/2025.11/identity-cloud-guide/about.md): Overview of how PingAM Web Agent works with PingOne Advanced Identity Cloud to enforce resource-based policies across clouds and on-premise.
 - [Accept Secure Cookies From AM Over HTTP](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.plain.channels.insecure.md)
@@ -425,7 +427,6 @@
 
 ## Web Agents 2024.11
 
-- [Untitled](https://docs.pingidentity.com/web-agents/2024.11/user-guide/configure-nginx-server.md)
 - [About Web Agent](https://docs.pingidentity.com/web-agents/2024.11/user-guide/about.md): Overview of PingAM Web Agent: components, configuration locations, request processing flow, realms, and session management.
 - [About Web Agent and PingOne Advanced Identity Cloud](https://docs.pingidentity.com/web-agents/2024.11/identity-cloud-guide/about.md): Overview of how PingAM Web Agent works with PingOne Advanced Identity Cloud to enforce resource-based policies across clouds and on-premise.
 - [Accept Secure Cookies From AM Over HTTP](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.forgerock.agents.config.plain.channels.insecure.md)
@@ -576,8 +577,8 @@
 - [POST Data Storage Directory](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/org.forgerock.agents.config.postdata.preserve.dir.md)
 - [Post update and upgrade tasks](https://docs.pingidentity.com/web-agents/2024.11/upgrade/post-upgrade-tasks.md): Post-upgrade tasks for PingAM Web Agent: review release notes for new features and follow up with post-installation configuration steps.
 - [Post-installation](https://docs.pingidentity.com/web-agents/2024.11/installation-guide/post-installation.md): Post-installation steps for PingAM Web Agent: review logs, validate the instance, configure shared memory, and support load balancers and reverse proxies.
-- [Prepare for installation](https://docs.pingidentity.com/web-agents/2024.11/identity-cloud-guide/installation.md): Prepare PingOne Advanced Identity Cloud for PingAM Web Agent: add a test user, create a policy set, and configure an agent profile.
 - [Prepare for installation](https://docs.pingidentity.com/web-agents/2024.11/installation-guide/pre-installation.md): Prerequisites and setup steps before installing PingAM Web Agent: system requirements, OpenSSL libraries, downloading the agent, creating agent profiles, and verifying connectivity.
+- [Prepare for installation](https://docs.pingidentity.com/web-agents/2024.11/identity-cloud-guide/installation.md): Prepare PingOne Advanced Identity Cloud for PingAM Web Agent: add a test user, create a policy set, and configure an agent profile.
 - [Private Client Certificate File Name](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.forgerock.agents.config.cert.key.md)
 - [Private Key Password](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.forgerock.agents.config.cert.key.password.md)
 - [Profile Attribute Cookie Prefix](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.sun.identity.agents.config.profile.attribute.cookie.prefix.md)
@@ -688,6 +689,7 @@
 - [Cookie reset](https://docs.pingidentity.com/web-agents/2023.11/user-guide/cookie-reset.md)
 - [Cookie Reset List](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.agents.config.cookie.reset.md)
 - [Cross-domain single sign-on](https://docs.pingidentity.com/web-agents/2023.11/user-guide/cdsso.md)
+- [Custom Login Mode](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/org.forgerock.openam.agents.config.allow.custom.login.md)
 - [Custom Properties](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.agents.config.freeformproperties.md)
 - [Deploy Web Agents with Docker](https://docs.pingidentity.com/web-agents/2023.11/installation-guide/docker.md)
 - [Disable Audience Claim Validation](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.forgerock.agents.jwt.aud.disable.md)
@@ -698,7 +700,6 @@
 - [Enable Connection Pooling](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/org.forgerock.agents.config.connection.pool.enable.md)
 - [Enable Cookie Reset](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.agents.config.cookie.reset.enable.md)
 - [Enable Cookie Security](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.agents.config.cookie.secure.md)
-- [Enable Custom Login Mode](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/org.forgerock.openam.agents.config.allow.custom.login.md)
 - [Enable FQDN Check](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.agents.config.fqdn.check.enable.md)
 - [Enable Fragment Redirect](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/org.forgerock.agents.config.fragment.redirect.enable.md)
 - [Enable HTTP Only Mode](https://docs.pingidentity.com/web-agents/2023.11/properties-reference/com.sun.identity.cookie.httponly.md)

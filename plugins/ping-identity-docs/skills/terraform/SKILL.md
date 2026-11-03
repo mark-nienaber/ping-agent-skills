@@ -6,7 +6,7 @@ license: MIT
 
 # Terraform
 
-Terraform documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Explains PingOne admin role considerations when using Terraform, including birthright roles, role conflicts, and importing role assignments.
 
 ## Live source of truth
 
@@ -27,12 +27,12 @@ Terraform documentation is indexed in the bundled llms.txt and live Ping Markdow
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Products: asked, frequently, getting | products | https://developer.pingidentity.com/terraform/products/*.md | references/snapshots/products.md |
-| Develop With Terraform: terraform, configuration, exporting | develop_with_terraform | https://developer.pingidentity.com/terraform/develop_with_terraform/*.md | live-only |
-| Terraform At Ping: terraform, benefits, deployments | terraform_at_ping | https://developer.pingidentity.com/terraform/terraform_at_ping/*.md | live-only |
-| Best Practices.Md: best, practices | best_practices.md | https://developer.pingidentity.com/terraform/best_practices.md | live-only |
-| Develop With Terraform.Md: develop, terraform | develop_with_terraform.md | https://developer.pingidentity.com/terraform/develop_with_terraform.md | live-only |
-| Terraform Landing Page.Md: identity, terraform | terraform_landing_page.md | https://developer.pingidentity.com/terraform/terraform_landing_page.md | live-only |
+| Products: terraform, pingone, role | products | https://developer.pingidentity.com/terraform/products/*.md | references/snapshots/products.md |
+| Develop With Terraform: terraform, cli, configuration | develop_with_terraform | https://developer.pingidentity.com/terraform/develop_with_terraform/*.md | references/snapshots/develop-with-terraform.md |
+| Terraform At Ping: terraform, identity, benefits | terraform_at_ping | https://developer.pingidentity.com/terraform/terraform_at_ping/*.md | references/snapshots/terraform-at-ping.md |
+| Best Practices.Md: best, practices, covering | best_practices.md | https://developer.pingidentity.com/terraform/best_practices.md | references/snapshots/best-practices-md.md |
+| Develop With Terraform.Md: terraform, develop, developing | develop_with_terraform.md | https://developer.pingidentity.com/terraform/develop_with_terraform.md | references/snapshots/develop-with-terraform-md.md |
+| Terraform Landing Page.Md: identity, terraform, conceptual | terraform_landing_page.md | https://developer.pingidentity.com/terraform/terraform_landing_page.md | references/snapshots/terraform-landing-page-md.md |
 
 ## Composition
 

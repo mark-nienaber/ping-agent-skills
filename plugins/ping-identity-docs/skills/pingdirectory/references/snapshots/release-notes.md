@@ -1,13 +1,16 @@
 ---
 title: Release notes
-description: Unless otherwise noted, all of the following enhancements, known issues, and resolved issues apply to the PingDirectory server, the PingDirectoryProxy server, and the PingDataSync server.
+description: Enhancements, known issues, and resolved issues for the PingDirectory, PingDirectoryProxy, PingDataSync, and Delegated Admin releases.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:release_notes:pd_release_notes
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/release_notes/pd_release_notes.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T00:00:00Z
 section_ids:
+  pingdirectory-suite-of-products-11-1-0-1-september-2026: PingDirectory suite of products 11.1.0.1 (September 2026)
+  version-incremented-for-administrative-purposes: Version incremented for administrative purposes
   pingdirectory-suite-of-products-11-1-0-0-june-2026: PingDirectory suite of products 11.1.0.0 (June 2026)
   added-runtime-support-for-java-25: Added runtime support for Java 25
   added-smtp-bearer-access-token-authentication: Added SMTP bearer access token authentication
@@ -28,6 +31,8 @@ section_ids:
   improved-verify-index-schema-consistency-detection: Improved verify-index schema consistency detection
   added-alerts-for-ldap-schema-element-changes: Added alerts for LDAP schema element changes
   improved-psa-logging-for-connection-errors: Improved PSA logging for connection errors
+  improved-replication-conflict-counting: Improved replication conflict counting
+  support-for-java-17-has-been-deprecated: Support for Java 17 has been deprecated
   removed-scim-1-1-support: Removed SCIM 1.1 support
   deprecated-support-for-the-implicit-grant-type: Deprecated support for the Implicit grant type
   removed-the-swagger-ui-and-schema-generation-endpoints: Removed the Swagger UI and schema generation endpoints
@@ -82,6 +87,14 @@ Subscribe to get automatic updates: [icon: rss-square, set=fa][PingDirectory Rel
 |   |                                                                                                 |
 | - | ----------------------------------------------------------------------------------------------- |
 |   | This is a short-term support release. Learn more in [Release statuses](../release_status.html). |
+
+## PingDirectory suite of products 11.1.0.1 (September 2026)
+
+### Version incremented for administrative purposes
+
+Info PingDirectory, PingDirectoryProxy, PingDataSync
+
+We incremented the version number because of changes released for PingAuthorize. There are no release notes for this version of the server.
 
 ## PingDirectory suite of products 11.1.0.0 (June 2026)
 
@@ -242,6 +255,18 @@ The server now raises an `existing-schema-element-changed` alert and logs a `SEV
 Improved DS-44665, DS-44686, DS-49012, DS-51082 PingDataSync
 
 We improved logging in the PSA for connection errors and DNS resolution failures.
+
+### Improved replication conflict counting
+
+Improved DS-51326 PingDirectory
+
+The replication monitor entry now falls back to an internal search operation to determine the number of conflict entries when there is no `objectClass` index configured.
+
+### Support for Java 17 has been deprecated
+
+Info DS-51880 PingDirectory, PingDirectoryProxy, PingDataSync
+
+Support for Java 17 has been deprecated and will be removed in a future release.
 
 ### Removed SCIM 1.1 support
 

@@ -6,7 +6,7 @@ page_id: agentless::pf_agentless_ik
 canonical_url: https://docs.pingidentity.com/integrations/agentless/pf_agentless_ik.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 7, 2025
+revdate: August 20, 2026
 section_ids:
   components: Components
   intended-audience: Intended audience
@@ -65,7 +65,7 @@ If you need help during the setup process, you can find more information in the 
 
 ## System requirements
 
-* PingFederate 11.3 or later
+* PingFederate 12.2 or later
 
 * Your application must be web-based and able to do the following:
 
@@ -77,48 +77,58 @@ If you need help during the setup process, you can find more information in the 
 
 ---
 title: Agentless Integration Kit Changelog
-description: The following is the change history for the Agentless Integration Kit.
+description: The following is the change history for the Agentless Integration Kit:
 component: agentless
 page_id: agentless:release_notes:pf_agentless_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/agentless/release_notes/pf_agentless_ik_changelog.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 23, 2026
+revdate: September 3, 2026
 section_ids:
-  version-2-3-1: Version 2.3.1
-  version-2-3: Version 2.3
-  version-2-2-1: Version 2.2.1
-  version-2-2: Version 2.2
-  version-2-1: Version 2.1
-  version-2-0-4: Version 2.0.4
-  version-2-0-3: Version 2.0.3
-  version-2-0-2: Version 2.0.2
-  version-2-0-1: Version 2.0.1
-  version-2-0: Version 2.0
-  version-1-5-4: Version 1.5.4
-  version-1-5-3: Version 1.5.3
-  version-1-5-2: Version 1.5.2
-  version-1-5-1: Version 1.5.1
-  version-1-5: Version 1.5
-  version-1-4-1: Version 1.4.1
-  version-1-4: Version 1.4
-  version-1-3-3: Version 1.3.3
-  version-1-3-2: Version 1.3.2
-  version-1-3-1: Version 1.3.1
-  version-1-3: Version 1.3
-  version-1-2-1: Version 1.2.1
-  version-1-2: Version 1.2
-  version-1-1: Version 1.1
-  version-1-0: Version 1.0
+  version-2-4-0-september-2026: Version 2.4.0 (September 2026)
+  version-2-3-2-august-2026: Version 2.3.2 (August 2026)
+  version-2-3-1-february-2026: Version 2.3.1 (February 2026)
+  version-2-3-november-2025: Version 2.3 (November 2025)
+  version-2-2-1-may-2025: Version 2.2.1 (May 2025)
+  version-2-2-april-2025: Version 2.2 (April 2025)
+  version-2-1-march-2025: Version 2.1 (March 2025)
+  version-2-0-4-november-2021: Version 2.0.4 (November 2021)
+  version-2-0-3-june-2021: Version 2.0.3 (June 2021)
+  version-2-0-2-may-2021: Version 2.0.2 (May 2021)
+  version-2-0-1-september-2020: Version 2.0.1 (September 2020)
+  version-2-0-august-2020: Version 2.0 (August 2020)
+  version-1-5-4-march-2020: Version 1.5.4 (March 2020)
+  version-1-5-3-january-2020: Version 1.5.3 (January 2020)
+  version-1-5-2-july-2019: Version 1.5.2 (July 2019)
+  version-1-5-1-february-2019: Version 1.5.1 (February 2019)
+  version-1-5-december-2018: Version 1.5 (December 2018)
+  version-1-4-1-november-2018: Version 1.4.1 (November 2018)
+  version-1-4-september-2018: Version 1.4 (September 2018)
+  version-1-3-3-august-2018: Version 1.3.3 (August 2018)
+  version-1-3-2-april-2018: Version 1.3.2 (April 2018)
+  version-1-3-1-september-2017: Version 1.3.1 (September 2017)
+  version-1-3-august-2017: Version 1.3 (August 2017)
+  version-1-2-1-january-2016: Version 1.2.1 (January 2016)
+  version-1-2-september-2012: Version 1.2 (September 2012)
+  version-1-1-november-2011: Version 1.1 (November 2011)
+  version-1-0-october-2010: Version 1.0 (October 2010)
 ---
 
 # Agentless Integration Kit Changelog
 
-The following is the change history for the Agentless Integration Kit.
+The following is the change history for the Agentless Integration Kit:
 
-## Version 2.3.1
+## Version 2.4.0 (September 2026)
 
-Released in February 2026.
+* Added jakarta-based sample applications for use with PingFederate 13.1 or later.
+
+* Fixed a defect in the sample configuration archive so it can be loaded into newer versions of PingFederate.
+
+## Version 2.3.2 (August 2026)
+
+* Removed third-party fonts from sample applications.
+
+## Version 2.3.1 (February 2026)
 
 * Fixed an issue that could have caused `500` errors if both:
 
@@ -126,9 +136,7 @@ Released in February 2026.
 
   * A tracked HTTP parameter or chained attribute included a JSON array.
 
-## Version 2.3
-
-Released in November 2025.
+## Version 2.3 (November 2025)
 
 * Added stricter enforcement for wildcard matching in the **Allowed Subject DN** and **Allowed Issuer DN** fields.
 
@@ -136,9 +144,7 @@ Released in November 2025.
 
 * Updated the code to fix improper encoding and prevent information leaks in HTTP responses.
 
-## Version 2.2.1
-
-Released in May 2025.
+## Version 2.2.1 (May 2025)
 
 * Fixed an issue that prevented the adapter configuration from supporting exclusive and dynamic scopes in Bearer access token authentication flow.
 
@@ -146,25 +152,19 @@ Released in May 2025.
 
 * Updated the adapter to ensure proper validation behavior when only Bearer token authentication is configured.
 
-## Version 2.2
-
-Released in April 2025.
+## Version 2.2 (April 2025)
 
 * Fixed an issue that caused null attributes to be excluded from the response of the pickup API endpoint and added the **Include Null Attributes** checkbox to the adapter configuration. Learn more in [Overview of the service provider SSO flow](../pf_agentless_ik_overview_of_the_service_provider_sso_flow.html), [Overview of the identity provider SSO flow](../overview_of_the_identity_provider_integration/pf_agentless_ik_overview_of_the_identity_provider_sso_flow.html), [Reference ID IdP Adapter settings reference](../custom_application_setup/pf_agentless_ik_reference_id_idp_adapter_settings_reference.html), and [Reference ID SP Adapter settings reference](../custom_application_setup/pf_agentless_ik_reference_id_sp_adapter_settings_reference.html).
 
 * Added the ability to preserve the JSON format of chained attribute and tracked HTTP parameter values. Learn more in [Reference ID IdP Adapter settings reference](../custom_application_setup/pf_agentless_ik_reference_id_idp_adapter_settings_reference.html).
 
-## Version 2.1
-
-Released in March 2025.
+## Version 2.1 (March 2025)
 
 * Added the ability to use Bearer token authentication as an authentication method.
 
   Learn more in [Authentication methods](../custom_application_setup/pf_agentless_ik_authentication_methods.html) and refer to the **Access Token Manager** - **Required Bearer Access Token Scopes** fields in [Reference ID IdP Adapter settings reference](../custom_application_setup/pf_agentless_ik_reference_id_idp_adapter_settings_reference.html) and [Reference ID SP Adapter settings reference](../custom_application_setup/pf_agentless_ik_reference_id_sp_adapter_settings_reference.html).
 
-## Version 2.0.4
-
-Released in November 2021.
+## Version 2.0.4 (November 2021)
 
 * Fixed an issue that caused the adapter to incorrectly handle integers in JSON payloads.
 
@@ -172,15 +172,11 @@ Released in November 2021.
 
 * Verified that the Reference ID IdP Adapter is compliant with US Federal Information Processing Standards (FIPS). Learn more in [Integrating Bouncy Castle FIPS providers](https://docs.pingidentity.com/pingfederate/latest/getting_started_with_pingfederate/pf_set_up_java8_java11.html) in the PingFederate documentation.
 
-## Version 2.0.3
-
-Released in June 2021.
+## Version 2.0.3 (June 2021)
 
 * Fixed an issue with client certificate authentication handling. Learn more in security bulletin [SECADV025](https://support.pingidentity.com/s/article/SECADV025-Agentless-Integration-Kit-Client-Certificate-Authentication-Mishandling) (requires sign-on).
 
-## Version 2.0.2
-
-Released in May 2021.
+## Version 2.0.2 (May 2021)
 
 * Improved the description for the **Relax Pass Phrase Requirements** setting.
 
@@ -188,15 +184,11 @@ Released in May 2021.
 
 * Fixed an issue that could cause a validation error in the **Logout Service Endpoint** field when upgrading the adapter.
 
-## Version 2.0.1
-
-Released in September 2020.
+## Version 2.0.1 (September 2020)
 
 * Fixed an issue that prevented an error from triggering when the wrong REF ID was provided.
 
-## Version 2.0
-
-Released in August 2020.
+## Version 2.0 (August 2020)
 
 * Added the **Send Request Parameters** setting to control the information sent in query parameter mode.
 
@@ -214,9 +206,7 @@ Released in August 2020.
 
 * Created new Java, .NET Core, PHP, and Python sample applications and example code. Learn more in the [Ping Identity GitHub repository](https://github.com/pingidentity?q=agentless).
 
-## Version 1.5.4
-
-Released in March 2020.
+## Version 1.5.4 (March 2020)
 
 * Added support for header names with dashes at the attribute pick up and dropoff endpoints.
 
@@ -226,9 +216,7 @@ Released in March 2020.
 
 * Fixed an issue that caused the drop-off endpoint to return HTML when an error occurred.
 
-## Version 1.5.3
-
-Released in January 2020.
+## Version 1.5.3 (January 2020)
 
 * Fixed an issue that prevented the adapter from correctly linking federated users to application users.
 
@@ -238,23 +226,17 @@ Released in January 2020.
 
 * Improved default values for some adapter configuration fields.
 
-## Version 1.5.2
-
-Released in July 2019.
+## Version 1.5.2 (July 2019)
 
 * Improved the query parameter transport mode. It now passes query parameters to the authentication endpoint.
 
-## Version 1.5.1
-
-Released in February 2019.
+## Version 1.5.1 (February 2019)
 
 * Included all-new sample applications in the distribution file. You can find the latest source code in [PingFederate Agentless Integration Kit Sample](https://github.com/pingidentity/pf-agentless-ik-sample) on the Ping Identity GitHub page.
 
 * Fixed a bug that caused an invalid content-type header value in some API responses.
 
-## Version 1.5
-
-Released in December 2018.
+## Version 1.5 (December 2018)
 
 * Added the ability to direct authorization consent requests to an external application. Learn more in [External consent approval](../custom_application_setup/pf_agentless_ik_external_consent_approval.html).
 
@@ -262,15 +244,11 @@ Released in December 2018.
 
 * Fixed a cross-site scripting (XSS) issue. Learn more in security bulletin [SECBL013](https://support.pingidentity.com/s/article/SECBL013-Agentless-Integration-Kit-Cross-Site-Scripting-XSS-Vulnerability) (requires sign-on).
 
-## Version 1.4.1
-
-Released in November 2018.
+## Version 1.4.1 (November 2018)
 
 * Improved the way Reference ID Adapter instance configurations are applied. Configuration changes now take effect without the need to restart PingFederate.
 
-## Version 1.4
-
-Released in September 2018.
+## Version 1.4 (September 2018)
 
 * Reference ID IdP Adapter
 
@@ -288,17 +266,13 @@ Released in September 2018.
 
   * Improved support for authentication method based on configured values.
 
-## Version 1.3.3
-
-Released in August 2018.
+## Version 1.3.3 (August 2018)
 
 * Fixed issue with HTTP request parameters overriding signed JWT request parameter values.
 
 * Target resource validation and error resource validation are now enabled in the sample configuration archive.
 
-## Version 1.3.2
-
-Released in April 2018.
+## Version 1.3.2 (April 2018)
 
 * Fixed issue processing JSON-based request object claims.
 
@@ -306,15 +280,11 @@ Released in April 2018.
 
 * Fixed data encoding issue with Form POST-based front-channel communication.
 
-## Version 1.3.1
-
-Released in September 2017.
+## Version 1.3.1 (September 2017)
 
 * Fixed issue with exposing attributes to the IdP authentication endpoint.
 
-## Version 1.3
-
-Released in August 2017.
+## Version 1.3 (August 2017)
 
 * Compatibility updates for JDK 8.
 
@@ -322,15 +292,11 @@ Released in August 2017.
 
 * Added support for multi-value attributes.
 
-## Version 1.2.1
-
-Released in January 2016.
+## Version 1.2.1 (January 2016)
 
 * Updated sample application data archive
 
-## Version 1.2
-
-Released in September 2012.
+## Version 1.2 (September 2012)
 
 * Added two Transport Mode options (Query Parameter or Form Post) for Front Channel Communication for both the IdP and SP Reference ID Adapter.
 
@@ -340,9 +306,7 @@ Released in September 2012.
 
 * Added the Certificate DN Compare Fix in the Agentless Integration Kit.
 
-## Version 1.1
-
-Released in November 2011.
+## Version 1.1 (November 2011)
 
 * Support for multiple client certificates in a single Reference ID Adapter instance for client-certificate authentication.
 
@@ -356,9 +320,9 @@ Released in November 2011.
 
 * Fixed an account linking issue with the Reference ID Adapter.
 
-## Version 1.0
+## Version 1.0 (October 2010)
 
-Released in October 2010.
+Released in .
 
 * Initial Release.
 
@@ -732,37 +696,27 @@ To use this method, complete the **User Name** and **Pass Phrase** fields in the
 title: Configuring a Reference ID IdP Adapter instance
 description: Configure the Reference ID IdP Adapter to determine how PingFederate communicates with your identity provider application.
 component: agentless
-page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_a_reference_id_idp_adapter_instance
-canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_idp_adapter_instance.html
+page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_reference_id_idp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_reference_id_idp_adapter_instance.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 7, 2024
+revdate: August 20, 2026
 section_ids:
-  about-this-task: About this task
   steps: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
+  next-steps: Next steps
 ---
 
 # Configuring a Reference ID IdP Adapter instance
 
-Configure the Reference ID IdP Adapter to determine how PingFederate communicates with your identity provider application.
-
-## About this task
-
-You can configure the adapter to direct authentication requests, authorization consent requests, or both to your application.
+Configure the adapter to direct authentication requests, authorization consent requests, or both to your application.
 
 ## Steps
 
-1. In the PingFederate administrative console, create a new IdP adapter instance:
+1. In the PingFederate administrative console, go to **Authentication > Integration > IdP Adapters**.
 
-   ### Choose from:
+2. Click **Create New Instance**.
 
-   * For PingFederate 10.1 or later: go to **Authentication > Integration > IdP Adapters**. Click **Create New Instance**.
-
-   * For PingFederate 10.0 or earlier: go to **Identity Provider > Adapters**. Click **Create New Instance**.
-
-2. On the **Type** tab, set the basic adapter instance attributes.
+3. On the **Type** tab, set the basic adapter instance attributes.
 
    1. In the **Instance Name** field, enter a name for the adapter instance.
 
@@ -770,25 +724,31 @@ You can configure the adapter to direct authentication requests, authorization c
 
    3. In the **Type** list, select **Reference ID IdP Adapter**. Click **Next**.
 
-3. On the **IdP Adapter** tab, configure the adapter instance by referring to [Reference ID IdP Adapter settings reference](pf_agentless_ik_reference_id_idp_adapter_settings_reference.html). Click **Next**.
+4. On the **IdP Adapter** tab, configure the adapter instance.
 
-4. **Optional:** On the **Actions** tab, click **Show Pass Phrase** and copy the pass phrase to your application. Click **Next**.
+   Learn more in [Reference ID IdP Adapter settings reference](pf_agentless_ik_reference_id_idp_adapter_settings_reference.html).
 
-5. On the **Extended Contract** screen, add any attributes that you expect to retrieve in addition to the SAML subject (user ID). If you have an external consent application, add the attribute that contains the authorization scopes. Click **Next**.
+5. Click **Next**.
 
-6. On the **Adapter Attributes** tab, set pseudonym and masking options as shown in [Set pseudonym and masking options](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_setting_pseudonym_masking_options.html) in the PingFederate documentation. Click **Next**.
+6. (Optional) On the **Actions** tab, click **Show Pass Phrase** and copy the pass phrase to your application. Click **Next**.
 
-7. On the **Adapter Contract Mapping** tab, configure the contract fulfillment details for the adapter as shown in [Define the IdP adapter contract](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_authnadapterinstancetasklet_plugincontractstate.html) in the PingFederate documentation. Click **Next**.
+7. On the **Extended Contract** screen, add any attributes that you expect to retrieve in addition to the SAML subject (user ID). If you have an external consent application, add the attribute that contains the authorization scopes. Click **Next**.
 
-8. On the **Summary** tab, check and save your configuration:
+8. On the **Adapter Attributes** tab, set pseudonym and masking options as shown in [Set pseudonym and masking options](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_setting_pseudonym_masking_options.html) in the PingFederate documentation.
 
-   ### Choose from:
+9. Click **Next**.
 
-   * For PingFederate 10.1 or later: click **Save**.
+10. On the **Adapter Contract Mapping** tab, configure the contract fulfillment details for the adapter as shown in [Defining the IdP adapter contract](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_authnadapterinstancetasklet_plugincontractstate.html) in the PingFederate documentation.
 
-   * For PingFederate 10.0 or earlier: click **Done**. On the **Manage IdP Adapter Instances** tab, click **Save**.
+11. Click **Next**.
 
-9. Create an SP connection using this Reference ID IdP Adapter instance. Learn more in [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html) in the PingFederate documentation.
+12. On the **Summary** tab, review your configuration and click **Save**.
+
+## Next steps
+
+Create an SP connection using this Reference ID IdP Adapter instance.
+
+Learn more in [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html) in the PingFederate documentation.
 
 ---
 
@@ -796,56 +756,60 @@ You can configure the adapter to direct authentication requests, authorization c
 title: Configuring a Reference ID SP Adapter instance
 description: Configure the Reference ID IdP Adapter to determine how PingFederate communicates with your service provider (SP) application.
 component: agentless
-page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance
-canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance.html
+page_id: agentless:custom_application_setup:pf_agentless_ik_configuring_reference_id_sp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_configuring_reference_id_sp_adapter_instance.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 7, 2024
+revdate: August 20, 2026
 section_ids:
   steps: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
 ---
 
 # Configuring a Reference ID SP Adapter instance
 
-Configure the Reference ID IdP Adapter to determine how PingFederate communicates with your service provider (SP) application.
+Configure the Reference ID IdP Adapter to determine how PingFederate communicates with your service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* application.
 
 ## Steps
 
-1. In the PingFederate administrative console, create a new SP adapter instance.
+1. In the PingFederate administrative console, go to **Applications > Integration > SP Adapters**.
 
-   ### Choose from:
+2. Click **Create New Instance**.
 
-   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Adapters**. Click **Create New Instance**.
-
-   * For PingFederate 10.0 or earlier: go to **Service Provider > Adapters**. Click **Create New Instance**.
-
-2. On the **Type** tab, set the basic adapter instance attributes.
+3. On the **Type** tab, set the basic adapter instance attributes.
 
    1. In the **Instance Name** field, enter a name for the adapter instance.
 
    2. In the **Instance ID** field, enter a unique identifier for the adapter instance.
 
-   3. In the **Type** list, select **Reference ID SP Adapter**. Click **Next**.
+   3. In the **Type** list, select **Reference ID SP Adapter**
 
-3. On the **Instance Configuration** tab, configure the adapter instance by referring to [Reference ID SP Adapter settings reference](pf_agentless_ik_reference_id_sp_adapter_settings_reference.html). Click **Next**.
+4. Click **Next**.
 
-4. **Optional:** On the **Actions** tab, click **Show Pass Phrase** and copy the pass phrase to your application. Click **Next**.
+5. On the **Instance Configuration** tab, configure the adapter instance by referring to [Reference ID SP Adapter settings reference](pf_agentless_ik_reference_id_sp_adapter_settings_reference.html).
 
-5. On the **Extended Contract** tab, add any attributes that you expect to retrieve other than the SAML subject. Click **Next**.
+6. Click **Next**.
 
-6. On the **Target App Info** tab, enter the basic information about your SP application. Click **Next**.
+7. (Optional) On the **Actions** tab, click **Show Pass Phrase** and copy the pass phrase to your application.
 
-7. On the **Summary** tab, check and save your configuration.
+8. Click **Next**.
 
-   ### Choose from:
+9. On the **Extended Contract** tab, add any attributes that you expect to retrieve other than the SAML subject.
 
-   * For PingFederate 10.1 or later: click **Save**.
+10. Click **Next**.
 
-   * For PingFederate 10.0 or earlier: click **Done**. On the **Manage SP Adapter Instances** tab, click **Save**.
+11. On the **Target App Info** tab, enter the basic information about your SP application.
 
-8. Create an IdP connection using this Reference ID SP Adapter instance. Learn more in [Service provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_servic_provid_sso_config.html) in the PingFederate documentation.
+    Learn more in [Identifying the target application](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_identifying_target_application.html) in the PingFederate documentation.
+
+12. Click **Next**.
+
+13. On the **Summary** tab, check your configuration and click **Save**.
+
+14. Create an IdP connection using this Reference ID SP Adapter instance.
+
+    Learn more in [Service provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_servic_provid_sso_config.html) in the PingFederate documentation.
 
 ---
 
@@ -979,11 +943,11 @@ You can integrate PingFederate with your identity provider or service provider a
 title: Deploying the integration files
 description: To get started with the integration, deploy the Agentless Integration Kit files to your PingFederate directory.
 component: agentless
-page_id: agentless:custom_application_setup:pf_agentless_ik_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_deploying_the_integration_files.html
+page_id: agentless:custom_application_setup:pf_agentless_ik_deploying_integration_files
+canonical_url: https://docs.pingidentity.com/integrations/agentless/custom_application_setup/pf_agentless_ik_deploying_integration_files.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 7, 2025
+revdate: September 3, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -1009,7 +973,11 @@ To get started with the integration, deploy the Agentless Integration Kit files 
 
 4. Extract the `.zip` archive and copy the contents of the `dist` directory to your `<pf_install>/pingfederate/server/default` directory.
 
-5. If there is more than one version of the `pf-authn-api-sdk-<version>.jar` file in your `<pf_install>/pingfederate/server/default/lib` directory, delete all but the latest version of the file.
+5. Delete the `pf-authn-api-sdk-<version>.jar` file in your `<pf_install>/pingfederate/server/default/lib` directory that's not used by your PingFederate version.
+
+   * If you're running PingFederate 13.0 or earlier, delete the `pf-authn-api-sdk-2.x.jar` file.
+
+   * If you're running PingFederate 13.1 or later, delete the `pf-authn-api-sdk-1.x.jar` file.
 
 6. Start PingFederate.
 
@@ -1021,11 +989,11 @@ To get started with the integration, deploy the Agentless Integration Kit files 
 title: Deploying the integration files and sample applications
 description: To get started with the integration, deploy the Agentless Integration Kit files to your PingFederate directory.
 component: agentless
-page_id: agentless:sample_application_setup:pf_agentless_ik_deploying_the_integration_files_and_sample_applications
-canonical_url: https://docs.pingidentity.com/integrations/agentless/sample_application_setup/pf_agentless_ik_deploying_the_integration_files_and_sample_applications.html
+page_id: agentless:sample_application_setup:pf_agentless_ik_deploying_integration_files_sample_applications
+canonical_url: https://docs.pingidentity.com/integrations/agentless/sample_application_setup/pf_agentless_ik_deploying_integration_files_sample_applications.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 7, 2025
+revdate: September 3, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -1067,7 +1035,15 @@ To get started with the integration, deploy the Agentless Integration Kit files 
 
    * `AgentlessSPSample.war`
 
-6. If there is more than one version of the `pf-authn-api-sdk-<version>.jar` file in your `<pf_install>/pingfederate/server/default/lib` directory, delete all but the latest version of the file.
+     |   |                                                                                                                                     |
+     | - | ----------------------------------------------------------------------------------------------------------------------------------- |
+     |   | If you're running PingFederate 13.1 or later, use the `AgentlessIdPSample.war` and `AgentlessSPSample.war` in the `jakarta` folder. |
+
+6. Delete the `pf-authn-api-sdk-<version>.jar` file in your `<pf_install>/pingfederate/server/default/lib` directory that's not used by your PingFederate version.
+
+   * If you're running PingFederate 13.0 or earlier, delete the `pf-authn-api-sdk-2.x.jar` file.
+
+   * If you're running PingFederate 13.1 or later, delete the `pf-authn-api-sdk-1.x.jar` file.
 
 7. Start PingFederate.
 
@@ -1266,7 +1242,7 @@ page_id: agentless:release_notes:pf_agentless_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/agentless/release_notes/pf_agentless_ik_download_manifest.html
 llms_txt: https://docs.pingidentity.com/integrations/agentless/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 7, 2025
+revdate: September 3, 2026
 ---
 
 # Download manifest
@@ -1297,9 +1273,15 @@ The following files are included in the Agentless Integration Kit `.zip` archive
 
   * `AgentlessSPSample.war`: The compiled Agentless service provider Java sample application.
 
-  |   |                                                                                                                                                                     |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | You can find the latest Java, .NET Core, PHP, and Python sample applications in the [Ping Identity GitHub repository](https://github.com/pingidentity?q=agentless). |
+  * `jakarta`: Contains sample applications for use with PingFederate 13.1 and later.
+
+    * `AgentlessIdPSample.war`: The compiled Agentless identity provider Java sample application.
+
+    * `AgentlessSPSample.war`: The compiled Agentless service provider Java sample application.
+
+      |   |                                                                                                                                                                     |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | You can find the latest Java, .NET Core, PHP, and Python sample applications in the [Ping Identity GitHub repository](https://github.com/pingidentity?q=agentless). |
 
 ---
 

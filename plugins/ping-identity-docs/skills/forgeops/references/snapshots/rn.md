@@ -1,12 +1,13 @@
 ---
 title: <code>forgeops</code> repository feature evolution
-description: All the features demonstrated in the forgeops repository evolve continuously, and should be expected to change, potentially in backwards-incompatible ways. Specific changes are documented in the ForgeOps release notes, and might go through the following stages:
+description: Track ForgeOps releases including new features, deprecation, and removals
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:rn:evolution
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/rn/evolution.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/rn/evolution.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-11-21T10:28:18Z
 ---
 
 # `forgeops` repository feature evolution
@@ -25,23 +26,39 @@ All the features demonstrated in the `forgeops` repository evolve continuously, 
 
 ---
 title: ForgeOps release notes
-description: Subscribe to the ForgeOps 2026.2.1 RSS feed to get notification when there's an update to the latest ForgeOps documentation.
+description: Review ForgeOps release notes for new features, bug fixes, documentation updates, limitations, and supported platform changes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:rn:rn
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/rn/rn.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/rn/rn.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-28T11:57:11Z
 section_ids:
   2026: 2026
-  june_29_2026: June 29, 2026
-  forgeops-2026-2-1-features: ForgeOps 2026.2.1 release features
-  forgeops_2026_2_0_release_features: ForgeOps 2026.2.0 release features
+  october_26_2026: October 26, 2026
+  october_14_2026: October 14, 2026
+  forgeops_2026_3_2_release_features: ForgeOps 2026.3.2 release features
+  deprecated_features: Deprecated features
+  new_features_and_updated_functionality: New features and updated functionality
+  bug_fixes: Bug fixes
+  documentation_updates: Documentation updates
+  forgeops_2026_3_1_release_features: ForgeOps 2026.3.1 release features
+  new_features_and_updated_functionality_2: New features and updated functionality
+  bugfixes: Bugfixes
+  august_28_2026: August 28, 2026
+  august_24_2026: August 24, 2026
+  august_17_2026: August 17, 2026
+  august_14_2026: August 14, 2026
+  forgeops_2026_3_0_release_features: ForgeOps 2026.3.0 release features
+  new_features_and_updated_functionality_3: New features and updated functionality
+  bug_fixes_2: Bug fixes
+  documentation_updates_2: Documentation updates
 ---
 
 # ForgeOps release notes
 
-Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.2.1 RSS feed](https://docs.pingidentity.com/forgeops/latest/rn/rn.xml) to get notification when there's an update to the latest ForgeOps documentation.
+Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.3 RSS feed](https://docs.pingidentity.com/forgeops/latest/rn/rn.xml) to get notified when the latest ForgeOps documentation is updated.
 
 |   |                                                                                                                                                                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -49,121 +66,326 @@ Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.2.1 RSS feed](https://
 
 |                                                                                                                                                              |                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Validated Kubernetes, Ingress-NGINX Controller, HAProxy Ingress, cert-manager, and operator versions for deploying Ping Advanced Identity Software 2026.2    | [Link](versions.html)                                              |
-| Limitations when deploying Ping Advanced Identity Software `2026.2` on Kubernetes                                                                            | [Link](limitations.html)                                           |
+| Validated Kubernetes, Ingress-NGINX Controller, HAProxy Ingress, cert-manager, and operator versions for deploying Ping Advanced Identity Software 2026.3    | [Link](versions.html)                                              |
+| Limitations when deploying Ping Advanced Identity Software `2026.3` on Kubernetes                                                                            | [Link](limitations.html)                                           |
 | More information about the evolving nature of the `forgeops` repository, including technology previews, legacy features, and feature deprecation and removal | [Link](evolution.html)                                             |
 | Legal notices                                                                                                                                                | [Link](legal.html)                                                 |
-| Archive of release notes in ForgeOps 2026.1 are available from ForgeOps release 2026.1 documentation.                                                        | [Link](https://docs.pingidentity.com/forgeops/2026.1/rn/rn.html)   |
-| Archive of release notes in ForgeOps 2025.1 and 2025.2 are available from ForgeOps release 2025.2 documentation.                                             | [Link](https://docs.pingidentity.com/forgeops/2025.2/rn/rn.html)   |
-| Archive of release notes in 2024 and before are available from ForgeOps release 7.5 documentation.                                                           | [Link](https://docs.pingidentity.com/forgeops/7.5/rn/rn.html#2024) |
-| Archive of release notes in 2023 and before are available from ForgeOps release 7.4 documentation                                                            | [Link](https://docs.pingidentity.com/forgeops/7.4/rn/rn.html#2023) |
+| Release notes for ForgeOps 2026.2                                                                                                                            | [Link](https://docs.pingidentity.com/forgeops/2026.2/rn/rn.html)   |
+| Release notes for ForgeOps 2026.1                                                                                                                            | [Link](https://docs.pingidentity.com/forgeops/2026.1/rn/rn.html)   |
+| Release notes for ForgeOps 2025.1 and 2025.2                                                                                                                 | [Link](https://docs.pingidentity.com/forgeops/2025.2/rn/rn.html)   |
+| Release notes for 2024 and earlier                                                                                                                           | [Link](https://docs.pingidentity.com/forgeops/7.5/rn/rn.html#2024) |
+| Release notes for 2023 and earlier                                                                                                                           | [Link](https://docs.pingidentity.com/forgeops/7.4/rn/rn.html#2023) |
 
 ## 2026
 
-### June 29, 2026
+### October 26, 2026
+
+* Added a procedure to set up custom release site
+
+  A new procedure to create a custom release site has been added to the documentation. Learn more in the [Custom release site](../reference/releases.html) section.
+
+### October 14, 2026
+
+* New RCS Helm chart
+
+  You can now use a new Helm chart called `charts/rcs` to deploy the Ping Remote Connector Server. Learn more in the [Ping RCS Connector](../integration/rcs-helm-chart.html) section.
+
+* Update namespace for role-binding
+
+  The forgeops env command now updates the namespace in the `role-binding.yaml` when `--namespace` option is used. This ensures that the role binding is created in the correct namespace.
+
+* Fixed a bug in `forgeops config build` command
+
+  When running the forgeops config build command, it throws errors because of a change to use the common args. The `args.profile` parameter needs to be `args.config_profile`. It has been fixed now.
+
+* Fixed a syntax error in `docker/am/import-pem-certs.sh`
+
+  In the `docker/am/import-pem-certs.sh` file, an invalid syntax (missing ']') was found. The syntax error has been fixed.
+
+* Fixed the issue of multiple `monitor` users
+
+  When using Prometheus for scraping, it caused errors because there are two `monitor` user entries present in the DS: one each for DS and IDM. This issue has been fixed now by appropriately addressing the scraping algorithm. If you are using older versions of ForgeOps tools, and have upgraded DS to 8.1.1 version, then you can fix the issue by removing the `monitor` user created by IDM. Learn more in the [Troubleshoot monitor user issue](../troubleshoot/monitor.html) section.
+
+### ForgeOps 2026.3.2 release features
+
+#### Deprecated features[icon: alarm-clock, set=fa]
+
+The following tools are deprecated and will be removed after the deprecation period:
+
+* Kustomize
+
+  Support for Kustomize-based deployments is deprecated. Users should migrate to Helm chart-based deployments. You can use the [Migrate to Helm](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) guide in the ForgeOps repository.
+
+  * **Deprecated in:** 2026.3.2
+
+  * **Expected removal:** 12 months after 2026.3.2 release
+
+  * **Migration path:** Migrate to Helm chart-based deployments
+
+* Secret agent
+
+  The secret agent operator is deprecated. Users should migrate to the built-in Helm-generated secrets or an alternative secrets management solution such as External Secrets Operator or HashiCorp Vault. Use [Migrate to Helm-generated secrets](../prepare/security/migrate-helmsec.html) for guidance on migrating to Helm-generated secrets.
+
+  * **Deprecated in:** 2026.3.2
+
+  * **Expected removal:** 12 months after 2026.3.2 release
+
+  * **Migration path:** Migrate to Helm-generated secrets or a supported external secrets management solution
+
+#### New features and updated functionality
+
+* Restored IDM admin UI for PingIDM 8.1.0
+
+  In PingIDM 8.1.0, the legacy IDM admin UI was removed. It was also removed from the ForgeOps 2026.3.1 release. To support use cases that still require it, you can optionally enable IDM admin UI as a separate nginx pod in a Helm deployment in IDM 8.1.0 or later.
+
+  |   |                                                                                                                                                                                                                                         |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | 1. **This feature is available only in Helm deployments** and not in Kustomize deployments.
+
+  2. This feature is available in ForgeOps 2026.3.1 release and later.
+
+  3. The new URL path for the IDM is `/api` instead of `/openidm/api`. |
+
+* Updated the process of customizing DS deployments
+
+  The revised process of deploying customized DS is now available in the documentation. Learn more in the [Customize the DS Docker image](../customize/ds.html) section.
+
+  A new [DS image description](https://github.com/ForgeRock/forgeops/blob//2026.3.2/docker/ds/README.md) file has been added in the `forgeops` repository.
+
+* Enabled HTTPS access to the releases site
+
+  The [releases site](https://releases.forgeops.com) could be accessed using HTTP protocol only. Now the releases site can be accessed using HTTPS protocol.
+
+#### Bug fixes
+
+* Refined `forgeops info --json` output
+
+  The `forgeops info --json` command generated extra content that wasn't in JSON format. This caused JSON parsing errors when the output is used directly. Now, the `forgeops info --json` command has been refined so that only valid JSON format is produced.
+
+* Update `ds-set-passwords` image when DS is updated
+
+  Previously, the `ds-set-passwords` wasn't updated in the `values.yaml` file when DS image was updated, causing them to be out of sync. Now, the `ds-idrepo-0` image section is used directly instead of a separate `ds-set-passwords` image section to avoid any out-of-sync issue.
+
+* Prevent logging sensitive information in Kubernetes logs
+
+  The forgeops dsconfig command previously leaked the directory manager user's password into Kubernetes logs. Now, the forgeops dsconfig command copies a file containing the credentials to a temporary file in the pod. The dsconfig command running in the pod reads the credentials from the temporary file within the pod and is cleaned up after the command completes. This prevents the credentials from appearing in the logs.
+
+* Fixed `forgeops config build` command
+
+  The `forgeops config build` command had a bug preventing it from executing. This bug has been fixed.
+
+* The `topologySpreadConstraint` configuration is corrected
+
+  The `topologySpreadConstraint` blocks for ds-cts and ds-idrepo were improperly configured. The `matchLabels` is changed to `app.kubernetes.io/component`. The `topologyKey` is changed to `kubernetes.io/hostname`. This ensures that DS pods are upgraded using the rolling update strategy.
+
+#### Documentation updates
+
+* Procedure to customize DS Docker images
+
+  The procedure to customize DS Docker images has been updated to reflect the revised DS base image creation process. Learn more in the [Customize the DS Docker image](../customize/ds.html) section.
+
+* Procedure to migrate to Helm-based deployment
+
+  The procedure to [migrate from Kustomize-based deployment to Helm-based](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) deployment has been documented.
+
+* Updated How-to procedures
+
+  In the `forgeops` repository, the following procedures have been updated:
+
+  * [Adding custom certificates to the truststore](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/adding-user-supplied-certs-to-truststore.md).
+
+  * [Retrieve SBOMs for ForgeOps images](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/retrieve-SBOMs-based-on-original-image-URL.md).
+
+* Renamed How-to procedures
+
+  In the `forgeops` repository, the file name for the following procedures have been renamed:
+
+  * [Enabling REST APIs in PingAccess](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingam-enabling-rest-apis.md)
+
+  * [Recreating DS STS](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingds-recreating-sts.md)
+
+  * [Using an externally deployed DS with a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingds-use-an-externally-deployed-ds-with-a-forgeops-deployment.md)
+
+### ForgeOps 2026.3.1 release features
+
+#### New features and updated functionality
+
+* New `forgeops dsconfig` subcommand
+
+  A new `forgeops dsconfig` subcommand has been added to allow users to make changes to DS configuration in DS pods.
+
+  The `forgeops dsconfig` command uses the secrets in the namespace where you deployed ForgeOps to determine the connection options needed and automatically passes them to the `dsconfig` command on the DS pod of your choosing.
+
+  Enclose strings with spaces in double quotes and escape special characters as needed. Learn more using the `forgeops dsconfig --help` command.
+
+* Removed the dry run (`-r`) short flag
+
+  The dry run short flag (`-r`) conflicted with the repository option and has been removed. Use `--dryrun` instead.
+
+#### Bugfixes
+
+* Incorrect image tag for ssh-keygen job's init container
+
+  The new job added in the 2026.3.0 release for Helm-generated secrets had a bug that mixed up the latest tag during the release process. Accordingly, the init container for the ssh-keygen job was using the wrong image tag. Now this issue has been fixed by pinning the tag for ssh-keygen's init container to a digest.
+
+* AM port in `forgerock-metrics`
+
+  The AM port in `forgerock-metrics` Helm chart has been changed to `http`.
+
+* `forgeops env --upgrade` with `--no-helm` or `--no-kustomize`
+
+  The `forgeops env --upgrade` command caused errors when `--no-helm` and `--no-kustomize` flags are used. Now the `forgeops env --upgrade` command has been updated to properly honor those flags.
+
+* DS base image creation is under revision
+
+  The DS base image creation process is being revised to incorporate the new changes to the DS product and the `forgeops` tool. The revised process will be available in the documentation soon.
+
+### August 28, 2026
+
+* `initImage` of `ssh-keygen` tag corrected
+
+  The `initImage` tag of the `ssh-keygen` job was incorrectly set, which affected the use of Helm-generated secrets. Now the `initImage` tag setting has been corrected.
+
+### August 24, 2026
+
+* Deploying on WSL2 minikube cluster
+
+  According to [this pull request](https://github.com/kubernetes/minikube/pull/23409), the network issues have been resolved. If you want to try deploying ForgeOps on a WSL2 minikube cluster, you can [set up minikube on WSL2](https://minikube.sigs.k8s.io/docs/tutorials/wsl_docker_driver) and deploy ForgeOps. However, the ForgeOps team hasn't tested the deployment on a WSL2 minikube cluster and might not be able to vouch for the correctness or completeness of the procedure.
+
+### August 17, 2026
+
+* Latest version of prereqs are installed by `forgeops prereqs` command
+
+  The `forgeops prereqs` command now installs the latest versions of prerequisite components, except secret-agent. This avoids issues with older versions of prerequisite components that might not be compatible with the latest ForgeOps release.
+
+### August 14, 2026
+
+* Updated platform UI images are available
+
+  Updated platform UI images are now available in ForgeOps deployments:
+
+  * Ping Advanced Identity Software admin UI : **8.1.2**
+
+  * Login UI : **8.1.2**
+
+  * End-user UI : **8.1.2**
+
+* Fix `forgeops env --upgrade` command
+
+  The `forgeops env --upgrade` command now correctly honors `--no-helm` and `--no-kustomize` flags instead of erroring out. This allows you to upgrade only Helm charts or only Kustomize configurations in your ForgeOps deployment.
+
+* Enable or disable security features
+
+  In ForgeOps 2026.3.0 release and later, the security features are enabled by default when you create a ForgeOps deployment environment. You can also disable the security features when you create a ForgeOps deployment environment by using the `--insecure` option of the `forgeops env` command. Learn more in the [`forgeops env` command reference](../reference/forgeops-cmd-ref.html#forgeops-env) section.
+
+### ForgeOps 2026.3.0 release features
+
+#### New features and updated functionality
+
+* Helm-generated secrets
+
+  * Secrets generation (Helm only)
+
+    You can now generate secrets with Helm in ForgeOps deployments. When you create a new ForgeOps environment with release 2026.2.0 or later, Helm-generated secret generation is enabled by default. Learn more in [Helm-generated secrets](../prepare/security/helm-gen-sec.html).
+
+  * ssh-keygen job
+
+    Helm cannot generate ssh keys, so a Kubernetes job is used to generate an ssh key and store it in a secret. This is used by `amster` to connect to am.
+
+  * New migration command
+
+    A new subcommand, **forgeops migrate sa2hs**, has been added. This subcommand can be used to migrate secrets from secret agent to Helm-generated secrets.
+
+* Integration with the PingOne Worker service
+
+  ForgeOps 2026.3 adds integration with the PingOne Worker service so you can use real-time risk scores to make authentication decisions. Learn more in [Integrate ForgeOps with the PingOne Worker service](../integration/int-p1-worker.html).
+
+* Helm chart for RCS
+
+  A new Helm chart has been created for RCS Server. This allows users to synchronize data with a ForgeOps deployment. Learn more in the [ForgeOps RCS Helm chart README.md file](https://github.com/ForgeRock/forgeops/tree/2026.3.2/charts/rcs/README.md).
+
+* Dynamic job naming (Helm only)
+
+  The Helm release revision number is now appended to the names of `amster`, `ds-set-passwords`, and `keystore-create` Kubernetes jobs in the `identity-platform` Helm chart. For example `amster-3`, `ds-set-passwords-3`, and `keystore-create-3`. This ensures that when the `helm upgrade` command is run, it generates a distinct job name, and prevents failures caused by Kubernetes' immutability constraint on existing jobs.
+
+* Increased TTL for Helm jobs (Helm only)
+
+  The default `ttlSecondsAfterFinished` value for all three Kubernetes jobs has been increased from 7200 seconds (2 hours) to 43200 seconds (12 hours), to afford more time to inspect completed or failed jobs before they are automatically cleaned up.
+
+* Adding PingOne secret
+
+  It is now possible to create and use a secret with ForgeOps to connect to the PingOne Worker Service. This secret gets mounted on the AM filesystem so that it can be used by AM. A new flag has been added to `forgeops env` to set the secret name. Learn more in the [PingOne Worker Service integration](../integration/int-p1-worker.html) section.
+
+* Applying schema updates to existing deployments
+
+  When you upgrade a ForgeOps deployment, DS schema updates now run automatically. A new `add schema` script in the `ds-idrepo` StatefulSet startup process applies schema changes when the deployed DS version requires them or when the schema is missing.
+
+* Moving DS runtime scripts into the Helm chart
+
+  Because the DS runtime scripts now apply changes over time, they are now part of the Helm chart. This lets schema changes apply without rebuilding DS images. For compatibility, the scripts remain hard-linked in `docker/DS` until older ForgeOps versions are no longer supported.
+
+#### Bug fixes
+
+* Dynamic Kubernetes job naming (Helm only)
+
+  The `amster`, `ds-set-passwords`, and `keystore-create` Kubernetes job names in the `identity-platform` Helm chart now include the Helm release revision as a suffix, such as `amster-3`, `ds-set-passwords-3`, and `keystore-create-3`. This ensures that each `helm upgrade` creates a distinct job name and avoids failures caused by the Kubernetes job immutability constraint.
+
+* Adding annotations for Traefik sticky sessions
+
+  The `forgeops prereqs` command installs Traefik in NGINX compatibility mode to ease migration from the old, unmaintained NGINX ingress. If you install Traefik manually, sticky sessions can fail. ForgeOps now adds Traefik-specific annotations for sticky sessions to prevent that issue.
+
+* `forgeops wait` reports success prematurely
+
+  After `kubectl rollout restart` on a DS StatefulSet, `forgeops wait` could report success before the rollout completed. ForgeOps now uses `kubectl rollout status` to check readiness.
+
+* Set the AM service port to HTTP
+
+  The AM service port name now uses `http` instead of `https`. The previous name worked with NGINX and with Traefik in NGINX compatibility mode, but it caused failures when Traefik ran normally because the AM pod port is not an SSL port.
+
+#### Documentation updates
+
+* Connecting to the PingOne Worker service
+
+  The documentation now includes a detailed procedure for connecting to the PingOne Worker service. Learn more in the [PingOne Worker service integration](../integration/int-p1-worker.html).
+
+* Migrating to Helm-generated secrets
+
+  The documentation now includes steps for migrating from secret-agent to Helm-generated secrets. Learn more in the [Helm-generated secrets](../prepare/security/helm-gen-sec.html) and [Migrate to Helm-generated secrets](../prepare/security/migrate-helmsec.html) sections.
+
+* `forgeops upgrade-am-config` command
+
+  The `forgeops upgrade-am-config` command lets you upgrade PingAM configuration profiles separately in your ForgeOps deployment environments. Learn more in the [`forgeops upgrade-am-config` command reference](../reference/forgeops-cmd-ref.html#upgrade-am-config).
+
+* Archived ForgeOps documentation for releases 7.2, 7.3, and 7.4
+
+  The documentation for ForgeOps releases 7.2, 7.3, and 7.4 is now [archived](https://docs.pingidentity.com/archive/#family-forgeops). This documentation is for reference only and is no longer actively maintained. PDFs are available at:
+
+  * [ForgeOps 7.2 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.2/forgeops-7.2.pdf)
+
+  * [ForgeOps 7.3 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.3/forgeops-7.3.pdf)
+
+  * [ForgeOps 7.4 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.4/forgeops-7.4.pdf)
 
 * Support policy for ForgeOps-provided Ping Advanced Identity Software images
 
-  Support for ForgeOps-provided Ping Advanced Identity Software images has been clarified. Learn more in the [Support for ForgeOps-provided images](../start/support.html#forgeops-image-support) section.
+  The documentation now clarifies support for ForgeOps-provided Ping Advanced Identity Software images. Learn more in the [Support for ForgeOps-provided images](../start/support.html#forgeops-image-support) section.
 
-### ForgeOps 2026.2.1 release features
+* Replaced card blocks with table blocks in the documentation
 
-* Updated the list of how-tos available in \`forgeops\`repository
-
-  The list of [how-to articles](../reference/how-tos.html) available in the `forgeops` repository has been updated in the documentation.
-
-* SBOM for ForgeOps images
-
-  Software Bill of Materials (SBOM) is now available for ForgeOps images. SBOM provides a detailed inventory of the components and dependencies used in ForgeOps images, which can help you identify and manage security vulnerabilities and compliance issues. Learn more in the [SBOM article](https://github.com/ForgeRock/forgeops/blob//2026.2.1/how-tos/retrieve-SBOMs-based-on-original-image-URL.md).
-
-* Added self-signed certificate
-
-  A self-signed certificate is now included for testing purposes in minikube environments.This certificate isn't intended for production use and should be used only in test environments.
-
-* Avoid using secret generator
-
-  There has been a lack of response from the secret generator project for questions and issues on using secret generator, we don't recommend or use it in ForgeOps environments. We'll be removing it from our artifacts in a future ForgeOps release. We've removed use of secret generator from ForgeOps documentation. Existing environments aren't affected by this change.
-
-* IDM admin UI is deprecated in 8.1
-
-  The IDM administration endpoint is deprecated in Ping Advanced Identity Software 8.1 and will be removed in a future release. You should use the identity Ping Advanced Identity Software admin UI or IDM REST API to administer user identities instead of the IDM admin UI. Learn more about this change in [Platform admin UI for standalone IDM](https://docs.pingidentity.com/pingidm/8.1/release-notes/whats-new.html#wn-platform-admin-ui-810).
-
-### ForgeOps 2026.2.0 release features
-
-* Removed `ds-util` container
-
-  The `ds-util` container has been removed because the same tasks can be performed directly on DS pods.
-
-- Read-only root filesystem for init containers (Helm only)
-
-  The init containers of all pods have been reconfigured to enable `readOnlyRootFilesystem` security context. This has no impact on deployments, but requires that DS stateful sets be recreated. To enable the `readOnlyRootFilesystem` security context, follow [these steps](#enable-sec-features).
-
-- Flags to enable or disable security features (Helm only)
-
-  You can enable or disable the new security features in your ForgeOps environment using the `--secure` or `--insecure` flags. By default, new environments are created with the `--secure` flag, so the new security features are enabled.
-
-  The `temp` directory of Tomcat is writeable, so users can continue to edit scripts in AM admin UI even when security is enabled.
-
-|   |                                                                                           |
-| - | ----------------------------------------------------------------------------------------- |
-|   | These flags can be enabled or disabled only in ForgeOps environments deployed using Helm. |
-
-To enable the security features in an existing environment:
-
-1. Run the `forgeops` command:
-
-   ```
-   $ cd /path/to/forgeops
-   $ ./bin/forgeops env --env-name my-env --secure
-   ```
-
-2. Recreate the DS stateful set using the instructions in the [how to recreate an STS article](https://github.com/ForgeRock/forgeops/blob//2026.2.1/how-tos/recreating-ds-sts.md).
-
-   * The platform pods deployed as non-root user using user ID
-
-     The AM, DS, and IDM pods are now deployed as the standard non-root user ID `11111` and the username is no longer referred to. The user ID `11111` is a security standard across the platform. This user ID is set in the pod security context as the `runAsUser` property.
-
-   * `PodDisruptionBudgets` for product components
-
-     You can enable `PodDisruptionBudgets` for platform product components in the Helm charts for Ping Advanced Identity Software including PingGateway. This feature is disabled by default. You can enable it for each component by setting component.pdb.enabled: true in your values file.
-
-     The default policy keeps at least one pod available by setting minAvailable: 1. You can change this value by appropriately changing the value of component.pdb.minAvailable or component.pdb.maxUnavailable.
-
-     The affected components are: `am`, `idm`, `admin-ui`, `end-user-ui`, `login-ui`, `ds-idrepo`, `ds-cts` and `ig` (ping-gateway).
-
-   * Supported Ping Advanced Identity Software images
-
-     ForgeOps supports the last three major or minor versions of the Ping Advanced Identity Software images. With the availability of 8.1 images, ForgeOps supports 8.1, 8.0, and 7.5 versions of the platform images, and **7.4 images are no longer supported**.
-
-     We recommend customers that upgrade to a newer version of the platform images. Use the [upgrade guide](https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-product.html) to upgrade to the latest image. The older tags remain available on <http://releases.forgeops.com> until the next major/minor release.
-
-   * The `config export no-upgrade` topic is removed from documentation
-
-     The `config export` functionality has been included in the forgeops config export command. Because the forgeops config export command already separates out the upgrade function, this topic is not required in the Troubleshooting section of the documentation. The `no-upgrade` option of `config export` topic is removed from the documentation.
-
-   * New `ttl` options for use with `amster` and `ds-set-passwords` jobs
-
-     The `amster` and `ds-set-passwords` jobs now have a time-to-live (TTL) option that you can set to retain these jobs for a specified time. This is useful for jobs that are run manually need and to be retained to run to completion. To use this feature, set the `ttlSecondsAfterFinished` option. The default is 7200 seconds.
-
-     |   |                                                     |
-     | - | --------------------------------------------------- |
-     |   | This feature is available in new environments only. |
-
-   * Ability to define `apiVersion`, `kind`, and `spec` for a secret
-
-     You can now define the `apiVersion`, `kind`, and `spec` for secrets defined in the `platform.secrets`. This allows you to define secrets using `external-secrets`.
+  Documentation pages now use table blocks instead of card blocks to improve readability and make information easier to scan.
 
 ---
 
 ---
 title: Legal notices
-description: Click here for legal information about product documentation published by Ping Identity.
+description: Review ForgeOps legal notices
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:rn:legal
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/rn/legal.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/rn/legal.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-18T11:55:56Z
 section_ids:
   about_ping_advanced_identity_software: About Ping Advanced Identity Software
   fontawesome_copyright: FontAwesome copyright
@@ -195,13 +417,14 @@ Copyright © 2017 by Dave Gandy, <https://fontawesome.com/>. This Font Software 
 
 ---
 title: Limitations
-description: This page documents limitations on the Ping Advanced Identity Software when deployed on a Kubernetes cluster in the cloud.
+description: Review ForgeOps limitations
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:rn:limitations
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/rn/limitations.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/rn/limitations.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-18T16:22:00Z
 section_ids:
   platform-limitations: On all Ping Advanced Identity Software components
   ds-limitations: On PingDS
@@ -268,7 +491,7 @@ This page documents limitations on the Ping Advanced Identity Software when depl
 
 * Value substitution is supported only for some configuration properties.
 
-  AM doesn't support [property value substitution](../customize/value-substitution.html) for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8/setup-guide/property-value-substitution.html) in the AM documentation for more information.
+  AM doesn't support [property value substitution](../customize/value-substitution.html) for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8.1/setup-guide/property-value-substitution.html) in the AM documentation for more information.
 
 * The SOAP binding isn't supported for SAML v2.0 single logout.
 
@@ -278,7 +501,7 @@ This page documents limitations on the Ping Advanced Identity Software when depl
 
   The shared identity repository deployed with the CDK and the CDM isn't preconfigured to store UMA objects, such as resources, labels, audit messages, and pending requests.
 
-  In order to use UMA in the CDK or the CDM, you'll need to customize your deployment. For more information, refer to the [*User-Managed Access (UMA) 2.0 Guide*](https://docs.pingidentity.com/pingam/8/uma-guide).
+  In order to use UMA in the CDK or the CDM, you'll need to customize your deployment. For more information, refer to the [*User-Managed Access (UMA) 2.0 Guide*](https://docs.pingidentity.com/pingam/8.1/uma-guide).
 
 ## On IDM
 
@@ -304,13 +527,14 @@ There are no limitations for this release.
 
 ---
 title: Validated software versions
-description: The following Kubernetes versions have been validated for use with Ping Advanced Identity Software 2026.2:
+description: Check validated Kubernetes, ingress controller, cert-manager, and ForgeOps operator versions for ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:rn:versions
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/rn/versions.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/rn/versions.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-23T12:17:10Z
 section_ids:
   kubernetes: Kubernetes
   forgeops_operators: ForgeOps operators
@@ -320,7 +544,7 @@ section_ids:
 
 ## Kubernetes
 
-The following Kubernetes versions have been validated for use with Ping Advanced Identity Software 2026.2:
+The following Kubernetes versions have been validated for use with Ping Advanced Identity Software 2026.3:
 
 | Cloud provider                          | Kubernetes version                                                                              |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -339,12 +563,12 @@ The forgeops prereqs commmand is used to install the following prerequisites:
 
 * `cert-manager` version 1.13.0
 
-If you install the prerequisites using a technique other than using the forgeops prereqs command, install prerequisites of this version. Newer versions might work, but they haven't been tested with Ping Advanced Identity Software 2026.2.
+If you install the prerequisites using a technique other than using the forgeops prereqs command, install prerequisites of this version. Newer versions might work, but they haven't been tested with Ping Advanced Identity Software 2026.3.
 
 ## ForgeOps operators
 
-ForgeOps has validated the following operator versions for use with Ping Advanced Identity Software 2026.2:
+ForgeOps has validated the following operator versions for use with Ping Advanced Identity Software 2026.3:
 
-* [Secret Agent operator](https://github.com/ForgeRock/secret-agent) — version 1.2.10
+* [Secret Agent operator](https://github.com/ForgeRock/secret-agent) — version 1.2.12
 
 * [DS operator](https://github.com/ForgeRock/ds-operator) — version 0.3.0

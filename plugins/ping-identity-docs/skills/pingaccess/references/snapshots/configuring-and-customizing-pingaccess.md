@@ -1056,9 +1056,9 @@ section_ids:
 
 2. Uncomment the `Socket` appender configurations in the `Api Audit log : CEF Formatted syslog appender`, `Engine Audit log : CEF Formatted syslog appender`, `Agent Audit log : CEF Formatted syslog appender`, `SidebandClient Audit log : CEF Formatted syslog appender`, and `Sideband Audit log : CEF Formatted syslog appender` sections.
 
-   |   |                                                                                                                                                                                                                                                                                                                                                        |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | Each `Socket` appender is followed by two related appenders, `RollingFile` and `PingFailover`. Together, they create a running `audit-cef-syslog-failover.log` file in the *\<PA\_HOME>*/log/pingaccess.log directory if CEF logging fails for any reason. If you uncomment the `Socket` appenders, make sure to uncomment the related appenders also. |
+   |   |                                                                                                                                                                                                                                                                                                                                                       |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Each `Socket` appender is followed by two related appenders, `RollingFile` and `PingFailover`. Together, they create a running `audit-cef-syslog-failover.log` file in the *\<PA_HOME>*/log/pingaccess.log directory if CEF logging fails for any reason. If you uncomment the `Socket` appenders, make sure to uncomment the related appenders also. |
 
    ### Example:
 

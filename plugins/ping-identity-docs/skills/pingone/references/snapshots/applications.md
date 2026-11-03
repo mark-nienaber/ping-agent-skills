@@ -1,13 +1,14 @@
 ---
 title: Access tokens and ID tokens
-description: Learn how PingOne uses access tokens and ID tokens in OAuth 2 and OIDC requests.
+description: PingOne uses access tokens and ID tokens in OAuth 2.0 and OIDC requests.
 component: pingone
 page_id: pingone:applications:p1_access_token_id_token
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_access_token_id_token.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 9, 2023
+revdate: 2026-08-03T00:00:00Z
 section_ids:
+  how-clients-obtain-access-tokens: How clients obtain access tokens
   related-links: Related links
 ---
 
@@ -15,9 +16,17 @@ section_ids:
 
 Access tokens are credential strings that represent authorization to access a protected resource.
 
-Client applications obtain access tokens by making OAuth 2 or OpenID Connect (OIDC) requests to an authorization server. Resource servers require clients to authenticate using access tokens.
+## How clients obtain access tokens
 
-Access tokens are obtained from the token endpoint, when using the client credentials grant type, or from the authorization endpoint, when using the implicit grant type. Access tokens are typically granted on behalf of a specific authenticated user. Tokens granted directly to applications are called application tokens.
+Client applications obtain access tokens by making OAuth 2.0 or OpenID Connect (OIDC) requests to an authorization server. Resource servers then require clients to authenticate using access tokens.
+
+Access tokens are obtained:
+
+* From the token endpoint when using the client credentials grant type.
+
+* From the authorization endpoint when using the implicit grant type.
+
+Access tokens are typically granted on behalf of a specific authenticated user. Tokens granted directly to applications are called application tokens.
 
 ## Related links
 
@@ -33,7 +42,7 @@ page_id: pingone:applications:p1_adding_custom_resource
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_adding_custom_resource.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 10, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -108,6 +117,8 @@ Use the **Resources** page to add a custom resource to PingOne.
 
 * You can add more scopes to the custom resource. Learn more in [Editing a resource](p1_editresource.html).
 
+* You can map attributes to scopes defined for a custom resource. Learn more in [Editing a resource](p1_editresource.html).
+
 * With PingOne Authorize, you can define application resources and permissions to set up role-based access control for the custom resource. Learn more in [Application permissions](p1_application_permissions.html) and [Editing a resource](p1_editresource.html).
 
 * You can enable an OIDC-based application to request scopes from multiple resources in a single request. Learn more about the **Request scopes to access multiple resources** option in [Editing an application - OIDC](p1_edit_application_oidc.html).
@@ -122,7 +133,7 @@ page_id: pingone:applications:p1_adding_amazon_web_services_p1_application_porta
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_adding_amazon_web_services_p1_application_portal.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 10, 2025
+revdate: 2025-01-10T00:00:00Z
 section_ids:
   steps: Steps
   result: Result:
@@ -218,7 +229,7 @@ page_id: pingone:applications:p1_applications_add_applications
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2026
+revdate: 2026-04-23T00:00:00Z
 page_aliases: ["p1_enable_application.adoc"]
 section_ids:
   steps: Steps
@@ -250,9 +261,9 @@ PingOne supports the following application types:
 
 * Worker
 
-|   |                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To use a templated service provider integration instead of creating a new application, go to the **Application Catalog**. Learn more in [Application catalog](p1_application_catalog.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To use a templated service provider integration instead of creating a new application, go to the **Application Catalog**. Learn more in [Application catalog](p1_application_catalog.html).For Microsoft 365 federation scenarios that use the WS-Federation and WS-Trust protocols with PingOne, use the Microsoft 365 application integration in the application catalog. Learn more in [Adding Microsoft 365 to allow users to sign on using PingOne](p1_adding_microsoft_365.html). |
 
 ## Steps
 
@@ -330,7 +341,7 @@ page_id: pingone:applications:p1_applicationcatalog
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_applicationcatalog.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 29, 2025
+revdate: 2025-05-29T00:00:00Z
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -454,7 +465,7 @@ page_id: pingone:applications:p1_add_application_permissions
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_add_application_permissions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 10, 2025
+revdate: 2025-01-10T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -566,7 +577,7 @@ page_id: pingone:applications:p1_adding_microsoft_365
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_adding_microsoft_365.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 21, 2025
+revdate: 2025-05-21T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -576,7 +587,7 @@ section_ids:
 
 # Adding Microsoft 365 to allow users to sign on using PingOne
 
-Use the application catalog to add Microsoft 365 to your application portal and connect the application to a Microsoft Entra ID domain.
+Use the application catalog to add Microsoft 365 to your application portal and connect the application to a Microsoft Entra ID domain using the WS-Federation and WS-Trust protocols.
 
 PingOne supports the Microsoft 365 passive and active profiles for single sign-on (SSO) *(tooltip: \<div class="paragraph">
 \<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
@@ -760,7 +771,7 @@ page_id: pingone:applications:p1_external_apps_not_included_in_apps_portal
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_external_apps_not_included_in_apps_portal.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 5, 2025
+revdate: 2025-06-05T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -791,7 +802,7 @@ page_id: pingone:applications:p1_adding_resource_links_to_application_portal
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_adding_resource_links_to_application_portal.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 10, 2025
+revdate: 2025-01-10T00:00:00Z
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -841,7 +852,7 @@ page_id: pingone:applications:p1_application_access_control
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_application_access_control.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2025-04-28T00:00:00Z
 page_aliases: ["p1_config_app_access_control.adoc", "p1_audit_access_events.adoc"]
 section_ids:
   configure_app_access: Configuring application access control
@@ -970,7 +981,7 @@ page_id: pingone:applications:p1_application_catalog
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_application_catalog.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 10, 2025
+revdate: 2025-01-10T00:00:00Z
 ---
 
 # Application catalog
@@ -989,7 +1000,7 @@ page_id: pingone:applications:p1_application_permissions
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_application_permissions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 5, 2025
+revdate: 2025-11-05T00:00:00Z
 section_ids:
   resources-and-permissions: Resources and permissions
   configuring-application-permissions: Configuring application permissions
@@ -1097,7 +1108,7 @@ page_id: pingone:applications:p1_application_portal_showing_applications
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_application_portal_showing_applications.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 21, 2025
+revdate: 2025-05-21T00:00:00Z
 ---
 
 # Application portal
@@ -1124,7 +1135,7 @@ page_id: pingone:applications:p1_application_types
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_application_types.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 26, 2025
+revdate: 2025-02-26T00:00:00Z
 ---
 
 # Applications
@@ -1138,6 +1149,10 @@ When you add an application, PingOne creates a client ID for the application, wh
 |   | To enable or disable an application, click the toggle in the **Applications** list. |
 
 PingOne supports several application types. Use the application type that best fits your requirements.
+
+|   |                                                                                                                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For Microsoft 365 federation scenarios that use the WS-Federation and WS-Trust protocols with PingOne, use the Microsoft 365 application integration. Learn more in [Adding Microsoft 365 to allow users to sign on using PingOne](p1_adding_microsoft_365.html). |
 
 * SAML application
 
@@ -1205,7 +1220,7 @@ page_id: pingone:applications:p1_applications_menu
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_applications_menu.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2026
+revdate: 2026-04-23T00:00:00Z
 page_aliases: ["getting_started_with_pingone:p1_mfa_creating_a_native_app.adoc"]
 ---
 
@@ -1231,7 +1246,7 @@ page_id: pingone:applications:p1_apply_auth_policy_to_applications
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_apply_auth_policy_to_applications.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2025
+revdate: 2025-05-23T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1287,7 +1302,7 @@ page_id: pingone:applications:p1_apply_application_portal_policy
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_apply_application_portal_policy.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 27, 2025
+revdate: 2025-01-27T00:00:00Z
 section_ids:
   steps: Steps
   result: Result
@@ -1358,7 +1373,7 @@ page_id: pingone:applications:p1_mfa_associating_sign_on_policy_with_web_app
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_mfa_associating_sign_on_policy_with_web_app.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 12, 2024
+revdate: 2024-09-12T00:00:00Z
 section_ids:
   associating-your-authentication-policy-with-your-web-app-console: Associating your authentication policy with your web app console
   before-you-begin: Before you begin
@@ -1450,7 +1465,7 @@ page_id: pingone:applications:p1_attribute_access_control
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_attribute_access_control.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2024
+revdate: 2024-05-23T00:00:00Z
 section_ids:
   related-links: Related links
 ---
@@ -1477,7 +1492,7 @@ page_id: pingone:applications:p1_auth_policies_for_applications
 canonical_url: https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2025
+revdate: 2025-05-23T00:00:00Z
 section_ids:
   no-authentication-policy-assignments: No authentication policy assignments
   one-authentication-policy-assignment: One authentication policy assignment

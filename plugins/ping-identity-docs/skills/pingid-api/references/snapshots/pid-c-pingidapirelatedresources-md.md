@@ -1,9 +1,11 @@
 ---
 title: Related resources
-description: When building your applications, refer to the collection of source code samples in Ping Identity's GitHub repository:
+description: Additional resources for developers using PingID API
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiRelatedResources
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiRelatedResources.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   sample-code-and-applications: Sample code and applications
   pingone-developer-account-signup: PingOne developer account signup

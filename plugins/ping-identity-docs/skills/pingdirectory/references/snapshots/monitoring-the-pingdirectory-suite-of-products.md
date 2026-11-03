@@ -1,6 +1,6 @@
 ---
 title: About the collection of system monitoring data
-description: All PingDirectory servers have the capability to monitor the health of the server and host system they run on for diagnostic review and troubleshooting.
+description: Understand how PingDirectory servers collect server and host system monitoring data through the Stats Collector plugin and Host System monitor provider.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_collection_system_monitoring_data
@@ -42,7 +42,7 @@ Enabling the Host System monitor provider automatically gathers CPU and memory u
 
 ---
 title: Accessing the Processing Time Histogram
-description: The PingDirectory server provides a processing time histogram that classifies operation response time into user-defined buckets.
+description: Access the PingDirectory processing time histogram in the admin console to view operation response times classified into user-defined buckets.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_access_processing_time_histogram
@@ -91,14 +91,14 @@ The histogram tracks the processing on a per-operation basis and as a percentage
 
 ---
 title: Configuring SNMP
-description: Because all server instances provide information for a common set of management information bases (MIBs), each server instance provides its information under a unique SNMPv3 context name equal to the server instance name.
+description: Configure SNMP for the PingDirectory server, including the SNMPv3 plugin and the context name that identifies each server instance.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_config_snmp
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_config_snmp.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 14, 2024
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -254,7 +254,7 @@ The server instance name is defined in the Global Configuration and is construct
 
       ### Example:
 
-      In this example, the `-m all`option loads all MIBs in the default MIB directory in `/usr/share/snmp/mibs` so that MIB names can be used in place of numeric OIDs.
+      In this example, the `-m all` option loads all MIBs in the default MIB directory in `/usr/share/snmp/mibs` so that MIB names can be used in place of numeric OIDs.
 
       ```shell
       $ snmpget -v 3 -u snmpuser -A password -l authNoPriv -n host.example.com:389 \
@@ -275,6 +275,7 @@ page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_dist
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_distributed_tracing_main.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 4, 2026
 section_ids:
   why-use-distributed-tracing: Why use distributed tracing?
   what-is-distributed-tracing: What is distributed tracing?
@@ -401,14 +402,14 @@ PingDirectory can push traces to an [OpenTelemetry Protocol (OTLP)](https://open
 
 ---
 title: Enabling and configuring the StatsD monitoring endpoint
-description: The Monitoring Endpoint configuration type provides the StatsD endpoint type that you can use to transfer metrics data in the StatsD format.
+description: Enable and configure the StatsD monitoring endpoint with dsconfig or the admin console to send PingDirectory metrics data in the StatsD format.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_enable_config_statsd_monitor_endpoint
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_enable_config_statsd_monitor_endpoint.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_ds_enable_config_statsd_collector_plugin.adoc", "pd_proxy_send_metrics_splunk_statsd.adoc"]
 section_ids:
   about-this-task: About this task
@@ -426,21 +427,21 @@ section_ids:
 
 # Enabling and configuring the StatsD monitoring endpoint
 
-The Monitoring Endpoint configuration type provides the StatsD endpoint type that you can use to transfer metrics data in the StatsD format.
+The monitoring endpoint configuration type provides the StatsD endpoint type that you can use to transfer metrics data in the StatsD format.
 
 ## About this task
 
-You can configure the Monitoring Endpoint using the `dsconfig` command or the admin console.
+You can configure the monitoring endpoint using the `dsconfig` command or the admin console.
 
 ## Steps
 
-* To create the StatsD monitoring Endpoint, use either of the following:
+* To create the StatsD monitoring endpoint, use either of the following:
 
   ### Choose from:
 
   * To use the command-line, run `dsconfig` with the `create-monitoring-endpoint` option.
 
-    This example configures a new StatsD Monitoring Endpoint to send UDP data to localhost port 8125 using `dsconfig`.
+    This example configures a new StatsD monitoring endpoint to send UDP data to localhost port 8125 using `dsconfig`.
 
     ```
     dsconfig create-monitoring-endpoint \
@@ -462,7 +463,7 @@ You can configure the Monitoring Endpoint using the `dsconfig` command or the ad
 
     4. Click **New Monitoring Endpoint**.
 
-  When you configure Monitoring Endpoint include:
+  When you configure the monitoring endpoint, include:
 
   * The endpoint's host name
 
@@ -472,7 +473,7 @@ You can configure the Monitoring Endpoint using the `dsconfig` command or the ad
 
   * A toggle to use SSL if you use TCP
 
-  You can configure a StatsD Monitoring Endpoint with custom tags using the `additional-tags` property. This adds the defined tags to each metric message sent to the endpoint. Each tag should be created in a "key=value" format. Additional tags are appended to the end of the StatsD message. Here is a sample StatsD message with custom tags:
+  You can configure a StatsD monitoring endpoint with custom tags using the `additional-tags` property. This adds the defined tags to each metric message sent to the endpoint. Each tag should be created in a "key=value" format. Additional tags are appended to the end of the StatsD message. Here is a sample StatsD message with custom tags:
 
   ```
   example.metric:123|g|#tag1:value1,tag2:value2
@@ -527,7 +528,7 @@ Examples of metrics you can send are:
 
     |   |                                                                                                                                                                                                                                                                         |
     | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    |   | If you are not using Data Metrics Server to monitor your server, you can disable the generation of some unnecessary metrics files for the StatsD Monitoring Endpoint. To do this, set the `generate-collector-files` property on the Stats Collector Plugin to `false`. |
+    |   | If you are not using Data Metrics Server to monitor your server, you can disable the generation of some unnecessary metrics files for the StatsD monitoring endpoint. To do this, set the `generate-collector-files` property on the Stats Collector Plugin to `false`. |
 
   * To use the admin console:
 
@@ -555,9 +556,9 @@ After you enable the Stats Collector and create the StatsD monitoring endpoint, 
 | - | --------------------------------------------------------- |
 |   | This topic applies only to the PingDirectoryProxy server. |
 
-Using the StatsD Endpoint type, you can send metric data to a Splunk installation. In Splunk, you can use Secure Sockets Layer (SSL) *(tooltip: \<div class="paragraph">
+Using the StatsD endpoint type, you can send metric data to a Splunk installation. In Splunk, you can use Secure Sockets Layer (SSL) *(tooltip: \<div class="paragraph">
 \<p>A protocol for authenticated and encrypted links between networked machines, typically over HTTPS. SSL was deprecated in 1999 in favor of Transport Layer Security (TLS).\</p>
-\</div>)* to secure ports opened for StatsD. You can configure open UDP or TCP ports in Splunk to accept only connections from a certain hostname or IP address.
+\</div>)* to secure ports opened for StatsD. You can configure open UDP or TCP ports in Splunk to accept only connections from a certain host name or IP address.
 
 |   |                                                                                                                                                                                                         |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -574,18 +575,18 @@ To securely send UDP or TCP data to Splunk:
 ---
 
 ---
-title: MIBS
-description: The server provides SMIv2-compliant management information base (MIB) definitions (RFC 2578, 2579, 2580) for distinct monitoring statistics. These MIB definition text files are in the server's /resource/mib directory.
+title: MIBs
+description: "Use the SMIv2-compliant MIB definition files in the server's resource/mib directory for SNMP monitoring of LDAP servers, backends, replication, and processing time."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_mibs
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_mibs.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 14, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
-# MIBS
+# MIBs
 
 The server provides SMIv2-compliant management information base (MIB) definitions (RFC 2578, 2579, 2580) for distinct monitoring statistics. These MIB definition text files are in the server's `/resource/mib` directory.
 
@@ -599,7 +600,7 @@ Each MIB provides managed object tables for each specific SNMP management inform
 
   Provides a collection of connection-oriented performance data that is based on a connection handler in the server.
 
-A server typically contain only one connection handler and therefore supplies only one table entry.
+A server typically contains only one connection handler and therefore supplies only one table entry.
 
 * Local DB Backend MIB
 
@@ -625,7 +626,7 @@ The server generates an extensive set of SNMP traps for event monitoring. The tr
 
 ---
 title: Monitoring disk space usage
-description: The disk space usage monitor provides information about the amount of usable disk space available for the server components.
+description: Understand the PingDirectory disk space usage monitor and its low space warning, low space error, and out of space error thresholds.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_disk_space_usage
@@ -671,21 +672,21 @@ If the out of space error threshold is set to zero, then the server does not att
 
 ---
 title: Monitoring key performance indicators by application
-description: PingDirectory server can be configured to track many key performance metrics, such as throughput and response-time, by the client applications requesting them.
+description: Configure the PingDirectory server to track throughput and response time key performance indicators by client application to measure service-level agreements.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_key_perf_indicators
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_monitor_key_perf_indicators.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 12, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Monitoring key performance indicators by application
 
 PingDirectory server can be configured to track many key performance metrics, such as throughput and response-time, by the client applications requesting them.
 
-This feature is invaluable for measuring whether the identify infrastructure meets all of your service-level agreements (SLA) that have been defined for client applications.
+This feature is invaluable for measuring whether the identity infrastructure meets all of your service-level agreements (SLA) that have been defined for client applications.
 
 When enabled, the per-application monitoring data:
 
@@ -701,7 +702,7 @@ For more information on using the Stats Logger, see [Profiling server performanc
 
 ---
 title: Monitoring over LDAP
-description: The PingDirectory server exposes a majority of its information under the cn=monitor entry.
+description: Use the ldapsearch tool to access PingDirectory monitor entries over LDAP in the cn=monitor entry.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_over_ldap
@@ -734,7 +735,7 @@ The PingDirectory server exposes a majority of its information under the `cn=mon
 
 ---
 title: Monitoring the PingDirectory Suite of Products
-description: The PingDirectory and PingDirectoryProxy servers provide a flexible monitoring framework that enables you to track server performance.
+description: Overview of the PingDirectory monitoring framework, including the cn=monitor entry, the admin console, SNMP, JMX, LDAP, and the Periodic Stats Logger.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_manage_monitoring
@@ -754,14 +755,14 @@ This framework exposes its monitoring information under the `cn=monitor` entry a
 
 ---
 title: Monitoring the server using JConsole
-description: Set up JConsole to monitor the server using a remote process.
+description: Monitor the PingDirectory server with JConsole as a remote process after enabling the JMX Connection Handler.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_dir_server_jconsole
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_monitor_dir_server_jconsole.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 13, 2024
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   steps: Steps
   example: Example:
@@ -783,7 +784,7 @@ Set up JConsole to monitor the server using a remote process.
    $ bin/start-server
    ```
 
-2. Enable the Java Management Extensions (JMX) Connection handler using`dsconfig` with the `set-connection-handler-prop` option.
+2. Enable the Java Management Extensions (JMX) Connection handler using `dsconfig` with the `set-connection-handler-prop` option.
 
    |   |                                                                                                                               |
    | - | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -835,7 +836,7 @@ Set up JConsole to monitor the server using a remote process.
 
 ---
 title: Monitoring using SNMP
-description: The PingDirectory server supports real-time monitoring using SNMP. The server provides an embedded SNMPv3 subagent plugin that, when enabled, sets up the server as a managed device and exchanges monitoring information with a primary agent based on the AgentX protocol.
+description: Understand PingDirectory SNMP monitoring, a deprecated feature that uses an embedded SNMPv3 subagent to exchange data with a primary agent.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_snmp
@@ -857,7 +858,7 @@ The PingDirectory server supports real-time monitoring using SNMP. The server pr
 
 ---
 title: Monitoring using the LDAP SDK
-description: You can use the monitoring API to retrieve monitor entries from the PingDirectoryProxy server and retrieve specific types of monitor entries.
+description: Use the LDAP SDK monitoring API to retrieve PingDirectory server monitor entries and print the information they contain in Java applications.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_ldap_sdk
@@ -896,7 +897,7 @@ For more information about the LDAP SDK and the methods in this example, see the
 
 ---
 title: Monitoring with JMX
-description: The PingDirectory server supports monitoring the Java virtual machine (JVM) through a Java Management Extensions (JMX) management agent, which can be accessed using JConsole or any other kind of JMX client.
+description: Understand PingDirectory JMX monitoring, which exposes JVM metrics, such as memory pools and threads, and administrative alert notifications.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_with_jmx
@@ -926,7 +927,7 @@ You can also subscribe to receive JMX notifications for any administrative alert
 
 ---
 title: Monitoring with the admin console
-description: The admin console can be used to monitor items, such as disk space usage, active operations in the server, and alarms raised.
+description: Use the admin console to monitor the PingDirectoryProxy server, including disk space usage, active operations, and alarms raised.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_proxy_monitor_admin_console
@@ -970,14 +971,14 @@ The **Monitors** page opens, and you can monitor your server by selecting a moni
 
 ---
 title: Profiling server performance using the Stats Logger
-description: The PingDirectory server includes a built-in Stats Logger that is useful for profiling server performance for a given configuration.
+description: Profile PingDirectory server performance with the Stats Logger, which writes server statistics to JSON or csv files at a specified interval.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_profile_server_perf_stats_logger
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_profile_server_perf_stats_logger.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 12, 2024
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_ds_enable_stats_logger.adoc", "pd_ds_config_multiple_periodic_stats_loggers.adoc", "pd_ds_add_custom_logged_stats_periodic_stats_logger.adoc", "pd_ds_config_custom_logged_stat_dsconfig_int.adoc", "pd_ds_config_custom_stats_logger_dsconfig_non_int.adoc"]
 section_ids:
   enable_stats_logger: Enabling the Stats Logger
@@ -1207,7 +1208,7 @@ total-bytes-used-by-memory-consumers: 3250017037
 
    For this example, enter the option for `raw statistics` as recorded by the logger.
 
-9. In the `Custom Logged Stats menu,` review the configuration.
+9. In the `Custom Logged Stats menu`, review the configuration.
 
 10. To set up a column name that lists the memory usage, enter the option to change the `column-name` property.
 
@@ -1277,7 +1278,7 @@ To create a custom stats logger:
 
   ##### Example:
 
-  In this example, the command produces a column named `Memory Consumer Total (GB)` that contains the value of the of `total-bytes-used-by-memory-consumers` attribute pulled from the entry with the `ds-memory-usage-monitor-entry` objectclass. This value is scaled by 1073741824 to get to a value represented in GBs.
+  In this example, the command produces a column named `Memory Consumer Total (GB)` that contains the value of the `total-bytes-used-by-memory-consumers` attribute pulled from the entry with the `ds-memory-usage-monitor-entry` object class. This value is scaled by 1073741824 to get to a value represented in GBs.
 
   ```shell
   $ bin/dsconfig create-custom-logged-stats --plugin-name "Stats Logger" \
@@ -1292,7 +1293,7 @@ To create a custom stats logger:
 
 ---
 title: Proxy considerations for tracked applications
-description: In a proxy environment, the criteria should be defined in the PingDirectoryProxy server, because the PingDirectoryProxy server passes the application name through to the PingDirectory server in the intermediate client control.
+description: Define tracked application criteria in the PingDirectoryProxy server so application names pass through to PingDirectory servers in the intermediate client control.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_proxy_considerations_tracked_apps
@@ -1312,7 +1313,7 @@ If a client of the PingDirectoryProxy server or the PingDirectory server happens
 
 ---
 title: Running JConsole
-description: Run jconsole to monitor the memory usage and thread activity of a Java virtual machine.
+description: Run the JConsole tool to monitor PingDirectory server memory usage and thread activity, locally or remotely over the JMX Connection Handler.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_run_jconsole
@@ -1344,9 +1345,9 @@ Before you can run `jconsole`, you must:
 
 * Invoke the `jconsole` executable by entering `jconsole` in your command-line interface or terminal.
 
-  |   |                                                                                                                       |
-  | - | --------------------------------------------------------------------------------------------------------------------- |
-  |   | If *\<JDK\_HOME>* is not set in your path, you can access `jconsole` in the `bin` directory of the `<JDK_HOME>` path. |
+  |   |                                                                                                                      |
+  | - | -------------------------------------------------------------------------------------------------------------------- |
+  |   | If *\<JDK_HOME>* is not set in your path, you can access `jconsole` in the `bin` directory of the `<JDK_HOME>` path. |
 
 ## Steps
 
@@ -1361,7 +1362,7 @@ Before you can run `jconsole`, you must:
      If SSL is configured on the JMX Connection Handler, you must specify the PingDirectory server `.jar` file in the class path when running `jconsole` over SSL, as in the following example:
 
      ```shell
-     $ jconsole -J-Dcom.unboundid.directory.server.protocol.jmx.trustStorePath=$INSTANCE_ROOT/config/truststore -J-Dcom.unboundid.directory.server.protocol.jmx.trustStorePin=secret -J-Dcom.unboundid.directory.server.protocol.jmx.trustStoreType=JKS -J-classpath -J"$INSTANCE_ROOT/lib/*:/Library/Java/JavaVirtualMachines /jdk1.8.0_201.jdk/Contents/Home/lib/jconsole.jar"
+     $ jconsole -J-Dcom.unboundid.directory.server.protocol.jmx.trustStorePath=$INSTANCE_ROOT/config/truststore -J-Dcom.unboundid.directory.server.protocol.jmx.trustStorePin=secret -J-Dcom.unboundid.directory.server.protocol.jmx.trustStoreType=JKS -J-classpath -J"$INSTANCE_ROOT/lib/*:/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/lib/jconsole.jar"
      ```
 
    Set the following properties in the above command:
@@ -1390,7 +1391,7 @@ Before you can run `jconsole`, you must:
 
 ---
 title: SNMP implementation
-description: In a typical SNMP deployment, many production environments use a network management system (NMS) for a unified monitoring and administrative view of all SNMP-enabled devices.
+description: Understand the PingDirectory SNMP implementation, in which an SNMP subagent plugin connects to a Net-SNMP primary agent for read-only monitoring.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_snmp_implementation
@@ -1418,14 +1419,14 @@ The server contains an SNMP subagent plugin that connects to a Net-SNMP primary 
 
 ---
 title: The monitor backend
-description: The server exposes its monitoring information under the cn=monitor entry.
+description: Understand the PingDirectory monitor backend, which exposes monitoring information under the cn=monitor entry for viewing with ldapsearch.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:monitoring_the_pingdirectory_suite_of_products:pd_ds_monitor_backend
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/pd_ds_monitor_backend.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 14, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # The monitor backend
@@ -1461,6 +1462,6 @@ The following table describes a subset of the monitor entries.
 | JVM Stack Trace                          | Provides a stack trace of all threads processing within the Java virtual machine (JVM).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | LDAP Connection Handler Statistics       | Provides statistics about the interaction that the associated LDAP connection handler has had with its clients, including the number of connections established and closed, bytes read and written, LDAP messages read and written, operations initiated, completed, and abandoned, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Processing Time Histogram                | Categorizes operation processing times into several user-defined buckets of information, including the total number of operations processed, overall average response time in milliseconds (ms), number of processing times between 0ms and 1ms, and so forth.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| System Information                       | Provides general information about the system and the JVM on which the server is running, including system host name, operation system, JVM architecture, Java home, Java version, and so forth.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| System Information                       | Provides general information about the system and the JVM on which the server is running, including the system host name, operating system, JVM architecture, Java home, Java version, and so forth.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Version                                  | Provides information about the server version, including build ID, version, revision number, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Work Queue                               | Provides information about the state of the PingDirectory server work queue, which holds requests until they can be processed by a worker thread, including the requests rejected, current work queue size, number of worker threads, and number of busy worker threads. The work queue configuration has a `monitor-queue-time` property set to `true` by default. This logs messages for new operations with a `qtime` attribute included in the log messages. Its value is expressed in milliseconds and represents the length of time that operations are held in the work queue.A dedicated thread pool can be used for processing administrative operations. This thread pool enables diagnosis and corrective action if all other worker threads are processing operations. To request that operations use the administrative thread pool, using the `ldapsearch` command for example, use the `--useAdministrativeSession` option. The requester must have the `use-admin-session` privilege, which is included for root users. By default, eight threads are available for this purpose. This can be changed with the `num-administrative-session-worker-threads` property in the work queue configuration. |

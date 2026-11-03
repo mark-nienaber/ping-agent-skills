@@ -197,7 +197,7 @@ Otherwise, complete the following prerequisite procedures:
 
 * [Getting ready to integrate Azure Active Directory](azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_prerequisites.html)
 
-* [Preparing Active Directory for federation](azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_prepare_active_directory_for_federation.html)
+* [Preparing Active Directory for federation](azure_ad_and_office_365_integration_guide/pf_azuread_office365_integration_prepare_active_directory_federation.html)
 
 ---
 
@@ -649,7 +649,7 @@ If you've already added and verified such a domain, skip to [Step 2.](pf_azuread
 
 ## Steps
 
-1. Add a federated domain to your account: Authenticate to Office 365 using the `Connect-MsolService` PowerShell `cmdlet` and enter the same credentials used when authenticating to the Microsoft Online Services portal.
+1. Add a federated domain to your account: Authenticate to Office 365 using the `Connect-MgGraph` PowerShell cmdlet and enter the same credentials used when authenticating to the Microsoft Online Services portal.
 
    ### Choose from:
 
@@ -661,15 +661,15 @@ If you've already added and verified such a domain, skip to [Step 2.](pf_azuread
 
    * Add a new domain manually with PowerShell.
 
-     |   |                                                                                                                                                                                                    |
-     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | You can load this and the other `cmdlets` described here by launching PowerShell from the **Microsoft Azure Active Directory Module for Windows PowerShell** desktop and **Start** menu shortcuts. |
+     |   |                                                                                                                                                                                                  |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+     |   | You can load this and the other cmdlets described here by launching PowerShell from the **Microsoft Azure Active Directory Module for Windows PowerShell** desktop and **Start** menu shortcuts. |
 
-     1. To add a new domain, run the `New-MsolDomain -Name <name> -Authentication Managed` command.
+     1. To add a new domain, run the `New-MgDomain -Name <name> -Authentication Managed` command.
 
-     2. To get DNS verification records for the new domain, run the `Get-MsolDomainVerificationDns -DomainName <name>` command.
+     2. To get DNS verification records for the new domain, run the `Get-MgDomainVerificationDnsRecord -DomainName <name>` command.
 
-     3. To prove that you control the domain, use the output of the `Get-MsolDomainVerificationDNS` command to create a `.txt` record on the DNS server of the domain used in the previous step.
+     3. To prove that you control the domain, use the output of the `Get-MgDomainVerificationDnsRecord` command to create a `.txt` record on the DNS server of the domain used in the previous step.
 
         |   |                                                                                                         |
         | - | ------------------------------------------------------------------------------------------------------- |
@@ -677,7 +677,7 @@ If you've already added and verified such a domain, skip to [Step 2.](pf_azuread
 
         The DNS record name should match the Domain Name and the DNS record value should be `MS=<ms portion of the Label>`.
 
-        The following is an example from the `Get-MsolDomainVerificationDNS` command.
+        The following is an example from the `Get-MgDomainVerificationDnsRecord` command.
 
         ![Screen capture showing the PowerShell prompt with the results of the Get-MsolDomainVerificationDNS command](_images/kfk1563995166854.jpg)
 
@@ -692,15 +692,15 @@ If you've already added and verified such a domain, skip to [Step 2.](pf_azuread
         | `.txt`      | `@ or jkdoctest.com` | `MS=ms60016396`                       | `1 Hour` |
         | `MX`        | `@ or jkdoctest.com` | `Ms60016396.msv1.invalid.outlook.com` | `1 Hour` |
 
-     4. To prove your control of the domain, run the `Confirm-MsolDomain -DomainName <name>` command.
+     4. To prove your control of the domain, run the `Confirm-MgDomain -DomainName <name>` command.
 
 2. Complete the steps in [Enabling federated authentication](pf_azuread_office365_integration_enabling_federated_authentication.html).
 
 3. Complete the steps in [Configuring multiple domains](pf_azuread_office365_integration_configuring_multiple_domains.html).
 
-4. To verify that the domain settings are up to date and in effect, run the `Get-MsolDomainFederationSettings -DomainName <name>` command.
+4. To verify that the domain settings are up to date and in effect, run the `Get-MgDomainFederationConfiguration -DomainName <name>` command.
 
-5. To change domain settings after the domain is created and verified, run the `Set-MsolDomainFederationSettings -DomainName` command with extra arguments for the settings that you want to change.
+5. To change domain settings after the domain is created and verified, run the `New-MgDomainFederationConfiguration -DomainName` command with extra arguments for the settings that you want to change.
 
 ---
 

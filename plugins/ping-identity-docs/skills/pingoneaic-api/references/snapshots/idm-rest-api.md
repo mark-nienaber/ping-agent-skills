@@ -4,6 +4,8 @@ description: The bulk import service lets you import large numbers of entries fr
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-bulk-import
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-bulk-import.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["endpoints/index.adoc"]
 ---
 
@@ -33,6 +35,8 @@ description: You can use the IDM outbound email service over REST at the externa
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-email
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-email.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   externalemail-post-parameters: external/email POST parameters
 ---
@@ -96,11 +100,13 @@ description: Existing tenants can use the openidm/feature endpoint to install ne
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-feature
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-feature.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   groups-feature: Groups feature
-  feature-enable-pass-timestamps: Password timestamps
-  feature-enable-indexed-strings: Additional indexed strings
-  feature-2fa-profile-attributes: Two-factor authentication (2FA) profile attributes
+  feature-enable-pass-timestamp-attributes: Password timestamp attributes
+  feature-enable-indexed-string-attributes: Additional indexed string attributes
+  feature-enable-2fa-profile-attributes: Two-factor authentication (2FA) profile attributes
 ---
 
 # Feature enablement
@@ -135,25 +141,39 @@ Learn more in [Groups](https://docs.pingidentity.com/pingoneaic/latest/idm-objec
 
 - Resources do *not* exist in the repository for `alpha_group` or `bravo_group`. |
 
-| URI                                       | HTTP Operation | Description                                                                          |
-| ----------------------------------------- | -------------- | ------------------------------------------------------------------------------------ |
-| /openidm/feature/groups                   | GET            | Returns the status of the groups feature.                                            |
-| /openidm/feature/groups?\_action=validate | POST           | Validates that any prerequisites to enable the groups feature are satisfied.         |
-| /openidm/feature/groups?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the groups feature. |
+| URI                                       | HTTP Operation | Description                                                                                                                                                                                 |
+| ----------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/feature/groups                   | GET            | Returns the status of the groups feature.                                                                                                                                                   |
+| /openidm/feature/groups?\_action=validate | POST           | Validates that the groups feature is available to install:- Returns `status` as `true` if the feature can be installed.
 
-## Password timestamps
+- Returns `status` as `false` if the feature is already installed. |
+| /openidm/feature/groups?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the groups feature.                                                                                                        |
 
-Learn more in [Password timestamps](https://docs.pingidentity.com/pingoneaic/latest/realms/password-policy.html#password-timestamps).
+## Password timestamp attributes
 
-| URI                                                    | HTTP Operation | Description                                                                                      |
-| ------------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------ |
-| /openidm/feature/password/timestamps                   | GET            | Returns the status of the password timestamp feature.                                            |
-| /openidm/feature/password/timestamps?\_action=validate | POST           | Validates that any prerequisites to enable the password timestamp feature are satisfied.         |
-| /openidm/feature/password/timestamps?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the password timestamp feature. |
+|   |                                                                                           |
+| - | ----------------------------------------------------------------------------------------- |
+|   | These attributes are enabled by default in tenants created on or after February 06, 2024. |
 
-## Additional indexed strings
+This feature adds two indexed string attributes to your tenant that can be used to query when a user password was last changed and when it's set to expire. Learn more in [Password timestamps](https://docs.pingidentity.com/pingoneaic/latest/realms/password-policy.html#password-timestamps).
 
-The additional indexed strings feature adds 15 additional indexed strings to your tenant. You can install this feature using the `feature` endpoint. To do so:
+| URI                                                    | HTTP Operation | Description                                                                                                                                                                                             |
+| ------------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/feature/password/timestamps                   | GET            | Returns the status of the password timestamp feature.                                                                                                                                                   |
+| /openidm/feature/password/timestamps?\_action=validate | POST           | Validates that the password timestamp feature is available to install:- Returns `status` as `true` if the feature can be installed.
+
+- Returns `status` as `false` if the feature is already installed. |
+| /openidm/feature/password/timestamps?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the password timestamp feature.                                                                                                        |
+
+## Additional indexed string attributes
+
+|   |                                                                                           |
+| - | ----------------------------------------------------------------------------------------- |
+|   | These attributes are enabled by default in tenants created on or after November 12, 2024. |
+
+This feature adds 15 additional indexed string attributes to your tenant that can be used as general purpose extension attributes.
+
+You can install this feature using the `feature` endpoint. To do so:
 
 1. Confirm that the feature is available by calling `GET openidm/feature/indexed/strings/6thru20`:
 
@@ -192,19 +212,25 @@ The additional indexed strings feature adds 15 additional indexed strings to you
    {
        "status": 200,
        "success": false,
-       "message": "Validate complete.config/repo.ds: frIndexedString6 must not already exist."
+       "message": "Validate complete.config/repo.ds: frIndexedString6 must not already exist.",
    }
    ```
 
-| URI                                                        | HTTP Operation | Description                                                                                              |
-| ---------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
-| /openidm/feature/indexed/strings/6thru20                   | GET            | Returns the status of the additional indexed strings feature.                                            |
-| /openidm/feature/indexed/strings/6thru20?\_action=validate | POST           | Validates that the additional indexed strings feature is available to install.                           |
-| /openidm/feature/indexed/strings/6thru20?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the additional indexed strings feature. |
+| URI                                                        | HTTP Operation | Description                                                                                                                                                                                                     |
+| ---------------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/feature/indexed/strings/6thru20                   | GET            | Returns the status of the additional indexed strings feature.                                                                                                                                                   |
+| /openidm/feature/indexed/strings/6thru20?\_action=validate | POST           | Validates that the additional indexed strings feature is available to install:- Returns `status` as `true` if the feature can be installed.
+
+- Returns `status` as `false` if the feature is already installed. |
+| /openidm/feature/indexed/strings/6thru20?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the additional indexed strings feature.                                                                                                        |
 
 ## Two-factor authentication (2FA) profile attributes
 
-The two-factor authentication (2FA) profile attributes feature adds the following five multivalue (array) strings to existing Alpha and Bravo realm user identities in PingOne Advanced Identity Cloud:
+|   |                                                                                          |
+| - | ---------------------------------------------------------------------------------------- |
+|   | These attributes are enabled by default in tenants created on or after January 09, 2025. |
+
+This feature adds the following five multivalue (array) strings to existing Alpha and Bravo realm user identities in PingOne Advanced Identity Cloud:
 
 * `deviceProfiles`
 
@@ -215,6 +241,8 @@ The two-factor authentication (2FA) profile attributes feature adds the followin
 * `oathDeviceProfiles`
 
 * `pushDeviceProfiles`
+
+The attributes can be used to store references to a user's associated two-factor authentication (2FA) devices.
 
 You can install this feature using the `feature` endpoint:
 
@@ -259,11 +287,13 @@ You can install this feature using the `feature` endpoint:
    }
    ```
 
-| URI                                                | HTTP Operation | Description                                                                                          |
-| -------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
-| /openidm/feature/am/2fa/profiles                   | GET            | Returns the status of the 2FA profile attributes feature.                                            |
-| /openidm/feature/am/2fa/profiles?\_action=validate | POST           | Validates that the 2FA profile attributes feature is available to install.                           |
-| /openidm/feature/am/2fa/profiles?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the 2FA profile attributes feature. |
+| URI                                                | HTTP Operation | Description                                                                                                                                                                                                 |
+| -------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/feature/am/2fa/profiles                   | GET            | Returns the status of the 2FA profile attributes feature.                                                                                                                                                   |
+| /openidm/feature/am/2fa/profiles?\_action=validate | POST           | Validates that the 2FA profile attributes feature is available to install:- Returns `status` as `true` if the feature can be installed.
+
+- Returns `status` as `false` if the feature is already installed. |
+| /openidm/feature/am/2fa/profiles?\_action=install  | POST           | Attempts to patch and install a tenant's configuration to enable the 2FA profile attributes feature.                                                                                                        |
 
 ---
 
@@ -273,6 +303,8 @@ description: The following table lists the REST endpoints associated with intern
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-internal
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-internal.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Internal objects
@@ -296,23 +328,25 @@ description: Groups are exposed under the context path managed/realm-name_group.
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-managed-groups
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-managed-groups.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Managed groups
 
 Groups are exposed under the context path `managed/realm-name_group`. The following table lists the REST commands associated with managed groups.
 
-| URI                                                                 | HTTP Operation | Description                                                                                                                   |
-| ------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| /openidm/managed/realm-name\_group?\_queryFilter=true&\_fields=\_id | GET            | Returns the IDs of all managed groups.                                                                                        |
-| /openidm/managed/realm-name\_group?\_queryFilter=filter             | GET            | Queries managed groups with the defined filter.                                                                               |
-| /openidm/managed/realm-name\_group/\_id                             | GET            | Returns the JSON representation of a specific group.                                                                          |
-| /openidm/managed/realm-name\_group/\_id?\_fields=name,members       | GET            | Returns the relationships (members) associated with a group.                                                                  |
-| /openidm/managed/realm-name\_group/\_id/members?\_queryFilter=true  | GET            | Returns the members of a group.                                                                                               |
-| /openidm/managed/realm-name\_group/\_id/members?\_action=create     | POST           | Adds a member to a group.                                                                                                     |
-| /openidm/managed/realm-name\_group/\_id                             | PUT            | Updates a group by replacing the entire object with a new one. If no group entry exists with that `_id`, one will be created. |
-| /openidm/managed/realm-name\_group?\_action=create                  | POST           | Creates a new group. `_id` and `name` will be the same.                                                                       |
-| /openidm/managed/realm-name\_group/\_id                             | DELETE         | Deletes a group.                                                                                                              |
+| URI                                                                | HTTP Operation | Description                                                                                                                   |
+| ------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/managed/realm-name_group?\_queryFilter=true&\_fields=\_id | GET            | Returns the IDs of all managed groups.                                                                                        |
+| /openidm/managed/realm-name_group?\_queryFilter=filter             | GET            | Queries managed groups with the defined filter.                                                                               |
+| /openidm/managed/realm-name_group/\_id                             | GET            | Returns the JSON representation of a specific group.                                                                          |
+| /openidm/managed/realm-name_group/\_id?\_fields=name,members       | GET            | Returns the relationships (members) associated with a group.                                                                  |
+| /openidm/managed/realm-name_group/\_id/members?\_queryFilter=true  | GET            | Returns the members of a group.                                                                                               |
+| /openidm/managed/realm-name_group/\_id/members?\_action=create     | POST           | Adds a member to a group.                                                                                                     |
+| /openidm/managed/realm-name_group/\_id                             | PUT            | Updates a group by replacing the entire object with a new one. If no group entry exists with that `_id`, one will be created. |
+| /openidm/managed/realm-name_group?\_action=create                  | POST           | Creates a new group. `_id` and `name` will be the same.                                                                       |
+| /openidm/managed/realm-name_group/\_id                             | DELETE         | Deletes a group.                                                                                                              |
 
 Learn about additional commands and examples in [Groups](https://docs.pingidentity.com/pingoneaic/latest/idm-objects/groups.html).
 
@@ -324,6 +358,8 @@ description: Organizations are exposed under the context path /managed/realm-nam
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-managed-organizations
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-managed-organizations.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Managed organizations
@@ -350,6 +386,8 @@ description: User objects are stored in the repository and are exposed under the
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-managed-users
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-managed-users.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Managed users
@@ -380,6 +418,8 @@ description: Privileges are a part of internal roles, and can be created or modi
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-privileges
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-privileges.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Privileges
@@ -402,6 +442,8 @@ description: Reconciliation is the process of ensuring that the objects in two d
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-recon
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-recon.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Reconciliation operations
@@ -437,6 +479,8 @@ description: Representational State Transfer (REST) is a software architecture s
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:rest-and-idm
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/rest-and-idm.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   crest-idm-specifics: REST and IDM
 ---
@@ -487,6 +531,8 @@ description: The URI scheme for accessing a managed object follows this conventi
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:rest-structure
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/rest-structure.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   rest-uri-scheme: URI scheme
   rest-object-identifier: Object identifiers
@@ -572,6 +618,8 @@ description: REST API features are assigned version numbers. Providing version n
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:rest-api-versioning
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/rest-api-versioning.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   api-version-over-rest: Specify the API version in REST calls
   api-version-in-scripts: Specify the API version in scripts
@@ -782,6 +830,8 @@ description: The task scanner lets you perform a batch scan for a specified date
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-task-scanner
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-task-scanner.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Scanning tasks
@@ -805,6 +855,8 @@ description: Use the scheduler service and its associated endpoints to manage an
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-schedules
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-schedules.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Schedules
@@ -838,6 +890,8 @@ description: The Schema API lets you perform operations on managed object schema
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-schema
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-schema.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Data Object Model", "Schema", "Relationships", "REST API"]
 ---
 
@@ -933,6 +987,8 @@ description: You can interact with the script service over REST, as shown in the
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-scripts
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-scripts.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Scripts
@@ -967,6 +1023,8 @@ description: Advanced Identity Cloud stores configuration objects in the reposit
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-server-config
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-server-config.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Server configuration
@@ -1067,6 +1125,8 @@ description: You can access information about the current state of the IDM insta
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-info
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-info.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Server state
@@ -1087,6 +1147,8 @@ description: You can interact with the synchronization service over REST, as sho
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-sync
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-sync.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Synchronization service
@@ -1145,6 +1207,8 @@ description: System objects, which are objects that are stored in remote systems
 component: pingoneaic-api
 page_id: pingoneaic-api:idm-rest-api:endpoints/rest-system-objects
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-system-objects.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   list-available-connector-configurations: List available connector configurations:
   list-remote-systems-and-their-status: List remote systems, and their status:

@@ -4,6 +4,8 @@ description: If you work for or with federal, state, and local government agenci
 component: pgic
 page_id: pgic:identity_federation:pgic_federation
 canonical_url: http://docs.pingidentity.com/pgic/identity_federation/pgic_federation.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   federation: Identity federation
   repositories: Identity repositories

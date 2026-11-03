@@ -69,13 +69,13 @@ You can edit your profile, change your password, and manage your MFA *(tooltip: 
 
 ---
 title: "Administrators: Verifying your own email address"
-description: Administrators must verify their own email address in PingOne.
+description: Verify your email address in PingOne as an administrator using the admin console or self-service application.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_verify_email_admins
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_verify_email_admins.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -119,13 +119,13 @@ Under your contact information, your email appears as verified. If you change yo
 
 ---
 title: Changing your password
-description: If you forget your password or want to change it, you can change it yourself from your PingOne profile.
+description: Change your password from your PingOne user profile using the self-service portal.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_changepassword
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_changepassword.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -161,13 +161,13 @@ To access your PingOne user profile, you'll need your PingOne environment URL an
 
 ---
 title: Completing the administrator account registration
-description: When you receive an email indicating that you were added as an administrator in PingOne, verify your email address and update your password to complete the registration process.
+description: Complete the PingOne administrator account registration to gain access to your account and environment.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_complete_admin_registration_process
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_complete_admin_registration_process.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 12, 2025
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -227,13 +227,13 @@ Your administrator account registration is complete.
 
 ---
 title: Editing your profile
-description: Access your PingOne user profile to update your contact details and location information.
+description: Edit your PingOne user profile to update contact details and location information.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_manageprofile
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_manageprofile.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -279,13 +279,13 @@ The out-of-the-box profile includes the user's basic contact and location inform
 
 ---
 title: "End users: Accessing your PingOne profile"
-description: Access the PingOne self-service portal to update your personal information, change your password, add MFA, view your accounts and sessions, and manage consents.
+description: Access the PingOne self-service portal.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_signinselfservice
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_signinselfservice.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -351,13 +351,13 @@ This section is intended for PingOne administrators to understand the options av
 
 ---
 title: "End users: Verifying an email address"
-description: In certain situations, end users might be able to verify their own email address using the PingOne self-service application.
+description: Verify your email address as a PingOne end user using the self-service application.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_verify_email_self
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_verify_email_self.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -404,13 +404,13 @@ Under your contact information, your email shows as verified. If you change your
 
 ---
 title: Managing accounts and sessions
-description: View and manage accounts linked to your profile, and any open sessions.
+description: View and manage accounts linked to your PingOne profile and sign off active sessions.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_manage_accts_sessions
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_manage_accts_sessions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -477,13 +477,13 @@ You can view and manage:
 
 ---
 title: Managing authentication methods
-description: From your PingOne user profile you can add, rename, or delete one or more authentication methods. You can also define your default authentication method.
+description: Add, rename, or remove MFA methods and set a default method from your PingOne user profile.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_managingauthenticationmethods
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_managingauthenticationmethods.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 8, 2024
+revdate: July 10, 2026
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -568,13 +568,13 @@ You can add different devices, such as a security key or phone biometrics for au
 
 ---
 title: Managing consents
-description: View or revoke any terms of service agreements that you consented to when accessing your account.
+description: View or revoke consent agreements from your PingOne profile.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_manage_consents
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_manage_consents.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 10, 2023
+revdate: July 10, 2026
 section_ids:
   steps: Steps
   result: Result:
@@ -606,13 +606,13 @@ On the **Consent** tab, you can view all the agreements that you've consented to
 
 ---
 title: Managing your PingOne user profile
-description: The PingOne self-service portal enables administrators and end users to manage their profile without contacting customer service.
+description: Use the PingOne self-service portal to manage your profile, authentication methods, password, and consents.
 component: pingone
 page_id: pingone:managing_your_pingone_user_profile:p1_self_service_start
 canonical_url: https://docs.pingidentity.com/pingone/managing_your_pingone_user_profile/p1_self_service_start.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 9, 2023
+revdate: July 10, 2026
 ---
 
 # Managing your PingOne user profile

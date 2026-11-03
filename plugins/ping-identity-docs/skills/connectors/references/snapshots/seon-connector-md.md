@@ -1,12 +1,12 @@
 ---
 title: SEON Connector
-description: The SEON connector lets you uncover fraud patterns through SEON's device fingerprinting and intelligent insights in your PingOne DaVinci flow.
+description: Configure the SEON connector in PingOne DaVinci to detect fraud using device fingerprinting, request fraud scores, and send feedback to SEON
 component: connectors
 page_id: connectors::seon_connector
 canonical_url: https://docs.pingidentity.com/connectors/seon_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -48,13 +48,13 @@ Learn more in the following:
 
   * [API Reference](https://docs.seon.io/api-reference)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -70,7 +70,7 @@ Follow the instructions in [Getting Started](https://docs.seon.io/getting-starte
 
 ### Configuring the SEON connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -341,7 +341,7 @@ Get the fraud score for data submitted.
 >
 > * Custom Fields `keyValueList`
 >
->   You can use unlimited custom fields to inform our machine learning system and scoring engine. These can be string, boolean and numeric, for example is\_intangible\_item, is\_pay\_on\_delivery, departure\_airport, arrival\_airport, days\_to\_board
+>   You can use unlimited custom fields to inform our machine learning system and scoring engine. These can be string, boolean and numeric, for example is_intangible_item, is_pay_on_delivery, departure_airport, arrival_airport, days_to_board
 >
 > - - Output Schema
 >   - output `object`
@@ -354,32 +354,32 @@ Get the fraud score for data submitted.
 >
 >   * * id `string`
 >     * state `string`
->     * fraud\_score `number`
->     * bin\_details `object`
+>     * fraud_score `number`
+>     * bin_details `object`
 >     * properties `object`
 >
-> - * card\_bin `string`
->   * bin\_bank `string`
->   * bin\_card `string`
->   * bin\_type `string`
->   * bin\_level `string`
->   * bin\_country `string`
->   * bin\_country\_code `string`
->   * bin\_website `string`
->   * bin\_phone `string`
->   * bin\_valid `boolean`
->   * card\_issuer `string`
+> - * card_bin `string`
+>   * bin_bank `string`
+>   * bin_card `string`
+>   * bin_type `string`
+>   * bin_level `string`
+>   * bin_country `string`
+>   * bin_country_code `string`
+>   * bin_website `string`
+>   * bin_phone `string`
+>   * bin_valid `boolean`
+>   * card_issuer `string`
 >
 >   - - version `string`
->     - applied\_rules `array`
+>     - applied_rules `array`
 >     - items `array`
 >
 > - * type `object`
 >   * properties
 >
->   - - calculation\_time `number`
->     - seon\_id `number`
->     - ip\_details `object`
+>   - - calculation_time `number`
+>     - seon_id `number`
+>     - ip_details `object`
 >     - properties `object`
 >
 > - * success `boolean`
@@ -389,14 +389,14 @@ Get the fraud score for data submitted.
 >   * ip `string`
 >   * score `number`
 >   * country `string`
->   * state\_prov `string`
+>   * state_prov `string`
 >   * city `string`
->   * timezone\_offset `string`
->   * isp\_name `string`
+>   * timezone_offset `string`
+>   * isp_name `string`
 >   * latitude `number`
 >   * longitude `number`
 >   * type `string`
->   * open\_ports `array`
+>   * open_ports `array`
 >   * items `array`
 >
 >   - type `integer`
@@ -404,15 +404,15 @@ Get the fraud score for data submitted.
 > - * tor `boolean`
 >   * harmful `boolean`
 >   * vpn `boolean`
->   * web\_proxy `boolean`
->   * public\_proxy `boolean`
->   * spam\_number `integer`
->   * spam\_urls `array`
+>   * web_proxy `boolean`
+>   * public_proxy `boolean`
+>   * spam_number `integer`
+>   * spam_urls `array`
 >   * items `array`
 >
 >   - type `string`
 >
-> - * applied\_rules `array`
+> - * applied_rules `array`
 >   * items `array`
 >
 >   - - type `object`
@@ -422,9 +422,9 @@ Get the fraud score for data submitted.
 >   * properties `object`
 >
 >   - - hits `integer`
->     - customer\_hits `integer`
->     - first\_seen `integer`
->     - last\_seen `integer`
+>     - customer_hits `integer`
+>     - first_seen `integer`
+>     - last_seen `integer`
 >
 > - * flags `array`
 >   * items `array`
@@ -434,13 +434,13 @@ Get the fraud score for data submitted.
 >
 > - id `string`
 >
->   * * email\_details `object`
+>   * * email_details `object`
 >     * properties `object`
 >
 > - * email `string`
 >   * score `number`
 >   * deliverable `boolean`
->   * domain\_details `object`
+>   * domain_details `object`
 >   * properties `object`
 >   * domain `string`
 >   * tld `string`
@@ -448,18 +448,18 @@ Get the fraud score for data submitted.
 >   * created `string`
 >   * updated `string`
 >   * expires `string`
->   * registrar\_name `string`
->   * registered\_to `string`
+>   * registrar_name `string`
+>   * registered_to `string`
 >   * disposable `boolean`
 >   * free `boolean`
 >   * custom `boolean`
->   * dmarc\_enforced `boolean`
->   * spf\_strict `boolean`
->   * valid\_mx `boolean`
->   * accept\_all `boolean`
->   * suspicious\_tld `boolean`
->   * website\_exists `boolean`
->   * account\_details `object`
+>   * dmarc_enforced `boolean`
+>   * spf_strict `boolean`
+>   * valid_mx `boolean`
+>   * accept_all `boolean`
+>   * suspicious_tld `boolean`
+>   * website_exists `boolean`
+>   * account_details `object`
 >   * properties `object`
 >   * apple `object`
 >   * properties `object`
@@ -589,17 +589,17 @@ Get the fraud score for data submitted.
 >
 >   - registered `boolean`
 >
-> - * breach\_details `object`
+> - * breach_details `object`
 >   * properties `object`
->   * haveibeenpwned\_listed `boolean`
->   * number\_of\_breaches `integer`
->   * first\_breach `string`
+>   * haveibeenpwned_listed `boolean`
+>   * number_of_breaches `integer`
+>   * first_breach `string`
 >   * breaches `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
->     - phone\_details `object`
+>     - phone_details `object`
 >     - properties `object`
 >
 > - * number `number`
@@ -608,7 +608,7 @@ Get the fraud score for data submitted.
 >   * country `string`
 >   * carrier `string`
 >   * score `number`
->   * account\_details `object`
+>   * account_details `object`
 >   * properties `object`
 >   * facebook `object`
 >   * properties `object`
@@ -689,7 +689,7 @@ Get the fraud score for data submitted.
 >     - title `string`
 >     - website `string`
 >     - twitter `string`
->     - connection\_count `number`
+>     - connection_count `number`
 >
 > - * weibo `object`
 >   * properties `object`
@@ -766,7 +766,7 @@ Get the fraud score for data submitted.
 >     - city `string`
 >     - gender `integer`
 >     - age `integer`
->     - date\_joined `integer`
+>     - date_joined `integer`
 >
 > - * kakao `object`
 >   * properties `object`
@@ -787,12 +787,12 @@ Get the fraud score for data submitted.
 >     - location `string`
 >     - name `string`
 >     - about `string`
->     - first\_name `string`
->     - created\_at `string`
->     - reviewee\_count `string`
+>     - first_name `string`
+>     - created_at `string`
+>     - reviewee_count `string`
 >     - trips `integer`
 >     - work `string`
->     - identity\_verified `string`
+>     - identity_verified `string`
 >
 > - * amazon `object`
 >   * properties `object`
@@ -903,116 +903,116 @@ Get the fraud score for data submitted.
 >   * properties `object`
 >
 >   - - registered `boolean`
->     - aml\_details `object`
+>     - aml_details `object`
 >     - properties `object`
 >
-> - * has\_crimelist\_match `boolean`
->   * has\_pep\_match `boolean`
->   * has\_watchlist\_match `boolean`
->   * has\_sanction\_match `boolean`
->   * result\_payload `object`
+> - * has_crimelist_match `boolean`
+>   * has_pep_match `boolean`
+>   * has_watchlist_match `boolean`
+>   * has_sanction_match `boolean`
+>   * result_payload `object`
 >   * properties `object`
->   * searched\_at `string`
->   * sanctionlist\_sources `array`
+>   * searched_at `string`
+>   * sanctionlist_sources `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
 >
-> - * crimelist\_entries `array`
+> - * crimelist_entries `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
 >
-> - * watchlist\_entries `array`
+> - * watchlist_entries `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
 >
-> - * sanctionlist\_entries `array`
+> - * sanctionlist_entries `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
 >
-> - * pep\_entries `array`
+> - * pep_entries `array`
 >   * items `array`
 >
 >   - - type `object`
 >     - properties
->     - device\_details `object`
+>     - device_details `object`
 >     - properties `object`
 >
-> - * session\_id `string`
+> - * session_id `string`
 >   * type `string`
->   * dns\_ip `string`
->   * dns\_ip\_country `string`
->   * dns\_ip\_isp `string`
+>   * dns_ip `string`
+>   * dns_ip_country `string`
+>   * dns_ip_isp `string`
 >   * source `string`
->   * device\_hash `string`
->   * device\_name `string`
->   * device\_cellular\_id `string`
->   * android\_id `string`
->   * build\_id `string`
->   * build\_device `string`
->   * build\_time `integer`
->   * build\_number `string`
->   * build\_manufacturer `string`
->   * app\_guid `string`
->   * android\_version `string`
->   * last\_boot\_time `integer`
->   * system\_uptime `integer`
->   * sensor\_hash `string`
->   * audio\_volume\_current `integer`
->   * audio\_mute\_status `boolean`
->   * battery\_level `integer`
->   * battery\_charging `boolean`
->   * battery\_temperature `integer`
->   * battery\_voltage `integer`
->   * battery\_health `string`
->   * has\_proximity\_sensor `boolean`
->   * cpu\_type `string`
->   * cpu\_count `integer`
->   * cpu\_speed `integer`
->   * cpu\_hash `string`
->   * kernel\_name `string`
->   * kernel\_version `string`
->   * kernel\_arch `string`
->   * physical\_memory `integer`
->   * screen\_brightness `integer`
->   * screen\_height `integer`
->   * screen\_width `integer`
->   * screen\_scale `integer`
->   * total\_storage `integer`
->   * free\_storage `integer`
->   * network\_config `string`
->   * wifi\_mac\_address `string`
->   * wifi\_ssid `string`
->   * carrier\_name `string`
->   * pasteboard\_hash `string`
->   * region\_timezone `string`
->   * region\_language `string`
->   * region\_country `string`
->   * carrier\_country `string`
->   * is\_emulator `boolean`
->   * is\_rooted `boolean`
->   * device\_ip\_address `string`
->   * device\_ip\_country `string`
->   * device\_ip\_isp `string`
+>   * device_hash `string`
+>   * device_name `string`
+>   * device_cellular_id `string`
+>   * android_id `string`
+>   * build_id `string`
+>   * build_device `string`
+>   * build_time `integer`
+>   * build_number `string`
+>   * build_manufacturer `string`
+>   * app_guid `string`
+>   * android_version `string`
+>   * last_boot_time `integer`
+>   * system_uptime `integer`
+>   * sensor_hash `string`
+>   * audio_volume_current `integer`
+>   * audio_mute_status `boolean`
+>   * battery_level `integer`
+>   * battery_charging `boolean`
+>   * battery_temperature `integer`
+>   * battery_voltage `integer`
+>   * battery_health `string`
+>   * has_proximity_sensor `boolean`
+>   * cpu_type `string`
+>   * cpu_count `integer`
+>   * cpu_speed `integer`
+>   * cpu_hash `string`
+>   * kernel_name `string`
+>   * kernel_version `string`
+>   * kernel_arch `string`
+>   * physical_memory `integer`
+>   * screen_brightness `integer`
+>   * screen_height `integer`
+>   * screen_width `integer`
+>   * screen_scale `integer`
+>   * total_storage `integer`
+>   * free_storage `integer`
+>   * network_config `string`
+>   * wifi_mac_address `string`
+>   * wifi_ssid `string`
+>   * carrier_name `string`
+>   * pasteboard_hash `string`
+>   * region_timezone `string`
+>   * region_language `string`
+>   * region_country `string`
+>   * carrier_country `string`
+>   * is_emulator `boolean`
+>   * is_rooted `boolean`
+>   * device_ip_address `string`
+>   * device_ip_country `string`
+>   * device_ip_isp `string`
 >
->   - - geolocation\_details `object`
+>   - - geolocation_details `object`
 >     - properties `object`
 >
-> - * user\_billing\_distance `number`
->   * user\_shipping\_distance `number`
->   * billing\_shipping\_distance `number`
->   * ip\_user\_distance `number`
->   * ip\_billing\_distance `number`
->   * ip\_shipping\_distance `number`
+> - * user_billing_distance `number`
+>   * user_shipping_distance `number`
+>   * billing_shipping_distance `number`
+>   * ip_user_distance `number`
+>   * ip_billing_distance `number`
+>   * ip_shipping_distance `number`
 >
->   - - rule\_category\_details `array`
+>   - - rule_category_details `array`
 >     - items `array`
 >
 > - * type `object`

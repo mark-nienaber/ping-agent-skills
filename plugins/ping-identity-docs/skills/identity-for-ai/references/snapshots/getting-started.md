@@ -1,10 +1,12 @@
 ---
-title: What Is Identity for AI?
+title: What is Identity for AI?
 description: Learn about Identity for AI, a comprehensive solution designed to secure, manage, and govern AI systems and data.
 component: identity-for-ai
 page_id: identity-for-ai:getting-started:idai-what-is-identity-for-ai
 canonical_url: https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.html
-revdate: May 13, 2026
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-16T00:06:46Z
 keywords: ["Identity for AI", "ai identity", "ai security", "ai governance", "ai compliance"]
 page_aliases: ["index.adoc"]
 section_ids:
@@ -15,7 +17,7 @@ section_ids:
   learn-more: Learn more
 ---
 
-# What Is Identity for AI?
+# What is Identity for AI?
 
 Artificial intelligence (AI) is transforming the way organizations operate. As AI systems evolve into autonomous agents capable of performing tasks such as scheduling appointments, answering emails, booking flights, and executing code, they transition from passive tools to active users. This shift demands that AI agents operate with well-defined and verifiable identity.
 
@@ -81,7 +83,7 @@ As AI becomes more integrated into business workflows, it's crucial to implement
 
 **Video (Brightcove)**
 
-\<https\://players.brightcove.net/771836189001/default\_default/index.html?videoId=6386342322112>
+\<https\://players.brightcove.net/771836189001/default_default/index.html?videoId=6386342322112>
 
 |   |                                                                                                |
 | - | ---------------------------------------------------------------------------------------------- |
@@ -118,6 +120,6 @@ To get started with Identity for AI:
 
 Use the following resources to learn more about Identity for AI and how it can benefit your organization:
 
-* [Agent Types](../identity/idai-agent-types.html)
+* [Agent types](../identity/idai-agent-types.html)
 
-* [Securing Digital Assistants](../use-cases/idai-securing-digital-assistants.html)
+* [Securing digital assistants](../use-cases/idai-securing-digital-assistants.html)

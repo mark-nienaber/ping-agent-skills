@@ -978,3 +978,32 @@ To allow PingFederate to communicate with Duo Security, add it as a protected ap
 3. Note the **Client ID**, **Client Secret**, and **API hostname**. You will use these in [Configuring an adapter instance](pf_duo_security_ik_22_configuring_an_adapter_instance.html).
 
    ![Screen capture showing the positioning of the Client ID, Client Secret, and API hostname fields on the PingFederate page.](../_images/lzr1579652693781.jpg)
+
+---
+
+---
+title: Getting your Duo Security keys and API hostname
+description: To allow PingFederate to communicate with Duo Security, add it as a protected application.
+component: duosecurity
+page_id: duosecurity:duo_security_integration_kit_3x:pf_duo_security_ik_getting_your_duo_security_keys_and_api_hostname
+canonical_url: https://docs.pingidentity.com/integrations/duosecurity/duo_security_integration_kit_3x/pf_duo_security_ik_getting_your_duo_security_keys_and_api_hostname.html
+llms_txt: https://docs.pingidentity.com/integrations/duosecurity/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 7, 2024
+section_ids:
+  steps: Steps
+---
+
+# Getting your Duo Security keys and API hostname
+
+To allow PingFederate to communicate with Duo Security, add it as a protected application.
+
+## Steps
+
+1. Log into Duo Security as an administrator.
+
+2. Go to **Applications > Protect an Application**. For **PingFederate**, click **Protect this Application.**
+
+3. Note the **Client ID**, **Client Secret**, and **API hostname**. You will use these in [Configuring an adapter instance](pf_duo_security_ik_configuring_an_adapter_instance.html).
+
+   ![Screen capture showing the positioning of the Client ID, Client Secret, and API hostname fields on the PingFederate page.](../_images/lzr1579652693781.jpg)

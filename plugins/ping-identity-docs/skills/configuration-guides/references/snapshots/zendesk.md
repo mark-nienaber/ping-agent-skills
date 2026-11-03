@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Zendesk and PingFederate
-description: Learn how to configure SAML SSO with Zendesk and PingFederate.
+description: Configure SAML SSO with Zendesk and PingFederate — assertion attribute contract and SP connection
 component: configuration_guides
 page_id: configuration_guides:zendesk:config_saml_zendesk_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/zendesk/config_saml_zendesk_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   about-this-task: About this task
@@ -140,10 +142,12 @@ The following table details the references that are used within this guide that 
 
 ---
 title: Configuring SAML SSO with Zendesk and PingOne
-description: Learn how to configure SAML SSO with ZenDesk and PingOne.
+description: Configure SAML SSO with Zendesk and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:zendesk:config_saml_zendesk_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/zendesk/config_saml_zendesk_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   about-this-task: About this task

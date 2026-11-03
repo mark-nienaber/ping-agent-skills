@@ -7,6 +7,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-discovery-webfinger
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-discovery-webfinger.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints"]
 page_aliases: ["oidc1-guide:rest-api-oidc-discovery-webfinger.adoc"]
 section_ids:
@@ -63,6 +64,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-discovery-configuration
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-discovery-configuration.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints", "Setup &amp; Configuration"]
 page_aliases: ["oidc1-guide:rest-api-oidc-discovery-configuration.adoc"]
 ---
@@ -149,6 +151,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-checksession-endpoint
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-checksession-endpoint.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints", "Sessions"]
 page_aliases: ["oidc1-guide:rest-api-oidc-checksession-endpoint.adoc"]
 ---
@@ -176,6 +179,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-endsession-endpoint
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-endsession-endpoint.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints", "Sessions"]
 page_aliases: ["oidc1-guide:rest-api-oidc-endsession-endpoint.adoc"]
 section_ids:
@@ -241,6 +245,7 @@ page_id: pingam:am-oidc1:managing-jwk_uri
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/managing-jwk_uri.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Setup &amp; Configuration", "Security", "Endpoints"]
 page_aliases: ["oidc1-guide:managing-jwk_uri.adoc"]
 section_ids:
@@ -254,7 +259,7 @@ section_ids:
   override-default-kid-values: Override default kid values
 ---
 
-# /oauth2/connect/jwk\_uri
+# /oauth2/connect/jwk_uri
 
 Each realm configured for OAuth 2.0 exposes a JSON web key (JWK) URI endpoint that contains public keys that clients can use to:
 
@@ -504,7 +509,7 @@ If you have several algorithms and key types associated with one `kid`, configur
 
 1. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced OpenID Connect.
 
-2. Enable Include all kty and alg combinations in jwk\_uri.
+2. Enable Include all kty and alg combinations in jwk_uri.
 
 3. Save your changes.
 
@@ -560,7 +565,7 @@ When AM signs a JWT using the secret, the `kid` header parameter in the JWT is t
 
 ## Override default `kid` values
 
-For certificates stored in a [GSM secret store](../security/secret-stores.html#create-GSM-secret-stores), the public key published in the JWK\_URI has a `kid` value that includes the name of the secret. For example:
+For certificates stored in a [GSM secret store](../security/secret-stores.html#create-GSM-secret-stores), the public key published in the JWK_URI has a `kid` value that includes the name of the secret. For example:
 
 ```json
 "kid" : "secrets/secret-name/versions/1"
@@ -583,11 +588,12 @@ page_id: pingam:am-oidc1:managing-rp-jwk_uri
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/managing-rp-jwk_uri.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Setup &amp; Configuration", "Security", "Endpoints"]
 page_aliases: ["oidc1-guide:managing-rp-jwk_uri.adoc"]
 ---
 
-# /oauth2/connect/rp/jwk\_uri
+# /oauth2/connect/rp/jwk_uri
 
 As well as acting as the provider, AM can also act as the relying party. To share its client public secrets, AM exposes a JSON web key (JWK) URI endpoint for each realm.
 
@@ -673,7 +679,7 @@ In a new AM installation, these signing and encryption secret labels are mapped 
 > | ----------------------------------------------- | ------------- | ------------------------------------------------------------ |
 > | `am.services.oauth2.oidc.rp.idtoken.encryption` | `test`        | Consult the `.well-known` endpoint of the identity provider. |
 >
-> The public key is exposed in the [/oauth2/connect/rp/jwk\_uri](managing-rp-jwk_uri.html).
+> The public key is exposed in the [/oauth2/connect/rp/jwk_uri](managing-rp-jwk_uri.html).
 >
 > For more information about the algorithms supported, and how to configure this secret label mapping, refer to [Social authentication](../am-authentication/social-registration.html).
 
@@ -685,7 +691,7 @@ In a new AM installation, these signing and encryption secret labels are mapped 
 > | ----------------------------------------------------- | ------------------ | ------------------------------------------------------------ |
 > | `am.services.oauth2.oidc.rp.jwt.authenticity.signing` | `rsajwtsigningkey` | Consult the `.well-known` endpoint of the identity provider. |
 >
-> The public key is exposed in the [/oauth2/connect/rp/jwk\_uri](managing-rp-jwk_uri.html).
+> The public key is exposed in the [/oauth2/connect/rp/jwk_uri](managing-rp-jwk_uri.html).
 >
 > For more information about the algorithms supported, and how to configure this secret label mapping, refer to [Social authentication](../am-authentication/social-registration.html).
 
@@ -708,6 +714,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-idtoken-validation
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-idtoken-validation.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints"]
 page_aliases: ["oidc1-guide:rest-api-oidc-idtoken-validation.adoc"]
 section_ids:
@@ -853,6 +860,7 @@ page_id: pingam:am-oidc1:rest-api-oauth2-register-endpoint
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oauth2-register-endpoint.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints", "Self-Service"]
 page_aliases: ["oidc1-guide:rest-api-oauth2-register-endpoint.adoc"]
 ---
@@ -906,6 +914,7 @@ page_id: pingam:am-oidc1:rest-api-oidc-userinfo-endpoint
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/rest-api-oidc-userinfo-endpoint.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-19T15:00:46Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Endpoints"]
 page_aliases: ["oidc1-guide:rest-api-oidc-userinfo-endpoint.adoc"]
 section_ids:
@@ -979,7 +988,7 @@ To enable signing and encryption, follow these steps:
 
 5. Save your work.
 
-For details, refer to the OAuth 2.0 provider reference documentation for [advanced OIDC settings](../setup/services-configuration.html#global-oauth-oidc-advanced-openid-connect) and to [Secret label default mappings](../security/secret-mapping.html#secret-label-mappings).
+For details, refer to the OAuth 2.0 provider reference documentation for [advanced OIDC settings](../setup/services-configuration.html#global-oauth-oidc-advanced-openid-connect) and to [Secret label default mappings](../security/secret-label-mappings.html).
 
 ---
 
@@ -992,7 +1001,7 @@ page_id: pingam:am-oidc1:use-case-temenos
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/use-case-temenos.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 10, 2025
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Use Case"]
 page_aliases: ["oidc1-guide:use-case-temenos.adoc"]
 section_ids:
@@ -1118,6 +1127,7 @@ page_id: pingam:am-oidc1:oidc-am-provider
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/oidc-am-provider.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Setup &amp; Configuration", "Integration"]
 page_aliases: ["oidc1-guide:oidc-am-provider.adoc"]
 section_ids:
@@ -1290,6 +1300,7 @@ page_id: pingam:am-oidc1:oidc-authentication-requirements
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/oidc-authentication-requirements.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-04T10:48:02Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Setup &amp; Configuration", "Authentication"]
 page_aliases: ["oidc1-guide:oidc-authentication-requirements.adoc"]
 section_ids:
@@ -1351,6 +1362,16 @@ RPs request voluntary `acr` claims for optional authentication mechanisms to imp
 
   Any mechanisms the RP specifies in the request override the default `acr` values.
 
+For CIBA requests, when the `acr_values` claim is absent and the [am.oauth2.ciba.spec.compliant.acr.resolution.enabled](../setup/server-advanced.html#am.oauth2.ciba.spec.compliant.acr.resolution.enabled) advanced server property is `true`, AM resolves the authentication journey from these sources, in order:
+
+1. The client's Default ACR values.
+
+2. The OAuth 2.0 provider's Default ACR values.
+
+3. The realm's default authentication journey.
+
+A client or provider default ACR value must match a key in the provider's OpenID Connect acr_values to Auth Chain Mapping. AM skips unmapped values and checks the next source. Learn more in [Resolve the CIBA authentication journey](openid-connect-backchannel-request-flow.html#ciba-acr-resolution).
+
 ### Essential claims
 
 RPs request essential `acr` claims for required authentication mechanisms.
@@ -1363,9 +1384,9 @@ Essential claims resemble, but are unrelated to, [step-up authentication](../am-
 
 1. In the AM admin UI, go to Realms > *realm name* > Services > OAuth2 Provider > Advanced OpenID Connect.
 
-2. Enable Enable "claims\_parameter\_supported" to let RPs request `acr` claims using the `claims` parameter.
+2. Enable Enable "claims_parameter_supported" to let RPs request `acr` claims using the `claims` parameter.
 
-3. In the OpenID Connect acr\_values to Auth Chain Mapping box, map keys to authentication journey identifiers.
+3. In the OpenID Connect acr_values to Auth Chain Mapping box, map keys to authentication journey identifiers.
 
    The following example maps `username-password` to the Login journey:
 
@@ -1626,9 +1647,12 @@ page_id: pingam:am-oidc1:backchannel-logout
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/backchannel-logout.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-19T15:00:46Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Authentication", "Setup &amp; Configuration", "Integration"]
 page_aliases: ["oidc1-guide:backchannel-logout.adoc"]
 section_ids:
+  common_use_cases: Common use cases
+  the_backchannel_logout_flow: The backchannel logout flow
   backchannel-logout-limitations: Backchannel logout limitations
   backchannel-logout-token: The logout token
   enabling-backchannel-logout: Enable backchannel logout
@@ -1638,6 +1662,24 @@ section_ids:
 # Backchannel logout
 
 [OpenID Connect Back-Channel Logout 1.0 Draft 06](https://openid.net/specs/openid-connect-backchannel-1_0.html) defines how a provider can send a *logout token* to the relevant relying parties when an authenticated session linked to an ID token becomes invalid.
+
+## Common use cases
+
+Backchannel logout suits deployments where several relying parties share an authenticated session and must stay consistent when it ends:
+
+* **Multi-application single sign-on (SSO)**: A user signs on once and opens several applications, each of which received ID tokens from the same session. When the session ends, AM notifies every participating relying party, so no application keeps treating the user as signed on.
+
+* **Account disablement**: An administrator disables an account. Existing sessions can remain valid until they are terminated or expire. To notify relying parties, terminate the user's sessions; AM then sends logout tokens.
+
+* **Administrator-forced logout**: A security team terminates a suspicious session. The logout token's `cause` claim records why the session ended, which relying parties can audit.
+
+Backchannel logout is different from browser-based logout and token expiry:
+
+* The [`/oauth2/connect/endSession`](rest-api-oidc-endsession-endpoint.html) endpoint signs the user off through their user-agent at their request. Backchannel logout needs no browser; AM notifies relying parties server-to-server when the session becomes invalid, whatever the cause.
+
+* Token expiry doesn't fire a logout token. Tokens can expire while the authenticated session remains valid, and a session can end while its tokens are still unexpired. Treat token validation and session logout as separate concerns.
+
+## The backchannel logout flow
 
 When backchannel logout is enabled, AM sends a logout token to a URL configured in the relying party's client profile. This URL must be a page or application in the relying party that is capable of dealing with the token.
 
@@ -1702,13 +1744,13 @@ The logout token is defined in section *2.4 Logout Token* of the draft. The foll
 | **2**  | The subject of the logout token. In this case, the user that has been logged out. The subject of the logout token matches the subject of the ID token(s).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **3**  | (AM-specific) Determines the unique audit identifier for this token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **4**  | The authorization server that issued the logout token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **5**  | (AM-specific) Documents the reason why the user was logged out, if known. Possible values are:- CLIENT\_LOGOUT. AM has received a call to the [sessions endpoint](../am-authentication/logout-using-rest.html) to end the session.
+| **5**  | (AM-specific) Documents the reason why the user was logged out, if known. Possible values are:- CLIENT_LOGOUT. AM has received a call to the [sessions endpoint](../am-authentication/logout-using-rest.html) to end the session.
 
-- SESSION\_TERMINATION. An administrative user has terminated the session.
+- SESSION_TERMINATION. An administrative user has terminated the session.
 
-- SESSION\_MAX\_TIMEOUT. AM terminated the session because it reached its maximum time-to-live.
+- SESSION_MAX_TIMEOUT. AM terminated the session because it reached its maximum time-to-live.
 
-- SESSION\_IDLE\_TIMEOUT. AM terminated the session because it reached its maximum idle time. If the reason is not known, the claim does not show in the token.                                                                                                                                                                                                                              |
+- SESSION_IDLE_TIMEOUT. AM terminated the session because it reached its maximum idle time. If the reason is not known, the claim does not show in the token.                                                                                                                                                                                                                                    |
 | **6**  | The expiration time of the logout token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **7**  | The creation time (issued at time) of the logout token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **8**  | The unique identifier for the logout token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -1733,7 +1775,7 @@ To enable backchannel logout, first configure the OAuth 2.0 provider for the rea
 
    * Review the logout token signing secret.
 
-     AM signs logout tokens with the same secret it uses to sign ID tokens. Learn more in [Secret label mappings for signing OpenID Connect tokens](../security/secret-mapping.html#secrets-oidc-IDtoken-signing-secretIDs).
+     AM signs logout tokens with the same secret it uses to sign ID tokens. Learn more in [Secret label mappings for signing OpenID Connect tokens](../security/secret-label-mappings.html#secrets-oidc-IDtoken-signing-secretIDs).
 
    * Configure AM to encrypt the logout tokens.
 
@@ -1852,13 +1894,16 @@ page_id: pingam:am-oidc1:openid-connect-backchannel-request-flow
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/openid-connect-backchannel-request-flow.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-12T10:22:27Z
 keywords: ["OpenID Connect (OIDC)", "Standards"]
 page_aliases: ["oidc1-guide:openid-connect-backchannel-request-flow.adoc"]
 section_ids:
+  common_use_cases: Common use cases
   the_backchannel_flow: The backchannel flow
   proc-prepare-for-ciba: Prepare for CIBA
   configure_the_service: Configure the service
   register_an_rp: Register an RP
+  ciba-acr-resolution: Resolve the CIBA authentication journey
   proc-auth-id-ciba: Get an auth request ID
   proc-auth-req-id-token-ciba: Exchange an auth request ID for tokens
   additional_oidc_claims: Additional OIDC claims
@@ -1870,19 +1915,29 @@ section_ids:
 
   * [/oauth2/bc-authorize](../am-oauth2/oauth2-bc-authorize-endpoint.html)
 
-  * [/oauth2/access\_token](../am-oauth2/oauth2-access_token-endpoint.html)
+  * [/oauth2/access_token](../am-oauth2/oauth2-access_token-endpoint.html)
 
   * [/oauth2/userinfo](rest-api-oidc-userinfo-endpoint.html)
 
 Use the backchannel request grant for [client-initiated backchannel authentication](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html) (CIBA).
 
-|   |                                                                                                                                                                              |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The OIDC backchannel request grant (CIBA) described here is distinct from the AM [backchannel authentication](../am-authentication/backchannel-authentication.html) feature. |
-
 CIBA lets a relying party (RP), the *consumption device*, get an end user's consent without redirection through the end user's browser. Instead, the end user authenticates and grants consent through an *authentication device* such as an authenticator application or a mobile banking application on the user's mobile phone.
 
 AM applies the guidelines suggested by the OpenID [Financial-grade API (FAPI) Working Group](https://openid.net/wg/fapi/) to implement CIBA.
+
+## Common use cases
+
+CIBA suits deployments where a trusted RP already knows the end user's identifier and needs their authorization without involving their browser:
+
+* **Transaction approval**: A banking application initiates a funds transfer. AM sends a push notification with a `binding_message` summarizing the transaction to the end user's authenticator application, and the user approves the operation with a single gesture. The RP gets the tokens it needs to complete the transfer only after the user approves.
+
+* **Call-center authentication**: A support agent looks up a customer in their system and starts a CIBA request with the customer's identifier. The customer approves the sign-on attempt on their own device, so the agent never handles their credentials.
+
+* **Limited-input devices**: A smart speaker receives a voice request that requires the registered end user's consent. The backend service knows the user's identifier, so it initiates a CIBA request and the user approves the operation on their mobile phone.
+
+Use the [device authorization grant](../am-oauth2/oauth2-device-flow.html) instead when the client can't identify the end user in advance, such as a smart TV or streaming device where anyone can start the flow. Device authorization lets the constrained client start from itself and display a code the user enters on another device.
+
+The OIDC backchannel request grant is distinct from the AM [backchannel authentication](../am-authentication/backchannel-authentication.html) feature, which redirects the end user to complete an authentication journey rather than gathering consent through an authentication device.
 
 ## The backchannel flow
 
@@ -1940,9 +1995,7 @@ AM applies the guidelines suggested by the OpenID [Financial-grade API (FAPI) Wo
 
 3. Associate the journey with incoming `acr_values`:
 
-   1. Switch to the Advanced OpenID Connect tab of the OAuth 2.0 provider configuration.
-
-   2. In the OpenID Connect acr\_values to Auth Chain Mapping box:
+   1. On the Advanced OpenID Connect tab of the OAuth 2.0 provider configuration, locate the OpenID Connect acr_values to Auth Chain Mapping box:
 
       1. Set the Key to the value that will be passed in through the `acr_values` claim of the incoming CIBA request.
 
@@ -1950,9 +2003,11 @@ AM applies the guidelines suggested by the OpenID [Financial-grade API (FAPI) Wo
 
       3. Click Add.
 
-   3. Save your changes.
+   2. Save your changes.
 
-   For more information, refer to [The `acr` claim](oidc-authentication-requirements.html#acr-claim).
+   The mapping key must match the `acr_values` claim in the incoming request. If the request doesn't include `acr_values`, enable the [am.oauth2.ciba.spec.compliant.acr.resolution.enabled](../setup/server-advanced.html#am.oauth2.ciba.spec.compliant.acr.resolution.enabled) advanced server property to resolve the authentication journey from configured defaults.
+
+Find more information in [The `acr` claim](oidc-authentication-requirements.html#acr-claim).
 
 ### Register an RP
 
@@ -2009,24 +2064,44 @@ AM applies the guidelines suggested by the OpenID [Financial-grade API (FAPI) Wo
 
      You can store more than one key in the JWK set.
 
+### Resolve the CIBA authentication journey
+
+When the `acr_values` claim is absent and the [am.oauth2.ciba.spec.compliant.acr.resolution.enabled](../setup/server-advanced.html#am.oauth2.ciba.spec.compliant.acr.resolution.enabled) advanced server property is `true`, AM checks the following sources in order:
+
+1. The client's Default ACR values.
+
+2. The OAuth 2.0 provider's Default ACR values.
+
+3. The realm's default authentication journey.
+
+A client or provider default ACR value is used only when it matches a key in the provider's OpenID Connect acr_values to Auth Chain Mapping. If a value isn't mapped, AM skips it and checks the next source. For example, a client default ACR value of `ciba` selects the `ciba` journey only when the provider mapping includes `ciba` as a key mapped to that journey.
+
+If no source produces a mapped authentication journey, AM returns an `invalid_request` error with the description `No default authentication method available`.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The [am.oauth2.ciba.spec.compliant.acr.resolution.enabled](../setup/server-advanced.html#am.oauth2.ciba.spec.compliant.acr.resolution.enabled) property is not enabled by default. If you leave this default setting and the `acr_values` claim is absent, CIBA requests use only the provider's default ACR values and don't fall back to the client defaults or the realm's default authentication journey. |
+
+The property affects only requests that omit `acr_values`. If a request includes `acr_values` but none of its values is mapped, AM returns an `invalid_request` error instead of substituting a default.
+
 ## Get an auth request ID
 
 Follow these steps as RP to get a CIBA authentication request ID:
 
 1. Prepare a signed [JWT](https://www.rfc-editor.org/info/rfc7523) with the required claims in the payload:
 
-   | Claim             | Description                                                                                                                                                                                                                                    | Example                                                                                         |
-   | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-   | `acr_values`      | A string identifying the mechanism for the end user to provide authorization.                                                                                                                                                                  | `"acr_values": "push"`                                                                          |
-   | `aud`             | A string or array of strings indicating the intended audience of the JWT. Must include the authorization server OAuth 2.0 endpoint.                                                                                                            | `"aud": "https://am.example.com:8443/am/oauth2"`                                                |
+   | Claim             | Description                                                                                                                                                                                                                                                                      | Example                                                                                         |
+   | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+   | `acr_values`      | A string identifying the mechanism for the end user to provide authorization. Optional when the `am.oauth2.ciba.spec.compliant.acr.resolution.enabled` advanced server property is set to `true`. Learn more in [Resolve the CIBA authentication journey](#ciba-acr-resolution). | `"acr_values": "push"`                                                                          |
+   | `aud`             | A string or array of strings indicating the intended audience of the JWT. Must include the authorization server OAuth 2.0 endpoint.                                                                                                                                              | `"aud": "https://am.example.com:8443/am/oauth2"`                                                |
    | `binding_message` | A short (100 character max.) string message to display to the user when obtaining authorization.For push notification, messages must:- Begin with a letter, number, or punctuation mark.
 
-   - **Not** include line breaks or control characters. | `"binding_message": "Allow ExampleBank to transfer £50 from 'Main' to 'Savings'? (EB-0246326)"` |
-   | `exp`             | The expiration time in seconds since January 1, 1970 UTC. An expiration time more than 30 minutes in the future causes a `JWT expiration time is unreasonable` error message.                                                                  | `"exp": 1675681183`                                                                             |
-   | `id_token_hint`   | An ID token identifying the principal and subject of the JWT (the end user).Required when not using `login_hint`.                                                                                                                              | `"id_token_hint": "<id-token>"`                                                                 |
-   | `iss`             | The unique identifier of the JWT issuer; must match the client ID in the application profile.                                                                                                                                                  | `"iss": "myCIBAClient"`                                                                         |
-   | `login_hint`      | A string identifying the principal and subject of the JWT (the end user).Required when not using `id_token_hint`.                                                                                                                              | `"login_hint": "a0325ea4-9d9b-4056-931b-ab64704cc3da"`                                          |
-   | `scope`           | A string holding a space-separated list of the requested scopes; must include `openid`.                                                                                                                                                        | `"scope": "openid profile"`                                                                     |
+   - **Not** include line breaks or control characters.                                   | `"binding_message": "Allow ExampleBank to transfer £50 from 'Main' to 'Savings'? (EB-0246326)"` |
+   | `exp`             | The expiration time in seconds since January 1, 1970 UTC. An expiration time more than 30 minutes in the future causes a `JWT expiration time is unreasonable` error message.                                                                                                    | `"exp": 1675681183`                                                                             |
+   | `id_token_hint`   | An ID token identifying the principal and subject of the JWT (the end user).Required when not using `login_hint`.                                                                                                                                                                | `"id_token_hint": "<id-token>"`                                                                 |
+   | `iss`             | The unique identifier of the JWT issuer; must match the client ID in the application profile.                                                                                                                                                                                    | `"iss": "myCIBAClient"`                                                                         |
+   | `login_hint`      | A string identifying the principal and subject of the JWT (the end user).Required when not using `id_token_hint`.                                                                                                                                                                | `"login_hint": "a0325ea4-9d9b-4056-931b-ab64704cc3da"`                                          |
+   | `scope`           | A string holding a space-separated list of the requested scopes; must include `openid`.                                                                                                                                                                                          | `"scope": "openid profile"`                                                                     |
 
    For example:
 
@@ -2034,7 +2109,6 @@ Follow these steps as RP to get a CIBA authentication request ID:
    {
      "aud": "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha",
      "binding_message": "Allow ExampleBank to transfer £50 from 'Main' to 'Savings'? (EB-0246326)",
-     "acr_values": "push",
      "exp": 1675681183,
      "iss": "<rp-client-id>",
      "login_hint": "<end-user-id>",
@@ -2068,7 +2142,7 @@ Follow these steps as RP to get a CIBA authentication request ID:
 
 ## Exchange an auth request ID for tokens
 
-To get an access token and ID token as the RP, poll the [/oauth2/access\_token](../am-oauth2/oauth2-access_token-endpoint.html) endpoint with HTTP POST requests having the following parameters:
+To get an access token and ID token as the RP, poll the [/oauth2/access_token](../am-oauth2/oauth2-access_token-endpoint.html) endpoint with HTTP POST requests having the following parameters:
 
 * `grant_type=urn:openid:params:grant-type:ciba`
 
@@ -2125,7 +2199,7 @@ An RP can request additional claims about the end user with the access token at 
 ```bash
 $ curl \
 --request GET \
---header "Authorization Bearer <access-token>" \
+--header "Authorization: Bearer <access-token>" \
 "https://am.example.com:8443/am/oauth2/realms/root/realms/alpha/userinfo"
 {
   "name": "<end-user-display-name>",
@@ -2147,6 +2221,7 @@ page_id: pingam:am-oidc1:understanding-openid-connect-scopes-and-claims
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/understanding-openid-connect-scopes-and-claims.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards"]
 page_aliases: ["oidc1-guide:understanding-openid-connect-scopes-and-claims.adoc"]
 ---
@@ -2207,7 +2282,7 @@ After a successful flow, the OpenID provider returns an ID token with the releva
 >
 >   This option is disabled by default because of the security concerns of returning claims that may contain sensitive user information.
 >
-> * To request that the provider only include certain scope-derived claims in the ID token, enable the property Enable "claims\_parameter\_supported" (Realms > *realm name* > Services > OAuth2 Provider > Advanced OpenID Connect) and request said claims in the `claims` parameter.
+> * To request that the provider only include certain scope-derived claims in the ID token, enable the property Enable "claims_parameter_supported" (Realms > *realm name* > Services > OAuth2 Provider > Advanced OpenID Connect) and request said claims in the `claims` parameter.
 >
 > > **Collapse: Voluntary and essential claims in the claims parameter**
 > >
@@ -2246,6 +2321,7 @@ page_id: pingam:am-oidc1:scripted-oidc-claims
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/scripted-oidc-claims.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Customization", "Extensibility"]
 page_aliases: ["oidc1-guide:scripted-oidc-claims.adoc"]
 ---
@@ -2275,6 +2351,7 @@ page_id: pingam:am-oidc1:dynamic-client-registration-script
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/dynamic-client-registration-script.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Setup &amp; Configuration", "Scripts"]
 page_aliases: ["oidc1-guide:dynamic-client-registration-script.adoc"]
 section_ids:
@@ -2370,6 +2447,7 @@ page_id: pingam:am-oidc1:oauth2-dynamic-client-registration
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/oauth2-dynamic-client-registration.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-07T10:00:00Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Self-Service", "Setup &amp; Configuration"]
 page_aliases: ["oidc1-guide:oauth2-dynamic-client-registration.adoc"]
 section_ids:
@@ -2391,15 +2469,18 @@ section_ids:
   dynamic-management-read: Read a client profile
   dynamic-management-update: Update a client profile
   dynamic-management-delete: Delete a client profile
+  dynamic-management-replace-token: Replace a lost registration access token
 ---
 
 # Dynamic client registration
 
 Dynamic client registration lets you set up a client application profile programmatically.
 
-|   |                                                                                                                                                                                                                                                                                                                                        |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To create and manage large numbers of clients without impacting system performance, use [Scalable OAuth 2.0 clients](../am-oauth2/oauth2-scalable-clients.html).To customize dynamic client registration, [configure a script](dynamic-client-registration-script.html) to run after a successful create, update, or delete operation. |
+|   |                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | * **Improve performance at scale:** Use [Scalable OAuth 2.0 clients](../am-oauth2/oauth2-scalable-clients.html) to create and manage large numbers of clients without impacting system performance.
+
+* **Customize registration:** [Configure a script](dynamic-client-registration-script.html) to run after a successful create, update, or delete operation. |
 
 ## Dynamic registration options
 
@@ -2551,6 +2632,8 @@ The client must read and store the dynamic registration response. The response i
   You can't choose the client ID or client secret when registering an application dynamically.
 
 * The URL and access token required to [update the client profile](#dynamic-client-registration-management).
+
+  The `registration_access_token` authorizes management of the client profile, so store it securely. If the client application loses the token, it can't be recovered through the dynamic registration endpoints; an administrator must replace it in the client profile. Learn more in [replace a lost registration access token](#dynamic-management-replace-token).
 
 ### Open registration
 
@@ -2988,11 +3071,11 @@ The JSON response to a successful dynamic registration request contains the foll
 
   The generated access token to authorize reading and updating the client profile.
 
-Make sure your client application stores the dynamic registration response, including these values. Your application needs them to read and update its client profile.
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The `registration_access_token` doesn't expire and doesn't require renewal. AM validates it against the value stored in the client profile, not as a standard OAuth 2.0 access token, so standard token expiration doesn't prevent its use for managing the client profile. The token remains valid until AM replaces it in a [profile update response](#dynamic-management-update) or an administrator replaces it manually. |
 
-|   |                                                                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To manage large numbers of clients without impacting system performance, use [Scalable OAuth 2.0 clients](../am-oauth2/oauth2-scalable-clients.html). |
+Make sure your client application stores the dynamic registration response, including these values. Your application needs them to read and update its client profile.
 
 ### Read a client profile
 
@@ -3089,6 +3172,7 @@ The following example updates the `scope` and `grant_types` settings:
 ```bash
 $ curl \
 --request PUT \
+--header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <generated-registration-access-token>' \
 --data '{
   "client_name#en": "My Client",
@@ -3169,6 +3253,30 @@ A successful request returns an HTTP 204 No Content response.
 
 Authorization grants and active tokens associated with the client remain valid until they expire.
 
+## Replace a lost registration access token
+
+You can't use the dynamic registration endpoints to recover a `registration_access_token` the client has lost. An administrator must replace the token stored in the client profile, then provide the new value to the client application securely.
+
+You can replace the token in the AM admin UI or over REST:
+
+* In the AM admin UI
+
+  1. Go to Realms > *realm name* > Applications > OAuth 2.0 > Clients > *client ID* > Advanced.
+
+  2. Set the Access Token field to the new value.
+
+* Over REST
+
+  Use the [client administration REST endpoint](../am-oauth2/rest-api-oauth2-client-admin-endpoint.html#update-oauth2-client) to update the `updateAccessToken` property:
+
+  1. Provide an administrative SSO token.
+
+  2. Send a GET request to read the client's complete configuration.
+
+  3. Change the `updateAccessToken` value.
+
+  4. Send the complete configuration in a PUT request. Because a PUT request removes omitted attributes, don't send a partial configuration.
+
 ---
 
 ---
@@ -3180,6 +3288,7 @@ page_id: pingam:am-oidc1:encrypting-oidc-idtokens
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/encrypting-oidc-idtokens.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Security"]
 page_aliases: ["oidc1-guide:encrypting-oidc-idtokens.adoc"]
 ---
@@ -3291,6 +3400,7 @@ page_id: pingam:am-oidc1:oidc-mobile-connect
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-oidc1/oidc-mobile-connect.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["OpenID Connect (OIDC)", "Standards", "Integration"]
 page_aliases: ["oidc1-guide:oidc-mobile-connect.adoc"]
 section_ids:

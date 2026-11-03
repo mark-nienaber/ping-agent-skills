@@ -1,5 +1,8 @@
 # PingOne Advanced Identity Cloud APIs
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Pingoneaic Api
 
 - [/.well-known/webfinger](https://developer.pingidentity.com/pingoneaic-api/am-oidc1/rest-api-oidc-discovery-webfinger.md)
@@ -48,7 +51,7 @@
 - [HTTP status codes](https://developer.pingidentity.com/pingoneaic-api/crest/status-codes.md)
 - [Interactive callbacks](https://developer.pingidentity.com/pingoneaic-api/am-authentication/callbacks-interactive.md)
 - [Internal objects](https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/endpoints/rest-internal.md)
-- [Introduction to the Advanced Identity Cloud API](https://developer.pingidentity.com/pingoneaic-api/api-reference.md)
+- [Introduction to the Advanced Identity Cloud API](https://developer.pingidentity.com/pingoneaic-api/api-reference.md): Overview of Advanced Identity Cloud REST APIs covering access management, identity management, and scripting endpoints
 - [Log in over REST](https://developer.pingidentity.com/pingoneaic-api/am-authentication/login-using-rest.md)
 - [Log out over REST](https://developer.pingidentity.com/pingoneaic-api/am-authentication/logout-using-rest.md)
 - [Manage scripts over REST](https://developer.pingidentity.com/pingoneaic-api/am-scripting/manage-scripts-rest.md)

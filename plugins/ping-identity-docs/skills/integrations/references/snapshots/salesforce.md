@@ -45,13 +45,13 @@ Create a dynamic single sign-on (SSO) link and add it to your Salesforce page.
 
      Replace the variables as follows:
 
-     * *pf\_host*: The host name or IP address of the PingFederate server.
+     * *pf_host*: The host name or IP address of the PingFederate server.
 
-     * *pf\_port*: The port number of the PingFederate server.
+     * *pf_port*: The port number of the PingFederate server.
 
-     * *destination\_URL*: The fully-qualified URL of the target application or other protected resource.
+     * *destination_URL*: The fully-qualified URL of the target application or other protected resource.
 
-     * *connection\_ID*: The **Partner's Entity ID (Connection ID)** of the service provider (SP) connection that you configured.
+     * *connection_ID*: The **Partner's Entity ID (Connection ID)** of the service provider (SP) connection that you configured.
 
        Example URL:
 
@@ -70,13 +70,13 @@ Create a dynamic single sign-on (SSO) link and add it to your Salesforce page.
 
      Replace the variables as follows:
 
-     * *pf\_host*: The host name or IP address of the PingFederate server.
+     * *pf_host*: The host name or IP address of the PingFederate server.
 
-     * *pf\_port*: The port number of the PingFederate server.
+     * *pf_port*: The port number of the PingFederate server.
 
-     * *destination\_URL*: The fully-qualified URL of the target application or other protected resource.
+     * *destination_URL*: The fully-qualified URL of the target application or other protected resource.
 
-     * *adapter\_ID*: The **Instance ID** of the Salesforce IdP Adapter that you configured.
+     * *adapter_ID*: The **Instance ID** of the Salesforce IdP Adapter that you configured.
 
        Example URL:
 

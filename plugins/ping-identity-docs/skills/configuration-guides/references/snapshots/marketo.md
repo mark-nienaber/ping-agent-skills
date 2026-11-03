@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Marketo and PingFederate
-description: Learn how to enable Marketo sign-on from PingFederate (IdP-initiated sign-on).
+description: Configure SAML SSO with Marketo and PingFederate — IdP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:marketo:config_saml_marketo_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/marketo/config_saml_marketo_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -95,10 +97,12 @@ Learn how to enable Marketo sign-on from PingFederate (IdP-initiated sign-on).
 
 ---
 title: Configuring SAML SSO with Marketo and PingOne
-description: Learn how to enable Marketo sign-on from PingOne (IdP-initiated sign-on).
+description: Configure SAML SSO with Marketo and PingOne — IdP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:marketo:config_saml_marketo_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/marketo/config_saml_marketo_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

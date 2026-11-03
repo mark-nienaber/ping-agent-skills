@@ -6,7 +6,7 @@ page_id: pingone:monitoring:p1_alerts
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_alerts.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 20, 2026
+revdate: 2026-05-20T00:00:00Z
 keywords: ["alerts", "alert types"]
 section_ids:
   alert-types: Alert types
@@ -70,26 +70,22 @@ page_id: pingone:monitoring:p1_reporting
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_reporting.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 17, 2024
+revdate: 2024-04-17T00:00:00Z
 section_ids:
   learn-more: Learn more
 ---
 
 # Audit
 
+Use the **Audit** page to run reports about events and actions performed in PingOne.
+
 PingOne logs three types of data that are governed by different retention policies:
 
-* **User events**
-
-  User events include user creation or deletion, authentications, updates to the user record, and other transactions related to end-user activity. User events are retained for 90 days.
-
-* **PingOne** admin console events
-
-  Configuration events include configuration changes made to system settings, policies, applications, and integrations. Configuration events are retained for 2 years.
-
-* **DaVinci** admin events
-
-  DaVinci administrative events, such as flow creation, connector updates, and variable changes. Learn more in [DaVinci administrative audit events in PingOne (early access)](../early-access-features/ea_p1_davinci_audit_events.html).
+| Data Type                    | Description                                                                                                                                                                                                                                             |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User events                  | User events include user creation or deletion, authentications, updates to the user record, and other transactions related to end-user activity. User events are retained for 90 days.                                                                  |
+| PingOne admin console events | PingOne admin console events include configuration changes made to system settings, policies, applications, and integrations. Configuration events are retained for 2 years.                                                                            |
+| DaVinci admin events         | DaVinci administrative events include events such as flow creation, connector updates, and variable changes. DaVinci administrative events are retained for 90 days. Learn more in [DaVinci administrative audit events](p1_davinci_audit_events.html). |
 
 You can run audit reports from **Monitoring > Audit** or using the PingOne APIs to view data about user and console events. You can run queries against a maximum of 14 days at a time.
 
@@ -107,7 +103,7 @@ Learn more about running audit reports in PingOne in the following topics:
 
 * [Running an audit report](p1_running_audit_report.html)
 
-* [DaVinci administrative audit events in PingOne (early access)](../early-access-features/ea_p1_davinci_audit_events.html)
+* [DaVinci administrative audit events](p1_davinci_audit_events.html)
 
 * [Audit Activities](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html) in the PingOne API documentation
 
@@ -121,176 +117,218 @@ page_id: pingone:monitoring:p1_auditparameters
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_auditparameters.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 page_aliases: ["p1_event_types.adoc"]
 section_ids:
   time-range: Time Range
-  filter-type: Filter Type
   selected-fields: Selected Fields
+  time-zone: Time Zone
+  filter-type: Filter Type
   secondary-filter-type: Secondary Filter Type
+  available-dates-utc: Available Dates (UTC)
 ---
 
 # Audit parameters
 
 Use audit parameters to specify the details of your search results.
 
+![A screen capture of the Audit Parameters section without any selections made.](_images/p1-monitoring-audit-params.png)
+
 ## Time Range
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Data up to 14 days old relative to the current date is available immediately. Data older than 14 days must be requested from the **Audit** page or using the API, and you can't request data for dates that are more than 2 years (730 days) before the current date.Depending on the number of days requested and the average number of events logged per day, the retrieval process can take from 2 to 24 hours. You can request a maximum of 14 days of data from within the data retention period, and you can't request additional data while another request is pending.If you have a valid email address in PingOne, you'll be notified when the requested data is available. At that point, you can return to the **Audit** page and run queries against the data for the timeframe requested. The retrieved data is available for 14 days from the date of the retrieval request. |
+Limit the report results to a specific time period.
 
-* **Relative**
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Data up to 14 days old relative to the current date is available immediately. Data older than 14 days must be requested from the **Audit** page or using the API. You can't request data for dates that are more than 2 years (730 days) before the current date.Depending on the number of days requested and the average number of events logged per day, the retrieval process can take from 2 to 24 hours. You can request a maximum of 14 days of data from within the data retention period, and you can't request additional data while another request is pending.If you have a valid email address in PingOne, you'll be notified when the requested data is available. At that point, you can return to the **Audit Parameters** page and run queries against the data for the timeframe requested. The retrieved data is available for 14 days from the date of the retrieval request. |
 
-  A time range relative to the current time. Under **Within**, select a number and a time period. For example, **2** **weeks**.
+| Option            | Description                                                                                                                                                                                              |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Relative**      | A time range relative to the current time. In the **Within** fields, select a number and a time period. For example, **2** and **weeks**.                                                                |
+| **Specific Date** | A time range with a specified start and end date, such as "March 27 to April 10." Optionally, you can also include the time of day using the **Hour** and **Minute** fields for the start and end dates. |
 
-* **Specific Date**
-
-  A time range with a specified start and end date, such as "March 27 to April 10." Optionally, you can specify the time of day using the **Hour** and **Minute** fields for the start and end dates.
-
-|   |                                                                                                                                                          |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you enter a time range further than 2 years (730 days) from the current date, you're prompted to adjust the time range before submitting the request. |
-
-## Filter Type
-
-Limit the search results based on the specified parameters.
-
-* **Resource ID**
-
-  Find activities by resource ID. For PingOne DaVinci events, enter a flow ID, variable ID, connector instance ID, flow policy ID, application ID, or UI template ID to scope results to a specific DaVinci resource.
-
-* **Correlation ID**
-
-  Find activities by correlation ID. When an HTTP request is received, it's assigned a correlation ID. You can use the correlation ID to associate HTTP responses with messages in the event log.
-
-* **Event Type**
-
-  Find activities by event type. Select an event type in the list. DaVinci-specific event types are included and can be selected simultaneously to filter for multiple event types at the same time. You can find a complete list of events logged in PingOne in [Audit Reporting Events](https://developer.pingidentity.com/pingone-api/platform/reference/audit-reporting-events.html) in the PingOne API documentation.
-
-* **User ID (Actor)**
-
-  Find activities that were performed by a particular user, by user ID.
-
-* **User Name (Actor)**
-
-  Find activities that were performed by a particular user, by user name.
-
-* **Client (Actor)**
-
-  Find activities that were performed by a particular client. Select a client in the **Filter** list. The list of clients varies depending on your configuration.
-
-* **Resource Population**
-
-  Find activities that were performed in resources within a particular population. Select a population in the list.
-
-* **Resource Type**
-
-  Find activities that were performed on a particular type of resource. Select a resource in the list. A **DaVinci** subsection is available to filter for DaVinci-related audit events. Learn more about individual DaVinci resource type filters in [Filtering DaVinci events](../early-access-features/ea_p1_davinci_audit_events.html#filtering-davinci-events).
-
-* **Population**
-
-  Find activities that were performed on a particular population.
-
-* **User**
-
-  Find activities that were performed on a particular user.
-
-* **Application**
-
-  Find activities that were performed by a particular client application.
+|   |                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you enter a time range more than 2 years (730 days) from the current date, you're prompted to adjust the time range before submitting the request. |
 
 ## Selected Fields
 
 Specify which fields appear in the results list.
 
-* **Timestamp**
+| Option            | Description                                                                                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Timestamp**     | Shows the date and time of the event. The format is: `MM/DD/YYYY hh:mm:ss`.                                                                                                                                                                             |
+| **Event Type**    | Shows the type of event returned. You can find a complete list of events logged in PingOne in [Audit Reporting Events](https://developer.pingidentity.com/pingone-api/platform/reference/audit-reporting-events.html) in the PingOne API documentation. |
+| **Description**   | Shows a brief description of the event.                                                                                                                                                                                                                 |
+| **Client**        | Shows the name of the application or OAuth client that performed the event.                                                                                                                                                                             |
+| **User Identity** | Shows the user who performed the action.                                                                                                                                                                                                                |
+| **Population**    | Shows the population of the resource on which the event was performed.                                                                                                                                                                                  |
+| **Resource Type** | Shows the type of resource affected by the event, such as an application, identity provider, or digital wallet.                                                                                                                                         |
 
-  The date and time of the event. The format is: MM/DD/YYYY hh:mm:ss.
+## Time Zone
 
-* **Event Name**
+Specify the time zone to use for the display of the **Timestamp** in the results list.
 
-  A unique identifier for the event.
+## Filter Type
 
-* **Description**
+Limit the search results based on the specified filters.
 
-  A brief description of the event.
-
-* **Client**
-
-  The client that performed the event.
-
-* **User Identity**
-
-  The user for which the event was performed.
-
-* **Population**
-
-  The population for which the event was performed.
-
-* **Resource Type**
-
-  The type of resource for which the event was performed.
+| Option                  | Description                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Resource ID**         | Find activities that were performed on a specific resource, identified by its resource ID (UUID).For PingOne DaVinci events, enter a flow ID, variable ID, connector instance ID, flow policy ID, application ID, or UI template ID to scope results to a specific DaVinci resource.                                                                 |
+| **Correlation ID**      | Find activities by correlation ID. When an HTTP request is received, it's assigned a correlation ID. You can use the correlation ID to associate HTTP responses with messages in the event log.                                                                                                                                                      |
+| **Event Type**          | Find activities by event type. You can find a complete list of events logged in PingOne in [Audit Reporting Events](https://developer.pingidentity.com/pingone-api/platform/reference/audit-reporting-events.html) in the PingOne API documentation.                                                                                                 |
+| **User ID (Actor)**     | Find activities performed by a specific user, identified by user ID. User IDs are immutable, so this filter provides a stable way to identify the user over time. If they change their username, you can still find the activities performed by that user.                                                                                           |
+| **User Name (Actor)**   | Find activities performed by a specific user, identified by username. Because usernames can change, results might not refer to the same person over time. Use **User ID (Actor)** if you need a stable identifier.                                                                                                                                   |
+| **Client (Actor)**      | Find activities performed by a specific OAuth client acting as the caller, such as the PingOne admin console (`adminui`), or a worker application using client credentials. You can enter an application ID or application name. This filter differs from the **Application** filter, which matches activities performed on an application.          |
+| **Resource Population** | Find activities performed on resources in one or more populations, matched by the population ID associated with the target resource. Use this filter to return everything that happened to users in a given population. This filter differs from the **Population** filter, which only matches activities performed on a specific population object. |
+| **Resource Type**       | Find activities performed on a specific type of resource, such as an application, identity provider, or digital wallet. This filter returns all activities whose target resource is the selected type, regardless of which specific resource was affected.                                                                                           |
+| **Population**          | Find activities performed on a specific population object itself, such as when the population was created, updated, or deleted. This filter doesn't include activities performed on users in that population. Use **Resource Population** for that use case.                                                                                         |
+| **User**                | Find activities performed on a specific user, identified by user ID (not by the username), such as updates to that user's profile, password, or credentials. This filter differs from **User ID (Actor)**, which matches activities performed by that user.                                                                                          |
+| **Application**         | Find activities performed on a specific application resource, such as when the application was created, updated, or deleted. Enter an application ID or name. This filter differs from **Client (Actor)**, which matches activities performed by an application acting as the caller.                                                                |
 
 ## Secondary Filter Type
 
-Specify a secondary filter for your results.
+Specify a secondary filter to further refine your results.
 
-|   |                                                                                                                                                                                                          |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You must specify a primary filter type before you can select a secondary filter type. The **Secondary Filter Type** list contains all of the filter types that you didn't select as your primary filter. |
+You must specify a primary filter type before you can select a secondary filter type. The **Secondary Filter Type** list contains all of the filter types that you didn't select as your primary filter.
+
+## Available Dates (UTC)
+
+The **Available Dates (UTC)** section of the page lists the dates for the data that's available to query or that has been requested.
+
+![A screen capture of the Audit Parameters section with a message indicating that data retrieval is in progress.](_images/p1-audit-data-retrieval-in-progress.png)
 
 ---
 
 ---
-title: Authentication dashboard
-description: The Authentication dashboard shows a summary of sign-on activity through PingOne sign-on policies for the selected environment.
+title: Authentication Dashboard
+description: The Authentication Dashboard shows a summary of SSO and authentication activity through PingOne authentication.
 component: pingone
-page_id: pingone:monitoring:p1_auth_dashboard
-canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_auth_dashboard.html
+page_id: pingone:monitoring:p1_authentication_dashboard
+canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_authentication_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
+revdate: 2026-09-14T16:07:15Z
+page_aliases: ["early-access-features:ea-p1_auth_dashboard.adoc", "p1_auth_dashboard.adoc"]
 section_ids:
-  cards: Cards
-  sign-ons-by-dayhour: Sign-ons by day/hour
+  limitations: Limitations
+  accessing-the-dashboard: Accessing the dashboard
+  filters: Filters
+  charts: Charts
+  total-successful-authentications: Total Successful Authentications
+  successful-authentications: Successful Authentications
+  total-identities: Total Identities
+  total-unsuccessful-authentication-attempts: Total Unsuccessful Authentication Attempts
+  unsuccessful-authentication-attempts: Unsuccessful Authentication Attempts
+  total-password-resets: Total Password Resets
+  password-resets: Password Resets
+  successful-authentications-by-dayhour: Successful Authentications by Day/Hour
 ---
 
-# Authentication dashboard
+# Authentication Dashboard
 
-The Authentication dashboard shows a summary of sign-on activity through PingOne sign-on policies for the selected environment.
+The **Authentication Dashboard** shows a summary of authentication activity through PingOne authentication for the selected environment, including:
 
-|   |                                                                     |
-| - | ------------------------------------------------------------------- |
-|   | The Authentication dashboard does not include DaVinci transactions. |
+* Single sign-on (SSO) activity.
 
-You can limit the data to a specific time range, such as the current day, the current week, the current month, or the previous three months.
+* User self-registration events.
 
-The graph at the top of the page shows sign-on activity at a glance, including the number of successful user sign-ons for the current day, and a graph showing the number of successful sign-ons and the number of failed sign-ons for the specified period.
+* PingOne DaVinci success flows from successful authentication attempts.
 
-## Cards
+* DaVinci failed flows from unsuccessful authentication attempts.
 
-The cards show the following information:
+* Authentication through external identity providers (IdPs) configured in PingOne.
 
-* **MFA adoption**
+## Limitations
 
-  The current percentage of MFA-enabled users. Select a timeframe of 30 days, 12 weeks, or 1 year to see the evolution of the MFA adoption rate. This information can help administrators visualize trends and inform decisions.Hover over the area chart to see exact information on rate and date for a particular point in time. The back of the card shows a snapshot of historical rates.
+The Authentication Dashboard doesn't display the following activity:
 
-* **Total identities**
+* DaVinci authentication attempts that result in a timeout or user abandonment
 
-  The number of active users for the specified period.
+* DaVinci authentications through social login connectors that bypass the DaVinci flow orchestration service, such as passwordless-only flows or sign-on with social accounts like Google
 
-* **Total password resets**
+* DaVinci authentications that succeed after the user falls back to a previous authentication method following an initial failure
 
-  The number of times users have requested password resets over the specified period.
+* Guest checkouts when a user is unable to sign on to their existing account and proceeds as a guest instead
 
-The cards show a graphical view on one side and a list view on the other. Click the icon on the top right of the card to toggle between views.
+## Accessing the dashboard
 
-## Sign-ons by day/hour
+To access the **Authentication Dashboard**, in the PingOne admin console, go to **Monitoring > Authentication**.
 
-The **Sign-ons by day/hour** shows relative authentication activity by hour of the day and day of the week. The color variations show usage trends throughout an average week.
+![A screenshot of the Authentication Dashboard](_images/p1-authentication-dashboard.png)
 
-Hover over the map to see the actual average of sign-ons to more accurately quantify the variation between periods. You can use this information to better understand users' habits as well as identify periods of interest, such as typical highs and lows.
+## Filters
+
+Use filters to refine the data displayed on the dashboard. You can limit data to a specific time range:
+
+* **Today**: Displays data for the current day only.
+
+* **From Yesterday**: Displays data for the previous day only.
+
+* **Last 7 Days** (default): Displays data for the previous 7 days only.
+
+* **Last 30 Days**: Displays data for the previous 30 days only.
+
+* **Last 90 Days**: Displays data for the previous 90 days only.
+
+* **This Month**: Displays data for the current calendar month only.
+
+* **Last Month**: Displays data for the previous calendar month only.
+
+* **Custom Range**: Enables you to define a date range within the last 6 months. Select a start date and an end date in the date picker, then click **Apply**.
+
+This filter applies to all charts on the dashboard.
+
+|   |                                                                        |
+| - | ---------------------------------------------------------------------- |
+|   | The Authentication Dashboard displays data only for the past 6 months. |
+
+## Charts
+
+Use the following controls to adjust the charts:
+
+| Icon                                                                | Name         | Description                                                                                                                                                                                       |
+| ------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![The Maximize icon.](../_images/p1-dashboard-maximize.png)         | Maximize     | Expands the chart to fill the dashboard.To minimize the chart, click the icon again.                                                                                                              |
+| ![The Menu options icon.](../_images/p1-dashboard-menu-options.png) | Menu options | Options can vary for different types of charts:- **View summary data**: Displays chart data as a table.
+
+- **Export**: Exports chart data to CSV or Excel format, depending on the type of chart. |
+| ![The Sort visual icon.](../_images/p1-dashboard-sort-visual.png)   | Sort visual  | Sorts the chart data in ascending or descending order.                                                                                                                                            |
+
+### Total Successful Authentications
+
+Displays the total number of successful authentication attempts during the selected time period.
+
+### Successful Authentications
+
+Displays a bar chart showing the total number of successful authentication attempts by date and a rolling average line for the selected time period. Hover over a bar to view the number of authentications for that date.
+
+### Total Identities
+
+Displays the total number of users in the PingOne directory for the selected time period and a graph showing the total user count by date.
+
+### Total Unsuccessful Authentication Attempts
+
+Displays the total number of unsuccessful authentication attempts, including account lockouts and timeouts, during the specified time period.
+
+### Unsuccessful Authentication Attempts
+
+Displays a bar chart of unsuccessful authentication attempts, including account lockouts and timeouts, by date, and a rolling average line for the selected time period. Hover over a bar to view the number of unsuccessful attempts for that date.
+
+### Total Password Resets
+
+Displays the total number of times users successfully reset their password during the selected time period.
+
+### Password Resets
+
+Displays a bar chart of times users successfully reset their password by date and a rolling average line for the selected time period. Hover over a bar to view the number of successful password resets for that date.
+
+### Successful Authentications by Day/Hour
+
+Displays a heat map of average authentication activity by hour of the day and day of the week in the end user's local time zone. The color variations show usage trends throughout an average week.
+
+Hover over the map to see the actual average of successful authentications to more accurately quantify the variation between periods. You can use this information to better understand user habits and identify periods of interest, such as typical highs and lows for authentication attempts.
 
 ---
 
@@ -302,7 +340,7 @@ page_id: pingone:monitoring:p1_add_alert
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_add_alert.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 26, 2026
+revdate: 2026-05-26T00:00:00Z
 keywords: ["create an alert", "add an alert"]
 section_ids:
   steps: Steps
@@ -336,7 +374,7 @@ page_id: pingone:monitoring:p1_dashboards
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_dashboards.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 2, 2025
+revdate: 2026-09-22T15:17:11Z
 section_ids:
   pingone: PingOne
   pingone-services: PingOne Services
@@ -348,7 +386,7 @@ section_ids:
 
 ## PingOne
 
-* [Authentication Dashboard](p1_auth_dashboard.html): View a summary of sign-on activity for the selected environment.
+* [Authentication Dashboard](p1_authentication_dashboard.html): View a summary of sign-on activity for the selected environment.
 
 * [User Demographics Dashboard](p1_user_demographic_dashboard.html): View a summary of user demographic profiles and activity for the selected environment.
 
@@ -375,6 +413,209 @@ section_ids:
 ---
 
 ---
+title: DaVinci administrative audit events
+description: DaVinci administrative audit events are available in the PingOne audit report with unified filtering, retention, and webhook streaming.
+component: pingone
+page_id: pingone:monitoring:p1_davinci_audit_events
+canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_davinci_audit_events.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-28T00:00:00Z
+page_aliases: ["ea_p1_davinci_audit_events.adoc"]
+section_ids:
+  accessing-davinci-audit-events: Accessing DaVinci audit events
+  retention-and-retrieval: Retention and retrieval
+  p1-filtering-davinci-events: Filtering DaVinci events
+  filter-by-resource-type: Filter by resource type
+  filter-by-event-type: Filter by event type
+  filter-by-resource-id: Filter by resource ID
+  davinci-audit-event-reference: DaVinci audit event reference
+  audit-event-structure: Audit event structure
+  standard-fields: Standard fields
+  davinci-specific-_embedded-fields: DaVinci-specific _embedded fields
+  api-access: API access
+---
+
+# DaVinci administrative audit events
+
+PingOne DaVinci administrative audit events are integrated into the PingOne centralized audit schema. DaVinci events appear alongside standard PingOne events in **Monitoring > Audit** and are subject to the same retention, retrieval, filtering, and webhook streaming capabilities. Learn more in [Audit](p1_reporting.html).
+
+## Accessing DaVinci audit events
+
+DaVinci audit events are visible in **Monitoring > Audit**. They appear alongside standard PingOne events and can be filtered to show only DaVinci-related activity.
+
+Learn more about running audit reports in [Audit](p1_reporting.html).
+
+### Retention and retrieval
+
+Use the following retention windows to determine whether your audit data is available immediately or requires a retrieval request:
+
+| Data age           | Availability                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| Up to 14 days      | Available immediately in the PingOne admin console and through the API                     |
+| Older than 14 days | Request retrieval from the **Audit** page. A prompt is displayed before results are shown. |
+
+## Filtering DaVinci events
+
+Use the available filters to narrow audit results by DaVinci resource type, event type, or a specific resource ID.
+
+### Filter by resource type
+
+In the **Filter Type** panel, select **Resource Type**. A **DaVinci** subsection is available with the following filters:
+
+| Filter value              | Covers                              |
+| ------------------------- | ----------------------------------- |
+| **DaVinci Flows**         | Flow events and flow version events |
+| **DaVinci Connectors**    | Connector instance events           |
+| **DaVinci Variables**     | Variable events                     |
+| **DaVinci Applications**  | Application events                  |
+| **DaVinci Flow Policies** | Flow policy events                  |
+| **DaVinci UI Templates**  | UI template events                  |
+
+### Filter by event type
+
+Select **Event Type** in the filter panel. All granular DaVinci event types are listed and multiple event types can be selected simultaneously.
+
+### Filter by resource ID
+
+Enter a flow ID, variable ID, connector instance ID, flow policy ID, application ID, or UI template ID in the **Resource ID** filter to scope results to a specific DaVinci resource.
+
+## DaVinci audit event reference
+
+The following 37 DaVinci administrative events are logged in PingOne.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Rows 12 – 17 share the `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED` action type for both flow-level and connector-level events. Differentiate by the `resources[].type` field: `DAVINCI_FLOW` for flow events (rows 12 – 15) and `DAVINCI_CONNECTOR` for connector events (rows 16 – 17). The context (direct creation, clone, or import) is reflected in `_embedded.davinciFlow.creationSource`. |
+
+| #  | Action type (`action.type`)                      | Event type (`action.description`)              | Example description (`result.description`)                                                                |
+| -- | ------------------------------------------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 1  | `DAVINCI.FLOW.CREATED`                           | DaVinci Flow Created                           | Created DaVinci Flow '{name}'                                                                             |
+| 2  | `DAVINCI.FLOW.UPDATED`                           | DaVinci Flow Updated                           | Updated DaVinci Flow '{name}'                                                                             |
+| 3  | `DAVINCI.FLOW.DELETED`                           | DaVinci Flow Deleted                           | Deleted DaVinci Flow '{name}'                                                                             |
+| 4  | `DAVINCI.FLOW.DEPLOYED`                          | DaVinci Flow Deployed                          | Deployed DaVinci Flow '{name}'                                                                            |
+| 5  | `DAVINCI.FLOW.CLONED`                            | DaVinci Flow Cloned                            | Cloned DaVinci Flow 'CLONE-{name}' from '\\{source name}'                                                 |
+| 6  | `DAVINCI.FLOW.IMPORTED`                          | DaVinci Flow Imported                          | Imported DaVinci Flow '{name}'                                                                            |
+| 7  | `DAVINCI.FLOW.ENABLED`                           | DaVinci Flow Enabled                           | Enabled DaVinci Flow '{name}'                                                                             |
+| 8  | `DAVINCI.FLOW.DISABLED`                          | DaVinci Flow Disabled                          | Disabled DaVinci Flow '{name}'                                                                            |
+| 9  | `DAVINCI.FLOW.DEBUG_LOGGING.ENABLED`             | DaVinci Flow Debug Logging Enabled             | Debug logging enabled for DaVinci Flow '{name}'                                                           |
+| 10 | `DAVINCI.FLOW.DEBUG_LOGGING.DISABLED`            | DaVinci Flow Debug Logging Disabled            | Debug logging disabled for DaVinci Flow '{name}'                                                          |
+| 11 | `DAVINCI.COMPANY.ENABLE_ANALYTICS_DEBUG_VIEW`    | DaVinci Company Debug Logging Enabled          | Debug logging for Analytics enabled from Company Settings                                                 |
+| 12 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow creation for DaVinci Flow '{name}'                                    |
+| 13 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow cloning for DaVinci Flow '{name}'                                     |
+| 14 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow import for DaVinci Flow '{name}'                                      |
+| 15 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.UPDATED`         | DaVinci Flow Custom JavaScript Updated         | Custom JavaScript updated in DaVinci Flow '{name}'                                                        |
+| 16 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Connector Custom JavaScript Added      | Custom JavaScript added in '\\{connector name}' Connector Configurations                                  |
+| 17 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Connector Custom JavaScript Updated    | Custom JavaScript updated in '\\{connector name}' Connector Configurations                                |
+| 18 | `DAVINCI.FLOW.VERSION.REVERTED`                  | DaVinci Flow Version Reverted                  | Flow version reverted from version {n} to version {m}, new version created: {p} for DaVinci Flow '{name}' |
+| 19 | `DAVINCI.FLOW.VERSION.ALIAS.UPDATED`             | DaVinci Flow Version Alias Updated             | Flow version alias updated for \\{flow name} (version {n}: {alias})                                       |
+| 20 | `DAVINCI.FLOW.VERSION.DELETED`                   | DaVinci Flow Version Deleted                   | Flow version {n} deleted for DaVinci Flow '{name}'                                                        |
+| 21 | `DAVINCI.FLOW.SESSION.CONFIGURATIONS.ADDED`      | DaVinci Flow Session Configurations Added      | Session configurations added in DaVinci Flow '{name}'                                                     |
+| 22 | `DAVINCI.FLOW.SESSION.CONFIGURATIONS.OVERRIDDEN` | DaVinci Flow Session Configurations Overridden | Session configurations overridden in DaVinci Flow '{name}'                                                |
+| 23 | `DAVINCI.CONNECTOR.CREATED`                      | DaVinci Connector Created                      | Created DaVinci Connector '{name}'                                                                        |
+| 24 | `DAVINCI.CONNECTOR.UPDATED`                      | DaVinci Connector Updated                      | Updated DaVinci Connector '{name}'                                                                        |
+| 25 | `DAVINCI.CONNECTOR.DELETED`                      | DaVinci Connector Deleted                      | Deleted DaVinci Connector '{name}'                                                                        |
+| 26 | `DAVINCI.VARIABLE.CREATED`                       | DaVinci Variable Created                       | Created DaVinci Variable '{name}'                                                                         |
+| 27 | `DAVINCI.VARIABLE.UPDATED`                       | DaVinci Variable Updated                       | Updated DaVinci Variable '{name}'                                                                         |
+| 28 | `DAVINCI.VARIABLE.DELETED`                       | DaVinci Variable Deleted                       | Deleted DaVinci Variable '{name}'                                                                         |
+| 29 | `DAVINCI.FLOW_POLICY.CREATED`                    | DaVinci Flow Policy Created                    | Created DaVinci Flow Policy '{name}'                                                                      |
+| 30 | `DAVINCI.FLOW_POLICY.UPDATED`                    | DaVinci Flow Policy Updated                    | Updated DaVinci Flow Policy '{name}'                                                                      |
+| 31 | `DAVINCI.FLOW_POLICY.DELETED`                    | DaVinci Flow Policy Deleted                    | Deleted DaVinci Flow Policy '{name}'                                                                      |
+| 32 | `DAVINCI.APPLICATION.CREATED`                    | DaVinci Application Created                    | Created DaVinci Application '{name}'                                                                      |
+| 33 | `DAVINCI.APPLICATION.UPDATED`                    | DaVinci Application Updated                    | Updated DaVinci Application '{name}'                                                                      |
+| 34 | `DAVINCI.APPLICATION.DELETED`                    | DaVinci Application Deleted                    | Deleted DaVinci Application '{name}'                                                                      |
+| 35 | `DAVINCI.UI_TEMPLATE.CREATED`                    | DaVinci UI Template Created                    | Created DaVinci UI Template '{name}'                                                                      |
+| 36 | `DAVINCI.UI_TEMPLATE.UPDATED`                    | DaVinci UI Template Updated                    | Updated DaVinci UI Template '{name}'                                                                      |
+| 37 | `DAVINCI.UI_TEMPLATE.DELETED`                    | DaVinci UI Template Deleted                    | Deleted DaVinci UI Template '{name}'                                                                      |
+
+## Audit event structure
+
+DaVinci audit events follow the standard PingOne audit event structure with DaVinci-specific `_embedded` fields.
+
+### Standard fields
+
+| Field                               | Description                                                                                                                        |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                | Unique audit event ID                                                                                                              |
+| `recordedAt`                        | ISO 8601 timestamp when the event was recorded                                                                                     |
+| `correlationId`                     | Request correlation ID                                                                                                             |
+| `internalCorrelation.transactionId` | Internal DaVinci transaction ID                                                                                                    |
+| `actors.client.name`                | Client application that performed the action (for example, `adminui`)                                                              |
+| `actors.user.name`                  | User who performed the action (PingOne user email)                                                                                 |
+| `actors.user.id`                    | PingOne user ID (UUID)                                                                                                             |
+| `source.ipAddress`                  | IP address of the request origin                                                                                                   |
+| `source.userAgent`                  | User-agent string                                                                                                                  |
+| `action.type`                       | Machine-readable event type (for example, `DAVINCI.FLOW.CREATED`)                                                                  |
+| `action.description`                | Human-readable event type label                                                                                                    |
+| `resources[].type`                  | Resource type (for example, `DAVINCI_FLOW`, `DAVINCI_CONNECTOR`, `DAVINCI_VARIABLE`, `DAVINCI_APPLICATION`, `DAVINCI_UI_TEMPLATE`) |
+| `resources[].id`                    | Resource ID                                                                                                                        |
+| `resources[].name`                  | Resource name                                                                                                                      |
+| `result.status`                     | `SUCCESS` or `FAILURE`                                                                                                             |
+| `result.description`                | Human-readable result description                                                                                                  |
+
+### DaVinci-specific `_embedded` fields
+
+* `_embedded.davinciFlow`
+
+  The following fields are present on flow events:
+
+  | Field                | Description                                                                                           |
+  | -------------------- | ----------------------------------------------------------------------------------------------------- |
+  | `flowId`             | DaVinci internal flow ID                                                                              |
+  | `flowName`           | Human-readable flow name                                                                              |
+  | `flowStatus`         | `ACTIVE`, `DISABLED`, or similar                                                                      |
+  | `logLevel`           | Current log level: `ERROR`, `DEBUG`, or `INFO`                                                        |
+  | `flowType`           | Trigger type: `DEFAULT`, `PINGONE`, `SCHEDULED`, or similar                                           |
+  | `flowVersion`        | Flow version number (present on update, enable, and disable events)                                   |
+  | `modifiedAttributes` | Array of attribute paths changed during an update (for example, `graphData`, `flowSettings.logLevel`) |
+  | `creationSource`     | On custom JavaScript add events: `DIRECT`, `CLONE`, or `IMPORT`                                       |
+  | `targetNodeId`       | Node IDs containing the custom JavaScript                                                             |
+
+* `_embedded.davinciFlowVersion`
+
+  The following fields are present on flow version events:
+
+  | Field                 | Description                                |
+  | --------------------- | ------------------------------------------ |
+  | `flowVersion`         | Version number affected                    |
+  | `revertSourceVersion` | Source version number (revert events only) |
+  | `flowVersionAlias`    | Version alias string                       |
+  | `previousAlias`       | Previous alias value before update         |
+
+* `_embedded.davinciConnector`
+
+  The following fields are present on connector custom JavaScript events:
+
+  | Field                  | Description                                 |
+  | ---------------------- | ------------------------------------------- |
+  | `connectorInstanceId`  | Connector instance ID                       |
+  | `connectorDisplayName` | Display name of the connector instance      |
+  | `connectorType`        | Connector type (for example, `PingOne MFA`) |
+  | `connectorCategory`    | Connector category                          |
+
+* `_embedded.companySettings`
+
+  The following fields are present on company-level debug logging events:
+
+  | Field                      | Description                                  |
+  | -------------------------- | -------------------------------------------- |
+  | `enableAnalyticsDebugView` | `true` when company debug logging is enabled |
+
+## API access
+
+DaVinci audit events are accessible through the standard PingOne Activities API:
+
+```
+GET /v1/environments/{environmentId}/activities
+```
+
+Filter by DaVinci event types using standard PingOne audit filter parameters. For example, `filter=action.type sw "DAVINCI"`.
+
+Learn more in [Audit Activities](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html) in the PingOne API documentation.
+
+---
+
+---
 title: Deleting an alert
 description: Delete alerts in PingOne.
 component: pingone
@@ -382,7 +623,7 @@ page_id: pingone:monitoring:p1_delete_alert
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_delete_alert.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 20, 2026
+revdate: 2026-05-20T00:00:00Z
 keywords: ["delete an alert", "remove an alert"]
 section_ids:
   steps: Steps
@@ -416,7 +657,7 @@ page_id: pingone:monitoring:p1_edit_alert
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_edit_alert.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 20, 2026
+revdate: 2026-05-20T00:00:00Z
 keywords: ["edit an alert", "modify an alert"]
 section_ids:
   steps: Steps
@@ -448,13 +689,13 @@ Use the **Alerts** page to edit an existing alert.
 
 ---
 title: MFA dashboard
-description: The MFA dashboard shows a summary of current multi-factor authentication (MFA) activity, SMS and voice usage and costs, and user devices.
+description: View a summary of MFA activity, SMS and voice usage, costs, and user devices in the PingOne MFA dashboard.
 component: pingone
 page_id: pingone:monitoring:p1_mfa_dashboard
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_mfa_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 25, 2026
+revdate: 2026-07-10T00:00:00Z
 ---
 
 # MFA dashboard
@@ -471,13 +712,13 @@ Learn more about MFA dashboard charts in [MFA Dashboard](../strong_authenticatio
 
 ---
 title: Monitoring
-description: The Monitoring branch provides access to the platform and services dashboards, as well as to the Audit and Alerts pages.
+description: Access PingOne dashboards, audit logs, and alerts from the Monitoring section of the admin console.
 component: pingone
 page_id: pingone:monitoring:p1_monitoring_menu
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_monitoring_menu.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 13, 2023
+revdate: 2026-07-10T00:00:00Z
 ---
 
 # Monitoring
@@ -496,13 +737,13 @@ For more information, see the following topics:
 
 ---
 title: Running an audit report
-description: Run reports to see a summary of actions performed in the PingOne admin console.
+description: Run reports to see a summary of user events or actions performed in PingOne.
 component: pingone
 page_id: pingone:monitoring:p1_running_audit_report
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_running_audit_report.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2024
+revdate: 2026-07-23T00:00:00Z
 section_ids:
   steps: Steps
   result: Result
@@ -521,69 +762,67 @@ You can run reports to see a summary of user events or events for actions perfor
 
 1. In the PingOne admin console, go to **Monitoring > Audit** and enter the report parameters.
 
+   Learn more in [Audit parameters](p1_auditparameters.html).
+
    ![A screen capture of the Audit Parameters section without any selections made.](_images/p1-monitoring-audit-params.png)
 
-   * **Time Range**: Limit the report results to a specified range of time.
+   | Option                    | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
+   | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **Time Range**            | Limit the report results to a specific time period.&#xA;&#xA;Data up to 14 days old relative to the current date is available immediately. Data older than 14 days must be requested from the Audit page or using the API. You can't request data for dates that are more than 2 years (730 days) before the current date.&#xA;&#xA;You can run reports or retrieve data for a maximum of 14 days at a time. |
+   | **Filter Type**           | Limit the results to a particular type, user, or resource. Learn more about the filters available in [Audit parameters](p1_auditparameters.html).                                                                                                                                                                                                                                                            |
+   | **Selected Fields**       | Specify which columns appear in the results list.                                                                                                                                                                                                                                                                                                                                                            |
+   | **Time Zone**             | Specify the time zone to use in the results list. The timestamp shows the date and time for the selected time zone.                                                                                                                                                                                                                                                                                          |
+   | **Secondary Filter Type** | Specify a secondary filter to further limit the results to a particular type, user, or resource. You must specify a primary filter type before you can select a secondary filter type.                                                                                                                                                                                                                       |
 
-     |   |                                                                                                                                                                                                                                                                                                                                                                                                                       |
-     | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | Data up to 14 days old relative to the current date is available immediately. Data older than 14 days must be requested from the **Audit** page or using the API, and you can't request data for dates that are more than 2 years (730 days) before the current date. You can run reports a maximum of 14 days at a time. If you enter an invalid time range, you're prompted to adjust it before you run the report. |
-
-   * **Filter type**: Limit the results to a particular type, user, or resource.
-
-   * **Selected fields**: Specify which columns appear in the results list.
-
-   * **Time zone**: Specify the time zone to use in the results list. The timestamp shows the date and time for the selected time zone.
-
-   * **Secondary Filter Type**: Specify a secondary filter to limit the results to a particular type, user, or resource. You must specify a primary filter type before you can select a secondary filter type.
-
-2. Click **Run**.
+2. Click **Run Report**.
 
 ## Result
 
-The information displayed depends on the date range for which you requested data:
+The information displayed depends on the date range for which you requested data.
 
 * Within the 14-day window for immediate availability
 
-  For example, on September 30, 2025, you enter a relative time range of 2 weeks, or a specific date range of `2025-09-22` to `2025-09-29`.
+  For example, on May 4, 2026, you enter a relative time range of 9 days, or a specific date range of `2026-04-26` to `2026-05-04`.
 
-  Full results are displayed.
+  Full results display immediately for the requested dates because no older data needs to be retrieved.
 
-  ![p1 audit report results](_images/p1-audit-report-results.png)
+  ![A screen capture of the Audit Report results for a 9 day time range in the current 14-day reporting retrieval window.](_images/p1-audit-report-results.png)
 
 * Outside of the 14-day window for immediate availability
 
-  For example, on September 30, 2025, you enter a specific date range of `2025-09-09` to `2025-09-16`.
+  For example, on July 23, 2026, you enter a specific date range of `2026-07-01` to `2026-07-08`.
 
-  The **Run Report** modal is displayed explaining that the requested data isn't immediately available and must be retrieved. The requested dates are displayed in the modal. Select the checkbox next to **Retrieve Event data from** `date1` **to** `date2` **(UTC)** and then click **Run Report**.
+  The **Run Report** modal displays explaining that the requested data isn't immediately available and must be retrieved. The requested dates are displayed in the modal. Select the checkbox and then click **Run Report** to retrieve data for the requested dates.
 
-  If you have a valid email address in PingOne, you'll be notified when the data is ready. After the data is retrieved, you can return to the **Audit** page and run reports against it for 14 days from the retrieval date.
+  ![A screen capture of the Run Report modal with a message to retrieve data because requested dates aren't immediately available.](_images/p1-audit-retrieval-modal.png)
 
-  ![A sample of the Run Report modal when all requested dates require retrieval](_images/p1-audit-retrieval-modal.png)
+  A message indicating a data retrieval is in progress displays in the **Available Dates (UTC)** section of the **Audit Parameters** page.
 
 * Includes both dates for which data is immediately available and dates for which data must be retrieved
 
-  For example, on October 21, 2025 you enter a specific date range with a start date of `2025-09-28` and an end date of `2025-10-10`. This range includes 10 days of data that must be retrieved (2025-09-28 to 2025-10-07) and 3 days of immediately available data (2025-10-08 to 2025-10-10).
+  For example, on August 7, 2026, you enter a specific date range with a start date of `2026-07-16` and an end date of `2026-07-27`.
 
-  The **Run Report** modal is displayed, and you must confirm that you want to retrieve the data for the dates that aren't immediately available. Select the checkbox next to **Retrieve Event data from** `date1` **to** `date2` **(UTC)** and then click **Run Report**.
+  This range includes 9 days of data that must be retrieved (`2026-07-16` to `2026-07-24`) and 3 days of immediately available data (`2026-07-25` to `2026-07-27`).
 
-  ![A sample of the Run Report modal when some requested dates require retrieval but others are available immediately](_images/p1-audit-retrieval-modal-mixed-dates.png)
+  The **Run Report** modal displays, and you must confirm that you want to retrieve the data for the dates that aren't immediately available. Select the checkbox and then click **Run Report** to retrieve data for the requested dates.
 
-  The results for the dates that are immediately available are displayed, and the data for older dates is requested. If you have a valid email address in PingOne, you'll be notified when the additional data is ready for reporting, and at that point you can run the report again.
+  ![A screen capture of the Run Report modal with a message to retrieve data for some dates because requested dates aren't immediately available.](_images/p1-audit-retrieval-modal-mixed-dates.png)
 
-  ![A sample audit report showing immediate results and dates for data that was requested](_images/p1-audit-report-mixed-dates.png)
+  The results display for the dates that are immediately available. A message indicating a retrieval request for the older data is in progress displays in the **Available Dates (UTC)** section of the **Audit Parameters** page.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | - The **Available Dates (UTC)** section lists the dates for the data that's available to query or has been requested.
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | * Depending on the number of days requested and the average number of events logged per day, the process can take from 2 to 24 hours.
 
-- Depending on the number of days requested and the average number of events logged per day, the process can take from 2 to 24 hours. You can request a maximum of 14 days of data from within the data retention period and you can't request additional data while another request is pending.
+  * You can request a maximum of 14 days of data within the data retention period, and you can't request additional data while another request is pending. If you request more than 14 days of data, or another request is pending, the checkbox in the **Run Report** modal is disabled and you can't submit the request.
 
-  If you have a valid email address in PingOne, you'll be notified when the requested data is available. At that point, you can return to the **Audit** page and run queries against the data for the timeframe requested. The retrieved data is available for 14 days from the date of the retrieval request. |
+  * If you have a valid email address in PingOne, you'll receive a notification email when the data is ready. After the data is retrieved, you can return to the **Audit Parameters** page and run reports against the data for the timeframe requested.
+
+  * The retrieved data is available for 14 days from the date of the retrieval request. |
 
 ## Next steps
 
-* To rearrange the columns in the report summary, drag the column heading to the desired position.
+* To rearrange the columns in the report summary, click **Columns**. The **Re-order Columns** modal displays. Drag the columns into the order you want to display them, then click **Save**.
 
 * To view the details of an event, click **View** in the **Details** column.
 
@@ -593,13 +832,13 @@ The information displayed depends on the date range for which you requested data
 
 ---
 title: User Demographics Dashboard
-description: The User Demographics Dashboard shows a summary of user demographic profiles and activity for the selected environment.
+description: View a summary of user demographic profiles, identity counts, and authentication activity in the User Demographics Dashboard.
 component: pingone
 page_id: pingone:monitoring:p1_user_demographic_dashboard
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_user_demographic_dashboard.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 4, 2025
+revdate: 2026-07-10T00:00:00Z
 section_ids:
   filters: Filters
   charts: Charts
@@ -670,9 +909,9 @@ Displays the current distribution of identities by population.
 
 Displays the distribution of authentication attempts by the operating system for the selected time period.
 
-|   |                                                                                                                                                                                                                           |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Updates for **Authenticate OS Distribution** and **Authenticate Browser Distribution** happen once a day at midnight, UTC. Depending on your time zone, these updates might not be visible for you at the end of the day. |
+|   |                                                                                                                                                                                                                               |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Updates for **Authentication OS Distribution** and **Authentication Browser Distribution** happen once a day at midnight, UTC. Depending on your time zone, these updates might not be visible for you at the end of the day. |
 
 **Authentication Browser Distribution**
 
@@ -706,13 +945,13 @@ Displays the distribution of MFA attempts by operating system for the selected t
 
 ---
 title: User devices and app version charts
-description: The User Devices chart enables you to view current information for user devices per authentication method, and mobile app users per app version.
+description: View user device usage by authentication method and mobile app usage by version using the User Devices and App Version charts.
 component: pingone
 page_id: pingone:monitoring:p1_user_devices_and_app_version_chart
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_user_devices_and_app_version_chart.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 11, 2024
+revdate: 2026-07-10T00:00:00Z
 ---
 
 # User devices and app version charts
@@ -767,7 +1006,7 @@ page_id: pingone:monitoring:p1_view_alerts
 canonical_url: https://docs.pingidentity.com/pingone/monitoring/p1_view_alerts.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 7, 2024
+revdate: 2024-05-07T00:00:00Z
 keywords: ["view alerts", "manage alerts"]
 section_ids:
   steps: Steps

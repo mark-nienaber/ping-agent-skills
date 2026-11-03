@@ -152,9 +152,9 @@ The following section describes the steps for configuring single sign-on (SSO) t
 
    * [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html)
 
-     |   |                                                                                                                                                       |
-     | - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | The SAML\_SUBJECT configured on the **IdP Adapter Mapping > Attribute Contract Fulfillment** page must match the user's loginId configured in Concur. |
+     |   |                                                                                                                                                      |
+     | - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | The SAML_SUBJECT configured on the **IdP Adapter Mapping > Attribute Contract Fulfillment** page must match the user's loginId configured in Concur. |
 
 6. On the **Credentials > Digital Signature Settings** page, select the signing certificate.
 
@@ -218,9 +218,9 @@ Outbound provisioning details are managed within a service provider (SP) connect
 
    ![An image of the Target screen.](_images/urm1563995207208.png)
 
-   | Field Name               | Description                                                                                                                                                                                                                  |
-   | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **OAUTH\_ACCESS\_TOKEN** | The OAuth access token for the Concur account.Learn more in [Obtain key and secret](pf_concur_connector_obtain_key_and_secret.html) and [Generate OAuth access token](pf_concur_connector_generate_oauth_access_token.html). |
+   | Field Name             | Description                                                                                                                                                                                                                  |
+   | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **OAUTH_ACCESS_TOKEN** | The OAuth access token for the Concur account.Learn more in [Obtain key and secret](pf_concur_connector_obtain_key_and_secret.html) and [Generate OAuth access token](pf_concur_connector_generate_oauth_access_token.html). |
 
 9. Click **Next** to continue the provisioning configuration. Learn more in the following sections under [Outbound provisioning for IdPs](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_outboun_provis_for_idp.html) in the PingFederate documentation:
 
@@ -529,28 +529,28 @@ Learn more in [User](https://developer.concur.com/api-reference/user/) in the Co
 | - | -------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Many fields are required based on your Concur account configuration. Ensure that you are sending data for all user fields that are required. |
 
-| Attribute                 | Description                                                                                                                                                                                                                   |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| loginId                   | The URL-encoded Concur login of the user. This value must be unique. This attribute is required.                                                                                                                              |
-| empId                     | The unique identifier for the user. This attribute is required.                                                                                                                                                               |
-| emailAddress              | The user's email address.                                                                                                                                                                                                     |
-| Password                  | The user's password. This element can be used to enter the password for a new user, but cannot be used to update the password for an existing user. This attribute is required.                                               |
-| crnKey                    | The 3-letter [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code for the user's reimbursement currency. For example, United States Dollar is USD.                                                                |
-| ctryCode                  | The [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. For example, United States is US.                                                                                                     |
-| ctrySubCode               | The user's two-character country code and two-character state or province code. For example, Washington State, United States is US-WA.                                                                                        |
-| custom1 through custom21  | The custom fields on the Employee form. Varies depending on configuration. There are two types of custom lists: simple lists and connected (multi-level) lists. We do not support connected lists.                            |
-| expenseUserApprover       | Whether the user is an Expense approver. Available options include: Y/N.                                                                                                                                                      |
-| expenseUser               | Whether the user has access to Expense. Available options include: Y/N.                                                                                                                                                       |
-| firstName                 | The user's first name.                                                                                                                                                                                                        |
-| invoiceUserApprover       | Whether the user is an Invoice approver. Available options include: Y/N.                                                                                                                                                      |
-| invoiceUser               | Whether the user has access to Invoice. Available options include: Y/N.                                                                                                                                                       |
-| lastName                  | The user's last name.                                                                                                                                                                                                         |
-| ledgerKey                 | The user's assigned account code ledger. For example, Default. NOTE: This is required for new users.                                                                                                                          |
-| localeName                | The user's language locale code. Learn more in [Locale Codes](https://developer.concur.com/tools-support/reference/locale-codes.html) in the Concur API reference documentation.For example, United States English is en\_US. |
-| mI                        | The user's middle initial.                                                                                                                                                                                                    |
-| orgUnit1 through orgUnit6 | The custom organizational unit fields on the Employee form. Varies depending on configuration.                                                                                                                                |
-| tripUser                  | Whether the user has access to Travel. Available options include: Y/N.                                                                                                                                                        |
-| isTestEmp                 | Whether the user is a test user. Available options include: Y/N.                                                                                                                                                              |
+| Attribute                 | Description                                                                                                                                                                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| loginId                   | The URL-encoded Concur login of the user. This value must be unique. This attribute is required.                                                                                                                             |
+| empId                     | The unique identifier for the user. This attribute is required.                                                                                                                                                              |
+| emailAddress              | The user's email address.                                                                                                                                                                                                    |
+| Password                  | The user's password. This element can be used to enter the password for a new user, but cannot be used to update the password for an existing user. This attribute is required.                                              |
+| crnKey                    | The 3-letter [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code for the user's reimbursement currency. For example, United States Dollar is USD.                                                               |
+| ctryCode                  | The [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. For example, United States is US.                                                                                                    |
+| ctrySubCode               | The user's two-character country code and two-character state or province code. For example, Washington State, United States is US-WA.                                                                                       |
+| custom1 through custom21  | The custom fields on the Employee form. Varies depending on configuration. There are two types of custom lists: simple lists and connected (multi-level) lists. We do not support connected lists.                           |
+| expenseUserApprover       | Whether the user is an Expense approver. Available options include: Y/N.                                                                                                                                                     |
+| expenseUser               | Whether the user has access to Expense. Available options include: Y/N.                                                                                                                                                      |
+| firstName                 | The user's first name.                                                                                                                                                                                                       |
+| invoiceUserApprover       | Whether the user is an Invoice approver. Available options include: Y/N.                                                                                                                                                     |
+| invoiceUser               | Whether the user has access to Invoice. Available options include: Y/N.                                                                                                                                                      |
+| lastName                  | The user's last name.                                                                                                                                                                                                        |
+| ledgerKey                 | The user's assigned account code ledger. For example, Default. NOTE: This is required for new users.                                                                                                                         |
+| localeName                | The user's language locale code. Learn more in [Locale Codes](https://developer.concur.com/tools-support/reference/locale-codes.html) in the Concur API reference documentation.For example, United States English is en_US. |
+| mI                        | The user's middle initial.                                                                                                                                                                                                   |
+| orgUnit1 through orgUnit6 | The custom organizational unit fields on the Employee form. Varies depending on configuration.                                                                                                                               |
+| tripUser                  | Whether the user has access to Travel. Available options include: Y/N.                                                                                                                                                       |
+| isTestEmp                 | Whether the user is a test user. Available options include: Y/N.                                                                                                                                                             |
 
 ---
 

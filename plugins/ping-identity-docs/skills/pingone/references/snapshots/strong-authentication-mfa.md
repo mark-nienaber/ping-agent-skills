@@ -530,7 +530,7 @@ page_id: pingone:strong_authentication_mfa:p1_creating_an_mfa_policy_for_strong_
 canonical_url: https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_creating_an_mfa_policy_for_strong_auth.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 30, 2026
+revdate: August 31, 2026
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -620,15 +620,15 @@ To create an MFA policy:
 
 1. **Remember me**: This feature allows users that have authenticated successfully at least once to skip MFA on their next authentication for a specified time period.
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
    |   | The workflow for this feature depends on your use case:- Customer use cases: you'll need to use the PingOne API to implement "remember me" functionality in your web applications. Learn more in [Remembered Devices](https://developer.pingidentity.com/pingone-api/mfa/users/remembered-devices.html).
 
    - Workforce use cases:
 
      * This feature is only available in environments that include the PingID service and requires PingID adapter 2.17 or later.
 
-     * For the Singapore geography, use DaVinci to create this functionality.
+     * For the Singapore and Canada geographies, use DaVinci to create this functionality.
 
      * When using PingID with PingOne for authentication and registration flows, enable the "remember me" option in the MFA policy and then reference the relevant MFA policy in your risk policy. For an example, see [Using predictors to recreate legacy PingID policy rules](../threat_protection_using_pingone_protect/p1_protect_recreating_legacy_pingid_rules.html). |
 
@@ -918,9 +918,9 @@ To create an MFA policy:
 
    > **Collapse: (Workforce only)**
    >
-   > |   |                                                               |
-   > | - | ------------------------------------------------------------- |
-   > |   | PingID desktop app isn't available in the Singapore geography |
+   > |   |                                                                             |
+   > | - | --------------------------------------------------------------------------- |
+   > |   | PingID desktop app isn't available in the Singapore and Canada geographies. |
    >
    > 1. Select **PingID desktop app (legacy)**, and then configure the following fields:
    >
@@ -1275,7 +1275,7 @@ page_id: pingone:strong_authentication_mfa:p1_strong_auth_email
 canonical_url: https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong_auth_email.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 5, 2024
+revdate: September 1, 2026
 ---
 
 # Configuring email authentication
@@ -1298,15 +1298,15 @@ When email authentication is configured, and the user signs on to their account 
 
   * (Workforce only): This is configured in the PingID Admin portal [Pre-populating or restricting user registration data](https://docs.pingidentity.com/pingid/pingid_service_management/pid_prepopulating_or_restricting_user_registration_data.html).
 
-  * (Customer only): This option is only available for environments that are integrated with PingFederate, and is configured using the PingOne MFA adapter. Learn more: [PingOne MFA IdP Adapter settings reference](https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_p1_mfa_idp_adapter_settings_reference.html).
+  * (Customer only): This option is only available for environments that are integrated with PingFederate, and is configured using the PingOne MFA adapter. Learn more: [PingOne MFA IdP Adapter settings reference](https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf-p1-mfa-ik-p1-mfa-idp-adapter-settings-reference_4.0.html).
 
 Workforce only:
 
 * Learn how to add email as a backup authentication method in [Configuring backup authentication methods](https://docs.pingidentity.com/pingid/pingid_service_management/pid_configuring_backup_authentication_methods.html).
 
-  |   |                                                          |
-  | - | -------------------------------------------------------- |
-  |   | This option is not available in the Singapore geography. |
+  |   |                                                                       |
+  | - | --------------------------------------------------------------------- |
+  |   | This option is not available in the Singapore and Canada geographies. |
 
   * To define a secondary email address as an additional backup authentication method:
 

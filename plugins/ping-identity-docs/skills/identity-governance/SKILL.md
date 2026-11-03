@@ -29,7 +29,7 @@ Identity Governance documentation is indexed in the bundled llms.txt and live Pi
 |---|---|---|---|
 | Users Guide: access, requests, review | users-guide | https://docs.pingidentity.com/identity-governance/7.1.2/users-guide/*.md | references/snapshots/users-guide.md |
 | Release Notes: release, before, changelog | release-notes | https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/*.md | references/snapshots/release-notes.md |
-| Admin Guide: access, administration, common | admin-guide | https://docs.pingidentity.com/identity-governance/7.1.2/admin-guide/*.md | references/snapshots/admin-guide.md |
+| Admin Guide: access, administration, common | admin-guide | https://docs.pingidentity.com/identity-governance/7.1.2/admin-guide/*.md | live-only |
 | Api Guide: access, about, governance | api-guide | https://docs.pingidentity.com/identity-governance/7.1.2/api-guide/*.md | references/snapshots/api-guide.md |
 | Root: glossary | root | https://docs.pingidentity.com/identity-governance/7.1.2/*.md | references/snapshots/root.md |
 

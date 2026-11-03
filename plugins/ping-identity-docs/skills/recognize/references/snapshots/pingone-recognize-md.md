@@ -1,6 +1,6 @@
 ---
 title: PingOne Recognize
-description: PingOne Recognize helps businesses authenticate users through privacy-preserving facial biometrics.
+description: PingOne Recognize landing page linking to getting started, IDV Bridge, mobile app user guide, on-premise install, and SDKs.
 component: recognize
 page_id: recognize::pingone-recognize
 canonical_url: https://docs.pingidentity.com/recognize/pingone-recognize.html
@@ -42,6 +42,8 @@ To learn more, refer to one of the following topics.
 
 * [Account Recovery](introduction/account_recovery.html)
 
+* [PingOne Recognize Connector](https://docs.pingidentity.com/connectors/p1_recognize_connector.html)
+
 ## Identity Verification (IDV) Bridge
 
 * [Setting up IDV Bridge](idv-bridge/idv-bridge-introduction.html)
@@ -58,13 +60,11 @@ To learn more, refer to one of the following topics.
 
 * [Delete account](user-guide/user-guide-delete-account.html)
 
-* [Authentication](user-guide/user-guide-authentication.html)
-
 * [Troubleshooting](user-guide/user-guide-troubleshooting.html)
 
 ## Install & troubleshooting
 
-* [On-premises install & deployment](on-premise/on-premise-installation-manual.html)
+* [On-premise install & deployment](on-premise/on-premise-installation-manual.html)
 
 * [Troubleshooting guide](troubleshooting/troubleshooting.html)
 

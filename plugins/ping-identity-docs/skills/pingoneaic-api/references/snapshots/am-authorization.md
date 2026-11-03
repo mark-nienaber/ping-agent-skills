@@ -4,6 +4,8 @@ description: You can manage authorization policies over REST at the policies end
 component: pingoneaic-api
 page_id: pingoneaic-api:am-authorization:rest-api-authz-policies
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-authorization/rest-api-authz-policies.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Authorization", "Policy", "REST API", "Configuration"]
 section_ids:
   policy-resource-objects: Policy resource objects
@@ -1433,6 +1435,8 @@ description: "You can manage policy sets over REST at the applications endpoint.
 component: pingoneaic-api
 page_id: pingoneaic-api:am-authorization:rest-api-authz-applications
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-authorization/rest-api-authz-applications.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Authorization", "Policy", "Resource", "Configuration", "REST API"]
 section_ids:
   access-the-endpoint: Access the endpoint
@@ -1799,6 +1803,8 @@ description: You can request policy decisions from Advanced Identity Cloud by us
 component: pingoneaic-api
 page_id: pingoneaic-api:am-authorization:rest-api-authz-policy-decisions
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-authorization/rest-api-authz-policy-decisions.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Authorization", "Policy", "REST API", "Evaluation"]
 section_ids:
   access-the-endpoint: Access the endpoint
@@ -2397,6 +2403,8 @@ description: You can manage resource types over REST at the resourcetypes endpoi
 component: pingoneaic-api
 page_id: pingoneaic-api:am-authorization:rest-api-authz-resource-types
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-authorization/rest-api-authz-resource-types.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Authorization", "Policy", "Resource", "REST API", "Configuration"]
 section_ids:
   access-the-endpoints: Access the endpoints

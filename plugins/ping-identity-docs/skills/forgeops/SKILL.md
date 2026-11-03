@@ -6,13 +6,13 @@ license: MIT
 
 # ForgeOps
 
-ForgeOps documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Manage PingAM and PingIDM static and dynamic configuration, exports, and configuration profiles in ForgeOps.
 
 ## Live source of truth
 
 - Product docs: https://docs.pingidentity.com/forgeops/
 - llms.txt index: https://docs.pingidentity.com/forgeops/llms.txt
-- Snapshot version: 2026.2
+- Snapshot version: 2026.3
 - Snapshot manifest: references/MANIFEST.md
 
 ## Retrieval strategy
@@ -27,18 +27,18 @@ ForgeOps documentation is indexed in the bundled llms.txt and live Ping Markdown
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Prepare: deployment, monitoring, pinggateway | prepare | https://docs.pingidentity.com/forgeops/2026.2/prepare/*.md | references/snapshots/prepare.md |
-| Reference: forgeops, command, span | reference | https://docs.pingidentity.com/forgeops/2026.2/reference/*.md | references/snapshots/reference.md |
-| Deploy: deploy, deployment, forgeops | deploy | https://docs.pingidentity.com/forgeops/2026.2/deploy/*.md | live-only |
-| Troubleshoot: code, troubleshooting, amster | troubleshoot | https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/*.md | references/snapshots/troubleshoot.md |
-| Customize: code, image, about | customize | https://docs.pingidentity.com/forgeops/2026.2/customize/*.md | references/snapshots/customize.md |
-| Start: forgeops, assess, here | start | https://docs.pingidentity.com/forgeops/2026.2/start/*.md | references/snapshots/start.md |
-| Upgrade: upgrade, advanced, docker | upgrade | https://docs.pingidentity.com/forgeops/2026.2/upgrade/*.md | references/snapshots/upgrade.md |
-| Rn: code, forgeops, evolution | rn | https://docs.pingidentity.com/forgeops/2026.2/rn/*.md | references/snapshots/rn.md |
-| Setup: aws, azure, cloud | setup | https://docs.pingidentity.com/forgeops/2026.2/setup/*.md | references/snapshots/setup.md |
-| Backup: backup, restore, span | backup | https://docs.pingidentity.com/forgeops/2026.2/backup/*.md | references/snapshots/backup.md |
-| Root: forgeops, consolidated, documentation | root | https://docs.pingidentity.com/forgeops/2026.2/*.md | references/snapshots/root.md |
-| Quick: deployment, minikube, quick | quick | https://docs.pingidentity.com/forgeops/2026.2/quick/*.md | references/snapshots/quick.md |
+| Prepare: forgeops, secrets, deployment | prepare | https://docs.pingidentity.com/forgeops/2026.3/prepare/*.md | references/snapshots/prepare.md |
+| Reference: forgeops, command, benchmarks | reference | https://docs.pingidentity.com/forgeops/2026.3/reference/*.md | references/snapshots/reference.md |
+| Troubleshoot: forgeops, code, troubleshoot | troubleshoot | https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/*.md | references/snapshots/troubleshoot.md |
+| Deploy: forgeops, deploy, deployment | deploy | https://docs.pingidentity.com/forgeops/2026.3/deploy/*.md | references/snapshots/deploy.md |
+| Customize: code, configuration, images | customize | https://docs.pingidentity.com/forgeops/2026.3/customize/*.md | references/snapshots/customize.md |
+| Start: forgeops, kubernetes, release | start | https://docs.pingidentity.com/forgeops/2026.3/start/*.md | references/snapshots/start.md |
+| Upgrade: forgeops, upgrade, migrate | upgrade | https://docs.pingidentity.com/forgeops/2026.3/upgrade/*.md | references/snapshots/upgrade.md |
+| Rn: forgeops, limitations, review | rn | https://docs.pingidentity.com/forgeops/2026.3/rn/*.md | references/snapshots/rn.md |
+| Setup: forgeops, local, tools | setup | https://docs.pingidentity.com/forgeops/2026.3/setup/*.md | references/snapshots/setup.md |
+| Backup: backup, backups, dsbackup | backup | https://docs.pingidentity.com/forgeops/2026.3/backup/*.md | references/snapshots/backup.md |
+| Integration: forgeops, pingone, integrate | integration | https://docs.pingidentity.com/forgeops/2026.3/integration/*.md | references/snapshots/integration.md |
+| Root: forgeops, advanced, consolidated | root | https://docs.pingidentity.com/forgeops/2026.3/*.md | references/snapshots/root.md |
 
 ## Composition
 

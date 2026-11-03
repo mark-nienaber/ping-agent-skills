@@ -123,6 +123,7 @@ section_ids:
   library_scripts: Library scripts
   next_generation_script_types: Next-generation script types
   access_pingone_verify_transaction_data: Access PingOne Verify transaction data
+  scripted-decision-node-http-user-agent-80: HTTP User-Agent change to httpClient binding
   new-enable-device-mgmt-node: Enable Device Management node
   new-flow-control-node: Flow Control node
   json-response-authentication: Customize the JSON in the authentication response
@@ -225,6 +226,7 @@ section_ids:
   parallel_updates_for_cts_sessions: Parallel updates for CTS sessions
   changes_in_am_8_0_x: Changes in AM 8.0.x
   am_8_0_3: AM 8.0
+  http-user-agent-change: HTTP User-Agent change to httpClient binding
   tomcat-10: Support for Tomcat 10
   modules-and-chains: Authentication modules and chains
   tls-client-cert-header: Providing OAuth 2.0 client certificates to AM
@@ -260,7 +262,8 @@ section_ids:
   amster: Amster
   deprecated-functionality: Deprecated
   deprecated_since_pingam_8_1: Deprecated since PingAM 8.1
-  saml_v2_0_jsps: SAML v2.0 JSPs
+  legacy-script-engine: Legacy scripting engine and sample scripts
+  saml_2_0_jsps: SAML 2.0 JSPs
   authentication_by_module_instance_policy_condition_type: Authentication by Module Instance policy condition type
   node-versioning-endpoints: Node versioning REST endpoints
   deprecated_since_pingam_8_0: Deprecated since PingAM 8.0
@@ -379,8 +382,8 @@ The following table summarizes the minimum recommended version of web and Java a
 
 | Agent           | Version   |
 | --------------- | --------- |
-| **Web agents**  | 2024.11.2 |
-| **Java agents** | 2024.11.1 |
+| **Web agents**  | 2024.11.3 |
+| **Java agents** | 2024.11.2 |
 
 AM supports several versions of web agents and Java agents. You can find information about supported container versions and other platform requirements related to agents in the [Web Agents Release Notes](https://docs.pingidentity.com/web-agents/release-notes/requirements.html) and the [Java Agents Release Notes](https://docs.pingidentity.com/java-agents/release-notes/requirements.html).
 
@@ -545,7 +548,7 @@ Learn more in [Introspection requirements](https://docs.pingidentity.com/pingam/
 
 [RFC 9701](https://www.rfc-editor.org/rfc/rfc9701.html) defines a JSON Web Token (JWT) response format for OAuth 2.0 token introspection. AM now includes stricter compliance with this specification, ensuring that the introspection response adheres to the JWT format when configured to do so.
 
-Find more information in [RFC 9701 token\_introspection claim](https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-introspect-endpoint.html#rfc-9701-token-introspection-claim).
+Find more information in [RFC 9701 token_introspection claim](https://docs.pingidentity.com/pingam/8.1/am-oauth2/oauth2-introspect-endpoint.html#rfc-9701-token-introspection-claim).
 
 #### AM 8.1.0
 
@@ -1332,6 +1335,14 @@ Set the `mustRun` property to force trees to always run to completion regardless
 
 Learn more in [Configure an authentication tree to always complete](https://docs.pingidentity.com/pingam/8/authentication-guide/configure-authentication-trees.html#enable-tree-completion).
 
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | By default, `mustRun` trees aren't supported in a standalone AM deployment, without the Platform UI. To support `mustRun` trees when requests are routed through the User UI, you must adjust and rebuild the UI:1) Follow the instructions to [Download the UI source](https://docs.pingidentity.com/pingam/8/ui-customization/downloading-ui.html).
+
+2) In the `openam-ui/openam-ui-user/.env.production` file, set `XUI_MUST_RUN_ENABLED=true`.
+
+3) [Test and redeploy the UI](https://docs.pingidentity.com/pingam/8/ui-customization/ui-testing-deploying.html). |
+
 ##### Configure no session trees
 
 Set the `noSession` property to create trees that don't result in an authenticated session when they successfully complete.
@@ -1463,6 +1474,12 @@ The following existing script types are now enabled for the next-generation scri
 The `verifyTransactionsHelper` next-generation binding lets you manage [PingOne Verify](https://www.pingidentity.com/en/platform/capabilities/identity-verification/pingone-verify.html) user transactions and PingOne user accounts.
 
 Learn more in [Access PingOne Verify transactions and manage associated user](https://docs.pingidentity.com/pingam/8/scripting-guide/script-bindings.html#common-verifytransactionshelper)
+
+##### HTTP `User-Agent` change to `httpClient` binding
+
+The `httpClient` script binding now sends `PingIdentity` as the default HTTP `User-Agent` value instead of `Apache-HttpClient/…​`. This change can affect WAF, firewall, proxy, and monitoring rules that identify outbound requests by their `User-Agent` value. Review and update rules or integrations that match `Apache-HttpClient/…​` so that they also accept `PingIdentity`.
+
+This change affects only the default request identification value and applies to both legacy and next-generation `httpClient` script bindings.
 
 ##### Enable Device Management node
 
@@ -2088,33 +2105,32 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 
 |              |                                                                                                                                                           |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OPENAM-28063 | Fixed token introspection failing for client-side (JWT) access tokens with a multi-valued `aud` claim                                                     |
-| OPENAM-28053 | Fixed a policy evaluation thread hang that occurred under certain conditions                                                                              |
-| OPENAM-28052 | Fixed an issue where JSON object changes to `authnRequest` in the SP adapter next-generation script did not persist                                       |
-| OPENAM-28050 | Fixed inactive circles of trust remaining active after being disabled                                                                                     |
-| OPENAM-28049 | Fixed `evaluateTree` not being available for use in policy evaluation scripts                                                                             |
-| OPENAM-28048 | Fixed journey configurations that were not conformant with the expected schema                                                                            |
 | OPENAM-28047 | Fixed occasional failures resolving the `passwordPurpose` attribute for a secret ID                                                                       |
 | OPENAM-28044 | Fixed an inability to delete Node Designer nodes in AM                                                                                                    |
-| OPENAM-28043 | Fixed the `aud` claim being omitted from the JSON introspection response due to an incorrect RFC 9701 configuration check                                 |
 | OPENAM-27978 | Fixed an issue in OAuth 2.0 token exchange where `accessToken.addExtraData` calls in the Token Modification script were ignored                           |
-| OPENAM-27951 | Fixed an issue where the default XUI login page showed a null label after migrating to file-based configuration                                           |
-| OPENAM-27796 | Fixed an upgrade failure from AM 7.4.1 to AM 8.1.0 when mTLS was enabled between AM and the policy and application store                                  |
-| OPENAM-27708 | Fixed an upgrade failure where the SAML2 node upgrade step rejected valid IdP Entity ID attributes during data validation                                 |
+| OPENAM-27912 | Fixed the `aud` claim being omitted from the JSON introspection response due to an incorrect RFC 9701 configuration check                                 |
 | OPENAM-27685 | Fixed an issue where authentication was re-triggered on subsequent OIDC flows after a failed `prompt=login` request                                       |
-| OPENAM-27534 | Fixed the `/aiagent/register` endpoint returning a 500 error when a Dynamic Client Registration script is configured                                      |
-| OPENAM-27463 | Fixed an upgrade failure caused by a missing upgrade step in the NodesPlugin for the Username Collector when the `autocompleteValues` attribute was added |
+| OPENAM-27658 | Fixed token introspection failing for client-side (JWT) access tokens with a multi-valued `aud` claim                                                     |
 | OPENAM-27398 | Fixed the upgrader to automatically update PingOne Protect Node class references when upgrading from AM 7.5 to AM 8.0.x                                   |
-| OPENAM-26694 | Fixed an Amster export failure returning a 400 Bad Request error for Custom and Node Designer nodes                                                       |
-| OPENAM-26427 | Fixed JWT introspection responses to use the `token_introspection` claim as required by RFC 9701                                                          |
-| OPENAM-26360 | Fixed an `invalid_request` error on `/authorize` requests that include `authorization_details` when the Remote Consent Service (RCS) is not configured    |
-| OPENAM-26265 | Fixed a race condition in session quota enforcement that caused a login failure under concurrent authentication requests                                  |
-| OPENAM-26240 | Fixed SAML persistent Name ID value mapping not being honored                                                                                             |
-| OPENAM-26232 | Added a pluggable mechanism for installing and configuring custom session `QuotaExhaustionAction` implementations                                         |
-| OPENAM-26036 | Fixed the `aud` claim in JWT access tokens not being correctly validated for the `/access_token` endpoint                                                 |
-| OPENAM-25994 | Fixed policy evaluation with `LDAPFilterCondition` to use the identity store user instead of the config store user                                        |
-| OPENAM-25911 | Resolved a performance regression where nested Inner Tree Evaluator nodes caused a significant drop in authentication throughput                          |
+| OPENAM-27214 | Fixed an upgrade failure where the SAML2 node upgrade step rejected valid IdP Entity ID attributes during data validation                                 |
+| OPENAM-26839 | Fixed the `/aiagent/register` endpoint returning a 500 error when a Dynamic Client Registration script is configured                                      |
+| OPENAM-26833 | Fixed an upgrade failure caused by a missing upgrade step in the NodesPlugin for the Username Collector when the `autocompleteValues` attribute was added |
+| OPENAM-26342 | Fixed an Amster export failure returning a 400 Bad Request error for Custom and Node Designer nodes                                                       |
+| OPENAM-26326 | Fixed an `invalid_request` error on `/authorize` requests that include `authorization_details` when the Remote Consent Service (RCS) is not configured    |
+| OPENAM-26249 | Fixed an upgrade failure from AM 7.4.1 to AM 8.1.0 when mTLS was enabled between AM and the policy and application store                                  |
+| OPENAM-26184 | Fixed a race condition in session quota enforcement that caused a login failure under concurrent authentication requests                                  |
+| OPENAM-26106 | Fixed SAML persistent Name ID value mapping not being honored                                                                                             |
+| OPENAM-26055 | Fixed a policy evaluation thread hang that occurred under certain conditions                                                                              |
+| OPENAM-26050 | Fixed an issue where JSON object changes to `authnRequest` in the SP adapter next-generation script did not persist                                       |
+| OPENAM-26031 | Fixed the `aud` claim in JWT access tokens not being correctly validated for the `/access_token` endpoint                                                 |
+| OPENAM-25910 | Fixed JWT introspection responses to use the `token_introspection` claim as required by RFC 9701                                                          |
+| OPENAM-25752 | Resolved a performance regression where nested Inner Tree Evaluator nodes caused a significant drop in authentication throughput                          |
 | OPENAM-25735 | Fixed loss of `OAUTH_REQUEST_ATTRIBUTES` context when the `max_age` parameter is used in authorization requests                                           |
+| OPENAM-25543 | Fixed inactive circles of trust remaining active after being disabled                                                                                     |
+| OPENAM-25506 | Fixed `evaluateTree` not being available for use in policy evaluation scripts                                                                             |
+| OPENAM-25424 | Fixed an issue where the default XUI login page showed a null label after migrating to file-based configuration                                           |
+| OPENAM-25416 | Fixed journey configurations that were not conformant with the expected schema                                                                            |
+| OPENAM-21441 | Fixed policy evaluation with `LDAPFilterCondition` to use the identity store user instead of the config store user                                        |
 
 #### AM 8.1.0
 
@@ -2372,7 +2388,7 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 > | OPENAM-22465 | Unexpected error when `request_uri` client doesn't match request parameter client in PAR authorise request            |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                               |
 > | OPENAM-22322 | ArtifactResponse Assertion that is signed cannot be verified and fails                                                |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                          |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                            |
 > | OPENAM-22289 | Session quota action may fail when the session is not updateable but should be fine to proceed.                       |
 > | OPENAM-22281 | NameIdFormat values populated for remote IdP                                                                          |
 > | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                               |
@@ -2451,11 +2467,11 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 > | OPENAM-22657 | JWT validation fails when signed using the RS256 algorithm                                                       |
 > | OPENAM-22632 | AMSetupServlet install error with Windows multi-domain environment                                               |
 > | OPENAM-22608 | Non-extractable secrets in HSM fails to work on AM for SAML2 XML signing                                         |
-> | OPENAM-22465 | Unexpected error when request\_uri client doesn't match request parameter client in PAR authorise request        |
+> | OPENAM-22465 | Unexpected error when request_uri client doesn't match request parameter client in PAR authorise request         |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22346 | The RP `form_post` endpoint doesn't handle POST data well when OP returns error                                  |
 > | OPENAM-22322 | Signed ArtifactResponse Assertion can't be verified and fails                                                    |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22298 | NullPointerException in `SAML2Utils.verifyNameIDFormat` method                                                   |
 > | OPENAM-22264 | Add global attribute handling to `ssoadm`                                                                        |
 > | OPENAM-22120 | Backchannel logout tokens now include the `exp` claim                                                            |
@@ -2501,7 +2517,7 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 > | OPENAM-21664 | Upgrade fails to AM 7.4.0 with an uncaught exception when initializing the PrivilegeIndexStore class       |
 > | OPENAM-21484 | OAuth 2.0 token introspection response has different claim value types when introspecting refresh tokens   |
 > | OPENAM-21473 | Certificate Collector node: getPortalStyleCert throws exception when cert/header not present               |
-> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK\_URIs have duplicate KID        |
+> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK_URIs have duplicate KID         |
 > | OPENAM-21277 | Running Amster in debug mode doesn't work on Windows                                                       |
 > | OPENAM-21191 | Web agent sessions have a long session lifetime of 42 years                                                |
 > | OPENAM-20609 | Inconsistent error message when generating access token using refresh token after changing username        |
@@ -2569,7 +2585,7 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 > | OPENAM-22421 | Webauthn: Windows Hello TPM Attestation failing for Windows 11 22H2                                              |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22322 | Unable to verify signed ArtifactResponse Assertion leading to failure                                            |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22289 | Session quota action may fail when the session isn't updatable but should be fine to proceed                     |
 > | OPENAM-22288 | Amster upgrade 7.3.0-to-7.3.x fails with Groovy Exception                                                        |
 > | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                          |
@@ -2632,7 +2648,7 @@ This page lists the cumulative fixes in AM 8.1.x releases:
 > | OPENAM-20230 | Class allowlisting fails with permission denied after an extended period                                            |
 > | OPENAM-20181 | AD account notification fails                                                                                       |
 > | OPENAM-20159 | Upgrader adds requestObjectProcessing to OAuth2Provider subconfigs                                                  |
-> | OPENAM-20104 | The `fragment` response\_mode for the /oauth2/authorize endpoint is not working                                     |
+> | OPENAM-20104 | The `fragment` response_mode for the /oauth2/authorize endpoint is not working                                      |
 > | OPENAM-20085 | STS token generation does not work with clustered docker pods                                                       |
 > | OPENAM-20082 | Locked out users are shown a misleading error message                                                               |
 > | OPENAM-19868 | Correctly handle multi-line text in Email Suspend nodes                                                             |
@@ -2806,7 +2822,7 @@ This page lists the cumulative fixes in AM 8.0.x releases:
 > | OPENAM-22465 | Unexpected error when `request_uri` client doesn't match request parameter client in PAR authorise request            |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                               |
 > | OPENAM-22322 | ArtifactResponse Assertion that is signed cannot be verified and fails                                                |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                          |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                            |
 > | OPENAM-22289 | Session quota action may fail when the session is not updateable but should be fine to proceed.                       |
 > | OPENAM-22281 | NameIdFormat values populated for remote IdP                                                                          |
 > | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                               |
@@ -2885,11 +2901,11 @@ This page lists the cumulative fixes in AM 8.0.x releases:
 > | OPENAM-22657 | JWT validation fails when signed using the RS256 algorithm                                                       |
 > | OPENAM-22632 | AMSetupServlet install error with Windows multi-domain environment                                               |
 > | OPENAM-22608 | Non-extractable secrets in HSM fails to work on AM for SAML2 XML signing                                         |
-> | OPENAM-22465 | Unexpected error when request\_uri client doesn't match request parameter client in PAR authorise request        |
+> | OPENAM-22465 | Unexpected error when request_uri client doesn't match request parameter client in PAR authorise request         |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22346 | The RP `form_post` endpoint doesn't handle POST data well when OP returns error                                  |
 > | OPENAM-22322 | Signed ArtifactResponse Assertion can't be verified and fails                                                    |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22298 | NullPointerException in `SAML2Utils.verifyNameIDFormat` method                                                   |
 > | OPENAM-22264 | Add global attribute handling to `ssoadm`                                                                        |
 > | OPENAM-22120 | Backchannel logout tokens now include the `exp` claim                                                            |
@@ -2935,7 +2951,7 @@ This page lists the cumulative fixes in AM 8.0.x releases:
 > | OPENAM-21664 | Upgrade fails to AM 7.4.0 with an uncaught exception when initializing the PrivilegeIndexStore class       |
 > | OPENAM-21484 | OAuth 2.0 token introspection response has different claim value types when introspecting refresh tokens   |
 > | OPENAM-21473 | Certificate Collector node: getPortalStyleCert throws exception when cert/header not present               |
-> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK\_URIs have duplicate KID        |
+> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK_URIs have duplicate KID         |
 > | OPENAM-21277 | Running Amster in debug mode doesn't work on Windows                                                       |
 > | OPENAM-21191 | Web agent sessions have a long session lifetime of 42 years                                                |
 > | OPENAM-20609 | Inconsistent error message when generating access token using refresh token after changing username        |
@@ -3017,7 +3033,7 @@ This page lists the cumulative fixes in AM 8.0.x releases:
 > | OPENAM-22421 | Webauthn: Windows Hello TPM Attestation failing for Windows 11 22H2                                              |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22322 | Unable to verify signed ArtifactResponse Assertion leading to failure                                            |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22289 | Session quota action may fail when the session isn't updatable but should be fine to proceed                     |
 > | OPENAM-22288 | Amster upgrade 7.3.0-to-7.3.x fails with Groovy Exception                                                        |
 > | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                          |
@@ -3080,7 +3096,7 @@ This page lists the cumulative fixes in AM 8.0.x releases:
 > | OPENAM-20230 | Class allowlisting fails with permission denied after an extended period                                            |
 > | OPENAM-20181 | AD account notification fails                                                                                       |
 > | OPENAM-20159 | Upgrader adds requestObjectProcessing to OAuth2Provider subconfigs                                                  |
-> | OPENAM-20104 | The `fragment` response\_mode for the /oauth2/authorize endpoint is not working                                     |
+> | OPENAM-20104 | The `fragment` response_mode for the /oauth2/authorize endpoint is not working                                      |
 > | OPENAM-20085 | STS token generation does not work with clustered docker pods                                                       |
 > | OPENAM-20082 | Locked out users are shown a misleading error message                                                               |
 > | OPENAM-19868 | Correctly handle multi-line text in Email Suspend nodes                                                             |
@@ -3160,7 +3176,7 @@ This page lists the cumulative fixes in AM 7.5.x releases:
 | OPENAM-22465 | Unexpected error when `request_uri` client doesn't match request parameter client in PAR authorise request            |
 | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                               |
 | OPENAM-22322 | ArtifactResponse Assertion that is signed cannot be verified and fails                                                |
-| OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                          |
+| OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                            |
 | OPENAM-22289 | Session quota action may fail when the session is not updateable but should be fine to proceed.                       |
 | OPENAM-22281 | NameIdFormat values populated for remote IdP                                                                          |
 | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                               |
@@ -3239,11 +3255,11 @@ This page lists the cumulative fixes in AM 7.5.x releases:
 > | OPENAM-22657 | JWT validation fails when signed using the RS256 algorithm                                                       |
 > | OPENAM-22632 | AMSetupServlet install error with Windows multi-domain environment                                               |
 > | OPENAM-22608 | Non-extractable secrets in HSM fails to work on AM for SAML2 XML signing                                         |
-> | OPENAM-22465 | Unexpected error when request\_uri client doesn't match request parameter client in PAR authorise request        |
+> | OPENAM-22465 | Unexpected error when request_uri client doesn't match request parameter client in PAR authorise request         |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22346 | The RP `form_post` endpoint doesn't handle POST data well when OP returns error                                  |
 > | OPENAM-22322 | Signed ArtifactResponse Assertion can't be verified and fails                                                    |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22298 | NullPointerException in `SAML2Utils.verifyNameIDFormat` method                                                   |
 > | OPENAM-22264 | Add global attribute handling to `ssoadm`                                                                        |
 > | OPENAM-22120 | Backchannel logout tokens now include the `exp` claim                                                            |
@@ -3289,7 +3305,7 @@ This page lists the cumulative fixes in AM 7.5.x releases:
 > | OPENAM-21664 | Upgrade fails to AM 7.4.0 with an uncaught exception when initializing the PrivilegeIndexStore class       |
 > | OPENAM-21484 | OAuth 2.0 token introspection response has different claim value types when introspecting refresh tokens   |
 > | OPENAM-21473 | Certificate Collector node: getPortalStyleCert throws exception when cert/header not present               |
-> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK\_URIs have duplicate KID        |
+> | OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK_URIs have duplicate KID         |
 > | OPENAM-21277 | Running Amster in debug mode doesn't work on Windows                                                       |
 > | OPENAM-21191 | Web agent sessions have a long session lifetime of 42 years                                                |
 > | OPENAM-20609 | Inconsistent error message when generating access token using refresh token after changing username        |
@@ -3371,7 +3387,7 @@ This page lists the cumulative fixes in AM 7.5.x releases:
 > | OPENAM-22421 | Webauthn: Windows Hello TPM Attestation failing for Windows 11 22H2                                              |
 > | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 > | OPENAM-22322 | Unable to verify signed ArtifactResponse Assertion leading to failure                                            |
-> | OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+> | OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 > | OPENAM-22289 | Session quota action may fail when the session isn't updatable but should be fine to proceed                     |
 > | OPENAM-22288 | Amster upgrade 7.3.0-to-7.3.x fails with Groovy Exception                                                        |
 > | OPENAM-22181 | Approve UMA request fails with 500 error when AM deployed as a platform                                          |
@@ -3434,7 +3450,7 @@ This page lists the cumulative fixes in AM 7.5.x releases:
 > | OPENAM-20230 | Class allowlisting fails with permission denied after an extended period                                            |
 > | OPENAM-20181 | AD account notification fails                                                                                       |
 > | OPENAM-20159 | Upgrader adds requestObjectProcessing to OAuth2Provider subconfigs                                                  |
-> | OPENAM-20104 | The `fragment` response\_mode for the /oauth2/authorize endpoint is not working                                     |
+> | OPENAM-20104 | The `fragment` response_mode for the /oauth2/authorize endpoint is not working                                      |
 > | OPENAM-20085 | STS token generation does not work with clustered docker pods                                                       |
 > | OPENAM-20082 | Locked out users are shown a misleading error message                                                               |
 > | OPENAM-19868 | Correctly handle multi-line text in Email Suspend nodes                                                             |
@@ -3467,11 +3483,11 @@ This page lists the cumulative fixes in AM 7.4.x releases:
 | OPENAM-22657 | JWT validation fails when signed using the RS256 algorithm                                                       |
 | OPENAM-22632 | AMSetupServlet install error with Windows multi-domain environment                                               |
 | OPENAM-22608 | Non-extractable secrets in HSM fails to work on AM for SAML2 XML signing                                         |
-| OPENAM-22465 | Unexpected error when request\_uri client doesn't match request parameter client in PAR authorise request        |
+| OPENAM-22465 | Unexpected error when request_uri client doesn't match request parameter client in PAR authorise request         |
 | OPENAM-22391 | Issues with `evaluateTree` when using wildcard policies                                                          |
 | OPENAM-22346 | The RP `form_post` endpoint doesn't handle POST data well when OP returns error                                  |
 | OPENAM-22322 | Signed ArtifactResponse Assertion can't be verified and fails                                                    |
-| OPENAM-22318 | OAUTH\_REQUEST\_ATTRIBUTES cookie isn't getting deleted after authentication                                     |
+| OPENAM-22318 | OAUTH_REQUEST_ATTRIBUTES cookie isn't getting deleted after authentication                                       |
 | OPENAM-22298 | NullPointerException in `SAML2Utils.verifyNameIDFormat` method                                                   |
 | OPENAM-22264 | Add global attribute handling to `ssoadm`                                                                        |
 | OPENAM-22120 | Backchannel logout tokens now include the `exp` claim                                                            |
@@ -3517,7 +3533,7 @@ This page lists the cumulative fixes in AM 7.4.x releases:
 | OPENAM-21664 | Upgrade fails to AM 7.4.0 with an uncaught exception when initializing the PrivilegeIndexStore class       |
 | OPENAM-21484 | OAuth 2.0 token introspection response has different claim value types when introspecting refresh tokens   |
 | OPENAM-21473 | Certificate Collector node: getPortalStyleCert throws exception when cert/header not present               |
-| OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK\_URIs have duplicate KID        |
+| OPENAM-21466 | AM using OIDC social authentication fails to verify ID token if remote JWK_URIs have duplicate KID         |
 | OPENAM-21277 | Running Amster in debug mode doesn't work on Windows                                                       |
 | OPENAM-21191 | Web agent sessions have a long session lifetime of 42 years                                                |
 | OPENAM-20609 | Inconsistent error message when generating access token using refresh token after changing username        |
@@ -3631,7 +3647,7 @@ This page lists the cumulative fixes in AM 7.4.x releases:
 > | OPENAM-20230 | Class allowlisting fails with permission denied after an extended period                                            |
 > | OPENAM-20181 | AD account notification fails                                                                                       |
 > | OPENAM-20159 | Upgrader adds requestObjectProcessing to OAuth2Provider subconfigs                                                  |
-> | OPENAM-20104 | The `fragment` response\_mode for the /oauth2/authorize endpoint is not working                                     |
+> | OPENAM-20104 | The `fragment` response_mode for the /oauth2/authorize endpoint is not working                                      |
 > | OPENAM-20085 | STS token generation does not work with clustered docker pods                                                       |
 > | OPENAM-20082 | Locked out users are shown a misleading error message                                                               |
 > | OPENAM-19868 | Correctly handle multi-line text in Email Suspend nodes                                                             |
@@ -3955,7 +3971,7 @@ Learn more in [Configure access to endpoints](https://docs.pingidentity.com/ping
 
 ##### Default `kid` values for GSM certificates
 
-For certificates stored in a Google Secret Manager ([GSM secret store](https://docs.pingidentity.com/pingam/8.1/security/secret-stores.html#create-GSM-secret-stores)), the public key published in the JWK\_URI now has a `kid` value that includes the name of the secret. For example:
+For certificates stored in a Google Secret Manager ([GSM secret store](https://docs.pingidentity.com/pingam/8.1/security/secret-stores.html#create-GSM-secret-stores)), the public key published in the JWK_URI now has a `kid` value that includes the name of the secret. For example:
 
 ```json
 "kid" : "secrets/secret-name/versions/1"
@@ -3978,6 +3994,14 @@ To re-enable the previous behavior, set the [am.cts.use.etag.assertion.on.update
 ### Changes in AM 8.0.x
 
 #### AM 8.0
+
+##### HTTP `User-Agent` change to `httpClient` binding
+
+The `httpClient` script binding now sends `PingIdentity` as the default HTTP `User-Agent` value instead of `Apache-HttpClient/…​`.
+
+This change can affect WAF, firewall, proxy, and monitoring rules that identify outbound requests by their `User-Agent` value. Review and update rules or integrations that match `Apache-HttpClient/…​` so that they also accept `PingIdentity`.
+
+The `httpClient` binding remains available to existing scripts. This change affects only the default request identification value and applies to both legacy and next-generation `httpClient` script bindings.
 
 ##### Support for Tomcat 10
 
@@ -4251,7 +4275,17 @@ The functionality listed here is deprecated, and likely to be removed in a futur
 
 ### Deprecated since PingAM 8.1
 
-#### SAML v2.0 JSPs
+#### Legacy scripting engine and sample scripts
+
+The legacy scripting engine and legacy sample scripts are deprecated and will be removed in a future release.
+
+You should [migrate your scripts to next-generation scripts](https://docs.pingidentity.com/pingam/8.1/am-scripting/next-generation-scripts.html#migrate-to-v2-steps).
+
+|   |                                                      |
+| - | ---------------------------------------------------- |
+|   | The next-generation engine can't use legacy scripts. |
+
+#### SAML 2.0 JSPs
 
 The JSPs provided for SAML v2.0 standalone mode are deprecated. Use the URL entry points described in [removed functionality](removed.html#removed-saml-jsps) instead.
 
@@ -4485,14 +4519,14 @@ In addition to the changes described elsewhere in these release notes, the publi
 | OPENAM-24491                             | Clarify Node Designer script capabilities                                                                    |
 | OPENAM-24438                             | Clarify the Scalable Clients setting                                                                         |
 | OPENAM-24435                             | Note that in FBC deployments, the default Stateless Session AES Encryption Key must be set post-installation |
-| OPENAM-24399                             | Document the new FACIAL\_COMPARISON\_REFERENCE\_SELFIE data type in PingOne Verify Evaluation node metadata  |
+| OPENAM-24399                             | Document the new FACIAL_COMPARISON_REFERENCE_SELFIE data type in PingOne Verify Evaluation node metadata     |
 | OPENAM-24396                             | Update Authenticator app documentation to reflect PingID as the default supported app                        |
 | OPENAM-24395                             | Address feedback regarding importing and exporting policies                                                  |
 | OPENAM-24374                             | Correct documentation regarding validator classes in the Node Developer guide                                |
 | OPENAM-24357                             | Fix an error in the documentation for hiddenValueCallback                                                    |
 | OPENAM-24345                             | Update the list of supported SNS regions for the Push Notification Service                                   |
 | OPENAM-24329                             | Correct inaccurate documentation for the OIDC ID Token Validator node                                        |
-| OPENAM-24324, OPENAM-23678               | Address feedback for validating id\_token and identifying users                                              |
+| OPENAM-24324, OPENAM-23678               | Address feedback for validating id_token and identifying users                                               |
 | OPENAM-24320                             | Indicate support for third-party authenticator apps                                                          |
 | OPENAM-24300                             | Update AM documentation regarding PKCS12 keystore support                                                    |
 | OPENAM-24296                             | Document node state biographic matching in the PingOne Verify Evaluation node                                |
@@ -4725,7 +4759,7 @@ In addition to the changes described elsewhere in these release notes, the publi
 | OPENAM-23662                                        | Document the Amster Jwt Decision node                                                           |
 | OPENAM-23660                                        | Update docs to include info on default trees that exist in AM 8                                 |
 | OPENAM-23620                                        | Update REST version messages                                                                    |
-| OPENAM-23558                                        | Provide more info on the am\_authentication\_count metric                                       |
+| OPENAM-23558                                        | Provide more info on the am_authentication_count metric                                         |
 | OPENAM-23549                                        | Error in documentation on scope validation                                                      |
 | OPENAM-23547                                        | Remove deprecated openam-legacy-debug-slf4j module from docs                                    |
 | OPENAM-23513                                        | Update supported directory stores                                                               |
@@ -4815,7 +4849,7 @@ In addition to the changes described elsewhere in these release notes, the publi
 > | OPENAM-23855 | JDBC Audit log table note about VARCHAR limits                                        |
 > | OPENAM-23746 | Incorrect `sub` value in mayAct script for delegation                                 |
 > | OPENAM-23714 | Indicate only one secret can be *active* for any secret label mapping                 |
-> | OPENAM-23638 | Fix DATA\_STORE setting for silent install should be dirServer                        |
+> | OPENAM-23638 | Fix DATA_STORE setting for silent install should be dirServer                         |
 > | OPENAM-23620 | Update docs for error logging in Rest API                                             |
 > | OPENAM-23616 | Client secret not required for OAuth 2.0 client update request                        |
 > | OPENAM-23549 | Error in documentation on scope validation                                            |
@@ -4887,7 +4921,7 @@ In addition to the changes described elsewhere in these release notes, the publi
 > | OPENAM-20673  | Clarify device reset with WebAuthn                                                                  |
 > | OPENAM-20591  | Prevent ClassNotFoundException when removing click-\* jars                                          |
 > | OPENAM-19899  | Remove all instances of /UI/login                                                                   |
-> | OPENAM-19575  | Check algorithm statement for /oauth2/connect/jwk\_uri                                              |
+> | OPENAM-19575  | Check algorithm statement for /oauth2/connect/jwk_uri                                               |
 > | OPENAM-19533  | Remove unnecessary images from installation steps                                                   |
 > | OPENAM-19395  | Distinguish between general mail server and self-service mail service                               |
 > | SDKS-3173     | The PingOne Worker service requires a configured OAuth 2.0 provider service                         |
@@ -5015,7 +5049,7 @@ There are no new issues identified in AM 8.0.1.
 | OPENAM-22700 | OAuth 2.0 introspect: Multi-audience token only checks against first value                         |
 | OPENAM-22670 | DJLDAPv3Repo `getDN` may return broken cached DN                                                   |
 | OPENAM-22663 | WS-Federation SLO calls cleanup directive if issued                                                |
-| OPENAM-22530 | OAUTH\_REQUEST\_ATTRIBUTES cookie is set for HTTP GET `/authorize` requests                        |
+| OPENAM-22530 | OAUTH_REQUEST_ATTRIBUTES cookie is set for HTTP GET `/authorize` requests                          |
 | OPENAM-22505 | Scripted policy condition fails with "Exception from invocation expected to be handled by promise" |
 | OPENAM-22386 | Next-generation `idRepository` binding doesn't return null if identity isn't found                 |
 | OPENAM-22031 | LDAP Decision node no longer displays locked account message but redirects to failed login         |
@@ -5200,7 +5234,7 @@ Amster has the following known limitations:
   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   |   | It's strongly recommended that you do *not* enable `org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH` when running AM in production as it introduces a security risk on Apache Tomcat. Additionally, this setting isn't supported on Apache Tomcat 10. |
 
-  Learn more in [How do I safely enable the org.apache.tomcat.util.buf.UDecoder.ALLOW\_ENCODED\_SLASH setting in PingAM?](https://support.pingidentity.com/s/article/How-do-I-safely-enable-the-org-apache-tomcat-util-buf-UDecoder-ALLOWENCODEDSLASH-setting-in-PingAM) in the *Knowledge Base*.
+  Learn more in [How do I safely enable the org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH setting in PingAM?](https://support.pingidentity.com/s/article/How-do-I-safely-enable-the-org-apache-tomcat-util-buf-UDecoder-ALLOWENCODEDSLASH-setting-in-PingAM) in the *Knowledge Base*.
 
 * **\[INFO] messages showing on SuSE on Amster start up**
 

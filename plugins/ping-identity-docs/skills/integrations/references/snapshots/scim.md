@@ -126,9 +126,9 @@ The following is the change history for the SCIM Provisioner.
 
 * Fixed a compatibility issue when multiple SCIM SaaS connectors are deployed.
 
-* Fixed an issue where the NO\_CONTENT HTTP response code was not being handled.
+* Fixed an issue where the NO_CONTENT HTTP response code was not being handled.
 
-* Fixed an issue where the SERVER\_ERROR HTTP response code was not being handled.
+* Fixed an issue where the SERVER_ERROR HTTP response code was not being handled.
 
 * Fixed an issue where the user's active status was not updated correctly on update requests.
 
@@ -766,9 +766,9 @@ Configuration settings and provisioning options for the SCIM Provisioner.
   ```To override a default filter, use the **Filter Expression** field.&#xA;&#xA;To change the unique user identifier:&#xA;&#xA;Delete the existing SP connection.&#xA;&#xA;Restart PingFederate.&#xA;&#xA;Create an SP Connection with the new Unique User Identifier setting. |
 | **Filter Expression**             | A rule that determines how the connector uses the unique user identifier to match existing users in the target application to users in the data store.This expression overrides the default filter expression that is set by the **Unique User Identifier** field.The filter expression contains three parts:```
 <attribute_name> <operation> <attribute_value>
-```The *\<attribute\_value>* is represented by `"%s"` in the expression. It is populated by the value of the Unique User Identifier.Example filter expressions:- `username eq "%s"`
+```The *\<attribute_value>* is represented by `"%s"` in the expression. It is populated by the value of the Unique User Identifier.Example filter expressions:- `username eq "%s"`
 
-- `email co "%s"`&#xA;&#xA;Check the target service documentation and the SCIM Filtering specification to see which filter expressions are supported.                                                                                              |
+- `email co "%s"`&#xA;&#xA;Check the target service documentation and the SCIM Filtering specification to see which filter expressions are supported.                                                                                               |
 | **Authorization Header Type**     | The type of HTTP authorization header used. For example, `oauth2`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Users API Path**                | The users API path is used when the users endpoint deviates from the SCIM specification (`/Users` is used by default when left blank).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **Groups Path API**               | The groups API path is used when the groups endpoint deviates from the SCIM specification (`/Groups` is used by default when left blank).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |

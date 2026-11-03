@@ -1,12 +1,13 @@
 ---
 title: About ForgeOps deployment monitoring
-description: Prometheus, Alertmanager, and Grafana, used for monitoring ForgeOps deployments, are deployed if you run the prometheus-deploy.sh script after performing a ForgeOps deployment. This script installs Helm charts from the prometheus-operator project into the monitoring namespace of a ForgeOps deployment. The Prometheus operator project provides monitoring definitions for Kubernetes services and deployment, and management of Prometheus instances.
+description: Install and customize Prometheus, Grafana, and Alertmanager to monitor ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:monitoring/monitoring-intro
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/monitoring-intro.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/monitoring-intro.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
 ---
 
 # About ForgeOps deployment monitoring
@@ -15,7 +16,7 @@ Prometheus, Alertmanager, and Grafana, used for monitoring ForgeOps deployments,
 
 The Helm charts deploy [Kubernetes pods that run the Prometheus and Grafana services](pods.html). The Prometheus operator then watches for service monitor CRDs—Kubernetes custom resource definitions. CRDs are Kubernetes class types that you manage with the kubectl command. The service monitor CRDs define targets to be scraped.
 
-In ForgeOps deployments, the Prometheus operator configuration is defined in the [prometheus-operator.yaml](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/prometheus-operator.yaml) file in the `forgeops` repository. For information about how to customize Prometheus, Alertmanager, and Grafana, refer to the [Prometheus README file in the `forgeops` repository](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md).
+In ForgeOps deployments, the Prometheus operator configuration is defined in the [prometheus-operator.yaml](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/prometheus-operator.yaml) file in the `forgeops` repository. For information about how to customize Prometheus, Alertmanager, and Grafana, refer to the [Prometheus README file in the `forgeops` repository](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md).
 
 After a ForgeOps deployment is done, you can access the monitoring dashboards. For details, refer to [ForgeOps deployment monitoring](../../deploy/access.html#cdm-monitoring).
 
@@ -27,13 +28,14 @@ After a ForgeOps deployment is done, you can access the monitoring dashboards. F
 
 ---
 title: Access restriction by IP address
-description: When installing the ingress controller in production environments, you should consider configuring a CIDR block in the Helm chart for the ingress controller so that you restrict access to worker nodes from a specific IP address or a range of IP addresses.
+description: Restrict ForgeOps ingress access to worker nodes from specified IP addresses with a CIDR block
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:security/restrict-access-ip-address
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/security/restrict-access-ip-address.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/restrict-access-ip-address.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-18T16:22:00Z
 keywords: ["Security", "Ingress Controller"]
 ---
 
@@ -45,33 +47,35 @@ When installing the ingress controller in production environments, you should co
 
 ---
 title: Alerts
-description: Alerts for ForgeOps deployments are defined in the fr-alerts.yaml file in the forgeops repository.
+description: Configure Prometheus alerts for ForgeOps deployments with Alertmanager and initial rules
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:monitoring/alerts
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/alerts.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/alerts.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-09-05T12:02:54Z
 keywords: ["Monitoring", "Alertmanager", "Prometheus"]
 ---
 
 # Alerts
 
-Alerts for ForgeOps deployments are defined in the [fr-alerts.yaml](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/forgerock-metrics/templates/fr-alerts.yaml) file in the `forgeops` repository.
+Alerts for ForgeOps deployments are defined in the [fr-alerts.yaml](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/forgerock-metrics/templates/fr-alerts.yaml) file in the `forgeops` repository.
 
-To configure additional alerts, refer to the [Configure Alerting Rules](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md#Configure-alerting-rules) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
+To configure additional alerts, refer to the [Configure Alerting Rules](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md#Configure-alerting-rules) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
 
 ---
 
 ---
 title: Cluster access for multiple AWS users
-description: It's common for team members to share the use of a cluster. For team members to share a cluster, the cluster owner must grant access to each user:
+description: Grant multiple AWS users access to a ForgeOps cluster by editing the Amazon EKS aws-auth configuration map
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:security/multi-user-access-aws
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/security/multi-user-access-aws.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/multi-user-access-aws.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
 keywords: ["Security", "AWS"]
 ---
 
@@ -125,13 +129,14 @@ It's common for team members to share the use of a cluster. For team members to 
 
 ---
 title: Custom Grafana dashboards
-description: In addition to the pods from the prometheus-operator project, ForgeOps deployments include a set of Grafana dashboards. The import-dashboards-... pod from the forgeops repository runs after Grafana starts up. This pod imports Grafana dashboards for the Ping Advanced Identity Software and terminates after importing has completed.
+description: Customize, export, and import Grafana dashboards for ForgeOps deployment monitoring
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:monitoring/dashboards
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/dashboards.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/dashboards.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
 keywords: ["Monitoring", "Grafana"]
 ---
 
@@ -141,19 +146,20 @@ In addition to the pods from the `prometheus-operator` project, ForgeOps deploym
 
 You can customize, export and import Grafana dashboards using the Grafana UI or HTTP API.
 
-For information about importing custom Grafana dashboards, refer to the [Import Custom Grafana Dashboards](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md#import-custom-grafana-dashboards) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
+For information about importing custom Grafana dashboards, refer to the [Import Custom Grafana Dashboards](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md#import-custom-grafana-dashboards) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
 
 ---
 
 ---
 title: Custom PingGateway image
-description: The default PingGateway configuration provided for use with ForgeOps deployments is an example. Replace this configuration with your own routes before using PingGateway in your environment.
+description: Build and deploy a custom PingGateway image with ForgeOps routes and customize its PingAM URL
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:ig/deploy-custom-ig
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-custom-ig.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/deploy-custom-ig.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-30T13:48:36Z
 keywords: ["PingGateway", "forgeops Command"]
 section_ids:
   deploy_custom_pinggateway_image: Deploy custom PingGateway image
@@ -164,7 +170,7 @@ section_ids:
 
 The default PingGateway configuration provided for use with ForgeOps deployments is an example. Replace this configuration with your own routes before using PingGateway in your environment.
 
-Refer to the [PingGateway Deployment Guide](https://docs.pingidentity.com/pinggateway/2026.3/devops-guide/preface.html) for configuring routes.
+Refer to the [PingGateway Deployment Guide](https://docs.pingidentity.com/pinggateway/2026.6/devops-guide/preface.html) for configuring routes.
 
 ## Deploy custom PingGateway image
 
@@ -184,11 +190,13 @@ To build a custom PingGateway image and deploy PingGateway:
 
    ```
    $ cd /path/to/forgeops/bin
-   ...
-   $ forgeops image --release 2026.3.0 --release-name my-ig-release ig
-   ...
+
+   $ forgeops image --env-nama my-env --release 2026.6.0 \
+     --release-name my-ig-release ig
+
    $ ./forgeops build ig --env-name my-env \
-     --config-profile my-profile --push-to my-repo
+     --config-profile my-profile --release-name my-ig-release \
+     --push-to my-repo
    ```
 
 7. If PingGateway hadn't already been deployed in the existing ForgeOps deployment, add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
@@ -211,7 +219,7 @@ To build a custom PingGateway image and deploy PingGateway:
    - ./login-ui
    ```
 
-8. Uninstall previously deployed PingGateway from your ForgeOps deployment:
+8. If PingGateway had already been deployed in your ForgeOps deployment, uninstall it:
 
    1. Set the active namespace in your local Kubernetes context to the namespace in which you've deployed the PingGateway.
 
@@ -227,19 +235,19 @@ To build a custom PingGateway image and deploy PingGateway:
 
 9. Deploy PingGateway using your customized PingGateway image:
 
-   1. In a Kustomize-based deployment:
+   > **Collapse: In a Kustomize-based deployment (Deprecated)**
+   >
+   > ```
+   > $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
+   > ```
 
-      ```
-      $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
-      ```
-
-   2. In a Helm-based deployment:
-
-      ```
-      $ cd /path/to/forgeops
-      $  helm upgrade --install ping-gateway charts/ping-gateway/ \
-        --values helm/my-env/values.yaml --namespace my-namespace
-      ```
+   > **Collapse: In a Helm-based deployment**
+   >
+   > ```
+   > $ cd /path/to/forgeops
+   > $  helm upgrade --install ping-gateway charts/ping-gateway/ \
+   >   --values helm/my-env/values.yaml --namespace my-namespace
+   > ```
 
 10. Run the kubectl get pods command to check the status of the PingGateway pod. Wait until the PingGateway pod is ready before proceeding to the next step.
 
@@ -258,7 +266,7 @@ To customize the AM URL in PingGateway and deploy using Helm:
          value: "\http://am/my-am"
    ```
 
-2. Redeploy PingGateway:
+2. Redeploy PingGateway. For example, in a Helm-based deployment:
 
    ```
    $ helm upgrade --install ping-gateway charts/ping-gateway/ \
@@ -278,13 +286,14 @@ To customize the AM URL in PingGateway and deploy using Helm:
 
 ---
 title: Deploy PingGateway
-description: ForgeOps deployments don't include PingGateway by default.
+description: Deploy PingGateway in a ForgeOps environment and verify its proxy routes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:ig/deploy-default-ig
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-default-ig.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/deploy-default-ig.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-20T12:24:02Z
 keywords: ["Internet Gateway", "forgeops Command"]
 ---
 
@@ -298,52 +307,54 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
 
 2. Set the active namespace in your local Kubernetes context to the namespace in which you've deployed the platform components.
 
-3. Add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
+3. Deploy PingGateway:
 
-   ```
-   kind: Kustomization
-   apiVersion: kustomize.config.k8s.io/v1beta1
-   resources:
-   - ./base
-   - ./secrets
-   - ./ds-cts
-   - ./ds-idrepo
-   - ./am
-   - ./amster
-   - ./idm
-   - ./ig
-   - ./ds-set-passwords
-   - ./admin-ui
-   - ./end-user-ui
-   - ./login-ui
-   ```
+   > **Collapse: In Kustomize-based deployments (Deprecated)**
+   >
+   > 1. Add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
+   >
+   >    ```
+   >    kind: Kustomization
+   >    apiVersion: kustomize.config.k8s.io/v1beta1
+   >    resources:
+   >    - ./base
+   >    - ./secrets
+   >    - ./ds-cts
+   >    - ./ds-idrepo
+   >    - ./am
+   >    - ./amster
+   >    - ./idm
+   >    - ./ig
+   >    - ./ds-set-passwords
+   >    - ./admin-ui
+   >    - ./end-user-ui
+   >    - ./login-ui
+   >    ```
+   >
+   > 2. Add PingGateway Docker image to your ForgeOps deployment configuration:
+   >
+   >    ```
+   >    $ cd /path/to/forgeops/bin/
+   >    $ ./forgeops image --release 2026.6.0 ig --env-name my-env
+   >    ```
+   >
+   >    1. Deploy PingGateway:
+   >
+   >       ```
+   >       $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
+   >       ```
 
-4. Add PingGateway Docker image to your ForgeOps deployment configuration:
+   > **Collapse: In Helm-based deployments**
+   >
+   > 1. Deploy PingGateway using the helm upgrade --install command:
+   >
+   >    ```
+   >    $ cd /path/to/forgeops
+   >    $ helm upgrade --install ping-gateway charts/ping-gateway/ \
+   >      --values helm/my-env/values.yaml --namespace my-namespace
+   >    ```
 
-   ```
-   $ cd /path/to/forgeops/bin/
-   $ ./forgeops image --release 2026.3.0 ig --env-name my-env
-   ```
-
-5. Deploy PingGateway:
-
-   1. In a Kustomize-based deployment:
-
-      ```
-      $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
-      ```
-
-   2. In a Helm-based deployment:
-
-      ```
-      $ cd /path/to/forgeops
-      $ helm upgrade --install ping-gateway charts/ping-gateway/ \
-        --values helm/my-env/values.yaml --namespace my-namespace
-      ```
-
-6. Run the kubectl get pods command to check the status of the PingGateway pod. Wait until the pod is ready before proceeding to the next step.
-
-7. Verify that PingGateway is running:
+4. Verify that PingGateway is running:
 
    ```
    $ curl --insecure -L -X GET https://my-fqdn/ig/openig/ping -v
@@ -361,7 +372,7 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
    * Closing connection 0
    ```
 
-8. Verify that the reverse proxy to the IDM pod is running:
+5. Verify that the reverse proxy to the IDM pod is running:
 
    ```
    $ curl --insecure -L -X GET https://my-fqdn/ig/openidm/info/ping -v
@@ -379,13 +390,14 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
 
 ---
 title: ForgeOps deployment monitoring
-description: ForgeOps deployments optionally use Prometheus to monitor Ping Advanced Identity Software components and Kubernetes objects, Prometheus Alertmanager to send alert notifications, and Grafana to analyze metrics using dashboards.
+description: Monitor ForgeOps deployments with Prometheus metrics, Alertmanager notifications, and Grafana dashboards
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:monitoring/overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-22T16:57:07Z
 keywords: ["Monitoring", "Prometheus", "Grafana", "Alertmanager"]
 ---
 
@@ -395,41 +407,376 @@ ForgeOps deployments optionally use Prometheus to monitor Ping Advanced Identity
 
 This topic describes the use of monitoring tools in ForgeOps deployments:
 
-[icon: eye, set=fas, size=3x]
+| Topic                                                               | Description                                                                                   |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [icon: eye, set=fa][Overview](monitoring-intro.html)                | Monitoring installation and architecture.                                                     |
+| [icon: fedora, set=fa][Monitoring Pods](pods.html)                  | Prometheus and Grafana pods that monitor ForgeOps deployments and provide reporting services. |
+| [icon: tachometer-alt, set=fa][Grafana Dashboards](dashboards.html) | Grafana dashboards for the platform that are available in ForgeOps deployments.               |
+| [icon: exclamation, set=fa][Prometheus Alerts](alerts.html)         | Prometheus alerts for the platform that are available in ForgeOps deployments.                |
 
-#### [Overview](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/monitoring-intro.html)
+---
 
-Monitoring installation and architecture.
+---
+title: Helm generated secrets
+description: Use Helm-generated secrets in ForgeOps deployments and preserve secret values across upgrades
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:security/helm-gen-sec
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/helm-gen-sec.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17T12:02:39Z
+keywords: ["Security", "Helm", "Secrets generation"]
+---
 
-[icon: fedora, set=fab, size=3x]
+# Helm generated secrets
 
-#### [Monitoring Pods](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/pods.html)
+Helm functions cannot generate the SSH keypair, therefore a Kubernetes job is used to generate the SSH keypair and store it in a Kubernetes secret. In Helm-based ForgeOps deployments, password-style secrets are generated using a Kubernetes job.
 
-Prometheus and Grafana pods that monitor ForgeOps deployments and provide reporting services.
+When you create new ForgeOps environment using the `forgeops env` command, the Helm-generated secrets are enabled by default.
 
-[icon: tachometer-alt, set=fas, size=3x]
+In a ForgeOps environment enabled with Helm-generated secrets, Helm creates any missing secrets on the first ForgeOps deployment using Helm. On later upgrades, the chart uses Helm `lookup` to keep the existing secret values so that upgrades do not rotate them unintentionally.
 
-#### [Grafana Dashboards](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/dashboards.html)
+When using the Helm-generated-secrets model, deploy ForgeOps normally using Helm and the `values.yaml` file for your environment.
 
-Grafana dashboards for the platform that are available in ForgeOps deployments.
+* Example steps
 
-[icon: exclamation, set=fas, size=3x]
+  The sample steps use the standard ForgeOps Helm deployment flow, while the Helm chart generates and preserves the secrets:
 
-#### [Prometheus Alerts](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/alerts.html)
+  ```
+  $ cd /path/to/forgeops/bin
 
-Prometheus alerts for the platform that are available in ForgeOps deployments.
+  $ ./forgeops env --env-name my-env \
+    --fqdn my-fqdn.example.com  \
+    --cluster-issuer my-cluster-issuer --single-instance
+
+  $ helm upgrade --install identity-platform identity-platform \
+    --repo https://ForgeRock.github.io/forgeops/ \
+    --namespace my-namespace \
+    --values /path/to/forgeops/helm/my-env/values.yaml
+  ```
+
+---
+
+---
+title: Identity Gateway
+description: Deploy PingGateway in ForgeOps and choose between default and custom PingGateway images
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:ig/overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-22T16:57:07Z
+---
+
+# Identity Gateway
+
+This topic describes how to deploy PingGateway in a ForgeOps deployment.
+
+| Topic                                                               | Description                                                                           |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [icon: user-lock, set=fa][IG Deployment](deploy-default-ig.html)    | Add PingGateway to a ForgeOps deployment.                                             |
+| [icon: user-shield, set=fa][Custom IG Image](deploy-custom-ig.html) | Build a custom PingGateway image and add it to a single-instance ForgeOps deployment. |
+
+---
+
+---
+title: Migrate secrets from secret agent to Helm-generated secrets
+description: Migrate ForgeOps Helm deployments from secret agent to Helm-generated secrets with the forgeops migrate sa2hs command
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:security/migrate-helmsec
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/migrate-helmsec.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T12:54:27Z
+section_ids:
+  before_you_begin: Before you begin
+  back_up_your_secrets: Back up your secrets
+  confirm_ds_password_rotation_support: Confirm DS password-rotation support
+  verify_the_current_state_of_the_deployment: Verify the current state of the deployment
+  run_the_migration_command: Run the migration command
+  what_the_migration_command_does: What the migration command does
+  responses_to_prompts_during_migration: Responses to prompts during migration
+  validate_the_deployment_after_migration: Validate the deployment after migration
+  troubleshooting: Troubleshooting
+  result: Result
+  next_steps: Next steps
+---
+
+# Migrate secrets from secret agent to Helm-generated secrets
+
+Use this procedure to migrate an existing ForgeOps deployment that uses Helm and secret agent for secrets management to Helm-generated secrets.
+
+In ForgeOps 2026.3.0, Helm-generated secrets were added to the Helm chart, the Secret Generator option was removed, and the `forgeops migrate sa2hs` command was added to migrate secrets from secret agent to Helm-generated secrets.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | * This procedure applies only to Helm deployments.
+
+* Do not use this procedure for Kustomize deployments.
+
+* Because ForgeOps deployments are highly customizable, validate this procedure in a test environment before using it in production.
+
+* **Run the forgeops commands in the Python3 virtual environment** that you created for deploying ForgeOps.
+
+* **If you are testing in a minikube environment, ensure that `minikube tunnel` is running in a separate terminal window.** |
+
+## Before you begin
+
+Make sure that:
+
+* Your deployment uses Helm.
+
+* Your deployment currently uses secret agent.
+
+* You have updated your ForgeOps artifacts to version 2026.3.0 or later.
+
+* You know the environment name, namespace, and location of your ForgeOps repository clone.
+
+* All pods in the deployment are healthy before you start.
+
+This migration does not require Secret Generator prerequisites.
+
+For newly created environments with ForgeOps 2026.3 or later, Helm-generated secrets are enabled by default. Existing environments are not changed automatically and must be migrated.
+
+### Back up your secrets
+
+Before you start, back up the secrets used by your deployment.
+
+1. At a minimum, back up the following secrets:
+
+   * `am-env-secrets`, `am-keystore`, `am-passwords`, `amster`, `amster-env-secrets`
+
+   * `ds-env-secrets`, `ds-passwords`
+
+   * `idm-env-secrets`, `idm`
+
+     For example:
+
+     ```
+     $ kubectl get secret am-env-secrets -n my-ns -o yaml > am-env-secrets.yaml
+     $ kubectl get secret ds-env-secrets -n my-ns -o yaml > ds-env-secrets.yaml
+     $ kubectl get secret ds-passwords -n my-ns -o yaml > ds-passwords.yaml
+     ```
+
+2. (Optional) You can also back up the DS key material that secret agent does not generate:
+
+   * `ds-master-keypair`, `ds-ssl-keypair`
+
+     For example:
+
+     ```
+     $ kubectl get secret ds-master-keypair -n my-ns -o yaml > ds-master-keypair.yaml
+     $ kubectl get secret ds-ssl-keypair -n my-ns -o yaml > ds-ssl-keypair.yaml
+     ```
+
+Secret agent can integrate with a cloud secret manager such as Google Cloud Secret Manager, AWS Secrets Manager, and Azure Key Vault. If your secret agent deployment uses a cloud secret manager, review that configuration before migrating to Helm-generated secrets.
+
+### Confirm DS password-rotation support
+
+For a no-downtime migration, use DS images that support multiple password values in DS. If your deployment does not have that capability, plan for downtime when passwords change during migration.
+
+## Verify the current state of the deployment
+
+1. Verify that all pods are running:
+
+   ```
+   $ kubectl get pods -n my-ns
+   ```
+
+2. Verify that the deployment is currently using secret agent. For example, check that the `forgerock-sac` resource exists:
+
+   ```
+   $ kubectl get sac -n my-ns
+   ```
+
+3. Review the current Helm values file for the environment:
+
+   ```
+   $ cat /path/to/forgeops/helm/my-env/values.yaml
+   ```
+
+## Run the migration command
+
+ForgeOps 2026.3.0 adds the forgeops migrate sa2hs command to migrate secrets from secret agent to Helm-generated secrets. To display the command help, run the \[.command]forgeops migrate sa2hs --help# command.
+
+1. To migrate a Helm deployment, run:
+
+   ```
+   $ forgeops migrate sa2hs --env-name my-env -n my-ns
+   ```
+
+   If you are testing with a local chart instead of the published chart, specify the chart location:
+
+   ```
+   $ forgeops migrate sa2hs -o ./charts/identity-platform --env-name my-env -n my-ns
+   ```
+
+   |   |                                                                                  |
+   | - | -------------------------------------------------------------------------------- |
+   |   | This command is for Helm deployments, so you need not specify a `--helm` option. |
+
+## What the migration command does
+
+The migration command pauses before each major change so that you can review what it is about to do in the running deployment.
+
+For a Helm deployment, the command performs the migration in phases.
+
+* In phase 1
+
+  The command:
+
+  1. Runs pre-migration checks.
+
+  2. Upgrades the existing environment to keep the environment files consistent.
+
+  3. Switches the environment to Helm-generated secrets by updating the environment with `--helm-secrets`.
+
+  4. Updates the environment `values.yaml` file for the first set of Helm-managed secrets.
+
+  5. Rotates `ds-env-secrets` so that AM can continue to communicate with DS during the transition.
+
+  6. Updates the `forgerock-sac` resource to remove the secrets being migrated away from secret agent.
+
+  7. Runs `helm upgrade` and forces the `ds-set-passwords` and `amster` jobs as needed.
+
+* In phase 2
+
+  The command:
+
+  1. Merges the remaining Helm-generated secret settings into `values.yaml`.
+
+  2. Rotates `ds-passwords`.
+
+  3. Deletes the `forgerock-sac` resource after the remaining secret agent-managed secrets have been migrated.
+
+  4. Runs `helm upgrade` again to apply the remaining secret changes.
+
+  5. Restarts DS so that the new password values are used consistently.
+
+  6. Deletes the temporary `old-ds-env-secrets` and `old-ds-passwords` secrets.
+
+  7. Runs Helm again to complete cleanup and force an Amster run.
+
+### Responses to prompts during migration
+
+The script prompts before making changes. When prompted, review the action and continue. These prompts are expected because the migration changes a running deployment.
+
+### Validate the deployment after migration
+
+After the migration completes:
+
+1. Verify that all pods are healthy:
+
+   ```
+   $ kubectl get pods --namespace my-ns
+   ```
+
+2. Verify that the deployment is now using Helm-generated secrets.
+
+   Review the environment `values.yaml` file and confirm that Helm-generated secret settings are present.
+
+3. Verify that the `forgerock-sac` resource has been removed:
+
+   ```
+   $ kubectl get sac --namespace my-ns
+   ```
+
+4. Confirm that the application is reachable and that you can log in to the platform.
+
+5. Verify that the completed jobs are present as expected for the migrated release, such as:
+
+   * `amster-<revision>`
+
+   * `ds-set-passwords-<revision>`
+
+   * `keystore-create-<revision>`
+
+   * `ssh-keygen-<revision>`
+
+### Troubleshooting
+
+* AM or IDM does not come up
+
+  If AM or IDM does not come up after the migration, restart the affected deployment:
+
+  ```
+  $ kubectl rollout restart deployment am --namespace my-ns
+  $ kubectl rollout restart deployment idm --namespace my-ns
+  ```
+
+* DS needs to pick up the new password values
+
+  If DS does not restart as needed during the migration, restart the DS stateful sets:
+
+```
+$ kubectl rollout restart sts ds-idrepo --namespace my-ns
+$ kubectl rollout restart sts ds-cts --namespace my-ns
+```
+
+* The admin UI shows a white screen after migration
+
+  Migration testing found that a missing Amster run can lead to a white screen after login.
+
+If this happens:
+
+1. Run Helm again and force an Amster run.
+
+2. If needed, redeploy the platform and restart IDM. For example:
+
+   ```
+   $ cd /path/to/forgeops
+
+   $ helm upgrade --install identity-platform  identity-platform \
+   --repo https://ForgeRock.github.io/forgeops/ \
+   --version 2026.3 --namespace my-ns \
+   --values /path/to/forgeops/helm/my-env/values.yaml
+
+   $ kubectl rollout restart deployment idm --namespace my-ns
+   ```
+
+3. Clear your browser data or use an incognito window, and then log in again.
+
+### Result
+
+After the migration:
+
+* The deployment no longer depends on secret agent for Helm-managed secrets.
+
+* Helm functions generate the default secrets used by the deployment.
+
+* The chart uses lookup logic so that existing secret values can be preserved across upgrades.
+
+* SSH key material that Helm cannot generate directly continues to be handled by the `ssh-keygen` job.
+
+## Next steps
+
+After you migrate the deployment:
+
+* Continue using Helm for future updates.
+
+* Use the Helm values file as the source of truth for the environment.
+
+* Review your team runbooks so they no longer reference secret agent for Helm deployments.
+
+* If you maintain documentation for fresh deployments, note that Helm-generated secrets are enabled by default for new environments.
+
+* After all your environments have migrated to use Helm-generated secrets, you can remove the secret agent from your deployment environment.
 
 ---
 
 ---
 title: Monitoring pods
-description: The following Prometheus and Grafana pods from the prometheus-operator project run in the monitoring namespace:
+description: Monitor Kubernetes pods in a ForgeOps deployment using Prometheus, Grafana, and Alertmanager
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:monitoring/pods
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/pods.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/pods.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
 keywords: ["Monitoring", "Prometheus", "Alertmanager"]
 ---
 
@@ -452,13 +799,14 @@ See the [prometheus-operator Helm chart README file](https://github.com/helm/cha
 
 ---
 title: Network policies
-description: Kubernetes network policies let you specify specify how pods are allowed to communicate with other pods, namespaces, and IP addresses.
+description: Configure Kubernetes network policies to restrict ForgeOps pod communication by service, port, namespace, and tier
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:security/network-policies
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/security/network-policies.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/network-policies.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-11-21T10:28:18Z
 keywords: ["Security", "Kubernetes", "Network"]
 section_ids:
   deny_all_policy: deny-all policy
@@ -475,9 +823,9 @@ Kubernetes [network policies](https://kubernetes.io/docs/concepts/services-netwo
 
 The `forgeops` repository contains two sets of example network policies for the Ping Advanced Identity Software:
 
-1. [Network policies for DS](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/base/security/ds-netpolicy.yaml).
+1. [Network policies for DS](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/base/security/ds-netpolicy.yaml).
 
-2. [Network policies for AM and IDM](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/base/security/app-netpolicy.yaml).
+2. [Network policies for AM and IDM](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/base/security/app-netpolicy.yaml).
 
 Customize the example policies to meet your security needs, or use them to help you better understand how network policies can make Kubernetes deployments more secure.
 
@@ -571,126 +919,633 @@ Note that users send HTTPS requests for the Ping Advanced Identity Software UIs 
 
 ---
 title: New security features
-description: New security features in ForgeOps 2026.2.
+description: Review new ForgeOps security features in the current release
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:security/sec-features
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/security/sec-features.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/sec-features.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-21T11:21:56Z
 keywords: ["Security", "Secret Agent Operator"]
 ---
 
 # New security features
 
-New security features in ForgeOps 2026.2.
-
----
-
----
-title: PingGateway deployment
-description: Add PingGateway to a ForgeOps deployment.
-component: forgeops
-version: 2026.2
-page_id: forgeops:prepare:ig/overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/overview.html
-llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
----
-
-# PingGateway deployment
-
-[icon: user-lock, set=fas, size=3x]
-
-#### [Default PingGateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-default-ig.html)
-
-Add PingGateway to a ForgeOps deployment.
-
-[icon: user-shield, set=fas, size=3x]
-
-#### [Custom PingGateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-custom-ig.html)
-
-Build a custom PingGateway image and add it to a single-instance ForgeOps deployment.
+New security features in ForgeOps 2026.3.
 
 ---
 
 ---
 title: Prepare to deploy in production
-description: After you get your ForgeOps deployment up and running, you can add deployment customizations—options that are not part of an out-of-the-box ForgeOps deployment, but which you may need when you deploy in production.
+description: Prepare ForgeOps for production deployment by customizing PingGateway, monitoring, security, and backup features
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:prepare:overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-22T16:57:07Z
 ---
 
 # Prepare to deploy in production
 
 After you get your ForgeOps deployment up and running, you can add deployment customizations—options that are not part of an out-of-the-box ForgeOps deployment, but which you may need when you deploy in production.
 
-[icon: play-circle, set=fas, size=3x]
-
-#### [Production Deployment Overview](https://docs.pingidentity.com/forgeops/2026.2/start/start-here.html#build-own-service)
-
-Customize, deploy, and maintain a production ForgeOps deployment.
-
-[icon: door-open, set=fas, size=3x]
-
-#### [Identity Gateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/overview.html)
-
-Add PingGateway to your deployment.
-
-[icon: stethoscope, set=fas, size=3x]
-
-#### [Monitoring](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/overview.html)
-
-Customize Prometheus monitoring and alerts.
-
-[icon: user-lock, set=fas, size=3x]
-
-#### [Security](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/overview.html)
-
-Customize the security features built into ForgeOps deployments.
-
-[icon: floppy-disk-circle-arrow-right, set=fas, size=3x]
-
-#### [Backup](https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html)
-
-Back up and restore data, such as identities and tokens.
+| Topic                                                                                                   | Description                                                       |
+| ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [icon: play-circle, set=fa][Production Deployment Overview](../start/start-here.html#build-own-service) | Customize, deploy, and maintain a production ForgeOps deployment. |
+| [icon: door-open, set=fa][Identity Gateway](ig/overview.html)                                           | Add PingGateway to your deployment.                               |
+| [icon: stethoscope, set=fa][Monitoring](monitoring/overview.html)                                       | Customize Prometheus monitoring and alerts.                       |
+| [icon: user-lock, set=fa][Security](security/overview.html)                                             | Customize the security features built into ForgeOps deployments.  |
+| [icon: floppy-disk-circle-arrow-right, set=fa][Backup](../backup/overview.html)                         | Back up and restore data, such as identities and tokens.          |
 
 ---
 
 ---
-title: Secret Agent operator
-description: The open source Secret Agent operator generates all the secrets needed for ForgeOps deployments except for the DS master key and TLS key. When directory instances are created, certificate manager is called to generate these two keys.
+title: Secrets Rotation
+description: Rotate ForgeOps Kubernetes secrets and passwords with the forgeops rotate command while managing dependent services
 component: forgeops
-version: 2026.2
-page_id: forgeops:prepare:security/secret-agent
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/prepare/security/secret-agent.html
+version: 2026.3
+page_id: forgeops:prepare:security/secrets-rotation
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/secrets-rotation.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-23T12:17:10Z
+keywords: ["Security", "Secret Generator", "Secrets Rotation"]
+section_ids:
+  introduction: Introduction
+  performing_secrets_and_passwords_rotation: Performing secrets and passwords rotation
+  rotating_ds_env_secrets: Rotating ds-env-secrets
+  rotating_ds_passwords: Rotating ds-passwords
+  rotating_amster_secret: Rotating amster secret
+  rotating_am_env_secrets: Rotating am-env-secrets
+  rotating_amster_env_secrets: Rotating amster-env-secrets
+  rotating_idm_env_secrets: Rotating idm-env-secrets
+  rotating_ds_ssl_keypair: Rotating ds-ssl-keypair
+  rotating_am_passwords: Rotating am-passwords
+  rotating_ds_master_keypair: Rotating ds-master-keypair
+  add-cust-cert: Adding custom certificate to the truststore
+---
+
+# Secrets Rotation
+
+## Introduction
+
+Secrets rotation is the process of updating or replacing sensitive information stored as Kubernetes secrets. Secrets rotation is crucial for maintaining strong security and mitigating risks of unauthorized access or data breaches.
+
+In a multi-component system, such as a ForgeOps deployment, each component interacts with others using secrets. Therefore, it's important to consider dependencies among components and perform secrets rotation while maintaining consistent interaction among dependent components.
+
+The forgeops command includes the rotate sub-command to enable `ds-env-secrets` and `ds-passwords` rotation consistently. You can rotate other ForgeOps required secrets also with due consideration to the impact on dependent components and downtime.
+
+## Performing secrets and passwords rotation
+
+This section describes how to rotate secrets and password in ForgeOps deployments. The steps for rotating each secret are mentioned separately for easier understanding and usage.
+
+### Rotating `ds-env-secrets`
+
+The `ds-env-secrets` controls access to DS from AM and IDM, and would normally cause a downtime when rotated. To avoid such a downtime, the forgeops rotate command creates old-ds-env-secrets temporarily to contain old secrets.
+
+In ForgeOps release 2025.2.1, the DS image was built to accommodate multiple passwords. This enables secrets rotation with no downtime.
+
+* For deployments using DS images from 2025.1 or earlier
+
+  If you are using the DS image from the 2025.1 release or earlier, then perform these steps to enable multiple passwords in DS.
+
+  1. In your terminal window, set up environment variables to get the password and connection string (DSPASS and CONN_STR):
+
+     ```
+     $ export DSPASS=$(kubectl get secret ds-passwords -n my_ns -o yaml | yq '.data["dirmanager.pw"]' | tr -d '"' | base64 -d -i -)
+
+     $ export CONN_STR="--hostname localhost --port 4444 --bindDn uid=admin --trustAll --no-prompt --bindPassword $DSPASS"
+     ```
+
+  2. Set up DS pods to enable multiple passwords:
+
+     ```
+     $ kubectl exec -it ds-cts-0 — bin/dsconfig set-password-policy-prop \
+       set-password-policy-prop --policy-name "Default Password Policy" \
+       --set allow-multiple-password-values:true $CONN_STR
+
+     $ kubectl exec -it ds-cts-0 — bin/dsconfig set-password-policy-prop \
+       set-password-policy-prop --policy-name "Root Password Policy" \
+       --set allow-multiple-password-values:true $CONN_STR
+
+     $ kubectl exec -it ds-idrepo-0 — bin/dsconfig set-password-policy-prop \
+       set-password-policy-prop --policy-name "Default Password Policy" \
+       --set allow-multiple-password-values:true $CONN_STR
+
+     $ kubectl exec -it ds-idrepo-0 — bin/dsconfig set-password-policy-prop \
+       set-password-policy-prop --policy-name "Root Password Policy" \
+       --set allow-multiple-password-values:true $CONN_STR
+     ```
+
+To rotate `ds-env-secrets`, run the forgeops rotate --namespace my_ns ds-env-secrets command.
+
+The command prompts you to perform steps to complete rotation of `ds-env-secrets`.
+
+### Rotating `ds-passwords`
+
+To rotate `ds-passwords`, run the forgeops rotate --namespace my_ns ds-passwords command. The command prompts you to perform steps to complete rotation of `ds-passwords`.
+
+You must restart the DS pods to update the `admin` user password because that password is set on DS pod startup. This could also require restarting some services instead of redeploying components.
+
+At the end of its successful run, the forgeops rotate command prompts the user to:
+
+* Delete the temporary secrets.
+
+* Remove the old passwords.
+
+### Rotating `amster` secret
+
+* Impact
+
+  This secret is specific to Amster and doesn't cause a downtime.
+
+* Procedure
+
+  1. Trigger renewal of Kubernetes secret:
+
+     ```
+     $ kubectl delete secret amster
+     ```
+
+  2. Rolling restart AM pods to pick up new `amster` secret:
+
+     ```
+     $ kubectl rollout restart deployment am -n my-ns
+     ```
+
+  3. Refresh amster job to verify `amster` can access AM:
+
+     1. Delete amster job to allow redeployment:
+
+        ```
+        $ kubectl delete job amster -n my-ns
+        ```
+
+     2. Deploy platform changes (`amster`)
+
+        1. For Helm:
+
+           ```
+           $ helm upgrade -i identity-platform --repo https://ForgeRock.github.io/forgeops/ \
+            --version my-prod-version \
+            --values /path/to/forgeops/helm/my-env/values.yaml
+           ```
+
+        2. For Kustomize:
+
+           ```
+           $ forgeops apply amster --env-name my-env
+           ```
+
+  4. Ensure that the `amster import` process has completed successfully:
+
+     ```
+     $ kubectl logs -f amster-pod -n my-ns
+     ```
+
+### Rotating `am-env-secrets`
+
+* Impact
+
+  AM depends on this secret for authentication. Therefore, during the short time between restarting AM and rerunning Amster, requests that need authentication could fail.
+
+* Procedure
+
+  1. Trigger renewal of Kubernetes secret:
+
+     ```
+     $ kubectl delete secret am-env-secrets
+     ```
+
+  2. Rolling restart AM pods to pick up new amster secret:
+
+     ```
+     $ kubectl rollout restart deployment am -n my-ns
+     ```
+
+  3. Reinitiate the amster job:
+
+     1. Delete the amster job to allow redeployment:
+
+        ```
+        $ kubectl delete job amster -n my-ns
+        ```
+
+     2. Redeploy `amster`:
+
+        1. For Helm:
+
+           ```
+           $ helm upgrade -i identity-platform --repo https://ForgeRock.github.io/forgeops/ \
+             --values /path/to/forgeops/helm/my-env/values.yaml
+           ```
+
+        2. For Kustomize:
+
+           ```
+           $ forgeops apply amster --env-name my-env
+           ```
+
+  4. Ensure that the amster import process has completed successfully:
+
+     ```
+     $ kubectl logs -f amster-pod -n my-ns
+     ```
+
+  5. Retrieve the new password for `amadmin` user to log in to the platform:
+
+     ```
+     $ forgeops info | grep amadmin
+     ```
+
+  6. Log in to the platform with new `amadmin` password to verify the platform is up and running.
+
+### Rotating `amster-env-secrets`
+
+* Impact
+
+  In the very short time between restarting IDM and Amster importing necessary data, the platform isn't accessible. Amster takes a few seconds to import data.
+
+* Procedure
+
+  1. Trigger renewal of Kubernetes secret:
+
+     ```
+     $ kubectl delete secret amster-env-secrets
+     ```
+
+  2. Rolling restart IDM pods to get the new amster secret:
+
+     ```
+     $ kubectl rollout restart deployment idm -n my-ns
+     ```
+
+  3. Rerun the `amster` job to import the new secrets:
+
+     1. Delete the `amster` job to allow redeployment:
+
+        ```
+        $ kubectl delete job amster -n my-ns
+        ```
+
+     2. Redeploy Amster:
+
+        1. When using Helm to deploy:
+
+           ```
+           $ helm upgrade -i identity-platform --repo https://ForgeRock.github.io/forgeops/ --values /path/to/custom/values.yaml
+           ```
+
+        2. When using Kustomize deploy:
+
+           ```
+           $ forgeops apply --env-name my-env amster
+           ```
+
+### Rotating idm-env-secrets
+
+* Procedure
+
+  1. Trigger renewal of Kubernetes secret:
+
+     ```
+     $ kubectl delete secret idm-env-secrets
+     ```
+
+  2. Rolling restart IDM pods:
+
+     ```
+     $ kubectl rollout restart deployment idm
+     ```
+
+  3. Check pods have come up:
+
+     ```
+     $ kubectl get pods -l app.kubernetes.io/component=idm -n my-ns
+     ```
+
+### Rotating `ds-ssl-keypair`
+
+|   |                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It's not advisable to rotate this secret. If you rotate this secret DS data replication will fail until all the DS pods are restarted. |
+
+* Procedure
+
+  1. Delete the `ds-ssl-keypair` secret:
+
+     ```
+     $ kubectl delete secret ds-ssl-keypair -n my-ns
+     ```
+
+  2. Check that the secret is recreated:
+
+     ```
+     $ kubectl get secret ds-ssl-keypair -n my-ns
+     ```
+
+  3. Rolling restart `ds-cts` pods to pick up new secret:
+
+     ```
+     $ kubectl rollout restart sts ds-cts -n my-ns
+     ```
+
+  4. Rolling restart `ds-idrepo` pods to pick up new secret:
+
+     ```
+     $ kubectl rollout restart sts ds-idrepo -n my-ns
+     ```
+
+  5. Rolling restart AM pods to pick up new secret:
+
+     ```
+     $ kubectl rollout restart deployment am -n my-ns
+     ```
+
+  6. Rolling restart IDM pods to pick up new secret:
+
+     ```
+     $ kubectl rollout restart deployment idm -n my-ns
+     ```
+
+  7. Check pods to ensure they have come back up:
+
+     ```
+     $ kubectl get pods -l app.kubernetes.io/component=ds-cts -n my-ns
+     $ kubectl get pods -l app.kubernetes.io/component=ds-idrepo -n my-ns
+     $ kubectl get pods -l app.kubernetes.io/component=am -n my-ns
+     $ kubectl get pods -l app.kubernetes.io/component=idm -n my-ns
+     ```
+
+### Rotating `am-passwords`
+
+* Impact
+
+  Rotating `am-passwords` doesn't necessitate a down-time. `am-passwords` is used only in ForgeOps deployments that use `secret agent` for secrets management. It's not relevant for deployments that use `secrets generator`.
+
+* Procedure
+
+  1. Trigger renewal of Kubernetes secret:
+
+     ```
+     $ kubectl delete secret am-passwords
+     $ kubectl delete secret am-keystore
+     ```
+
+  2. Delete the AM pod:
+
+     ```
+     $ kubectl delete pod am-wxyz-abcd
+     ```
+
+  3. Recreate keystore to use the new secret.
+
+### Rotating `ds-master-keypair`
+
+|   |                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | **Do not rotate `ds-master-keypair` because it's used in DS data backups**. The same secret is required to decrypt data when you need to restore from backups. If you must rotate these secrets, then restart backups and discard the previous backups because they can't be used for restoring directory data. |
+
+### Adding custom certificate to the truststore
+
+The following environment variables are used to point to the paths for certificates. You don't need to update any of it.
+
+* **AM_DEFAULT_TRUSTSTORE**: PingAM and PingIDM now use the default Java ca certificate as the default truststore.
+
+* **AM_PEM_TRUSTSTORE**: Custom user-supplied certificates to append to the truststore.
+
+* **AM_PEM_TRUSTSTORE_DS**: The DS SSL key pair used for LDAPS connectivity between PingAM and PingDS.
+
+The following procedure helps in adding user supplied certificates to the truststore for PingAM and PingIDM. **Certificates should be in pem format.**
+
+* In a Helm based deployment
+
+  * (Option 1) Provide the certificate using a manually created secret. This is the preferred option.
+
+    1. Set `platform.truststore.secret.enabled` to "true".
+
+    2. Ensure `truststore.secret.create` is set to "false".
+
+    3. Create a Kubernetes secret containing certificate:
+
+       ```
+       $ kubectl --namespace my-namespace create secret generic \
+        platform-truststore-certificates --from-file=/path/to/my-certificates
+       ```
+
+  * (Option 2) Provide certificate content in `values.yaml`. This option is useful for testing purposes or if you only have a single certificate.
+
+    1. Set `platform.truststore.secret.enabled` to "true".
+
+    2. Set `platform.truststore.secret.create` to "true".
+
+    3. Add the content of the certificate to `platform.truststore.secret.certificates`.
+
+* In a Kustomize based deployment
+
+  1. Create a Kubernetes secret containing the certificate:
+
+     ```
+     $ kubectl --namespace my-namespace create secret generic \
+       platform-truststore-certificates --from-file=/path/to/my-certificates
+     ```
+
+* Add an existing secret containing custom certificates to the truststore
+
+  1. (Option 1) Recreate your current secret with the name `platform-truststore-certificates` to match the previous steps.
+
+  2. (Option 2) In the overlay file of your environment, update the mount points where `platform-truststore-certificates` is configured with the name of your custom secret.
+
+---
+
+---
+title: Secure HTTP
+description: Secure ForgeOps deployments with TLS ingress, certificate management, trusted certificates, and mkcert
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:security/https
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/https.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T10:51:50Z
+keywords: ["Security", "SSL/TLS"]
+section_ids:
+  tls-certificate: TLS certificate
+  mkcert: Certificate generated by the mkcert utility
+---
+
+# Secure HTTP
+
+ForgeOps deployments use a TLS-enabled ingress controller to enable secure communication to the cluster\[[1](#_footnotedef_1 "View footnote.")]. Incoming requests and outgoing responses are encrypted. TLS is terminated at the ingress controller.
+
+By default, ForgeOps installs Traefik\[[2](#_footnotedef_2 "View footnote.")]. The /path/to/forgeops/kustomize/base/ingress/ingress.yaml file contains an annotation—`cert-manager.io/cluster-issuer`—that configures the Traefik to use [cert-manager](https://github.com/jetstack/cert-manager) software for certificate management\[[3](#_footnotedef_3 "View footnote.")].
+
+The forgeops apply command installs the `cert-manager` utility in the `cert-manager` namespace and configures `cert-manager` to generate self-signed certificates for securing communication into the ingress.
+
+When self-signed certificates are used, communication is encrypted, but users receive warnings about insecure communication from some browsers. Because of this, self-signed certificates are suitable for test environments only.
+
+For all other environments, reconfigure certificate management. Two common configurations are:
+
+* Using a certificate with a trust chain that starts at a trusted root certificate—Communication is encrypted, and users do not receive warnings from their browsers.
+
+  [TLS certificate](#tls-certificate) contains a simple example of how to deploy a certificate from a trusted authority in a ForgeOps deployment. The steps in the example:
+
+  * Remove the cert-manager annotation from the ingress.
+
+  * Create a secret named `tls-myfqdn` (for example:tls-forgeops.example.com) that contains the certificate you want to use in your deployment.
+
+* Using a dynamically obtained certificate from [Let's Encrypt](https://letsencrypt.org/)—Communication is encrypted and users do not receive warnings from their browsers.
+
+  You reconfigure cert-manager to use a ClusterIssuer that calls Let's Encrypt to obtain a certificate and installs the certificate as a Kubernetes secret.
+
+There are many options for certificate management in a Ping Advanced Identity Software deployment. For more information about configuring certificate manager, refer to the [cert-manager documentation](https://cert-manager.io/docs).
+
+## TLS certificate
+
+The forgeops apply command installs [cert-manager software](https://cert-manager.io/docs). Similarly, when using Helm, the default ForgeOps deployment requires `cert-manager` annotations.
+
+When the `default-issuer` is used, the ingress controller in ForgeOps deployments is configured to use the self-signed certificate\[[4](#_footnotedef_4 "View footnote.")]. This is the simplest encryption option—you don't have to make any changes to your deployment to get encryption.
+
+However, when you access one of the Ping Identity web applications from your browser, you'll get a "Not Secure" message from your browser. Users will need to bypass the message.
+
+If you have a certificate from a CA, or a [certificate generated by the mkcert utility](#mkcert), you can use your certificate for TLS encryption instead of the default self-signed certificate:
+
+1. Obtain the certificate:
+
+   * Make sure that the certificate is PEM-encoded.
+
+   * A best practice is to include the entire chain of trust with your certificate.
+
+2. Make sure that the deployment FQDN (that you specified in your /etc/hosts file) works with your certificate. Refer to the hostname resolution page for your cluster provider: [Google Cloud](../../setup/google-cloud.html#gcp-ingress) | [AWS](../../setup/aws.html#aws-ingress) | [Azure](../../setup/azure.html#azure-ingress) | [minikube](../../setup/minikube.html#minikube-ingress).
+
+3. Remove cert-manager's annotation from the ingress definition:
+
+   1. If you are using Kustomize, run the kubectl annotate command:
+
+      ```
+      $ kubectl annotate ingress forgerock cert-manager.io/cluster-issuer-
+      ```
+
+   2. If you are using Helm, edit the charts/identity-platform/values.yaml file and set `cert_manager.enabled` to false:
+
+      ```
+      ...
+      cert_manager:
+
+          enabled: false
+      ```
+
+4. Delete the certificate resource originally created by cert-manager:
+
+   ```
+   $ kubectl delete certificate tls-myfqdn
+   ```
+
+5. Update your tls-myfqdn secret with your certificate. For example:
+
+   ```
+   $ kubectl create secret tls tls-myfqdn --cert=/path/to/my-cert.crt --key=/path/to/my-key.key \
+     --dry-run=client -o yaml | kubectl replace -f -
+   ```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | 1) If you have SSL certificate and do not want to use TLS certificates, then you can use your custom SSL certificate in your ForgeOps deployment environment:
+
+   ```
+   forgeops env --env-name my-env --ssl-secretname my-ssl-secret
+   ```
+
+2) If you disable `cert-manager` in the Helm chart, `cert-manager` is disabled for all certificates including the `ds-ssl-keypair` secret. You must create a custom version of that secret as well. |
+
+## Certificate generated by the mkcert utility
+
+If you don't have a certificate from a CA, you can use the mkcert utility to generate a locally trusted certificate. In many cases, it's acceptable to use mkcert certificates for development purposes.
+
+To use a certificate generated by the mkcert utility in a ForgeOps deployment that uses `my-fqdn` as the deployment FQDN:
+
+1. If you don't have mkcert software installed locally, [install it](https://github.com/FiloSottile/mkcert#installation). Firefox users must install certutil software. Refer to the mkcert installation instructions for more information.
+
+2. If you haven't ever done so, run the mkcert -install command to create a local certificate authority (CA) and install it in your system root store. Restart your browser after creating the local CA.
+
+3. Create a wildcard certificate for the `example.com` domain:
+
+   ```
+   $ cd
+   $ mkcert "*.example.com"
+   ```
+
+   The mkcert utility generates the certificate file as \_wildcard.example.com.pem and the private key file as \_wildcard.example.com-key.pem. Use these two file names when you create the Kubernetes TLS secret.
+
+***
+
+[1](#_footnoteref_1). To access DS, refer to [DS command-line access.](../../deploy/access.html#ds_command_line_access)[2](#_footnoteref_2). If you prefer to use a different ingress controller, deploy infrastructure in Kubernetes to support it.[3](#_footnoteref_3). Traefik and cert-manager are evolving technologies. Descriptions of these technologies were accurate at the time of this writing, but might differ when you deploy them.[4](#_footnoteref_4). For more information on howto change the default behavior, refer to [the steps for creatingTLS certificate](#mkcert-use).
+
+---
+
+---
+title: Security
+description: Configure ForgeOps deployment security with TLS, IP restrictions, Kubernetes network policies, AWS access, and secret management
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:security/overview
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/overview.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T12:54:27Z
+---
+
+# Security
+
+This topic describes some security options in a ForgeOps deployment:
+
+| Topic                                                                            | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [icon: lock, set=fa][Secure Communications](https.html)                          | Secure HTTP and certificate management.                                          |
+| [icon: id-card, set=fa][IP Address Restriction](restrict-access-ip-address.html) | Access restriction by incoming IP address, enforced by the ingress controller.   |
+| [icon: network-wired, set=fa][Network Policies](network-policies.html)           | Secure cross-pod communications, enforced by Kubernetes network policies.        |
+| [icon: user-friends, set=fa][Cluster Access on AWS](multi-user-access-aws.html)  | User entries in the Amazon EKS authorization configuration map.                  |
+| [icon: user-secret, set=fa][Secret Agent](secret-agent.html)                     | Kubernetes operator that generates secrets and provides cloud secret management. |
+| [icon: key, set=fa][Helm Generated Secrets](helm-gen-sec.html)                   | Helm-generated secrets for ForgeOps deployments.                                 |
+| [icon: arrows-spin, set=fa][Rotate Secrets](secrets-rotation.html)               | Rotate secrets in a ForgeOps deployment.                                         |
+| [icon: shield-check, set=fa][New security features](sec-features.html)           | New ForgeOps security features.                                                  |
+| [icon: key, set=fa][Helm-based secrets](migrate-helmsec.html)                    | Migrate a ForgeOps deployment to use Helm-generated secrets.                     |
+
+---
+
+---
+title: The secret agent operator
+description: Configure the ForgeOps secret agent operator to generate and manage deployment secrets with cloud secret managers
+component: forgeops
+version: 2026.3
+page_id: forgeops:prepare:security/secret-agent
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/prepare/security/secret-agent.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T12:54:27Z
 keywords: ["Security", "Secret Agent Operator"]
-page_aliases: ["preview:secret-agent.adoc"]
 section_ids:
   secret_generation: Secret generation
   cloud-secret-management: Cloud secret management
   password-changes: Administration password changes
 ---
 
-# Secret Agent operator
+# The secret agent operator
 
-The open source Secret Agent operator generates all the secrets needed for ForgeOps deployments except for the DS master key and TLS key. When directory instances are created, certificate manager is called to generate these two keys.
+The open source secret agent operator generates all the secrets needed for ForgeOps deployments except for the DS master key and TLS key. When directory instances are created, certificate manager is used to generate these two keys.
 
 In addition to generating secrets, the operator also integrates with Google Cloud Secret Manager, AWS Secrets Manager, and Azure Key Vault to manage secrets, providing cloud backup and retrieval for secrets.
 
-The Secret Agent operator runs as a Kubernetes deployment that must be available before you can install AM, IDM, and DS.
+The secret agent operator runs as a Kubernetes deployment that must be available before you can install AM, IDM, and DS.
 
 ## Secret generation
 
 By default, the operator examines your namespace to determine whether it contains all the secrets that it manages for Ping Advanced Identity Software deployments. If any of the secrets it manages are not present, the operator generates them.
 
-Refer to the Secret Agent project README for information about:
+Refer to the secret agent project README for information about:
 
 * [Importing your own secrets](https://github.com/ForgeRock/secret-agent#importing-your-own-secrets)
 

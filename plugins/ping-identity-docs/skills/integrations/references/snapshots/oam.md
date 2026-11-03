@@ -91,7 +91,7 @@ revdate: June 21, 2024
 
 * Added support for dynamic target resources: The adapter now uses the target resource contained within the request to determine where the user should be redirected to after successful SSO.
 
-* Bug fix: The adapter will include the value of the Access Manager parameter OAM\_REQ in the response if it was present in the initial request (as required by the OAM Server)
+* Bug fix: The adapter will include the value of the Access Manager parameter OAM_REQ in the response if it was present in the initial request (as required by the OAM Server)
 
 * Security update
 
@@ -122,13 +122,13 @@ The distribution `.zip` archive for the OAM Integration Kit contains the followi
 
   * pf-oam-adapter-3.1.0.jar - OAM Adapter JAR file
 
-  * mod\_pfoam.so - Apache 2.4 Module, compiled on Redhat 6.7
+  * mod_pfoam.so - Apache 2.4 Module, compiled on Redhat 6.7
 
   * PingOpenTokenAuthPlugin.jar - OAM Authentication plugin used for SP use case
 
 * /conf - contains libraries needed to run the adapter:
 
-  * httpd-pfoam.conf - Sample Apache configuration file for mod\_pfoam.so
+  * httpd-pfoam.conf - Sample Apache configuration file for mod_pfoam.so
 
   * jps-config.xml - OAM configuration file
 
@@ -216,9 +216,9 @@ You can test this adapter using the SP sample application that ships with PingFe
 
 3. Reconfigure the SP connection to the sample application to use the OAM Adapter Instance by deleting the existing adapter instance and map the OAM Adapter instance in its place. See [Managing mappings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_managing_mappings.html) in the PingFederate documentation.
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Use the default setting on the Assertion Mapping screen. On the Attribute Contract Fulfillment screen, map SAML\_SUBJECT to the Adapter value userId. If you have extended the Adapter Contract and wish to send the extended-attribute value to the SP during SSO, you will need to add a corresponding attribute to the Attribute Contract for the SP connection. Then map this attribute to the additional adapter attribute value (for example, authLevel).For any attributes in the Attribute Contract for which there are no related Adapter attributes, select Text in the Source drop-down list for each attribute and enter "test" (or any other text) in the associated text boxes. |
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Use the default setting on the Assertion Mapping screen. On the Attribute Contract Fulfillment screen, map SAML_SUBJECT to the Adapter value userId. If you have extended the Adapter Contract and wish to send the extended-attribute value to the SP during SSO, you will need to add a corresponding attribute to the Attribute Contract for the SP connection. Then map this attribute to the additional adapter attribute value (for example, authLevel).For any attributes in the Attribute Contract for which there are no related Adapter attributes, select Text in the Source drop-down list for each attribute and enter "test" (or any other text) in the associated text boxes. |
 
 4. On a web page protected by the OAM Access Gate, create an "SSO" link to the PingFederate startSSO endpoint, including the sample SP's connection ID, in the following format:
 
@@ -226,11 +226,11 @@ You can test this adapter using the SP sample application that ships with PingFe
 
    where:
 
-   * \<PF\_host> is the machine running the PingFederate server
+   * \<PF_host> is the machine running the PingFederate server
 
    * \<port> is the PingFederate port and
 
-   * \<connection\_id> is the Connection ID of the SP connection to the sample application.
+   * \<connection_id> is the Connection ID of the SP connection to the sample application.
 
 5. Access the protected web page by authenticating through OAM Webgate, and click the SSO link.
 
@@ -333,13 +333,13 @@ revdate: June 21, 2024
 
 * The OAM adapters are designed for Single Sign-On only. Single Log-Out is not supported in this release.
 
-* Any attribute being mapped to SAML\_SUBJECT, such as userId, will not be masked in the server.log file even if it is marked as such. This is because SAML standard already provides facilities for ensuring privacy and confidentiality of the SAML\_SUBJECT, and can never be masked by PingFederate.
+* Any attribute being mapped to SAML_SUBJECT, such as userId, will not be masked in the server.log file even if it is marked as such. This is because SAML standard already provides facilities for ensuring privacy and confidentiality of the SAML_SUBJECT, and can never be masked by PingFederate.
 
-* Failing to run the configureAccessGate or similar utility in the OAM SDK will result in an error saying that OBACCESS\_INSTALL\_DIR has not been set. Refer to your OAM SDK documentation for more information.
+* Failing to run the configureAccessGate or similar utility in the OAM SDK will result in an error saying that OBACCESS_INSTALL_DIR has not been set. Refer to your OAM SDK documentation for more information.
 
-* Placing the authn\_pingfed.dll in the wrong directory will result in the same OBACCESS\_INSTALL\_DIR error. Be sure to copy authn\_pingfed.dll plug-in to the Access Server lib path, not the Access Server SDK lib path.
+* Placing the authn_pingfed.dll in the wrong directory will result in the same OBACCESS_INSTALL_DIR error. Be sure to copy authn_pingfed.dll plug-in to the Access Server lib path, not the Access Server SDK lib path.
 
-* The authn\_pingfed.dll packaged with the kit has been tested against OAM 6.1 (NetPoint COREid 6.1).
+* The authn_pingfed.dll packaged with the kit has been tested against OAM 6.1 (NetPoint COREid 6.1).
 
 * Any attributes returned by an OAM Action will always be masked in the server.log file as they are being gathered by the adapter.
 
@@ -548,7 +548,7 @@ section_ids:
 
    `pf.oam.ik.ssoUrl=<PF_SSO_URL>`
 
-   where PF\_SSO\_URL is the Sp-initiated Single sign on URL. For example:
+   where PF_SSO_URL is the Sp-initiated Single sign on URL. For example:
 
    ```
    https://<PF_HOST>:<PF_PORT>/sp/startSSO.ping?PartnerIdpId=<PARTNER_ID>
@@ -745,15 +745,15 @@ Use the following instructions to upgrade an existing OAM 3.0 installation to th
 
    * oamasdk-api.jar
 
-   * opss\_standalone/modules/
+   * opss_standalone/modules/
 
-     * oracle.idm\_11.1.1/identitystore.jar
+     * oracle.idm_11.1.1/identitystore.jar
 
-     * oracle.pki\_11.1.1/oraclepki.jar
+     * oracle.pki_11.1.1/oraclepki.jar
 
-     * oracle.jps\_11.1.1/\* (all files)
+     * oracle.jps_11.1.1/\* (all files)
 
-     * oracle.osdt\_11.1.1/\* (all files)
+     * oracle.osdt_11.1.1/\* (all files)
 
        |   |                                                                                                                                                |
        | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |

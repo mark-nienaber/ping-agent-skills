@@ -12,7 +12,7 @@ Instructions for accessing PingCentral.
 
 - Product docs: https://docs.pingidentity.com/pingcentral/
 - llms.txt index: https://docs.pingidentity.com/pingcentral/llms.txt
-- Snapshot version: 3.1.1
+- Snapshot version: 3.2
 - Snapshot manifest: references/MANIFEST.md
 
 ## Retrieval strategy
@@ -27,10 +27,10 @@ Instructions for accessing PingCentral.
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Release Notes: pingcentral, notes, release | release_notes | https://docs.pingidentity.com/pingcentral/3.1.1/release_notes/*.md | references/snapshots/release-notes.md |
-| Pingcentral For Iam Administrators: pingcentral, configuring, instructions | pingcentral_for_iam_administrators | https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/*.md | references/snapshots/pingcentral-for-iam-administrators.md |
-| Pingcentral For Application Owners: applications, instructions, pingcentral | pingcentral_for_application_owners | https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_application_owners/*.md | references/snapshots/pingcentral-for-application-owners.md |
-| Root: pingcentral | root | https://docs.pingidentity.com/pingcentral/3.1.1/*.md | references/snapshots/root.md |
+| Pingcentral For Iam Administrators: pingcentral, configuring, instructions | pingcentral_for_iam_administrators | https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/*.md | references/snapshots/pingcentral-for-iam-administrators.md |
+| Release Notes: pingcentral, notes, release | release_notes | https://docs.pingidentity.com/pingcentral/3.2/release_notes/*.md | references/snapshots/release-notes.md |
+| Pingcentral For Application Owners: applications, instructions, pingcentral | pingcentral_for_application_owners | https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_application_owners/*.md | references/snapshots/pingcentral-for-application-owners.md |
+| Root: pingcentral | root | https://docs.pingidentity.com/pingcentral/3.2/*.md | references/snapshots/root.md |
 
 ## Composition
 

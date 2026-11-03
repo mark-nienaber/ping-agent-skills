@@ -4,6 +4,8 @@ description: Ping Government Identity Cloud is a managed, software as a service 
 component: pgic
 page_id: pgic:introduction:fedrampsolutions_intro
 canonical_url: http://docs.pingidentity.com/pgic/introduction/fedrampsolutions_intro.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 1, 2023
 section_ids:
   simplifying: Simplifying identity and access management

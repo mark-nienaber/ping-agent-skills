@@ -87,6 +87,92 @@ Implement OIDC sign-on to PingFederate in iOS apps
 ---
 
 ---
+title: Authenticating devices with the Device Authorization Grant
+description: PingOne PingOne Advanced Identity Cloud PingAM Android iOS React Native
+component: orchsdks
+page_id: orchsdks:oidc:use-cases/device-authorization-grant/index
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/use-cases/device-authorization-grant/index.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 15 May 2026 00:00:00 +0000
+keywords: ["OAuth 2.0", "OpenID Connect", "Device Authorization Grant", "RFC 8628", "SDK", "Android", "iOS", "React Native"]
+section_ids:
+  get_started: Get Started
+---
+
+# Authenticating devices with the Device Authorization Grant
+
+[icon: circle-check, set=far]PingOne [icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: android, set=fab]Android [icon: apple, set=fab]iOS [icon: react, set=fab]React Native
+
+The Orchestration SDK implements the [OAuth 2.0 Device Authorization Grant (RFC 8628)](https://datatracker.ietf.org/doc/html/rfc8628) that lets you authenticate users on devices that have limited input capabilities or no embedded browser, such as smart TVs, IoT devices, or lobby kiosks.
+
+The flow involves two devices:
+
+* **The requesting device**
+
+  The constrained device running your app. It starts the flow, displays the code, and polls the server until it receives tokens.
+
+* **The approving device**
+
+  A browser-capable device, such as the user's phone or computer, where the user navigates to the authorization server and authenticates.
+
+The app on the requesting device obtains a short-lived code from the authorization server, displays it to the user, and polls in the background while the user completes authentication on the separate, browser-capable approving device.
+
+Figure 1. Summary of the device authorization grant flow
+
+The overall authentication flow is as follows:
+
+1. The requesting app calls `OidcDeviceClient.deviceAuthorization()`, causing the Orchestration SDK to send a `POST` request to the device authorization endpoint.
+
+2. The server returns a `device_code`, a short human-readable `user_code`, a `verification_uri`, an optional `verification_uri_complete` parameter, and a polling `interval`.
+
+   The requesting app now displays the `user_code` and `verification_uri` to the user, so they can complete authentication on a separate, more capable device.
+
+   Options for displaying the values include:
+
+   * Plain text, so the user can visit the URL and type the code manually.
+
+   * A QR Code the user can scan that has the URI, and the user code as a query parameter. When the user scans it on the approving device, the browser opens the authorization server's UI with the code pre-filled, so the user does not need to type it.
+
+3. The requesting app begins polling the server's token endpoint, including the `device_code`, to check if the authentication has been completed.
+
+4. The server returns `authorization_pending`, indicating the user has not yet authenticated. The requesting app waits for the `interval` duration and polls again.
+
+5. On the approving device, the user navigates to the `verification_uri` and enters the `user_code`.
+
+6. The authorization server starts an authentication journey or DaVinci flow.
+
+7. The user completes authentication on the approving device, stepping through the journey or flow.
+
+8. On successful authentication, the server updates the status for the relevant `device_code`.
+
+9. The requesting app is still polling the token endpoint with the `device_code`.
+
+10. This time, the server returns an `access_token`, `id_token`, and optional `refresh_token`. Authentication is complete.
+
+## Get Started
+
+[icon: android, set=fab, size=3x]
+
+#### [Android](android.html)
+
+Configure an Android app to authenticate using the Device Authorization Grant.
+
+[icon: apple, set=fab, size=3x]
+
+#### [iOS](ios.html)
+
+Configure an iOS app to authenticate using the Device Authorization Grant.
+
+[icon: react, set=fab, size=3x]
+
+#### [React Native](react-native.html)
+
+Configure a React Native app to authenticate using the Device Authorization Grant.
+
+---
+
+---
 title: Before you begin
 description: Set up the custom login UI sample app by downloading dependencies and configuring DNS aliases before starting the tutorial
 component: orchsdks
@@ -136,7 +222,7 @@ To download or clone a copy of the SDK Sample Apps repo, complete these steps:
         git clone https://github.com/ForgeRock/sdk-sample-apps.git
         ```
 
-After completing these steps, you will have a local folder named `sdk-sample-apps`. Inside, you'll find separate folders for the Android, iOS, and JavaScript sample app projects.
+After completing these steps, you will have a local folder named `sdk-sample-apps`. Inside, you'll find separate folders for the Android, iOS, JavaScript, and React Native sample app projects.
 
 ## Step 2. Installing the dependencies
 
@@ -1021,659 +1107,6 @@ This tutorial requires you to configure your PingOne server as follows:
 
 ---
 title: Before you begin
-description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for Advanced Identity Cloud.
-component: orchsdks
-page_id: orchsdks:oidc:try-it-out/ios/aic/00_before-you-begin
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/aic/00_before-you-begin.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 2 Apr 2026 11:33:37 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "Advanced Identity Cloud", "prerequisites"]
-section_ids:
-  prerequisites: Prerequisites
-  server_configuration: Server configuration
----
-
-# Before you begin
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: apple, set=fab]iOS
-
-* **Prepare**
-
-* [Download](01_download-sample-repo.html)
-
-* [Configure](02_configuring-connection-properties.html)
-
-* [Run](03_test-the-app.html)
-
-To successfully complete this tutorial refer to the prerequisites in this section.
-
-The tutorial also requires a configured PingOne Advanced Identity Cloud tenant.
-
-## Prerequisites
-
-* Xcode
-
-  You can download the latest version for free from <https://developer.apple.com/xcode/>.
-
-## Server configuration
-
-This tutorial requires you to configure your PingOne Advanced Identity Cloud tenant as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Identities > Manage.
->
-> 3. Click [icon: plus, set=fa]New Alpha realm - User.
->
-> 4. Enter the following details:
->
->    * **Username** = `demo`
->
->    * **First Name** = `Demo`
->
->    * **Last Name** = `User`
->
->    * **Email Address** = `demo.user@example.com`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Create an authentication journey**
->
-> Authentication journeys provide fine-grained authentication by allowing multiple paths and decision points throughout the flow. Authentication journeys are made up of nodes that define actions taken during authentication.
->
-> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
->
-> You'll need an authentication journey configured on your server to try out the **Journey** module. That journey must only use [nodes, and therefore callbacks, that the Orchestration SDKs supports](../../../../journey/compatibility.html#supported-authentication-journey-callbacks).
->
-> |   |                                                                                                                |
-> | - | -------------------------------------------------------------------------------------------------------------- |
-> |   | You can use the default **Login** journey that both Advanced Identity Cloud and PingAM include out-of-the-box. |
->
-> To create your own authentication journey for use when testing the Orchestration SDKs, follow these steps:
->
-> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Journeys, and click [icon: plus, set=fa]New Journey.
->
-> 2. Enter a name, such as `sdkUsernamePasswordJourney` and click Save.
->
->    The authentication journey designer appears.
->
-> 3. Drag the following nodes into the designer area:
->
->    * **Page Node**
->
->    * **Platform Username**
->
->    * **Platform Password**
->
->    * **Data Store Decision**
->
-> 4. Drag and drop the **Platform Username** and **Platform Password** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
->
-> 5. Connect the nodes as follows:
->
->    ![sdk username password journey idcloud en](../../../../_images/sdk-username-password-journey-idcloud-en.png)Figure 1. Example username and password authentication journey
->
-> 6. Click Save.
-
-> **Collapse: Task 3. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Applications.
->
-> 3. Click [icon: plus, set=fa]Custom Application.
->
-> 4. Select OIDC - OpenId Connect as the sign-in method, and then click Next.
->
-> 5. Select Native / SPA as the application type, and then click Next.
->
-> 6. In Name, enter a name for the application, such as `Public SDK Client`.
->
-> 7. In Owners, select a user that is responsible for maintaining the application, and then click Next.
->
->    |   |                                                                                    |
->    | - | ---------------------------------------------------------------------------------- |
->    |   | When trying out the SDKs, you could select the `demo` user you created previously. |
->
-> 8. In Client ID, enter `sdkPublicClient`
->
-> 9. Select **Configure for SDK Sample Apps**.
->
-> 10. Click Create Application.
->
->     PingOne Advanced Identity Cloud creates the application and displays the details screen.
->
-> 11. On the Sign On tab:
->
->     1. In Sign-In URLs, ensure the following values appear, or add them if they don't:
->
->        `com.example.demo://oauth2redirect`
->
->        |   |                                                             |
->        | - | ----------------------------------------------------------- |
->        |   | Also add any other domains where you host SDK applications. |
->
->     2. In Grant Types, ensure the following values appear:
->
->        `Authorization Code`
->
->        `Refresh Token`
->
->     3. In Scopes, ensure the following values appear:
->
->        `openid profile email address`
->
-> 12. Click Show advanced settings, and on the Authentication tab, confirm the following properties:
->
->     1. In Token Endpoint Authentication Method, select `none`.
->
->     2. In Client Type, select `Public`.
->
->     3. Enable the Implied Consent property.
->
-> 13. Click Save.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 4. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingOne Advanced Identity Cloud OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Native Consoles > Access Management.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
----
-
----
-title: Before you begin
-description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingAM.
-component: orchsdks
-page_id: orchsdks:oidc:try-it-out/ios/pingam/00_before-you-begin
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingam/00_before-you-begin.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 2 Apr 2026 11:33:37 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingAM", "prerequisites"]
-section_ids:
-  prerequisites: Prerequisites
-  server_configuration: Server configuration
----
-
-# Before you begin
-
-[icon: circle-check, set=far]PingAM [icon: apple, set=fab]iOS
-
-* **Prepare**
-
-* [Download](01_download-sample-repo.html)
-
-* [Configure](02_configuring-connection-properties.html)
-
-* [Run](03_test-the-app.html)
-
-To successfully complete this tutorial refer to the prerequisites in this section.
-
-The tutorial also requires a configured PingAM server.
-
-## Prerequisites
-
-* Xcode
-
-  You can download the latest version for free from <https://developer.apple.com/xcode/>.
-
-## Server configuration
-
-This tutorial requires you to configure your PingAM server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingAM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: address-card, set=fa]Identities, and then click [icon: plus, set=fa]Add Identity.
->
-> 3. Enter the following details:
->
->    * **User ID** = `demo`
->
->    * **Password** = `Ch4ng3it!`
->
->    * **Email Address** = `demo.user@example.com`
->
-> 4. Click Create.
-
-> **Collapse: Task 2. Create an authentication journey**
->
-> Authentication trees provide fine-grained authentication by allowing multiple paths and decision points throughout the authentication flow. Authentication trees are made up of nodes that define actions taken during authentication.
->
-> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
->
-> To create a simple tree for use when testing the Orchestration SDKs, follow these steps:
->
-> 1. Under Realm Overview, click Authentication Trees, then click Create Tree.
->
-> 2. Enter a tree name, for example `sdkUsernamePasswordJourney`, and then click Create.
->
->    The authentication tree designer appears, showing the Start entry point connected to the Failure exit point.
->
-> 3. Drag the following nodes from the Components panel on the left side into the designer area:
->
->    * **Page Node**
->
->    * **Username Collector**
->
->    * **Password Collector**
->
->    * **Data Store Decision**
->
-> 4. Drag and drop the **Username Collector** and **Password Collector** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
->
-> 5. Connect the nodes as follows:
->
->    ![trees node login example](../../../../_images/trees-node-login-example.png)Figure 1. Example username and password authentication tree
->
-> 6. Select the **Page Node**, and in the Properties pane, set the Stage property to `UsernamePassword`.
->
->    |   |                                                                                                            |
->    | - | ---------------------------------------------------------------------------------------------------------- |
->    |   | You can configure the node properties by selecting a node and altering properties in the right-hand panel. |
->
->    One of the samples uses this specific value to determine the custom UI to display.
->
-> 7. Click **Save**.
-
-> **Collapse: Task 3. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in AM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: list-alt, set=fa]Applications > OAuth 2.0 > Clients, and then click [icon: plus, set=fa]Add Client.
->
-> 3. In Client ID, enter `sdkPublicClient`.
->
-> 4. Leave Client secret empty.
->
-> 5. In Redirection URIs, enter the following values:
->
->    `com.example.demo://oauth2redirect`
->
->    |   |                                                                        |
->    | - | ---------------------------------------------------------------------- |
->    |   | Also add any other domains where you will be hosting SDK applications. |
->
-> 6. In Scopes, enter the following values:
->
->    `openid profile email address`
->
-> 7. Click Create.
->
->    PingAM creates the new OAuth 2.0 client, and displays the properties for further configuration.
->
-> 8. On the Core tab:
->
->    1. In Client type, select `Public`.
->
->    2. Disable Allow wildcard ports in redirect URIs.
->
->    3. Click Save Changes.
->
-> 9. On the Advanced tab:
->
->    1. In Grant Types, enter the following values:
->
->       ```none
->       Authorization Code
->       Refresh Token
->       ```
->
->    2. In Token Endpoint Authentication Method, select `None`.
->
->    3. Enable the Implied consent property.
->
-> 10. Click Save Changes.
-
-> **Collapse: Task 4. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingAM OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
----
-
----
-title: Before you begin
-description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingFederate.
-component: orchsdks
-page_id: orchsdks:oidc:try-it-out/ios/pingfed/00_before-you-begin
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingfed/00_before-you-begin.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 2 Apr 2026 11:33:37 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingFederate", "prerequisites"]
-section_ids:
-  prerequisites: Prerequisites
-  server_configuration: Server configuration
----
-
-# Before you begin
-
-[icon: circle-check, set=far]PingFederate [icon: apple, set=fab]iOS
-
-* **Prepare**
-
-* [Download](01_download-sample-repo.html)
-
-* [Configure](02_configuring-sample-for-pingfed.html)
-
-* [Run](03_running-sample-pingfed.html)
-
-To successfully complete this tutorial refer to the prerequisites and compatibility requirements in this section.
-
-The tutorial also requires a configured PingFederate server.
-
-## Prerequisites
-
-* Xcode
-
-  You can download the latest version for free from <https://developer.apple.com/xcode/>.
-
-## Server configuration
-
-This tutorial requires you to configure your PingFederate server as follows:
-
-> **Collapse: Task 1. Register a public OAuth 2.0 client**
->
-> OAuth 2.0 client application profiles define how applications connect to PingFederate and obtain OAuth 2.0 tokens.
->
-> To allow the Orchestration SDKs to connect to PingFederate and obtain OAuth 2.0 tokens, you must register an OAuth 2.0 client application:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **Applications** [icon: angle-right, set=fa] **OAuth** [icon: angle-right, set=fa] **Clients**.
->
-> 3. Click **Add Client**.
->
->    PingFederate displays the **Clients | Client** page.
->
-> 4. In **Client ID** and **Name**, enter a name for the profile, for example `sdkPublicClient`
->
->    Make a note of the **Client ID** value, you will need it when you configure the sample code.
->
-> 5. In **Client Authentication**, select `None`.
->
-> 6. In **Redirect URIs**, add the following:
->
->    `com.example.demo://oauth2redirect`
->
->    |   |                                                                                                                                                                                                                                                                                   |
->    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Also add any other URLs where you host SDK applications.Failure to add redirect URLs that exactly match your client app's values can cause PingFederate to display an error message such as `Redirect URI mismatch` when attempting to end a session by redirecting from the SDK. |
->
-> 7. In **Allowed Grant Types**, select the following values:
->
->    `Authorization Code`
->
->    `Refresh Token`
->
-> 8. In the **OpenID Connect** section:
->
->    1. In **Logout Mode**, select **Ping Front-Channel**
->
->    2. In **Front-Channel Logout URIs**, add the following:
->
->       `com.example.demo://oauth2redirect`
->
->       |   |                                                                                                                                                                                                                                                                                                                       |
->       | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->       |   | Also add any other URLs that redirect users to PingFederate to end their session.Failure to add sign off URLs that exactly match your client app's values can cause PingFederate to display an error message such as `invalid post logout redirect URI` when attempting to end a session by redirecting from the SDK. |
->
->    3. In **Post-Logout Redirect URIs**, add the following:
->
->       `com.example.demo://oauth2redirect`
->
-> 9. Click Save.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Orchestration SDK PingFederate example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 2. Configure CORS**
->
-> [Cross-origin resource sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS) lets user agents make cross-domain server requests. In PingFederate, you can configure CORS to allow browsers or apps from trusted domains to access protected resources.
->
-> To configure CORS in PingFederate follow these steps:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **System** [icon: angle-right, set=fa] **OAuth Settings** [icon: angle-right, set=fa] **Authorization Server Settings**.
->
-> 3. In the **Cross-Origin Resource Sharing Settings** section, in the **Allowed Origin** field, enter any DNS aliases you use for your SDK apps.
->
->    This documentation assumes the following configuration:
->
->    | Property         | Values                              |
->    | ---------------- | ----------------------------------- |
->    | `Allowed Origin` | `com.example.demo://oauth2redirect` |
->
-> 4. Click **Save**.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    Your PingFederate server is now able to accept connections from origins hosting apps built with the Orchestration SDKs.
-
----
-
----
-title: Before you begin
-description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingOne.
-component: orchsdks
-page_id: orchsdks:oidc:try-it-out/ios/pingone/00_before-you-begin
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingone/00_before-you-begin.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 2 Apr 2026 11:33:37 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingOne", "prerequisites"]
-section_ids:
-  prerequisites: Prerequisites
-  p1-server-ios: Server configuration
----
-
-# Before you begin
-
-[icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
-
-* **Prepare**
-
-* [Download](01_download-sample-repo.html)
-
-* [Configure](02_configuring-sample-for-pingone.html)
-
-* [Run](03_running-sample-pingone.html)
-
-To successfully complete this tutorial refer to the prerequisites and compatibility requirements in this section.
-
-The tutorial also requires a [configured PingOne instance](#p1-server-ios).
-
-## Prerequisites
-
-* Xcode
-
-  You can download the latest version for free from <https://developer.apple.com/xcode/>.
-
-## Server configuration
-
-This tutorial requires you to configure your PingOne server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Directory > Users.
->
-> 3. Next to the Users label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add User panel.
->
-> 4. Enter the following details:
->
->    * **Given Name** = `Demo`
->
->    * **Family Name** = `User`
->
->    * **Username** = `demo`
->
->    * **Email** = `demo.user@example.com`
->
->    * **Population** = `Default`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> To register a *public* OAuth 2.0 client application in PingOne for use with the Orchestration SDKs for Android and iOS, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Applications > Applications.
->
-> 3. Next to the Applications label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add Application panel.
->
-> 4. In Application Name, enter a name for the profile, for example `sdkNativeClient`
->
-> 5. Select Native as the Application Type, and then click Save.
->
-> 6. On the Configuration tab, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Grant Type, select the following values:
->
->       `Authorization Code`
->
->       `Refresh Token`
->
->    2. In Redirect URIs, enter the following values:
->
->       `com.example.demo://oauth2redirect`
->
->    3. In Token Endpoint Authentication Method, select `None`.
->
->    4. In the **Advanced Settings** section, enable **Terminate User Session by ID Token**.
->
->    5. Click Save.
->
-> 7. On the Resources tab, next to Allowed Scopes, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Scopes, select the following values:
->
->       `email`
->
->       `phone`
->
->       `profile`
->
->       |   |                                            |
->       | - | ------------------------------------------ |
->       |   | The `openid` scope is selected by default. |
->
->       The result resembles the following:
->
->       ![Adding scopes to an application.](../../../../_images/pingone-oidc-native-scopes-en.png)Figure 1. Adding scopes to an application.
->
-> 8. Optionally, on the Policies tab, click the pencil icon ([icon: pencil, set=fa]) to select the authentication policies for the application.
->
->    |   |                                                                                                                                        |
->    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Applications that have no authentication policy assignments use the environment's default authentication policy to authenticate users. |
->
->    If you have a DaVinci license, you can select PingOne policies or DaVinci Flow policies, but not both. If you do not have a DaVinci license, the page only displays PingOne policies.
->
->    To use a *PingOne policy*:
->
->    1. Click [icon: plus, set=fa]Add policies and then select the policies that you want to apply to the application.
->
->    2. Click Save.
->
->       PingOne applies the policies in the order in which they appear in the list. PingOne evaluates the first policy in the list first. If the requirements are not met, PingOne moves to the next one.
->
->       For more information, see [Authentication policies for applications](https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html).
->
->    To use a *DaVinci Flow policy*:
->
->    1. You must clear all PingOne policies. Click Deselect all PingOne Policies.
->
->    2. In the confirmation message, click Continue.
->
->    3. On the DaVinci Policies tab, select the policies that you want to apply to the application.
->
->    4. Click Save.
->
->       PingOne applies the first policy in the list.
->
-> 9. Click Save.
->
-> 10. Enable the OAuth 2.0 client application by using the toggle next to its name:
->
->     ![Enable the application using the toggle.](../../../../_images/pingone-apps-enable-native-client-en.png)Figure 2. Enable the application using the toggle.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Android and iOS PingOne example applications and tutorials covered by this documentation.
-
----
-
----
-title: Before you begin
 description: Outlines the prerequisites and server configuration steps required before starting the JavaScript OIDC sign-on module tutorial for Advanced Identity Cloud.
 component: orchsdks
 page_id: orchsdks:oidc:try-it-out/javascript/aic/00_before-you-begin
@@ -2412,6 +1845,1362 @@ This tutorial requires you to configure your PingOne tenant as follows:
 ---
 
 ---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for Advanced Identity Cloud.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/ios/aic/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/aic/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 2 Apr 2026 11:33:37 +0100
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "Advanced Identity Cloud", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: apple, set=fab]iOS
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-connection-properties.html)
+
+* [Run](03_test-the-app.html)
+
+To successfully complete this tutorial refer to the prerequisites in this section.
+
+The tutorial also requires a configured PingOne Advanced Identity Cloud tenant.
+
+## Prerequisites
+
+* Xcode
+
+  You can download the latest version for free from <https://developer.apple.com/xcode/>.
+
+## Server configuration
+
+This tutorial requires you to configure your PingOne Advanced Identity Cloud tenant as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingOne Advanced Identity Cloud, follow these steps:
+>
+> 1. Log in to your PingOne Advanced Identity Cloud tenant.
+>
+> 2. In the left panel, click Identities > Manage.
+>
+> 3. Click [icon: plus, set=fa]New Alpha realm - User.
+>
+> 4. Enter the following details:
+>
+>    * **Username** = `demo`
+>
+>    * **First Name** = `Demo`
+>
+>    * **Last Name** = `User`
+>
+>    * **Email Address** = `demo.user@example.com`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+> 5. Click Save.
+
+> **Collapse: Task 2. Create an authentication journey**
+>
+> Authentication journeys provide fine-grained authentication by allowing multiple paths and decision points throughout the flow. Authentication journeys are made up of nodes that define actions taken during authentication.
+>
+> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
+>
+> You'll need an authentication journey configured on your server to try out the **Journey** module. That journey must only use [nodes, and therefore callbacks, that the Orchestration SDKs supports](../../../../journey/compatibility.html#supported-authentication-journey-callbacks).
+>
+> |   |                                                                                                                |
+> | - | -------------------------------------------------------------------------------------------------------------- |
+> |   | You can use the default **Login** journey that both Advanced Identity Cloud and PingAM include out-of-the-box. |
+>
+> To create your own authentication journey for use when testing the Orchestration SDKs, follow these steps:
+>
+> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Journeys, and click [icon: plus, set=fa]New Journey.
+>
+> 2. Enter a name, such as `sdkUsernamePasswordJourney` and click Save.
+>
+>    The authentication journey designer appears.
+>
+> 3. Drag the following nodes into the designer area:
+>
+>    * **Page Node**
+>
+>    * **Platform Username**
+>
+>    * **Platform Password**
+>
+>    * **Data Store Decision**
+>
+> 4. Drag and drop the **Platform Username** and **Platform Password** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
+>
+> 5. Connect the nodes as follows:
+>
+>    ![sdk username password journey idcloud en](../../../../_images/sdk-username-password-journey-idcloud-en.png)Figure 1. Example username and password authentication journey
+>
+> 6. Click Save.
+
+> **Collapse: Task 3. Register a public OAuth 2.0 client**
+>
+> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
+>
+> To register a *public* OAuth 2.0 client application for use with the SDKs in PingOne Advanced Identity Cloud, follow these steps:
+>
+> 1. Log in to your PingOne Advanced Identity Cloud tenant.
+>
+> 2. In the left panel, click Applications.
+>
+> 3. Click [icon: plus, set=fa]Custom Application.
+>
+> 4. Select OIDC - OpenId Connect as the sign-in method, and then click Next.
+>
+> 5. Select Native / SPA as the application type, and then click Next.
+>
+> 6. In Name, enter a name for the application, such as `Public SDK Client`.
+>
+> 7. In Owners, select a user that is responsible for maintaining the application, and then click Next.
+>
+>    |   |                                                                                    |
+>    | - | ---------------------------------------------------------------------------------- |
+>    |   | When trying out the SDKs, you could select the `demo` user you created previously. |
+>
+> 8. In Client ID, enter `sdkPublicClient`
+>
+> 9. Select **Configure for SDK Sample Apps**.
+>
+> 10. Click Create Application.
+>
+>     PingOne Advanced Identity Cloud creates the application and displays the details screen.
+>
+> 11. On the Sign On tab:
+>
+>     1. In Sign-In URLs, ensure the following values appear, or add them if they don't:
+>
+>        `com.example.demo://oauth2redirect`
+>
+>        |   |                                                             |
+>        | - | ----------------------------------------------------------- |
+>        |   | Also add any other domains where you host SDK applications. |
+>
+>     2. In Grant Types, ensure the following values appear:
+>
+>        `Authorization Code`
+>
+>        `Refresh Token`
+>
+>     3. In Scopes, ensure the following values appear:
+>
+>        `openid profile email address`
+>
+> 12. Click Show advanced settings, and on the Authentication tab, confirm the following properties:
+>
+>     1. In Token Endpoint Authentication Method, select `none`.
+>
+>     2. In Client Type, select `Public`.
+>
+>     3. Enable the Implied Consent property.
+>
+> 13. Click Save.
+>
+> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the example applications and tutorials covered by this documentation.
+
+> **Collapse: Task 4. Configure the OAuth 2.0 provider**
+>
+> The provider specifies the supported OAuth 2.0 configuration options for a realm.
+>
+> To ensure the PingOne Advanced Identity Cloud OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
+>
+> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Native Consoles > Access Management.
+>
+> 2. In the left panel, click [icon: plug, set=fa]Services.
+>
+> 3. In the list of services, click OAuth2 Provider.
+>
+> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
+>
+> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
+>
+> 6. Click Save Changes.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingAM.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/ios/pingam/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingam/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 2 Apr 2026 11:33:37 +0100
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingAM", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingAM [icon: apple, set=fab]iOS
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-connection-properties.html)
+
+* [Run](03_test-the-app.html)
+
+To successfully complete this tutorial refer to the prerequisites in this section.
+
+The tutorial also requires a configured PingAM server.
+
+## Prerequisites
+
+* Xcode
+
+  You can download the latest version for free from <https://developer.apple.com/xcode/>.
+
+## Server configuration
+
+This tutorial requires you to configure your PingAM server as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingAM, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. Navigate to [icon: address-card, set=fa]Identities, and then click [icon: plus, set=fa]Add Identity.
+>
+> 3. Enter the following details:
+>
+>    * **User ID** = `demo`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+>    * **Email Address** = `demo.user@example.com`
+>
+> 4. Click Create.
+
+> **Collapse: Task 2. Create an authentication journey**
+>
+> Authentication trees provide fine-grained authentication by allowing multiple paths and decision points throughout the authentication flow. Authentication trees are made up of nodes that define actions taken during authentication.
+>
+> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
+>
+> To create a simple tree for use when testing the Orchestration SDKs, follow these steps:
+>
+> 1. Under Realm Overview, click Authentication Trees, then click Create Tree.
+>
+> 2. Enter a tree name, for example `sdkUsernamePasswordJourney`, and then click Create.
+>
+>    The authentication tree designer appears, showing the Start entry point connected to the Failure exit point.
+>
+> 3. Drag the following nodes from the Components panel on the left side into the designer area:
+>
+>    * **Page Node**
+>
+>    * **Username Collector**
+>
+>    * **Password Collector**
+>
+>    * **Data Store Decision**
+>
+> 4. Drag and drop the **Username Collector** and **Password Collector** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
+>
+> 5. Connect the nodes as follows:
+>
+>    ![trees node login example](../../../../_images/trees-node-login-example.png)Figure 1. Example username and password authentication tree
+>
+> 6. Select the **Page Node**, and in the Properties pane, set the Stage property to `UsernamePassword`.
+>
+>    |   |                                                                                                            |
+>    | - | ---------------------------------------------------------------------------------------------------------- |
+>    |   | You can configure the node properties by selecting a node and altering properties in the right-hand panel. |
+>
+>    One of the samples uses this specific value to determine the custom UI to display.
+>
+> 7. Click **Save**.
+
+> **Collapse: Task 3. Register a public OAuth 2.0 client**
+>
+> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
+>
+> To register a *public* OAuth 2.0 client application for use with the SDKs in AM, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. Navigate to [icon: list-alt, set=fa]Applications > OAuth 2.0 > Clients, and then click [icon: plus, set=fa]Add Client.
+>
+> 3. In Client ID, enter `sdkPublicClient`.
+>
+> 4. Leave Client secret empty.
+>
+> 5. In Redirection URIs, enter the following values:
+>
+>    `com.example.demo://oauth2redirect`
+>
+>    |   |                                                                        |
+>    | - | ---------------------------------------------------------------------- |
+>    |   | Also add any other domains where you will be hosting SDK applications. |
+>
+> 6. In Scopes, enter the following values:
+>
+>    `openid profile email address`
+>
+> 7. Click Create.
+>
+>    PingAM creates the new OAuth 2.0 client, and displays the properties for further configuration.
+>
+> 8. On the Core tab:
+>
+>    1. In Client type, select `Public`.
+>
+>    2. Disable Allow wildcard ports in redirect URIs.
+>
+>    3. Click Save Changes.
+>
+> 9. On the Advanced tab:
+>
+>    1. In Grant Types, enter the following values:
+>
+>       ```none
+>       Authorization Code
+>       Refresh Token
+>       ```
+>
+>    2. In Token Endpoint Authentication Method, select `None`.
+>
+>    3. Enable the Implied consent property.
+>
+> 10. Click Save Changes.
+
+> **Collapse: Task 4. Configure the OAuth 2.0 provider**
+>
+> The provider specifies the supported OAuth 2.0 configuration options for a realm.
+>
+> To ensure the PingAM OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. In the left panel, click [icon: plug, set=fa]Services.
+>
+> 3. In the list of services, click OAuth2 Provider.
+>
+> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
+>
+> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
+>
+> 6. Click Save Changes.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingFederate.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/ios/pingfed/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingfed/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 2 Apr 2026 11:33:37 +0100
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingFederate", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingFederate [icon: apple, set=fab]iOS
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-sample-for-pingfed.html)
+
+* [Run](03_running-sample-pingfed.html)
+
+To successfully complete this tutorial refer to the prerequisites and compatibility requirements in this section.
+
+The tutorial also requires a configured PingFederate server.
+
+## Prerequisites
+
+* Xcode
+
+  You can download the latest version for free from <https://developer.apple.com/xcode/>.
+
+## Server configuration
+
+This tutorial requires you to configure your PingFederate server as follows:
+
+> **Collapse: Task 1. Register a public OAuth 2.0 client**
+>
+> OAuth 2.0 client application profiles define how applications connect to PingFederate and obtain OAuth 2.0 tokens.
+>
+> To allow the Orchestration SDKs to connect to PingFederate and obtain OAuth 2.0 tokens, you must register an OAuth 2.0 client application:
+>
+> 1. Log in to the PingFederate administration console as an administrator.
+>
+> 2. Navigate to **Applications** [icon: angle-right, set=fa] **OAuth** [icon: angle-right, set=fa] **Clients**.
+>
+> 3. Click **Add Client**.
+>
+>    PingFederate displays the **Clients | Client** page.
+>
+> 4. In **Client ID** and **Name**, enter a name for the profile, for example `sdkPublicClient`
+>
+>    Make a note of the **Client ID** value, you will need it when you configure the sample code.
+>
+> 5. In **Client Authentication**, select `None`.
+>
+> 6. In **Redirect URIs**, add the following:
+>
+>    `com.example.demo://oauth2redirect`
+>
+>    |   |                                                                                                                                                                                                                                                                                   |
+>    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>    |   | Also add any other URLs where you host SDK applications.Failure to add redirect URLs that exactly match your client app's values can cause PingFederate to display an error message such as `Redirect URI mismatch` when attempting to end a session by redirecting from the SDK. |
+>
+> 7. In **Allowed Grant Types**, select the following values:
+>
+>    `Authorization Code`
+>
+>    `Refresh Token`
+>
+> 8. In the **OpenID Connect** section:
+>
+>    1. In **Logout Mode**, select **Ping Front-Channel**
+>
+>    2. In **Front-Channel Logout URIs**, add the following:
+>
+>       `com.example.demo://oauth2redirect`
+>
+>       |   |                                                                                                                                                                                                                                                                                                                       |
+>       | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>       |   | Also add any other URLs that redirect users to PingFederate to end their session.Failure to add sign off URLs that exactly match your client app's values can cause PingFederate to display an error message such as `invalid post logout redirect URI` when attempting to end a session by redirecting from the SDK. |
+>
+>    3. In **Post-Logout Redirect URIs**, add the following:
+>
+>       `com.example.demo://oauth2redirect`
+>
+> 9. Click Save.
+>
+>    |   |                                                                                                                                                                                                                                                                                                  |
+>    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+>    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
+>
+>    The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Orchestration SDK PingFederate example applications and tutorials covered by this documentation.
+
+> **Collapse: Task 2. Configure CORS**
+>
+> [Cross-origin resource sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS) lets user agents make cross-domain server requests. In PingFederate, you can configure CORS to allow browsers or apps from trusted domains to access protected resources.
+>
+> To configure CORS in PingFederate follow these steps:
+>
+> 1. Log in to the PingFederate administration console as an administrator.
+>
+> 2. Navigate to **System** [icon: angle-right, set=fa] **OAuth Settings** [icon: angle-right, set=fa] **Authorization Server Settings**.
+>
+> 3. In the **Cross-Origin Resource Sharing Settings** section, in the **Allowed Origin** field, enter any DNS aliases you use for your SDK apps.
+>
+>    This documentation assumes the following configuration:
+>
+>    | Property         | Values                              |
+>    | ---------------- | ----------------------------------- |
+>    | `Allowed Origin` | `com.example.demo://oauth2redirect` |
+>
+> 4. Click **Save**.
+>
+>    |   |                                                                                                                                                                                                                                                                                                  |
+>    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+>    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
+>
+>    Your PingFederate server is now able to accept connections from origins hosting apps built with the Orchestration SDKs.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the iOS OIDC sign-on module tutorial for PingOne.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/ios/pingone/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/ios/pingone/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 2 Apr 2026 11:33:37 +0100
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "iOS", "PingOne", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  p1-server-ios: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-sample-for-pingone.html)
+
+* [Run](03_running-sample-pingone.html)
+
+To successfully complete this tutorial refer to the prerequisites and compatibility requirements in this section.
+
+The tutorial also requires a [configured PingOne instance](#p1-server-ios).
+
+## Prerequisites
+
+* Xcode
+
+  You can download the latest version for free from <https://developer.apple.com/xcode/>.
+
+## Server configuration
+
+This tutorial requires you to configure your PingOne server as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingOne, follow these steps:
+>
+> 1. Log in to your PingOne administration console.
+>
+> 2. In the left panel, navigate to Directory > Users.
+>
+> 3. Next to the Users label, click the plus icon ([icon: plus, set=fa]).
+>
+>    PingOne displays the Add User panel.
+>
+> 4. Enter the following details:
+>
+>    * **Given Name** = `Demo`
+>
+>    * **Family Name** = `User`
+>
+>    * **Username** = `demo`
+>
+>    * **Email** = `demo.user@example.com`
+>
+>    * **Population** = `Default`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+> 5. Click Save.
+
+> **Collapse: Task 2. Register a public OAuth 2.0 client**
+>
+> To register a *public* OAuth 2.0 client application in PingOne for use with the Orchestration SDKs for Android and iOS, follow these steps:
+>
+> 1. Log in to your PingOne administration console.
+>
+> 2. In the left panel, navigate to Applications > Applications.
+>
+> 3. Next to the Applications label, click the plus icon ([icon: plus, set=fa]).
+>
+>    PingOne displays the Add Application panel.
+>
+> 4. In Application Name, enter a name for the profile, for example `sdkNativeClient`
+>
+> 5. Select Native as the Application Type, and then click Save.
+>
+> 6. On the Configuration tab, click the pencil icon ([icon: pencil, set=fa]).
+>
+>    1. In Grant Type, select the following values:
+>
+>       `Authorization Code`
+>
+>       `Refresh Token`
+>
+>    2. In Redirect URIs, enter the following values:
+>
+>       `com.example.demo://oauth2redirect`
+>
+>    3. In Token Endpoint Authentication Method, select `None`.
+>
+>    4. In the **Advanced Settings** section, enable **Terminate User Session by ID Token**.
+>
+>    5. Click Save.
+>
+> 7. On the Resources tab, next to Allowed Scopes, click the pencil icon ([icon: pencil, set=fa]).
+>
+>    1. In Scopes, select the following values:
+>
+>       `email`
+>
+>       `phone`
+>
+>       `profile`
+>
+>       |   |                                            |
+>       | - | ------------------------------------------ |
+>       |   | The `openid` scope is selected by default. |
+>
+>       The result resembles the following:
+>
+>       ![Adding scopes to an application.](../../../../_images/pingone-oidc-native-scopes-en.png)Figure 1. Adding scopes to an application.
+>
+> 8. Optionally, on the Policies tab, click the pencil icon ([icon: pencil, set=fa]) to select the authentication policies for the application.
+>
+>    |   |                                                                                                                                        |
+>    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
+>    |   | Applications that have no authentication policy assignments use the environment's default authentication policy to authenticate users. |
+>
+>    If you have a DaVinci license, you can select PingOne policies or DaVinci Flow policies, but not both. If you do not have a DaVinci license, the page only displays PingOne policies.
+>
+>    To use a *PingOne policy*:
+>
+>    1. Click [icon: plus, set=fa]Add policies and then select the policies that you want to apply to the application.
+>
+>    2. Click Save.
+>
+>       PingOne applies the policies in the order in which they appear in the list. PingOne evaluates the first policy in the list first. If the requirements are not met, PingOne moves to the next one.
+>
+>       For more information, see [Authentication policies for applications](https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html).
+>
+>    To use a *DaVinci Flow policy*:
+>
+>    1. You must clear all PingOne policies. Click Deselect all PingOne Policies.
+>
+>    2. In the confirmation message, click Continue.
+>
+>    3. On the DaVinci Policies tab, select the policies that you want to apply to the application.
+>
+>    4. Click Save.
+>
+>       PingOne applies the first policy in the list.
+>
+> 9. Click Save.
+>
+> 10. Enable the OAuth 2.0 client application by using the toggle next to its name:
+>
+>     ![Enable the application using the toggle.](../../../../_images/pingone-apps-enable-native-client-en.png)Figure 2. Enable the application using the toggle.
+>
+> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Android and iOS PingOne example applications and tutorials covered by this documentation.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the React Native OIDC sign-on module tutorial for Advanced Identity Cloud.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/react-native/aic/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/react-native/aic/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "React Native", "Advanced Identity Cloud", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: react, set=fab]React Native
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-connection-properties.html)
+
+* [Run](03_test-the-app.html)
+
+To successfully complete this tutorial refer to the prerequisites in this section.
+
+The tutorial also requires a configured PingOne Advanced Identity Cloud tenant.
+
+## Prerequisites
+
+* React Native
+
+  This sample app requires React Native 0.80.1 or later.
+
+* iOS
+
+  This sample app requires iOS 17.0 or later.
+
+* Android
+
+  This sample app requires Android 11 (API level 30) or later.
+
+The React Native development environment must be fully configured before you begin. Follow the official [React Native environment setup guide](https://reactnative.dev/docs/set-up-your-environment) and ensure the following tools are installed:
+
+* Node.js and Yarn
+
+  Install [Node.js](https://nodejs.org/) version 20 or later.
+
+  This project uses Yarn. Install Yarn by running:
+
+  ```shell
+  corepack enable
+  ```
+
+* Xcode (iOS only)
+
+  Download and install [Xcode](https://developer.apple.com/xcode/) from the Mac App Store.
+
+  Xcode 15 or later is recommended.
+
+* Ruby and Bundler (iOS only)
+
+  Ruby 3.3.6 or later is required to manage CocoaPods.
+
+  |   |                                                                                                                                                                                                |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | macOS ships with an older version of Ruby that is not compatible with this project.Install a current version using [rbenv](https://rbenv.org/) or a similar version manager before continuing. |
+
+  Install [Bundler](https://bundler.io/) with:
+
+  ```shell
+  gem install bundler
+  ```
+
+* CocoaPods (iOS only)
+
+  CocoaPods is installed locally during the tutorial. You do not need to install it globally.
+
+* Android Studio (Android only)
+
+  Download and install [Android Studio](https://developer.android.com/studio).
+
+  An Android emulator or physical device is required to run the app. To add a virtual device, refer to [Create and manage virtual devices](https://developer.android.com/studio/run/managing-avds) on the Android Developers website.
+
+* Java (Android only)
+
+  Android Studio includes an embedded JDK.
+
+  Java 21 is recommended and is bundled with recent versions of Android Studio.
+
+* `keytool` (Android only)
+
+  `keytool` is part of the Java Development Kit (JDK) and is used to generate the debug signing keystore required for the Android build. It is included with Android Studio's bundled JDK.
+
+## Server configuration
+
+This tutorial requires you to configure your PingOne Advanced Identity Cloud tenant as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingOne Advanced Identity Cloud, follow these steps:
+>
+> 1. Log in to your PingOne Advanced Identity Cloud tenant.
+>
+> 2. In the left panel, click Identities > Manage.
+>
+> 3. Click [icon: plus, set=fa]New Alpha realm - User.
+>
+> 4. Enter the following details:
+>
+>    * **Username** = `demo`
+>
+>    * **First Name** = `Demo`
+>
+>    * **Last Name** = `User`
+>
+>    * **Email Address** = `demo.user@example.com`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+> 5. Click Save.
+
+> **Collapse: Task 2. Create an authentication journey**
+>
+> Authentication journeys provide fine-grained authentication by allowing multiple paths and decision points throughout the flow. Authentication journeys are made up of nodes that define actions taken during authentication.
+>
+> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
+>
+> You'll need an authentication journey configured on your server to try out the **Journey** module. That journey must only use [nodes, and therefore callbacks, that the Orchestration SDKs supports](../../../../journey/compatibility.html#supported-authentication-journey-callbacks).
+>
+> |   |                                                                                                                |
+> | - | -------------------------------------------------------------------------------------------------------------- |
+> |   | You can use the default **Login** journey that both Advanced Identity Cloud and PingAM include out-of-the-box. |
+>
+> To create your own authentication journey for use when testing the Orchestration SDKs, follow these steps:
+>
+> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Journeys, and click [icon: plus, set=fa]New Journey.
+>
+> 2. Enter a name, such as `sdkUsernamePasswordJourney` and click Save.
+>
+>    The authentication journey designer appears.
+>
+> 3. Drag the following nodes into the designer area:
+>
+>    * **Page Node**
+>
+>    * **Platform Username**
+>
+>    * **Platform Password**
+>
+>    * **Data Store Decision**
+>
+> 4. Drag and drop the **Platform Username** and **Platform Password** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
+>
+> 5. Connect the nodes as follows:
+>
+>    ![sdk username password journey idcloud en](../../../../_images/sdk-username-password-journey-idcloud-en.png)Figure 1. Example username and password authentication journey
+>
+> 6. Click Save.
+
+> **Collapse: Task 3. Register a public OAuth 2.0 client**
+>
+> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
+>
+> To register a *public* OAuth 2.0 client application for use with the SDKs in PingOne Advanced Identity Cloud, follow these steps:
+>
+> 1. Log in to your PingOne Advanced Identity Cloud tenant.
+>
+> 2. In the left panel, click Applications.
+>
+> 3. Click [icon: plus, set=fa]Custom Application.
+>
+> 4. Select OIDC - OpenId Connect as the sign-in method, and then click Next.
+>
+> 5. Select Native / SPA as the application type, and then click Next.
+>
+> 6. In Name, enter a name for the application, such as `Public SDK Client`.
+>
+> 7. In Owners, select a user that is responsible for maintaining the application, and then click Next.
+>
+>    |   |                                                                                    |
+>    | - | ---------------------------------------------------------------------------------- |
+>    |   | When trying out the SDKs, you could select the `demo` user you created previously. |
+>
+> 8. In Client ID, enter `sdkPublicClient`
+>
+> 9. Select **Configure for SDK Sample Apps**.
+>
+> 10. Click Create Application.
+>
+>     PingOne Advanced Identity Cloud creates the application and displays the details screen.
+>
+> 11. On the Sign On tab:
+>
+>     1. In Sign-In URLs, ensure the following values appear, or add them if they don't:
+>
+>        `org.forgerock.oidc://oauth2redirect`
+>
+>        |   |                                                             |
+>        | - | ----------------------------------------------------------- |
+>        |   | Also add any other domains where you host SDK applications. |
+>
+>     2. In Grant Types, ensure the following values appear:
+>
+>        `Authorization Code`
+>
+>        `Refresh Token`
+>
+>     3. In Scopes, ensure the following values appear:
+>
+>        `openid profile email address`
+>
+> 12. Click Show advanced settings, and on the Authentication tab, confirm the following properties:
+>
+>     1. In Token Endpoint Authentication Method, select `none`.
+>
+>     2. In Client Type, select `Public`.
+>
+>     3. Enable the Implied Consent property.
+>
+> 13. Click Save.
+>
+> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the example applications and tutorials covered by this documentation.
+
+> **Collapse: Task 4. Configure the OAuth 2.0 provider**
+>
+> The provider specifies the supported OAuth 2.0 configuration options for a realm.
+>
+> To ensure the PingOne Advanced Identity Cloud OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
+>
+> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Native Consoles > Access Management.
+>
+> 2. In the left panel, click [icon: plug, set=fa]Services.
+>
+> 3. In the list of services, click OAuth2 Provider.
+>
+> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
+>
+> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
+>
+> 6. Click Save Changes.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the React Native OIDC sign-on module tutorial for PingAM.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/react-native/pingam/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/react-native/pingam/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "React Native", "PingAM", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingAM [icon: react, set=fab]React Native
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-connection-properties.html)
+
+* [Run](03_test-the-app.html)
+
+To successfully complete this tutorial refer to the prerequisites in this section.
+
+The tutorial also requires a configured PingAM server.
+
+## Prerequisites
+
+* React Native
+
+  This sample app requires React Native 0.80.1 or later.
+
+* iOS
+
+  This sample app requires iOS 17.0 or later.
+
+* Android
+
+  This sample app requires Android 11 (API level 30) or later.
+
+The React Native development environment must be fully configured before you begin. Follow the official [React Native environment setup guide](https://reactnative.dev/docs/set-up-your-environment) and ensure the following tools are installed:
+
+* Node.js and Yarn
+
+  Install [Node.js](https://nodejs.org/) version 20 or later.
+
+  This project uses Yarn. Install Yarn by running:
+
+  ```shell
+  corepack enable
+  ```
+
+* Xcode (iOS only)
+
+  Download and install [Xcode](https://developer.apple.com/xcode/) from the Mac App Store.
+
+  Xcode 15 or later is recommended.
+
+* Ruby and Bundler (iOS only)
+
+  Ruby 3.3.6 or later is required to manage CocoaPods.
+
+  |   |                                                                                                                                                                                                |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | macOS ships with an older version of Ruby that is not compatible with this project.Install a current version using [rbenv](https://rbenv.org/) or a similar version manager before continuing. |
+
+  Install [Bundler](https://bundler.io/) with:
+
+  ```shell
+  gem install bundler
+  ```
+
+* CocoaPods (iOS only)
+
+  CocoaPods is installed locally during the tutorial. You do not need to install it globally.
+
+* Android Studio (Android only)
+
+  Download and install [Android Studio](https://developer.android.com/studio).
+
+  An Android emulator or physical device is required to run the app. To add a virtual device, refer to [Create and manage virtual devices](https://developer.android.com/studio/run/managing-avds) on the Android Developers website.
+
+* Java (Android only)
+
+  Android Studio includes an embedded JDK.
+
+  Java 21 is recommended and is bundled with recent versions of Android Studio.
+
+* `keytool` (Android only)
+
+  `keytool` is part of the Java Development Kit (JDK) and is used to generate the debug signing keystore required for the Android build. It is included with Android Studio's bundled JDK.
+
+## Server configuration
+
+This tutorial requires you to configure your PingAM server as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingAM, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. Navigate to [icon: address-card, set=fa]Identities, and then click [icon: plus, set=fa]Add Identity.
+>
+> 3. Enter the following details:
+>
+>    * **User ID** = `demo`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+>    * **Email Address** = `demo.user@example.com`
+>
+> 4. Click Create.
+
+> **Collapse: Task 2. Create an authentication tree**
+>
+> Authentication trees provide fine-grained authentication by allowing multiple paths and decision points throughout the authentication flow. Authentication trees are made up of nodes that define actions taken during authentication.
+>
+> Each node performs a single task, such as collecting a username or making a simple decision. Nodes can have multiple outcomes rather than just success or failure.
+>
+> To create a simple tree for use when testing the Orchestration SDKs, follow these steps:
+>
+> 1. Under Realm Overview, click Authentication Trees, then click Create Tree.
+>
+> 2. Enter a tree name, for example `sdkUsernamePasswordJourney`, and then click Create.
+>
+>    The authentication tree designer appears, showing the Start entry point connected to the Failure exit point.
+>
+> 3. Drag the following nodes from the Components panel on the left side into the designer area:
+>
+>    * **Page Node**
+>
+>    * **Username Collector**
+>
+>    * **Password Collector**
+>
+>    * **Data Store Decision**
+>
+> 4. Drag and drop the **Username Collector** and **Password Collector** nodes onto the **Page Node**, so that they both appear on the same page when logging in.
+>
+> 5. Connect the nodes as follows:
+>
+>    ![trees node login example](../../../../_images/trees-node-login-example.png)Figure 1. Example username and password authentication tree
+>
+> 6. Select the **Page Node**, and in the Properties pane, set the Stage property to `UsernamePassword`.
+>
+>    |   |                                                                                                            |
+>    | - | ---------------------------------------------------------------------------------------------------------- |
+>    |   | You can configure the node properties by selecting a node and altering properties in the right-hand panel. |
+>
+>    One of the samples uses this specific value to determine the custom UI to display.
+>
+> 7. Click **Save**.
+
+> **Collapse: Task 3. Register a public OAuth 2.0 client**
+>
+> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
+>
+> To register a *public* OAuth 2.0 client application for use with the SDKs in AM, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. Navigate to [icon: list-alt, set=fa]Applications > OAuth 2.0 > Clients, and then click [icon: plus, set=fa]Add Client.
+>
+> 3. In Client ID, enter `sdkPublicClient`.
+>
+> 4. Leave Client secret empty.
+>
+> 5. In Redirection URIs, enter the following values:
+>
+>    `org.forgerock.oidc://oauth2redirect`
+>
+>    |   |                                                                        |
+>    | - | ---------------------------------------------------------------------- |
+>    |   | Also add any other domains where you will be hosting SDK applications. |
+>
+> 6. In Scopes, enter the following values:
+>
+>    `openid profile email address`
+>
+> 7. Click Create.
+>
+>    PingAM creates the new OAuth 2.0 client, and displays the properties for further configuration.
+>
+> 8. On the Core tab:
+>
+>    1. In Client type, select `Public`.
+>
+>    2. Disable Allow wildcard ports in redirect URIs.
+>
+>    3. Click Save Changes.
+>
+> 9. On the Advanced tab:
+>
+>    1. In Grant Types, enter the following values:
+>
+>       ```none
+>       Authorization Code
+>       Refresh Token
+>       ```
+>
+>    2. In Token Endpoint Authentication Method, select `None`.
+>
+>    3. Enable the Implied consent property.
+>
+> 10. Click Save Changes.
+
+> **Collapse: Task 4. Configure the OAuth 2.0 provider**
+>
+> The provider specifies the supported OAuth 2.0 configuration options for a realm.
+>
+> To ensure the PingAM OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
+>
+> 1. Log in to the PingAM admin UI as an administrator.
+>
+> 2. In the left panel, click [icon: plug, set=fa]Services.
+>
+> 3. In the list of services, click OAuth2 Provider.
+>
+> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
+>
+> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
+>
+> 6. Click Save Changes.
+
+---
+
+---
+title: Before you begin
+description: Outlines the prerequisites and server configuration steps required before starting the React Native OIDC sign-on module tutorial for PingOne.
+component: orchsdks
+page_id: orchsdks:oidc:try-it-out/react-native/pingone/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/oidc/try-it-out/react-native/pingone/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "OpenID Connect", "Tutorial", "Source Code", "Integration", "SDK", "React Native", "PingOne", "prerequisites"]
+section_ids:
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingOne [icon: react, set=fab]React Native
+
+* **Prepare**
+
+* [Download](01_download-sample-repo.html)
+
+* [Configure](02_configuring-sample-for-pingone.html)
+
+* [Run](03_running-sample-pingone.html)
+
+To successfully complete this tutorial refer to the prerequisites in this section.
+
+The tutorial also requires a configured PingOne instance.
+
+## Prerequisites
+
+* React Native
+
+  This sample app requires React Native 0.80.1 or later.
+
+* iOS
+
+  This sample app requires iOS 17.0 or later.
+
+* Android
+
+  This sample app requires Android 11 (API level 30) or later.
+
+The React Native development environment must be fully configured before you begin. Follow the official [React Native environment setup guide](https://reactnative.dev/docs/set-up-your-environment) and ensure the following tools are installed:
+
+* Node.js and Yarn
+
+  Install [Node.js](https://nodejs.org/) version 20 or later.
+
+  This project uses Yarn. Install Yarn by running:
+
+  ```shell
+  corepack enable
+  ```
+
+* Xcode (iOS only)
+
+  Download and install [Xcode](https://developer.apple.com/xcode/) from the Mac App Store.
+
+  Xcode 15 or later is recommended.
+
+* Ruby and Bundler (iOS only)
+
+  Ruby 3.3.6 or later is required to manage CocoaPods.
+
+  |   |                                                                                                                                                                                                |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | macOS ships with an older version of Ruby that is not compatible with this project.Install a current version using [rbenv](https://rbenv.org/) or a similar version manager before continuing. |
+
+  Install [Bundler](https://bundler.io/) with:
+
+  ```shell
+  gem install bundler
+  ```
+
+* CocoaPods (iOS only)
+
+  CocoaPods is installed locally during the tutorial. You do not need to install it globally.
+
+* Android Studio (Android only)
+
+  Download and install [Android Studio](https://developer.android.com/studio).
+
+  An Android emulator or physical device is required to run the app. To add a virtual device, refer to [Create and manage virtual devices](https://developer.android.com/studio/run/managing-avds) on the Android Developers website.
+
+* Java (Android only)
+
+  Android Studio includes an embedded JDK.
+
+  Java 21 is recommended and is bundled with recent versions of Android Studio.
+
+* `keytool` (Android only)
+
+  `keytool` is part of the Java Development Kit (JDK) and is used to generate the debug signing keystore required for the Android build. It is included with Android Studio's bundled JDK.
+
+## Server configuration
+
+This tutorial requires you to configure your PingOne server as follows:
+
+> **Collapse: Task 1. Create a demo user**
+>
+> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
+>
+> To create a demo user in PingOne, follow these steps:
+>
+> 1. Log in to your PingOne administration console.
+>
+> 2. In the left panel, navigate to Directory > Users.
+>
+> 3. Next to the Users label, click the plus icon ([icon: plus, set=fa]).
+>
+>    PingOne displays the Add User panel.
+>
+> 4. Enter the following details:
+>
+>    * **Given Name** = `Demo`
+>
+>    * **Family Name** = `User`
+>
+>    * **Username** = `demo`
+>
+>    * **Email** = `demo.user@example.com`
+>
+>    * **Population** = `Default`
+>
+>    * **Password** = `Ch4ng3it!`
+>
+> 5. Click Save.
+
+> **Collapse: Task 2. Register a public OAuth 2.0 client**
+>
+> To register a *public* OAuth 2.0 client application in PingOne for use with the Orchestration SDKs for Android and iOS, follow these steps:
+>
+> 1. Log in to your PingOne administration console.
+>
+> 2. In the left panel, navigate to Applications > Applications.
+>
+> 3. Next to the Applications label, click the plus icon ([icon: plus, set=fa]).
+>
+>    PingOne displays the Add Application panel.
+>
+> 4. In Application Name, enter a name for the profile, for example `sdkNativeClient`
+>
+> 5. Select Native as the Application Type, and then click Save.
+>
+> 6. On the Configuration tab, click the pencil icon ([icon: pencil, set=fa]).
+>
+>    1. In Grant Type, select the following values:
+>
+>       `Authorization Code`
+>
+>       `Refresh Token`
+>
+>    2. In Redirect URIs, enter the following values:
+>
+>       `org.forgerock.oidc://oauth2redirect`
+>
+>    3. In Token Endpoint Authentication Method, select `None`.
+>
+>    4. In the **Advanced Settings** section, enable **Terminate User Session by ID Token**.
+>
+>    5. Click Save.
+>
+> 7. On the Resources tab, next to Allowed Scopes, click the pencil icon ([icon: pencil, set=fa]).
+>
+>    1. In Scopes, select the following values:
+>
+>       `email`
+>
+>       `phone`
+>
+>       `profile`
+>
+>       |   |                                            |
+>       | - | ------------------------------------------ |
+>       |   | The `openid` scope is selected by default. |
+>
+>       The result resembles the following:
+>
+>       ![Adding scopes to an application.](../../../../_images/pingone-oidc-native-scopes-en.png)Figure 1. Adding scopes to an application.
+>
+> 8. Optionally, on the Policies tab, click the pencil icon ([icon: pencil, set=fa]) to select the authentication policies for the application.
+>
+>    |   |                                                                                                                                        |
+>    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
+>    |   | Applications that have no authentication policy assignments use the environment's default authentication policy to authenticate users. |
+>
+>    If you have a DaVinci license, you can select PingOne policies or DaVinci Flow policies, but not both. If you do not have a DaVinci license, the page only displays PingOne policies.
+>
+>    To use a *PingOne policy*:
+>
+>    1. Click [icon: plus, set=fa]Add policies and then select the policies that you want to apply to the application.
+>
+>    2. Click Save.
+>
+>       PingOne applies the policies in the order in which they appear in the list. PingOne evaluates the first policy in the list first. If the requirements are not met, PingOne moves to the next one.
+>
+>       For more information, see [Authentication policies for applications](https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html).
+>
+>    To use a *DaVinci Flow policy*:
+>
+>    1. You must clear all PingOne policies. Click Deselect all PingOne Policies.
+>
+>    2. In the confirmation message, click Continue.
+>
+>    3. On the DaVinci Policies tab, select the policies that you want to apply to the application.
+>
+>    4. Click Save.
+>
+>       PingOne applies the first policy in the list.
+>
+> 9. Click Save.
+>
+> 10. Enable the OAuth 2.0 client application by using the toggle next to its name:
+>
+>     ![Enable the application using the toggle.](../../../../_images/pingone-apps-enable-native-client-en.png)Figure 2. Enable the application using the toggle.
+>
+> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Android and iOS PingOne example applications and tutorials covered by this documentation.
+
+---
+
+---
 title: Compatibility
 description: View supported servers, operating systems, and browsers for the OIDC module across Android, iOS, and JavaScript platforms
 component: orchsdks
@@ -2477,25 +3266,27 @@ Select a platform below to view the supported operating systems and browsers.
 
 * JavaScript / Login Widget
 
+* React Native
+
 The OIDC module for Android supports the following versions of the Android operating system:
 
 **Supported Android versions and original release dates**
 
-| Release    | API Levels | Released        |
+| Release    | API Levels | Release date    |
 | ---------- | ---------- | --------------- |
+| Android 17 | 37         | June, 2026      |
 | Android 16 | 36         | August, 2025    |
 | Android 15 | 35         | September, 2024 |
 | Android 14 | 34         | October, 2023   |
 | Android 13 | 33         | March, 2022     |
 | Android 12 | 31, 32     | October, 2021   |
 | Android 11 | 30         | September, 2020 |
-| Android 10 | 29         | September, 2019 |
 
 |   |                                                                                                                                                                                                                                                                                                  |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | We have updated how we determine which Android versions form our support policy for the OIDC module for Android.The support policy is as follows:- Every public major release of Android within the last 6 years.
 
-  For example, this would mean support for **Android 10** and later versions. |
+  For example, this would mean support for **Android 11** and later versions. |
 
 **Supported browsers on Android**
 
@@ -2505,18 +3296,18 @@ The OIDC module for iOS supports the following versions of the iOS operating sys
 
 **Supported iOS versions and original release dates**
 
-| Release | Released        |
+| Release | Release date    |
 | ------- | --------------- |
+| iOS 27  | September, 2026 |
 | iOS 26  | September, 2025 |
 | iOS 18  | September, 2024 |
 | iOS 17  | September, 2023 |
-| iOS 16  | September, 2022 |
 
 |   |                                                                                                                                                                                                                                                                                  |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | We have updated how we determine which iOS versions form our support policy for the OIDC module for iOS.The support policy is as follows:- Every public major release of iOS within the last 3 years.
 
-  For example, this would mean support for **iOS 16** and later versions. |
+  For example, this would mean support for **iOS 17** and later versions. |
 
 **Supported browsers on iOS**
 
@@ -2539,6 +3330,31 @@ The OIDC module for JavaScript, and the Advanced Identity Cloud/PingAM Login Wid
 * iOS (Safari) - Two most recent major versions of the operating system.
 
 * Android (Chrome) - Two most recent major versions of the operating system.
+
+The OIDC module for React Native wraps the native Android and iOS OIDC modules, so supported operating systems and browsers are a superset of the Android and iOS support listed in the tabs above.
+
+Support depends on the platform the app runs on:
+
+**Supported Android versions and original release dates**
+
+| Release    | API Levels | Release date    |
+| ---------- | ---------- | --------------- |
+| Android 17 | 37         | June, 2026      |
+| Android 16 | 36         | August, 2025    |
+| Android 15 | 35         | September, 2024 |
+| Android 14 | 34         | October, 2023   |
+| Android 13 | 33         | March, 2022     |
+| Android 12 | 31, 32     | October, 2021   |
+| Android 11 | 30         | September, 2020 |
+
+**Supported iOS versions and original release dates**
+
+| Release | Release date    |
+| ------- | --------------- |
+| iOS 27  | September, 2026 |
+| iOS 26  | September, 2025 |
+| iOS 18  | September, 2024 |
+| iOS 17  | September, 2023 |
 
 ### JavaScript Compatibility with WebViews
 
@@ -2573,6 +3389,9 @@ section_ids:
   android_oidc_redirects: Step 1. Configuring your app to handle redirects
   android_oidc_modules: Step 2. Installing modules
   android_oidc_properties: Step 3. Configuring connection properties
+  android_oidc_full_configuration: Full configuration
+  android_oidc_common_json_configuration: Common JSON configuration
+  configuration_property_reference: Configuration property reference
   android_oidc_start_oauth2: Step 4. Starting the OAuth 2.0 flow
   android_oidc_access_token: Step 5. Obtaining an Access Token
   android_oidc_logout: Step 6. Revoking tokens and signing out
@@ -3187,19 +4006,31 @@ To install these modules into your Android app:
 
    ```gradle
    dependencies {
-       implementation("com.pingidentity.sdks:oidc:2.0.1")
-       implementation("com.pingidentity.sdks:browser:2.0.1")
+       implementation("com.pingidentity.sdks:oidc:2.2.0")
+       implementation("com.pingidentity.sdks:browser:2.2.0")
    }
    ```
 
 ## Step 3. Configuring connection properties
 
-Configure the `oidc` module to connect to your OpenID Connect 1.0-compliant authorization server:
+Configure the `oidc` module to connect to your OpenID Connect 1.0-compliant authorization server.
 
-Required parameters to configure the `oidc` module
+There are two methods for configuring the `oidc` module:
+
+* [Full configuration](#android_oidc_full_configuration)
+
+  Use the Kotlin builder DSL to access all available settings, including Android-specific options such as custom HTTP clients and storage configuration.
+
+* [Common JSON configuration](#android_oidc_common_json_configuration)
+
+  Use a shared key-value structure that works identically across Android, iOS, and JavaScript, letting you load a single config file across platforms.
+
+### Full configuration
+
+Configure the `oidc` module
 
 ```kotlin
-val web = OidcWebClient {
+val oidcClient = OidcWebClient {
     logger = Logger.STANDARD
     module(com.pingidentity.oidc.module.Oidc) {
         discoveryEndpoint =
@@ -3207,160 +4038,172 @@ val web = OidcWebClient {
         clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
         redirectUri = "https://demo.example.com/oath2redirect"
         scopes = mutableSetOf("openid", "email", "address", "profile", "phone")
+        par = true
     }
 }
 ```
 
-Update the following properties with values that match your environment:
+### Common JSON configuration
 
-* *discoveryEndpoint*
+You can provide the same OIDC configuration as a JSON object, which lets you share a single config file across Android, iOS, and JavaScript.
 
-  The `.well-known` endpoint from your OAuth 2.0 application.
-
-  > **Collapse: How do I find my PingOne .well-known URL?**
-  >
-  > To find the `.well-known` endpoint for an OAuth 2.0 client in PingOne:
-  >
-  > 1. Log in to your PingOne administration console.
-  >
-  > 2. Go to **Applications > Applications**, and then select your OAuth 2.0 client.
-  >
-  >    For example, sdkPublicClient.
-  >
-  > 3. On the **Overview** tab, expand the **Connection Details** section, and then copy the **OIDC Discovery Endpoint** value.
-  >
-  >    ![Locating the .well-known URL in a PingOne client profile.](../../_images/p1-client-well-known.png)
-
-  > **Collapse: How do I form my PingFederate .well-known URL?**
-  >
-  > To form the `.well-known` endpoint for a PingFederate server:
-  >
-  > 1. Log in to your PingFederate administration console.
-  >
-  > 2. Navigate to **System** [icon: angle-right, set=fa] **Server** [icon: angle-right, set=fa] **Protocol Settings**.
-  >
-  > 3. Make a note of the **Base URL** value.
-  >
-  >    For example, `https://pingfed.example.com`
-  >
-  >    |   |                                   |
-  >    | - | --------------------------------- |
-  >    |   | Do not use the admin console URL. |
-  >
-  > 4. Append `/.well-known/openid-configuration` after the base URL value to form the `.well-known` endpoint of your server.
-  >
-  >    For example, `https://pingfed.example.com/.well-known/openid-configuration`.
-  >
-  >    The SDK reads the OAuth 2.0 paths it requires from this endpoint.
-
-  > **Collapse: How do I find my PingOne Advanced Identity Cloud  URL?**
-  >
-  > You can view the `.well-known` endpoint for an OAuth 2.0 client in the PingOne Advanced Identity Cloud admin console:
-  >
-  > 1. Log in to your PingOne Advanced Identity Cloud administration console.
-  >
-  > 2. Click Applications, and then select the OAuth 2.0 client you created earlier. For example, sdkPublicClient.
-  >
-  > 3. On the Sign On tab, in the Client Credentials section, copy the Discovery URI value.
-  >
-  >    For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/alpha/.well-known/openid-configuration`
-  >
-  > |   |                                                                                                                                                                                                                                                                                                                                 |
-  > | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  > |   | If you are using a custom domain, your `.well-known` is formed as follows:`https://<custom-domain-fqdn>/.well-known/openid-configuration`Learn more in [Access OIDC configuration discovery endpoint](https://docs.pingidentity.com/pingoneaic/latest/realms/custom-domains.html#access-oidc-configuration-discovery-endpoint). |
-
-  > **Collapse: How do I find my PingAM  URL?**
-  >
-  > To form the `.well-known` URL for an PingAM server, concatenate the following information into a single URL:
-  >
-  > 1. The base URL of the PingAM component of your deployment, including the port number and deployment path.
-  >
-  >    For example, `https://openam.example.com:8443/openam`
-  >
-  > 2. The string `/oauth2`
-  >
-  > 3. The hierarchy of the realm that contains the OAuth 2.0 client.
-  >
-  >    You must specify the entire hierarchy of the realm, starting at the Top Level Realm. Prefix each realm in the hierarchy with the `realms/` keyword.
-  >
-  >    For example, `/realms/root/realms/customers`
-  >
-  >    |   |                                                                                 |
-  >    | - | ------------------------------------------------------------------------------- |
-  >    |   | If you omit the realm hierarchy, the top level `ROOT` realm is used by default. |
-  >
-  > 4. The string `/.well-known/openid-configuration`
-  >
-  > For example, `https://openam.example.com:8443/openam/oauth2/realms/root/.well-known/openid-configuration`
-
-  For example, `https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`
-
-* *clientId*
-
-  The client ID of your OAuth 2.0 application.
-
-  For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`
-
-* *redirectUri*
-
-  The redirect URI as configured in the OAuth 2.0 client profile.
-
-  This value must exactly match one of the values configured in your OAuth 2.0 client.
-
-  For example:
-
-  * App link / HTTPS redirect URI:
-
-    `https://demo.example.com/oauth2redirect`
-
-  * Custom scheme redirect URI:
-
-    `com.example.demo://oauth2redirect`
-
-* *scopes*
-
-  The scopes you added to your OAuth 2.0 application.
-
-  For example, `"openid", "email", "address", "profile", "phone"`
-
-You can pass optional OAuth 2.0 parameters into configuration to affect the OAuth 2.0 flow on the server.
-
-Adding optional parameters when configuring the `oidc` module
+Configure `OidcWebClient` from a JSON object
 
 ```kotlin
-val web = OidcWebClient {
-    logger = Logger.STANDARD
-    module(com.pingidentity.oidc.module.Oidc) {
-        discoveryEndpoint =
-            "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        redirectUri = "https://demo.example.com/oath2redirect"
-        scopes = mutableSetOf("openid", "email", "address", "profile", "phone")
-        acrValues = "Single_Factor%20Multi_Factor"
-        loginHint = "demo.user@example.com"
+val oidcClient = OidcWebClient(buildJsonObject {
+    put("timeout", 30000) // milliseconds
+    put("log", "WARN")
+    putJsonObject("oidc") {
+        put("clientId", "6c7eb89a-66e9-ab12-cd34-eeaf795650b2")
+        put("discoveryEndpoint",
+            "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration")
+        putJsonArray("scopes") { add("openid"); add("profile"); add("email") }
+        put("redirectUri", "com.example.demo://oauth2redirect")
+        put("par", true)
     }
-}
+}).getOrThrow()
 ```
 
-For example, you can add the following parameters:
+Optionally, you can store this JSON in a file alongside your app and load it at runtime so the same file can be shared across platforms.
 
-* *acrValues*
+JSON configuration supports the common properties that work across all platforms.
 
-  An optional space-separated list of Authentication Context Class Reference (`acr`) values, in order of preference.
+|   |                                                                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The JSON factory and the native `OidcWebClient {}` builder DSL are mutually exclusive, there is no combined form.If you need Android-specific settings such as `httpClient` or storage configuration, use the native builder DSL for the entire configuration instead. |
 
-  The server can use these values to help determine how the user should be authenticated.
+### Configuration property reference
 
-  For example, you can specify a DaVinci flow policy ID, or PingOne policy names to request that PingOne follows a particular path to authenticate the user.
+The following properties are available when configuring the `oidc` module for Android.
 
-  The Orchestration SDK sends this as the `acr_values` parameter in the authentication request, as per the specification.
+The **JSON property** column shows the equivalent key when using JSON configuration.
 
-* *loginHint*
+**OIDC module configuration properties for Android**
 
-  An optional string that lets the server know what identifier the user might use to authenticate with.
+| Property               | JSON property               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Required? |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `logger`               | `log`                       | The logger the module uses to output messages.Choose from `STANDARD`, `WARN`, or `NONE`, or specify a custom logger to use.Learn more in [Customizing logging on Android](../customization/logging/android-custom-logging.html).In JSON configuration, use the `log` property at the root level.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | No        |
+| `timeout`              | `timeout`                   | A timeout, in milliseconds, for each request that communicates with the server.For example, for 30 seconds specify `30000`.When using JSON configuration, specify `timeout` at the root level.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | No        |
+| `acrValues`            | `oidc.acrValues`            | An optional space-separated list of Authentication Context Class Reference (`acr`) values, in order of preference.The server can use these values to help determine how the user should be authenticated as part of the OIDC flow\.Before you specify an `acr` value, configure your server to map it to a specific authentication path:- PingOne
 
-  The server can use this to pre-populate a sign-on form, or to customize the UI to match a particular brand or organization.
+  Map `acrValues` to a DaVinci flow policy ID.
 
-  The Orchestration SDK sends this as the `login_hint` parameter in the authentication request, as per the specification.
+  Learn more in [Invoking the flow](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_launch_flow_redirect.html#invoking-the-flow).
+
+- PingOne Advanced Identity Cloud
+
+  Map `acrValues` to a journey.
+
+  Learn more in [The acr claim](https://docs.pingidentity.com/pingoneaic/latest/am-oidc1/oidc-authentication-requirements.html#acr-claim).
+
+- PingAM
+
+  Map `acrValues` to an authentication tree.
+
+  Learn more in [The acr claim](https://docs.pingidentity.com/pingam/8.1/am-oidc1/oidc-authentication-requirements.html#acr-claim).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | No        |
+| `clientId`             | `oidc.clientId`             | The client ID of your OAuth 2.0 application.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Yes       |
+| `discoveryEndpoint`    | `oidc.discoveryEndpoint`    | The `.well-known` endpoint from your OAuth 2.0 application.> **Collapse: How do I find my PingOne .well-known URL?**
+>
+> To find the `.well-known` endpoint for an OAuth 2.0 client in PingOne:
+>
+> 1. Log in to your PingOne administration console.
+>
+> 2. Go to **Applications > Applications**, and then select your OAuth 2.0 client.
+>
+>    For example, sdkPublicClient.
+>
+> 3. On the **Overview** tab, expand the **Connection Details** section, and then copy the **OIDC Discovery Endpoint** value.
+>
+>    ![Locating the .well-known URL in a PingOne client profile.](../../_images/p1-client-well-known.png)> **Collapse: How do I form my PingFederate .well-known URL?**
+>
+> To form the `.well-known` endpoint for a PingFederate server:
+>
+> 1. Log in to your PingFederate administration console.
+>
+> 2. Navigate to **System** [icon: angle-right, set=fa] **Server** [icon: angle-right, set=fa] **Protocol Settings**.
+>
+> 3. Make a note of the **Base URL** value.
+>
+>    For example, `https://pingfed.example.com`
+>
+>    Do not use the admin console URL.
+>
+> 4. Append `/.well-known/openid-configuration` after the base URL value to form the `.well-known` endpoint of your server.
+>
+>    For example, `https://pingfed.example.com/.well-known/openid-configuration`.
+>
+>    The SDK reads the OAuth 2.0 paths it requires from this endpoint.> **Collapse: How do I find my PingOne Advanced Identity Cloud  URL?**
+>
+> You can view the `.well-known` endpoint for an OAuth 2.0 client in the PingOne Advanced Identity Cloud admin console:
+>
+> 1. Log in to your PingOne Advanced Identity Cloud administration console.
+>
+> 2. Click Applications, and then select the OAuth 2.0 client you created earlier. For example, sdkPublicClient.
+>
+> 3. On the Sign On tab, in the Client Credentials section, copy the Discovery URI value.
+>
+>    For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/alpha/.well-known/openid-configuration`
+>
+> &#xA;&#xA;If you are using a custom domain, your .well-known is formed as follows:&#xA;&#xA;https\://\<custom-domain-fqdn>/.well-known/openid-configuration&#xA;&#xA;Learn more in Access OIDC configuration discovery endpoint.> **Collapse: How do I find my PingAM  URL?**
+>
+> To form the `.well-known` URL for an PingAM server, concatenate the following information into a single URL:
+>
+> 1. The base URL of the PingAM component of your deployment, including the port number and deployment path.
+>
+>    For example, `https://openam.example.com:8443/openam`
+>
+> 2. The string `/oauth2`
+>
+> 3. The hierarchy of the realm that contains the OAuth 2.0 client.
+>
+>    You must specify the entire hierarchy of the realm, starting at the Top Level Realm. Prefix each realm in the hierarchy with the `realms/` keyword.
+>
+>    For example, `/realms/root/realms/customers`
+>
+>    &#xA;&#xA;If you omit the realm hierarchy, the top level ROOT realm is used by default.
+>
+> 4. The string `/.well-known/openid-configuration`
+>
+> For example, `https://openam.example.com:8443/openam/oauth2/realms/root/.well-known/openid-configuration`For example, `https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration` | Yes       |
+| `loginHint`            | `oidc.loginHint`            | An optional string that lets the server know what identifier the user might use to authenticate with.The server can use this to pre-populate a sign-on form, or to customize the UI to match a particular brand or organization.The Orchestration SDK sends this as the `login_hint` parameter in the authentication request, as per the specification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | No        |
+| `par`                  | `oidc.par`                  | Whether to use Pushed Authorization Requests (PAR) for communicating with the authorization server.Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../use-cases/par/index.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | No        |
+| `redirectUri`          | `oidc.redirectUri`          | The redirect URI as configured in the OAuth 2.0 client profile.This value must exactly match one of the values configured in your OAuth 2.0 client.App link / HTTPS redirect URI: `https://demo.example.com/oauth2redirect`Custom scheme redirect URI: `com.example.demo://oauth2redirect`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Yes       |
+| `scopes`               | `oidc.scopes`               | The scopes you added to your OAuth 2.0 application.For example, `"openid", "email", "address", "profile", "phone"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Yes       |
+| `additionalParameters` | `oidc.additionalParameters` | Add any additional key-value query parameters your environment might require to complete an OAuth 2.0 flow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | No        |
+| `display`              | `oidc.display`              | How the authorization server should display the authentication UI.- `page`
+
+  Full-page redirect (default).
+
+- `popup`
+
+  Pop-up window.
+
+- `touch`
+
+  Optimized for touch-based devices.
+
+- `wap`
+
+  Optimized for WAP/mobile browsers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | No        |
+| `nonce`                | `oidc.nonce`                | A value to associate with the ID token to prevent replay attacks.If not set, the SDK generates a nonce automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | No        |
+| `prompt`               | `oidc.prompt`               | Controls whether the authorization server prompts the user for re-authentication or consent.- `none`
+
+  No UI; returns an error if interaction is required.
+
+- `login`
+
+  Force re-authentication.
+
+- `consent`
+
+  Request consent even if previously granted.
+
+- `select_account`
+
+  Prompt to select an account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | No        |
+| `refreshThreshold`     | `oidc.refreshThreshold`     | The number of seconds before token expiry at which the SDK proactively refreshes the token.Defaults to `0`, meaning the SDK refreshes only when the token has expired.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | No        |
+| `signOutRedirectUri`   | `oidc.signOutRedirectUri`   | The URI to redirect to after sign-out.Maps to the `post_logout_redirect_uri` parameter in the end-session request.This value must be registered in your OAuth 2.0 client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | No        |
+| `uiLocales`            | `oidc.uiLocales`            | Space-separated BCP 47 language tags indicating the preferred display language for the authorization server's UI.For example, `en-US fr`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | No        |
 
 Learn more about OAuth 2.0 authentication request parameters in [Authentication Request](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest), in the *OpenID Connect Core 1.0* specification.
 
@@ -3371,7 +4214,7 @@ The `oidc` module provides the `authorize()` method, which launches the web brow
 Start the OAuth 2.0 flow by using the `authorize()` method
 
 ```kotlin
-web.authorize()
+oidcClient.authorize()
   .onSuccess { user ->
     ...
   }.onFailure { throwable ->
@@ -3379,19 +4222,17 @@ web.authorize()
   }
 ```
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | You can inject or override OAuth 2.0 parameters, and pass custom key-pair values when starting the OAuth 2.0 flow with the `authorize()` method.Adding parameters when using the `authorize()` method```kotlin
-web.authorize(
-    "acrValues" to "Social_Signon",
-    "loginHint" to "+1 303 555 0100",
+oidcClient.authorize(
     "customParameter" to "my_custom_value"
 ).onSuccess { user ->
     ...
   }.onFailure { throwable ->
     ...
   }
-``` |
+```If you've already set a value using a dedicated configuration property, such as `acrValues` or `loginHint`, passing the same key to `authorize()` duplicates the parameter in the request rather than overriding it, and may have unexpected consequences. |
 
 ## Step 5. Obtaining an Access Token
 
@@ -3404,7 +4245,7 @@ To obtain an access token on behalf of a user, follow these steps:
    Create a user object by calling the `user()` method
 
    ```kotlin
-   val user = web.user()
+   val user = oidcClient.user()
    ```
 
 2. Retrieve a token on behalf of the user by calling the `token()` method on your `user` object, and handle the result:
@@ -3487,1930 +4328,3 @@ You can customize aspects of how both of these appear in your app:
   ```
 
   Learn more in [Customizing the UI](https://developer.chrome.com/docs/android/custom-tabs/guide-ui-customization) in the *Chrome for Developers* documentation.
-
----
-
----
-title: Configuring iOS apps for OIDC sign-on
-description: Configure iOS apps to use centralized OIDC sign-on with PingOne, PingOne Advanced Identity Cloud, PingAM, or any OIDC-compliant authorization server.
-component: orchsdks
-page_id: orchsdks:oidc:usage/ios-centralized-login
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/usage/ios-centralized-login.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Tue, 17 Oct 2025 11:22:33 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Setup &amp; Configuration", "Source Code", "Integration", "SDK", "iOS"]
-section_ids:
-  ios_oidc_server_config: Before you begin
-  ios_oidc_redirects: Step 1. Configuring your app to handle redirects
-  ios_oidc_modules: Step 2. Installing modules
-  ios_oidc_properties: Step 3. Configuring connection properties
-  configure_the_browser_type_used_for_oidc_sign_on: Configure the browser type used for OIDC sign-on
-  ios_oidc_start_oauth2: Step 4. Starting the OAuth 2.0 flow
-  ios_oidc_access_token: Step 5. Obtaining an Access Token
-  ios_oidc_logout: Step 6. Revoking tokens and signing out
----
-
-# Configuring iOS apps for OIDC sign-on
-
-[icon: circle-check, set=far]PingOne [icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: circle-check, set=far]OIDC-compliant servers [icon: apple, set=fab]iOS
-
-You can configure your iOS apps to use your authorization server's UI, or your own web application, for sign-on requests.
-
-When a user attempts to log in to your app it redirects them to the central sign-on UI. After the user authenticates, the authorization server redirects them back to your application or site.
-
-Changes to authentication journeys or flows on your authorization server are available to all your apps that use the OIDC sign-on method, without the need to rebuild or redistribute the app. Likewise, any rebranding applied to your central sign-on UI is reflected immediately in your client apps.
-
-Your app doesn't need to access user credentials directly, just the result of the authentication from the server—usually an access token.
-
-To configure an iOS app to perform OIDC sign-on, complete each of the following steps:
-
-* [Before you begin](#ios_oidc_server_config)
-
-* [Step 1. Configuring your app to handle redirects](#ios_oidc_redirects)
-
-* [Step 2. Installing modules](#ios_oidc_modules)
-
-* [Step 3. Configuring connection properties](#ios_oidc_properties)
-
-* [Step 4. Starting the OAuth 2.0 flow](#ios_oidc_start_oauth2)
-
-* [Step 5. Obtaining an Access Token](#ios_oidc_access_token)
-
-* [Step 6. Revoking tokens and signing out](#ios_oidc_logout)
-
-## Before you begin
-
-You need to prepare your server for OIDC sign-on. Select your server from the options below and complete the tasks before proceeding to configure your application.
-
-* PingOne
-
-* Advanced Identity Cloud
-
-* AM
-
-* PingFederate
-
-This tutorial requires you to configure your PingOne server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Directory > Users.
->
-> 3. Next to the Users label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add User panel.
->
-> 4. Enter the following details:
->
->    * **Given Name** = `Demo`
->
->    * **Family Name** = `User`
->
->    * **Username** = `demo`
->
->    * **Email** = `demo.user@example.com`
->
->    * **Population** = `Default`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> To register a *public* OAuth 2.0 client application in PingOne for use with the Orchestration SDKs for Android and iOS, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Applications > Applications.
->
-> 3. Next to the Applications label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add Application panel.
->
-> 4. In Application Name, enter a name for the profile, for example `sdkNativeClient`
->
-> 5. Select Native as the Application Type, and then click Save.
->
-> 6. On the Configuration tab, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Grant Type, select the following values:
->
->       `Authorization Code`
->
->       `Refresh Token`
->
->    2. In Redirect URIs, enter the following values:
->
->       `com.example.demo://oauth2redirect`
->
->    3. In Token Endpoint Authentication Method, select `None`.
->
->    4. In the **Advanced Settings** section, enable **Terminate User Session by ID Token**.
->
->    5. Click Save.
->
-> 7. On the Resources tab, next to Allowed Scopes, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Scopes, select the following values:
->
->       `email`
->
->       `phone`
->
->       `profile`
->
->       |   |                                            |
->       | - | ------------------------------------------ |
->       |   | The `openid` scope is selected by default. |
->
->       The result resembles the following:
->
->       ![Adding scopes to an application.](../../_images/pingone-oidc-native-scopes-en.png)Figure 1. Adding scopes to an application.
->
-> 8. Optionally, on the Policies tab, click the pencil icon ([icon: pencil, set=fa]) to select the authentication policies for the application.
->
->    |   |                                                                                                                                        |
->    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Applications that have no authentication policy assignments use the environment's default authentication policy to authenticate users. |
->
->    If you have a DaVinci license, you can select PingOne policies or DaVinci Flow policies, but not both. If you do not have a DaVinci license, the page only displays PingOne policies.
->
->    To use a *PingOne policy*:
->
->    1. Click [icon: plus, set=fa]Add policies and then select the policies that you want to apply to the application.
->
->    2. Click Save.
->
->       PingOne applies the policies in the order in which they appear in the list. PingOne evaluates the first policy in the list first. If the requirements are not met, PingOne moves to the next one.
->
->       For more information, see [Authentication policies for applications](https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html).
->
->    To use a *DaVinci Flow policy*:
->
->    1. You must clear all PingOne policies. Click Deselect all PingOne Policies.
->
->    2. In the confirmation message, click Continue.
->
->    3. On the DaVinci Policies tab, select the policies that you want to apply to the application.
->
->    4. Click Save.
->
->       PingOne applies the first policy in the list.
->
-> 9. Click Save.
->
-> 10. Enable the OAuth 2.0 client application by using the toggle next to its name:
->
->     ![Enable the application using the toggle.](../../_images/pingone-apps-enable-native-client-en.png)Figure 2. Enable the application using the toggle.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Android and iOS PingOne example applications and tutorials covered by this documentation.
-
-This tutorial requires you to configure your PingOne Advanced Identity Cloud tenant as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Identities > Manage.
->
-> 3. Click [icon: plus, set=fa]New Alpha realm - User.
->
-> 4. Enter the following details:
->
->    * **Username** = `demo`
->
->    * **First Name** = `Demo`
->
->    * **Last Name** = `User`
->
->    * **Email Address** = `demo.user@example.com`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Applications.
->
-> 3. Click [icon: plus, set=fa]Custom Application.
->
-> 4. Select OIDC - OpenId Connect as the sign-in method, and then click Next.
->
-> 5. Select Native / SPA as the application type, and then click Next.
->
-> 6. In Name, enter a name for the application, such as `Public SDK Client`.
->
-> 7. In Owners, select a user that is responsible for maintaining the application, and then click Next.
->
->    |   |                                                                                    |
->    | - | ---------------------------------------------------------------------------------- |
->    |   | When trying out the SDKs, you could select the `demo` user you created previously. |
->
-> 8. In Client ID, enter `sdkPublicClient`
->
-> 9. Select **Configure for SDK Sample Apps**.
->
-> 10. Click Create Application.
->
->     PingOne Advanced Identity Cloud creates the application and displays the details screen.
->
-> 11. On the Sign On tab:
->
->     1. In Sign-In URLs, ensure the following values appear, or add them if they don't:
->
->        `com.example.demo://oauth2redirect`
->
->        `https://demo.example.com/oauth2redirect`
->
->        |   |                                                             |
->        | - | ----------------------------------------------------------- |
->        |   | Also add any other domains where you host SDK applications. |
->
->     2. In Grant Types, ensure the following values appear:
->
->        `Authorization Code`
->
->        `Refresh Token`
->
->     3. In Scopes, ensure the following values appear:
->
->        `openid profile email address`
->
-> 12. Click Show advanced settings, and on the Authentication tab, confirm the following properties:
->
->     1. In Token Endpoint Authentication Method, select `none`.
->
->     2. In Client Type, select `Public`.
->
->     3. Enable the Implied Consent property.
->
-> 13. Click Save.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 3. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingOne Advanced Identity Cloud OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Native Consoles > Access Management.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
-This tutorial requires you to configure your AM server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingAM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: address-card, set=fa]Identities, and then click [icon: plus, set=fa]Add Identity.
->
-> 3. Enter the following details:
->
->    * **User ID** = `demo`
->
->    * **Password** = `Ch4ng3it!`
->
->    * **Email Address** = `demo.user@example.com`
->
-> 4. Click Create.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in AM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: list-alt, set=fa]Applications > OAuth 2.0 > Clients, and then click [icon: plus, set=fa]Add Client.
->
-> 3. In Client ID, enter `sdkPublicClient`.
->
-> 4. Leave Client secret empty.
->
-> 5. In Redirection URIs, enter the following values:
->
->    `com.example.demo://oauth2redirect`
->
->    https\://demo.example.com/oauth2redirect
->
->    |   |                                                                        |
->    | - | ---------------------------------------------------------------------- |
->    |   | Also add any other domains where you will be hosting SDK applications. |
->
-> 6. In Scopes, enter the following values:
->
->    `openid profile email address`
->
-> 7. Click Create.
->
->    PingAM creates the new OAuth 2.0 client, and displays the properties for further configuration.
->
-> 8. On the Core tab:
->
->    1. In Client type, select `Public`.
->
->    2. Disable Allow wildcard ports in redirect URIs.
->
->    3. Click Save Changes.
->
-> 9. On the Advanced tab:
->
->    1. In Grant Types, enter the following values:
->
->       ```none
->       Authorization Code
->       Refresh Token
->       ```
->
->    2. In Token Endpoint Authentication Method, select `None`.
->
->    3. Enable the Implied consent property.
->
-> 10. Click Save Changes.
-
-> **Collapse: Task 3. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingAM OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
-This tutorial requires you to configure your PingFederate server as follows:
-
-> **Collapse: Task 1. Register a public OAuth 2.0 client**
->
-> OAuth 2.0 client application profiles define how applications connect to PingFederate and obtain OAuth 2.0 tokens.
->
-> To allow the Orchestration SDKs to connect to PingFederate and obtain OAuth 2.0 tokens, you must register an OAuth 2.0 client application:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **Applications** [icon: angle-right, set=fa] **OAuth** [icon: angle-right, set=fa] **Clients**.
->
-> 3. Click **Add Client**.
->
->    PingFederate displays the **Clients | Client** page.
->
-> 4. In **Client ID** and **Name**, enter a name for the profile, for example `sdkPublicClient`
->
->    Make a note of the **Client ID** value, you will need it when you configure the sample code.
->
-> 5. In **Client Authentication**, select `None`.
->
-> 6. In **Redirect URIs**, add the following:
->
->    `com.example.demo://oauth2redirect`
->
->    https\://demo.example.com/oauth2redirect
->
->    |   |                                                                                                                                                                                                                                                                                   |
->    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Also add any other URLs where you host SDK applications.Failure to add redirect URLs that exactly match your client app's values can cause PingFederate to display an error message such as `Redirect URI mismatch` when attempting to end a session by redirecting from the SDK. |
->
-> 7. In **Allowed Grant Types**, select the following values:
->
->    `Authorization Code`
->
->    `Refresh Token`
->
-> 8. In the **OpenID Connect** section:
->
->    1. In **Logout Mode**, select **Ping Front-Channel**
->
->    2. In **Front-Channel Logout URIs**, add the following:
->
->       `com.example.demo://oauth2redirect`
->
->       https\://demo.example.com/oauth2redirect
->
->       |   |                                                                                                                                                                                                                                                                                                                       |
->       | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->       |   | Also add any other URLs that redirect users to PingFederate to end their session.Failure to add sign off URLs that exactly match your client app's values can cause PingFederate to display an error message such as `invalid post logout redirect URI` when attempting to end a session by redirecting from the SDK. |
->
->    3. In **Post-Logout Redirect URIs**, add the following:
->
->       `com.example.demo://oauth2redirect`
->
->       https\://demo.example.com/oauth2redirect
->
-> 9. Click Save.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Orchestration SDK PingFederate example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 2. Configure CORS**
->
-> [Cross-origin resource sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS) lets user agents make cross-domain server requests. In PingFederate, you can configure CORS to allow browsers or apps from trusted domains to access protected resources.
->
-> To configure CORS in PingFederate follow these steps:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **System** [icon: angle-right, set=fa] **OAuth Settings** [icon: angle-right, set=fa] **Authorization Server Settings**.
->
-> 3. In the **Cross-Origin Resource Sharing Settings** section, in the **Allowed Origin** field, enter any DNS aliases you use for your SDK apps.
->
->    This documentation assumes the following configuration:
->
->    | Property         | Values                              |
->    | ---------------- | ----------------------------------- |
->    | `Allowed Origin` | `com.example.demo://oauth2redirect` |
->
-> 4. Click **Save**.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    Your PingFederate server is now able to accept connections from origins hosting apps built with the Orchestration SDKs.
-
-## Step 1. Configuring your app to handle redirects
-
-After completing authentication in the browser, the server redirects the user back to your application, by using the value of the `redirect_uri` parameter.
-
-You need to configure your app to open and accept the data the server sends as part of the redirect.
-
-There are two methods for configuring an Android app to handle redirect URIs. To ensure that only your app is able to obtain authorization tokens during centralized sign-on we recommend you configure it to use [Universal Links](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app?language=objc).
-
-If you don't want to implement Universal Links, you can instead use a custom scheme for your redirect URIs.
-
-* Apple Universal Links
-
-* Custom scheme
-
-You can configure your iOS app to open and handle redirects that use the HTTPS protocol.
-
-Using this method, your redirect URI will resemble the following:
-
-`https://demo.example.com/oauth2redirect`
-
-To configure universal Links in an iOS application, perform the following steps:
-
-1. In Xcode, in the Project Navigator, double-click your application to open the Project pane.
-
-2. On the Signing & Capabilities tab, click [icon: plus, set=fa]Capability, type `Associated Domains`, and then double click the result to add the capability.
-
-3. In Domains, click the Add ([icon: plus, set=fa]) button, and enter `applinks:`, followed by the hostname that will be used in your redirect URIs.
-
-   ![Adding an associated domain in Xcode](../../_images/xcode-associated-domain.png)
-
-   The host value must match the domain where you upload the `apple-app-site-association` file.
-
-4. Create or update an `apple-app-site-association` file that associates your app with the domain.
-
-   You must host the file in a `.well-known` folder on the same host that you entered in the intent filter earlier.
-
-   The file will resemble the following:
-
-   https\://ios.example.com/.well-known/apple-app-site-association
-
-   ```json
-   {
-     "applinks": {
-         "details": [
-              {
-                "appIDs": [ "XXXXXXXXXX.com.example.AppName" ],
-                "components": [
-                  {
-                     "/": "/oauth2redirect",
-                     "comment": "Associate my app with the OAuth 2.0 redirect URI."
-                  }
-                ]
-              }
-          ]
-      }
-   }
-   ```
-
-5. Upload the completed file to the domain that matches the host value you configured in the earlier step.
-
-   For information on uploading an `apple-app-site-association` file to an Advanced PingOne Advanced Identity Cloud instance, refer to [Upload an iOS apple-app-site-association file](https://docs.pingidentity.com/pingoneaic/latest/end-user/upload-ios-apple-app-site-association.html).
-
-   For learn more information about Universal Links and associating domains, refer to the following in the Apple Developer documentation:
-
-   * [Supporting universal links in your app](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app?language=objc)
-
-   * [Supporting associated domains](https://developer.apple.com/documentation/xcode/supporting-associated-domains?language=objc)
-
-6. Add the Universal Link to the Redirection URIs property of your OAuth 2.0 client. For example, `https://demo.example.com/oauth2redirect`
-
-You can configure your iOS app to open and handle redirects that use a custom scheme, rather than HTTPS.
-
-Using this method, your redirect URI will resemble the following:
-
-`com.example.demo://oauth2redirect`
-
-To configure a custom scheme in an iOS application, perform the following steps:
-
-1. In Xcode, in the Project Navigator, double-click your application to open the Project pane.
-
-2. On the Info tab, in the URL Types panel, configure your custom URL scheme:
-
-   ![Custom URL Scheme](../../_images/xcode_custom_scheme.png)
-
-3. Add the custom URL scheme to the **Redirect URIs** property of your OAuth 2.0 client.
-
-   ![PingOne redirect URLs](../../_images/pingone_mobile_redirect.png)
-
-   |   |                                                                                                                            |
-   | - | -------------------------------------------------------------------------------------------------------------------------- |
-   |   | In an Advanced Identity Cloud tenant, enter redirect URIs in the **Sign-in URLs** field, in the **General Settings** pane. |
-
-## Step 2. Installing modules
-
-To use the DaVinci client for iOS, use Swift Package Manager (SPM) or Cocoapods to add the dependencies to your project.
-
-* SPM (Swift Package Manager)
-
-* CocoaPods
-
-You can install packages by using SPM (Swift Package Manager) on the iOS project.
-
-1. In Xcode, in the Project Navigator, right-click your project, and then click Add Package Dependencies…​.
-
-2. In the **Search or Enter Package URL** field, enter the URL of the repo containing the DaVinci Client for iOS, `https://github.com/ForgeRock/ping-ios-sdk.git`.
-
-3. In **Add to Project**, select the name of your project, and then click **Add Package**.
-
-   Xcode shows a dialog containing the libraries available in the OIDC module for iOS.
-
-4. Select the `PingOidc` library, and in the **Add to Target** column select the name of your project.
-
-5. Repeat the previous step for any other OIDC module libraries you want to add to your project.
-
-6. Click **Add Package**.
-
-   Xcode displays the chosen libraries and any prerequisites they might have in the **Package Dependencies** pane of the Project Navigator.
-
-1) If you don't already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
-
-2) If you don't already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
-
-   ```
-   pod init
-   ```
-
-3) Add the following lines to your Podfile:
-
-   ```
-   pod 'PingOidc'
-   ```
-
-4) Run the following command to install pods:
-
-   ```
-   pod install
-   ```
-
-## Step 3. Configuring connection properties
-
-Configure the `PingOidc` module to connect to your OpenID Connect 1.0-compliant authorization server:
-
-Required parameters to configure the `PingOidc` module
-
-```swift
-public let oidcLogin = OidcWebClient.createOidcWebClient { config in
-    config.module(PingOidc.OidcModule.config) { oidcValue in
-        oidcValue.discoveryEndpoint = "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        oidcValue.redirectUri = "https://demo.example.com/oauth2redirect"
-        oidcValue.scopes = ["openid", "email", "address", "profile", "phone"]
-    }
-}
-```
-
-Update the following properties with values that match your environment:
-
-* *discoveryEndpoint*
-
-  The `.well-known` endpoint from your OAuth 2.0 application.
-
-  > **Collapse: How do I find my PingOne .well-known URL?**
-  >
-  > To find the `.well-known` endpoint for an OAuth 2.0 client in PingOne:
-  >
-  > 1. Log in to your PingOne administration console.
-  >
-  > 2. Go to **Applications > Applications**, and then select your OAuth 2.0 client.
-  >
-  >    For example, sdkPublicClient.
-  >
-  > 3. On the **Overview** tab, expand the **Connection Details** section, and then copy the **OIDC Discovery Endpoint** value.
-  >
-  >    ![Locating the .well-known URL in a PingOne client profile.](../../_images/p1-client-well-known.png)
-
-  > **Collapse: How do I form my PingFederate .well-known URL?**
-  >
-  > To form the `.well-known` endpoint for a PingFederate server:
-  >
-  > 1. Log in to your PingFederate administration console.
-  >
-  > 2. Navigate to **System** [icon: angle-right, set=fa] **Server** [icon: angle-right, set=fa] **Protocol Settings**.
-  >
-  > 3. Make a note of the **Base URL** value.
-  >
-  >    For example, `https://pingfed.example.com`
-  >
-  >    |   |                                   |
-  >    | - | --------------------------------- |
-  >    |   | Do not use the admin console URL. |
-  >
-  > 4. Append `/.well-known/openid-configuration` after the base URL value to form the `.well-known` endpoint of your server.
-  >
-  >    For example, `https://pingfed.example.com/.well-known/openid-configuration`.
-  >
-  >    The SDK reads the OAuth 2.0 paths it requires from this endpoint.
-
-  > **Collapse: How do I find my PingOne Advanced Identity Cloud  URL?**
-  >
-  > You can view the `.well-known` endpoint for an OAuth 2.0 client in the PingOne Advanced Identity Cloud admin console:
-  >
-  > 1. Log in to your PingOne Advanced Identity Cloud administration console.
-  >
-  > 2. Click Applications, and then select the OAuth 2.0 client you created earlier. For example, sdkPublicClient.
-  >
-  > 3. On the Sign On tab, in the Client Credentials section, copy the Discovery URI value.
-  >
-  >    For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/alpha/.well-known/openid-configuration`
-  >
-  > |   |                                                                                                                                                                                                                                                                                                                                 |
-  > | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  > |   | If you are using a custom domain, your `.well-known` is formed as follows:`https://<custom-domain-fqdn>/.well-known/openid-configuration`Learn more in [Access OIDC configuration discovery endpoint](https://docs.pingidentity.com/pingoneaic/latest/realms/custom-domains.html#access-oidc-configuration-discovery-endpoint). |
-
-  > **Collapse: How do I find my PingAM  URL?**
-  >
-  > To form the `.well-known` URL for an PingAM server, concatenate the following information into a single URL:
-  >
-  > 1. The base URL of the PingAM component of your deployment, including the port number and deployment path.
-  >
-  >    For example, `https://openam.example.com:8443/openam`
-  >
-  > 2. The string `/oauth2`
-  >
-  > 3. The hierarchy of the realm that contains the OAuth 2.0 client.
-  >
-  >    You must specify the entire hierarchy of the realm, starting at the Top Level Realm. Prefix each realm in the hierarchy with the `realms/` keyword.
-  >
-  >    For example, `/realms/root/realms/customers`
-  >
-  >    |   |                                                                                 |
-  >    | - | ------------------------------------------------------------------------------- |
-  >    |   | If you omit the realm hierarchy, the top level `ROOT` realm is used by default. |
-  >
-  > 4. The string `/.well-known/openid-configuration`
-  >
-  > For example, `https://openam.example.com:8443/openam/oauth2/realms/root/.well-known/openid-configuration`
-
-  For example, `https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`
-
-* *clientId*
-
-  The client ID of your OAuth 2.0 application.
-
-  For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`
-
-* *redirectUri*
-
-  The redirect URI as configured in the OAuth 2.0 client profile.
-
-  This value must exactly match one of the values configured in your OAuth 2.0 client.
-
-  For example:
-
-  * Universal link / HTTPS redirect URI:
-
-    `https://demo.example.com/oauth2redirect`
-
-  * Custom scheme redirect URI:
-
-    `com.example.demo://oauth2redirect`
-
-* *scopes*
-
-  The scopes you added to your OAuth 2.0 application.
-
-  For example, `"openid", "email", "address", "profile", "phone"`
-
-You can pass optional OAuth 2.0 parameters into configuration to affect the sign-on flow on the server.
-
-Adding optional parameters when configuring the `PingOidc` module
-
-```swift
-public let oidcLogin = OidcWebClient.createOidcWebClient { config in
-    config.module(PingOidc.OidcModule.config) { oidcValue in
-        oidcValue.discoveryEndpoint = "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        oidcValue.redirectUri = "https://demo.example.com/oauth2redirect"
-        oidcValue.scopes = ["openid", "email", "address", "profile", "phone"]
-        oidcValue.acrValues = "Single_Factor%20Multi_Factor"
-        oidcValue.loginHint = "demo.user@example.com"
-        oidcValue.additionalParameters = ["myCustomParam" : "myCustomValue"]
-    }
-}
-```
-
-For example, you can add the following parameters:
-
-* *acrValues*
-
-  An optional space-separated list of Authentication Context Class Reference (`acr`) values, in order of preference.
-
-  The server can use these values to help determine how the user should be authenticated.
-
-  For example, you can specify a DaVinci flow policy ID, or PingOne policy names to request that PingOne follows a particular path to authenticate the user.
-
-  The Orchestration SDK sends this as the `acr_values` parameter in the authentication request, as per the specification.
-
-* *loginHint*
-
-  An optional string that lets the server know what identifier the user might use to authenticate with.
-
-  The server can use this to pre-populate a sign-on form, or to customize the UI to match a particular brand or organization.
-
-  The Orchestration SDK sends this as the `login_hint` parameter in the authentication request, as per the specification.
-
-* *additionalParameters*
-
-  Add any additional key-value query parameters your environment might require to complete an OAuth 2.0 flow.
-
-Learn more about OAuth 2.0 authentication request parameters in [Authentication Request](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest), in the *OpenID Connect Core 1.0* specification.
-
-### Configure the browser type used for OIDC sign-on
-
-You can configure the type of browser iOS uses for the OIDC sign-on flow, by adding the `browserType` property to the `PingOIDC` module configuration:
-
-Required parameters to configure the `PingOidc` module
-
-```swift
-public let oidcLogin = OidcWebClient.createOidcWebClient { config in
-    config.browserType = .authSession
-    config.module(PingOidc.OidcModule.config) { oidcValue in
-        oidcValue.discoveryEndpoint = "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        oidcValue.redirectUri = "https://demo.example.com/oauth2redirect"
-        oidcValue.scopes = ["openid", "email", "address", "profile", "phone"]
-    }
-}
-```
-
-Each browser type has different characteristics, which make them suitable to different scenarios, as outlined in this table:
-
-|                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Browser type            | Characteristics                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `.authSession`          | Opens a [web authentication session](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) browser.Designed specifically for authentication sessions, however it prompts the user before opening the browser with a modal that asks them to confirm the domain is allowed to authenticate them.This is the default option in the Orchestration SDK for iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `.ephemeralAuthSession` | Opens a [web authentication session](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) browser, but enables the [`prefersEphemeralWebBrowserSession`](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/prefersephemeralwebbrowsersession) parameter.This browser type *does not* prompt the user before opening the browser with a modal.The difference between this and `.authSession` is that the browser does not include any existing data such as cookies in the request, and also discards any data obtained during the browser session, including any session tokens.When is `ephemeralAuthSession` suitable:- [icon: times, set=fa]`ephemeralAuthSession` is *not* suitable when you require single sign-on (SSO) between your iOS apps, as the browser will not maintain session tokens.
-
-- [icon: times, set=fa]`ephemeralAuthSession` is *not* suitable when you require a session token to log a user out of the server, for example for logging out of PingOne, as the browser will not maintain session tokens.
-
-- [icon: check, set=fa]Use `ephemeralAuthSession` when you do not want the user's existing sessions to affect the authentication. |
-
-## Step 4. Starting the OAuth 2.0 flow
-
-The `PingOidc` module provides the `authorize()` method, which launches the web browsers and starts the OAuth 2.0 flow.
-
-Start the OAuth 2.0 flow by using the `authorize()` method
-
-```swift
-let state = try await oidcLogin.authorize()
-
-// Handle the state
-switch oidcLogin.state {
-case .success( _ ):
-    ...
-case .failure(let error):
-    ...
-case .none:
-    ...
-}
-```
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can inject or override OAuth 2.0 parameters, and pass custom key-pair values when starting the OAuth 2.0 flow with the `authorize()` method.Adding parameters when using the `authorize()` method```swift
-let state = try await oidcLogin.authorize { options in
-    options.acrValues = "Single_Factor%20Multi_Factor"
-    options.loginHint = "demo.user@example.com"
-    options.additionalParameters = ["myCustomParam" : "myCustomValue"]
-}
-``` |
-
-## Step 5. Obtaining an Access Token
-
-After successfully starting the OAuth 2.0 flow and authenticating the user, the server redirects control back to your application. Your application receives the OAuth 2.0 `code` and `state` parameters it needs to continue the flow and obtain an access token.
-
-To obtain an access token on behalf of a user, follow these steps:
-
-1. Create an object that represents a user's authentication session by using the `oidcLoginUser()` method:
-
-   Create a user object by calling the `oidcLoginUser()` method
-
-   ```swift
-   let oidcLoginUser = await oidcLogin.oidcLoginUser()
-   ```
-
-2. Retrieve a token on behalf of the user by calling the `token()` method on your `oidcLoginUser` object, and handle the result:
-
-   Obtain an access token for a user by calling `oidcLoginUser.token()` and handle the result
-
-   ```swift
-   let token = await oidcLoginUser.token()
-   ```
-
-## Step 6. Revoking tokens and signing out
-
-You can call the following methods on your `oidcLoginUser` object to revoke OAuth 2.0 tokens, and sign out the user from the server:
-
-* `oidcLoginUser?.revoke()`
-
-  Revokes the OAuth 2.0 tokens on the server, and deletes them from storage.
-
-* `oidcLoginUser?.logout()`
-
-  Removes an session tokens the user may have, and contacts the server to end the user's session.
-
----
-
----
-title: Configuring JavaScript apps for OIDC sign-on
-description: Configure JavaScript apps to use OIDC centralized sign-on with PingOne, PingOne Advanced Identity Cloud, PingAM, or any OIDC-compliant authorization server
-component: orchsdks
-page_id: orchsdks:oidc:usage/javascript-centralized-login
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/usage/javascript-centralized-login.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Tue, 17 Oct 2025 11:22:33 +0100
-keywords: ["OAuth 2.0", "OpenID Connect", "Setup &amp; Configuration", "Source Code", "Integration", "SDK", "JavaScript", "SPA"]
-section_ids:
-  javascript_oidc_server_config: Before you begin
-  javascript_oidc_modules: Step 1. Installing modules
-  javascript_oidc_properties: Step 2. Configuring connection properties
-  javascript_oidc_start_oauth2: Step 3. Starting the OAuth 2.0 flow
-  javascript_oidc_access_token: Step 4. Obtaining an Access Token
-  javascript_oidc_user_info: Step 5. Obtaining user info
-  javascript_oidc_logout: Step 6. Revoking tokens and signing out
----
-
-# Configuring JavaScript apps for OIDC sign-on
-
-[icon: circle-check, set=far]PingOne [icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: circle-check, set=far]OIDC-compliant servers [icon: js, set=fab]JavaScript
-
-You can configure your JavaScript apps to use your authorization server's UI, or your own web application, for sign-on requests.
-
-When a user attempts to sign on to your app it redirects them to the central sign-on UI. After the user authenticates, the authorization server redirects them back to your application or site.
-
-Changes to authentication journeys or flows on your authorization server are available to all your apps that use the OIDC sign-on method, without the need to rebuild or redistribute the app. Likewise, any rebranding applied to your central sign-on UI is reflected immediately in your client apps.
-
-Your app doesn't need to access user credentials directly, just the result of the authentication from the server—usually an access token.
-
-To configure an JavaScript app to perform OIDC sign-on, complete each of the following steps:
-
-* [Before you begin](#javascript_oidc_server_config)
-
-* [Step 1. Installing modules](#javascript_oidc_modules)
-
-* [Step 2. Configuring connection properties](#javascript_oidc_properties)
-
-* [Step 3. Starting the OAuth 2.0 flow](#javascript_oidc_start_oauth2)
-
-* [Step 4. Obtaining an Access Token](#javascript_oidc_access_token)
-
-* [Step 5. Obtaining user info](#javascript_oidc_user_info)
-
-* [Step 6. Revoking tokens and signing out](#javascript_oidc_logout)
-
-## Before you begin
-
-You need to prepare your server for OIDC sign-on. Select your server from the options below and complete the tasks before proceeding to configure your application.
-
-* PingOne
-
-* Advanced Identity Cloud
-
-* AM
-
-* PingFederate
-
-This tutorial requires you to configure your PingOne server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Directory > Users.
->
-> 3. Next to the Users label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add User panel.
->
-> 4. Enter the following details:
->
->    * **Given Name** = `Demo`
->
->    * **Family Name** = `User`
->
->    * **Username** = `demo`
->
->    * **Email** = `demo.user@example.com`
->
->    * **Population** = `Default`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> To register a *public* OAuth 2.0 client application in PingOne for use with the Orchestration SDK for JavaScript, follow these steps:
->
-> 1. Log in to your PingOne administration console.
->
-> 2. In the left panel, navigate to Applications > Applications.
->
-> 3. Next to the Applications label, click the plus icon ([icon: plus, set=fa]).
->
->    PingOne displays the Add Application panel.
->
-> 4. In Application Name, enter a name for the profile, for example `sdkPublicClient`
->
-> 5. Select OIDC Web App as the Application Type, and then click Save.
->
-> 6. On the Configuration tab, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Grant Type, select the following:
->
->       `Authorization Code`
->
->       `Refresh Token`
->
->    2. In Redirect URIs, enter the following:
->
->       `https://localhost:8443/callback.html`
->
->       |   |                                                                                                                                                                                                                                                                              |
->       | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->       |   | Also add any other URLs where you host SDK applications.Failure to add redirect URLs that exactly match your client app's values can cause PingOne to display an error message such as `Redirect URI mismatch` when attempting to end a session by redirecting from the SDK. |
->
->    3. In Token Endpoint Authentication Method, select `None`.
->
->    4. In Signoff URLs, enter the following:
->
->       `https://localhost:8443`
->
->       |   |                                                                                                                                                                                                                                                                                                             |
->       | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->       |   | Also add any other URLs that redirect users to PingOne to end their session.Failure to add sign off URLs that exactly match your client app's values can cause PingOne to display an error message such as `invalid post logout redirect URI` when attempting to end a session by redirecting from the SDK. |
->
->    5. In CORS Settings, in the drop-down select Allow specific origins, and in the Allowed Origins field, enter the URL where you will be running the sample app.
->
->       For example, `https://localhost:8443`
->
->    6. In the **Advanced Settings** section, enable **Terminate User Session by ID Token**.
->
->    7. Click Save.
->
-> 7. On the Resources tab, next to Allowed Scopes, click the pencil icon ([icon: pencil, set=fa]).
->
->    1. In Scopes, select the following values:
->
->       `email`
->
->       `phone`
->
->       `profile`
->
->       |   |                                            |
->       | - | ------------------------------------------ |
->       |   | The `openid` scope is selected by default. |
->
->       The result resembles the following:
->
->       ![Adding scopes to an application.](../../_images/pingone-oidc-scopes-en.png)Figure 1. Adding scopes to an application.
->
-> 8. Optionally, on the Policies tab, click the pencil icon ([icon: pencil, set=fa]) to select the authentication policies for the application.
->
->    |   |                                                                                                                                        |
->    | - | -------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Applications that have no authentication policy assignments use the environment's default authentication policy to authenticate users. |
->
->    If you have a DaVinci license, you can select PingOne policies or DaVinci Flow policies, but not both. If you do not have a DaVinci license, the page only displays PingOne policies.
->
->    To use a *PingOne policy*:
->
->    1. Click [icon: plus, set=fa]Add policies and then select the policies that you want to apply to the application.
->
->    2. Click Save.
->
->       PingOne applies the policies in the order in which they appear in the list. PingOne evaluates the first policy in the list first. If the requirements are not met, PingOne moves to the next one.
->
->       For more information, see [Authentication policies for applications](https://docs.pingidentity.com/pingone/applications/p1_auth_policies_for_applications.html).
->
->    To use a *DaVinci Flow policy*:
->
->    1. You must clear all PingOne policies. Click Deselect all PingOne Policies.
->
->    2. In the confirmation message, click Continue.
->
->    3. On the DaVinci Policies tab, select the policies that you want to apply to the application.
->
->    4. Click Save.
->
->       PingOne applies the first policy in the list.
->
-> 9. Click Save.
->
-> 10. Enable the OAuth 2.0 client application by using the toggle next to its name:
->
->     ![Enable the application using the toggle.](../../_images/pingone-apps-enable-client-en.png)Figure 2. Enable the application using the toggle.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the JavaScript example PingOne applications and tutorials covered by this documentation.
-
-This tutorial requires you to configure your PingOne Advanced Identity Cloud tenant as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Identities > Manage.
->
-> 3. Click [icon: plus, set=fa]New Alpha realm - User.
->
-> 4. Enter the following details:
->
->    * **Username** = `demo`
->
->    * **First Name** = `Demo`
->
->    * **Last Name** = `User`
->
->    * **Email Address** = `demo.user@example.com`
->
->    * **Password** = `Ch4ng3it!`
->
-> 5. Click Save.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in PingOne Advanced Identity Cloud, follow these steps:
->
-> 1. Log in to your PingOne Advanced Identity Cloud tenant.
->
-> 2. In the left panel, click Applications.
->
-> 3. Click [icon: plus, set=fa]Custom Application.
->
-> 4. Select OIDC - OpenId Connect as the sign-in method, and then click Next.
->
-> 5. Select Native / SPA as the application type, and then click Next.
->
-> 6. In Name, enter a name for the application, such as `Public SDK Client`.
->
-> 7. In Owners, select a user that is responsible for maintaining the application, and then click Next.
->
->    |   |                                                                                    |
->    | - | ---------------------------------------------------------------------------------- |
->    |   | When trying out the SDKs, you could select the `demo` user you created previously. |
->
-> 8. In Client ID, enter `sdkPublicClient`
->
-> 9. Select **Configure for SDK Sample Apps**.
->
-> 10. Click Create Application.
->
->     PingOne Advanced Identity Cloud creates the application and displays the details screen.
->
-> 11. On the Sign On tab:
->
->     1. In Sign-In URLs, ensure the following values appear, or add them if they don't:
->
->        `https://localhost:8443/callback.html`
->
->        |   |                                                             |
->        | - | ----------------------------------------------------------- |
->        |   | Also add any other domains where you host SDK applications. |
->
->     2. In Grant Types, ensure the following values appear:
->
->        `Authorization Code`
->
->        `Refresh Token`
->
->     3. In Scopes, ensure the following values appear:
->
->        `openid profile email address`
->
-> 12. Click Show advanced settings, and on the Authentication tab, confirm the following properties:
->
->     1. In Token Endpoint Authentication Method, select `none`.
->
->     2. In Client Type, select `Public`.
->
->     3. Enable the Implied Consent property.
->
-> 13. Click Save.
->
-> The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 3. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingOne Advanced Identity Cloud OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. In your PingOne Advanced Identity Cloud tenant, navigate to Native Consoles > Access Management.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
-This tutorial requires you to configure your AM server as follows:
-
-> **Collapse: Task 1. Create a demo user**
->
-> The samples and tutorials in this documentation often require that you have an identity set up so that you can test authentication.
->
-> To create a demo user in PingAM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: address-card, set=fa]Identities, and then click [icon: plus, set=fa]Add Identity.
->
-> 3. Enter the following details:
->
->    * **User ID** = `demo`
->
->    * **Password** = `Ch4ng3it!`
->
->    * **Email Address** = `demo.user@example.com`
->
-> 4. Click Create.
-
-> **Collapse: Task 2. Register a public OAuth 2.0 client**
->
-> Public clients do not use a client secret to obtain tokens because they are unable to keep them hidden. The Orchestration SDKs commonly use this type of client to obtain tokens, as they cannot guarantee safekeeping of the client credentials in a browser or on a mobile device.
->
-> To register a *public* OAuth 2.0 client application for use with the SDKs in AM, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. Navigate to [icon: list-alt, set=fa]Applications > OAuth 2.0 > Clients, and then click [icon: plus, set=fa]Add Client.
->
-> 3. In Client ID, enter `sdkPublicClient`.
->
-> 4. Leave Client secret empty.
->
-> 5. In Redirection URIs, enter the following values:
->
->    `https://localhost:8443/callback.html`
->
->    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
->    | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | The Orchestration SDK for JavaScript attempts to load the redirect page to capture the OAuth 2.0 `code` and `state` query parameters that the server appended to the redirect URL.If the page you redirect to does not exist, takes a long time to load, or runs any JavaScript you might get a timeout, delayed authentication, or unexpected errors.To ensure the best user experience, we ***highly recommend*** that you redirect to a static HTML page with minimal HTML and no JavaScript when obtaining OAuth 2.0 tokens. |
->
->    |   |                                                                        |
->    | - | ---------------------------------------------------------------------- |
->    |   | Also add any other domains where you will be hosting SDK applications. |
->
-> 6. In Scopes, enter the following values:
->
->    `openid profile email address`
->
-> 7. Click Create.
->
->    PingAM creates the new OAuth 2.0 client, and displays the properties for further configuration.
->
-> 8. On the Core tab:
->
->    1. In Client type, select `Public`.
->
->    2. Disable Allow wildcard ports in redirect URIs.
->
->    3. Click Save Changes.
->
-> 9. On the Advanced tab:
->
->    1. In Grant Types, enter the following values:
->
->       ```none
->       Authorization Code
->       Refresh Token
->       ```
->
->    2. In Token Endpoint Authentication Method, select `None`.
->
->    3. Enable the Implied consent property.
->
-> 10. Click Save Changes.
-
-> **Collapse: Task 3. Configure the OAuth 2.0 provider**
->
-> The provider specifies the supported OAuth 2.0 configuration options for a realm.
->
-> To ensure the PingAM OAuth 2.0 provider service is configured for use with the Orchestration SDKs, follow these steps:
->
-> 1. Log in to the PingAM admin UI as an administrator.
->
-> 2. In the left panel, click [icon: plug, set=fa]Services.
->
-> 3. In the list of services, click OAuth2 Provider.
->
-> 4. On the Core tab, ensure Issue Refresh Tokens is enabled.
->
-> 5. On the Consent tab, ensure Allow Clients to Skip Consent is enabled.
->
-> 6. Click Save Changes.
-
-This tutorial requires you to configure your PingFederate server as follows:
-
-> **Collapse: Task 1. Register a public OAuth 2.0 client**
->
-> OAuth 2.0 client application profiles define how applications connect to PingFederate and obtain OAuth 2.0 tokens.
->
-> To allow the Orchestration SDKs to connect to PingFederate and obtain OAuth 2.0 tokens, you must register an OAuth 2.0 client application:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **Applications** [icon: angle-right, set=fa] **OAuth** [icon: angle-right, set=fa] **Clients**.
->
-> 3. Click **Add Client**.
->
->    PingFederate displays the **Clients | Client** page.
->
-> 4. In **Client ID** and **Name**, enter a name for the profile, for example `sdkPublicClient`
->
->    Make a note of the **Client ID** value, you will need it when you configure the sample code.
->
-> 5. In **Client Authentication**, select `None`.
->
-> 6. In **Redirect URIs**, add the following:
->
->    `https://localhost:8443`
->
->    |   |                                                                                                                                                                                                                                                                                   |
->    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->    |   | Also add any other URLs where you host SDK applications.Failure to add redirect URLs that exactly match your client app's values can cause PingFederate to display an error message such as `Redirect URI mismatch` when attempting to end a session by redirecting from the SDK. |
->
-> 7. In **Allowed Grant Types**, select the following values:
->
->    `Authorization Code`
->
->    `Refresh Token`
->
-> 8. In the **OpenID Connect** section:
->
->    1. In **Logout Mode**, select **Ping Front-Channel**
->
->    2. In **Front-Channel Logout URIs**, add the following:
->
->       `https://localhost:8443`
->
->       |   |                                                                                                                                                                                                                                                                                                                       |
->       | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
->       |   | Also add any other URLs that redirect users to PingFederate to end their session.Failure to add sign off URLs that exactly match your client app's values can cause PingFederate to display an error message such as `invalid post logout redirect URI` when attempting to end a session by redirecting from the SDK. |
->
->    3. In **Post-Logout Redirect URIs**, add the following:
->
->       `https://localhost:8443`
->
-> 9. Click Save.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    The application is now configured to accept client connections from and issue OAuth 2.0 tokens to the Orchestration SDK PingFederate example applications and tutorials covered by this documentation.
-
-> **Collapse: Task 2. Configure CORS**
->
-> [Cross-origin resource sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS) lets user agents make cross-domain server requests. In PingFederate, you can configure CORS to allow browsers or apps from trusted domains to access protected resources.
->
-> To configure CORS in PingFederate follow these steps:
->
-> 1. Log in to the PingFederate administration console as an administrator.
->
-> 2. Navigate to **System** [icon: angle-right, set=fa] **OAuth Settings** [icon: angle-right, set=fa] **Authorization Server Settings**.
->
-> 3. In the **Cross-Origin Resource Sharing Settings** section, in the **Allowed Origin** field, enter any DNS aliases you use for your SDK apps.
->
->    This documentation assumes the following configuration:
->
->    | Property         | Values                   |
->    | ---------------- | ------------------------ |
->    | `Allowed Origin` | `https://localhost:8443` |
->
-> 4. Click **Save**.
->
->    |   |                                                                                                                                                                                                                                                                                                  |
->    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
->    |   | After changing PingFederate configuration using the administration console, you must replicate the changes to each server node in the cluster before they take effect.In the PingFederate administration console, navigate to **System > Server > Cluster Management**, and click **Replicate**. |
->
->    Your PingFederate server is now able to accept connections from origins hosting apps built with the Orchestration SDKs.
-
-## Step 1. Installing modules
-
-The OIDC client for JavaScript as available as an **npm** module at [@forgerock/oidc-client](https://www.npmjs.com/package/@forgerock/oidc-client?activeTab=readme).
-
-To install the module into your JavaScript project, run the following `npm` command:
-
-```shell
-npm install @forgerock/oidc-client@2.0.0
-```
-
-After installation, import the module into your app as follows:
-
-```typescript
-import { oidc } from '@forgerock/oidc-client';
-```
-
-## Step 2. Configuring connection properties
-
-Configure the `oidc` module to connect to your OpenID Connect 1.0-compliant authorization server:
-
-Required parameters to configure the `oidc` module
-
-```javascript
-const oidcClient = oidc({
-    config: {
-        clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
-        redirectUri: 'https://localhost:8443/callback.html',
-        scope: 'openid profile email phone',
-        serverConfig: {
-          wellknown:
-            'https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
-        },
-    },
-});
-```
-
-Update the following properties with values that match your environment:
-
-* *clientId*
-
-  The client ID of your OAuth 2.0 application.
-
-  For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`
-
-* *redirectUri*
-
-  The redirect URI as configured in the OAuth 2.0 client profile.
-
-  This value must exactly match one of the values configured in your OAuth 2.0 client.
-
-  For example, `https://localhost:8443/callback.html`
-
-* *scope*
-
-  The scopes you added to your OAuth 2.0 application.
-
-  For example, `openid profile email phone`
-
-* *serverConfig.wellknown*
-
-  The `.well-known` endpoint from your OAuth 2.0 application.
-
-  > **Collapse: How do I find my PingOne .well-known URL?**
-  >
-  > To find the `.well-known` endpoint for an OAuth 2.0 client in PingOne:
-  >
-  > 1. Log in to your PingOne administration console.
-  >
-  > 2. Go to **Applications > Applications**, and then select your OAuth 2.0 client.
-  >
-  >    For example, sdkPublicClient.
-  >
-  > 3. On the **Overview** tab, expand the **Connection Details** section, and then copy the **OIDC Discovery Endpoint** value.
-  >
-  >    ![Locating the .well-known URL in a PingOne client profile.](../../_images/p1-client-well-known.png)
-
-  > **Collapse: How do I form my PingFederate .well-known URL?**
-  >
-  > To form the `.well-known` endpoint for a PingFederate server:
-  >
-  > 1. Log in to your PingFederate administration console.
-  >
-  > 2. Navigate to **System** [icon: angle-right, set=fa] **Server** [icon: angle-right, set=fa] **Protocol Settings**.
-  >
-  > 3. Make a note of the **Base URL** value.
-  >
-  >    For example, `https://pingfed.example.com`
-  >
-  >    |   |                                   |
-  >    | - | --------------------------------- |
-  >    |   | Do not use the admin console URL. |
-  >
-  > 4. Append `/.well-known/openid-configuration` after the base URL value to form the `.well-known` endpoint of your server.
-  >
-  >    For example, `https://pingfed.example.com/.well-known/openid-configuration`.
-  >
-  >    The SDK reads the OAuth 2.0 paths it requires from this endpoint.
-
-  > **Collapse: How do I find my PingOne Advanced Identity Cloud  URL?**
-  >
-  > You can view the `.well-known` endpoint for an OAuth 2.0 client in the PingOne Advanced Identity Cloud admin console:
-  >
-  > 1. Log in to your PingOne Advanced Identity Cloud administration console.
-  >
-  > 2. Click Applications, and then select the OAuth 2.0 client you created earlier. For example, sdkPublicClient.
-  >
-  > 3. On the Sign On tab, in the Client Credentials section, copy the Discovery URI value.
-  >
-  >    For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/alpha/.well-known/openid-configuration`
-  >
-  > |   |                                                                                                                                                                                                                                                                                                                                 |
-  > | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  > |   | If you are using a custom domain, your `.well-known` is formed as follows:`https://<custom-domain-fqdn>/.well-known/openid-configuration`Learn more in [Access OIDC configuration discovery endpoint](https://docs.pingidentity.com/pingoneaic/latest/realms/custom-domains.html#access-oidc-configuration-discovery-endpoint). |
-
-  > **Collapse: How do I find my PingAM  URL?**
-  >
-  > To form the `.well-known` URL for an PingAM server, concatenate the following information into a single URL:
-  >
-  > 1. The base URL of the PingAM component of your deployment, including the port number and deployment path.
-  >
-  >    For example, `https://openam.example.com:8443/openam`
-  >
-  > 2. The string `/oauth2`
-  >
-  > 3. The hierarchy of the realm that contains the OAuth 2.0 client.
-  >
-  >    You must specify the entire hierarchy of the realm, starting at the Top Level Realm. Prefix each realm in the hierarchy with the `realms/` keyword.
-  >
-  >    For example, `/realms/root/realms/customers`
-  >
-  >    |   |                                                                                 |
-  >    | - | ------------------------------------------------------------------------------- |
-  >    |   | If you omit the realm hierarchy, the top level `ROOT` realm is used by default. |
-  >
-  > 4. The string `/.well-known/openid-configuration`
-  >
-  > For example, `https://openam.example.com:8443/openam/oauth2/realms/root/.well-known/openid-configuration`
-
-  For example, `https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`
-
-## Step 3. Starting the OAuth 2.0 flow
-
-The `oidc` module provides two choices for starting an OAuth 2.0 flow.
-
-* Redirect
-
-  The module obtains the URL for authenticating users from your authorization server (AS) and adds the necessary parameters.
-
-  You then redirect the user to the URL to authenticate, after which the AS redirects them back to your application.
-
-* Background
-
-  If the user already has a session, the module can attempt to start an OAuth 2.0 flow in the background. The module makes a request to your authorization server (AS) in an iframe using the session tokens.
-
-  On success, the AS returns the `code` and `state` parameters, ready to exchange for an access token, without having to redirect to the AS.
-
-  On failure, for example if the session isn't valid, the request returns the URL to redirect to for authentication, just like in the redirect method above.
-
-- Redirect
-
-- Background
-
-Use the `oidcClient.authorize.url()` function to determine the URL to use to authenticate the user.
-
-Redirect the user to the URL you receive to authenticate.
-
-On success, the AS redirects the user back to your app, and includes the `code` and `state` parameters that you can exchange for an access token.
-
-Starting an OAuth 2.0 flow by using the `authorize.url()` function
-
-```javascript
-const authorizeUrl = await oidcClient.authorize.url();
-
-if (typeof authorizeUrl !== 'string' && 'error' in authorizeUrl) {
-  console.error('Authorization URL Error:', authorizeUrl);
-  displayError(authorizeUrl);
-  return;
-} else {
-  console.log('Authorization URL:', authorizeUrl);
-  window.location.assign(authorizeUrl);
-}
-```
-
-Use the `oidcClient.authorize.background()` function to attempt to get OAuth 2.0 tokens for a user without having to redirect to the AS.
-
-The AS responds with either the `code` and `state` parameters that you can exchange for an access token, or a `redirectUrl` to use for authenticating the user.
-
-Starting an OAuth 2.0 flow by using the `background()` function
-
-```javascript
-const response = await oidcClient.authorize.background();
-
-if ('error' in response) {
-  console.error('Authorization Error:', response);
-
-  if (response.redirectUrl) {
-    window.location.assign(response.redirectUrl);
-  } else {
-    console.log('Authorization failed with no ability to redirect:', response);
-  }
-  return;
-
-// Handle success response from background authorization
-} else if ('code' in response) {
-  console.log('Authorization Code:', response.code);
-}
-```
-
-## Step 4. Obtaining an Access Token
-
-After starting the OAuth 2.0 flow and authenticating the user, the server redirects control back to your application. Your application receives the OAuth 2.0 `code` and `state` parameters it needs to continue the flow and obtain an access token.
-
-Use the `token.exchange()` function to obtain an access token on behalf of the user, passing in the `code` and `state` parameters:
-
-Obtain an access token for a user by calling `token.exchange()` and handle the result
-
-```javascript
-const code = urlParams.get('code');
-const state = urlParams.get('state');
-
-if (code && state) {
-  const response = await oidcClient.token.exchange(code, state);
-  displayTokenResponse(response);
-}
-```
-
-## Step 5. Obtaining user info
-
-The `oidc` module implements a `user` object that represents a user's authentication session.
-
-Call the `info()` function on this object to retrieve details about the user from the server:
-
-```javascript
-const userInfo = await oidcClient.user.info();
-
-if ('error' in userInfo) {
-  console.error('User Info Error:', userInfo);
-} else {
-  console.log('User Info:', userInfo);
-}
-```
-
-## Step 6. Revoking tokens and signing out
-
-You can call the following functions to revoke OAuth 2.0 tokens, and sign out the user from the server:
-
-* `oidcClient.token.revoke()`
-
-  Revokes the OAuth 2.0 tokens on the server, and deletes them from storage.
-
-* `oidcClient.user.logout()`
-
-  Removes any session tokens the user may have, and contacts the server to end the user's session.
-
----
-
----
-title: Configuring logging in JavaScript
-description: Configure logging levels and customize logging output for the Orchestration SDK OIDC JavaScript client to aid debugging and troubleshoot authentication flows
-component: orchsdks
-page_id: orchsdks:oidc:customization/logging/javascript-custom-logging
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/customization/logging/javascript-custom-logging.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OIDC", "JavaScript", "Logging", "Debug", "Console"]
-section_ids:
-  configuring_javascript_logging: Configuring JavaScript logging
-  customize-logger-javascript: Customizing JavaScript logging
----
-
-# Configuring logging in JavaScript
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: circle-check, set=far]PingOne [icon: js, set=fab]JavaScript
-
-When you develop applications with the Orchestration SDK, you might need to understand its internal workings or troubleshoot unexpected behavior.
-
-Use logging to gain crucial insights into your application's operations, identify issues, verify expected functionality, and better understand authentication flows.
-
-This section covers how to configure and customize the logging output from the Orchestration SDK for JavaScript.
-
-## Configuring JavaScript logging
-
-To configure the logging output from the Orchestration SDK for JavaScript, inside the `logger` object, specify the level to use for logging in the `level` property in the client module configuration:
-
-Setting the logging level in the OIDC client configuration
-
-```javascript
-const oidcClient = oidc({
-    logger: {
-        level: 'WARN'
-    },
-    config: {
-        clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
-        redirectUri: 'https://localhost:8443/callback.html',
-        scope: 'openid profile email phone',
-        serverConfig: {
-          wellknown:
-            'https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
-        },
-    },
-});
-```
-
-The Orchestration SDK for JavaScript supports the following logger levels:
-
-| Level   | Priority | Description                                                                          |
-| ------- | -------- | ------------------------------------------------------------------------------------ |
-| `none`  | `-1`     | Does not output any log messages.                                                    |
-| `error` | `0`      | Log messages describing errors that have occurred.                                   |
-| `warn`  | `1`      | Log messages detailing possible issues that aren't yet errors.                       |
-| `info`  | `3`      | Log messages for expected activities during regular usage.This is the default value. |
-| `debug` | `4`      | Log messages intended only for development and troubleshooting.                      |
-
-The Orchestration SDK outputs messages that have a priority equal to, or less than your chosen level.
-
-For example, if you set the level to `warn`, the module outputs `warn` and `error` messages.
-
-## Customizing JavaScript logging
-
-The Orchestration SDK for JavaScript allows developers to customize the default logger behavior. For example, you might want to redirect the logs to an external service, or pipe them to a file.
-
-To customize how the Orchestration SDK outputs logger messages:
-
-1. Create a function that implements the `LoggerFunctions` interface.
-
-   For example, the following code adds a prefix to output from the SDK before logging it to the console:
-
-   ```javascript
-   const customLogger = {
-     error: (...args) => console.error(`[Ping SDK Error]:`, ...args),
-     warn: (...args) => console.warn(`[Ping SDK Warning]:`, ...args),
-     info: (...args) => console.info(`[Ping SDK Info]:`, ...args),
-     debug: (...args) => console.debug(`[Ping SDK Debug]:`, ...args)
-   };
-   ```
-
-   The signature of the interface defaults to the following:
-
-   `(...msgs: unknown[]) => void`
-
-2. Specify the custom logger to use in the `custom` property in the `logger` object of your client module configuration:
-
-   Setting the logging level in the OIDC client configuration
-
-   ```javascript
-   const oidcClient = oidc({
-       logger: {
-           level: 'WARN',
-           custom: customLogger,
-       },
-       config: {
-           clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
-           redirectUri: 'https://localhost:8443/callback.html',
-           scope: 'openid profile email phone',
-           serverConfig: {
-             wellknown:
-               'https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
-           },
-       },
-   });
-   ```
-
-The Orchestration SDK redirects its logging output to your custom logger:
-
-![Custom logger output in the Chrome developer console.](../../../_images/logger/chrome-console-custom-logger.png)Figure 1. Custom logger output in the Chrome developer console.
-
-|   |                                                                                                                                                                                                                                                           |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You might need to adjust the default console output filters in your browser's developer console, to view output from the Orchestration SDK.For example, to view `debug` level messages in Chrome, make sure you enable **Verbose** output in the console. |
-
----
-
----
-title: Configuring logging on iOS
-description: Configure logging on iOS to capture and debug OIDC SDK activity in your app
-component: orchsdks
-page_id: orchsdks:oidc:customization/logging/ios-custom-logging
-canonical_url: https://developer.pingidentity.com/orchsdks/oidc/customization/logging/ios-custom-logging.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OIDC", "Android", "Logging", "Debug", "Console"]
-section_ids:
-  configuring_ios_logging: Configuring iOS logging
-  defining_and_using_custom_loggers: Defining and using custom loggers
-  ios_logger_module: Step 1. Installing modules
-  add_dependencies_using_spm_swift_package_manager: Add dependencies using SPM (Swift Package Manager)
-  add_dependencies_using_cocoapods: Add dependencies using CocoaPods
-  step_2_defining_and_using_custom_loggers: Step 2. Defining and using custom loggers
----
-
-# Configuring logging on iOS
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
-
-When you develop applications with the Orchestration SDK, you might need to understand its internal workings or troubleshoot unexpected behavior.
-
-Use logging to gain crucial insights into your application's operations, identify issues, verify expected functionality, and better understand authentication flows.
-
-This section covers how to configure and customize the logging output from the Orchestration SDK for iOS.
-
-## Configuring iOS logging
-
-To configure the logging output from the Orchestration SDK for iOS, specify the logger to use in the client module configuration:
-
-Setting the logging level in the OIDC client configuration
-
-```swift
-import PingLogger
-
-public let oidcLogin = OidcWebClient.createOidcWebClient { config in
-    config.logger = LogManager.standard
-    config.module(PingOidc.OidcModule.config) { oidcValue in
-        oidcValue.discoveryEndpoint = "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        oidcValue.redirectUri = "https://demo.example.com/oauth2redirect"
-        oidcValue.scopes = ["openid", "email", "address", "profile", "phone"]
-    }
-}
-```
-
-The Orchestration SDK for iOS includes the following logger presets:
-
-| Logger preset | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| `standard`    | Outputs all log messages to the console.                    |
-| `warning`     | Outputs only warning and error log messages to the console. |
-| `none`        | Prevents all log messages.                                  |
-
-|   |                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The `standard` logger tags messages in the console with the Orchestration SDK version. You can filter the console to only show the tagged messages:![Filtering console output by tag](../../../_images/logger/ios-console-tag.png)Figure 1. Filtering console output by tag |
-
-## Defining and using custom loggers
-
-In addition to the preset loggers you can create your own loggers. For example, you could output Orchestration SDK for Android messages to a file or a third-party service, or filter which messages to display.
-
-### Step 1. Installing modules
-
-To create custom loggers, you need to add the **Logger** module for iOS as a dependency to your project.
-
-You can use Swift Package Manager (SPM) or Cocoapods to add the dependencies to your iOS project.
-
-#### Add dependencies using SPM (Swift Package Manager)
-
-You can install this by using SPM (Swift Package Manager) on the generated iOS project.
-
-1. In Xcode,in the Project Navigator, right-click your project, and then click Add Package Dependencies…​.
-
-2. In the **Search or Enter Package URL** field, enter the URL of the repo containing the DaVinci module for iOS, `https://github.com/ForgeRock/ping-ios-sdk.git`.
-
-3. In **Add to Project**, select the name of your project, and then click **Add Package**.
-
-   Xcode shows a dialog containing the libraries available in the Orchestration SDK for iOS.
-
-4. Select the `PingLogger` library, and in the **Add to Target** column select the name of your project.
-
-5. Repeat the previous step for any other Orchestration SDK libraries you want to add to your project.
-
-6. Click **Add Package**.
-
-   Xcode displays the chosen libraries and any prerequisites they might have in the **Package Dependencies** pane of the Project Navigator:
-
-   ![Package dependencies in the Xcode package navigator pane.](../../../davinci/_images/Xcode-package-dependencies-dv-client.png)Figure 2. Package dependencies in the Xcode package navigator pane.
-
-#### Add dependencies using CocoaPods
-
-1. If you do not already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
-
-2. If you do not already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
-
-   ```
-   pod init
-   ```
-
-3. Add the following lines to your Podfile:
-
-   ```
-   pod 'PingLogger'
-   ```
-
-4. Run the following command to install pods:
-
-   ```
-   pod install
-   ```
-
-### Step 2. Defining and using custom loggers
-
-To create a custom logger, first define a class and override each of the logger methods with the new behavior.
-
-For example, the following code creates a custom logger named `warningErrorOnly`, that only outputs warning and error messages, and ignores both info and debug messages:
-
-Defining a custom logger class on iOS
-
-```swift
-import PingLogger
-
-struct WarningErrorOnlyLogger: Logger {
-
-  func i(_ message: String) {
-  }
-
-  func d(_ message: String) {
-  }
-
-  func w(_ message: String, error: Error?) {
-    if let error = error {
-      print("\(message): \(error)")
-    } else {
-      print(message)
-    }
-  }
-
-  func e(_ message: String, error: Error?) {
-    if let error = error {
-      print("\(message): \(error)")
-    } else {
-      print(message)
-    }
-  }
-}
-
-extension LogManager {
-  static var warningErrorOnly: Logger {
-    return WarningErrorOnlyLogger()
-  }
-}
-```
-
-To use the custom logger in your app, specify the logger's name, just as with the preset loggers:
-
-Using a custom logger with the OIDC module on iOS
-
-```swift
-public let oidcLogin = OidcWebClient.createOidcWebClient { config in
-    config.logger = warningErrorOnly
-    config.module(PingOidc.OidcModule.config) { oidcValue in
-        oidcValue.discoveryEndpoint = "https://auth.pingone.ca/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-        oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-        oidcValue.redirectUri = "https://demo.example.com/oauth2redirect"
-        oidcValue.scopes = ["openid", "email", "address", "profile", "phone"]
-    }
-}
-```

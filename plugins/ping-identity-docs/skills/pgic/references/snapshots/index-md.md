@@ -4,6 +4,8 @@ description: Ping Government Identity Cloud simplifies identity and access manag
 component: pgic
 page_id: pgic::index
 canonical_url: http://docs.pingidentity.com/pgic/index.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 15, 2025
 section_ids:
   get-started-with-ping-government-identity-cloud: Get started with Ping Government Identity Cloud

@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with SuccessFactors and PingFederate
-description: Learn how to enable SuccessFactors sign-on from a PingFederate URL (IdP-initiated sign-on) and direct SuccessFactors sign-on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with SuccessFactors and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:successfactors:config_saml_successfactors_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/successfactors/config_saml_successfactors_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -154,10 +156,12 @@ Learn how to enable SuccessFactors sign-on from a PingFederate URL (IdP-initiate
 
 ---
 title: Configuring SAML SSO with SuccessFactors and PingOne for Enterprise
-description: Learn how to enable SuccessFactors sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct SuccessFactors sign-on using PingOne for Enterprise (SP-initiated sign-on).
+description: Configure SAML SSO with SuccessFactors and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:successfactors:config_saml_successfactors_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/successfactors/config_saml_successfactors_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   before-you-begin: Before you begin

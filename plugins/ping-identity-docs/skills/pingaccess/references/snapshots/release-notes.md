@@ -1,14 +1,26 @@
 ---
 title: Release notes
-description: New features and improvements in PingAccess. Updated June 2026.
+description: New features and improvements in PingAccess.
 component: pingaccess
 version: 9.1
 page_id: pingaccess:release_notes:pa_release_notes
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/release_notes/pa_release_notes.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 5, 2026
+revdate: 2026-09-11T18:00:00Z
 section_ids:
+  pa-911: PingAccess 9.1.1
+  improved-response-time-for-enginescertificates-endpoint: Improved response time for /engines/certificates endpoint
+  fixed-path-traversal-vulnerability: Fixed path traversal vulnerability
+  improved-bouncy-castle-fips-security: Improved Bouncy Castle FIPS security
+  improved-netty-security: Improved Netty security
+  improved-bouncy-castle-security: Improved Bouncy Castle security
+  improved-jose4j-security: Improved jose4j security
+  improved-apache-commons-lang-security: Improved Apache Commons Lang security
+  silenced-failed-to-make-host-key-executable-warning: Silenced failed to make host key executable warning
+  added-log4j-json-template-to-pa_homeupgradelib: Added log4j json template to <PA_HOME>/upgrade/lib/
+  addressed-pingaccess-console-hang: Addressed PingAccess console hang
+  identified-an-issue-that-causes-the-engine-and-replica-configured-certificate-to-change-when-upgrading: Identified an issue that causes the engine and replica configured certificate to change when upgrading
   pa-91: PingAccess 9.1.0
   use-cspnonce-to-embed-inline-javascript-into-templates: Use <cspNonce> to embed inline JavaScript into templates
   authenticate-with-a-qr-code: Authenticate with a QR code
@@ -21,10 +33,9 @@ section_ids:
   retain-existing-application-resource-ids-throughout-upgrade-process: Retain existing application resource IDs throughout upgrade process
   checking-application-resource-ids: Checking application resource IDs
   updated-third-party-dependencies: Updated third-party dependencies
-  improved-bouncy-castle-security: Improved Bouncy Castle security
-  updated-the-apache-log4j-library-to-version-2-25-3: Updated the Apache Log4j library to version 2.25.3
+  improved-bouncy-castle-security-2: Improved Bouncy Castle security
   updated-nettys-parsing-behavior: Updated Netty's parsing behavior
-  updated-component-dependencies: Updated component dependencies
+  updated-the-apache-log4j-library-to-version-2-25-4: Updated the Apache Log4j library to version 2.25.4
   addressed-potential-request-smuggling-security-vulnerability: Addressed potential request smuggling security vulnerability
   addressed-potential-resource-allocation-security-vulnerability: Addressed potential resource allocation security vulnerability
   fixed-unnecessary-warnings-logged-for-jwks-atvs: Fixed unnecessary warnings logged for JWKS ATVs
@@ -41,8 +52,27 @@ section_ids:
   fixed-a-post-preservation-encoding-issue-when-not-using-utf-8: Fixed a POST preservation encoding issue when not using UTF-8
   pingaccess-add-on-sdk-class-is-incompatible-in-groovy-script-rules-with-java-17-and-later: PingAccess Add-On SDK class is incompatible in Groovy script rules with Java 17 and later
   fips-mode-validation-doesnt-cover-imported-key-pairs-for-sha1: FIPS mode validation doesn't cover imported key pairs for SHA1
+  pa-905: PingAccess 9.0.5
+  improved-response-time-for-enginescertificates-endpoint-2: Improved response time for /engines/certificates endpoint
+  fixed-path-traversal-vulnerability-2: Fixed path traversal vulnerability
+  improved-netty-security-2: Improved Netty security
+  improved-bouncy-castle-security-3: Improved Bouncy Castle security
+  improved-jose4j-security-2: Improved jose4j security
+  added-log4j-json-template-to-pa_homeupgradelib-2: Added log4j json template to <PA_HOME>/upgrade/lib/
+  fixed-an-issue-preventing-json-templates-from-being-carried-over-when-upgrading: Fixed an issue preventing JSON templates from being carried over when upgrading
+  addressed-ecdsa-keyfactory-not-available-error: Addressed ECDSA KeyFactory not available error
+  addressed-pingaccess-console-hang-2: Addressed PingAccess console hang
+  pa-904: PingAccess 9.0.4 (June 2026)
+  retry-post-requests-that-failed-because-of-an-unknownhostexception-2: Retry POST requests that failed because of an UnknownHostException
+  updated-the-apache-log4j-library-to-version-2-25-4-2: Updated the Apache Log4j library to version 2.25.4
+  addressed-potential-request-smuggling-security-vulnerability-2: Addressed potential request smuggling security vulnerability
+  addressed-potential-resource-allocation-security-vulnerability-2: Addressed potential resource allocation security vulnerability
+  fixed-an-issue-with-automatic-resource-ordering-2: Fixed an issue with automatic resource ordering
+  fixed-an-issue-causing-the-admin-console-to-show-a-blank-page-2: Fixed an issue causing the admin console to show a blank page
+  fixed-an-issue-blocking-key-pair-imports-2: Fixed an issue blocking key pair imports
+  fixed-a-post-preservation-encoding-issue-when-not-using-utf-8-2: Fixed a POST preservation encoding issue when not using UTF-8
   pa-903: PingAccess 9.0.3 (May 2026)
-  updated-the-apache-log4j-library-to-version-2-25-3-2: Updated the Apache Log4j library to version 2.25.3
+  updated-the-apache-log4j-library-to-version-2-25-3: Updated the Apache Log4j library to version 2.25.3
   updated-nettys-parsing-behavior-2: Updated Netty's parsing behavior
   fixed-an-apache-commons-logging-classpath-warning-2: Fixed an Apache Commons Logging classpath warning
   fixed-application-level-rule-evaluation-2: Fixed application-level rule evaluation
@@ -97,7 +127,7 @@ section_ids:
   sni-isnt-set-up-for-virtual-hosts-only-used-in-redirects: SNI isn't set up for virtual hosts only used in redirects
   cannot-assign-rule-sets-containing-a-singular-cors-rule: Cannot assign rule sets containing a singular CORS rule
   saving-overwrites-the-sslciphers-and-sslprotocol-fields-in-the-administrative-api: Saving overwrites the sslCiphers and sslProtocol fields in the administrative API
-  cannot-use-fips-mode-with-a-safenet-luna-hsm: Cannot use FIPS mode with a Safenet Luna HSM
+  cannot-use-fips-mode-with-a-thales-luna-hsm: Cannot use FIPS mode with a Thales Luna HSM
   acme-account-creation-fails-while-pingaccess-is-in-fips-mode: ACME account creation fails while PingAccess is in FIPS mode
   device-profiling-causes-infinite-loop-when-using-chrome-devtools: Device profiling causes infinite loop when using Chrome Devtools
   pa-16103: Key pairs cause SSL exception when using Luna HSM Client 10.8
@@ -110,9 +140,93 @@ section_ids:
 
 # Release notes
 
-New features and improvements in PingAccess. Updated June 2026.
+New features and improvements in PingAccess. Updated September 2026.
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][PingAccess Release Notes RSS Feed](../release_notes/pa_release_notes.xml)
+
+## PingAccess 9.1.1
+
+Released in October 2026.
+
+### Improved response time for `/engines/certificates` endpoint
+
+Improved PA-16532
+
+We've significantly improved the response time of the `/engines/certificates` API endpoint. This change improves performance when retrieving certificate information from the PingAccess API, particularly when the environment has a large number of certificates configured.
+
+### Fixed path traversal vulnerability
+
+Security PA-16568
+
+Fixed a vulnerability that could allow an attacker to bypass access-control policy by using path traversal with various servlet style applications.
+
+### Improved Bouncy Castle FIPS security
+
+Security PA-16489
+
+Upgraded Bouncy Castle FIPS version to address potential security vulnerabilities when FIPS mode is enabled.
+
+### Improved Netty security
+
+Security PA-16624
+
+Upgraded Netty version to address potential security vulnerabilities.
+
+### Improved Bouncy Castle security
+
+Security PA-16628
+
+Upgraded Bouncy Castle version to address potential security vulnerabilities.
+
+### Improved jose4j security
+
+Security PA-16640
+
+Upgraded jose4j version to address potential security vulnerabilities.
+
+### Improved Apache Commons Lang security
+
+Security PA-16708
+
+Upgraded `commons-lang3` version to address potential security vulnerabilities.
+
+### Silenced `failed to make host key executable` warning
+
+Fixed PA-16536
+
+We've fixed an issue related to using PingAccess with Java 25 on Windows that caused PingAccess to log the following warning on startup and upgrades:
+
+```
+2026-06-11T00:23:48,997  INFO [] com.pingidentity.pa.crypto.HostKeyLoader - Generated new host key: {"kty":"oct","kid":"q7K6tOWKiL4FEydC","key_ops":["encrypt","decrypt"],"alg":"A128CBC-HS256"}
+2026-06-11T00:23:49,022  WARN [] com.pingidentity.pa.crypto.HostKeyLoader - Failed to make host key non-executable: C:\Users\TEMP\Downloads\pingaccess-9.1.0-MR1-SNAPSHOT-9476\pingaccess-9.1.0-MR1-SNAPSHOT-9476\bin\..\conf\pa.jwk
+2026-06-11T00:23:49,023  INFO [] com.pingidentity.pa.crypto.HostKeyLoader - Created host key file (unencrypted): C:\Users\TEMP\Downloads\pingaccess-9.1.0-MR1-SNAPSHOT-9476\pingaccess-9.1.0-MR1-SNAPSHOT-9476\bin\..\conf\pa.jwk
+```
+
+### Added log4j json template to `<PA_HOME>/upgrade/lib/`
+
+Fixed PA-16576
+
+Fixed an issue that causes the PingAccess upgrade tool to fail when a custom `log4j2.xml` file that uses `JsonTemplateLayout` is placed in `<PA_HOME>/upgrade/conf/`.
+
+### Addressed PingAccess console hang
+
+Fixed PA-16637
+
+Fixed an issue that could potentially cause the PingAccess console to become unresponsive because of resource allocation.
+
+### Identified an issue that causes the engine and replica configured certificate to change when upgrading
+
+Issue PA-16714
+
+Identified a particular configuration that causes the following warnings when upgrading PingAccess from 9.1.0 to 9.1.1:
+
+```
+INFO * API response warning issued from POST for /adminConfig/replicaAdmins endpoint "The certificate you have selected is not affiliated with the Config Query Listener.  The replica admin may not be able to directly communicate with PingAccess via SSL."
+INFO * API response warning issued from POST for /engines endpoint "The certificate you have selected is not affiliated with the Config Query Listener.  The engine may not be able to directly communicate with PingAccess via SSL."
+INFO * API response warning issued from POST for /agents endpoint "The certificate you have selected is not affiliated with the Agent Listener.  The agent may not be able to directly communicate with PingAccess via SSL."
+```
+
+To work around this issue, set the `jdk.sha1.restriction.enabled=false` property in the `<PA_HOME>/run.properties` file, or set the `PA_RUN_jdk_sha1_restriction_enabled=false` environment variable and restart the PingAccess 9.1.0 admin prior to upgrading. After the upgrade is complete, you can set the value of the property/environment variable to `true`, or remove it altogether.
 
 ## PingAccess 9.1.0
 
@@ -202,11 +316,11 @@ Make sure to review the [PingAccess 9.1 upgrade considerations](../upgrading_pin
 
 New PA-16317
 
-We've added a new advanced web session setting, the **UI Locales** field. This change makes it possible to set [IETF BCP 47 language tags](https://datatracker.ietf.org/doc/html/rfc5646) using the **ui\_locales** OIDC request parameter, enabling you to provide the sign-on page in a wider variety of languages for end users.
+We've added a new advanced web session setting, the **UI Locales** field. This change makes it possible to set [IETF BCP 47 language tags](https://datatracker.ietf.org/doc/html/rfc5646) using the **ui_locales** OIDC request parameter, enabling you to provide the sign-on page in a wider variety of languages for end users.
 
-|   |                                                                                                                                               |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Language customization through the **ui\_locales** parameter is available through the sign-on flow only, and applies only to the web session. |
+|   |                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Language customization through the **ui_locales** parameter is available through the sign-on flow only, and applies only to the web session. |
 
 Learn more in [Configuring advanced web session settings](../pingaccess_user_interface_reference_guide/pa_advanced_web_session_settings.html).
 
@@ -252,19 +366,13 @@ Security PA-16298, PA-16214
 
 Addressed potential security vulnerabilities relating to Bouncy Castle.
 
-### Updated the Apache Log4j library to version 2.25.3
-
-Security PA-16321
-
-Upgraded the Apache Log4j library to address a potential security vulnerability.
-
 ### Updated Netty's parsing behavior
 
 Security PA-16459
 
 Updated Netty's parsing behavior to address a potential security vulnerability.
 
-### Updated component dependencies
+### Updated the Apache Log4j library to version 2.25.4
 
 Security PA-16477
 
@@ -371,6 +479,116 @@ Issue PA-16346, PA-16488
 FIPS mode validation doesn't prevent administrators from importing key pairs that contain chained certificates with a SHA1 signature algorithm. SHA1 isn't FIPS-compliant.
 
 As a workaround, set `jdk.sha1.restriction.enabled=true` to enforce exclusion of key pairs that use SHA1 in key pair and certificate imports.
+
+## PingAccess 9.0.5
+
+Released in October 2026.
+
+### Improved response time for `/engines/certificates` endpoint
+
+Improved PA-16532
+
+We've significantly improved the response time of the `/engines/certificates` API endpoint. This change improves performance when retrieving certificate information from the PingAccess API, particularly when the environment has a large number of certificates configured.
+
+### Fixed path traversal vulnerability
+
+Security PA-16568
+
+Fixed a vulnerability that could allow an attacker to bypass access-control policy by using path traversal with various servlet style applications.
+
+### Improved Netty security
+
+Security PA-16624
+
+Upgraded Netty version to address potential security vulnerabilities.
+
+### Improved Bouncy Castle security
+
+Security PA-16628
+
+Upgraded Bouncy Castle version to address potential security vulnerabilities.
+
+### Improved jose4j security
+
+Security PA-16640
+
+Upgraded jose4j version to address potential security vulnerabilities.
+
+### Added log4j json template to `<PA_HOME>/upgrade/lib/`
+
+Fixed PA-16576
+
+Fixed an issue that causes the PingAccess upgrade tool to fail when a custom `log4j2.xml` file that uses `JsonTemplateLayout` is placed in `<PA_HOME>/upgrade/conf/`.
+
+### Fixed an issue preventing JSON templates from being carried over when upgrading
+
+Fixed PA-16449
+
+Fixed an issue preventing modified files in `<PA_HOME>/upgrade/conf/log4j/json-templates` from being carried over to the target version in an upgrade.
+
+### Addressed `ECDSA KeyFactory not available` error
+
+Fixed PA-16706
+
+Fixed an issue preventing PingAccess from starting after an upgrade due to an `ECDSA KeyFactory not available` error.
+
+### Addressed PingAccess console hang
+
+Fixed PA-16637
+
+Fixed an issue that could potentially cause the PingAccess console to become unresponsive due to resource allocation.
+
+## PingAccess 9.0.4 (June 2026)
+
+### Retry POST requests that failed because of an `UnknownHostException`
+
+New PA-16346
+
+We've added a new availability profile setting, **Retry on Unknown Host**. Select this checkbox to retry a failed POST request against other configured backchannel hosts if the original request failed because of an `UnknownHostException`. This setting can improve service reliability during potential DNS changes.
+
+You can find more information in [Creating availability profiles](../pingaccess_user_interface_reference_guide/pa_creating_availability_profiles.html).
+
+### Updated the Apache Log4j library to version 2.25.4
+
+Security PA-16477
+
+Updated dependency versions to address potential security vulnerabilities.
+
+### Addressed potential request smuggling security vulnerability
+
+Security PA-16521
+
+Addressed a potential security vulnerability related to request smuggling.
+
+### Addressed potential resource allocation security vulnerability
+
+Security PA-16522
+
+Addressed a potential security vulnerability related to resource allocation for multi-part headers.
+
+### Fixed an issue with automatic resource ordering
+
+Fixed PA-16495
+
+Fixed an issue that caused automatic resource ordering to leave out root resources if another resource had been configured with the `/*` path pattern.
+
+### Fixed an issue causing the admin console to show a blank page
+
+Fixed PA-16508
+
+Fixed an issue that caused the PingAccess admin console to show a blank page when trying to view the **References** tab on a key pair, after configuring a JWT identity mapping without giving the **Custom Claims** field a value.
+
+### Fixed an issue blocking key pair imports
+
+Fixed PA-16530
+
+Fixed an issue that prevented PingAccess from importing key pairs that contain `otherName` attributes configured in the **Subject Alternative Name** field.
+
+### Fixed a POST preservation encoding issue when not using UTF-8
+
+Fixed PA-16531
+
+Fixed an issue that sometimes caused PingAccess to end POST parameter processing early if it encountered non-UTF-8 bytes that could be interpreted as valid UTF-8 bytes.
 
 ## PingAccess 9.0.3 (May 2026)
 
@@ -759,11 +977,11 @@ It affects the following administrative API endpoints:
 
 * `/auth/tokenProvider`
 
-### Cannot use FIPS mode with a Safenet Luna HSM
+### Cannot use FIPS mode with a Thales Luna HSM
 
 Issue PA-15928
 
-[Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html) doesn't work with [Safenet Luna HSM](../pingaccess_user_interface_reference_guide/pa_adding_a_safenet_luna_provider.html). Trying to configure a key pair or enter FIPS mode with a key pair already configured causes a `Null Pointer Exception` error.
+[Federal Information Processing Standards (FIPS) mode](../configuring_and_customizing_pingaccess/pa_fips_mode.html) doesn't work with [Thales Luna (formerly Safenet Luna) HSM](../pingaccess_user_interface_reference_guide/pa_adding_a_thales_luna_provider.html). Trying to configure a key pair or enter FIPS mode with a key pair already configured causes a `Null Pointer Exception` error.
 
 ### ACME account creation fails while PingAccess is in FIPS mode
 
@@ -781,7 +999,7 @@ Performing PingOne Protect device profiling with Chrome Devtools open causes an 
 
 Issue PA-16103
 
-Key pairs stored in a Safenet Luna HSM cause SSL exceptions if using Luna HSM Client 10.8.
+Key pairs stored in a Thales Luna (formerly Safenet Luna) HSM cause SSL exceptions if using Luna HSM Client 10.8.
 
 A potential workaround for this issue is to disable TLS 1.3 and RSASSA-PSS in the `run.properties` file. You can find more information in the **TLS/SSL** section of the PingAccess [Configuration file reference](../reference_guides/pa_config_file_ref.html#pa-tls-ssl).
 
@@ -789,7 +1007,7 @@ A potential workaround for this issue is to disable TLS 1.3 and RSASSA-PSS in th
 
 Issue PA-16104
 
-PingAccess fails to shut down when the Safenet Luna HSM `libCryptoki2.so` directory is in the `deploy` directory, which is a deployment requirement for [Adding a Safenet Luna provider](../pingaccess_user_interface_reference_guide/pa_adding_a_safenet_luna_provider.html) on a Linux system. This is an issue specific to Luna HSM Client 10.8.
+PingAccess fails to shut down when the Thales Luna (formerly Safenet Luna) HSM `libCryptoki2.so` directory is in the `deploy` directory, which is a deployment requirement for [Adding a Thales Luna provider](../pingaccess_user_interface_reference_guide/pa_adding_a_thales_luna_provider.html) on a Linux system. This is an issue specific to Luna HSM Client 10.8.
 
 ### `404` error for Swagger 1.2 specification API docs
 
@@ -797,7 +1015,7 @@ Issue PA-16230
 
 Trying to access the Swagger 1.2 specification information for specific individual endpoints (such as `/pa-admin-api/v3/api-docs/pa/accessTokenValidators`) currently results in a `404 Not Found` error.
 
-This happens because Swagger 1.2 isn't fully compatible with JDK 17. Ping Identity recommends using the OAS 2.0 specifications instead, which you can find at https\://*\<pa\_admin\_host>*:*\<pa\_admin\_port>*/pa-admin-api/v3/api-docs/pa/api-docs-v2.json. Learn more in [Administrative API endpoints](../reference_guides/pa_admin_api_endpoints.html).
+This happens because Swagger 1.2 isn't fully compatible with JDK 17. Ping Identity recommends using the OAS 2.0 specifications instead, which you can find at https\://*\<pa_admin_host>*:*\<pa_admin_port>*/pa-admin-api/v3/api-docs/pa/api-docs-v2.json. Learn more in [Administrative API endpoints](../reference_guides/pa_admin_api_endpoints.html).
 
 ### CloudHSM key pairs aren't usable in FIPS mode
 
@@ -813,7 +1031,7 @@ When upgrading a PingAccess server, modified files in the `conf/log4j/json-templ
 
 ## Previous releases
 
-You can find information about enhancements and issues resolved in previous releases of PingAccess, beginning with PingAccess 3.2, in the [Ping Identity Documentation Archive](https://docs.pingidentity.com/archive/).
+You can find information about enhancements and issues resolved in previous releases of PingAccess, beginning with PingAccess 3.2, in the [Ping Identity Documentation Archive](https://docs.pingidentity.com/archive/#pingaccess). Learn more about when product versions are archived in the [Ping Identity EOL Tracker](https://support.pingidentity.com/s/article/Ping-Identity-EOL-Tracker#pa). Documentation is archived six months after the listed **End of Support Date**.
 
 For information about enhancements and issues resolved in other actively maintained releases of PingAccess, refer to the following release notes:
 
@@ -822,11 +1040,3 @@ For information about enhancements and issues resolved in other actively maintai
 * [PingAccess 8.3](https://docs.pingidentity.com/pingaccess/8.3/release_notes/pa_release_notes.html)
 
 * [PingAccess 8.2](https://docs.pingidentity.com/pingaccess/8.2/release_notes/pa_release_notes.html)
-
-* [PingAccess 8.1](https://docs.pingidentity.com/pingaccess/8.1/release_notes/pa_release_notes.html)
-
-* [PingAccess 8.0](https://docs.pingidentity.com/pingaccess/8.0/release_notes/pa_release_notes.html)
-
-* [PingAccess 7.3](https://docs.pingidentity.com/pingaccess/7.3/release_notes/pa_release_notes.html)
-
-* [PingAccess 7.2](https://docs.pingidentity.com/pingaccess/7.2/release_notes/pa_release_notes.html)

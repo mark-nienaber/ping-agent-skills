@@ -5,6 +5,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-08T17:54:09Z
 ---
 
 # Archive
@@ -22,6 +25,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-changes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-changes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 ---
 
 # Changes
@@ -41,6 +47,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-2023
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2023.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-08T17:54:09Z
 section_ids:
   web_agent_2023_11_x: Web Agent 2023.11.x
   web_agent_2023_11_3: Web Agent 2023.11.3
@@ -129,11 +138,14 @@ The following versions of OpenSSL are no longer supported:
 
 ---
 title: Changes in Web Agent 2024.x
-description: There are no incompatible changes in the Web Agent 2024.11 release or the Web Agent 2024.11.1 maintenance release.
+description: There are no incompatible changes in the Web Agent 2024.11 release, the Web Agent 2024.11.1 maintenance release, or the Web Agent 2024.11.3 maintenance release.
 component: web-agents
 version: release-notes
 page_id: web-agents::changes-2024
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2024.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-10T09:12:12Z
 section_ids:
   web_agent_2024_11_x: Web Agent 2024.11.x
   web_agent_2024_11_2: Web Agent 2024.11.2
@@ -150,7 +162,7 @@ section_ids:
 
 ## Web Agent 2024.11.x
 
-There are no incompatible changes in the Web Agent 2024.11 release or the Web Agent 2024.11.1 maintenance release.
+There are no incompatible changes in the Web Agent 2024.11 release, the Web Agent 2024.11.1 maintenance release, or the Web Agent 2024.11.3 maintenance release.
 
 ### Web Agent 2024.11.2
 
@@ -204,13 +216,16 @@ Because of the changes in [Hardened security of agent secrets](whats-new.html#ha
 
 ---
 title: Changes in Web Agent 2025.x
-description: There are no incompatible changes in this release.
+description: There are no incompatible changes in the Web Agent 2025.11 release or the Web Agent 2025.11.1 maintenance release.
 component: web-agents
 version: release-notes
 page_id: web-agents::changes-2025
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2025.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-10T08:52:43Z
 section_ids:
-  web_agent_2025_11: Web Agent 2025.11
+  web_agent_2025_11_x: Web Agent 2025.11.x
   web_agent_2025_9: Web Agent 2025.9
   iaic-am-compatibility: Advanced Identity Cloud and AM compatibility
   web_agent_2025_6: Web Agent 2025.6
@@ -227,9 +242,9 @@ section_ids:
 
 # Changes in Web Agent 2025.x
 
-## Web Agent 2025.11
+## Web Agent 2025.11.x
 
-There are no incompatible changes in this release.
+There are no incompatible changes in the Web Agent 2025.11 release or the Web Agent 2025.11.1 maintenance release.
 
 ## Web Agent 2025.9
 
@@ -279,7 +294,7 @@ Learn more in [Content Security Policy - `frame-ancestors`](whats-new.html#csp-f
 
 #### Agent authentication to Advanced Identity Cloud and AM
 
-The default fallback mode setting (`0`) for [AM\_AGENT\_AUTH\_MODE](https://docs.pingidentity.com/web-agents/2025.11/installation-guide/installer-env-vars.html#am-agent-auth-mode) and [Agent Authentication Mode](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.agent.auth.mode.html) has been removed. The default setting is now `1` meaning the agent always authenticates using the `Agent` journey.
+The default fallback mode setting (`0`) for [AM_AGENT_AUTH_MODE](https://docs.pingidentity.com/web-agents/2025.11/installation-guide/installer-env-vars.html#am-agent-auth-mode) and [Agent Authentication Mode](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.agent.auth.mode.html) has been removed. The default setting is now `1` meaning the agent always authenticates using the `Agent` journey.
 
 If the `Agent` journey doesn't exist, you should create it. Learn more in [Authenticate agents to the identity provider](https://docs.pingidentity.com/web-agents/2025.11/installation-guide/pre-installation.html#authenticate_agents_to_the_identity_provider).
 
@@ -295,12 +310,16 @@ Glibc 2.17 is no longer supported. Glibc 2.28 is the minimum version supported o
 
 ---
 title: Changes in Web Agent 2026.x
-description: The Web Agent downloads for Apache, IBM HTTP and NGINX Plus now include the architecture in the file name.
+description: There are no incompatible changes in the Web Agent 2026.6.1 maintenance release.
 component: web-agents
 version: release-notes
 page_id: web-agents::changes-2026
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-2026.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-11T12:40:08Z
 section_ids:
+  web_agent_2026_6_x: Web Agent 2026.6.x
   web_agent_2026_6: Web Agent 2026.6
   downloads: Web Agent downloads
   ibm_aix: IBM AIX
@@ -308,9 +327,13 @@ section_ids:
 
 # Changes in Web Agent 2026.x
 
-## Web Agent 2026.6
+## Web Agent 2026.6.x
 
-### Web Agent downloads
+There are no incompatible changes in the Web Agent 2026.6.1 maintenance release.
+
+### Web Agent 2026.6
+
+#### Web Agent downloads
 
 The Web Agent downloads for Apache, IBM HTTP and NGINX Plus now include the architecture in the file name.
 
@@ -326,7 +349,7 @@ The following table shows the new naming conventions:
 |            |          | N/A                        | `NGINX_r36_Linux_x86_64`    | `NGINX_r36_Linux_arm64`  |
 |            |          | N/A                        | `NGINX_r37_Linux_x86_64`    | `NGINX_r37_Linux_arm64`  |
 
-### IBM AIX
+#### IBM AIX
 
 Support for the IBM AIX operating system has been removed in this release.
 
@@ -339,6 +362,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes-510
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes-510.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-08T17:54:09Z
 section_ids:
   changed-in-510: Web Agent 5.10
   regular_expression_pattern_matching_is_platform_dependent: Regular expression pattern matching is platform-dependent
@@ -370,6 +396,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-deprecated
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-deprecated.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 ---
 
 # Deprecated
@@ -393,6 +422,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::deprecated
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/deprecated.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-04-08T12:16:57Z
 page_aliases: ["deprecated-functionality.adoc"]
 ---
 
@@ -400,19 +432,19 @@ page_aliases: ["deprecated-functionality.adoc"]
 
 Deprecated is defined in [Release levels and interface stability](stability.html):
 
-| Deprecated in | Description                                                                                                                                                                                                                                                                                                                      | Replaced by                                                                                                                                                                              | Removed in      |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 2026.6        | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2025.11       | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2025.9        | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2025.6        | Use of the [Public Client Certificate File Name](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.cert.file.html) property for the certificate friendly name.                                                                                                                   | [Public Client Certificate Friendly Name](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.win.clientcert.friendly.name.html) property. | -               |
-| 2025.3        | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2024.11       | Fallback mode setting (`0`) for [AM\_AGENT\_AUTH\_MODE](https://docs.pingidentity.com/web-agents/2024.11/installation-guide/installer-env-vars.html#am-agent-auth-mode) and [Agent Authentication Mode](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.forgerock.agents.config.agent.auth.mode.html). | Default will change to always authenticate using the `Agent` journey.                                                                                                                    | 2025.3          |
-|               | `user` field in audit logs.                                                                                                                                                                                                                                                                                                      | `userId` field in audit logs.                                                                                                                                                            | Not yet removed |
-| 2024.9        | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2024.6        | -                                                                                                                                                                                                                                                                                                                                | -                                                                                                                                                                                        | -               |
-| 2024.3        | Support for AM 6.5                                                                                                                                                                                                                                                                                                               | Later versions of AM                                                                                                                                                                     | 2025.3          |
-|               | From AM 7.5, values set in the AM admin UI for `Replay Password Key` are ignored.                                                                                                                                                                                                                                                | From AM 7.5, the value of the DES key is inherited from the secret mapped to the AM secret label `am.authentication.replaypassword.key`.                                                 | Not yet removed |
+| Deprecated in | Description                                                                                                                                                                                                                                                                                                                   | Replaced by                                                                                                                                                                              | Removed in      |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 2026.6        | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2025.11       | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2025.9        | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2025.6        | Use of the [Public Client Certificate File Name](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.cert.file.html) property for the certificate friendly name.                                                                                                                | [Public Client Certificate Friendly Name](https://docs.pingidentity.com/web-agents/2025.11/properties-reference/com.forgerock.agents.config.win.clientcert.friendly.name.html) property. | -               |
+| 2025.3        | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2024.11       | Fallback mode setting (`0`) for [AM_AGENT_AUTH_MODE](https://docs.pingidentity.com/web-agents/2024.11/installation-guide/installer-env-vars.html#am-agent-auth-mode) and [Agent Authentication Mode](https://docs.pingidentity.com/web-agents/2024.11/properties-reference/com.forgerock.agents.config.agent.auth.mode.html). | Default will change to always authenticate using the `Agent` journey.                                                                                                                    | 2025.3          |
+|               | `user` field in audit logs.                                                                                                                                                                                                                                                                                                   | `userId` field in audit logs.                                                                                                                                                            | Not yet removed |
+| 2024.9        | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2024.6        | -                                                                                                                                                                                                                                                                                                                             | -                                                                                                                                                                                        | -               |
+| 2024.3        | Support for AM 6.5                                                                                                                                                                                                                                                                                                            | Later versions of AM                                                                                                                                                                     | 2025.3          |
+|               | From AM 7.5, values set in the AM admin UI for `Replay Password Key` are ignored.                                                                                                                                                                                                                                             | From AM 7.5, the value of the DES key is inherited from the secret mapped to the AM secret label `am.authentication.replaypassword.key`.                                                 | Not yet removed |
 
 ---
 
@@ -423,6 +455,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-fixes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-fixes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 ---
 
 # Fixes
@@ -442,6 +477,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 ---
 
 # Fixes
@@ -467,6 +505,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2023
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2023.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-08T17:54:09Z
 section_ids:
   web_agent_2023_11_x: Web Agent 2023.11.x
   web_agent_2023_11_3: Web Agent 2023.11.3
@@ -493,10 +534,10 @@ This page lists the cumulative fixes in Web Agent 2023.x releases:
 
 ### Web Agent 2023.11.2
 
-|               |                                                              |
-| ------------- | ------------------------------------------------------------ |
-| AMAGENTS-6527 | WPA SSL\_shutdown shutdown while in init errors in agent log |
-| AMAGENTS-6215 | "Not Enforced Client IP List" abnormal                       |
+|               |                                                             |
+| ------------- | ----------------------------------------------------------- |
+| AMAGENTS-6527 | WPA SSL_shutdown shutdown while in init errors in agent log |
+| AMAGENTS-6215 | "Not Enforced Client IP List" abnormal                      |
 
 ### Web Agent 2023.11.1
 
@@ -509,7 +550,7 @@ This page lists the cumulative fixes in Web Agent 2023.x releases:
 
 |               |                                                                      |
 | ------------- | -------------------------------------------------------------------- |
-| AMAGENTS-6175 | Memory leak in credentials\_secure\_free                             |
+| AMAGENTS-6175 | Memory leak in credentials_secure_free                               |
 | AMAGENTS-6133 | Improper use of Bcrypt hash handle in JWT password replay module in  |
 | AMAGENTS-6132 | JWT password replay module in IIS should use json parser             |
 | AMAGENTS-6073 | Idle timeout should not update on NEU with SSO Only, neu fetch and   |
@@ -552,8 +593,12 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2024
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2024.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-10T09:12:12Z
 section_ids:
   web_agent_2024_11_x: Web Agent 2024.11.x
+  web_agent_2024_11_3: Web Agent 2024.11.3
   web_agent_2024_11_2: Web Agent 2024.11.2
   web_agent_2024_11_1: Web Agent 2024.11.1
   web_agent_2024_11: Web Agent 2024.11
@@ -567,6 +612,10 @@ section_ids:
 This page lists the cumulative fixes in Web Agent 2024.x releases:
 
 ## Web Agent 2024.11.x
+
+### Web Agent 2024.11.3
+
+No issues were fixed in this release.
 
 ### Web Agent 2024.11.2
 
@@ -584,22 +633,22 @@ This page lists the cumulative fixes in Web Agent 2024.x releases:
 
 ### Web Agent 2024.11
 
-|               |                                                                                    |
-| ------------- | ---------------------------------------------------------------------------------- |
-| AMAGENTS-5958 | Invalid error AMConfigurationException generated in the AM log                     |
-| AMAGENTS-6729 | Looping after Authentication in session quota mode with -25 / 403 errors           |
-| AMAGENTS-6885 | Closing SSL session logs are at ERROR level and should be at DEBUG                 |
-| AMAGENTS-6906 | WPA validator validate\_session\_profile test always uses auth module (regression) |
-| AMAGENTS-6916 | userId does not get populated by web agent audit                                   |
-| AMAGENTS-6929 | NGINX crash in agent\_config\_cleanup                                              |
+|               |                                                                                  |
+| ------------- | -------------------------------------------------------------------------------- |
+| AMAGENTS-5958 | Invalid error AMConfigurationException generated in the AM log                   |
+| AMAGENTS-6729 | Looping after Authentication in session quota mode with -25 / 403 errors         |
+| AMAGENTS-6885 | Closing SSL session logs are at ERROR level and should be at DEBUG               |
+| AMAGENTS-6906 | WPA validator validate_session_profile test always uses auth module (regression) |
+| AMAGENTS-6916 | userId does not get populated by web agent audit                                 |
+| AMAGENTS-6929 | NGINX crash in agent_config_cleanup                                              |
 
 ## Web Agent 2024.9
 
-|               |                                                              |
-| ------------- | ------------------------------------------------------------ |
-| AMAGENTS-6628 | Fragment replay is broken with custom login mode 2           |
-| AMAGENTS-6527 | WPA SSL\_shutdown shutdown while in init errors in agent log |
-| AMAGENTS-6215 | "Not Enforced Client IP List" abnormal                       |
+|               |                                                             |
+| ------------- | ----------------------------------------------------------- |
+| AMAGENTS-6628 | Fragment replay is broken with custom login mode 2          |
+| AMAGENTS-6527 | WPA SSL_shutdown shutdown while in init errors in agent log |
+| AMAGENTS-6215 | "Not Enforced Client IP List" abnormal                      |
 
 ## Web Agent 2024.6
 
@@ -608,7 +657,7 @@ This page lists the cumulative fixes in Web Agent 2024.x releases:
 | AMAGENTS-6557 | Segmentation fault in agentadmin --V before install complete or in custom directory |
 | AMAGENTS-6494 | Agents local policy eval fails. Agent name and policy application name are switched |
 | AMAGENTS-6428 | Incorrect message formats in task.c                                                 |
-| AMAGENTS-6289 | AM\_SYSTEM\_LOG\_FILES only works for debug.log                                     |
+| AMAGENTS-6289 | AM_SYSTEM_LOG_FILES only works for debug.log                                        |
 | AMAGENTS-3663 | Nginx Agent print absolute build path into debug logs                               |
 | AMAGENTS-3166 | The path attribute in agent's audit log is not the full path                        |
 
@@ -619,7 +668,7 @@ This page lists the cumulative fixes in Web Agent 2024.x releases:
 | AMAGENTS-6397 | If the agent instance isn't provided for key rotation, agentadmin doesn't print an error                          |
 | AMAGENTS-6302 | NGINX agent PDP fails with HTTP/3 connections                                                                     |
 | AMAGENTS-6172 | WPA for IIS does not work when running in 32bit mode on 64bit Windows OS                                          |
-| AMAGENTS-6046 | convert\_request\_after\_authn\_post writes to /tmp instead of configured PDP directory                           |
+| AMAGENTS-6046 | convert_request_after_authn_post writes to /tmp instead of configured PDP directory                               |
 | AMAGENTS-5985 | Interactive installation using existing agent configuration files duplicate properties which are commented out    |
 | AMAGENTS-5983 | Interactive installer refer to the legacy agent configuration file - OpenSSOAgentBootstrap.properties             |
 | AMAGENTS-4590 | login-fragment-relay page should have charset specified.                                                          |
@@ -635,7 +684,12 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2025
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2025.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-10T08:52:43Z
 section_ids:
+  web_agent_2025_11_x: Web Agent 2025.11.x
+  web_agent_2025_11_1: Web Agent 2025.11.1
   web_agent_2025_11: Web Agent 2025.11
   web_agent_2025_9: Web Agent 2025.9
   web_agent_2025_6: Web Agent 2025.6
@@ -648,18 +702,29 @@ section_ids:
 
 This page lists the cumulative fixes in Web Agent 2025.x releases:
 
-## Web Agent 2025.11
+## Web Agent 2025.11.x
+
+### Web Agent 2025.11.1
+
+|               |                                                                        |
+| ------------- | ---------------------------------------------------------------------- |
+| AMAGENTS-7772 | Fixed close-delimited responses that weren't correctly terminated      |
+| AMAGENTS-7771 | Fixed Web Agent timeouts on Windows when reading large HTTPS responses |
+| AMAGENTS-7704 | IIS crash in dev_await_mutex_win when dll unloaded due to shutdown     |
+| AMAGENTS-7674 | IIS Web Agent running in 32 bit application pool crash                 |
+
+### Web Agent 2025.11
 
 |               |                                                                                             |
 | ------------- | ------------------------------------------------------------------------------------------- |
-| AMAGENTS-7542 | 2025.9 mod\_headers support causes login self submit form failures                          |
+| AMAGENTS-7542 | 2025.9 mod_headers support causes login self submit form failures                           |
 | AMAGENTS-4672 | Web Agent doesn't handle specific case for Not-Enforced URL and one level wildcard properly |
 
 ## Web Agent 2025.9
 
 |               |                                                                 |
 | ------------- | --------------------------------------------------------------- |
-| AMAGENTS-7433 | Apache agent custom responses don't work with mod\_headers      |
+| AMAGENTS-7433 | Apache agent custom responses don't work with mod_headers       |
 | AMAGENTS-7390 | Web Agent needs to handle PingAM in serverinfo/version response |
 
 ## Web Agent 2025.6
@@ -697,7 +762,12 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-2026
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-2026.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-10T17:18:09Z
 section_ids:
+  web_agent_2026_6_x: Web Agent 2026.6.x
+  web_agent_2026_6_1: Web Agent 2026.6.1
   web_agent_2026_6: Web Agent 2026.6
 ---
 
@@ -705,13 +775,23 @@ section_ids:
 
 This page lists the cumulative fixes in Web Agent 2026.x releases:
 
-## Web Agent 2026.6
+## Web Agent 2026.6.x
+
+### Web Agent 2026.6.1
+
+|               |                                                                        |
+| ------------- | ---------------------------------------------------------------------- |
+| AMAGENTS-7772 | Fixed close-delimited responses that weren't correctly terminated      |
+| AMAGENTS-7771 | Fixed Web Agent timeouts on Windows when reading large HTTPS responses |
+| AMAGENTS-7770 | WebSocket idle read timeouts on Windows logged as ERROR                |
+
+### Web Agent 2026.6
 
 |               |                                                                             |
 | ------------- | --------------------------------------------------------------------------- |
-| AMAGENTS-7704 | IIS crash in dev\_await\_mutex\_win when dll unloaded due to shutdown       |
+| AMAGENTS-7704 | IIS crash in dev_await_mutex_win when dll unloaded due to shutdown          |
 | AMAGENTS-7695 | Web Agent crash when policy response attributes contains null array element |
-| AMAGENTS-7680 | IIS Web Agent crash in am\_notification\_loop during shutdown               |
+| AMAGENTS-7680 | IIS Web Agent crash in am_notification_loop during shutdown                 |
 | AMAGENTS-7674 | IIS Web Agent running in 32 bit application pool crash                      |
 | AMAGENTS-7658 | Agent Profile ID Allow List search is incorrect                             |
 
@@ -724,6 +804,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::fixes-510
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/fixes-510.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-08T17:54:09Z
 section_ids:
   web_agent_5_10_4: Web Agent 5.10.4
   web_agent_5_10_3: Web Agent 5.10.3
@@ -781,6 +864,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::support
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/support.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-09-09T11:12:25Z
 ---
 
 # Getting support
@@ -806,6 +892,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::changes
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/changes.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 ---
 
 # Incompatible changes
@@ -831,6 +920,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::archive-known-issues
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/archive-known-issues.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-11-19T17:06:18Z
 section_ids:
   web_agent_2023_11: Web Agent 2023.11
   web_agent_2023_9: Web Agent 2023.9
@@ -846,10 +938,10 @@ section_ids:
 | Issue                                                                                                                                             | Comment                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | AMAGENTS-6628: Fragment replay is broken with custom login mode 2                                                                                 | Fixed in 2024.9, 2023.11.1 |
-| AMAGENTS-6527: WPA SSL\_shutdown shutdown while in init errors in agent log                                                                       | Fixed in 2024.9, 2023.11.2 |
+| AMAGENTS-6527: WPA SSL_shutdown shutdown while in init errors in agent log                                                                        | Fixed in 2024.9, 2023.11.2 |
 | AMAGENTS-6494: Agents local policy eval fails. Agent name and policy application name are switched                                                | Fixed in 2024.6, 2023.11.1 |
 | AMAGENTS-6172: WPA for IIS doesn't work when running in 32bit mode on 64bit Windows OS                                                            | Fixed in 2024.3            |
-| AMAGENTS-6046: convert\_request\_after\_authn\_post writes to /tmp instead of configured PDP directory                                            | Fixed in 2024.3            |
+| AMAGENTS-6046: convert_request_after_authn_post writes to /tmp instead of configured PDP directory                                                | Fixed in 2024.3            |
 | AMAGENTS-5985: Interactive installation using existing agent configuration files duplicate properties which are commented out                     | Fixed in 2024.3            |
 | AMAGENTS-5983 Interactive installer refer to the legacy agent configuration file - OpenSSOAgentBootstrap.properties                               | Fixed in 2024.3            |
 | AMAGENTS-5958: Invalid error AMConfigurationException generated in the AM log                                                                     | Fixed in 2024.11           |
@@ -869,9 +961,9 @@ section_ids:
 | Issue                                                                                                                                             | Comment                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | AMAGENTS-6494: Agents local policy eval fails. Agent name and policy application name are switched                                                | Fixed in 2024.6, 2023.11.1 |
-| AMAGENTS-6175: Memory leak in credentials\_secure\_free                                                                                           | Fixed in 2023.11           |
+| AMAGENTS-6175: Memory leak in credentials_secure_free                                                                                             | Fixed in 2023.11           |
 | AMAGENTS-6073: Idle timeout should not update on NEU with SSO Only, neu fetch and                                                                 | Fixed in 2023.11           |
-| AMAGENTS-6046: convert\_request\_after\_authn\_post writes to /tmp instead of configured PDP directory                                            | Fixed in 2024.3            |
+| AMAGENTS-6046: convert_request_after_authn_post writes to /tmp instead of configured PDP directory                                                | Fixed in 2024.3            |
 | AMAGENTS-5985: Interactive installation using existing agent configuration files duplicate properties which are commented out                     | Fixed in 2024.3            |
 | AMAGENTS-5958: Invalid error AMConfigurationException generated in the AM log                                                                     | Fixed in 2024.11           |
 | AMAGENTS-5777: IIS web agent zip file includes 32bit DLL                                                                                          | Unresolved                 |
@@ -891,8 +983,8 @@ section_ids:
 | Issue                                                                                                                                             | Comment                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | AMAGENTS-6494: Agents local policy eval fails. Agent name and policy application name are switched                                                | Fixed in 2024.6, 2023.11.1 |
-| AMAGENTS-6175: Memory leak in credentials\_secure\_free                                                                                           | Fixed in 2023.11           |
-| AMAGENTS-6046: convert\_request\_after\_authn\_post writes to /tmp instead of configured PDP directory                                            | Fixed in 2024.3            |
+| AMAGENTS-6175: Memory leak in credentials_secure_free                                                                                             | Fixed in 2023.11           |
+| AMAGENTS-6046: convert_request_after_authn_post writes to /tmp instead of configured PDP directory                                                | Fixed in 2024.3            |
 | AMAGENTS-5995: Don't extend user session for not enforced url with fetch attributes enabled                                                       | Fixed in 2023.9            |
 | AMAGENTS-5985: Interactive installation using existing agent configuration files duplicate properties which are commented out                     | Fixed in 2024.3            |
 | AMAGENTS-5833: WPA 403 error on /agent/cdsso-oauth2 with invalid jwt.aud.whitelist parameter value                                                | Fixed in 2023.9            |
@@ -914,8 +1006,8 @@ section_ids:
 
 | Issue                                                                                                                                             | Comment          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| AMAGENTS-6175: Memory leak in credentials\_secure\_free                                                                                           | Fixed in 2023.11 |
-| AMAGENTS-6046: convert\_request\_after\_authn\_post writes to /tmp instead of configured PDP directory                                            | Fixed in 2024.3  |
+| AMAGENTS-6175: Memory leak in credentials_secure_free                                                                                             | Fixed in 2023.11 |
+| AMAGENTS-6046: convert_request_after_authn_post writes to /tmp instead of configured PDP directory                                                | Fixed in 2024.3  |
 | AMAGENTS-5995: Don't extend user session for not enforced url with fetch attributes enabled                                                       | Fixed in 2023.9  |
 | AMAGENTS-5985: Interactive installation using existing agent configuration files duplicate properties which are commented out                     | Fixed in 2024.3  |
 | AMAGENTS-5833: WPA 403 error on /agent/cdsso-oauth2 with invalid jwt.aud.whitelist parameter value                                                | Fixed in 2023.9  |
@@ -947,6 +1039,9 @@ component: web-agents
 version: release-notes
 page_id: web-agents::known-issues
 canonical_url: https://docs.pingidentity.com/web-agents/release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-10T17:18:09Z
 section_ids:
   web_agent_2026_6: Web Agent 2026.6
   web_agent_2025_11: Web Agent 2025.11
@@ -1008,7 +1103,7 @@ section_ids:
 | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | AMAGENTS-7219: Local policy evaluation mode not working                                                                                     | Fixed in 2025.3.1, 2024.11.1 |
 | AMAGENTS-6905: Apache agent should fail to start if multiple AmAgentID directives are detected                                              | Fixed in 2025.3              |
-| AMAGENTS-6904: validate\_credential\_files issue with config filename that have no path component                                           | Won't fix                    |
+| AMAGENTS-6904: validate_credential_files issue with config filename that have no path component                                             | Won't fix                    |
 | AMAGENTS-6749: Agent local configuration files lost formatting                                                                              | Fixed in 2025.3              |
 | AMAGENTS-6363: Shared user profile attributes                                                                                               | Unresolved                   |
 | AMAGENTS-6306: Infinite apache error log caused by pipe error                                                                               | Won't fix                    |
@@ -1036,7 +1131,7 @@ section_ids:
 | Issue                                                                                                                                       | Comment                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | AMAGENTS-6628: Fragment replay is broken with custom login mode 2                                                                           | Fixed in 2024.9, 2023.11.1 |
-| AMAGENTS-6527: WPA SSL\_shutdown shutdown while in init errors in agent log                                                                 | Fixed in 2024.9, 2023.11.2 |
+| AMAGENTS-6527: WPA SSL_shutdown shutdown while in init errors in agent log                                                                  | Fixed in 2024.9, 2023.11.2 |
 | AMAGENTS-6363: Shared user profile attributes                                                                                               | Unresolved                 |
 | AMAGENTS-6306: Infinite apache error log caused by pipe error                                                                               | Unresolved                 |
 | AMAGENTS-6279: X-frame option is not coming in response header for Application url when fragment redirect is enabled                        | Fixed in 2025.3            |
@@ -1051,11 +1146,11 @@ section_ids:
 | Issue                                                                                                                                        | Comment                    |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | AMAGENTS-6628: Fragment replay is broken with custom login mode 2                                                                            | Fixed in 2024.9, 2023.11.1 |
-| AMAGENTS-6527: WPA SSL\_shutdown shutdown while in init errors in agent log                                                                  | Fixed in 2024.9, 2023.11.2 |
+| AMAGENTS-6527: WPA SSL_shutdown shutdown while in init errors in agent log                                                                   | Fixed in 2024.9, 2023.11.2 |
 | AMAGENTS-6494: Agents local policy eval fails. Agent name and policy application name are switched                                           | Fixed in 2024.6, 2023.11.1 |
 | AMAGENTS-6363:websites sharing a cache sometimes don't get the expected headers set because of cache sharing issues in the agent             | Unresolved                 |
 | AMAGENTS-6306: infinite apache error log caused by pipe error                                                                                | Unresolved                 |
-| AMAGENTS-6289: AM\_SYSTEM\_LOG\_FILES only works for debug.log                                                                               | Fixed in 2024.6            |
+| AMAGENTS-6289: AM_SYSTEM_LOG_FILES only works for debug.log                                                                                  | Fixed in 2024.6            |
 | AMAGENTS-5958: Invalid error AMConfigurationException generated in the AM log                                                                | Fixed in 2024.11           |
 | AMAGENTS-5718: Custom Login mode 2 doesn't correctly process composite advice.                                                               | Unresolved                 |
 | AMAGENTS-5032: Native agents for windows do not correctly use unicode for the file system, resulting in configured files with garbled names. | Unresolved                 |

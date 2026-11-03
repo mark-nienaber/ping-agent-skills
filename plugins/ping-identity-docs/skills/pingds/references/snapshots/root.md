@@ -7,7 +7,7 @@ page_id: pingds::index
 canonical_url: https://docs.pingidentity.com/pingds/release-notes/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-04-29T12:00:00Z
+revdate: 2026-04-29T08:46:30Z
 section_ids:
   release_notes: Release notes
   get_started_with_pingds: Get started with PingDS

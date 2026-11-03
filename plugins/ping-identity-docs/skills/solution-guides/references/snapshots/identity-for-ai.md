@@ -4,7 +4,9 @@ description: Identity for AI secures AI agents with agent registration, authenti
 component: solution-guides
 page_id: solution-guides:identity-for-ai:identity-for-ai-solutions
 canonical_url: https://docs.pingidentity.com/solution-guides/identity-for-ai/identity-for-ai-solutions.html
-revdate: May 19, 2026
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: October 16, 2026
 keywords: ["Identity for AI", "AI identity", "AI security", "AI governance", "AI compliance", "AI agent security", "AI agent identity", "AI agent gateway", "AI agent detection", "AI agent use cases", "AI solutions", "NHI", "non-human identity", "agentic AI", "AI agents", "AI risk", "AI policy", "AI audit", "AI integrations", "MCP security"]
 page_aliases: ["index.adoc"]
 section_ids:
@@ -54,7 +56,7 @@ Classify agents by type
 
 [icon: shield-check, set=far, size=3x]
 
-#### [PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html)
+#### [PingOne Advanced Identity Cloud](https://docs.pingidentity.com/pingoneaic/identity-for-ai/ai-agent-identities.html)
 
 Register, authenticate, and monitor agents
 
@@ -70,13 +72,13 @@ Secure what agents can do after they authenticate. Explore how to use delegated 
 
 [icon: puzzle, set=far, size=3x]
 
-#### [PingOne](https://developer.pingidentity.com/identity-for-ai/identity/idai-securing-agents-pingone.html)
+#### [PingOne](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingone.html)
 
 Secure digital assistants with delegation and least privilege
 
 [icon: puzzle, set=far, size=3x]
 
-#### [PingFederate](https://developer.pingidentity.com/identity-for-ai/identity/idai-securing-agents-pingfed.html)
+#### [PingFederate](https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.html)
 
 Secure digital assistants with delegated access tokens
 
@@ -124,20 +126,24 @@ Explore reference integrations that show how Ping Identity products work with AI
 
 ![](_images/aws.svg)
 
-#### [PingOne, PingOne Advanced Identity Cloud, PingFederate + AWS Bedrock](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-aws-ping.html)
+#### [PingOne, PingOne Advanced Identity Cloud, PingFederate + AWS Bedrock](https://developer.pingidentity.com/identity-for-ai/integrations/idai-securing-aws-ping.html)
 
 ![](_images/cloudflare-logo.png)
 
-#### [PingOne Advanced Identity Cloud + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-aic.html)
+#### [PingOne Advanced Identity Cloud + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/integrations/idai-securing-cloudflare-aic.html)
 
 ![](_images/cloudflare-logo.png)
 
-#### [PingOne + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-pingone.html)
+#### [PingOne + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/integrations/idai-securing-cloudflare-pingone.html)
 
 ![](_images/cloudflare-logo.png)
 
-#### [PingFederate + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-pingfed.html)
+#### [PingFederate + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/integrations/idai-securing-cloudflare-pingfed.html)
 
 ![](_images/cloudflare-logo.png)
 
-#### [DaVinci + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/agents/idai-securing-cloudflare-davinci.html)
+#### [DaVinci + Cloudflare Workers MCP server](https://developer.pingidentity.com/identity-for-ai/integrations/idai-securing-cloudflare-davinci.html)
+
+![](_images/gemini-logo.png)
+
+#### [PingOne, PingOne Authorize + Gemini Enterprise Agent Platform](https://developer.pingidentity.com/identity-for-ai/integrations/idai-integrating-gemini-agent-platform-with-ping.html)

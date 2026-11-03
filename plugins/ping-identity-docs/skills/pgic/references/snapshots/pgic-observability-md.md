@@ -4,6 +4,8 @@ description: Our Support team and the Site Reliability Engineers proactively mon
 component: pgic
 page_id: pgic::pgic_observability
 canonical_url: http://docs.pingidentity.com/pgic/pgic_observability.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Observability and logging

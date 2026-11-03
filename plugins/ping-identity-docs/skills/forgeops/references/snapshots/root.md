@@ -1,22 +1,40 @@
 ---
 title: Consolidated ForgeOps documentation
-description: The Ping Advanced Identity Software provides ForgeOps to help you deploy PingAM, PingDS, PingIDM, and PingGateway collectively in an integrated manner on a cloud platform that runs Kubernetes.
+description: Consolidated ForgeOps documentation for deploying and customizing the Ping Advanced Identity Software on Kubernetes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops::consolidated
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/consolidated.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/consolidated.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-28T09:52:15Z
 section_ids:
   2026: 2026
   introduction_to_forgeops: Introduction to ForgeOps
-  whats_new_in_forgeops_2026_2: What's new in ForgeOps 2026.2
+  whats_new_in_forgeops_2026_3: What's new in ForgeOps 2026.3
   release_information: Release information
-  highlights_in_2026_2_1_release: Highlights in 2026.2.1 release
+  highlights_in_2026_3_release: Highlights in 2026.3 release
+  deprecated_features: Deprecated features
+  release_notes_for_2026_3: Release notes for 2026.3
   forgeops_release_notes: ForgeOps release notes
-  june_29_2026: June 29, 2026
-  forgeops-2026-2-1-features: ForgeOps 2026.2.1 release features
-  forgeops_2026_2_0_release_features: ForgeOps 2026.2.0 release features
+  october_26_2026: October 26, 2026
+  october_14_2026: October 14, 2026
+  forgeops_2026_3_2_release_features: ForgeOps 2026.3.2 release features
+  deprecated_features_2: Deprecated features
+  new_features_and_updated_functionality: New features and updated functionality
+  bug_fixes: Bug fixes
+  documentation_updates: Documentation updates
+  forgeops_2026_3_1_release_features: ForgeOps 2026.3.1 release features
+  new_features_and_updated_functionality_2: New features and updated functionality
+  bugfixes: Bugfixes
+  august_28_2026: August 28, 2026
+  august_24_2026: August 24, 2026
+  august_17_2026: August 17, 2026
+  august_14_2026: August 14, 2026
+  forgeops_2026_3_0_release_features: ForgeOps 2026.3.0 release features
+  new_features_and_updated_functionality_3: New features and updated functionality
+  bug_fixes_2: Bug fixes
+  documentation_updates_2: Documentation updates
   validated_software_versions: Validated software versions
   kubernetes: Kubernetes
   forgeops_operators: ForgeOps operators
@@ -127,12 +145,12 @@ section_ids:
   next_step_3: Next step
   deploy_using_helm_on_minikube: Deploy using Helm on minikube
   next_step_4: Next step
-  deploy_using_kustomize_on_gke_eks_or_aks: Deploy using Kustomize on GKE, EKS, or AKS
+  deploy_using_kustomize_on_gke_eks_or_aks_deprecated: Deploy using Kustomize on GKE, EKS, or AKS (Deprecated)
   alt-techniques-kustomize-cloud: Alternative deployment techniques when using Kustomize
   staged_deployments: Staged deployments
   generating_kustomize_manifests_and_using_kubectl_apply_commands: Generating Kustomize manifests and using kubectl apply commands
   next_step_5: Next step
-  deploy_using_kustomize_on_minikube: Deploy using Kustomize on minikube
+  deploy_using_kustomize_on_minikube_deprecated: Deploy using Kustomize on minikube (Deprecated)
   alt-techniques-kustomize-local: Alternative deployment techniques when using Kustomize
   staged_deployments_2: Staged deployments
   generating_kustomize_manifests_and_using_kubectl_apply_commands_2: Generating Kustomize manifests and using kubectl apply commands
@@ -182,17 +200,13 @@ section_ids:
   am_image: am image
   customization_overview_2: Customization overview
   detailed_steps_2: Detailed steps
-  redeploy-am-forgeops-command: "Redeploy AM: Kustomize deployments"
-  redeploy-am-helm: "Redeploy AM: Helm deployments"
   next_step_13: Next step
   idm_image: idm image
   customization_overview_3: Customization overview
   detailed_steps_3: Detailed steps
-  redeploy-idm-forgeops-command: "Redeploy IDM: Kustomize deployments"
-  redeploy-idm-helm: "Redeploy IDM: Helm deployments"
   next_step_14: Next step
   prepare_to_deploy_in_production: Prepare to deploy in production
-  pinggateway_deployment: PingGateway deployment
+  identity_gateway: Identity Gateway
   deploy_pinggateway: Deploy PingGateway
   custom_pinggateway_image: Custom PingGateway image
   deploy_custom_pinggateway_image: Deploy custom PingGateway image
@@ -215,7 +229,7 @@ section_ids:
   backend_http_access_policy: backend-http-access policy
   front_end_http_access_policy: front-end-http-access policy
   cluster_access_for_multiple_aws_users: Cluster access for multiple AWS users
-  secret_agent_operator: Secret Agent operator
+  the_secret_agent_operator: The secret agent operator
   secret_generation: Secret generation
   cloud-secret-management: Cloud secret management
   password-changes: Administration password changes
@@ -252,14 +266,18 @@ section_ids:
   dr-restore: Restore a PingDS deployment after a disaster
   restore-best-practices: Best practices for restoring directories
   using_cloud_storage_locally_for_backup_and_restore: Using cloud storage locally for backup and restore
+  integration_use_cases: Integration use cases
+  integrate_forgeops_with_the_pingone_worker_service: Integrate ForgeOps with the PingOne Worker service
+  why_integrate_with_the_pingone_worker_service: Why integrate with the PingOne Worker service?
+  set_up_a_pingone_environment: Set up a PingOne environment
+  set_up_forgeops_on_minikube: Set up ForgeOps on minikube
+  export_am_runtime_config_into_a_profile_and_redeploy: Export AM runtime config into a profile and redeploy
+  test_the_integration: Test the integration
   upg-overview: Upgrade and Migration Overview
   troubleshooting: Troubleshooting
   kubernetes_logs_and_other_diagnostics: Kubernetes logs and other diagnostics
   debug_logs_utility: debug-logs utility
   example_troubleshooting_steps: Example troubleshooting steps
-  ds_diagnostic_tools: DS diagnostic tools
-  ds-debug: Debug script
-  debug-tools-container: Debug tools container
   troubleshooting_the_amster_pod: Troubleshooting the amster pod
   start_the_amster_pod: Start the amster pod
   amster-retain: Export and import AM configuration
@@ -298,9 +316,12 @@ section_ids:
   forgeops-apply: forgeops apply
   forgeops-build: forgeops build
   forgeops-delete: forgeops delete
+  forgeops-dsconfig: forgeops dsconfig
   forgeops-env: forgeops env
   forgeops-image: forgeops image
   foregops-prereqs: forgeops prereqs
+  forgeops-upgrade-am-config: forgeops upgrade-am-config
+  examples_5: Examples
   secrets_reference: Secrets Reference
   am_configuration_passwords: AM configuration passwords
   kubernetes_secret_name_am_env_secret: "Kubernetes secret name: am-env-secret"
@@ -357,19 +378,19 @@ ForgeOps comprises mainly two sets of resources:
 
   * Fully integrated AM, IDM, and DS installations
 
-  * Multi-zone high availability'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Multi-zone high availability\[[1](#_footnotedef_1 "View footnote.")]
 
-  * Replicated directory services'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Replicated directory services\[[1](#_footnotedef_1 "View footnote.")]
 
-  * Ingress configuration'\[[2](#_footnotedef_2 "View footnote.")]'
+  * Ingress configuration\[[2](#_footnotedef_2 "View footnote.")]
 
   * Certificate management
 
   * Randomly generated secrets with ability to rotate secrets
 
-  * Prometheus monitoring, Grafana reporting, and alert management'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Prometheus monitoring, Grafana reporting, and alert management\[[1](#_footnotedef_1 "View footnote.")]
 
-* The [ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.2)
+* The [ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.3)
 
   The ForgeOps documentation helps you work with ForgeOps deployments:
 
@@ -383,11 +404,23 @@ ForgeOps comprises mainly two sets of resources:
 
 Learn more about ForgeOps and the Ping Advanced Identity Software in <https://www.pingidentity.com/en/platform.html>.
 
-## What's new in ForgeOps 2026.2
+## What's new in ForgeOps 2026.3
 
 ### Release information
 
-#### Highlights in 2026.2.1 release
+#### Highlights in 2026.3 release
+
+* Custom release site
+
+  A reference section is added in the ForgeOps documentation to set up your release site to manage the images and tags in your deployments. Learn more in the [Custom release site](reference/releases.html) section.
+
+* RCS Helm chart
+
+  A new Helm chart has been created for RCS Server. This allows users to synchronize Advanced Identity Cloud identities with a ForgeOps deployment. Learn more about the use of RCS Helm chart in the [Ping RCS Connector](integration/rcs-helm-chart.html) section.
+
+* Optionally enable IDM admin UI
+
+  In PingIDM 8.1.0, the IDM admin UI was removed. Accordingly, it was removed in the ForgeOps 2026.3.1 release. We have made it possible to enable the IDM admin UI optionally in ForgeOps deployments.
 
 * The `main` branch contains pre-release artifacts
 
@@ -397,29 +430,39 @@ Learn more about ForgeOps and the Ping Advanced Identity Software in <https://ww
 
   The `dev` branch that used to contain the pre-release artifacts is discontinued and will no longer be updated.
 
-* Focus more on using Helm 4
+* Helm-generated secrets
 
-  The `forgeops` utility now uses Helm 4 for deploying ForgeOps on Kubernetes. Helm 4 provides improved performance and security features compared to previous Helm versions. We recommend you use Helm in ForgeOps deployments rather than Kustomize.
+  You can now generate secrets using Helm in ForgeOps deployments. A Kubernetes job was created to generate an ssh key and store it in a secret. This is used by `amster` to connect to am.
 
-* Security enabled by default
+  A new subcommand, **forgeops migrate sa2hs**, has been added. This subcommand can be used to migrate secrets from secret agent to Helm-generated secrets.
 
-  The `forgeops` utility now enables security by default for new ForgeOps deployments. Learn more in [Enable security features](rn/rn.html#sec-2026-2-features).
+* Integration with PingOne Worker service
 
-* SBOM for ForgeOps images
+  ForgeOps provides integration with PingOne Worker service in ForgeOps 2026.3.0 release. This allows ForgeOps users to leverage real-time risk scores for better authentication decisions.
 
-  Software Bill of Materials (SBOM) is now available for ForgeOps images. SBOM provides a detailed inventory of the components and dependencies used in ForgeOps images, which can help you identify and manage security vulnerabilities and compliance issues.
+* Supported Ping Advanced Identity Software images
 
-* Images support update
+  ForgeOps supports the last three major or minor versions of the Ping Advanced Identity Software images. With the availability of 8.1 images, ForgeOps supports 8.1, 8.0, and 7.5 versions of the platform images, and **7.4 images are no longer supported**.
 
-  ForgeOps supports the latest available major or minor versions of the Ping Advanced Identity Software components. Learn more at [ForgeOps image support](start/support.html#forgeops-image-support).
+### Deprecated features
 
-* Further release information
+The following features are deprecated in ForgeOps 2026.3 release:
 
-  Learn more about this release in the [ForgeOps 2026.2.1 release notes](rn/rn.html#forgeops-2026-2-1-features).
+* Kustomize
+
+  Support for Kustomize-based deployments is deprecated. The ForgeOps team recommends migrating to Helm chart-based deployments. The ForgeOps Helm charts are actively maintained. Learn about migrating to Helm chart-based deployments in the [Migrate from Kustomize to Helm chart-based deployments](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) article.
+
+* Secret agent
+
+  The secret agent operator is deprecated. Users need to migrate to the built-in Helm-generated secrets or an alternative secrets management solution. Use [Migrate to Helm-generated secrets](prepare/security/migrate-helmsec.html) for guidance on migrating to Helm-generated secrets.
+
+### Release notes for 2026.3
+
+Further release information is available in the [ForgeOps release notes](rn/rn.html).
 
 ## ForgeOps release notes
 
-Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.2.1 RSS feed](https://docs.pingidentity.com/forgeops/latest/rn/rn.xml) to get notification when there's an update to the latest ForgeOps documentation.
+Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.3 RSS feed](https://docs.pingidentity.com/forgeops/latest/rn/rn.xml) to get notified when the latest ForgeOps documentation is updated.
 
 |   |                                                                                                                                                                                                                                                              |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -427,115 +470,319 @@ Subscribe to the [icon: rss-square, set=fa][ForgeOps 2026.2.1 RSS feed](https://
 
 |                                                                                                                                                              |                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Validated Kubernetes, Ingress-NGINX Controller, HAProxy Ingress, cert-manager, and operator versions for deploying Ping Advanced Identity Software 2026.2    | [Link](rn/versions.html)                                           |
-| Limitations when deploying Ping Advanced Identity Software `2026.2` on Kubernetes                                                                            | [Link](rn/limitations.html)                                        |
+| Validated Kubernetes, Ingress-NGINX Controller, HAProxy Ingress, cert-manager, and operator versions for deploying Ping Advanced Identity Software 2026.3    | [Link](rn/versions.html)                                           |
+| Limitations when deploying Ping Advanced Identity Software `2026.3` on Kubernetes                                                                            | [Link](rn/limitations.html)                                        |
 | More information about the evolving nature of the `forgeops` repository, including technology previews, legacy features, and feature deprecation and removal | [Link](rn/evolution.html)                                          |
 | Legal notices                                                                                                                                                | [Link](rn/legal.html)                                              |
-| Archive of release notes in ForgeOps 2026.1 are available from ForgeOps release 2026.1 documentation.                                                        | [Link](https://docs.pingidentity.com/forgeops/2026.1/rn/rn.html)   |
-| Archive of release notes in ForgeOps 2025.1 and 2025.2 are available from ForgeOps release 2025.2 documentation.                                             | [Link](https://docs.pingidentity.com/forgeops/2025.2/rn/rn.html)   |
-| Archive of release notes in 2024 and before are available from ForgeOps release 7.5 documentation.                                                           | [Link](https://docs.pingidentity.com/forgeops/7.5/rn/rn.html#2024) |
-| Archive of release notes in 2023 and before are available from ForgeOps release 7.4 documentation                                                            | [Link](https://docs.pingidentity.com/forgeops/7.4/rn/rn.html#2023) |
+| Release notes for ForgeOps 2026.2                                                                                                                            | [Link](https://docs.pingidentity.com/forgeops/2026.2/rn/rn.html)   |
+| Release notes for ForgeOps 2026.1                                                                                                                            | [Link](https://docs.pingidentity.com/forgeops/2026.1/rn/rn.html)   |
+| Release notes for ForgeOps 2025.1 and 2025.2                                                                                                                 | [Link](https://docs.pingidentity.com/forgeops/2025.2/rn/rn.html)   |
+| Release notes for 2024 and earlier                                                                                                                           | [Link](https://docs.pingidentity.com/forgeops/7.5/rn/rn.html#2024) |
+| Release notes for 2023 and earlier                                                                                                                           | [Link](https://docs.pingidentity.com/forgeops/7.4/rn/rn.html#2023) |
 
 ### 2026
 
-#### June 29, 2026
+#### October 26, 2026
+
+* Added a procedure to set up custom release site
+
+  A new procedure to create a custom release site has been added to the documentation. Learn more in the [Custom release site](reference/releases.html) section.
+
+#### October 14, 2026
+
+* New RCS Helm chart
+
+  You can now use a new Helm chart called `charts/rcs` to deploy the Ping Remote Connector Server. Learn more in the [Ping RCS Connector](integration/rcs-helm-chart.html) section.
+
+* Update namespace for role-binding
+
+  The forgeops env command now updates the namespace in the `role-binding.yaml` when `--namespace` option is used. This ensures that the role binding is created in the correct namespace.
+
+* Fixed a bug in `forgeops config build` command
+
+  When running the forgeops config build command, it throws errors because of a change to use the common args. The `args.profile` parameter needs to be `args.config_profile`. It has been fixed now.
+
+* Fixed a syntax error in `docker/am/import-pem-certs.sh`
+
+  In the `docker/am/import-pem-certs.sh` file, an invalid syntax (missing ']') was found. The syntax error has been fixed.
+
+* Fixed the issue of multiple `monitor` users
+
+  When using Prometheus for scraping, it caused errors because there are two `monitor` user entries present in the DS: one each for DS and IDM. This issue has been fixed now by appropriately addressing the scraping algorithm. If you are using older versions of ForgeOps tools, and have upgraded DS to 8.1.1 version, then you can fix the issue by removing the `monitor` user created by IDM. Learn more in the [Troubleshoot monitor user issue](troubleshoot/monitor.html) section.
+
+#### ForgeOps 2026.3.2 release features
+
+##### Deprecated features[icon: alarm-clock, set=fa]
+
+The following tools are deprecated and will be removed after the deprecation period:
+
+* Kustomize
+
+  Support for Kustomize-based deployments is deprecated. Users should migrate to Helm chart-based deployments. You can use the [Migrate to Helm](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) guide in the ForgeOps repository.
+
+  * **Deprecated in:** 2026.3.2
+
+  * **Expected removal:** 12 months after 2026.3.2 release
+
+  * **Migration path:** Migrate to Helm chart-based deployments
+
+* Secret agent
+
+  The secret agent operator is deprecated. Users should migrate to the built-in Helm-generated secrets or an alternative secrets management solution such as External Secrets Operator or HashiCorp Vault. Use [Migrate to Helm-generated secrets](prepare/security/migrate-helmsec.html) for guidance on migrating to Helm-generated secrets.
+
+  * **Deprecated in:** 2026.3.2
+
+  * **Expected removal:** 12 months after 2026.3.2 release
+
+  * **Migration path:** Migrate to Helm-generated secrets or a supported external secrets management solution
+
+##### New features and updated functionality
+
+* Restored IDM admin UI for PingIDM 8.1.0
+
+  In PingIDM 8.1.0, the legacy IDM admin UI was removed. It was also removed from the ForgeOps 2026.3.1 release. To support use cases that still require it, you can optionally enable IDM admin UI as a separate nginx pod in a Helm deployment in IDM 8.1.0 or later.
+
+  |   |                                                                                                                                                                                                                                         |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | 1. **This feature is available only in Helm deployments** and not in Kustomize deployments.
+
+  2. This feature is available in ForgeOps 2026.3.1 release and later.
+
+  3. The new URL path for the IDM is `/api` instead of `/openidm/api`. |
+
+* Updated the process of customizing DS deployments
+
+  The revised process of deploying customized DS is now available in the documentation. Learn more in the [Customize the DS Docker image](customize/ds.html) section.
+
+  A new [DS image description](https://github.com/ForgeRock/forgeops/blob//2026.3.2/docker/ds/README.md) file has been added in the `forgeops` repository.
+
+* Enabled HTTPS access to the releases site
+
+  The [releases site](https://releases.forgeops.com) could be accessed using HTTP protocol only. Now the releases site can be accessed using HTTPS protocol.
+
+##### Bug fixes
+
+* Refined `forgeops info --json` output
+
+  The `forgeops info --json` command generated extra content that wasn't in JSON format. This caused JSON parsing errors when the output is used directly. Now, the `forgeops info --json` command has been refined so that only valid JSON format is produced.
+
+* Update `ds-set-passwords` image when DS is updated
+
+  Previously, the `ds-set-passwords` wasn't updated in the `values.yaml` file when DS image was updated, causing them to be out of sync. Now, the `ds-idrepo-0` image section is used directly instead of a separate `ds-set-passwords` image section to avoid any out-of-sync issue.
+
+* Prevent logging sensitive information in Kubernetes logs
+
+  The forgeops dsconfig command previously leaked the directory manager user's password into Kubernetes logs. Now, the forgeops dsconfig command copies a file containing the credentials to a temporary file in the pod. The dsconfig command running in the pod reads the credentials from the temporary file within the pod and is cleaned up after the command completes. This prevents the credentials from appearing in the logs.
+
+* Fixed `forgeops config build` command
+
+  The `forgeops config build` command had a bug preventing it from executing. This bug has been fixed.
+
+* The `topologySpreadConstraint` configuration is corrected
+
+  The `topologySpreadConstraint` blocks for ds-cts and ds-idrepo were improperly configured. The `matchLabels` is changed to `app.kubernetes.io/component`. The `topologyKey` is changed to `kubernetes.io/hostname`. This ensures that DS pods are upgraded using the rolling update strategy.
+
+##### Documentation updates
+
+* Procedure to customize DS Docker images
+
+  The procedure to customize DS Docker images has been updated to reflect the revised DS base image creation process. Learn more in the [Customize the DS Docker image](customize/ds.html) section.
+
+* Procedure to migrate to Helm-based deployment
+
+  The procedure to [migrate from Kustomize-based deployment to Helm-based](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) deployment has been documented.
+
+* Updated How-to procedures
+
+  In the `forgeops` repository, the following procedures have been updated:
+
+  * [Adding custom certificates to the truststore](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/adding-user-supplied-certs-to-truststore.md).
+
+  * [Retrieve SBOMs for ForgeOps images](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/retrieve-SBOMs-based-on-original-image-URL.md).
+
+* Renamed How-to procedures
+
+  In the `forgeops` repository, the file name for the following procedures have been renamed:
+
+  * [Enabling REST APIs in PingAccess](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingam-enabling-rest-apis.md)
+
+  * [Recreating DS STS](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingds-recreating-sts.md)
+
+  * [Using an externally deployed DS with a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/pingds-use-an-externally-deployed-ds-with-a-forgeops-deployment.md)
+
+#### ForgeOps 2026.3.1 release features
+
+##### New features and updated functionality
+
+* New `forgeops dsconfig` subcommand
+
+  A new `forgeops dsconfig` subcommand has been added to allow users to make changes to DS configuration in DS pods.
+
+  The `forgeops dsconfig` command uses the secrets in the namespace where you deployed ForgeOps to determine the connection options needed and automatically passes them to the `dsconfig` command on the DS pod of your choosing.
+
+  Enclose strings with spaces in double quotes and escape special characters as needed. Learn more using the `forgeops dsconfig --help` command.
+
+* Removed the dry run (`-r`) short flag
+
+  The dry run short flag (`-r`) conflicted with the repository option and has been removed. Use `--dryrun` instead.
+
+##### Bugfixes
+
+* Incorrect image tag for ssh-keygen job's init container
+
+  The new job added in the 2026.3.0 release for Helm-generated secrets had a bug that mixed up the latest tag during the release process. Accordingly, the init container for the ssh-keygen job was using the wrong image tag. Now this issue has been fixed by pinning the tag for ssh-keygen's init container to a digest.
+
+* AM port in `forgerock-metrics`
+
+  The AM port in `forgerock-metrics` Helm chart has been changed to `http`.
+
+* `forgeops env --upgrade` with `--no-helm` or `--no-kustomize`
+
+  The `forgeops env --upgrade` command caused errors when `--no-helm` and `--no-kustomize` flags are used. Now the `forgeops env --upgrade` command has been updated to properly honor those flags.
+
+* DS base image creation is under revision
+
+  The DS base image creation process is being revised to incorporate the new changes to the DS product and the `forgeops` tool. The revised process will be available in the documentation soon.
+
+#### August 28, 2026
+
+* `initImage` of `ssh-keygen` tag corrected
+
+  The `initImage` tag of the `ssh-keygen` job was incorrectly set, which affected the use of Helm-generated secrets. Now the `initImage` tag setting has been corrected.
+
+#### August 24, 2026
+
+* Deploying on WSL2 minikube cluster
+
+  According to [this pull request](https://github.com/kubernetes/minikube/pull/23409), the network issues have been resolved. If you want to try deploying ForgeOps on a WSL2 minikube cluster, you can [set up minikube on WSL2](https://minikube.sigs.k8s.io/docs/tutorials/wsl_docker_driver) and deploy ForgeOps. However, the ForgeOps team hasn't tested the deployment on a WSL2 minikube cluster and might not be able to vouch for the correctness or completeness of the procedure.
+
+#### August 17, 2026
+
+* Latest version of prereqs are installed by `forgeops prereqs` command
+
+  The `forgeops prereqs` command now installs the latest versions of prerequisite components, except secret-agent. This avoids issues with older versions of prerequisite components that might not be compatible with the latest ForgeOps release.
+
+#### August 14, 2026
+
+* Updated platform UI images are available
+
+  Updated platform UI images are now available in ForgeOps deployments:
+
+  * Ping Advanced Identity Software admin UI : **8.1.2**
+
+  * Login UI : **8.1.2**
+
+  * End-user UI : **8.1.2**
+
+* Fix `forgeops env --upgrade` command
+
+  The `forgeops env --upgrade` command now correctly honors `--no-helm` and `--no-kustomize` flags instead of erroring out. This allows you to upgrade only Helm charts or only Kustomize configurations in your ForgeOps deployment.
+
+* Enable or disable security features
+
+  In ForgeOps 2026.3.0 release and later, the security features are enabled by default when you create a ForgeOps deployment environment. You can also disable the security features when you create a ForgeOps deployment environment by using the `--insecure` option of the `forgeops env` command. Learn more in the [`forgeops env` command reference](reference/forgeops-cmd-ref.html#forgeops-env) section.
+
+#### ForgeOps 2026.3.0 release features
+
+##### New features and updated functionality
+
+* Helm-generated secrets
+
+  * Secrets generation (Helm only)
+
+    You can now generate secrets with Helm in ForgeOps deployments. When you create a new ForgeOps environment with release 2026.2.0 or later, Helm-generated secret generation is enabled by default. Learn more in [Helm-generated secrets](prepare/security/helm-gen-sec.html).
+
+  * ssh-keygen job
+
+    Helm cannot generate ssh keys, so a Kubernetes job is used to generate an ssh key and store it in a secret. This is used by `amster` to connect to am.
+
+  * New migration command
+
+    A new subcommand, **forgeops migrate sa2hs**, has been added. This subcommand can be used to migrate secrets from secret agent to Helm-generated secrets.
+
+* Integration with the PingOne Worker service
+
+  ForgeOps 2026.3 adds integration with the PingOne Worker service so you can use real-time risk scores to make authentication decisions. Learn more in [Integrate ForgeOps with the PingOne Worker service](integration/int-p1-worker.html).
+
+* Helm chart for RCS
+
+  A new Helm chart has been created for RCS Server. This allows users to synchronize data with a ForgeOps deployment. Learn more in the [ForgeOps RCS Helm chart README.md file](https://github.com/ForgeRock/forgeops/tree/2026.3.2/charts/rcs/README.md).
+
+* Dynamic job naming (Helm only)
+
+  The Helm release revision number is now appended to the names of `amster`, `ds-set-passwords`, and `keystore-create` Kubernetes jobs in the `identity-platform` Helm chart. For example `amster-3`, `ds-set-passwords-3`, and `keystore-create-3`. This ensures that when the `helm upgrade` command is run, it generates a distinct job name, and prevents failures caused by Kubernetes' immutability constraint on existing jobs.
+
+* Increased TTL for Helm jobs (Helm only)
+
+  The default `ttlSecondsAfterFinished` value for all three Kubernetes jobs has been increased from 7200 seconds (2 hours) to 43200 seconds (12 hours), to afford more time to inspect completed or failed jobs before they are automatically cleaned up.
+
+* Adding PingOne secret
+
+  It is now possible to create and use a secret with ForgeOps to connect to the PingOne Worker Service. This secret gets mounted on the AM filesystem so that it can be used by AM. A new flag has been added to `forgeops env` to set the secret name. Learn more in the [PingOne Worker Service integration](integration/int-p1-worker.html) section.
+
+* Applying schema updates to existing deployments
+
+  When you upgrade a ForgeOps deployment, DS schema updates now run automatically. A new `add schema` script in the `ds-idrepo` StatefulSet startup process applies schema changes when the deployed DS version requires them or when the schema is missing.
+
+* Moving DS runtime scripts into the Helm chart
+
+  Because the DS runtime scripts now apply changes over time, they are now part of the Helm chart. This lets schema changes apply without rebuilding DS images. For compatibility, the scripts remain hard-linked in `docker/DS` until older ForgeOps versions are no longer supported.
+
+##### Bug fixes
+
+* Dynamic Kubernetes job naming (Helm only)
+
+  The `amster`, `ds-set-passwords`, and `keystore-create` Kubernetes job names in the `identity-platform` Helm chart now include the Helm release revision as a suffix, such as `amster-3`, `ds-set-passwords-3`, and `keystore-create-3`. This ensures that each `helm upgrade` creates a distinct job name and avoids failures caused by the Kubernetes job immutability constraint.
+
+* Adding annotations for Traefik sticky sessions
+
+  The `forgeops prereqs` command installs Traefik in NGINX compatibility mode to ease migration from the old, unmaintained NGINX ingress. If you install Traefik manually, sticky sessions can fail. ForgeOps now adds Traefik-specific annotations for sticky sessions to prevent that issue.
+
+* `forgeops wait` reports success prematurely
+
+  After `kubectl rollout restart` on a DS StatefulSet, `forgeops wait` could report success before the rollout completed. ForgeOps now uses `kubectl rollout status` to check readiness.
+
+* Set the AM service port to HTTP
+
+  The AM service port name now uses `http` instead of `https`. The previous name worked with NGINX and with Traefik in NGINX compatibility mode, but it caused failures when Traefik ran normally because the AM pod port is not an SSL port.
+
+##### Documentation updates
+
+* Connecting to the PingOne Worker service
+
+  The documentation now includes a detailed procedure for connecting to the PingOne Worker service. Learn more in the [PingOne Worker service integration](integration/int-p1-worker.html).
+
+* Migrating to Helm-generated secrets
+
+  The documentation now includes steps for migrating from secret-agent to Helm-generated secrets. Learn more in the [Helm-generated secrets](prepare/security/helm-gen-sec.html) and [Migrate to Helm-generated secrets](prepare/security/migrate-helmsec.html) sections.
+
+* `forgeops upgrade-am-config` command
+
+  The `forgeops upgrade-am-config` command lets you upgrade PingAM configuration profiles separately in your ForgeOps deployment environments. Learn more in the [`forgeops upgrade-am-config` command reference](reference/forgeops-cmd-ref.html#upgrade-am-config).
+
+* Archived ForgeOps documentation for releases 7.2, 7.3, and 7.4
+
+  The documentation for ForgeOps releases 7.2, 7.3, and 7.4 is now [archived](https://docs.pingidentity.com/archive/#family-forgeops). This documentation is for reference only and is no longer actively maintained. PDFs are available at:
+
+  * [ForgeOps 7.2 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.2/forgeops-7.2.pdf)
+
+  * [ForgeOps 7.3 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.3/forgeops-7.3.pdf)
+
+  * [ForgeOps 7.4 PDF](https://cdn-docs.pingidentity.com/archive/pdf/forgeops/7.4/forgeops-7.4.pdf)
 
 * Support policy for ForgeOps-provided Ping Advanced Identity Software images
 
-  Support for ForgeOps-provided Ping Advanced Identity Software images has been clarified. Learn more in the [Support for ForgeOps-provided images](start/support.html#forgeops-image-support) section.
+  The documentation now clarifies support for ForgeOps-provided Ping Advanced Identity Software images. Learn more in the [Support for ForgeOps-provided images](start/support.html#forgeops-image-support) section.
 
-#### ForgeOps 2026.2.1 release features
+* Replaced card blocks with table blocks in the documentation
 
-* Updated the list of how-tos available in \`forgeops\`repository
-
-  The list of [how-to articles](reference/how-tos.html) available in the `forgeops` repository has been updated in the documentation.
-
-* SBOM for ForgeOps images
-
-  Software Bill of Materials (SBOM) is now available for ForgeOps images. SBOM provides a detailed inventory of the components and dependencies used in ForgeOps images, which can help you identify and manage security vulnerabilities and compliance issues. Learn more in the [SBOM article](https://github.com/ForgeRock/forgeops/blob//2026.2.1/how-tos/retrieve-SBOMs-based-on-original-image-URL.md).
-
-* Added self-signed certificate
-
-  A self-signed certificate is now included for testing purposes in minikube environments.This certificate isn't intended for production use and should be used only in test environments.
-
-* Avoid using secret generator
-
-  There has been a lack of response from the secret generator project for questions and issues on using secret generator, we don't recommend or use it in ForgeOps environments. We'll be removing it from our artifacts in a future ForgeOps release. We've removed use of secret generator from ForgeOps documentation. Existing environments aren't affected by this change.
-
-* IDM admin UI is deprecated in 8.1
-
-  The IDM administration endpoint is deprecated in Ping Advanced Identity Software 8.1 and will be removed in a future release. You should use the identity Ping Advanced Identity Software admin UI or IDM REST API to administer user identities instead of the IDM admin UI. Learn more about this change in [Platform admin UI for standalone IDM](https://docs.pingidentity.com/pingidm/8.1/release-notes/whats-new.html#wn-platform-admin-ui-810).
-
-#### ForgeOps 2026.2.0 release features
-
-* Removed `ds-util` container
-
-  The `ds-util` container has been removed because the same tasks can be performed directly on DS pods.
-
-- Read-only root filesystem for init containers (Helm only)
-
-  The init containers of all pods have been reconfigured to enable `readOnlyRootFilesystem` security context. This has no impact on deployments, but requires that DS stateful sets be recreated. To enable the `readOnlyRootFilesystem` security context, follow [these steps](#enable-sec-features).
-
-- Flags to enable or disable security features (Helm only)
-
-  You can enable or disable the new security features in your ForgeOps environment using the `--secure` or `--insecure` flags. By default, new environments are created with the `--secure` flag, so the new security features are enabled.
-
-  The `temp` directory of Tomcat is writeable, so users can continue to edit scripts in AM admin UI even when security is enabled.
-
-|   |                                                                                           |
-| - | ----------------------------------------------------------------------------------------- |
-|   | These flags can be enabled or disabled only in ForgeOps environments deployed using Helm. |
-
-To enable the security features in an existing environment:
-
-1. Run the `forgeops` command:
-
-   ```
-   $ cd /path/to/forgeops
-   $ ./bin/forgeops env --env-name my-env --secure
-   ```
-
-2. Recreate the DS stateful set using the instructions in the [how to recreate an STS article](https://github.com/ForgeRock/forgeops/blob//2026.2.1/how-tos/recreating-ds-sts.md).
-
-   * The platform pods deployed as non-root user using user ID
-
-     The AM, DS, and IDM pods are now deployed as the standard non-root user ID `11111` and the username is no longer referred to. The user ID `11111` is a security standard across the platform. This user ID is set in the pod security context as the `runAsUser` property.
-
-   * `PodDisruptionBudgets` for product components
-
-     You can enable `PodDisruptionBudgets` for platform product components in the Helm charts for Ping Advanced Identity Software including PingGateway. This feature is disabled by default. You can enable it for each component by setting component.pdb.enabled: true in your values file.
-
-     The default policy keeps at least one pod available by setting minAvailable: 1. You can change this value by appropriately changing the value of component.pdb.minAvailable or component.pdb.maxUnavailable.
-
-     The affected components are: `am`, `idm`, `admin-ui`, `end-user-ui`, `login-ui`, `ds-idrepo`, `ds-cts` and `ig` (ping-gateway).
-
-   * Supported Ping Advanced Identity Software images
-
-     ForgeOps supports the last three major or minor versions of the Ping Advanced Identity Software images. With the availability of 8.1 images, ForgeOps supports 8.1, 8.0, and 7.5 versions of the platform images, and **7.4 images are no longer supported**.
-
-     We recommend customers that upgrade to a newer version of the platform images. Use the [upgrade guide](https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-product.html) to upgrade to the latest image. The older tags remain available on <http://releases.forgeops.com> until the next major/minor release.
-
-   * The `config export no-upgrade` topic is removed from documentation
-
-     The `config export` functionality has been included in the forgeops config export command. Because the forgeops config export command already separates out the upgrade function, this topic is not required in the Troubleshooting section of the documentation. The `no-upgrade` option of `config export` topic is removed from the documentation.
-
-   * New `ttl` options for use with `amster` and `ds-set-passwords` jobs
-
-     The `amster` and `ds-set-passwords` jobs now have a time-to-live (TTL) option that you can set to retain these jobs for a specified time. This is useful for jobs that are run manually need and to be retained to run to completion. To use this feature, set the `ttlSecondsAfterFinished` option. The default is 7200 seconds.
-
-     |   |                                                     |
-     | - | --------------------------------------------------- |
-     |   | This feature is available in new environments only. |
-
-   * Ability to define `apiVersion`, `kind`, and `spec` for a secret
-
-     You can now define the `apiVersion`, `kind`, and `spec` for secrets defined in the `platform.secrets`. This allows you to define secrets using `external-secrets`.
+  Documentation pages now use table blocks instead of card blocks to improve readability and make information easier to scan.
 
 ### Validated software versions
 
 #### Kubernetes
 
-The following Kubernetes versions have been validated for use with Ping Advanced Identity Software 2026.2:
+The following Kubernetes versions have been validated for use with Ping Advanced Identity Software 2026.3:
 
 | Cloud provider                          | Kubernetes version                                                                              |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -554,13 +801,13 @@ The forgeops prereqs commmand is used to install the following prerequisites:
 
 * `cert-manager` version 1.13.0
 
-If you install the prerequisites using a technique other than using the forgeops prereqs command, install prerequisites of this version. Newer versions might work, but they haven't been tested with Ping Advanced Identity Software 2026.2.
+If you install the prerequisites using a technique other than using the forgeops prereqs command, install prerequisites of this version. Newer versions might work, but they haven't been tested with Ping Advanced Identity Software 2026.3.
 
 #### ForgeOps operators
 
-ForgeOps has validated the following operator versions for use with Ping Advanced Identity Software 2026.2:
+ForgeOps has validated the following operator versions for use with Ping Advanced Identity Software 2026.3:
 
-* [Secret Agent operator](https://github.com/ForgeRock/secret-agent) — version 1.2.10
+* [Secret Agent operator](https://github.com/ForgeRock/secret-agent) — version 1.2.12
 
 * [DS operator](https://github.com/ForgeRock/ds-operator) — version 0.3.0
 
@@ -622,7 +869,7 @@ This page documents limitations on the Ping Advanced Identity Software when depl
 
 * Value substitution is supported only for some configuration properties.
 
-  AM doesn't support [property value substitution](customize/value-substitution.html) for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8/setup-guide/property-value-substitution.html) in the AM documentation for more information.
+  AM doesn't support [property value substitution](customize/value-substitution.html) for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8.1/setup-guide/property-value-substitution.html) in the AM documentation for more information.
 
 * The SOAP binding isn't supported for SAML v2.0 single logout.
 
@@ -632,7 +879,7 @@ This page documents limitations on the Ping Advanced Identity Software when depl
 
   The shared identity repository deployed with the CDK and the CDM isn't preconfigured to store UMA objects, such as resources, labels, audit messages, and pending requests.
 
-  In order to use UMA in the CDK or the CDM, you'll need to customize your deployment. For more information, refer to the [*User-Managed Access (UMA) 2.0 Guide*](https://docs.pingidentity.com/pingam/8/uma-guide).
+  In order to use UMA in the CDK or the CDM, you'll need to customize your deployment. For more information, refer to the [*User-Managed Access (UMA) 2.0 Guide*](https://docs.pingidentity.com/pingam/8.1/uma-guide).
 
 #### On IDM
 
@@ -1094,13 +1341,13 @@ This appendix contains information about support options for ForgeOps deployment
 
 #### ForgeOps support
 
-The Ping Identity ForgeOps team has developed artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) Git repositories for deploying the Ping Advanced Identity Software in the cloud. The companion [ForgeOps documentation](index.html) provides examples to help you get started.
+The Ping Identity ForgeOps team has developed artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) Git repositories for deploying the Ping Advanced Identity Software in the cloud. The companion [ForgeOps documentation](index.html) provides examples to help you get started.
 
 These artifacts and documentation are provided on an as-is basis. Ping Identity doesn't guarantee the individual success developers may have in implementing the code on their development platforms or in production configurations.
 
 ##### ForgeOps lifecycle policy
 
-When a Ping Advanced Identity Software product has been deployed using ForgeOps, the product support lifecycle policy and timeline that applies to that product continues to apply regardless of the deployment type. These support policies relate to the Ping Advanced Identity Software product only and not the underlying container operating system. Therefore, refer to the support lifecycle policy for the relevant Ping Advanced Identity Software product support lifecycle:
+When a Ping Advanced Identity Software product has been deployed using ForgeOps, the product support lifecycle policy and timeline that applies to that product continues to apply regardless of the deployment type. These support policies relate to the Ping Advanced Identity Software product only and not the underlying container operating system. Therefore, refer to the support lifecycle policy for the relevant Ping Identity Platform product support lifecycle:
 
 * [Support lifecycle policy for PingAM, PingDS, PingIDM, and IGA](https://support.pingidentity.com/s/article/Ping-Identity-Product-Support-Lifecycle-Policy-PingAM-PingDS-PingIDM-and-IGA).
 
@@ -1145,7 +1392,7 @@ Ping Identity provides support for the following resources:
 
 * Docker images provided by the ForgeOps team.
 
-* Artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) Git repository:
+* Artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) Git repository:
 
   * Files used to build Docker images for the Ping Advanced Identity Software:
 
@@ -1165,7 +1412,7 @@ For more information about support for specific directories and files in the `fo
 
 Ping Identity provides support for the Ping Advanced Identity Software. For supported components, containers, and Java versions, refer to the following:
 
-* [PingAM Release Notes](https://docs.pingidentity.com/pingam//release-notes/preface.html)
+* [PingAM Release Notes](https://docs.pingidentity.com/pingam/release-notes/preface.html)
 
 * [PingIDM Release Notes](https://docs.pingidentity.com/pingidm/8.1/release-notes/preface.html)
 
@@ -1179,7 +1426,7 @@ Ping Identity provides no support for the following:
 
 * Artifacts in the [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repository. For more information about support for specific directories and files in the `forgeops-extras` repository, refer to the [`forgeops-extras` repository reference](start/repositories.html#forgeops-extras-reference).
 
-* Artifacts other than Dockerfiles, Helm charts, Kustomize bases, and Kustomize overlays in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) Git repository. Examples include scripts, example configurations, and so forth.
+* Artifacts other than Dockerfiles, Helm charts, Kustomize bases, and Kustomize overlays in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) Git repository. Examples include scripts, example configurations, and so forth.
 
 * Infrastructure outside Ping Identity. Examples include Docker, Kubernetes, Google Cloud Platform, Amazon Web Services, Microsoft Azure, and so forth.
 
@@ -1233,7 +1480,7 @@ When requesting help with a problem, include the following information:
 
 #### Suggestions for fixes and enhancements to artifacts
 
-ForgeOps greatly appreciates suggestions for fixes and enhancements to ForgeOps-provided artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repositories.
+ForgeOps greatly appreciates suggestions for fixes and enhancements to ForgeOps-provided artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repositories.
 
 If you would like to report a problem with or make an enhancement request for an artifact in either repository, create a GitHub issue in the repository.
 
@@ -1279,26 +1526,26 @@ Learn more about the files in the repository, recommendations about how to work 
 
 ##### `forgeops` repository updates
 
-New `forgeops` repository features become available in the `2026.2.1` tag of the `main` branch from time to time.
+New `forgeops` repository features become available in the `2026.3.2` tag of the `main` branch from time to time.
 
 When you start working with the `forgeops` repository, clone the repository. Depending on your organization's setup, you'll clone the repository either from the public repository on GitHub, or from a fork. You can find more information in [Git clone or Git fork?](#forgeops-fork).
 
-Then, check out the `2026.2.1` tag and create a working branch. For example:
+Then, check out the `2026.3.2` tag and create a working branch. For example:
 
 ```
-$ git checkout 2026.2.1
+$ git checkout 2026.3.2
 $ git checkout -b my-working-branch
 ```
 
-The ForgeOps team recommends that you regularly incorporate updates to the `2026.2.1` tag into your working branch:
+The ForgeOps team recommends that you regularly incorporate updates to the `2026.3.2` tag into your working branch:
 
-1. [Get emails or subscribe to the ForgeOps RSS feed](rn/rn.html) to be notified when there have been updates to ForgeOps 2026.2.1.
+1. [Get emails or subscribe to the ForgeOps RSS feed](rn/rn.html) to be notified when there have been updates to ForgeOps 2026.3.2.
 
-2. Pull new commits in the `2026.2.1` tag from the repository into your `2026.2.1` clone.
+2. Pull new commits in the `2026.3.2` tag from the repository into your `2026.3.2` clone.
 
 3. Rebase the commits from the new branch into your working branch in your `forgeops` repository clone.
 
-It's important to understand the impact of rebasing changes from the `forgeops` repository into your branches. [`forgeops` repository reference](#forgeops-reference) provides advice about which files in the `forgeops` repository to change, which files not to change, and what to look out for when you rebase. Follow the advice in [`forgeops` repository reference](#forgeops-reference) to reduce merge conflicts, and to better understand how to resolve them when you rebase your working branch with updates that the ForgeOps team has made to the `2026.2.1` tag of the `main` branch.
+It's important to understand the impact of rebasing changes from the `forgeops` repository into your branches. [`forgeops` repository reference](#forgeops-reference) provides advice about which files in the `forgeops` repository to change, which files not to change, and what to look out for when you rebase. Follow the advice in [`forgeops` repository reference](#forgeops-reference) to reduce merge conflicts, and to better understand how to resolve them when you rebase your working branch with updates that the ForgeOps team has made to the `2026.3.2` tag of the `main` branch.
 
 ##### `forgeops` repository reference
 
@@ -1474,7 +1721,7 @@ Support Status: Sample files. [Not supported by Ping Identity.](start/support.ht
 
 #### Git clone or Git fork?
 
-For the simplest use cases—a single user performing a proof of concept, or exploration of the platform—cloning the ForgeOps public repositories from GitHub provides a quick and adequate way to access the repositories.
+For the simplest use cases—a single user performing a proof of concept, or exploration of the platform—cloning the ForgeOps public repositories from GitHub provides a quick and adequate way to access public repositories.
 
 If, however, your use case is more complex, you might want to fork the repositories, and use the forks as your common upstream repositories. For example:
 
@@ -1496,7 +1743,7 @@ If you've forked the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, install the requisite third-party software on your local computer.
 
-The ForgeOps team recommends you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[3](#_footnotedef_3 "View footnote.")]' .
+The ForgeOps team recommends you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[3](#_footnotedef_3 "View footnote.")] .
 
 #### Required third-party software
 
@@ -1515,7 +1762,7 @@ The ForgeOps team recommends you install third-party software using [Homebrew](h
 | * Setup tools (Python)                  | 82.0.1  | `python-setuptools`                                         |
 | - Terraform                             | 1.12.2  | `terraform`                                                 |
 | **Additionally on Google GKE**          |         |                                                             |
-| * Google Cloud SDK                      | 569.0.0 | `gcloud-cli` (cask)\[[3](#_footnotedef_3 "View footnote.")] |
+| * Google Cloud CLI                      | 569.0.0 | `gcloud-cli` (cask)\[[3](#_footnotedef_3 "View footnote.")] |
 | **Additionally on Amazon EKS**          |         |                                                             |
 | - Amazon AWS Command-line Interface     | 2.34.50 | `awscli`                                                    |
 | * AWS IAM Authenticator for Kubernetes  | 0.7.16  | `aws-iam-authenticator`                                     |
@@ -1546,7 +1793,7 @@ ForgeOps release process is aimed at simplifying the management of multiple Forg
 
 * Product versions are separated from the `forgeops` repository
 
-  * Product image tags are now maintained in tag files at <http://releases.forgeops.com>.
+  * Product image tags are now maintained in tag files at <https://releases.forgeops.com>.
 
   * The refactored `forgeops` tool retrieves the requested tags and updates Dockerfiles/Helm/Kustomize as required.
 
@@ -1564,7 +1811,7 @@ ForgeOps release process is aimed at simplifying the management of multiple Forg
 
     * The Ping Advanced Identity Software teams provide the platform-level patches.
 
-  * The delivery process is automated, and the newly promoted tags will be available at <http://releases.forgeops.com>.
+  * The delivery process is automated, and the newly promoted tags will be available at <https://releases.forgeops.com>.
 
   * New `dev` branch for latest forgeops features. Equivalent to the erstwhile `master` branch which is no longer available.
 
@@ -1580,29 +1827,12 @@ Before performing a ForgeOps deployment, you must perform some setup tasks in yo
 
 The specific tasks you'll need to do vary depending on the platform on which you run Kubernetes:
 
-[icon: google, set=fab, size=3x]
-
-#### [Google Cloud](https://docs.pingidentity.com/forgeops/2026.2/setup/google-cloud.html)
-
-Set up your local computer to deploy ForgeOps on Google Cloud.
-
-[icon: aws, set=fab, size=3x]
-
-#### [AWS](https://docs.pingidentity.com/forgeops/2026.2/setup/aws.html)
-
-Set up your local computer to deploy ForgeOps on AWS.
-
-[icon: microsoft, set=fab, size=3x]
-
-#### [Azure](https://docs.pingidentity.com/forgeops/2026.2/setup/azure.html)
-
-Set up your local computer to deploy ForgeOps on Azure.
-
-[icon: empire, set=fab, size=3x]
-
-#### [minikube](https://docs.pingidentity.com/forgeops/2026.2/setup/minikube.html)
-
-Set up your local computer to deploy ForgeOps on minikube.
+| Topic                                                         | Description                                                    |
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| [icon: google, set=fa][Google Cloud](setup/google-cloud.html) | Set up your local computer to deploy ForgeOps on Google Cloud. |
+| [icon: aws, set=fa][AWS](setup/aws.html)                      | Set up your local computer to deploy ForgeOps on AWS.          |
+| [icon: microsoft, set=fa][Azure](setup/azure.html)            | Set up your local computer to deploy ForgeOps on Azure.        |
+| [icon: empire, set=fa][minikube](setup/minikube.html)         | Set up your local computer to deploy ForgeOps on minikube.     |
 
 ### Google Cloud
 
@@ -1637,14 +1867,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -1657,7 +1887,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[3](#_footnotedef_3 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[3](#_footnotedef_3 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Google Cloud. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -1678,7 +1908,7 @@ Install the following third-party software:
 | * Setup tools (Python)                  | 82.0.1  | `python-setuptools`                                         |
 | - Terraform                             | 1.12.2  | `terraform`                                                 |
 | **Additionally on Google GKE**          |         |                                                             |
-| * Google Cloud SDK                      | 569.0.0 | `gcloud-cli` (cask)\[[3](#_footnotedef_3 "View footnote.")] |
+| * Google Cloud CLI                      | 569.0.0 | `gcloud-cli` (cask)\[[3](#_footnotedef_3 "View footnote.")] |
 
 ##### Python `venv`
 
@@ -1910,14 +2140,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -1930,7 +2160,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[3](#_footnotedef_3 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[3](#_footnotedef_3 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Amazon Web Services. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -2226,14 +2456,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -2246,7 +2476,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[3](#_footnotedef_3 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[3](#_footnotedef_3 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Microsoft Azure. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -2476,7 +2706,7 @@ Before you can [perform a ForgeOps deployment on a Kubernetes cluster running on
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | Learn more about configuring GitHub notifications [here](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications) so you can get notified on ForgeOps releases. |
 
-Before you can perform a ForgeOps deployment, you must first get the `forgeops` repository and check out the `2026.2.1` tag you want to use:
+Before you can perform a ForgeOps deployment, you must first get the `forgeops` repository and check out the `2026.3.2` tag you want to use:
 
 1. Clone the `forgeops` repository. For example:
 
@@ -2486,20 +2716,20 @@ Before you can perform a ForgeOps deployment, you must first get the `forgeops` 
 
    The `forgeops` repository is a public Git repository. You do not need credentials to clone it.
 
-2. Check out the `2026.2.1` tag:
+2. Check out the `2026.3.2` tag:
 
    ```
    $ cd forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag. Learn more in [Repository Updates](start/repositories.html#forgeops-updates).
+Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag. Learn more in [Repository Updates](start/repositories.html#forgeops-updates).
 
 #### Third-party software
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[3](#_footnotedef_3 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[3](#_footnotedef_3 "View footnote.")] .
 
 The versions listed in this section have been validated for ForgeOps deployments on minikube. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -2621,7 +2851,7 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 1. Determine the minikube ingress controller's IP address.
 
-   * If minikube is using the Docker driver on macOS system'\[[11](#_footnotedef_11 "View footnote.")]' , use `127.0.0.1` as the ingress IP address.
+   * If minikube is using the Docker driver on macOS system\[[11](#_footnotedef_11 "View footnote.")] , use `127.0.0.1` as the ingress IP address.
 
    * If minikube is running the Hyperkit driver on Intel-based macOS system or on a Linux system, get the IP address by running the minikube ip command:
 
@@ -2720,19 +2950,19 @@ Here are some of the characteristics of ForgeOps deployments:
 
   * [What is Traefik?](https://doc.traefik.io/traefik/)
 
-  * [HAProxy Ingress Controller](https://haproxy-ingress.github.io) for Kubernetes ingress support.'\[[2](#_footnotedef_2 "View footnote.")]'
+  * [HAProxy Ingress Controller](https://haproxy-ingress.github.io) for Kubernetes ingress support.\[[2](#_footnotedef_2 "View footnote.")]
 
-  * [Prometheus](https://prometheus.io/) for monitoring and notifications.'\[[2](#_footnotedef_2 "View footnote.")]'
+  * [Prometheus](https://prometheus.io/) for monitoring and notifications.\[[2](#_footnotedef_2 "View footnote.")]
 
-  * [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) for setting and managing alerts.'\[[2](#_footnotedef_2 "View footnote.")]'
+  * [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) for setting and managing alerts.\[[2](#_footnotedef_2 "View footnote.")]
 
-  * [Grafana](https://grafana.com/) for metrics visualization.'\[[2](#_footnotedef_2 "View footnote.")]'
+  * [Grafana](https://grafana.com/) for metrics visualization.\[[2](#_footnotedef_2 "View footnote.")]
 
   * [Certificate Manager](https://docs.cert-manager.io) for obtaining and installing security certificates.
 
   * [Helm](https://helm.sh) for deploying Helm charts.
 
-  * [Terraform](https://developer.hashicorp.com/terraform) for creating example clusters.'\[[2](#_footnotedef_2 "View footnote.")]'
+  * [Terraform](https://developer.hashicorp.com/terraform) for creating example clusters.\[[2](#_footnotedef_2 "View footnote.")]
 
 * Ready-to-use Ping Advanced Identity Software components
 
@@ -2740,15 +2970,15 @@ Here are some of the characteristics of ForgeOps deployments:
 
   * The AM configuration is file-based, stored at the path `/home/forgerock/openam/config` inside the AM Docker container (and in the AM pods).
 
-  * Multiple AM instances are deployed for higher availability.'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Multiple AM instances are deployed for higher availability.\[[1](#_footnotedef_1 "View footnote.")]
 
   * AM instances are configured to access DS data stores.
 
-  * Multiple IDM instances are deployed for higher availability.'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Multiple IDM instances are deployed for higher availability.\[[1](#_footnotedef_1 "View footnote.")]
 
   * IDM instances are configured to access DS data stores.
 
-- Highly available, distributed deployment'\[[2](#_footnotedef_2 "View footnote.")]' '\[[1](#_footnotedef_1 "View footnote.")]'
+- Highly available, distributed deployment\[[2](#_footnotedef_2 "View footnote.")] \[[1](#_footnotedef_1 "View footnote.")]
 
   Deployment across three zones ensures that the ingress controller and all Ping Advanced Identity Software components are highly available.
 
@@ -2764,7 +2994,7 @@ Here are some of the characteristics of ForgeOps deployments:
 
   Hitherto ForgeOps used ingress-nginx controller by default. In March 2026, [Kubernetes will retire support for ingress-nginx controller](https://kubernetes.io/blog/2026/01/29/ingress-nginx-statement/). ForgeOps team has decided to use Traefik as the default ingress controller for new deployments. Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 
-  Optionally, you can [deploy HAProxy Ingress](reference/ingress.html#haproxy) as the ingress controller instead.'\[[2](#_footnotedef_2 "View footnote.")]'
+  Optionally, you can [deploy HAProxy Ingress](reference/ingress.html#haproxy) as the ingress controller instead.\[[2](#_footnotedef_2 "View footnote.")]
 
 - Secret generation and management
 
@@ -2794,11 +3024,11 @@ Here are some of the characteristics of ForgeOps deployments:
 
   IDM is configured to use AM for authentication.
 
-- DS replication'\[[1](#_footnotedef_1 "View footnote.")]'
+- DS replication\[[1](#_footnotedef_1 "View footnote.")]
 
   All DS instances are configured for full replication of identities and session tokens.
 
-- Backup and restore'\[[2](#_footnotedef_2 "View footnote.")]'
+- Backup and restore\[[2](#_footnotedef_2 "View footnote.")]
 
   Backup and restore can be performed using several techniques. You can:
 
@@ -2844,7 +3074,7 @@ Choose Kustomize as your deployment technology when:
 
 * You performed ForgeOps deployments before Helm charts were available in the `forgeops` repository, and you want to continue to use Kustomize-based deployments.
 
-* You want to generate Kustomize manifests for the platform, including custom manifests, using the forgeops generate command.
+* You want to generate Kustomize manifests for the platform, including custom manifests, using the forgeops env command.
 
 * Kustomize is your organization's preferred deployment technology for Kubernetes.
 
@@ -2858,21 +3088,21 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 * [Deploy using Helm on minikube](deploy/deploy-scenario-helm-local.html)
 
-* [Deploy using Kustomize on GKE, EKS, or AKS](deploy/deploy-scenario-kustomize-cloud.html)
+* [Deploy using Kustomize on GKE, EKS, or AKS (Deprecated)[icon: alarm-clock, set=fa]](deploy/deploy-scenario-kustomize-cloud.html)
 
-* [Deploy using Kustomize on minikube](deploy/deploy-scenario-kustomize-local.html)
+* [Deploy using Kustomize on minikube (Deprecated)[icon: alarm-clock, set=fa]](deploy/deploy-scenario-kustomize-local.html)
 
 #### Deploy using Helm on GKE, EKS, or AKS
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | * In a development or demo environment, you can use the Helm chart available locally in /path/to/forgeops/charts directory for performing ForgeOps deployment. In a production environment, it's highly recommended to use the Helm charts published on the registry.
 
 * The default ForgeOps deployment provides a self-signed certificate that has a very limited use even in demo environments. You must use a certificate obtained from a certificate authority for use in your environment. You can use the [Add custom certificates](prepare/security/secrets-rotation.html#add-cust-cert) procedure.
 
 * The current ForgeOps deployments on GKE, AKS, and EKS use Traefik as the default ingress controller. You can continue to use NGINX, but note that Kubernetes has stopped the support for ingress-nginx controller, so we strongly recommend you use Traefik for new deployments.
 
-* On minikube, ForgeOps deployments continues to use the ingress-nginx addon provided by minikube. |
+* In ForgeOps 2026.3.2 or later, new Helm-generated deployments enable `readOnlyRootFilesystem` in DS pods by default. Learn more about [how to recreate the PingDS stateful set](https://github.com/ForgeRock/forgeops/blob/2026.3.2/how-tos/recreating-ds-sts.md) when you need to disable or enable `readOnlyRootFilesystem` or make any changes to existing DS stateful sets. |
 
 1. Verify you've set up your environment and created a Kubernetes cluster as documented in the [setup section](setup/overview.html).
 
@@ -2939,27 +3169,32 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 8. Set up the certificate and secret management prerequisites:
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | 1. The `forgeops` utility uses `cert-manager` as the certificate management utility. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility. You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | 1. **The `forgeops prereqs` command installs the latest version of prerequisite components, except secret-agent which doesn't select the `latest`.**
+
+   2. The `forgeops prereqs` command installs `cert-manager` for certificate management. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility.
+
+      You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
 
       ```
       $ forgeops env --env-name my-env --ingress-no-cert-manager
       ```
 
-   2. Currently, `secret-agent` is used as the default secrets management utility in ForgeOps deployments. You can continue to use the secret agent in existing deployments.
-
-   3. ForgeOps artifacts include alternatives for ingress (Traefik or `ha-proxy`).
-
-      The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
+   3. The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
 
       A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
 
-   4. Versions 1.2.9 and 1.2.10 of `secret-agent` have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.11**. |
+   4. **New Helm-based deployments use the Helm-generated secrets by default.**
 
-   1. To install all prereqs including `secret-agent` for secret management:
+   5. In Kustomize-based deployments, `secret-agent` is used as the default secrets management utility.
+
+      The secret-agent versions 1.2.9 and 1.2.10 have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.12 or later**. |
+
+   1. To install all the default prereqs:
 
       ```
+      $ cd /path/to/forgeops/bin
       $ forgeops prereqs
       ```
 
@@ -2977,11 +3212,13 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
     ```
     $ helm upgrade --install identity-platform  identity-platform \
      --repo https://ForgeRock.github.io/forgeops/ \
-     --version 2026.2 --namespace my-namespace \
+     --version 2026.3.2 --namespace my-namespace \
      --values /path/to/forgeops/helm/my-env/values.yaml
     ```
 
     When deploying the platform with Docker images other than the ForgeOps-provided images, you'll also need to set additional Helm values such as `am.image.repository`, `am.image.tag`, `idm.image.repository`, and `idm.image.tag`. For an example, refer to [Redeploy AM: Helm deployments](customize/am.html#redeploy-am-helm).
+
+    In a Helm-generated deployment, the Kubernetes jobs names have a suffix of the Helm release name.
 
     |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3092,15 +3329,15 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 #### Deploy using Helm on minikube
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | * In a development or demo environment, you can use the Helm chart available locally in /path/to/forgeops/charts directory for performing ForgeOps deployment. In a production environment, it's highly recommended to use the Helm charts published on the registry.
 
 * The default ForgeOps deployment provides a self-signed certificate that has a very limited use even in demo environments. You must use a certificate obtained from a certificate authority for use in your environment. You can use the [Add custom certificates](prepare/security/secrets-rotation.html#add-cust-cert) procedure.
 
 * The current ForgeOps deployments on GKE, AKS, and EKS use Traefik as the default ingress controller. You can continue to use NGINX, but note that Kubernetes has stopped the support for ingress-nginx controller, so we strongly recommend you use Traefik for new deployments.
 
-* On minikube, ForgeOps deployments continues to use the ingress-nginx addon provided by minikube. |
+* In ForgeOps 2026.3.2 or later, new Helm-generated deployments enable `readOnlyRootFilesystem` in DS pods by default. Learn more about [how to recreate the PingDS stateful set](https://github.com/ForgeRock/forgeops/blob/2026.3.2/how-tos/recreating-ds-sts.md) when you need to disable or enable `readOnlyRootFilesystem` or make any changes to existing DS stateful sets. |
 
 1. Verify you've set up your environment and created a Kubernetes cluster as documented in the [setup section](setup/overview.html).
 
@@ -3119,13 +3356,60 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 4. The configuration of a ForgeOps deployment is steered through the use of Kustomize overlays or Helm values. Use the forgeops env command to set up the Kustomize overlays and Helm values files to configure your ForgeOps deployment environment:
 
-5. In a minikube, set up the default cluster issuer\[[13](#_footnotedef_13 "View footnote.")]. For example:
+5. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted:
+
+   ```
+   $ minikube tunnel
+   ✅  Tunnel successfully started
+
+   📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible …​
+
+   ❗  ...
+   Password:
+   ```
+
+   The tunnel creates networking that lets you access the minikube cluster's ingress on the localhost IP address (127.0.0.1). **Leave the tab or window that started the tunnel open for as long as you run the ForgeOps deployment.**
+
+   Refer to [this post](https://stackoverflow.com/questions/70961901/ingress-with-minikube-working-differently-on-mac-vs-ubuntu-when-to-set-etc-host) for an explanation about why a minikube tunnel is required to access ingress resources when running minikube on an ARM-based macOS system.
+
+6. Back in the Python3 enabled terminal set up the certificate and secret management prerequisites:
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | 1. **The `forgeops prereqs` command installs the latest version of prerequisite components, except secret-agent which doesn't select the `latest`.**
+
+   2. The `forgeops prereqs` command installs `cert-manager` for certificate management. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility.
+
+      You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
+
+      ```
+      $ forgeops env --env-name my-env --ingress-no-cert-manager
+      ```
+
+   3. The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
+
+      A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
+
+   4. **New Helm-based deployments use the Helm-generated secrets by default.**
+
+   5. In Kustomize-based deployments, `secret-agent` is used as the default secrets management utility.
+
+      The secret-agent versions 1.2.9 and 1.2.10 have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.12 or later**. |
+
+   1. To install the secret agent for secret management:
+
+      ```
+      $ cd /path/to/forgeops/bin
+      $ forgeops prereqs cert-manager secrets
+      ```
+
+7. In a minikube, set up the default cluster issuer\[[13](#_footnotedef_13 "View footnote.")]. For example:
 
    ```
    $ kubectl apply -f /path/to/forgeops/etc/resources/selfsigned-issuer.yaml
    ```
 
-6. In minikube, set up a single instance deployment environment. For example:
+8. In minikube, set up a single instance deployment environment. For example:
 
    ```
    $ cd /path/to/forgeops/bin
@@ -3137,7 +3421,7 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
    Learn more about deployment sizes in [Cluster and deployment sizes](deploy/architecture.html#cluster-and-deployment-sizes) and about single instances [here](deploy/architecture.html#single-inst).
 
-7. Ensure that the `image.repository` and `image.tag` are correctly specified in the Helm values file (/path/to/forgeops/helm/my-env/values.yaml) in your ForgeOps deployment environment.
+9. Ensure that the `image.repository` and `image.tag` are correctly specified in the Helm values file (/path/to/forgeops/helm/my-env/values.yaml) in your ForgeOps deployment environment.
 
    In your production environment, use the forgeops image command to select the latest available platform image corresponding to the major ForgeOps release, and not necessarily the latest image available from ForgeOps. This documentation uses images as latest from ForgeOps as default for demo and learning purposes. Using images tagged as latest from ForgeOps directly in your production environment can result in unintended upgrades.
 
@@ -3145,68 +3429,26 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
    Learn more about customizing ForgeOps platform images [here](customize/overview.html).
 
-8. Use the forgeops image command to set up the correct component image versions to be deployed:
-
-   ```
-   $ cd /path/to/forgeops/bin
-   $ ./forgeops image --release my-image --env-name my-env platform
-   ```
-
-9. Set up your Kubernetes context:
-
-   1. Create a Kubernetes namespace in the cluster for the Ping Advanced Identity Software pods:
-
-      ```
-      $ kubectl create namespace my-namespace
-      ```
-
-   2. Set the active namespace in your Kubernetes context to the Kubernetes namespace you just created:
-
-      ```
-      $ kubens my-namespace
-      ```
-
-10. Set up the certificate management and secret agent.
-
-    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    |   | 1) Because minikube provides its own ingress controller, there's no need to install another ingress controller.1. The `forgeops` utility uses `cert-manager` as the certificate management utility. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility. You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
-
-       ```
-       $ forgeops env --env-name my-env --ingress-no-cert-manager
-       ```
-
-    2. Currently, `secret-agent` is used as the default secrets management utility in ForgeOps deployments. You can continue to use the secret agent in existing deployments.
-
-    3. ForgeOps artifacts include alternatives for ingress (Traefik or `ha-proxy`).
-
-       The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
-
-       A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
-
-    4. Versions 1.2.9 and 1.2.10 of `secret-agent` have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.11**. |
-
-    1. To install the secret agent for secret management:
-
-       ```
-       $ forgeops prereqs cert-manager secrets
-       ```
-
-11. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted:
+10. Use the forgeops image command to set up the correct component image versions to be deployed:
 
     ```
-    $ minikube tunnel
-    ✅  Tunnel successfully started
-
-    📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible …​
-
-    ❗  ...
-    Password:
+    $ cd /path/to/forgeops/bin
+    $ ./forgeops image --release my-image --env-name my-env platform
     ```
 
-    The tunnel creates networking that lets you access the minikube cluster's ingress on the localhost IP address (127.0.0.1). Leave the tab or window that started the tunnel open for as long as you run the ForgeOps deployment.
+11. Set up a namespace in your Kubernetes context:
 
-    Refer to [this post](https://stackoverflow.com/questions/70961901/ingress-with-minikube-working-differently-on-mac-vs-ubuntu-when-to-set-etc-host) for an explanation about why a minikube tunnel is required to access ingress resources when running minikube on an ARM-based macOS system.
+    1. Create a Kubernetes namespace in the cluster for the Ping Advanced Identity Software pods:
+
+       ```
+       $ kubectl create namespace my-namespace
+       ```
+
+    2. Set the active namespace in your Kubernetes context to the Kubernetes namespace you just created:
+
+       ```
+       $ kubens my-namespace
+       ```
 
 12. Set up the `fast` storage class using the `minikube-fast-storage-class.yaml` file in the /path/to/forgeops/etc/resources directory:
 
@@ -3232,6 +3474,8 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
     The preceding command creates a single-instance ForgeOps deployment. Only single-instance deployments are supported on minikube.
 
     Learn more about single-instance deployments in [Cluster and deployment sizes](deploy/architecture.html#cluster-and-deployment-sizes).
+
+    In a Helm-based deployment, the Kubernetes jobs names have a suffix of the Helm release name.
 
     |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3263,17 +3507,21 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 * [icon: square-o, set=fa][Plan for production deployment](deploy/next-steps.html)
 
-#### Deploy using Kustomize on GKE, EKS, or AKS
+#### Deploy using Kustomize on GKE, EKS, or AKS (Deprecated)[icon: alarm-clock, set=fa]
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                 |
+| - | ------------------------------------------------------------------------------- |
+|   | This deployment scenario is deprecated and will be removed in a future release. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | * In a development or demo environment, you can use the Helm chart available locally in /path/to/forgeops/charts directory for performing ForgeOps deployment. In a production environment, it's highly recommended to use the Helm charts published on the registry.
 
 * The default ForgeOps deployment provides a self-signed certificate that has a very limited use even in demo environments. You must use a certificate obtained from a certificate authority for use in your environment. You can use the [Add custom certificates](prepare/security/secrets-rotation.html#add-cust-cert) procedure.
 
 * The current ForgeOps deployments on GKE, AKS, and EKS use Traefik as the default ingress controller. You can continue to use NGINX, but note that Kubernetes has stopped the support for ingress-nginx controller, so we strongly recommend you use Traefik for new deployments.
 
-* On minikube, ForgeOps deployments continues to use the ingress-nginx addon provided by minikube. |
+* In ForgeOps 2026.3.2 or later, new Helm-generated deployments enable `readOnlyRootFilesystem` in DS pods by default. Learn more about [how to recreate the PingDS stateful set](https://github.com/ForgeRock/forgeops/blob/2026.3.2/how-tos/recreating-ds-sts.md) when you need to disable or enable `readOnlyRootFilesystem` or make any changes to existing DS stateful sets. |
 
 1. Verify you've set up your environment and created a Kubernetes cluster as documented in the [setup section](setup/overview.html).
 
@@ -3345,23 +3593,27 @@ Follow the steps in one of these scenarios to perform a ForgeOps deployment:
 
 7. Set up the certificate management, secret agent, and Traefik:
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | 1. The `forgeops` utility uses `cert-manager` as the certificate management utility. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility. You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | 1. **The `forgeops prereqs` command installs the latest version of prerequisite components, except secret-agent which doesn't select the `latest`.**
+
+   2. The `forgeops prereqs` command installs `cert-manager` for certificate management. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility.
+
+      You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
 
       ```
       $ forgeops env --env-name my-env --ingress-no-cert-manager
       ```
 
-   2. Currently, `secret-agent` is used as the default secrets management utility in ForgeOps deployments. You can continue to use the secret agent in existing deployments.
-
-   3. ForgeOps artifacts include alternatives for ingress (Traefik or `ha-proxy`).
-
-      The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
+   3. The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
 
       A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
 
-   4. Versions 1.2.9 and 1.2.10 of `secret-agent` have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.11**. |
+   4. **New Helm-based deployments use the Helm-generated secrets by default.**
+
+   5. In Kustomize-based deployments, `secret-agent` is used as the default secrets management utility.
+
+      The secret-agent versions 1.2.9 and 1.2.10 have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.12 or later**. |
 
    1. To install all prereqs including `secret-agent` for secret management:
 
@@ -3514,17 +3766,21 @@ The forgeops env command generates Kustomize manifests for your ForgeOps deploym
 
 * [icon: square-o, set=fa][Plan for production deployment](deploy/next-steps.html)
 
-#### Deploy using Kustomize on minikube
+#### Deploy using Kustomize on minikube (Deprecated)[icon: alarm-clock, set=fa]
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                 |
+| - | ------------------------------------------------------------------------------- |
+|   | This deployment scenario is deprecated and will be removed in a future release. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | * In a development or demo environment, you can use the Helm chart available locally in /path/to/forgeops/charts directory for performing ForgeOps deployment. In a production environment, it's highly recommended to use the Helm charts published on the registry.
 
 * The default ForgeOps deployment provides a self-signed certificate that has a very limited use even in demo environments. You must use a certificate obtained from a certificate authority for use in your environment. You can use the [Add custom certificates](prepare/security/secrets-rotation.html#add-cust-cert) procedure.
 
 * The current ForgeOps deployments on GKE, AKS, and EKS use Traefik as the default ingress controller. You can continue to use NGINX, but note that Kubernetes has stopped the support for ingress-nginx controller, so we strongly recommend you use Traefik for new deployments.
 
-* On minikube, ForgeOps deployments continues to use the ingress-nginx addon provided by minikube. |
+* In ForgeOps 2026.3.2 or later, new Helm-generated deployments enable `readOnlyRootFilesystem` in DS pods by default. Learn more about [how to recreate the PingDS stateful set](https://github.com/ForgeRock/forgeops/blob/2026.3.2/how-tos/recreating-ds-sts.md) when you need to disable or enable `readOnlyRootFilesystem` or make any changes to existing DS stateful sets. |
 
 1. Verify you've set up your environment and created a Kubernetes cluster as documented in the [setup section](setup/overview.html).
 
@@ -3543,13 +3799,60 @@ The forgeops env command generates Kustomize manifests for your ForgeOps deploym
 
 4. The configuration of a ForgeOps deployment is steered through the use of Kustomize overlays or Helm values. Use the forgeops env command to set up the Kustomize overlays and Helm values files to configure your ForgeOps deployment environment:
 
-5. In a minikube, set up the default cluster issuer\[[15](#_footnotedef_15 "View footnote.")]. For example:
+5. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted:
+
+   ```
+   $ minikube tunnel
+   ✅  Tunnel successfully started
+
+   📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible …​
+
+   ❗  ...
+   Password:
+   ```
+
+   The tunnel creates networking that lets you access the minikube cluster's ingress on the localhost IP address (127.0.0.1). **Leave the tab or window that started the tunnel open for as long as you run the ForgeOps deployment.**
+
+   Refer to [this post](https://stackoverflow.com/questions/70961901/ingress-with-minikube-working-differently-on-mac-vs-ubuntu-when-to-set-etc-host) for an explanation about why a minikube tunnel is required to access ingress resources when running minikube on an ARM-based macOS system.
+
+6. Back in the Python3 enabled terminal set up the certificate and secret management prerequisites:
+
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | 1. **The `forgeops prereqs` command installs the latest version of prerequisite components, except secret-agent which doesn't select the `latest`.**
+
+   2. The `forgeops prereqs` command installs `cert-manager` for certificate management. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility.
+
+      You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
+
+      ```
+      $ forgeops env --env-name my-env --ingress-no-cert-manager
+      ```
+
+   3. The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
+
+      A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
+
+   4. **New Helm-based deployments use the Helm-generated secrets by default.**
+
+   5. In Kustomize-based deployments, `secret-agent` is used as the default secrets management utility.
+
+      The secret-agent versions 1.2.9 and 1.2.10 have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.12 or later**. |
+
+   1. To install the secret agent for secret management:
+
+      ```
+      $ cd /path/to/forgeops/bin
+      $ forgeops prereqs cert-manager secrets
+      ```
+
+7. In a minikube, set up the default cluster issuer\[[15](#_footnotedef_15 "View footnote.")]. For example:
 
    ```
    $ kubectl apply -f /path/to/forgeops/etc/resources/selfsigned-issuer.yaml
    ```
 
-6. In minikube, set up a single instance deployment environment. For example:
+8. In minikube, set up a single instance deployment environment. For example:
 
    ```
    $ cd /path/to/forgeops/bin
@@ -3561,7 +3864,7 @@ The forgeops env command generates Kustomize manifests for your ForgeOps deploym
 
    Learn more about deployment sizes in [Cluster and deployment sizes](deploy/architecture.html#cluster-and-deployment-sizes) and about single instances [here](deploy/architecture.html#single-inst).
 
-7. Ensure that the `image.repository` and `image.tag` are correctly specified in the image defaulter file in your ForgeOps deployment environment. The image defaulter file is located at /path/to/forgeops/kustomize/deploy/image-defaulter/kustomization.yaml.
+9. Ensure that the `image.repository` and `image.tag` are correctly specified in the image defaulter file in your ForgeOps deployment environment. The image defaulter file is located at /path/to/forgeops/kustomize/deploy/image-defaulter/kustomization.yaml.
 
    In your production environment, use the forgeops image command to select the latest available platform image corresponding to the major ForgeOps release, and not necessarily the latest image available from ForgeOps. This documentation uses images tagged as latest from ForgeOps as default for demo and learning purposes. Using images tagged as latest from ForgeOps directly in your production environment can result in unintended upgrades.
 
@@ -3581,63 +3884,19 @@ The forgeops env command generates Kustomize manifests for your ForgeOps deploym
    $ ./forgeops image --release my-image --release-name my-release --env-name my-env platform
    ```You can get the image names and tags from the image defaulter file on the system on which the customized Docker images were developed. |
 
-8. Set up your Kubernetes context:
+10. Set up a namespace in your Kubernetes context:
 
-   1. Create a Kubernetes namespace in the cluster for the Ping Advanced Identity Software pods:
+    1. Create a Kubernetes namespace in the cluster for the Ping Advanced Identity Software pods:
 
-      ```
-      $ kubectl create namespace my-namespace
-      ```
+       ```
+       $ kubectl create namespace my-namespace
+       ```
 
-   2. Set the active namespace in your Kubernetes context to the Kubernetes namespace you just created:
+    2. Set the active namespace in your Kubernetes context to the Kubernetes namespace you just created:
 
-      ```
-      $ kubens my-namespace
-      ```
-
-9. Set up the certificate and secret management prerequisites:
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | 1. Because minikube provides its own ingress controller, there's no need to install another ingress controller.
-
-   2. The `forgeops` utility uses `cert-manager` as the certificate management utility. If you need to use a different certificate management utility, refer to the corresponding documentation for installing that utility. You can disable `cert-manager` for ingresses in your ForgeOps deployment environment using the --ingress-no-cert-manager option of the forgeops env command:
-
-      ```
-      $ forgeops env --env-name my-env --ingress-no-cert-manager
-      ```
-
-   3. Currently, `secret-agent` is used as the default secrets management utility in ForgeOps deployments. You can continue to use the secret agent in existing deployments.
-
-   4. ForgeOps artifacts include alternatives for ingress (Traefik or `ha-proxy`).
-
-      The forgeops prereqs command provides a corresponding `--` option to select the component you want to use. The `--` option isn't available for components, such as `cert-manager`, for which an alternative isn't provided.
-
-      A few examples of the forgeops prereqs command are provided in the [`forgeops prereqs` command reference](reference/forgeops-cmd-ref.html#prereqs-examples).
-
-   5. Versions 1.2.9 and 1.2.10 of `secret-agent` have a flaw that causes the `secret-agent` operator to crash when it tries to access the Kubernetes API. If you are using `secret-agent`, **avoid `secret-agent` versions 1.2.9 and 1.2.10; upgrade to version 1.2.11**. |
-
-   1. To install the secret agent for secret management:
-
-      ```
-      $ forgeops prereqs cert-manager secrets
-      ```
-
-10. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted:
-
-    ```
-    $ minikube tunnel
-    ✅  Tunnel successfully started
-
-    📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible …​
-
-    ❗  ...
-    Password:
-    ```
-
-    The tunnel creates networking that lets you access the minikube cluster's ingress on the localhost IP address (127.0.0.1). Leave the tab or window that started the tunnel open for as long as you run the ForgeOps deployment.
-
-    Refer to [this post](https://stackoverflow.com/questions/70961901/ingress-with-minikube-working-differently-on-mac-vs-ubuntu-when-to-set-etc-host) for an explanation about why a minikube tunnel is required to access ingress resources when running minikube on an ARM-based macOS system.
+       ```
+       $ kubens my-namespace
+       ```
 
 11. Set up the `fast` storage class using the `minikube-fast-storage-class.yaml` file in the /path/to/forgeops/etc/resources directory:
 
@@ -3718,7 +3977,21 @@ This page shows you how to access and monitor the Ping Advanced Identity Softwar
 
 AM and IDM are configured for access through the Kubernetes cluster's ingress controller. You can access these components using their admin UIs and REST APIs.
 
-DS cannot be accessed through the ingress controller, but you can use Kubernetes methods to access the DS pods.
+The forgeops image command also sets the image information if the requested IDM version is 8.1.0 or later. In PingIDM 8.1.0, the legacy IDM admin UI was removed. It was also removed from the ForgeOps 2026.3.1 release. To support use cases that still require it, you can optionally enable IDM admin UI as a separate nginx pod in a Helm deployment.
+
+To enable the IDM admin UI, use the `--idm-admin-ui-enable` option of the forgeops env command when you create a ForgeOps deployment environment:
+
+```
+$ forgeops env --env-name my-env --idm-admin-ui-enable
+```
+
+|   |                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | 1. This feature is **available only in Helm deployments** and not in Kustomize deployments.
+
+2. The IDM API URL path is now **/api** instead of `/openidm/api`. |
+
+DS can't be accessed through the ingress controller, but you can use Kubernetes methods to access the DS pods.
 
 #### AM services
 
@@ -3775,7 +4048,7 @@ To access the AM REST APIs:
 
 #### IDM services
 
-To access the IDM REST APIs:
+To access IDM REST APIs:
 
 1. Start a terminal window session.
 
@@ -3789,7 +4062,7 @@ To access the IDM REST APIs:
    vr58qt11ihoa31zfbjsdxxrqryfw0s31 (amadmin user)
    ```
 
-4. AM authorizes IDM REST API access using the [OAuth 2.0 authorization code flow](https://docs.pingidentity.com/pingam/8/oauth2-guide/oauth2-authz-grant.html). ForgeOps deployments come with the `idm-admin-ui` client, which is configured to let you get a bearer token using this OAuth 2.0 flow. You'll use the bearer token in the next step to access the IDM REST API:
+4. AM authorizes IDM REST API access using the [OAuth 2.0 authorization code flow](https://docs.pingidentity.com/pingam/8.1/oauth2-guide/oauth2-authz-grant.html). ForgeOps deployments let you get a bearer token using this OAuth 2.0 flow. You'll use the bearer token in the next step to access the IDM REST API:
 
    1. Get a session token for the `amadmin` user:
 
@@ -3817,7 +4090,7 @@ To access the IDM REST APIs:
        --request GET \
        --header "Cookie: iPlanetDirectoryPro=AQIC5wM...Q.." \
        "https://my-fqdn/am/oauth2/realms/root/authorize?redirect_uri=https://my-fqdn/platform/appAuthHelperRedirect.html&client_id=idm-admin-ui&scope=openid%20fr:idm:&response_type=code&state=abc123"
-
+      +
       HTTP/2 302
       ...
       code=3cItL9G52DIiBdfXRngv2_dAaYM...
@@ -3881,7 +4154,7 @@ For all ForgeOps deployment directory pods, the directory superuser DN is `uid=a
 
 #### ForgeOps deployment monitoring
 
-This section describes how to access Grafana dashboards and Prometheus UI'\[[2](#_footnotedef_2 "View footnote.")]' .
+This section describes how to access Grafana dashboards and Prometheus UI\[[2](#_footnotedef_2 "View footnote.")] .
 
 ##### Grafana
 
@@ -3901,7 +4174,7 @@ To access Grafana dashboards:
 
 When you're done using the Grafana UI, stop Grafana port forwarding by entering Ctrl+c in the terminal window where you initiated port forwarding.
 
-For information about Grafana, refer to [the Grafana documentation](http://docs.grafana.org).
+You can find more information about Grafana in [the Grafana documentation](http://docs.grafana.org).
 
 ##### Prometheus
 
@@ -3919,9 +4192,9 @@ To access the Prometheus UI:
 
 When you're done using the Prometheus UI, stop Prometheus port forwarding by entering Ctrl+c in the terminal window where you initiated port forwarding.
 
-For information about Prometheus, refer to [the Prometheus documentation](https://prometheus.io/docs/introduction/overview).
+You can find more information about Prometheus in [the Prometheus documentation](https://prometheus.io/docs/introduction/overview).
 
-For a description of ForgeOps monitoring architecture and information about how to customize ForgeOps monitoring, refer to [ForgeOps deployment monitoring](prepare/monitoring/overview.html).
+You can find the description of ForgeOps monitoring architecture and information about how to customize ForgeOps monitoring, in [ForgeOps deployment monitoring](prepare/monitoring/overview.html).
 
 #### Next step
 
@@ -3943,11 +4216,11 @@ If you've followed the instructions for performing a ForgeOps deployment *withou
 
 * DS, AM, and IDM are installed and running. You can access each ForgeOps component.
 
-* DS replication and failover work as expected.'\[[1](#_footnotedef_1 "View footnote.")]'
+* DS replication and failover work as expected.\[[1](#_footnotedef_1 "View footnote.")]
 
 When you're satisfied that all of these conditions are met, then you've successfully taken the first steps towards deploying the Ping Advanced Identity Software on Kubernetes. Congratulations!
 
-You can use the ForgeOps deployment to test deployment customizations—options that you might want to use in production but are not part of the base deployment. Examples'\[[2](#_footnotedef_2 "View footnote.")]' include, but are not limited to:
+You can use the ForgeOps deployment to test deployment customizations—options that you might want to use in production but are not part of the base deployment. Examples\[[2](#_footnotedef_2 "View footnote.")] include, but are not limited to:
 
 * Running lightweight benchmark tests
 
@@ -3998,7 +4271,6 @@ This page provides instructions for removing ForgeOps deployments for the follow
 2. Remove the ForgeOps deployment:
 
    ```
-   $ cd /path/to/forgeops/charts/identity-platform
    $ helm uninstall identity-platform
    ```
 
@@ -4010,11 +4282,7 @@ This page provides instructions for removing ForgeOps deployments for the follow
    $ kubectl delete pvc data-ds-idrepo-0 data-ds-cts-0
    ```
 
-4. (Optional) To delete the `amster` job, use the kubectl command:
-
-   ```
-   $ kubectl delete job amster
-   ```
+4. (Optional) Delete amster jobs, using the kubectl delete jobs command.
 
 5. (Optional) Delete your cluster:
 
@@ -4034,7 +4302,7 @@ This page provides instructions for removing ForgeOps deployments for the follow
 
 #### Remove a Helm deployment from minikube
 
-1. Set the active namespace in your Kubernetes context to the Kubernetes namespace in which you deployed the platform:
+1. Set the active namespace in your Kubernetes context to the one in which you deployed the platform:
 
    ```
    $ kubens my-namespace
@@ -4043,7 +4311,6 @@ This page provides instructions for removing ForgeOps deployments for the follow
 2. Remove the ForgeOps deployment:
 
    ```
-   $ cd /path/to/forgeops/charts/identity-platform
    $ helm uninstall identity-platform
    ```
 
@@ -4055,11 +4322,7 @@ This page provides instructions for removing ForgeOps deployments for the follow
    $ kubectl delete pvc data-ds-idrepo-0 data-ds-cts-0
    ```
 
-4. (Optional) To delete the `amster` job, use the kubectl command:
-
-   ```
-   $ kubectl delete job amster
-   ```
+4. (Optional) Delete amster jobs, using the kubectl delete jobs command.
 
 5. (Optional) Delete your cluster:
 
@@ -4107,7 +4370,7 @@ This page provides instructions for removing ForgeOps deployments for the follow
 
 #### Remove a Kustomize deployment from minikube
 
-1. Set the active namespace in your Kubernetes context to the Kubernetes namespace in which you deployed the platform:
+1. Set the active namespace in your Kubernetes context to the one in which you deployed the platform:
 
    ```
    $ kubens my-namespace
@@ -4177,9 +4440,9 @@ Use the following links for information about how to create single-instance Forg
 
 * [Deploy using Helm on minikube](deploy/deploy-scenario-helm-local.html)
 
-* [Deploy using Kustomize on GKE, EKS, or AKS](deploy/deploy-scenario-kustomize-cloud.html)
+* [Deploy using Kustomize on GKE, EKS, or AKS (Deprecated)[icon: alarm-clock, set=fa]](deploy/deploy-scenario-kustomize-cloud.html)
 
-* [Deploy using Kustomize on minikube](deploy/deploy-scenario-kustomize-local.html)
+* [Deploy using Kustomize on minikube (Deprecated)[icon: alarm-clock, set=fa]](deploy/deploy-scenario-kustomize-local.html)
 
 #### Set up your environment to push to your Docker registry
 
@@ -4302,11 +4565,11 @@ $ cp -rp deploy deploy-my-environment
 
 To develop customized Docker images, start with ForgeOps-provided images. Then, build your configuration profile iteratively as you customize the platform to meet your needs. Building Docker images from time to time integrates your custom configuration profile into new Docker images.
 
-To develop a customized DS Docker image, refer to [`ds` image](customize/ds.html).
+* [icon: tools, set=fa]**Steps to customize the DS Docker image are being revised, and will be published soon.**
 
-To develop a customized AM Docker image, refer to [`am` image](customize/am.html).
+* To develop a customized AM Docker image, refer to [`am` image](customize/am.html).
 
-To develop a customized IDM Docker image, refer to [`idm` image](customize/idm.html).
+* To develop a customized IDM Docker image, refer to [`idm` image](customize/idm.html).
 
 ![Brief overview of containers for developers.](customize/_images/containerization-dev.svg)
 
@@ -4346,7 +4609,7 @@ This section covers:
 
 * Customize LDAP configuration by including LDIF format LDAP configuration files in `ldif-ext` directory.
 
-* Customize LDAP schema by including customized schema LDIF files in the `config` directory.
+* Customize LDAP schema by including customized schema LDIF files in the `docker/ds/config/schema` directory.
 
 * Customize DS setup behavior by updating the setup and post-init runtime scripts in the `runtime-scripts` directory.
 
@@ -4368,88 +4631,92 @@ This section covers:
 
    * You've [set up your environment to push to your Docker registry](customize/setup.html#docker-push).
 
-2. Perform version control activities on your `forgeops` repository clone:
+1) Perform version control activities on your `forgeops` repository clone:
 
    1. Run the git status command.
 
    2. (Optional) Run the git commit command to commit the changes.
 
-3. Add your DS customizations:
+2) Add your DS customizations:
 
-   1. Learn more at [custom LDAP configuration](https://community.forgerock.com/t/forgeops-ds-customization-guide-7-4-7-5/5525#adding-custom-ldap-configuration-3) to add LDAP configuration.
+   1. Customize the `ds-idrepo`:
 
-   2. Learn more in [custom LDAP schema](https://community.forgerock.com/t/forgeops-ds-customization-guide-7-4-7-5/5525#adding-custom-ldap-schema-4) to add LDAP schema.
+      1. Edit `setup` script in the /path/to/forgeops/docker/ds/runtime-scripts/ds-idrepo directory to set up profiles and indexes.
 
-   3. Customize DS's setup behavior in the /path/to/forgeops/docker/ds/ds-new directory:
+      2. Edit the `post-init` script to add custom configurations.
 
-      1. To set up profiles and indexes, edit the `runtime-scripts/setup` script. Learn more in [`setup` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#setup-15).
+   2. Customize the `ds-cts`:
 
-      2. To add custom configurations after indexes have been rebuilt, edit the `runtime-scripts/post-init` script. Learn more in [`post-init` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#post-init-12).
+      1. Edit `setup` script in the /path/to/forgeops/docker/ds/runtime-scripts/ds-cts directory to set up profiles and indexes.
 
-      3. To prepare the DS docker image for setup, edit the `ds-setup.sh` script. Learn more in [`ds-setup.sh` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#ds-setupsh-5).
+      2. Edit the `post-init` script to add custom configurations.
 
-4. [Identify the repository](customize/setup.html#push-to) where you'll push the Docker image. You'll use this location to specify the --push-to argument value in the [build ds image](#build-ds) step.
+   3. Prepare the DS docker image for setup by editing the `ds-setup.sh` script in /path/to/forgeops/docker/ds directory.
 
-5. Decide on the DS image tag for each build of the image. You'll use this tag to specify the `--tag` argument value in the [build DS image](#build-ds) step.
+3) [Identify the repository](customize/setup.html#push-to) where you'll push the Docker image. You'll use this location to specify the --push-to argument value in the [build DS image](#build-ds) step.
 
-6. []()Build a new DS image that includes your customization:
+4) Decide on the DS image tag for each build of the image. You'll use this tag to specify the `--tag` argument value in the [build DS image](#build-ds) step.
+
+5) []()Build a new DS image that includes your customization:
 
    ```
    $ cd /path/to/forgeops/bin
    $ ./forgeops build ds --env-name my-env --config-profile my-profile --push-to my-repo --tag my-ds-tag
    ```
 
-7. Redeploy DS using your new DS image:
+6) Redeploy DS using the new image:
 
-* Deploy using the `forgeops` command
+   * Using Helm
 
-* Deploy using Helm
+   * Using Kustomize (deprecated)[icon: alarm-clock, set=fa]
 
-The `forgeops build` command calls Docker to build a new `ds` Docker image and to push the image to your Docker repository. The new image includes your custom LDAP and schema files. It also updates the image defaulter file so that the next time you install DS, the deployed DS server includes your custom DS image.
+   1. Locate the repository and tag for the new DS Docker image from the forgeops build command output.
 
-Perform version control activities on your `forgeops` repository clone:
+   2. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
 
-1. Run the git status command.
+      If the attached DS pod is running, the PVC is not deleted immediately. So you should stop the running DS pods.
 
-   Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+      In another terminal window, stop the DS pods using the kubectl delete pods command. This deletes the pods and its attached PVC.
 
-2. (Optional) Run the git commit command to commit changes to the image defaulter file.
+   3. Redeploy DS using the new Docker image:
 
-3. Remove DS from your ForgeOps deployment:
+      ```
+      $ cd /path/to/forgeops/charts/identity-platform
+      $ helm upgrade identity-platform ./ \
+       --namespace my-namespace \
+       --set 'ds_idrepo.image.repository=my-repository' \
+       --set 'ds_cts.image.repository=my-repository' \
+       --set 'ds_cts.image.tag=my-ds-tag' \
+       --set 'ds_idrepo.image.tag=my-ds-tag'
+      ```
 
-   ```
-   $ ./forgeops delete ds --env-name my-env
-   ...
-   deployment.apps "ds" deleted
-   ```
+   The `forgeops build` command calls Docker to build a new `ds` Docker image and to push the image to your Docker repository. The new image includes your custom LDAP and schema files. It also updates the image defaulter file so that the next time you install DS, the deployed DS server includes your custom DS image.
 
-4. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
+   Perform version control activities on your `forgeops` repository clone:
 
-5. Redeploy DS using the new Docker image:
+   1. Run the git status command.
 
-   ```
-   $ ./forgeops apply ds --env-name my-env --single-instance
-   Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
-   Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
-   ```
+      Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-1) Locate the repository and tag for the new DS Docker image from the forgeops build command output.
+   2. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-2) Delete the PVCs attached to DS pods using the kubectl delete pvc command.
+   3. Remove DS from your ForgeOps deployment:
 
-   If the attached DS pod is running, the PVC is not deleted immediately. So you should stop the running DS pods.
+      ```
+      $ ./forgeops delete ds --env-name my-env
+      ...
+      deployment.apps "ds" deleted
+      ```
 
-   In another terminal window, stop the DS pods using the kubectl delete pods command. This deletes the pods and its attached PVC.
+   4. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
 
-3) Redeploy DS using the new Docker image:
+   5. Redeploy DS using the new Docker image:
 
-   ```
-   $ cd /path/to/forgeops/charts/identity-platform
-   $ helm upgrade identity-platform ./ \
-    --namespace my-namespace \
-    --set 'ds.image.repository=my-repository' \
-    --set 'ds.image.tag=my-ds-tag'
-   ```
+      ```
+      $ ./forgeops apply ds --env-name my-env
+      Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
+      Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
+      ```
 
 #### Next step
 
@@ -4543,7 +4810,7 @@ You can use one or both of the following techniques to manage AM dynamic configu
 
   Note that the forgeops amster command automatically converts passwords in AM dynamic configuration to configuration expressions. Because of this, passwords in AM configuration files will not appear in cleartext. For details about how to work with dynamic configuration that has passwords and other properties specified as configuration expressions, refer to [Export Utilities and Configuration Expressions](customize/value-substitution.html#export-config-expr).
 
-* Write REST API applications to import and export AM dynamic configuration. For more information, refer to [Rest API](https://docs.pingidentity.com/pingam/8/REST-guide/preface.html) in the AM documentation.
+* Write REST API applications to import and export AM dynamic configuration. For more information, refer to [Rest API](https://docs.pingidentity.com/pingam/8.1/REST-guide/preface.html) in the AM documentation.
 
 ##### Tips for managing IDM dynamic configuration
 
@@ -4679,7 +4946,7 @@ The Secret Agent configuration computes and propagates passwords for AM dynamic 
 
 [](#limitations_on_property_value_substitution_in_am)Limitations on property value substitution in AM
 
-AM doesn't support property value substitution for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8/setup-guide/property-value-substitution.html) in the AM documentation for more information.
+AM doesn't support property value substitution for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8.1/setup-guide/property-value-substitution.html) in the AM documentation for more information.
 
 ##### Next step
 
@@ -4798,84 +5065,81 @@ Prior to the ForgeOps 2026.1 release, the `am` Docker image contained the AM con
    ``` |
 
    ```
-   $ ./forgeops config build --env-name my-env am \
-     --config-profile my-profile --push-to my-repo --tag my-am-tag
+   $ ./forgeops config build --env-name my-env \
+     --config-profile my-profile --push-to my-repo \
+     --tag my-am-tag am
    ...
    ```
 
 9. Redeploy AM using your new AM [BusyBox](# "A BusyBox container is a minimal, lightweight containerized environment that includes a compact implementation of common UNIX utilities.") image:
 
-   * If you installed the platform using the forgeops command, follow the steps in [Redeploy AM: Kustomize deployments](#redeploy-am-forgeops-command).
+   The forgeops build command calls Docker to build a new `am` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install AM, the forgeops apply command gets AM static configuration from your new custom Docker image.
 
-   * If you installed the platform using Helm, follow the steps in [Redeploy AM: Helm deployments](#redeploy-am-helm).
+   ![Building the new custom Docker image.](customize/_images/cdk-build.svg)
 
-###### Redeploy AM: Kustomize deployments
+   * []()Helm deployments
 
-The forgeops build command calls Docker to build a new `am` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install AM, the forgeops apply command gets AM static configuration from your new custom Docker image.
+   * Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-![Building the new custom Docker image.](customize/_images/cdk-build.svg)
+   1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new AM Docker image's repository and tag.
 
-1. Perform version control activities on your `forgeops` repository clone:
+   2. Redeploy AM using the new AM Docker image:
 
-   1. Run the git status command.
+      ```
+      $ helm upgrade identity-platform ./ \
+       --namespace my-namespace \
+       --values /path/to/forgeops/helm/my-env/values.yaml
+      ```
 
-   2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+   3. Validate that AM has the expected configuration:
 
-   3. (Optional) Run the git commit command to commit changes to the image defaulter file.
+      * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
 
-2. Remove AM from your ForgeOps deployment:
+      * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   ```
-   $ ./forgeops delete am --env-name my-env
-   ... platform detected in namespace: "my-namespace".
-   Uninstalling component(s): ['am'] from namespace: "my-namespace".
-   OK to delete components? [Y/N] Y
-   service "am" deleted
-   deployment.apps "am" deleted
-   ```
+      * Start the AM admin UI and verify that your configuration changes are present.
 
-3. Redeploy AM:
+   1) Perform version control activities on your `forgeops` repository clone:
 
-   ```
-   $ ./forgeops apply am --env-name my-env
-   Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
-   Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
+      1. Run the git status command.
 
-   Installing component(s): ['am'] ... from deployment manifests in ...
+      2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-   service/am created
-   deployment.apps/am created
+      3. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-   Enjoy your deployment!
-   ```
+   2) Remove AM from your ForgeOps deployment:
 
-4. Validate that AM has the expected configuration:
+      ```
+      $ ./forgeops delete am --env-name my-env
+      ... platform detected in namespace: "my-namespace".
+      Uninstalling component(s): ['am'] from namespace: "my-namespace".
+      OK to delete components? [Y/N] Y
+      service "am" deleted
+      deployment.apps "am" deleted
+      ```
 
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
+   3) Redeploy AM:
 
-   * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+      ```
+      $ ./forgeops apply am --env-name my-env
+      Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
+      Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
 
-   * Start the AM admin UI and verify that your configuration changes are present.
+      Installing component(s): ['am'] ... from deployment manifests in ...
 
-###### Redeploy AM: Helm deployments
+      service/am created
+      deployment.apps/am created
 
-1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new AM Docker image's repository and tag.
+      Enjoy your deployment!
+      ```
 
-2. Redeploy AM using the new AM Docker image:
+   4) Validate that AM has the expected configuration:
 
-   ```
-   $ helm upgrade identity-platform ./ \
-    --namespace my-namespace \
-    --values /path/to/forgeops/helm/my-env/values.yaml
-   ```
+      * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
 
-3. Validate that AM has the expected configuration:
+      * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
-
-   * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
-
-   * Start the AM admin UI and verify that your configuration changes are present.
+      * Start the AM admin UI and verify that your configuration changes are present.
 
 ##### Next step
 
@@ -4931,7 +5195,7 @@ Prior to the ForgeOps 2026.1 release, the `idm` Docker image contained the IDM c
 
    3. (Optional) Run the git commit command to commit changes to files that have been modified.
 
-3. Modify the IDM configuration using the REST APIs.
+3. Modify the IDM configuration using the the REST APIs.
 
    Learn more about how to access the REST APIs in [IDM Services](deploy/access.html#idm-services-cdm).
 
@@ -4997,74 +5261,71 @@ Prior to the ForgeOps 2026.1 release, the `idm` Docker image contained the IDM c
    ``` |
 
    ```
-   $ ./forgeops config build --env-name my-env idm \
-     --config-profile my-profile --push-to my-repo --tag my-idm-tag
+   $ ./forgeops config build --env-name my-env \
+     --config-profile my-profile --push-to my-repo \
+     --tag my-idm-tag idm
 
    ...
    ```
 
 9. Redeploy IDM using your new IDM [BusyBox](# "A BusyBox container is a minimal, lightweight containerized environment that includes a compact implementation of common UNIX utilities.") image:
 
-   * If you installed the platform using the forgeops command, follow the steps in [Redeploy IDM: Kustomize deployments](#redeploy-idm-forgeops-command).
+   The forgeops build command calls Docker to build a new `idm` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install IDM, the forgeops apply command gets IDM static configuration from your new custom Docker image.
 
-   * If you installed the platform using Helm, follow the steps in [Redeploy IDM: Helm deployments](#redeploy-idm-helm).
+   ![Building the new custom Docker image.](customize/_images/cdk-build.svg)
 
-###### Redeploy IDM: Kustomize deployments
+   * Helm deployments
 
-The forgeops build command calls Docker to build a new `idm` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install IDM, the forgeops apply command gets IDM static configuration from your new custom Docker image.
+   * Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-![Building the new custom Docker image.](customize/_images/cdk-build.svg)
+   1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new IDM Docker image's repository and tag.
 
-1. Perform version control activities on your `forgeops` repository clone:
+   2. Redeploy IDM using the new IDM Docker image:
 
-   1. Run the git status command.
+      ```
+      $ helm upgrade identity-platform ./ \
+       --version 2026.3 --namespace my-namespace \
+       --values /path/to/forgeops/helm/my-env/values.yaml
+      ```
 
-   2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+   3. Validate that IDM has the expected configuration:
 
-   3. (Optional) Run the git commit command to commit changes to the image defaulter file.
+      * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
 
-2. Remove IDM from your ForgeOps deployment:
+      * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   ```
-   $ ./forgeops delete idm --env-name my-env
-   "cdk" platform detected in namespace: "my-namespace".
-   Uninstalling component(s): ['idm'] from namespace: "my-namespace".
-   OK to delete components? [Y/N] Y
-   service "idm" deleted
-   deployment.apps "idm" deleted
-   ```
+   1) Perform version control activities on your `forgeops` repository clone:
 
-3. Redeploy IDM:
+      1. Run the git status command.
 
-   ```
-   $ ./forgeops apply idm --env-name my-env
+      2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-   ...
-   ```
+      3. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-4. Validate that IDM has the expected configuration:
+   2) Remove IDM from your ForgeOps deployment:
 
-   * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
+      ```
+      $ ./forgeops delete idm --env-name my-env
+      "cdk" platform detected in namespace: "my-namespace".
+      Uninstalling component(s): ['idm'] from namespace: "my-namespace".
+      OK to delete components? [Y/N] Y
+      service "idm" deleted
+      deployment.apps "idm" deleted
+      ```
 
-   * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+   3) Redeploy IDM:
 
-###### Redeploy IDM: Helm deployments
+      ```
+      $ ./forgeops apply idm --env-name my-env
 
-1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new IDM Docker image's repository and tag.
+      ...
+      ```
 
-2. Redeploy IDM using the new IDM Docker image:
+   4) Validate that IDM has the expected configuration:
 
-   ```
-   $ helm upgrade identity-platform ./ \
-    --version 2026.2 --namespace my-namespace \
-    --values /path/to/forgeops/helm/my-env/values.yaml
-   ```
+      * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
 
-3. Validate that IDM has the expected configuration:
-
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
-
-   * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+      * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
 ##### Next step
 
@@ -5086,49 +5347,22 @@ The forgeops build command calls Docker to build a new `idm` Docker image and to
 
 After you get your ForgeOps deployment up and running, you can add deployment customizations—options that are not part of an out-of-the-box ForgeOps deployment, but which you may need when you deploy in production.
 
-[icon: play-circle, set=fas, size=3x]
+| Topic                                                                                                | Description                                                       |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [icon: play-circle, set=fa][Production Deployment Overview](start/start-here.html#build-own-service) | Customize, deploy, and maintain a production ForgeOps deployment. |
+| [icon: door-open, set=fa][Identity Gateway](prepare/ig/overview.html)                                | Add PingGateway to your deployment.                               |
+| [icon: stethoscope, set=fa][Monitoring](prepare/monitoring/overview.html)                            | Customize Prometheus monitoring and alerts.                       |
+| [icon: user-lock, set=fa][Security](prepare/security/overview.html)                                  | Customize the security features built into ForgeOps deployments.  |
+| [icon: floppy-disk-circle-arrow-right, set=fa][Backup](backup/overview.html)                         | Back up and restore data, such as identities and tokens.          |
 
-#### [Production Deployment Overview](https://docs.pingidentity.com/forgeops/2026.2/start/start-here.html#build-own-service)
+### Identity Gateway
 
-Customize, deploy, and maintain a production ForgeOps deployment.
+This topic describes how to deploy PingGateway in a ForgeOps deployment.
 
-[icon: door-open, set=fas, size=3x]
-
-#### [Identity Gateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/overview.html)
-
-Add PingGateway to your deployment.
-
-[icon: stethoscope, set=fas, size=3x]
-
-#### [Monitoring](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/overview.html)
-
-Customize Prometheus monitoring and alerts.
-
-[icon: user-lock, set=fas, size=3x]
-
-#### [Security](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/overview.html)
-
-Customize the security features built into ForgeOps deployments.
-
-[icon: floppy-disk-circle-arrow-right, set=fas, size=3x]
-
-#### [Backup](https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html)
-
-Back up and restore data, such as identities and tokens.
-
-### PingGateway deployment
-
-[icon: user-lock, set=fas, size=3x]
-
-#### [Default PingGateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-default-ig.html)
-
-Add PingGateway to a ForgeOps deployment.
-
-[icon: user-shield, set=fas, size=3x]
-
-#### [Custom PingGateway](https://docs.pingidentity.com/forgeops/2026.2/prepare/ig/deploy-custom-ig.html)
-
-Build a custom PingGateway image and add it to a single-instance ForgeOps deployment.
+| Topic                                                                          | Description                                                                           |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| [icon: user-lock, set=fa][IG Deployment](prepare/ig/deploy-default-ig.html)    | Add PingGateway to a ForgeOps deployment.                                             |
+| [icon: user-shield, set=fa][Custom IG Image](prepare/ig/deploy-custom-ig.html) | Build a custom PingGateway image and add it to a single-instance ForgeOps deployment. |
 
 #### Deploy PingGateway
 
@@ -5140,52 +5374,54 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
 
 2. Set the active namespace in your local Kubernetes context to the namespace in which you've deployed the platform components.
 
-3. Add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
+3. Deploy PingGateway:
 
-   ```
-   kind: Kustomization
-   apiVersion: kustomize.config.k8s.io/v1beta1
-   resources:
-   - ./base
-   - ./secrets
-   - ./ds-cts
-   - ./ds-idrepo
-   - ./am
-   - ./amster
-   - ./idm
-   - ./ig
-   - ./ds-set-passwords
-   - ./admin-ui
-   - ./end-user-ui
-   - ./login-ui
-   ```
+   > **Collapse: In Kustomize-based deployments (Deprecated)**
+   >
+   > 1. Add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
+   >
+   >    ```
+   >    kind: Kustomization
+   >    apiVersion: kustomize.config.k8s.io/v1beta1
+   >    resources:
+   >    - ./base
+   >    - ./secrets
+   >    - ./ds-cts
+   >    - ./ds-idrepo
+   >    - ./am
+   >    - ./amster
+   >    - ./idm
+   >    - ./ig
+   >    - ./ds-set-passwords
+   >    - ./admin-ui
+   >    - ./end-user-ui
+   >    - ./login-ui
+   >    ```
+   >
+   > 2. Add PingGateway Docker image to your ForgeOps deployment configuration:
+   >
+   >    ```
+   >    $ cd /path/to/forgeops/bin/
+   >    $ ./forgeops image --release 2026.6.0 ig --env-name my-env
+   >    ```
+   >
+   >    1. Deploy PingGateway:
+   >
+   >       ```
+   >       $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
+   >       ```
 
-4. Add PingGateway Docker image to your ForgeOps deployment configuration:
+   > **Collapse: In Helm-based deployments**
+   >
+   > 1. Deploy PingGateway using the helm upgrade --install command:
+   >
+   >    ```
+   >    $ cd /path/to/forgeops
+   >    $ helm upgrade --install ping-gateway charts/ping-gateway/ \
+   >      --values helm/my-env/values.yaml --namespace my-namespace
+   >    ```
 
-   ```
-   $ cd /path/to/forgeops/bin/
-   $ ./forgeops image --release 2026.3.0 ig --env-name my-env
-   ```
-
-5. Deploy PingGateway:
-
-   1. In a Kustomize-based deployment:
-
-      ```
-      $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
-      ```
-
-   2. In a Helm-based deployment:
-
-      ```
-      $ cd /path/to/forgeops
-      $ helm upgrade --install ping-gateway charts/ping-gateway/ \
-        --values helm/my-env/values.yaml --namespace my-namespace
-      ```
-
-6. Run the kubectl get pods command to check the status of the PingGateway pod. Wait until the pod is ready before proceeding to the next step.
-
-7. Verify that PingGateway is running:
+4. Verify that PingGateway is running:
 
    ```
    $ curl --insecure -L -X GET https://my-fqdn/ig/openig/ping -v
@@ -5203,7 +5439,7 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
    * Closing connection 0
    ```
 
-8. Verify that the reverse proxy to the IDM pod is running:
+5. Verify that the reverse proxy to the IDM pod is running:
 
    ```
    $ curl --insecure -L -X GET https://my-fqdn/ig/openidm/info/ping -v
@@ -5221,7 +5457,7 @@ To deploy PingGateway after you've performed a ForgeOps deployment:
 
 The default PingGateway configuration provided for use with ForgeOps deployments is an example. Replace this configuration with your own routes before using PingGateway in your environment.
 
-Refer to the [PingGateway Deployment Guide](https://docs.pingidentity.com/pinggateway/2026.3/devops-guide/preface.html) for configuring routes.
+Refer to the [PingGateway Deployment Guide](https://docs.pingidentity.com/pinggateway/2026.6/devops-guide/preface.html) for configuring routes.
 
 ##### Deploy custom PingGateway image
 
@@ -5241,11 +5477,13 @@ To build a custom PingGateway image and deploy PingGateway:
 
    ```
    $ cd /path/to/forgeops/bin
-   ...
-   $ forgeops image --release 2026.3.0 --release-name my-ig-release ig
-   ...
+
+   $ forgeops image --env-nama my-env --release 2026.6.0 \
+     --release-name my-ig-release ig
+
    $ ./forgeops build ig --env-name my-env \
-     --config-profile my-profile --push-to my-repo
+     --config-profile my-profile --release-name my-ig-release \
+     --push-to my-repo
    ```
 
 7. If PingGateway hadn't already been deployed in the existing ForgeOps deployment, add the - ./ig line in the default overlay file, kustomize/overlay/my-env/kustomization.yaml:
@@ -5268,7 +5506,7 @@ To build a custom PingGateway image and deploy PingGateway:
    - ./login-ui
    ```
 
-8. Uninstall previously deployed PingGateway from your ForgeOps deployment:
+8. If PingGateway had already been deployed in your ForgeOps deployment, uninstall it:
 
    1. Set the active namespace in your local Kubernetes context to the namespace in which you've deployed the PingGateway.
 
@@ -5284,19 +5522,19 @@ To build a custom PingGateway image and deploy PingGateway:
 
 9. Deploy PingGateway using your customized PingGateway image:
 
-   1. In a Kustomize-based deployment:
+   > **Collapse: In a Kustomize-based deployment (Deprecated)**
+   >
+   > ```
+   > $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
+   > ```
 
-      ```
-      $ /path/to/forgeops/bin/forgeops apply --env-name my-env ig
-      ```
-
-   2. In a Helm-based deployment:
-
-      ```
-      $ cd /path/to/forgeops
-      $  helm upgrade --install ping-gateway charts/ping-gateway/ \
-        --values helm/my-env/values.yaml --namespace my-namespace
-      ```
+   > **Collapse: In a Helm-based deployment**
+   >
+   > ```
+   > $ cd /path/to/forgeops
+   > $  helm upgrade --install ping-gateway charts/ping-gateway/ \
+   >   --values helm/my-env/values.yaml --namespace my-namespace
+   > ```
 
 10. Run the kubectl get pods command to check the status of the PingGateway pod. Wait until the PingGateway pod is ready before proceeding to the next step.
 
@@ -5315,7 +5553,7 @@ To customize the AM URL in PingGateway and deploy using Helm:
          value: "\http://am/my-am"
    ```
 
-2. Redeploy PingGateway:
+2. Redeploy PingGateway. For example, in a Helm-based deployment:
 
    ```
    $ helm upgrade --install ping-gateway charts/ping-gateway/ \
@@ -5337,29 +5575,12 @@ ForgeOps deployments optionally use Prometheus to monitor Ping Advanced Identity
 
 This topic describes the use of monitoring tools in ForgeOps deployments:
 
-[icon: eye, set=fas, size=3x]
-
-#### [Overview](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/monitoring-intro.html)
-
-Monitoring installation and architecture.
-
-[icon: fedora, set=fab, size=3x]
-
-#### [Monitoring Pods](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/pods.html)
-
-Prometheus and Grafana pods that monitor ForgeOps deployments and provide reporting services.
-
-[icon: tachometer-alt, set=fas, size=3x]
-
-#### [Grafana Dashboards](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/dashboards.html)
-
-Grafana dashboards for the platform that are available in ForgeOps deployments.
-
-[icon: exclamation, set=fas, size=3x]
-
-#### [Prometheus Alerts](https://docs.pingidentity.com/forgeops/2026.2/prepare/monitoring/alerts.html)
-
-Prometheus alerts for the platform that are available in ForgeOps deployments.
+| Topic                                                                                  | Description                                                                                   |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [icon: eye, set=fa][Overview](prepare/monitoring/monitoring-intro.html)                | Monitoring installation and architecture.                                                     |
+| [icon: fedora, set=fa][Monitoring Pods](prepare/monitoring/pods.html)                  | Prometheus and Grafana pods that monitor ForgeOps deployments and provide reporting services. |
+| [icon: tachometer-alt, set=fa][Grafana Dashboards](prepare/monitoring/dashboards.html) | Grafana dashboards for the platform that are available in ForgeOps deployments.               |
+| [icon: exclamation, set=fa][Prometheus Alerts](prepare/monitoring/alerts.html)         | Prometheus alerts for the platform that are available in ForgeOps deployments.                |
 
 #### About ForgeOps deployment monitoring
 
@@ -5367,7 +5588,7 @@ Prometheus, Alertmanager, and Grafana, used for monitoring ForgeOps deployments,
 
 The Helm charts deploy [Kubernetes pods that run the Prometheus and Grafana services](prepare/monitoring/pods.html). The Prometheus operator then watches for service monitor CRDs—Kubernetes custom resource definitions. CRDs are Kubernetes class types that you manage with the kubectl command. The service monitor CRDs define targets to be scraped.
 
-In ForgeOps deployments, the Prometheus operator configuration is defined in the [prometheus-operator.yaml](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/prometheus-operator.yaml) file in the `forgeops` repository. For information about how to customize Prometheus, Alertmanager, and Grafana, refer to the [Prometheus README file in the `forgeops` repository](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md).
+In ForgeOps deployments, the Prometheus operator configuration is defined in the [prometheus-operator.yaml](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/prometheus-operator.yaml) file in the `forgeops` repository. For information about how to customize Prometheus, Alertmanager, and Grafana, refer to the [Prometheus README file in the `forgeops` repository](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md).
 
 After a ForgeOps deployment is done, you can access the monitoring dashboards. For details, refer to [ForgeOps deployment monitoring](deploy/access.html#cdm-monitoring).
 
@@ -5396,65 +5617,35 @@ In addition to the pods from the `prometheus-operator` project, ForgeOps deploym
 
 You can customize, export and import Grafana dashboards using the Grafana UI or HTTP API.
 
-For information about importing custom Grafana dashboards, refer to the [Import Custom Grafana Dashboards](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md#import-custom-grafana-dashboards) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
+For information about importing custom Grafana dashboards, refer to the [Import Custom Grafana Dashboards](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md#import-custom-grafana-dashboards) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
 
 #### Alerts
 
-Alerts for ForgeOps deployments are defined in the [fr-alerts.yaml](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/forgerock-metrics/templates/fr-alerts.yaml) file in the `forgeops` repository.
+Alerts for ForgeOps deployments are defined in the [fr-alerts.yaml](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/forgerock-metrics/templates/fr-alerts.yaml) file in the `forgeops` repository.
 
-To configure additional alerts, refer to the [Configure Alerting Rules](https://github.com/ForgeRock/forgeops/blob/2026.2.1/cluster/addons/prometheus/README.md#Configure-alerting-rules) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
+To configure additional alerts, refer to the [Configure Alerting Rules](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus/README.md#Configure-alerting-rules) section of the Prometheus and Grafana Deployment README file in the `forgeops` repository.
 
 ### Security
 
 This topic describes some security options in a ForgeOps deployment:
 
-[icon: lock, set=fas, size=3x]
-
-#### [Secure Communications](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/https.html)
-
-Secure HTTP and certificate management.
-
-[icon: id-card, set=fas, size=3x]
-
-#### [IP Address Restriction](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/restrict-access-ip-address.html)
-
-Access restriction by incoming IP address, enforced by the ingress controller.
-
-[icon: network-wired, set=fas, size=3x]
-
-#### [Network Policies](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/network-policies.html)
-
-Secure cross-pod communications, enforced by Kubernetes network policies.
-
-[icon: user-friends, set=fas, size=3x]
-
-#### [Cluster Access on AWS](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/multi-user-access-aws.html)
-
-User entries in the Amazon EKS authorization configuration map.
-
-[icon: user-secret, set=fas, size=3x]
-
-#### [Secret Agent](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/secret-agent.html)
-
-Kubernetes operator that generates secrets and provides cloud secret management.
-
-[icon: arrows-spin, set=fas, size=3x]
-
-#### [Rotate Secrets](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/secrets-rotation.html)
-
-Rotate secrets in a ForgeOps deployment.
-
-[icon: shield-check, set=fas, size=3x]
-
-#### [New security features](https://docs.pingidentity.com/forgeops/2026.2/prepare/security/sec-features.html)
-
-New ForgeOps security features
+| Topic                                                                                             | Description                                                                      |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [icon: lock, set=fa][Secure Communications](prepare/security/https.html)                          | Secure HTTP and certificate management.                                          |
+| [icon: id-card, set=fa][IP Address Restriction](prepare/security/restrict-access-ip-address.html) | Access restriction by incoming IP address, enforced by the ingress controller.   |
+| [icon: network-wired, set=fa][Network Policies](prepare/security/network-policies.html)           | Secure cross-pod communications, enforced by Kubernetes network policies.        |
+| [icon: user-friends, set=fa][Cluster Access on AWS](prepare/security/multi-user-access-aws.html)  | User entries in the Amazon EKS authorization configuration map.                  |
+| [icon: user-secret, set=fa][Secret Agent](prepare/security/secret-agent.html)                     | Kubernetes operator that generates secrets and provides cloud secret management. |
+| [icon: key, set=fa][Helm Generated Secrets](prepare/security/helm-gen-sec.html)                   | Helm-generated secrets for ForgeOps deployments.                                 |
+| [icon: arrows-spin, set=fa][Rotate Secrets](prepare/security/secrets-rotation.html)               | Rotate secrets in a ForgeOps deployment.                                         |
+| [icon: shield-check, set=fa][New security features](prepare/security/sec-features.html)           | New ForgeOps security features.                                                  |
+| [icon: key, set=fa][Helm-based secrets](prepare/security/migrate-helmsec.html)                    | Migrate a ForgeOps deployment to use Helm-generated secrets.                     |
 
 #### Secure HTTP
 
 ForgeOps deployments use a TLS-enabled ingress controller to enable secure communication to the cluster\[[17](#_footnotedef_17 "View footnote.")]. Incoming requests and outgoing responses are encrypted. TLS is terminated at the ingress controller.
 
-By default, ForgeOps installs Traefik on AKS, EKS, and GKE clusters, and ingress-nginx on minikube\[[18](#_footnotedef_18 "View footnote.")]. The /path/to/forgeops/kustomize/base/ingress/ingress.yaml file contains an annotation—`cert-manager.io/cluster-issuer`—that configures the Traefik to use [cert-manager](https://github.com/jetstack/cert-manager) software for certificate management\[[19](#_footnotedef_19 "View footnote.")].
+By default, ForgeOps installs Traefik\[[18](#_footnotedef_18 "View footnote.")]. The /path/to/forgeops/kustomize/base/ingress/ingress.yaml file contains an annotation—`cert-manager.io/cluster-issuer`—that configures the Traefik to use [cert-manager](https://github.com/jetstack/cert-manager) software for certificate management\[[19](#_footnotedef_19 "View footnote.")].
 
 The forgeops apply command installs the `cert-manager` utility in the `cert-manager` namespace and configures `cert-manager` to generate self-signed certificates for securing communication into the ingress.
 
@@ -5563,9 +5754,9 @@ Kubernetes [network policies](https://kubernetes.io/docs/concepts/services-netwo
 
 The `forgeops` repository contains two sets of example network policies for the Ping Advanced Identity Software:
 
-1. [Network policies for DS](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/base/security/ds-netpolicy.yaml).
+1. [Network policies for DS](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/base/security/ds-netpolicy.yaml).
 
-2. [Network policies for AM and IDM](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/base/security/app-netpolicy.yaml).
+2. [Network policies for AM and IDM](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/base/security/app-netpolicy.yaml).
 
 Customize the example policies to meet your security needs, or use them to help you better understand how network policies can make Kubernetes deployments more secure.
 
@@ -5701,19 +5892,19 @@ It's common for team members to share the use of a cluster. For team members to 
 
 6. Save the configuration map.
 
-#### Secret Agent operator
+#### The secret agent operator
 
-The open source Secret Agent operator generates all the secrets needed for ForgeOps deployments except for the DS master key and TLS key. When directory instances are created, certificate manager is called to generate these two keys.
+The open source secret agent operator generates all the secrets needed for ForgeOps deployments except for the DS master key and TLS key. When directory instances are created, certificate manager is used to generate these two keys.
 
 In addition to generating secrets, the operator also integrates with Google Cloud Secret Manager, AWS Secrets Manager, and Azure Key Vault to manage secrets, providing cloud backup and retrieval for secrets.
 
-The Secret Agent operator runs as a Kubernetes deployment that must be available before you can install AM, IDM, and DS.
+The secret agent operator runs as a Kubernetes deployment that must be available before you can install AM, IDM, and DS.
 
 ##### Secret generation
 
 By default, the operator examines your namespace to determine whether it contains all the secrets that it manages for Ping Advanced Identity Software deployments. If any of the secrets it manages are not present, the operator generates them.
 
-Refer to the Secret Agent project README for information about:
+Refer to the secret agent project README for information about:
 
 * [Importing your own secrets](https://github.com/ForgeRock/secret-agent#importing-your-own-secrets)
 
@@ -6155,7 +6346,7 @@ In ForgeOps release 2025.2.1, the DS image was built to accommodate multiple pas
 
   If you are using the DS image from the 2025.1 release or earlier, then perform these steps to enable multiple passwords in DS.
 
-  1. In your terminal window, set up environment variables to get the password and connection string (DSPASS and CONN\_STR):
+  1. In your terminal window, set up environment variables to get the password and connection string (DSPASS and CONN_STR):
 
      ```
      $ export DSPASS=$(kubectl get secret ds-passwords -n my_ns -o yaml | yq '.data["dirmanager.pw"]' | tr -d '"' | base64 -d -i -)
@@ -6183,13 +6374,13 @@ In ForgeOps release 2025.2.1, the DS image was built to accommodate multiple pas
        --set allow-multiple-password-values:true $CONN_STR
      ```
 
-To rotate `ds-env-secrets`, run the forgeops rotate --namespace my\_ns ds-env-secrets command.
+To rotate `ds-env-secrets`, run the forgeops rotate --namespace my_ns ds-env-secrets command.
 
 The command prompts you to perform steps to complete rotation of `ds-env-secrets`.
 
 ###### Rotating `ds-passwords`
 
-To rotate `ds-passwords`, run the forgeops rotate --namespace my\_ns ds-passwords command. The command prompts you to perform steps to complete rotation of `ds-passwords`.
+To rotate `ds-passwords`, run the forgeops rotate --namespace my_ns ds-passwords command. The command prompts you to perform steps to complete rotation of `ds-passwords`.
 
 You must restart the DS pods to update the `admin` user password because that password is set on DS pod startup. This could also require restarting some services instead of redeploying components.
 
@@ -6456,11 +6647,11 @@ At the end of its successful run, the forgeops rotate command prompts the user t
 
 The following environment variables are used to point to the paths for certificates. You don't need to update any of it.
 
-* **AM\_DEFAULT\_TRUSTSTORE**: PingAM and PingIDM now use the default Java ca certificate as the default truststore.
+* **AM_DEFAULT_TRUSTSTORE**: PingAM and PingIDM now use the default Java ca certificate as the default truststore.
 
-* **AM\_PEM\_TRUSTSTORE**: Custom user-supplied certificates to append to the truststore.
+* **AM_PEM_TRUSTSTORE**: Custom user-supplied certificates to append to the truststore.
 
-* **AM\_PEM\_TRUSTSTORE\_DS**: The DS SSL key pair used for LDAPS connectivity between PingAM and PingDS.
+* **AM_PEM_TRUSTSTORE_DS**: The DS SSL key pair used for LDAPS connectivity between PingAM and PingDS.
 
 The following procedure helps in adding user supplied certificates to the truststore for PingAM and PingIDM. **Certificates should be in pem format.**
 
@@ -6504,7 +6695,7 @@ The following procedure helps in adding user supplied certificates to the trusts
 
 #### New security features
 
-New security features in ForgeOps 2026.2.
+New security features in ForgeOps 2026.3.
 
 ## Backup and restore overview
 
@@ -6618,11 +6809,81 @@ c7147ff   156m           156m
 
 When enabled, volume snapshots are created once every day by default and purged after three days. You can customize the backup schedules as required in your environment.
 
-* In a Kustomize-based deployment
+* Helm-based deployments
 
-* In a Helm-based deployment
+* Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-To modify the default schedule and purge delay for the `idrepo` repository\[[21](#_footnotedef_21 "View footnote.")]:
+To modify the default schedule and purge delay:
+
+1. In a terminal window, change to the /path/to/forgeops/helm/my-env directory:
+
+   ```
+   $ cd /path/to/forgeops/helm/my-env
+   ```
+
+2. Copy the values.yaml file, so you can restore it if required:
+
+   ```
+   $ cp values.yaml /tmp/values.yaml
+   ```
+
+3. Edit the values.yaml file and set the `schedule` and `purge-delay` parameters as needed.
+
+4. Run the helm upgrade command.
+
+   * Examples for scheduling snapshots for the `idrepo` repository\[[21](#_footnotedef_21 "View footnote.")]
+
+     * To schedule snapshots twice a day, at noon and midnight:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 0/12 * * *"
+       ...
+       ```
+
+     * To schedule snapshots every 8 hours:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 */8 * * *"
+       ...
+       ```
+
+   * Examples for purging schedule for the `idrepo` repository\[[21](#_footnotedef_21 "View footnote.")]
+
+     * To schedule purge after 4 days:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-4 day"
+       ...
+       ```
+
+     * To schedule purge after a week:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-7 day"
+       ...
+       ```
+
+To modify the default schedule and purge delay for the `idrepo` repository\[[22](#_footnotedef_22 "View footnote.")]:
 
 1. In a terminal window, change to the path/to/idrepo directory.
 
@@ -6670,76 +6931,6 @@ To modify the default schedule and purge delay for the `idrepo` repository\[[21]
                 env:
                   - name: PURGE_DELAY
                     value: "-7 day"
-       ```
-
-To modify the default schedule and purge delay:
-
-1. In a terminal window, change to the /path/to/forgeops/helm/my-env directory:
-
-   ```
-   $ cd /path/to/forgeops/helm/my-env
-   ```
-
-2. Copy the values.yaml file, so you can restore it if required:
-
-   ```
-   $ cp values.yaml /tmp/values.yaml
-   ```
-
-3. Edit the values.yaml file and set the `schedule` and `purge-delay` parameters as needed.
-
-4. Run the helm upgrade command.
-
-   * Examples for scheduling snapshots for the `idrepo` repository\[[22](#_footnotedef_22 "View footnote.")]
-
-     * To schedule snapshots twice a day, at noon and midnight:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            schedule: "0 0/12 * * *"
-       ...
-       ```
-
-     * To schedule snapshots every 8 hours:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            schedule: "0 */8 * * *"
-       ...
-       ```
-
-   * Examples for purging schedule for the `idrepo` repository\[[22](#_footnotedef_22 "View footnote.")]
-
-     * To schedule purge after 4 days:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            purgeDelay: "-4 day"
-       ...
-       ```
-
-     * To schedule purge after a week:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            purgeDelay: "-7 day"
-       ...
        ```
 
 #### Restore from volume snapshot
@@ -7194,7 +7385,7 @@ The disaster recovery ID is configured in the `platform-config` configmap as fol
 
 * For Helm: update `ds_restore.disasterRecoveryId` in your custom values file
 
-* For Kustomize: update DISASTER\_RECOVERY\_ID in your custom overlay in base/platform-config.yaml
+* For Kustomize: update DISASTER_RECOVERY_ID in your custom overlay in base/platform-config.yaml
 
 ##### Best practices for restoring directories
 
@@ -7205,6 +7396,192 @@ The disaster recovery ID is configured in the `platform-config` configmap as fol
 #### Using cloud storage locally for backup and restore
 
 In DS version 8.1.0 you can use cloud storage mounted locally for backup and restore. This is useful for local testing of backup and restore. You can mount cloud storage as local filesystem and use the local mount point as a local backup location. Learn more about mounting cloud storage locally in the [Cloud storage section](https://docs.pingidentity.com/pingds/8.1/maintenance-guide/backup-restore.html#cloud-storage) of DS documentation.
+
+## Integration use cases
+
+After you get your ForgeOps deployment up and running, you can test and evaluate integration with other Ping services. Some sample integration use cases are provided in this section:
+
+| Topic                                                                                | Description                             |
+| ------------------------------------------------------------------------------------ | --------------------------------------- |
+| [icon: shield-check, set=fa][PingOne Worker service](integration/int-p1-worker.html) | Integrate with PingOne Protect service. |
+
+### Integrate ForgeOps with the PingOne Worker service
+
+#### Why integrate with the PingOne Worker service?
+
+Integrating ForgeOps with the PingOne Worker Service allows a ForgeOps deployment to extend platform capabilities through PingOne Universal Services such as PingOne Protect, PingOne Verify, and others. The PingOne Worker service provides the integration point between ForgeOps and these PingOne services using secrets and configuration.
+
+For example, when integrated with PingOne Protect through the PingOne Worker Service, journeys can use real-time risk scores to make smarter authentication decisions. PingOne Protect evaluates signals such as device, network, and user behavior to produce a risk score for each sign-on event. Journeys can then use that score to adapt authentication journeys dynamically, such as allowing access for low-risk events, prompting step-up authentication for medium-risk events, or denying access for high-risk events.
+
+This guide provides sample instructions for setting up the integration in a ForgeOps deployment running on minikube. You can adapt the instructions for your environment and the PingOne services you want to use.
+
+#### Set up a PingOne environment
+
+Use the steps in the PingOne documentation to set up a PingOne environment and a PingOne Worker application.
+
+1. Create a PingOne Workforce solution environment as described in [Create a PingOne environment](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started_adding_environment.html).
+
+2. Create a PingOne Worker application as described in [Create a PingOne Worker application](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-PingOne.html#create-worker-application).
+
+3. Enable the PingOne Worker application by using the `Enable` switch in the upper-right corner of the application overview tab.
+
+4. Note the following data from the PingOne Worker application overview tab:
+
+   * Environment ID:
+
+   * Client ID:
+
+   * Client Secret:
+
+#### Set up ForgeOps on minikube
+
+|   |                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | 1. Ensure that the window running the minikube tunnel remains open as long as you run the ForgeOps deployment.
+
+2. All forgeops commands must be run in the Python virtual environment. |
+
+1. Use the steps in the [Quick deployment on minikube](quick/quick-set-mini.html) to set up a ForgeOps deployment on minikube. Use the local Helm chart to deploy ForgeOps in step 7 of the [Perform ForgeOps deployment](quick/quick-set-mini.html#perform-forgeops-deployment) section:
+
+   ```
+   helm upgrade --install identity-platform ./charts/identity-platform  \
+   --namespace my-namespace --values helm/my-env/values.yaml
+   ```
+
+2. Create a filesystem secret:
+
+   In the following command, replace `my-client-secret` with the client secret you obtained in the PingOne Application overview.
+
+   ```
+   $ kubectl create secret generic pingone-secrets \
+     --namespace my-namespace \
+     --from-literal=am.services.pingone.worker.pingprotect.clientsecret='my-client-secret'
+   ```
+
+3. Modify your ForgeOps deployment environment to set the secret name:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops env --env-name my-env --pingone-secret pingone-secrets
+   ```
+
+4. Redeploy ForgeOps to pick up the new secret:
+
+   ```
+   helm upgrade --install identity-platform ./charts/identity-platform  \
+   --namespace my-namespace --values helm/my-env/values.yaml
+   ```
+
+5. Check if AM pods have started:
+
+   ```
+   $ kubectl get pods --namespace my-namespace
+   $ kubectl rollout status deploy/am --namespace my-namespace
+   ```
+
+   |   |                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If any pod is in the `Error` or `CrashLoopBackOff` state, delete the pod with the kubectl delete pod pod-name command and let Kubernetes restart it. |
+
+6. Verify that the secret is present and accessible to the AM pod:
+
+   ```
+   $ kubectl exec --namespace my-namespace deploy/am -- ls  /var/run/secrets/pingone
+   Defaulted container "openam" out of: openam, ...
+   am.services.pingone.worker.pingprotect.clientsecret
+   ```
+
+7. Configure a secret store in the AM native console:
+
+   1. In the AM native console, navigate to **Secret Stores > Add Secret Store** and create a new secret store with the following values:
+
+      | Field               | Value                      |
+      | ------------------- | -------------------------- |
+      | **Secret Store ID** | p1-worker-service          |
+      | **Store Type**      | File System Secret Volumes |
+      | **Directory**       | /var/run/secrets/pingone   |
+      | **File Suffix**     | (leave empty)              |
+      | **Value Format**    | Plain Text                 |
+
+8. Configure a Worker Service in AM:
+
+   1. In the AM native console, navigate to **Services > Add Service > PingOne Worker Server** and click **Create**.
+
+   2. In the **Secondary Configuration** tab, click **Add a Secondary Configuration** and enter the following values in the **New workers configuration** form. Then click **Save**:
+
+      | Field                              | Value                                                        |
+      | ---------------------------------- | ------------------------------------------------------------ |
+      | **Name**                           | Ping_SDK_Worker (note no spaces!)                            |
+      | **Client ID**                      | 11a2…..(obtained from PingOne Worker application overview)   |
+      | **Client Secret Label Identifier** | pingprotect                                                  |
+      | **Environment ID**                 | b2d….(obtained from the PingOne Worker application overview) |
+
+   3. In the ensuing **WORKERS CONFIGURATION** form for `Ping_SDK_Worker`, enter the following values and click **Save and Test Connection**: |**PingOne API Server URL and Authorization URL** |Select from these options, depending on where the PingOne tenant is hosted:
+
+      | Region                           | API URL                      | Authorization URL          |
+      | -------------------------------- | ---------------------------- | -------------------------- |
+      | North America (Excluding Canada) | https\://api.pingone.com/v1  | https\://auth.pingone.com  |
+      | Canada                           | https\://api.pingone.ca/v1   | https\://auth.pingone.ca   |
+      | Europe                           | https\://api.pingone.eu/v1   | https\://auth.pingone.eu   |
+      | Asia-Pacific                     | https\://api.pingone.asia/v1 | https\://auth.pingone.asia |
+
+|   |                                                                                                                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The configuration changes made in this section are file-based configuration changes. Therefore, you must export the configuration changes, build a new configuration image, and redeploy as explained in the next steps. Otherwise, you might lose the configuration changes when you redeploy AM. |
+
+#### Export AM runtime config into a profile and redeploy
+
+To ensure that the new configuration, such as the file system secret store and worker service connection, isn't lost, the changes must be built into a new image. The following steps show how to export the configuration changes into a new profile, build a new configuration image, and redeploy AM.
+
+1. Create a new profile by exporting the configuration:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops config export --baseline-profile default am workerService \
+     --env-name my-env
+   ```
+
+2. Build the new config image:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops config build --env-name my-env \
+     --config-profile workerService --tag workerService am
+   ```
+
+3. If needed, load the configuration image into minikube:
+
+   ```
+   $ minikube image load am-custom:workerService
+   $ forgeops image --env-name my-env --custom am
+   ```
+
+4. Redeploy ForgeOps to pick up the new config image:
+
+   ```
+   helm upgrade --install identity-platform ./charts/identity-platform  \
+   --namespace my-namespace --values helm/my-env/values.yaml
+   ```
+
+5. Check status and wait until the rollout is complete:
+
+   ```
+   $ kubectl rollout status deploy/am --namespace my-namespace
+   ```
+
+#### Test the integration
+
+1. In the AM native console, navigate to **Services** > **PingOne Worker Service** > **Secondary Configuration tab** > **Ping_SDK_Worker** > **Save and Test Connection**.
+
+   You should see the **Connection was successful** message.
+
+2. \[Optionally] Configure a test journey by using these links to test the integration:
+
+   * [PingOne Protect integration](https://docs.pingidentity.com/pingam/8.1/integrations/pingone-protect.html)
+
+   * [PingOne Protect Initialize node](https://docs.pingidentity.com/auth-node-ref/8.1/pingone/pingone-protect-initialize.html#example)
+
+   * [PingOne Protect Result node](https://docs.pingidentity.com/auth-node-ref/8.1/pingone/pingone-protect-result.html)
 
 ## Upgrade and Migration Overview
 
@@ -7226,11 +7603,13 @@ Upgrading ForgeOps deployments involves three main sections:
 
   * [Upgrade Ping Advanced Identity Software Docker image to new patch release](upgrade/upgrade-patch.html).
 
-* Upgrade from previous ForgeOps releases
+* Migrate from previous ForgeOps releases
 
-  * [Migrate Kustomize configurations](upgrade/migrate-forgeops.html).
+  * [Kustomize configurations](upgrade/migrate-forgeops.html).
 
-  * [Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.2 tag](upgrade/mig-74-75.html).
+  * [From 7.4 to 7.5](upgrade/mig-74-75.html).
+
+[Migrate secrets from Secret Agent to Helm-based secrets](prepare/security/migrate-helmsec.html).
 
 ## Troubleshooting
 
@@ -7247,19 +7626,19 @@ $ ./bin/forgeops version
 
 Here are some techniques you can use to troubleshoot problems with ForgeOps deployments:
 
-| Problem                                                                                 | Troubleshooting Technique                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Some pods don't start.                                                                  | Review [Kubernetes logs and other diagnostics](troubleshoot/pods.html). Verify if your cluster is resource-constrained. Check for under-configured clusters by using the `kubectl describe nodes` and `kubectl get events -w` commands. Pods terminated with out of memory (OOM) errors indicate that your cluster is under-configured. Make sure that you're using [tested versions of third-party software](troubleshoot/sw-versions.html). [Stage your installation](troubleshoot/staged-deployment.html). Install Ping Advanced Identity Software components separately, instead of installing all the components with a single command. Staging your installation lets you make sure each component works correctly before installing the next component. |
-| All the pods have started, but you can't reach the services running in them.            | Make sure you don't have any [ingress issues](troubleshoot/ingress.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| AM doesn't work as expected.                                                            | [Set the AM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-am.html), recreate the issue, and analyze the AM log files. [Turn on audit logging in AM.](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops.html)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| IDM doesn't work as expected.                                                           | [Set the IDM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-idm.html), recreate the issue, and analyze the IDM log files. [Turn on audit logging in IDM.](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops.html)                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Your JVM crashed with an out of memory error, or you suspect that you've a memory leak. | [Collect and analyze Java thread dumps and heap dumps](https://support.pingidentity.com/s/article/How-do-I-collect-Java-thread-dumps-and-heap-dumps-for-troubleshooting-a-ForgeOps-deployment).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Changes you've made to ForgeOps's Kustomize files don't work as expected.               | [Fully expand the Kustomize output](troubleshoot/kustomize.html), and then examine the output for unintended effects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Your minikube deployment doesn't work.                                                  | Make sure that you don't have a problem with [virtual hardware requirements](troubleshoot/minikube.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| You're having name resolution or other DNS issues.                                      | Use diagnostic tools in the [debug tools container](troubleshoot/debug-tools.html#debug-tools-container).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| You want to run DS utilities without disturbing a DS pod.                               | Use the [bin/ds-debug.sh script](troubleshoot/debug-tools.html#ds-debug) or DS tools in the [debug tools container](troubleshoot/debug-tools.html#debug-tools-container).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| You want to keep the `amster` pod running to diagnose AM configuration issues.          | Use the [forgeops amster command](troubleshoot/amster.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| The `kubectl` command requires too much typing.                                         | Enable [kubectl tab autocompletion](troubleshoot/tab-completion.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Problem                                                                                 | Troubleshooting Technique                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Some pods don't start.                                                                  | Review [Kubernetes logs and other diagnostics](troubleshoot/pods.html). Verify if your cluster is resource-constrained. Check for underconfigured clusters by using the `kubectl describe nodes` and `kubectl get events -w` commands. Pods killed with out of memory (OOM) conditions indicate that your cluster is underconfigured. Make sure that you're using [tested versions of third-party software](troubleshoot/sw-versions.html). [Stage your installation](troubleshoot/staged-deployment.html). Install Ping Advanced Identity Software components separately, instead of installing all the components with a single command. Staging your installation lets you make sure each component works correctly before installing the next component. |
+| All the pods have started, but you can't reach the services running in them.            | Make sure you don't have any [ingress issues](troubleshoot/ingress.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| AM doesn't work as expected.                                                            | [Set the AM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-PingAM), recreate the issue, and analyze the AM log files. [Turn on audit logging in AM.](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Audit-logging-in-PingAM-and-PingIDM-for-ForgeOps)                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| IDM doesn't work as expected.                                                           | [Set the IDM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-IDM), recreate the issue, and analyze the IDM log files. [Turn on audit logging in IDM.](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Audit-logging-in-PingAM-and-PingIDM-for-ForgeOps)                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Your JVM crashed with an out of memory error, or you suspect that you've a memory leak. | [Collect and analyze Java thread dumps and heap dumps](https://support.pingidentity.com/s/article/How-do-I-collect-Java-thread-dumps-and-heap-dumps-for-troubleshooting-a-ForgeOps-deployment).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Changes you've made to ForgeOps's Kustomize files don't work as expected.               | [Fully expand the Kustomize output](troubleshoot/kustomize.html), and then examine the output for unintended effects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Your minikube deployment doesn't work.                                                  | Make sure that you don't have a problem with [virtual hardware requirements](troubleshoot/minikube.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| You're having name resolution or other DNS issues.                                      | Use diagnostic tools in the [debug tools container](troubleshoot/debug-tools.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| When using Prometheus for scraping, you notice HTTP 401 errors.                         | Remove the monitor user created by IDM as described in [Resolve prometheus error](troubleshoot/monitor.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| You want to keep the `amster` pod running to diagnose AM configuration issues.          | Use the [forgeops amster command](troubleshoot/amster.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| The `kubectl` command requires too much typing.                                         | Enable [kubectl tab autocompletion](troubleshoot/tab-completion.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ### Kubernetes logs and other diagnostics
 
@@ -7305,7 +7684,7 @@ Suppose you performed a ForgeOps deployment but noticed that one of the pods had
 
 1. Make sure the active namespace in your local Kubernetes context is the one that contains the component you are debugging.
 
-2. Make sure you've checked out the 2026.2.1 branch of the `forgeops` repository.
+2. Make sure you've checked out the 2026.3.2 branch of the `forgeops` repository.
 
 3. Change to the /path/to/forgeops/bin directory in your `forgeops` repository clone.
 
@@ -7350,59 +7729,6 @@ After you've obtained the pod descriptions and container logs, here are some act
 * Examine the init containers. Did each init container complete with a zero (success) exit code? If not, examine the logs from that failed init container using the `kubectl logs pod-xxx -c init-container-name` command.
 
 * Look at the logs from pods to check if the main container entered a crash loop.
-
-### DS diagnostic tools
-
-#### Debug script
-
-The bin/ds-debug.sh script lets you obtain diagnostic information for any DS pod running in your cluster. It also lets you perform several cleanup and recovery operations on DS pods.
-
-Run bin/ds-debug.sh -h to refer to the command's syntax.
-
-The following bin/ds-debug.sh subcommands provide diagnostic information:
-
-| Subcommand   | Diagnostics                                                   |
-| ------------ | ------------------------------------------------------------- |
-| status       | Server details, connection handlers, backends, and disk space |
-| rstatus      | Replication status                                            |
-| idsearch     | All the DNs in the `ou=identities` branch                     |
-| monitor      | All the directory entries in the `cn=monitor` branch          |
-| list-backups | A list of the backups associated with a DS instance           |
-
-The bin/ds-debug.sh purge command purges all the backups associated with a DS instance.
-
-#### Debug tools container
-
-The `ds-util` debug tools container provides a suite of diagnostic tools that you can execute inside of a running Kubernetes cluster.
-
-The container has two types of tools:
-
-* DS tools—A DS instance is installed in the /opt/opendj directory of the `ds-util` container. DS tools, such as the ldapsearch and ldapmodify commands, are available in the /opt/opendj/bin directory.
-
-* Miscellaneous diagnostic tools—A set of diagnostic tools, including `dig`, `netcat`, `nslookup`, `curl`, and `vi`, have been installed in the container. The file, /path/to/forgeops/docker/ds/dsutil/Dockerfile, has the list of operating system packages that have been installed in the debug tools container.
-
-To start the debug tools container:
-
-```
-$ kubectl run -it ds-util --image=gcr.io/forgeops-public/ds-util -- bash
-```
-
-After you start the tools container, a command prompt appears:
-
-```
-root@ds-util:/opt/opendj#
-```
-
-You can access all the tools available in the container from this prompt. For example:
-
-```
-root@ds-util:/opt/opendj# nslookup am
-Server:		10.96.0.10
-Address:	10.96.0.10#53
-
-Name:	am.my-namespace.svc.cluster.local
-Address: 10.100.20.240
-```
 
 ### Troubleshooting the `amster` pod
 
@@ -7740,7 +8066,7 @@ data:
 
 #### Cluster configuration
 
-The minikube start command example in [minikube](setup/minikube.html) provides a good default virtual hardware configuration for a minikube cluster running a single-instance ForgeOps deployment.
+The [minikube start command](setup/minikube.html#minikube-start) example provides a good default virtual hardware configuration for a minikube cluster running a single-instance ForgeOps deployment.
 
 #### Disk space
 
@@ -7779,6 +8105,8 @@ This section includes:
 
 * Steps to create your own [Base Docker images](reference/base-docker-images.html).
 
+* Steps to [create and manage custom releases](reference/releases.html).
+
 * [Reference documentation](reference/forgeops.html) for the forgeops command.
 
 * A [glossary](reference/glossary.html) of terminology used in this documentation.
@@ -7789,16 +8117,16 @@ This section includes:
 
 ### Base Docker images
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.Before you begin building custom images, ensure you've installed Java version 25 or 21 on your computer.For example:> **Collapse: When using platform versions 8.x**
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This procedure is moved into the reference section because creating Docker images from scratch is only required under special circumstances.Before you begin building custom images, ensure you've installed Java version 25 or 21 on your computer.For example:> **Collapse: When using PingAM, PingDS versions 8.x, or PingGateway 2026.x versions, ensure you have Java 25 installed.**
 >
 > ```
 > $ java --version
 > openjdk version "25.0.2" 2026-01-20
 > OpenJDK Runtime Environment Homebrew (build 25.0.2)
 > OpenJDK 64-Bit Server VM Homebrew (build 25.0.2, mixed mode, sharing)
-> ```> **Collapse: When using platform versions 7.x**
+> ```> **Collapse: When using PingIDM 8.x versions, ensure you have Java 21 installed.**
 >
 > ```
 > $ java --version
@@ -7856,11 +8184,11 @@ Perform the following steps to build base images. After you've built your own ba
 
    Both repositories are public; you do not need credentials to clone them.
 
-3. Check out the `forgeops` repository's `2026.2.1` tag:
+3. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
 4. Check out the `forgeops-extras` repository's `main` tag:
@@ -7872,14 +8200,14 @@ Perform the following steps to build base images. After you've built your own ba
 
 5. Build the Java base image, which is required by several of the other Dockerfiles:
 
-   > **Collapse: For platform images 8.x**
+   > **Collapse: For PingAM and PingDS 8.x, and PingGateway 2026.x versions**
    >
    > ```
    > $ cd /path/to/forgeops-extras/images/java-25
    > $ docker build --tag my-repo/my-java .
    > ```
 
-   > **Collapse: For platform images 7.x**
+   > **Collapse: For PingIDM version 8.x**
    >
    > ```
    > $ cd /path/to/forgeops-extras/images/java-21
@@ -7917,7 +8245,7 @@ Perform the following steps to build base images. After you've built your own ba
    5. Build the `amster` Docker image:
 
       ```
-      $ docker build --tag amster:8.1.0 .
+      $ docker build --tag amster:8.1.1 .
 
        ⇒ [internal] load build definition from Dockerfile
       ...
@@ -7926,7 +8254,7 @@ Perform the following steps to build base images. After you've built your own ba
        ⇒ exporting to image
        ⇒ ⇒ exporting layers
        ⇒ ⇒ writing image sha256:bc47...f9e52                       0.0s
-       ⇒ ⇒ naming to docker.io/library/amster:8.1.0
+       ⇒ ⇒ naming to docker.io/library/amster:8.1.1
       ```
 
 7. Build the empty AM image:
@@ -7935,12 +8263,30 @@ Perform the following steps to build base images. After you've built your own ba
 
    2. Change to the openam/samples/docker directory in the expanded `.zip` file output.
 
-   3. Change to the images/am-empty directory.
-
-   4. Build the `am-empty` Docker image:
+   3. Run the setup.sh script:
 
       ```
-      $ docker build --tag am-empty:8.1.0 .
+      $ ./setup.sh
+      ```
+
+   4. Change to the images/am-empty directory.
+
+   5. Edit the Dockerfile and change the line:
+
+      ```
+      FROM gcr.io/engineering-devops/ci/base-images/tomcat:10-jdk25 AS base
+      ```
+
+      to:
+
+      ```
+      FROM us-docker.pkg.dev/forgeops-public/images-base/tomcat:10-jdk25 AS base
+      ```
+
+   6. Build the `am-empty` Docker image:
+
+      ```
+      $ docker build --tag am-empty:8.1.1 .
 
        ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
        ⇒ ⇒ transferring dockerfile: 3.60kB                                                                                                         0.0s
@@ -7954,7 +8300,7 @@ Perform the following steps to build base images. After you've built your own ba
        ⇒ exporting to image                                                                                                                        1.7s
        ⇒ ⇒ exporting layers                                                                                                                        1.6s
        ⇒ ⇒ writing image sha256:9784a73...1d36018c9                                                                                                0.0s
-       ⇒ ⇒ naming to docker.io/library/am-empty:8.1.0
+       ⇒ ⇒ naming to docker.io/library/am-empty:8.1.1
       ```
 
 8. Build the base image for AM:
@@ -7970,24 +8316,24 @@ Perform the following steps to build base images. After you've built your own ba
       to:
 
       ```
-      FROM am-empty:8.1.0
+      FROM am-empty:8.1.1
       ```
 
    3. Build the `am-base` Docker image:
 
       ```
-      $ docker build --tag am-base:8.1.0 .
+      $ docker build --tag am-base:8.1.1 .
 
        ⇒ [internal] load build definition from Dockerfile                                                               0.0s
        ⇒ ⇒ transferring dockerfile: 2.72kB                                                                              0.0s
        ⇒ [internal] load .dockerignore                                                                                  0.0s
        ⇒ ⇒ transferring context: 2B                                                                                     0.0s
-       ⇒ [internal] load metadata for docker.io/library/amster:8.1.0                                                    0.0s
-       ⇒ [internal] load metadata for docker.io/library/am-empty:8.1.0                                                  0.0s
+       ⇒ [internal] load metadata for docker.io/library/amster:8.1.1                                                    0.0s
+       ⇒ [internal] load metadata for docker.io/library/am-empty:8.1.1                                                  0.0s
        ⇒ [internal] load build context                                                                                  0.4s
        ⇒ ⇒ transferring context: 35.66MB                                                                                0.4s
-       ⇒ [generator  1/15] FROM docker.io/library/am-empty:8.1.0                                                        0.4s
-       ⇒ [amster 1/1] FROM docker.io/library/amster:8.1.0                                                               0.2s
+       ⇒ [generator  1/15] FROM docker.io/library/am-empty:8.1.1                                                        0.4s
+       ⇒ [amster 1/1] FROM docker.io/library/amster:8.1.1                                                               0.2s
        ⇒ [generator  2/15] RUN apt-get update -y &&     apt-get install -y git jq unzip
       ...
        ⇒ [am-base  7/11] COPY --chown=forgerock:root docker-entrypoint.sh /home/forgerock/                              0.0s
@@ -7998,7 +8344,7 @@ Perform the following steps to build base images. After you've built your own ba
        ⇒ exporting to image                                                                                             0.2s
        ⇒ ⇒ exporting layers                                                                                             0.2s
        ⇒ ⇒ writing image sha256:2c06...87c6c                                                                            0.0s
-       ⇒ ⇒ naming to docker.io/library/am-base:8.1.0
+       ⇒ ⇒ naming to docker.io/library/am-base:8.1.1
       ```
 
    4. Change to the ../am-cdk directory.
@@ -8012,20 +8358,20 @@ Perform the following steps to build base images. After you've built your own ba
       to:
 
       ```
-      FROM am-base:8.1.0
+      FROM am-base:8.1.1
       ```
 
    6. Build the `am` Docker image:
 
       ```
-      $ docker build --tag my-repo/am:8.1.0 .
+      $ docker build --tag my-repo/am:8.1.1 .
       [+] Building 5.1s (10/10) FINISHED                                                                 docker:desktop-linux
        ⇒ [internal] load build definition from Dockerfile                                                               0.0s
        ⇒ ⇒ transferring dockerfile: 1.71kB                                                                              0.0s
        ⇒ [internal] load .dockerignore                                                                                  0.0s
        ⇒ ⇒ transferring context: 2B                                                                                     0.0s
-       ⇒ [internal] load metadata for docker.io/library/am-base:8.1.0                                                   0.0s
-       ⇒ [1/5] FROM docker.io/library/am-base:8.1.0                                                                     0.2s
+       ⇒ [internal] load metadata for docker.io/library/am-base:8.1.1                                                   0.0s
+       ⇒ [1/5] FROM docker.io/library/am-base:8.1.1                                                                     0.2s
        ⇒ [internal] load build context                                                                                  0.2s
        ⇒ ⇒ transferring context: 403.07kB                                                                               0.1s
        ⇒ [2/5] RUN apt-get update         && apt-get install -y git         && apt-get clean         && rm -r /var/lib  3.9s
@@ -8035,22 +8381,22 @@ Perform the following steps to build base images. After you've built your own ba
        ⇒ exporting to image                                                                                             0.1s
        ⇒ ⇒ exporting layers                                                                                             0.1s
        ⇒ ⇒ writing image sha256:14b43fb5121cee08341130bf502b7841429b057ff406bbe635b23119a74dec45                        0.0s
-       ⇒ ⇒ naming to my-repo/am:8.1.0                                                                                   0.0s
+       ⇒ ⇒ naming to my-repo/am:8.1.1                                                                                   0.0s
       ```
 
 9. Now that the AM image is built, tag the base image for Amster in advance of pushing it to your private repository:
 
    ```
-   $ docker tag amster:8.1.0 my-repo/amster:8.1.0
+   $ docker tag amster:8.1.1 my-repo/amster:8.1.1
    ```
 
 10. Build the `am-config-upgrader` base image:
 
     1. Change to the `openam` directory in the expanded AM `.zip` file output.
 
-    2. Unzip the `Config-Upgrader-8.1.0.zip` file.
+    2. Unzip the `Config-Upgrader-8.1.1.zip` file.
 
-    3. Change to the `amupgrade/samples/docker` directory in the expanded `Config-Upgrader-8.1.0.zip` file output.
+    3. Change to the `amupgrade/samples/docker` directory in the expanded `Config-Upgrader-8.1.1.zip` file output.
 
     4. Edit the Dockerfile in the amupgrade/samples/docker directory and change line 16 from:
 
@@ -8077,7 +8423,7 @@ Perform the following steps to build base images. After you've built your own ba
     6. Create the base `am-config-upgrader` image:
 
        ```
-       $ docker build --tag my-repo/am-config-upgrader:8.1.0 .
+       $ docker build --tag my-repo/am-config-upgrader:8.1.1 .
 
        [+] Building 8.5s (9/9) FINISHED                                  docker:desktop-linux
         ⇒ [internal] load build definition from Dockerfile                               0.0s
@@ -8094,7 +8440,7 @@ Perform the following steps to build base images. After you've built your own ba
         ⇒ exporting to image                                                             0.1s
         ⇒ ⇒ exporting layers                                                             0.1s
         ⇒ ⇒ writing image sha256:3f6845…​44011                                            0.0s
-        ⇒ ⇒ naming to my-repo/am-config-upgrader:8.1.0                                   0.0s
+        ⇒ ⇒ naming to my-repo/am-config-upgrader:8.1.1                                   0.0s
        ```
 
 11. Build the base image for DS:
@@ -8134,7 +8480,7 @@ Perform the following steps to build base images. After you've built your own ba
     5. Build the `ds` base image:
 
        ```
-       $ docker build --tag my-repo/ds:8.1.0 .
+       $ docker build --tag my-repo/ds:8.1.1 .
 
        [+] Building 11.0s (9/9) FINISHED
 
@@ -8151,7 +8497,7 @@ Perform the following steps to build base images. After you've built your own ba
         ⇒ exporting to image                                                                                                                        0.4s
         ⇒ ⇒ exporting layers                                                                                                                        0.3s
         ⇒ ⇒ writing image sha256:713ac...b107e0f                                                                                                    0.0s
-        ⇒ ⇒ naming to my-repo/ds:8.1.0
+        ⇒ ⇒ naming to my-repo/ds:8.1.1
        ```
 
 12. []()Build the base image for IDM:
@@ -8190,89 +8536,89 @@ Perform the following steps to build base images. After you've built your own ba
 
        ```
        $ chmod +x build-idm-image.sh
-       $ ./build-idm-image.sh docker.pkg.dev/forgeops-public/images-base/idm:8.1.0 my-repo/my-java my-repo/idm:8.1.0
+       $ ./build-idm-image.sh docker.pkg.dev/forgeops-public/images-base/idm:8.1.1 my-repo/my-java my-repo/idm:8.1.1
        ```
 
-       |   |                                                                                                          |
-       | - | -------------------------------------------------------------------------------------------------------- |
-       |   | The build-idm-image.sh script expands the IDM Docker image, rebuilds the image, and cleans up afterward. |
+1) Ensure you are using the Java version 21 to build the IDM image.
 
-13. (Optional) Build the base image for PingGateway:
+2) The build-idm-image.sh script expands the IDM Docker image, rebuilds the image, and cleans up afterward.
 
-    1. Unzip the PingGateway `.zip` file.
+1. (Optional) Build the base image for PingGateway:
 
-    2. Change to the identity-gateway directory in the expanded `.zip` file output.
+   1. Unzip the PingGateway `.zip` file.
 
-    3. Edit the Dockerfile in the identity-gateway/docker directory. Change the line:
+   2. Change to the identity-gateway directory in the expanded `.zip` file output.
 
-       ```
-       FROM gcr.io/forgerock-io/java-...:latest
-       ```
+   3. Edit the Dockerfile in the identity-gateway/docker directory. Change the line:
 
-       to:
+      ```
+      FROM gcr.io/forgerock-io/java-...:latest
+      ```
 
-       ```
-       FROM my-repo/my-java
-       ```
+      to:
 
-    4. Build the `ig` base image:
+      ```
+      FROM my-repo/my-java
+      ```
 
-       ```
-       $ docker build . --file docker/Dockerfile --tag my-repo/ig:2026.3.0
+   4. Build the `ig` base image:
 
-       [+] Building 2.1s (8/8) FINISHED
-       ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
-        ⇒ ⇒ transferring dockerfile: 1.43kB                                                                                                        0.0s
-        ⇒ [internal] load .dockerignore                                                                                                            0.0s
-        ⇒ ⇒ transferring context: 2B                                                                                                               0.0s
-        ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                      0.3s
-        ⇒ [internal] load build context                                                                                                            2.2s
-        ⇒ ⇒ transferring context: 113.60MB                                                                                                         2.2s
-        ⇒ CACHED [1/3] FROM my-repo/my-java:latest
-        ⇒ [2/3] COPY --chown=forgerock:root . /opt/ig                                                                                              0.7s
-        ⇒ [3/3] RUN mkdir -p "/var/ig"     && chown -R forgerock:root "/var/ig" "/opt/ig"     &&  -R g+rwx "/var/ig" "/opt/ig"                     0.9s
-        ⇒ exporting to image                                                                                                                       0.6s
-        ⇒ ⇒ exporting layers                                                                                                                       0.6s
-        ⇒ ⇒ writing image sha256:77fc5...6e63                                                                                                      0.0s
-        ⇒ ⇒ naming to my-repo/ig:2026.3.0
-       ```
+      ```
+      $ docker build . --file docker/Dockerfile --tag my-repo/ig:2026.6.0
 
-14. Run the docker images command to verify that you built the base images:
+      [+] Building 2.1s (8/8) FINISHED
+      ⇒ [internal] load build definition from Dockerfile                                                                                          0.0s
+       ⇒ ⇒ transferring dockerfile: 1.43kB                                                                                                        0.0s
+       ⇒ [internal] load .dockerignore                                                                                                            0.0s
+       ⇒ ⇒ transferring context: 2B                                                                                                               0.0s
+       ⇒ [internal] load metadata for my-repo/my-java:latest                                                                                      0.3s
+       ⇒ [internal] load build context                                                                                                            2.2s
+       ⇒ ⇒ transferring context: 113.60MB                                                                                                         2.2s
+       ⇒ CACHED [1/3] FROM my-repo/my-java:latest
+       ⇒ [2/3] COPY --chown=forgerock:root . /opt/ig                                                                                              0.7s
+       ⇒ [3/3] RUN mkdir -p "/var/ig"     && chown -R forgerock:root "/var/ig" "/opt/ig"     &&  -R g+rwx "/var/ig" "/opt/ig"                     0.9s
+       ⇒ exporting to image                                                                                                                       0.6s
+       ⇒ ⇒ exporting layers                                                                                                                       0.6s
+       ⇒ ⇒ writing image sha256:77fc5...6e63                                                                                                      0.0s
+       ⇒ ⇒ naming to my-repo/ig:2026.6.0
+      ```
 
-    ```
-    $ docker images | grep my-repo
+2. Run the docker images command to verify that you built the base images:
 
-    REPOSITORY                   TAG      IMAGE ID        CREATED        SIZE
-    my-repo/am                   8.1.0    552073a1c000    1 hour ago     795MB
-    my-repo/am-config-upgrader   8.1.0    d115125b1c3f    1 hour ago     795MB
-    my-repo/amster               8.1.0    d9e1c735f415    1 hour ago     577MB
-    my-repo/ds                   8.1.0    ac8e8ab0fda6    1 hour ago     196MB
-    my-repo/idm                  8.1.0    0cc1b7f70ce6    1 hour ago     387MB
-    my-repo/ig                   2026.3.0 cc52e9623b3c    1 hour ago     249MB
-    my-repo/java-...             latest   a504925c2672    1 hour ago     144MB
-    ```
+   ```
+   $ docker images | grep my-repo
 
-15. Push the new base Docker images to your Docker repository.
+   REPOSITORY                   TAG      IMAGE ID        CREATED        SIZE
+   my-repo/am                   8.1.1    552073a1c000    1 hour ago     795MB
+   my-repo/am-config-upgrader   8.1.1    d115125b1c3f    1 hour ago     795MB
+   my-repo/amster               8.1.1    d9e1c735f415    1 hour ago     577MB
+   my-repo/ds                   8.1.1    ac8e8ab0fda6    1 hour ago     196MB
+   my-repo/idm                  8.1.1    0cc1b7f70ce6    1 hour ago     387MB
+   my-repo/ig                   2026.6.0 cc52e9623b3c    1 hour ago     249MB
+   my-repo/java-...             latest   a504925c2672    1 hour ago     144MB
+   ```
 
-    Refer to your registry provider documentation for detailed instructions. For most Docker registries, you run the docker login command to log in to the registry. Then, you run the docker push command to push a Docker image to the registry.
+3. Push the new base Docker images to your Docker repository.
 
-    Be sure to configure your Docker registry so that you can successfully push your Docker images. Each cloud-based Docker registry has its own specific requirements. For example, on Amazon ECR, you must create a repository for each image.
+   Refer to your registry provider documentation for detailed instructions. For most Docker registries, you run the docker login command to log in to the registry. Then, you run the docker push command to push a Docker image to the registry.
 
-    Push the following images to your repository:
+   Be sure to configure your Docker registry so that you can successfully push your Docker images. Each cloud-based Docker registry has its own specific requirements. For example, on Amazon ECR, you must create a repository for each image.
 
-    * `my-repo/am:8.1.0`
+   Push the following images to your repository:
 
-    * `my-repo/am-config-upgrader:8.1.0`
+   * `my-repo/am:8.1.1`
 
-    * `my-repo/amster:8.1.0`
+   * `my-repo/am-config-upgrader:8.1.1`
 
-    * `my-repo/ds:8.1.0`
+   * `my-repo/amster:8.1.1`
 
-    * `my-repo/idm:8.1.0`
+   * `my-repo/ds:8.1.1`
 
-    * `my-repo/my-java`
+   * `my-repo/idm:8.1.1`
 
-    If you're deploying your own PingGateway base image, also push the `my-repo/ig:2026.3.0` image.
+   * `my-repo/my-java`
+
+   If you're deploying your own PingGateway base image, also push the `my-repo/ig:2026.6.0` image.
 
 #### Create Docker images for use in production
 
@@ -8298,11 +8644,11 @@ Create your production-ready Docker images, create a Kubernetes cluster to test 
 
    | In the `forgeops` repository file: | Change the `FROM` line to:                                          |
    | ---------------------------------- | ------------------------------------------------------------------- |
-   | docker/am/Dockerfile               | `FROM my-repo/am:8.1.0` \[[24](#_footnotedef_24 "View footnote.")]  |
-   | docker/amster/Dockerfile           | `FROM my-repo/amster:8.1.0`                                         |
-   | docker/ds/ds-new/Dockerfile        | `FROM my-repo/ds:8.1.0`                                             |
-   | docker/idm/Dockerfile              | `FROM my-repo/idm:8.1.0` \[[25](#_footnotedef_25 "View footnote.")] |
-   | (Optional) docker/ig/Dockerfile    | `FROM my-repo/ig:2026.3.0`                                          |
+   | docker/am/Dockerfile               | `FROM my-repo/am:8.1.1` \[[24](#_footnotedef_24 "View footnote.")]  |
+   | docker/amster/Dockerfile           | `FROM my-repo/amster:8.1.1`                                         |
+   | docker/ds/ds-new/Dockerfile        | `FROM my-repo/ds:8.1.1`                                             |
+   | docker/idm/Dockerfile              | `FROM my-repo/idm:8.1.1` \[[25](#_footnotedef_25 "View footnote.")] |
+   | (Optional) docker/ig/Dockerfile    | `FROM my-repo/ig:2026.6.0`                                          |
 
 4. If necessary, log in to your Docker registry.
 
@@ -8597,15 +8943,25 @@ For components, specify:
 
 * `am`, `amster`, `ds-cts`, `ds-idrepo`, `idm`, or `ig` to deploy each Ping Advanced Identity Software component.
 
-* More than one component or set of components separated by a space to deploy multiple Ping Advanced Identity Software components. For example, forgeops apply ds-idrepo ds-cts am.
+* `ds` to deploy both `ds-cts` and `ds-idrepo` components.
 
-* `secrets` to deploy Kubernetes secrets. Secrets generated by cert-manager are not deployed.
+* `admin-ui`, `end-user-ui`, or `login-ui` to deploy each Ping Advanced Identity Software UI component.
+
+* `ui` to deploy all the Ping Advanced Identity Software UI components.
+
+* `platform` to deploy all the components and UI.
+
+* More than one component or set of components separated by a space to deploy multiple Ping Advanced Identity Software components. For example, forgeops apply ds-idrepo ds-cts am.
 
 * `base` to deploy the `platform-config` configmap Kubernetes ingress resources and Kubernetes secrets. Secrets generated by cert-manager are not deployed.
 
-* `all` to deploy all the Ping Advanced Identity Software components.
+* `apps` to deploy AM and IDM.
 
-The default value for components is `all`.
+* `platform` to deploy all the Ping Advanced Identity Software components.
+
+* `all` to deploy all the Ping Advanced Identity Software components and UI.
+
+The default value for components is `platform`.
 
 [](#options_2)Options
 
@@ -8631,15 +8987,17 @@ The forgeops apply subcommand takes the following options:
 
   The fully qualified hostname to use in the deployment.
 
-  * The namespace specified in the forgeops env command is used by default. For simple demo purposes, the namespace specified in the default overlay file is used.
-
-  * Relevant only for the forgeops apply all and forgeops apply base commands. This option is ignored for other forgeops apply commands.
+  * Relevant only for the forgeops apply platform and forgeops apply base commands. This option is ignored for other forgeops apply commands.
 
 * `--namespace` ns
 
-  The namespace in which to install the ForgeOps platform components. If you need to create the namespace, then specify the `--create-namespace | -c` option.
+  The namespace in which to install the ForgeOps platform components.
 
-* `--kustomize` my-kustomize-path
+  * The namespace specified in the forgeops env command is used by default.
+
+  * If you need to create the namespace, then specify the `--create-namespace` option.
+
+* `--kustomize-path` my-kustomize-path
 
   The directory that contains Kustomize overlays. Specify the full path to the directory or the path relative to the base of your local `forgeops` repository. The default value is `kustomize`.
 
@@ -8655,17 +9013,17 @@ The forgeops apply subcommand takes the following options:
 
 ###### forgeops build
 
-forgeops build --env-name my\_env components options
+forgeops build --env-name my_env components options
 
 Use the forgeops build command to build custom Docker images for one or more Ping Advanced Identity Software components, and update the Helm `values` file and the Kustomize `image-defaulter` overlay file for the specified environment.
 
-|   |                                                                                                                                                                                                                                                                                                                              |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   |                                                                                                                                                                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | * Building an `amster` image is not supported, so use bin/forgeops amster.
 
-* The `--config-profile` option is applicable only for AM, idm\_abbr, and PingGateway.
+* The `--config-profile` option is applicable only for AM, idm_abbr, and PingGateway.
 
-* Use the `--push-to` option or set the PUSH\_TO variable in your environment.
+* Use the `--push-to` option or set the PUSH_TO variable in your environment.
 
 * Use the `--push-to none` option for building local images in minikube. |
 
@@ -8717,7 +9075,7 @@ In addition to the global forgeops command options, the forgeops build subcomman
 
   The forgeops build command updates the image defaulter in the target environment. For example, if you ran forgeops build --env-name prod, the image defaulter in the kustomize/overlay/deploy-prod/image-defaulter directory would be updated.
 
-* `--kustomize`
+* `--kustomize-path`
 
   The path to the directory where the Kustomize overlays and the image defaulter files for the environment are located. You can specify the full path or path relative to the local directory of your `forgeops` repository clone.
 
@@ -8813,6 +9171,119 @@ The forgeops delete subcommand takes the following options:
 
   forgeops delete --env-name prod am --dryrun
 
+###### forgeops dsconfig
+
+[](#description_2)Description
+
+The forgeops dsconfig subcommand, introduced in the ForgeOps 2026.3.1 release, runs a PingDS `dsconfig` command against a DS pod in a ForgeOps deployment. The forgeops dsconfig command obtains the admin password from the secret in the target namespace, so you provide the DS configuration operation and its operation-specific options rather than specifying the administration connection arguments yourself.
+
+The command simplifies viewing and changing DS configuration that would otherwise require entering a DS pod and manually supplying the `dsconfig` host, port, bind DN, password, TLS, and non-interactive options.
+
+It uses the `dirmanager.pw` key from the `ds-passwords` secret and connects to the standard LDAPS port 1636 as the DS administrator (`uid=admin`). The command gets the other connection values from the default settings. You can use the `--dryrun` flag to view the connection information.
+
+You can also connect to any ForgeOps-compatible DS pod that has `dsconfig` installed. In a replicated DS environment, you must make the changes on each pod individually. Reapply those changes when you create new pods.
+
+You can use the forgeops dsconfig subcommand in Helm-based deployments as well as Kustomize-based deployments. The ForgeOps team strongly recommends using Helm-based deployments for ForgeOps 2026.3.0 and later.
+
+Learn more about the PingDS `dsconfig` command in [PingDS dsconfig reference](https://docs.pingidentity.com/pingds//8.1/tools-reference/dsconfig.html).
+
+* Command syntax
+
+```
+$ forgeops dsconfig [global-options] <namespace> <ds-pod> — <dsconfig-subcommand> [dsconfig-options]
+```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | 1. The `forgeops dsconfig` command requires that the target DS pod has `dsconfig` installed and accessible.
+
+2. In a replicated DS environment, changes must be applied to each pod individually.
+
+3. The option strings containing spaces must be in one of these two ways:
+
+   1. The strings are enclosed in double quotes.
+
+   2. The strings are enclosed in single quotes and space characters are escaped with a backslash. |
+
+[](#arguments)Arguments
+
+* `<namespace>`
+
+  The Kubernetes namespace containing the ForgeOps deployment along with the DS secrets.
+
+* `<ds-pod>`
+
+  The name of the DS pod on which to run the command. For example, `ds-idrepo-0`.
+
+* `<dsconfig-subcommand>`
+
+  The PingDS `dsconfig` subcommand to run, such as `set-password-policy-prop`.
+
+  The ForgeOps command passes this value to the DS container without changing the DS `dsconfig` subcommand syntax.
+
+* `-- [dsconfig-options]`
+
+  Use `--` to separate ForgeOps options from the arguments passed to PingDS `dsconfig`.
+
+  Example:
+
+  ```
+  $ forgeops dsconfig --namespace my-ns ds-idrepo-0 \
+    — set-password-policy-prop --policy-name '"Default Password Policy"' \
+    --set "allow-pre-encoded-passwords:true"
+  ```
+
+* Debug option
+
+  ```
+  --debug
+  ```
+
+  Purpose: Display diagnostic information while the command runs.
+
+* Dry-run option
+
+  ```
+  --dryrun
+  ```
+
+  Purpose: Display the command that would run without changing DS configuration.
+
+* Help option
+
+  ```
+  --help
+  ```
+
+  Display usage information for the `forgeops dsconfig` subcommand.
+
+[](#examples_4)Examples
+
+* Set a password-policy property
+
+  Use the command to update a password-policy property without manually specifying DS connection options:
+
+  ```
+  $ forgeops dsconfig --namespace my-ns ds-idrepo-0 \
+    — set-password-policy-prop --policy-name "Default Password Policy" \
+    --set "allow-pre-encoded-passwords:true"
+  ```
+
+* Read a configuration property
+
+  ```
+  $ forgeops dsconfig --namespace my-ns ds-idrepo-0 \
+    — get-global-configuration-prop --property property-name
+  ```
+
+* Apply a multi-valued property change
+
+  ```
+  $ forgeops dsconfig --namespace my-ns ds-idrepo-0 \
+    — set-<component>-prop --<component-option> <value> \
+    --add <property>:<value>
+  ```
+
 ###### forgeops env
 
 The forgeops env command enables you to set up a ForgeOps deployment environment with parameters such as FQDN, ingress, and secret management tool.
@@ -8843,7 +9314,7 @@ By unifying the parameters in a location, you don't have to specify these parame
 
   This is a mandatory parameter. Default: None.
 
-* `--helm path/to/helm/directory`
+* `--helm-path path/to/helm/values`
 
   The directory where Helm values files are located. The directory path can be relative to the `forgeops` root directory or an absolute path.
 
@@ -8853,7 +9324,7 @@ By unifying the parameters in a location, you don't have to specify these parame
 
   Default: None.
 
-* `--kustomize my/kustomize`
+* `--kustomize-path my-kustomize-path`
 
   The directory that contains Kustomize overlays. The directory path can be an absolute or relative to the `forgeops` root directory.
 
@@ -8955,6 +9426,18 @@ By unifying the parameters in a location, you don't have to specify these parame
 
   Default: False.
 
+* `--secure`
+
+  Enable security features in the ForgeOps deployment. In newer deployments created with ForgeOps 2026.2.0 or later, the security features are enabled by default. To apply the security features in an existing deployment, you need to use the `forgeops env --env-name my-env --secure` command and recreate the DS stateful sets as specified in [Recreate the PingDS stateful set](https://github.com/ForgeRock/forgeops/blob/2026.3.2/how-tos/recreating-ds-sts.md).
+
+  Default: True.
+
+* `--insecure`
+
+  Disable security features when you create a new ForgeOps deployment.
+
+  Default: False.
+
 ###### forgeops image
 
 The forgeops image command enables you to maintain ForgeOps deployments with the latest images available. Also, you can work with multiple versions of ForgeOps-provided images, providing more flexibility to upgrade the `forgeops` tool and ForgeOps deployment.
@@ -8979,13 +9462,13 @@ Replace my-components with one or more of `platform`, `apps`, `ui`, `am`, `amste
 
 [](#options_6)Options
 
-* `--kustomize-path` my-kustomize-loc
+* `--kustomize-path` my-kustomize-path
 
   The absolute path or the path relative to the `forgeops` directory where Kustomize overlay files are stored.
 
   Default: kustomize
 
-* `--build-path` my-docker-loc
+* `--build-path` my-docker-path
 
   The absolute path or the path relative to the `forgeops` directory where Docker files are stored.
 
@@ -9031,7 +9514,7 @@ Replace my-components with one or more of `platform`, `apps`, `ui`, `am`, `amste
 
 * `--releases-src` my-release-source-url
 
-  URL or path where release files live (default: <http://releases.forgeops.com>)
+  URL or path where release files live (default: <https://releases.forgeops.com>)
 
 * `--image-repo` my-docker-repo
 
@@ -9071,7 +9554,7 @@ forgeops prereqs prereqs
 
   Use `HAProxy` ingress controller.
 
-* \--upgrade
+* \--`upgrade`
 
   Upgrade if the prerequisite has been installed.
 
@@ -9083,7 +9566,7 @@ forgeops prereqs prereqs
 
 * Install HAProxy:
 
-  forgeops prereqs ingress --haproxy secrets
+  forgeops prereqs ingress --haproxy secrets --secret-generator
 
 * Install only `cert-manager` and `secret-agent`:
 
@@ -9093,9 +9576,90 @@ forgeops prereqs prereqs
 
   forgeops prereqs cert-manager ingress
 
-* Install HAProxy:
+###### forgeops upgrade-am-config
 
-  forgeops prereqs ingress --haproxy
+The command forgeops upgrade-am-config upgrades a PingAM configuration profile to the target ForgeOps and PingAM versions before you rebuild the PingAM configuration image and deploy in a ForgeOps environment.
+
+[](#command_details_4)Command details
+
+forgeops upgrade-am-config --env-name my-env --config-profile my-conf-profile
+
+Use the `forgeops upgrade-am-config` command to update a custom PingAM configuration profile in preparation for upgrading your ForgeOps deployment. Run this command after setting the target images and before building and deploying updated custom PingAM images.
+
+The command supports two ways to select the `am-config-upgrader` image:
+
+* `--env-name`: Use the environment configuration populated by `forgeops image`.
+
+* `--release-name`: Use a specific release name to select the matching upgrader image.
+
+You can specify the AM configuration profile in either of these forms:
+
+* A profile name, if the profile is stored in the default location under `FORGEOPS_DATA/docker/am/config-profiles`.
+
+* An absolute path, if the profile is stored elsewhere.
+
+Do not pass `docker/am/config-profiles/<profile-name>` as a relative path. If you want to use the default profile location, specify only the profile name.
+
+[](#options_8)Options
+
+* `--env-name ENV_NAME`
+
+  Uses the specified ForgeOps environment to locate the `am-config-upgrader` image. This is the recommended form for current workflows because the upgrader image is already populated in the environment by `forgeops image`.
+
+* `--release-name RELEASE_NAME`
+
+  Uses the specified release name to select the version of the `am-config-upgrader` image that matches the target deployment version.
+
+* `--config-profile CONFIG_PROFILE`
+
+  Specifies the profile to upgrade. In practice, use either:
+
+  * the profile name only, such as `online`, when the profile is in the default location.
+
+  * an absolute path to the profile directory when the profile is stored outside the default location.
+
+[](#usage_notes)Usage notes
+
+When you use the default profile location, specify only the profile name. For example, use `online`, not `docker/am/config-profiles/online`.
+
+Relative paths are supported only for profiles managed outside the default location. If you specify `docker/am/config-profiles/<name>` as a relative path, the command can resolve it incorrectly.
+
+If you are upgrading AM, keep the Amster and AM versions aligned as required by the upgrade workflow.
+
+Validate the upgraded configuration in a test environment before using it in production, especially if your deployment includes customizations.
+
+###### Examples
+
+* Upgrade a profile using the environment configuration:
+
+  forgeops upgrade-am-config --env-name my-env my-profile
+
+* Upgrade a profile using a release name:
+
+  forgeops upgrade-am-config --release-name my-release my-profile
+
+* Upgrade a profile stored outside the default location by specifying an absolute path:
+
+  forgeops upgrade-am-config --release-name 8.1.0 /full/path/to/config-profiles/my-profile
+
+[](#example_workflow)Example workflow
+
+The following example shows where `forgeops upgrade-am-config` fits in an AM upgrade workflow:
+
+```
+forgeops image --release 8.1.0 --env-name my-env platform
+
+forgeops upgrade-am-config --env-name my-env my-am-config-profile
+
+forgeops config build am --env-name my-env \
+--release-name my-custom-release my-am-config-profile
+```
+
+[](#related_information)Related information
+
+* [Upgrade Ping Advanced Identity Software Docker images to new major or minor version](upgrade/upgrade-product.html)
+
+* [Upgrade Ping Advanced Identity Software Docker image to new patch release](upgrade/upgrade-patch.html)
 
 ### Secrets Reference
 
@@ -9123,23 +9687,23 @@ This section describes various secrets and keys used in ForgeOps. Secrets, passw
 
     | Description or role                                                                                       | Location on container                                                                                                                                                                                                                                                 |
     | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | **AM\_AUTHENTICATION\_SHARED\_SECRET**                                                                    |                                                                                                                                                                                                                                                                       |
+    | **AM_AUTHENTICATION_SHARED_SECRET**                                                                       |                                                                                                                                                                                                                                                                       |
     | Core authentication secret for the root realm.                                                            | * `cdk/config/services/realm/root/iplanetamauthservice/1.0/organizationconfig/defaultconfig.json`
 
     * Value: `security.sharedSecret`                                                                                                                                   |
-    | **AM\_ENCRYPTION\_KEY**                                                                                   |                                                                                                                                                                                                                                                                       |
+    | **AM_ENCRYPTION_KEY**                                                                                     |                                                                                                                                                                                                                                                                       |
     | Key used for encrypting information stored in the secure state of authentication trees in AM.             | - `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/http___am_80_am.json`
 
     - `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json` |
-    | **AM\_OIDC\_CLIENT\_SUBJECT\_IDENTIFIER\_HASH\_SALT**                                                     |                                                                                                                                                                                                                                                                       |
+    | **AM_OIDC_CLIENT_SUBJECT_IDENTIFIER_HASH_SALT**                                                           |                                                                                                                                                                                                                                                                       |
     | Configuration parameter used to specify the Subject Identifier Hash Salt in the OAuth 2.0 and OIDC flows. | `base/config/services/realm/root/oauth2provider/1.0/organizationconfig/defaultconfig.json`                                                                                                                                                                            |
-    | **AM\_PASSWORDS\_AMADMIN\_CLEAR**                                                                         |                                                                                                                                                                                                                                                                       |
-    | Password for the amadmin user. Updated to AM\_PASSWORDS\_AMADMIN\_HASHED in `docker-entrypoint.sh`.       | `base/config/services/realm/root/sunidentityrepositoryservice/1.0/globalconfig/default/users/amadmin.json`                                                                                                                                                            |
-    | **AM\_SELFSERVICE\_LEGACY\_CONFIRMATION\_EMAIL\_LINK\_SIGNING\_KEY**                                      |                                                                                                                                                                                                                                                                       |
+    | **AM_PASSWORDS_AMADMIN_CLEAR**                                                                            |                                                                                                                                                                                                                                                                       |
+    | Password for the amadmin user. Updated to AM_PASSWORDS_AMADMIN_HASHED in `docker-entrypoint.sh`.          | `base/config/services/realm/root/sunidentityrepositoryservice/1.0/globalconfig/default/users/amadmin.json`                                                                                                                                                            |
+    | **AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNING_KEY**                                             |                                                                                                                                                                                                                                                                       |
     | A 256-bit key (base64-encoded) used for HMAC signing of the legacy self-service confirmation email links. | `base/config/services/realm/root/restsecurity/1.0/organizationconfig/defaultconfig.json`                                                                                                                                                                              |
-    | **AM\_SESSION\_STATELESS\_ENCRYPTION\_KEY**                                                               |                                                                                                                                                                                                                                                                       |
+    | **AM_SESSION_STATELESS_ENCRYPTION_KEY**                                                                   |                                                                                                                                                                                                                                                                       |
     | Encryption key for encrypting stateless session tokens.                                                   | `base/config/services/realm/root/iplanetamsessionservice/1.0/globalconfig/default.json`                                                                                                                                                                               |
-    | **AM\_SESSION\_STATELESS\_SIGNING\_KEY**                                                                  |                                                                                                                                                                                                                                                                       |
+    | **AM_SESSION_STATELESS_SIGNING_KEY**                                                                      |                                                                                                                                                                                                                                                                       |
     | Signing key for validating the security of stateless session tokens.                                      | `base/config/services/realm/root/iplanetamsessionservice/1.0/globalconfig/default.json`                                                                                                                                                                               |
 
 #### AM secrets
@@ -9213,9 +9777,9 @@ This section describes various secrets and keys used in ForgeOps. Secrets, passw
 
     | Description or role                                                                                                                       | Location on container                                |
     | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-    | **IDM\_PROVISIONING\_CLIENT\_SECRET**                                                                                                     |                                                      |
+    | **IDM_PROVISIONING_CLIENT_SECRET**                                                                                                        |                                                      |
     | AM nodes in authentication journeys use this confidential client to authenticate through AM and provision identities through IDM.         | Used for provisioning Oauth2Client in IDM.           |
-    | **IDM\_RS\_CLIENT\_SECRET**                                                                                                               |                                                      |
+    | **IDM_RS_CLIENT_SECRET**                                                                                                                  |                                                      |
     | IDM uses this confidential client to introspect access tokens through the `am/oauth2/introspect` endpoint to get information about users. | Used in the Oauth2Client of the IDM resource server. |
 
 * Environment variables in `idm` pod
@@ -9228,7 +9792,7 @@ This section describes various secrets and keys used in ForgeOps. Secrets, passw
 
     | Description or role                                                                                                                       | Location on container                                                                                         |
     | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-    | **IDM\_RS\_CLIENT\_SECRET**                                                                                                               |                                                                                                               |
+    | **IDM_RS_CLIENT_SECRET**                                                                                                                  |                                                                                                               |
     | IDM uses this confidential client to introspect access tokens through the `am/oauth2/introspect` endpoint to get information about users. | Set in `boot.properties: "rs.client.secret"` to communicate with the Oauth2Client of the IDM resource server. |
 
 #### DS secrets, keys, and passwords
@@ -9247,7 +9811,7 @@ Service account passwords for AM connecting to DS backends. `ds-set-passwords` i
 
     | Description or role                                              | Location on container                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
     | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | **AM\_STORES\_USER\_PASSWORD**                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | **AM_STORES_USER_PASSWORD**                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
     | Password for AM to access the identities backend on `ds-idrepo`. | 1. `cdk/config/services/realm/root/sunidentityrepositoryservice/1.0/organizationconfig/default/opendj.json`
 
     2. `base/config/services/realm/root/amdatastoreservice/1.0/globalconfig/default/datastorecontainer/application-store.json`
@@ -9261,7 +9825,7 @@ Service account passwords for AM connecting to DS backends. `ds-set-passwords` i
     6. `base/config/services/realm/root-sunamhiddenrealmdelegationservicepermissions/iplanetamauthldapservice/1.0/organizationconfig/default.json`
 
        * **Variables are set in the `docker-entrypoint.sh`** |
-    | **AM\_STORES\_APPLICATION\_PASSWORD**                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | **AM_STORES_APPLICATION_PASSWORD**                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
     | Password for AM to access the config backend on `ds-idrepo`.     | 1) `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
 
     2) `base/config/services/realm/root/amdatastoreservice/1.0/globalconfig/default/datastorecontainer/application-store.json`
@@ -9273,7 +9837,7 @@ Service account passwords for AM connecting to DS backends. `ds-set-passwords` i
     5) `base/config/services/realm/root/iplanetampolicyconfigservice/1.0/organizationconfig/defaultconfig.json`
 
     6) `base/config/services/realm/root-sunamhiddenrealmdelegationservicepermissions/iplanetampolicyconfigservice/1.0/organizationconfig/default.json`        |
-    | **AM\_STORES\_CTS\_PASSWORD**                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+    | **AM_STORES_CTS_PASSWORD**                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
     | Password for AM to access the tokens backend on `ds-cts`.        | 1. `cdk/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`
 
     2. `base/config/services/realm/root/iplanetamplatformservice/1.0/globalconfig/default/com-sun-identity-servers/server-default.json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -9286,11 +9850,11 @@ Service account passwords for AM connecting to DS backends. `ds-set-passwords` i
 
   * Type: Environment variables
 
-    | Name                                  | Description                                                         |
-    | ------------------------------------- | ------------------------------------------------------------------- |
-    | **AM\_STORES\_USER\_PASSWORD**        | Password for AM to access the identity backend on the `ds-idrepo`.  |
-    | **AM\_STORES\_APPLICATION\_PASSWORD** | Password for AM to access the configuration backend on `ds-idrepo`. |
-    | **AM\_STORES\_CTS\_PASSWORD**         | Password for AM to access the tokens backend on `ds-cts`.           |
+    | Name                               | Description                                                         |
+    | ---------------------------------- | ------------------------------------------------------------------- |
+    | **AM_STORES_USER_PASSWORD**        | Password for AM to access the identity backend on the `ds-idrepo`.  |
+    | **AM_STORES_APPLICATION_PASSWORD** | Password for AM to access the configuration backend on `ds-idrepo`. |
+    | **AM_STORES_CTS_PASSWORD**         | Password for AM to access the tokens backend on `ds-cts`.           |
 
 ##### Kubernetes secret name: `ds-passwords`
 
@@ -9388,12 +9952,12 @@ IDM administration and keystore passwords
 
 * Type: ENV VARS
 
-  | Description or role             | Location on container                               |
-  | ------------------------------- | --------------------------------------------------- |
-  | **OPENIDM\_ADMIN\_PASSWORD**    |                                                     |
-  | IDM admin password.             | Configured in `repo.init.json`                      |
-  | **OPENIDM\_KEYSTORE\_PASSWORD** |                                                     |
-  | IDM keystore password.          | Configured in `docker/idm/resolver/boot.properties` |
+  | Description or role           | Location on container                               |
+  | ----------------------------- | --------------------------------------------------- |
+  | **OPENIDM_ADMIN_PASSWORD**    |                                                     |
+  | IDM admin password.           | Configured in `repo.init.json`                      |
+  | **OPENIDM_KEYSTORE_PASSWORD** |                                                     |
+  | IDM keystore password.        | Configured in `docker/idm/resolver/boot.properties` |
 
 ### ForgeOps benchmarks
 
@@ -9812,7 +10376,7 @@ When you [perform your ForgeOps deployment](deploy/deploy.html):
 
   AM affinity deployment lets AM spread the LDAP requests load over multiple directory server instances. Once a CTS token is created and assigned to a session, AM sends all further token operations to the same token origin directory server from any AM node. This ensures that the load of CTS token management is spread across directory servers.
 
-  Source: [CTS Affinity Deployment](https://docs.pingidentity.com/pingam/8/cts-guide/cts-deployment-architectures.html#cts-affinity) in the Core Token Service (CTS) documentation
+  Source: [CTS Affinity Deployment](https://docs.pingidentity.com/pingam/8.1/cts-guide/cts-deployment-architectures.html#cts-affinity) in the Core Token Service (CTS) documentation
 
 * Amazon EKS
 
@@ -10256,11 +10820,11 @@ Useful links that cover topics beyond the scope of this documentation.
 
 #### Deployment topics
 
-* [Deploy and customize Prometheus, Grafana, and Alertmanager in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob/2026.2.1/etc/addons/prometheus#prometheus-and-grafana-deployment)
+* [Deploy and customize Prometheus, Grafana, and Alertmanager in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob/2026.3.2/cluster/addons/prometheus#prometheus-and-grafana-deployment)
 
 * [Deploy the platform in a multi-cluster environment using Google Cloud Multi Cluster Ingress and Cloud DNS for GKE](https://github.com/ForgeRock/forgeops-extras/tree/master/samples/multi-cluster/google-cloud/multi-cluster-ingress)
 
-* [Import a certificate into the truststore in a ForgeOps deployment](https://support.pingidentity.com/s/article/How-do-I-import-a-certificate-into-the-truststore-in-a-ForgeOps-deployment) **(Updated)**
+* [Import a certificate into the truststore in a ForgeOps deployment](https://github.com/ForgeRock/forgeops/blob/dev/how-tos/migrate-custom-certs-to-new-truststore.md) **(Updated)**
 
 * [Enable the IDM workflow in a ForgeOps deployment](https://community.forgerock.com/t/enabling-the-idm-workflow-with-forgeops-v7-x/3949)
 
@@ -10290,29 +10854,30 @@ Useful links that cover topics beyond the scope of this documentation.
 
 #### Troubleshooting
 
-* [Enable and modify the AM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-am.html)
+* [Enable and modify the AM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-PingAM) (applies to ForgeOps 2026.3.2)
 
-* [Enable and modify the IDM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-idm/3152)
+* [Enable and modify the IDM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-IDM) (applies to ForgeOps 2026.3.2)
 
-* [Enable and modify the audit logging level](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops/3263)
+* [Enable and modify the audit logging level](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops/3263) (applies to ForgeOps 2026.3.2)
 
 ## End of the consolidated file
 
 ***
 
-[1](#_footnoteref_1). Not available on single-instance ForgeOps deployments.[2](#_footnoteref_2). Not available on ForgeOps deployments on minikube.[3](#_footnoteref_3). The Linux version of Homebrew doesn't support installing software it maintains as casks. Because of this, if you're setting up an environment on Linux, you won't be able to use Homebrew to install software in several cases. You'll need to refer to the software's documentation for information about how to install the software on a Linux system.[4](#_footnoteref_4). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[5](#_footnoteref_5). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[6](#_footnoteref_6). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[7](#_footnoteref_7). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[8](#_footnoteref_8). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[9](#_footnoteref_9). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[10](#_footnoteref_10). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[11](#_footnoteref_11). For example, systems based on M1 or M2 chipsets.[12](#_footnoteref_12). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[13](#_footnoteref_13). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[14](#_footnoteref_14). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[15](#_footnoteref_15). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[16](#_footnoteref_16). You can automate logging into ECR every 12 hours by using the `cron` utility.[17](#_footnoteref_17). To access DS, refer to [DS command-line access.](deploy/access.html#ds_command_line_access)[18](#_footnoteref_18). If you prefer to use a different ingress controller, deploy infrastructure in Kubernetes to support it.[19](#_footnoteref_19). Traefik and cert-manager are evolving technologies. Descriptions of these technologies were accurate at the time of this writing, but might differ when you deploy them.[20](#_footnoteref_20). For more information on howto change the default behavior, refer to [the steps for creatingTLS certificate](#mkcert-use).[21](#_footnoteref_21). Use similar steps to modify the schedule and purge delay for the `cts` repository[22](#_footnoteref_22). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository[23](#_footnoteref_23). To get the access key from the Azure portal, go to your storage account. Under Security + networking on the left navigation menu, select Access keys[24](#_footnoteref_24). The `FROM` statement originally contained `am-cdk` as part of the repository name. Be sure to use `am`, not `am-cdk`, in the revised statement.[25](#_footnoteref_25). The `FROM` statement originally contained `idm-cdk` as part of the repository name. Be sure to use `idm`, not `idm-cdk`, in the revised statement.[26](#_footnoteref_26). Except for the deprecated `amster` component.
+[1](#_footnoteref_1). Not available on single-instance ForgeOps deployments.[2](#_footnoteref_2). Not available on ForgeOps deployments on minikube.[3](#_footnoteref_3). The Linux version of Homebrew doesn't support installing software it maintains as casks. Because of this, if you're setting up an environment on Linux, you won't be able to use Homebrew to install software in several cases. You'll need to refer to the software's documentation for information about how to install the software on a Linux system.[4](#_footnoteref_4). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[5](#_footnoteref_5). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[6](#_footnoteref_6). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[7](#_footnoteref_7). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[8](#_footnoteref_8). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[9](#_footnoteref_9). The Terraform configuration contains a set of variables under `forgerock` that adds labels required for clusters created by Ping Identity employees. If you're a Ping Identity employee creating a cluster, set values for these variables.[10](#_footnoteref_10). If you have updated Python3, you should delete the existing virtual environment and create a new one using the updated python3 version: rm -rf .venv && python3 -m venv .venv && ./bin/forgeops configure[11](#_footnoteref_11). For example, systems based on M1 or M2 chipsets.[12](#_footnoteref_12). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[13](#_footnoteref_13). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[14](#_footnoteref_14). Installing Prometheus, Grafana, and Alertmanager technology in ForgeOps deployments provides an example of how you might set up monitoring and alerting in a Ping Advanced Identity Software deployment in the cloud. Remember, [ForgeOps deployments are reference implementations.](start/start-here.html#cdm-sandbox) When you [create a project plan](start/start-here.html#planning), you'll need to determine how to monitor and send alerts in your production deployment.[15](#_footnoteref_15). You can use the self-signed issuer provided by ForgeOps for test purposes. For production environments, ForgeOps recommends using a cluster issuer that uses a certificate from a trusted certificate authority (CA).[16](#_footnoteref_16). You can automate logging into ECR every 12 hours by using the `cron` utility.[17](#_footnoteref_17). To access DS, refer to [DS command-line access.](deploy/access.html#ds_command_line_access)[18](#_footnoteref_18). If you prefer to use a different ingress controller, deploy infrastructure in Kubernetes to support it.[19](#_footnoteref_19). Traefik and cert-manager are evolving technologies. Descriptions of these technologies were accurate at the time of this writing, but might differ when you deploy them.[20](#_footnoteref_20). For more information on howto change the default behavior, refer to [the steps for creatingTLS certificate](#mkcert-use).[21](#_footnoteref_21). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository[22](#_footnoteref_22). Use similar steps to modify the schedule and purge delay for the `cts` repository[23](#_footnoteref_23). To get the access key from the Azure portal, go to your storage account. Under Security + networking on the left navigation menu, select Access keys[24](#_footnoteref_24). The `FROM` statement originally contained `am-cdk` as part of the repository name. Be sure to use `am`, not `am-cdk`, in the revised statement.[25](#_footnoteref_25). The `FROM` statement originally contained `idm-cdk` as part of the repository name. Be sure to use `idm`, not `idm-cdk`, in the revised statement.[26](#_footnoteref_26). Except for the deprecated `amster` component.
 
 ---
 
 ---
 title: Welcome to ForgeOps
-description: The Ping Advanced Identity Software provides ForgeOps to help you deploy PingAM, PingDS, PingIDM, and PingGateway collectively in an integrated manner on a cloud platform that runs Kubernetes.
+description: ForgeOps hub for setting up, deploying, customizing, securing, backing up, upgrading, and troubleshooting the Ping Advanced Identity Software on Kubernetes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops::index
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/index.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/index.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-29T19:33:21Z
 page_aliases: ["_@forgeops::index.adoc"]
 section_ids:
   chapters_in_this_documentation: Chapters in this documentation
@@ -10332,19 +10897,19 @@ ForgeOps comprises mainly two sets of resources:
 
   * Fully integrated AM, IDM, and DS installations
 
-  * Multi-zone high availability'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Multi-zone high availability\[[1](#_footnotedef_1 "View footnote.")]
 
-  * Replicated directory services'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Replicated directory services\[[1](#_footnotedef_1 "View footnote.")]
 
-  * Ingress configuration'\[[2](#_footnotedef_2 "View footnote.")]'
+  * Ingress configuration\[[2](#_footnotedef_2 "View footnote.")]
 
   * Certificate management
 
   * Randomly generated secrets with ability to rotate secrets
 
-  * Prometheus monitoring, Grafana reporting, and alert management'\[[1](#_footnotedef_1 "View footnote.")]'
+  * Prometheus monitoring, Grafana reporting, and alert management\[[1](#_footnotedef_1 "View footnote.")]
 
-* The [ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.2)
+* The [ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.3)
 
   The ForgeOps documentation helps you work with ForgeOps deployments:
 
@@ -10358,77 +10923,19 @@ ForgeOps comprises mainly two sets of resources:
 
 ## Chapters in this documentation
 
-[icon: play-circle, set=fas, size=3x]
-
-#### [Start Here](https://docs.pingidentity.com/forgeops/2026.2/start/start-here.html)
-
-Important considerations for a ForgeOps deployment.
-
-[icon: hands-helping, set=fas, size=3x]
-
-#### [Support](https://docs.pingidentity.com/forgeops/2026.2/start/support.html)
-
-Support options for ForgeOps deployments.
-
-[icon: github, set=fab, size=3x]
-
-#### [Repositories](https://docs.pingidentity.com/forgeops/2026.2/start/repositories.html)
-
-How to use the artifacts in ForgeOps public repositories.
-
-[icon: circle-nodes, set=fas, size=3x]
-
-#### [Setup](https://docs.pingidentity.com/forgeops/2026.2/setup/overview.html)
-
-Create a Kubernetes cluster for a ForgeOps deployment.
-
-[icon: sign-posts-wrench, set=fas, size=3x]
-
-#### [Deploy](https://docs.pingidentity.com/forgeops/2026.2/deploy/overview.html)
-
-Deploy the platform on a Kubernetes cluster.
-
-[icon: sliders, set=fas, size=3x]
-
-#### [Customize](https://docs.pingidentity.com/forgeops/2026.2/customize/overview.html)
-
-Customize AM and IDM configurations.
-
-[icon: tasks, set=fas, size=3x]
-
-#### [Prepare for production](https://docs.pingidentity.com/forgeops/2026.2/prepare/overview.html)
-
-PingGateway, monitoring, security, and benchmarking.
-
-[icon: floppy-disk-circle-arrow-right, set=fas, size=3x]
-
-#### [Backup](https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html)
-
-Backup and restore your data.
-
-[icon: level-up, set=fas, size=3x]
-
-#### [Upgrade](https://docs.pingidentity.com/forgeops/2026.2/upgrade/upgrade-overview.html)
-
-Upgrade or apply a patch to ForgeOps deployments.
-
-[icon: ban-bug, set=fas, size=3x]
-
-#### [Troubleshoot](https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/overview.html)
-
-Troubleshoot problems.
-
-[icon: books, set=fas, size=3x]
-
-#### [Reference](https://docs.pingidentity.com/forgeops/2026.2/reference/overview.html)
-
-Command external references, glossary, articles.
-
-[icon: newspaper, set=fas, size=3x]
-
-#### [Single Page](https://docs.pingidentity.com/forgeops/2026.2/consolidated.html)
-
-This entire documentation set on a single HTML page.
+| Topic                                                                        | Description                                                                 |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [icon: play-circle, set=fa][Start Here](start/start-here.html)               | Important information to consider before you attempt a ForgeOps deployment. |
+| [icon: hands-helping, set=fa][Support](start/support.html)                   | Support options for ForgeOps deployments.                                   |
+| [icon: github, set=fa][Repositories](start/repositories.html)                | How to use the artifacts in ForgeOps public GitHub repositories.            |
+| [icon: circle-nodes, set=fa][Setup](setup/overview.html)                     | Create a Kubernetes cluster suitable for a ForgeOps deployment.             |
+| [icon: sign-posts-wrench, set=fa][Deploy](deploy/overview.html)              | Deploy the platform on a Kubernetes cluster using ForgeOps.                 |
+| [icon: sliders, set=fa][Customize](customize/overview.html)                  | Customize the platform by configuring AM and IDM.                           |
+| [icon: tasks, set=fa][Prepare for production](prepare/overview.html)         | Base images, PingGateway, monitoring, security, benchmarking, and ingress.  |
+| [icon: floppy-disk-circle-arrow-right, set=fa][Backup](backup/overview.html) | Backup and restore your data.                                               |
+| [icon: level-up, set=fa][Upgrade](upgrade/upgrade-overview.html)             | Upgrade the platform to a new version or apply a patch upgrade.             |
+| [icon: ban-bug, set=fa][Troubleshoot](troubleshoot/overview.html)            | Tools and techniques to troubleshoot problems with ForgeOps deployments.    |
+| [icon: books, set=fa][Reference](reference/overview.html)                    | Command references, glossary, articles beyond the docs.                     |
 
 ***
 

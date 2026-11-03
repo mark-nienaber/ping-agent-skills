@@ -789,7 +789,7 @@ Based on the authentication indicators, the Resource Server decides whether to g
 
   * It might check for the presence of a specific `amr` value, such as "mfa" or "biometric".
 
-  * It can validate if a required scope is present, for example "READ\_TRANSACTION".
+  * It can validate if a required scope is present, for example "READ_TRANSACTION".
 
 * Access control
 

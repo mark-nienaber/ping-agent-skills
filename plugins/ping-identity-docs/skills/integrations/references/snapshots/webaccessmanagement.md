@@ -1,4 +1,523 @@
 ---
+title: Changelog
+description: Web Access Management Integration Kit 2.0 – August 2014 (Current Release)
+component: webAccessManagement
+page_id: webAccessManagement:web_access_management_wam_integration_kit:pf_wam_ik_changelog
+canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_integration_kit/pf_wam_ik_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+---
+
+# Changelog
+
+**Web Access Management Integration Kit 2.0 – August 2014 (Current Release)**
+
+* Added a per-adapter SLO URL field
+
+* Added an Authentication Mapping Table with an attribute filter for the IdP adapter
+
+* Added a Protected Resource Mapping Table to the SP adapter with an attribute filter
+
+* Enabled cookie provider functionality during SLO
+
+* Added an encode token field to the SP adapter
+
+* Added support for ObFormLoginCookie with customizable rh value
+
+**Web Access Management Integration Kit 1.2 – August 2013**
+
+* Added support for Cookie Provider
+
+* Added OpenToken support within WAM Adapter
+
+* Added Authentication Level to Authentication Context mapping table
+
+**Web Access Management Integration Kit 1.1 – March 2013**
+
+* WAM kit now includes WAM plug-in compatible with RSA Access Manager
+
+**Web Access Management Integration Kit 1.0.1 – December 2012**
+
+* Updated to address security issue found since the previous release.
+
+* Added support for OpenToken 2.5.1 Adapter
+
+**Web Access Management Integration Kit 1.0 – November 2012**
+
+* Initial Release
+
+* Redesigned former product-specific kits to provide consistent functionality across multiple WAM products
+
+---
+
+---
+title: Changelog
+description: Web Access Management Token Translator 2.0 – August 2014 (Current Release)
+component: webAccessManagement
+page_id: webAccessManagement:web_access_management_wam_token_translator:pf_wam_tt_changelog
+canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_token_translator/pf_wam_tt_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+---
+
+# Changelog
+
+**Web Access Management Token Translator 2.0 – August 2014 (Current Release)**
+
+* Updated Token Translator with the WAM Agent Plugin 2.0
+
+* Added "encode Token" field
+
+**Web Access Management Token Translator 1.2 – August 2013**
+
+* Updated Token Translator with the WAM Agent Plugin 1.2
+
+**Web Access Management Token Translator 1.1 – March 2013**
+
+* WAM Token Translator now includes WAM plug-in compatible with RSA Access Manager
+
+**Web Access Management Token Translator 1.0.1 – December 2012**
+
+* Updated to address security issues found since previous release
+
+* Added support for OpenToken Adapter 2.5.1
+
+**Web Access Management Token Translator 1.0 – November 2012**
+
+* Initial Release
+
+* Redesigned former product-specific kits to provide consistent functionality across multiple WAM products
+
+---
+
+---
+title: Configuring an IdP adapter instance
+description: Configure the WAM Integration Kit for an identity provider (IdP).
+component: webAccessManagement
+page_id: webAccessManagement:web_access_management_wam_integration_kit:pf_wam_ik_configuring_an_idp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_integration_kit/pf_wam_ik_configuring_an_idp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  before-you-begin: Before you begin
+  steps: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+---
+
+# Configuring an IdP adapter instance
+
+Configure the WAM Integration Kit for an identity provider (IdP).
+
+## Before you begin
+
+|   |                                                                                                                                                                                                                                                                                                                             |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You must create a third-party WAM Web Agent in your WAM tool before starting the following procedure. Several properties that you use to configure the agent are required to fill out the **IdP Adapter** tab in the following procedure.You can find more details on agent configuration in your WAM Server documentation. |
+
+## Steps
+
+1. In the PingFederate administrative console, create a new IdP adapter instance:
+
+   ### Choose from:
+
+   * For PingFederate 10.1 or later: go to **Authentication > Integration > IdP Adapters**. Click **Create New Instance**.
+
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > Adapters**. Click **Create New Instance**.
+
+2. On the **Type** tab, set the basic adapter instance attributes:
+
+   1. In the **Instance Name** field, enter a name for the adapter instance.
+
+   2. In the **Instance ID** field, enter a unique identifier for the adapter instance.
+
+   3. In the **Type** list, select **WAM IdP Adapter**. Click **Next**.
+
+      |   |                                                                                                                                                                                                                                             |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | * If you are configuring the adapter for a custom plug-in (not bundled with this kit), continue to step 5.
+
+      * If you are configuring the RSA AM Dispatcher server, continue with step 6.
+
+      * If you are configuring OAM, continue at step 7. |
+
+      ![A screenshot that shows the WAM IdP Adapter settings.](_images/zgf1563995786336.jpg)
+
+3. (Only for custom plug-ins for WAM servers other than OAM or RSA) On the **IdP Adapter** tab, click **Add a new row to 'WAM Server'** and enter the following information:
+
+   1. Enter the hostname or the IP address where the WAM server is running.
+
+   2. Specify the remaining WAM server values required for your configuration.
+
+   3. In the **Action** column, click **Update**.
+
+   4. Repeat this step as needed for additional custom WAM plug-ins.
+
+      Skip the next step.
+
+4. (Only for the RSA bundled plug-in) On the **IdP Adapter** tab, click **Add a new row to 'RSA AM Dispatcher Server'** and enter the following information:
+
+   |   |                                                         |
+   | - | ------------------------------------------------------- |
+   |   | You must specify at least one RSA AM Dispatcher Server. |
+
+   1. Enter the hostname or the IP address and the (optional) dispatcher port where the RSA AM Dispatcher server is running.
+
+      |   |                                                                                                                                                                                      |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+      |   | You must specify the authentication method used by the dispatcher server. If you have specified multiple dispatcher servers, each server can have individual authentication methods. |
+
+   2. Specify the **Authentication Type** used by the RSA Dispatcher Server.
+
+      * **Clear**: Clear text, no encryption.
+
+      * **Anon**: Anonymous SSL, SSL encryption only.
+
+      * **Auth**: Mutually authenticated SSL, SSL encryption with certificate-based encryption.
+
+   3. If you select **Auth** as the **Authentication Type**, you must specify the following RSA server values:
+
+      * **Keystore Path**: The string filename of the private keystore file (PKCS12 only).
+
+      * **Keystore Password**: The password for the private keystore.
+
+      * **Key Alias**: The alias to your private key in the keystore.
+
+      * **Key Password**: The private key password for keystore.
+
+   4. (Optional) Specify the **Timeout** value required for your configuration.
+
+   5. In the **Action** column, click **Update**.
+
+   6. Repeat this step as needed for additional RSA Servers.
+
+5. (Only for custom plug-ins for WAM servers and the OAM bundled plug-in) On the **IdP Adapter** tab, click **Add a new row to 'Authentication Context Mapping Table'** and enter the following information:
+
+   * **Authentication Level**: A specific value for a WAM system indicating the level of authentication an end-user has gone through.
+
+   * **Authentication Context**: This is part of the SAML assertion.
+
+   1. In the **Action** column, click **Update**. Repeat this step as needed.
+
+6. Provide entries on the **IdP Adapter** tab, as described on the tab and in the following table.
+
+   |   |                                                                                                                                                                                                                                                |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The selected WAM Plug-in Type may override optional and required fields.For example, if the selected **WAM Plug-in Type** is OAM, the **Agent Config Location** becomes a required field. Leaving this field blank generates an error message. |
+
+   > **Collapse: Configuration Fields**
+   >
+   > | Field                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   > | **WAM Plug-in Type**                 | The class name for the specific WAM implementation.	The WAM Plug-in Type determines optional and required fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Agent Name**                       | This value must match the value used when the third-party WAM Web Agent was configured.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Agent Secret**                     | This value must match the value used when the third-party WAM Web Agent was configured.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Agent Config Location**            | Required for OAM. This value must contain the full path to an XML network-configuration file generated by the access-management system.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Failover**                         | The default is false, indicating load balancing is enabled and user-session states and configuration data are shared among multiple WAM servers.Select **true** to enable failover, indicating that when one server fails, the next server is used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   > | **Domain Name**                      | Enter the fully-qualified domain name for the Cookie Domain where the WAM session cookie is stored, preceded by a period.For example, `.pingidentity.com`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   > | **Cookie Path**                      | (Required) The default value is the root directory (`/`). Specify a different path for the WAM session cookie location, if necessary.You can find more details in WAM Server documentation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | **Protected Resource**               | (Required) The default value is all files in the root directory (`/*`). Specify a different path to the resources in the protected realm, if necessary.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Error URL**                        | Enter a URL for redirecting the user if there are errors. For example, incorrect parameters in the link.This URL can contain query parameters. The URL has an `errorMessage` query parameter appended to it, which contains a brief description of the error that happened. The error page can optionally display this message on the screen to provide guidance on remedying the problem.When using the `errorMessage` query parameter in a custom error page, adhere to Web application security best practices to guard against common content injection vulnerabilities.If no URL is specified, the appropriate default error landing page appears. Learn more in [Customizable user-facing pages](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_custom_user_facing_pages.html) in the PingFederate documentation.	If you define an error redirect URL, errors are sent to the error URL and logged in the PingFederate server log, but not the PingFederate audit log. |
+   > | **User Identifier**                  | (Required) Defines which attribute parsed from the WAM session cookie is the user identifier for use in the assertion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   > | **Session Token Name**               | (Required) The WAM session cookie name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Session Token LOGGEDOFF Value**    | (Required) The value representing a logged-out session token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   > | **HTTP Only**                        | Enable this option to set the WAM Session Cookie as HTTP Only.If this option is enabled, the browser will send the WAM Session Cookie through HTTP or HTTPS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   > | **Secure**                           | Enable this option to set the WAM Session Cookie as secure.If this option is enabled, the browser will send the WAM Session Cookie via HTTPS only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+   > | **PingFederate Base URL**            | The base URL for PingFederate. If specified, this value is used for creating the return URL if the Cookie Provider URL is used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+   > | **Authorization Error URL**          | URL to redirect for authorization errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   > | **Cookie Provider URL**              | The URL for the cookie provider where PingFederate should redirect the request if the WAM session cookie is in a separate domain. This service must be protected by the WAM server and would simply redirect back to the PingFederate `resumePath`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   > | **Cookie Provider Target Parameter** | The name of the parameter used to send the return URL for the cookie provider.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+   > | **Login URL**                        | An optional URL for the authentication service. If the WAM session cookie is not found in the request, PingFederate redirects the request to the URL page along with the relative `resumePath`. This service must be protected by the WAM Agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+   > | **Per-Adapter SLO URL**              | If a URL is entered into this field, it will be used as the redirect target during SLO for this adapter instance, instead of the default value from PingFederate.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Authentication Context**           | This may be any value agreed upon with your SP partner that indicates how the user was authenticated. The value is included in the SAML assertion. Standard URIs are defined in the SAML specifications. You can find more information in the [Authentication Context for the OASIS Security Assertion Markup Language(SAML) V2.0](http://docs.oasis-open.org/security/saml/v2.0/saml-authn-context-2.0-os.pdf) PDF on the OASIS site.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   > | **Authentication Level Identifier**  | Identifier used for the Authentication Level attribute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Repad Token String**               | Enable this to pad the incoming session token (if required).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+
+   ![A screenshot that shows the advanced WAM IdP Adapter settings.](_images/ptm1563995788261.jpg)
+
+7. (Optional) Click **Show Advanced Fields** to specify OpenToken configuration values or settings, depending on your network configuration and other requirements at your site.
+
+   This section also contains fields for configuring tokens capturing the original request information if necessary. This functionality is based on the ObFormLoginCookie from OAM.
+
+   |   |                                                                                                                                                                             |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you want to configure the use of OpenToken as part of the WAM adapter configuration, complete the fields as described on the **IdP Adapter** tab and in the table below. |
+
+   > **Collapse: Advanced Fields**
+   >
+   > | Field                                 | Description                                                                                                                                                                                                                                                          |
+   > | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   > | **OpenToken Name**                    | The name of the cookie or request attribute that contains the OpenToken. This name should be unique for each adapter instance.                                                                                                                                       |
+   > | **OpenToken Transfer Method**         | Specifies how the OpenToken is transferred. Select one of the following options:- Through a cookie
+   >
+   > - As a query parameter
+   >
+   > - Through Form Post                                                                                                                      |
+   > | **OpenToken Password**                | The password used for encrypting extended attributes.	This password is also used to generate the configuration file that the OpenToken agent uses. You must configure a value for the OpenToken Password even if the OpenToken Cipher Suite is set to NULL.          |
+   > | **OpenToken Cipher Suite**            | The algorithm, cipher mode, and key size to use for token encryption.                                                                                                                                                                                                |
+   > | **OpenToken Cookie Domain**           | The server domain, preceded by a period.For example, `.example.com`.If you don't specify a domain, the value is obtained from the request.                                                                                                                           |
+   > | **OpenToken Cookie Path**             | The path for the cookie that contains the OpenToken.                                                                                                                                                                                                                 |
+   > | **OpenToken Token Lifetime**          | The duration (in seconds) for which the OpenToken is valid. Range is 1 - 28800.                                                                                                                                                                                      |
+   > | **OpenToken Session Lifetime**        | The duration (in seconds) during which the OpenToken can be re-issued without authentication. Range is 1 - 259200.                                                                                                                                                   |
+   > | **Not Before Tolerance**              | The amount of time (in seconds) to allow for clock skew between servers. Range is 0 - 3600.                                                                                                                                                                          |
+   > | **Session Cookie**                    | If selected, the OpenToken cookie is set as a session cookie (rather than a persistent cookie).Applies only if the **OpenToken Transfer Method** is set as `Cookie`.                                                                                                 |
+   > | **Secure Cookie**                     | If selected, the OpenToken cookie is set only if the request is on a secure channel (HTTPS).Applies only if the **OpenToken Transfer Method** is set as `Cookie`.                                                                                                    |
+   > | **Create Form Login Token**           | If selected, a Token is created containing the information needed to retain the original request information if a redirect to a form authentication page is required.The token contents are implemented based on the requirements of the ObFormLoginCookie from OAM. |
+   > | **Form Login Cookie Name**            | The name given to the created Form Login CookieFor example, `ObFormLoginCookie`.                                                                                                                                                                                     |
+   > | **Form Login Cookie Domain**          | The server domain, preceded by a period.For example, `.example.com`.                                                                                                                                                                                                 |
+   > | **Form Login Cookie Path**            | The path for the cookie that contains the Form Login Cookie.                                                                                                                                                                                                         |
+   > | **Form Login Cookie is Secure**       | Sets the `secure` flag on the Form Login Cookie.                                                                                                                                                                                                                     |
+   > | **Form Login Cookie is HTTP Only**    | Sets the `httpOnly` flag on the Form Login Cookie.                                                                                                                                                                                                                   |
+   > | **Form Login Token Transfer Method**  | Specifies how the Form Login Token is transferred. Select one of the following options:- Through a cookie
+   >
+   > - As a query parameter                                                                                                                                    |
+   > | **Create Form Login Cookie for Host** | If selected, the Form Login Cookie is created for the hostname in the request, ignoring the **Form Login Cookie Domain**.                                                                                                                                            |
+   > | **RU URL**                            | Determines how the ru URL is derived:- Base
+   >
+   >   Full path using the RH from the **PF BASE URL**.
+   >
+   > - Request
+   >
+   >   Full path using the RH from the HTTP request.
+   >
+   > - Relative
+   >
+   >   Use relative (do not add RH).                                                             |
+   > | **Reset Invalid Session Cookie**      | If selected, the invalid session cookie is set to the configured logged-off value before redirecting to the **Login URL**.                                                                                                                                           |
+
+8. Click **Next**.
+
+9. On the **Actions** tab, click the **Test Connection** link to validate the WAM configuration.
+
+   |   |                                                                                                                                                                                                                |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you're using an OpenToken Adapter Configuration, click the **Invoke Download** link and then click **Export** to download the `agent-config.txt` properties to a directory that the WAM Web Agent can read. |
+
+10. On the **Extended Contract** tab, add any attributes that you want to include in the contract. Click **Next**.
+
+11. On the **Adapter Attributes** tab, select **userId** or **wamSessionToken** under **Pseudonym**. You can also select any extended attributes specified on the previous screen. Click **Next**.
+
+    Learn more in [Set pseudonym and masking options](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_setting_pseudonym_masking_options.html) in the PingFederate documentation. Click **Next**.
+
+12. On the **Summary** tab, check and save your configuration:
+
+    ### Choose from:
+
+    * For PingFederate 10.1 or later: Click **Save**.
+
+    * For PingFederate 10.0 or earlier: Click **Done**. On the **Manage IdP Adapter Instances** tab, click **Save**.
+
+---
+
+---
+title: Configuring an SP adapter instance
+description: Configure the WAM Integration Kit for a service provider (SP).
+component: webAccessManagement
+page_id: webAccessManagement:web_access_management_wam_integration_kit:pf_wam_ik_configuring_an_sp_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_integration_kit/pf_wam_ik_configuring_an_sp_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  before-you-begin: Before you begin
+  steps: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+---
+
+# Configuring an SP adapter instance
+
+Configure the WAM Integration Kit for a service provider (SP).
+
+If you are using OAM, you can find configuration information in [Creating a Custom Authentication Scheme for OAM](pf_wam_ik_creating_a_custom_authentication_scheme_for_oam.html).
+
+## Before you begin
+
+|   |                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You must create a third-party WAM Web Agent in your WAM tool before starting the following procedure. Several properties that you use to configure the agent are required to fill out the **Instance Configuration** tab in the following procedure.You can find more details on configuring an agent in your WAM Server documentation. |
+
+## Steps
+
+1. In the PingFederate administrative console, create a new SP adapter instance.
+
+   ### Choose from:
+
+   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Adapters**. Click **Create New Instance**.
+
+   * For PingFederate 10.0 or earlier: go to **Service Provider > Adapters**. Click **Create New Instance**.
+
+2. On the **Type** tab, set the basic adapter instance attributes:
+
+   1. In the **Instance Name** field, enter a name for the adapter instance.
+
+   2. In the **Instance ID** field, enter a unique identifier for the adapter instance.
+
+   3. In the **Type** list, select **WAM SP Adapter**. Click **Next**.
+
+      |   |                                                                                                                                                                                                                                             |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | * If you are configuring the adapter for a custom plug-in (not bundled with this kit), continue to step 5.
+
+      * If you are configuring the RSA AM Dispatcher server, continue with step 6.
+
+      * If you are configuring OAM, continue at step 7. |
+
+      ![A screenshot that shows the WAM SP Adapter settings.](_images/pgi1563995793233.jpg)
+
+3. (Only for custom plug-ins for WAM servers other than OAM or RSA) On the **Instance Configuration** tab, click **Add a new row to 'WAM Server'** and enter the following information:
+
+   1. Enter the Hostname or the IP address where the WAM server is running.
+
+   2. Specify the remaining WAM server values required for your configuration.
+
+   3. Click **Update** in the Action column.
+
+   4. Repeat this step as needed for additional WAM plug-ins.
+
+      Skip the next step.
+
+4. (Only for the RSA bundled plug-in) On the **Instance Configuration** tab, click **Add a new row to 'RSA AM Dispatcher Server'** and enter the following information:
+
+   |   |                                                         |
+   | - | ------------------------------------------------------- |
+   |   | You must specify at least one RSA AM Dispatcher Server. |
+
+   1. Enter the Hostname or the IP address and the (optional) Dispatcher Port where the RSA AM Dispatcher server is running.
+
+      |   |                                                                                                                                                                               |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | You must specify the authentication method used by the dispatcher server. If you specify multiple dispatcher servers, each server can have individual authentication methods. |
+
+   2. Specify the **Authentication Type** used by the RSA Dispatcher Server:
+
+      * **Clear**: Clear text, no encryption.
+
+      * **Anon**: Anonymous SSL, SSL encryption only.
+
+      * **Auth**: Mutually authenticated SSL, SSL encryption with certificate-based encryption.
+
+   3. If you select **Auth** as the **Authentication Type**, you must specify the following RSA server values:
+
+      * **Keystore Path**: String filename of the private keystore file (PKCS12 only).
+
+      * **Keystore Password**: The password for the private keystore.
+
+      * **Key Alias**: The alias to your private key in the keystore.
+
+      * **Key Password**: The private key password for the keystore.
+
+   4. (Optional) Specify the **Timeout** value required for your configuration.
+
+   5. In the **Action** column, click **Update**.
+
+   6. Repeat this step as needed for additional RSA Servers.
+
+5. (Optional) Only for custom plug-ins for WAM servers and the OAM bundled plug-in) On the **SP Adapter** tab, click **Add a new row to 'Protected Resource Mapping Table'** and enter the following information:
+
+   * **Authentication Context**: This is part of the SAML assertion.
+
+   * **Attribute Filter**: The names and values of attributes that the assertion must contain for this protected resource.
+
+   * **Protected Resource**: The protected resource to be accessed if the authentication context and attribute filters in the assertion match the provided values.
+
+   Click **Update** in the Action column. Repeat this step as needed.
+
+6. Provide entries on the **Instance Configuration** tab, as described on the tab and in the table below.
+
+   |   |                                                                                                                                                                                                                                                 |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The selected WAM Plug-in Type might override optional andrequired fields.For example, if the selected **WAM Plug-in Type** is OAM, the **Agent Config Location** becomes a required field. Leaving this field blank generates an error message. |
+
+   > **Collapse: Configuration Fields**
+   >
+   > | Field                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   > | **WAM Plug-in Type**                 | The class name for the specific WAM implementation.	The WAM Plug-in Type determines optional and required fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Agent Name**                       | This value must match the value used when the third-party WAM Web Agent was configured.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Agent Secret**                     | This value must match the value used when the third-party WAM Web Agent was configured.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Agent Config Location**            | Required for OAM. This value must contain the full path to an XML network-configuration file generated by the access-management system.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Failover**                         | The default is false, indicating load balancing is enabled and user-session states and configuration data are shared among multiple WAM servers.Select **true** to enable failover, indicating that when one server fails, the next server is used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   > | **Domain Name**                      | Enter the fully-qualified domain name for the Cookie Domain where the WAM session cookie is stored, preceded by a period.For example, `.pingidentity.com`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   > | **Cookie Path**                      | (Required) The default value is the root directory (`/`). Specify a different path for the WAM session cookie location, if necessary.You can find more details in WAM Server documentation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | **Protected Resource**               | (Required) The default value is all files in the root directory (`/*`). Specify a different path to the resources in the protected realm, if necessary.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Error URL**                        | Enter a URL for redirecting the user if there are errors. For example, incorrect parameters in the link.This URL can contain query parameters. The URL has an `errorMessage` query parameter appended to it, which contains a brief description of the error that happened. The error page can optionally display this message on the screen to provide guidance on remedying the problem.When using the `errorMessage` query parameter in a custom error page, adhere to Web application security best practices to guard against common content injection vulnerabilities.If no URL is specified, the appropriate default error landing page appears. Learn more in [Customizable user-facing pages](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_custom_user_facing_pages.html) in the PingFederate documentation.	If you define an error redirect URL, errors are sent to the error URL and logged in the PingFederate server log, but not the PingFederate audit log. |
+   > | **User Identifier**                  | (Required) Defines which attribute parsed from the WAM session cookie is the user identifier for use in the assertion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   > | **Session Token Name**               | (Required) The WAM session cookie name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Session Token LOGGEDOFF Value**    | (Required) The value representing a logged-out session token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   > | **HTTP Only**                        | Enable this option to set the WAM Session Cookie as HTTP Only.If this option is enabled, the browser will send the WAM Session Cookie through HTTP or HTTPS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   > | **Secure**                           | Enable this option to set WAM Session Cookie as secure.If this option is enabled, the browser sends the WAM Session Cookie through HTTPS only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+   > | **PingFederate Base URL**            | The base URL for PingFederate. If specified, this value is used for creating the return URL if the **Cookie Provider URL** is being used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   > | **Authorization Error URL**          | The URL to redirect for authorization errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   > | **Cookie Provider URL**              | The URL for the cookie provider where PingFederate should redirect the request if the WAM session cookie is in a separate domain.This service must be protected by WAM and redirect back to the PingFederate `resumePath`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   > | **Cookie Provider Target Parameter** | The name of the parameter used to send the return URL for the cookie provider.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+   > | **Authentication Service URL**       | The URL to which the user is redirected for an SSO event.This URL overrides the Target Resource, which is sent as a parameter to the Authentication Service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   > | **Authentication Scheme Secret**     | (Required, except for RSA) The shared secret between the adapter and the custom authentication scheme deployed on the WAM server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Per-Adapter SLO URL**              | Enter a URL to use as the redirect target during SLO for this adapter instance, instead of the default value from PingFederate.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+   > | **Account Link Service**             | The URL for the Account Linking Service.This service must be protected by the WAM Web Agent and redirect back to the PingFederate `resumePath`.The local user id is obtained from the WAM session cookie.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+   ![A screenshot that shows the advanced WAM SP Adapter settings.](_images/pwt1563995794959.jpg)
+
+7. (Optional) Click **Show Advanced Fields** to configure how to send extended attributes or to specify OpenToken configuration values or settings.
+
+   Learn more in [Configuring an OpenToken SP Adapter instance](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_config_opentoken_sp_adapt_instance.html) in the PingFederate documentation.
+
+   |   |                                                                                                                                                                                 |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you want to configure the use of OpenToken as part of the WAM adapter configuration, complete the fields as described on the **IdP Adapter** tab and in the following table. |
+
+   You can change default values or settings, depending on your network configuration and other requirements at your site.
+
+   > **Collapse: Advanced Fields**
+   >
+   > | Field                          | Description                                                                                                                                                                                                                                                 |
+   > | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   > | **Send Extended Attributes**   | The method of sending extended attributes. These attributes can be sent along with the request through browser cookies, query parameters, or as an encrypted token.	Learn more about defining the attributes on the Extended Contract tab in step 10.       |
+   > | **OpenToken Transfer Method**  | Specifies how the OpenToken is transferred. Select one of the following options:- Through a cookie
+   >
+   > - As a query parameter
+   >
+   > - Through Form Post                                                                                                             |
+   > | **OpenToken Name**             | The name of the cookie or request attribute that contains the OpenToken. This name should be unique for each adapter instance.                                                                                                                              |
+   > | **OpenToken Password**         | The password used for encrypting extended attributes.	This password is also used to generate the configuration file that the OpenToken agent uses. You must configure a value for the OpenToken Password even if the OpenToken Cipher Suite is set to NULL. |
+   > | **OpenToken Cipher Suite**     | The algorithm, cipher mode, and key size to use for token encryption.                                                                                                                                                                                       |
+   > | **OpenToken Cookie Domain**    | The server domain, preceded by a period.For example, `.example.com`.If you don't specify a domain, the value is obtained from the request.                                                                                                                  |
+   > | **OpenToken Cookie Path**      | The path for the cookie that contains the OpenToken.                                                                                                                                                                                                        |
+   > | **OpenToken Token Lifetime**   | The duration (in seconds) during which the OpenToken is valid. Range is 1 - 28800.                                                                                                                                                                          |
+   > | **OpenToken Session Lifetime** | The duration (in seconds) during which the OpenToken can be re-issued without authentication. Range is 1 - 259200.                                                                                                                                          |
+   > | **Not Before Tolerance**       | The amount of time (in seconds) to allow for clock skew between servers. Range is 0 - 3600.                                                                                                                                                                 |
+   > | **Session Cookie**             | If selected, OpenToken is set as a session cookie (rather than a persistent cookie).Applies only if the **OpenToken Transfer Method** is set as `Cookie`.                                                                                                   |
+   > | **Secure Cookie**              | If selected, the OpenToken cookie is set only if the request is on a secure channel (https).Applies only if the OpenToken Transfer Method is set as 'Cookie'.                                                                                               |
+   > | **Set WAM Cookie**             | If cleared, the WAM Cookie isn't set in the browser.                                                                                                                                                                                                        |
+   > | **Add WAM Token**              | If selected, adds the WAM session token to extended attributes in OpenToken.You can only use this flag if you're sending extended attributes through OpenToken.                                                                                             |
+   > | **Encode Token**               | Select this checkbox to URL encode the token string if the WAM provider requires it.                                                                                                                                                                        |
+   > | **Idle Timeout**               | The idle timeout (in seconds). This value can be used by the specific plugin while creating the session if required.                                                                                                                                        |
+   > | **Max Timeout**                | The max timeout (in seconds). This value can be used by the specific plugin while creating the session.                                                                                                                                                     |
+
+8. Click **Next**.
+
+9. On the **Actions** tab, click **Test Connection** to validate the WAM configuration.
+
+   |   |                                                                                                                                                                                                                |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you're using an OpenToken Adapter Configuration, click the **Invoke Download** link and then click **Export** to download the `agent-config.txt` properties to a directory that the WAM Web Agent can read. |
+
+10. On the **Extended Contract** tab, add any attributes you want to include in the request header. Click **Next**.
+
+11. On the **Summary** tab, check and save your configuration.
+
+    ### Choose from:
+
+    * For PingFederate 10.1 or later: click **Save**.
+
+    * For PingFederate 10.0 or earlier: click **Done**. On the **Manage SP Adapter Instances** tab, click **Save**.
+
+---
+
+---
 title: Configuring the IdP token processor
 description: If you are using PingFederate as an IdP server, configure the Token Processor using the following steps:
 component: webAccessManagement
@@ -785,182 +1304,3 @@ The following figure illustrates the request flow and how the WAM SP Adapter lev
 5. The request is then redirected to the SP Application, which is protected by the third-party WAM Web Agent.
 
 6. The third-party WAM Web Agent intercepts the request, extracts and validates the WAM session cookie, and allows access to the application.
-
----
-
----
-title: Test the IdP adapter
-description: You can test this adapter using the samples applications that are included in the Java Integration Kit. Follow this procedure to verify adapter functions:
-component: webAccessManagement
-page_id: webAccessManagement:web_access_management_wam_integration_kit:pf_wam_ik_test_the_idp_adapter
-canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_integration_kit/pf_wam_ik_test_the_idp_adapter.html
-llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Test the IdP adapter
-
-## About this task
-
-You can test this adapter using the samples applications that are included in the Java Integration Kit. Follow this procedure to verify adapter functions:
-
-## Steps
-
-1. Download the Java Integration kit from the [PingFederate server add-ons page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html).
-
-2. Complete the steps in [Sample application setup](../../java/setup/pf_java_ik_sample_application_setup.html) in the Java Integration Kit documentation to set up an IdP application.
-
-3. Configure an instance of the WAM Adapter.
-
-4. Reconfigure the SP connection to use the WAM Adapter instance.
-
-   Delete the existing adapter instance and map the WAM Adapter instance in its place. For details, see [Managing mappings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_managing_mappings.html) in the PingFederate documentation.
-
-5. On a web page protected by the third-party WAM web Agent, create an "SSO" link to the PingFederate `startSSO` endpoint, including the sample SP's connection ID, in the following format:
-
-   ```none
-   http[s]://<PF_host>:<port>/IdP/startSSO.ping?PartnerSpId=<connection_id>
-   ```
-
-   * `<PF_host>` is the machine running the PingFederate server.
-
-   * `<port>` is the PingFederate port (default value: `9031`).
-
-   * `<connection_id>` is the Connection ID of the SP connection.
-
-6. Access the protected web page by authenticating through the WAM web Agent and click the SSO link.
-
-7. You are logged on to the Java sample application.
-
----
-
----
-title: Test the SP adapter
-description: You can test this adapter using the samples applications that are included in the Java Integration Kit.
-component: webAccessManagement
-page_id: webAccessManagement:web_access_management_wam_integration_kit:pf_wam_ik_test_the_sp_adapter
-canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_integration_kit/pf_wam_ik_test_the_sp_adapter.html
-llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Test the SP adapter
-
-## About this task
-
-You can test this adapter using the samples applications that are included in the Java Integration Kit.
-
-## Steps
-
-1. Download the Java Integration kit from the [PingFederate server add-ons page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html).
-
-2. Complete the steps in [Sample application setup](../../java/setup/pf_java_ik_sample_application_setup.html) in the Java Integration Kit documentation to set up an SP application.
-
-3. Configure an instance of the WAM Adapter as shown in [Setting Up the SP Adapter](pf_wam_ik_configuring_an_sp_adapter_instance.html).
-
-4. Reconfigure the IdP connection to use the WAM Adapter instance.
-
-   Delete the existing adapter instance for the connection and map the WAM Adapter instance in its place.
-
-5. From the Main Menu, click **Adapters** under My SP Configuration.
-
-6. Protect a web page using the WAM web Agent.
-
-7. On the same web server, create an unprotected web page with a hyperlink to PingFederate's SP-initiated SSO endpoint in the following format:
-
-   ```none
-   http[s]://<PF_host>:<port>/sp/startSSO.ping?TargetResource=<protected_resource>&PartnerIdpId=<connection_id>
-   ```
-
-   * `<PF_host>` is the machine running the PingFederate server.
-
-   * `<port>` is the port (default value: `9031`).
-
-   * `<protected_resource>` is the web page protected in the previous step.
-
-   * `<connection_id>` is the Connection ID of the IdP connection.
-
-8. Click the SSO link on the unprotected web page.
-
-   You should arrive at the IdP application's login page.
-
-9. Add at least one of the users in the username drop-down list to the WAM Server.
-
-   Refer to your WAM platform documentation for more information.
-
-10. On the IdP application's login page, log in with a username managed by your WAM platform.
-
-    You should be redirected to a WAM platform-protected web page. Independently, you can view cookies from your browser to see that a WAM session cookie has been created.
-
----
-
----
-title: Token generator sample code
-description: The code snippet below demonstrates using the PingFederate Java STS Client SDK to retrieve a WAM session token through the PingFederate STS.
-component: webAccessManagement
-page_id: webAccessManagement:web_access_management_wam_token_translator:pf_wam_tt_token_generator_sample_code
-canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_token_translator/pf_wam_tt_token_generator_sample_code.html
-llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
----
-
-# Token generator sample code
-
-The code snippet below demonstrates using the PingFederate Java STS Client SDK to retrieve a WAM session token through the PingFederate STS.
-
-```javascript
- // Configure STS Client (SP side / IdP Connection)
- STSClientConfiguration stsConfig = new STSClientConfiguration();
- stsConfig.setStsEndpoint("https://sp.domain.com:9031/sp/sts.wst");
- stsConfig.setOutTokenType(TokenType.BINARY);
-
- // Instantiate the STSClient
- STSClient stsClient = new STSClient(stsConfig);
-
- // Send an RST Issue request to {pingfed} STS
- Element wamsessionToken = stsClient.issueToken(samlToken);
-```
-
----
-
----
-title: Token processor sample code
-description: The code snippet below demonstrates using the PingFederate Java STS Client SDK to send a WAM session token to the PingFederate STS.
-component: webAccessManagement
-page_id: webAccessManagement:web_access_management_wam_token_translator:pf_wam_tt_token_processor_sample_code
-canonical_url: https://docs.pingidentity.com/integrations/webAccessManagement/web_access_management_wam_token_translator/pf_wam_tt_token_processor_sample_code.html
-llms_txt: https://docs.pingidentity.com/integrations/webAccessManagement/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
----
-
-# Token processor sample code
-
-The code snippet below demonstrates using the PingFederate Java STS Client SDK to send a WAM session token to the PingFederate STS.
-
-```javascript
- // Example method for obtaining the WAM Session token.
- // You will need to implement this for your environment.
- String wamSessionToken = getWAMSessionToken();
-
- // Configure STS Client (IdP side / SP Connection)
- STSClientConfiguration stsConfig = new STSClientConfiguration();
- stsConfig.setAppliesTo("http://sp.domain.com");
- stsConfig.setStsEndpoint("https://idp.domain.com:9031/idp/sts.wst");
- stsConfig.setInTokenType(TokenType.BINARY);
-
- // Instantiate the STSClient
- STSClient stsClient = new STSClient(stsConfig);
-
- // Send an RST Issue request to {pingfed} STS
- Element samlToken = stsClient.issueToken(wamSessionToken);
-```

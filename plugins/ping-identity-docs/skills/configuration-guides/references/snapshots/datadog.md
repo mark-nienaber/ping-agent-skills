@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Datadog and PingOne
-description: Learn how to enable SAML SSO with Datadog and PingOne
+description: Configure SAML SSO with Datadog and PingOne — IdP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:datadog:config_saml_datadog_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/datadog/config_saml_datadog_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   before-you-begin: Before you begin

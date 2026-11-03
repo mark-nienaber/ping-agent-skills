@@ -1,32 +1,32 @@
 # Snapshot Manifest - pingcentral
 
 - Product: PingCentral
-- Version: 3.1.1
-- Sync date: 2026-07-10
+- Version: 3.2
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/pingcentral/llms.txt
 - Guides discovered: 4
 - Guides captured: 4
-- Guides fully captured: 1
-- Guides partially captured: 3
+- Guides fully captured: 3
+- Guides partially captured: 1
 - Guides without snapshots: 0
-- Total pages indexed: 301
-- Total snapshot pages captured: 69
+- Total pages indexed: 58
+- Total snapshot pages captured: 49
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| release-notes.md | assembled | <100 pages from release_notes> | 100 | 20 | partial |
-| pingcentral-for-iam-administrators.md | assembled | <99 pages from pingcentral_for_iam_administrators> | 99 | 20 | partial |
-| pingcentral-for-application-owners.md | assembled | <93 pages from pingcentral_for_application_owners> | 93 | 20 | partial |
-| root.md | assembled | <9 pages from root> | 9 | 9 | full |
+| pingcentral-for-iam-administrators.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 29 | 20 | partial |
+| release-notes.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 19 | 19 | full |
+| pingcentral-for-application-owners.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 9 | 9 | full |
+| root.md | assembled | https://docs.pingidentity.com/pingcentral/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 7cfbd1ad03354732ceddcc708f1da4eafbb9e7bc84a211608c86acbbe6c92b10 |
-| snapshots/release-notes.md | 11f65cca444bd54693439150dc7f35016365a853c52a37e120f4ef789ec7d2c1 |
-| snapshots/pingcentral-for-iam-administrators.md | d28e812dec8cb7f8ccd58f49ddf5e28a57042d2d175744921073fcb1d329a005 |
-| snapshots/pingcentral-for-application-owners.md | 50e4a2e5b7109fa4c036726dfcd865df974a9cc2c77fc5bce6e4f0b18ac82a25 |
-| snapshots/root.md | d65a81ea34a6c407644f389ee86c6b4fb6ef18c269b442dcd19f52b068e6bf72 |
+| llms.txt | 6ab1176d6bd3f6042c3dfc8eb89a695dfea351ea0aa7df3e36c4317324e7c682 |
+| snapshots/pingcentral-for-iam-administrators.md | 3625f3a210309cde0564d060bf5dfa7da9515e64f468d26a22f72807e6ec3f28 |
+| snapshots/release-notes.md | b9daa6d21035b8a953a13fdb9bde00f6b31e4d8487cf369a05470967f71a4a9f |
+| snapshots/pingcentral-for-application-owners.md | 1071f6879249f0e446eaf451dba214f4b3d68501df35dae3fd7c8267b1cb4cc6 |
+| snapshots/root.md | d94f465aa68461c0575d3c6fe3dce6305a03f619b957347e705482f23f037084 |

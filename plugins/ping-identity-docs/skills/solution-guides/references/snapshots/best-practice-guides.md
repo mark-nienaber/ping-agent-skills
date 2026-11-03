@@ -1,10 +1,12 @@
 ---
 title: Best Practice Guides
-description: "Best Practices: Session Management"
+description: Index of Ping Identity best practice guides covering session management, passwordless authentication, performance testing, and upgrades.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_best_practice_guides
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_best_practice_guides.html
-revdate: April 8, 2025
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-31T00:00:00Z
 ---
 
 # Best Practice Guides
@@ -12,9 +14,6 @@ revdate: April 8, 2025
 | Use case                                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Best Practices: Session Management](bp_session_mgmt.html)                                            | Session management is the process of managing user sessions in a web application. A session is a series of interactions between users and a web application that take place over a period of time.                                                                                                                                                                                                                      |
-| [Best Practices: Elevated Rights for PingDirectory](bp_pd_elevated_rights.html)                       | This document provides an overview of Ping Identity's recommendations for management of elevated rights in PingDirectory.                                                                                                                                                                                                                                                                                               |
-| [Best Practices: Performance Testing PingDirectory](bp_pd_performance_testing.html)                   | PingDirectory ships with several tools that you can use for performance testing.                                                                                                                                                                                                                                                                                                                                        |
-| [Best Practices: PingDirectory Operational Support](bp_pd_operational_support.html)                   | This document contains recommendations and best practices for the PingDirectory application onboarding process. Additionally, this document provides recommendations on supporting processes that could be used in conjunction with application integration.                                                                                                                                                            |
 | [Best Practices: PingFederate SAML Signing Certificates](htg_best_practice_pf_saml_signing_cert.html) | The following reference guide details the best practices for managing PingFederate Security Assertion Markup Language (SAML) *(tooltip: \<div class="paragraph">&#xA;\<p>A standard, XML-based, message-exchange framework enabling the secure transmittal of authentication tokens and other user attributes across domains.\</p>&#xA;\</div>)* signing certificate settings, depending on your partners' preferences. |
 | [Best Practices: Performance Testing for PingFederate](bp_pf_performance_testing.html)                | This document provides an overview as well as general guidelines related to performance testing methodology for testing a PingFederate server prior to that system entering a customer production environment.                                                                                                                                                                                                          |
 | [Best Practices: Journey to Passwordless](bp_journey_to_passwordless.html)                            | Learn about how passwordless authentication reduces friction for users.                                                                                                                                                                                                                                                                                                                                                 |
@@ -22,368 +21,13 @@ revdate: April 8, 2025
 ---
 
 ---
-title: "Best Practices: Elevated Rights for PingDirectory"
-description: This document provides an overview of Ping Identity's recommendations for management of elevated rights in PingDirectory.
-component: solution-guides
-page_id: solution-guides:best_practice_guides:bp_pd_elevated_rights
-canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_elevated_rights.html
-revdate: April 14, 2025
-page_aliases: ["best_practice_guides:bp_pd_elevated_rights_capabilities.adoc", "best_practice_guides:bp_pd_elevated_rights_aci_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_privileges_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_client_connection_policy_best_practices.adoc", "best_practice_guides:bp_pd_elevated_rights_examples.adoc"]
-section_ids:
-  capabilities: Capabilities
-  privileges: Privileges
-  access-control-instructions-aci: Access control instructions (ACI)
-  client-connection-policy: Client connection policy
-  aci-best-practices: ACI best practices
-  group-based: Group based
-  use-implicit-deny-not-explicit: Use implicit deny, not explicit
-  use-names-with-identifiers-in-acis-and-document: Use names with identifiers in ACIs and document
-  privileges-best-practices: Privileges best practices
-  client-connection-policy-best-practices: Client connection policy best practices
-  not-a-replacement-for-acis: Not a replacement for ACIs
-  define-unauthenticatedinsecure-policy: Define unauthenticated/insecure policy
-  set-restrictive-client-connection-criteria: Set restrictive client connection criteria
-  examples: Examples
----
-
-# Best Practices: Elevated Rights for PingDirectory
-
-This document provides an overview of Ping Identity's recommendations for management of elevated rights in PingDirectory.
-
-PingDirectory is designed as a security product and provides a number of mechanisms that can be used to provide fine-grained control over the elevated rights that can be assigned to an administrator or service account.
-
-## Capabilities
-
-### Privileges
-
-PingDirectory has a number of defined privileges that are used for fine-grained control of privilege.
-
-The capabilities of the Directory Manager account that is created by default during a PingDirectory install is granted by assignment of privileges. This default Directory Manager account itself does not possess any special privileges or capabilities beyond those assigned by privileges. Any account in the directory that is assigned the same privileges as that default Directory Manager will have exactly the same level of access as that Directory Manager account.
-
-The privileges assigned to the Directory Manager account can be removed (or the account itself can be deleted) without impacting the functionality of the directory.
-
-| Privilege name                               | Root privilege | Privilege description                                                                                                                                                                                                                                                                                                        |
-| -------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `audit-data-security`                        | Yes            | Provides the ability to audit the security of data in any backend. The user still needs access control permission to perform the requested operation                                                                                                                                                                         |
-| `backend-backup`                             | Yes            | Provides the ability to perform a backup of one or more backends with the server online via the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                          |
-| `backend-restore`                            | Yes            | Provides the ability to perform a restore of a backend with the server online through the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                                |
-| `bypass-acl`                                 | Yes            | Provides the ability to bypass all access control evaluation for any type of operation.&#xA;&#xA;Users with the bypass-acl privilege can still be subject to other restrictions, such other privileges that might be required to process a particular operation.                                                             |
-| `bypass-pw-policy`                           | No             | Provides the ability to exempt an administrator from certain types of password policy evaluation when performing an operation against another user.                                                                                                                                                                          |
-| `bypass-read-acl`                            | No             | Provides the ability to bypass all access control evaluation, but only for bind, compare, and search operations. Normal access control evaluation is still performed for add, delete, extended, modify, and modify DN operations.                                                                                            |
-| `collect-support-data`                       | Yes            | Allows the requester to invoke the collect-support-data tool using an administrative task or extended operation.                                                                                                                                                                                                             |
-| `config-read`                                | Yes            | Provides the ability to perform search and compare operations in the server configuration. These operations are still subject to access control restrictions.                                                                                                                                                                |
-| `config-write`                               | Yes            | Provides the ability to perform add, delete, and modify operations in the server configuration. These operations are still subject to access control restrictions.                                                                                                                                                           |
-| `disconnect-client`                          | Yes            | Provides the ability to terminate an arbitrary client connection. The user still needs access control permission to perform the requested operation.                                                                                                                                                                         |
-| `exec-task`                                  | No             | Allows the requester to schedule an exec task.                                                                                                                                                                                                                                                                               |
-| `file-servlet-access`                        | Yes            | Indicates that the requester may be permitted access to the content exposed by file servlet instances that require this privilege.                                                                                                                                                                                           |
-| `jmx-notify`                                 | No             | Provides the ability to subscribe to receive JMX notifications.                                                                                                                                                                                                                                                              |
-| `jmx-read`                                   | No             | Provides the ability to perform read operations using JMX.                                                                                                                                                                                                                                                                   |
-| `jmx-write`                                  | No             | Provides the ability to perform write operations using JMX.                                                                                                                                                                                                                                                                  |
-| `ldif-export`                                | Yes            | Provides the ability to perform LDIF export operations with the server online through the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                                |
-| `ldif-import`                                | Yes            | Provides the ability to perform LDIF import operations with the server online through the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                                |
-| `lockdown-mode`                              | Yes            | Provides the ability to cause the server to enter and leave lockdown mode or to access the server while it is in lockdown mode. The user still needs access control permission to perform the requested operation.                                                                                                           |
-| `manage-topology`                            | Yes            | Provides the ability to manage a topology of server instances, including adding servers to and removing servers from a topology. The user still needs access control permission to perform the requested operation.                                                                                                          |
-| `metrics-read`                               | Yes            | Provides the ability to search or retrieve data in the metrics backend. The user still needs access control permission to perform the requested operation.                                                                                                                                                                   |
-| `modify-acl`                                 | Yes            | Provides the ability to modify access control rules. The user still needs access control permission to perform the requested operation.                                                                                                                                                                                      |
-| `password-reset`                             | Yes            | Provides the ability to change another user's password. The user still needs access control permission to perform the requested operation.                                                                                                                                                                                   |
-| `permit-externally-processed-authentication` | No             | Provides the ability for the requester to issue a bind request that uses the `UNBOUNDID-EXTERNALLY-PROCESSED-AUTHENTICATION` Simple Authentication and Security Layer (SASL) mechanism.                                                                                                                                      |
-| `permit-forwarding-client-connection-policy` | No             | Provides the ability to request that an operation be processed using a specified client connection policy.                                                                                                                                                                                                                   |
-| `permit-get-password-policy-state-issues`    | Yes            | Provides the ability for the requester to issue a bind request that includes the get password policy state issues request control. The bind request must also include the retain identity request control.                                                                                                                   |
-| `privilege-change`                           | Yes            | Provides the ability to alter the set of privileges assigned to an individual user or to change the set of privileges that can be automatically assigned to root users.                                                                                                                                                      |
-| `proxied-auth`                               | No             | Provides the ability to request that an operation be processed using an alternate authorization identity, such as using the proxied authorization or intermediate client request control or using a SASL authorization identity.                                                                                             |
-| `server-restart`                             | Yes            | Provides the ability to request a server restart using the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                                                               |
-| `server-shutdown`                            | Yes            | Provides the ability to request a server shutdown using the tasks interface. The user still needs access control permission to perform the requested operation.                                                                                                                                                              |
-| `soft-delete-read`                           | Yes            | Provides the ability to retrieve, compare, modify, delete, or undelete soft-deleted entries. The user still needs access control permission to perform the requested operation.                                                                                                                                              |
-| `stream-values`                              | Yes            | Provides the ability to use the stream directory values extended operation to obtain a list of all entry DNs or unique attribute values or to use the stream proxy values extended operation to obtain information from the global index. The user still needs access control permission to perform the requested operation. |
-| `third-party-task`                           | Yes            | Provides the ability to invoke a third-party task in the server. The user still needs access control permission to perform the requested operation.                                                                                                                                                                          |
-| `unindexed-search`                           | Yes            | Provides the ability to perform an expensive unindexed search in a local DB backend. The user still needs access control permission to perform the requested operation.                                                                                                                                                      |
-| `unindexed-search-with-control`              | No             | Provides the ability to perform an unindexed search if the request also includes the permit unindexed search request control.                                                                                                                                                                                                |
-| `update-schema`                              | Yes            | Provides the ability to alter the server schema. The user still needs access control permission to perform the requested operation.                                                                                                                                                                                          |
-| `use-admin-session`                          | Yes            | Provides the ability to use an administrative session to request that operations be processed in a dedicated thread pool.                                                                                                                                                                                                    |
-
-Privileges are granted to an account by adding the desired privilege to the accounts `ds-privilege-name` attribute.
-
-This attribute can be explicitly populated, populated with a virtual attribute, or a combination of the two.
-
-Privileges allow us to grant accounts the ability to perform basic administrative tasks, such as `server-shutdown`, without needing to grant more powerful privileges, such as `bypass-aci`.
-
-### Access control instructions (ACI)
-
-ACIs are used to define the level of access an account can have to entries and attributes in the directory. By default, PingDirectory is configured with an implicit deny, so read/write access to entries must be explicitly granted.
-
-### Client connection policy
-
-A number of different client connection policies may be defined on a server. A client connection policy can, among other things, determine:
-
-* Which branches of the directory are accessible
-
-* Allow operation types (for example, search, add, delete, and modify)
-
-* Allowed filter types
-
-* Search size and time restrictions
-
-* Attributes to be excluded from search results
-
-* Attributes that cannot be included in search filters
-
-* Attributes that cannot be modified (even if ACIs would normally allow)
-
-Which client connection policy applies to an authenticated account can be determined by:
-
-* Included/excluded IP address or IP range
-
-* Connection type (HTTPs, LDAPs, LDAP)
-
-* Location of authenticated account in the directory
-
-* Group membership of authenticated account
-
-* Attribute value contained in the authenticated account
-
-* Authenticated account privileges
-
-A common use of client connection policies is creating a connection policy for insecure LDAP communications where only accounts in specific groups are allowed to connect insecurely and can only see a limited number of entries and attributes.
-
-## ACI best practices
-
-Best practices for the definition of ACIs in a PingDirectory environment include:
-
-* Default to deny
-
-  * Don't define any global permissive ACIs for all users.
-
-  * Ensure that unless explicitly granted, all security decisions are a deny.
-
-* Group-based ACI
-
-  * All ACIs should be assigned through group membership.
-
-  * Do not assign ACIs to specific user accounts.
-
-* Implement ACI identifiers and document thoroughly
-
-### Group based
-
-Ping Identity highly recommends using a set of standardized, group-based ACIs to grant permissions to the directory. Managing the application of ACIs through group membership provides a number of benefits:
-
-* Easier to understand
-
-  * You only need to look at group membership to determine what a user has access to. You don't need to decode ACIs to see which ACIs apply to a user.
-
-* Simplified auditing (just look at group membership)
-
-* Greatly simplifies the granting of rights
-
-* Reduces the total number of ACIs
-
-  * ACIs always get evaluated, so keeping the number of defined ACIs relatively small can help performance.
-
-* Reduce risk and ACI proliferation
-
-  * Application-specific or user-specific ACIs can be difficult to maintain. It can be difficult to know if an ACI is safe to remove or if it grants too many rights to an application. Group-based ACIs transform this issue into a group management issue that administrators are much better equipped to deal with.
-
-  * Creating generic, reusable ACIs greatly reduces or eliminates the need to create custom, application-specific ACIs for each new application or unique use case.
-
-**Example**
-
-For a specific user organizational unit (OU) in the directory, you could create a set of group-based ACIs that grant the following:
-
-* Read/Search access to non-sensitive attributes
-
-* Read/Search access to sensitive attributes, such as SSN or date of birth.
-
-* Write access to non-sensitive attributes
-
-* Write access to sensitive attributes
-
-* Create permission for specific entry types (create for `inetOrgPerson` or `groupOfUniqueNames`)
-
-* Write access to specific attribute (for example, `uniqueMember` grants the ability to manage group membership separately from the ability to create/delete groups)
-
-* Import/Export rights (to allow for `moddn` operations)
-
-* Delete permission for specific entry types
-
-This might initially look like a lot of ACIs to create for each OU in your directory. However, these ACIs greatly reduce or eliminate the need for the creation of future ACIs, as 95% of your conceivable use cases for granting of permissions can now be accomplished through group membership.
-
-PingDirectory allows for the use of nested groups, so it is possible to create a Level1 Help Desk group and nest it into multiple ACI groups across multiple OUs to simplify administration.
-
-### Use implicit deny, not explicit
-
-Using the above methodology means an entry will by default have no access to any entries in the directory. Any access granted to an account will be an accumulation of explicitly granted permissions. Starting from a position of no privilege and only having permissive ACIs greatly simplifies the evaluation of privileges when troubleshooting or verifying that an account has the correct rights.
-
-One of the biggest issues with a deny ACI is that the deny is being implemented as a security control to remove access that would otherwise be granted. This implies that the account in question would by default have access to data it should not unless action is explicitly taken to deny that access.
-
-Having only permissive ACIs means that mistakes in granting rights to a user will usually result in a user not having enough access. Using a deny ACI opens us up to the possibility of a mistake granting a user rights they should not have.
-
-If you don't grant a user enough privileges, the user will usually let you know. Detection of this type of mistake is usually easy (the user is motivated to let you know) and poses low security risk to the organization.
-
-If you grant a user or account too many permissions, no one will likely notice. Even if a user or application owner notices, they might not consider this an issue and are unlikely to report it. Detection of this type of mistake is very difficult and can pose a high security risk to the organization.
-
-### Use names with identifiers in ACIs and document
-
-When an ACI has been in place for an extended period of time it might not be a simple process to determine why that ACI exists, what exactly it does, and if it's safe to modify or delete it. This presents a number of auditing and supportability concerns and can produce a directory whose security stance cannot be fully determined.
-
-It is highly recommended when creating ACIs that each ACI contain a descriptive name with a unique identifier that can be cross-referenced with a version document containing:
-
-* ACI Unique Identifier
-
-* ACI High Level Description
-
-* ACI Business Case
-
-* Change order/request id used to implement the ACI
-
-* Responsible party
-
-* Parties to be informed if ACI needs to be deleted or changed
-
-For example, we might have an ACI that looks like:
-
-```
-(target="ldap:///cn=changelog")(targetscope="subtree")(targetattr="*||+")(version
-          3.0; acl "GL-SYNC-1: Allow Read access to changelog backend";allow(read,search,compare)
-          groupdn="ldap:///cn=SyncReadGrp,ou=Groups,ou=Administrators,dc=example,dc=com";)
-```
-
-With a corresponding entry in the ACI document similar to the following.
-
-**GL-SYNC-1**
-
-|                     |                                                                                                                                                                                                 |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Description         | Grants read access to cn=changelog for the PingDataSync service account so it can monitor for changes to user data                                                                              |
-| Business case       | CRM Unit needs to monitor for new customer entries in the directory so they can retrieve application generated unique identifiers and associate those with customer entries in the CRM database |
-| Change order        | Implemented 12/24/2020 under CR23423                                                                                                                                                            |
-| Request ID          | Requested 6/15/2020 with REQ 1231254                                                                                                                                                            |
-| Area owner          | US Customer Relations                                                                                                                                                                           |
-| Responsible parties | Manager – Alice Smith (bob.smith\@company.com)BA – Bob Jones (bob.jones\@company.com)                                                                                                           |
-
-## Privileges best practices
-
-Privileges are assigned to an entry through the population of the `ds-privilege-name` attribute with a list of the privileges that entry should have.
-
-Ongoing maintenance and auditing of privilege assignment can be challenging if privileges are assigned through direct population of the `ds-privilege-name` attribute. Ping Identity does not recommend direct population of this attribute except in special cases.
-
-Ping Identity recommends the use of group-membership based virtual attributes to populate privileges.
-
-For example, to assign the `pwd-reset` privilege a virtual attribute would be created similar to:
-
-```shell
-dsconfig create-virtual-attribute \
- --name ADM-Password-Reset-Priv --type constructed \
- --set enabled:true --set attribute-type:ds-privilege-name \
- --set enabled:true --set attribute-type:ds-privilege-name \
- --set group-dn:cn=ADM-PasswordReset,ou=groups,ou=admins,dc=example,dc=com \
- --set value-pattern:password-reset
-```
-
-Using this virtual attribute, an account can be granted the password reset privilege by adding the user to the `ADM-PasswordReset` group.
-
-**Exception**
-
-You might encounter a potential bug with applications that heavily use Proxy Auth privileges where security context changes multiple times over a single connection. This behavior is typically limited to applications such as PingFederate and Siteminder. An existing connection that's heavily used for Proxy Auth might forget what privileges it has unless they are explicitly assigned to the entry's `ds-privilege-name` attribute.
-
-## Client connection policy best practices
-
-Client connection policies can be used to control what a client can see or do at a very high level. You can use client connection policies to enforce a certain level of security that is not available through other mechanisms.
-
-There are a number of common use cases for client connection policies:
-
-* Allow exceptions to requirement for secure connections based on a service account's group membership
-
-* Limit the subtrees viewable or accessible to a client
-
-  * Useful when storing both employee and customer data on the same server to logically isolate the branches from each other for most applications
-
-* Restrict access or disallow access to PingDirectory based on client IP address (for example, don't allow adds/mod/writes from the Internet even if the account has ACIs granting those permissions)
-
-* Place restrictions on allowable search filters
-
-* Enforce limits on poorly behaving applications or applications that are yet to be vetted by the directory administrators
-
-* The calculation of expensive virtual attributes can be restricted so that they only occur over a specific connection policy
-
-The client connection policy associated with a particular connection can change over time. The client connection policy will be determined:
-
-* When the connection is initially established
-
-* After any successful Bind operation
-
-* After a StartTLS request is received
-
-### Not a replacement for ACIs
-
-Care should be taken not to rely too heavily on connection policies to enforce security that can be addressed at a lower level by ACIs or Privileges.
-
-If you don't want a particular user to have access to `ou=Customers`, for example, you could create a connection policy that prevents that user from seeing `ou=Customers`. However, ACIs should also be created to ensure that the user does not have access to those entries if a client connection policy mistake is made.
-
-|   |                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Creating new client connection policies can easily introduce issues in the client connection policy evaluation order and process a more permissive policy before the more restrictive policies. |
-
-### Define unauthenticated/insecure policy
-
-When clients connect to PingDirectory, the initial connection is almost always unauthenticated.
-
-If you are deleting the default client connection policy (or modifying it), make sure that there is at least one client connection policy that allows for a connection to transition from an unauthenticated state to an authenticated state or to allow an unauthenticated connection to send a StartTLS control.
-
-### Set restrictive client connection criteria
-
-The evaluation order defined for a client connection policy will determine which client connection policy a client receives if it meets the criteria for more than one client connection policy. This has the potential to create unexpected scenarios if a valid client connection state is not considered or tested during the design of the client connection criteria and client connection policies.
-
-Best practice is to implement mutually exclusive client connection criteria where possible to reduce or eliminate reliance on the evaluation order index when a connection's client connection policy is determined.
-
-## Examples
-
-The following is a sample list of group based ACIs that might be created for an OU that contains employee accounts:
-
-```shell
-dn: ou=people,ou=internal,dc=example,dc=com
-
-aci: (target =
-"ldap:///ou=people,ou=internal,dc=example,dc=com")(targetattr = "* || +") (version 3.0; acl "IP1 read internal people ou"; allow
-(search,read,compare)
-(groupdn="ldap:///cn=ADM-InternalPeopleRead,ou=groups,ou=admins,dc=example,dc=com");)
-
-aci: (target =
-"ldap:///ou=people,ou=internal,dc=example,dc=com")(targetattr != "userpassword || authpassword") (version 3.0; acl "IP2 write internal people"; allow (write) (groupdn="ldap:///cn=ADM-InternalPeopleUpdate,ou=groups,ou=admins,dc=example,dc=com");)
-
-aci: (target = "ldap:///ou=people,ou=internal,dc=example,dc=com")(targetattr = "userpassword || authpassword") (version 3.0; acl "IP3 password update internal people"; allow (write)
-(groupdn="ldap:///cn=ADM-InternalPeoplePwdReset,ou=groups,ou=admins,dc=example,dc=com");)
-
-aci: (target = "ldap:///ou=people,ou=internal,dc=example,dc=com") (version 3.0; acl "IP4 add internal people"; allow (add)
-(groupdn="ldap:///cn=ADM-InternalPeopleAdd,ou=groups,ou=admins,dc=example,dc=com");)
-
-aci: (target = "ldap:///ou=people,ou=internal,dc=example,dc=com") (version 3.0; acl "IP5 delete internal people"; allow (delete)
-(groupdn="ldap:///cn=ADM-InternalPeopleDel,ou=groups,ou=admins,dc=example,dc=com");)
-
-aci: (target = "ldap:///ou=people,ou=internal,dc=example,dc=com") (version 3.0; acl "IP6 move branch internal people"; allow
-(import,export)
-(groupdn="ldap:///cn=ADM-InternalPeopleModDN,ou=groups,ou=admins,dc=example,dc=com");)
-```
-
-In this example, if we wanted to give the help desk the ability to search for user accounts, read user accounts, and reset passwords, we would place the help desk users into the following groups (either directly or, more likely, by creating a help desk group and nesting it into these groups):
-
-* `ADM-InternalPeopleRead`
-
-* `ADM-InternalPeoplePwdReset`
-
-With descriptive group names, this makes the determination of a user's rights to the directory intuitively obvious.
-
-One further item to note is that the ACI that grants write access to `userPassword` (IP3) will need to be used in conjunction with the `password-reset` privilege before the help desk user can reset an employee's password. In the Privileges best practices section, there is an example virtual attribute that is used to assign the `password-reset` privilege to users that are direct or indirect members of the group `ADM-PasswordReset`.
-
-To enable help desk users to reset the passwords of employees, those help desk users would need to be added to `ADM-InternalPeoplePwdReset`, which grants write access to `userPassword`. Then you would need to nest the `ADM-InternalPeoplePwdReset` group into the `ADM-PasswordReset` group that is used by that virtual attribute, which will grant those help desk users the `password-reset` privilege.
-
----
-
----
 title: "Best Practices: Journey to Passwordless"
-description: Learn about how passwordless authentication reduces friction for users.
+description: "Journey to passwordless authentication: how eliminating passwords reduces user friction and improves security with PingOne."
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_journey_to_passwordless
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_journey_to_passwordless.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 13, 2022
 ---
 
@@ -447,10 +91,12 @@ You can balance security and experience by managing risk.
 
 ---
 title: "Best Practices: Performance Testing for PingFederate"
-description: This document provides an overview as well as general guidelines related to performance testing methodology for testing a PingFederate server prior to that system entering a customer production environment.
+description: "Performance testing methodology for PingFederate: load generation, tooling, and scalability testing before production deployment."
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pf_performance_testing
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pf_performance_testing.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 1, 2025
 section_ids:
   audience: Audience
@@ -580,336 +226,13 @@ Our next installment of this series will move into a discussion of how to set up
 ---
 
 ---
-title: "Best Practices: Performance Testing PingDirectory"
-description: PingDirectory ships with several tools that you can use for performance testing.
-component: solution-guides
-page_id: solution-guides:best_practice_guides:bp_pd_performance_testing
-canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_performance_testing.html
-revdate: April 14, 2025
-section_ids:
-  performance-testing: Performance testing
-  creating-test-entries: Creating test entries
-  searchrate-testing: Searchrate testing
-  authrate-testing: Authrate testing
-  modrate-testing: Modrate testing
----
-
-# Best Practices: Performance Testing PingDirectory
-
-PingDirectory ships with several tools that you can use for performance testing.
-
-## Performance testing
-
-The following table explains what each tool does.
-
-| Tool name    | Description                             |
-| ------------ | --------------------------------------- |
-| `searchrate` | Test search performance                 |
-| `authrate`   | Test authentication performance         |
-| `modrate`    | Test modification and write performance |
-
-## Creating test entries
-
-Before testing, you should create some entries to test with. The easiest way to do this is by creating a template that can be used with the `make-ldif` utility.
-
-1. Create a template file called `templateTest.tmp`:
-
-   ```text
-   define suffix=dc=example,dc=com
-   define maildomain=example.com
-   define numusers=5001
-
-   branch: ou=PerfTest,[suffix]
-   subordinateTemplate: person:[numusers]
-
-   template: person
-   rdnAttr: uid
-   objectClass: top
-   objectClass: person
-   objectClass: organizationalPerson
-   objectClass: inetOrgPerson
-   givenName:  <first>
-   sn:  <last>
-   cn: {givenName} {sn}
-   initials: {givenName:1}<random:chars:ABCDEFGHIJKLMNOPQRSTUVWXYZ:1>{sn:1}
-   employeeNumber:  <sequential:0>
-   uid: user.{employeeNumber}
-   mail: {uid}@[maildomain]
-   userPassword: Password_123
-   telephoneNumber:  <random:telephone>
-   homePhone:  <random:telephone>
-   pager:  <random:telephone>
-   mobile:  <random:telephone>
-   street:  <random:numeric:5>  <file:streets>  Street
-   l:  <file:cities>
-   st:  <file:states>
-   postalCode:  <random:numeric:5>
-   postalAddress: {cn}${street}${l}, {st} {postalCode}
-   description: This is the description for {cn}.
-   ```
-
-2. To create an LDIF file that can be used to create test users, run `make-ldif` with the template file:
-
-   ```shell
-   bin/make-ldif --templatefile templateTest.tmp --ldiffile testUser.ldif
-   ```
-
-3. To create the `testuser` organizational unit (OU) and the test users in the directory, apply the LDIF:
-
-   ```shell
-   bin/ldapmodify -a -f testUser.ldif
-   ```
-
-## Searchrate testing
-
-Now you can run `searchrate`. Running this utility on the same server hosting the directory being tested will have some impact on performance results.
-
-```shell
-bin/searchrate --hostname [server name] --port [LDAP port] \
---bindDN "cn=directory manager" \
---bindPassword [directory manager password] \
---baseDN dc=example,dc=com \
---scope sub --filter "(uid=user.[1-5000])" \
---attribute givenName --attribute sn --attribute mail \
---numThreads 10
-```
-
-The output will look similar to:
-
-```text
-      Recent      Recent         Recent      Recent       Overall     Overall
-Searches/Sec  Avg Dur ms   Entries/Srch  Errors/Sec  Searches/Sec  Avg Dur ms
------------- ------------  ------------ ------------ ------------ ------------
-    9703.655       0.204          1.000       0.000      8261.414       0.239
-    9867.418       0.201          1.000       0.000      8796.509       0.225
-```
-
-Increasing the thread count will improve throughput for lower values. Higher thread counts will have diminishing returns on performance.
-
-## Authrate testing
-
-You should test authentication rate. `Authrate` testing will be similar to `searchrate` testing.
-
-The following command issues a search request to find a user and then a bind request to authenticate that user:
-
-```shell
-bin/authrate --hostname [server name] --port [LDAP port] \
---bindDN "cn=directory manager" --bindPassword [password] \
---baseDN dc=example,dc=com --scope sub --filter "(uid=user.[1-5000])" \
---credentials Password_123 --numThreads 10
-```
-
-The thread count should be varied to get an idea of how thread count (connection count) will impact performance. Test results will look similar to:
-
-```text
-    Recent        Recent       Recent      Overall      Overall
- Auths/Sec    Avg Dur ms   Errors/Sec    Auths/Sec   Avg Dur ms
------------- ------------ ------------ ------------ ------------
-  4131.452         0.482        0.000     3634.848        0.547
-  4097.089         0.486        0.000     3789.004        0.525
-  3829.309         0.520        0.000     3799.079        0.524
-```
-
-## Modrate testing
-
-The `modrate` tool tests the rate at which the directory can process modify operations. The arguments and output format will be similar to the other rate tools.
-
-```shell
-bin/modrate --hostname [server name] --port [LDAP port] \
---bindDN "cn=directory manager" \
---bindPassword [directory manager password] \
---entryDN "uid=user.[1-5000],ou=perftest,dc=example,dc=com" \
---attribute description --valueLength 12 \
---numThreads 10
-```
-
-Output will look similar to:
-
-```text
-     Recent       Recent       Recent      Overall      Overall
-   Mods/Sec   Avg Dur ms   Errors/Sec     Mods/Sec   Avg Dur ms
------------- ------------ ------------ ------------ ------------
-   6505.814        1.530        0.000     6505.811        1.530
-   8270.312        1.206        0.000     7387.366        1.349
-   9295.419        1.073        0.000     8023.173        1.242
-```
-
-|   |                                                                                   |
-| - | --------------------------------------------------------------------------------- |
-|   | Remember, varying the thread or connection count will impact performance results. |
-
----
-
----
-title: "Best Practices: PingDirectory Operational Support"
-description: This document contains recommendations and best practices for the PingDirectory application onboarding process. Additionally, this document provides recommendations on supporting processes that could be used in conjunction with application integration.
-component: solution-guides
-page_id: solution-guides:best_practice_guides:bp_pd_operational_support
-canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_operational_support.html
-revdate: April 14, 2025
-section_ids:
-  schema-dictionary: Schema dictionary
-  attributes: Attributes
-  syntax: Syntax
-  example: Example
-  ownership-and-change-process: Ownership and change process
-  attribute-metadata: Attribute metadata
-  application-onboarding: Application onboarding
-  application-profiling: Application profiling
-  schema-modification: Schema modification
-  json-attributes: JSON attributes
----
-
-# Best Practices: PingDirectory Operational Support
-
-This document contains recommendations and best practices for the PingDirectory application onboarding process. Additionally, this document provides recommendations on supporting processes that could be used in conjunction with application integration.
-
-## Schema dictionary
-
-The schema dictionary is an often overlooked portion of running a well-managed directory. It can be time-consuming to create from scratch, but you'll get that time investment back.
-
-### Attributes
-
-A schema dictionary does not need to contain all of the attributes that you have defined in the schema. It should only contain those attributes that will get used by applications and other consumers of the directory and whose documentation is beneficial. You don't need to thoroughly document operational attributes or attributes that are never used.
-
-### Syntax
-
-A schema dictionary should contain a thorough description of the attribute syntax and format in both the directory and in any data sources that feed that data into the directory.
-
-For example, for `HRemployeeID` you might have something like this:
-
-```
-HRemployeeid
-Directory: Multi-valued, Case-Insensitive Unicode, Min. Length 5,
-Max. Length 90
-Peoplesoft: Single-valued, VARCHAR(30)
-ContractorDB: Single-valued, NUM(45)
-```
-
-It can save a lot of time if you can get your developers to look at this document when they write their code. Having an attribute that is always a five-digit number can be dangerous if the source definition is VARCHAR. Documenting the real data format prevents developers from using an implied data format and hard coding something that will cause problems later.
-
-### Example
-
-Let's say you have an attribute called `HRemployeeID` that is used as a user's uid. In this example, it has always been a six-digit number. Then you hire your millionth employee. You're faced with what could be a difficult decision: how many of your application entitlement databases are using `HRemployeeID` as the key field? How many of these have that field defined as being six characters long because IDs are never longer than that? And how many of those have defined that field as an integer because it's always been an integer? Keeping the six character length and moving to alphanumeric will probably break some of your apps, but so will moving to a seven-digit integer.
-
-The schema dictionary provides an easy means of preventing programmers and database administrators from making simple mistakes like this. It's not going to solve all of your issues, but most coders, database administrators, and application architects will read the document.
-
-It's easy for a programmer to make a mistake with implied formats. Recovering from that mistake after it's been in production for a few years is hard. Just making sure app designers are aware that many of your attributes are case-insensitive all by itself will fully return your time investment.
-
-## Ownership and change process
-
-Most of the data that's stored in your directory is not owned or managed by you, and you're probably the only person in your organization who knows that.
-
-Adding some verbiage into the schema dictionary as to who the owner is for each attribute and what the change process is for that attribute will save you a lot of time.
-
-This is also an opportunity to keep your directory clean. On a regular basis, you should reach out the data owners for each attribute and have them certify the information that you have recorded about that attribute.
-
-If you can't find an owner for an attribute, you should remove it from your directory (after giving advance notice first to your app owners, especially the ones that might be using that attribute). The default owner of an unowned attribute that remains in your directory is you, which can lead to issues such as governance difficulties and audit compliance if you don't have accurate information about the attribute.
-
-Once a year, you should provide attribute owners with a list of groups and accounts in the directory that have read and write access to their attributes. It's critical that access decisions to potentially sensitive attribute information are approved by the owners of that data and not by an area (the directory support team) that does not own that data.
-
-## Attribute metadata
-
-Directory users are constantly getting themselves into trouble by thinking they understand what the attributes stored in your directory mean.
-
-For example, with a `streetAddress` attribute, you know that a user has at least two business addresses in HR: a physical location and a physical mailing address. And you know that about 5% of the time, those two are different. You also know which of those two got mapped to `streetAddress` in our directory, but not everyone using the attribute is aware of that.
-
-The schema dictionary is a great place to store information about your attributes that your users need. Initially, you won't have much metadata to worry about, but as identities get more complicated and start coming from a larger and larger number of disparate sources, the volume of metadata (and the importance of having it easily available) will grow.
-
-Metadata can include:
-
-* A description of what the attribute is
-
-* Level of assurance
-
-* Data classification
-
-* Appropriate usage (for example, `streetAddress` sourced from Database A was collected under a EULA that prohibits usage for advertising)
-
-|   |                                                                                                                                                                                                                                     |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To understand more about metadata documentation, you should reading up on Master Data Management (MDM) methodologies. If you've been doing IDM for a while, you'll realize fairly rapidly that IDM is essentially MDM for identity. |
-
-## Application onboarding
-
-About the only time an application team will feel motivated to answer your questions and provide documentation about their application is while they're waiting for you to approve creation of their service account. While they're waiting, here is some of the data you will want to collect:
-
-* Expected SLAs
-
-  You'll want to collect data about how responsive they expect the directory to be. This can be used later as business requirements or justification when you want to request more server resources.
-
-* Change windows
-
-  Knowing the change windows for your consuming applications can help you identify the best time to perform maintenance. When asking the application areas for this, it should be made clear that staying in their change windows will not be guaranteed and is just best effort.
-
-* Financial impact
-
-  How much revenue an application generates and how much money is lost when it is not available is very useful information to have when you are building a business case for funding and resources.
-
-  * Revenue generated per year
-
-  * Revenue lost for 1 minute / 10 minute / 30 minute / 1 hour / full day outage.
-
-* Service account password change process
-
-  Application support teams rotate into and out of their areas all of the time. If you ever get into a situation where you want to mandate a password change after an application has been in place for more than a couple of years you might discover that no one knows how to safely change that password.
-
-* Contact information
-
-  This can be useful to have documented somewhere if you notice that a specific application is creating issues in the directory (especially if the issues are only moderately impactful and don't rise to the level of an incident).
-
-  You should send an email to all of your application contacts a few times a year so that you can keep the contact list updated.
-
-## Application profiling
-
-PingDirectory provides the ability to filter the data written to access logs based on connection criteria (see the appendix for a configuration example). This provides us with a mechanism to create a custom access log that only contains operations performed by specific accounts.
-
-This can be used with new or existing applications to collect data about how the application behaves. The bin/summarize-access-log utility can be used against this application-specific log file to generate an overview of the types of searches that are run by the application, index utilization, errors, and an operation response time histogram.
-
-Having this information documented provides a useful comparison if the application begins to experience production issues and can greatly simplify troubleshooting.
-
-## Schema modification
-
-The ability to extend the schema should not be delegated to any groups outside of the directory administrators.
-
-If an application area needs to extend the schema they will need to document their requirements. Their documentation should include:
-
-* Attribute names
-
-* objectclass definitions
-
-* Single or multi-valued
-
-* Attribute syntaxes
-
-* Attribute indexing requirements
-
-* Who owns the data in the attribute
-
-* How the data is stored in the system of record (if the directory will not be the system of record)
-
-The application area might need some help and guidance to answer these questions.
-
-Before extending the schema, the data owners associated with this new data should be contacted and their approval granted and documented.
-
-### JSON attributes
-
-If an application's data storage requirements cannot easily be met by a defined, structured schema (for example, largely non-homogeneous data), consider creating application specific JSON attributes for the application.
-
-Because JSON attributes can contain any JSON-formatted set of data, they're an ideal candidate for storing complex data and relationships that cannot be easily defined or stored in a traditional hierarchical data model.
-
-Because there could be little enforcement as to what gets populated, care should be taken with JSON attributes, and their usage should be reviewed on an annual basis.
-
-Optionally, you can place restrictions on JSON attributes to restrict things such as allowable keys, must and may keys, and syntaxes. You can find more information in [Configuring JSON attribute constraints](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_config_json_attr_constraints.html) for details on how to implement JSON restrictions and JSON key indexing.
-
----
-
----
 title: "Best Practices: PingFederate SAML Signing Certificates"
-description: "The following reference guide details the best practices for managing PingFederate Security Assertion Markup Language (SAML) signing certificate settings, depending on your partners' preferences."
+description: Best practices for managing PingFederate SAML signing certificates, including self-signed or CA-signed certificates, key length, and rotation.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_best_practice_pf_saml_signing_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_best_practice_pf_saml_signing_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   component: Component
@@ -1014,10 +337,12 @@ For more information on whether you need a CA-signed certificate for SAML signat
 
 ---
 title: "Best Practices: Planning your upgrade"
-description: Upgrading your software is essential to maintaining a secure environment that responds to your business needs. This planning guide is intended to supplement your internal upgrade protocols.
+description: "Plan a Ping Identity software upgrade: assessment checklist, product-specific steps, rollback preparation, and testing guidance."
 component: solution-guides
 page_id: solution-guides:best_practice_guides:htg_plan_software_upgrade
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_plan_software_upgrade.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 25, 2025
 page_aliases: ["best_practice_guides:htg_upgrade_planning_guide.adoc", "best_practice_guides:htg_plan_upgrade_process.adoc", "best_practice_guides:erj1574373609467.adoc", "best_practice_guides:htg_product_specific_upgrades.adoc"]
 section_ids:
@@ -1101,15 +426,11 @@ This upgrade process is recommended for all Ping products.
 
 1. Identify the key contacts:
 
-   | Ping primary contacts  | Contact phone or email                                                                    |
-   | ---------------------- | ----------------------------------------------------------------------------------------- |
-   | Account executive      |                                                                                           |
-   | Ping Technical Support | * North America: 1-855-355-PING (7464)
-
-   * EMEA: 44 0 808 196 0788
-
-   * APJ: 61 1800 370 672 |
-   | Other                  |                                                                                           |
+   | Ping primary contacts  | Contact phone or email |
+   | ---------------------- | ---------------------- |
+   | Account executive      |                        |
+   | Ping Technical Support |                        |
+   | Other                  |                        |
 
    | Internal primary contacts |         |
    | ------------------------- | ------- |
@@ -1234,10 +555,12 @@ These links go to the upgrade pages and release notes for each Ping Identity pro
 
 ---
 title: "Best Practices: Session Management"
-description: Session management is the process of managing user sessions in a web application. A session is a series of interactions between users and a web application that take place over a period of time.
+description: "Best practices for session management: configure session lifetimes, short- and long-lived sessions, and risk-based authentication."
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_session_mgmt
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_session_mgmt.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 8, 2025
 page_aliases: ["best_practice_guides:bp_session_mgmt_keyfindings.adoc", "best_practice_guides:bp_session_mgmt_recommendations.adoc"]
 section_ids:
@@ -1401,10 +724,12 @@ To learn more about monitoring solutions, see:
 
 ---
 title: Enabling passwordless authentication in a PingFederate authentication policy
-description: To enable passwordless authentication in a PingFederate authentication policy:
+description: Enable passwordless authentication in a PingFederate authentication policy using policy contracts and MFA adapters.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_enabling_passwordless_pf_authentication_policy
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_enabling_passwordless_pf_authentication_policy.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 7, 2022
 section_ids:
   about-this-task: About this task
@@ -1505,10 +830,12 @@ To enable passwordless authentication in a PingFederate authentication policy:
 
 ---
 title: Enabling passwordless authentication in the PingID cloud service
-description: To enable passwordless authentication in the PingID cloud service, add a security key factor as an additional option to leverage for MFA:
+description: Enable passwordless authentication in the PingID cloud service by adding a security key as an MFA option.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_enabling_passwordless_pid_cloud_service
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_enabling_passwordless_pid_cloud_service.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: September 7, 2022
 section_ids:
   about-this-task: About this task
@@ -1543,10 +870,12 @@ To enable passwordless authentication in the PingID cloud service, add a securit
 
 ---
 title: PingID passwordless use cases
-description: Windows login - passwordless makes it possible for users to sign on to their Windows computer without a password, using only one of the PingID authentication methods, such as the PingID mobile app.
+description: PingID passwordless use cases including Windows login without a password using the PingID mobile app.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_pid_passwordless_usecases
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pid_passwordless_usecases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   windows-passwordless-login: Windows passwordless login
@@ -1595,10 +924,12 @@ These are the main steps the administrator must do to set up the PingID integrat
 
 ---
 title: Setting up Windows passwordless login
-description: You can use Windows login - passwordless so that users can sign on to their Windows computer without a password.
+description: Set up Windows passwordless login with PingID so users can sign on to Windows without a password.
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_setting_up_windows_passwordless_login
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_setting_up_windows_passwordless_login.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["best_practice_guides:bp_setting_up_windows_passwordless_login_connect_pid_p1.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_config_id_store.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_create_issuance_cert.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_create_authn_policy.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_windows_app_p1.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_kdc_cert.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_install_on_client.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_powershell.adoc", "best_practice_guides:bp_setting_up_windows_passwordless_login_troubleshooting.adoc"]
 section_ids:
@@ -1819,7 +1150,7 @@ After creating the authentication policy, you can now create the application for
 
 11. Go to the application's **Policies** tab and drag the passwordless policy that you created from the **All Policies** list to the **Applied Policies** list.
 
-    ![Screen capture of the Policies tab. Applied Policy has passwordless\_policy added to it](_images/mlk1662490521899.png)
+    ![Screen capture of the Policies tab. Applied Policy has passwordless_policy added to it](_images/mlk1662490521899.png)
 
 ## Generating a KDC certificate
 
@@ -1957,10 +1288,12 @@ The **Audit** window in PingOne includes information on events, such as certific
 
 ---
 title: Workforce passwordless journey
-description: The journey to passwordless is comprised of many phases and goals.
+description: "Workforce passwordless journey: phases and goals from centralizing SSO and MFA to eliminating passwords entirely."
 component: solution-guides
 page_id: solution-guides:best_practice_guides:bp_workforce_passwordless_journey
 canonical_url: https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_workforce_passwordless_journey.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["best_practice_guides:bp_planning_workforce_passwordless_journey.adoc", "best_practice_guides:bp_lessons_learned_workforce_passwordless_journey.adoc", "best_practice_guides:bp_deploying_product.adoc"]
 section_ids:

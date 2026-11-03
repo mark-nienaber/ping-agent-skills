@@ -1,4 +1,50 @@
 ---
+title: Achievers Attribute Mapping
+description: PingOne will automatically populate required SAML attributes.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_achievers_attribute
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_achievers_attribute.html
+revdate: July 17, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+  next-steps: Next steps
+---
+
+# Achievers Attribute Mapping
+
+## About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Achievers, the required attribute is `SAML_SUBJECT`.
+
+## Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   ### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+---
+
+---
 title: Achievers Connection Configuration
 description: Import the metadata for Achievers:
 component: pingoneforenterprise
@@ -55,6 +101,2707 @@ section_ids:
 ## Next steps
 
 Click **Continue to Next Step**.
+
+---
+
+---
+title: Achievers Customization
+description: To change the application icon, click Select image and upload a local image file.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_achievers_customization
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_achievers_customization.html
+revdate: July 17, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+---
+
+# Achievers Customization
+
+## Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+---
+
+---
+title: Achievers Group Access
+description: The Group Access tab shows every user group that you have created.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_achievers_groups
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_achievers_groups.html
+revdate: July 17, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  next-steps: Next steps
+---
+
+# Achievers Group Access
+
+## About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+## Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+## Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding Achievers to Your PingOne for Enterprise Dock
+description: Add the Achievers application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_achievers
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_achievers.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  achievers-connection-configuration: Achievers Connection Configuration
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  achievers-attribute-mapping: Achievers Attribute Mapping
+  about-this-task: About this task
+  steps-3: Steps
+  choose-from-3: Choose from:
+  next-steps-3: Next steps
+  achievers-customization: Achievers Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  achievers-group-access: Achievers Group Access
+  about-this-task-2: About this task
+  steps-5: Steps
+  next-steps-5: Next steps
+---
+
+# Adding Achievers to Your PingOne for Enterprise Dock
+
+Add the Achievers application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Achievers** application line to expand it and click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+
+5. Send an email to your Achievers client success manager with the following information:
+
+   * The signing certificate file you downloaded in step 2, attached to the email.
+
+   * The entity ID, which is the **Issuer** URL.
+
+   * The sign-on page URL, which is <https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=>*\<your IdP ID>*, where *\<your Idp ID>* is your **IdP ID** number.
+
+## Next steps
+
+After your client success manager responds with the necessary information, click **Continue to Next Step**.
+
+## Achievers Connection Configuration
+
+### Steps
+
+1. Import the metadata for Achievers:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** and **Entity ID** fields, replace the *${programName}* and *${serverName}* variables with the information provided by your client success manager.
+
+3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Achiever.
+
+7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an activeSSO session.
+
+9. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+10. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+12. Select the **Use Custom URL** checkbox to enter a customer URL to launch Achievers from the dock.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Achievers Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Achievers, the required attribute is `SAML_SUBJECT`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Achievers Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Achievers Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding ADP Workforce Now to Your PingOne for Enterprise Dock
+description: Add the ADP Workforce Now application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  adp-workforce-now-connection-configuration: ADP Workforce Now Connection Configuration
+  steps-2: Steps
+  choose-from: Choose from:
+  next-steps-2: Next steps
+  adp-workforce-now-attribute-mapping: ADP Workforce Now Attribute Mapping
+  about-this-task: About this task
+  steps-3: Steps
+  choose-from-2: Choose from:
+  next-steps-3: Next steps
+  adp-workforce-now-customization: ADP Workforce Now Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  adp-workforce-now-group-access: ADP Workforce Now Group Access
+  about-this-task-2: About this task
+  steps-5: Steps
+  adp-workforce-now-saml-connection: ADP Workforce Now SAML Connection
+  steps-6: Steps
+---
+
+# Adding ADP Workforce Now to Your PingOne for Enterprise Dock
+
+Add the ADP Workforce Now application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click on the **ADP Workforce Now** application line to expand it and click **Setup**.
+
+## Next steps
+
+On the **SSO Instructions** tab, click **Continue to Next Step**.
+
+## ADP Workforce Now Connection Configuration
+
+### Steps
+
+1. In the **ACS URL** field, enter the assertion consumer service (ACS) URL.
+
+   |   |                                                                                               |
+   | - | --------------------------------------------------------------------------------------------- |
+   |   | The default ACS URL is pre-populated, and should work for most ADP Workforce Now connections. |
+
+2. In the **Entity ID** field, enter the Entity ID.
+
+   The default Entity ID is pre-populated, and should work for most ADP Workforce Now connections.
+
+3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+   The default URL is pre-populated, and should work for most ADP Workforce Now connections.
+
+4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+6. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+7. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+9. Select the **Encrypt Assertion** box to encrypt outgoing SAML assertions.
+
+10. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+12. Select the **Use Custom URL**checkbox to enter a customer URL to launch ADP Workforce Now from the dock.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## ADP Workforce Now Attribute Mapping
+
+### About this task
+
+PingOne will automatically add required SAML attributes.
+
+For ADP Workforce Now, the required attributes are:
+
+* `SAML_SUBJECT`. The identity bridge attribute is mapped by default.
+
+* `PersonImmutableID`. Map the identity bridge attribute representing your employee ID.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## ADP Workforce Now Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## ADP Workforce Now Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+## ADP Workforce Now SAML Connection
+
+### Steps
+
+1. On the **Review Setup** tab, go to the **SAML Metadata** line and click **Download** to download the PingOne metadata.
+
+2. Click **Finish** to complete your configuration and add ADP Workforce Now to your PingOne Dock.
+
+3. Go to <https://adpfedsso.adp.com> and sign on using your ADP account credentials.
+
+4. Follow the steps on the ADP site to upload the metadata file.
+
+5. After your metadata has been uploaded, your ADP account representative will confirm that the setup is complete in the live environment and to advise on next steps.
+
+---
+
+---
+title: Adding Amazon Web Services to Your PingOne for Enterprise Dock
+description: Add the Amazon Web Services (AWS) application to your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_aws
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_aws.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  amazon-web-services-connection-configuration: Amazon Web Services Connection Configuration
+  about-this-task: About this task
+  steps-2: Steps
+  choose-from: Choose from:
+  next-steps-2: Next steps
+  amazon-web-services-provisioning: Amazon Web Services Provisioning
+  about-this-task-2: About this task
+  steps-3: Steps
+  next-steps-3: Next steps
+  amazon-web-services-attribute-mapping: Amazon Web Services Attribute Mapping
+  about-this-task-3: About this task
+  steps-4: Steps
+  choose-from-2: Choose from:
+  next-steps-4: Next steps
+  amazon-web-services-customization: Amazon Web Services Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  amazon-web-services-group-access: Amazon Web Services Group Access
+  about-this-task-4: About this task
+  steps-6: Steps
+  next-steps-6: Next steps
+  amazon-web-services-saml-connection: Amazon Web Services SAML connection
+  about-this-task-5: About this task
+  steps-7: Steps
+  next-steps-7: Next steps
+---
+
+# Adding Amazon Web Services to Your PingOne for Enterprise Dock
+
+Add the Amazon Web Services (AWS) application to your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the Amazon Web Services application line to expand it and then click **Setup**.
+
+4. Sign on to your AWS administration account and go to the **Management Console**.
+
+5. Click your user name, click**My Security Credentials**, and click to expand **Access Keys**.
+
+6. Copy the **Access Key ID** and the **Access Key Secret** values.
+
+   For more information about your access key ID and access key secret, see the related [AWS documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html).
+
+## Next steps
+
+In PingOne for Enterprise, click **Continue to Next Step**.
+
+## Amazon Web Services Connection Configuration
+
+### About this task
+
+The **ACS URL** and **Entity ID** fields are populated with the correct values for Amazon Web Services (AWS).
+
+All other fields are optional.
+
+### Steps
+
+1. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+2. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+3. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+4. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Achiever.
+
+5. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses in case the primary certificate fails.
+
+6. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+7. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+8. On the **Signing** line:
+
+   #### Choose from:
+
+   * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+   * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+9. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+10. Select the **Use Custom URL**checkbox to enter a customer URL to launch AWS from the dock.
+
+11. Select the **Set Up Provisioning** checkbox to configure user provisioning to AWS.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Amazon Web Services Provisioning
+
+### About this task
+
+|   |                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Amazon Web Services Attribute Mapping](p14eapps_aws_attributes.html). |
+
+If you selected **Set Up Provisioning** on the **Connection configuration** tab:
+
+### Steps
+
+1. In the AWS Management Console, go to **My Security Credentials**.
+
+2. Expand the **Access keys** tab and click **Create New Access Key**.
+
+3. When prompted, click **Show Access Key**.
+
+4. Copy the **Access Key ID** and **Access Key Secret**.
+
+5. In PingOne, click **Continue to Next Step** to open the **Application Configuration** tab.
+
+6. On the **Application Configuration** tab, enter the credentials you copied in step 4 in the **accessKey** and **accessKeySecret** fields.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Amazon Web Services Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Amazon Web Services, the required attributes are:
+
+* `SAML_SUBJECT`
+
+* `https://aws.amazon.com/SAML/Attributes/Role`
+
+* If you selected **Set Up Provisioning**, `UserName(provisioning)`
+
+### Steps
+
+1. For `SAML_SUBJECT`:
+
+   1. In the **Identity Bridge Attribute or Literal Value** field, enter or select **Username**.
+
+   2. Click **Advanced**.
+
+   3. In the **Name ID Format to send to SP** field, enter or select **urn:oasis:names:tc:SAML:2.0:nameid-format:persistent**.
+
+   4. Click **Save**
+
+2. For `https://aws.amazon.com/SAML/Attributes/Role`
+
+   1. In the **Identity Bridge Attribute or Literal Value** field, select the attribute that matches `Role`.
+
+   2. Click **Advanced**.
+
+   3. In the **NameFormat** field, select **urn:oasis:names:tc:SAML:2.0:attrname-format:uri**.
+
+   4. Click **Save**
+
+   The expected format for this attribute is
+
+   \+
+
+   ```
+   arn:aws:iam::<account-number>:role/<role-name>,arn:aws:iam::<account-number>:saml-provider/<provider-name>
+   ```
+
+3. To add an additional optional attribute, click **Add new attribute**.
+
+4. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+5. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * Enter or select a directory attribute to map to the application attribute.
+
+   * Select **As Literal**, then enter a literal value to assign to the application attribute.
+
+6. To create advanced attribute mappings, click **Advanced**.
+
+Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Amazon Web Services Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Amazon Web Services Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Amazon Web Services SAML connection
+
+### About this task
+
+After completing the Amazon Web Services configuration in the PingOne for Enterprise admin portal, you must authorize PingOne for Enterprise as a SAML provider in the AWS console.
+
+### Steps
+
+1. In the PingOne for Enterprise admin console, on the **Review Setup** tab, click **Download** to download the **SAML Metadata** file.
+
+2. Click **Finish** to add Amazon Web Services to your PingOne for Enterprise Dock.
+
+3. In the AWS console, create a SAML provider.
+
+   For information about creating a SAML provider in AWS, see [Create a SAML identity provider in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html) in the AWS documentation.
+
+4. In the AWS console, create a SAML role.
+
+   For more information about creating a SAML role in AWS, see [Create a role for a third-party identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp.html) in the AWS documentation.
+
+### Next steps
+
+To configure AWS for multiple roles and accounts, see [Configure Amazon Web Services SSO for multiple roles and accounts](https://support.pingidentity.com/s/article/Configure-Amazon-Web-Services-SSO-for-multiple-roles-and-accounts) in the Ping Identity Knowledge Base.
+
+---
+
+---
+title: Adding Aquera to Your PingOne for Enterprise Dock
+description: Add the Aquera application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_aquera
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_aquera.html
+revdate: October 4, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  next-steps: Next steps
+  aquera-connection-configuration: Aquera Connection Configuration
+  steps-2: Steps
+  next-steps-2: Next steps
+  aquera-application-configuration: Aquera Application Configuration
+  before-you-begin: Before you begin
+  steps-3: Steps
+  choose-from: Choose from:
+  next-steps-3: Next steps
+  aquera-attribute-mapping: Aquera Attribute Mapping
+  about-this-task-2: About this task
+  steps-4: Steps
+  choose-from-2: Choose from:
+  next-steps-4: Next steps
+  aquera-customization: Aquera Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  aquera-group-access: Aquera Group Access
+  about-this-task-3: About this task
+  steps-6: Steps
+  next-steps-6: Next steps
+---
+
+# Adding Aquera to Your PingOne for Enterprise Dock
+
+Add the Aquera application your PingOne for Enterprise dock from the application catalog.
+
+## About this task
+
+This application enables outbound provisioning to various services through Aquera. It can also be used to configure SSO to the target service. See the configuration documentation for the target service for more information.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Aquera** application line to expand it and then click **Setup**.
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+## Aquera Connection Configuration
+
+### Steps
+
+1. On the **Connection Configuration** form, select the **Set Up Provisioning** checkbox.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Aquera Application Configuration
+
+### Before you begin
+
+Before configuring the **Application Configuration** form, sign on to the Aquera admin console in a separate browser window.
+
+### Steps
+
+1. In the Aquera admin console, go to **Applications**.
+
+2. Click the application that you want to provision.
+
+3. Copy the URL in the **Copy this URL** field.
+
+4. In PingOne for Enterprise, paste the URL into the **SCIM\_URL** field.
+
+5. In Aquera, from the **Authorization** field, copy the bearer token.
+
+6. In PingOne for Enterprise, paste the bearer token into the **ACCESS\_TOKEN** field.
+
+7. **Optional:** In the **BASIC\_AUTH\_USER** and **BASIC\_AUTH\_PASSWORD** fields, enter the credentials for the administrator account of the service you're provisioning.
+
+   |   |                                                                                                                                               |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you enter and save both the access token and the basic authorization credentials, only the access token is saved and used to authenticate. |
+
+8. From the **REMOVE\_ACTION** list, select the action you want Aquera to take when you delete or disable a user in PingOne for Enterprise.
+
+   #### Choose from:
+
+   * Select **Disable** to have Aquera disable a user that you've disabled or deleted in PingOne for Enterprise.
+
+   * Select **Delete** to have Aquera delete a user that you've disabled deleted in PingOne for Enterprise.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Aquera Attribute Mapping
+
+### About this task
+
+For Aquera, the required attributes are `SAML_SUBJECT` and `userName`.
+
+If you want to add additional attributes, Aquera supports provisioning for standard System for Cross-domain Identity Management (SCIM) attributes. For a list of SCIM attributes, see [Supported attributes reference](https://docs.pingidentity.com/integrations/aquera/setup/pf_aquera_connector_supported_attributes_reference.html).
+
+Aquera also supports custom provisioning attributes. When creating a custom attribute, use the `IANUser` prefix. For example, if you want to create a custom attribute for office location, call it `IANUser:officeLocation` and map it to `IANUser:officeLocation`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. For custom attributes, select the **Provisioning** checkbox.
+
+4. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * Enter or select a directory attribute to map to the application attribute.
+
+   * Select **As Literal**, then enter a literal value to assign to the application attribute.
+
+5. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Aquera Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Aquera Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne for Enterprise Dock.
+
+---
+
+---
+title: Adding Arena BOMControl to Your PingOne for Enterprise Dock
+description: Add the Arena BOMControl application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_arena_bomcontrol
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_arena_bomcontrol.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  arena-bomcontrol-connection-configuration: Arena BOMControl Connection Configuration
+  about-this-task: About this task
+  steps-2: Steps
+  next-steps-2: Next steps
+  arena-bomcontrol-attribute-mapping: Arena BOMControl Attribute Mapping
+  about-this-task-2: About this task
+  steps-3: Steps
+  choose-from: Choose from:
+  next-steps-3: Next steps
+  arena-bomcontrol-customization: Arena BOMControl Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  arena-bomcontrol-group-access: Arena BOMControl Group Access
+  about-this-task-3: About this task
+  steps-5: Steps
+  next-steps-5: Next steps
+---
+
+# Adding Arena BOMControl to Your PingOne for Enterprise Dock
+
+Add the Arena BOMControl application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Arena BOMControl** application line to expand it and then click **Setup**.
+
+4. To enable cloud single sign-on (SSO), email [Arena Sales.](mailto:sales@arenasolutions.com)
+
+   |   |                                                                                                           |
+   | - | --------------------------------------------------------------------------------------------------------- |
+   |   | You can continue configuring this application for PingOne before your sales representative activates SSO. |
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+## Arena BOMControl Connection Configuration
+
+### About this task
+
+Your Arena representative will configure your application connection based on your specific requirements.
+
+### Steps
+
+* Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active single sign-on (SSO) session when they start this application.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Arena BOMControl Attribute Mapping
+
+### About this task
+
+For Arena BOMControl, the required attribute is `subject`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Arena BOMControl Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Arena BOMControl Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding Ariba to Your PingOne for Enterprise Dock
+description: Add the Ariba application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_ariba
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_ariba.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  ariba-connection-configuration: Ariba Connection Configuration
+  about-this-task: About this task
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  ariba-attribute-mapping: Ariba Attribute Mapping
+  about-this-task-2: About this task
+  steps-3: Steps
+  choose-from-3: Choose from:
+  next-steps-3: Next steps
+  ariba-customization: Ariba Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  ariba-group-access: Ariba Group Access
+  about-this-task-3: About this task
+  steps-5: Steps
+  next-steps-5: Next steps
+---
+
+# Adding Ariba to Your PingOne for Enterprise Dock
+
+Add the Ariba application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Ariba** application line to expand it and then click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+
+5. Send an email to your Ariba representative with the following information:
+
+   * The signing certificate file you downloaded in step 3, attached to the email
+
+   * The **Issuer** URL
+
+   * The sign-on page URL, which is <https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=>*\<your IdP ID>*, where *\<your Idp ID>* is your **IdP ID** number.
+
+   * The logout URL where you would like to redirect users after they sign off of Ariba.
+
+## Next steps
+
+After your client success manager responds with the necessary information, click **Continue to Next Step**.
+
+## Ariba Connection Configuration
+
+### About this task
+
+Your Ariba representative will provide you with connection parameters for the **ACS URL** and **Entity ID** fields.
+
+All other fields are optional.
+
+### Steps
+
+1. Import the metadata for Ariba:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** and **Entity ID** fields, replace the *${parameter}* variables with the information provided by your Ariba representative.
+
+3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+6. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+7. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+9. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+10. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+12. Select the **Use Custom URL** checkbox to enter a customer URL to launch Ariba from the dock.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Ariba Attribute Mapping
+
+### About this task
+
+PingOne for Enterprise will automatically populate required SAML attributes.
+
+For Ariba, the required attribute is `SAML_SUBJECT`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Ariba Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Ariba Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding Atlassian Cloud to Your PingOne for Enterprise Dock
+description: Add the Atlassian Cloud application to your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_atlassian_cloud
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_atlassian_cloud.html
+revdate: June 5, 2024
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  atlassian-cloud-connection-configuration: Atlassian Cloud Connection Configuration
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  atlassian-cloud-provisioning: Atlassian Cloud Provisioning
+  about-this-task: About this task
+  steps-3: Steps
+  choose-from-3: Choose from:
+  next-steps-3: Next steps
+  atlassian-cloud-attribute-mapping: Atlassian Cloud Attribute Mapping
+  about-this-task-2: About this task
+  steps-4: Steps
+  choose-from-4: Choose from:
+  next-steps-4: Next steps
+  atlassian-cloud-customization: Atlassian Cloud Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  atlassian-cloud-group-access: Atlassian Cloud Group Access
+  about-this-task-3: About this task
+  steps-6: Steps
+  atlassian-cloud-saml-connection: Atlassian Cloud SAML connection
+  steps-7: Steps
+---
+
+# Adding Atlassian Cloud to Your PingOne for Enterprise Dock
+
+Add the Atlassian Cloud application to your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Atlassian Cloud** application line to expand it and click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+
+5. Sign on to Atlassian Cloud as an administrator
+
+6. Go to **Security > SAML Single Sign-On**
+
+7. Copy the **ACS URL** and **Entity ID** values.
+
+## Next steps
+
+In PingOne for Enterprise, click **Continue to Next Step**.
+
+## Atlassian Cloud Connection Configuration
+
+### Steps
+
+1. Import the metadata for Atlassian Cloud,
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** field, enter the assertion consumer service (ACS) URL.
+
+3. In the **Entity ID** field, enter the Entity ID.
+
+4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+   The default URL is pre-populated, and should work for most Atlassian Cloud connections.
+
+5. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
+
+6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
+
+7. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+8. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+10. Select the **Encrypt Assertion** box to encrypt outgoing SAML assertions.
+
+11. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
+
+12. In the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+13. Select the **Use Custom URL**checkbox to enter a customer URL to launch Atlassian Cloud from the dock.
+
+14. Select the **Set Up Provisioning** checkbox to configure provisioning to Atlassian Cloud.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Atlassian Cloud Provisioning
+
+### About this task
+
+|   |                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Atlassian Cloud Attribute Mapping](p14eapps_atlassian_attribute_mapping.html). |
+
+If you selected **Set Up Provisioning** on the **Connection configuration** tab:
+
+### Steps
+
+{In Atlassian Cloud}
+
+1. In Atlassian Cloud, go to **Directory > User Provisioning**.
+
+2. Click **Create a Directory**.
+
+3. In the **Directory** field, enter a name for your directory.
+
+4. Copy your **Directory Base URL** and **API Key**.
+
+{In PingOne for Enterprise}
+
+1. Click **Continue to Next Step**.
+
+2. In the **DIRECTORY\_BASE\_URL** field, enter the directory base URL.
+
+3. In the **API\_KEY** field, enter your API key.
+
+4. In the **REMOVE\_ACTION** list, select one of the following options:
+
+   #### Choose from:
+
+   * If you select **Disable**, a user you disable or delete in PingOne for Enterprise will be disabled in Atlassian Cloud.
+
+   * If you select **Delete**, a user you disable or delete in PingOne for Enterprise will be deleted in Atlassian Cloud.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Atlassian Cloud Attribute Mapping
+
+### About this task
+
+For Atlassian Cloud, the required attribute is `SAML_SUBJECT`.
+
+If you want to add additional attributes, Atlassian Cloud supports provisioning for standard System for Cross-domain Identity Management (SCIM) attributes. For a list of SCIM attributes, see [Supported attributes reference](https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_supported_attributes_reference.html).
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. For custom attributes, select the **Provisioning** checkbox.
+
+4. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * Enter or select a directory attribute to map to the application attribute.
+
+   * Select **As Literal**, then enter a literal value to assign to the application attribute.
+
+5. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Atlassian Cloud Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Atlassian Cloud Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+## Atlassian Cloud SAML connection
+
+### Steps
+
+1. In PingOne for Enterprise, on the **Review Setup** tab, click **Download** to download the signing certificate.
+
+2. Copy the **Issuer** and **idpid** values.
+
+3. Click **Finish** to add Atlassian Cloud to your PingOne for Enterprise Dock.
+
+4. In Atlassian Cloud, go to **Security > Identity providers** and select your PingOne for Enterprise **Directory**.
+
+5. Click **Set up SAML single sign-on**.
+
+6. Enter your configuration information.
+
+   1. In the **Identity provider Entity ID** field, enter the **Issuer** value.
+
+   2. In the **Identity provider SSO URL** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<your idpid>`, where *\<your idpid>* is the **idpid** value.
+
+   3. In the **Public x509 Certificate** field, paste the text of the signing certificate you downloaded, including the `----BEGIN CERTIFICATE----` line.
+
+7. Click **Save SAML configuration** to activate the connection to PingOne for Enterprise.
+
+---
+
+---
+title: Adding Bomgar to Your PingOne for Enterprise Dock
+description: Add the Bomgar application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_bomgar
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_bomgar.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  bomgar-connection-configuration: Bomgar Connection Configuration
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  bomgar-attribute-mapping: Bomgar Attribute Mapping
+  about-this-task: About this task
+  steps-3: Steps
+  choose-from-3: Choose from:
+  next-steps-3: Next steps
+  bomgar-customization: Bomgar Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  bomgar-group-access: Bomgar Group Access
+  about-this-task-2: About this task
+  steps-5: Steps
+  bomgar-saml-connection: Bomgar SAML connection
+  steps-6: Steps
+---
+
+# Adding Bomgar to Your PingOne for Enterprise Dock
+
+Add the Bomgar application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Bomgar** application line to expand it and then click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+
+5. In the Bomgar admin interface, go to **Users & Security > Security Providers > Add a SAML Provider**.
+
+6. In the **Bomgar admin interface**:
+
+   1. In the **Name** field, enter a name for the connection.
+
+   2. Select the **Enabled** checkbox to activate the connection.
+
+   3. In the **Entity ID** field, enter the **Issuer** value from the **SSO Instructions** tab in PingOne.
+
+   4. In the **Single Sign-On Service URL** field, enter the **Initiate Single Sign-On URL** value from the **SSO Instructions** tab in PingOne.
+
+   5. In the **Certificate** section, click **Choose File** and upload the signing certificate you downloaded previously.
+
+7. In the Bomgar admin interface, click **Download Service Provider Metadata**.
+
+## Next steps
+
+In PingOne for Enterprise, click **Continue to Next Step**.
+
+## Bomgar Connection Configuration
+
+### Steps
+
+1. In PingOne for Enterprise, import the metadata for Bomgar:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** field, enter the value from the **Assertion Consumer Service URL** field in the Bomgar admin interface.
+
+3. In the **Entity ID** field, enter the value from the **Entity ID** field in the Bomgar admin interface.
+
+4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+7. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+8. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an activeSSO session.
+
+10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+11. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Bomgar from the dock.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Bomgar Attribute Mapping
+
+### About this task
+
+PingOne for Enterprise will automatically populate requested SAML attributes.
+
+For Bomgar, the populated attributes are:
+
+* `SAML_SUBJECT`. Maps to a unique value.
+
+  1. Click **Advanced**.
+
+  2. From the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:2.0:nameid-format:persistent**.
+
+  3. Click **Save** to apply this format.
+
+* `Username`. Map to `Email`.
+
+* `Email`. Map to `Email`.
+
+* `FirstName`. Map to `FirstName`.
+
+* `LastName`. Map to `Last Name`.
+
+* `Groups`. Map to `memberOf`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Bomgar Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Bomgar Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+## Bomgar SAML connection
+
+### Steps
+
+1. In PingOne for Enterprise, on the **Review Setup** tab, click **Download** to download the SAML metadata file.
+
+2. Click **Finish** to add Bomgar to your PingOne Dock.
+
+3. In the **Bomgar admin interface**, on the **Identity Provider Settings** tab, click **Choose File** and upload the PingOne metadata file.
+
+4. Click **Save Changes** to activate the connection to PingOne.
+
+---
+
+---
+title: Adding Box to Your PingOne for Enterprise Dock
+description: Add the Box application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_box
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_box.html
+revdate: October 4, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  next-steps: Next steps
+  box-connection-configuration: Box Connection Configuration
+  about-this-task-2: About this task
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  box-provisioning: Box Provisioning
+  before-you-begin: Before you begin
+  about-this-task-3: About this task
+  steps-3: Steps
+  result: Result:
+  result-2: Result:
+  next-steps-3: Next steps
+  box-attribute-mapping: Box Attribute Mapping
+  about-this-task-4: About this task
+  steps-4: Steps
+  choose-from-3: Choose from:
+  next-steps-4: Next steps
+  box-customization: Box Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  box-group-access: Box Group Access
+  about-this-task-5: About this task
+  steps-6: Steps
+  box-saml-connection: Box SAML connection
+  about-this-task-6: About this task
+  steps-7: Steps
+---
+
+# Adding Box to Your PingOne for Enterprise Dock
+
+Add the Box application your PingOne for Enterprise dock from the application catalog.
+
+## About this task
+
+After you configure the Box application for the PingOne for Enterprise dock, you must email your Box representative with configuration and connection information.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Box** application line to expand it and click **Setup**.
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+## Box Connection Configuration
+
+### About this task
+
+PingOne for Enterprise automatically populates the values for the **ACS URL** and **Entity ID** fields. All other fields are optional.
+
+For most configurations, the values on this tab should not change.
+
+### Steps
+
+1. Import the metadata for Box:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** field, the value should be `https://sso.services.box.net/sp/ACS.saml2`.
+
+3. In the **Entity ID** field, the value should be `box.net`.
+
+4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+5. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
+
+6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
+
+7. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+8. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+11. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
+
+12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Achievers from the dock.
+
+14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Box.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Box Provisioning
+
+### Before you begin
+
+Ensure that popups are permitted in your browser.
+
+### About this task
+
+|   |                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Box Attribute Mapping](p14eapps_box_attributes.html). |
+
+If you selected **Set Up Provisioning** on the **Connection configuration** tab:
+
+### Steps
+
+1. On the **Provisioning Instructions** tab, click **Continue to Next Step**.
+
+2. **Optional:** On the **Application Configuration** tab, complete the following steps.
+
+   1. Select the **CREATE\_PERSONAL\_FOLDERS** checkbox to create a new Box folder when a new user is created.
+
+   2. In the **PARENT\_FOLDER\_ID** field, enter the ID of the folder where the new user folders will be created.
+
+      |   |                                                                                                                                                                                                                                             |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | Find the ID of the desired parent folder by navigating to the Box web portal and copying the string at the end of the URL. For the folder located at <https://myconnector.app.box.com/folder/1234567890>, the folder ID would be 123456789. |
+
+The administrator account used to obtain the **Client ID** and **Client Secret** must be the owner of this folder.
+
+1. From the **PERSONAL\_FOLDER\_PERMISSION\_LEVELS** list, select the ownership and access permissions to apply to new user folders.
+
+2. From the **REMOVE\_ACTION** list, select the action to take when you disable or delete a user account in PingOne.
+
+   * Select **Suspend** to suspend a deleted user's Box account.
+
+   * Select **Delete** to delete a deleted user's Box account.
+
+3. In the **DELETED\_CONTENT\_ACCOUNT** field, enter the email address to which the content of a deleted user's account will be transferred.
+
+4. From the **FORCE\_DELETE** list, select whether to delete users who own content.
+
+   * **False** is the default option. Attempts to delete users who own content will fail.
+
+   * **True** allows users who own content to be deleted.
+
+     1. Click **Continue to Next Step**.
+
+     2. Click **Activate**.
+
+        #### Result:
+
+        The **Customer Log In** page appears in a pop-up window.
+
+     3. Enter your Box credentials and click **Authorize**.
+
+     4. Click **Grant Access to Box**.
+
+        #### Result:
+
+        You will be redirected to PingOne. The **Activate** button should now read **Activated**.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Box Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Box, the required attribute is `SAML_SUBJECT`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Box Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Box Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+## Box SAML connection
+
+### About this task
+
+### Steps
+
+1. In PingOne, on the **Review Setup** tab, click **Download** to download the SAML metadata file.
+
+2. Click **Finish** to add Box to your PingOne Dock.
+
+3. Send an email to inform your Box representative that you want to enable SSO. Include the following information.
+
+   * The SAML metadata file you downloaded, attached to the email.
+
+   * Which SSO mode you want.
+
+     * SSO Enabled allows users to sign on to Box using either their Box credentials or SAML SSO.
+
+     * SSO Required requires users to sign on to Box using SSO.
+
+---
+
+---
+title: Adding Concur to Your PingOne for Enterprise Dock
+description: Add the Concur application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_concur
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_concur.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  concur-connection-configuration: Concur Connection Configuration
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  concur-provisioning: Concur Provisioning
+  before-you-begin: Before you begin
+  about-this-task: About this task
+  steps-3: Steps
+  result: Result:
+  result-2: Result:
+  next-steps-3: Next steps
+  concur-attribute-mapping: Concur Attribute Mapping
+  about-this-task-2: About this task
+  steps-4: Steps
+  choose-from-3: Choose from:
+  next-steps-4: Next steps
+  concur-customization: Concur Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  concur-group-access: Concur Group Access
+  about-this-task-3: About this task
+  steps-6: Steps
+  next-steps-6: Next steps
+---
+
+# Adding Concur to Your PingOne for Enterprise Dock
+
+Add the Concur application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Concur** application line to expand it and then click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the PingOne signing certificate.
+
+5. Email Ping Identity at <concursso@pingidentity.com>. Include the following information in the email.
+
+   * The signing certificate you downloaded, attached to the email.
+
+   * The **Issuer** value.
+
+   * The email address of your employee who is the primary point of contact for the Concur configuration.
+
+   * A logout URL to direct users to when they log out of Concur.
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+## Concur Connection Configuration
+
+### Steps
+
+1. Import the metadata for Concur:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** field, replace *$\\{www or implementation}* with the information supplied by Ping.
+
+   The **Entity ID** field is automatically populated. You should not need to change it. All other fields are optional.
+
+3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+6. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+7. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an activeSSO session.
+
+9. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+10. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+12. Select the **Use Custom URL** checkbox to enter a customer URL to launch Concur from the dock.
+
+13. Select the **Set Up Provisioning** checkbox to configure user provisioning to Concur.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Concur Provisioning
+
+### Before you begin
+
+Ensure that popups are permitted in your browser.
+
+### About this task
+
+|   |                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Concur Attribute Mapping](p14eapps_concur_attributes.html). |
+
+If you selected **Set Up Provisioning** on the **Connection configuration** tab:
+
+### Steps
+
+1. Sign on to Concur as a Web Services Administrator.
+
+2. Go to **Administration > Web Services**.
+
+3. Click **Enable Partner Application**.
+
+4. Select **PingOne Provisioning** and click **Enable**.
+
+5. In PingOne, click**Continue to Next Step**.
+
+6. Click **Activate**.
+
+   #### Result:
+
+   The **Customer Log In** page appears in a pop-up window.
+
+7. Enter your Concur credentials and click **Authorize**.
+
+8. Click **Grant Access to Concur**.
+
+   #### Result:
+
+   You will be redirected to PingOne. The **Activate** button should now read **Activated**.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Concur Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Concur, the required attribute is `SAML_SUBJECT`.
+
+Enabling user provisioning creates additional required attributes, which are designated with asterisks (`\*`). We recommend literal mapping for these attributes.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `EmpID` attribute is unique to Concur and is required to complete user provisioning for this application. It is mapped to `Email` by default, but we recommend changing it.Click **Advanced**, and from the **Function** list, select **PickByFieldsFromJsonList**. In the **Expression** field, enter `\{"primary":true,"type":"work","targetField":"employeeID"}` |
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Concur Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Concur Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding Cornerstone to Your PingOne for Enterprise Dock
+description: Add the Cornerstone application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_cornerstone
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_cornerstone.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  cornerstone-connection-configuration: Cornerstone Connection Configuration
+  about-this-task: About this task
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  cornerstone-attribute-mapping: Cornerstone Attribute Mapping
+  about-this-task-2: About this task
+  steps-3: Steps
+  choose-from-3: Choose from:
+  next-steps-3: Next steps
+  cornerstone-customization: Cornerstone Customization
+  steps-4: Steps
+  next-steps-4: Next steps
+  cornerstone-group-access: Cornerstone Group Access
+  about-this-task-3: About this task
+  steps-5: Steps
+  next-steps-5: Next steps
+---
+
+# Adding Cornerstone to Your PingOne for Enterprise Dock
+
+Add the Cornerstone application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Cornerstone** application line to expand it and then click **Setup**.
+
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+
+5. Send an email to your Cornerstone representative with the following information:
+
+   * The signing certificate file you downloaded in step 2, attached to the email.
+
+   * The entity ID, which is the **Issuer** URL.
+
+## Next steps
+
+After your client success manager responds with the necessary information, click **Continue to Next Step**.
+
+## Cornerstone Connection Configuration
+
+### About this task
+
+Your Cornerstone representative will respond with your host name, which you will enter into the **ACS URL** and **Entity ID** fields. All other fields on this tab are optional.
+
+### Steps
+
+1. Import the metadata for Cornerstone.
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** and **Entity ID** fields, replace the *${host}* variables with the host name provided by your Cornerstone representative.
+
+3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
+
+5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
+
+6. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+7. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+8. Select the **Force Re-authentication**checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+9. Select the **Encrypt Assertion** box to encrypt outgoing SAML assertions.
+
+10. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
+
+11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+12. Select the **Use Custom URL** box to enter a customer URL to launch Achievers from the dock.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Cornerstone Attribute Mapping
+
+### About this task
+
+PingOne for Enterprise will automatically populate required SAML attributes.
+
+For Cornerstone, the required attribute is `SAML_SUBJECT`.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Cornerstone Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Cornerstone Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+
+---
+
+---
+title: Adding Coupa to Your PingOne for Enterprise Dock
+description: Add the Coupa application your PingOne for Enterprise dock from the application catalog.
+component: pingoneforenterprise
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_coupa
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_coupa.html
+revdate: October 4, 2023
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+  coupa-connection-configuration: Coupa Connection Configuration
+  about-this-task: About this task
+  steps-2: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  next-steps-2: Next steps
+  coupa-provisioning: Coupa Provisioning
+  about-this-task-2: About this task
+  steps-3: Steps
+  example: Example:
+  next-steps-3: Next steps
+  coupa-attribute-mapping: Coupa Attribute Mapping
+  about-this-task-3: About this task
+  steps-4: Steps
+  choose-from-3: Choose from:
+  next-steps-4: Next steps
+  coupa-customization: Coupa Customization
+  steps-5: Steps
+  next-steps-5: Next steps
+  coupa-group-access: Coupa Group Access
+  about-this-task-4: About this task
+  steps-6: Steps
+  next-steps-6: Next steps
+  coupa-saml-connection: Coupa SAML Connection
+  steps-7: Steps
+---
+
+# Adding Coupa to Your PingOne for Enterprise Dock
+
+Add the Coupa application your PingOne for Enterprise dock from the application catalog.
+
+## Steps
+
+1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
+
+2. **Optional:** In the **Search** field, search for the application.
+
+3. Click the **Coupa** application line to expand it and click **Setup**.
+
+4. On the **SSO Instructions** page, click the **Download** link to download the PingOne for Enterprise signing certificate.
+
+## Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa Connection Configuration
+
+### About this task
+
+PingOne for Enterprise automatically populates the values for the **ACS URL** and **Entity ID** fields. All other fields are optional.
+
+### Steps
+
+1. Import the metadata for Coupa:
+
+   #### Choose from:
+
+   * Click **Select File** to upload the metadata file.
+
+   * Click **Or use URL** to enter the URL of the metadata.
+
+2. In the **ACS URL** field, make sure the value is `https://prdsso40.coupahost.com/sp/ACS.saml2`.
+
+3. In the **Entity ID** field, make sure the value is `prdsso40.coupahost.com`.
+
+4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
+
+5. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
+
+6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
+
+7. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
+
+8. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
+
+9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
+
+10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
+
+11. On the **Signing** line:
+
+    #### Choose from:
+
+    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
+
+    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
+
+12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
+
+13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Coupa from the dock.
+
+14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Coupa.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa Provisioning
+
+### About this task
+
+|   |                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Coupa Attribute Mapping](p14eapps_coupa_attributes.html). |
+
+If you selected **Set Up Provisioning** on the **Connection Configuration** tab:
+
+### Steps
+
+1. On the **Provisioning Instructions** tab, click **Continue to Next Step** to proceed to the **Application Configuration** tab.
+
+2. In the **COUPA\_SUBDOMAIN** field, enter your Coupa subdomain.
+
+   Your Coupa subdomain is the subdomain in the URL for your Coupa login.
+
+   #### Example:
+
+   https\://*\<subdomain>*.coupacloud.com
+
+3. In the **API\_KEY** field, enter the API key used to authenticate provisioning requests.
+
+   To obtain your API key:
+
+   1. Sign on to your Coupa account as an administrative user.
+
+   2. Go to **Setup > API Keys**.
+
+   3. Click **Create**.
+
+   4. Complete the creation form and click **Create**.
+
+   5. Copy the API key value and paste into the **API\_KEY** field.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Coupa, the required attribute is `SAML_SUBJECT`.
+
+If you enabled provisioning, the required provisioning attributes are:
+
+* `login`
+
+* `email`
+
+* `firstname`
+
+* `lastname`
+
+Provisioning creates and populates a number of optional attributes. Clear the **Identity Bridge Attribute** field for any attribute you don't intend to use.
+
+### Steps
+
+1. To add an additional optional attribute, click **Add new attribute**.
+
+2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
+
+3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
+
+   #### Choose from:
+
+   * To map to the application attribute: Enter or select a directory attribute.
+
+   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
+
+4. To create advanced attribute mappings, click **Advanced**.
+
+   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa Customization
+
+### Steps
+
+* To change the application icon, click **Select image** and upload a local image file.
+
+  The image file must be:
+
+  * PNG, GIF, or JPG format
+
+  * 312 x 52 pixels maximum
+
+  * 2 MB maximum file size
+
+    |   |                                                  |
+    | - | ------------------------------------------------ |
+    |   | Images are scaled to 64 x 64 pixels for display. |
+
+* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
+
+* To change the description of the application, in the **Description** field, enter the new description text.
+
+* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
+
+  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa Group Access
+
+### About this task
+
+The **Group Access** tab shows every user group that you have created.
+
+Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
+
+### Steps
+
+* To add a group's access to the application, on the line for that group, click **Add**.
+
+* To remove a group's access, on the line for that group, click **Remove**.
+
+* When you're finished assigning groups, click **Continue to Next Step**.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Coupa SAML Connection
+
+### Steps
+
+1. On the **Review Setup** tab, on the **SAML Metadata** line, click **Download** to download the metadata file.
+
+2. Click **Finish** to add Coupa to your PingOne Dock.
+
+3. Send an email to inform your Coupa representative that you want to enable SSO. Include the following information.
+
+   * The SAML metadata file you downloaded, attached to the email.
+
+   * A login URL. The login URL should be in the following format.
+
+     ```
+     https://prdsso40.coupahost.com/sp/startSSO.ping?PartnerIdpId=<Issuer>&TARGET=https://<your_site>.coupahost.com/sessions/saml_post
+     ```
+
+     * Replace *\<Issuer>* with the **Issuer** value on the **Review Setup** tab.
+
+     * Replace *\<your\_site>* with the complete URL of your site as registered at Coupa.
+
+   * A logout page URL. Consider using the PingOne dashboard URL, which you can find in the **Configure Single Sign-on** box on your PingOne Dashboard.
+
+   * Test user. Coupa needs a test user name and password to test SSO functionality.
+
+4. Sign on to Coupa.
+
+5. Go to **Setup > Company Setup > Security Controls**.
+
+   1. Check the **Log in using SAML** checkbox.
+
+   2. In the **Login Page URL** field, enter the login URL that you emailed to your Coupa representative.
+
+   3. In the **Logout Page URL** field, enter the logout page URL that you emailed to your Coupa representative.
+
+   4. In the **Timeout URL**, enter the same URL as the **Logout Page URL**.
+
+   5. In the **Certificate** field, upload the signing certificate that you downloaded in [Adding Coupa to Your PingOne for Enterprise Dock](p14eapps_coupa.html).
+
+6. Save your configuration in Coupa.
 
 ---
 
@@ -251,527 +2998,45 @@ On the **Review Setup** tab, review your configuration, and click **Finish** to 
 ---
 
 ---
-title: Adding PagerDuty to Your PingOne for Enterprise Dock
-description: Add the PagerDuty application your PingOne for Enterprise Dock from the application catalog.
+title: Adding DocuSign to Your PingOne for Enterprise Dock
+description: Add the DocuSign application your PingOne for Enterprise dock from the application catalog.
 component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_pagerduty
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_pagerduty.html
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_docusign
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_docusign.html
 revdate: October 4, 2023
 section_ids:
+  about-this-task: About this task
   steps: Steps
   next-steps: Next steps
-  pagerduty-connection-configuration: PagerDuty Connection Configuration
+  docusign-connection-configuration: Docusign Connection Configuration
   steps-2: Steps
   choose-from: Choose from:
   choose-from-2: Choose from:
   next-steps-2: Next steps
-  pagerduty-attribute-mapping: PagerDuty Attribute Mapping
-  about-this-task: About this task
+  docusign-attribute-mapping: DocuSign Attribute Mapping
+  about-this-task-2: About this task
   steps-3: Steps
   choose-from-3: Choose from:
   next-steps-3: Next steps
-  pagerduty-customization: PagerDuty Customization
+  docusign-customization: DocuSign Customization
   steps-4: Steps
   next-steps-4: Next steps
-  pagerduty-group-access: PagerDuty Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding PagerDuty to Your PingOne for Enterprise Dock
-
-Add the PagerDuty application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **PagerDuty** application line to expand it and click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
-
-5. In a separate tab or window, sign on to PagerDuty as the account owner.
-
-6. In PagerDuty, go to **Account Settings > Single Sign-on**.
-
-7. Enter the signing certificate:
-
-   1. In a plain text editor, open the signing certificate you downloaded in step 4.
-
-   2. Copy the contents of the certificate.
-
-   3. In PagerDuty, in the **X.509 Certificate** field, paste the certificate contents, including the `Begin Certificate` and `End Certificate` lines.
-
-8. In the **Login URL** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, replacing *\<IdP ID>* with the **IdP ID** value from PingOne for Enterprise.
-
-9. Select the **Turn on single sign-on** checkbox.
-
-10. Select the **Allow username/password login** checkbox.
-
-    Enable this option while testing your single sign-on (SSO) connection. After a successful test, you can disable it.
-
-11. Click **Save Changes**.
-
-12. Sign out of PagerDuty.
-
-13. On the PagerDuty sign on page, click **Sign in with your Identity Provider**.
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## PagerDuty Connection Configuration
-
-### Steps
-
-1. Import the metadata for PagerDuty:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** and **Entity ID** fields, replace *${accountid}* with your PagerDuty account ID.
-
-3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated SSO.
-
-4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from PagerDuty.
-
-7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-9. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-10. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-12. Select the **Use Custom URL** checkbox to enter a customer URL to launch PagerDuty from the dock.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## PagerDuty Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For PagerDuty, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## PagerDuty Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## PagerDuty Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
----
-
----
-title: Adding Salesforce to Your PingOne for Enterprise Dock
-description: Add the Salesforce application your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_salesforce
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_salesforce.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  salesforce-connection-configuration: Salesforce Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  salesforce-provisioning: Salesforce Provisioning
-  before-you-begin: Before you begin
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  example: Example:
-  choose-from-4: Choose from:
-  result: Result:
-  next-steps-3: Next steps
-  salesforce-attribute-mapping: Salesforce Attribute Mapping
-  about-this-task-2: About this task
-  steps-4: Steps
-  choose-from-5: Choose from:
-  next-steps-4: Next steps
-  salesforce-customization: Salesforce Customization
-  steps-5: Steps
-  next-steps-5: Next steps
-  salesforce-group-access: Salesforce Group Access
+  docusign-group-access: DocuSign Group Access
   about-this-task-3: About this task
-  steps-6: Steps
-  next-steps-6: Next steps
----
-
-# Adding Salesforce to Your PingOne for Enterprise Dock
-
-Add the Salesforce application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Salesforce** application line to expand it, and then and click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
-
-5. In a separate tab or window, sign on to the Salesforce admin portal.
-
-6. In Salesforce, go to **Setup > Administer > Security Controls > Single Sign-On Settings**.
-
-7. Select the **SAML Enabled** checkbox.
-
-8. In the **Name** field, enter a name for the connection to PingOne.
-
-9. In the **Issuer** field, enter the **Issuer** value from PingOne.
-
-10. On the **Identity Provider Certificate** line, click **Browse** to upload the signing certificate you downloaded in step 4.
-
-11. From the **SAML Identity Type** list, select **Assertion contains User's salesforce.com username**.
-
-12. From the **SAML Identity Location** list, select **Identity is in the NameIdentifier element of the Subject Statement**.
-
-13. In the **API Name** field, enter a unique name for the API.
-
-14. In the **Entity ID** field, enter `https://saml.salesforce.com`
-
-    If you have a Salesforce.com My Domain URL, you can enter it into this field instead.
-
-15. **Optional:** In the **Identity Provier Login URL**, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, replacing *\<IdP ID>* with the **IdP ID** value from PingOne.
-
-16. **Optional:** In the **Identity provider Logout URL** field, enter `https://sso.connect.pingidentity.com/sso/terminatesession.aspx?page=https://www.salesforce.com`.
-
-17. **Optional:** In the **Custom Error URL**, enter a URL to redirect users to when an error occurs.
-
-    If your identity bridge is AD Connect with IIS, you can enter `https://<AD Connect IIS Server URL>/ADconnect/error.aspx`.
-
-18. Click **Save**.
-
-    |   |                                                                                   |
-    | - | --------------------------------------------------------------------------------- |
-    |   | Keep the Salesforce tab open, as you will need values from it for the next steps. |
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## Salesforce Connection Configuration
-
-### Steps
-
-1. Import the metadata for Salesforce:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** field, enter the **Salesforce Login URL** value from Salesforce.
-
-3. In the **Entity ID** field, enter the **Entity ID** value from Salesforce.
-
-4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Salesforce.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Salesforce from the dock.
-
-14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Salesforce.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Salesforce Provisioning
-
-### Before you begin
-
-Ensure that popups are permitted in your browser.
-
-### About this task
-
-|   |                                                                                                                                |
-| - | ------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you don't need to set up user provisioning, proceed to [Salesforce Attribute Mapping](p14eapps_salesforce_attributes.html). |
-
-If you selected **Set Up Provisioning** on the **Connection configuration** tab:
-
-### Steps
-
-1. In PingOne, click **Continue to Next Step** to proceed to the **Application Configuration** tab.
-
-2. Chose how Salesforce will deprovision:
-
-   #### Choose from:
-
-   * Select the **FREEZE\_USER\_FLAG** checkbox to freeze a deprovisioned user account.
-
-   * Leave the checkbox clear to deactivate a deprovisioned user account.
-
-3. In the **SUBDOMAIN** field, your Salesforce subdomain
-
-   #### Example:
-
-   If your Salesforce URL is `example.my.salesforce.com`, your subdomain is `example.my`.
-
-4. From the **PERMISSION\_SET\_MANAGEMENT** list, select how to handle permission sets provisioned from PingOne to Salesforce:
-
-   #### Choose from:
-
-   * Select **Merge with permission sets in Salesforce** to add provisioned PingOne user permissions to existing permission sets in Salesforce.
-
-   * Select **Overwrite permission sets in Salesforce** to overwrite permissions in Salesforce with the provisioned permissions from PingOne.
-
-5. Click **Continue to Next Step**.
-
-6. On the **Connection Configuration** tab, click **Activate**.
-
-   #### Result:
-
-   PingOne opens the Salesforce sign-on page in a pop-up window.
-
-7. Sign on to Salesforce as an administrative user.
-
-8. Click **Allow**.
-
-### Next steps
-
-In PingOne, click **Continue to Next Step**.
-
-## Salesforce Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For Salesforce, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Salesforce Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Salesforce Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
----
-
----
-title: Adding ServiceNow to Your PingOne for Enterprise Dock
-description: Add the ServiceNow application to your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_servicenow
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_servicenow.html
-revdate: October 4, 2023
-section_ids:
-  before-you-begin: Before you begin
-  steps: Steps
-  next-steps: Next steps
-  servicenow-connection-configuration: ServiceNow Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  servicenow-provisioning: ServiceNow Provisioning
-  before-you-begin-2: Before you begin
-  about-this-task: About this task
-  steps-3: Steps
-  examplehttpsyourinstance-servicenow-com: Example:https://<yourinstance>.servicenow.com
-  next-steps-3: Next steps
-  servicenow-attribute-mapping: ServiceNow Attribute Mapping
-  about-this-task-2: About this task
-  steps-4: Steps
-  choose-from-3: Choose from:
-  next-steps-4: Next steps
-  servicenow-customization: ServiceNow Customization
   steps-5: Steps
   next-steps-5: Next steps
-  servicenow-group-access: ServiceNow Group Access
-  about-this-task-3: About this task
+  docusign-saml-connection: DocuSign SAML connection
+  about-this-task-4: About this task
   steps-6: Steps
-  next-steps-6: Next steps
-  servicenow-saml-connection: ServiceNow SAML Connection
-  steps-7: Steps
 ---
 
-# Adding ServiceNow to Your PingOne for Enterprise Dock
+# Adding DocuSign to Your PingOne for Enterprise Dock
 
-Add the ServiceNow application to your PingOne for Enterprise Dock from the application catalog.
+Add the DocuSign application your PingOne for Enterprise dock from the application catalog.
 
-## Before you begin
+## About this task
 
-To configure single sign-on (SSO) for ServiceNow, you must have the SAML 2.0 Single Sign-On plugin installed in your ServiceNow account. If this plugin is not yet installed, contact ServiceNow customer support.
+For more information about configuring an identity provider for DocuSign, see [Set Up an Identity Provider](https://support.docusign.com/en/guides/org-admin-guide-identity-providers) in the DocuSign documentation.
 
 ## Steps
 
@@ -779,27 +3044,17 @@ To configure single sign-on (SSO) for ServiceNow, you must have the SAML 2.0 Sin
 
 2. **Optional:** In the **Search** field, search for the application.
 
-3. Click the **ServiceNow** application line to expand it and click **Setup**.
-
-4. In a separate tab or window, sign on to your ServiceNow account as an administrative user.
-
-5. In ServiceNow, go to **SAML 2.0 Single Sign-On > Properties**.
-
-6. On the **Enable External Authentication** line, click **Yes**.
-
-7. In the **Identity Provider URL which will issue the SAML2 Security token with user info** field, enter the **Issuer** value from PingOne for Enterprise.
-
-8. In the **The base URL to the Identity Provider's AuthnRequest service. The AuthnRequest will be posted to this URL as the SAMLRequest parameter** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, replacing *\<IdP ID>* with the **IdP ID** value from PingOne for Enterprise.
+3. Click the **DocuSign 2.0 - Production** application line to expand it and then click **Setup**.
 
 ## Next steps
 
-In PingOne for Enterprise, click **Continue to Next Step**.
+Click **Continue to Next Step**.
 
-## ServiceNow Connection Configuration
+## Docusign Connection Configuration
 
 ### Steps
 
-1. Import the metadata for ServiceNow:
+1. Import the metadata for DocuSign:
 
    #### Choose from:
 
@@ -807,266 +3062,7 @@ In PingOne for Enterprise, click **Continue to Next Step**.
 
    * Click **Or use URL** to enter the URL of the metadata.
 
-2. In the **ACS URL** field, enter the **The URL to the ServiceNow instance homepage** value from ServiceNow.
-
-3. In the **Entity ID** field, enter the **The entity identification, or the issuer** value from ServiceNow.
-
-4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single SSO.
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from ServiceNow.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch ServiceNow from the dock.
-
-14. Select the **Set Up Provisioning** checkbox to configure user provisioning to ServiceNow.
-
-### Next steps
-
-In PingOne, click **Continue to Next Step**.
-
-## ServiceNow Provisioning
-
-### Before you begin
-
-Ensure that popups are permitted in your browser.
-
-### About this task
-
-|   |                                                                                                                                |
-| - | ------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you don't need to set up user provisioning, proceed to [ServiceNow Attribute Mapping](p14eapps_servicenow_attributes.html). |
-
-If you selected **Set Up Provisioning** on the **Connection configuration** tab:
-
-### Steps
-
-1. In PingOne, click**Continue to Next Step** to proceed to the **Application Configuration** tab.
-
-2. Install the Ping Identity Provisioning Solution application.
-
-   For more information, see [Adding the Ping Identity provisioning role in ServiceNow](https://docs.pingidentity.com/bundle/integrations/page/pzq1563995052451.html).
-
-3. Create a provisioning user.
-
-   Learn more in [Creating a provisioning user in ServiceNow](https://docs.pingidentity.com//integrations/servicenow/setup/pf_servicenow_connector_creating_a_provisioning_user_in_servicenow.html).
-
-4. In PingOne, in the **Administrator\_Username** field, enter the username for the provisioning user.
-
-5. In the **Administrator\_Password** field, enter the password for the provisioning user.
-
-6. In the **ServiceNow\_URL** field, enter the full URL of your ServiceNow instance.
-
-   #### Example:`https://<yourinstance>.servicenow.com`
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## ServiceNow Attribute Mapping
-
-### About this task
-
-PingOne will automatically populate required SAML attributes.
-
-For ServiceNow, the required attribute is `SAML_SUBJECT`.
-
-If you enabled provisioning, the required provisioning attribute is `Username`. All other provisioning attributes are optional.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## ServiceNow Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## ServiceNow Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
-## ServiceNow SAML Connection
-
-### Steps
-
-1. On the **Review Setup** tab, go to the **SAML Metadata** line and click **Download** to download the PingOne metadata.
-
-2. Click **Finish** to complete your configuration and add ServiceNow to your PingOne Dock.
-
-3. In ServiceNow, go to **SAML 2.0 Single Sign-On > Certificate**.
-
-4. In the **Name** field, enter or select **SAML 2.0**.
-
-5. From the **Format** list, select **PEM**.
-
-6. In a plain text editor, open the PingOne metadata file.
-
-7. Copy the contents of the metadata file and paste them into the **PEM Certificate** field.
-
-8. Click **Save**.
-
----
-
----
-title: Adding ShareFile to Your PingOne for Enterprise Dock
-description: Add the ShareFile application to your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_sharefile
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_sharefile.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  sharefile-connection-configuration: ShareFile Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  sharefile-attribute-mapping: ShareFile Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  sharefile-customization: ShareFile Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  sharefile-group-access: ShareFile Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding ShareFile to Your PingOne for Enterprise Dock
-
-Add the ShareFile application to your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **ShareFile** application line to expand it and click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
-
-5. In a separate tab or window, sign on to ShareFile as an administrative user.
-
-6. In ShareFile, go to **Admin > Configure Single Sign-On**.
-
-7. Select the **Enable SAML** checkbox.
-
-8. In the **Your Issuer/Entity ID** field, enter the **Issuer** value from PingOne for Enterprise.
-
-9. In the **Sharefile Issuer/Entity ID** field, enter `https//<subdomain>.sharefile.com/saml/info`, replacing *\<subdomain>* with your Sharefile subdomain.
-
-10. In a plain text editor, open the signing certificate you downloaded in step 4.
-
-11. Copy the contents of the certificate, and paste them into the **X.509 Certificate** field.
-
-12. In the **Login URL** field, enter the **Initiate Single Sign-On URL** value from PingOne for Enterprise.
-
-13. In the **Logout URL** field, enter a URL to redirect users to when they sign off from ShareFile.
-
-    Consider the **PingOne Dock URL**, which you can find at **Setup > Dock**.
-
-14. Click **Save**.
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## ShareFile Connection Configuration
-
-### Steps
-
-1. Import the metadata for ShareFile:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** and **Entity ID** fields, replace *${mydomain}* with your ShareFile subdomain.
+2. **Required:** In the **ACS URL** and **Entity ID** fields, replace the *${customer-organization-ID-goes-here}* variable with the value in your DocuSign account.
 
 3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
 
@@ -1074,7 +3070,7 @@ In PingOne for Enterprise, click **Continue to Next Step**.
 
 5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
 
-6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from ShareFile.
+6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from DocuSign.
 
 7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
 
@@ -1092,19 +3088,35 @@ In PingOne for Enterprise, click **Continue to Next Step**.
 
 11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
 
-12. Select the **Use Custom URL** checkbox to enter a customer URL to launch ShareFile from the dock.
+12. Select the **Use Custom URL** checkbox to enter a customer URL to launch DocuSign from the dock.
 
 ### Next steps
 
 Click **Continue to Next Step**.
 
-## ShareFile Attribute Mapping
+## DocuSign Attribute Mapping
 
 ### About this task
 
-PingOne for Enterprise will automatically populate required SAML attributes.
+For DocuSign, the required attributes are:
 
-For ShareFile, the required attribute is `SAML_SUBJECT`.
+* `SAML_SUBJECT`: Map to your username attribute.
+
+  |   |                                                                                                                                                                                 |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | On the **SAML\_SUBJECT** line, click **Advanced**.In the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:2.0:nameid-format:persistent**.Click **Save**. |
+
+* `emailaddress`: Map to your email attribute. This can be the same as your username attribute.
+
+* `givenname`: Map to your first name attribute.
+
+* `surname`: Map to your last name attribute.
+
+DocuSign also creates two optional attributes.
+
+* `accountid`: Map to your account ID attribute.
+
+* `permissionprofileid`: Map to your permission profile id, for example `memberof`.
 
 ### Steps
 
@@ -1128,7 +3140,7 @@ For ShareFile, the required attribute is `SAML_SUBJECT`.
 
 Click **Continue to Next Step**.
 
-## ShareFile Customization
+## DocuSign Customization
 
 ### Steps
 
@@ -1158,7 +3170,7 @@ Click **Continue to Next Step**.
 
 Click **Continue to Next Step**.
 
-## ShareFile Group Access
+## DocuSign Group Access
 
 ### About this task
 
@@ -1178,48 +3190,76 @@ Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.htm
 
 On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
 
+## DocuSign SAML connection
+
+### About this task
+
+Keep the PingOne for Enterprise **Review Setup** tab open. You will need values from the **Review Setup** tab to complete your configuration in DocuSign.
+
+### Steps
+
+1. In a separate tab or window, sign on to the DocuSign administrative console.
+
+2. From the DocuSign dashboard, click **Identity Providers**, then click **Add Identity Provider**.
+
+3. In the **Identity Provider Settings** form, enter the following information:
+
+   | Field                                         | Value                                                                                                              |
+   | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+   | **Name**                                      | Enter a name for this connection.                                                                                  |
+   | **Identity Provider Issuer**                  | **Issuer**                                                                                                         |
+   | **Identity Provider Login URL**               | `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<idpid>`Replace *\<idpid>* with the **idpid** value. |
+   | (Optional) **Identity Provider Logout URL**   | **Single Logout Endpoint**                                                                                         |
+   | (Optional) **Identity Provider Metadata URL** | **SAML Metadata URL**                                                                                              |
+
+4. In PingOne for Enterprise, click **Download** to download the **Signing Certificate**.
+
+5. In DocuSign, click **Add Certificate** and upload the PingOne for Enterprise signing certificate you downloaded.
+
+6. Click **Save**.
+
 ---
 
 ---
-title: Adding Slack to Your PingOne for Enterprise Dock
-description: Add the Slack application to your PingOne for Enterprise Dock from the application catalog.
+title: Adding Dropbox to Your PingOne for Enterprise Dock
+description: Add the Dropbox application to your PingOne for Enterprise dock from the application catalog.
 component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_slack
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_slack.html
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_dropbox
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_dropbox.html
 revdate: October 4, 2023
 section_ids:
   steps: Steps
   choose-from: Choose from:
-  result: Result
   next-steps: Next steps
-  slack-connection-configuration: Slack Connection Configuration
+  dropbox-connection-configuration: Dropbox Connection Configuration
+  about-this-task: About this task
   steps-2: Steps
   choose-from-2: Choose from:
   choose-from-3: Choose from:
   next-steps-2: Next steps
-  slack-provisioning: Slack Provisioning
+  dropbox-provisioning: Dropbox Provisioning
   before-you-begin: Before you begin
-  about-this-task: About this task
-  steps-3: Steps
-  result-2: Result:
-  next-steps-3: Next steps
-  slack-attribute-mapping: Slack Attribute Mapping
   about-this-task-2: About this task
+  steps-3: Steps
+  result: Result:
+  next-steps-3: Next steps
+  dropbox-attribute-mapping: Dropbox Attribute Mapping
+  about-this-task-3: About this task
   steps-4: Steps
   choose-from-4: Choose from:
   next-steps-4: Next steps
-  slack-customization: Slack Customization
+  dropbox-customization: Dropbox Customization
   steps-5: Steps
   next-steps-5: Next steps
-  slack-group-access: Slack Group Access
-  about-this-task-3: About this task
+  dropbox-group-access: Dropbox Group Access
+  about-this-task-4: About this task
   steps-6: Steps
   next-steps-6: Next steps
 ---
 
-# Adding Slack to Your PingOne for Enterprise Dock
+# Adding Dropbox to Your PingOne for Enterprise Dock
 
-Add the Slack application to your PingOne for Enterprise Dock from the application catalog.
+Add the Dropbox application to your PingOne for Enterprise dock from the application catalog.
 
 ## Steps
 
@@ -1227,53 +3267,43 @@ Add the Slack application to your PingOne for Enterprise Dock from the applicati
 
 2. **Optional:** In the **Search** field, search for the application.
 
-3. Click the **Slack** application line to expand it, and then click **Setup**.
+3. Click the **Dropbox** application line to expand it and then click **Setup**.
 
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
+4. On the **SSO Instructions** tab, click **Download** to download the PingOne for Enterprise signing certificate.
 
-5. In a separate tab or window, go to [slack.com/admin](https://www.slack.com/admin) and sign on to your Slack account as a team owner.
+5. In a new tab or window, sign on to the Dropbox admin console.
 
-6. In Slack, go to **Menu > Authentication > SAML authentication > Configure**.
+6. Go to **Settings > Single Sign-On** and select the **Enable single sign-on** checkbox.
 
-7. From the **SAML provider** list, select **Custom SAML 2.0**.
+7. From the **Single sign-on** list, select one of the following:
 
-8. In the **SAML SSO URL** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, replacing *\<IdP ID>* with the **IdP ID** field from PingOne.
+   ### Choose from:
 
-9. Enter the PingOne for Enterprise signing certificate:
+   * **Optional** allows users to authenticate using either their single sign-on (SSO) credentials or their Dropbox account.
 
-   1. In a plain text editor, open the PingOne for Enterprise signing certificate you downloaded in step 4.
+   * **Required** forces users to authenticate using SSO.
 
-   2. Copy the contents of the certificate.
+8. On the **Identity provider sign-in URL** line, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, where *\<IdP ID>* is the **IdP ID** value on the **SSO Instructions** in PingOne.
 
-   3. In Slack, paste the copied certificate contents into the **X.509 Certificate** field.
+9. **Optional:** On the **Identity provider sign-out URL** line, enter `https://sso.connect.pingidentity.com/sso/SLO.saml2`.
 
-10. On the **Settings** line, click the button to set single sign-on (SSO) requirements.
-
-    ### Choose from:
-
-    * **Required**
-
-    * **Partially Required**
-
-    * **Optional**
-
-    If your users include restricted or single-channel guest accounts, select **Partially Required**.
-
-11. Click **Save Configuration**.
-
-## Result
-
-Slack will send a confirmation email to all users, prompting them to connect their Slack accounts to their single sign-on (SSO) accounts. After they confirm, they will be able to SSO into Slack.
+10. On the **X.509 certificate** line, upload the PingOne for Enterprise signing certificate that you downloaded in step 4.
 
 ## Next steps
 
-In PingOne, click **Continue to Next Step**.
+In PingOne for Enterprise, click **Continue to Next Step**.
 
-## Slack Connection Configuration
+## Dropbox Connection Configuration
+
+### About this task
+
+PingOne automatically populates the values for the required **ACS URL** and **Entity ID** fields.
+
+All other fields are optional.
 
 ### Steps
 
-1. Import the metadata for Slack:
+1. Import the metadata for Dropbox:
 
    #### Choose from:
 
@@ -1281,19 +3311,21 @@ In PingOne, click **Continue to Next Step**.
 
    * Click **Or use URL** to enter the URL of the metadata.
 
-2. In the **ACS URL** field, replace the *${teamname}* variable with your Slack subdomain.
+2. In the **ACS URL** field, enter the ACS URL.
 
-3. In the **Entity ID** field, enter the entity ID.
+   The pre-populated value for this field should work for most configurations.
 
-   The default value of `https://slack.com` should work for most configurations.
+3. In the **Entity ID** field, enter an entity ID.
 
-4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated SSO.
+   The pre-populated value for this field should work for most configurations.
+
+4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
 
 5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
 
 6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
 
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Slack.
+7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Dropbox.
 
 8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
 
@@ -1311,15 +3343,15 @@ In PingOne, click **Continue to Next Step**.
 
 12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
 
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Slack from the dock.
+13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Dropbox from the dock.
 
-14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Slack.
+14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Dropbox.
 
 ### Next steps
 
 Click **Continue to Next Step**.
 
-## Slack Provisioning
+## Dropbox Provisioning
 
 ### Before you begin
 
@@ -1327,9 +3359,9 @@ Ensure that popups are permitted in your browser.
 
 ### About this task
 
-|   |                                                                                                                      |
-| - | -------------------------------------------------------------------------------------------------------------------- |
-|   | If you don't need to set up user provisioning, proceed to [Slack Attribute Mapping](p14eapps_slack_attributes.html). |
+|   |                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------ |
+|   | If you don't need to set up user provisioning, proceed to [Dropbox Attribute Mapping](p14eapps_dropbox_attributes.html). |
 
 If you selected **Set Up Provisioning** on the **Connection configuration** tab:
 
@@ -1343,21 +3375,21 @@ If you selected **Set Up Provisioning** on the **Connection configuration** tab:
 
    The **Customer Log In** page appears in a pop-up window.
 
-3. On the **Customer Log In**, page, enter your team name and sign on to the Slack admin console.
+3. Sign on to the Dropbox admin console.
 
-4. Click **Authorize**.
+4. Click **Allow**.
 
 ### Next steps
 
-In PingOne, click **Continue to Next Step**.
+Click **Continue to Next Step**.
 
-## Slack Attribute Mapping
+## Dropbox Attribute Mapping
 
 ### About this task
 
-PingOne will automatically populate required SAML attributes.
+PingOne will automatically populate the required SAML attributes.
 
-For Slack, the required attribute is `SAML_SUBJECT`. Map it to your email attribute. Click **Advanced** and from the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:persistent**.
+For Dropbox, the required attribute is `SAML_SUBJECT`. Map it to an attribute that matches the Dropbox username. Click **Advanced** and from the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
 
 ### Steps
 
@@ -1381,7 +3413,7 @@ For Slack, the required attribute is `SAML_SUBJECT`. Map it to your email attrib
 
 Click **Continue to Next Step**.
 
-## Slack Customization
+## Dropbox Customization
 
 ### Steps
 
@@ -1411,7 +3443,7 @@ Click **Continue to Next Step**.
 
 Click **Continue to Next Step**.
 
-## Slack Group Access
+## Dropbox Group Access
 
 ### About this task
 
@@ -1429,477 +3461,49 @@ Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.htm
 
 ### Next steps
 
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
+On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne dock.
 
 ---
 
 ---
-title: Adding Smartsheet to Your PingOne for Enterprise Dock
-description: Add the Smartsheet application your PingOne for Enterprise Dock from the application catalog.
+title: Adding Egnyte to Your PingOne for Enterprise Dock
+description: Add the Egnyte application your PingOne for Enterprise Dock from the application catalog.
 component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_smartsheet
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_smartsheet.html
+page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_egnyte
+canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_egnyte.html
 revdate: October 4, 2023
 section_ids:
   steps: Steps
+  result: Result:
   next-steps: Next steps
-  smartsheet-connection-configuration: Smartsheet Connection Configuration
+  egnyte-connection-configuration: Egnyte Connection Configuration
   steps-2: Steps
   choose-from: Choose from:
   choose-from-2: Choose from:
   next-steps-2: Next steps
-  smartsheet-attribute-mapping: Smartsheet Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  smartsheet-customization: Smartsheet Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  smartsheet-group-access: Smartsheet Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
-  smartsheet-saml-connection: Smartsheet SAML Connection
+  egnyte-provisioning: Egnyte Provisioning
   before-you-begin: Before you begin
-  steps-6: Steps
-  result: Result:
+  about-this-task: About this task
+  steps-3: Steps
   result-2: Result:
----
-
-# Adding Smartsheet to Your PingOne for Enterprise Dock
-
-Add the Smartsheet application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Smartsheet** application line to expand it, and then click **Setup**.
-
-## Next steps
-
-On the **SSO Instruction** tab, click **Continue to Next Step**.
-
-## Smartsheet Connection Configuration
-
-### Steps
-
-1. Import the metadata for Smartsheet:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-   Find your Smartsheet metadata URL at [What You Need to Set Up Smartsheet with Your Identity Provider](https://help.smartsheet.com/articles/2476141-configure-saml-sso) in the Smartsheet documentation.
-
-2. In the **ACS URL** field, enter the Smartsheet ACS URL.
-
-   The pre-populated value for this field should work for most configurations.
-
-3. In the **Entity ID** field, enter the Smartsheet entity ID.
-
-   The pre-populated value for this field should work for most configurations.
-
-4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Smartsheet.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Smartsheet from the dock.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Smartsheet Attribute Mapping
-
-### About this task
-
-PingOne will automatically populate required SAML attributes.
-
-Smartsheet requires two attributes:
-
-* `SAML_SUBJECT`. Map to an attribute that matches user email address. Click **Advanced** and from the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:persistent**.
-
-* `emailaddress`. Map to email. Click **Advanced** and in the **NameFormat** field, enter `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Smartsheet Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Smartsheet Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Smartsheet SAML Connection
-
-### Before you begin
-
-Ensure that your Smartsheet account is an enterprise account.
-
-### Steps
-
-1. On the **Review Setup** tab, go to the **SAML Metadata** line and click **Download** to download the PingOne metadata.
-
-2. Click **Finish** to complete your configuration and add Smartsheet to your PingOne Dock.
-
-3. In a separate tab or window, sign on to your Smartsheet account as an administrative user.
-
-4. In Smartsheet, go to **Account > Account Admin > Security Controls**.
-
-5. Under the **Authentication** heading, click **Edit**.
-
-6. Click **Not Configured**.
-
-   #### Result:
-
-   Smartsheet opens the **SAML Administration** form.
-
-7. Click **Add IdP**.
-
-8. In the **IdP Nickname** field, enter a name for the connection.
-
-9. Enter the PingOne metadata.
-
-   1. In a plain text editor, open the PingOne metadata file you downloaded in step 1.
-
-   2. Copy the contents of the file.
-
-   3. In Smartsheet, paste the file contents into the **IdP Metadata** field.
-
-10. Click **Save**.
-
-11. Click **Activate**.
-
-    #### Result:
-
-    The **IdP Status** will change from **Inactive** to **Active, Default**
-
-12. In the **Authentication** form, select the **SAML** checkbox to enable the SAML connection.
-
-13. Click **Save**.
-
----
-
----
-title: Adding SuccessFactors to Your PingOne for Enterprise Dock
-description: Add the SuccessFactors application your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_successfactors
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_successfactors.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  successfactors-connection-configuration: SuccessFactors Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  successfactors-attribute-mapping: SuccessFactors Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
   next-steps-3: Next steps
-  successfactors-customization: SuccessFactors Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  successfactors-group-access: SuccessFactors Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding SuccessFactors to Your PingOne for Enterprise Dock
-
-Add the SuccessFactors application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **SuccessFactors** application line to expand it, and then click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
-
-5. Email your SuccessFactors representative requesting a single sign-on (SSO) connection. Include the following information in the email:
-
-   * The **Issuer** value.
-
-   * The SAML version you want to use. In most cases this is SAML 2.0.
-
-   * The PingOne signing certificate you downloaded in step 4, attached to the email.
-
-   In the email, request the following information from your SuccessFactors representative:
-
-   * The assertion consumer service (ACS) URL
-
-   * The target resource value
-
-## Next steps
-
-After your SuccessFactors representative replies with the requested information, click **Continue to Next Step**.
-
-## SuccessFactors Connection Configuration
-
-### Steps
-
-1. Import the metadata for SuccessFactors:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** field, enter ACS URL value supplied by your SuccessFactors representative.
-
-3. In the **Entity ID** field, enter the entity ID.
-
-   The pre-populated value for this field should work for most configurations.
-
-4. In the **Target Resource** field, enter the target resource value supplied by your SuccessFactors representative.
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Achiever.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch SuccessFactors from the dock.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## SuccessFactors Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For SuccessFactors, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## SuccessFactors Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## SuccessFactors Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
----
-
----
-title: Adding Ultimate Software to Your PingOne for Enterprise Dock
-description: Add UltiPro your PingOne for Enterprise dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_ultimate_software
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_ultimate_software.html
-revdate: August 5, 2024
-section_ids:
-  steps: Steps
-  result: Result:
-  next-steps: Next steps
-  ultimate-software-connection-configuration: Ultimate Software Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  ultimate-software-provisioning: Ultimate Software Provisioning
-  about-this-task: About this task
-  steps-3: Steps
-  next-steps-3: Next steps
-  ultimate-software-attribute-mapping: Ultimate Software Attribute Mapping
+  egnyte-attribute-mapping: Egnyte Attribute Mapping
   about-this-task-2: About this task
   steps-4: Steps
   choose-from-3: Choose from:
   next-steps-4: Next steps
-  ultimate-software-customization: Ultimate Software Customization
+  egnyte-customization: Egnyte Customization
   steps-5: Steps
   next-steps-5: Next steps
-  ultimate-software-group-access: Ultimate Software Group Access
+  egnyte-group-access: Egnyte Group Access
   about-this-task-3: About this task
   steps-6: Steps
   next-steps-6: Next steps
-  ultimate-software-saml-connection: Ultimate Software SAML Connection
-  steps-7: Steps
-  result-2: Result:
 ---
 
-# Adding Ultimate Software to Your PingOne for Enterprise Dock
+# Adding Egnyte to Your PingOne for Enterprise Dock
 
-Add UltiPro your PingOne for Enterprise dock from the application catalog.
+Add the Egnyte application your PingOne for Enterprise Dock from the application catalog.
 
 ## Steps
 
@@ -1907,278 +3511,53 @@ Add UltiPro your PingOne for Enterprise dock from the application catalog.
 
 2. **Optional:** In the **Search** field, search for the application.
 
-3. Click the **Ultimate Software** application line to expand it , and then click **Setup**.
+3. Click the **Egnyte** application line to expand it and click **Setup**.
 
-4. On the **SSO Instructions** tab, click **Download** to download the PingOne for Enterprise signing certificate.
+4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
 
-5. Email <Setupmanagement@ultimatesoftware.com> with your company name to request a single sign-on (SSO) connection.
+5. In a separate tab or window, sign on to your Egnyte domain.
+
+6. In Egnyte, go to **Settings > External Authentication > SAML (SSO)**.
+
+7. Select the **Enable SAML (SSO)** checkbox.
 
    ### Result:
 
-   Ultimate Software will respond with the **ACS URL** and **Entity ID** values you will need in following steps.
+   Egnyte presents a SAML connection form.
 
-## Next steps
+8. From the **IdP Name** list, select **PingIdentity**.
 
-In PingOne for Enterprise, click **Continue to Next Step**
+9. In the **IdP Account Name** field, enter your Egnyte account name.
 
-## Ultimate Software Connection Configuration
+   Do not include the ".egnyte.com" part of your account name.
 
-### Steps
+10. In the **IdP Target URL** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, where *\<IdP ID>* is the **IdP ID** value from the **SSO Instructions** tab in PingOne.
 
-1. Import the metadata for Ultimate Software:
+11. In the **IdP Issuer URL** field, enter the **Issuer** value from the **SSO Instructions** tab in PingOne.
 
-   #### Choose from:
+12. In the **SAML Certificate** field, enter the signing certificate information.
 
-   * Click **Select File** to upload the metadata file.
+    1. In a plain text editor, open the signing certificate you downloaded in step 4.
 
-   * Click **Or use URL** to enter the URL of the metadata.
+    2. Copy the text of the certificate.
 
-2. In the **ACS URL** and **Entity ID** fields, replace *$\\{ultipro provided host}* with the values supplied by your Ultimate Software representative.
+    Do not copy theBegin CertificateorEnd Certificatelines.
 
-3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated SSO.
+    1. Paste the text into the **SAML Certificate** field.
 
-4. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
+13. From the **Default User Mapping** list, select **Email address**.
 
-5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
-
-6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Ultimate Software.
-
-7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-9. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-10. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
-
-11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-12. Select the **Use Custom URL** checkbox to enter a customer URL to launch Achievers from the dock.
-
-13. Select the **Set Up Provisioning** checkbox to configure user provisioning to Ultimate Software.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Ultimate Software Provisioning
-
-### About this task
-
-|   |                                                                                                                                              |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you don't need to set up user provisioning, proceed to [Ultimate Software Attribute Mapping](p14eapps_ultimate_software_attributes.html). |
-
-If you selected **Set Up Provisioning** on the **Connection configuration** tab:
-
-### Steps
-
-1. Email your Ultimate Software representative and ask them to configure provisioning for your account.
-
-2. After your representative confirms the provisioning configuration, click**Continue to Next Step**.
-
-3. In a separate tab or window, sign on to your Ultimate Software account.
-
-4. In Ultimate Software, go to **System Admin > Web Services**.
-
-5. In PingOne, enter the following information:
-
-   1. In the **Username** field, enter the username for your Ultimate Software account.
-
-   2. In the **Password** and **Repeat Password** fields, enter your Ultimate Software account password.
-
-   3. In the **User API Key**, **Client API Key**, and **Login Service Endpoint**, enter the corresponding values from the Ultimate Software **Web Services** page.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Ultimate Software Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For Ultimate Software, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Ultimate Software Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Ultimate Software Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Ultimate Software SAML Connection
-
-### Steps
-
-1. On the **Review Setup** tab, click **Download** to download the PingOne SAML metadata file.
-
-2. Email your Ultimate Software representative with the following information:
-
-   * The **IdP ID** value.
-
-   * The PingOne SAML metadata file you downloaded in step 1, attached to the email.
-
-     #### Result:
-
-     Your Ultimate Software representative will respond with your SSO URL.
-
-3. In PingOne, click **Finish** to add Ultimate Software to your PingOne Dock.
-
----
-
----
-title: Adding WebEx to Your PingOne for Enterprise Dock
-description: Add the WebEx application your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_webex
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_webex.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  webex-connection-configuration: WebEx Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  webex-provisioning: WebEx Provisioning
-  about-this-task: About this task
-  steps-3: Steps
-  next-steps-3: Next steps
-  webex-attribute-mapping: WebEx Attribute Mapping
-  about-this-task-2: About this task
-  steps-4: Steps
-  choose-from-3: Choose from:
-  next-steps-4: Next steps
-  webex-customization: WebEx Customization
-  steps-5: Steps
-  next-steps-5: Next steps
-  webex-group-access: WebEx Group Access
-  about-this-task-3: About this task
-  steps-6: Steps
-  next-steps-6: Next steps
----
-
-# Adding WebEx to Your PingOne for Enterprise Dock
-
-Add the WebEx application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **WebEx** application line to expand it, and then click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the signing certificate.
-
-5. In a separate tab or window, sign on to your WebEx account as an administrative user.
-
-6. In WebEx, go to **Site Administration > SSO Configuration**.
-
-7. Click **Organization Certificate Management** and upload the PingOne for Enterprise signing certificate you downloaded in step 4.
-
-8. In the single sign-on (SSO) configuration form, enter the following information.
-
-   | Field                                                 | Action                                                                                                                                                |
-   | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Federation Protocol**                               | **SAML 2.0**                                                                                                                                          |
-   | **WebEx SAML Issuer (SP ID)**                         | `https://webex.com`                                                                                                                                   |
-   | **Issuer for SAML (IdP ID)**                          | Enter the **IdP ID** from PingOne                                                                                                                     |
-   | **Customer SSO Service Login URL**                    | `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, replacing *\<IdP ID>* with the **IdP ID** value from PingOne for Enterprise. |
-   | **Default WebEx Target Page URL**                     | Leave blank                                                                                                                                           |
-   | **Customer SSO Error URL**                            | Leave blank                                                                                                                                           |
-   | **NameID Format**                                     | `Unspecified`                                                                                                                                         |
-   | **AuthnContextClassRef**                              | `urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified`                                                                                                  |
-   | **SSO Profile**                                       | `SP Initiated`                                                                                                                                        |
-   | **Single Logout**                                     | Leave checkbox clear                                                                                                                                  |
-   | **AuthnRequest Signed**                               | Leave checkbox clear                                                                                                                                  |
-   | **Auto Account Update**                               | Leave checkbox clear                                                                                                                                  |
-   | **Remove uid Domain Suffix for Active Directory UPN** | Leave checkbox clear                                                                                                                                  |
+14. Click **Save**.
 
 ## Next steps
 
 In PingOne for Enterprise, click **Continue to Next Step**.
 
-## WebEx Connection Configuration
+## Egnyte Connection Configuration
 
 ### Steps
 
-1. Import the metadata for WebEx:
+1. Import the metadata for Egnyte:
 
    #### Choose from:
 
@@ -2186,451 +3565,11 @@ In PingOne for Enterprise, click **Continue to Next Step**.
 
    * Click **Or use URL** to enter the URL of the metadata.
 
-2. In the **ACS URL** field, replace *${parameter}* with your WebEx subdomain.
+2. In the **ACS URL** field, replace *$\\{your Egnyte domain}* with your Egnyte subdomain.
 
-3. In the **Entity ID** field, enter your entity ID.
+3. In the **Entity ID** field, enter the Egnyte entity ID.
 
    The pre-populated value for this field should work for most configurations.
-
-4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated SSO.
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from WebEx.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch WebEx from the dock.
-
-14. Select the **Set Up Provisioning** checkbox to configure user provisioning to WebEx.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## WebEx Provisioning
-
-### About this task
-
-|   |                                                                                                                      |
-| - | -------------------------------------------------------------------------------------------------------------------- |
-|   | If you don't need to set up user provisioning, proceed to [WebEx Attribute Mapping](p14eapps_webex_attributes.html). |
-
-If you selected **Set Up Provisioning** on the **Connection configuration** tab:
-
-### Steps
-
-1. In PingOne, click**Continue to Next Step**.
-
-2. On the **Application Configuration** tab, enter the following information.
-
-   1. In the **webexid** field, enter your WebEx administrator user name
-
-   2. In the **password** field, enter the WebEx administrator user password.
-
-   3. In the **siteName** field, enter your WebEx subdomain.
-
-   4. **Optional:** In the **siteid** field, enter your WebEx **Account Site ID** value.
-
-      You can find this value on the WebEx Administration Tool page.
-
-   5. In the **partnerId** field, enter your WebEx **Account Partner ID** value.
-
-   You can find this value on the WebEx Administration Tool page.
-
-### Next steps
-
-In PingOne, click **Continue to Next Step**.
-
-## WebEx Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For WebEx, the following attributes are required for SSO:
-
-* `SAML_SUBJECT`. Map to the username attribute. Email address is preferred.
-
-* `SAML_AUTHN_CTX`. Select the **As Literal** checkbox. Enter a value of `urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified`.
-
-If you enabled provisioning, the following provisioning attributes are required:
-
-* `firstname`
-
-* `lastname`
-
-* `password`
-
-* `email`
-
-All other provisioning attributes are optional.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## WebEx Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## WebEx Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
----
-
----
-title: Adding Workday to Your PingOne for Enterprise Dock
-description: Add the Workday application to your PingOne for Enterprise dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_workday
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_workday.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  workday-connection-configuration: Workday Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  workday-attribute-mapping: Workday Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  workday-customization: Workday Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  workday-group-access: Workday Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding Workday to Your PingOne for Enterprise Dock
-
-Add the Workday application to your PingOne for Enterprise dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Workday** application line to expand it, and then click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the PingOne for Enterprise signing certificate.
-
-5. Copy the **IdP ID** value.
-
-6. Send an email to your Workday partner representative with the following information.
-
-   | Property                   | Description                                                                                                                                                                                                                                                                                                                                                                               |
-   | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Certificate                | Attach the signing certificate you downloaded in step 4.                                                                                                                                                                                                                                                                                                                                  |
-   | Certificate validity range | The issued date and the expiration date of the certificate.                                                                                                                                                                                                                                                                                                                               |
-   | Redirect URL               | Include the following URL with your PingOne for Enterprise account information filled in.`https://sso.connect.pingidentity.com/sso/sp/initsso?saasid=e003a904-a9d8-4d2e-a3e8-74dac7879938&idpid=<Enter idpid here>&appurl=https%3A%2F%2Fwww.myworkday.com%2<Enter Workday tenant here>%2Flogin.flex`&#xA;&#xA;The Redirect URL isn't required if you plan to use the Target Resource URL. |
-   | Logout URL                 | Specify where to redirect users when they sign out of Workday.                                                                                                                                                                                                                                                                                                                            |
-   | Identity Provider ID       | The **IdP ID** value from above.                                                                                                                                                                                                                                                                                                                                                          |
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## Workday Connection Configuration
-
-### Steps
-
-1. Import the metadata for Workday:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** field, replace the *${tenant}* variable with the your Workday account name.
-
-3. Leave the default **Entity ID** value.
-
-4. **Optional:** In the **Target Resource** field, replace the *${tenant}* variable with the your Workday account name.
-
-   |   |                                                                                              |
-   | - | -------------------------------------------------------------------------------------------- |
-   |   | Enter this information only if you're using a target resource URL instead of a redirect URL. |
-
-5. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
-
-6. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
-
-7. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Zendesk.
-
-8. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-9. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-10. Select **Pass-Thru RequestedAuthnContext to IdP** if you want PingOne for Enterprise to pass the `RequestedAuthnContext` request to the IdP for your account.
-
-    This option is available only if you upload a primary verification certificate.
-
-11. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-12. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
-
-13. In the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-14. Select the **Use Custom URL** checkbox to enter a customer URL to launch Workday from the dock.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Workday Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For Workday, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Workday Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Workday Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne for Enterprise dock.
-
----
-
----
-title: Adding Workplace by Facebook to Your PingOne for Enterprise Dock
-description: Add the Workplace by Facebook application your PingOne for Enterprise Dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_facebook
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_facebook.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  workplace-by-facebook-connection-configuration: Workplace by Facebook Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  workplace-by-facebook-attribute-mapping: Workplace by Facebook Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  workplace-by-facebook-customization: Workplace by Facebook Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  workplace-by-facebook-group-access: Workplace by Facebook Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding Workplace by Facebook to Your PingOne for Enterprise Dock
-
-Add the Workplace by Facebook application your PingOne for Enterprise Dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Workplace by Facebook** application line to expand it and click **Setup**.
-
-4. On the **Signing Certificate** line, click **Download**.
-
-5. In a separate tab or window, sign on to Workplace by Facebook as an administrator.
-
-6. From the dashboard, go to **Settings > SSO Settings**.
-
-7. From the **Allow users to login via** list, select **SSO only**.
-
-8. In the **SAML URL** field, enter `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<IdP ID>`, where *\<IdP ID>* is the value of the **IdP ID** line on the PingOne for Enterprise **SSO Instructions** tab.
-
-9. In the **SAML Issuer URI** field, enter the **Issuer** value from the PingOne for Enterprise **SSO Instructions** tab.
-
-10. Using a text editor, open the PingOne for Enterprise signing certificate you downloaded in step 4.
-
-11. Copy the contents of the certificate and paste them into the **SAML Certificate** field in Workplace by Facebook.
-
-12. Click **Test SSO** to confirm that the SSO connection is successful.
-
-13. Click **Save**.
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## Workplace by Facebook Connection Configuration
-
-### Steps
-
-1. Import the metadata for Workplace by Facebook:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** field, replace *${company\_subdomain}* with your company subdomain.
-
-3. In the **Entity ID** field, replace *${companyid}* with your company ID.
 
 4. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
 
@@ -2656,19 +3595,57 @@ In PingOne for Enterprise, click **Continue to Next Step**.
 
 12. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
 
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Workplace by Facebook from the dock.
+13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Egnyte from the dock.
+
+14. Select the **Set Up Provisioning** checkbox to configure user provisioning to Egnyte.
 
 ### Next steps
 
 Click **Continue to Next Step**.
 
-## Workplace by Facebook Attribute Mapping
+## Egnyte Provisioning
+
+### Before you begin
+
+Ensure that popups are permitted in your browser.
 
 ### About this task
 
-PingOne for Enterprise will automatically populate required SAML attributes.
+|   |                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------- |
+|   | If you don't need to set up user provisioning, proceed to [Egnyte Attribute Mapping](p14eapps_egnyte_attributes.html). |
 
-For Workplace by Facebook, the required attribute is `SAML_SUBJECT`. Map it to an attribute that matches the `userName` attribute. Click **Advanced** and from the **Name ID Format to send to SP** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
+If you selected **Set Up Provisioning** on the **Connection configuration** tab:
+
+### Steps
+
+1. In PingOne, click **Continue to Next Step**.
+
+2. In the **Subdomain** field, enter your Egnyte subdomain.
+
+3. Click **Continue to Next Step**.
+
+4. Click **Activate**.
+
+   #### Result:
+
+   The **Customer Log In** page appears in a pop-up window.
+
+5. Sign on to the Egnyte admin console.
+
+6. Click **Authorize**.
+
+### Next steps
+
+Click **Continue to Next Step**.
+
+## Egnyte Attribute Mapping
+
+### About this task
+
+PingOne will automatically populate required SAML attributes.
+
+For Egnyte, the required attribute is `SAML_SUBJECT`.
 
 ### Steps
 
@@ -2692,7 +3669,7 @@ For Workplace by Facebook, the required attribute is `SAML_SUBJECT`. Map it to a
 
 Click **Continue to Next Step**.
 
-## Workplace by Facebook Customization
+## Egnyte Customization
 
 ### Steps
 
@@ -2722,517 +3699,7 @@ Click **Continue to Next Step**.
 
 Click **Continue to Next Step**.
 
-## Workplace by Facebook Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne Dock.
-
----
-
----
-title: Adding Zendesk to Your PingOne for Enterprise Dock
-description: Add the Zendesk application to your PingOne for Enterprise dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_zendesk
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_zendesk.html
-revdate: October 4, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
-  zendesk-connection-configuration: Zendesk Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  zendesk-attribute-mapping: Zendesk Attribute Mapping
-  about-this-task: About this task
-  steps-3: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  zendesk-customization: Zendesk Customization
-  steps-4: Steps
-  next-steps-4: Next steps
-  zendesk-group-access: Zendesk Group Access
-  about-this-task-2: About this task
-  steps-5: Steps
-  next-steps-5: Next steps
----
-
-# Adding Zendesk to Your PingOne for Enterprise Dock
-
-Add the Zendesk application to your PingOne for Enterprise dock from the application catalog.
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Zendesk** application line to expand it, and then click **Setup**.
-
-4. On the **SSO Instructions** tab, click **Download** to download the PingOne for Enterprise signing certificate.
-
-5. In the Zendesk admin console, click the **Zendesk Products** icon, then click **Admin Center**.
-
-6. Click the **Security** icon, then click the **Single sign-on** tab.
-
-7. Click **Configure**.
-
-8. In the single sign-on (SSO) configuration form, enter the following information.
-
-   | Field                                  | Action                                                                                                                                                                                                                                                                                                            |
-   | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **SAML SSO URL** (Required)            | `https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<your IdP ID value>`                                                                                                                                                                                                                                |
-   | **Certificate fingerprint** (Required) | Enter the certificate fingerprint for your signing certificate.&#xA;&#xA;To obtain the certificate fingerprint, in PingOne for Enterprise, go to Setup > Certificates, and expand the line for your signing certificate. PingOne for Enterprise displays both the SHA1 Fingerprint and SHA256 Fingerprint values. |
-   | **Remote logout URL** (Optional)       | `https://sso.connect.pingidentity.com/sso/terminatesession?page=https://<URL to redirect users to>`                                                                                                                                                                                                               |
-   | **IP Ranges** (Optional)               | Enter a range of IP addresses to restrict SSO to those locations. Users requesting sign on from outside those locations will be redirected to the Zendesk sign-on page.Leave this field blank to allow SSO from any location.                                                                                     |
-
-9. Click **Enabled**
-
-10. Click **Save**.
-
-## Next steps
-
-In PingOne for Enterprise, click **Continue to Next Step**.
-
-## Zendesk Connection Configuration
-
-### Steps
-
-1. Import the metadata for Zendesk:
-
-   #### Choose from:
-
-   * Click **Select File** to upload the metadata file.
-
-   * Click **Or use URL** to enter the URL of the metadata.
-
-2. In the **ACS URL** and **Entity ID** fields, replace the *${accountname}* variables with the your Zendesk account name.
-
-3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
-
-4. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
-
-5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
-
-6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Zendesk.
-
-7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-9. Select **Pass-Thru RequestedAuthnContext to IdP** if you want PingOne for Enterprise to pass the `RequestedAuthnContext` request to the IdP for your account.
-
-   This option is available only if you upload a primary verification certificate.
-
-10. Select the **Encrypt Assertion** checkbox to encrypt outgoing SAML assertions.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * Click **Sign Assertion** to have PingOne for Enterprise sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne for Enterprise sign responses to incoming SAML assertions.
-
-12. In the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. Select the **Use Custom URL** checkbox to enter a customer URL to launch Zendesk from the dock.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zendesk Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise will automatically populate required SAML attributes.
-
-For Zendesk, the required attribute is `SAML_SUBJECT`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zendesk Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zendesk Group Access
-
-### About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-### Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
-### Next steps
-
-On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne for Enterprise dock.
-
----
-
----
-title: Adding Zoom to Your PingOne for Enterprise Dock
-description: Add the Zoom application to your PingOne for Enterprise dock from the application catalog.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_zoom
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_zoom.html
-revdate: October 4, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  next-steps: Next steps
-  zoom-connection-configuration: Zoom Connection Configuration
-  steps-2: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  next-steps-2: Next steps
-  zoom-provisioning: Zoom Provisioning
-  about-this-task-2: About this task
-  steps-3: Steps
-  zoom-attribute-mapping: Zoom Attribute Mapping
-  about-this-task-3: About this task
-  steps-4: Steps
-  choose-from-3: Choose from:
-  next-steps-3: Next steps
-  zoom-customization: Zoom Customization
-  steps-5: Steps
-  next-steps-4: Next steps
-  zoom-group-access: Zoom Group Access
-  about-this-task-4: About this task
-  steps-6: Steps
-  next-steps-5: Next steps
-  zoom-saml-connection: Zoom SAML Connection
-  steps-7: Steps
-  examplehttpssso-connect-pingidentity-comssoidpsso-saml2idpididpid-value: Example:https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<idpid value>
----
-
-# Adding Zoom to Your PingOne for Enterprise Dock
-
-Add the Zoom application to your PingOne for Enterprise dock from the application catalog.
-
-## About this task
-
-|   |                                                                                        |
-| - | -------------------------------------------------------------------------------------- |
-|   | Single sign-on (SSO) is only available to paid business and educational Zoom accounts. |
-
-## Steps
-
-1. In the PingOne for Enterprise admin console, go to **Applications > Application Catalog**.
-
-2. **Optional:** In the **Search** field, search for the application.
-
-3. Click the **Zoom** application line to expand it and click **Setup**.
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | As of June 2023, Zoom no longer allows the creation of new JSON Web Token (JWT) *(tooltip: \<div class="paragraph">&#xA;\<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>&#xA;\</div>)* applications.If you want to enable user provisioning for Zoom, select the **Zoom - OAuth** application in the PingOne for Enterprise Application Catalog.Learn more in [JWT App Type Deprecation](https://developers.zoom.us/changelog/platform/jwt-app-type-deprecation/) in the Zoom documentation. |
-
-4. In a separate tab, go to <https://www.zoom.us/signin> and sign on to your account as an administrative user.
-
-5. In the Zoom admin console, click **Single Sign-On**.
-
-6. On the **Vanity URL** line, click **Apply**.
-
-7. In the **Vanity URL** field, enter a vanity URL for your organization and click **Apply**.
-
-   For more information, see [Guidelines for Vanity URL requests](https://support.zoom.us/hc/en-us/articles/215062646-Guidelines-for-Vanity-URL-Requests) in the Zoom documentation.
-
-   |   |                                                              |
-   | - | ------------------------------------------------------------ |
-   |   | Zoom takes 1-2 business days to process vanity URL requests. |
-
-## Next steps
-
-After Zoom approves your vanity URL request, return to the Zoom app catalog application and click **Continue to Next Step**.
-
-## Zoom Connection Configuration
-
-### Steps
-
-1. Import the metadata for Zoom:
-
-   #### Choose from:
-
-   * To upload the metadata file: Click **Select File**.
-
-   * To enter the URL of the metadata: Click **Or use URL**.
-
-     |   |                                                                                                                                                                                                                                                                                                         |
-     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | If you upload a metadata file, the **Entity ID** field is automatically populated to include the `https` prefix. Leaving this prefix intact can cause configuration errors.After you upload the metadata file, you should verify that the **Entity ID** value is in the format `<vanity name>.zoom.us`. |
-
-2. **Required:** In the **ACS URL** and **Entity ID** fields, replace the *${vanity}* variables with your Zoom vanity URL.
-
-3. In the **Target Resource** field, enter a URL to redirect the user to after identity provider (IdP)-initiated SSO.
-
-4. In the **Single Logout Endpoint** field, enter a URL for PingOne for Enterprise to send single logout (SLO) requests to.
-
-   |   |                                                                                                                                             |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If you enter a value in the **Single Logout Endpoint** field, it should be in the format `https://<vanity name>.zoom.us/saml/SingleLogout`. |
-
-5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne for Enterprise to send SLO responses to.
-
-   |   |                                                                                                                                                                                                                                                                   |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Using the https\://*\<your vanity URL>*.zoom.us/saml/singlelogout SLO endpoint for both **Single Logout Endpoint** and **Single Logout Response Endpoint** improves your security by ending the user session in the application when the user's SSO session ends. |
-
-6. To add a **Primary Verification Certificate**, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses coming from Zoom.
-
-7. To add a **Secondary Verification Certificate**, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-8. To require your identity bridge to re-authenticate users with an active SSO session, select the **Force Re-authentication** checkbox .
-
-9. If you want PingOne for Enterprise to pass the `RequestedAuthnContext` request to the IdP for your account, select **Pass-Thru RequestedAuthnContext to IdP**.
-
-   |   |                                                                                 |
-   | - | ------------------------------------------------------------------------------- |
-   |   | This option is available only if you upload a primary verification certificate. |
-
-10. To encrypt outgoing SAML assertions, select the **Encrypt Assertion** checkbox.
-
-11. On the **Signing** line:
-
-    #### Choose from:
-
-    * To have PingOne for Enterprise sign outgoing SAML assertions: Click **Sign Assertion**. This is the default option.
-
-    * To have PingOne for Enterprise sign responses to incoming SAML assertions: Click **Sign Response**.
-
-12. In the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-13. To enter a custom URL to launch Zoom from the dock, select the **Use Custom URL** checkbox.
-
-14. To enable user provisioning, select the **Set Up Provisioning** checkbox.
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zoom Provisioning
-
-### About this task
-
-|   |                                                                                                                    |
-| - | ------------------------------------------------------------------------------------------------------------------ |
-|   | If you don't need to set up user provisioning, proceed to [Zoom Attribute Mapping](p14eapps_zoom_attributes.html). |
-
-### Steps
-
-1. Sign on to the [Zoom App Marketplace](https://marketplace.zoom.us/) as an administrator.
-
-2. Click **Develop > Build App**.
-
-3. On the **Choose your app type** page, in the **Server-to-Server OAuth** tile, click **Create**.
-
-4. In the **App Name** field, enter a name for your application and click **Create**.
-
-5. On the **App credentials** tab, copy the **Account ID**, **Client ID**, and **Client Secret** values, then click **Continue**.
-
-You will enter these values into PingOne for Enterprise later.
-
-1. On the **Information** tab, complete the following information:
-
-   1. In the **Short description** field, enter a description for the application.
-
-   2. In the **Company Name** field, enter the name of your organization.
-
-   3. In the **Name**, enter the name of the contact for your Zoom account administrator.
-
-   4. In the **Email address** field, enter to company email address of your Zoom account administrator.
-
-      |   |                                                                               |
-      | - | ----------------------------------------------------------------------------- |
-      |   | The information on this tab is required for you to activate your application. |
-
-2. On the **Features** tab, click **Continue**.
-
-3. On the **Scopes** tab:
-
-   1. Click **Add Scopes**.
-
-   2. On the **Add Scopes** dialog, select the checkboxes to add the following scopes:
-
-      * **User**
-
-        * **View and manage sub account's user information** (user:master)
-
-        * **View all user information** (user:read:admin)
-
-        * **View users information and manage users** (user:write:admin)
-
-      * **Account**
-
-        * **View and manage sub accounts** (account:master)
-
-        * **View account info** (account:read:admin)
-
-        * **View and manage account info** (account:write:admin)
-
-      * **SCIM2**
-
-        * **Call Zoom SCIM2 API** (scim2)
-
-   3. Click **Done** to add the selected scopes.
-
-4. On the **Activation** tab, click **Activate**.
-
-5. In PingOne for Enterprise, click **Continue to Next Step** until you see the **Application Configuration** tab.
-
-6. On the **Application Configuration** tab, configure your Zoom connection.
-
-   1. Review the values for the **SCIM\_URL** and **OAUTH\_TOKEN\_URL** fields, and change if necessary.
-
-      |   |                                                  |
-      | - | ------------------------------------------------ |
-      |   | The default values will work for most customers. |
-
-   2. In the **OAUTH\_ACCOUNT\_ID** field, enter your Zoom account ID.
-
-   3. In the **OAUTH\_CLIENT\_ID** field, enter your Zoom client ID
-
-   4. In the **OAUTH\_CLIENT\_SECRET** field, enter your Zoom client secret.
-
-   5. From the **REMOVE\_ACTION** list, select one of the following options:
-
-      * If you select **Disable**, a user you disable or delete in PingOne for Enterprise will be disabled in Zoom.
-
-      * If you select **Delete**, a user you disable or delete in PingOne for Enterprise will be deleted in Zoom.
-
-   6. Click **Continue to Next Step**.
-
-## Zoom Attribute Mapping
-
-### About this task
-
-PingOne for Enterprise automatically populates required SAML attributes.
-
-For Zoom, the required attribute is `SAML_SUBJECT`. Map this to the attribute of the user's email address, usually `SAML_SUBJECT` or `email`.
-
-### Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   #### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zoom Customization
-
-### Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-### Next steps
-
-Click **Continue to Next Step**.
-
-## Zoom Group Access
+## Egnyte Group Access
 
 ### About this task
 
@@ -3251,271 +3718,3 @@ Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.htm
 ### Next steps
 
 On the **Review Setup** tab, review your configuration, and click **Finish** to add the application to your PingOne for Enterprise Dock.
-
-## Zoom SAML Connection
-
-### Steps
-
-1. On the **Review Setup** tab:
-
-   1. On the **Signing Certificate** line, click **Download** to download the signing certificate.
-
-   2. On the **SAML Metadata** line, click **Download** to download the metadata file.
-
-2. In a separate tab, sign on to the Zoom admin console and go to the **Single Sign-On** tab.
-
-3. In Zoom, set the **Sign-in Page URL** value:
-
-   1. Open the metadata file in a text editor.
-
-   2. Copy the `SingleSignOnService` `Location` value.
-
-      #### Example:`https://sso.connect.pingidentity.com/sso/idp/SSO.saml2?idpid=<idpid value>`
-
-   3. In the Zoom admin console, paste the `Location` value into the **Sign-in Page URL** field.
-
-4. **Optional:** In the **Sign-Out page URL** field, enter `https://<vanity name>.zoom.us/saml/SingleLogout`.
-
-   |   |                                                                                                 |
-   | - | ----------------------------------------------------------------------------------------------- |
-   |   | An SLO URL improves security by ending a user session in Zoom when the user's SSO session ends. |
-
-5. In the **Service Provider (SP) Entity ID** list, select the non-HTTPS option.
-
-6. In the **Enter Issuer** field, paste the *entityID* value from the metadata file.
-
-7. Enter the **Identity provider certificate** value:
-
-   1. Open the signing certificate file in a text editor.
-
-   2. Copy the contents of the signing certificate file, excluding the `BEGIN CERTIFICATE` and `END CERTIFICATE` lines.
-
-   3. In the Zoom admin console, paste the certificate contents into the **Identity provider certificate** field.
-
-8. On the **Binding** line, click either **HTTP-POST** or **HTTP-Redirect**.
-
-   |   |                                                                                                                    |
-   | - | ------------------------------------------------------------------------------------------------------------------ |
-   |   | **HTTP-POST** is the more secure option, because it doesn't expose the SAML token as a query parameter in the URL. |
-
-9. On the **Signature Hash Algorithm** line, click **SHA-256**.
-
-10. On the **Security** line, select the checkboxes of the security policies to implement.
-
-    |   |                                                                                                           |
-    | - | --------------------------------------------------------------------------------------------------------- |
-    |   | Improve your security by selecting **Sign SAML request** and **Save SAML response logs on user sign-in**. |
-
-11. Click **Save Changes**.
-
----
-
----
-title: ADP Workforce Now Attribute Mapping
-description: PingOne will automatically add required SAML attributes.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce_attributes
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce_attributes.html
-revdate: July 17, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  choose-from: Choose from:
-  next-steps: Next steps
----
-
-# ADP Workforce Now Attribute Mapping
-
-## About this task
-
-PingOne will automatically add required SAML attributes.
-
-For ADP Workforce Now, the required attributes are:
-
-* `SAML_SUBJECT`. The identity bridge attribute is mapped by default.
-
-* `PersonImmutableID`. Map the identity bridge attribute representing your employee ID.
-
-## Steps
-
-1. To add an additional optional attribute, click **Add new attribute**.
-
-2. In the **Application Attribute** field, enter the attribute name as it appears in the application.
-
-3. In the **Identity Bridge Attribute or Literal Value** field, choose one of the following:
-
-   ### Choose from:
-
-   * To map to the application attribute: Enter or select a directory attribute.
-
-   * To assign to the application attribute: Select **As Literal**, then enter a literal value.
-
-4. To create advanced attribute mappings, click **Advanced**.
-
-   Learn more in [Creating advanced attribute mappings](../pingone_for_enterprise/p14e_creating_advaced_attribute_mappings.html).
-
-## Next steps
-
-Click **Continue to Next Step**.
-
----
-
----
-title: ADP Workforce Now Connection Configuration
-description: In the ACS URL field, enter the assertion consumer service (ACS) URL.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce_connection
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce_connection.html
-revdate: July 17, 2023
-section_ids:
-  steps: Steps
-  choose-from: Choose from:
-  next-steps: Next steps
----
-
-# ADP Workforce Now Connection Configuration
-
-## Steps
-
-1. In the **ACS URL** field, enter the assertion consumer service (ACS) URL.
-
-   |   |                                                                                               |
-   | - | --------------------------------------------------------------------------------------------- |
-   |   | The default ACS URL is pre-populated, and should work for most ADP Workforce Now connections. |
-
-2. In the **Entity ID** field, enter the Entity ID.
-
-   The default Entity ID is pre-populated, and should work for most ADP Workforce Now connections.
-
-3. In the **Target Resource** field, enter a URL to redirect the user to after IdP-initiated single sign-on (SSO).
-
-   The default URL is pre-populated, and should work for most ADP Workforce Now connections.
-
-4. In the **Single Logout Endpoint** field, enter a URL for PingOne to send single logout (SLO) requests to.
-
-5. In the **Single Logout Response Endpoint** field, enter a URL for PingOne to send SLO responses to.
-
-6. On the **Primary Verification Certificate** line, click **Browse** to locate and upload a local certificate file used to verify SLO requests and responses.
-
-7. On the **Secondary Verification Certificate** line, click **Browse** to locate and upload a local certificate used to verify SLO requests and responses if the primary certificate fails.
-
-8. Select the **Force Re-authentication** checkbox to require your identity bridge to re-authenticate users with an active SSO session.
-
-9. Select the **Encrypt Assertion** box to encrypt outgoing SAML assertions.
-
-10. On the **Signing** line:
-
-    ### Choose from:
-
-    * Click **Sign Assertion** to have PingOne sign outgoing SAML assertions. This is the default option.
-
-    * Click **Sign Response** to have PingOne sign responses to incoming SAML assertions.
-
-11. From the **Signing Algorithm** list, select an algorithm with which to sign SAML assertions.
-
-12. Select the **Use Custom URL**checkbox to enter a customer URL to launch ADP Workforce Now from the dock.
-
-## Next steps
-
-Click **Continue to Next Step**.
-
----
-
----
-title: ADP Workforce Now Customization
-description: To change the application icon, click Select image and upload a local image file.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce_customization
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce_customization.html
-revdate: July 17, 2023
-section_ids:
-  steps: Steps
-  next-steps: Next steps
----
-
-# ADP Workforce Now Customization
-
-## Steps
-
-* To change the application icon, click **Select image** and upload a local image file.
-
-  The image file must be:
-
-  * PNG, GIF, or JPG format
-
-  * 312 x 52 pixels maximum
-
-  * 2 MB maximum file size
-
-    |   |                                                  |
-    | - | ------------------------------------------------ |
-    |   | Images are scaled to 64 x 64 pixels for display. |
-
-* To change the name of the application displayed on the dock, in the **Name** field, enter a new name.
-
-* To change the description of the application, in the **Description** field, enter the new description text.
-
-* To change the category to which the application is assigned on the dock, in the **Category** list, select a category.
-
-  Learn more in [Creating a custom application category](../pingone_for_enterprise/p14e_creating_custom_application_category.html).
-
-## Next steps
-
-Click **Continue to Next Step**.
-
----
-
----
-title: ADP Workforce Now Group Access
-description: The Group Access tab shows every user group that you have created.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce_groups
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce_groups.html
-revdate: July 17, 2023
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# ADP Workforce Now Group Access
-
-## About this task
-
-The **Group Access** tab shows every user group that you have created.
-
-Learn more in [Adding user groups](../pingone_for_enterprise/p14e_add_groups.html).
-
-## Steps
-
-* To add a group's access to the application, on the line for that group, click **Add**.
-
-* To remove a group's access, on the line for that group, click **Remove**.
-
-* When you're finished assigning groups, click **Continue to Next Step**.
-
----
-
----
-title: ADP Workforce Now SAML Connection
-description: On the Review Setup tab, go to the SAML Metadata line and click Download to download the PingOne metadata.
-component: pingoneforenterprise
-page_id: pingoneforenterprise:pingone_for_enterprise_app_catalog:p14eapps_adp_workforce_saml
-canonical_url: https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise_app_catalog/p14eapps_adp_workforce_saml.html
-revdate: July 17, 2023
-section_ids:
-  steps: Steps
----
-
-# ADP Workforce Now SAML Connection
-
-## Steps
-
-1. On the **Review Setup** tab, go to the **SAML Metadata** line and click **Download** to download the PingOne metadata.
-
-2. Click **Finish** to complete your configuration and add ADP Workforce Now to your PingOne Dock.
-
-3. Go to <https://adpfedsso.adp.com> and sign on using your ADP account credentials.
-
-4. Follow the steps on the ADP site to upload the metadata file.
-
-5. After your metadata has been uploaded, your ADP account representative will confirm that the setup is complete in the live environment and to advise on next steps.

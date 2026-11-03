@@ -1,25 +1,21 @@
 ---
 title: MCP security gateway
-description: Use PingGateway as an MCP security gateway to protect MCP servers with OAuth 2.0, auditing, rate limiting, and access control
+description: Use PingGateway as an MCP security gateway to protect MCP servers with OAuth 2.1, auditing, rate limiting, and access control
 component: pinggateway
 version: 2026
 page_id: pinggateway:mcp:index
 canonical_url: https://docs.pingidentity.com/pinggateway/2026/mcp/index.html
-revdate: 2026-03-17T18:00:00Z
-keywords: ["AI", "Model Context Protocol", "OAuth 2.0", "Security"]
+llms_txt: https://docs.pingidentity.com/pinggateway/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-15T10:10:08Z
+keywords: ["AI", "Model Context Protocol", "OAuth 2.1", "Security"]
 section_ids:
   goals: Goals
   what_youll_do: What you'll do
   preparation: Preparation
-  install-software: "Preparation task 1: Install software for this tutorial"
+  install-software: "Preparation task 1: Install software for the tutorials"
   run-mcp-server: "Preparation task 2: Run the sample MCP server"
   run-mcp-agent: "Preparation task 3: Run the MCP agent"
-  tutorial: Tutorial
-  before-you-begin: "Tutorial task 1: Before you begin"
-  configure-as: "Tutorial task 2: Prepare Advanced Identity Cloud as the AS"
-  configure-gateway: "Tutorial task 3: Configure PingGateway"
-  start-mcp-agent: "Tutorial task 4: Start the MCP agent"
-  validate-mcp: Validation
 ---
 
 # MCP security gateway
@@ -34,7 +30,7 @@ The challenge, however, consists in implementing an appropriate, consistent, doc
 
 * Throttle request rates.
 
-* Enforce coarse-grained OAuth 2.0 security controls.
+* Enforce coarse-grained OAuth 2.1 security controls.
 
 * Enforce fine-grained access control policies with PingOne Authorize, PingAuthorize, PingOne Protect, and Advanced Identity Cloud.
 
@@ -52,11 +48,11 @@ Business teams can focus on accelerating AI adoption in the business while ident
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | This feature has [Evolving](https://docs.pingidentity.com/pinggateway/release-notes/stability.html#interface-stability) interface stability. It's subject to change without notice, even in a minor or maintenance release. |
 
-This page shows how to protect a sample MCP server using Advanced Identity Cloud as the OAuth 2.0 authorization server (AS). Follow similar steps when using PingOne or PingAM as the AS and to protect your own MCP servers.
+This page describes how to use PingGateway to protect a sample MCP server. Complete the preparation, then follow the tutorial for your OAuth 2.1 authorization server (AS): PingOne or PingOne Advanced Identity Cloud. The same approach works with other OAuth 2.1 authorization servers, including PingAM. When you understand how a tutorial works, you can adapt the pattern to protect your own MCP servers.
 
 ## Goals
 
-When you complete this tutorial, you will know:
+When you complete a tutorial, you learn:
 
 * How to use PingGateway to protect an MCP server.
 
@@ -66,41 +62,35 @@ When you complete this tutorial, you will know:
 
 ## What you'll do
 
-In this tutorial, you will start by preparing the sample MCP software with the server to protect. Once the MCP software works on your computer, you will use PingGateway to protect the MCP server.
+Start by preparing the sample MCP software. After it works on your computer, follow the tutorial for your AS to protect the MCP server with PingGateway.
 
-The tutorial assumes you already have PingGateway and the AS set up, and only need to configure them for MCP.
+The tutorials assume you already have PingGateway and the AS set up, and only need to configure them for MCP.
 
-The full example has two parts with multiple tasks each:
+The full example has two parts:
 
 1. Prepare the sample MCP software:
 
-   * [Install software for this tutorial](#install-software).
+   * [Install software for the tutorials](#install-software).
 
    * [Run the sample MCP server](#run-mcp-server).
 
    * [Run the sample MCP agent](#run-mcp-agent).
 
-   By completing these tasks, you show the sample MCP software works on your computer without PingGateway or Advanced Identity Cloud.
+   By completing these tasks, you show the sample MCP software works on your computer without PingGateway.
 
 2. Protect the sample MCP server with PingGateway:
 
-   * [Prepare PingGateway to connect to you Advanced Identity Cloud tenant](#before-you-begin).
+   * [Protect an MCP server with PingOne](tutorial-pingone.html)
 
-   * [Prepare Advanced Identity Cloud as the OAuth 2.0 AS for MCP.](#configure-as)
+   * [Protect an MCP server with PingOne Advanced Identity Cloud](tutorial-aic.html)
 
-   * [Configure PingGateway to protect the sample MCP server](#configure-gateway).
-
-   * [Restart the sample MCP agent](#start-mcp-agent).
-
-   * [Validate PingGateway can protect the MCP server](#validate-mcp).
-
-   By completing these tasks, you show how to use PingGateway in an MCP security architecture.
+   By following a tutorial, you show how to use PingGateway in an MCP security architecture.
 
 ## Preparation
 
-Before trying the tutorial, prepare the sample MCP software to make sure it works on your computer.
+Before trying a tutorial, prepare the sample MCP software to make sure it works on your computer.
 
-### Preparation task 1: Install software for this tutorial
+### Preparation task 1: Install software for the tutorials
 
 1. Install the prerequisite software on your computer:
 
@@ -193,13 +183,353 @@ The sample MCP agent uses [Meta's Llama 3.2](https://ollama.com/library/llama3.2
 
 You have successfully run the sample MCP agent with the sample MCP server.
 
-## Tutorial
+---
 
-Now you know the sample MCP software works on your computer. Show you can protect the sample MCP server with PingGateway using Advanced Identity Cloud as the AS.
+---
+title: Protect an MCP server with PingOne
+description: Tutorial to protect a sample MCP server using PingGateway and PingOne as the OAuth 2.1 authorization server
+component: pinggateway
+version: 2026
+page_id: pinggateway:mcp:tutorial-pingone
+canonical_url: https://docs.pingidentity.com/pinggateway/2026/mcp/tutorial-pingone.html
+llms_txt: https://docs.pingidentity.com/pinggateway/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-15T10:10:08Z
+keywords: ["AI", "Model Context Protocol", "OAuth 2.1", "Security"]
+section_ids:
+  before-you-begin: "Task 1: Before you begin"
+  configure-as: "Task 2: Prepare PingOne as the AS"
+  create-resource: Create a resource
+  create-native-app: Create a native application
+  configure-gateway: "Task 3: Configure PingGateway"
+  start-mcp-agent: "Task 4: Start the MCP agent"
+  validate-mcp: Validation
+---
 
-### Tutorial task 1: Before you begin
+# Protect an MCP server with PingOne
 
-* Prepare the sample MCP software as described in [Preparation](#preparation).
+## Task 1: Before you begin
+
+* Complete the preparation described in [Prepare the sample MCP software](index.html#preparation).
+
+* Make sure you can access the PingOne administration console as an administrator.
+
+* Set up PingGateway with HTTPS on port 8443.
+
+  The following tasks use `https://ig.example.com:8443`.
+
+## Task 2: Prepare PingOne as the AS
+
+Prepare PingOne to act as the OAuth 2.1 AS for MCP by creating a resource and an application.
+
+### Create a resource
+
+1. In the PingOne admin console, go to Applications > Resources, and click [icon: plus-circle, set=fa].
+
+2. Set Resource Name to a name for the resource, for example, `MCP Resource`, and click Next.
+
+3. Set Audience to the URL that PingGateway uses as the resource identifier: `https://ig.example.com:8443/p1-mcp`.
+
+   PingGateway validates the `aud` claim in each access token against this value. Update this value if you change the gateway URL or route path.
+
+4. Click Save.
+
+5. On the Scopes tab, click + Add Scope, set Name to `test`, and click Save.
+
+6. Enable the resource using the toggle at the top of the page.
+
+7. On the Overview tab, note the Client ID and Client Secret.
+
+   PingGateway uses these credentials to call the PingOne token introspection endpoint.
+
+8. Add the base64-encoded client secret to the PingGateway environment:
+
+   ```console
+   $ export PINGONE_RESOURCE_SECRET=$(echo -n '<resource-client-secret>' | base64)
+   ```
+
+   The [SystemAndEnvSecretStore](../reference/SystemAndEnvSecretStore.html) in the route reads the secret ID `pingone.resource.secret` from the `PINGONE_RESOURCE_SECRET` environment variable.
+
+9. Restart PingGateway to load the secret.
+
+### Create a native application
+
+Create the application that the MCP agent uses to authenticate. PingOne requires pre-registered clients. It doesn't support dynamic client registration.
+
+1. In the PingOne admin console, go to Applications > Applications, and click [icon: plus-circle, set=fa].
+
+2. Select Native App, set Application Name to a name, for example, `MCP Client`, and click Save.
+
+3. On the Configuration tab, set:
+
+   * Grant Types: Authorization Code and Refresh Token
+
+   * Token Endpoint Auth Method: None
+
+   * PKCE Enforcement: S256 Required
+
+   * Redirect URIs: `http://localhost:3000/callback`
+
+4. Click Save.
+
+5. On the Resources tab, click [icon: pencil-alt, set=fa], select the resource you created, allow the `test` scope, and click Save.
+
+6. On the Overview tab, note the Client ID.
+
+   You pass this value to the sample MCP agent in [Task 4: Start the MCP agent](#start-mcp-agent).
+
+You have successfully prepared PingOne to act as the AS.
+
+## Task 3: Configure PingGateway
+
+1. If the MCP server uses [server-sent events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events), update the `admin.json` file for PingGateway to [enable streaming](../reference/AdminHttpApplication.html#AdminHttpApplication-streamingEnabled), and restart PingGateway.
+
+   Skip this step for the sample MCP server.
+
+2. Add the following route to PingGateway and correct the `"properties"` settings:
+
+   * Linux
+
+     `$HOME/.openig/config/routes/mcp-p1.json`
+
+   * Windows
+
+     `%appdata%\OpenIG\config\routes\mcp-p1.json`
+
+   ```json
+   {
+     "name": "mcp-p1",
+     "condition": "${find(request.uri.path, '^/p1-mcp')}",
+     "properties": {
+       "mcpServerUrl": "http://localhost:8000",
+       "gatewayUrl": "https://ig.example.com:8443",
+       "pingOneAsUrl": "https://auth.pingone.com/<envId>/as",
+       "pingOneIntrospectUrl": "https://auth.pingone.com/<envId>/as/introspect",
+       "pingOneResourceClientId": "<resourceId>"
+     },
+     "baseURI": "&{mcpServerUrl}",
+     "heap": [
+       {
+         "name": "AuditService",
+         "type": "AuditService",
+         "config": {
+           "eventHandlers": [
+             {
+               "class": "org.forgerock.audit.handlers.json.JsonAuditEventHandler",
+               "config": {
+                 "name": "json",
+                 "logDirectory": "&{ig.instance.dir}/audit",
+                 "topics": [
+                   "access",
+                   "mcp"
+                 ]
+               }
+             }
+           ]
+         }
+       },
+       {
+         "name": "rsFilter",
+         "type": "OAuth2ResourceServerFilter",
+         "config": {
+           "scopes": [
+             "test"
+           ],
+           "accessTokenResolver": {
+             "type": "TokenIntrospectionAccessTokenResolver",
+             "config": {
+               "endpoint": "&{pingOneIntrospectUrl}",
+               "providerHandler": {
+                 "type": "Chain",
+                 "config": {
+                   "filters": [
+                     {
+                       "type": "ClientSecretBasicAuthenticationFilter",
+                       "config": {
+                         "clientId": "&{pingOneResourceClientId}",
+                         "clientSecretId": "pingone.resource.secret",
+                         "secretsProvider": {
+                           "type": "SystemAndEnvSecretStore"
+                         }
+                       }
+                     }
+                   ],
+                   "handler": "ClientHandler"
+                 }
+               }
+             }
+           }
+         }
+       }
+     ],
+     "handler": {
+       "type": "Chain",
+       "config": {
+         "filters": [
+           {
+             "type": "McpAuditFilter",
+             "config": {
+               "auditService": "AuditService"
+             }
+           },
+           {
+             "type": "McpProtectionFilter",
+             "config": {
+               "resourceId": "&{gatewayUrl}/p1-mcp",
+               "authorizationServerUri": "&{pingOneAsUrl}",
+               "resourceServerFilter": "rsFilter",
+               "supportedScopes": [
+                 "test"
+               ]
+             }
+           },
+           {
+             "type": "McpValidationFilter",
+             "config": {
+               "acceptedOrigins": ".*"
+             }
+           },
+           {
+             "type": "UriPathRewriteFilter",
+             "config": {
+               "mappings": {
+                 "/p1-mcp": "/"
+               }
+             }
+           }
+         ],
+         "handler": {
+           "type": "ReverseProxyHandler",
+           "config": {
+             "soTimeout": "20 seconds"
+           }
+         }
+       }
+     }
+   }
+   ```
+
+   Source: [mcp-p1.json](../_attachments/config/routes/mcp-p1.json)
+
+   Update the following properties:
+
+   * `mcpServerUrl` — the URL of the MCP server. The default assumes the sample MCP server runs on your computer.
+
+   * `gatewayUrl` — the base URL of PingGateway. The route uses this to construct the resource identifier.
+
+   * `pingOneAsUrl` — the AS base URL for your PingOne environment, for example, `https://auth.pingone.eu/<envId>/as` for the EU region. Replace `<envId>` with your PingOne environment ID and adjust the domain for your region.
+
+   * `pingOneIntrospectUrl` — the introspect endpoint for your environment.
+
+   * `pingOneResourceClientId` — the resource Client ID noted in [Create a resource](#create-resource).
+
+   Notice the following features of the route:
+
+   * PingGateway acts as an OAuth 2.1 resource server (RS) when protecting the sample MCP server.
+
+   * The [McpAuditFilter](../reference/McpAuditFilter.html) audits MCP requests. PingGateway records MCP audit events in an `audit/mcp.audit.json` file.
+
+   * The [McpProtectionFilter](../reference/McpProtectionFilter.html) serves the MCP OAuth 2.1 protected resource metadata endpoint and validates that each access token is intended for this resource. The filter comes before [UriPathRewriteFilter](../reference/UriPathRewriteFilter.html) so it sees the original request path.
+
+   * The `McpProtectionFilter` uses the default `"resourceIdPointer"` of `/aud`, which matches the `aud` claim PingOne includes in access tokens.
+
+   * The [TokenIntrospectionAccessTokenResolver](../reference/TokenIntrospectionAccessTokenResolver.html) calls the PingOne introspect endpoint with the resource client credentials from the environment variable.
+
+   * The [McpValidationFilter](../reference/McpValidationFilter.html) validates MCP protocol compliance for each request.
+
+   * The [UriPathRewriteFilter](../reference/UriPathRewriteFilter.html) rewrites the route path prefix before the request reaches the MCP server.
+
+   * The [ReverseProxyHandler](../reference/ReverseProxyHandler.html) uses a long `"soTimeout"` setting to accommodate an MCP agent receiving few or infrequent SSE updates.
+
+   This simple route doesn't show [throttling](../reference/ThrottlingPolicies.html) or fine-grained access control. Add those features as needed to meet your security requirements.
+
+3. Verify the PingGateway log shows the route loaded successfully.
+
+You have successfully configured PingGateway to protect the sample MCP server.
+
+## Task 4: Start the MCP agent
+
+|   |                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------ |
+|   | The `--client-id` argument used in this task requires the sample MCP agent from PingGateway 2026.9 or later. |
+
+In the directory where you unpacked the sample MCP agent, start the sample MCP agent again. This time, point it to the PingGateway route and pass the application client ID you noted in [Create a native application](#create-native-app):
+
+```console
+$ python3 sample-mcp-agent.py \
+    --mcp-server-url https://ig.example.com:8443/p1-mcp \
+    --client-id <native-app-client-id>
+```
+
+No client secret is needed because the application uses PKCE only.
+
+Passing `--client-id` pre-registers the client in the agent's token storage, so the agent skips dynamic client registration and uses the pre-registered client directly.
+
+You have successfully started the sample MCP agent.
+
+## Validation
+
+With PingGateway protecting the MCP server, the sample MCP agent directs your browser to PingOne to sign on as an end user and authorize access to make MCP requests. If it can't open the browser, the sample MCP agent shows the URL you can paste into a private or incognito window.
+
+1. Sign on with your PingOne user credentials and consent to the requested `test` scope before closing the browser tab as prompted.
+
+2. In the terminal where the sample MCP agent runs, notice the available commands:
+
+   ```text
+   [INFO] Discovered tools [https://ig.example.com:8443/p1-mcp]:
+   [INFO] - geocode: Returns a list of objects containing city name, latitude, longitude, country, admin1 (region), and timezone for each matching city
+   [INFO] - forecast_daily: Returns a multi-day weather forecast for a given location
+   [INFO] - forecast_periods: Returns weather forecasts for each representative period of the current day
+   [INFO] - forecast_hourly: Returns an hourly weather forecast for the current day
+   [INFO] - weather_at_time: Returns the forecasted weather for a specific time at a given location
+
+   Enter your message (or 'exit|quit|q'):
+   ```
+
+3. Enter a prompt and get a response from the MCP server through PingGateway, then exit the agent:
+
+   The following example uses the `forecast_daily` tool to get the daily forecast for Tokyo:
+
+   ```text
+   Enter your message (or 'exit|quit|q'): What is the daily forecast for Tokyo?
+   Agent: The daily forecast for Tokyo is:
+
+   <MCP server response with forecast details>
+
+   Enter your message (or 'exit|quit|q'): exit
+   User requested exit. Goodbye!
+   ```
+
+   Find additional details about the MCP request in the PingGateway log.
+
+You have successfully validated PingGateway can protect the MCP server.
+
+---
+
+---
+title: Protect an MCP server with PingOne Advanced Identity Cloud
+description: Tutorial to protect a sample MCP server using PingGateway and PingOne Advanced Identity Cloud as the OAuth 2.0 authorization server
+component: pinggateway
+version: 2026
+page_id: pinggateway:mcp:tutorial-aic
+canonical_url: https://docs.pingidentity.com/pinggateway/2026/mcp/tutorial-aic.html
+llms_txt: https://docs.pingidentity.com/pinggateway/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-15T10:10:08Z
+keywords: ["AI", "Model Context Protocol", "OAuth 2.1", "Security"]
+section_ids:
+  before-you-begin: "Task 1: Before you begin"
+  configure-as: "Task 2: Prepare Advanced Identity Cloud as the AS"
+  configure-gateway: "Task 3: Configure PingGateway"
+  start-mcp-agent: "Task 4: Start the MCP agent"
+  validate-mcp: Validation
+---
+
+# Protect an MCP server with PingOne Advanced Identity Cloud
+
+## Task 1: Before you begin
+
+* Complete the preparation described in [Prepare the sample MCP software](index.html#preparation).
 
 * Make sure you can access the PingOne Advanced Identity Cloud tenant as an administrator.
 
@@ -215,17 +545,23 @@ Now you know the sample MCP software works on your computer. Show you can protec
 
   1. Open the AM admin UI at [icon: open_in_new, set=material, size=inline] Native Consoles > Access Management.
 
-  2. In the AM admin UI, go to Applications > Agents > Identity Gateway > ig\_agent.
+  2. In the AM admin UI, go to Applications > Agents > Identity Gateway > ig_agent.
 
   3. Set Token Introspection to `Realm Only`.
 
   4. Click Save Changes.
 
-### Tutorial task 2: Prepare Advanced Identity Cloud as the AS
+* For other AS options, learn more in:
+
+  * [Protect an MCP server with PingOne](tutorial-pingone.html)
+
+  * [Protect an MCP server with PingFederate](../reference/McpProtectionFilter.html#McpProtectionFilter-example-pingfederate)
+
+## Task 2: Prepare Advanced Identity Cloud as the AS
 
 1. Sign on to the Advanced Identity Cloud admin UI as an administrator.
 
-2. Make sure you have an OAuth2 Access Token Modification script to support [RFC 8707, Resource Indicators for OAuth 2.0](https://www.rfc-editor.org/rfc/rfc8707.html) as required by MCP.
+2. Ensure the OAuth2 Provider for your realm has an OAuth2 Access Token Modification script to support [RFC 8707, Resource Indicators for OAuth 2.0](https://www.rfc-editor.org/rfc/rfc8707.html) as required by MCP.
 
    If the OAuth2 Provider for your realm already uses an OAuth2 Access Token Modification script, add code to set the audience claim in the access token as shown for the following script.
 
@@ -243,7 +579,7 @@ Now you know the sample MCP software works on your computer. Show you can protec
      	  }());
      ```
 
-     The PingGateway [McpProtectionFilter](../reference/McpProtectionFilter.html) will consume the claim specified in its `"resourceIdPointer"` setting.
+     The PingGateway [McpProtectionFilter](../reference/McpProtectionFilter.html) consumes the claim specified in its `"resourceIdPointer"` setting.
 
 3. Using the AM admin UI, update the `OAuth2 Provider` service settings for the realm.
 
@@ -257,39 +593,33 @@ Now you know the sample MCP software works on your computer. Show you can protec
 
 You have successfully prepared Advanced Identity Cloud to act as the AS.
 
-### Tutorial task 3: Configure PingGateway
+## Task 3: Configure PingGateway
 
-Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1: Before you begin](#before-you-begin). Now, configure PingGateway to protect the sample MCP server:
+Previously, you prepared PingGateway for HTTPS as described in [Task 1: Before you begin](#before-you-begin). Now, configure PingGateway to protect the sample MCP server:
 
-1. In the `admin.json` file for PingGateway, [enable streaming](../reference/AdminHttpApplication.html#AdminHttpApplication-streamingEnabled):
+1. If the MCP server uses [server-sent events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events), update the `admin.json` file for PingGateway to [enable streaming](../reference/AdminHttpApplication.html#AdminHttpApplication-streamingEnabled), and restart PingGateway.
 
-   ```none
-   "streamingEnabled": true
-   ```
+   Skip this step for the sample MCP server.
 
-   PingGateway requires this setting for [server-side events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events), part of MCP.
-
-2. Restart PingGateway to apply the change.
-
-3. Add the following route to PingGateway updating `"properties"` as needed for your deployment:
+2. Add the following route to PingGateway updating `"properties"` as needed for your deployment:
 
    * Linux
 
-     `$HOME/.openig/config/routes/mcp.json`
+     `$HOME/.openig/config/routes/mcp-aic.json`
 
    * Windows
 
-     `%appdata%\OpenIG\config\routes\mcp.json`
+     `%appdata%\OpenIG\config\routes\mcp-aic.json`
 
    ```json
    {
-     "name": "mcp",
-     "condition": "${find(request.uri.path, '^/mcp')}",
+     "name": "mcp-aic",
+     "condition": "${find(request.uri.path, '^/aic-mcp')}",
      "properties": {
-       "amUrl": "https://myTenant.forgeblocks.com/am/",
        "amRealm": "/alpha",
        "gatewayUrl": "https://ig.example.com:8443",
-       "mcpServerUrl": "http://localhost:8000"
+       "mcpServerUrl": "http://localhost:8000",
+       "tenantHostname": "myTenant.forgeblocks.com"
      },
      "baseURI": "&{mcpServerUrl}",
      "heap": [
@@ -325,7 +655,6 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
          "name": "AmService",
          "type": "AmService",
          "config": {
-           "url": "&{amUrl}",
            "realm": "&{amRealm}",
            "agent": {
              "username": "ig_agent",
@@ -334,7 +663,8 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
            "secretsProvider": "SecretsPasswords",
            "sessionCache": {
              "enabled": true
-           }
+           },
+           "url": "https://&{tenantHostname}/am/"
          }
        },
        {
@@ -384,15 +714,15 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
              "type": "UriPathRewriteFilter",
              "config": {
                "mappings": {
-                 "/mcp": "/"
+                 "/aic-mcp": "/"
                }
              }
            },
            {
              "type": "McpProtectionFilter",
              "config": {
-               "resourceId": "&{gatewayUrl}/mcp",
-               "authorizationServerUri": "&{amUrl}oauth2/realms/root/realms&{amRealm}",
+               "resourceId": "&{gatewayUrl}/aic-mcp",
+               "authorizationServerUri": "https://&{tenantHostname}/am/oauth2/realms/root/realms&{amRealm}",
                "resourceServerFilter": "rsFilter",
                "supportedScopes": [
                  "test"
@@ -418,13 +748,13 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
    }
    ```
 
-   Source: [mcp.json](../_attachments/config/routes/mcp.json)
+   Source: [mcp-aic.json](../_attachments/config/routes/mcp-aic.json)
 
    Notice the following features of the route:
 
    * The sample route uses a base-64 encoded secret to connect to the AS. In production, don't include secrets in route files.
 
-   * PingGateway acts as an OAuth 2.0 resource server (RS) when protecting the sample MCP server.
+   * PingGateway acts as an OAuth 2.1 resource server (RS) when protecting the sample MCP server.
 
    * The [McpAuditFilter](../reference/McpAuditFilter.html) audits MCP requests. PingGateway records MCP audit events in an `audit/mcp.audit.json` file.
 
@@ -438,38 +768,32 @@ Previously, you prepared PingGateway for HTTPS as described in [Tutorial task 1:
 
    This simple route doesn't show [throttling](../reference/ThrottlingPolicies.html) or fine-grained access control. Add those features as needed to meet your security requirements.
 
-4. Check the PingGateway log to verify the route loads successfully.
+3. Verify the PingGateway log shows the route loaded successfully.
 
 You have successfully configured PingGateway to protect the sample MCP server.
 
-### Tutorial task 4: Start the MCP agent
+## Task 4: Start the MCP agent
 
 In the directory where you unpacked the sample MCP agent, start the sample MCP agent again. This time, point it to the PingGateway route for MCP requests:
 
 ```console
-$ python3 sample-mcp-agent.py --mcp-server-url https://ig.example.com:8443/mcp
+$ python3 sample-mcp-agent.py --mcp-server-url https://ig.example.com:8443/aic-mcp
 ```
 
 You have successfully started the sample MCP agent.
 
 ## Validation
 
-With PingGateway protecting the MCP server, the sample MCP agent directs you to the AS to sign on as an end user and authorize access to make MCP requests.
+With PingGateway protecting the MCP server, the sample MCP agent directs your browser to the AS to sign on as an end user and authorize access to make MCP requests. If it can't open the browser, the sample MCP agent shows the URL you can paste into a private or incognito window.
 
-1. Copy the authorization URL the sample MCP agent now displays in your terminal window.
-
-   The URL looks similar to `https://myTenant.forgeblocks.com/am/oauth2/realms/root/realms/alpha/authorize?response_type=code&client_id=…​`
-
-2. In your browser's privacy or incognito mode, go to the authorization URL you copied.
-
-3. Sign on with the end-user credentials (username: `demo` password: `Ch4ng3!t`) and consent to the requested `test` scope before closing the browser tab as prompted.
+1. Sign on with the end-user credentials (username: `demo` password: `Ch4ng3!t`) and consent to the requested `test` scope before closing the browser tab as prompted.
 
    You set these credentials when you [set up a demo user in PingOne Advanced Identity Cloud](../aic/preface.html#setup-user-idc).
 
-4. In the terminal where the sample MCP agent runs, notice the available commands:
+2. In the terminal where the sample MCP agent runs, notice the available commands:
 
-   ```none
-   [INFO] Discovered tools [https://ig.example.com:8443/mcp]:
+   ```text
+   [INFO] Discovered tools [https://ig.example.com:8443/aic-mcp]:
    [INFO] - geocode: Returns a list of objects containing city name, latitude, longitude, country, admin1 (region), and timezone for each matching city
    [INFO] - forecast_daily: Returns a multi-day weather forecast for a given location
    [INFO] - forecast_periods: Returns weather forecasts for each representative period of the current day
@@ -479,11 +803,11 @@ With PingGateway protecting the MCP server, the sample MCP agent directs you to 
    Enter your message (or 'exit|quit|q'):
    ```
 
-5. Enter a prompt and get a response from the MCP server through PingGateway, then exit the agent:
+3. Enter a prompt and get a response from the MCP server through PingGateway, then exit the agent:
 
    The following example uses the `forecast_daily` tool to get the daily forecast for Tokyo:
 
-   ```none
+   ```text
    Enter your message (or 'exit|quit|q'): What is the daily forecast for Tokyo?
    Agent: The daily forecast for Tokyo is:
 

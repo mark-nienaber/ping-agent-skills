@@ -2,9 +2,13 @@
 title: Network guide
 description: PingOne Advanced Services provides you with your own virtual private cloud (VPC) network that you define. This virtual network can connect to any data source and closely resembles the network you operate in your data centers, but in a scalable, secure, cloud environment with data and resource isolation.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:network_guide:p1as_network_guide
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/network_guide/p1as_network_guide.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/network_guide/p1as_network_guide.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 21, 2026
+page_aliases: ["index.adoc"]
 section_ids:
   _items_not_supported: Items not supported
   _region_deployment_models: Regions and deployment models

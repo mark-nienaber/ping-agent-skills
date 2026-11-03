@@ -1,12 +1,12 @@
 ---
 title: Salesforce Connector
-description: The Salesforce connector lets you manage users and records in Salesforce from your PingOne DaVinci flows.
+description: Configure the Salesforce connector to read, create, and update users and records in Salesforce from PingOne DaVinci flows
 component: connectors
 page_id: connectors::salesforce_connector
 canonical_url: https://docs.pingidentity.com/connectors/salesforce_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -56,13 +56,13 @@ Learn more in the following:
 
   * [User fields](https://help.salesforce.com/s/articleView?id=sf.user_fields.htm)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -78,7 +78,7 @@ To use the connector, you'll need:
 
 ### Setting up Salesforce
 
-To configure the Salesforce environment to use the Salesforce connector in DaVinci:
+To configure the Salesforce environment to use the Salesforce connector in PingOne DaVinci:
 
 1. Sign on to a Salesforce production, developer, or sandbox account.
 
@@ -146,7 +146,7 @@ To configure the Salesforce environment to use the Salesforce connector in DaVin
       | - | ------------------------------------------------------------------------------------- |
       |   | Be sure to sign on with the administrator account that uses the Salesforce connector. |
 
-6. In DaVinci, add a Salesforce connector to your flow.
+6. In PingOne DaVinci, add a Salesforce connector to your flow.
 
 7. Click **Configure** and complete the following fields:
 
@@ -204,7 +204,7 @@ No special configuration is needed. Add the capability and populate its properti
 
 This flow allows the user to upload a document, such as an image or PDF, to Salesforce.
 
-1. Download the [Salesforce - Document upload](https://marketplace.pingone.com/item/salesforce-document-upload) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [Salesforce - Document upload](https://marketplace.pingone.com/item/salesforce-document-upload) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the file upload form.
 
@@ -296,7 +296,7 @@ Create a new user.
 >
 >   * Japanese (EUC)
 >
->   * Korean (ks\_c\_5601-1987)
+>   * Korean (ks_c_5601-1987)
 >
 >   * Traditional Chinese (Big5)
 >
@@ -304,7 +304,7 @@ Create a new user.
 >
 >   * Traditional Chinese Hong Kong (Big5-HKSCS)
 >
->   * Japanese (Shift-JIS\_2004)
+>   * Japanese (Shift-JIS_2004)
 >
 > - Profile dropDown required
 >
@@ -390,9 +390,9 @@ Create a new user.
 >
 >   * (GMT+11:00) Ponape Time (Pacific/Ponape)
 >
->   * (GMT+10:30) Lord Howe Standard Time (Australia/Lord\_Howe)
+>   * (GMT+10:30) Lord Howe Standard Time (Australia/Lord_Howe)
 >
->   * (GMT+11:00) Lord Howe Daylight Time (Australia/Lord\_Howe)
+>   * (GMT+11:00) Lord Howe Daylight Time (Australia/Lord_Howe)
 >
 >   * (GMT+10:00) Dumont-d'Urville Time (Antarctica/DumontDUrville)
 >
@@ -426,7 +426,7 @@ Create a new user.
 >
 >   * (GMT+10:00) Chamorro Standard Time (Pacific/Guam)
 >
->   * (GMT+10:00) Papua New Guinea Time (Pacific/Port\_Moresby)
+>   * (GMT+10:00) Papua New Guinea Time (Pacific/Port_Moresby)
 >
 >   * (GMT+10:00) Chamorro Standard Time (Pacific/Saipan)
 >
@@ -436,9 +436,9 @@ Create a new user.
 >
 >   * (GMT+10:30) Australian Central Daylight Time (Australia/Adelaide)
 >
->   * (GMT+09:30) Australian Central Standard Time (Australia/Broken\_Hill)
+>   * (GMT+09:30) Australian Central Standard Time (Australia/Broken_Hill)
 >
->   * (GMT+10:30) Australian Central Daylight Time (Australia/Broken\_Hill)
+>   * (GMT+10:30) Australian Central Daylight Time (Australia/Broken_Hill)
 >
 >   * (GMT+09:30) Australian Central Standard Time (Australia/Darwin)
 >
@@ -466,11 +466,11 @@ Create a new user.
 >
 >   * (GMT+08:00) Ulaanbaatar Standard Time (Asia/Choibalsan)
 >
->   * (GMT+08:00) Hong Kong Standard Time (Asia/Hong\_Kong)
+>   * (GMT+08:00) Hong Kong Standard Time (Asia/Hong_Kong)
 >
 >   * (GMT+08:00) Irkutsk Standard Time (Asia/Irkutsk)
 >
->   * (GMT+08:00) Malaysia Time (Asia/Kuala\_Lumpur)
+>   * (GMT+08:00) Malaysia Time (Asia/Kuala_Lumpur)
 >
 >   * (GMT+08:00) Malaysia Time (Asia/Kuching)
 >
@@ -496,7 +496,7 @@ Create a new user.
 >
 >   * (GMT+07:00) Moscow Standard Time + 4 (Asia/Barnaul)
 >
->   * (GMT+07:00) Indochina Time (Asia/Ho\_Chi\_Minh)
+>   * (GMT+07:00) Indochina Time (Asia/Ho_Chi_Minh)
 >
 >   * (GMT+07:00) Hovd Standard Time (Asia/Hovd)
 >
@@ -508,7 +508,7 @@ Create a new user.
 >
 >   * (GMT+07:00) Novosibirsk Standard Time (Asia/Novosibirsk)
 >
->   * (GMT+07:00) Indochina Time (Asia/Phnom\_Penh)
+>   * (GMT+07:00) Indochina Time (Asia/Phnom_Penh)
 >
 >   * (GMT+07:00) Western Indonesia Time (Asia/Pontianak)
 >
@@ -604,11 +604,11 @@ Create a new user.
 >
 >   * (GMT+04:30) Iran Daylight Time (Asia/Tehran)
 >
->   * (GMT+03:00) East Africa Time (Africa/Addis\_Ababa)
+>   * (GMT+03:00) East Africa Time (Africa/Addis_Ababa)
 >
 >   * (GMT+03:00) East Africa Time (Africa/Asmera)
 >
->   * (GMT+03:00) East Africa Time (Africa/Dar\_es\_Salaam)
+>   * (GMT+03:00) East Africa Time (Africa/Dar_es_Salaam)
 >
 >   * (GMT+03:00) East Africa Time (Africa/Djibouti)
 >
@@ -878,9 +878,9 @@ Create a new user.
 >
 >   * (GMT+02:00) Central European Summer Time (Europe/Rome)
 >
->   * (GMT+01:00) Central European Standard Time (Europe/San\_Marino)
+>   * (GMT+01:00) Central European Standard Time (Europe/San_Marino)
 >
->   * (GMT+02:00) Central European Summer Time (Europe/San\_Marino)
+>   * (GMT+02:00) Central European Summer Time (Europe/San_Marino)
 >
 >   * (GMT+01:00) Central European Standard Time (Europe/Sarajevo)
 >
@@ -940,9 +940,9 @@ Create a new user.
 >
 >   * (GMT+00:00) Greenwich Mean Time (Africa/Dakar)
 >
->   * (GMT+00:00) Western European Standard Time (Africa/El\_Aaiun)
+>   * (GMT+00:00) Western European Standard Time (Africa/El_Aaiun)
 >
->   * (GMT+01:00) Western European Summer Time (Africa/El\_Aaiun)
+>   * (GMT+01:00) Western European Summer Time (Africa/El_Aaiun)
 >
 >   * (GMT+00:00) Greenwich Mean Time (Africa/Freetown)
 >
@@ -954,7 +954,7 @@ Create a new user.
 >
 >   * (GMT+00:00) Greenwich Mean Time (Africa/Ouagadougou)
 >
->   * (GMT+00:00) Greenwich Mean Time (Africa/Sao\_Tome)
+>   * (GMT+00:00) Greenwich Mean Time (Africa/Sao_Tome)
 >
 >   * (GMT+00:00) Greenwich Mean Time (America/Danmarkshavn)
 >
@@ -976,7 +976,7 @@ Create a new user.
 >
 >   * (GMT+00:00) Greenwich Mean Time (Atlantic/Reykjavik)
 >
->   * (GMT+00:00) Greenwich Mean Time (Atlantic/St\_Helena)
+>   * (GMT+00:00) Greenwich Mean Time (Atlantic/St_Helena)
 >
 >   * (GMT+00:00) Greenwich Mean Time (Europe/Dublin)
 >
@@ -986,9 +986,9 @@ Create a new user.
 >
 >   * (GMT+01:00) British Summer Time (Europe/Guernsey)
 >
->   * (GMT+00:00) Greenwich Mean Time (Europe/Isle\_of\_Man)
+>   * (GMT+00:00) Greenwich Mean Time (Europe/Isle_of_Man)
 >
->   * (GMT+01:00) British Summer Time (Europe/Isle\_of\_Man)
+>   * (GMT+01:00) British Summer Time (Europe/Isle_of_Man)
 >
 >   * (GMT+00:00) Greenwich Mean Time (Europe/Jersey)
 >
@@ -1012,25 +1012,25 @@ Create a new user.
 >
 >   * (GMT+00:00) Azores Summer Time (Atlantic/Azores)
 >
->   * (GMT-01:00) Cape Verde Standard Time (Atlantic/Cape\_Verde)
+>   * (GMT-01:00) Cape Verde Standard Time (Atlantic/Cape_Verde)
 >
 >   * (GMT-02:00) Fernando de Noronha Standard Time (America/Noronha)
 >
->   * (GMT-02:00) South Georgia Time (Atlantic/South\_Georgia)
+>   * (GMT-02:00) South Georgia Time (Atlantic/South_Georgia)
 >
 >   * (GMT-03:00) Brasilia Standard Time (America/Araguaina)
 >
->   * (GMT-03:00) Argentina Standard Time (America/Argentina/Buenos\_Aires)
+>   * (GMT-03:00) Argentina Standard Time (America/Argentina/Buenos_Aires)
 >
->   * (GMT-03:00) Argentina Standard Time (America/Argentina/La\_Rioja)
+>   * (GMT-03:00) Argentina Standard Time (America/Argentina/La_Rioja)
 >
->   * (GMT-03:00) Argentina Standard Time (America/Argentina/Rio\_Gallegos)
+>   * (GMT-03:00) Argentina Standard Time (America/Argentina/Rio_Gallegos)
 >
 >   * (GMT-03:00) Argentina Standard Time (America/Argentina/Salta)
 >
->   * (GMT-03:00) Argentina Standard Time (America/Argentina/San\_Juan)
+>   * (GMT-03:00) Argentina Standard Time (America/Argentina/San_Juan)
 >
->   * (GMT-03:00) Argentina Standard Time (America/Argentina/San\_Luis)
+>   * (GMT-03:00) Argentina Standard Time (America/Argentina/San_Luis)
 >
 >   * (GMT-03:00) Argentina Standard Time (America/Argentina/Tucuman)
 >
@@ -1066,13 +1066,13 @@ Create a new user.
 >
 >   * (GMT-03:00) Suriname Time (America/Paramaribo)
 >
->   * (GMT-03:00) Chile Standard Time (America/Punta\_Arenas)
+>   * (GMT-03:00) Chile Standard Time (America/Punta_Arenas)
 >
 >   * (GMT-03:00) Brasilia Standard Time (America/Recife)
 >
 >   * (GMT-03:00) Brasilia Standard Time (America/Santarem)
 >
->   * (GMT-03:00) Brasilia Standard Time (America/Sao\_Paulo)
+>   * (GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)
 >
 >   * (GMT-03:00) Chile Standard Time (Antarctica/Palmer)
 >
@@ -1080,9 +1080,9 @@ Create a new user.
 >
 >   * (GMT-03:00) Falkland Islands Standard Time (Atlantic/Stanley)
 >
->   * (GMT-03:30) Newfoundland Standard Time (America/St\_Johns)
+>   * (GMT-03:30) Newfoundland Standard Time (America/St_Johns)
 >
->   * (GMT-02:30) Newfoundland Daylight Time (America/St\_Johns)
+>   * (GMT-02:30) Newfoundland Daylight Time (America/St_Johns)
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Anguilla)
 >
@@ -1098,9 +1098,9 @@ Create a new user.
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Blanc-Sablon)
 >
->   * (GMT-04:00) Amazon Standard Time (America/Boa\_Vista)
+>   * (GMT-04:00) Amazon Standard Time (America/Boa_Vista)
 >
->   * (GMT-04:00) Amazon Standard Time (America/Campo\_Grande)
+>   * (GMT-04:00) Amazon Standard Time (America/Campo_Grande)
 >
 >   * (GMT-04:00) Venezuela Time (America/Caracas)
 >
@@ -1110,13 +1110,13 @@ Create a new user.
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Dominica)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Glace\_Bay)
+>   * (GMT-04:00) Atlantic Standard Time (America/Glace_Bay)
 >
->   * (GMT-03:00) Atlantic Daylight Time (America/Glace\_Bay)
+>   * (GMT-03:00) Atlantic Daylight Time (America/Glace_Bay)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Goose\_Bay)
+>   * (GMT-04:00) Atlantic Standard Time (America/Goose_Bay)
 >
->   * (GMT-03:00) Atlantic Daylight Time (America/Goose\_Bay)
+>   * (GMT-03:00) Atlantic Daylight Time (America/Goose_Bay)
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Grenada)
 >
@@ -1130,9 +1130,9 @@ Create a new user.
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Kralendijk)
 >
->   * (GMT-04:00) Bolivia Time (America/La\_Paz)
+>   * (GMT-04:00) Bolivia Time (America/La_Paz)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Lower\_Princes)
+>   * (GMT-04:00) Atlantic Standard Time (America/Lower_Princes)
 >
 >   * (GMT-04:00) Amazon Standard Time (America/Manaus)
 >
@@ -1146,27 +1146,27 @@ Create a new user.
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Montserrat)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Port\_of\_Spain)
+>   * (GMT-04:00) Atlantic Standard Time (America/Port_of_Spain)
 >
->   * (GMT-04:00) Amazon Standard Time (America/Porto\_Velho)
+>   * (GMT-04:00) Amazon Standard Time (America/Porto_Velho)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Puerto\_Rico)
+>   * (GMT-04:00) Atlantic Standard Time (America/Puerto_Rico)
 >
 >   * (GMT-04:00) Chile Standard Time (America/Santiago)
 >
 >   * (GMT-03:00) Chile Summer Time (America/Santiago)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/Santo\_Domingo)
+>   * (GMT-04:00) Atlantic Standard Time (America/Santo_Domingo)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/St\_Barthelemy)
+>   * (GMT-04:00) Atlantic Standard Time (America/St_Barthelemy)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/St\_Kitts)
+>   * (GMT-04:00) Atlantic Standard Time (America/St_Kitts)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/St\_Lucia)
+>   * (GMT-04:00) Atlantic Standard Time (America/St_Lucia)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/St\_Thomas)
+>   * (GMT-04:00) Atlantic Standard Time (America/St_Thomas)
 >
->   * (GMT-04:00) Atlantic Standard Time (America/St\_Vincent)
+>   * (GMT-04:00) Atlantic Standard Time (America/St_Vincent)
 >
 >   * (GMT-04:00) Atlantic Standard Time (America/Thule)
 >
@@ -1184,7 +1184,7 @@ Create a new user.
 >
 >   * (GMT-05:00) Eastern Standard Time (America/Cayman)
 >
->   * (GMT-05:00) Eastern Standard Time (America/Coral\_Harbour)
+>   * (GMT-05:00) Eastern Standard Time (America/Coral_Harbour)
 >
 >   * (GMT-05:00) Eastern Standard Time (America/Detroit)
 >
@@ -1192,9 +1192,9 @@ Create a new user.
 >
 >   * (GMT-05:00) Acre Standard Time (America/Eirunepe)
 >
->   * (GMT-05:00) Eastern Standard Time (America/Grand\_Turk)
+>   * (GMT-05:00) Eastern Standard Time (America/Grand_Turk)
 >
->   * (GMT-04:00) Eastern Daylight Time (America/Grand\_Turk)
+>   * (GMT-04:00) Eastern Daylight Time (America/Grand_Turk)
 >
 >   * (GMT-05:00) Ecuador Time (America/Guayaquil)
 >
@@ -1250,9 +1250,9 @@ Create a new user.
 >
 >   * (GMT-04:00) Eastern Daylight Time (America/Nassau)
 >
->   * (GMT-05:00) Eastern Standard Time (America/New\_York) (Default)
+>   * (GMT-05:00) Eastern Standard Time (America/New_York) (Default)
 >
->   * (GMT-04:00) Eastern Daylight Time (America/New\_York) (Default)
+>   * (GMT-04:00) Eastern Daylight Time (America/New_York) (Default)
 >
 >   * (GMT-05:00) Eastern Standard Time (America/Nipigon)
 >
@@ -1268,19 +1268,19 @@ Create a new user.
 >
 >   * (GMT-04:00) Eastern Daylight Time (America/Port-au-Prince)
 >
->   * (GMT-05:00) Acre Standard Time (America/Rio\_Branco)
+>   * (GMT-05:00) Acre Standard Time (America/Rio_Branco)
 >
->   * (GMT-05:00) Eastern Standard Time (America/Thunder\_Bay)
+>   * (GMT-05:00) Eastern Standard Time (America/Thunder_Bay)
 >
->   * (GMT-04:00) Eastern Daylight Time (America/Thunder\_Bay)
+>   * (GMT-04:00) Eastern Daylight Time (America/Thunder_Bay)
 >
 >   * (GMT-05:00) Eastern Standard Time (America/Toronto)
 >
 >   * (GMT-04:00) Eastern Daylight Time (America/Toronto)
 >
->   * (GMT-06:00) Central Standard Time (America/Bahia\_Banderas)
+>   * (GMT-06:00) Central Standard Time (America/Bahia_Banderas)
 >
->   * (GMT-05:00) Central Daylight Time (America/Bahia\_Banderas)
+>   * (GMT-05:00) Central Daylight Time (America/Bahia_Banderas)
 >
 >   * (GMT-06:00) Central Standard Time (America/Belize)
 >
@@ -1288,9 +1288,9 @@ Create a new user.
 >
 >   * (GMT-05:00) Central Daylight Time (America/Chicago)
 >
->   * (GMT-06:00) Central Standard Time (America/Costa\_Rica)
+>   * (GMT-06:00) Central Standard Time (America/Costa_Rica)
 >
->   * (GMT-06:00) Central Standard Time (America/El\_Salvador)
+>   * (GMT-06:00) Central Standard Time (America/El_Salvador)
 >
 >   * (GMT-06:00) Central Standard Time (America/Guatemala)
 >
@@ -1298,9 +1298,9 @@ Create a new user.
 >
 >   * (GMT-05:00) Central Daylight Time (America/Indiana/Knox)
 >
->   * (GMT-06:00) Central Standard Time (America/Indiana/Tell\_City)
+>   * (GMT-06:00) Central Standard Time (America/Indiana/Tell_City)
 >
->   * (GMT-05:00) Central Daylight Time (America/Indiana/Tell\_City)
+>   * (GMT-05:00) Central Daylight Time (America/Indiana/Tell_City)
 >
 >   * (GMT-06:00) Central Standard Time (America/Managua)
 >
@@ -1316,33 +1316,33 @@ Create a new user.
 >
 >   * (GMT-05:00) Central Daylight Time (America/Merida)
 >
->   * (GMT-06:00) Central Standard Time (America/Mexico\_City)
+>   * (GMT-06:00) Central Standard Time (America/Mexico_City)
 >
->   * (GMT-05:00) Central Daylight Time (America/Mexico\_City)
+>   * (GMT-05:00) Central Daylight Time (America/Mexico_City)
 >
 >   * (GMT-06:00) Central Standard Time (America/Monterrey)
 >
 >   * (GMT-05:00) Central Daylight Time (America/Monterrey)
 >
->   * (GMT-06:00) Central Standard Time (America/North\_Dakota/Beulah)
+>   * (GMT-06:00) Central Standard Time (America/North_Dakota/Beulah)
 >
->   * (GMT-05:00) Central Daylight Time (America/North\_Dakota/Beulah)
+>   * (GMT-05:00) Central Daylight Time (America/North_Dakota/Beulah)
 >
->   * (GMT-06:00) Central Standard Time (America/North\_Dakota/Center)
+>   * (GMT-06:00) Central Standard Time (America/North_Dakota/Center)
 >
->   * (GMT-05:00) Central Daylight Time (America/North\_Dakota/Center)
+>   * (GMT-05:00) Central Daylight Time (America/North_Dakota/Center)
 >
->   * (GMT-06:00) Central Standard Time (America/North\_Dakota/New\_Salem)
+>   * (GMT-06:00) Central Standard Time (America/North_Dakota/New_Salem)
 >
->   * (GMT-05:00) Central Daylight Time (America/North\_Dakota/New\_Salem)
+>   * (GMT-05:00) Central Daylight Time (America/North_Dakota/New_Salem)
 >
->   * (GMT-06:00) Central Standard Time (America/Rainy\_River)
+>   * (GMT-06:00) Central Standard Time (America/Rainy_River)
 >
->   * (GMT-05:00) Central Daylight Time (America/Rainy\_River)
+>   * (GMT-05:00) Central Daylight Time (America/Rainy_River)
 >
->   * (GMT-06:00) Central Standard Time (America/Rankin\_Inlet)
+>   * (GMT-06:00) Central Standard Time (America/Rankin_Inlet)
 >
->   * (GMT-05:00) Central Daylight Time (America/Rankin\_Inlet)
+>   * (GMT-05:00) Central Daylight Time (America/Rankin_Inlet)
 >
 >   * (GMT-06:00) Central Standard Time (America/Regina)
 >
@@ -1350,7 +1350,7 @@ Create a new user.
 >
 >   * (GMT-05:00) Central Daylight Time (America/Resolute)
 >
->   * (GMT-06:00) Central Standard Time (America/Swift\_Current)
+>   * (GMT-06:00) Central Standard Time (America/Swift_Current)
 >
 >   * (GMT-06:00) Central Standard Time (America/Tegucigalpa)
 >
@@ -1368,9 +1368,9 @@ Create a new user.
 >
 >   * (GMT-06:00) Mountain Daylight Time (America/Boise)
 >
->   * (GMT-07:00) Mountain Standard Time (America/Cambridge\_Bay)
+>   * (GMT-07:00) Mountain Standard Time (America/Cambridge_Bay)
 >
->   * (GMT-06:00) Mountain Daylight Time (America/Cambridge\_Bay)
+>   * (GMT-06:00) Mountain Daylight Time (America/Cambridge_Bay)
 >
 >   * (GMT-07:00) Mexican Pacific Standard Time (America/Chihuahua)
 >
@@ -1380,7 +1380,7 @@ Create a new user.
 >
 >   * (GMT-07:00) Mountain Standard Time (America/Dawson)
 >
->   * (GMT-07:00) Mountain Standard Time (America/Dawson\_Creek)
+>   * (GMT-07:00) Mountain Standard Time (America/Dawson_Creek)
 >
 >   * (GMT-07:00) Mountain Standard Time (America/Denver)
 >
@@ -1390,7 +1390,7 @@ Create a new user.
 >
 >   * (GMT-06:00) Mountain Daylight Time (America/Edmonton)
 >
->   * (GMT-07:00) Mountain Standard Time (America/Fort\_Nelson)
+>   * (GMT-07:00) Mountain Standard Time (America/Fort_Nelson)
 >
 >   * (GMT-07:00) Mexican Pacific Standard Time (America/Hermosillo)
 >
@@ -1414,13 +1414,13 @@ Create a new user.
 >
 >   * (GMT-06:00) Mountain Daylight Time (America/Yellowknife)
 >
->   * (GMT-08:00) Pacific Standard Time (America/Los\_Angeles)
+>   * (GMT-08:00) Pacific Standard Time (America/Los_Angeles)
 >
->   * (GMT-07:00) Pacific Daylight Time (America/Los\_Angeles)
+>   * (GMT-07:00) Pacific Daylight Time (America/Los_Angeles)
 >
->   * (GMT-08:00) Northwest Mexico Standard Time (America/Santa\_Isabel)
+>   * (GMT-08:00) Northwest Mexico Standard Time (America/Santa_Isabel)
 >
->   * (GMT-07:00) Northwest Mexico Daylight Time (America/Santa\_Isabel)
+>   * (GMT-07:00) Northwest Mexico Daylight Time (America/Santa_Isabel)
 >
 >   * (GMT-08:00) Pacific Standard Time (America/Tijuana)
 >
@@ -1476,7 +1476,7 @@ Create a new user.
 >
 >   * (GMT-11:00) Niue Time (Pacific/Niue)
 >
->   * (GMT-11:00) Samoa Standard Time (Pacific/Pago\_Pago)
+>   * (GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)
 >
 > - Locale dropDown required
 >

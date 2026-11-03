@@ -7,6 +7,7 @@ page_id: auth-node-ref::accept-terms-and-conditions
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T17:39:33Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Terms &amp; Conditions"]
 page_aliases: ["auth-node-accept-terms-and-conditions.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html
@@ -17,6 +18,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -39,13 +41,13 @@ The [Patch Object node](patch-object.html) stores the acceptance response if the
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes 1      |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes (1)    |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
-1 This functionality requires that you configure AM as part of a [Ping Identity Platform deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
+(1) This functionality requires that you configure AM as part of a [Ping Advanced Identity Software deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
 
 ## Inputs
 
@@ -67,6 +69,10 @@ The node writes a `termsAccepted` object to the shared node state. The object co
 
 * `termsVersion`: A string indicating the version of the accepted terms.
 
+## Callbacks
+
+The node sends a [TermsAndConditionsCallback](https://docs.pingidentity.com/pingoneaic/am-authentication/callbacks-interactive.html#TermsAndConditionsCallback), which prompts the user to accept the current version of the terms and conditions.
+
 ## Outcomes
 
 Single outcome path; the user accepted the terms and conditions.
@@ -86,6 +92,7 @@ page_id: auth-node-ref::account-active-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/account-active-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Accounts"]
 page_aliases: ["auth-node-account-active-decision.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/account-active-decision.html
@@ -96,6 +103,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -114,25 +122,39 @@ An account is considered unlocked under this condition:
 
 * The status is active and no duration lockout is set on the account.
 
-The node determines whether the account has been locked through both persistent (physical) lockout and duration lockout.
+The node determines whether the account has been locked, either through persistent (physical) lockout or duration lockout.
 
 Find more information in [Account lockout](https://docs.pingidentity.com/pingoneaic/am-authentication/auth-nodes-and-journeys.html#account-lockout-trees).
 
 ## Example
 
-For progressive profiling, include this node after a [Terms and Conditions Decision node](terms-and-conditions-decision.html). If the user has not accepted the latest version of the terms and conditions, evaluation takes them to a page that requires them to accept the current terms and conditions.
+In this simple login journey, authentication fails if the account is assessed to be `inactive` or `locked`.
 
-The [Patch Object node](patch-object.html) stores the acceptance response if the user accepts:
+![Account active Decision node in a simple login journey](_images/account-active-decision-example.png)
 
-![Storing acceptance of terms and conditions](_images/trees-node-accept-terms-conditions-tree-example.png)
+This example uses the following nodes:
+
+* The [Page node](page.html) prompts the user to input their username and password:
+
+  * The [Platform Username node](platform-username.html) collects the username and stores it in the shared state.
+
+  * The [Platform Password node](platform-password.html) collects the password and stores it in the shared state.
+
+* The [Data Store Decision node](data-store-decision.html) uses the username and password to determine whether the account exists.
+
+* The **Account Active Decision** node determines whether the account is active and unlocked.
+
+* If the account is active and unlocked, the [Increment Login Count node](increment-login-count.html) increments the login count and authentication succeeds.
+
+* If the account is inactive or locked, authentication fails.
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -151,6 +173,10 @@ This node has no configurable properties.
 ## Outputs
 
 This node doesn't change the shared state.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -179,6 +205,7 @@ page_id: auth-node-ref::account-lockout
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/account-lockout.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-09T18:17:32Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Accounts", "User Profiles", "Authentication"]
 page_aliases: ["auth-node-account-lockout.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/account-lockout.html
@@ -189,6 +216,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -217,11 +245,11 @@ Before using a journey like this in deployment, adapt it to reset the retry coun
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -231,7 +259,7 @@ It also requires the `realm` property, which the product using this node sets by
 
 ## Dependencies
 
-This node depends on the underlying identity service that stores the user profile.
+None.
 
 ## Configuration
 
@@ -242,6 +270,10 @@ This node depends on the underlying identity service that stores the user profil
 ## Outputs
 
 This node doesn't change the shared state.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -261,12 +293,21 @@ If this node fails to set the account status, it logs a `failed to set the user 
 
 This node can also throw exceptions with the following messages:
 
-| Message                                                                     | Notes                                                                               |
-| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `Could not get a valid username from the context`                           | Failed to read the `username` from the shared node state                            |
-| `Could not get a valid realm from the context`                              | Failed to read the `realm` from the shared node state                               |
-| `Could not find the identity based on the information available on context` | Failed to find the account profile with this `username` in this `realm`             |
-| `An error occurred when trying to lock out the user account`                | Failed to update the account status; applies when locking and unlocking the account |
+* `Could not get a valid username from the context`
+
+  Failed to read the `username` from the shared node state.
+
+* `Could not get a valid realm from the context`
+
+  Failed to read the `realm` from the shared node state.
+
+* `Could not find the identity based on the information available on context`
+
+  Failed to find the account profile with this `username` in this `realm`.
+
+* `An error occurred when trying to lock out the user account`
+
+  Failed to update the account status; applies when locking and unlocking the account.
 
 ---
 
@@ -279,6 +320,7 @@ page_id: auth-node-ref::ad-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/ad-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Active Directory"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/ad-decision.html
 section_ids:
@@ -288,6 +330,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   ad-decision-disabled-locked-accounts: Locked and disabled accounts
   errors: Errors
@@ -323,11 +366,11 @@ The following example journey collects the user credentials and checks them agai
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -343,43 +386,61 @@ This node has no dependencies.
 
 ## Configuration
 
-| Property                                                              | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Primary LDAP Server *(required)*                                      | Specify one or more primary directory servers. Specify each directory server in the following format: `host:port`.For example, `ad.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Secondary LDAP Server                                                 | Specify one or more secondary directory servers. Specify each directory server in the following format: `host:port`.The journey uses the secondary servers when none of the primary servers are available.For example, `ad_backup.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| DN to Start User Search *(required)*                                  | Specify the DN from which to start the user search. More specific DNs, such as `ou=sales,dc=example,dc=com`, result in better search performance.If multiple entries with the same attribute values exist in the directory server, make sure this property is specific enough to return only one entry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bind User DN, Bind User Password                                      | The credentials used to connect to the directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Attribute Used to Retrieve User Profile *(required)*                  | The attribute used to retrieve a user profile from the directory server.The user search will have already happened, as specified by the Attributes Used to Search for a User to be Authenticated and User Search Filter properties.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Attributes Used to Search for a User to be Authenticated *(required)* | The attributes the node uses to match the credentials provided by the user to an entry in the directory server.For example, a value of `uid` forms the search filter `uid=user`. If you specify multiple values, such as `uid` and `cn`, the node forms a complex search filter `(\|(uid=user)(cn=user))`.Multiple attribute values let the user authenticate with any one of the values. For example, if you set both `uid` and `mail`, then Barbara Jensen can authenticate with either `bjensen` or `bjensen@example.com`.&#xA;&#xA;If you're using account lockout and you set multiple attribute values here, you must add those attributes to the Alias Search Attribute Name property in the User profile. Find more information about this property in Core authentication attributes > User profile.                                                                                                                                                                         |
-| User Search Filter                                                    | A filter to append to user searches.For example, if your search attribute is `mail` and you set User Search Filter to `(objectClass=inetOrgPerson)`, the node uses `(&(mail=address)(objectClass=inetOrgPerson))` as the resulting search filter. In this example, *address* is the mail address provided by the user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Property                                                              | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Primary LDAP Server *(required)*                                      | Specify one or more primary directory servers. Specify each directory server in the following format: `host:port`.For example, `ad.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Secondary LDAP Server                                                 | Specify one or more secondary directory servers. Specify each directory server in the following format: `host:port`.The journey uses the secondary servers when none of the primary servers are available.For example, `ad_backup.example.com:389`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| DN to Start User Search *(required)*                                  | Specify the DN from which to start the user search. More specific DNs, such as `ou=sales,dc=example,dc=com`, result in better search performance.If multiple entries with the same attribute values exist in the directory server, make sure this property is specific enough to return only one entry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Bind User DN, Bind User Password                                      | The credentials used to connect to the directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Attribute Used to Retrieve User Profile *(required)*                  | The attribute used to retrieve a user profile from the directory server.The user search will have already happened, as specified by the Attributes Used to Search for a User to be Authenticated and User Search Filter properties.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Attributes Used to Search for a User to be Authenticated *(required)* | The attributes the node uses to match the credentials provided by the user to an entry in the directory server.For example, a value of `uid` forms the search filter `uid=user`. If you specify multiple values, such as `uid` and `cn`, the node forms a complex search filter `(\|(uid=user)(cn=user))`.Multiple attribute values let the user authenticate with any one of the values. For example, if you set both `uid` and `mail`, then Barbara Jensen can authenticate with either `bjensen` or `bjensen@example.com`.&#xA;&#xA;If you're using account lockout and you set multiple attribute values here, you must add those attributes to the Alias Search Attribute Name property in the User profile. Find more information about this property in Core authentication attributes > User profile.                                                                                                                                                                      |
+| User Search Filter                                                    | A filter to append to user searches.For example, if your search attribute is `mail` and you set User Search Filter to `(objectClass=inetOrgPerson)`, the node uses `(&(mail=address)(objectClass=inetOrgPerson))` as the resulting search filter. In this example, *address* is the mail address provided by the user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Search Scope                                                          | The extent of the search for users in the directory server:- `OBJECT`: The search extends only to the entry specified by the DN to Start User Search.
 
 - `ONELEVEL`: The search extends to the entries that are direct children of the DN to Start User Search.
 
-- `SUBTREE`: The search extends to the DN to Start User Search and every entry under it.Default: `SUBTREE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| LDAP Connection Mode                                                  | Whether to use SSL or StartTLS to connect to the directory server. The node must be able to trust the certificates used.Possible values: `LDAP`, `LDAPS`, and `StartTLS`Default: `LDAP`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+- `SUBTREE`: The search extends to the DN to Start User Search and every entry under it.Default: `SUBTREE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| LDAP Connection Mode                                                  | Whether to use SSL or StartTLS to connect to the directory server. The node must be able to trust the certificates used.Possible values: `LDAP`, `LDAPS`, and `StartTLS`Default: `LDAP`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | mTLS Enabled                                                          | Enables mTLS (mutual TLS) between Advanced Identity Cloud and the directory server.This setting applies to *all* configured LDAP servers; that is, Advanced Identity Cloud uses mTLS to authenticate to all LDAP servers configured for this node.When mTLS is enabled, Advanced Identity Cloud ignores the values for Bind User DN and Bind User Password.If you enable this property, you must:- Set the LDAP Connection Mode to `LDAPS`
 
-- Provide an mTLS Secret Label IdentifierLearn about mapping secrets in [Map and rotate secrets](https://docs.pingidentity.com/pingoneaic/tenants/esvs-signing-encryption.html#map-esv-secrets-to-secret-labels).Default: Not enabled                                                                                                                                                                                                                                                                                                     |
-| mTLS Secret Label Identifier                                          | Identifier used to create a secret label for mapping to the mTLS certificate in the secret store. Advanced Identity Cloud uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.ldap.decision.mtls.identifier.cert` , where `identifier` is the value of mTLS Secret Label Identifier. The identifier can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period. All LDAP servers configured for this node share the same secret label.For more security, you should rotate certificates periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this label. When you rotate a certificate, Advanced Identity Cloud closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required. |
-| Return Account Locked Message                                         | If enabled, the node returns a specific `Account locked` message for locked accounts. Otherwise, it returns a generic `Login failure` message to hide the account's locked status.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Return User DN to DataStore                                           | When enabled, the node returns the DN rather than the User ID. From the DN value, Advanced Identity Cloud uses the RDN to search for the user profile. For example, if a returned DN value is `uid=demo,ou=people,dc=example,dc=com`, Advanced Identity Cloud uses `uid=demo` to search the directory server.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| User Creation Attributes                                              | This list lets you map (external) attribute names from the LDAP directory server to (internal) attribute names used by Advanced Identity Cloud.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Minimum Password Length                                               | The minimum acceptable password length.Default: `8`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Trust All Server Certificates                                         | When enabled, the server blindly trusts server certificates, including self-signed test certificates.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| LDAP Connection Heartbeat Interval                                    | Specifies how often Advanced Identity Cloud should send a heartbeat request to the directory server to ensure that the connection doesn't remain idle.Some network administrators configure firewalls and load balancers to drop connections that are idle for too long. Set the units for the interval in the `LDAP Connection Heartbeat Time Unit` property.&#xA;&#xA;Setting this property to 0 does not disable the heartbeat (keepalive) or load balancer availability checks.Default: `10`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| LDAP Connection Heartbeat Time Unit                                   | The time unit for the `LDAP Connection Heartbeat Interval`.Default: `seconds`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| LDAP Operations Timeout                                               | The timeout, in seconds, that Advanced Identity Cloud should wait for a response from the directory server.Default: `0` (means no timeout)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Use mixed case for password change messages                           | Whether the server returns password reset messages in mixed case (sentence case) or transforms them to uppercase.By default, the server transforms password reset and password change messages to uppercase. Enable this setting to return messages in sentence case.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+- Provide an mTLS Secret Label IdentifierLearn about mapping secrets in [Map and rotate secrets](https://docs.pingidentity.com/pingoneaic/tenants/esvs-signing-encryption.html#map-esv-secrets-to-secret-labels).Default: Not enabled                                                                                                                                                                                                                                                                                                  |
+| mTLS Secret Label Identifier                                          | Identifier used to create a secret label for mapping to the mTLS certificate in the secret store. Advanced Identity Cloud uses this identifier to create a specific secret label for this node. The secret label takes the form `am.authentication.nodes.ad.decision.mtls.identifier.cert`, where `identifier` is the value of mTLS Secret Label Identifier. The identifier can only contain alphanumeric characters (`a-z`, `A-Z`, `0-9`) and periods (`.`). It can't start or end with a period. All LDAP servers configured for this node share the same secret label.For more security, you should rotate certificates periodically. When you rotate a certificate, update the corresponding mapping in the realm secret store configuration to reflect this label. When you rotate a certificate, Advanced Identity Cloud closes any existing connections using the old certificate. A new connection is selected from the connection pool and no server restart is required. |
+| Return Account Locked Message                                         | If enabled, the node returns a specific `Account locked` message for locked accounts. Otherwise, it returns a generic `Login failure` message to hide the account's locked status.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Return User DN to DataStore                                           | When enabled, the node returns the DN rather than the User ID. From the DN value, Advanced Identity Cloud uses the RDN to search for the user profile. For example, if a returned DN value is `uid=demo,ou=people,dc=example,dc=com`, Advanced Identity Cloud uses `uid=demo` to search the directory server.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| User Creation Attributes                                              | This list lets you map (external) attribute names from the LDAP directory server to (internal) attribute names used by Advanced Identity Cloud.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Minimum Password Length                                               | The minimum acceptable password length.Default: `8`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Trust All Server Certificates                                         | When enabled, the server blindly trusts server certificates, including self-signed test certificates.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| LDAP Connection Heartbeat Interval                                    | Specifies how often Advanced Identity Cloud should send a heartbeat request to the directory server to ensure that the connection doesn't remain idle.Some network administrators configure firewalls and load balancers to drop connections that are idle for too long. Set the units for the interval in the `LDAP Connection Heartbeat Time Unit` property.&#xA;&#xA;Setting this property to 0 does not disable the heartbeat (keepalive) or load balancer availability checks.Default: `10`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| LDAP Connection Heartbeat Time Unit                                   | The time unit for the `LDAP Connection Heartbeat Interval`.Default: `seconds`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| LDAP Operations Timeout                                               | The timeout, in seconds, that Advanced Identity Cloud should wait for a response from the directory server.Default: `0` (means no timeout)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Use mixed case for password change messages                           | Whether the server returns password reset messages in mixed case (sentence case) or transforms them to uppercase.By default, the server transforms password reset and password change messages to uppercase. Enable this setting to return messages in sentence case.Default: Not enabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | LDAP Affinity Level                                                   | Level of affinity used to balance requests across directory servers.Affinity-based load balancing means that each request for the same user entry goes to the same directory server. The directory server used for a specific operation is determined by the DN of the identity involved.List the directory server instances that form part of the affinity deployment in the Primary LDAP Server and Secondary LDAP Server properties.Options are:- `NONE` – no affinity
 
 - `BIND` – affinity for BIND requests only
 
-- `ALL` – affinity for all requestsDefault: `NONE`                                                                                                                                                                                                                                                                                                                                                                                                             |
+- `ALL` – affinity for all requestsDefault: `NONE`                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ## Outputs
 
 If a password reset is required, the node adds a `lastModuleState` property with the value of `changeAfterReset` to shared state.
+
+## Callbacks
+
+The node sends the following callbacks when a password change is required:
+
+* `ConfirmationCallback`
+
+  Prompts the user to submit the password change or to cancel.
+
+* `PasswordCallback`
+
+  Prompts the user for their current password, the new password, and a confirmation of the new password. The node sends three instances of this callback.
+
+* `TextOutputCallback`
+
+  Displays a status message to the user, such as a warning that the password is expiring or an error that the new password doesn't meet requirements.
+
+Learn more in [Supported callbacks](https://docs.pingidentity.com/pingoneaic/am-authentication/callbacks-supported.html).
 
 ## Outcomes
 
@@ -430,13 +491,19 @@ In contrast, a *disabled account* is a deliberate, long-term administrative acti
 
 ## Errors
 
-The node logs the following exceptions:
+The node can log the following exceptions:
 
-* `Invalid configuration`: If AD returns an unexpected result.
+* `Invalid configuration`
 
-* `Server error`: If an error occurs connecting to AD.
+  AD returns an unexpected result.
 
-* `Unknown login state`: If authentication results in an unknown state.
+* `Server error`
+
+  An error occurs connecting to AD.
+
+* `Unknown login state`
+
+  Authentication results in an unknown state.
 
 ---
 
@@ -449,6 +516,7 @@ page_id: auth-node-ref::agent-data-store-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/agent-data-store-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Agents", "Password", "Data Store"]
 page_aliases: ["auth-node-agent-data-store-decision.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/agent-data-store-decision.html
@@ -459,6 +527,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -485,11 +554,11 @@ The following example uses this node to authenticate an agent with the credentia
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -509,6 +578,10 @@ This node has no configurable properties.
 
 This node copies the shared and transient states into the outgoing node state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `True`
@@ -521,19 +594,244 @@ This node copies the shared and transient states into the outgoing node state.
 
 ## Errors
 
-This node can log the following warnings:
+The node can log the following:
 
-* `Exception in data store decision node`
+* Warnings
 
-  The node couldn't connect to the data store, or another error occurred.
+  * `invalid password error`
 
-* `invalid password error`
+    The password doesn't match.
 
-  The password doesn't match.
+  * `invalid username error`
 
-* `invalid username error`
+    The username doesn't match any profiles found in the data store.
 
-  The username doesn't match any profiles found in the data store.
+  * `Exception in data store decision node`
+
+    The node couldn't connect to the data store, or another error occurred.
+
+* Errors
+
+  * Password is null for username *username*
+
+    The password is missing from the shared state for the user.
+
+---
+
+---
+title: Akamai Account Protector node
+description: Use the Akamai Account Protector node to inject the Akamai risk score into an Advanced Identity Cloud authentication journey.
+component: auth-node-ref
+version: latest
+page_id: auth-node-ref:cloud:akamai-account-protector
+canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/cloud/akamai-account-protector.html
+llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-07T16:18:42Z
+keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Akamai"]
+section_ids:
+  example: Example
+  availability: Availability
+  inputs: Inputs
+  dependencies: Dependencies
+  configure_akamai_account_protector: Configure Akamai Account Protector
+  enable_account_protector_on_the_akamai_edge: Enable Account Protector on the Akamai Edge
+  add_the_username_parameter_to_akamai_account_protector: Add the username parameter to Akamai Account Protector
+  configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
+---
+
+# Akamai Account Protector node
+
+The Akamai Account Protector node injects the Akamai risk score into your authentication journey. When the Akamai Account Protector feature is enabled for your application, the Akamai Edge service provides the risk score in an HTTP request header. Learn more in the [Akamai Account Protector](https://techdocs.akamai.com/cloud-security/docs/account-protector) documentation.
+
+## Example
+
+The following example inner journey uses the Akamai Account Protector node to parse the user risk score from the `Akamai-User-Risk` header and branch the journey based on the risk:
+
+![Journey using the Akamai Account Protector node](_images/akamai-account-protector-journey.png)
+
+The inner journey in the example is contained in an outer journey that performs user authentication and collects the username. The Akamai Account Protector node parses the `Akamai-User-Risk` HTTP request header and extracts the user risk score. Based on the risk score, the journey progresses through the appropriate outcome.
+
+## Availability
+
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes (1)    |
+| Ping Advanced Identity Software (self-managed) | Yes (1)    |
+
+(1) For self-managed products, download the node from the [Ping Identity Marketplace](https://marketplace.pingone.com/item/akamai-account-protector).
+
+## Inputs
+
+This node retrieves user risk data from the `Akamai-User-Risk` HTTP request header. The header value contains semicolon-delimited key-value pairs, for example `score=50`.
+
+## Dependencies
+
+You must set up [Akamai Account Protector](https://www.akamai.com/resources/product-brief/account-protector) and enable it in your web application before using the Akamai Account Protector node.
+
+### Configure Akamai Account Protector
+
+Akamai Account Protector detects malicious activity and assigns risk scores to requests. To inject the `akamai-user-risk` header, follow these steps:
+
+#### Enable Account Protector on the Akamai Edge
+
+1. Sign in to the Akamai Control Center.
+
+2. Go to Security Configuration and select your existing security policy or create a new one.
+
+3. Enable Account Protector under the bot management settings.
+
+4. Ensure that risk scoring is enabled and that Akamai adds the `akamai-user-risk` HTTP header.
+
+#### Add the username parameter to Akamai Account Protector
+
+1. In the Akamai Control Center, create an API definition pointing to your Advanced Identity Cloud hostname.
+
+2. Add an API resource with the following details:
+
+   * **Name:** Authenticate
+
+   * **Path:** `/am/json/realms/root/realms/realm name/authenticate`
+
+3. Select the `POST` method and set the request parameters.
+
+   > **Collapse: Example request parameters for the Authenticate API resource**
+   >
+   > ![Example request parameters for the Authenticate API resource](_images/akamai-account-protector-set-parameters.png)
+
+4. Similarly, set the response parameters.
+
+   > **Collapse: Example JSON/XML schema for the request and response parameters**
+   >
+   > ```json
+   > {
+   >   "requestBody": {
+   >     "content": {
+   >       "application/json": {
+   >         "schema": {
+   >           "type": "object",
+   >           "required": [
+   >             "callbacks"
+   >           ],
+   >           "properties": {
+   >             "callbacks": {
+   >               "type": "array",
+   >               "items": {
+   >                 "type": "object",
+   >                 "properties": {
+   >                   "input": {
+   >                     "type": "array",
+   >                     "items": {
+   >                       "type": "object",
+   >                       "properties": {
+   >                         "name": {
+   >                           "type": "string"
+   >                         }
+   >                       }
+   >                     }
+   >                   }
+   >                 }
+   >               },
+   >               "description": "callbacks"
+   >             }
+   >           }
+   >         }
+   >       },
+   >       "application/xml": {
+   >         "schema": {
+   >           "type": "object",
+   >           "required": [
+   >             "callbacks"
+   >           ],
+   >           "properties": {
+   >             "callbacks": {
+   >               "type": "array",
+   >               "items": {
+   >                 "type": "object",
+   >                 "properties": {
+   >                   "input": {
+   >                     "type": "array",
+   >                     "items": {
+   >                       "type": "object",
+   >                       "properties": {
+   >                         "name": {
+   >                           "type": "array",
+   >                           "items": {
+   >                             "type": "string"
+   >                           },
+   >                           "maxItems": 1
+   >                         }
+   >                       }
+   >                     }
+   >                   }
+   >                 }
+   >               },
+   >               "description": "callbacks"
+   >             }
+   >           },
+   >           "xml": {
+   >             "name": "root"
+   >           }
+   >         }
+   >       }
+   >     },
+   >     "required": true
+   >   }
+   > }
+   > ```
+
+## Configuration
+
+| Property                           | Usage                                                                                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| High Risk Threshold                | The maximum score for the Medium Risk outcome. Scores above this value receive the High Risk outcome.Default: `50`                                      |
+| Medium Risk Threshold              | The maximum score for the Low Risk outcome. Scores above this value and up to the High Risk Threshold receive the Medium Risk outcome.Default: `25`     |
+| Save Akamai Header to Shared State | If selected, the node writes the `Akamai-User-Risk` header key-value pairs to the shared state, in addition to the transient state.Default: Not enabled |
+
+## Outputs
+
+The node writes each key-value pair from the `Akamai-User-Risk` header, such as `score`, to the transient state. If you select Save Akamai Header to Shared State, the node also writes the pairs to the shared state.
+
+## Callbacks
+
+This node doesn't send any callbacks.
+
+## Outcomes
+
+The node has the following outcomes:
+
+* `Low Risk`
+
+  The overall score is less than or equal to the Medium Risk Threshold value.
+
+* `Medium Risk`
+
+  The overall score is greater than the Medium Risk Threshold and less than or equal to the High Risk Threshold value.
+
+* `High Risk`
+
+  The overall score is greater than the High Risk Threshold value.
+
+* `No Score`
+
+  The `Akamai-User-Risk` header is empty.
+
+* `Error`
+
+  The node couldn't parse the risk score; for example, the header doesn't contain a `score` key-value pair or the score isn't an integer.
+
+## Errors
+
+The node can log the following errors:
+
+* `[AkamaiAccountProtector][Version: <version>][Marketplace]Exception occurred`
+
+  An exception occurred while the node processed the `Akamai-User-Risk` header. The node stores the exception message and stack trace in the transient state.
 
 ---
 
@@ -546,6 +844,7 @@ page_id: auth-node-ref:am-only:amster-jwt-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/amster-jwt-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Amster"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/am-only/amster-jwt-decision.html
 section_ids:
@@ -555,6 +854,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -583,11 +883,11 @@ This node is used only by the `amsterService` authentication tree:
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | No         |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | No         |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -606,6 +906,10 @@ This node has no dependencies.
 ## Outputs
 
 This node doesn't change the shared state.
+
+## Callbacks
+
+The node sends a [HiddenValueCallback](https://docs.pingidentity.com/pingoneaic/am-authentication/callbacks-interactive.html#hiddenvaluecallback) containing a one-time nonce that the Amster client must sign in a JWT using a local private key and return to the node for verification.
 
 ## Outcomes
 
@@ -632,21 +936,25 @@ page_id: auth-node-ref::anonymous-session-upgrade
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-session-upgrade.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Sessions"]
 page_aliases: ["auth-node-anonymous-session-upgrade.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-session-upgrade.html
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Anonymous Session Upgrade node
 
-Upgrades an anonymous session to a non-anonymous session.
-
-Use this as the first node in the flow.
+The Anonymous Session Upgrade node lets you upgrade an anonymous session to an identified session.
 
 ## Example
 
@@ -656,19 +964,47 @@ After using the [Anonymous User Mapping node](anonymous-user-mapping.html) to ac
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
+
+## Inputs
+
+None. This node doesn't read shared state data.
+
+## Dependencies
+
+The node requires an existing anonymous session. Use it after the [Anonymous User Mapping node](anonymous-user-mapping.html) node or another node that creates an anonymous session.
+
+## Configuration
+
+This node has no configurable properties.
+
+## Outputs
+
+The node upgrades the current anonymous session when the previous authentication session was created by an anonymous journey.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
 Single outcome path.
 
-## Configuration
+## Errors
 
-This node has no configurable properties.
+The node can log the following errors:
+
+* `Failed to get previous session`
+
+  The node couldn't retrieve the session identified by the request SSO token.
+
+* `Unable to create AMAuthenticationManager instance`
+
+  The node couldn't load the authentication configuration for the realm. Check that the realm and its authentication configuration are available.
 
 ---
 
@@ -681,45 +1017,93 @@ page_id: auth-node-ref::anonymous-user-mapping
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-user-mapping.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Accounts"]
 page_aliases: ["auth-node-anonymous-user-mapping.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/anonymous-user-mapping.html
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Anonymous User Mapping node
 
-Lets users log in to an application or website without providing credentials, by assuming the identity of a specified existing user account. The default user for this purpose is named `anonymous`.
+The Anonymous User Mapping node lets users log in to an application or website without providing credentials, by assuming the identity of a specified existing user account. The default user for this purpose is named `anonymous`.
 
 Take care to limit access for such users. For example, grant anonymous users access to public downloads on your site.
 
 ## Example
 
-The following example uses this node to grant access as an anonymous user to users who have performed social authentication access and do not have an existing profile:
+The following example uses this node to grant users access as an anonymous user if they've completed social authentication but don't have an existing profile:
 
-![Optionally authenticating as an anonymous user](_images/trees-node-anonymous-user-mapping-tree-example-platform.png)
+![Example journey using the Anonymous User Mapping node](_images/anonymous-user-mapping-journey.png)
+
+* The [Page node](page.html) containing the [Platform Username node](platform-username.html), [Platform Password node](platform-password.html), and [Select Identity Provider node](select-identity-provider.html) prompts the user to authenticate with a username and password, or to select a social identity provider.
+
+* If the user enters their username and password, the [Data Store Decision node](data-store-decision.html) validates the username-password credentials, and authentication succeeds if their credentials are valid.
+
+* If the user selects social authentication, the [Social Provider Handler node](social-provider-handler.html) does the following:
+
+  * If the user has an existing user account, authenticates that user.
+
+  * If the user doesn't have a user account, the Anonymous User Mapping node provides limited access as an anonymous user.
+
+  * If the user interrupts the social authentication, they are routed back to the Page node to try again.
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
+
+## Inputs
+
+This node requires the `realm` property in the incoming node state, which Advanced Identity Cloud sets by default.
+
+## Dependencies
+
+The configured anonymous user must already exist in the realm, and its user status must be `active`.
+
+## Configuration
+
+| Property            | Usage                                                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Anonymous User Name | The username of an account that represents anonymous users. This user must already exist in the realm, and its user status must be `active`. |
+
+## Outputs
+
+The node sets the following values:
+
+* `username`: The configured anonymous username.
+
+* The universal ID of the configured user.
+
+* An anonymous authentication marker used when upgrading the session.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
 Single outcome path.
 
-## Configuration
+## Errors
 
-| Property            | Usage                                                                                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Anonymous User Name | Specifies the username of an account that represents anonymous users. This user must already exist in the realm, and its user status must be `active`. |
+The node can log the following error:
+
+* `Anonymous user name could not be found in the configuration`
+
+  The Anonymous User Name property is empty. Enter the username of an existing active user account.
 
 ---
 
@@ -732,6 +1116,7 @@ page_id: auth-node-ref::app-policy-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/app-policy-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-09T17:31:41Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/app-policy-decision.html
 section_ids:
@@ -854,11 +1239,11 @@ The following setup is assumed:
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -917,6 +1302,7 @@ page_id: auth-node-ref::attribute-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T17:39:33Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Schema", "Policy", "Custom Attributes"]
 page_aliases: ["auth-node-attribute-collector.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html
@@ -928,6 +1314,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1008,13 +1395,13 @@ The following video shows an example of a journey collecting the datetime from a
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes 1      |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes (1)    |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
-1 This functionality requires that you configure AM as part of a [Ping Identity Platform deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
+(1) This functionality requires that you configure AM as part of a [Ping Advanced Identity Software deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
 
 ## Inputs
 
@@ -1045,6 +1432,24 @@ None.
 
 The node writes the attributes and their values to the shared node state.
 
+## Callbacks
+
+The node sends the following callbacks:
+
+* `BooleanAttributeInputCallback`
+
+  Prompts the user to select a boolean value for the attribute being collected.
+
+* `NumberAttributeInputCallback`
+
+  Prompts the user to enter a number value for the attribute being collected.
+
+* `StringAttributeInputCallback`
+
+  Prompts the user to enter a string value for the attribute being collected.
+
+Learn more in [Supported callbacks](https://docs.pingidentity.com/pingoneaic/am-authentication/callbacks-supported.html).
+
 ## Outcomes
 
 Single outcome path; on success, downstream nodes can read the attributes from the shared node state.
@@ -1064,6 +1469,7 @@ page_id: auth-node-ref::attribute-present-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-present-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T17:39:33Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Account", "Custom Attributes", "Update Passwords"]
 page_aliases: ["auth-node-attribute-present-decision.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/attribute-present-decision.html
@@ -1074,6 +1480,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1110,13 +1517,13 @@ The user has already authenticated before beginning this journey:
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes 1      |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes (1)    |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
-1 This functionality requires that you configure AM as part of a [Ping Identity Platform deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
+(1) This functionality requires that you configure AM as part of a [Ping Advanced Identity Software deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
 
 ## Inputs
 
@@ -1138,6 +1545,10 @@ None.
 ## Outputs
 
 This node doesn't change the shared state.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -1164,12 +1575,14 @@ page_id: auth-node-ref::attribute-value-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/attribute-value-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T17:39:33Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Custom Attributes"]
 page_aliases: ["auth-node-attribute-value-decision.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/attribute-value-decision.html
 section_ids:
   availability: Availability
   configuration: Configuration
+  callbacks: Callbacks
 ---
 
 # Attribute Value Decision node
@@ -1188,13 +1601,13 @@ Use [Attribute Present Decision node](attribute-present-decision.html) instead w
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes 1      |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes (1)    |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
-1 This functionality requires that you configure AM as part of a [Ping Identity Platform deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
+(1) This functionality requires that you configure AM as part of a [Ping Advanced Identity Software deployment](https://docs.pingidentity.com/platform/8.1/sample-setup/).
 
 ## Configuration
 
@@ -1211,6 +1624,10 @@ Use [Attribute Present Decision node](attribute-present-decision.html) instead w
 | Comparison Value     | When Comparison Operation is `EQUALS`, compare this value to the provided attribute value.                                                                                                                                  |
 | Identity Attribute   | The property used to locate the identity.                                                                                                                                                                                   |
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ---
 
 ---
@@ -1222,11 +1639,13 @@ page_id: auth-node-ref::auth-level-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/auth-level-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["auth-node-auth-level-decision.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/auth-level-decision.html
 section_ids:
   availability: Availability
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -1237,11 +1656,15 @@ Compares the current authentication level value against a configured value.
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -1266,6 +1689,7 @@ page_id: auth-node-ref:self-managed:authenticate-thing
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/self-managed/authenticate-thing.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Identity Store"]
 page_aliases: ["self-managed/auth-node-authenticate-thing.adoc"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/self-managed/authenticate-thing.html
@@ -1273,6 +1697,7 @@ section_ids:
   examples: Examples
   availability: Availability
   dependencies: Dependencies
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -1295,11 +1720,11 @@ The following example shows how to authenticate a thing when the identity does n
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | No         |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | No         |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Dependencies
 
@@ -1326,6 +1751,10 @@ The node supports two methods of authentication:
 2. Client Assertion
 
    The node collects a JWT Bearer token from the request for authentication and validates the request according to the [JWT Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://www.rfc-editor.org/rfc/rfc7523.html#section-3).
+
+## Callbacks
+
+The node sends a [HiddenValueCallback](https://docs.pingidentity.com/pingoneaic/am-authentication/callbacks-interactive.html#hiddenvaluecallback), which collects the authentication JWT from the IoT SDK — either a proof-of-possession JWT containing a challenge nonce, or a client assertion JWT, depending on the configured JWT Authentication Method.
 
 ## Outcomes
 
@@ -1366,7 +1795,7 @@ page_id: auth-node-ref::overview
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/overview.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["_@auth-node-ref::index.adoc"]
+revdate: 2026-10-14T11:08:17Z
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/overview.html
 section_ids:
   basic_authentication_nodes: Basic authentication nodes
@@ -1377,7 +1806,7 @@ section_ids:
   federation_nodes: Federation nodes
   identity_management_nodes: Identity management nodes
   utility_nodes: Utility nodes
-  thing_nodes_pingamping_identity_platform: Thing nodes (PingAM/Ping Identity Platform)
+  thing_nodes_pingamping_advanced_identity_software: Thing nodes (PingAM/Ping Advanced Identity Software)
   uncategorized_nodes: Uncategorized nodes
   marketplace_nodes: Marketplace nodes
 ---
@@ -1390,21 +1819,21 @@ section_ids:
 
 * [Data Store Decision node](data-store-decision.html)
 
+* [Failure node](failure.html)
+
+* [Identity Store Decision node](cloud/identity-store-decision.html)
+
 * [Kerberos node](self-managed/kerberos.html)
 
 * [LDAP Decision node](ldap-decision.html)
 
-* [Identity Store Decision node](cloud/identity-store-decision.html)
-
 * [Password Collector node](am-only/password-collector.html)
+
+* [Success node](success.html)
 
 * [Username Collector node](am-only/username-collector.html)
 
 * [Zero Page Login Collector node](zero-page-login-collector.html)
-
-* [Failure node](failure.html)
-
-* [Success node](success.html)
 
 ## MFA nodes
 
@@ -1550,7 +1979,7 @@ section_ids:
 
 * [KBA Verification node](kba-verification.html)
 
-* [Pass-through Authentication node](passthrough-authentication.html)
+* [Passthrough Authentication node](passthrough-authentication.html)
 
 * [Patch Object node](patch-object.html)
 
@@ -1656,7 +2085,7 @@ section_ids:
 
 * [Update Journey Timeout node](update-journey-timeout.html)
 
-## Thing nodes (PingAM/Ping Identity Platform)
+## Thing nodes (PingAM/Ping Advanced Identity Software)
 
 * [Authenticate Thing node](self-managed/authenticate-thing.html)
 
@@ -1674,9 +2103,41 @@ section_ids:
 
 * [RADIUS Decision node](radius-decision.html)
 
-* [SpyCloud Auth Node](cloud/spycloud-auth.html)
-
 ## Marketplace nodes
+
+* PingOne integration
+
+  * [PingOne Service](pingone/pingone-service.html)
+
+  * [PingOne node (deprecated)](pingone/pingone.html)
+
+  * [PingOne Authorize node](pingone/pingone-authorize.html)
+
+  * [PingOne Credentials nodes](pingone/pingone-cred-overview.html)
+
+  * [PingOne Credentials Delete Wallet node](pingone/pingone-cred-delete-wallet.html)
+
+  * [PingOne Credentials Find Wallets node](pingone/pingone-cred-find-wallet.html)
+
+  * [PingOne Credentials Issue node](pingone/pingone-cred-issue.html)
+
+  * [PingOne Credentials Pair Wallet node](pingone/pingone-cred-pair-wallet.html)
+
+  * [PingOne Credentials Revoke node](pingone/pingone-cred-revoke.html)
+
+  * [PingOne Credentials Update node](pingone/pingone-cred-update.html)
+
+  * [PingOne Credentials Verification node](pingone/pingone-cred-verify.html)
+
+  * [PingOne DaVinci API node](pingone/pingone-davinci.html)
+
+  * [PingOne Verify Authentication node (deprecated)](pingone/pingone-verify-authn.html)
+
+  * [PingOne Verify Proofing node (deprecated)](pingone/pingone-verify-proof.html)
+
+  * [PingOne Verify service (deprecated)](pingone/pingone-verify-service.html)
+
+* [Akamai Account Protector node](cloud/akamai-account-protector.html)
 
 * [BioCatch Session node](cloud/biocatch-session.html)
 
@@ -1684,7 +2145,25 @@ section_ids:
 
 * [BioCatch Session Profiler node](cloud/biocatch-session-profiler.html)
 
+* [CLEAR ID Verification node](cloud/clear-id-verification.html)
+
 * [Duo node (deprecated)](cloud/duo.html)
+
+* [Duo Universal Prompt node](cloud/duo-univ-prompt.html)
+
+* [Fingerprint nodes](cloud/fingerprint.html)
+
+  * [Setup](cloud/fingerprint-setup.html)
+
+  * [Fingerprint Profiler node](cloud/fingerprint-profiler.html)
+
+  * [Fingerprint Response node](cloud/fingerprint-response.html)
+
+* [Gateway Communication node](cloud/gateway-communication.html)
+
+* [Google Chrome Device Trust node](cloud/google-chrome-device-trust.html)
+
+* [HTTP Client node](cloud/http-client.html)
 
 * [IdentityX Auth Request Decision node](cloud/identityx-auth-request-decision.html)
 
@@ -1698,13 +2177,53 @@ section_ids:
 
 * [IdentityX Sponsor User node](cloud/identityx-sponsor-user.html)
 
+* [iProov Authentication node](cloud/iproov.html)
+
 * [Jumio identity verification](cloud/jumio-id-verify.html)
 
-  * [Jumio initiate node](cloud/jumio-initiate.html)
+  * [Jumio Initiate node](cloud/jumio-initiate.html)
 
   * [Jumio Decision node](cloud/jumio-decision.html)
 
+* [LexisNexis Dynamic Decision Platform (DDP)](cloud/lexis-ddp.html)
+
+  * [LexisNexis DDP Profiler node](cloud/lexis-ddp-profiler.html)
+
+  * [LexisNexis DDP Query node](cloud/lexis-ddp-query.html)
+
+  * [LexisNexis DDP Review Status node](cloud/lexis-ddp-review-status.html)
+
+  * [LexisNexis DDP Reason Code node](cloud/lexis-ddp-reason-code.html)
+
+  * [LexisNexis DDP Update Review node](cloud/lexis-ddp-update-review.html)
+
+* [LexisNexis InstantID Question and Answer (IIDQA)](cloud/lexis-iidqa.html)
+
+  * [LexisNexis InstantID Get Quiz node](cloud/lexis-iidqa-get-quiz.html)
+
+  * [LexisNexis InstantID Quiz Collector node](cloud/lexis-iidqa-quiz-collector.html)
+
+  * [LexisNexis InstantID Quiz Decision node](cloud/lexis-iidqa-quiz-decision.html)
+
+* [LexisNexis One-Time Passcode (OTP)](cloud/lexis-otp.html)
+
+  * [LexisNexis OTP Sender node](cloud/lexis-otp-sender.html)
+
+  * [LexisNexis OTP Collector node](cloud/lexis-otp-collector.html)
+
+  * [LexisNexis OTP Decision node](cloud/lexis-otp-decision.html)
+
 * [Microsoft Intune node](cloud/microsoft-intune-about.html)
+
+* [NuData Captcha node](cloud/nudata-captcha.html)
+
+* [NuData Initialize node](cloud/nudata-initialize.html)
+
+* [NuData Score node](cloud/nudata-score.html)
+
+* [NuData Trigger MFA node](cloud/nudata-trigger-mfa.html)
+
+* [NuData Update node](cloud/nudata-update.html)
 
 * [OneSpan](cloud/onespan-about.html)
 
@@ -1724,6 +2243,16 @@ section_ids:
 
     * [OneSpan Auth Check Session Status node](cloud/onespan-check-session-status.html)
 
+    * [OneSpan Auth VDP User Register node](cloud/onespan-vdp-register.html)
+
+    * [OneSpan Auth Assign Authenticator node](cloud/onespan-assign-authn.html)
+
+    * [OneSpan Auth Generate VOTP node](cloud/onespan-generate-votp.html)
+
+    * [OneSpan Get User Authenticator node](cloud/onespan-get-user-authenticator.html)
+
+    * [OneSpan Identity Verification node](cloud/onespan-id-verify.html)
+
   * [OneSpan Sample journeys](cloud/onespan-sample.html)
 
 * [Onfido Check node](cloud/onfido-check.html)
@@ -1742,17 +2271,7 @@ section_ids:
 
   * [Socure Predictive DocV node](cloud/socure-predictive-docv.html)
 
-* [ThreatMetrix Authentication nodes](cloud/threat-metrix.html)
-
-  * [ThreatMetrix Profiler node](cloud/threat-metrix-profiler.html)
-
-  * [ThreatMetrix Session Query node](cloud/threat-metrix-session-query.html)
-
-  * [ThreatMetrix Review Status node](cloud/threat-metrix-review-status.html)
-
-  * [ThreatMetrix Reason Code node](cloud/threat-metrix-reason-code.html)
-
-  * [ThreatMetrix Update Review node](cloud/threat-metrix-update-review.html)
+* [SpyCloud Auth Node](cloud/spycloud-auth.html)
 
 * [Twilio Identifier node](cloud/twilio-identifier.html)
 
@@ -1783,6 +2302,7 @@ page_id: auth-node-ref::backchannel-initialize
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-initialize.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-07T12:43:19Z
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-initialize.html
 section_ids:
   example: Example
@@ -1793,6 +2313,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -1931,11 +2452,11 @@ The main journey polls for completion of this subjourney. When this journey comp
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -1947,9 +2468,9 @@ This node has no dependencies.
 
 ## Configuration
 
-| Property            | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Journey             | The asynchronous journey to initialize.Select a journey from the list of configured journeys.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Property            | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Journey             | The asynchronous journey to initialize.Select a journey from the list of configured journeys.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Subject Type        | The type of subject to initialize the journey for:- User
 
   The subject is a user identity.
@@ -1960,27 +2481,27 @@ This node has no dependencies.
 
 - None
 
-  Setting the Subject Type to `None` means any subject can log in using the initialized journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Subject Name Key    | The `nodeState` key that contains the user ID of the subject you're initializing the journey for.This property is ignored if the Subject Type is `None`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Data Object Key     | The node state key that contains the data object (if present) to pass to the journey at the root level of the shared state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Redirect URL Type   | The type of redirect URL to save to node state:By default, the base URL of the redirect URI is retrieved from the incoming HTTP request.- Get
+  Setting the Subject Type to `None` means any subject can log in using the initialized journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Subject Name Key    | The `nodeState` key that contains the user ID of the subject you're initializing the journey for.This property is ignored if the Subject Type is `None`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Data Object Key     | The node state key that contains the data object (if present) to pass to the journey at the root level of the shared state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Redirect URL Type   | The type of redirect URI to generate and save to node state in the `backchannel-redirectUri` key. The journey or client can use this URI to redirect the user.Possible values are:- Get
 
-  The node redirects the user to a URL based on the base URL service. The redirect uses a GET request to the `/XUI/Login` endpoint.
+  The node generates a redirect URI based on the base URL service. The redirect uses a GET request to the `/UI/Login` endpoint.
 
 - Post
 
-  The node redirects the user to a URL based on the base URL service. The redirect uses a POST request to the `authenticate` endpoint.
+  The node generates a redirect URI based on the base URL service. The redirect uses a POST request to the `json/authenticate` endpoint.
 
 - Custom
 
-  The node redirects the user to the URL specified in the Custom Redirect URL field.
+  The node generates a redirect URI based on the URL specified in the Custom Redirect URL field.
 
 - None
 
-  If none of the redirect URL mechanisms (`Get`, `Post`, or `Custom`) meet your business requirements, you can use the transaction ID stored in state to make your own redirect URL outside of the functionality of this node. Connect this output to a [Scripted Decision node](scripted-decision.html) to achieve this. |
-| Custom Redirect URL | If Redirect URL Type is `Custom`, set this field to the custom redirect URL for the authentication journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Max Time (Seconds)  | The maximum number of seconds to wait for the backchannel journey to complete before timing out. This lets you set a specific timeout for each backchannel journey, depending on the expected completion time for the journey.	This value doesn't affect the authentication session timeout.If you don't set a value here, the backchannel journey times out after the Time to Live set for the realm.You can change this under Native Consoles > Access Management > Realms> *Realm Name* > Services > Transaction Authentication Service > Time to Live.                                                                                                                                                                                                                                                                                                            |
-| Allow Retry         | When enabled, the end user can retry the backchannel journey if it fails. There's no maximum *number* of retries, but the retry window ends after the configured `Max Time`.If you disable this option, the backchannel authentication token goes into the `Failure` state the first time the backchannel journey fails. In this case, calls to the [Backchannel Status node](backchannel-status.html) go to the Failure outcome.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                     |
+  The node doesn't generate a redirect URI. Use the transaction ID stored in state to construct your own redirect URL outside of the functionality of this node. Connect the node's outcome to a [Scripted Decision node](scripted-decision.html) to achieve this. |
+| Custom Redirect URL | If Redirect URL Type is `Custom`, set this field to the custom redirect URL for the authentication journey.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Max Time (Seconds)  | The maximum number of seconds to wait for the backchannel journey to complete before timing out. This lets you set a specific timeout for each backchannel journey, depending on the expected completion time for the journey.	This value doesn't affect the authentication session timeout.If you don't set a value here, the backchannel journey times out after the Time to Live set for the realm.You can change this under Native Consoles > Access Management > Realms> *Realm Name* > Services > Transaction Authentication Service > Time to Live.                                                                                                                                                                                                                                                                                                         |
+| Allow Retry         | When enabled, the end user can retry the backchannel journey if it fails. There's no maximum *number* of retries, but the retry window ends after the configured `Max Time`.If you disable this option, the backchannel authentication token goes into the `Failure` state the first time the backchannel journey fails. In this case, calls to the [Backchannel Status node](backchannel-status.html) go to the Failure outcome.Default: Enabled                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ## Outputs
 
@@ -1991,6 +2512,10 @@ The node writes the following to the shared state:
 | `backchannel-transaction` | The transaction ID of the backchannel authentication request.                      |
 | `backchannel-redirectUri` | The generated redirect URI.                                                        |
 | `backchannel-data`        | An optional data object with additional information about the authenticating user. |
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -2008,17 +2533,19 @@ The node writes the following to the shared state:
 
 ## Errors
 
-* If the node can't retrieve the subject from the incoming state, it logs the following warning:
+The node can log the following:
 
-  ```none
-  Error retrieving subject from node state.
-  ```
+* Warnings
 
-* If the node can't initialize the backchannel authentication journey, it logs the following error:
+  * `Error retrieving subject from node state.`
 
-  ```none
-  Error initializing back channel transaction.
-  ```
+    The node can't retrieve the subject from the incoming state.
+
+* Errors
+
+  * `Error initializing back channel transaction.`
+
+    The node can't initialize the backchannel authentication journey.
 
 ---
 
@@ -2031,6 +2558,7 @@ page_id: auth-node-ref::backchannel-notification
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-notification.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Backchannel"]
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-notification.html
 section_ids:
@@ -2405,11 +2933,11 @@ f The Backchannel Notification node reads the shared state and sends a status up
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -2447,21 +2975,23 @@ This node doesn't send any callbacks.
 
 ## Errors
 
-The node can log the following errors:
+The node can log the following:
 
-* `Failed to update backchannel transaction`
+* Warnings
 
-  An error occurred when the node attempted to update the backchannel transaction with the data from the incoming node state.
+  * `Transaction ID not found in context`
 
-The node can log the following warnings:
+    The transaction ID is missing from the incoming request context.
 
-* `Transaction ID not found in context`
+  * `Data in state at dataKey data key was not found or incorrect type, not updating transaction.`
 
-  The transaction ID is missing from the incoming request context.
+    The Data Key configured for the node doesn't exist in the incoming node state, or it exists but contains invalid data.
 
-* `Data in state at dataKey data key was not found or incorrect type, not updating transaction.`
+* Errors
 
-  The Data Key configured for the node doesn't exist in the incoming node state, or it exists but contains invalid data.
+  * `Failed to update backchannel transaction`
+
+    An error occurred when the node attempted to update the backchannel transaction with the data from the incoming node state.
 
 ---
 
@@ -2474,6 +3004,7 @@ page_id: auth-node-ref::backchannel-status
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-status.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 superseded_by: https://docs.pingidentity.com/auth-node-ref/latest/backchannel-status.html
 section_ids:
   example: Example
@@ -2484,6 +3015,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -2622,11 +3154,11 @@ The main journey polls for completion of this subjourney. When this journey comp
 
 ## Availability
 
-| Product                               | Available? |
-| ------------------------------------- | ---------- |
-| PingOne Advanced Identity Cloud       | Yes        |
-| PingAM (self-managed)                 | Yes        |
-| Ping Identity Platform (self-managed) | Yes        |
+| Product                                        | Available? |
+| ---------------------------------------------- | ---------- |
+| PingOne Advanced Identity Cloud                | Yes        |
+| PingAM (self-managed)                          | Yes        |
+| Ping Advanced Identity Software (self-managed) | Yes        |
 
 ## Inputs
 
@@ -2655,6 +3187,10 @@ This node has no dependencies.
 * If Record Transaction Data is enabled, the node writes transaction data to the shared state in the key specified in Transaction Data Key. If no key is specified, data is written to the default `backchannel-transactionData` key.
 
   This data includes anything added to the transaction by the [Backchannel Notification node](backchannel-notification.html) for real-time updates.
+
+## Callbacks
+
+This node doesn't send any callbacks.
 
 ## Outcomes
 
@@ -2701,6 +3237,7 @@ page_id: auth-node-ref:cloud:biocatch-session-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/cloud/biocatch-session-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-03T18:03:31Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["auth-node-biocatch-session-collector.adoc"]
 section_ids:
@@ -2730,192 +3267,3 @@ For an example in context, refer to the [BioCatch examples](biocatch-session.htm
 ## Configuration
 
 This node has no configurable properties.
-
----
-
----
-title: BioCatch Session node
-description: Initializes a BioCatch scoring API session, associates it with the authenticating user, and links the session ID to the BioCatch server in an Advanced Identity Cloud journey.
-component: auth-node-ref
-version: latest
-page_id: auth-node-ref:cloud:biocatch-session
-canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/cloud/biocatch-session.html
-llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Policy", "Javascript", "Scripts", "Sessions"]
-page_aliases: ["auth-node-biocatch-session.adoc"]
-section_ids:
-  biocatch-examples: Example
-  prerequisites: Dependencies
-  biocatch_script: BioCatch script
-  biocatch_policy: BioCatch policy
-  outcomes: Outcomes
-  configuration: Configuration
----
-
-# BioCatch Session node
-
-Manages the interaction with the [BioCatch](https://www.biocatch.com/) scoring API.
-
-This node initializes a session with the BioCatch scoring API, associates the session with the user who authenticates, and links the session ID in the user-agent with the BioCatch server.
-
-## Example
-
-The following example injects a unique session identifier (`customerSessionID`) in the page for collecting credentials with the [BioCatch Session Profiler node](biocatch-session-profiler.html) and initiates scoring:
-
-![Inject a BioCatch session identifier and initiate scoring.](_images/biocatch-journey.png)
-
-The following example relies on the customer web application having the JavaScript to inject the user's unique session identifier (`customerSessionID`). It collects the identifier with the [BioCatch Session Collector node](biocatch-session-collector.html) and initiates scoring:
-
-![Collect a BioCatch session identifier and initiate scoring.](_images/biocatch-journey-2.png)
-
-In both cases, the policy configured as a [prerequisite](#prerequisites) determines access based on the score from BioCatch.
-
-## Dependencies
-
-Before you start, create at least one scripted policy to determine access based on BioCatch scores.
-
-### BioCatch script
-
-The policy relies on a policy condition script to grant or deny access depending on the BioCatch score.
-
-1. In the Advanced Identity Cloud admin UI, go to Scripts > Auth Scripts, click + New Script, and select Policy Condition.
-
-2. Name your script, replace the default JavaScript with the following sample, update the default variables at the top of the script with values that suit your deployment, and save your work:
-
-   ```javascript
-   try {
-   //==================== Update these variables for the deployment ======================
-     var biocatchEndpoint = "https://api-customer-id.eu.v2.customers.biocatch.com/api/v6/score";
-     var customerId = "customer-id";
-     var minScore = 0;
-     var maxScore = 500;
-     var advices = ["Fraud Alert"]; // Advices to return for a fraudulent request
-   //=====================================================================================
-
-     var customerSessionID = null;
-
-     /**
-      * Sends a request to Biocatch to get the score of a customer session.
-      *
-      * @returns {*} The score of a customer session.
-      */
-     function getScore() {
-
-       var loginDoRequest = new org.forgerock.http.protocol.Request();
-
-       //Set the method type.
-       loginDoRequest.setMethod("POST");
-
-       //set the POST URL
-       loginDoRequest.setUri(biocatchEndpoint);
-
-       //set some header values
-       loginDoRequest.getHeaders().add('Content-Type', 'application/json; charset=UTF-8');
-
-       var user = String(session.getProperty("UserToken"));
-
-       //set some body values
-       var theBody = JSON.stringify({
-         "action": "getScore",
-         "customerSessionID": customerSessionID,
-         "uuid": user,
-         "solution": "ATO",
-         "activityType": "LOGIN",
-         "customerID": customerId
-       });
-
-       loginDoRequest.getEntity().setString(theBody);
-       var response = httpClient.send(loginDoRequest).get();
-
-       var resultJSON = JSON.parse(response.getEntity().getString());
-       return parseInt(resultJSON.score);
-     }
-
-     /**
-      * Retrieve and validate the variables required to make the external HTTP calls.
-      *
-      * @returns {boolean} Will be true if validation was successful.
-      */
-     function validateAndInitializeParameters() {
-
-       if (username == null || biocatchEndpoint == null || maxScore == null || customerId == null || advice == null || minScore == null)
-         return false;
-
-       if (!environment) {
-         logger.warning("No environment parameters specified in the evaluation request.");
-         return false;
-       }
-
-       if (environment.get("customerSessionID") != null && environment.get("customerSessionID").iterator().hasNext()) {
-         customerSessionID = environment.get("customerSessionID").iterator().next();
-       } else {
-         logger.warning("No customerSessionId specified in the evaluation request environment parameters.");
-         return false;
-       }
-
-       return true;
-     }
-
-
-     if (validateAndInitializeParameters()) {
-
-       var scoreFromBiocatch = getScore();
-
-       if (scoreFromBiocatch >= minScore && scoreFromBiocatch <= maxScore) {
-         logger.message("Authorization Succeeded");
-         authorized = true;
-       } else {
-         logger.message("Authorization Failed");
-         advice.put("advice", advices);
-         authorized = false;
-       }
-
-     } else {
-       logger.message("Required parameters not found. Authorization Failed.");
-       advice.put("advice", ["Required parameters not found"]);
-       authorized = false;
-     }
-   } catch (error) {
-     logger.error(error);
-     advice.put("advice", ["Error occurred"]);
-     authorized = false;
-   }
-   ```
-
-3. Adapt the sample script for the deployment as necessary.
-
-### BioCatch policy
-
-1. Create a policy set for BioCatch policies.
-
-   Find more information in [Policy sets](https://docs.pingidentity.com/pingoneaic/am-authorization/configuring-policy-sets.html).
-
-2. Create a policy with the BioCatch policy decision script as an environment condition.
-
-   The following policy grants authenticated users with an appropriate score HTTP GET and POST access to URLs:
-
-   ![Grant access to GET and POST given an appropriate score](_images/biocatch-policy.png)
-
-   Find more information in [Policy sets in the UI](https://docs.pingidentity.com/pingoneaic/am-authorization/policies-ui.html).
-
-## Outcomes
-
-* `True`
-
-  Initialization succeeded.
-
-* `False`
-
-  Initialization failed.
-
-* `Error`
-
-  An error occurred.
-
-## Configuration
-
-| Property           | Usage                                            |
-| ------------------ | ------------------------------------------------ |
-| BioCatch End Point | URL for the BioCatch initialization API          |
-| Customer Id        | The customer or project identifier from BioCatch |

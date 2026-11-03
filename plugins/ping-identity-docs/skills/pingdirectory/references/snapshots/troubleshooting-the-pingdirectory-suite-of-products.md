@@ -1,6 +1,6 @@
 ---
 title: Common problems and potential solutions
-description: This section describes several different types of problems that can occur and common potential causes for them.
+description: Find potential causes and solutions for common PingDirectory server problems, from setup and startup failures to slow client responses.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_common_probs_potential_sols
@@ -18,7 +18,7 @@ This section describes several different types of problems that can occur and co
 
 ---
 title: Conditions for automatic server shutdown
-description: All PingDirectory servers will shut down in an out of memory condition, a low disk space error state, or for running out of file descriptors. The server will enter lockdown mode on unrecoverable database environment errors, but can be configured to shutdown instead with this setting:
+description: Understand the conditions that cause automatic PingDirectory server shutdown, including out of memory, low disk space, and file descriptor exhaustion.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_conditions_auto_server_shutdown
@@ -41,7 +41,7 @@ $ dsconfig set-global-configuration-prop \
 
 ---
 title: Conditions for automatic server shutdown
-description: All PingDirectory servers will shutdown in an out of memory condition, a low disk space error state, or for running out of file descriptors. The PingDirectory server will enter lockdown mode on unrecoverable database environment errors, but can be configured to shutdown instead with this setting:
+description: Review the conditions that shut down PingDataSync servers automatically, including out of memory, low disk space, and file descriptor limits.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_conditions_auto_server_shutdown
@@ -64,7 +64,7 @@ $ dsconfig set-global-configuration-prop \
 
 ---
 title: Enabling JVM debugging
-description: Enable the Java Virtual Machine (JVM) debugging options to track garbage collection data for the system. These options can impact JVM performance, but provide valuable data to tune the server. While the jstat utility with the -gc option can be used to obtain some information about garbage collection activity, there are additional arguments that can be added to provide additional detail, such as:
+description: Enable JVM debugging options in the PingDataSync server to collect garbage collection data for tuning JVM performance.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_enable_jvm_debugging
@@ -111,19 +111,19 @@ Enable the Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">
 
 ---
 title: General troubleshooting methodology
-description: When a problem is detected, the following general methodology to isolate the problem are recommended.
+description: Follow a general methodology to isolate PingDirectory server problems, from checking server status to reviewing logs and system resources.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_general_troubleshoot_method
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_ds_general_troubleshoot_method.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 13, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # General troubleshooting methodology
 
-When a problem is detected, the following general methodology to isolate the problem are recommended.
+When a problem is detected, the following general methodology to isolate the problem is recommended.
 
 1. Run the `bin/status` tool or look at the server status in the admin console. The `status` tool provides a summary of the server's current state with key metrics and a list of recent alerts.
 
@@ -137,11 +137,11 @@ When a problem is detected, the following general methodology to isolate the pro
 
 3. Use system commands, such as `vmstat` and `iostat` to determine if the server is bottle-necked on a system resource like CPU or disk throughput.
 
-4. For performance problem (especially intermittent ones like spikes in response time), enabling the `periodic-stats-logger` can help to isolate problems, because it stores important server performance information on a per-second basis. The `periodic-stats-logger` can save the information in a csv-formatted file that can be loaded into a spreadsheet. The information this logger makes available is very configurable. You can create multiple loggers for different types of information or a different frequency of logging (for example, hourly data in addition to per-second data). For more information, see "Profiling Server Performance Using the Periodic Stats Logger".
+4. For performance problems (especially intermittent ones like spikes in response time), enabling the `periodic-stats-logger` can help to isolate problems, because it stores important server performance information on a per-second basis. The `periodic-stats-logger` can save the information in a csv-formatted file that can be loaded into a spreadsheet. The information this logger makes available is very configurable. You can create multiple loggers for different types of information or a different frequency of logging (for example, hourly data in addition to per-second data). Learn more in [Profiling server performance using the Stats Logger](../monitoring_the_pingdirectory_suite_of_products/pd_ds_profile_server_perf_stats_logger.html).
 
-5. For replication problem, run `dsreplication status` and look at the `logs/replication` file.
+5. For replication problems, run `dsreplication status` and look at the `logs/replication` file.
 
-6. For more advanced users, run the `collect-support-data` tool on the system, unzip the archive somewhere, and look through the collected information. This is often useful when administrators most familiar with the Data Platform do not have direct access to the systems where the production servers are running. They can examine the `collect-support-data` archive on a different server. For more information, see Using the Collect Support Data Tool.
+6. For more advanced users, run the `collect-support-data` tool on the system, unzip the archive somewhere, and look through the collected information. This is often useful when administrators most familiar with the data platform don't have direct access to the systems where the production servers are running. They can examine the `collect-support-data` archive on a different server. Learn more in [Working with the collect-support-data tool](pd_ds_collect_support_data_tool.html).
 
 |   |                                                                                                                                                                                                                              |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -151,7 +151,7 @@ When a problem is detected, the following general methodology to isolate the pro
 
 ---
 title: How to regenerate the server ads-certificate
-description: This topic applies only to the PingDirectory server.
+description: Regenerate the PingDirectory ads-certificate for secure server communication by removing the ads-truststore files while the server is offline.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_regen_server_ads_cert
@@ -182,21 +182,21 @@ The solution is to stop the server, remove `config/adstruststore` and `config/ad
 
 ---
 title: Installation and maintenance issues
-description: The following are common installation and maintenance issues and possible solutions.
+description: Troubleshoot common PingDataSync and PingDirectory issues, including setup, server startup, shutdown, client connections, unresponsive servers, and the admin console.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_install_maint_issues
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_sync_install_maint_issues.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_sync_setup_will_not_run.adoc", "pd_sync_server_will_not_start.adoc", "pd_sync_server_has_shutdown.adoc", "pd_sync_server_will_not_accept_client_connections.adoc", "pd_sync_server_unresponsive.adoc", "pd_sync_problems_admin_console.adoc"]
 section_ids:
   the-setup-program-will-not-run: The setup program will not run
   a-java-environment-is-not-available: A Java environment is not available
   unexpected-arguments-provided-to-the-jvm: Unexpected arguments provided to the JVM
   the-server-has-already-been-configured-or-started: The server has already been configured or started
-  the-server-will-not-start: The server will not start
+  the-server-wont-start: The server won't start
   the-server-or-other-administrative-tool-is-already-running: The server or other administrative tool is already running
   there-is-not-enough-memory-available: There is not enough memory available
   an-invalid-java-environment-or-jvm-option-was-used: An invalid Java environment or JVM option was used
@@ -249,7 +249,7 @@ The `setup` tool is only intended to provide the initial configuration for the s
 
 A previous installation should be removed before installing a new one. However, if there is nothing of value in the existing installation, the following steps can be used to run the `setup` program:
 
-* Remove the `config/config.ldiffile` and replace it with the `config/update/config.ldif.{revision}` file containing the initial configuration.
+* Remove the `config/config.ldif` file and replace it with the `config/update/config.ldif.{revision}` file containing the initial configuration.
 
 * If there are any files or subdirectories in the `db` directory, then remove them.
 
@@ -257,9 +257,9 @@ A previous installation should be removed before installing a new one. However, 
 
 * If a `lib/setup-java-home` script (or `lib\set-java-home.bat` file on Microsoft Windows) exists, then remove it.
 
-## The server will not start
+## The server won't start
 
-If the server does not start, then there are several potential causes.
+If the server doesn't start, then there are several potential causes.
 
 ### The server or other administrative tool is already running
 
@@ -302,7 +302,7 @@ If an attempt to start the server fails with 'no valid Java environment could be
 
 * The Java installation has been updated, and one or more of the options that had worked with the previous Java version no longer work. Re-configure the server to use the previous Java version, and investigate which options should be used with the new installation.
 
-* If an `UNBOUNDID_JAVA_HOME` or `UNBOUNDID_JAVA_BIN` environment variable is set, its value might override the path to the Java installation used to run the server (defined in the `config/java.properties` file). Similarly, if an `UNBOUNDID_JAVA_ARGS` environment variable is set, then its value might override the arguments provided to the JVM. If this is the case, explicitly unset the `UNBOUNDID_JAVA_HOME`, `UNBOUNDID_JAVA_BIN`, and `UNBOUNDID_JAVA_ARGS`environment variables before starting the server.
+* If an `UNBOUNDID_JAVA_HOME` or `UNBOUNDID_JAVA_BIN` environment variable is set, its value might override the path to the Java installation used to run the server (defined in the `config/java.properties` file). Similarly, if an `UNBOUNDID_JAVA_ARGS` environment variable is set, then its value might override the arguments provided to the JVM. If this is the case, explicitly unset the `UNBOUNDID_JAVA_HOME`, `UNBOUNDID_JAVA_BIN`, and `UNBOUNDID_JAVA_ARGS` environment variables before starting the server.
 
 Any time the `config/java.properties` file is updated, the `bin/dsjavaproperties` tool must be run to apply the new configuration. If a problem with the previous Java configuration prevents the `bin/dsjavaproperties` tool from running properly, remove the `lib/set-java-home` script (or`lib\set-java-home.bat` file on Microsoft Windows) and invoke the `bin/dsjavaproperties` tool with an explicitly-defined path to the Java environment, such as:
 
@@ -318,7 +318,7 @@ There are a small number of arguments that can be provided when running the `bin
 
 If a change is made to the server configuration using `dsconfig` or the admin console, the server will validate the change before applying it. However, it is possible that a configuration change can appear to be valid, but does not work as expected when the server is restarted.
 
-In most cases, the server displays (and writes to the error log) a message that explains the problem. If the message does not provide enough information to identify the problem, the `logs/config-audit.logfile` provides recent configuration changes, or the `config/archived-configs` directory contains configuration changes not made through a supported configuration interface. The server can be started with the last valid configuration using the `-- useLastKnownGoodConfig` option:
+In most cases, the server displays (and writes to the error log) a message that explains the problem. If the message does not provide enough information to identify the problem, the `logs/config-audit.log` file provides recent configuration changes, or the `config/archived-configs` directory contains configuration changes not made through a supported configuration interface. The server can be started with the last valid configuration using the `--useLastKnownGoodConfig` option:
 
 ```shell
 $ bin/start-server --useLastKnownGoodConfig
@@ -406,7 +406,7 @@ If a problem occurs when trying to use the admin console, reasons might include 
 
 ---
 title: Insufficient memory errors
-description: If the server shuts down because of insufficient memory errors, it is possible that the allocated heap size is not enough for the amount of data being returned. Consider increasing the heap size, or reducing the number of request handler threads using the following dsconfig command:
+description: Resolve PingDataSync insufficient memory errors by increasing the heap size or reducing the number of request handler threads with dsconfig.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_insufficient_memory_errors
@@ -430,7 +430,7 @@ $ bin/dsconfig set-connection-handler-prop \
 
 ---
 title: Java diagnostic information
-description: In addition to the tools listed in the previous section, the JVM can provide additional diagnostic information in response to certain events.
+description: Understand the JVM diagnostic information the PingDirectory server generates, including fatal error logs for crashes and garbage collection data.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_java_diagnostic_info
@@ -478,14 +478,14 @@ $ bin/dsjavaproperties
 
 ---
 title: Java troubleshooting tools
-description: The Java Development Kit provides several very useful tools to obtain information about Java applications and diagnosing problems. These tools are not included with the Java Runtime Environment (JRE), so the full Java Development Environment (JDK) should always be installed and used to run the Server.
+description: Use the JDK diagnostic tools jps, jstack, jmap, jhat, and jstat to gather information about PingDirectory server processes and problems.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_java_troubleshoot_tools
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_ds_java_troubleshoot_tools.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 2, 2024
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_ds_jps.adoc", "pd_ds_jstack.adoc", "pd_ds_jmap.adoc", "pd_ds_jhat.adoc", "pd_ds_jstat.adoc"]
 section_ids:
   jps: jps
@@ -497,7 +497,7 @@ section_ids:
 
 # Java troubleshooting tools
 
-The Java Development Kit provides several very useful tools to obtain information about Java applications and diagnosing problems. These tools are not included with the Java Runtime Environment (JRE), so the full Java Development Environment (JDK) should always be installed and used to run the Server.
+The Java Development Kit provides several very useful tools to obtain information about Java applications and diagnose problems. These tools aren't included with the Java Runtime Environment (JRE), so the full Java Development Kit (JDK) should always be installed and used to run the Server.
 
 ## jps
 
@@ -505,7 +505,7 @@ The `jps` tool is a Java-specific version of the UNIX `ps` tool. It can be used 
 
 This tool can be used to see if the PingDirectory server is running and if a process ID has been assigned to it. This process ID can be used in conjunction with other tools to perform further analysis.
 
-This tool can be run without any arguments, but some of the more useful arguments that include:
+This tool can be run without any arguments, but some of the more useful arguments include:
 
 * `-v`: Includes the arguments passed to the JVM for the processes that are listed.
 
@@ -550,7 +550,7 @@ Some of the additional arguments include:
 
 * `-heap`: Provides a summary of the memory used in the Java heap, along with information about the garbage collection algorithm in use.
 
-* `-histo:live`: Provides a count of the number of objects of each type contained in the heap. If the "`:live`" portion is included, then only live objects are included; otherwise, the count include objects that are no longer in use and are garbage collected.
+* `-histo:live`: Provides a count of the number of objects of each type contained in the heap. If the "`:live`" portion is included, then only live objects are included; otherwise, the count includes objects that are no longer in use and are garbage collected.
 
 ## jhat
 
@@ -596,14 +596,14 @@ The `{interval}` option specifies the length of time in milliseconds between lin
 
 ---
 title: Management tools
-description: Each PingDirectory server provides command-line tools to manage, monitor, and diagnose server operations. Each tool provides a description of the subcommands, arguments, and usage examples needed to run the tool.
+description: Review the PingDataSync command-line tools for managing, monitoring, and diagnosing server operations, including --help usage examples.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_management_tools
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_sync_management_tools.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Management tools
@@ -614,7 +614,7 @@ Each PingDirectory server provides command-line tools to manage, monitor, and di
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | For detailed information and examples of the command-line tools, see the Configuration Reference Guide in the `<server-root>/docs` directory, or linked from the admin console. |
 
-To view detailed argument options and examples, use `--help` with the each tool:
+To view detailed argument options and examples, use `--help` with each tool:
 
 ```shell
 $ bin/dsconfig --help
@@ -636,14 +636,14 @@ $ bin/dsconfig list-log-publishers --help
 
 ---
 title: Monitor entries
-description: This topic applies only to the PingDirectory server.
+description: Understand the monitor entries the PingDirectory server publishes under cn=monitor, including general, active operations, backend, and client connection entries.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_monitor_entries
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_ds_monitor_entries.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 4, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Monitor entries
@@ -674,7 +674,7 @@ While the server is running, it generates a significant amount of information av
 
 * **LDAP Statistics Monitor Entries (cn={name} Statistics,cn=monitor)** – Provides information about the number of each type of operation requested and bytes transferred over the connection handler.
 
-* **Processing Time Histogram Monitor Entry (cn=Processing Time Histogram,cn=monitor)** – Provides information about the number of percent of operations that completed in various response time categories.
+* **Processing Time Histogram Monitor Entry (cn=Processing Time Histogram,cn=monitor)** – Provides information about the number and percent of operations that completed in various response time categories.
 
 * **SSL Context Monitor Entry (cn=SSL Context,cn=monitor)** – Provides information about the available and supported SSL Cipher Suites and Protocols on the server.
 
@@ -688,7 +688,7 @@ While the server is running, it generates a significant amount of information av
 
 ---
 title: PingDataSync gauges
-description: The PingDataSync server provides several built-in gauges to monitor PingDataSync performance. These gauges are listed in the following table:
+description: Review the built-in PingDataSync gauges for monitoring performance, including file descriptors, certificate expiration, CPU, memory, and disk.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_pds_gauges
@@ -721,7 +721,7 @@ The PingDataSync server provides several built-in gauges to monitor PingDataSync
 
 ---
 title: PingDataSync log files
-description: The following log files are specific to PingDataSync, and contain details about the synchronization processes:
+description: Understand the PingDataSync log files for synchronization, including the Sync Log, Sync Failed Operations Log, and Resync Log.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_synchronize_troubleshooting
@@ -755,14 +755,14 @@ The following log files are specific to PingDataSync, and contain details about 
 
 ---
 title: PingDirectory server troubleshooting information
-description: This topic applies only to the PingDirectory server.
+description: Review the PingDirectory server log files to use when troubleshooting, including the error, access, debug, and replication repair logs and the server.out file.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_dir_server_troubleshoot_info
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_ds_dir_server_troubleshoot_info.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_ds_error_logs.adoc", "pd_ds_server_out_log.adoc", "pd_ds_debug_log.adoc", "pd_ds_replication_repair_log.adoc", "pd_ds_config_audit_log_config_archive.adoc", "pd_ds_access_audit_log.adoc", "pd_ds_setup_log.adoc", "pd_ds_tool_log.adoc", "pd_ds_je_info_je_config_files.adoc", "pd_ds_ldap_sdk_log.adoc"]
 section_ids:
   error-log: Error log
@@ -795,7 +795,7 @@ The following is an example of a message that might be written to the error log:
 [11/Apr/2011:10:31:53.783 -0500] category=CORE severity=NOTICE msgID=458887 msg="The Directory Server has started successfully"
 ```
 
-The category field provides information about the area of the server from which the message was generated. Available categories include: ACCESS\_CONTROL, ADMIN, ADMIN\_TOOL, BACKEND, CONFIG, CORE, DSCONFIG, EXTENSIONS, PROTOCOL, SCHEMA, JEB, SYNC, LOG, PLUGIN, PROXY, QUICKSETUP, REPLICATION, RUNTIME\_INFORMATION, TASK, THIRD\_PARTY, TOOLS, USER\_DEFINED, UTIL, and VERSION.
+The category field provides information about the area of the server from which the message was generated. Available categories include: ACCESS_CONTROL, ADMIN, ADMIN_TOOL, BACKEND, CONFIG, CORE, DSCONFIG, EXTENSIONS, PROTOCOL, SCHEMA, JEB, SYNC, LOG, PLUGIN, PROXY, QUICKSETUP, REPLICATION, RUNTIME_INFORMATION, TASK, THIRD_PARTY, TOOLS, USER_DEFINED, UTIL, and VERSION.
 
 The severity field provides information about how severe the server considers the problem to be. Available severities include:
 
@@ -815,7 +815,7 @@ The severity field provides information about how severe the server considers th
 
 * `FATAL_ERROR`: Used for critical problems that might leave the server unable to continue processing operations normally.
 
-The messages written to the error log can be filtered based on their severities. The error log publisher has a `default-severity` property, which can be used to specify the severity of messages logged regardless of their category. By default, this includes the NOTICE, SEVERE\_WARNING, SEVERE\_ERROR, and FATAL\_ERROR severities.
+The messages written to the error log can be filtered based on their severities. The error log publisher has a `default-severity` property, which can be used to specify the severity of messages logged regardless of their category. By default, this includes the NOTICE, SEVERE_WARNING, SEVERE_ERROR, and FATAL_ERROR severities.
 
 You can override these severities on a per-category basis using the `override-severity` property. If this property is used, then each value should consist of a category name followed by an equal sign and a comma-delimited set of severities that should be logged for messages in that category. For example, the following override severity would enable logging at all severity levels in the PROTOCOL category:
 
@@ -823,7 +823,7 @@ You can override these severities on a per-category basis using the `override-se
 protocol=debug,information,mild-warning,mild-error,notice,severe-warning,severe-error,fatal-error
 ```
 
-For the purposes of this configuration property, any underscores in category or severity names should be replaced with dashes. Also, severities aren't inherently hierarchical, so enabling the DEBUG severity for a category won't automatically enable logging at the INFORMATION, MILD\_WARNING, or MILD\_ERROR severities.
+For the purposes of this configuration property, any underscores in category or severity names should be replaced with dashes. Also, severities aren't inherently hierarchical, so enabling the DEBUG severity for a category won't automatically enable logging at the INFORMATION, MILD_WARNING, or MILD_ERROR severities.
 
 The error log configuration can be altered on the fly using tools like `dsconfig`, the admin console, or the LDIF connection handler, and changes will take effect immediately. You can configure multiple error logs that are active in the server at the same time, writing to different log files with different configurations. For example, a new error logger can be activated with a different set of default severities to debug a short-term problem, and then that logger can be removed after the problem is resolved so that the normal error log doesn't contain any of the more verbose information.
 
@@ -895,7 +895,7 @@ Each log message includes a timestamp indicating when it was written, followed b
 
 The remaining content for access log messages varies based on the type of operation being processed, and whether it is a request or a result message. Request messages generally include the most pertinent information from the request, but generally omit information that is sensitive or not useful.
 
-Result messages include a `resultCode` element that indicates whether the operation was successful or if failed and an `etime` element that indicates the length of time in milliseconds that the server spent processing the operation. Other elements that might be present include the following:
+Result messages include a `resultCode` element that indicates whether the operation was successful or failed and an `etime` element that indicates the length of time in milliseconds that the server spent processing the operation. Other elements that might be present include the following:
 
 * `origin=replication`: Operation that was processed as a result of data synchronization (for example, replication) rather than a request received directly from a client.
 
@@ -905,7 +905,7 @@ Result messages include a `resultCode` element that indicates whether the operat
 
 * `authDN – DN` of the user that authenticated to the server (typically only included in bind result messages).
 
-* `authzDN – DN` of an alternate authorization identify used when processing the operation (for example, if the proxied authorization control was included in the request).
+* `authzDN – DN` of an alternate authorization identity used when processing the operation (for example, if the proxied authorization control was included in the request).
 
 * `authFailureID`: Unique identifier associated with the authentication failure reason (only included in non-successful bind result messages).
 
@@ -929,7 +929,7 @@ The `setup` command writes a log file providing information about the processing
 
 ## Tool log
 
-Many of the administrative tools provided with the server (for example, `import-ldif`, `export-ldif`, `backup`, `restore`, and so on) can take a significant length of time to complete write information to standard output or standard error or both while the tool is running. They also write additional output to files in the `logs/tools` directory (for example, `logs/tools/ import-ldif.log`). The information written to these log files can be useful for diagnosing problems encountered while they were running. When running using the server tasks interface, log messages generated while the task is running can alternately be written to the server error log file.
+Many of the administrative tools provided with the server (for example, `import-ldif`, `export-ldif`, `backup`, and `restore`) can take a significant length of time to complete and to write information to standard output or standard error. They also write additional output to files in the `logs/tools` directory (for example, `logs/tools/ import-ldif.log`). The information written to these log files can be useful for diagnosing problems encountered while they were running. When running using the server tasks interface, log messages generated while the task is running can alternately be written to the server error log file.
 
 ## je.info and je.config files
 
@@ -947,7 +947,7 @@ This log can be used to help examine the communication between the PingDirectory
 
 ---
 title: Problems with SSL communication
-description: Enable TLS debugging in the server to troubleshoot Secure Sockets Layer (SSL) communication issues:
+description: Troubleshoot PingDataSync SSL communication problems by enabling TLS debugging in the server and adding the javax.net.debug option.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_sync_probs_ssl_comm
@@ -985,7 +985,7 @@ In the `java.properties` file, add `-Djavax.net.debug=ssl` to the `start-ds` lin
 
 ---
 title: Problems with the admin console
-description: If a problem arises when trying to use the admin console, then potential reasons for the problem can include the following:
+description: Resolve problems with the PingDirectory admin console, such as a web application container that is not running or authentication failures.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_problems_admin_console
@@ -993,6 +993,7 @@ canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 12, 2024
+page_aliases: ["pd_ds_probs_admin_console_jvm_memory.adoc"]
 ---
 
 # Problems with the admin console
@@ -1008,41 +1009,8 @@ If a problem arises when trying to use the admin console, then potential reasons
 ---
 
 ---
-title: "Problems with the admin console: JVM memory issues"
-description: Console runs out of memory (PermGen). An inadequate PermSize setting in the server, while hosting web applications like the admin console can result in errors like this in the error log:
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_probs_admin_console_jvm_memory
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_ds_probs_admin_console_jvm_memory.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
----
-
-# Problems with the admin console: JVM memory issues
-
-**Console runs out of memory (PermGen)**. An inadequate PermSize setting in the server, while hosting web applications like the admin console can result in errors like this in the error log:
-
-```
-[02/Mar/2016:07:50:27.017 -0600] threadID=2 category=UTIL
-    severity=SEVERE_ERROR msgID=-1 msg="The server experienced an unexpected
-    error. Please report this problem and include this log file.
-    OutOfMemoryError: PermGen space
-    ()\ncom.unboundid.directory.server.core.DirectoryServer.uncaughtException
-    (DirectoryServer.java:15783)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1057)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1052)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1052)\njava.lang.Thread.dispatchUncaughtException
-    (Thread.java:1986)\nBuild revision: 22496\n"
-```
-
-This is only relevant for servers running Java 7.
-
----
-
----
 title: Problems with the HTTP Connection Handler
-description: This topic applies only to the PingDirectory server.
+description: Diagnose HTTP Connection Handler problems in PingDirectory using log examples for malformed requests, unsupported methods, and authentication errors.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_probs_http_connection_handler
@@ -1129,7 +1097,7 @@ When problems with the HTTP Connection Handler occur, first look at the HTTP con
 
 ---
 title: Providing information for support cases
-description: If a problem arises that you are unable to fully diagnose and correct on your own, then contact your authorized support provider for assistance. To ensure that the problem can be addressed as quickly as possible, be sure to provide all of the information that the support personnel might need to fully understand the underlying cause by running the collect-support-data tool, and then sending the generated zip file to your authorized support provider. It is good practice to run this tool and send the ZIP file to your authorized support provider before any corrective action has taken place.
+description: Provide the information support personnel need by running the PingDirectory collect-support-data tool and sending the zip archive.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_ds_provide_info_support_cases
@@ -1142,3 +1110,43 @@ revdate: July 3, 2024
 # Providing information for support cases
 
 If a problem arises that you are unable to fully diagnose and correct on your own, then contact your authorized support provider for assistance. To ensure that the problem can be addressed as quickly as possible, be sure to provide all of the information that the support personnel might need to fully understand the underlying cause by running the `collect-support-data` tool, and then sending the generated zip file to your authorized support provider. It is good practice to run this tool and send the ZIP file to your authorized support provider before any corrective action has taken place.
+
+---
+
+---
+title: Recovering forgotten Proxy User password
+description: Recover a forgotten cn=Proxy User password using password retirement, an encoded password value from an existing PingDirectoryProxy server, or a new root user.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:troubleshooting_the_pingdirectory_suite_of_products:pd_proxy_recover_forgotten_proxy_user_pw
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/pd_proxy_recover_forgotten_proxy_user_pw.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+---
+
+# Recovering forgotten Proxy User password
+
+If you forget your `cn=Proxy User` password, you can recover it using different methods.
+
+## About this task
+
+|   |                                                           |
+| - | --------------------------------------------------------- |
+|   | This topic applies only to the PingDirectoryProxy server. |
+
+## Steps
+
+* To recover your password, do any of the following:
+
+  ### Choose from:
+
+  * The PingDirectory server supports a feature called password retirement that allows you to set a new password while allowing the current password to remain usable for a specified period of time. This can be used to set a new password for the account while still allowing the current password to remain temporarily available so that existing PingDirectoryProxy server instances will still be able to use the current password to authenticate until you can update them with the new password. To enable password retirement, update the `password-retirement-behavior` property in the root password policy for all PingDirectory server instances to include a value of `retire-on-administrative-reset`, and set the `max-retired-password-age` property to indicate how long you want the current password to remain valid after setting a new password. Then, reset the Proxy User password for all of the PingDirectory server instances, and update all of the PingDirectoryProxy server instances to use the new password in their LDAP external server configuration.
+
+  * If you do not know the clear-text value for the password but you have other PingDirectoryProxy server instances set up to use that password, then you can use the encoded password value from the LDAP external server configuration entry of one of the existing PingDirectoryProxy servers when creating the LDAP external server for new PingDirectoryProxy server instances.
+
+  * Create a new root user in the directory server instances with the appropriate set of privileges and have the new PingDirectoryProxy server instance use that account to authenticate. To use the new account, update all of the other PingDirectoryProxy instances.

@@ -5,6 +5,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-14T16:56:34Z
 ---
 
 # Archive
@@ -22,6 +25,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-changes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-changes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 ---
 
 # Changes
@@ -41,6 +47,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-2023
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2023.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-14T16:56:34Z
 section_ids:
   java_agent_2023_11_x: Java Agent 2023.11.x
   java_agent_2023_11_2: Java Agent 2023.11.2
@@ -125,11 +134,14 @@ WebLogic 12c Java Agent and WebSphere Java Agent do not support JDK 11, which is
 
 ---
 title: Changes in Java Agent 2024.x
-description: There are no incompatible changes in the Java Agent 2024.11.1 maintenance release.
+description: There are no incompatible changes in the Java Agent 2024.11.1 maintenance release or the Java Agent 2024.11.2 maintenance release.
 component: java-agents
 version: release-notes
 page_id: java-agents::changes-2024
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2024.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T11:18:11Z
 section_ids:
   java_agent_2024_11_x: Java Agent 2024.11.x
   java_agent_2024_11: Java Agent 2024.11
@@ -145,7 +157,7 @@ section_ids:
 
 ## Java Agent 2024.11.x
 
-There are no incompatible changes in the Java Agent 2024.11.1 maintenance release.
+There are no incompatible changes in the Java Agent 2024.11.1 maintenance release or the Java Agent 2024.11.2 maintenance release.
 
 ### Java Agent 2024.11
 
@@ -179,24 +191,27 @@ There are no incompatible changes in this release.
 
 ---
 title: Changes in Java Agent 2025.x
-description: There are no incompatible changes in this release.
+description: There are no incompatible changes in the Java Agent 2025.11 release or the Java Agent 2025.11.1 maintenance release.
 component: java-agents
 version: release-notes
 page_id: java-agents::changes-2025
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2025.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-02T16:15:52Z
 section_ids:
-  changes_in_java_agent_2025_11: Changes in Java Agent 2025.11
-  changes_in_java_agent_2025_3: Changes in Java Agent 2025.3
+  java_agent_2025_11_x: Java Agent 2025.11.x
+  java_agent_2025_3: Java Agent 2025.3
   am_6_5: AM 6.5
 ---
 
 # Changes in Java Agent 2025.x
 
-## Changes in Java Agent 2025.11
+## Java Agent 2025.11.x
 
-There are no incompatible changes in this release.
+There are no incompatible changes in the Java Agent 2025.11 release or the Java Agent 2025.11.1 maintenance release.
 
-## Changes in Java Agent 2025.3
+## Java Agent 2025.3
 
 ### AM 6.5
 
@@ -206,12 +221,16 @@ AM 6.5 has reached End of Life (EOL) and is no longer supported.
 
 ---
 title: Changes in Java Agent 2026.x
-description: Support for JDK 11 has been removed.
+description: There are no incompatible changes in the Java Agent 2026.6.1 maintenance release.
 component: java-agents
 version: release-notes
 page_id: java-agents::changes-2026
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-2026.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-03T08:46:37Z
 section_ids:
+  java_agent_2026_6_x: Java Agent 2026.6.x
   changes_in_java_agent_2026_6: Changes in Java Agent 2026.6
   jdk_11: JDK 11
   jdk_17_with_weblogic_14c_14_1_1_java_agent: JDK 17 with WebLogic 14c (14.1.1) Java Agent
@@ -219,13 +238,17 @@ section_ids:
 
 # Changes in Java Agent 2026.x
 
-## Changes in Java Agent 2026.6
+## Java Agent 2026.6.x
 
-### JDK 11
+There are no incompatible changes in the Java Agent 2026.6.1 maintenance release.
+
+### Changes in Java Agent 2026.6
+
+#### JDK 11
 
 Support for JDK 11 has been removed.
 
-### JDK 17 with WebLogic 14c (14.1.1) Java Agent
+#### JDK 17 with WebLogic 14c (14.1.1) Java Agent
 
 WebLogic 14c (14.1.1) doesn't support JDK 17, which is the minimum JDK version supported in this release. Consequently, this platform isn't supported in this release.
 
@@ -238,6 +261,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes-510
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes-510.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-15T13:18:37Z
 section_ids:
   java_agent_5_10_4: Java Agent 5.10.4
   url-handling-changes-5104: URL handling
@@ -274,6 +300,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-deprecated
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-deprecated.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 ---
 
 # Deprecated
@@ -297,6 +326,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::deprecated
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/deprecated.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T16:45:30Z
 ---
 
 # Deprecated
@@ -328,6 +360,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-fixes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-fixes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 ---
 
 # Fixes
@@ -347,6 +382,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 ---
 
 # Fixes
@@ -372,6 +410,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2023
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2023.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-14T16:56:34Z
 section_ids:
   java_agent_2023_11_x: Java Agent 2023.11.x
   java_agent_2023_11_2: Java Agent 2023.11.2
@@ -428,7 +469,7 @@ No issues were fixed in this release.
 | ------------- | -------------------------------------------------------------------------------------------------- |
 | AMAGENTS-5550 | Changing the log level at runtime stops logging altogether                                         |
 | AMAGENTS-5497 | Avoid use of the "Agent Tree" for JPA login                                                        |
-| AMAGENTS-5089 | agentadmin --encrypt Agent\_Id \<password-file> throws error                                       |
+| AMAGENTS-5089 | agentadmin --encrypt Agent_Id \<password-file> throws error                                        |
 | AMAGENTS-4816 | Do not invoke rest logout for some special cases                                                   |
 | AMAGENTS-3912 | Avoid displaying a huge stacktrace to the user when the bootstrap properties file cannot be opened |
 
@@ -441,8 +482,12 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2024
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2024.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T11:18:11Z
 section_ids:
   java_agent_2024_11_x: Java Agent 2024.11.x
+  java_agent_2024_11_2: Java Agent 2024.11.2
   java_agent_2024_11_1: Java Agent 2024.11.1
   java_agent_2024_11: Java Agent 2024.11
   java_agent_2024_9: Java Agent 2024.9
@@ -455,6 +500,10 @@ section_ids:
 This page lists the cumulative fixes in Java Agent 2024.x releases:
 
 ## Java Agent 2024.11.x
+
+### Java Agent 2024.11.2
+
+No issues were fixed in this release.
 
 ### Java Agent 2024.11.1
 
@@ -498,7 +547,12 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2025
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2025.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-02T16:15:52Z
 section_ids:
+  java_agent_2025_11_x: Java Agent 2025.11.x
+  java_agent_2025_11_1: Java Agent 2025.11.1
   java_agent_2025_11: Java Agent 2025.11
   java_agent_2025_3: Java Agent 2025.3
 ---
@@ -507,7 +561,13 @@ section_ids:
 
 This page lists the cumulative fixes in Java Agent 2025.x releases:
 
-## Java Agent 2025.11
+## Java Agent 2025.11.x
+
+### Java Agent 2025.11.1
+
+No issues were fixed in this release.
+
+### Java Agent 2025.11
 
 |               |                                                               |
 | ------------- | ------------------------------------------------------------- |
@@ -530,7 +590,12 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-2026
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-2026.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-03T08:46:37Z
 section_ids:
+  java_agent_2026_6_x: Java Agent 2026.6.x
+  java_agent_2026_6_1: Java Agent 2026.6.1
   java_agent_2026_6: Java Agent 2026.6
 ---
 
@@ -538,7 +603,13 @@ section_ids:
 
 This page lists the cumulative fixes in Java Agent 2026.x releases:
 
-## Java Agent 2026.6
+## Java Agent 2026.6.x
+
+### Java Agent 2026.6.1
+
+No issues were fixed in this release.
+
+### Java Agent 2026.6
 
 No issues were fixed in this release.
 
@@ -551,6 +622,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::fixes-510
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/fixes-510.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-14T16:56:34Z
 section_ids:
   java_agent_5_10_4: Java Agent 5.10.4
   fix-in-5103: Java Agent 5.10.3
@@ -585,7 +659,7 @@ No issues were fixed in this release.
 |               |                                                                           |
 | ------------- | ------------------------------------------------------------------------- |
 | AMAGENTS-5182 | Log level should be WARN if agent-profile authN fails using service=Agent |
-| AMAGENTS-5089 | agentadmin --encrypt Agent\_Id \<password-file> throws error              |
+| AMAGENTS-5089 | agentadmin --encrypt Agent_Id \<password-file> throws error               |
 | AMAGENTS-4816 | Agent does not invoke rest logout for special cases                       |
 
 ## Java Agent 5.10
@@ -605,6 +679,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::support
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/support.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-09-09T10:22:26Z
 ---
 
 # Getting support
@@ -630,6 +707,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::changes
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/changes.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 ---
 
 # Incompatible changes
@@ -655,6 +735,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::archive-known-issues
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/archive-known-issues.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-04T18:23:47Z
 section_ids:
   java_agent_2023_11: Java Agent 2023.11
   java_agent_2023_9: Java Agent 2023.9
@@ -733,6 +816,9 @@ component: java-agents
 version: release-notes
 page_id: java-agents::known-issues
 canonical_url: https://docs.pingidentity.com/java-agents/release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-04-08T09:52:38Z
 section_ids:
   java_agent_2026_6: Java Agent 2026.6
   java_agent_2025_11: Java Agent 2025.11
@@ -771,6 +857,7 @@ section_ids:
 
 | Issue                                                                                        | Comment          |
 | -------------------------------------------------------------------------------------------- | ---------------- |
+| AMAGENTS-7940: Advanced Properties don't override other properties in Java Agent 2024.11.x   | Fixed in 2025.3  |
 | AMAGENTS-6838: JPA will create a JWT cookie in SSO Token Acceptance mode                     | Unresolved       |
 | AMAGENTS-6809: Monitoring endpoint doesn't work for Jakarta builds                           | Fixed in 2025.3  |
 | AMAGENTS-6615: agentadmin option "--getEncryptKey" doesn't work on Windows                   | Fixed in 2025.11 |

@@ -45,7 +45,7 @@ PingOne Advanced Identity Cloud (formerly ForgeRock Identity Cloud) is a SaaS-ba
 
 * [Manage tenant settings](tenants/tenant-settings.html)
 
-* [Manage tenant configuration](tenants/configuration-preface.html)
+* [Manage tenant configuration and ESVs](tenants/configuration-preface.html)
 
 * [Manage cookie domains](realms/cookie-domains.html)
 

@@ -1,6 +1,6 @@
 ---
 title: Comparison of FIPS-compliant and non-FIPS-compliant modes
-description: Servers running in FIPS-compliant mode and servers running in non-FIPS-compliant mode differ and have certain incompatibilities.
+description: Compare FIPS-compliant and non-FIPS-compliant PingDirectory server modes, including the incompatibilities between them and migration considerations.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:fips_140-2_compliance_for_pingdirectory:pd_met_diff_fips_compliant_non_compliant
@@ -164,7 +164,7 @@ These mechanisms include:
 
 ---
 title: FIPS Compliance for PingDirectory
-description: The Federal Risk and Authorization Management Program (FedRAMP) could require that United States government agencies and organizations that work with those agencies ensure that their cloud-based services adhere to either the FIPS 140-2 or FIPS 140-3 specification. These specifications define requirements for cryptographic processing.
+description: Understand how PingDirectory, PingDirectoryProxy, and PingDataSync servers run in FIPS-compliant mode using the FIPS 140-2 or 140-3 specification.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:fips_140-2_compliance_for_pingdirectory:pd_fips_compliance
@@ -187,14 +187,14 @@ When setting up in FIPS-compliant mode, the server uses the [Bouncy Castle FIPS 
 
 ---
 title: Setting up the server in FIPS-compliant mode
-description: You can't have both FIPS-compliant and non-FIPS-compliant servers in the same topology, and you can't update an existing non-FIPS-compliant server to run in FIPS-compliant mode.
+description: Set up a new PingDirectory server instance in FIPS-compliant mode, including ensuring sufficient entropy and setting up certificate trust stores.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:fips_140-2_compliance_for_pingdirectory:pd_met_set_up_server_fips_compliant_mode
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/fips_140-2_compliance_for_pingdirectory/pd_met_set_up_server_fips_compliant_mode.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-09-21T00:00:00Z
 page_aliases: ["pd_fips_ensure_sufficient_entropy.adoc", "pd_fips_resolve_entropy_exhaustion.adoc", "pd_fips_set_up_cert_key_trust_stores.adoc", "pd_fips_set_up_data_encryption.adoc", "pd_fips_install_server_fips140_2_compliant_mode.adoc"]
 section_ids:
   ensure-sufficient-entropy: Ensure sufficient entropy
@@ -360,9 +360,13 @@ Interactive setup doesn't provide an option to enable FIPS-compliant mode, and t
 
   * To set up the server for FIPS 140-2 compliance, add `--fips-provider BCFIPS1` to the set of arguments used when running setup in non-interactive mode or to the server profile's `setup-arguments.txt` file when using `manage-profile setup`.
 
+    |   |                                                                                                                                                                                                               |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | While both `BCFIPS` and `BCFIPS1` resolve to the same value, and both are supported for FIPS 140-2 compliance, the `BCFIPS` parameter is subject to change in future releases. If possible, choose `BCFIPS1`. |
+
     #### Example:
 
-    The following example provides a sample command line that demonstrates the process for setting up the server in FIPS 140-2-compliant mode. The server only accepts TLS-encrypted LDAP on port 636 and TLS-encrypted HTTP on port 443, but doesn't allow unencrypted connections from either LDAP or HTTP clients. BCFKS key and trust stores are generated from information provided in PEM files, and an encryption settings definition is generated from a specified passphrase.
+    The following sample command demonstrates the process for setting up the server in FIPS 140-2-compliant mode. The server only accepts TLS-encrypted LDAP on port 636 and TLS-encrypted HTTP on port 443, but doesn't allow unencrypted connections from either LDAP or HTTP clients. BCFKS key and trust stores are generated from information provided in PEM files, and an encryption settings definition is generated from a specified passphrase.
 
     ```
     ./setup \
@@ -458,7 +462,7 @@ To update the FIPS specification on a FIPS-compliant server, you need to know th
 
   * Using `setup`
 
-* The encoded value of the target FIPS specfication:
+* The encoded value of the target FIPS specification:
 
   * `BCFIPS1` for FIPS 140-2
 

@@ -7,7 +7,7 @@ page_id: pingds:rest-guide:action-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/action-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authentication", "REST API"]
 section_ids:
   rest-action-auth: Authenticate
@@ -1869,7 +1869,7 @@ page_id: pingds:rest-guide:binary-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/binary-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   binary-rest-update: Add a binary resource
@@ -2081,7 +2081,7 @@ page_id: pingds:rest-guide:create-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/create-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   rest-create: Create (HTTP PUT)
@@ -2398,7 +2398,7 @@ page_id: pingds:rest-guide:delete-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/delete-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   delete_a_resource: Delete a resource
@@ -2673,7 +2673,7 @@ page_id: pingds:rest-guide:rest-pwp
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/rest-pwp.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API", "Setup &amp; Configuration"]
 ---
 
@@ -3308,7 +3308,7 @@ page_id: pingds:rest-guide:rest-operations
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/rest-operations.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-09-02T11:40:14Z
 keywords: ["REST API"]
 section_ids:
   authenticate-rest: Authentication
@@ -3525,7 +3525,7 @@ HDAP Ruby examples require Ruby 3.2 and the `faraday` and `json` gems.
 
 ### Bearer auth
 
-HDAP supports HTTP Bearer authorization using an access token. The access token is a JSON Web Token (JWT) DS returns for a successful authentication action.
+HDAP supports HTTP Bearer authorization using an access token. By default, the access token is a JSON Web Token (JWT) DS issues for a successful authentication action.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                      |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3534,6 +3534,10 @@ HDAP supports HTTP Bearer authorization using an access token. The access token 
 Use HTTPS POST to the path for the account to authenticate with `_action=authenticate` in the query string and a JSON object `{ "password": "<password>" }` as the request payload.
 
 On success, the HTTP status code is 200 OK, and the response body is a JSON resource with an `access_token`. Use the bearer token to authorize later HTTP requests.
+
+By default, HTTP Bearer authorization uses an internally generated key to sign and validate the JWTs. As a result, only the DS server that issues a JWT recognizes it and only until the server restarts. This is fine to demonstrate bearer authorization on a single server, but not for deployment.
+
+When deploying HDAP, *edit the [HDAP Authorization Mechanism](../configref/objects-hdap-authorization-mechanism.html) to share the signing key across all DS servers.* Set at least the `jwt-key-manager-provider` and `jwt-key-alias` properties to specify the shared signing key.
 
 * Curl
 
@@ -3609,7 +3613,7 @@ Source files for this sample: [utils.rb](../_attachments/hdap/rb/utils.rb), [bas
 
 HDAP Ruby examples require Ruby 3.2 and the `faraday` and `json` gems.
 
-Learn about alternative authentication options:
+Learn about alternative authentication options, including using OAuth 2.0 access tokens issued by an external authorization server:
 
 * [Configure HTTP authorization](../config-guide/http-access.html#setup-http-authorization)
 
@@ -4467,7 +4471,7 @@ page_id: pingds:rest-guide:patch-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/patch-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   add_a_member_to_a_group: Add a member to a group
@@ -5019,7 +5023,7 @@ page_id: pingds:rest-guide:query-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/query-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   example_query_filters: Example query filters
@@ -7134,7 +7138,7 @@ page_id: pingds:rest-guide:read-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/read-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   read-rest-resource: Read a resource
@@ -7365,7 +7369,7 @@ page_id: pingds:rest-guide:update-rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/update-rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 section_ids:
   update_a_resource: Update a resource
@@ -7622,7 +7626,7 @@ page_id: pingds:rest-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/rest-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["REST API"]
 page_aliases: ["index.adoc"]
 ---

@@ -1,16 +1,24 @@
 ---
-title: Accessing the PingID End User Guide
-description: The PingID End User guide describes the user experience, and includes all the information a user needs to know to pair, and authenticate with PingID. It also details how to pair more than one device, how to manage devices, and some basic troubleshooting information.
+title: Getting help for the PingID end user
+description: Every organization implements PingID differently. Therefore it's recommended that you provide your end users with details about:
 component: pingid
 page_id: pingid::pid_link_to_end_user_guide
-canonical_url: http://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.html
-llms_txt: http://docs.pingidentity.com/pingid/llms.txt
+canonical_url: https://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.html
+llms_txt: https://docs.pingidentity.com/pingid/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 3, 2023
 ---
 
-# Accessing the PingID End User Guide
+# Getting help for the PingID end user
 
-The PingID End User guide describes the user experience, and includes all the information a user needs to know to pair, and authenticate with PingID. It also details how to pair more than one device, how to manage devices, and some basic troubleshooting information.
+Every organization implements PingID differently. Therefore it's recommended that you provide your end users with details about:
 
-To view the PingID End User Guide, see [PingID End User Guide](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_end_user_guide.html).
+* The features and authentication methods permitted by your organization, and how to use them.
+
+* Where to find a QR code or pairing key
+
+* Where to get help within your organization.
+
+The PingID end user help provides information to help end user to solve general issues on their own where possible, and help them to understand when they should turn to their organization or third-party provider for help.
+
+Learn more in [Get help using PingID](https://docs.pingidentity.com/pingid-user-guide/index.html).

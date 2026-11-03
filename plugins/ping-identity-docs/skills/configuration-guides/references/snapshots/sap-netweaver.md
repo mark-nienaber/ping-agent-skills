@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with SAP Netweaver and PingFederate
-description: Learn how to configure SAML SSO with SAP Netweaver and PingFederate.
+description: Configure SAML SSO with SAP NetWeaver and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:sap_netweaver:config_saml_sapnetweaver_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/sap_netweaver/config_saml_sapnetweaver_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -98,10 +100,12 @@ After testing, you can enable SP-initiated SSO for SAP Netweaver by editing the 
 
 ---
 title: Configuring SAML SSO with SAP Netweaver and PingOne for Enterprise
-description: Learn how to configure SAML SSO with SAP Netweaver and PingOne for Enterprise.
+description: Configure SAML SSO with SAP NetWeaver and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:sap_netweaver:config_saml_sapnetweaver_p14e
 canonical_url: https://docs.pingidentity.com/configuration_guides/sap_netweaver/config_saml_sapnetweaver_p14e.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

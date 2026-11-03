@@ -1,19 +1,21 @@
 ---
 title: Start Here
-description: Build smarter, faster, and more securely with Ping Identity and AI. Whether it's MCP servers or agent skills, this is where AI meets identity, giving developers the tools to integrate AI-powered workflows with Ping Identity identity platforms using natural language, directly from their favorite IDE or AI agent.
+description: Landing page for Build with AI and Ping — discover MCP servers, agent skills, and AI-first identity use cases for developers.
 component: build-with-ai
 page_id: build-with-ai::index
 canonical_url: https://developer.pingidentity.com/build-with-ai/index.html
 llms_txt: https://developer.pingidentity.com/build-with-ai/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2026
+revdate: 2026-09-21T00:00:00Z
 section_ids:
-  ai-first-use-cases: AI-First Use Cases
+  concepts-and-use-cases: Concepts and use cases
+  guidance: Guidance
+  action-and-execution: Action and execution
 ---
 
 # Start Here
 
-Build smarter, faster, and more securely with Ping Identity and AI. Whether it's MCP servers or agent skills, this is where AI meets identity, giving developers the tools to integrate AI-powered workflows with Ping Identity identity platforms using natural language, directly from their favorite IDE or AI agent.
+Build smarter, faster, and more securely with Ping Identity and AI. Whether it's MCP servers or agent skills, this is where AI meets identity. Build AI-powered workflows with Ping Identity identity platforms using natural language, directly from your favorite IDE or AI agent.
 
 ![Stylized representation using Ping to build with AI.](_images/build-with-ai-landing-page.png)
 
@@ -21,17 +23,27 @@ Build smarter, faster, and more securely with Ping Identity and AI. Whether it's
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | **This is AI-first headless identity.**This site is the developer-facing home for AI-first headless identity. This is an important pillar of how Ping enables enterprises to leverage the power of agentic AI. It's about using AI to accelerate how you build, configure, and manage identity. The MCP servers and agent skills here put AI to work for your identity workflows. |
 
+## Concepts and use cases
+
 [icon: layer-group, set=fas, size=3x]
 
 #### [Tying It All Together](tying-it-all-together.html)
 
-How agent-ready docs, agent skills, and MCP servers work together.
+How agent-ready docs, agent skills, MCP servers, CLI, and Terraform work together for AI-first headless identity.
 
-[icon: newspaper, set=far, size=3x]
+[icon: sitemap, set=fas, size=3x]
 
-#### [What's New?](release_notes/whats-new.html)
+#### [Agentic Deployment Patterns](agentic-deployment-patterns.html)
 
-Stay up to date with the latest releases, features, and announcements across all AI for Identity tools and resources.
+Choose the right interaction model for your environment, from sandbox development through to production CI/CD pipelines.
+
+[icon: mobile-screen-button, set=fas, size=3x]
+
+#### [Build an iOS Sample App with AI](use-cases/build-ios-app.html)
+
+Go from a blank slate to a running iOS authentication app using the AIC Remote MCP Server and Agent Skills, entirely through natural language prompts.
+
+## Guidance
 
 [icon: microchip-ai, set=far, size=3x]
 
@@ -43,26 +55,30 @@ Learn how AI agents can discover, navigate, and ingest Ping Identity documentati
 
 #### [Ping Identity Agent Plugins](agent-skills/overview.html)
 
-Six composable skills covering Ping's Identity platform, with automatic MCP server registration for Claude Code and Cursor.
+Composable skills covering Ping's Identity platform, with automatic MCP server registration for Claude Code and Cursor.
+
+## Action and execution
 
 [icon: chart-diagram, set=fas, size=3x]
 
-#### [AIC MCP Server](aic-mcp-server/overview.html)
+#### [AIC Remote MCP Server](aic-remote-mcp-server/overview.html)
 
-Manage users, themes, journeys, logs, and environment configuration in PingOne Advanced Identity Cloud using natural language from your AI agent.
+Manage users, themes, journeys, logs, and environment configuration in PingOne Advanced Identity Cloud using natural language from your AI agent, through a hosted HTTP MCP endpoint.
 
 [icon: chart-diagram, set=fas, size=3x]
 
-#### [DaVinci MCP Server](davinci-mcp-server/overview.html)
+#### [PingOne Remote MCP Server](pingone-mcp-server/p1-overview.html)
 
-Manage DaVinci flows, applications, connectors, variables, and forms using natural language from your AI agent.
+Administer PingOne environments, applications, users, and DaVinci flows using natural language, through a PingOne-hosted remote MCP endpoint.
 
-## AI-First Use Cases
+[icon: terminal, set=fas, size=3x]
 
-See AI-first headless identity in action through end-to-end use cases that combine MCP servers and agent skills.
+#### [Ping CLI](pingcli/overview.html)
 
-[icon: mobile-screen-button, set=fas, size=3x]
+Script and automate Ping Identity configuration in agentic development workflows and CI/CD pipelines.
 
-#### [Build an iOS Sample App with AI](use-cases/build-ios-app.html)
+[icon: cubes, set=fas, size=3x]
 
-Go from a blank slate to a running iOS authentication app using the AIC MCP Server and Agent Skills, entirely through natural language prompts.
+#### [Terraform](terraform/overview.html)
+
+Declarative infrastructure-as-code for managing Ping Identity platform configuration across environments.

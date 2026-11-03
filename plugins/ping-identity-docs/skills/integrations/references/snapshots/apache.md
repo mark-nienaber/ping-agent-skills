@@ -1,4 +1,127 @@
 ---
+title: Apache agent information
+description: The Apache agent lets your Apache server communicate with PingFederate. When a user tries to access a resource on your Apache server, the agent checks their session status. When a user starts a new session, the agent validates OpenToken information from PingFederate and lets the user access the resource.
+component: apache
+page_id: apache:apache_agent_information:pf_apache_linux_ik_agent_information
+canonical_url: https://docs.pingidentity.com/integrations/apache/apache_agent_information/pf_apache_linux_ik_agent_information.html
+llms_txt: https://docs.pingidentity.com/integrations/apache/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  ssl-support: SSL support
+  session-validation: Session validation
+  memory-usage: Memory usage
+  session-information-and-user-attributes: Session information and user attributes
+  error-handling: Error handling
+  session-logout: Session logout
+  logging: Logging
+---
+
+# Apache agent information
+
+The Apache agent lets your Apache server communicate with PingFederate. When a user tries to access a resource on your Apache server, the agent checks their session status. When a user starts a new session, the agent validates OpenToken information from PingFederate and lets the user access the resource.
+
+## SSL support
+
+The Apache agent supports TLS/SSL, using standard Apache SSL support for connections to the server from browsers.
+
+## Session validation
+
+PingFederate validates both an inactivity timeout and an overall session timeout:
+
+* Inactivity timeout
+
+  The amount of time that a session can be inactive when no new browser requests are received and before a user is required to reauthenticate.
+
+* Overall session timeout
+
+  The total amount of time that a session can be active, regardless of activity, before the user is required to re-authenticate.
+
+If either of the timeout limits has expired, the Apache agent cancels the existing session and redirects the browser to the `PingFederateLoginPageUrl` address in your `<apache_home>/conf/mod_pf.conf` file. This starts a service provider (SP)-initiated single sign-on (SSO) request at the identity provider (IdP).
+
+|   |                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------- |
+|   | Session cancellation enforces session cleanup in the PingFederate server and session cookie obsolescence. |
+
+## Memory usage
+
+The Apache agent uses the Apache Portable Runtime (APR) pools for allocation of most data: either the configuration-time pool for storing configuration variables or request-time pools for processing sessions.
+
+Heap is used only for temporary data with a short usage time and sensitive size, such as:
+
+* Dynamic reallocations on compressed-token decompression
+
+* Parsing session information
+
+* Operations with the OpenToken library
+
+## Session information and user attributes
+
+The PingFederate Apache agent passes session information and user attributes from the adapter to the application.
+
+The Apache agent includes the information in HTTP request headers or Apache environment variables. This information can then be used by the application for authorization decisions or for generation of content specific to the user making the request.
+
+The following session and attribute information is exposed to the application:
+
+* Attributes from the OpenToken Adapter contract
+
+  The subject (`SUBJECT`) and any attributes that you add on the **Extended Contract** tab of the adapter configuration. Only the attributes fulfilled at runtime are exposed to the application. Attributes with a `NULL` value aren't included in the OpenToken.
+
+* `NOT-ON-OR-AFTER`
+
+  The time until inactivity timeout is reached.
+
+* `RENEW-UNTIL`
+
+  The time until overall session timeout is reached.
+
+* `AUTH_NOT-BEFORE`
+
+  The time when the session was created.
+
+* `AUTHNCONTEXT`
+
+  Information from the SAML assertion that describes how the user was authenticated at the IdP.
+
+For security reasons, each HTTP request header or Apache environment variable is first pre-pended with a specific prefix. Learn more about configuring the prefix in [Configuring the Apache agent](../setup/pf_apache_linux_ik_configuring_the_apache_agent.html). The Apache agent always removes and rewrites the prefixed request headers and environment variables for each request.
+
+If you can't modify your applications to accept headers with this prefix, you can configure the Apache agent to add a prefix to the HTTP headers or environment variables. In this case, on the **Extended Contract** tab of the OpenToken Adapter configuration, include an attribute named `pf_attribute_list`. Map that attribute in your identity provider (IdP) connection as a text field containing a comma-separated list of all the attributes in the adapter contract. This attribute list is sent in the OpenToken and used by the Apache agent to overwrite headers in the request.
+
+Learn more about [Configuring target session fulfillment](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_configuring_target_session_fulfillment.html) in the PingFederate documentation.
+
+## Error handling
+
+When an error occurs, the Apache agent redirects the browser to the `PingFederateErrorPageURL` address in your `<apache_home>/conf/mod_pf.conf` file.
+
+|   |                                                                 |
+| - | --------------------------------------------------------------- |
+|   | This value isn't enabled by default, but examples are provided. |
+
+## Session logout
+
+The `PingFederateCancelURL` address in your `<apache_home>/conf/mod_pf.conf` file initiates a user-session logout. This URL specifies a resource that directs the Apache agent to:
+
+1. Initiate a single logout (SLO), if configured
+
+2. Expire the PingFederate session
+
+3. Clean up any resources associated with the session
+
+4. Pass control back to the application so that it can clean up its own session
+
+## Logging
+
+The PingFederate Apache agent uses an Apache API logging scheme that writes into the standard `logs/error_log` file. This file is created automatically at startup with the verbosity level controlled by `LogLevel` in your `httpd.conf` file.
+
+The PingFederate Apache agent has six internally distinguished verbosity levels, ranging from `0` to `5`. The first four correspond to Apache definitions in `error/warn/notice/info`. The last two levels are for logging HTTP requests, responses, and cURL-library debug output, if necessary. The default level is `0`, which logs only errors.
+
+|   |                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The Apache agent logs all of its output at the `info` level. To access this output, set the Apache `LogLevel` to `info` in `httpd.conf`, then restart the Apache server. |
+
+---
+
+---
 title: Apache Agent setup
 description: To set up the Apache agent, you must copy a configuration file and a library from the extracted integration-kit distribution to your Apache installation and then modify the configuration file.
 component: apache
@@ -27,7 +150,7 @@ page_id: apache::pf_apache_linux_ik
 canonical_url: https://docs.pingidentity.com/integrations/apache/pf_apache_linux_ik.html
 llms_txt: https://docs.pingidentity.com/integrations/apache/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 27, 2024
+revdate: September 9, 2026
 section_ids:
   components: Components
   intended-audience: Intended audience
@@ -84,6 +207,8 @@ The Apache agent supports the following platforms:
 
     * Red Hat Enterprise Linux 9
 
+    * Red Hat Enterprise Linux 10
+
   * Canonical Ubuntu:
 
     * Canonical Ubuntu 18.04
@@ -94,18 +219,25 @@ The Apache agent supports the following platforms:
 
     * Canonical Ubuntu 24.04
 
+    * Canonical Ubuntu 26.04
+
+|   |                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Apache Linux Integration Kit binaries are compiled for the x86-64 architecture, which supports 64-bit Intel and AMD processors. They aren't built for or supported on ARM64 (aarch64) systems. |
+
 ---
 
 ---
 title: Changelog
-description: The following is the change history for the Apache Linux Integration Kit.
+description: Added support for:
 component: apache
 page_id: apache:release_notes:pf_apache_linux_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/apache/release_notes/pf_apache_linux_ik_changelog.html
 llms_txt: https://docs.pingidentity.com/integrations/apache/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 27, 2024
+revdate: September 9, 2026
 section_ids:
+  apache-linux-integration-kit-4-3-september-2026: Apache Linux Integration Kit 4.3 - September 2026
   apache-linux-integration-kit-4-2-january-2025: Apache Linux Integration Kit 4.2 – January 2025
   apache-linux-integration-kit-4-1-1-august-2022: Apache Linux Integration Kit 4.1.1 – August 2022
   apache-linux-integration-kit-4-1-june-2022: Apache Linux Integration Kit 4.1 – June 2022
@@ -136,7 +268,13 @@ section_ids:
 
 # Changelog
 
-The following is the change history for the Apache Linux Integration Kit.
+## Apache Linux Integration Kit 4.3 - September 2026
+
+* Added support for:
+
+  * Red Hat Enterprise Linux 10
+
+  * Canonical Ubuntu 26.04
 
 ## Apache Linux Integration Kit 4.2 – January 2025
 
@@ -544,7 +682,7 @@ page_id: apache:release_notes:pf_apache_linux_ik_download_manifest
 canonical_url: https://docs.pingidentity.com/integrations/apache/release_notes/pf_apache_linux_ik_download_manifest.html
 llms_txt: https://docs.pingidentity.com/integrations/apache/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 27, 2024
+revdate: September 9, 2026
 ---
 
 # Download manifest
@@ -583,6 +721,12 @@ The following files are included in the Apache Linux Integration Kit `.zip` arch
 
       * `mod_pf.so`: Apache agent module.
 
+    * `RHEL10_64`: Contains the RHEL 10.x 64-bit.
+
+      * `libopentoken.so`: OpenToken library.
+
+      * `mod_pf.so`: Apache agent module.
+
     * `Ubuntu18_64`: Contains the Canonical Ubuntu 18.04 64-bit.
 
       * `libopentoken.so`: OpenToken library.
@@ -604,6 +748,12 @@ The following files are included in the Apache Linux Integration Kit `.zip` arch
     * `Ubuntu24_64`: Contains the Canonical Ubuntu 24.04 64-bit.
 
       * `libopentoken.so`: OpenToken library.
+
+      * `mod_pf.so`: Apache agent module.
+
+    * `Ubuntu26_64`: Contains the Canonical Ubuntu 26.0 64-bit.
+
+      * `libopentken.so`: OpenToken library.
 
       * `mod_pf.so`: Apache agent module.
 
@@ -1001,93 +1151,3 @@ The Apache Linux Integration Kit relies on the OpenToken Adapter that is distrib
 5. Start PingFederate.
 
 6. If you operate PingFederate in a cluster, repeat steps 2-5 for each engine node.
-
----
-
----
-title: Upgrading an existing deployment
-description: If you're upgrading from a previous version of the Apache Linux Integration Kit, modify your existing configuration files.
-component: apache
-page_id: apache:setup:pf_apache_linux_ik_upgrading_an_existing_deployment
-canonical_url: https://docs.pingidentity.com/integrations/apache/setup/pf_apache_linux_ik_upgrading_an_existing_deployment.html
-llms_txt: https://docs.pingidentity.com/integrations/apache/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 27, 2024
-section_ids:
-  steps: Steps
----
-
-# Upgrading an existing deployment
-
-If you're upgrading from a previous version of the Apache Linux Integration Kit, modify your existing configuration files.
-
-## Steps
-
-1. Stop Apache.
-
-2. Download the Apache Linux Integration Kit `.zip` archive from the **Add-ons** tab of the [PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html).
-
-3. From the `.zip` archive, copy `apache-agent/lib/<your platform>/libopentoken.so` to the Apache modules directory.
-
-4. Edit your existing `mod_pf.conf` file:
-
-   1. Add the following if it doesn't already exist.
-
-      ```none
-      # Enables or disables the "http only" attribute of the cookie. Http only cookies
-      # inform the browser that the cookie shouldn't be accessible by client-side scripts.
-      # The default is set to "yes"
-
-      PingFederateCookieHttpOnly              yes
-      ```
-
-   2. Set the value to `yes` or `no` to suit your environment. Save the file.
-
-5. Edit your existing `mod_pf.so` file:
-
-   1. Add the following if it doesn't already exist.
-
-      ```none
-      # (Required)
-      # The SameSite cookie attribute is set to this value. Set this to match the value of
-      # 'cookie-samesite-attribute' in the Agent configuration file (defined in
-      # PingFederateAgentConfigurationFile), if that is defined.
-      # The allowed values for this setting are: Strict, Lax, None, and Nothing
-      # The "Strict", "Lax", and "None" value changes the SameSite cookie attribute setting.
-      # The "Nothing" value leaves the SameSite cookie attribute unset in the OpenToken Session Cookie.
-      # For the "None" value, you must use secure attributes because cross-site cookies can only be
-      # accessed over HTTPS connections.
-      # If the cookie is not secure and the "None" value is selected, the SameSite cookie attribute
-      # will not be set.
-
-      PingFederateCookieSameSiteAttribute	Nothing
-      ```
-
-   2. Set the value to `Strict`, `Lax`, `None`, or `Nothing` to suit your environment. Save the file.
-
-6. Add the following if it doesn't already exist.
-
-   ```none
-   # (Optional)
-   # Enables or disables fragment preservation in requests.
-   # When set to "yes", preserves request fragment and redirects user back
-   # to the URI with fragment.
-   # To prevent sensitive data leakage, ensure that no sensitive information
-   # is present in a preserved fragment.
-   # The default is "no".
-   PingFederateEnableFragmentPreservation   no
-
-   # (Optional)
-   # The HTML template used to generate client side (JavaScript-based) redirects for
-   # fragment preservation. If not specified, a prebuilt template is used.
-   # Path could be an absolute or relative to the httpd.conf ServerRoot
-   # definition.
-
-   #PingFederateFragmentPreservationPageTemplateFile conf/fragment_preservation_request_template.html
-   ```
-
-7. Start Apache.
-
-8. Update the OpenToken Adapter in PingFederate as shown in [Updating the OpenToken Adapter](pf_apache_linux_ik_updating_the_opentoken_adapter.html).
-
-9. Reinstall the Apache agent as shown in [Apache Agent setup](pf_apache_linux_ik_agent_setup.html).

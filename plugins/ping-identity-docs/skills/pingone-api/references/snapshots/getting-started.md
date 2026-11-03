@@ -1,12 +1,13 @@
 ---
 title: Getting Started
-description: This guide uses fundamental workflows to walk you through the steps to get an access token, and begin using the PingOne APIs.
+description: "Introduces the Getting Started guide's three PingOne workflows for creating an admin Worker app, a test environment, and an SSO web application"
 component: pingone-api
-page_id: pingone-api:getting-started:introduction
-canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/introduction.html
+page_id: pingone-api:getting-started:index
+canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["index.adoc"]
+revdate: 2026-08-07
+page_aliases: ["introduction.adoc"]
 section_ids:
   what-youll-do: What you'll do
   how-the-workflows-interact: How the workflows interact
@@ -35,13 +36,13 @@ There are three inter-related workflows you'll use to:
 
 ## The Postman choice
 
-We use Postman to create our PingOne API docs, and have done so in this Getting Started guide as well. We highly recommend you use Postman to complete the workflows using the PingOne APIs ([Task 2: Create a test environment](create-a-test-environment.html) and [Task 3: Create an SSO workflow](simple-sso-workflow.html)). We've configured a Postman collection for you to download in each of these workflows, so you can call these requests in your own Postman installation. There's also an accompanying Postman Environment template already populated with the necessary variables.
+We use Postman to create our PingOne API docs, and have done so in this Getting Started guide as well. We highly recommend you use Postman to complete the workflows using the PingOne APIs ([Task 2: Create a test environment](create-a-test-environment/index.html) and [Task 3: Create an SSO workflow](simple-sso-workflow/index.html)). We've configured a Postman collection for you to download in each of these workflows, so you can call these requests in your own Postman installation. There's also an accompanying Postman Environment template already populated with the necessary variables.
 
 |   |                                                                                                 |
 | - | ----------------------------------------------------------------------------------------------- |
 |   | Postman offers a free version. Refer to [Download Postman](https://www.postman.com/downloads/). |
 
-If you'd rather not install Postman, this guide doesn't limit or constrain you in that respect. Each Postman request in this guide is well-documented, and has a dropdown list to show the coding language to use for the request. (This is also true for our [Platform Reference API](../platform/introduction.html) docs.)
+If you'd rather not install Postman, this guide doesn't limit or constrain you in that respect. Each Postman request in this guide is well-documented, and has a dropdown list to show the coding language to use for the request. (This is also true for our [Platform Reference API](../platform/index.html) docs.)
 
 ![RequestLanguage](../_images/p1_requestLanguageList.png)
 
@@ -51,12 +52,13 @@ You can use cURL (the default) and call the request from your command line, or s
 
 ---
 title: "Step 1: Get a new PingOne access token"
-description: Because the access token you used for the workflow to create a test environment may have expired (a 1 hour expiry), you'll again call the POST {{authPath}}/{{adminEnvID}}/as/token request to obtain a new access token. This request uses Basic authorization to get an access token having an authorization code grant type.
+description: Get a new PingOne access token for the Worker app before starting the SSO workflow
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-1-get-new-access-token
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-1-get-new-access-token.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -77,7 +79,7 @@ Because the access token you used for the workflow to create a test environment 
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
 * `{{adminEnvID}}` is the environment that contains the admin Worker application you created using the PingOne admin console in the prior workflow to [Create an admin Worker app connection](../create-an-admin-worker-app/step-3-assign-roles.html).
 
@@ -109,9 +111,9 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key         | Value               |
-| ----------- | ------------------- |
-| grant\_type | client\_credentials |
+| Key        | Value              |
+| ---------- | ------------------ |
+| grant_type | client_credentials |
 
 ##
 
@@ -366,12 +368,13 @@ task.resume()
 
 ---
 title: "Step 1: Get a PingOne access token"
-description: Use the POST {{authPath}}/{{adminEnvID}}/as/token request to obtain an access token. The access token is needed to call any of the PingOne APIs. This request uses Basic authorization to get an access token having a client_credentials grant type.
+description: "Get a PingOne access token using the Worker app's client credentials to call the PingOne APIs"
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-1-get-access-token
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-1-get-access-token.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -392,9 +395,9 @@ Use the `POST {{authPath}}/{{adminEnvID}}/as/token` request to obtain an access 
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
-* `{{adminEnvID}}` is the environment that contains the admin Worker application you created using the PingOne admin console in the prior workflow to [Create an admin Worker app connection](../create-an-admin-worker-app.html).
+* `{{adminEnvID}}` is the environment that contains the admin Worker application you created using the PingOne admin console in the prior workflow to [Create an admin Worker app connection](../create-an-admin-worker-app/index.html).
 
 If you're using Postman, set these variables in the Authorization tab. If you're not using Postman, these are header variables:
 
@@ -424,9 +427,9 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key         | Value               |
-| ----------- | ------------------- |
-| grant\_type | client\_credentials |
+| Key        | Value              |
+| ---------- | ------------------ |
+| grant_type | client_credentials |
 
 ##
 
@@ -681,12 +684,13 @@ task.resume()
 
 ---
 title: "Step 1: Sign on to admin console"
-description: Sign on to the PingOne admin console. For more information about the PingOne admin console, refer to Accessing the admin console home page.
+description: Sign on to the PingOne admin console to begin creating an admin Worker app connection
 component: pingone-api
 page_id: pingone-api:getting-started:create-an-admin-worker-app/step-1-login
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-an-admin-worker-app/step-1-login.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Step 1: Sign on to admin console
@@ -697,12 +701,13 @@ Sign on to the PingOne admin console. For more information about the PingOne adm
 
 ---
 title: "Step 2: Add a Worker app"
-description: In the admin console, add a Worker app connection to PingOne:
+description: Add a Worker app connection to a PingOne environment using the admin console
 component: pingone-api
 page_id: pingone-api:getting-started:create-an-admin-worker-app/step-2-add-worker-app
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-an-admin-worker-app/step-2-add-worker-app.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Step 2: Add a Worker app
@@ -725,12 +730,13 @@ In the admin console, add a Worker app connection to PingOne:
 
 ---
 title: "Step 2: Create a Web application"
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/applications operation to create a new PingOne OpenID Connect (OIDC) Web app. This app configuration represents (to PingOne) your custom application for user sign-on.
+description: Create a PingOne OpenID Connect web application for testing the single sign-on workflow
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-2-create-a-web-application
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-2-create-a-web-application.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -751,9 +757,9 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/applications` operation to c
 
 In this request:
 
-* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
-* `{{envID}}` is the ID of the environment you created when you created your test environment. Refer to [Create a Test Environment](../create-a-test-environment.html).
+* `{{envID}}` is the ID of the environment you created when you created your test environment. Refer to [Create a Test Environment](../create-a-test-environment/index.html).
 
 In the request body:
 
@@ -1244,12 +1250,13 @@ task.resume()
 
 ---
 title: "Step 2: Read All Licenses"
-description: Use GET {{apiPath}}/v1/organizations/{{orgID}}/licenses to return the list of licenses associated with your organization. You'll want to do this because an organization can have several licenses, including multiple active licenses (an environment can have one license only). If your organization has more than one license, you can use a filter as a query parameter to limit the licenses returned.
+description: Read all PingOne licenses associated with your organization to find the license ID needed to create a new environment
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-2-read-all-licenses
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-2-read-all-licenses.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -1271,7 +1278,7 @@ You can use the filtering expression `filter=status eq "active"` to return licen
 
 In this request:
 
-* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{orgID}}` is the ID of the organization in which you created your test environment. To find your `orgID`, log in to the PingOne admin console, ensure the environment selected is the one you're currently using, and go to Settings > Environment Properties. The Organization ID is displayed.
 
@@ -2247,12 +2254,13 @@ task.resume()
 
 ---
 title: "Step 3: Assign roles to the Worker app"
-description: In the application information page for your new Worker app, you'll assign the roles that grant admin-level permissions to the Worker app.
+description: Assign Organization Admin and Environment Admin roles to a PingOne Worker app and lists the available PingOne admin roles
 component: pingone-api
 page_id: pingone-api:getting-started:create-an-admin-worker-app/step-3-assign-roles
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-an-admin-worker-app/step-3-assign-roles.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Step 3: Assign roles to the Worker app
@@ -2283,39 +2291,17 @@ In the application information page for your new Worker app, you'll assign the r
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | The roles and permissions apply only to the Worker app, and not to any PingOne admin user. We'll show you how to assign these permissions to an admin user when you get to the create a test environment workflow. |
 
-When you subsequently call Management API requests, as you will in steps 2-5 of the next workflow to create a test environment, you'll see one or more of these PingOne role icons beneath the request title:
-
-| Role                          | Can Assign                                                          |
-| ----------------------------- | ------------------------------------------------------------------- |
-| Organization Admin            | Environment Admin                                                   |
-| Environment Admin             | All roles except Organization Admin                                 |
-| Identity Data Admin           | Identity Data Admin, Identity Data Read-Only Admin, Help Desk Admin |
-| DaVinci Admin                 | DaVinci Admin, DaVinci Read-Only Admin                              |
-| Custom Role Admin             | None                                                                |
-| Application Owner             | None                                                                |
-| Identity Data Read-Only Admin | None                                                                |
-| Configuration Read-Only Admin | None                                                                |
-| DaVinci Read-Only Admin       | None                                                                |
-| Client Application Developer  | None                                                                |
-| Help Desk Admin               | None                                                                |
-| Privilege Admin               | None                                                                |
-
-For example, in the request documentation to GET all applications for an environment, either the Client Application Developer or Environment Admin role is required to call the request:
-
-![Admin-Console-Worker-App-Env-Admin-Role](../../_images/p1_get-all-apps.png)
-
-For some requests, multiple roles have permissions necessary to call the request. As long as your Worker app has at least one of the roles shown for the request, the Worker app can make the call.
-
 ---
 
 ---
 title: "Step 3: Create an environment"
-description: Use the POST {{apiPath}}/v1/environments request to create a new environment. You need to have the Organization Admin role to create an environment. You're automatically assigned the Organization Admin role when you create a PingOne account.
+description: Create a new PingOne test environment using the Organization Admin role
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-3-create-an-environment
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-3-create-an-environment.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -2346,7 +2332,7 @@ The new environment will include several PingOne resources automatically created
 
 In this request:
 
-* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 In the request body:
 
@@ -2833,12 +2819,13 @@ task.resume()
 
 ---
 title: "Step 3: Get the application secret"
-description: Use the GET {{apiPath}}/v1/environments/{{envID}}/applications/{{solutionAppID}}/secret operation to get the application's secret. The application secret serves as the application's password. This will be needed to authenticate the token request in a subsequent step.
+description: Get the client secret for a PingOne web application to authenticate its token requests
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-3-get-the-application-secret
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-3-get-the-application-secret.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -2858,9 +2845,9 @@ Use the `GET {{apiPath}}/v1/environments/{{envID}}/applications/{{solutionAppID}
 
 In this request:
 
-* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
-* `{{envID}}` is the ID of the environment you created when you created your test environment. Refer to [Create Your Test Environment](../create-a-test-environment.html).
+* `{{envID}}` is the ID of the environment you created when you created your test environment. Refer to [Create Your Test Environment](../create-a-test-environment/index.html).
 
 * `{{solutionAppID}}` is the Web application ID returned by your previous request to create the Web application.
 
@@ -3117,12 +3104,13 @@ task.resume()
 
 ---
 title: "Step 4: Copy Worker app credentials"
-description: While still in the application information page for your new Worker app, you'll get the Worker app credentials, and enable the Worker app.
+description: "Copy a PingOne Worker app's Client ID, Client Secret, and Environment ID, then enable the app"
 component: pingone-api
 page_id: pingone-api:getting-started:create-an-admin-worker-app/step-4-app-credentials
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-an-admin-worker-app/step-4-app-credentials.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Step 4: Copy Worker app credentials
@@ -3151,12 +3139,13 @@ You're now all set to use the PingOne APIs in the next workflows.
 
 ---
 title: "Step 4: Create a population"
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/populations operation to create a new population. All users in PingOne must be associated with a population. Although your new environment automatically includes a default population, creating a new population gives you the ability to associate this user with a more specific population grouping.
+description: Create a new population in a PingOne environment to group users for testing
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-4-create-a-population
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-4-create-a-population.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -3177,7 +3166,7 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/populations` operation to cr
 
 In this request:
 
-* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{envID}}` is the ID of the environment you created in the previous step. If you're using Postman, this value is automatically set by the script in the Script tab used for the previous step.
 
@@ -3517,12 +3506,13 @@ task.resume()
 
 ---
 title: "Step 4: Send an authorization request"
-description: Use the GET {{authPath}}/{{envID}}/as/authorize operation to send an authorization request to the PingOne authorization server. This step queries the authorization server, and returns the flow ID as the id property in the response. You'll use this flow ID in Step 5 to start the sign-on flow and submit your test user's credentials.
+description: Send an authorization request to the PingOne authorization server to start the sign-on flow and get a flow ID
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-4-send-an-authorization-request
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-4-send-an-authorization-request.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   example-request: Example Request
@@ -3541,7 +3531,7 @@ Use the `GET {{authPath}}/{{envID}}/as/authorize` operation to send an authoriza
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
 * `{{envID}}` is the environment ID for the environment you created in the prior workflow to create your test environment.
 
@@ -3794,12 +3784,13 @@ task.resume()
 
 ---
 title: "Step 5: Create a user"
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/users request to create a new user.
+description: Create a new PingOne user and assign the user to a population
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-5-create-a-user
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-5-create-a-user.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -3820,7 +3811,7 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/users` request to create a n
 
 In this request:
 
-* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* ``{{apiPath}}`is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1`` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{envID}}` is the ID of the environment you created in the previous step. If you're using Postman, this value is automatically set by the script in the Script tab used for the previous step.
 
@@ -4233,12 +4224,13 @@ task.resume()
 
 ---
 title: "Step 5: Submit login credentials"
-description: Use POST {{authPath}}/{{envID}}/flows/{{flowID}} to respond to the USERNAME_PASSWORD_REQUIRED flow state set by the previous call to get the flow. This requires that the user initiates the usernamePassword.check action.
+description: "Submit a test user's username and password to respond to the PingOne sign-on flow's USERNAME_PASSWORD_REQUIRED state"
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-5-submit-login-credentials
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-5-submit-login-credentials.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -4261,7 +4253,7 @@ You need to set the `application/vnd.pingidentity.usernamePassword.check+json` c
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
 * `{{envID}}` is the environment ID for the environment you created in the prior workflow to create your test environment.
 
@@ -4585,12 +4577,13 @@ task.resume()
 
 ---
 title: "Step 6: Call the resume endpoint"
-description: Use the GET {{authPath}}/{{envID}}/as/resume?flowId={{flowID}} request to obtain the authorization code required to exchange for an access token.
+description: Call the PingOne resume endpoint to obtain the authorization code needed to exchange for an access token
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-6-call-the-resume-endpoint
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-6-call-the-resume-endpoint.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -4610,7 +4603,7 @@ Use the `GET {{authPath}}/{{envID}}/as/resume?flowId={{flowID}}` request to obta
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
 * `{{envID}}` is the environment ID for the environment you created in the prior workflow to create your test environment.
 
@@ -4883,12 +4876,13 @@ task.resume()
 
 ---
 title: "Step 6: Set the user password"
-description: Use the PUT {{apiPath}}/v1/environments/{{envID}}/users/{{sharedUserID}}/password request to assign an initial password for the new user. The request requires the application/vnd.pingidentity.password.set+json custom content type in the Content-Type HTTP header to initate the set password action. If you're using Postman, we use a pre-request script to set the user password.
+description: Assign an initial password to a PingOne user as an admin-level password action
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-6-set-user-password
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-6-set-user-password.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -4911,7 +4905,7 @@ This request is an admin-level assignment of a user's initial password.
 
 In this request:
 
-* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{envID}}` is the ID of the environment you created in the previous step. If you're using Postman, this value is automatically set by the script in the Script tab used for the previous step.
 
@@ -5267,12 +5261,13 @@ task.resume()
 
 ---
 title: "Step 7: Enable user MFA"
-description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{sharedUserID}}/mfaEnabled operation enables MFA for the specified user.
+description: Enable multi-factor authentication for a PingOne user
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-7-enable-user-mfa
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-7-enable-user-mfa.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -5293,7 +5288,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{sharedUserID}}/mfaEnable
 
 In this request:
 
-* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{envID}}` is the ID of the environment you created in the previous step. If you're using Postman, this value is automatically set by the script in the Script tab used for the previous step.
 
@@ -5608,12 +5603,13 @@ task.resume()
 
 ---
 title: "Step 7: Get the access token"
-description: Use the POST {{authPath}}/{{envID}}/as/token request to acquire the access token by presenting the client's (the Web application's) authorization grant.
+description: Exchange an authorization code and application credentials for an access token to complete the PingOne SSO sign-on flow
 component: pingone-api
 page_id: pingone-api:getting-started:simple-sso-workflow/step-7-get-the-access-token
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/simple-sso-workflow/step-7-get-the-access-token.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -5638,7 +5634,7 @@ Use the `POST {{authPath}}/{{envID}}/as/token` request to acquire the access tok
 
 In this request:
 
-* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) for the top-level domains for other regions.
+* `{{authPath}}` is the geographic domain to use for authentication and authorization for your PingOne environment. The PingOne top-level domain is `https://auth.pingone.com/` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) for the top-level domains for other regions.
 
 * `{{envID}}` is the environment ID for the environment you created in the prior workflow to create your test environment.
 
@@ -5678,12 +5674,12 @@ Cookie      ST={{set-cookieID}}
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key           | Value                            |
-| ------------- | -------------------------------- |
-| grant\_type   | authorization\_code              |
-| code          | {{authCode}}                     |
-| redirect\_uri | <http://localhost:3000/callback> |
-| scope         | openid                           |
+| Key          | Value                            |
+| ------------ | -------------------------------- |
+| grant_type   | authorization_code               |
+| code         | {{authCode}}                     |
+| redirect_uri | <http://localhost:3000/callback> |
+| scope        | openid                           |
 
 ##
 
@@ -5966,12 +5962,13 @@ task.resume()
 
 ---
 title: "Step 8: Set user device (Email)"
-description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{sharedUserID}}/devices operation creates an MFA device (method) for an email address and associates this with the specified user. The user can then receive an email notification for MFA authentication.
+description: Create an email MFA device for a PingOne user to enable email-based multi-factor authentication
 component: pingone-api
 page_id: pingone-api:getting-started:create-a-test-environment/step-8-set-user-device-email
 canonical_url: https://developer.pingidentity.com/pingone-api/getting-started/create-a-test-environment/step-8-set-user-device-email.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-08
 section_ids:
   troubleshooting: Troubleshooting
   headers: Headers
@@ -5992,7 +5989,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{sharedUserID}}/devices` 
 
 In this request:
 
-* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/introduction.html) for the top-level domains for other regions.
+* `{{apiPath}}` is the geographic domain for the PingOne API endpoints for your PingOne environment. The PingOne top-level domain is `https://api.pingone.com/v1` for the U.S. Refer to [PingOne API domains](../../before-you-begin/index.html) for the top-level domains for other regions.
 
 * `{{envID}}` is the ID of the environment you created in the previous step. If you're using Postman, this value is automatically set by the script in the Script tab used for the previous step.
 
@@ -6006,7 +6003,7 @@ In the request body:
 
 A successful response returns a `Status: 200 successful` message, and shows the user's password `status` of `OK`.
 
-You're now ready to create an SSO workflow for this test environment using the PingOne APIs. Refer to [Create an SSO Workflow](../simple-sso-workflow.html).
+You're now ready to create an SSO workflow for this test environment using the PingOne APIs. Refer to [Create an SSO Workflow](../simple-sso-workflow/index.html).
 
 ### Troubleshooting
 

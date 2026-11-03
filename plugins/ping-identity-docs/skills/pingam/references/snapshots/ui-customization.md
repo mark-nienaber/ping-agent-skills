@@ -7,6 +7,7 @@ page_id: pingam:ui-customization:ui-customization-intro
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/ui-customization-intro.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Customization", "Source Code"]
 page_aliases: ["ui-customization-guide:ui-customization-intro.adoc"]
 ---
@@ -55,6 +56,7 @@ page_id: pingam:ui-customization:ui-customizing-layout
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/ui-customizing-layout.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Customization", "Source Code"]
 page_aliases: ["ui-customization-guide:ui-customizing-layout.adoc"]
 ---
@@ -254,6 +256,7 @@ page_id: pingam:ui-customization:downloading-ui
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/downloading-ui.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Customization", "User Interface", "Source Code"]
 page_aliases: ["ui-customization-guide:downloading-ui.adoc"]
 ---
@@ -318,6 +321,7 @@ page_id: pingam:ui-customization:ui-localization
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/ui-localization.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Localization", "Customization"]
 page_aliases: ["ui-customization-guide:ui-localization.adoc"]
 ---
@@ -365,6 +369,7 @@ page_id: pingam:ui-customization:ui-testing-deploying
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/ui-testing-deploying.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Localization", "Install", "Testing"]
 page_aliases: ["ui-customization-guide:ui-testing-deploying.adoc"]
 section_ids:
@@ -457,6 +462,7 @@ page_id: pingam:ui-customization:ui-themes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/ui-themes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Localization", "Customization"]
 page_aliases: ["ui-customization-guide:ui-themes.adoc"]
 section_ids:
@@ -605,6 +611,7 @@ page_id: pingam:ui-customization:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/ui-customization/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["User Interface", "Customization"]
 ---
 

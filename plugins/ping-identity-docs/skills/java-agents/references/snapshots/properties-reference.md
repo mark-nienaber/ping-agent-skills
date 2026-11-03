@@ -5,6 +5,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.access.denied.uri.map
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.access.denied.uri.map.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Access Denied URI Map
@@ -40,6 +42,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.debug.level
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.debug.level.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Debug Level
@@ -96,6 +100,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.filter.mode.map
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.filter.mode.map.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Filter Mode Map
@@ -112,28 +118,28 @@ The following example configures the `NONE` filter mode for all applications in 
 
 The mode `J2EE_POLICY` does not apply to Java Agents 5.10. However, for backward-compatibility, it is displayed in the AM agent profile page.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.filter.mode.map`                                                                                                                                                                                                                                                                                                                                                                                        |
-| Aliases                  | `com.sun.identity.agents.config.filter.mode`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.filter.mode.map`   Introduced in Java Agent 5.6.2.1                                                                                                                                                                                                   |
-| Function                 | Agent                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.filter.mode.map`                                                                                                                                                                                                                                                                                                                                                                                      |
+| Aliases                  | `com.sun.identity.agents.config.filter.mode`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.filter.mode.map`   Introduced in Java Agent 5.6.2.1                                                                                                                                                                                                 |
+| Function                 | Agent                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Supported settings       | * NONE
 
   The agent performs no authentication check, and grants access to any resource. When the value is `NONE` and logging is enabled, for auditing purposes, the agent filter logs all incoming requests.
 
-* SSO\_ONLY
+* SSO_ONLY
 
   Any user having either a valid SSO token or JWT can access any resource.
 
-* URL\_POLICY
+* URL_POLICY
 
   The normal operating mode of the agent, in which resource access is granted by AM policy evaluation. |
-| Default                  | `URL_POLICY`                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Bootstrap property       | Yes                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                                                                                                                                                                                                                                                   |
-| AM console               | Tab: `Global`Title: `Agent Filter Mode Map`Legacy title: `Agent Filter Mode`                                                                                                                                                                                                                                                                                                                                                  |
+| Default                  | `URL_POLICY`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Bootstrap property       | Yes                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                                                                                                                                                                                                                                                 |
+| AM console               | Tab: `Global`Title: `Agent Filter Mode Map`Legacy title: `Agent Filter Mode`                                                                                                                                                                                                                                                                                                                                                |
 
 ---
 
@@ -144,6 +150,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.profile.name
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.profile.name.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Name
@@ -172,6 +180,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.agent.profile.realm
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.agent.profile.realm.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Agent Profile Realm
@@ -201,6 +211,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.agent.hostname
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.agent.hostname.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Alternative Agent Host Name
@@ -232,6 +244,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.agent.port
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.agent.port.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Alternative Agent Port Number
@@ -258,97 +272,246 @@ Use the following properties to override the agent redirection value with the UR
 ---
 
 ---
-title: Continuous Security Cookie Map
-description: Maps cookie values available in inbound resource requests to entries in the environmental conditions map, which agents send to AM during policy evaluation.
+title: Alternative Agent Protocol
+description: In environments when agents are behind a load balancer or reverse proxy which does a SSL offloading, the request URL is changed to match the URL that the agent receives.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.continuous.security.cookies.map
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.continuous.security.cookies.map.html
+page_id: java-agents:properties-reference:org.forgerock.agents.agent.protocol
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.agent.protocol.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Continuous Security Cookie Map
+# Alternative Agent Protocol
 
-Maps cookie values available in inbound resource requests to entries in the environmental conditions map, which agents send to AM during policy evaluation.
+In environments when agents are behind a load balancer or reverse proxy which does a SSL offloading, the request URL is changed to match the URL that the agent receives.
 
-|                          |                                                                                                                                                                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.continuous.security.cookies.map`                                                                                                                                                                                                      |
-| Aliases                  | `org.forgerock.agents.continuous.security.cookies.map`   Introduced in Java Agent 5.6`org.forgerock.openam.agents.config.continuous.security.cookies`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
-| Function                 | Continuous security                                                                                                                                                                                                                                         |
-| Type                     | Map- Keys: incoming cookie name
+The agent then uses the new URL as the redirection value in the pre-authentication cookie, created during the first unauthenticated request to the agent.
 
-- Values: name of entry in environment map                                                                                                                                                                                 |
-| Bootstrap property       | No                                                                                                                                                                                                                                                          |
-| Required property        | No                                                                                                                                                                                                                                                          |
-| Restart required         | No                                                                                                                                                                                                                                                          |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                    |
-| AM console               | Tab: `Application`Title: `Continuous Security Cookie Map`Legacy title: `Continuous Security Cookies`                                                                                                                                                        |
+Use the following properties to override the agent redirection value with the URL of the original client request: [Alternative Agent Host Name](org.forgerock.agents.agent.hostname.html), and [Alternative Agent Port Number](org.forgerock.agents.agent.port.html).
+
+|                          |                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.agent.protocol`                                                                                                                                                                                     |
+| Aliases                  | `com.sun.identity.agents.config.agent.protocol`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.agent.protocol`   Introduced in Java Agent 5.6 |
+| Function                 | Agent                                                                                                                                                                                                                     |
+| Type                     | String                                                                                                                                                                                                                    |
+| Bootstrap property       | No                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                  |
+| AM console               | Tab: `Advanced`Title: `Alternative Agent Protocol`                                                                                                                                                                        |
 
 ---
 
 ---
-title: Continuous Security Header Map
-description: Maps header values in inbound resource requests to entries in the environmental conditions map, which agents send to AM during policy evaluation.
+title: Always invalidate sessions
+description: When false, the agent does not invoke the AM REST logout endpoint to kill the user session.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.continuous.security.headers.map
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.continuous.security.headers.map.html
+page_id: java-agents:properties-reference:org.forgerock.agents.config.logout.session.invalidate.enabled
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.config.logout.session.invalidate.enabled.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Continuous Security Header Map
+# Always invalidate sessions
 
-Maps header values in inbound resource requests to entries in the environmental conditions map, which agents send to AM during policy evaluation.
+When `false`, the agent does not invoke the AM REST logout endpoint to kill the user session.
+
+If [Conditional Logout URL List](org.forgerock.agents.conditional.logout.url.list.html) is configured with a URL that does not perform a REST logout to AM, set this property to `true`. The agent additionally invokes the AM REST logout endpoint to invalidate the session.
+
+|                          |                                                                                                                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Property name            | `org.forgerock.agents.config.logout.session.invalidate.enabled`                                                                                                                            |
+| Aliases                  | `org.forgerock.agents.config.logout.session.invalidate.enabled`   Introduced in Java Agent 5.10.1`org.forgerock.agents.config.logout.session.invalidate`   Introduced in Java Agent 5.10.1 |
+| Function                 | Logout                                                                                                                                                                                     |
+| Type                     | Boolean: `true` returns true; all other strings return `false`.                                                                                                                            |
+| Default                  | `true`                                                                                                                                                                                     |
+| Bootstrap property       | No                                                                                                                                                                                         |
+| Required property        | No                                                                                                                                                                                         |
+| Restart required         | No                                                                                                                                                                                         |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                   |
+
+---
+
+---
+title: AM Authentication Service Host Name
+description: The AM server host name.
+component: java-agents
+version: 2026
+page_id: java-agents:properties-reference:org.forgerock.agents.am.hostname
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.am.hostname.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# AM Authentication Service Host Name
+
+The AM server host name.
+
+|                          |                                                                                                                                                                                                     |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.am.hostname`                                                                                                                                                                  |
+| Aliases                  | `com.iplanet.am.server.host`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.am.hostname`   Introduced in Java Agent 5.6 |
+| Function                 | Authentication service, Required                                                                                                                                                                    |
+| Type                     | String                                                                                                                                                                                              |
+| Bootstrap property       | Yes                                                                                                                                                                                                 |
+| Required property        | Yes - If this property is missing, the agent fails to start                                                                                                                                         |
+| Restart required         | Yes - Restart the container after changing the property                                                                                                                                             |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                         |
+| AM console               | Tab: `AM Services`Title: `AM Authentication Service Host Name`                                                                                                                                      |
+
+---
+
+---
+title: AM Authentication Service Path
+description: The path to the AM server.
+component: java-agents
+version: 2026
+page_id: java-agents:properties-reference:org.forgerock.agents.am.path
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.am.path.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# AM Authentication Service Path
+
+The path to the AM server.
+
+|                          |                                                                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Property name            | `org.forgerock.agents.am.path`                                                                                                             |
+| Aliases                  | `com.iplanet.am.services.deploymentDescriptor`   Introduced in Java Agent 5.0`org.forgerock.agents.am.path`   Introduced in Java Agent 5.6 |
+| Function                 | Authentication service, Required                                                                                                           |
+| Type                     | String                                                                                                                                     |
+| Bootstrap property       | Yes                                                                                                                                        |
+| Required property        | Yes - If this property is missing, the agent fails to start                                                                                |
+| Restart required         | Yes - Restart the container after changing the property                                                                                    |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                |
+
+---
+
+---
+title: AM Authentication Service Port
+description: The AM server port number.
+component: java-agents
+version: 2026
+page_id: java-agents:properties-reference:org.forgerock.agents.am.port
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.am.port.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# AM Authentication Service Port
+
+The AM server port number.
+
+|                          |                                                                                                                                                                                                 |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.am.port`                                                                                                                                                                  |
+| Aliases                  | `com.iplanet.am.server.port`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.am.port`   Introduced in Java Agent 5.6 |
+| Function                 | Authentication service, Required                                                                                                                                                                |
+| Type                     | String                                                                                                                                                                                          |
+| Bootstrap property       | Yes                                                                                                                                                                                             |
+| Required property        | Yes - If this property is missing, the agent fails to start                                                                                                                                     |
+| Restart required         | Yes - Restart the container after changing the property                                                                                                                                         |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                     |
+| AM console               | Tab: `AM Services`Title: `AM Authentication Service Port`                                                                                                                                       |
+
+---
+
+---
+title: AM Authentication Service Protocol
+description: The protocol used by the AM server. Set to one of the following values:
+component: java-agents
+version: 2026
+page_id: java-agents:properties-reference:org.forgerock.agents.am.protocol
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.am.protocol.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# AM Authentication Service Protocol
+
+The protocol used by the AM server. Set to one of the following values:
+
+* HTTP
+
+* HTTPS
+
+|                          |                                                                                                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.am.protocol`                                                                                                                                                                      |
+| Aliases                  | `org.forgerock.agents.am.protocol`   Introduced in Java Agent 5.6`com.iplanet.am.server.protocol`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
+| Function                 | Authentication service, Required                                                                                                                                                                        |
+| Type                     | String                                                                                                                                                                                                  |
+| Bootstrap property       | Yes                                                                                                                                                                                                     |
+| Required property        | Yes - If this property is missing, the agent fails to start                                                                                                                                             |
+| Restart required         | Yes - Restart the container after changing the property                                                                                                                                                 |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                             |
+| AM console               | Tab: `AM Services`Title: `AM Authentication Service Protocol`                                                                                                                                           |
+
+---
+
+---
+title: AM Login URL List
+description: The URL of the login page to use for authentication.
+component: java-agents
+version: 2026
+page_id: java-agents:properties-reference:com.sun.identity.agents.config.login.url
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/com.sun.identity.agents.config.login.url.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# AM Login URL List
+
+The URL of the login page to use for authentication.
+
+During the redirect, the agent appends the following parameters to the agent's CDSSO endpoint:
+
+* The goto parameter configured in [Goto Parameter Name](com.sun.identity.agents.config.redirect.param.html)
+
+* A nonce parameter
+
+Use the format `URL[?realm=realm_name?parameter1=value1&…​]`, where:
+
+* `URL`: URL of the login page to use for authentication
+
+* `[?realm=realm_name&service=tree_name&parameter1=value1&…​]`: Optional parameters that the agent passes to the
+
+login page, for example, the AM realm at which to authenticate and the authentication tree to authenticate with.
+
+You do not need to specify an authentication realm if any of the following conditions are true:
+
+* The custom login page sets the realm parameter, for example, because it lets the user choose the realm.
+
+* The user authenticates into a realm that has DNS aliases configured in AM. AM then logs the user into the realm whose DNS alias matches the incoming request URL. For example, an inbound request from `http://marketplace.example.com` logs in the marketplace realm if the realm alias is set to `marketplace.example.com`.
+
+* The user authenticates to the top-level realm.
+
+This parameter can be overwritten by the custom login page if, for example, the user chooses the authentication realm.
+
+Specify as many parameters your custom login pages require.
 
 Example:
 
-`org.forgerock.agents.continuous.security.headers.map[User-Agent]=myUserAgentHeaderEntry`
+`https://login.example.com/login.jsp?realm=marketplace&param1=value1`
 
-|                          |                                                                                                                                                                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.continuous.security.headers.map`                                                                                                                                                                                                      |
-| Aliases                  | `org.forgerock.agents.continuous.security.headers.map`   Introduced in Java Agent 5.6`org.forgerock.openam.agents.config.continuous.security.headers`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
-| Function                 | Continuous security                                                                                                                                                                                                                                         |
-| Type                     | Map- Keys: incoming header name
+In some versions of AM you can configure more than one value for this property, but only the first value is honored.
 
-- Values: name of entry in environment map                                                                                                                                                                                 |
-| Bootstrap property       | No                                                                                                                                                                                                                                                          |
-| Required property        | No                                                                                                                                                                                                                                                          |
-| Restart required         | No                                                                                                                                                                                                                                                          |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                    |
-| AM console               | Tab: `Application`Title: `Continuous Security Header Map`Legacy title: `Continuous Security Headers`                                                                                                                                                        |
-
----
-
----
-title: Control Handling of Path Traversal Attempts
-description: When set to true any incoming URL containing a path segment of .. will cause the incoming request to be rejected with an HTTP 400 response.
-component: java-agents
-version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.reject.path.traversal.attempts.enabled
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.reject.path.traversal.attempts.enabled.html
----
-
-# Control Handling of Path Traversal Attempts
-
-When set to `true` any incoming URL containing a path segment of `..` will cause the incoming request to be rejected with an HTTP 400 response.
-
-Note that requests will be rejected if any path parameter contains `..` anywhere, even though path parameters do not take part in URI normalisation.
-
-When the property [Control Handling of the URL Encoded Sequence %2e](org.forgerock.agents.percent.2e.handling.strategy.html) is set to ACCEPT\_AND\_INTERPRET, path segments or path parameters containing `.%2e`, `%2e.` and `%2e%2e` will also be rejected.
-
-Note that this will NOT affect access to resources such as `index..html`, for example.
-
-|                          |                                                                                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------------ |
-| Property name            | `org.forgerock.agents.reject.path.traversal.attempts.enabled`                                    |
-| Aliases                  | `org.forgerock.agents.reject.path.traversal.attempts.enabled`   Introduced in Java Agent 2024.11 |
-| Function                 | Configure behaviour                                                                              |
-| Type                     | Boolean: `true` returns true; all other strings return `false`.                                  |
-| Default                  | `false`                                                                                          |
-| Bootstrap property       | No                                                                                               |
-| Required property        | No                                                                                               |
-| Restart required         | No                                                                                               |
-| Local configuration file | `AgentConfig.properties`                                                                         |
+|                          |                                                                                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Property name            | `com.sun.identity.agents.config.login.url`                                                                                                       |
+| Aliases                  | `com.sun.identity.agents.config.login.url`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
+| Function                 | Custom login redirect, Default Login Redirect, Login redirect, Login Redirect (Default)                                                          |
+| Type                     | List                                                                                                                                             |
+| Bootstrap property       | No                                                                                                                                               |
+| Required property        | No                                                                                                                                               |
+| Restart required         | No                                                                                                                                               |
+| Local configuration file | `AgentConfig.properties`                                                                                                                         |
+| AM console               | Tab: `AM Services`Title: `AM Login URL List`Legacy title: `AM Login URL`                                                                         |
 
 ---
 
@@ -359,6 +522,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.backslash.handling.strategy
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.backslash.handling.strategy.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Control Handling of the Backslash Character
@@ -371,27 +536,27 @@ When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of backslash in the incom
 
 When set to `ACCEPT_AND_INTERPRET`, any occurrence of backslash in the incoming URI path, or path parameters, will be replaced by a forward slash character.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.backslash.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Aliases                  | `org.forgerock.agents.backslash.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Supported settings       | * REJECT\_OUTRIGHT
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.backslash.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Aliases                  | `org.forgerock.agents.backslash.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supported settings       | * REJECT_OUTRIGHT
 
   Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
 
-* ACCEPT\_BUT\_NOT\_INTERPRET
+* ACCEPT_BUT_NOT_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
 
-* ACCEPT\_AND\_INTERPRET
+* ACCEPT_AND_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -402,6 +567,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.percent.2e.handling.strategy
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.2e.handling.strategy.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Control Handling of the URL Encoded Sequence %2e
@@ -414,27 +581,27 @@ When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%2e` in the incoming 
 
 When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%2e` in the incoming URI path will be interpreted as a `.` character.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.2e.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Aliases                  | `org.forgerock.agents.percent.2e.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Supported settings       | * REJECT\_OUTRIGHT
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.percent.2e.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Aliases                  | `org.forgerock.agents.percent.2e.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supported settings       | * REJECT_OUTRIGHT
 
   Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
 
-* ACCEPT\_BUT\_NOT\_INTERPRET
+* ACCEPT_BUT_NOT_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
 
-* ACCEPT\_AND\_INTERPRET
+* ACCEPT_AND_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -445,6 +612,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.percent.2f.handling.strategy
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.2f.handling.strategy.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Control Handling of the URL Encoded Sequence %2f
@@ -457,27 +626,27 @@ When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%2f` in the incoming 
 
 When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%2f` in the incoming URI path, or path parameters, will be replaced by a forward slash character.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.2f.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Aliases                  | `org.forgerock.agents.percent.2f.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Supported settings       | * REJECT\_OUTRIGHT
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.percent.2f.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Aliases                  | `org.forgerock.agents.percent.2f.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supported settings       | * REJECT_OUTRIGHT
 
   Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
 
-* ACCEPT\_BUT\_NOT\_INTERPRET
+* ACCEPT_BUT_NOT_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
 
-* ACCEPT\_AND\_INTERPRET
+* ACCEPT_AND_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -488,6 +657,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.percent.3b.handling.strategy
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.3b.handling.strategy.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Control Handling of the URL Encoded Sequence %3b
@@ -500,27 +671,27 @@ When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%3b` in the incoming 
 
 When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%3b` in the incoming URI path will be replaced by a semicolon and used as a path segment/path parameter separator.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.3b.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Aliases                  | `org.forgerock.agents.percent.3b.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Supported settings       | * REJECT\_OUTRIGHT
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.percent.3b.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Aliases                  | `org.forgerock.agents.percent.3b.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supported settings       | * REJECT_OUTRIGHT
 
   Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
 
-* ACCEPT\_BUT\_NOT\_INTERPRET
+* ACCEPT_BUT_NOT_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
 
-* ACCEPT\_AND\_INTERPRET
+* ACCEPT_AND_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -531,6 +702,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.percent.5c.handling.strategy
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.5c.handling.strategy.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Control Handling of the URL Encoded Sequence %5c
@@ -543,27 +716,27 @@ When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%5c` in the incoming 
 
 When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%5c` in the incoming URI path, or path parameters, will be replaced by a forward slash character.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.5c.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Aliases                  | `org.forgerock.agents.percent.5c.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Supported settings       | * REJECT\_OUTRIGHT
+|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.percent.5c.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Aliases                  | `org.forgerock.agents.percent.5c.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supported settings       | * REJECT_OUTRIGHT
 
   Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
 
-* ACCEPT\_BUT\_NOT\_INTERPRET
+* ACCEPT_BUT_NOT_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
 
-* ACCEPT\_AND\_INTERPRET
+* ACCEPT_AND_INTERPRET
 
   Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -574,6 +747,8 @@ component: java-agents
 version: 2026
 page_id: java-agents:properties-reference:org.forgerock.agents.accept.ipdp.cookie
 canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.accept.ipdp.cookie.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Convert SSO Tokens Into OIDC JWTs
@@ -604,124 +779,3 @@ For each incoming request, the agent looks for an OIDC JWT in the cookie named b
 | Restart required         | No                                                                                                                                                                                                                                                                                                                   |
 | Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                             |
 | AM console               | Tab: `SSO (from AM 7)`Title: `Convert SSO Tokens Into OIDC JWTs`Legacy title: `Convert SSO Tokens into OpenID Connect JWTs`                                                                                                                                                                                          |
-
----
-
----
-title: Cookie Reset
-description: When true, the agent resets the cookies in the response before redirecting the client for login, and when the client logs out.
-component: java-agents
-version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.cookie.reset.enabled
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.cookie.reset.enabled.html
----
-
-# Cookie Reset
-
-When `true`, the agent resets the cookies in the response before redirecting the client for login, and when the client logs out.
-
-The agent resets the cookies listed in [Reset Cookie List](org.forgerock.agents.cookie.reset.name.list.html), and cookies that store profile or session attributes (when [Profile Attribute Fetch Mode](org.forgerock.agents.profile.attribute.fetch.mode.html) or [Session Attribute Fetch Mode](org.forgerock.agents.session.attribute.fetch.mode.html) has the value `HTTP_COOKIE`).
-
-To reset cookies that store response attributes (when [Response Attribute Fetch Mode](org.forgerock.agents.response.attribute.fetch.mode.html) has the value `HTTP_COOKIE`), add them to the [Reset Cookie List](org.forgerock.agents.cookie.reset.name.list.html).
-
-|                          |                                                                                                                                                                                                                                      |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Property name            | `org.forgerock.agents.cookie.reset.enabled`                                                                                                                                                                                          |
-| Aliases                  | `org.forgerock.agents.cookie.reset.enabled`   Introduced in Java Agent 5.6`com.sun.identity.agents.config.cookie.reset.enable`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
-| Function                 | Cookie reset                                                                                                                                                                                                                         |
-| Type                     | Boolean: `true` returns true; all other strings return `false`.                                                                                                                                                                      |
-| Default                  | `false`                                                                                                                                                                                                                              |
-| Bootstrap property       | No                                                                                                                                                                                                                                   |
-| Required property        | No                                                                                                                                                                                                                                   |
-| Restart required         | No                                                                                                                                                                                                                                   |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                             |
-| AM console               | Tab: `SSO`Title: `Cookie Reset`                                                                                                                                                                                                      |
-
----
-
----
-title: Cookie Separator Character
-description: The separator for multiple values of the same attribute when it is set as a cookie.
-component: java-agents
-version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.attribute.cookie.separator
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.attribute.cookie.separator.html
----
-
-# Cookie Separator Character
-
-The separator for multiple values of the same attribute when it is set as a cookie.
-
-|                          |                                                                                                                                                                                                                                                   |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.attribute.cookie.separator`                                                                                                                                                                                                 |
-| Aliases                  | `com.sun.identity.agents.config.attribute.cookie.separator`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.attribute.cookie.separator`   Introduced in Java Agent 5.6 |
-| Function                 | Attributes                                                                                                                                                                                                                                        |
-| Type                     | String                                                                                                                                                                                                                                            |
-| Default                  | `\|`                                                                                                                                                                                                                                              |
-| Bootstrap property       | No                                                                                                                                                                                                                                                |
-| Required property        | No                                                                                                                                                                                                                                                |
-| Restart required         | No                                                                                                                                                                                                                                                |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                          |
-| AM console               | Tab: `Application`Title: `Cookie Separator Character`                                                                                                                                                                                             |
-
----
-
----
-title: CSV Monitoring Directory
-description: The full path to the directory where the agent writes CSV monitoring files, when CSV monitoring is enabled.
-component: java-agents
-version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.csv.monitoring.directory
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.csv.monitoring.directory.html
----
-
-# CSV Monitoring Directory
-
-The full path to the directory where the agent writes CSV monitoring files, when CSV monitoring is enabled.
-
-The default is set by the installer and written to the bootstrap properties file.
-
-Default: `/logs/debug` directory relative to the definedBy of the agent installation
-
-|                          |                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------ |
-| Property name            | `org.forgerock.agents.csv.monitoring.directory`                                |
-| Aliases                  | `org.forgerock.agents.csv.monitoring.directory`   Introduced in Java Agent 5.7 |
-| Function                 | Monitoring                                                                     |
-| Type                     | String                                                                         |
-| Bootstrap property       | Yes                                                                            |
-| Required property        | No                                                                             |
-| Restart required         | Yes - Restart the container after changing the property                        |
-| Local configuration file | `AgentBootstrap.properties`                                                    |
-
----
-
----
-title: Custom Response Header Map
-description: A key:value map of custom headers set by the agent for the client, where the key is the header name, and the value is the header value. For example, org.forgerock.agents.response.header.map[Cache-Control]=no-cache
-component: java-agents
-version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.response.header.map
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.response.header.map.html
----
-
-# Custom Response Header Map
-
-A key:value map of custom headers set by the agent for the client, where the key is the header name, and the value is the header value. For example, `org.forgerock.agents.response.header.map[Cache-Control]=no-cache`
-
-Format `org.forgerock.agents.response.header.map[HEADER-NAME]=HEADER-VALUE`
-
-|                          |                                                                                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.response.header.map`                                                                                                                                                                                      |
-| Aliases                  | `org.forgerock.agents.response.header.map`   Introduced in Java Agent 5.6`com.sun.identity.agents.config.response.header`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6 |
-| Function                 | Miscellaneous                                                                                                                                                                                                                   |
-| Type                     | Map- Keys: from header
-
-- Values: to header                                                                                                                                                                                     |
-| Bootstrap property       | No                                                                                                                                                                                                                              |
-| Required property        | No                                                                                                                                                                                                                              |
-| Restart required         | No                                                                                                                                                                                                                              |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                        |
-| AM console               | Tab: `Global`Title: `Custom Response Header Map`Legacy title: `Custom Response Header`                                                                                                                                          |

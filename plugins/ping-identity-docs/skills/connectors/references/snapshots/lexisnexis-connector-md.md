@@ -1,12 +1,12 @@
 ---
 title: LexisNexis Connector
-description: The LexisNexis connector lets you create a PingOne DaVinci flow that performs risk assessments with ThreatMetrix and other Dynamic Decision Platform services, sends a one-time passcode (OTP), and prompts users with security questions.
+description: Configure the LexisNexis connector in PingOne DaVinci to assess risk with ThreatMetrix, send OTPs, and authenticate with security questions
 component: connectors
 page_id: connectors::lexisnexis_connector
 canonical_url: https://docs.pingidentity.com/connectors/lexisnexis_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -62,13 +62,13 @@ You can use the LexisNexis connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -80,7 +80,7 @@ To use the connector, you'll need:
 
 ### Configuring LexisNexis
 
-To configure the LexisNexis connector in DaVinci, you must create an API Key in DaVinci
+To configure the LexisNexis connector in PingOne DaVinci, you must create an API Key in PingOne DaVinci
 
 To create an API Key:
 
@@ -94,7 +94,7 @@ To create an API Key:
 
 ### Configuring the LexisNexis connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -170,7 +170,7 @@ You can use the **InstantID Q\&A** capability to prompt a user with security que
 
 ### Handling unknown sessions
 
-Unknown sessions occur when the **Get Device Profile** capability tries to get a risk evaluation due to a device profiling failure, therefore causing LexisNexis to not return a review status. Device profiling can be blocked for various reasons, including ad blockers and browsers (such as Firefox). DaVinci attempts to fingerprint the user's device until the time limit defined by the **Timeout** property is reached.
+Unknown sessions occur when the **Get Device Profile** capability tries to get a risk evaluation due to a device profiling failure, therefore causing LexisNexis to not return a review status. Device profiling can be blocked for various reasons, including ad blockers and browsers (such as Firefox). PingOne DaVinci attempts to fingerprint the user's device until the time limit defined by the **Timeout** property is reached.
 
 The **Get Device Profile** capability allows the end user to continue through the flow whether the device profiling succeeded or failed. The **Review Status for Unknown Sessions** property in the **Dynamic Decision Policy** capability allows you to pre-define how unknown sessions are treated. With this property, you assign a static review status, such as **Pass**, **Review**, **Challenge**, or **Reject**, allowing users with unknown sessions to proceed through the flow following the same branching rules as users that received a realtime review status from LexisNexis.
 
@@ -323,19 +323,19 @@ Use LexisNexis DDP for multi-faceted fraud and risk assessment.
 >
 >   The Type of National Id that will be used for verification.
 >
->   * US\_SSN
+>   * US_SSN
 >
->   * US\_SSN\_HASH
+>   * US_SSN_HASH
 >
->   * US\_SSN4
+>   * US_SSN4
 >
->   * US\_SSN\_FIRST5
+>   * US_SSN_FIRST5
 >
->   * BR\_CPF
+>   * BR_CPF
 >
->   * MX\_CURP
+>   * MX_CURP
 >
->   * CO\_CEDULA
+>   * CO_CEDULA
 >
 > - Driver License Number textField
 >
@@ -493,227 +493,227 @@ Use LexisNexis DDP for multi-faceted fraud and risk assessment.
 >
 >     * policy string required
 >
->     * service\_type string required
+>     * service_type string required
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_work\_phone string
+>     * account_work_phone string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_gender string
+>     * account_gender string
 >
->     * national\_id\_number string
+>     * national_id_number string
 >
->     * national\_id\_type string
+>     * national_id_type string
 >
->     * account\_drivers\_license\_number string
+>     * account_drivers_license_number string
 >
->     * account\_drivers\_license\_issuer string
+>     * account_drivers_license_issuer string
 >
->     * account\_routing\_address string
+>     * account_routing_address string
 >
->     * account\_routing\_standard string
+>     * account_routing_standard string
 >
->     * account\_number string
+>     * account_number string
 >
->     * account\_passport\_number string
+>     * account_passport_number string
 >
->     * account\_passport\_machine\_readable\_line1 string
+>     * account_passport_machine_readable_line1 string
 >
->     * account\_passport\_machine\_readable\_line2 string
+>     * account_passport_machine_readable_line2 string
 >
->     * account\_passport\_expiration\_date string
+>     * account_passport_expiration_date string
 >
->     * account\_passport\_country string
+>     * account_passport_country string
 >
->     * transaction\_id string
+>     * transaction_id string
 >
->     * cc\_number\_hash string
+>     * cc_number_hash string
 >
->     * online\_tld string
+>     * online_tld string
 >
->     * online\_tld\_handle string
+>     * online_tld_handle string
 >
->     * line\_of\_business string
+>     * line_of_business string
 >
->     * application\_name string
+>     * application_name string
 >
->     * shipping\_account\_address\_street1 string
+>     * shipping_account_address_street1 string
 >
->     * shipping\_account\_address\_street2 string
+>     * shipping_account_address_street2 string
 >
->     * shipping\_account\_address\_city string
+>     * shipping_account_address_city string
 >
->     * shipping\_account\_address\_state string
+>     * shipping_account_address_state string
 >
->     * shipping\_account\_address\_zip string
+>     * shipping_account_address_zip string
 >
->     * shipping\_account\_address\_country string
+>     * shipping_account_address_country string
 >
->     * ach\_routing\_number string
+>     * ach_routing_number string
 >
->     * transaction\_amount number
+>     * transaction_amount number
 >
->     * transaction\_currency string
+>     * transaction_currency string
 >
->     * account\_login string
+>     * account_login string
 >
->     * password\_hash string
+>     * password_hash string
 >
->     * ssn\_hash string
+>     * ssn_hash string
 >
->     * ach\_account\_hash string
+>     * ach_account_hash string
 >
->     * drivers\_licence\_number\_hash string
+>     * drivers_licence_number_hash string
 >
->     * input\_ip\_address string
+>     * input_ip_address string
 >
->     * page\_fingerprint string
+>     * page_fingerprint string
 >
->     * device\_id string
+>     * device_id string
 >
->     * fuzzy\_device\_id string
+>     * fuzzy_device_id string
 >
->     * http\_referer\_domain string
+>     * http_referer_domain string
 >
->     * profiled\_domain string
+>     * profiled_domain string
 >
 > - output object
 >
 >   * rawResponse object
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_telephone\_is\_possible string
+>     * account_telephone_is_possible string
 >
->     * account\_telephone\_is\_valid string
+>     * account_telephone_is_valid string
 >
->     * account\_telephone\_type string
+>     * account_telephone_type string
 >
->     * api\_call\_datetime string
+>     * api_call_datetime string
 >
->     * api\_type string
+>     * api_type string
 >
->     * api\_version string
+>     * api_version string
 >
->     * champion\_request\_duration string
+>     * champion_request_duration string
 >
->     * custom\_count\_10 string
+>     * custom_count_10 string
 >
->     * custom\_count\_12 string
+>     * custom_count_12 string
 >
->     * custom\_count\_15 string
+>     * custom_count_15 string
 >
->     * custom\_count\_8 string
+>     * custom_count_8 string
 >
->     * custom\_count\_9 string
+>     * custom_count_9 string
 >
->     * custom\_output\_11 array
+>     * custom_output_11 array
 >
->     * custom\_output\_12 array
+>     * custom_output_12 array
 >
->     * custom\_output\_13 array
+>     * custom_output_13 array
 >
->     * custom\_output\_14 array
+>     * custom_output_14 array
 >
->     * custom\_output\_15 array
+>     * custom_output_15 array
 >
->     * custom\_output\_16 array
+>     * custom_output_16 array
 >
->     * custom\_output\_7 array
+>     * custom_output_7 array
 >
->     * custom\_output\_9 array
+>     * custom_output_9 array
 >
->     * event\_datetime string
+>     * event_datetime string
 >
->     * event\_type string
+>     * event_type string
 >
->     * integration\_hub\_results object
+>     * integration_hub_results object
 >
 >       * 3c8qvza7:DIIG Identity Verification object
 >
 >         * Execute DIIG object
 >
->           * rule\_id string
+>           * rule_id string
 >
->           * tps\_datetime string
+>           * tps_datetime string
 >
->           * tps\_duration string
+>           * tps_duration string
 >
->           * tps\_result string
+>           * tps_result string
 >
->           * tps\_type string
+>           * tps_type string
 >
->           * tps\_vendor string
+>           * tps_vendor string
 >
->           * tps\_vendor\_raw\_response string
+>           * tps_vendor_raw_response string
 >
->           * tps\_was\_timeout string
+>           * tps_was_timeout string
 >
->     * national\_id\_number string
+>     * national_id_number string
 >
->     * national\_id\_type string
+>     * national_id_type string
 >
->     * org\_id string
+>     * org_id string
 >
 >     * policy string
 >
->     * policy\_details\_api object
+>     * policy_details_api object
 >
->       * policy\_detail\_api array
+>       * policy_detail_api array
 >
->     * policy\_engine\_version string
+>     * policy_engine_version string
 >
->     * policy\_score string
+>     * policy_score string
 >
->     * reason\_code array
+>     * reason_code array
 >
->     * request\_id string
+>     * request_id string
 >
->     * request\_result string
+>     * request_result string
 >
->     * review\_status string
+>     * review_status string
 >
->     * risk\_rating string
+>     * risk_rating string
 >
->     * service\_type string
+>     * service_type string
 >
->     * tps\_was\_timeout string
+>     * tps_was_timeout string
 >
 >   * transactionStatus string
 >
@@ -880,7 +880,7 @@ Get a risk assessment from ThreatMetrix using a session ID and optional attribut
 >
 > - Event Type dropDown
 >
->   NOTE: If event\_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event\_type on attribute query, it will run but not increment velocity etc counters.
+>   NOTE: If event_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event_type on attribute query, it will run but not increment velocity etc counters.
 >
 >   * Login
 >
@@ -1142,183 +1142,183 @@ Get a risk assessment from ThreatMetrix using a session ID and optional attribut
 >
 >     * orgId string required
 >
->     * service\_type string required
+>     * service_type string required
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_work\_phone string
+>     * account_work_phone string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_gender string
+>     * account_gender string
 >
->     * account\_national\_id\_number string
+>     * account_national_id_number string
 >
->     * account\_national\_id\_type string
+>     * account_national_id_type string
 >
->     * account\_drivers\_license\_number string
+>     * account_drivers_license_number string
 >
->     * account\_drivers\_license\_issuer string
+>     * account_drivers_license_issuer string
 >
->     * account\_routing\_address string
+>     * account_routing_address string
 >
->     * account\_routing\_standard string
+>     * account_routing_standard string
 >
->     * account\_number string
+>     * account_number string
 >
->     * account\_passport\_number string
+>     * account_passport_number string
 >
->     * account\_passport\_machine\_readable\_line1 string
+>     * account_passport_machine_readable_line1 string
 >
->     * account\_passport\_machine\_readable\_line2 string
+>     * account_passport_machine_readable_line2 string
 >
->     * account\_passport\_expiration\_date string
+>     * account_passport_expiration_date string
 >
->     * account\_passport\_country string
+>     * account_passport_country string
 >
->     * event\_type string
+>     * event_type string
 >
->     * transaction\_id string
+>     * transaction_id string
 >
->     * cc\_number\_hash string
+>     * cc_number_hash string
 >
->     * online\_tld string
+>     * online_tld string
 >
->     * online\_tld\_handle string
+>     * online_tld_handle string
 >
->     * line\_of\_business string
+>     * line_of_business string
 >
->     * application\_name string
+>     * application_name string
 >
->     * shipping\_account\_address\_street1 string
+>     * shipping_account_address_street1 string
 >
->     * shipping\_account\_address\_street2 string
+>     * shipping_account_address_street2 string
 >
->     * shipping\_account\_address\_city string
+>     * shipping_account_address_city string
 >
->     * shipping\_account\_address\_state string
+>     * shipping_account_address_state string
 >
->     * shipping\_account\_address\_zip string
+>     * shipping_account_address_zip string
 >
->     * shipping\_account\_address\_country string
+>     * shipping_account_address_country string
 >
->     * ach\_routing\_number string
+>     * ach_routing_number string
 >
->     * transaction\_amount number
+>     * transaction_amount number
 >
->     * transaction\_currency string
+>     * transaction_currency string
 >
 >     * sessionId string
 >
->     * account\_login string
+>     * account_login string
 >
->     * password\_hash string
+>     * password_hash string
 >
->     * ssn\_hash string
+>     * ssn_hash string
 >
->     * ach\_account\_hash string
+>     * ach_account_hash string
 >
->     * drivers\_licence\_number\_hash string
+>     * drivers_licence_number_hash string
 >
->     * input\_ip\_address string
+>     * input_ip_address string
 >
->     * page\_fingerprint string
+>     * page_fingerprint string
 >
->     * device\_id string
+>     * device_id string
 >
->     * fuzzy\_device\_id string
+>     * fuzzy_device_id string
 >
->     * http\_referer\_domain string
+>     * http_referer_domain string
 >
->     * profiled\_domain string
+>     * profiled_domain string
 >
 > - output object
 >
 >   * rawResponse object
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_telephone\_is\_possible string
+>     * account_telephone_is_possible string
 >
->     * account\_telephone\_is\_valid string
+>     * account_telephone_is_valid string
 >
->     * account\_telephone\_type string
+>     * account_telephone_type string
 >
->     * api\_call\_datetime string
+>     * api_call_datetime string
 >
->     * api\_type string
+>     * api_type string
 >
->     * api\_version string
+>     * api_version string
 >
->     * champion\_request\_duration string
+>     * champion_request_duration string
 >
->     * custom\_count\_15 string
+>     * custom_count_15 string
 >
->     * event\_datetime string
+>     * event_datetime string
 >
->     * event\_type string
+>     * event_type string
 >
->     * national\_id\_number string
+>     * national_id_number string
 >
->     * national\_id\_type string
+>     * national_id_type string
 >
->     * org\_id string
+>     * org_id string
 >
 >     * policy string
 >
->     * policy\_details\_api object
+>     * policy_details_api object
 >
->       * policy\_detail\_api array
+>       * policy_detail_api array
 >
->     * policy\_engine\_version string
+>     * policy_engine_version string
 >
->     * policy\_score string
+>     * policy_score string
 >
->     * reason\_code array
+>     * reason_code array
 >
->     * request\_id string
+>     * request_id string
 >
->     * request\_result string
+>     * request_result string
 >
->     * review\_status string
+>     * review_status string
 >
->     * risk\_rating string
+>     * risk_rating string
 >
->     * service\_type string
+>     * service_type string
 >
 > Output Example
 >
@@ -1646,173 +1646,173 @@ Search by phone number or identity to get ranked results with data insights like
 >
 >     * orgId string required
 >
->     * service\_type string required
+>     * service_type string required
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string required
+>     * account_telephone string required
 >
->     * account\_work\_phone string
+>     * account_work_phone string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_gender string
+>     * account_gender string
 >
->     * account\_national\_id\_number string
+>     * account_national_id_number string
 >
->     * account\_national\_id\_type string
+>     * account_national_id_type string
 >
->     * account\_drivers\_license\_number string
+>     * account_drivers_license_number string
 >
->     * account\_drivers\_license\_issuer string
+>     * account_drivers_license_issuer string
 >
->     * account\_routing\_address string
+>     * account_routing_address string
 >
->     * account\_routing\_standard string
+>     * account_routing_standard string
 >
->     * account\_number string
+>     * account_number string
 >
->     * account\_passport\_number string
+>     * account_passport_number string
 >
->     * account\_passport\_machine\_readable\_line1 string
+>     * account_passport_machine_readable_line1 string
 >
->     * account\_passport\_machine\_readable\_line2 string
+>     * account_passport_machine_readable_line2 string
 >
->     * account\_passport\_expiration\_date string
+>     * account_passport_expiration_date string
 >
->     * account\_passport\_country string
+>     * account_passport_country string
 >
->     * transaction\_id string
+>     * transaction_id string
 >
->     * cc\_number\_hash string
+>     * cc_number_hash string
 >
->     * online\_tld string
+>     * online_tld string
 >
->     * online\_tld\_handle string
+>     * online_tld_handle string
 >
->     * line\_of\_business string
+>     * line_of_business string
 >
->     * application\_name string
+>     * application_name string
 >
->     * shipping\_account\_address\_street1 string
+>     * shipping_account_address_street1 string
 >
->     * shipping\_account\_address\_street2 string
+>     * shipping_account_address_street2 string
 >
->     * shipping\_account\_address\_city string
+>     * shipping_account_address_city string
 >
->     * shipping\_account\_address\_state string
+>     * shipping_account_address_state string
 >
->     * shipping\_account\_address\_zip string
+>     * shipping_account_address_zip string
 >
->     * shipping\_account\_address\_country string
+>     * shipping_account_address_country string
 >
->     * ach\_routing\_number string
+>     * ach_routing_number string
 >
->     * transaction\_amount number
+>     * transaction_amount number
 >
->     * transaction\_currency string
+>     * transaction_currency string
 >
->     * account\_login string
+>     * account_login string
 >
->     * password\_hash string
+>     * password_hash string
 >
->     * ssn\_hash string
+>     * ssn_hash string
 >
->     * ach\_account\_hash string
+>     * ach_account_hash string
 >
->     * drivers\_licence\_number\_hash string
+>     * drivers_licence_number_hash string
 >
->     * input\_ip\_address string
+>     * input_ip_address string
 >
->     * page\_fingerprint string
+>     * page_fingerprint string
 >
->     * device\_id string
+>     * device_id string
 >
->     * fuzzy\_device\_id string
+>     * fuzzy_device_id string
 >
->     * http\_referer\_domain string
+>     * http_referer_domain string
 >
->     * profiled\_domain string
+>     * profiled_domain string
 >
 > - output object
 >
 >   * rawResponse object
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_lex\_id string
+>     * account_lex_id string
 >
->     * account\_lex\_id\_region string
+>     * account_lex_id_region string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_telephone\_is\_possible string
+>     * account_telephone_is_possible string
 >
->     * account\_telephone\_is\_valid string
+>     * account_telephone_is_valid string
 >
->     * account\_telephone\_type string
+>     * account_telephone_type string
 >
->     * api\_call\_datetime string
+>     * api_call_datetime string
 >
->     * api\_type string
+>     * api_type string
 >
->     * api\_version string
+>     * api_version string
 >
->     * champion\_request\_duration string
+>     * champion_request_duration string
 >
->     * event\_datetime string
+>     * event_datetime string
 >
->     * event\_type string
+>     * event_type string
 >
->     * integration\_hub\_results object
+>     * integration_hub_results object
 >
 >       * 3c8qvza7:Phone Finder object
 >
 >         * Execute Phone Finder object
 >
->           * rule\_id string
+>           * rule_id string
 >
->           * tps\_datetime string
+>           * tps_datetime string
 >
->           * tps\_duration string
+>           * tps_duration string
 >
->           * tps\_result string
+>           * tps_result string
 >
->           * tps\_type string
+>           * tps_type string
 >
->           * tps\_vendor string
+>           * tps_vendor string
 >
->           * tps\_vendor\_raw\_response object
+>           * tps_vendor_raw_response object
 >
 >             * Status object
 >
@@ -1824,37 +1824,37 @@ Search by phone number or identity to get ranked results with data insights like
 >
 >             * Products array
 >
->           * tps\_was\_timeout string
+>           * tps_was_timeout string
 >
->     * national\_id\_number string
+>     * national_id_number string
 >
->     * national\_id\_type string
+>     * national_id_type string
 >
->     * org\_id string
+>     * org_id string
 >
 >     * policy string
 >
->     * policy\_details\_api object
+>     * policy_details_api object
 >
->       * policy\_detail\_api array
+>       * policy_detail_api array
 >
->     * policy\_engine\_version string
+>     * policy_engine_version string
 >
->     * policy\_score string
+>     * policy_score string
 >
->     * reason\_code array
+>     * reason_code array
 >
->     * request\_id string
+>     * request_id string
 >
->     * request\_result string
+>     * request_result string
 >
->     * review\_status string
+>     * review_status string
 >
->     * risk\_rating string
+>     * risk_rating string
 >
->     * service\_type string
+>     * service_type string
 >
->     * tps\_was\_timeout string
+>     * tps_was_timeout string
 >
 > Output Example
 >
@@ -2559,7 +2559,7 @@ Evaluate email address metadata points such as domain details, email details, ri
 >
 > - User Email textField
 >
->   The Emailage username used to make the query. By default, if user\_email is not specified, we use the account's default user and the associated department. If this value is applied, we use the specified user and department. NOTE: This is NOT the email address being queried. If this field is populated with an email other than one authorized to run queries, 3001 errors will be generated
+>   The Emailage username used to make the query. By default, if user_email is not specified, we use the account's default user and the associated department. If this value is applied, we use the specified user and department. NOTE: This is NOT the email address being queried. If this field is populated with an email other than one authorized to run queries, 3001 errors will be generated
 >
 > - accept-language HTTP header textField
 >
@@ -2589,7 +2589,7 @@ Evaluate email address metadata points such as domain details, email details, ri
 >
 >     * phone string
 >
->     * secondary\_email string
+>     * secondary_email string
 >
 >     * existingcustomer boolean
 >
@@ -2635,17 +2635,17 @@ Evaluate email address metadata points such as domain details, email details, ri
 >
 >     * transactionTypeDescription string
 >
->     * time\_to\_service string
+>     * time_to_service string
 >
->     * service\_date string
+>     * service_date string
 >
->     * service\_location string
+>     * service_location string
 >
->     * service\_detail string
+>     * service_detail string
 >
->     * service\_category string
+>     * service_category string
 >
->     * delivery\_type string
+>     * delivery_type string
 >
 >     * useragent string
 >
@@ -2653,11 +2653,11 @@ Evaluate email address metadata points such as domain details, email details, ri
 >
 >     * devicesource string
 >
->     * user\_email string
+>     * user_email string
 >
 >     * acceptlang string
 >
->     * response\_language string
+>     * response_language string
 >
 > - output object
 >
@@ -2909,7 +2909,7 @@ Challenge users with knowledge-based questions.
 >
 >   * Communications Error
 >
->   * Internal Application\_Error
+>   * Internal Application_Error
 >
 >   * Invalid Information
 >
@@ -2984,27 +2984,27 @@ Challenge users with knowledge-based questions.
 >
 >     * year string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
 >     * ssnNumber string
 >
@@ -3226,7 +3226,7 @@ Send a one-time password.
 >
 > - Event Type dropDown
 >
->   NOTE: If event\_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event\_type on attribute query, it will run but not increment velocity etc counters.
+>   NOTE: If event_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event_type on attribute query, it will run but not increment velocity etc counters.
 >
 >   * Login
 >
@@ -3267,7 +3267,7 @@ Send a one-time password.
 >
 >     * apiKey2 string required
 >
->     * event\_type string
+>     * event_type string
 >
 >     * Method string required
 >
@@ -3279,39 +3279,39 @@ Send a one-time password.
 >
 >     * Language string required
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_gender string
+>     * account_gender string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_national\_id\_number string
+>     * account_national_id_number string
 >
->     * account\_national\_id\_type string
+>     * account_national_id_type string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_telephone\_context string
+>     * account_telephone_context string
 >
->     * account\_telephone\_geo string
+>     * account_telephone_geo string
 >
 > * complete object
 >
@@ -3335,97 +3335,97 @@ Send a one-time password.
 >
 >   * rawResponse object
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_email\_activities array
+>     * account_email_activities array
 >
->     * account\_email\_attributes array
+>     * account_email_attributes array
 >
->     * account\_email\_first\_seen string
+>     * account_email_first_seen string
 >
->     * account\_email\_last\_event string
+>     * account_email_last_event string
 >
->     * account\_email\_last\_update string
+>     * account_email_last_update string
 >
->     * account\_email\_result string
+>     * account_email_result string
 >
->     * account\_email\_score string
+>     * account_email_score string
 >
->     * account\_email\_worst\_score string
+>     * account_email_worst_score string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_name\_activities array
+>     * account_name_activities array
 >
->     * account\_name\_attributes array
+>     * account_name_attributes array
 >
->     * account\_name\_first\_seen string
+>     * account_name_first_seen string
 >
->     * account\_name\_last\_event string
+>     * account_name_last_event string
 >
->     * account\_name\_last\_update string
+>     * account_name_last_update string
 >
->     * account\_name\_result string
+>     * account_name_result string
 >
->     * account\_name\_score string
+>     * account_name_score string
 >
->     * account\_name\_worst\_score string
+>     * account_name_worst_score string
 >
 >     * action string
 >
->     * action\_template string
+>     * action_template string
 >
->     * api\_call\_datetime string
+>     * api_call_datetime string
 >
->     * api\_caller\_ip string
+>     * api_caller_ip string
 >
->     * api\_type string
+>     * api_type string
 >
->     * auth\_method string
+>     * auth_method string
 >
->     * auth\_status string
+>     * auth_status string
 >
->     * champion\_request\_duration string
+>     * champion_request_duration string
 >
->     * enabled\_services array
+>     * enabled_services array
 >
->     * event\_date string
+>     * event_date string
 >
->     * event\_datetime string
+>     * event_datetime string
 >
->     * event\_last\_update string
+>     * event_last_update string
 >
->     * event\_type string
+>     * event_type string
 >
->     * input\_request\_id string
+>     * input_request_id string
 >
->     * integration\_hub\_results object
+>     * integration_hub_results object
 >
 >       * 11jr7q70:Authentication object
 >
 >         * Authentication object
 >
->           * rule\_id string
+>           * rule_id string
 >
->           * tps\_datetime string
+>           * tps_datetime string
 >
->           * tps\_duration string
+>           * tps_duration string
 >
->           * tps\_error string
+>           * tps_error string
 >
->           * tps\_result string
+>           * tps_result string
 >
->           * tps\_type string
+>           * tps_type string
 >
->           * tps\_vendor string
+>           * tps_vendor string
 >
->           * tps\_vendor\_raw\_response object
+>           * tps_vendor_raw_response object
 >
 >             * Status object
 >
@@ -3441,67 +3441,67 @@ Send a one-time password.
 >
 >             * Products array
 >
->           * tps\_was\_timeout string
+>           * tps_was_timeout string
 >
->     * national\_id\_type null
+>     * national_id_type null
 >
->     * org\_id string
+>     * org_id string
 >
->     * original\_event\_created string
+>     * original_event_created string
 >
->     * original\_event\_updated string
+>     * original_event_updated string
 >
 >     * policy string
 >
->     * policy\_details\_api object
+>     * policy_details_api object
 >
->       * policy\_detail\_api array
+>       * policy_detail_api array
 >
->     * policy\_engine\_version string
+>     * policy_engine_version string
 >
->     * policy\_score string
+>     * policy_score string
 >
->     * primary\_industry string
+>     * primary_industry string
 >
->     * reason\_code array
+>     * reason_code array
 >
->     * request\_duration string
+>     * request_duration string
 >
->     * request\_id string
+>     * request_id string
 >
->     * request\_id\_activities array
+>     * request_id_activities array
 >
->     * request\_result string
+>     * request_result string
 >
->     * review\_status string
+>     * review_status string
 >
->     * risk\_rating string
+>     * risk_rating string
 >
->     * secondary\_industry string
+>     * secondary_industry string
 >
->     * service\_type string
+>     * service_type string
 >
->     * summary\_risk\_score string
+>     * summary_risk_score string
 >
->     * tmx\_reason\_code array
+>     * tmx_reason_code array
 >
->     * tmx\_risk\_rating string
+>     * tmx_risk_rating string
 >
->     * tps\_datetime string
+>     * tps_datetime string
 >
->     * tps\_duration string
+>     * tps_duration string
 >
->     * tps\_error string
+>     * tps_error string
 >
->     * tps\_result string
+>     * tps_result string
 >
->     * tps\_type string
+>     * tps_type string
 >
->     * tps\_vendor string
+>     * tps_vendor string
 >
->     * tps\_vendor\_raw\_response string
+>     * tps_vendor_raw_response string
 >
->     * tps\_was\_timeout string
+>     * tps_was_timeout string
 >
 > Output Example
 >
@@ -3738,7 +3738,7 @@ Challenge users with knowledge-based questions.
 >
 > - Event Type dropDown
 >
->   NOTE: If event\_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event\_type on attribute query, it will run but not increment velocity etc counters.
+>   NOTE: If event_type is passed to attribute query, it WILL increment velocity counters etc just like a session query. if there is no event_type on attribute query, it will run but not increment velocity etc counters.
 >
 >   * Login
 >
@@ -3779,67 +3779,67 @@ Challenge users with knowledge-based questions.
 >
 >     * apiKey2 string required
 >
->     * event\_type string
+>     * event_type string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_middle\_name string
+>     * account_middle_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * account\_date\_of\_birth string
+>     * account_date_of_birth string
 >
->     * account\_gender string
+>     * account_gender string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_address\_street2 string
+>     * account_address_street2 string
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_zip string
+>     * account_address_zip string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_national\_id\_number string
+>     * account_national_id_number string
 >
->     * account\_national\_id\_type string
+>     * account_national_id_type string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_telephone string
+>     * account_telephone string
 >
->     * account\_telephone\_context string
+>     * account_telephone_context string
 >
->     * account\_telephone\_geo string
+>     * account_telephone_geo string
 >
 > - output object
 >
 >   * rawResponse object
 >
->     * account\_address\_city string
+>     * account_address_city string
 >
->     * account\_address\_country string
+>     * account_address_country string
 >
->     * account\_address\_state string
+>     * account_address_state string
 >
->     * account\_address\_street1 string
+>     * account_address_street1 string
 >
->     * account\_email string
+>     * account_email string
 >
->     * account\_first\_name string
+>     * account_first_name string
 >
->     * account\_last\_name string
+>     * account_last_name string
 >
->     * auth\_method string
+>     * auth_method string
 >
->     * auth\_status string
+>     * auth_status string
 >
->     * event\_datetime string
+>     * event_datetime string
 >
->     * event\_type string
+>     * event_type string
 >
 >     * answers object
 >
@@ -3847,25 +3847,25 @@ Challenge users with knowledge-based questions.
 >
 >       * Questions array
 >
->     * input\_request\_id string
+>     * input_request_id string
 >
->     * original\_event\_created string
+>     * original_event_created string
 >
->     * original\_event\_updated string
+>     * original_event_updated string
 >
 >     * policy string
 >
->     * policy\_engine\_version string
+>     * policy_engine_version string
 >
->     * policy\_site\_id string
+>     * policy_site_id string
 >
->     * request\_duration string
+>     * request_duration string
 >
->     * request\_id string
+>     * request_id string
 >
->     * request\_result string
+>     * request_result string
 >
->     * review\_status string
+>     * review_status string
 >
 > Output Example
 >
@@ -3944,7 +3944,7 @@ Verify user identities with government ID validation and selfie liveness checks.
 >
 >   * Communications Error
 >
->   * Internal Application\_Error
+>   * Internal Application_Error
 >
 >   * Invalid Information
 >

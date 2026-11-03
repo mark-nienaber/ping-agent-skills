@@ -2,71 +2,75 @@
 
 - Product: PingAM
 - Version: 8.1
-- Sync date: 2026-07-03
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/pingam/llms.txt
-- Guides discovered: 27
-- Guides captured: 24
-- Guides fully captured: 10
-- Guides partially captured: 14
-- Guides without snapshots: 3
-- Total pages indexed: 1117
-- Total snapshot pages captured: 359
+- Guides discovered: 28
+- Guides captured: 26
+- Guides fully captured: 13
+- Guides partially captured: 13
+- Guides without snapshots: 2
+- Total pages indexed: 1123
+- Total snapshot pages captured: 353
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| entity-reference.md | assembled | <546 pages from entity-reference> | 546 | 20 | partial |
-| am-oauth2.md | assembled | <63 pages from am-oauth2> | 63 | 20 | partial |
-| am-authentication.md | assembled | <55 pages from am-authentication> | 55 | 20 | partial |
+| entity-reference.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 546 | 20 | partial |
+| am-oauth2.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 63 | 20 | partial |
+| am-authentication.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 55 | 20 | partial |
 | release-notes.md | single-page | https://docs.pingidentity.com/pingam/release-notes/single-page.md | 49 | 49 | full |
-| security.md | assembled | <43 pages from security> | 43 | 20 | partial |
-| am-scripting.md | assembled | <37 pages from am-scripting> | 37 | 20 | partial |
-| installation.md | assembled | <33 pages from installation> | 33 | 18 | partial |
-| am-saml2.md | assembled | <30 pages from am-saml2> | 30 | 14 | partial |
-| setup.md | assembled | <30 pages from setup> | 30 | 20 | partial |
-| am-oidc1.md | assembled | <29 pages from am-oidc1> | 29 | 20 | partial |
-| auth-nodes.md | assembled | <27 pages from auth-nodes> | 27 | 20 | partial |
-| uma.md | assembled | <24 pages from uma> | 24 | 15 | partial |
-| am-authorization.md | assembled | <21 pages from am-authorization> | 21 | 1 | partial |
-| am-sessions.md | assembled | <14 pages from am-sessions> | 14 | 13 | partial |
-| monitoring.md | assembled | <14 pages from monitoring> | 14 | 14 | full |
-| deployment-planning.md | assembled | <13 pages from deployment-planning> | 13 | 13 | full |
-| user-self-service.md | assembled | <12 pages from user-self-service> | 12 | 12 | full |
-| amster.md | assembled | <11 pages from amster> | 11 | 11 | full |
-| maintenance.md | assembled | <11 pages from maintenance> | 11 | 11 | full |
-| sts.md | assembled | <10 pages from sts> | 10 | 10 | full |
-| am-rest.md | assembled | <7 pages from am-rest> | 7 | 6 | partial |
-| ui-customization.md | assembled | <7 pages from ui-customization> | 7 | 7 | full |
-| am-reference.md | assembled | <4 pages from am-reference> | 4 | 4 | full |
-| root.md | assembled | <1 pages from root> | 1 | 1 | full |
+| security.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 44 | 20 | partial |
+| installation.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 33 | 13 | partial |
+| am-saml2.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 31 | 20 | partial |
+| setup.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 30 | 20 | partial |
+| am-oidc1.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 29 | 20 | partial |
+| auth-nodes.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 27 | 19 | partial |
+| uma.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 24 | 2 | partial |
+| am-authorization.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 21 | 20 | partial |
+| am-sessions.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 14 | 14 | full |
+| monitoring.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 14 | 14 | full |
+| deployment-planning.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 13 | 13 | full |
+| user-self-service.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 12 | 12 | full |
+| amster.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 11 | 11 | full |
+| maintenance.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 11 | 3 | partial |
+| cts.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 9 | 3 | partial |
+| upgrade.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 9 | 9 | full |
+| evaluation.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 8 | 8 | full |
+| am-rest.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 7 | 7 | full |
+| ui-customization.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 7 | 7 | full |
+| am-reference.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 4 | 4 | full |
+| integrations.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 4 | 4 | full |
+| root.md | assembled | https://docs.pingidentity.com/pingam/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 565e6e37936d37d23aed243f122b251e2747f11dca08ffa65eaeed32065f6c7d |
-| snapshots/entity-reference.md | f39a7c62bd6ed2c2290dcafaae15ed27117fe10c5118049f4ef7f26794b5d987 |
-| snapshots/am-oauth2.md | 062a52a1f70b191c7c3dd8506b8d9141c693a99b47429cef7b2d7b45911fcf88 |
-| snapshots/am-authentication.md | 332a5c88eb36147d20b09d3d1473dfe9fa127cffb72c46a3bd0704b3667904e6 |
-| snapshots/release-notes.md | bbd645d1d884df3c4408fb8f63fed974cfd56cbb3064b076a87cec788c2735a2 |
-| snapshots/security.md | edfc62f122de1b482336b4a500bdbe8af6b73164b58ab4128a3db4fc40db4695 |
-| snapshots/am-scripting.md | 8c684d33d0a66204730ca97ec69ff90bd05b099591ebcf8d4e5fc4457318381e |
-| snapshots/installation.md | 14e2738266ffe0cade52258ee565a3d88a4263e188e4c3a6b466ccb4872ff4bc |
-| snapshots/am-saml2.md | 5ddf67bcb7c49ea7e043ff22c4e12d8acf697c5a7fbc805c5cb67acc66ca026f |
-| snapshots/setup.md | d16825dbf6c8fcf9a14ac870cf163b49a344ca9981464384a0ab9c22959b980c |
-| snapshots/am-oidc1.md | 65ecacc0d63ae797eecca3e9fe78beefb3905cb3f5e9de9b73b87e186e39fe05 |
-| snapshots/auth-nodes.md | 63bdde3bb99ee331160d4b9da7857acfda43d828e85b95032bf208ed81adba5c |
-| snapshots/uma.md | cad6b4a1903a0a7eec5461352992c598c6272a346874968ab52d36a0f66dbf43 |
-| snapshots/am-authorization.md | 0768c501a56fc33b017d9a35f78fe842748e62a0c10ee53744c47e4a6af965f0 |
-| snapshots/am-sessions.md | d51cd2b5bc9dceed40d1b27b7001d0d7e72604b81306edad722a3baf41439418 |
-| snapshots/monitoring.md | f9806f0d90919a44496d8551bebd9a62b16ce5c54b84258d7b5acc4887a76748 |
-| snapshots/deployment-planning.md | f00d3296c9d50d8305a1eb7620733c49e558bab5d871f683e480491577a3257a |
-| snapshots/user-self-service.md | 27561169babeb122620cfebed2124601b52297b0b1d9ae7110b31a4628a78312 |
-| snapshots/amster.md | 8e16224c3b1436e6c96ea9040645cf5868e2caaba4a188d5021d6c67cd784dd9 |
-| snapshots/maintenance.md | 1632a5e7233d1ebc8eba0c8b1de10a9a7acd55be1eeb4c91cc62cd1578389c55 |
-| snapshots/sts.md | 9de72484033f29a36ae80196754241fa77bcce3dc297131029c2f1233242d1cb |
-| snapshots/am-rest.md | 1250774c2b97bdfcfa9afff41a52ec4e2695d682185e4fc6183a784dd852cf1a |
-| snapshots/ui-customization.md | 56409d70bbfa32544cf2030271088c03aae39b4df6722a05b2498b9bb7efefaf |
-| snapshots/am-reference.md | 7771fa07d3d6dc22e99826eed85f1777a35e7c935f17ea428e1b2c32894193cf |
-| snapshots/root.md | 9540c6ebd0060fb671afa75d20487e5c347d88c69ce2bbd3b11e5d716ee61f91 |
+| llms.txt | 2dc03fd841e55834dc24ef76fc75b4882429a8510cd3ee97e85440a0052a8ce2 |
+| snapshots/entity-reference.md | a9b0fd46890d6928edd1234a549075f8d5394c63fa84d2034dd01c8223b5cee8 |
+| snapshots/am-oauth2.md | f68ff4eed4e959fc4c31427f607d5019e9b61f01251e03a5c1ed2151be3f80e7 |
+| snapshots/am-authentication.md | 8f19c1b6d27b0781473e6c9223bdb371eaa6283606cc2ea7a5120423378630f6 |
+| snapshots/release-notes.md | efd53636f326b927373289462f60a92de21b40e1135aa49091fc9da4f4ef85c7 |
+| snapshots/security.md | d0a9dcaecfd8500725a75ecaa55d28ac2e86a2a2865e4021023ba2f490b76525 |
+| snapshots/installation.md | 5bf7b436a9be68ef8d96eefe0fd2ede06b38a94f07f0a32ce6fb42515d9e6b08 |
+| snapshots/am-saml2.md | 0519bc510301bf4295f3462e921d84ff6c1ea7adcd0ceb44f00be262b480b447 |
+| snapshots/setup.md | 7dab94ea3280207e77fb47f2a57a9aaa3c60d4c820422b085c0376291ec57fb7 |
+| snapshots/am-oidc1.md | 0dd1811914c94735c6324a205dbb7bd9fc7a082240110b7f5a6a8cf9080180d3 |
+| snapshots/auth-nodes.md | 71f9844d28cd631ad8a8606e25f478beaa0d33bf7e38d24fee4cadafe74924fb |
+| snapshots/uma.md | 367369093751d26896a20bc6430dd2fc1c491d32c7e709eeb4ad09e72aad6197 |
+| snapshots/am-authorization.md | 881376bf2ead5b3c65526dd9e188e8bc8971a429c20dad62bc90fec491d323a2 |
+| snapshots/am-sessions.md | 58ffbc4a15675652ca376745419c1d118276df7374b0bc25505c462fb7ca8180 |
+| snapshots/monitoring.md | 9b2f47e97633db658f7d89ab90f4b3074434c747cdfc874d97fccc0505778268 |
+| snapshots/deployment-planning.md | 575c4a2f8e17e28a364dbfa815ea2a0c47510882ba3ed375d7ae36857ef644b2 |
+| snapshots/user-self-service.md | 1bdc88a5d996def267140bb7af9b49bcbb6d28603e1537bea64b3ce0899caeb0 |
+| snapshots/amster.md | b9710e1894d688d3516af855e9343dcfd832a1ae7230bdddd8c0e62a4bda312e |
+| snapshots/maintenance.md | 53ebe8de47415c2c1026a73fdbc575b57c05e913f684c932ecd1fd8d703dfafc |
+| snapshots/cts.md | 477b2768500cd81b5b035e2a6bd02ab63f458d622b2f9c287681fad71c17fbea |
+| snapshots/upgrade.md | 1be09498b4bf973aca84ae96308a5cb630073cb5427b33775b4544198a28ebb0 |
+| snapshots/evaluation.md | 356ff9c837d3083820579c3d0917077ba290c95f172ca1dc5ac3d0e98d24bcfa |
+| snapshots/am-rest.md | ee9d0d087c7a8dc2adc66ec7b764ee858ac3a87c0076951258def3f548f7b18b |
+| snapshots/ui-customization.md | 1baa21638eb1a35b8a24361db7ae3593ff198899bbeea51ef15fcccd82aad5d5 |
+| snapshots/am-reference.md | 0b233ae538c97d0815c89276a53b4c309b87e4e284f10cf5add23ce0ebcb0528 |
+| snapshots/integrations.md | 373326d480da4b86cc026056c3bbd2ac617cb1e6a6ba1381be5629c17d57b477 |
+| snapshots/root.md | c8e022da5596b86372ac53ff4b2ffd9df412f8078899bb75ecd29d8810a85d98 |

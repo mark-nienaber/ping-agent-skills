@@ -6748,251 +6748,36 @@ am> query AgentGroups --realm Realm --filter filter
 ---
 
 ---
-title: Agents
-description: Aggregating Agents handler that is responsible for querying the aggregating agents
+title: AIAgents
+description: Agents handler that is responsible for managing agents
 component: pingam
 version: 8.1
-page_id: pingam:entity-reference:sec-amster-entity-agents
-canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-agents.html
+page_id: pingam:entity-reference:sec-amster-entity-aiagents
+canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-aiagents.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  sec-amster-entity-agents-realm-ops: Realm Operations
-  sec-amster-entity-agents-realm-ops-getalltypes: getAllTypes
-  sec-amster-entity-agents-realm-ops-getcreatabletypes: getCreatableTypes
-  sec-amster-entity-agents-realm-ops-nextdescendents: nextdescendents
-  sec-amster-entity-agents-realm-ops-query: query
-  sec-amster-entity-agents-global-ops: Global Operations
-  sec-amster-entity-agents-global-ops-getalltypes: getAllTypes
-  sec-amster-entity-agents-global-ops-getcreatabletypes: getCreatableTypes
-  sec-amster-entity-agents-global-ops-nextdescendents: nextdescendents
+  sec-amster-entity-aiagents-realm-ops: Realm Operations
+  sec-amster-entity-aiagents-realm-ops-create: create
+  sec-amster-entity-aiagents-realm-ops-delete: delete
+  sec-amster-entity-aiagents-realm-ops-getalltypes: getAllTypes
+  sec-amster-entity-aiagents-realm-ops-getcreatabletypes: getCreatableTypes
+  sec-amster-entity-aiagents-realm-ops-nextdescendents: nextdescendents
+  sec-amster-entity-aiagents-realm-ops-query: query
+  sec-amster-entity-aiagents-realm-ops-read: read
+  sec-amster-entity-aiagents-realm-ops-update: update
 ---
 
-# Agents
+# AIAgents
 
 ## Realm Operations
 
-Aggregating Agents handler that is responsible for querying the aggregating agents
+Agents handler that is responsible for managing agents
 
 Resource path:
 
 ```
-/realm-config/agents
-```
-
-Resource version: `0.0`
-
-### getAllTypes
-
-Obtain the collection of all secondary configuration types related to the resource.
-
-**Usage**
-
-```
-am> action Agents --realm Realm --actionName getAllTypes
-```
-
-### getCreatableTypes
-
-Obtain the collection of secondary configuration types that have yet to be added to the resource.
-
-**Usage**
-
-```
-am> action Agents --realm Realm --actionName getCreatableTypes
-```
-
-### nextdescendents
-
-Obtain the collection of secondary configuration instances that have been added to the resource.
-
-**Usage**
-
-```
-am> action Agents --realm Realm --actionName nextdescendents
-```
-
-### query
-
-Querying the aggregating agents
-
-**Usage**
-
-```
-am> query Agents --realm Realm --filter filter
-```
-
-**Parameters**
-
-* *\--filter*
-
-  A CREST formatted query filter, where "true" will query all. Fields that can be queried: \[\*]
-
-## Global Operations
-
-Global and default configuration for agents
-
-Resource path:
-
-```
-/global-config/agents
-```
-
-Resource version: `1.0`
-
-### getAllTypes
-
-Obtain the collection of all secondary configuration types related to the resource.
-
-**Usage**
-
-```
-am> action Agents --global --actionName getAllTypes
-```
-
-### getCreatableTypes
-
-Obtain the collection of secondary configuration types that have yet to be added to the resource.
-
-**Usage**
-
-```
-am> action Agents --global --actionName getCreatableTypes
-```
-
-### nextdescendents
-
-Obtain the collection of secondary configuration instances that have been added to the resource.
-
-**Usage**
-
-```
-am> action Agents --global --actionName nextdescendents
-```
-
----
-
----
-title: AgentService
-description: Resource path:
-component: pingam
-version: 8.1
-page_id: pingam:entity-reference:sec-amster-entity-agentservice
-canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-agentservice.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  sec-amster-entity-agentservice-global-ops: Global Operations
-  sec-amster-entity-agentservice-global-ops-getalltypes: getAllTypes
-  sec-amster-entity-agentservice-global-ops-getcreatabletypes: getCreatableTypes
-  sec-amster-entity-agentservice-global-ops-nextdescendents: nextdescendents
-  sec-amster-entity-agentservice-global-ops-read: read
-  sec-amster-entity-agentservice-global-ops-update: update
----
-
-# AgentService
-
-## Global Operations
-
-Resource path:
-
-```
-/global-config/agents/AgentService
-```
-
-Resource version: `1.0`
-
-### getAllTypes
-
-Obtain the collection of all secondary configuration types related to the resource.
-
-**Usage**
-
-```
-am> action AgentService --global --actionName getAllTypes
-```
-
-### getCreatableTypes
-
-Obtain the collection of secondary configuration types that have yet to be added to the resource.
-
-**Usage**
-
-```
-am> action AgentService --global --actionName getCreatableTypes
-```
-
-### nextdescendents
-
-Obtain the collection of secondary configuration instances that have been added to the resource.
-
-**Usage**
-
-```
-am> action AgentService --global --actionName nextdescendents
-```
-
-### read
-
-**Usage**
-
-```
-am> read AgentService --global
-```
-
-### update
-
-**Usage**
-
-```
-am> update AgentService --global --body body
-```
-
-**Parameters**
-
-* *\--body*
-
-  The resource in JSON format, described by the following JSON schema:
-
-  ```json
-  {
-    "type" : "object"
-  }
-  ```
-
----
-
----
-title: AIAgentGroups
-description: Agent Groups handler that is responsible for managing agent groups
-component: pingam
-version: 8.1
-page_id: pingam:entity-reference:sec-amster-entity-aiagentgroups
-canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-aiagentgroups.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  sec-amster-entity-aiagentgroups-realm-ops: Realm Operations
-  sec-amster-entity-aiagentgroups-realm-ops-create: create
-  sec-amster-entity-aiagentgroups-realm-ops-delete: delete
-  sec-amster-entity-aiagentgroups-realm-ops-getalltypes: getAllTypes
-  sec-amster-entity-aiagentgroups-realm-ops-getcreatabletypes: getCreatableTypes
-  sec-amster-entity-aiagentgroups-realm-ops-nextdescendents: nextdescendents
-  sec-amster-entity-aiagentgroups-realm-ops-query: query
-  sec-amster-entity-aiagentgroups-realm-ops-read: read
-  sec-amster-entity-aiagentgroups-realm-ops-update: update
----
-
-# AIAgentGroups
-
-## Realm Operations
-
-Agent Groups handler that is responsible for managing agent groups
-
-Resource path:
-
-```
-/realm-config/agents/groups/AIAgent
+/realm-config/agents/AIAgent
 ```
 
 Resource version: `0.0`
@@ -7002,7 +6787,7 @@ Resource version: `0.0`
 **Usage**
 
 ```
-am> create AIAgentGroups --realm Realm --id id --body body
+am> create AIAgents --realm Realm --id id --body body
 ```
 
 **Parameters**
@@ -7019,344 +6804,263 @@ am> create AIAgentGroups --realm Realm --id id --body body
   {
     "type" : "object",
     "properties" : {
-      "coreUmaClientConfig" : {
+      "overrideOAuth2ClientConfig" : {
         "type" : "object",
-        "title" : "UMA",
-        "propertyOrder" : 4,
+        "title" : "OAuth2 Provider Overrides",
+        "propertyOrder" : 5,
         "properties" : {
-          "claimsRedirectionUris" : {
-            "title" : "Claims Redirection URIs",
-            "description" : "Redirection URIs for returning to the client from UMA claims collection. If multiple URIs are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
-            "propertyOrder" : 23200,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          }
-        }
-      },
-      "coreOpenIDClientConfig" : {
-        "type" : "object",
-        "title" : "OpenID Connect",
-        "propertyOrder" : 2,
-        "properties" : {
-          "jwtTokenLifetime" : {
-            "title" : "OpenID Connect JWT Token Lifetime (seconds)",
-            "description" : "The time in seconds a JWT is valid for. <i>NB</i> If this field is set to zero, JWT Token Lifetime of the OAuth2 Provider is used instead of.",
-            "propertyOrder" : 26100,
+          "accessTokenModificationScript" : {
+            "title" : "Access Token Modification Script",
+            "description" : "The plugin that is executed when issuing an access token. <p>The plugin can change the access token's internal data structure to include or exclude particular fields.",
+            "propertyOrder" : 40400,
             "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "backchannel_logout_uri" : {
-            "title" : "Backchannel Logout URL",
-            "description" : "RP URL that will cause the RP to log itself out when sent a Logout Token by the OP. This URL SHOULD use the https scheme and MAY contain port, path, and query parameter components; however, it MAY use the http scheme, provided that the Client Type is confidential, as defined in Section 2.1 of OAuth 2.0 [RFC6749], and provided the OP allows the use of http RP URIs.",
-            "propertyOrder" : 35200,
-            "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "defaultMaxAgeEnabled" : {
-            "title" : "Default Max Age Enabled",
-            "description" : "Whether or not the default max age is enforced.",
-            "propertyOrder" : 25600,
+          "oidcMayActScript" : {
+            "title" : "OIDC ID Token May Act Script",
+            "description" : "The script that is executed when issuing an OIDC ID Token explicitly to modify the <code>may_act</code> claim placed on the token.",
+            "propertyOrder" : 40600,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "usePolicyEngineForScope" : {
+            "title" : "Use Policy Engine for Scope decisions",
+            "description" : "With this setting enabled, the policy engine is consulted for each scope value that is requested.<br><br>If a policy returns an action of GRANT=true, the scope is consented automatically, and the user is not consulted in a user-interaction flow. If a policy returns an action of GRANT=false, the scope is not added to any resulting token, and the user will not see it in a user-interaction flow. If no policy returns a value for the GRANT action, then if the grant type is user-facing (i.e. authorization or device code flows), the user is asked for consent (or saved consent is used), and if the grant type is not user-facing (password or client credentials), the scope is not added to any resulting token.",
+            "propertyOrder" : 40300,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "defaultMaxAge" : {
-            "title" : "Default Max Age",
-            "description" : "Minimum value 0. Sets the maximum length of time in seconds a session may be active after the authorization service has succeeded before the user must actively re-authenticate.",
-            "propertyOrder" : 25500,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "clientSessionUri" : {
-            "title" : "Client Session URI",
-            "description" : "This is the URI that will be used to check messages sent to the session management endpoints. This URI must match the origin of the message",
-            "propertyOrder" : 25200,
+          "customLoginUrlTemplate" : {
+            "title" : "Custom Login URL Template",
+            "description" : "Custom URL for handling login, to override the default OpenAM login page.<br><br>Supports Freemarker syntax, with the following variables:<table><tr><th>Variable</th><th>Description</th></tr><tr><td><code>gotoUrl</code></td><td><p>The URL to redirect to after login.</p></td></tr><tr><td><code>acrValues</code></td><td><p>The Authentication Context Class Reference (acr) values for the authorization request.</p></td></tr><tr><td><code>realm</code></td><td><p>The OpenAM realm the authorization request was made on.</p></td></tr><tr><td><code>module</code></td><td><p>The name of the OpenAM authentication module requested to perform resource owner authentication.</p></td></tr><tr><td><code>service</code></td><td><p>The name of the OpenAM authentication chain requested to perform resource owner authentication.</p></td></tr><tr><td><code>locale</code></td><td><p>A space-separated list of locales, ordered by preference.</p></td></tr></table>The following example template redirects users to a non-OpenAM front end to handle login, which will then redirect back to the <code>/oauth2/authorize</code> endpoint with any required parameters:<p> <code>http://mylogin.com/login?goto=${goto}&lt;#if acrValues??&gt;&amp;acr_values=${acrValues}&lt;&#x2F;#if&gt;&lt;#if realm??&gt;&amp;realm=${realm}&lt;&#x2F;#if&gt;&lt;#if module??&gt;&amp;module=${module}&lt;&#x2F;#if&gt;&lt;#if service??&gt;&amp;service=${service}&lt;&#x2F;#if&gt;&lt;#if locale??&gt;&amp;locale=${locale}&lt;&#x2F;#if&gt;</code><br><b>NOTE</b>: Default OpenAM login page is constructed using \"Base URL Source\" service.",
+            "propertyOrder" : 40900,
             "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "claims" : {
-            "title" : "Claim(s)",
-            "description" : "List of claim name translations, which will override those specified for the AS. Claims are values that are presented to the user to inform them what data is being made available to the Client.<br><br>Claims may be entered as simple strings or pipe separated strings representing the internal claim name, locale, and localized description; e.g. \"name|en|Your full name\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"name|Your full name\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"name|\" would allow the claim \"name\" to be used by the client, but would not display it to the user when it was requested.<p>If a value is not given here, the value will be computed from the OAuth 2 Provider settings.</p>",
-            "propertyOrder" : 23400,
+          "evaluateScopeClass" : {
+            "title" : "Scope Evaluation Plugin Implementation Class",
+            "description" : "The plugin that is executed when retrieving access token's information. <p>The plugin can provide a mechanism to associate scopes with profile attribute values, such as if one of the scopes is mail, the resource owner's email address is provided in the information returned. <p>The provided plugin class must implement the scope evaluation plugin interface: <code>org.forgerock.oauth2.core.plugins.ScopeEvaluator</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultScopeEvaluator</code>",
+            "propertyOrder" : 42300,
             "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+            "type" : "string",
             "exampleValue" : ""
           },
-          "postLogoutRedirectUri" : {
-            "title" : "Post Logout Redirect URIs",
-            "description" : "URIs that can be redirected to after the client logout process.",
-            "propertyOrder" : 25000,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+          "authorizeEndpointDataProviderPluginType" : {
+            "title" : "Authorize Endpoint Data Provider Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Authorize Endpoint Data Provider Script will be executed and when plugin type is JAVA then the Authorize Endpoint Data Provider Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42700,
+            "required" : true,
+            "type" : "string",
             "exampleValue" : ""
           },
-          "backchannel_logout_session_required" : {
-            "title" : "Backchannel Logout Session Required",
-            "description" : "Boolean value specifying whether the RP requires that a sid (session ID) Claim be included in the Logout Token to identify the RP session with the OP when the Backchannel Logout URL is used.",
-            "propertyOrder" : 35300,
+          "tokenEncryptionEnabled" : {
+            "title" : "Encrypt Client-Side Tokens",
+            "description" : "Whether client-side access and refresh tokens should be encrypted.<br><br>Enabling token encryption will disable token signing as encryption is performed using direct symmetric encryption.",
+            "propertyOrder" : 41100,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "defaultAcrValues" : {
-            "title" : "Default ACR values",
-            "description" : "Default requested Authentication Context Class Reference values.<br><br>Array of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr_values_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr_values request parameter or an individual acr Claim request override these default values.",
-            "propertyOrder" : 25650,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          }
-        }
-      },
-      "advancedOAuth2ClientConfig" : {
-        "type" : "object",
-        "title" : "Advanced",
-        "propertyOrder" : 1,
-        "properties" : {
-          "policyUri" : {
-            "title" : "Privacy Policy URI",
-            "description" : "The URI for the client's privacy policy, for use in user-facing consent pages.",
-            "propertyOrder" : 25375,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "logoUri" : {
-            "title" : "Logo URI",
-            "description" : "The URI for the client's logo, for use in user-facing UIs such as consent pages and application pages.",
-            "propertyOrder" : 25350,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "subjectType" : {
-            "title" : "Subject Type",
-            "description" : "The subject type added to responses for this client. This value must be included in \"Subject Type Supported\" in OAuth2 Provider service setting.",
-            "propertyOrder" : 24400,
+          "accessTokenMayActScript" : {
+            "title" : "OAuth2 Access Token May Act Script",
+            "description" : "The script that is executed when issuing an access token explicitly to modify the <code>may_act</code> claim placed on the token.",
+            "propertyOrder" : 40500,
             "required" : true,
             "type" : "string",
             "exampleValue" : ""
           },
-          "tosURI" : {
-            "title" : "Terms of Service URI",
-            "description" : "The URI for the client's terms of service.",
-            "propertyOrder" : 25390,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "allowedResourceServerAudienceValues" : {
-            "title" : "Allowed Resource Server Audience Values",
-            "description" : "List of audience (aud) claim values that are allowed for resource servers. The value(s) must match those expected by the resource server for which the access tokens are requested.",
-            "propertyOrder" : 35900,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "softwareVersion" : {
-            "title" : "Software Version",
-            "description" : "A version identifier string for the identifier defined in the Software Identity.",
-            "propertyOrder" : 35500,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "clientUri" : {
-            "title" : "Client URI",
-            "description" : "The URI for finding further information about the client from user-facing UIs.",
-            "propertyOrder" : 25325,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "acceptedJwtIssuers" : {
-            "title" : "Accepted JWT Issuers",
-            "description" : "List of JWT issuers that will be accepted in addition to client_id for private key JWT authentication.",
-            "propertyOrder" : 24250,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "updateAccessToken" : {
-            "title" : "Access Token",
-            "description" : "The access token used to update the client.",
-            "propertyOrder" : 25100,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "grantTypes" : {
-            "title" : "Grant Types",
-            "description" : "The set of Grant Types (OAuth2 Flows) that are permitted to be used by this client.<br><br>If no Grant Types (OAuth2 Flows) are configured then AUTHORIZATION_CODE flow would be permitted by default.",
-            "propertyOrder" : 23800,
-            "required" : true,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "tokenExchangeAuthLevel" : {
-            "title" : "Token Exchange Auth Level",
-            "description" : "Auth level granted to tokens generated as a result of a Token Exchange, where the input token had no original auth_level claim. (e.g. When exchanging ID Token for an Access Token)",
-            "propertyOrder" : 10100,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "sectorIdentifierUri" : {
-            "title" : "Sector Identifier URI",
-            "description" : "The Host component of this URL is used in the computation of pairwise Subject Identifiers.",
-            "propertyOrder" : 24300,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "contacts" : {
-            "title" : "Contacts",
-            "description" : "Email addresses of users who can administrate this client.",
-            "propertyOrder" : 23900,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "refreshTokenGracePeriod" : {
-            "title" : "Refresh Token Grace Period (seconds)",
-            "description" : "The period, in seconds, that a refresh token can be replayed. This allows a client to recover if the response from the original refresh request is not received due to a network problem or other transient issue. <br>Applies only to tokens in a one-to-one storage scheme. Keep this value as short as possible â it must not exceed 120 seconds. To deactivate the grace period set the value to â1. If this value is set to 0, the Refresh Token Grace Period of the OAuth2 Provider will be used instead.",
-            "propertyOrder" : 26150,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "mixUpMitigation" : {
-            "title" : "OAuth 2.0 Mix-Up Mitigation enabled",
-            "description" : "Enables OAuth 2.0 mix-up mitigation on the authorization server side.<br><br>Enable this setting only if this OAuth 2.0 client supports the <a href=\"https://tools.ietf.org/html/draft-ietf-oauth-mix-up-mitigation-01\">OAuth 2.0 Mix-Up Mitigation draft</a>, otherwise AM will fail to validate access token requests received from this client.",
-            "propertyOrder" : 26300,
+          "statelessTokensEnabled" : {
+            "title" : "Use Client-Side Access & Refresh Tokens",
+            "description" : "When enabled, OpenAM issues access and refresh tokens that can be inspected by resource servers.",
+            "propertyOrder" : 41000,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "requestUris" : {
-            "title" : "Request uris",
-            "description" : "Array of request_uri values that are pre-registered by the RP for use at the OP.<br><br>The entire Request URI MUST NOT exceed 512 ASCII characters and MUST use either HTTP or HTTPS. Otherwise the value will be ignored.",
-            "propertyOrder" : 23700,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+          "evaluateScopePluginType" : {
+            "title" : "Scope Evaluation Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Scope Evaluation Script will be executed and when plugin type is JAVA then the Scope Evaluation Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42100,
+            "required" : true,
+            "type" : "string",
             "exampleValue" : ""
           },
-          "javascriptOrigins" : {
-            "title" : "JavaScript Origins",
+          "clientsCanSkipConsent" : {
+            "title" : "Allow Clients to Skip Consent",
+            "description" : "If enabled, clients may be configured so that the resource owner will not be asked for consent during authorization flows.",
+            "propertyOrder" : 41300,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "validateScopeClass" : {
+            "title" : "Scope Validation Plugin Implementation Class",
+            "description" : "The plugin that is executed when validating or customising the set of requested scopes for authorize, access token, refresh token and back channel authorize requests. <p>The provided plugin class must implement the scope validation plugin interface: <code>org.forgerock.oauth2.core.plugins.ScopeValidator</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultScopeValidator</code>",
+            "propertyOrder" : 42600,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "evaluateScopeScript" : {
+            "title" : "Scope Evaluation Script",
+            "description" : "The plugin that is executed when retrieving access token's information. <p>The plugin can provide a mechanism to associate scopes with profile attribute values, such as if one of the scopes is mail, the resource owner's email address is provided in the information returned.",
+            "propertyOrder" : 42200,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "authorizeEndpointDataProviderScript" : {
+            "title" : "Authorize Endpoint Data Provider Script",
+            "description" : "The plugin that is executed to return additional data from the authorization request.",
+            "propertyOrder" : 42800,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "providerOverridesEnabled" : {
+            "title" : "Enable OAuth2 Provider Overrides",
+            "description" : "Enabling this causes the other config in this section to override the default OAuth2 Provider behaviour.",
+            "propertyOrder" : 40000,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "enableApplicationContext" : {
+            "title" : "Enable Application Context",
+            "description" : "When enabled, this setting makes the application context available in all OAuth2 / OIDC flows for this client as the <code>oauthApplication</code> binding in scripted decision node scripts.",
+            "propertyOrder" : 43500,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "remoteConsentServiceId" : {
+            "title" : "Remote Consent Service ID",
+            "description" : "The ID of an existing remote consent service agent.",
+            "propertyOrder" : 41500,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "accessTokenModificationPluginType" : {
+            "title" : "Access Token Modification Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Access Token Modification Script will be executed and when plugin type is JAVA then the Access Token Modifier Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 40390,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "authorizeEndpointDataProviderClass" : {
+            "title" : "Authorize Endpoint Data Provider Plugin Implementation Class",
+            "description" : "The plugin that is executed to return additional data from the authorization request. <<p>The provided plugin class must implement the scope evaluation plugin interface: <code>org.forgerock.oauth2.core.plugins.AuthorizeEndpointDataProvider</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultEndpointDataProvider</code>",
+            "propertyOrder" : 42900,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "oidcClaimsPluginType" : {
+            "title" : "OIDC Claims Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the OIDC Claims Script will be executed and when plugin type is JAVA then the OIDC Claims Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 40690,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "acceptAudienceParametersInTokenExchangeRequests" : {
+            "title" : "Accept Audience Parameters in Token Exchange Requests",
+            "description" : "When enabled, AM validates audience parameter values in Token Exchange requests against the values defined in Allowed Resource Server Audience Values. If validation fails, the token exchange request is rejected.",
+            "propertyOrder" : 43600,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "oidcClaimsClass" : {
+            "title" : "OIDC Claims Plugin Implementation Class",
+            "description" : "The plugin that is executed when issuing an ID token or making a request to the <i>userinfo</i> endpoint during OpenID requests.<p>The plugin gathers the scopes and populates claims, and has access to the access token, the user's identity and, if available, the user's session. <p>This plugin provides the custom implementation for the OIDC claims plugin interface: <code>org.forgerock.oauth2.core.plugins.UserInfoClaimsPlugin</code> <p>This field cannot be empty if the Plugin Type of JAVA is selected. Failure to provide a valid implementation of the OIDC claims plugin interface will cause OAuth2 flows to fail.",
+            "propertyOrder" : 40710,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "oidcClaimsScript" : {
+            "title" : "OIDC Claims Script",
+            "description" : "The plugin that is executed when issuing an ID token or making a request to the <i>userinfo</i> endpoint during OpenID requests.<p>The plugin gathers the scopes and populates claims, and has access to the access token, the user's identity and, if available, the user's session.",
+            "propertyOrder" : 40700,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "issueRefreshToken" : {
+            "title" : "Issue Refresh Tokens",
+            "description" : "Whether to issue a refresh token when returning an access token.",
+            "propertyOrder" : 40100,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "useTokenIntrospectionClaimForJWT" : {
+            "title" : "Use token_introspection claim for JWT",
+            "description" : "When enabled, the JWT introspection response complies with RFC 9701. This ensures the introspection data is nested within the <code>token_introspection</code> claim in the JWT response. <br><b>Note:</b> Enabling this option also causes the JSON introspection response to include the token's <code>aud</code> claim, if present.",
+            "propertyOrder" : 43700,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "issueRefreshTokenOnRefreshedToken" : {
+            "title" : "Issue Refresh Tokens on Refreshing Access Tokens",
+            "description" : "Whether to issue a refresh token when refreshing an access token.",
+            "propertyOrder" : 40200,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "accessTokenModifierClass" : {
+            "title" : "Access Token Modifier Plugin Implementation Class",
+            "description" : "The plugin that is executed when issuing an access token. <p>The plugin can change the access token's internal data structure to include or exclude particular fields. <p>This plugin provides the custom implementation for the access token modifier plugin interface: <code>org.forgerock.oauth2.core.plugins.AccessTokenModifier</code> <p>This field cannot be empty if the Plugin Type of JAVA is selected. Failure to provide a valid implementation of the access token modifier plugin interface will cause OAuth2 flows to fail.",
+            "propertyOrder" : 40410,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "validateScopeScript" : {
+            "title" : "Scope Validation Script",
+            "description" : "The plugin that is executed when validating or customising the set of requested scopes for authorize, access token, refresh token and back channel authorize requests.",
+            "propertyOrder" : 42500,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "enableRemoteConsent" : {
+            "title" : "Enable Remote Consent",
             "description" : "",
-            "propertyOrder" : 23650,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "isConsentImplied" : {
-            "title" : "Implied consent",
-            "description" : "When enabled, the resource owner will not be asked for consent during authorization flows. The OAuth2 Provider must be configured to allow clients to skip consent.",
-            "propertyOrder" : 26200,
+            "propertyOrder" : 41400,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "name" : {
-            "title" : "Display name",
-            "description" : "A client name that may be relevant to the resource owner when considering approval.<br><br>The name may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The ExampleCo Intranet\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the name is displayed to all users having undefined locales. e.g. \"The ExampleCo Intranet\".",
-            "propertyOrder" : 23500,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "require_pushed_authorization_requests" : {
-            "title" : "Require Pushed Authorization Requests",
-            "description" : "If enabled, the client must use the PAR endpoint to initiate authorization requests. Note that, even if this value is set to false, the authorization server may be configured to enforce PAR for all clients.",
-            "propertyOrder" : 35600,
+          "useForceAuthnForMaxAge" : {
+            "title" : "Use Force Authentication for max_age",
+            "description" : "When this setting is <code>false</code> (default)<ul><li>Attempted authorization when the max_age has passed will log the existing session out and start a re-authentication</li></ul> <ul><li>Re-authentication triggered by the max_age parameter will create a new session</li></ul> When this setting is <code>true</code> <ul><li>Attempted authorization when the max_age has passed will not destroy the existing session</li></ul> <ul><li>Re-authentication triggered by the max_age parameter will return the same session. The advanced server property org.forgerock.openam.authentication.forceAuth.enabled must be set to <code>true</code></li></ul> <p>For security reasons, it is strongly recommended that you leave <code>Use Force Authentication for max_age</code> set to the default value (<code>false</code>), so that a new session is created when the user re-authenticates.</p>",
+            "propertyOrder" : 40850,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "responseTypes" : {
-            "title" : "Response Types",
-            "description" : "Response types this client will support and use.",
-            "propertyOrder" : 23800,
-            "required" : true,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "descriptions" : {
-            "title" : "Display description",
-            "description" : "A description of the client or other information that may be relevant to the resource owner when considering approval.<br><br>The description may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The company intranet is requesting the following access permission\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the description is displayed to all users having undefined locales. e.g. \"The company intranet is requesting the following access permission\".",
-            "propertyOrder" : 23600,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "softwareIdentity" : {
-            "title" : "Software Identity",
-            "description" : "A unique identifier assigned by the client developer or software publisher to identity the client software.",
-            "propertyOrder" : 35400,
+          "scopesPolicySet" : {
+            "title" : "Scopes Policy Set",
+            "description" : "The policy set that defines the context in which policy evaluations occur when Use Policy Engine for Scope decisions is enabled on the OAuth2 provider. If blank will default to the oauth2Scopes policy set.",
+            "propertyOrder" : 40310,
             "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "customProperties" : {
-            "title" : "Custom Properties",
-            "description" : "Additional properties that allow users to augment the set of properties supported by the OAuth2 Client. <br> Examples: <br> customproperty=custom-value1 <br> customlist[0]=customlist-value-0 <br> customlist[1]=customlist-value-1 <br> custommap[key1]=custommap-value-1 <br> custommap[key2]=custommap-value-2",
-            "propertyOrder" : 35100,
+          "overrideableOIDCClaims" : {
+            "title" : "Overrideable Id_Token Claims",
+            "description" : "List of claims in the id_token that may be overrideable in the OIDC Claims Script. These should be the subset of the core OpenID Connect Claims like aud or azp.",
+            "propertyOrder" : 43300,
             "required" : false,
             "items" : {
               "type" : "string"
@@ -7364,18 +7068,10 @@ am> create AIAgentGroups --realm Realm --id id --body body
             "type" : "array",
             "exampleValue" : ""
           },
-          "treeName" : {
-            "title" : "Tree Name",
-            "description" : "The name of the tree that the client is associated with.<br><br>When a client is associated with a tree, the configured Authentication Context Mapper is not executed. Instead, AM redirects to the configured tree.",
-            "propertyOrder" : 25670,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenEndpointAuthMethod" : {
-            "title" : "Token Endpoint Authentication Method",
-            "description" : "The authentication method with which a client authenticates to the authorization server at the token endpoint. The authentication method applies to OIDC requests with the openid scope.",
-            "propertyOrder" : 24000,
+          "validateScopePluginType" : {
+            "title" : "Scope Validation Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Scope Validation Script will be executed and when plugin type is JAVA then the Scope Validation Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42400,
             "required" : true,
             "type" : "string",
             "exampleValue" : ""
@@ -7387,237 +7083,989 @@ am> create AIAgentGroups --realm Realm --id id --body body
         "title" : "Signing and Encryption",
         "propertyOrder" : 3,
         "properties" : {
-          "publicKeyLocation" : {
-            "title" : "Public key selector",
-            "description" : "Select the public key for this client to come from either the jwks_uri, manual jwks or X509 field.",
-            "propertyOrder" : 25700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "mTLSSubjectDN" : {
-            "title" : "mTLS Subject DN",
-            "description" : "Expected Subject DN of certificate used for mTLS client certificate authentication. Defaults to CN=&lt;client_id&gt;. Only applicable when using CA-signed certificates.",
-            "propertyOrder" : 25406,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationResponseEncryptionAlgorithm" : {
-            "title" : "Authorization Response JWT Encryption Algorithm",
-            "description" : "Algorithm the Authorization Response JWT for this client must be encrypted with.",
-            "propertyOrder" : 24803,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoEncryptedResponseEncryptionAlgorithm" : {
-            "title" : "User info encrypted response encryption algorithm",
-            "description" : "JWE enc algorithm for encrypting UserInfo Responses. If userinfo encrypted response algorithm is specified, the default for this value is A128CBC-HS256. When user info encrypted response encryption is included, user info encrypted response algorithm MUST also be provided.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
-            "propertyOrder" : 27400,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenIntrospectionEncryptedResponseEncryptionAlgorithm" : {
-            "title" : "Token introspection encrypted response encryption algorithm",
-            "description" : "JWE 'enc' algorithm REQUIRED for encrypting token introspection responses. Sets the algorithm that will be used to encrypt the Plaintext of a JWE when the chosen introspection response format is 'signed then encrypted'.",
-            "propertyOrder" : 27830,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "idTokenEncryptionEnabled" : {
-            "title" : "Enable ID Token Encryption",
-            "description" : "Select to enable ID token encryption.",
-            "propertyOrder" : 24600,
-            "required" : true,
-            "type" : "boolean",
-            "exampleValue" : ""
-          },
-          "idTokenPublicEncryptionKey" : {
-            "title" : "ID Token Encryption Public Key",
-            "description" : "A Base64 encoded public key for encrypting ID Tokens. This key is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
-            "propertyOrder" : 24900,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "requestParameterEncryptedAlg" : {
-            "title" : "Request parameter encryption algorithm",
-            "description" : "JWE algorithm for encrypting the request parameter.",
-            "propertyOrder" : 27600,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoEncryptedResponseAlg" : {
-            "title" : "User info encrypted response algorithm",
-            "description" : "JWE algorithm for encrypting UserInfo Responses. If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT. The default, if omitted, is that no encryption is performed.",
-            "propertyOrder" : 27300,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoSignedResponseAlg" : {
-            "title" : "User info signed response algorithm",
-            "description" : "JWS algorithm for signing UserInfo Responses. If this is specified, the response will be JWT <a href=\"https://tools.ietf.org/html/rfc7519\">JWT</a> serialized, and signed using JWS. The default, if omitted, is for the UserInfo Response to return the Claims as a UTF-8 encoded JSON object using the application/json content-type.",
-            "propertyOrder" : 27200,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "requestParameterSignedAlg" : {
-            "title" : "Request parameter signing algorithm",
-            "description" : "JWS algorithm for signing the request parameter.",
-            "propertyOrder" : 27500,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenIntrospectionSignedResponseAlg" : {
-            "title" : "Token introspection response signing algorithm",
-            "description" : "Algorithm used for signing the introspection JWT response.",
-            "propertyOrder" : 27810,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "idTokenSignedResponseAlg" : {
-            "title" : "ID Token Signing Algorithm",
-            "description" : "Algorithm the ID Token for this client must be signed with.",
-            "propertyOrder" : 24500,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwksCacheTimeout" : {
-            "title" : "JWKs URI content cache timeout in ms",
-            "description" : "To avoid loading the JWKS URI content for every token encryption, the JWKS content is cached. This timeout defines the maximum of time the JWKS URI content can be cached before being refreshed.",
-            "propertyOrder" : 24110,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "tokenEndpointAuthSigningAlgorithm" : {
-            "title" : "Token Endpoint Authentication Signing Algorithm",
-            "description" : "The JWS algorithm that MUST be used for signing the JWT used to authenticate the Client at the Token Endpointfor the private_key_jwt and client_secret_jwt authentication methods. All Token Requests using these authentication methods from this Client MUST be rejected, if the JWT is not signed with this algorithm.",
-            "propertyOrder" : 24130,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "authorizationResponseEncryptionMethod" : {
+            "title" : "Authorization Response JWT Encryption Method",
+            "description" : "Encryption method the Authorization Response JWT for this client must be encrypted with.",
+            "propertyOrder" : 24804,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
           "idTokenEncryptionAlgorithm" : {
             "title" : "ID Token Encryption Algorithm",
             "description" : "Algorithm the ID Token for this client must be encrypted with.",
             "propertyOrder" : 24700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "mTLSTrustedCert" : {
-            "title" : "mTLS Self-Signed Certificate",
-            "description" : "Self-signed PEM-encoded or DER-encoded X.509 certificate for mTLS client certificate authentication. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
-            "propertyOrder" : 25405,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
           "requestParameterEncryptedEncryptionAlgorithm" : {
             "title" : "Request parameter encryption method",
             "description" : "JWE enc algorithm for encrypting the request parameter.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
             "propertyOrder" : 27700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "mTLSCertificateBoundAccessTokens" : {
-            "title" : "Use Certificate-Bound Access Tokens",
-            "description" : "Whether access tokens issued to this client should be bound to the X.509 certificate it uses to authenticate to the token endpoint. If enabled (and the provider supports it) then an x5t#S256 confirmation key will be added to all access tokens with the SHA-256 hash of the client's certificate.",
-            "propertyOrder" : 25507,
-            "required" : true,
-            "type" : "boolean",
-            "exampleValue" : ""
+          "userinfoSignedResponseAlg" : {
+            "title" : "User info signed response algorithm",
+            "description" : "JWS algorithm for signing UserInfo Responses. If this is specified, the response will be JWT <a href=\"https://tools.ietf.org/html/rfc7519\">JWT</a> serialized, and signed using JWS. The default, if omitted, is for the UserInfo Response to return the Claims as a UTF-8 encoded JSON object using the application/json content-type.",
+            "propertyOrder" : 27200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
-          "idTokenEncryptionMethod" : {
-            "title" : "ID Token Encryption Method",
-            "description" : "Encryption method the ID Token for this client must be encrypted with.",
-            "propertyOrder" : 24800,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "tokenEndpointAuthSigningAlgorithm" : {
+            "title" : "Token Endpoint Authentication Signing Algorithm",
+            "description" : "The JWS algorithm that MUST be used for signing the JWT used to authenticate the Client at the Token Endpointfor the private_key_jwt and client_secret_jwt authentication methods. All Token Requests using these authentication methods from this Client MUST be rejected, if the JWT is not signed with this algorithm.",
+            "propertyOrder" : 24130,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "userinfoResponseFormat" : {
-            "title" : "User info response format.",
-            "description" : "The user info endpoint offers different output format. See http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse",
-            "propertyOrder" : 27100,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwkSet" : {
-            "title" : "Json Web Key",
-            "description" : "Raw JSON Web Key value containing the client's public keys.",
-            "propertyOrder" : 24200,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "clientJwtPublicKey" : {
-            "title" : "Client JWT Bearer Public Key",
-            "description" : "A Base64 encoded X509 certificate, containing the public key, represented as a UTF-8 PEM file, of the key pair for signing the Client Bearer JWT. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
-            "propertyOrder" : 25400,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationResponseSigningAlgorithm" : {
-            "title" : "Authorization Response JWT Signing Algorithm",
-            "description" : "Algorithm the Authorization Response JWT for this client must be signed with.",
-            "propertyOrder" : 24801,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwkStoreCacheMissCacheTime" : {
-            "title" : "JWKs URI content cache miss cache time",
-            "description" : "To avoid loading the JWKS URI content for every token signature verification, especially when the kid is not in the jwks content already cached, the JWKS content will be cache for a minimum period of time. This cache miss cache time defines the minimum of time the JWKS URI content is cache.",
-            "propertyOrder" : 24120,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "jwksUri" : {
-            "title" : "Json Web Key URI",
-            "description" : "The uri that contains the client's public keys in Json Web Key format.",
-            "propertyOrder" : 24100,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : "https://{{jwks-www}}/oauth2/{{realm}}/connect/jwk_uri"
-          },
-          "tokenIntrospectionResponseFormat" : {
-            "title" : "Token introspection response format",
-            "description" : "The token introspection endpoint offers different output format. see https://tools.ietf.org/html/draft-ietf-oauth-jwt-introspection-response-03",
-            "propertyOrder" : 27800,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "mTLSTrustedCert" : {
+            "title" : "mTLS Self-Signed Certificate",
+            "description" : "Self-signed PEM-encoded or DER-encoded X.509 certificate for mTLS client certificate authentication. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
+            "propertyOrder" : 25405,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
           "tokenIntrospectionEncryptedResponseAlg" : {
             "title" : "Token introspection response encryption algorithm",
             "description" : "JWE \"alg\" algorithm REQUIRED for encrypting introspection responses. Sets the algorithm that will be used to encrypt the Content Encryption Key when the chosen introspection response format is 'signed then encrypted'.",
             "propertyOrder" : 27820,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "authorizationResponseEncryptionMethod" : {
-            "title" : "Authorization Response JWT Encryption Method",
-            "description" : "Encryption method the Authorization Response JWT for this client must be encrypted with.",
-            "propertyOrder" : 24804,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
+          "jwkSet" : {
+            "title" : "Json Web Key",
+            "description" : "Raw JSON Web Key value containing the client's public keys.",
+            "propertyOrder" : 24200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "userinfoResponseFormat" : {
+            "title" : "User info response format.",
+            "description" : "The user info endpoint offers different output format. See http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse",
+            "propertyOrder" : 27100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "userinfoEncryptedResponseEncryptionAlgorithm" : {
+            "title" : "User info encrypted response encryption algorithm",
+            "description" : "JWE enc algorithm for encrypting UserInfo Responses. If userinfo encrypted response algorithm is specified, the default for this value is A128CBC-HS256. When user info encrypted response encryption is included, user info encrypted response algorithm MUST also be provided.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
+            "propertyOrder" : 27400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionResponseFormat" : {
+            "title" : "Token introspection response format",
+            "description" : "The token introspection endpoint offers different output format. see https://tools.ietf.org/html/draft-ietf-oauth-jwt-introspection-response-03",
+            "propertyOrder" : 27800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "publicKeyLocation" : {
+            "title" : "Public key selector",
+            "description" : "Select the public key for this client to come from either the jwks_uri, manual jwks or X509 field.",
+            "propertyOrder" : 25700,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionEncryptedResponseEncryptionAlgorithm" : {
+            "title" : "Token introspection encrypted response encryption algorithm",
+            "description" : "JWE 'enc' algorithm REQUIRED for encrypting token introspection responses. Sets the algorithm that will be used to encrypt the Plaintext of a JWE when the chosen introspection response format is 'signed then encrypted'.",
+            "propertyOrder" : 27830,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "jwkStoreCacheMissCacheTime" : {
+            "title" : "JWKs URI content cache miss cache time",
+            "description" : "To avoid loading the JWKS URI content for every token signature verification, especially when the kid is not in the jwks content already cached, the JWKS content will be cache for a minimum period of time. This cache miss cache time defines the minimum of time the JWKS URI content is cache.",
+            "propertyOrder" : 24120,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "requestParameterEncryptedAlg" : {
+            "title" : "Request parameter encryption algorithm",
+            "description" : "JWE algorithm for encrypting the request parameter.",
+            "propertyOrder" : 27600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "idTokenEncryptionMethod" : {
+            "title" : "ID Token Encryption Method",
+            "description" : "Encryption method the ID Token for this client must be encrypted with.",
+            "propertyOrder" : 24800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "jwksUri" : {
+            "title" : "Json Web Key URI",
+            "description" : "The uri that contains the client's public keys in Json Web Key format.",
+            "propertyOrder" : 24100,
+            "type" : "object",
+            "exampleValue" : "https://{{jwks-www}}/oauth2/{{realm}}/connect/jwk_uri",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "userinfoEncryptedResponseAlg" : {
+            "title" : "User info encrypted response algorithm",
+            "description" : "JWE algorithm for encrypting UserInfo Responses. If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT. The default, if omitted, is that no encryption is performed.",
+            "propertyOrder" : 27300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "authorizationResponseEncryptionAlgorithm" : {
+            "title" : "Authorization Response JWT Encryption Algorithm",
+            "description" : "Algorithm the Authorization Response JWT for this client must be encrypted with.",
+            "propertyOrder" : 24803,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "requestParameterSignedAlg" : {
+            "title" : "Request parameter signing algorithm",
+            "description" : "JWS algorithm for signing the request parameter.",
+            "propertyOrder" : 27500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "mTLSCertificateBoundAccessTokens" : {
+            "title" : "Use Certificate-Bound Access Tokens",
+            "description" : "Whether access tokens issued to this client should be bound to the X.509 certificate it uses to authenticate to the token endpoint. If enabled (and the provider supports it) then an x5t#S256 confirmation key will be added to all access tokens with the SHA-256 hash of the client's certificate.",
+            "propertyOrder" : 25507,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "jwksCacheTimeout" : {
+            "title" : "JWKs URI content cache timeout in ms",
+            "description" : "To avoid loading the JWKS URI content for every token encryption, the JWKS content is cached. This timeout defines the maximum of time the JWKS URI content can be cached before being refreshed.",
+            "propertyOrder" : 24110,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "mTLSSubjectDN" : {
+            "title" : "mTLS Subject DN",
+            "description" : "Expected Subject DN of certificate used for mTLS client certificate authentication. Defaults to CN=&lt;client_id&gt;. Only applicable when using CA-signed certificates.",
+            "propertyOrder" : 25406,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "idTokenEncryptionEnabled" : {
+            "title" : "Enable ID Token Encryption",
+            "description" : "Select to enable ID token encryption.",
+            "propertyOrder" : 24600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionSignedResponseAlg" : {
+            "title" : "Token introspection response signing algorithm",
+            "description" : "Algorithm used for signing the introspection JWT response.",
+            "propertyOrder" : 27810,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "idTokenPublicEncryptionKey" : {
+            "title" : "ID Token Encryption Public Key",
+            "description" : "A Base64 encoded public key for encrypting ID Tokens. This key is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
+            "propertyOrder" : 24900,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "clientJwtPublicKey" : {
+            "title" : "Client JWT Bearer Public Key",
+            "description" : "A Base64 encoded X509 certificate, containing the public key, represented as a UTF-8 PEM file, of the key pair for signing the Client Bearer JWT. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
+            "propertyOrder" : 25400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "authorizationResponseSigningAlgorithm" : {
+            "title" : "Authorization Response JWT Signing Algorithm",
+            "description" : "Algorithm the Authorization Response JWT for this client must be signed with.",
+            "propertyOrder" : 24801,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "idTokenSignedResponseAlg" : {
+            "title" : "ID Token Signing Algorithm",
+            "description" : "Algorithm the ID Token for this client must be signed with.",
+            "propertyOrder" : 24500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          }
+        }
+      },
+      "advancedOAuth2ClientConfig" : {
+        "type" : "object",
+        "title" : "Advanced",
+        "propertyOrder" : 1,
+        "properties" : {
+          "name" : {
+            "title" : "Display name",
+            "description" : "A client name that may be relevant to the resource owner when considering approval.<br><br>The name may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The ExampleCo Intranet\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the name is displayed to all users having undefined locales. e.g. \"The ExampleCo Intranet\".",
+            "propertyOrder" : 23500,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "logoUri" : {
+            "title" : "Logo URI",
+            "description" : "The URI for the client's logo, for use in user-facing UIs such as consent pages and application pages.",
+            "propertyOrder" : 25350,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "grantTypes" : {
+            "title" : "Grant Types",
+            "description" : "The set of Grant Types (OAuth2 Flows) that are permitted to be used by this client.<br><br>If no Grant Types (OAuth2 Flows) are configured then AUTHORIZATION_CODE flow would be permitted by default.",
+            "propertyOrder" : 23800,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : true
+              }
+            }
+          },
+          "subjectType" : {
+            "title" : "Subject Type",
+            "description" : "The subject type added to responses for this client. This value must be included in \"Subject Type Supported\" in OAuth2 Provider service setting.",
+            "propertyOrder" : 24400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "responseTypes" : {
+            "title" : "Response Types",
+            "description" : "Response types this client will support and use.",
+            "propertyOrder" : 23800,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : true
+              }
+            }
+          },
+          "softwareIdentity" : {
+            "title" : "Software Identity",
+            "description" : "A unique identifier assigned by the client developer or software publisher to identity the client software.",
+            "propertyOrder" : 35400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "policyUri" : {
+            "title" : "Privacy Policy URI",
+            "description" : "The URI for the client's privacy policy, for use in user-facing consent pages.",
+            "propertyOrder" : 25375,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "allowedResourceServerAudienceValues" : {
+            "title" : "Allowed Resource Server Audience Values",
+            "description" : "List of audience (aud) claim values that are allowed for resource servers. The value(s) must match those expected by the resource server for which the access tokens are requested.",
+            "propertyOrder" : 35900,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "customProperties" : {
+            "title" : "Custom Properties",
+            "description" : "Additional properties that allow users to augment the set of properties supported by the OAuth2 Client. <br> Examples: <br> customproperty=custom-value1 <br> customlist[0]=customlist-value-0 <br> customlist[1]=customlist-value-1 <br> custommap[key1]=custommap-value-1 <br> custommap[key2]=custommap-value-2",
+            "propertyOrder" : 35100,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "sectorIdentifierUri" : {
+            "title" : "Sector Identifier URI",
+            "description" : "The Host component of this URL is used in the computation of pairwise Subject Identifiers.",
+            "propertyOrder" : 24300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "acceptedJwtIssuers" : {
+            "title" : "Accepted JWT Issuers",
+            "description" : "List of JWT issuers that will be accepted in addition to client_id for private key JWT authentication.",
+            "propertyOrder" : 24250,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "isConsentImplied" : {
+            "title" : "Implied consent",
+            "description" : "When enabled, the resource owner will not be asked for consent during authorization flows. The OAuth2 Provider must be configured to allow clients to skip consent.",
+            "propertyOrder" : 26200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "require_pushed_authorization_requests" : {
+            "title" : "Require Pushed Authorization Requests",
+            "description" : "If enabled, the client must use the PAR endpoint to initiate authorization requests. Note that, even if this value is set to false, the authorization server may be configured to enforce PAR for all clients.",
+            "propertyOrder" : 35600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "mixUpMitigation" : {
+            "title" : "OAuth 2.0 Mix-Up Mitigation enabled",
+            "description" : "Enables OAuth 2.0 mix-up mitigation on the authorization server side.<br><br>Enable this setting only if this OAuth 2.0 client supports the <a href=\"https://tools.ietf.org/html/draft-ietf-oauth-mix-up-mitigation-01\">OAuth 2.0 Mix-Up Mitigation draft</a>, otherwise AM will fail to validate access token requests received from this client.",
+            "propertyOrder" : 26300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "updateAccessToken" : {
+            "title" : "Access Token",
+            "description" : "The access token used to update the client.",
+            "propertyOrder" : 25100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "tokenEndpointAuthMethod" : {
+            "title" : "Token Endpoint Authentication Method",
+            "description" : "The authentication method with which a client authenticates to the authorization server at the token endpoint. The authentication method applies to OIDC requests with the openid scope.",
+            "propertyOrder" : 24000,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "javascriptOrigins" : {
+            "title" : "JavaScript Origins",
+            "description" : "",
+            "propertyOrder" : 23650,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "refreshTokenGracePeriod" : {
+            "title" : "Refresh Token Grace Period (seconds)",
+            "description" : "The period, in seconds, that a refresh token can be replayed. This allows a client to recover if the response from the original refresh request is not received due to a network problem or other transient issue. <br>Applies only to tokens in a one-to-one storage scheme. Keep this value as short as possible â it must not exceed 120 seconds. To deactivate the grace period set the value to â1. If this value is set to 0, the Refresh Token Grace Period of the OAuth2 Provider will be used instead.",
+            "propertyOrder" : 26150,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "treeName" : {
+            "title" : "Tree Name",
+            "description" : "The name of the tree that the client is associated with.<br><br>When a client is associated with a tree, the configured Authentication Context Mapper is not executed. Instead, AM redirects to the configured tree.",
+            "propertyOrder" : 25670,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "tokenExchangeAuthLevel" : {
+            "title" : "Token Exchange Auth Level",
+            "description" : "Auth level granted to tokens generated as a result of a Token Exchange, where the input token had no original auth_level claim. (e.g. When exchanging ID Token for an Access Token)",
+            "propertyOrder" : 10100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "clientUri" : {
+            "title" : "Client URI",
+            "description" : "The URI for finding further information about the client from user-facing UIs.",
+            "propertyOrder" : 25325,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "contacts" : {
+            "title" : "Contacts",
+            "description" : "Email addresses of users who can administrate this client.",
+            "propertyOrder" : 23900,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "softwareVersion" : {
+            "title" : "Software Version",
+            "description" : "A version identifier string for the identifier defined in the Software Identity.",
+            "propertyOrder" : 35500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "requestUris" : {
+            "title" : "Request uris",
+            "description" : "Array of request_uri values that are pre-registered by the RP for use at the OP.<br><br>The entire Request URI MUST NOT exceed 512 ASCII characters and MUST use either HTTP or HTTPS. Otherwise the value will be ignored.",
+            "propertyOrder" : 23700,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "descriptions" : {
+            "title" : "Display description",
+            "description" : "A description of the client or other information that may be relevant to the resource owner when considering approval.<br><br>The description may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The company intranet is requesting the following access permission\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the description is displayed to all users having undefined locales. e.g. \"The company intranet is requesting the following access permission\".",
+            "propertyOrder" : 23600,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "tosURI" : {
+            "title" : "Terms of Service URI",
+            "description" : "The URI for the client's terms of service.",
+            "propertyOrder" : 25390,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           }
         }
       },
@@ -7626,97 +8074,417 @@ am> create AIAgentGroups --realm Realm --id id --body body
         "title" : "Core",
         "propertyOrder" : 0,
         "properties" : {
-          "defaultScopes" : {
-            "title" : "Default Scope(s)",
-            "description" : "Default Scope(s). Scopes automatically given to tokens.<br><br>Default Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
-            "propertyOrder" : 23700,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "scopes" : {
-            "title" : "Scope(s)",
-            "description" : "Scope(s). Scopes are strings that are presented to the user for approval and included in tokens so that the protected resource may make decisions about what to give access to.<br><br>Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
-            "propertyOrder" : 23300,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
+          "loopbackInterfaceRedirection" : {
+            "title" : "Allow wildcard ports in redirect URIs",
+            "description" : "This flag indicates whether wildcards can be used for port numbers in redirect URIs. When this toggle is set to true and a wildcard is used the only allowed combinations of protocols and hosts are: http://127.0.0.1, https://127.0.0.1, http://[::1], https://[::1], http://localhost, https://localhost The wild cards are permitted only for the port values. For example - <code>http://localhost:80*</code>, <code>http://localhost:80?0/{path}</code>, <code>http://localhost:80[8-9]0/{path}</code>",
+            "propertyOrder" : 23150,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : false
+              }
+            }
           },
           "accessTokenLifetime" : {
             "title" : "Access Token Lifetime (seconds)",
             "description" : "The time in seconds an access token is valid for. <i>NB</i> If this field is set to zero, Access Token Lifetime of the OAuth2 Provider is used instead of.",
             "propertyOrder" : 26000,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "status" : {
-            "title" : "Status",
-            "description" : "Status of the agent configuration.",
-            "propertyOrder" : 200,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationCodeLifetime" : {
-            "title" : "Authorization Code Lifetime (seconds)",
-            "description" : "The time in seconds an authorization code is valid for. <i>NB</i> If this field is set to zero, Authorization Code Lifetime of the OAuth2 Provider is used instead of.",
-            "propertyOrder" : 25800,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "loopbackInterfaceRedirection" : {
-            "title" : "Allow wildcard ports in redirect URIs",
-            "description" : "This flag indicates whether wildcards can be used for port numbers in redirect URIs. When this toggle is set to true and a wildcard is used the only allowed combinations of protocols and hosts are: http://127.0.0.1, https://127.0.0.1, http://[::1], https://[::1], http://localhost, https://localhost The wild cards are permitted only for the port values. For example - <code>http://localhost:80*</code>, <code>http://localhost:80?0/{path}</code>, <code>http://localhost:80[8-9]0/{path}</code>",
-            "propertyOrder" : 23150,
-            "required" : false,
-            "type" : "boolean",
-            "exampleValue" : ""
-          },
-          "redirectionUris" : {
-            "title" : "Redirection URIs",
-            "description" : "Redirection URIs (optional for confidential clients). Complete URIs or URIs consisting of protocol + authority + path are registered so that the OAuth 2.0 provider can trust that tokens are sent to trusted entities. If multiple URI's are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
-            "propertyOrder" : 23200,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
           },
           "clientName" : {
             "title" : "Client Name",
             "description" : "This value is a readable name for this client.",
             "propertyOrder" : 25300,
-            "required" : false,
             "items" : {
               "type" : "string"
             },
-            "type" : "array",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           },
-          "refreshTokenLifetime" : {
-            "title" : "Refresh Token Lifetime (seconds)",
-            "description" : "The time in seconds a refresh token is valid for. <i>NB</i> If this field is set to zero, Refresh Token Lifetime of the OAuth2 Provider is used instead. If this field is set to -1, the token will never expire.",
-            "propertyOrder" : 25900,
+          "scopes" : {
+            "title" : "Scope(s)",
+            "description" : "Scope(s). Scopes are strings that are presented to the user for approval and included in tokens so that the protected resource may make decisions about what to give access to.<br><br>Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
+            "propertyOrder" : 23300,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "userpassword" : {
+            "title" : "Client secret",
+            "description" : "Client secret. Used when the client authenticates to AM if you don't store client secret in a secret store.This secret is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
+            "propertyOrder" : 23000,
             "required" : true,
-            "type" : "integer",
+            "type" : "string",
+            "format" : "password",
             "exampleValue" : ""
           },
           "clientType" : {
             "title" : "Client type",
             "description" : "Type of OAuth 2.0 client. Confidential clients can keep their password secret, and are typically web apps or other server-based clients. Public clients run the risk of exposing their password to a host or user agent, such as rich browser applications or desktop clients.",
             "propertyOrder" : 23100,
-            "required" : true,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "defaultScopes" : {
+            "title" : "Default Scope(s)",
+            "description" : "Default Scope(s). Scopes automatically given to tokens.<br><br>Default Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
+            "propertyOrder" : 23700,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "redirectionUris" : {
+            "title" : "Redirection URIs",
+            "description" : "Redirection URIs (optional for confidential clients). Complete URIs or URIs consisting of protocol + authority + path are registered so that the OAuth 2.0 provider can trust that tokens are sent to trusted entities. If multiple URI's are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
+            "propertyOrder" : 23200,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "authorizationCodeLifetime" : {
+            "title" : "Authorization Code Lifetime (seconds)",
+            "description" : "The time in seconds an authorization code is valid for. <i>NB</i> If this field is set to zero, Authorization Code Lifetime of the OAuth2 Provider is used instead of.",
+            "propertyOrder" : 25800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "status" : {
+            "title" : "Status",
+            "description" : "Status of the agent configuration.",
+            "propertyOrder" : 200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "refreshTokenLifetime" : {
+            "title" : "Refresh Token Lifetime (seconds)",
+            "description" : "The time in seconds a refresh token is valid for. <i>NB</i> If this field is set to zero, Refresh Token Lifetime of the OAuth2 Provider is used instead. If this field is set to -1, the token will never expire.",
+            "propertyOrder" : 25900,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "agentgroup" : {
+            "title" : "Group",
+            "description" : "Add the client to a group to allow inheritance of property values from the group. <br>Changing the group will update inherited property values. <br>Inherited property values are copied to the client.",
+            "propertyOrder" : 100,
+            "required" : false,
             "type" : "string",
             "exampleValue" : ""
+          },
+          "secretLabelIdentifier" : {
+            "title" : "Secret Label Identifier",
+            "description" : "AM uses this identifier to create secret labels, using the following templates: <br> <ul> <li><code>am.applications.oauth2.client.{{identifier}}.secret</code> for the <b>Client secret</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.jwt.public.key</code> for the <b>Client JWT Bearer Public Key</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.mtls.trusted.cert</code> for the <b>mTLS Self-Signed Certificate</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.id.token.enc.public.key</code> for the <b>ID Token Encryption Public Key</b></li> </ul> where {{identifier}} is the Secret Label Identifier. <br> The Secret Label Identifier can only contain characters {{a-z}} {{A-Z}} {{0-9}} {{.}} and cannot start or end with {{.}}. <br>As a best practice, use a different Secret Label Identifier per OAuth2 client.",
+            "propertyOrder" : 23050,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          }
+        }
+      },
+      "coreOpenIDClientConfig" : {
+        "type" : "object",
+        "title" : "OpenID Connect",
+        "propertyOrder" : 2,
+        "properties" : {
+          "defaultMaxAge" : {
+            "title" : "Default Max Age",
+            "description" : "Minimum value 0. Sets the maximum length of time in seconds a session may be active after the authorization service has succeeded before the user must actively re-authenticate.",
+            "propertyOrder" : 25500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "defaultMaxAgeEnabled" : {
+            "title" : "Default Max Age Enabled",
+            "description" : "Whether or not the default max age is enforced.",
+            "propertyOrder" : 25600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "postLogoutRedirectUri" : {
+            "title" : "Post Logout Redirect URIs",
+            "description" : "URIs that can be redirected to after the client logout process.",
+            "propertyOrder" : 25000,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "jwtTokenLifetime" : {
+            "title" : "OpenID Connect JWT Token Lifetime (seconds)",
+            "description" : "The time in seconds a JWT is valid for. <i>NB</i> If this field is set to zero, JWT Token Lifetime of the OAuth2 Provider is used instead of.",
+            "propertyOrder" : 26100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "backchannel_logout_session_required" : {
+            "title" : "Backchannel Logout Session Required",
+            "description" : "Boolean value specifying whether the RP requires that a sid (session ID) Claim be included in the Logout Token to identify the RP session with the OP when the Backchannel Logout URL is used.",
+            "propertyOrder" : 35300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "clientSessionUri" : {
+            "title" : "Client Session URI",
+            "description" : "This is the URI that will be used to check messages sent to the session management endpoints. This URI must match the origin of the message",
+            "propertyOrder" : 25200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "defaultAcrValues" : {
+            "title" : "Default ACR values",
+            "description" : "Default requested Authentication Context Class Reference values.<br><br>Array of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr_values_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr_values request parameter or an individual acr Claim request override these default values.",
+            "propertyOrder" : 25650,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "claims" : {
+            "title" : "Claim(s)",
+            "description" : "List of claim name translations, which will override those specified for the AS. Claims are values that are presented to the user to inform them what data is being made available to the Client.<br><br>Claims may be entered as simple strings or pipe separated strings representing the internal claim name, locale, and localized description; e.g. \"name|en|Your full name\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"name|Your full name\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"name|\" would allow the claim \"name\" to be used by the client, but would not display it to the user when it was requested.<p>If a value is not given here, the value will be computed from the OAuth 2 Provider settings.</p>",
+            "propertyOrder" : 23400,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "backchannel_logout_uri" : {
+            "title" : "Backchannel Logout URL",
+            "description" : "RP URL that will cause the RP to log itself out when sent a Logout Token by the OP. This URL SHOULD use the https scheme and MAY contain port, path, and query parameter components; however, it MAY use the http scheme, provided that the Client Type is confidential, as defined in Section 2.1 of OAuth 2.0 [RFC6749], and provided the OP allows the use of http RP URIs.",
+            "propertyOrder" : 35200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          }
+        }
+      },
+      "coreUmaClientConfig" : {
+        "type" : "object",
+        "title" : "UMA",
+        "propertyOrder" : 4,
+        "properties" : {
+          "claimsRedirectionUris" : {
+            "title" : "Claims Redirection URIs",
+            "description" : "Redirection URIs for returning to the client from UMA claims collection. If multiple URIs are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
+            "propertyOrder" : 23200,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           }
         }
       }
@@ -7729,7 +8497,7 @@ am> create AIAgentGroups --realm Realm --id id --body body
 **Usage**
 
 ```
-am> delete AIAgentGroups --realm Realm --id id
+am> delete AIAgents --realm Realm --id id
 ```
 
 **Parameters**
@@ -7745,7 +8513,7 @@ Obtain the collection of all secondary configuration types related to the resour
 **Usage**
 
 ```
-am> action AIAgentGroups --realm Realm --actionName getAllTypes
+am> action AIAgents --realm Realm --actionName getAllTypes
 ```
 
 ### getCreatableTypes
@@ -7755,7 +8523,7 @@ Obtain the collection of secondary configuration types that have yet to be added
 **Usage**
 
 ```
-am> action AIAgentGroups --realm Realm --actionName getCreatableTypes
+am> action AIAgents --realm Realm --actionName getCreatableTypes
 ```
 
 ### nextdescendents
@@ -7765,17 +8533,17 @@ Obtain the collection of secondary configuration instances that have been added 
 **Usage**
 
 ```
-am> action AIAgentGroups --realm Realm --actionName nextdescendents
+am> action AIAgents --realm Realm --actionName nextdescendents
 ```
 
 ### query
 
-Querying the agent groups of a specific type
+Querying the agents of a specific type
 
 **Usage**
 
 ```
-am> query AIAgentGroups --realm Realm --filter filter
+am> query AIAgents --realm Realm --filter filter
 ```
 
 **Parameters**
@@ -7789,7 +8557,7 @@ am> query AIAgentGroups --realm Realm --filter filter
 **Usage**
 
 ```
-am> read AIAgentGroups --realm Realm --id id
+am> read AIAgents --realm Realm --id id
 ```
 
 **Parameters**
@@ -7803,7 +8571,7 @@ am> read AIAgentGroups --realm Realm --id id
 **Usage**
 
 ```
-am> update AIAgentGroups --realm Realm --id id --body body
+am> update AIAgents --realm Realm --id id --body body
 ```
 
 **Parameters**
@@ -7820,344 +8588,263 @@ am> update AIAgentGroups --realm Realm --id id --body body
   {
     "type" : "object",
     "properties" : {
-      "coreUmaClientConfig" : {
+      "overrideOAuth2ClientConfig" : {
         "type" : "object",
-        "title" : "UMA",
-        "propertyOrder" : 4,
+        "title" : "OAuth2 Provider Overrides",
+        "propertyOrder" : 5,
         "properties" : {
-          "claimsRedirectionUris" : {
-            "title" : "Claims Redirection URIs",
-            "description" : "Redirection URIs for returning to the client from UMA claims collection. If multiple URIs are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
-            "propertyOrder" : 23200,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          }
-        }
-      },
-      "coreOpenIDClientConfig" : {
-        "type" : "object",
-        "title" : "OpenID Connect",
-        "propertyOrder" : 2,
-        "properties" : {
-          "jwtTokenLifetime" : {
-            "title" : "OpenID Connect JWT Token Lifetime (seconds)",
-            "description" : "The time in seconds a JWT is valid for. <i>NB</i> If this field is set to zero, JWT Token Lifetime of the OAuth2 Provider is used instead of.",
-            "propertyOrder" : 26100,
+          "accessTokenModificationScript" : {
+            "title" : "Access Token Modification Script",
+            "description" : "The plugin that is executed when issuing an access token. <p>The plugin can change the access token's internal data structure to include or exclude particular fields.",
+            "propertyOrder" : 40400,
             "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "backchannel_logout_uri" : {
-            "title" : "Backchannel Logout URL",
-            "description" : "RP URL that will cause the RP to log itself out when sent a Logout Token by the OP. This URL SHOULD use the https scheme and MAY contain port, path, and query parameter components; however, it MAY use the http scheme, provided that the Client Type is confidential, as defined in Section 2.1 of OAuth 2.0 [RFC6749], and provided the OP allows the use of http RP URIs.",
-            "propertyOrder" : 35200,
-            "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "defaultMaxAgeEnabled" : {
-            "title" : "Default Max Age Enabled",
-            "description" : "Whether or not the default max age is enforced.",
-            "propertyOrder" : 25600,
+          "oidcMayActScript" : {
+            "title" : "OIDC ID Token May Act Script",
+            "description" : "The script that is executed when issuing an OIDC ID Token explicitly to modify the <code>may_act</code> claim placed on the token.",
+            "propertyOrder" : 40600,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "usePolicyEngineForScope" : {
+            "title" : "Use Policy Engine for Scope decisions",
+            "description" : "With this setting enabled, the policy engine is consulted for each scope value that is requested.<br><br>If a policy returns an action of GRANT=true, the scope is consented automatically, and the user is not consulted in a user-interaction flow. If a policy returns an action of GRANT=false, the scope is not added to any resulting token, and the user will not see it in a user-interaction flow. If no policy returns a value for the GRANT action, then if the grant type is user-facing (i.e. authorization or device code flows), the user is asked for consent (or saved consent is used), and if the grant type is not user-facing (password or client credentials), the scope is not added to any resulting token.",
+            "propertyOrder" : 40300,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "defaultMaxAge" : {
-            "title" : "Default Max Age",
-            "description" : "Minimum value 0. Sets the maximum length of time in seconds a session may be active after the authorization service has succeeded before the user must actively re-authenticate.",
-            "propertyOrder" : 25500,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "clientSessionUri" : {
-            "title" : "Client Session URI",
-            "description" : "This is the URI that will be used to check messages sent to the session management endpoints. This URI must match the origin of the message",
-            "propertyOrder" : 25200,
+          "customLoginUrlTemplate" : {
+            "title" : "Custom Login URL Template",
+            "description" : "Custom URL for handling login, to override the default OpenAM login page.<br><br>Supports Freemarker syntax, with the following variables:<table><tr><th>Variable</th><th>Description</th></tr><tr><td><code>gotoUrl</code></td><td><p>The URL to redirect to after login.</p></td></tr><tr><td><code>acrValues</code></td><td><p>The Authentication Context Class Reference (acr) values for the authorization request.</p></td></tr><tr><td><code>realm</code></td><td><p>The OpenAM realm the authorization request was made on.</p></td></tr><tr><td><code>module</code></td><td><p>The name of the OpenAM authentication module requested to perform resource owner authentication.</p></td></tr><tr><td><code>service</code></td><td><p>The name of the OpenAM authentication chain requested to perform resource owner authentication.</p></td></tr><tr><td><code>locale</code></td><td><p>A space-separated list of locales, ordered by preference.</p></td></tr></table>The following example template redirects users to a non-OpenAM front end to handle login, which will then redirect back to the <code>/oauth2/authorize</code> endpoint with any required parameters:<p> <code>http://mylogin.com/login?goto=${goto}&lt;#if acrValues??&gt;&amp;acr_values=${acrValues}&lt;&#x2F;#if&gt;&lt;#if realm??&gt;&amp;realm=${realm}&lt;&#x2F;#if&gt;&lt;#if module??&gt;&amp;module=${module}&lt;&#x2F;#if&gt;&lt;#if service??&gt;&amp;service=${service}&lt;&#x2F;#if&gt;&lt;#if locale??&gt;&amp;locale=${locale}&lt;&#x2F;#if&gt;</code><br><b>NOTE</b>: Default OpenAM login page is constructed using \"Base URL Source\" service.",
+            "propertyOrder" : 40900,
             "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "claims" : {
-            "title" : "Claim(s)",
-            "description" : "List of claim name translations, which will override those specified for the AS. Claims are values that are presented to the user to inform them what data is being made available to the Client.<br><br>Claims may be entered as simple strings or pipe separated strings representing the internal claim name, locale, and localized description; e.g. \"name|en|Your full name\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"name|Your full name\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"name|\" would allow the claim \"name\" to be used by the client, but would not display it to the user when it was requested.<p>If a value is not given here, the value will be computed from the OAuth 2 Provider settings.</p>",
-            "propertyOrder" : 23400,
+          "evaluateScopeClass" : {
+            "title" : "Scope Evaluation Plugin Implementation Class",
+            "description" : "The plugin that is executed when retrieving access token's information. <p>The plugin can provide a mechanism to associate scopes with profile attribute values, such as if one of the scopes is mail, the resource owner's email address is provided in the information returned. <p>The provided plugin class must implement the scope evaluation plugin interface: <code>org.forgerock.oauth2.core.plugins.ScopeEvaluator</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultScopeEvaluator</code>",
+            "propertyOrder" : 42300,
             "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+            "type" : "string",
             "exampleValue" : ""
           },
-          "postLogoutRedirectUri" : {
-            "title" : "Post Logout Redirect URIs",
-            "description" : "URIs that can be redirected to after the client logout process.",
-            "propertyOrder" : 25000,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+          "authorizeEndpointDataProviderPluginType" : {
+            "title" : "Authorize Endpoint Data Provider Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Authorize Endpoint Data Provider Script will be executed and when plugin type is JAVA then the Authorize Endpoint Data Provider Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42700,
+            "required" : true,
+            "type" : "string",
             "exampleValue" : ""
           },
-          "backchannel_logout_session_required" : {
-            "title" : "Backchannel Logout Session Required",
-            "description" : "Boolean value specifying whether the RP requires that a sid (session ID) Claim be included in the Logout Token to identify the RP session with the OP when the Backchannel Logout URL is used.",
-            "propertyOrder" : 35300,
+          "tokenEncryptionEnabled" : {
+            "title" : "Encrypt Client-Side Tokens",
+            "description" : "Whether client-side access and refresh tokens should be encrypted.<br><br>Enabling token encryption will disable token signing as encryption is performed using direct symmetric encryption.",
+            "propertyOrder" : 41100,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "defaultAcrValues" : {
-            "title" : "Default ACR values",
-            "description" : "Default requested Authentication Context Class Reference values.<br><br>Array of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr_values_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr_values request parameter or an individual acr Claim request override these default values.",
-            "propertyOrder" : 25650,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          }
-        }
-      },
-      "advancedOAuth2ClientConfig" : {
-        "type" : "object",
-        "title" : "Advanced",
-        "propertyOrder" : 1,
-        "properties" : {
-          "policyUri" : {
-            "title" : "Privacy Policy URI",
-            "description" : "The URI for the client's privacy policy, for use in user-facing consent pages.",
-            "propertyOrder" : 25375,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "logoUri" : {
-            "title" : "Logo URI",
-            "description" : "The URI for the client's logo, for use in user-facing UIs such as consent pages and application pages.",
-            "propertyOrder" : 25350,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "subjectType" : {
-            "title" : "Subject Type",
-            "description" : "The subject type added to responses for this client. This value must be included in \"Subject Type Supported\" in OAuth2 Provider service setting.",
-            "propertyOrder" : 24400,
+          "accessTokenMayActScript" : {
+            "title" : "OAuth2 Access Token May Act Script",
+            "description" : "The script that is executed when issuing an access token explicitly to modify the <code>may_act</code> claim placed on the token.",
+            "propertyOrder" : 40500,
             "required" : true,
             "type" : "string",
             "exampleValue" : ""
           },
-          "tosURI" : {
-            "title" : "Terms of Service URI",
-            "description" : "The URI for the client's terms of service.",
-            "propertyOrder" : 25390,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "allowedResourceServerAudienceValues" : {
-            "title" : "Allowed Resource Server Audience Values",
-            "description" : "List of audience (aud) claim values that are allowed for resource servers. The value(s) must match those expected by the resource server for which the access tokens are requested.",
-            "propertyOrder" : 35900,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "softwareVersion" : {
-            "title" : "Software Version",
-            "description" : "A version identifier string for the identifier defined in the Software Identity.",
-            "propertyOrder" : 35500,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "clientUri" : {
-            "title" : "Client URI",
-            "description" : "The URI for finding further information about the client from user-facing UIs.",
-            "propertyOrder" : 25325,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "acceptedJwtIssuers" : {
-            "title" : "Accepted JWT Issuers",
-            "description" : "List of JWT issuers that will be accepted in addition to client_id for private key JWT authentication.",
-            "propertyOrder" : 24250,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "updateAccessToken" : {
-            "title" : "Access Token",
-            "description" : "The access token used to update the client.",
-            "propertyOrder" : 25100,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "grantTypes" : {
-            "title" : "Grant Types",
-            "description" : "The set of Grant Types (OAuth2 Flows) that are permitted to be used by this client.<br><br>If no Grant Types (OAuth2 Flows) are configured then AUTHORIZATION_CODE flow would be permitted by default.",
-            "propertyOrder" : 23800,
-            "required" : true,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "tokenExchangeAuthLevel" : {
-            "title" : "Token Exchange Auth Level",
-            "description" : "Auth level granted to tokens generated as a result of a Token Exchange, where the input token had no original auth_level claim. (e.g. When exchanging ID Token for an Access Token)",
-            "propertyOrder" : 10100,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "sectorIdentifierUri" : {
-            "title" : "Sector Identifier URI",
-            "description" : "The Host component of this URL is used in the computation of pairwise Subject Identifiers.",
-            "propertyOrder" : 24300,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "contacts" : {
-            "title" : "Contacts",
-            "description" : "Email addresses of users who can administrate this client.",
-            "propertyOrder" : 23900,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "refreshTokenGracePeriod" : {
-            "title" : "Refresh Token Grace Period (seconds)",
-            "description" : "The period, in seconds, that a refresh token can be replayed. This allows a client to recover if the response from the original refresh request is not received due to a network problem or other transient issue. <br>Applies only to tokens in a one-to-one storage scheme. Keep this value as short as possible â it must not exceed 120 seconds. To deactivate the grace period set the value to â1. If this value is set to 0, the Refresh Token Grace Period of the OAuth2 Provider will be used instead.",
-            "propertyOrder" : 26150,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "mixUpMitigation" : {
-            "title" : "OAuth 2.0 Mix-Up Mitigation enabled",
-            "description" : "Enables OAuth 2.0 mix-up mitigation on the authorization server side.<br><br>Enable this setting only if this OAuth 2.0 client supports the <a href=\"https://tools.ietf.org/html/draft-ietf-oauth-mix-up-mitigation-01\">OAuth 2.0 Mix-Up Mitigation draft</a>, otherwise AM will fail to validate access token requests received from this client.",
-            "propertyOrder" : 26300,
+          "statelessTokensEnabled" : {
+            "title" : "Use Client-Side Access & Refresh Tokens",
+            "description" : "When enabled, OpenAM issues access and refresh tokens that can be inspected by resource servers.",
+            "propertyOrder" : 41000,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "requestUris" : {
-            "title" : "Request uris",
-            "description" : "Array of request_uri values that are pre-registered by the RP for use at the OP.<br><br>The entire Request URI MUST NOT exceed 512 ASCII characters and MUST use either HTTP or HTTPS. Otherwise the value will be ignored.",
-            "propertyOrder" : 23700,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
+          "evaluateScopePluginType" : {
+            "title" : "Scope Evaluation Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Scope Evaluation Script will be executed and when plugin type is JAVA then the Scope Evaluation Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42100,
+            "required" : true,
+            "type" : "string",
             "exampleValue" : ""
           },
-          "javascriptOrigins" : {
-            "title" : "JavaScript Origins",
+          "clientsCanSkipConsent" : {
+            "title" : "Allow Clients to Skip Consent",
+            "description" : "If enabled, clients may be configured so that the resource owner will not be asked for consent during authorization flows.",
+            "propertyOrder" : 41300,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "validateScopeClass" : {
+            "title" : "Scope Validation Plugin Implementation Class",
+            "description" : "The plugin that is executed when validating or customising the set of requested scopes for authorize, access token, refresh token and back channel authorize requests. <p>The provided plugin class must implement the scope validation plugin interface: <code>org.forgerock.oauth2.core.plugins.ScopeValidator</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultScopeValidator</code>",
+            "propertyOrder" : 42600,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "evaluateScopeScript" : {
+            "title" : "Scope Evaluation Script",
+            "description" : "The plugin that is executed when retrieving access token's information. <p>The plugin can provide a mechanism to associate scopes with profile attribute values, such as if one of the scopes is mail, the resource owner's email address is provided in the information returned.",
+            "propertyOrder" : 42200,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "authorizeEndpointDataProviderScript" : {
+            "title" : "Authorize Endpoint Data Provider Script",
+            "description" : "The plugin that is executed to return additional data from the authorization request.",
+            "propertyOrder" : 42800,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "providerOverridesEnabled" : {
+            "title" : "Enable OAuth2 Provider Overrides",
+            "description" : "Enabling this causes the other config in this section to override the default OAuth2 Provider behaviour.",
+            "propertyOrder" : 40000,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "enableApplicationContext" : {
+            "title" : "Enable Application Context",
+            "description" : "When enabled, this setting makes the application context available in all OAuth2 / OIDC flows for this client as the <code>oauthApplication</code> binding in scripted decision node scripts.",
+            "propertyOrder" : 43500,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "remoteConsentServiceId" : {
+            "title" : "Remote Consent Service ID",
+            "description" : "The ID of an existing remote consent service agent.",
+            "propertyOrder" : 41500,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "accessTokenModificationPluginType" : {
+            "title" : "Access Token Modification Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Access Token Modification Script will be executed and when plugin type is JAVA then the Access Token Modifier Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 40390,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "authorizeEndpointDataProviderClass" : {
+            "title" : "Authorize Endpoint Data Provider Plugin Implementation Class",
+            "description" : "The plugin that is executed to return additional data from the authorization request. <<p>The provided plugin class must implement the scope evaluation plugin interface: <code>org.forgerock.oauth2.core.plugins.AuthorizeEndpointDataProvider</code> <p>If this field is empty and the Plugin Type of JAVA is selected, the default implementation will be used: <code>org.forgerock.oauth2.core.plugins.registry.DefaultEndpointDataProvider</code>",
+            "propertyOrder" : 42900,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "oidcClaimsPluginType" : {
+            "title" : "OIDC Claims Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the OIDC Claims Script will be executed and when plugin type is JAVA then the OIDC Claims Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 40690,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "acceptAudienceParametersInTokenExchangeRequests" : {
+            "title" : "Accept Audience Parameters in Token Exchange Requests",
+            "description" : "When enabled, AM validates audience parameter values in Token Exchange requests against the values defined in Allowed Resource Server Audience Values. If validation fails, the token exchange request is rejected.",
+            "propertyOrder" : 43600,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "oidcClaimsClass" : {
+            "title" : "OIDC Claims Plugin Implementation Class",
+            "description" : "The plugin that is executed when issuing an ID token or making a request to the <i>userinfo</i> endpoint during OpenID requests.<p>The plugin gathers the scopes and populates claims, and has access to the access token, the user's identity and, if available, the user's session. <p>This plugin provides the custom implementation for the OIDC claims plugin interface: <code>org.forgerock.oauth2.core.plugins.UserInfoClaimsPlugin</code> <p>This field cannot be empty if the Plugin Type of JAVA is selected. Failure to provide a valid implementation of the OIDC claims plugin interface will cause OAuth2 flows to fail.",
+            "propertyOrder" : 40710,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "oidcClaimsScript" : {
+            "title" : "OIDC Claims Script",
+            "description" : "The plugin that is executed when issuing an ID token or making a request to the <i>userinfo</i> endpoint during OpenID requests.<p>The plugin gathers the scopes and populates claims, and has access to the access token, the user's identity and, if available, the user's session.",
+            "propertyOrder" : 40700,
+            "required" : true,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "issueRefreshToken" : {
+            "title" : "Issue Refresh Tokens",
+            "description" : "Whether to issue a refresh token when returning an access token.",
+            "propertyOrder" : 40100,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "useTokenIntrospectionClaimForJWT" : {
+            "title" : "Use token_introspection claim for JWT",
+            "description" : "When enabled, the JWT introspection response complies with RFC 9701. This ensures the introspection data is nested within the <code>token_introspection</code> claim in the JWT response. <br><b>Note:</b> Enabling this option also causes the JSON introspection response to include the token's <code>aud</code> claim, if present.",
+            "propertyOrder" : 43700,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "issueRefreshTokenOnRefreshedToken" : {
+            "title" : "Issue Refresh Tokens on Refreshing Access Tokens",
+            "description" : "Whether to issue a refresh token when refreshing an access token.",
+            "propertyOrder" : 40200,
+            "required" : true,
+            "type" : "boolean",
+            "exampleValue" : ""
+          },
+          "accessTokenModifierClass" : {
+            "title" : "Access Token Modifier Plugin Implementation Class",
+            "description" : "The plugin that is executed when issuing an access token. <p>The plugin can change the access token's internal data structure to include or exclude particular fields. <p>This plugin provides the custom implementation for the access token modifier plugin interface: <code>org.forgerock.oauth2.core.plugins.AccessTokenModifier</code> <p>This field cannot be empty if the Plugin Type of JAVA is selected. Failure to provide a valid implementation of the access token modifier plugin interface will cause OAuth2 flows to fail.",
+            "propertyOrder" : 40410,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "validateScopeScript" : {
+            "title" : "Scope Validation Script",
+            "description" : "The plugin that is executed when validating or customising the set of requested scopes for authorize, access token, refresh token and back channel authorize requests.",
+            "propertyOrder" : 42500,
+            "required" : false,
+            "type" : "string",
+            "exampleValue" : ""
+          },
+          "enableRemoteConsent" : {
+            "title" : "Enable Remote Consent",
             "description" : "",
-            "propertyOrder" : 23650,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "isConsentImplied" : {
-            "title" : "Implied consent",
-            "description" : "When enabled, the resource owner will not be asked for consent during authorization flows. The OAuth2 Provider must be configured to allow clients to skip consent.",
-            "propertyOrder" : 26200,
+            "propertyOrder" : 41400,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "name" : {
-            "title" : "Display name",
-            "description" : "A client name that may be relevant to the resource owner when considering approval.<br><br>The name may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The ExampleCo Intranet\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the name is displayed to all users having undefined locales. e.g. \"The ExampleCo Intranet\".",
-            "propertyOrder" : 23500,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "require_pushed_authorization_requests" : {
-            "title" : "Require Pushed Authorization Requests",
-            "description" : "If enabled, the client must use the PAR endpoint to initiate authorization requests. Note that, even if this value is set to false, the authorization server may be configured to enforce PAR for all clients.",
-            "propertyOrder" : 35600,
+          "useForceAuthnForMaxAge" : {
+            "title" : "Use Force Authentication for max_age",
+            "description" : "When this setting is <code>false</code> (default)<ul><li>Attempted authorization when the max_age has passed will log the existing session out and start a re-authentication</li></ul> <ul><li>Re-authentication triggered by the max_age parameter will create a new session</li></ul> When this setting is <code>true</code> <ul><li>Attempted authorization when the max_age has passed will not destroy the existing session</li></ul> <ul><li>Re-authentication triggered by the max_age parameter will return the same session. The advanced server property org.forgerock.openam.authentication.forceAuth.enabled must be set to <code>true</code></li></ul> <p>For security reasons, it is strongly recommended that you leave <code>Use Force Authentication for max_age</code> set to the default value (<code>false</code>), so that a new session is created when the user re-authenticates.</p>",
+            "propertyOrder" : 40850,
             "required" : true,
             "type" : "boolean",
             "exampleValue" : ""
           },
-          "responseTypes" : {
-            "title" : "Response Types",
-            "description" : "Response types this client will support and use.",
-            "propertyOrder" : 23800,
-            "required" : true,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "descriptions" : {
-            "title" : "Display description",
-            "description" : "A description of the client or other information that may be relevant to the resource owner when considering approval.<br><br>The description may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The company intranet is requesting the following access permission\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the description is displayed to all users having undefined locales. e.g. \"The company intranet is requesting the following access permission\".",
-            "propertyOrder" : 23600,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "softwareIdentity" : {
-            "title" : "Software Identity",
-            "description" : "A unique identifier assigned by the client developer or software publisher to identity the client software.",
-            "propertyOrder" : 35400,
+          "scopesPolicySet" : {
+            "title" : "Scopes Policy Set",
+            "description" : "The policy set that defines the context in which policy evaluations occur when Use Policy Engine for Scope decisions is enabled on the OAuth2 provider. If blank will default to the oauth2Scopes policy set.",
+            "propertyOrder" : 40310,
             "required" : false,
             "type" : "string",
             "exampleValue" : ""
           },
-          "customProperties" : {
-            "title" : "Custom Properties",
-            "description" : "Additional properties that allow users to augment the set of properties supported by the OAuth2 Client. <br> Examples: <br> customproperty=custom-value1 <br> customlist[0]=customlist-value-0 <br> customlist[1]=customlist-value-1 <br> custommap[key1]=custommap-value-1 <br> custommap[key2]=custommap-value-2",
-            "propertyOrder" : 35100,
+          "overrideableOIDCClaims" : {
+            "title" : "Overrideable Id_Token Claims",
+            "description" : "List of claims in the id_token that may be overrideable in the OIDC Claims Script. These should be the subset of the core OpenID Connect Claims like aud or azp.",
+            "propertyOrder" : 43300,
             "required" : false,
             "items" : {
               "type" : "string"
@@ -8165,18 +8852,10 @@ am> update AIAgentGroups --realm Realm --id id --body body
             "type" : "array",
             "exampleValue" : ""
           },
-          "treeName" : {
-            "title" : "Tree Name",
-            "description" : "The name of the tree that the client is associated with.<br><br>When a client is associated with a tree, the configured Authentication Context Mapper is not executed. Instead, AM redirects to the configured tree.",
-            "propertyOrder" : 25670,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenEndpointAuthMethod" : {
-            "title" : "Token Endpoint Authentication Method",
-            "description" : "The authentication method with which a client authenticates to the authorization server at the token endpoint. The authentication method applies to OIDC requests with the openid scope.",
-            "propertyOrder" : 24000,
+          "validateScopePluginType" : {
+            "title" : "Scope Validation Plugin Type",
+            "description" : "When the plugin type is SCRIPTED then the Scope Validation Script will be executed and when plugin type is JAVA then the Scope Validation Plugin Implementation Class will be executed. If the plugin type is PROVIDER the client override is disabled and the plugin configured on the OAuth2 Provider is used.",
+            "propertyOrder" : 42400,
             "required" : true,
             "type" : "string",
             "exampleValue" : ""
@@ -8188,237 +8867,989 @@ am> update AIAgentGroups --realm Realm --id id --body body
         "title" : "Signing and Encryption",
         "propertyOrder" : 3,
         "properties" : {
-          "publicKeyLocation" : {
-            "title" : "Public key selector",
-            "description" : "Select the public key for this client to come from either the jwks_uri, manual jwks or X509 field.",
-            "propertyOrder" : 25700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "mTLSSubjectDN" : {
-            "title" : "mTLS Subject DN",
-            "description" : "Expected Subject DN of certificate used for mTLS client certificate authentication. Defaults to CN=&lt;client_id&gt;. Only applicable when using CA-signed certificates.",
-            "propertyOrder" : 25406,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationResponseEncryptionAlgorithm" : {
-            "title" : "Authorization Response JWT Encryption Algorithm",
-            "description" : "Algorithm the Authorization Response JWT for this client must be encrypted with.",
-            "propertyOrder" : 24803,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoEncryptedResponseEncryptionAlgorithm" : {
-            "title" : "User info encrypted response encryption algorithm",
-            "description" : "JWE enc algorithm for encrypting UserInfo Responses. If userinfo encrypted response algorithm is specified, the default for this value is A128CBC-HS256. When user info encrypted response encryption is included, user info encrypted response algorithm MUST also be provided.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
-            "propertyOrder" : 27400,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenIntrospectionEncryptedResponseEncryptionAlgorithm" : {
-            "title" : "Token introspection encrypted response encryption algorithm",
-            "description" : "JWE 'enc' algorithm REQUIRED for encrypting token introspection responses. Sets the algorithm that will be used to encrypt the Plaintext of a JWE when the chosen introspection response format is 'signed then encrypted'.",
-            "propertyOrder" : 27830,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "idTokenEncryptionEnabled" : {
-            "title" : "Enable ID Token Encryption",
-            "description" : "Select to enable ID token encryption.",
-            "propertyOrder" : 24600,
-            "required" : true,
-            "type" : "boolean",
-            "exampleValue" : ""
-          },
-          "idTokenPublicEncryptionKey" : {
-            "title" : "ID Token Encryption Public Key",
-            "description" : "A Base64 encoded public key for encrypting ID Tokens. This key is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
-            "propertyOrder" : 24900,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "requestParameterEncryptedAlg" : {
-            "title" : "Request parameter encryption algorithm",
-            "description" : "JWE algorithm for encrypting the request parameter.",
-            "propertyOrder" : 27600,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoEncryptedResponseAlg" : {
-            "title" : "User info encrypted response algorithm",
-            "description" : "JWE algorithm for encrypting UserInfo Responses. If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT. The default, if omitted, is that no encryption is performed.",
-            "propertyOrder" : 27300,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "userinfoSignedResponseAlg" : {
-            "title" : "User info signed response algorithm",
-            "description" : "JWS algorithm for signing UserInfo Responses. If this is specified, the response will be JWT <a href=\"https://tools.ietf.org/html/rfc7519\">JWT</a> serialized, and signed using JWS. The default, if omitted, is for the UserInfo Response to return the Claims as a UTF-8 encoded JSON object using the application/json content-type.",
-            "propertyOrder" : 27200,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "requestParameterSignedAlg" : {
-            "title" : "Request parameter signing algorithm",
-            "description" : "JWS algorithm for signing the request parameter.",
-            "propertyOrder" : 27500,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "tokenIntrospectionSignedResponseAlg" : {
-            "title" : "Token introspection response signing algorithm",
-            "description" : "Algorithm used for signing the introspection JWT response.",
-            "propertyOrder" : 27810,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "idTokenSignedResponseAlg" : {
-            "title" : "ID Token Signing Algorithm",
-            "description" : "Algorithm the ID Token for this client must be signed with.",
-            "propertyOrder" : 24500,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwksCacheTimeout" : {
-            "title" : "JWKs URI content cache timeout in ms",
-            "description" : "To avoid loading the JWKS URI content for every token encryption, the JWKS content is cached. This timeout defines the maximum of time the JWKS URI content can be cached before being refreshed.",
-            "propertyOrder" : 24110,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "tokenEndpointAuthSigningAlgorithm" : {
-            "title" : "Token Endpoint Authentication Signing Algorithm",
-            "description" : "The JWS algorithm that MUST be used for signing the JWT used to authenticate the Client at the Token Endpointfor the private_key_jwt and client_secret_jwt authentication methods. All Token Requests using these authentication methods from this Client MUST be rejected, if the JWT is not signed with this algorithm.",
-            "propertyOrder" : 24130,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "authorizationResponseEncryptionMethod" : {
+            "title" : "Authorization Response JWT Encryption Method",
+            "description" : "Encryption method the Authorization Response JWT for this client must be encrypted with.",
+            "propertyOrder" : 24804,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
           "idTokenEncryptionAlgorithm" : {
             "title" : "ID Token Encryption Algorithm",
             "description" : "Algorithm the ID Token for this client must be encrypted with.",
             "propertyOrder" : 24700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "mTLSTrustedCert" : {
-            "title" : "mTLS Self-Signed Certificate",
-            "description" : "Self-signed PEM-encoded or DER-encoded X.509 certificate for mTLS client certificate authentication. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
-            "propertyOrder" : 25405,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
           "requestParameterEncryptedEncryptionAlgorithm" : {
             "title" : "Request parameter encryption method",
             "description" : "JWE enc algorithm for encrypting the request parameter.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
             "propertyOrder" : 27700,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "mTLSCertificateBoundAccessTokens" : {
-            "title" : "Use Certificate-Bound Access Tokens",
-            "description" : "Whether access tokens issued to this client should be bound to the X.509 certificate it uses to authenticate to the token endpoint. If enabled (and the provider supports it) then an x5t#S256 confirmation key will be added to all access tokens with the SHA-256 hash of the client's certificate.",
-            "propertyOrder" : 25507,
-            "required" : true,
-            "type" : "boolean",
-            "exampleValue" : ""
+          "userinfoSignedResponseAlg" : {
+            "title" : "User info signed response algorithm",
+            "description" : "JWS algorithm for signing UserInfo Responses. If this is specified, the response will be JWT <a href=\"https://tools.ietf.org/html/rfc7519\">JWT</a> serialized, and signed using JWS. The default, if omitted, is for the UserInfo Response to return the Claims as a UTF-8 encoded JSON object using the application/json content-type.",
+            "propertyOrder" : 27200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
-          "idTokenEncryptionMethod" : {
-            "title" : "ID Token Encryption Method",
-            "description" : "Encryption method the ID Token for this client must be encrypted with.",
-            "propertyOrder" : 24800,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "tokenEndpointAuthSigningAlgorithm" : {
+            "title" : "Token Endpoint Authentication Signing Algorithm",
+            "description" : "The JWS algorithm that MUST be used for signing the JWT used to authenticate the Client at the Token Endpointfor the private_key_jwt and client_secret_jwt authentication methods. All Token Requests using these authentication methods from this Client MUST be rejected, if the JWT is not signed with this algorithm.",
+            "propertyOrder" : 24130,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "userinfoResponseFormat" : {
-            "title" : "User info response format.",
-            "description" : "The user info endpoint offers different output format. See http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse",
-            "propertyOrder" : 27100,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwkSet" : {
-            "title" : "Json Web Key",
-            "description" : "Raw JSON Web Key value containing the client's public keys.",
-            "propertyOrder" : 24200,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "clientJwtPublicKey" : {
-            "title" : "Client JWT Bearer Public Key",
-            "description" : "A Base64 encoded X509 certificate, containing the public key, represented as a UTF-8 PEM file, of the key pair for signing the Client Bearer JWT. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
-            "propertyOrder" : 25400,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationResponseSigningAlgorithm" : {
-            "title" : "Authorization Response JWT Signing Algorithm",
-            "description" : "Algorithm the Authorization Response JWT for this client must be signed with.",
-            "propertyOrder" : 24801,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "jwkStoreCacheMissCacheTime" : {
-            "title" : "JWKs URI content cache miss cache time",
-            "description" : "To avoid loading the JWKS URI content for every token signature verification, especially when the kid is not in the jwks content already cached, the JWKS content will be cache for a minimum period of time. This cache miss cache time defines the minimum of time the JWKS URI content is cache.",
-            "propertyOrder" : 24120,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "jwksUri" : {
-            "title" : "Json Web Key URI",
-            "description" : "The uri that contains the client's public keys in Json Web Key format.",
-            "propertyOrder" : 24100,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : "https://{{jwks-www}}/oauth2/{{realm}}/connect/jwk_uri"
-          },
-          "tokenIntrospectionResponseFormat" : {
-            "title" : "Token introspection response format",
-            "description" : "The token introspection endpoint offers different output format. see https://tools.ietf.org/html/draft-ietf-oauth-jwt-introspection-response-03",
-            "propertyOrder" : 27800,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+          "mTLSTrustedCert" : {
+            "title" : "mTLS Self-Signed Certificate",
+            "description" : "Self-signed PEM-encoded or DER-encoded X.509 certificate for mTLS client certificate authentication. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
+            "propertyOrder" : 25405,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
           },
           "tokenIntrospectionEncryptedResponseAlg" : {
             "title" : "Token introspection response encryption algorithm",
             "description" : "JWE \"alg\" algorithm REQUIRED for encrypting introspection responses. Sets the algorithm that will be used to encrypt the Content Encryption Key when the chosen introspection response format is 'signed then encrypted'.",
             "propertyOrder" : 27820,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
           },
-          "authorizationResponseEncryptionMethod" : {
-            "title" : "Authorization Response JWT Encryption Method",
-            "description" : "Encryption method the Authorization Response JWT for this client must be encrypted with.",
-            "propertyOrder" : 24804,
-            "required" : false,
-            "type" : "string",
-            "exampleValue" : ""
+          "jwkSet" : {
+            "title" : "Json Web Key",
+            "description" : "Raw JSON Web Key value containing the client's public keys.",
+            "propertyOrder" : 24200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "userinfoResponseFormat" : {
+            "title" : "User info response format.",
+            "description" : "The user info endpoint offers different output format. See http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse",
+            "propertyOrder" : 27100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "userinfoEncryptedResponseEncryptionAlgorithm" : {
+            "title" : "User info encrypted response encryption algorithm",
+            "description" : "JWE enc algorithm for encrypting UserInfo Responses. If userinfo encrypted response algorithm is specified, the default for this value is A128CBC-HS256. When user info encrypted response encryption is included, user info encrypted response algorithm MUST also be provided.<br><br>AM supports the following token encryption algorithms:<ul><li><code>A128GCM</code>, <code>A192GCM</code>, and <code>A256GCM</code> - AES in Galois Counter Mode (GCM) authenticated encryption mode.</li><li><code>A128CBC-HS256</code>, <code>A192CBC-HS384</code>, and <code>A256CBC-HS512</code> - AES encryption in CBC mode, with HMAC-SHA-2 for integrity.</li></ul>",
+            "propertyOrder" : 27400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionResponseFormat" : {
+            "title" : "Token introspection response format",
+            "description" : "The token introspection endpoint offers different output format. see https://tools.ietf.org/html/draft-ietf-oauth-jwt-introspection-response-03",
+            "propertyOrder" : 27800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "publicKeyLocation" : {
+            "title" : "Public key selector",
+            "description" : "Select the public key for this client to come from either the jwks_uri, manual jwks or X509 field.",
+            "propertyOrder" : 25700,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionEncryptedResponseEncryptionAlgorithm" : {
+            "title" : "Token introspection encrypted response encryption algorithm",
+            "description" : "JWE 'enc' algorithm REQUIRED for encrypting token introspection responses. Sets the algorithm that will be used to encrypt the Plaintext of a JWE when the chosen introspection response format is 'signed then encrypted'.",
+            "propertyOrder" : 27830,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "jwkStoreCacheMissCacheTime" : {
+            "title" : "JWKs URI content cache miss cache time",
+            "description" : "To avoid loading the JWKS URI content for every token signature verification, especially when the kid is not in the jwks content already cached, the JWKS content will be cache for a minimum period of time. This cache miss cache time defines the minimum of time the JWKS URI content is cache.",
+            "propertyOrder" : 24120,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "requestParameterEncryptedAlg" : {
+            "title" : "Request parameter encryption algorithm",
+            "description" : "JWE algorithm for encrypting the request parameter.",
+            "propertyOrder" : 27600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "idTokenEncryptionMethod" : {
+            "title" : "ID Token Encryption Method",
+            "description" : "Encryption method the ID Token for this client must be encrypted with.",
+            "propertyOrder" : 24800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "jwksUri" : {
+            "title" : "Json Web Key URI",
+            "description" : "The uri that contains the client's public keys in Json Web Key format.",
+            "propertyOrder" : 24100,
+            "type" : "object",
+            "exampleValue" : "https://{{jwks-www}}/oauth2/{{realm}}/connect/jwk_uri",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "userinfoEncryptedResponseAlg" : {
+            "title" : "User info encrypted response algorithm",
+            "description" : "JWE algorithm for encrypting UserInfo Responses. If both signing and encryption are requested, the response will be signed then encrypted, with the result being a Nested JWT. The default, if omitted, is that no encryption is performed.",
+            "propertyOrder" : 27300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "authorizationResponseEncryptionAlgorithm" : {
+            "title" : "Authorization Response JWT Encryption Algorithm",
+            "description" : "Algorithm the Authorization Response JWT for this client must be encrypted with.",
+            "propertyOrder" : 24803,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "requestParameterSignedAlg" : {
+            "title" : "Request parameter signing algorithm",
+            "description" : "JWS algorithm for signing the request parameter.",
+            "propertyOrder" : 27500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "mTLSCertificateBoundAccessTokens" : {
+            "title" : "Use Certificate-Bound Access Tokens",
+            "description" : "Whether access tokens issued to this client should be bound to the X.509 certificate it uses to authenticate to the token endpoint. If enabled (and the provider supports it) then an x5t#S256 confirmation key will be added to all access tokens with the SHA-256 hash of the client's certificate.",
+            "propertyOrder" : 25507,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "jwksCacheTimeout" : {
+            "title" : "JWKs URI content cache timeout in ms",
+            "description" : "To avoid loading the JWKS URI content for every token encryption, the JWKS content is cached. This timeout defines the maximum of time the JWKS URI content can be cached before being refreshed.",
+            "propertyOrder" : 24110,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "mTLSSubjectDN" : {
+            "title" : "mTLS Subject DN",
+            "description" : "Expected Subject DN of certificate used for mTLS client certificate authentication. Defaults to CN=&lt;client_id&gt;. Only applicable when using CA-signed certificates.",
+            "propertyOrder" : 25406,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "idTokenEncryptionEnabled" : {
+            "title" : "Enable ID Token Encryption",
+            "description" : "Select to enable ID token encryption.",
+            "propertyOrder" : 24600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "tokenIntrospectionSignedResponseAlg" : {
+            "title" : "Token introspection response signing algorithm",
+            "description" : "Algorithm used for signing the introspection JWT response.",
+            "propertyOrder" : 27810,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "idTokenPublicEncryptionKey" : {
+            "title" : "ID Token Encryption Public Key",
+            "description" : "A Base64 encoded public key for encrypting ID Tokens. This key is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
+            "propertyOrder" : 24900,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "clientJwtPublicKey" : {
+            "title" : "Client JWT Bearer Public Key",
+            "description" : "A Base64 encoded X509 certificate, containing the public key, represented as a UTF-8 PEM file, of the key pair for signing the Client Bearer JWT. This value is ignored if you specify a Secret Label Identifier and a corresponding secret mapping.",
+            "propertyOrder" : 25400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "authorizationResponseSigningAlgorithm" : {
+            "title" : "Authorization Response JWT Signing Algorithm",
+            "description" : "Algorithm the Authorization Response JWT for this client must be signed with.",
+            "propertyOrder" : 24801,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "idTokenSignedResponseAlg" : {
+            "title" : "ID Token Signing Algorithm",
+            "description" : "Algorithm the ID Token for this client must be signed with.",
+            "propertyOrder" : 24500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          }
+        }
+      },
+      "advancedOAuth2ClientConfig" : {
+        "type" : "object",
+        "title" : "Advanced",
+        "propertyOrder" : 1,
+        "properties" : {
+          "name" : {
+            "title" : "Display name",
+            "description" : "A client name that may be relevant to the resource owner when considering approval.<br><br>The name may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The ExampleCo Intranet\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the name is displayed to all users having undefined locales. e.g. \"The ExampleCo Intranet\".",
+            "propertyOrder" : 23500,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "logoUri" : {
+            "title" : "Logo URI",
+            "description" : "The URI for the client's logo, for use in user-facing UIs such as consent pages and application pages.",
+            "propertyOrder" : 25350,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "grantTypes" : {
+            "title" : "Grant Types",
+            "description" : "The set of Grant Types (OAuth2 Flows) that are permitted to be used by this client.<br><br>If no Grant Types (OAuth2 Flows) are configured then AUTHORIZATION_CODE flow would be permitted by default.",
+            "propertyOrder" : 23800,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : true
+              }
+            }
+          },
+          "subjectType" : {
+            "title" : "Subject Type",
+            "description" : "The subject type added to responses for this client. This value must be included in \"Subject Type Supported\" in OAuth2 Provider service setting.",
+            "propertyOrder" : 24400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "responseTypes" : {
+            "title" : "Response Types",
+            "description" : "Response types this client will support and use.",
+            "propertyOrder" : 23800,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : true
+              }
+            }
+          },
+          "softwareIdentity" : {
+            "title" : "Software Identity",
+            "description" : "A unique identifier assigned by the client developer or software publisher to identity the client software.",
+            "propertyOrder" : 35400,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "policyUri" : {
+            "title" : "Privacy Policy URI",
+            "description" : "The URI for the client's privacy policy, for use in user-facing consent pages.",
+            "propertyOrder" : 25375,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "allowedResourceServerAudienceValues" : {
+            "title" : "Allowed Resource Server Audience Values",
+            "description" : "List of audience (aud) claim values that are allowed for resource servers. The value(s) must match those expected by the resource server for which the access tokens are requested.",
+            "propertyOrder" : 35900,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "customProperties" : {
+            "title" : "Custom Properties",
+            "description" : "Additional properties that allow users to augment the set of properties supported by the OAuth2 Client. <br> Examples: <br> customproperty=custom-value1 <br> customlist[0]=customlist-value-0 <br> customlist[1]=customlist-value-1 <br> custommap[key1]=custommap-value-1 <br> custommap[key2]=custommap-value-2",
+            "propertyOrder" : 35100,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "sectorIdentifierUri" : {
+            "title" : "Sector Identifier URI",
+            "description" : "The Host component of this URL is used in the computation of pairwise Subject Identifiers.",
+            "propertyOrder" : 24300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "acceptedJwtIssuers" : {
+            "title" : "Accepted JWT Issuers",
+            "description" : "List of JWT issuers that will be accepted in addition to client_id for private key JWT authentication.",
+            "propertyOrder" : 24250,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "isConsentImplied" : {
+            "title" : "Implied consent",
+            "description" : "When enabled, the resource owner will not be asked for consent during authorization flows. The OAuth2 Provider must be configured to allow clients to skip consent.",
+            "propertyOrder" : 26200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "require_pushed_authorization_requests" : {
+            "title" : "Require Pushed Authorization Requests",
+            "description" : "If enabled, the client must use the PAR endpoint to initiate authorization requests. Note that, even if this value is set to false, the authorization server may be configured to enforce PAR for all clients.",
+            "propertyOrder" : 35600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "mixUpMitigation" : {
+            "title" : "OAuth 2.0 Mix-Up Mitigation enabled",
+            "description" : "Enables OAuth 2.0 mix-up mitigation on the authorization server side.<br><br>Enable this setting only if this OAuth 2.0 client supports the <a href=\"https://tools.ietf.org/html/draft-ietf-oauth-mix-up-mitigation-01\">OAuth 2.0 Mix-Up Mitigation draft</a>, otherwise AM will fail to validate access token requests received from this client.",
+            "propertyOrder" : 26300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "updateAccessToken" : {
+            "title" : "Access Token",
+            "description" : "The access token used to update the client.",
+            "propertyOrder" : 25100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "tokenEndpointAuthMethod" : {
+            "title" : "Token Endpoint Authentication Method",
+            "description" : "The authentication method with which a client authenticates to the authorization server at the token endpoint. The authentication method applies to OIDC requests with the openid scope.",
+            "propertyOrder" : 24000,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "javascriptOrigins" : {
+            "title" : "JavaScript Origins",
+            "description" : "",
+            "propertyOrder" : 23650,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "refreshTokenGracePeriod" : {
+            "title" : "Refresh Token Grace Period (seconds)",
+            "description" : "The period, in seconds, that a refresh token can be replayed. This allows a client to recover if the response from the original refresh request is not received due to a network problem or other transient issue. <br>Applies only to tokens in a one-to-one storage scheme. Keep this value as short as possible â it must not exceed 120 seconds. To deactivate the grace period set the value to â1. If this value is set to 0, the Refresh Token Grace Period of the OAuth2 Provider will be used instead.",
+            "propertyOrder" : 26150,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "treeName" : {
+            "title" : "Tree Name",
+            "description" : "The name of the tree that the client is associated with.<br><br>When a client is associated with a tree, the configured Authentication Context Mapper is not executed. Instead, AM redirects to the configured tree.",
+            "propertyOrder" : 25670,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "tokenExchangeAuthLevel" : {
+            "title" : "Token Exchange Auth Level",
+            "description" : "Auth level granted to tokens generated as a result of a Token Exchange, where the input token had no original auth_level claim. (e.g. When exchanging ID Token for an Access Token)",
+            "propertyOrder" : 10100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "clientUri" : {
+            "title" : "Client URI",
+            "description" : "The URI for finding further information about the client from user-facing UIs.",
+            "propertyOrder" : 25325,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "contacts" : {
+            "title" : "Contacts",
+            "description" : "Email addresses of users who can administrate this client.",
+            "propertyOrder" : 23900,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "softwareVersion" : {
+            "title" : "Software Version",
+            "description" : "A version identifier string for the identifier defined in the Software Identity.",
+            "propertyOrder" : 35500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "requestUris" : {
+            "title" : "Request uris",
+            "description" : "Array of request_uri values that are pre-registered by the RP for use at the OP.<br><br>The entire Request URI MUST NOT exceed 512 ASCII characters and MUST use either HTTP or HTTPS. Otherwise the value will be ignored.",
+            "propertyOrder" : 23700,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "descriptions" : {
+            "title" : "Display description",
+            "description" : "A description of the client or other information that may be relevant to the resource owner when considering approval.<br><br>The description may be entered as a single string or as pipe separated strings for locale and localized name; e.g. \"en|The company intranet is requesting the following access permission\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale is omitted, the description is displayed to all users having undefined locales. e.g. \"The company intranet is requesting the following access permission\".",
+            "propertyOrder" : 23600,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "tosURI" : {
+            "title" : "Terms of Service URI",
+            "description" : "The URI for the client's terms of service.",
+            "propertyOrder" : 25390,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           }
         }
       },
@@ -8427,100 +9858,651 @@ am> update AIAgentGroups --realm Realm --id id --body body
         "title" : "Core",
         "propertyOrder" : 0,
         "properties" : {
-          "defaultScopes" : {
-            "title" : "Default Scope(s)",
-            "description" : "Default Scope(s). Scopes automatically given to tokens.<br><br>Default Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
-            "propertyOrder" : 23700,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
-          },
-          "scopes" : {
-            "title" : "Scope(s)",
-            "description" : "Scope(s). Scopes are strings that are presented to the user for approval and included in tokens so that the protected resource may make decisions about what to give access to.<br><br>Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
-            "propertyOrder" : 23300,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
+          "loopbackInterfaceRedirection" : {
+            "title" : "Allow wildcard ports in redirect URIs",
+            "description" : "This flag indicates whether wildcards can be used for port numbers in redirect URIs. When this toggle is set to true and a wildcard is used the only allowed combinations of protocols and hosts are: http://127.0.0.1, https://127.0.0.1, http://[::1], https://[::1], http://localhost, https://localhost The wild cards are permitted only for the port values. For example - <code>http://localhost:80*</code>, <code>http://localhost:80?0/{path}</code>, <code>http://localhost:80[8-9]0/{path}</code>",
+            "propertyOrder" : 23150,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : false
+              }
+            }
           },
           "accessTokenLifetime" : {
             "title" : "Access Token Lifetime (seconds)",
             "description" : "The time in seconds an access token is valid for. <i>NB</i> If this field is set to zero, Access Token Lifetime of the OAuth2 Provider is used instead of.",
             "propertyOrder" : 26000,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "status" : {
-            "title" : "Status",
-            "description" : "Status of the agent configuration.",
-            "propertyOrder" : 200,
-            "required" : true,
-            "type" : "string",
-            "exampleValue" : ""
-          },
-          "authorizationCodeLifetime" : {
-            "title" : "Authorization Code Lifetime (seconds)",
-            "description" : "The time in seconds an authorization code is valid for. <i>NB</i> If this field is set to zero, Authorization Code Lifetime of the OAuth2 Provider is used instead of.",
-            "propertyOrder" : 25800,
-            "required" : true,
-            "type" : "integer",
-            "exampleValue" : ""
-          },
-          "loopbackInterfaceRedirection" : {
-            "title" : "Allow wildcard ports in redirect URIs",
-            "description" : "This flag indicates whether wildcards can be used for port numbers in redirect URIs. When this toggle is set to true and a wildcard is used the only allowed combinations of protocols and hosts are: http://127.0.0.1, https://127.0.0.1, http://[::1], https://[::1], http://localhost, https://localhost The wild cards are permitted only for the port values. For example - <code>http://localhost:80*</code>, <code>http://localhost:80?0/{path}</code>, <code>http://localhost:80[8-9]0/{path}</code>",
-            "propertyOrder" : 23150,
-            "required" : false,
-            "type" : "boolean",
-            "exampleValue" : ""
-          },
-          "redirectionUris" : {
-            "title" : "Redirection URIs",
-            "description" : "Redirection URIs (optional for confidential clients). Complete URIs or URIs consisting of protocol + authority + path are registered so that the OAuth 2.0 provider can trust that tokens are sent to trusted entities. If multiple URI's are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
-            "propertyOrder" : 23200,
-            "required" : false,
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
           },
           "clientName" : {
             "title" : "Client Name",
             "description" : "This value is a readable name for this client.",
             "propertyOrder" : 25300,
-            "required" : false,
             "items" : {
               "type" : "string"
             },
-            "type" : "array",
-            "exampleValue" : ""
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           },
-          "refreshTokenLifetime" : {
-            "title" : "Refresh Token Lifetime (seconds)",
-            "description" : "The time in seconds a refresh token is valid for. <i>NB</i> If this field is set to zero, Refresh Token Lifetime of the OAuth2 Provider is used instead. If this field is set to -1, the token will never expire.",
-            "propertyOrder" : 25900,
+          "scopes" : {
+            "title" : "Scope(s)",
+            "description" : "Scope(s). Scopes are strings that are presented to the user for approval and included in tokens so that the protected resource may make decisions about what to give access to.<br><br>Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
+            "propertyOrder" : 23300,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "userpassword" : {
+            "title" : "Client secret",
+            "description" : "Client secret. Used when the client authenticates to AM if you don't store client secret in a secret store.This secret is ignored if you specify a Secret Label Identifier and the corresponding secret mapping.",
+            "propertyOrder" : 23000,
             "required" : true,
-            "type" : "integer",
+            "type" : "string",
+            "format" : "password",
             "exampleValue" : ""
           },
           "clientType" : {
             "title" : "Client type",
             "description" : "Type of OAuth 2.0 client. Confidential clients can keep their password secret, and are typically web apps or other server-based clients. Public clients run the risk of exposing their password to a host or user agent, such as rich browser applications or desktop clients.",
             "propertyOrder" : 23100,
-            "required" : true,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "defaultScopes" : {
+            "title" : "Default Scope(s)",
+            "description" : "Default Scope(s). Scopes automatically given to tokens.<br><br>Default Scopes may be entered as simple strings or pipe separated strings representing the internal scope name, locale, and localized description; e.g. \"read|en|Permission to view email messages in your account\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"read|Permission to view email messages in your account\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"read|\" would allow the scope \"read\" to be used by the client, but would not display it to the user when it was requested.",
+            "propertyOrder" : 23700,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "redirectionUris" : {
+            "title" : "Redirection URIs",
+            "description" : "Redirection URIs (optional for confidential clients). Complete URIs or URIs consisting of protocol + authority + path are registered so that the OAuth 2.0 provider can trust that tokens are sent to trusted entities. If multiple URI's are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
+            "propertyOrder" : 23200,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "authorizationCodeLifetime" : {
+            "title" : "Authorization Code Lifetime (seconds)",
+            "description" : "The time in seconds an authorization code is valid for. <i>NB</i> If this field is set to zero, Authorization Code Lifetime of the OAuth2 Provider is used instead of.",
+            "propertyOrder" : 25800,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "status" : {
+            "title" : "Status",
+            "description" : "Status of the agent configuration.",
+            "propertyOrder" : 200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : true
+              }
+            }
+          },
+          "refreshTokenLifetime" : {
+            "title" : "Refresh Token Lifetime (seconds)",
+            "description" : "The time in seconds a refresh token is valid for. <i>NB</i> If this field is set to zero, Refresh Token Lifetime of the OAuth2 Provider is used instead. If this field is set to -1, the token will never expire.",
+            "propertyOrder" : 25900,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "agentgroup" : {
+            "title" : "Group",
+            "description" : "Add the client to a group to allow inheritance of property values from the group. <br>Changing the group will update inherited property values. <br>Inherited property values are copied to the client.",
+            "propertyOrder" : 100,
+            "required" : false,
             "type" : "string",
             "exampleValue" : ""
+          },
+          "secretLabelIdentifier" : {
+            "title" : "Secret Label Identifier",
+            "description" : "AM uses this identifier to create secret labels, using the following templates: <br> <ul> <li><code>am.applications.oauth2.client.{{identifier}}.secret</code> for the <b>Client secret</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.jwt.public.key</code> for the <b>Client JWT Bearer Public Key</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.mtls.trusted.cert</code> for the <b>mTLS Self-Signed Certificate</b></li> <li><code>am.applications.oauth2.client.{{identifier}}.id.token.enc.public.key</code> for the <b>ID Token Encryption Public Key</b></li> </ul> where {{identifier}} is the Secret Label Identifier. <br> The Secret Label Identifier can only contain characters {{a-z}} {{A-Z}} {{0-9}} {{.}} and cannot start or end with {{.}}. <br>As a best practice, use a different Secret Label Identifier per OAuth2 client.",
+            "propertyOrder" : 23050,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          }
+        }
+      },
+      "coreOpenIDClientConfig" : {
+        "type" : "object",
+        "title" : "OpenID Connect",
+        "propertyOrder" : 2,
+        "properties" : {
+          "defaultMaxAge" : {
+            "title" : "Default Max Age",
+            "description" : "Minimum value 0. Sets the maximum length of time in seconds a session may be active after the authorization service has succeeded before the user must actively re-authenticate.",
+            "propertyOrder" : 25500,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "defaultMaxAgeEnabled" : {
+            "title" : "Default Max Age Enabled",
+            "description" : "Whether or not the default max age is enforced.",
+            "propertyOrder" : 25600,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "postLogoutRedirectUri" : {
+            "title" : "Post Logout Redirect URIs",
+            "description" : "URIs that can be redirected to after the client logout process.",
+            "propertyOrder" : 25000,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "jwtTokenLifetime" : {
+            "title" : "OpenID Connect JWT Token Lifetime (seconds)",
+            "description" : "The time in seconds a JWT is valid for. <i>NB</i> If this field is set to zero, JWT Token Lifetime of the OAuth2 Provider is used instead of.",
+            "propertyOrder" : 26100,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "integer",
+                "required" : true
+              }
+            }
+          },
+          "backchannel_logout_session_required" : {
+            "title" : "Backchannel Logout Session Required",
+            "description" : "Boolean value specifying whether the RP requires that a sid (session ID) Claim be included in the Logout Token to identify the RP session with the OP when the Backchannel Logout URL is used.",
+            "propertyOrder" : 35300,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "boolean",
+                "required" : true
+              }
+            }
+          },
+          "clientSessionUri" : {
+            "title" : "Client Session URI",
+            "description" : "This is the URI that will be used to check messages sent to the session management endpoints. This URI must match the origin of the message",
+            "propertyOrder" : 25200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          },
+          "defaultAcrValues" : {
+            "title" : "Default ACR values",
+            "description" : "Default requested Authentication Context Class Reference values.<br><br>Array of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr_values_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr_values request parameter or an individual acr Claim request override these default values.",
+            "propertyOrder" : 25650,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "claims" : {
+            "title" : "Claim(s)",
+            "description" : "List of claim name translations, which will override those specified for the AS. Claims are values that are presented to the user to inform them what data is being made available to the Client.<br><br>Claims may be entered as simple strings or pipe separated strings representing the internal claim name, locale, and localized description; e.g. \"name|en|Your full name\". Locale strings are in the format <code>language + \"_\" + country + \"_\" + variant</code>, e.g. en, en_GB, en_US_WIN. If the locale and pipe is omitted, the description is displayed to all users having undefined locales. e.g. \"name|Your full name\". <i>NB</i> If the description is also omitted, nothing is displayed to all users, e.g. specifying \"name|\" would allow the claim \"name\" to be used by the client, but would not display it to the user when it was requested.<p>If a value is not given here, the value will be computed from the OAuth 2 Provider settings.</p>",
+            "propertyOrder" : 23400,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
+          },
+          "backchannel_logout_uri" : {
+            "title" : "Backchannel Logout URL",
+            "description" : "RP URL that will cause the RP to log itself out when sent a Logout Token by the OP. This URL SHOULD use the https scheme and MAY contain port, path, and query parameter components; however, it MAY use the http scheme, provided that the Client Type is confidential, as defined in Section 2.1 of OAuth 2.0 [RFC6749], and provided the OP allows the use of http RP URIs.",
+            "propertyOrder" : 35200,
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "string",
+                "required" : false
+              }
+            }
+          }
+        }
+      },
+      "coreUmaClientConfig" : {
+        "type" : "object",
+        "title" : "UMA",
+        "propertyOrder" : 4,
+        "properties" : {
+          "claimsRedirectionUris" : {
+            "title" : "Claims Redirection URIs",
+            "description" : "Redirection URIs for returning to the client from UMA claims collection. If multiple URIs are registered, the client MUST specify the URI that the user should be redirected to following approval. May not contain a fragment (#).",
+            "propertyOrder" : 23200,
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "object",
+            "exampleValue" : "",
+            "properties" : {
+              "inherited" : {
+                "type" : "boolean",
+                "required" : true
+              },
+              "value" : {
+                "type" : "array",
+                "required" : false
+              }
+            }
           }
         }
       }
     }
+  }
+  ```
+
+---
+
+---
+title: AmsterJwtDecisionNodeCollection
+description: Base resource for the AmsterJwtDecisionNode
+component: pingam
+version: 8.1
+page_id: pingam:entity-reference:sec-amster-entity-amsterjwtdecisionnodecollection
+canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-amsterjwtdecisionnodecollection.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops: Realm Operations
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-getalltypes: getAllTypes
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-getcreatabletypes: getCreatableTypes
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-getlatesttype: getLatestType
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-gettype: getType
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-nextdescendents: nextdescendents
+  sec-amster-entity-amsterjwtdecisionnodecollection-realm-ops-versioninfo: versionInfo
+---
+
+# AmsterJwtDecisionNodeCollection
+
+## Realm Operations
+
+Base resource for the AmsterJwtDecisionNode
+
+Resource path:
+
+```
+/realm-config/authentication/authenticationtrees/nodes/AmsterJwtDecisionNode
+```
+
+Resource version: `3.0`
+
+### getAllTypes
+
+Obtain the collection of all secondary configuration types related to the resource.
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName getAllTypes
+```
+
+### getCreatableTypes
+
+Obtain the collection of secondary configuration types that have yet to be added to the resource.
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName getCreatableTypes
+```
+
+### getLatestType
+
+getLatestType.description
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName getLatestType
+```
+
+### getType
+
+List information related to the node such as a name, description, tags and metadata.
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName getType
+```
+
+### nextdescendents
+
+Obtain the collection of secondary configuration instances that have been added to the resource.
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName nextdescendents
+```
+
+### versionInfo
+
+List the versions available for the node type.
+
+**Usage**
+
+```
+am> action AmsterJwtDecisionNodeCollection --realm Realm --actionName versionInfo
+```
+
+---
+
+---
+title: AuthenticationTreesConfiguration
+description: Sub-path parent for all authentication tree configuration.
+component: pingam
+version: 8.1
+page_id: pingam:entity-reference:sec-amster-entity-authenticationtreesconfiguration
+canonical_url: https://docs.pingidentity.com/pingam/8.1/entity-reference/sec-amster-entity-authenticationtreesconfiguration.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  sec-amster-entity-authenticationtreesconfiguration-realm-ops: Realm Operations
+  sec-amster-entity-authenticationtreesconfiguration-realm-ops-getalltypes: getAllTypes
+  sec-amster-entity-authenticationtreesconfiguration-realm-ops-getcreatabletypes: getCreatableTypes
+  sec-amster-entity-authenticationtreesconfiguration-realm-ops-nextdescendents: nextdescendents
+  sec-amster-entity-authenticationtreesconfiguration-global-ops: Global Operations
+  sec-amster-entity-authenticationtreesconfiguration-global-ops-getalltypes: getAllTypes
+  sec-amster-entity-authenticationtreesconfiguration-global-ops-getcreatabletypes: getCreatableTypes
+  sec-amster-entity-authenticationtreesconfiguration-global-ops-nextdescendents: nextdescendents
+  sec-amster-entity-authenticationtreesconfiguration-global-ops-read: read
+  sec-amster-entity-authenticationtreesconfiguration-global-ops-update: update
+---
+
+# AuthenticationTreesConfiguration
+
+## Realm Operations
+
+Sub-path parent for all authentication tree configuration.
+
+Resource path:
+
+```
+/realm-config/authentication/authenticationtrees
+```
+
+Resource version: `0.0`
+
+### getAllTypes
+
+Obtain the collection of all secondary configuration types related to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --realm Realm --actionName getAllTypes
+```
+
+### getCreatableTypes
+
+Obtain the collection of secondary configuration types that have yet to be added to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --realm Realm --actionName getCreatableTypes
+```
+
+### nextdescendents
+
+Obtain the collection of secondary configuration instances that have been added to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --realm Realm --actionName nextdescendents
+```
+
+## Global Operations
+
+Resource path:
+
+```
+/global-config/authentication/authenticationtrees
+```
+
+Resource version: `1.0`
+
+### getAllTypes
+
+Obtain the collection of all secondary configuration types related to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --global --actionName getAllTypes
+```
+
+### getCreatableTypes
+
+Obtain the collection of secondary configuration types that have yet to be added to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --global --actionName getCreatableTypes
+```
+
+### nextdescendents
+
+Obtain the collection of secondary configuration instances that have been added to the resource.
+
+**Usage**
+
+```
+am> action AuthenticationTreesConfiguration --global --actionName nextdescendents
+```
+
+### read
+
+**Usage**
+
+```
+am> read AuthenticationTreesConfiguration --global
+```
+
+### update
+
+**Usage**
+
+```
+am> update AuthenticationTreesConfiguration --global --body body
+```
+
+**Parameters**
+
+* *\--body*
+
+  The resource in JSON format, described by the following JSON schema:
+
+  ```json
+  {
+    "type" : "object"
   }
   ```

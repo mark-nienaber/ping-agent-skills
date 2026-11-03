@@ -41,8 +41,9 @@ page_id: pingfederate:upgrading_pingfederate:pf_copying_custom_files_settings
 canonical_url: https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/pf_copying_custom_files_settings.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2022
+revdate: October 1, 2026
 section_ids:
+  redis-truststore: Redis truststore
   user-facing-windows: User-facing windows
   email-notifications: Email notifications
   jetty-or-jboss-configuration: Jetty or JBoss configuration
@@ -56,9 +57,15 @@ section_ids:
 
 After you upgrade PingFederate, you must copy files that were customized in the previous release to the current installation.
 
+## Redis truststore
+
+If you store PingFederate data in a Redis cache, and you use a truststore file, you must manually copy that file into the same directory after upgrading.
+
+Learn more in [Storing PingFederate data with Redis](../administrators_reference_guide/pf_storing_pf_data_redis.html).
+
 ## User-facing windows
 
-If you modified any Velocity templates for user-facing windows, to preserve the customized user experience, some of your custom changes must be migrated manually to the new installation manually for each server node.
+If you modified any Velocity templates for user-facing windows, to preserve the customized user experience, some of your custom changes must be migrated manually to the new installation for each server node.
 
 The templates are located in the `<pf_install>/pingfederate/server/default/conf/template` directory.
 
@@ -80,15 +87,11 @@ As of PingFederate 11.0, the Upgrade Utility migrates your modified Velocity HTM
 
 If you have modified any Jetty or JBoss settings that need to be carried forward, you must make the corresponding changes manually in the new PingFederate deployment.
 
-If you are upgrading from PingFederate 6.9 or later, merge any changes in `<pf_install>/etc/jetty-runtime.xml` and `<pf_install>/etc/jetty-admin.xml` files into the corresponding files of the new deployment.
+Merge any changes in `<pf_install>/etc/jetty-runtime.xml` and `<pf_install>/etc/jetty-admin.xml` files into the corresponding files of the new deployment.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If only the values of the `minThreads`, `maxThreads`, and `acceptQueueSize` parameters were modified in those Jetty files, you should set those values in the new deployment's `<pf_install>/bin/run.properties` file instead of merging them into the Jetty files.The advantage of setting those values in `run.properties` is that PingFederate can automatically merge `run.properties`customizations into new deployments, saving you time and preventing errors in future upgrades. For more information, see [Configuring PingFederate properties](../administrators_reference_guide/pf_config_pf_propert.html). |
-
-If you are upgrading from PingFederate 6.0 through 6.8, first identify any changes made to the JBoss configuration, then make corresponding changes for the newer Jetty configuration.
-
-For example, if you modified the `<pf_install>/pingfederate/server/default/deploy/jetty.sar/META-INF/jboss-service.xml` file before 6.9, identify the changes and make the same modifications at corresponding points in either the `jetty-admin.xml` or `jetty-runtime.xml` files located in the new Jetty configuration directory, `<pf_install>/pingfederate/etc`.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If only the values of the `minThreads`, `maxThreads`, and `acceptQueueSize` parameters were modified in those Jetty files, you should set those values in the new deployment's `<pf_install>/bin/run.properties` file instead of merging them into the Jetty files.The advantage of setting those values in `run.properties` is that PingFederate can automatically merge `run.properties` customizations into new deployments, saving you time and preventing errors in future upgrades. Learn more in [Configuring PingFederate properties](../administrators_reference_guide/pf_config_pf_propert.html). |
 
 ## The size-limits.conf file
 
@@ -117,15 +120,15 @@ If you previously modified the value of the `InterReqStateMgmtMapImpl.expiry.min
 
 If you previously edited the `<pf_install>/pingfederate/etc/webdefault.xml` file to enable CORS support for OAuth endpoints, instead of updating the `webdefault.xml` file, define the allowed origins manually using the PingFederate administrative console after the upgrade.
 
-For more information, see [Configuring authorization server settings](../administrators_reference_guide/help_authorizationserversettingstasklet_oauthauthorizationserversettingsstate.html).
+Learn more in [Configuring authorization server settings](../administrators_reference_guide/help_authorizationserversettingstasklet_oauthauthorizationserversettingsstate.html).
 
 ## Configuration files in the config-store directory
 
 If you added or replaced setting values in configuration files stored in the `<pf_install>/pingfederate/server/default/data/config-store` directory, the PingFederate upgrade tools copy these setting values to the new installation.
 
-|   |                                                                                                |
-| - | ---------------------------------------------------------------------------------------------- |
-|   | The upgrade tools do not copy comments from the existing installation to the new installation. |
+|   |                                                                                               |
+| - | --------------------------------------------------------------------------------------------- |
+|   | The upgrade tools don't copy comments from the existing installation to the new installation. |
 
 If you removed a setting or a block of settings from a configuration file in the `config-store` directory, the upgrade tool preserves your changes by removing the setting or block of settings from the new installation and records the removals in its log file.
 
@@ -149,17 +152,13 @@ The following files are copied automatically:
 
 If you modified the default templates located in `<pf_install>/pingfederate/server/default/conf/template`, you must customize these templates in the new PingFederate installation.
 
-If you modified versions of `tcp.xml`, `udp.xml`, and `log4j2.xml`, they are copied over intact. The default files are saved in the target directory with a different extension. To take advantage of the improvements in the default versions of these files, merge your changes into the current default files and then rename them appropriately.
+If you modified versions of `tcp.xml`, `udp.xml`, and `log4j2.xml`, they're copied over intact. The default files are saved in the target directory with a different extension. To take advantage of the improvements in the default versions of these files, merge your changes into the current default files and then rename them appropriately.
 
-|   |                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you are upgrading from 8.0 or earlier, PingFederate might not start until you have merged your changes into the current default files because of JGroups errors. |
+Other files, such as `jmx.remote.access`, aren't copied to the new installation automatically. To preserve any custom settings, create a backup of the current configuration files and merge your changes to the current files.
 
-Other files, such as `jmx.remote.access`, are not copied to the new installation automatically. To preserve any custom settings, create a backup of the current configuration files and merge your changes to the current files.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you previously customized Java virtual machine (JVM) options in the `run.bat` or `run.sh` files, instead of updating these files, manually merge your JVM options to the `<pf_install>/pingfederate/bin/jvm-memory.options` file. For more information, see [Fine-tuning JVM options](../performance_tuning_guide/pf_fine_tuning_jvm_option.html) and [memoryoptions and upgrade](../performance_tuning_guide/pf_memoryoptions_upgrade.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | If you previously customized Java virtual machine (JVM) options in the `run.bat` or `run.sh` files, instead of updating these files, manually merge your JVM options to the `<pf_install>/pingfederate/bin/jvm-memory.options` file. Learn more in [Fine-tuning JVM options](../performance_tuning_guide/pf_fine_tuning_jvm_option.html) and [memoryoptions and upgrade](../performance_tuning_guide/pf_memoryoptions_upgrade.html). |
 
 ---
 
@@ -516,7 +515,7 @@ page_id: pingfederate:upgrading_pingfederate:pf_prepare_upgrade_pf
 canonical_url: https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/pf_prepare_upgrade_pf.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 13, 2023
+revdate: July 27, 2026
 section_ids:
   steps: Steps
 ---
@@ -535,13 +534,15 @@ Prepare to upgrade PingFederate by completing a number of tasks.
 
 * Obtain a new license key if needed.
 
-* Update the Java runtime environment (JRE) to version 11 or 17 on your PingFederate servers if needed.
+* Update the Java Runtime Environment (JRE) *(tooltip: \<div class="paragraph">
+  \<p>A software layer that provides the class libraries and resources needed for a Java program to run.\</p>
+  \</div>)* on your PingFederate servers if needed. Refer to [Installing Java](../installing_and_uninstalling_pingfederate/pf_install_java.html) for supported Java versions.
 
-  When you upgrade the JRE, modify the previously defined paths for the system *\<JAVA\_HOME>* and *\<PATH>* environment variables.
+  |   |                                                                                                                                                                                                                                                                                                                                                                  |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | Updating your Java version results in an error when PingFederate is already installed and running as a service on Windows. To work around this issue, uninstall and reinstall the PingFederate Windows service by running the `UninstallPingFederateService.bat` and `InstallPingFederateService.bat` files located in `<pf_install>/pingfederate/sbin/wrapper`. |
 
-  |   |                                                                                                                                                                                                                                                                            |
-  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PingFederate 7.2 and earlier will not start using the currently supported Java runtime. If you need to start the previous PingFederate version on the same server after the upgrade, retain the older Java installation and change environment variables back when needed. |
+  When you upgrade the JRE, modify the previously defined paths for the system *\<JAVA_HOME>* and *\<PATH>* environment variables.
 
 * Complete any unfinished connections (Drafts) in the administrative console if you want to include them in the migration.
 
@@ -576,7 +577,7 @@ The `provmgr` command-line tool is located in the `<pf_install>/pingfederate/bin
 
 * Linux: `provmgr.sh`
 
-For more information about the `provmgr` command-line tool, see [Outbound provisioning CLI](../administrators_reference_guide/pf_outbound_provision_cli.html).
+For more information about the `provmgr` command-line tool, see [Outbound provisioning CLI](../administrators_reference_guide/pf_outbound_provisioning_cli.html).
 
 ## Steps
 
@@ -742,7 +743,9 @@ If your installation includes a cluster, perform the following procedure on each
 
    If the in-place update contains `merge_required/pingfederate/server/default/conf/language-packs/pingfederate-messages.properties`, copy the changes in the new version into the `pingfederate-messages.properties` file in your PingFederate installation.
 
-6. Start PingFederate.
+6. In a text editor, open the `pf-maintenance/files_to_delete.txt` file and follow the instructions to delete version-specific files that are deprecated for the new version.
+
+7. Start PingFederate.
 
 ---
 
@@ -831,7 +834,7 @@ Several specific modifications since PingFederate 10.0 might affect existing dep
 
 * TLS 1.0 and 1.1 disabled
 
-  Starting with version 10.3, PingFederate disables TLS 1.0 and 1.1 for both inbound and outbound connections by default. As a result, clients using TLS 1.0 or 1.1 will no longer be able to connect to the administrative port or the runtime port. If you must re-enable TLS 1.0 or 1.1, add `TLSv1` or `TLSv1.1` to the `run.properties` file: look for the "TLS Protocol Settings" section and follow the inline instructions. Additionally, you might need to add back the weaker cipher suites, such as TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA, TLS\_ECDH\_RSA\_WITH\_AES\_128\_CBC\_SHA, or TLS\_ECDH\_ECDSA\_WITH\_AES\_128\_CBC\_SHA. For more information, see [Managing cipher suites](../administrators_reference_guide/pf_managing_cipher_suites.html).
+  Starting with version 10.3, PingFederate disables TLS 1.0 and 1.1 for both inbound and outbound connections by default. As a result, clients using TLS 1.0 or 1.1 will no longer be able to connect to the administrative port or the runtime port. If you must re-enable TLS 1.0 or 1.1, add `TLSv1` or `TLSv1.1` to the `run.properties` file: look for the "TLS Protocol Settings" section and follow the inline instructions. Additionally, you might need to add back the weaker cipher suites, such as TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, or TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA. For more information, see [Managing cipher suites](../administrators_reference_guide/pf_managing_cipher_suites.html).
 
 * Bouncy Castle FIPS mode
 
@@ -931,12 +934,18 @@ page_id: pingfederate:upgrading_pingfederate:pf_upgrade_considerations_11x
 canonical_url: https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/pf_upgrade_considerations_11x.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 16, 2025
+revdate: September 16, 2026
 ---
 
 # Upgrade considerations introduced in PingFederate 11.x
 
 The following modifications since PingFederate 11.0 might affect existing deployments.
+
+* `start.ini` configurations
+
+  The parameters set in the `start.ini` file aren't upgraded automatically. You must update the configurations manually after upgrade.
+
+  Beginning with PingFederate 12.0, the `start.ini` file is deprecated and its parameters are moved to the `run.properties` file.
 
 * Apache Velocity Engine upgrade
 
@@ -946,33 +955,35 @@ The following modifications since PingFederate 11.0 might affect existing deploy
 
   Starting with PingFederate 11.3, the distribution ZIP file no longer contains the `hivemodule.xml` file. Instead, the distribution contains a new file: `service-points.conf` in the `<pf_install>/pingfederate/server/default/conf/` directory. On first startup, PingFederate processes `service-points.conf` and generates a default `hivemodule.xml`.
 
-The advantage of the `service-points.conf` file is that it lets you use environment variables to override hivemodule settings without having to modify an XML file. For more information, see [Overriding configuration settings using environment variables](../administrators_reference_guide/override_configuration_settings_using_environment_variables.html).
+  The advantage of the `service-points.conf` file is that it lets you use environment variables to override hivemodule settings without having to modify an XML file. Learn more in [Overriding configuration settings using environment variables](../administrators_reference_guide/override_configuration_settings_using_environment_variables.html).
 
-When you upgrade a supported version of PingFederate older than 11.3 to version 11.3 or later, the `service-points.conf` file replaces the `hivemodule.xml` file in the `<pf_install>/pingfederate/server/default/conf/META-INF/` directory with a generated default `hivemodule.xml` file in `<pf_install>/pingfederate/server/default/conf/generated-hivemodule/META-INF/` directory.
+  When you upgrade a supported version of PingFederate older than 11.3 to version 11.3 or later, the `service-points.conf` file replaces the `hivemodule.xml` file in the `<pf_install>/pingfederate/server/default/conf/META-INF/` directory with a generated default `hivemodule.xml` file in `<pf_install>/pingfederate/server/default/conf/generated-hivemodule/META-INF/` directory.
 
-If you want to continue using `hivemodule.xml` instead of `service-points.conf`, add `hivemodule.xml` to the directory `<pf_install>/pingfederate/server/default/conf/META-INF/` after upgrading PingFederate. During startup, if PingFederate finds `hivemodule.xml` in that directory, it will ignore `service-points.conf`. Later, when you upgrade PingFederate 11.3 or a newer version, the `hivemodule.xml` file won't be replaced.
+  If you want to continue using `hivemodule.xml` instead of `service-points.conf`, add `hivemodule.xml` to the `<pf_install>/pingfederate/server/default/conf/META-INF/` directory after upgrading PingFederate. During startup, if PingFederate finds `hivemodule.xml` in that directory, it will ignore `service-points.conf`. Later, when you upgrade PingFederate 11.3 or newer, the `hivemodule.xml` file won't be replaced.
 
-These changes don't affect your upgrade process in either of the following cases:
+  These changes don't affect your upgrade process in either of the following cases:
 
-* You upgrade to PingFederate 11.3 or later using the upgrade utility, as recommended
+  * You upgrade to PingFederate 11.3 or later using the upgrade utility, as recommended
 
-* You don't need to modify the default `hivemodule.xml` file
+  * You don't need to modify the default `hivemodule.xml` file
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you start a new instance of PingFederate 11.3 or later using a process that depends on having `hivemodule.xml` in the distribution ZIP file, the process will fail. To prevent this startup failure, do one of the following:* Launch a local instance of the new PingFederate version, which generates the default `hivemodule.xml` in `<pf_install>/pingfederate/server/default/conf/generated-hivemodule/META-INF/`. Copy and, if needed, modify `hivemodule.xml`. Use that file to launch your production PingFederate instance. When you launch PingFederate, your existing process can grab `hivemodule.xml` and work as expected.
+    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    |   | If you start a new instance of PingFederate 11.3 or later using a process that depends on having `hivemodule.xml` in the distribution ZIP file, the process will fail. To prevent this startup failure, do one of the following:- Launch a local instance of the new PingFederate version, which generates the default `hivemodule.xml` in `<pf_install>/pingfederate/server/default/conf/generated-hivemodule/META-INF/`. Copy and, if needed, modify `hivemodule.xml`. Use that file to launch your production PingFederate instance. When you launch PingFederate, your existing process can find `hivemodule.xml` and work as expected.
 
-* Disable your process that needs to work with `hivemodule.xml` directly. If needed, modify the `service-points.conf` file that comes with PingFederate 11.3 or later. When you launch PingFederate, it generates `hivemodule.xml` and works as expected.
+    - Disable your process that needs to work with `hivemodule.xml` directly. If needed, modify the `service-points.conf` file that comes with PingFederate 11.3 or later. When you launch PingFederate, it generates `hivemodule.xml` and works as expected.
 
-* Disable your process that needs to work with `hivemodule.xml` directly. If needed, configure the PingFederate environment variables. When you launch PingFederate, it uses those environment variables and generates `hivemodule.xml`. |
+    - Disable your process that needs to work with `hivemodule.xml` directly. If needed, configure the PingFederate environment variables. When you launch PingFederate, it uses those environment variables and generates `hivemodule.xml`. |
 
 * Configuration change necessary for MFA adapters
 
-  As of PingFederate 10.2, when you define policies using multi-factor authentication (MFA) adapters, you must select the **User ID Authenticated** checkbox in the **Incoming User ID** popup to allow users to register as a new MFA user. You should only select this checkbox if the previous authentication source has verified the **Incoming User ID**. You should not select the checkbox if the MFA adapter is part of a policy used for password reset or password change. For more information, see [Defining authentication policies](../administrators_reference_guide/pf_defining_auth_policies.html).
+  As of PingFederate 10.2, when you define policies using multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+  \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+  \</div>)* adapters, you must select the **User ID Authenticated** checkbox in the **Incoming User ID** popup to allow users to register as a new MFA user. You should only select this checkbox if the previous authentication source has verified the **Incoming User ID**. You shouldn't select the checkbox if the MFA adapter is part of a policy used for password reset or password change. Learn more in [Defining authentication policies](../administrators_reference_guide/pf_defining_auth_policies.html).
 
-|   |                                                                                                                                                                           |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Administrators using the PingID adapter must review existing policies and select this checkbox if appropriate. Otherwise, the adapter will prevent new user registration. |
+  |   |                                                                                                                                                                           |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | Administrators using the PingID adapter must review existing policies and select this checkbox if appropriate. Otherwise, the adapter will prevent new user registration. |
 
 * LDAP properties
 
@@ -980,11 +991,19 @@ These changes don't affect your upgrade process in either of the following cases
 
 * Refresh token rolling grace period
 
-  When upgrading from PingFederate versions later than 11.0.1, if the **Authorization Server Settings** window was never modified, a default value of 0 shall be set for **Refresh Token Rolling Grace Period**. If the **Authorization Server Settings** window was modified, the previously set value shall be retained. For more information, see the Refresh Token Rolling Grace period field in [Configuring authorization server settings](../administrators_reference_guide/help_authorizationserversettingstasklet_oauthauthorizationserversettingsstate.html).
+  When upgrading from PingFederate versions newer than 11.0.1, if the **Authorization Server Settings** page was never modified, PingFederate sets a default value of `0` for **Refresh Token Rolling Grace Period**. If the **Authorization Server Settings** page was modified, PingFederate retains the previously set value. Learn more in the Refresh Token Rolling Grace Period field in [Configuring authorization server settings](../administrators_reference_guide/help_authorizationserversettingstasklet_oauthauthorizationserversettingsstate.html).
+
+* Refresh token chain revocation
+
+  PingFederate 11.3 introduced refresh token *(tooltip: \<div class="paragraph">
+  \<p>A long-lived token used by OAuth clients to obtain a new access token without having to obtain fresh authorization from the resource owner.\</p>
+  \</div>)* chain revocation, which revokes a chain of refresh tokens when a token in that chain is revoked or reused. This behavior is the default in new installs, but not in upgrades to 11.3 or newer. You can change the behavior using the `RevokeReplayedRefreshToken` setting in the `<pf_install>/pingfederate/server/default/data/config-store/org.sourceid.oauth20.domain.AuthzServerManagerImpl.xml` file. Learn more in [refresh token reuse and revocation](../release_notes/pf_release_notes_113.html#refresh-token-reuse-and-revocation-best-practice).
 
 * Metadata response configuration
 
-  Starting with PingFederate 11.2, PingFederate provides an OAuth authorization server metadata endpoint, `/.well-known/oauth-authorization-server`. The new endpoint returns configuration information that OAuth clients need to interface with PingFederate using the OAuth 2.0 protocol. You can customize what information the endpoint returns by editing the `<pf_install>/pingfederate/server/default/conf/openid-configuration.template.json` template file, which also determines what information the OpenID Connect metadata endpoint returns.
+  Starting with PingFederate 11.2, PingFederate provides an OAuth *(tooltip: \<div class="paragraph">
+  \<p>A standard framework that enables an application (OAuth client) to obtain access tokens from an OAuth authorization server for the purpose of retrieving protected resources on a resource server.\</p>
+  \</div>)* authorization server metadata endpoint, `/.well-known/oauth-authorization-server`. The new endpoint returns configuration information that OAuth clients need to interface with PingFederate using OAuth 2.0. You can customize what information the endpoint returns by editing the `<pf_install>/pingfederate/server/default/conf/openid-configuration.template.json` template file, which also determines what information the OpenID Connect metadata endpoint returns.
 
   If you previously modified `openid-configuration.template.json` for the OpenID Connect metadata endpoint, merge your modifications into the 11.2 version of the template.
 
@@ -994,11 +1013,17 @@ These changes don't affect your upgrade process in either of the following cases
 
 * Integration with Amazon Web Services (AWS) CloudHSM
 
-  Starting with PingFederate 11.2, PingFederate's integration with AWS CloudHSM now requires the AWS CloudHSM Java Cryptography Extension (JCE) provider for Client SDK 5. There are a number of new limitations around assertion and token decryption with Client SDK 5. For more information on limitations, see the Hardware security modules (HSM) issue section of the [Release Notes](../release_notes/pf_release_notes.html). In addition, the `java.security` file in the Java Runtime Environment (JRE) no longer needs to be modified and client files do not need to be copied to the `JAVA_HOME/jre/lib/ext` directory. For more information on how to upgrade the HSM client, see the updated setup instructions in [Integrating with AWS CloudHSM](../getting_started_with_pingfederate/pf_integra_aws_cloudhsm.html).
+  Starting with PingFederate 11.2, PingFederate's integration with Amazon Web Services (AWS) *(tooltip: \<div class="paragraph">
+  \<p>An Amazon subsidiary providing cloud computing platforms.\</p>
+  \</div>)* CloudHSM now requires the AWS CloudHSM Java Cryptography Extension (JCE) provider for Client SDK 5. There are a number of new limitations around assertion and token decryption with Client SDK 5. Learn more about the limitations in the hardware security module (HSM) *(tooltip: \<div class="paragraph">
+  \<p>A dedicated cryptographic processor designed to manage and protect digital keys. HSMs act as trust anchors that protect the cryptographic key lifecycle by securely managing, processing, and storing cryptographic keys inside a hardened, tamper-resistant device.\</p>
+  \</div>)* issue section of the [Release Notes](../release_notes/pf_release_notes.html). In addition, the `java.security` file in the Java Runtime Environment (JRE) *(tooltip: \<div class="paragraph">
+  \<p>A software layer that provides the class libraries and resources needed for a Java program to run.\</p>
+  \</div>)* no longer needs to be modified and client files do not need to be copied to the `JAVA_HOME/jre/lib/ext` directory. Learn more about how to upgrade the HSM client in the updated setup instructions in [Integrating with AWS CloudHSM](../getting_started_with_pingfederate/pf_integra_aws_cloudhsm.html).
 
 * Verbose logging
 
-  Starting with PingFederate 11.2, you can enable verbose logging with the **Log Settings** window or with the administrative API on nodes that have the updated version of the `<pf_install>/pingfederate/server/default/conf/log4j2.xml` file. If `log4j2.xml` was previously modified, PingFederate will migrate the modified file on upgrade and create a backup of the latest file. To take advantage of the new verbose logging capability, you must merge your modifications into the latest version of `log4j2.xml`.
+  Starting with PingFederate 11.2, you can enable verbose logging with the **Log Settings** page or with the administrative API on nodes that have the updated version of the `<pf_install>/pingfederate/server/default/conf/log4j2.xml` file. If `log4j2.xml` was previously modified, PingFederate will migrate the modified file on upgrade and create a backup of the latest file. To take advantage of the new verbose logging capability, you must merge your modifications into the latest version of `log4j2.xml`.
 
 * Expired passwords and prompts to change passwords
 
@@ -1006,7 +1031,7 @@ These changes don't affect your upgrade process in either of the following cases
 
   * Set the **return-password-expiration-controls** setting in the PingDirectory password policy to **always**.
 
-  * Starting with PingFederate 11.1, when configuring an LDAP Username Password Credential Validator, select the **Expect Password Expired Control** checkbox in the advanced fields section of the **Instance Configuration** tab of the **Create Credential Validator Instance** window.
+  * Starting with PingFederate 11.1, when configuring an LDAP Username Password Credential Validator, select the **Expect Password Expired Control** checkbox in the advanced fields section of the **Instance Configuration** tab of the **Create Credential Validator Instance** page.
 
 * Device authorization flows using the authentication API
 
@@ -1020,9 +1045,9 @@ These changes don't affect your upgrade process in either of the following cases
 
   * Oracle JDK
 
-  * Amazon Correto
+  * Amazon Corretto
 
-If you upgrade to Java version 17 after you upgrade PingFederate:
+If you upgrade to Java 17 after you upgrade PingFederate:
 
 * Remove `-XX:-UseParallelOldGC` from the `jvm-memory.options` file.
 
@@ -1030,13 +1055,17 @@ If you upgrade to Java version 17 after you upgrade PingFederate:
 
   * Certificate revocation checking
 
-    Starting with PingFederate 11.1, when configured for certificate revocation list (CRL) or online certificate status protocol (OCSP) revocation checking, PingFederate now performs these checks in a broader range of flows. In particular, outbound TLS calls to retrieve JSON web key sets (JWKS) now perform revocation checks. Also, outbound TLS calls performed by plugins, such as adapters, now perform revocation checks. To revert to the previous behavior where PingFederate doesn't perform these new checks, set `pf.tls.installRevocationCheckerGlobally` to `false` in the `run.properties` file.
+    Starting with PingFederate 11.1, when configured for certificate revocation list (CRL) *(tooltip: \<div class="paragraph">
+    \<p>A list of revoked signing certificates, maintained by the issuing authority at a public URL.\</p>
+    \</div>)* or Online Certificate Status Protocol (OCSP) *(tooltip: \<div class="paragraph">
+    \<p>The protocol used by CAs to check the revocation status of an X.509 certificate.\</p>
+    \</div>)* revocation checking, PingFederate now performs these checks in a broader range of flows. In particular, outbound TLS calls to retrieve JSON web key sets (JWKS) now perform revocation checks. Also, outbound TLS calls performed by plugins, such as adapters, now perform revocation checks. To revert to the previous behavior where PingFederate doesn't perform these new checks, set `pf.tls.installRevocationCheckerGlobally` to `false` in the `run.properties` file.
 
-|   |                                                                                                                                                                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | CRL-based revocation checks can consume large amounts of memory. If CRL checking is enabled, you should set PingFederate's maximum heap in the `jvm-memory.options` file to at least 4 GB. Alternatively, consider switching to OCSP revocation checking, which demands fewer resources. |
+    |   |                                                                                                                                                                                                                                                                                          |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | CRL-based revocation checks can consume large amounts of memory. If CRL checking is enabled, you should set PingFederate's maximum heap in the `jvm-memory.options` file to at least 4 GB. Alternatively, consider switching to OCSP revocation checking, which demands fewer resources. |
 
-When configured for CRL or OCSP revocation checking, PingFederate's validation of CRLs and OCSP responses is tighter than before. The following settings in the `revocation-checking-config.xml` file control the new validation checks:
+    When configured for CRL or OCSP revocation checking, PingFederate's validation of CRLs and OCSP responses is tighter than before. The following settings in the `revocation-checking-config.xml` file control the new validation checks:
 
 * `crl-issuer-allow-any-trust-anchor`
 
@@ -1048,7 +1077,7 @@ Although you should leave the new validation checks enabled, you can disable the
 
 * Custom `MasterKeyEncryptor` implementations
 
-  Starting with PingFederate 11.1, due to the revocation checking enhancements outlined above, a circular initialization dependency can arise if revocation checking is enabled and a custom `MasterKeyEncryptor` implementation makes API calls to an external service. To avoid this risk, you should disable revocation checking for any API calls made by the master key encryptor. Refer to the SDK documentation for more information on how to disable revocation checking in custom `MasterKeyEncryptor` implementations.
+  Starting with PingFederate 11.1, due to the revocation checking enhancements outlined above, a circular initialization dependency can arise if revocation checking is enabled and a custom `MasterKeyEncryptor` implementation makes API calls to an external service. To avoid this risk, you should disable revocation checking for any API calls made by the master key encryptor. Learn more about disabling revocation checking in custom `MasterKeyEncryptor` implementations in the PingFederate SDK documentation.
 
 * `run.sh` and `run.bat` files
 
@@ -1066,98 +1095,102 @@ If your `run.sh` or `run.bat` files were customized, you must update your copy o
 
   Starting with PingFederate 11.1, the `username.recovery.template.html` template no longer includes the *$forgotPasswordUrl* variable.
 
-|   |                                                                     |
-| - | ------------------------------------------------------------------- |
-|   | The top of the template file documents which variables you can use. |
+  |   |                                                                     |
+  | - | ------------------------------------------------------------------- |
+  |   | The top of the template file documents which variables you can use. |
 
 * Dynamic discovery settings
 
-  In versions preceding PingFederate 11.0, administrators could only define dynamic discovery settings to discover cluster membership in the `server/default/conf/tcp.xml` file. Now PingFederate provides a new configuration file for these settings, `bin/jgroups.properties`. This new approach streamlines future upgrade experiences. For new installations, we recommend defining dynamic discovery settings in the `jgroups.properties` file. While upgraded environments will continue to look for dynamic discovery settings from the `tcp.xml` file, we recommend performing a one-time migration to ease the upgrade experiences in the future. For more information, see [Migrating cluster discovery settings](../server_clustering_guide/pf_migrate_cluster_discovery_settings.html).
+  In PingFederate 10.3.x or older, administrators could only define dynamic discovery settings to discover cluster membership in the `server/default/conf/tcp.xml` file. Now PingFederate provides a new configuration file for these settings, `bin/jgroups.properties`. This new approach streamlines future upgrade experiences. For new installations, we recommend defining dynamic discovery settings in the `jgroups.properties` file. While upgraded environments will continue to look for dynamic discovery settings from the `tcp.xml` file, we recommend performing a one-time migration to ease the upgrade experiences in the future. Learn more in [Migrating cluster discovery settings](../server_clustering_guide/pf_migrate_cluster_discovery_settings.html).
 
 * Velocity HTML templates
 
-  Starting with PingFederate 11.0, if any of the default Velocity HTML templates for user-facing windows were modified, the Upgrade Utility migrates them to the new installation and renames the corresponding default templates in the new installation with the following format: `<template_name>-default-<PF-version>.<ext>`. For more information, see [User-facing windows](pf_copying_custom_files_settings.html#_user_facing_windows).
+  Starting with PingFederate 11.0, if any of the default Velocity HTML templates for user-facing windows were modified, the Upgrade Utility migrates them to the new installation and renames the corresponding default templates in the new installation with the following format: `<template_name>-default-<PF-version>.<ext>`. Learn more in [User-facing windows](pf_copying_custom_files_settings.html#_user_facing_windows).
 
 * Kerberos authentication
 
-  Starting with PingFederate 11.0, when the new **Retain Previous Keys on Password Change** checkbox on the **Manage Domain/Realm** window is selected, PingFederate saves the encryption keys associated with the password of the current Kerberos service account. The checkbox is selected by default.
+  Starting with PingFederate 11.0, when the new **Retain Previous Keys on Password Change** checkbox on the **Manage Domain/Realm** page is selected, PingFederate saves the encryption keys associated with the password of the current Kerberos service account. The checkbox is selected by default.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | PingFederate will not save the encryption keys until you re-save the configuration of the domain or realm. To facilitate seamless rotation of the service account password for existing domains, click **Save** on the **Manage Domain/Realm** window before you update the password in the domain controller. For more information, see [Adding Active Directory domains and Kerberos realms](../administrators_reference_guide/pf_adding_active_directory_domains_kerberos_realms.html). |
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PingFederate will not save the encryption keys until you re-save the configuration of the domain or realm. To facilitate seamless rotation of the service account password for existing domains, click **Save** on the **Manage Domain/Realm** page before you update the password in the domain controller. Learn more in [Adding Active Directory domains and Kerberos realms](../administrators_reference_guide/pf_adding_active_directory_domains_kerberos_realms.html). |
 
 * IWA IdP adapter
 
-  PingFederate 11.0 and later no longer support the integrated Windows authentication (IWA) IdP adapter. The IWA integration kit for Kerberos has been replaced with a PingFederate adapter for Kerberos. See [Migrating from the Integrated Windows Authentication Integration Kit to the PingFederate Kerberos adapter](https://support.pingidentity.com/s/article/Migrating-from-the-Integrated-Windows-Authentication-integration-kit-to-the-PingFederate-Kerberos-adapter).
+  PingFederate 11.0 and later no longer support the Integrated Windows authentication (IWA) *(tooltip: \<div class="paragraph">
+  \<p>Internet Information Services (IIS) authentication protocol for authenticated connections between IIS and other Microsoft services.\</p>
+  \</div>)* IdP adapter. The IWA integration kit for Kerberos has been replaced with a PingFederate adapter for Kerberos. See [Migrating from the Integrated Windows Authentication Integration Kit to the PingFederate Kerberos adapter](https://support.pingidentity.com/s/article/Migrating-from-the-Integrated-Windows-Authentication-integration-kit-to-the-PingFederate-Kerberos-adapter).
 
 * Private key JSON web token authentication
 
-  When authenticating an OAuth client that uses the private key JSON web token (JWT) authentication scheme, PingFederate now validates that the issuer and subject claims in the JWT have the same value.The following administrative API endpoint exposes the validation on/off switch:
+  When authenticating an OAuth client that uses the private key JSON Web Token (JWT) *(tooltip: \<div class="paragraph">
+  \<p>An IETF standard container format for a JSON object used for the secure exchange of content, such as identity or entitlement information. You can find the industry standard in \<a href="https\://datatracker.ietf.org/doc/html/rfc7519">RFC 7519\</a>.\</p>
+  \</div>)* authentication scheme, PingFederate now validates that the issuer and subject claims in the JWT have the same value. The following administrative API endpoint exposes the validation on/off switch:
 
-```
-https://{{pf_base_host_port}}/pf-admin-api/v1/configStore/oauth-credentials-validator/issuerMustBeEqualToClientId
-```
+  ```
+  https://{{pf_base_host_port}}/pf-admin-api/v1/configStore/oauth-credentials-validator/issuerMustBeEqualToClientId
+  ```
 
-To disable validation, send an HTTP POST request with the following body to the endpoint:
+  To disable validation, send an HTTP POST request with the following body to the endpoint:
 
-```json
-{
-  "id": "issuerMustBeEqualToClientId",
-  "stringValue": "false",
-  "type":"STRING"
-}
-```
+  ```json
+  {
+    "id": "issuerMustBeEqualToClientId",
+    "stringValue": "false",
+    "type":"STRING"
+  }
+  ```
 
 * Authentication API applications
 
-  Starting with PingFederate 11.0, the new **Restrict Access to Redirectless Mode** checkbox on the **Authentication API Applications** window lets you restrict which authentication API applications can use redirectless mode. To avoid impacting existing deployments, this checkbox is not selected on upgrade. However, you should enable this setting. For more information, see [Managing authentication applications](../administrators_reference_guide/help_authenticationapplicationstasklet_authenticationapplicationsstate.html).
+  Starting with PingFederate 11.0, the new **Restrict Access to Redirectless Mode** checkbox on the **Authentication API Applications** page lets you restrict which authentication API applications can use redirectless mode. To avoid impacting existing deployments, this checkbox is not selected on upgrade. However, you should enable this setting. Learn more in [Managing authentication applications](../administrators_reference_guide/help_authenticationapplicationstasklet_authenticationapplicationsstate.html).
 
 * Jetty agent
 
   Starting with PingFederate 11.0, if your PingFederate server is running on a Java version prior to 8u252, you must modify your `run.sh`, `run.bat`, or `PingFederateService.conf` script to include the new Jetty agent in PingFederate.
 
-Add the following Java argument to the script:
+  Add the following Java argument to the script:
 
-```
--javaagent:/server/default/lib/jetty-alpn-agent.jar
-```
+  ```
+  -javaagent:/server/default/lib/jetty-alpn-agent.jar
+  ```
 
-Example for `run.sh`:
+  Example for `run.sh`:
 
-```
-"$JAVA" $JAVA_OPTS \
-$ERROR_FILE \
-$HEAP_DUMP \
-${GC_FILE:+$GC_FLAG"$GC_FILE"$GC_OPTIONS} \
-$ENDORSED_DIRS_FLAG \
- -javaagent:$PF_HOME/server/default/lib/jetty-alpn-agent.jar  \
--Dlog4j2.AsyncQueueFullPolicy=Discard \
-```
+  ```
+  "$JAVA" $JAVA_OPTS \
+  $ERROR_FILE \
+  $HEAP_DUMP \
+  ${GC_FILE:+$GC_FLAG"$GC_FILE"$GC_OPTIONS} \
+  $ENDORSED_DIRS_FLAG \
+   -javaagent:$PF_HOME/server/default/lib/jetty-alpn-agent.jar  \
+  -Dlog4j2.AsyncQueueFullPolicy=Discard \
+  ```
 
-Example for `run.bat`:
+  Example for `run.bat`:
 
-```
-"%JAVA%" %PF_JAVA_OPTS% %JAVA_OPTS% %GC_OPTION%  -javaagent:%PF_HOME%/server/default/lib/jetty-alpn-agent.jar  -Dlog4j2.AsyncQueueFullPolicy=Discard
-```
+  ```
+  "%JAVA%" %PF_JAVA_OPTS% %JAVA_OPTS% %GC_OPTION%  -javaagent:%PF_HOME%/server/default/lib/jetty-alpn-agent.jar  -Dlog4j2.AsyncQueueFullPolicy=Discard
+  ```
 
-Example for `PingFederateService.conf` (note the extra `../` because this is located in `pingfederate/sbin/wrapper`):
+  Example for `PingFederateService.conf` (note the extra `../` because this is located in `pingfederate/sbin/wrapper`):
 
-```
-# Java Additional Parameters
-wrapper.java.additional.1=-Dlog4j.configurationFile=../../server/default/conf/log4j2.xml
+  ```
+  # Java Additional Parameters
+  wrapper.java.additional.1=-Dlog4j.configurationFile=../../server/default/conf/log4j2.xml
 
-...... (omitted lines 2-13 to save space) ......
+  ...... (omitted lines 2-13 to save space) ......
 
-wrapper.java.additional.14=-javaagent:../../server/default/lib/jetty-alpn-agent.jar
-```
+  wrapper.java.additional.14=-javaagent:../../server/default/lib/jetty-alpn-agent.jar
+  ```
 
 * Specifying a maximum size for inbound runtime requests
 
-  Starting with PingFederate 11.0, if you have previously specified a value for `maxFormContextSize` in `jetty-runtime.xml`, you should now use `pf.runtime.http.maxRequestBodySize` in the `run.properties` file to control the maximum size for inbound runtime requests. For more information, see [Configuring PingFederate properties](../administrators_reference_guide/pf_config_pf_propert.html).
+  Starting with PingFederate 11.0, if you have previously specified a value for `maxFormContextSize` in `jetty-runtime.xml`, you should now use `pf.runtime.http.maxRequestBodySize` in the `run.properties` file to control the maximum size for inbound runtime requests. Learn more in [Configuring PingFederate properties](../administrators_reference_guide/pf_config_pf_propert.html).
 
 * Java 8
 
-  As we continue to improve our products and hardware security module (HSM) integrations, you should migrate off of Java 8. We intend to remove Java 8 support from our qualification process in May 2023. For more information, including Java 11 support, see [System requirements](../installing_and_uninstalling_pingfederate/pf_system_requirements.html).
+  As we continue to improve our products and HSM integrations, you should migrate off of Java 8. We intend to remove Java 8 support from our qualification process in May 2023. You can find more information, including about Java 11 support, in [System requirements](../installing_and_uninstalling_pingfederate/pf_system_requirements.html).
 
 * Third-party integrations
 
@@ -1189,7 +1222,7 @@ We encourage you to upgrade these products to more recent versions, such as:
 
 * Microsoft Active Directory 2016
 
-For a more complete list of qualified third-party solutions, see [System requirements](../installing_and_uninstalling_pingfederate/pf_system_requirements.html).
+Find a more complete list of qualified third-party solutions in [System requirements](../installing_and_uninstalling_pingfederate/pf_system_requirements.html).
 
 ---
 
@@ -1215,7 +1248,7 @@ The following modifications since PingFederate 12.0 might affect existing deploy
 
 * `pf.admin.baseurl` must be set
 
-  A defect fix requires the `pf.admin.baseurl` property to be explicitly set in `run.properties`. This prevents admin console URL redirects from failing when PingFederate is accessed through a load balancer with a port that differs from `pf.admin.https.port`.
+  Starting with PingFederate 12.3.1, a defect fix requires the `pf.admin.baseurl` property to be explicitly set in `run.properties`. This prevents admin console URL redirects from failing when PingFederate is accessed through a load balancer with a port that differs from `pf.admin.https.port`.
 
 * Refresh token MySQL deadlocks
 
@@ -1328,13 +1361,13 @@ The following modifications since PingFederate 12.0 might affect existing deploy
 
 * Prevent JGroups thread pool exhaustion in large clusters
 
-  Starting with PingFederate 12.0 the default value of *pf.cluster.TCPPING.return\_entire\_cache* in `jgroups.properties` to `false` on fresh installations of PingFederate.
+  Starting with PingFederate 12.0 the default value of *pf.cluster.TCPPING.return_entire_cache* in `jgroups.properties` to `false` on fresh installations of PingFederate.
 
-  Setting *pf.cluster.TCPPING.return\_entire\_cache* to `false` avoids an issue where the thread pool for cluster RPCs temporarily runs out of threads and some RPCs get dropped. This issue only occurs in large clusters under heavy load.
+  Setting *pf.cluster.TCPPING.return_entire_cache* to `false` avoids an issue where the thread pool for cluster RPCs temporarily runs out of threads and some RPCs get dropped. This issue only occurs in large clusters under heavy load.
 
-  Setting *pf.cluster.TCPPING.return\_entire\_cache* means that all clusters must be listed in *pf.cluster.tcp.discovery.initial.hosts*.
+  Setting *pf.cluster.TCPPING.return_entire_cache* means that all clusters must be listed in *pf.cluster.tcp.discovery.initial.hosts*.
 
-  On upgrade, the existing value of *pf.cluster.TCPPING.return\_entire\_cache* is preserved, but customers using `TCPPING` with large clusters should set it to `false`, provided that all cluster members are listed in *pf.cluster.tcp.discovery.initial.hosts*.
+  On upgrade, the existing value of *pf.cluster.TCPPING.return_entire_cache* is preserved, but customers using `TCPPING` with large clusters should set it to `false`, provided that all cluster members are listed in *pf.cluster.tcp.discovery.initial.hosts*.
 
 * Removed support for Java 8
 
@@ -1406,7 +1439,7 @@ revdate: July 8, 2024
 
 * Weaker cipher suites disabled
 
-  Starting with PingFederate 9.1, weaker cipher suites TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA and TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA are disabled in new installations and upgrades. As a result, the administrative and runtime servers support only TLS 1.2. If you must re-enable these cipher suites for legacy clients, refer to [Managing cipher suites](../administrators_reference_guide/pf_managing_cipher_suites.html) for more information.
+  Starting with PingFederate 9.1, weaker cipher suites TLS_RSA_WITH_AES_128_CBC_SHA and TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA are disabled in new installations and upgrades. As a result, the administrative and runtime servers support only TLS 1.2. If you must re-enable these cipher suites for legacy clients, refer to [Managing cipher suites](../administrators_reference_guide/pf_managing_cipher_suites.html) for more information.
 
 * LDAP service accounts on PingDirectory
 
@@ -1447,6 +1480,7 @@ page_id: pingfederate:upgrading_pingfederate:pf_upgrade_faq
 canonical_url: https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/pf_upgrade_faq.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 13, 2025
 section_ids:
   planning-your-upgrade: Planning your upgrade
   downloads: Downloads

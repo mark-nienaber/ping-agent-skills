@@ -1,15 +1,15 @@
 ---
 title: Quick deployment on minikube
-description: Perform the steps described in this section to set up a demo or development environment on minikube.
+description: Deploy ForgeOps on minikube for demo or development and access the Ping Advanced Identity Software admin UI
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:quick:quick-set-mini
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/quick/quick-set-mini.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/quick/quick-set-mini.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-28T09:52:15Z
 section_ids:
   set_up_a_minikube_cluster: Set up a minikube cluster
-  perform_forgeops_deployment: Perform ForgeOps deployment
   access_the_administrator_ui: Access the administrator UI
 ---
 
@@ -23,12 +23,12 @@ Perform the steps described in this section to set up a demo or development envi
 
 ## Set up a minikube cluster
 
-1. Clone the `forgeops` and check out the `2026.2.1`. For example:
+1. Clone the `forgeops` and check out the `2026.3.2`. For example:
 
    ```
    $ git clone https://github.com/ForgeRock/forgeops.git
    $ cd forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
 2. Ensure that you have installed the following:
@@ -68,28 +68,46 @@ Perform the steps described in this section to set up a demo or development envi
       $ /path/to/forgeops/bin/forgeops configure
       ```
 
-## Perform ForgeOps deployment
+      \== Perform ForgeOps deployment
 
 This section describes steps to perform ForgeOps deployment on minikube quickly using Helm. Learn more about deployment steps in [Deployment overview](../deploy/overview.html).
 
-**Perform the following steps in the terminal window where you have activated the Python venv.**
+1. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted. **Keep this terminal window open while you perform the ForgeOps deployment.**:
 
-1. Set up the default cluster issuer\[[2](#_footnotedef_2 "View footnote.")]. For example:
+   ```
+   $ sudo minikube tunnel
+   ✅  Tunnel successfully started
+
+   📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible …​
+
+   Password:
+   ...
+   ```
+
+**Perform following steps in the terminal window where you have activated the Python venv.**
+
+1. Install the prerequisites:
+
+   ```
+   $ cd /path/to/forgeops/bin
+   $ ./forgeops prereqs
+   ```
+
+2. Set up the default cluster issuer\[[2](#_footnotedef_2 "View footnote.")]. For example:
 
    ```
    $ kubectl apply -f /path/to/forgeops/etc/resources/selfsigned-issuer.yaml
    ```
 
-2. Set up a ForgeOps deployment configuration environment:
+3. Set up a ForgeOps deployment configuration environment:
 
    ```
-   $ cd /path/to/forgeops/bin
    $ ./forgeops env --env-name my-env --fqdn forgeops.example.com --cluster-issuer my-cluster-issuer --single-instance
    ```
 
    In the previous command, replace forgeops.example.com and my-cluster-issuer with appropriate values from your environment.
 
-3. Set up your Kubernetes context:
+4. Set up a namespace in your Kubernetes context:
 
    1. Create a Kubernetes namespace in the cluster for the Ping Advanced Identity Software pods:
 
@@ -103,34 +121,19 @@ This section describes steps to perform ForgeOps deployment on minikube quickly 
       $ kubens my-namespace
       ```
 
-4. Install the prerequisites:
-
-   ```
-   $ ./forgeops prereqs
-   ```
-
-5. In a separate terminal tab or window, run the minikube tunnel command, and enter your system's superuser password when prompted:
-
-   ```
-   $ sudo minikube tunnel
-   ✅  Tunnel successfully started
-   ...
-   ```
-
-6. Set up the `fast` storage class using the `minikube-fast-storage-class.yaml` file in the /path/to/forgeops/etc/resources directory:
+5. Set up the `fast` storage class using the `minikube-fast-storage-class.yaml` file in the /path/to/forgeops/etc/resources directory:
 
    ```
    $ kubectl apply -f /path/to/forgeops/etc/resources/minikube-fast-storage-class.yaml
    ```
 
-7. Enable secret generator in your deployment environment:
+6. Update your ForgeOps deployment environment to use the namespace you created:
 
    ```
-   $ cd /path/to/forgeops/bin
    $ ./forgeops env --env-name my-env --namespace my-namespace
    ```
 
-8. Perform a ForgeOps deployment using Helm:
+7. Perform a ForgeOps deployment using Helm:
 
    ```
    $ helm upgrade --install identity-platform identity-platform \
@@ -139,7 +142,7 @@ This section describes steps to perform ForgeOps deployment on minikube quickly 
     --values /path/to/forgeops/helm/my-env/values.yaml
    ```
 
-9. Check the status of the pods in the namespace in which you deployed the platform until all the pods are ready:
+8. Check the status of the pods in the namespace in which you deployed the platform until all the pods are ready:
 
    1. Run the kubectl get pods command.
 

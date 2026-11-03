@@ -1,6 +1,6 @@
 ---
 title: About representing certificates, private keys, and certificate signing requests
-description: X.509 is an encoding format that uses the ASN.1 distinguished encoding rules (DER), which exist in binary format. When writing a certificate to a file, either a raw DER format or a plain-text format called PEM can be used.
+description: Understand how PingDirectory represents certificates, private keys, and certificate signing requests in DER and PEM encodings.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_rep_certs_pvt_keys_cert_signing_reqs
@@ -43,7 +43,7 @@ Some implementations use the following alternate, nonstandard forms.
 
 ---
 title: Available subcommands
-description: The manage-certificates tool uses the following subcommands to indicate which function to invoke:
+description: Reference for the PingDirectory manage-certificates subcommands and the function each one invokes.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_available_subcommands
@@ -78,7 +78,7 @@ The `manage-certificates` tool uses the following subcommands to indicate which 
 
 ---
 title: Certificate chains
-description: A certificate chain is an ordered list of one or more certificates. In such a chain, each subsequent certificate is the issuer of the previous certificate.
+description: Understand certificate chains in PingDirectory.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_certificate_chains
@@ -114,7 +114,7 @@ The certificate at the head of a certificate chain, which appears as the first o
 
 ---
 title: Certificate extensions
-description: Extensions provide additional context for a certificate.
+description: Understand certificate extensions in PingDirectory.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_certificate_extensions
@@ -222,7 +222,7 @@ Some of the more common extension types include the following:
 
 ---
 title: Certificate key pairs
-description: Each certificate contains a key pair that consists of two keys that are linked cryptographically. If you encrypt data with one key, the data can be only decrypted with the other key.
+description: Understand certificate key pairs in PingDirectory.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_certificate_key_pairs
@@ -268,7 +268,7 @@ If all of your clients support EC certificates, you should use an EC certificate
 
 ---
 title: Certificate subject DNs
-description: A certificate's subject distinguished name (DN) provides information about how the certificate should be used.
+description: Understand certificate subject DNs in PingDirectory.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_certificate_subject_dns
@@ -302,7 +302,7 @@ A certificate subject includes at least one attribute-value pair, and the `CN` a
 
 ---
 title: Certificate trust
-description: When a server presents its certificate chain to a client during TLS negotiation, the client decides whether to trust the certificate chain and concludes whether it is communicating with a legitimate server instead of an impostor.
+description: Understand certificate trust in PingDirectory, including how clients verify a server certificate chain.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_certificate_trust
@@ -364,7 +364,7 @@ These steps represent a starting point. If necessary, the client can perform add
 
 ---
 title: Common arguments
-description: "Most of the manage-certificates subcommands require access to a Java KeyStore (JKS) or PKCS #12 keystore. In such instances, use the --keystore argument to specify the path to the keystore."
+description: Use common arguments with PingDirectory manage-certificates subcommands for keystore paths, types, and passwords.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_common_arguments
@@ -404,7 +404,7 @@ Several operations require you to specify the keystore entry to target. In such 
 
 ---
 title: Enabling low-level debugging
-description: This topic applies only to the PingDirectoryProxy server.
+description: Enable low-level TLS debugging in PingDirectoryProxy by adding JVM debug arguments and restarting the server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_proxy_enable_low_level_debugging
@@ -443,7 +443,7 @@ To enable low-level debugging:
 
 ---
 title: Enabling TLS support after setup
-description: If the server has been set up without support for TLS, enable TLS support later by completing the following tasks.
+description: Enable TLS support for PingDirectory after setup.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_enable_tls_support_after_setup
@@ -620,11 +620,11 @@ The following table details the two types of entries that require updating:
 
 **Configuration types and their update descriptions**
 
-| Configuration Type                     | Update description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Configuration Type                     | Update description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Server instance listener configuration | * Provides information that is needed to trust the TLS certificates that instances in the topology present.
 
-* The server instance listener configuration must include the server certificate, which is defined as the certificate at the head of the chain. This version must be the multi-line, PEM-formatted representation of the certificate. You can use `dsconfig` to import the certificate from a file, as shown in the following example.
+* The server instance listener configuration must include the server certificate, which is defined as the certificate at the head of the chain. This value must be the multi-line, PEM-formatted representation of the certificate. You can use `dsconfig` to import the certificate from a file, as shown in the following example.
 
   ```
   bin/dsconfig set-server-instance-listener-prop \
@@ -643,13 +643,13 @@ dsconfig set-server-instance-prop \
   --set https-port:443 \
   --set preferred-security:ssl \
   --set start-tls-enabled:true
-```                                                                                                                                                                                                                                                                                           |
+```                                                                                                                                                                                                                                                                                         |
 
 ---
 
 ---
 title: Enabling TLS support during setup
-description: Enable TLS support in the server.
+description: Enable TLS support for PingDirectory during setup.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_enable_tls_support_during_setup
@@ -774,7 +774,7 @@ Access product documentation from docs/index.html
 
 ---
 title: Exporting certificates
-description: Use the export-certificate subcommand to export a single certificate or a certificate chain from a key store to a file in PEM or DER format.
+description: Export certificates from a PingDirectory key store with the manage-certificates export-certificate subcommand.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_export_certificates
@@ -876,14 +876,14 @@ Successfully exported the private key.
 
 ---
 title: Generating certificate signing requests
-description: A certificate signing request (CSR) contains all of the information that a certification authority requires to issue a certificate.
+description: Generate certificate signing requests for PingDirectory with the manage-certificates generate-certificate-signing-request command.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_generate_cert_signing_requests
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/managing_servers_and_certificates/pd_ds_generate_cert_signing_requests.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Generating certificate signing requests
@@ -904,7 +904,7 @@ A certificate signing request (CSR) contains all of the information that a certi
 
 To create a certificate signing request, use the `manage-certificates generate-certificate-signing-request` command, which performs the following steps:
 
-1. Generated a public and private key pair.
+1. Generates a public and private key pair.
 
 2. Stores the key pair in a key store with a given alias.
 
@@ -946,7 +946,7 @@ bin/manage-certificates generate-certificate-signing-request \
      --alias server-cert \
      --subject-dn "CN=ds.example.com,O=Example Corp,C=US" \
      --key-algorithm EC \
-     --key-length-bits 256 \
+     --key-size-bits 256 \
      --signature-algorithm SHA256withECDSA \
      --subject-alternative-name-dns ds.example.com \
      --subject-alternative-name-dns ds1.example.com \
@@ -1048,7 +1048,7 @@ Certificate Extensions:
 
 ---
 title: Generating self-signed certificates
-description: The process of creating a self-signed certificate is straightforward because a self-signed certificate claims itself as its own issuer.
+description: Generate self-signed certificates for PingDirectory with manage-certificates, including subject DN, key size, and validity arguments.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_generate_self_signed_certs
@@ -1132,7 +1132,7 @@ bin/manage-certificates generate-self-signed-certificate \
      --alias server-cert \
      --subject-dn "CN=ds.example.com,O=Example Corp,C=US" \
      --key-algorithm EC \
-     --key-length-bits 256 \
+     --key-size-bits 256 \
      --signature-algorithm SHA256withECDSA \
      --subject-alternative-name-dns ds.example.com \
      --subject-alternative-name-dns ds1.example.com \
@@ -1168,7 +1168,7 @@ SHA-256 Fingerprint:
 
 ---
 title: Importing signed and trusted certificates
-description: Use the manage-certificates import-certificate command to import certificates into a keystore.
+description: Import signed and trusted certificates into a PingDirectory key store.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_import_signed_trusted_certs
@@ -1264,7 +1264,7 @@ The output of the `display-certificate-file` subcommand has the same format and 
 
 ---
 title: Inter-server certificates
-description: Each server instance in a topology has an inter-server certificate that is generated during the setup process.
+description: Understand PingDirectory inter-server certificates, which authenticate server instances within a topology without a trusted issuer.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_inter_server_certificates
@@ -1288,14 +1288,14 @@ The inter-server certificate is generated with a long lifespan. Replace it only 
 
 ---
 title: Key agreement
-description: Key agreement processing provides a critical component of TLS negotiation.
+description: Understand TLS key agreement in PingDirectory, including RSA and Diffie-Hellman key exchange.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_key_agreement
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/managing_servers_and_certificates/pd_ds_key_agreement.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Key agreement
@@ -1310,15 +1310,15 @@ It allows the client and server to select the symmetric key that encrypts the re
 
 * Diffie-Hellman (DH) key exchange
 
-  The client and server agree publicly on a pair of mathematically linked numbers, and each participant chooses its own secret value. Through a special computation, they generate a key that can be discovered only by someone who knows one of the secret values. Although several variants of the Diffie-Hellman algorithm can be used in key exchange, we recommend the ECHDE and DHE versions because they use ephemeral keys with no relation to the server's certificate. Of those two versions, ECDHE is faster and uses smaller keys.
+  The client and server agree publicly on a pair of mathematically linked numbers, and each participant chooses its own secret value. Through a special computation, they generate a key that can be discovered only by someone who knows one of the secret values. Although several variants of the Diffie-Hellman algorithm can be used in key exchange, we recommend the ECDHE and DHE versions because they use ephemeral keys with no relation to the server's certificate. Of those two versions, ECDHE is faster and uses smaller keys.
 
-When possible, use ECHDE over DHE, and either of those options over RSA. The DH algorithms provide a substantial benefit over RSA in the form of forward secrecy. Because RSA key exchange uses the server certificate's public key to encrypt data, the encryption can be broken if the certificate's private key is compromised. This warning applies to previously captured data as well as to communication on new TLS connections. The use of ephemeral keys in ECDHE and DHE ensures that, even if the certificate's private key is compromised, the encrypted communication remains indecipherable to anyone but the client and server, although anyone with the private key can still impersonate the legitimate server.
+When possible, use ECDHE over DHE, and either of those options over RSA. The DH algorithms provide a substantial benefit over RSA in the form of forward secrecy. Because RSA key exchange uses the server certificate's public key to encrypt data, the encryption can be broken if the certificate's private key is compromised. This warning applies to previously captured data as well as to communication on new TLS connections. The use of ephemeral keys in ECDHE and DHE ensures that, even if the certificate's private key is compromised, the encrypted communication remains indecipherable to anyone but the client and server, although anyone with the private key can still impersonate the legitimate server.
 
 ---
 
 ---
 title: Keystores and truststores
-description: A keystore is a type of database that holds certificates.
+description: "Understand key and trust stores in PingDirectory, including JKS, PKCS #12, PEM, and HSM options."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_keystores_truststores
@@ -1344,7 +1344,7 @@ The following examples represent the most common forms of keystores:
 
 The server supports file-based keystores by using the JKS and PKCS #12 formats and by using hardware security modules that are accessible through PKCS #11. The server does not currently support a keystore format that consists of individual certificate and private key files. To import these files into a JKS or PKCS #12 keystore, use the `manage-certificates` tool.
 
-A keystore also represents a collection of entries, each of which is identified by a name that an alias calls. Keystores can have the following entry types:
+A keystore also represents a collection of entries, each of which is identified by a name called an alias. Keystores can have the following entry types:
 
 * Private key entries
 
@@ -1372,7 +1372,7 @@ Java runtime environments typically include a default truststore, often `jre/lib
 
 ---
 title: LDAP StartTLS extended operation
-description: In most scenarios, a client that uses TLS establishes a connection to a port that is dedicated to its use, like 636 (LDAPS) or 443 (HTTPS).
+description: Use the LDAP StartTLS extended operation with PingDirectory to secure an existing connection.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_ldap_starttls_extended_operation
@@ -1410,7 +1410,7 @@ To ensure that a communication is always secure, use LDAPS instead of establishi
 
 ---
 title: ldapsearch
-description: The ldapsearch command-line utility is a powerful tool for issuing searches against an LDAP directory server. It also provides a convenient method for troubleshooting a variety of issues, including problems that are relevant to TLS communication.
+description: Use PingDirectory ldapsearch arguments to troubleshoot TLS-related communication issues.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:managing_servers_and_certificates:pd_ds_ldapsearch

@@ -1,11 +1,12 @@
 ---
 title: Authorization Attributes
-description: Authorization attributes provide contextual information that informs fine-grained dynamic authorization decisions. Attributes have the following characteristics:
+description: Early access endpoints to create, read, update, test, and delete PingOne Authorize trust framework attributes, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-attributes-data-model: Authorization attributes data model
   authorization-attributes-resolvers-data-model: Authorization attributes resolvers type data model
@@ -89,12 +90,13 @@ The audit reporting events applicable to the authorize attribute service are:
 
 ---
 title: Authorization Conditions
-description: Conditions in PingOne Authorize define authorization logic by comparing one thing to another. Conditions evaluate to either true or false. The authorization conditions service provides endpoints to create, read, update, test, and delete trust framework authorization conditions.
+description: Early access endpoints to create, read, update, test, and delete PingOne Authorize trust framework conditions, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-conditions-data-model: Authorization conditions data model
   authorization-condition-conditions-data-model: Authorization conditions condition type data model
@@ -168,12 +170,13 @@ The audit reporting events applicable to the authorization condition service are
 
 ---
 title: Authorization Connector Templates
-description: This endpoint provides an operation to view the authorization connector templates associated with the specified environment.
+description: Early access endpoint to read PingOne Authorize trust framework connector templates associated with your environment, plus their data model
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-connector-templates/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   connector-templates-data-model: Connector templates data model
   response-codes: Response codes
@@ -212,12 +215,13 @@ This endpoint provides an operation to view the authorization connector template
 
 ---
 title: Authorization Policies
-description: Authorization policies specify the statements (directives that instruct the policy decision service to perform additional processing in conjunction with an authorization decision), conditions (authorization logic comparing one thing to another), and combining algorithms (the process for combining multiple rules) to determine an authorization decision.
+description: Early access endpoints to create, read, update, test, and delete PingOne Authorize authorization policies, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-policies-data-model: Authorization policies data model
   authorization-embedded-policies-data-model: Authorization embedded policies data model
@@ -236,22 +240,22 @@ Authorization policies specify the statements (directives that instruct the poli
 
 ## Authorization policies data model
 
-| Property                       | Type    | Required | Mutable   | Description                                                                                                                                                       |
-| ------------------------------ | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`                     | Array   | Optional | Mutable   | The list of child policies or rules. Can be either referenced or embedded.                                                                                        |
-| `combiningAlgorithm`           | Object  | Required | Immutable | The algorithm that determines how rules are combined to produce an authorization decision. For details, refer to [Authorization Rules](authorization-rules.html). |
-| `condition`                    | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../pingauthorize-trust-framework/authorization-conditions.html).             |
-| `description`                  | String  | Optional | Mutable   | The authorization policy resource's description.                                                                                                                  |
-| `enabled`                      | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                                  |
-| `id`                           | String  | N/A      | Read only | The policy resource's unique identifier.                                                                                                                          |
-| `name`                         | String  | Required | Mutable   | A user-friendly policy name. The `name` value must be unique.                                                                                                     |
-| `repetitionSettings`           | Object  | Optional | Mutable   | Applies the policy to each item of the specific attribute, filtered by decision.                                                                                  |
-| `repetitionSettings.source`    | Object  | Optional | Mutable   | The source associated with this rule.                                                                                                                             |
-| `repetitionSettings.source.id` | String  | Optional | Mutable   | The UUID of the repetition source associated with this rule.                                                                                                      |
-| `repetitionSettings.decision`  | String  | Optional | Mutable   | The decision filter. Options are `PERMIT`, `DENY`, `NOT_APPLICABLE`, and `INDETERMINATE`.                                                                         |
-| `statements`                   | Object  | Optional | Mutable   | The authorization statements object. Can be either referenced or embedded. For details, refer to [Authorization Statements](authorization-statements.html).       |
-| `type`                         | String  | Required | Mutable   | The attribute type. Options are `POLICY`.                                                                                                                         |
-| `version`                      | String  | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                             |
+| Property                       | Type    | Required | Mutable   | Description                                                                                                                                                                |
+| ------------------------------ | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                     | Array   | Optional | Mutable   | The list of child policies or rules. Can be either referenced or embedded.                                                                                                 |
+| `combiningAlgorithm`           | Object  | Required | Immutable | The algorithm that determines how rules are combined to produce an authorization decision. For details, refer to [Authorization Rules](../authorization-rules/index.html). |
+| `condition`                    | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../../pingauthorize-trust-framework/authorization-conditions/index.html).             |
+| `description`                  | String  | Optional | Mutable   | The authorization policy resource's description.                                                                                                                           |
+| `enabled`                      | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                                           |
+| `id`                           | String  | N/A      | Read only | The policy resource's unique identifier.                                                                                                                                   |
+| `name`                         | String  | Required | Mutable   | A user-friendly policy name. The `name` value must be unique.                                                                                                              |
+| `repetitionSettings`           | Object  | Optional | Mutable   | Applies the policy to each item of the specific attribute, filtered by decision.                                                                                           |
+| `repetitionSettings.source`    | Object  | Optional | Mutable   | The source associated with this rule.                                                                                                                                      |
+| `repetitionSettings.source.id` | String  | Optional | Mutable   | The UUID of the repetition source associated with this rule.                                                                                                               |
+| `repetitionSettings.decision`  | String  | Optional | Mutable   | The decision filter. Options are `PERMIT`, `DENY`, `NOT_APPLICABLE`, and `INDETERMINATE`.                                                                                  |
+| `statements`                   | Object  | Optional | Mutable   | The authorization statements object. Can be either referenced or embedded. For details, refer to [Authorization Statements](../authorization-statements/index.html).       |
+| `type`                         | String  | Required | Mutable   | The attribute type. Options are `POLICY`.                                                                                                                                  |
+| `version`                      | String  | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                                      |
 
 ## Authorization embedded policies data model
 
@@ -285,11 +289,11 @@ Authorization policies specify the statements (directives that instruct the poli
 
 The audit reporting events applicable to the authorize policies service are:
 
-| Topic             | Event                        |
-| ----------------- | ---------------------------- |
-| `authorize-model` | `AUTHORIZE_POLICIES.CREATED` |
-| `authorize-model` | `AUTHORIZE_POLICIES.UPDATED` |
-| `authorize-model` | `AUTHORIZE_POLICIES.DELETED` |
+| Topic             | Event                      |
+| ----------------- | -------------------------- |
+| `authorize-model` | `AUTHORIZE_POLICY.CREATED` |
+| `authorize-model` | `AUTHORIZE_POLICY.UPDATED` |
+| `authorize-model` | `AUTHORIZE_POLICY.DELETED` |
 
 ## Response codes
 
@@ -307,12 +311,13 @@ The audit reporting events applicable to the authorize policies service are:
 
 ---
 title: Authorization Processors
-description: Authorization processors transform the data coming from the resolvers. Processors manipulate and transform data, including extracting details from structured data, or converting data to different formats. These endpoints provide operations to create, read, update, and delete authorizaton processor resources.
+description: Early access endpoints to create, read, update, and delete PingOne Authorize trust framework processors, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-processors-data-model: Authorization processors data model
   authorization-processors-processor-data-model: Authorization processors processor type data model
@@ -382,12 +387,13 @@ The audit reporting events applicable to the authorize processors service are:
 
 ---
 title: Authorization Rules
-description: Rules in PingOne Authorize identify the statements and conditions by which a decision node is evaluated. If the condition is true, the decision node is evaluated. Otherwise, it is not. PingOne Authorize policies can combine multiple rules to produce a Permit, Deny, Indeterminate, or Not Applicable decision.
+description: Early access endpoints to create, read, update, test, and delete PingOne Authorize authorization rules, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-rules-data-model: Authorization rules data model
   event-types: Event types
@@ -404,27 +410,28 @@ Rules in PingOne Authorize identify the statements and conditions by which a dec
 
 ## Authorization rules data model
 
-| Property         | Type    | Required | Mutable   | Description                                                                                                                                           |
-| ---------------- | ------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `condition`      | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../pingauthorize-trust-framework/authorization-conditions.html). |
-| `description`    | String  | Optional | Mutable   | The authorization rule resource's description.                                                                                                        |
-| `effectSettings` | Object  | Required | Immutable | An object that determines how the children are combined to produce an outcome for the policy.                                                         |
-| `enabled`        | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                      |
-| `id`             | UUID    | Required | Read only | The resource's unique identifier.                                                                                                                     |
-| `name`           | String  | Required | Mutable   | A user-friendly authorization rule name. The `name` value must be unique.                                                                             |
-| `statements`     | Object  | Optional | Mutable   | The authorization statements object. For details, refer to [Authorization Statements](authorization-statements.html).                                 |
-| `type`           | String  | Required | Immutable | The condition resource's type. Options are `CONDITION`.                                                                                               |
-| `version`        | UUID    | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                 |
+| Property         | Type    | Required | Mutable   | Description                                                                                                                                                    |
+| ---------------- | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | UUID    | Required | Read only | The resource's unique identifier.                                                                                                                              |
+| `condition`      | Object  | Optional | Mutable   | The authorization condition object. For details, refer to [Authorization Conditions](../../pingauthorize-trust-framework/authorization-conditions/index.html). |
+| `description`    | String  | Optional | Mutable   | The authorization rule resource's description.                                                                                                                 |
+| `effectSettings` | Object  | Required | Immutable | An object that determines how the children are combined to produce an outcome for the policy.                                                                  |
+| `enabled`        | Boolean | Optional | Mutable   | The setting that determines whether the decision node is evaluated. The default value is `true`.                                                               |
+| `name`           | String  | Required | Mutable   | A user-friendly authorization rule name. The `name` value must be unique.                                                                                      |
+| `shared`         | Boolean | Optional | Mutable   | Whether or not the rule is available in the shared library to be reused by other policies.                                                                     |
+| `statements`     | Object  | Optional | Mutable   | The authorization statements object. For details, refer to [Authorization Statements](../authorization-statements/index.html).                                 |
+| `type`           | String  | Required | Immutable | The condition resource's type. Options are `CONDITION`.                                                                                                        |
+| `version`        | UUID    | Required | Read only | A random ID generated by the system for concurrency control purposes.                                                                                          |
 
 ## Event types
 
 The audit reporting events applicable to the authorization rules service are:
 
-| Topic             | Event                     |
-| ----------------- | ------------------------- |
-| `authorize-model` | `AUTHORIZE_RULES.CREATED` |
-| `authorize-model` | `AUTHORIZE_RULES.UPDATED` |
-| `authorize-model` | `AUTHORIZE_RULES.DELETED` |
+| Topic             | Event                    |
+| ----------------- | ------------------------ |
+| `authorize-model` | `AUTHORIZE_RULE.CREATED` |
+| `authorize-model` | `AUTHORIZE_RULE.UPDATED` |
+| `authorize-model` | `AUTHORIZE_RULE.DELETED` |
 
 ## Response codes
 
@@ -442,12 +449,13 @@ The audit reporting events applicable to the authorization rules service are:
 
 ---
 title: Authorization Services
-description: Authorization services, also referred to as Policy Information Points or PIPs, represent third-party HTTP services or internal PingOne platform services (such as PingOne Protect) that may be called to retrieve data.
+description: Early access endpoints to create, read, update, test, and delete PingOne Authorize trust framework services, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-services-data-model: Authorization services data model
   http-service-type-data-model-properties: HTTP serviceType data model properties
@@ -534,7 +542,7 @@ If the `serviceSettings.type` property is `HTTP`, the service supports the follo
 | `token`    | Object | Required | Mutable | The token object.               |
 | `token.id` | UUID   | Required | Mutable | The token used to authenticate. |
 
-**CLIENT\_CREDENTIALS**
+**CLIENT_CREDENTIALS**
 
 | Property          | Type   | Required | Mutable | Description                                                                   |
 | ----------------- | ------ | -------- | ------- | ----------------------------------------------------------------------------- |
@@ -609,12 +617,13 @@ The audit reporting events applicable to the authorization services service are:
 
 ---
 title: Authorization Statements
-description: Statements instruct the policy decision service to perform additional processing in conjunction with an authorization decision. In addition to allowing or blocking access to a resource, using statements, the decision service can attach information to decision responses and filter and transform API payloads.
+description: Early access endpoints to create, read, update, and delete PingOne Authorize authorization statements, plus their data model and event types
 component: pingone-api-ea
-page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements.html
+page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-statements-data-model: Authorization statements data model
   event-types: Event types
@@ -671,11 +680,13 @@ The audit reporting events applicable to the authorize statements service are:
 
 ---
 title: Create Authorization Attribute
+description: Early access operation to create a PingOne Authorize trust framework attribute in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/create-authorization-attribute
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/create-authorization-attribute.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -686,8 +697,6 @@ section_ids:
 # Create Authorization Attribute
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationAttributes
@@ -1143,11 +1152,13 @@ task.resume()
 
 ---
 title: Create Authorization Condition
+description: Early access operation to create a PingOne Authorize trust framework condition in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/create-authorization-condition
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/create-authorization-condition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1158,8 +1169,6 @@ section_ids:
 # Create Authorization Condition
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationConditions
@@ -1702,11 +1711,13 @@ task.resume()
 
 ---
 title: Create Authorization Policy
+description: Early access operation to create a PingOne Authorize authorization policy in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/create-authorization-policy
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/create-authorization-policy.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1717,8 +1728,6 @@ section_ids:
 # Create Authorization Policy
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationPolicies
@@ -2881,11 +2890,13 @@ task.resume()
 
 ---
 title: Create Authorization Processor
+description: Early access operation to create a PingOne Authorize trust framework processor in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/create-authorization-processor
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/create-authorization-processor.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -2896,8 +2907,6 @@ section_ids:
 # Create Authorization Processor
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationProcessors
@@ -3349,11 +3358,13 @@ task.resume()
 
 ---
 title: Create Authorization Rule
+description: Early access operation to create a PingOne Authorize authorization rule in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/create-authorization-rule
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/create-authorization-rule.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -3364,8 +3375,6 @@ section_ids:
 # Create Authorization Rule
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationRules
@@ -4096,6 +4105,7 @@ task.resume()
     "effectSettings": {
         "type": "UNCONDITIONAL_PERMIT"
     },
+    "shared": true,
     "version": "5e121ef3-8342-4b4d-bd94-716ba1753a33"
 }
 ```
@@ -4104,11 +4114,13 @@ task.resume()
 
 ---
 title: Create Authorization Service
+description: Early access operation to create a PingOne Authorize trust framework service in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/create-authorization-service
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-services/create-authorization-service.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -4119,8 +4131,6 @@ section_ids:
 # Create Authorization Service
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationServices
@@ -4495,11 +4505,13 @@ task.resume()
 
 ---
 title: Create Authorization Statement
+description: Early access operation to create a PingOne Authorize authorization statement in an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/create-authorization-statement
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-statements/create-authorization-statement.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -4510,8 +4522,6 @@ section_ids:
 # Create Authorization Statement
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/authorizationStatements
@@ -4908,11 +4918,13 @@ task.resume()
 
 ---
 title: Delete Authorization Attribute
+description: Early access operation to delete a PingOne Authorize trust framework attribute from an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/delete-authorization-attribute
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-attributes/delete-authorization-attribute.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-10
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -4922,8 +4934,6 @@ section_ids:
 # Delete Authorization Attribute
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationAttributes/{{authAttributeID}}
@@ -5150,11 +5160,13 @@ task.resume()
 
 ---
 title: Delete Authorization Condition
+description: Early access operation to delete a PingOne Authorize trust framework condition from an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/delete-authorization-condition
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-conditions/delete-authorization-condition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-10
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -5164,8 +5176,6 @@ section_ids:
 # Delete Authorization Condition
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationConditions/{{authConditionsID}}
@@ -5392,11 +5402,13 @@ task.resume()
 
 ---
 title: Delete Authorization Policy
+description: Early access operation to delete a PingOne Authorize authorization policy from an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/delete-authorization-policy
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-policies/delete-authorization-policy.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -5406,8 +5418,6 @@ section_ids:
 # Delete Authorization Policy
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationPolicies/{{authorizationPolicyID}}
@@ -5634,11 +5644,13 @@ task.resume()
 
 ---
 title: Delete Authorization Processor
+description: Early access operation to delete a PingOne Authorize trust framework processor from an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/delete-authorization-processor
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-trust-framework/authorization-processors/delete-authorization-processor.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-02-10
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -5648,8 +5660,6 @@ section_ids:
 # Delete Authorization Processor
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationProcessors/{{authProcessorID}}
@@ -5876,11 +5886,13 @@ task.resume()
 
 ---
 title: Delete Authorization Rule
+description: Early access operation to delete a PingOne Authorize authorization rule from an environment
 component: pingone-api-ea
 page_id: pingone-api-ea:authorize:early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/delete-authorization-rule
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis/pingauthorize-editor-policy-management/authorization-rules/delete-authorization-rule.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -5890,8 +5902,6 @@ section_ids:
 # Delete Authorization Rule
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/authorizationRules/{{authorizationRuleID}}

@@ -18,7 +18,7 @@ The Orchestration SDKs provide two methods for implementing authentication in yo
 
   The app developer is responsible for building the login and registration UI.
 
-  Uses the [Authorization code grant with PKCE](https://docs.pingidentity.com/pingam/8/oauth2-guide/oauth2-authz-grant-pkce.html) flow, based on [RFC7636](https://datatracker.ietf.org/doc/html/rfc7636).
+  Uses the [Authorization code grant with PKCE](https://docs.pingidentity.com/pingam/8.1/oauth2-guide/oauth2-authz-grant-pkce.html) flow, based on [RFC7636](https://datatracker.ietf.org/doc/html/rfc7636).
 
   When using auth journeys for authentication, the SDKs do not store user credentials on the device or in the browser.
 
@@ -100,7 +100,97 @@ If you're familiar with OpenID Connect (OIDC) specifications, the web app is the
 
 For more information on PKCE standards, see the following IETF document: [Proof key for code exchange by OAuth public clients](https://www.rfc-editor.org/rfc/rfc7636).
 
-For more information on how we implement PKCE for native and SPA apps, refer to [Authorization code grant with PKCE](https://docs.pingidentity.com/pingam/8/oauth2-guide/oauth2-authz-grant-pkce.html).
+For more information on how we implement PKCE for native and SPA apps, refer to [Authorization code grant with PKCE](https://docs.pingidentity.com/pingam/8.1/oauth2-guide/oauth2-authz-grant-pkce.html).
+
+---
+
+---
+title: OAuth 2.0 security with Pushed Authorization Requests
+description: Pushed Authorization Requests (PAR) is an OAuth 2.0 extension defined in RFC 9126 that improves the security of the OIDC redirect login flow.
+component: orchsdks
+page_id: orchsdks::security/oauth2-par
+canonical_url: https://developer.pingidentity.com/orchsdks/security/oauth2-par.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 19 Jun 2026 00:00:00 +0000
+keywords: ["PingOne Advanced Identity Cloud", "PingAM", "OAuth 2.0", "Pushed Authorization Requests", "PAR", "RFC 9126", "Security", "SDK"]
+section_ids:
+  the_problem_par_solves: The problem PAR solves
+  how_par_works: How PAR works
+  par_and_pkce: PAR and PKCE
+  enabling_par_in_the_sdk: Enabling PAR in the SDK
+  configuration_instructions: Configuration instructions
+---
+
+# OAuth 2.0 security with Pushed Authorization Requests
+
+Pushed Authorization Requests (PAR) is an OAuth 2.0 extension defined in [RFC 9126](https://datatracker.ietf.org/doc/html/rfc9126) that improves the security of the OIDC redirect login flow.
+
+PAR moves authorization parameters out of the browser redirect URL and into a direct, server-side request, reducing their exposure and protecting their integrity.
+
+## The problem PAR solves
+
+In a standard OIDC redirect flow, authorization parameters such as `client_id`, `redirect_uri`, `scope`, `state`, and any `acr_values` are sent as query parameters in the browser's address bar when redirecting to the authorization server.
+
+This exposes those parameters in several places:
+
+* Browser history and URL bars
+
+* Proxy and network access logs
+
+* HTTP `Referer` headers sent to third-party resources on the authorization server's page
+
+In addition, browsers can impose URL length limits. Complex requests with many parameters, such as those encoding rich claims or long `acr_values` strings, can exceed those limits and cause errors.
+
+## How PAR works
+
+With PAR, the client sends authorization parameters directly to the authorization server's `/par` endpoint over a backchannel `POST` request *before* the browser redirect occurs.
+
+The authorization server validates the parameters, stores them, and returns a short-lived `request_uri` that acts as an opaque reference.
+
+The browser redirect to the `/authorize` endpoint then uses only that `request_uri`, keeping all sensitive parameters out of the URL.
+
+Figure 1. PAR authorization flow
+
+This approach provides the following security benefits:
+
+* **Reduced parameter exposure**
+
+  Authorization parameters are no longer visible in browser history, proxy logs, or referrer headers.
+
+* **Integrity protection**
+
+  Parameters are submitted directly to the authorization server before the browser redirect, so they cannot be tampered with in transit.
+
+* **No URL length limits**
+
+  Complex authorization requests are no longer constrained by browser URL length restrictions.
+
+## PAR and PKCE
+
+PAR and [PKCE](oauth2-pkce.html) are complementary security measures that work well together.
+
+PKCE protects the authorization code exchange by binding a `code_challenge` to the initial authorization request and requiring the matching `code_verifier` when exchanging the code for tokens.
+
+PAR carries the PKCE `code_challenge` as one of its parameters, so both protections apply to the same request.
+
+Using PAR and PKCE together provides both confidentiality (parameters are not exposed in the URL) and integrity (the code exchange cannot be replayed or intercepted).
+
+When the `par` option is enabled in the SDK configuration, the Orchestration SDKs use both PKCE and PAR together.
+
+## Enabling PAR in the SDK
+
+PAR is opt-in.
+
+Set the `par` option to `true` in your SDK configuration to enable it.
+
+Once enabled, the SDK reads the `pushed_authorization_request_endpoint` URL automatically from the server's `.well-known/openid-configuration` document, sends authorization parameters to that endpoint before the browser redirect, and uses the returned `request_uri` in the subsequent `/authorize` redirect.
+
+PAR is supported for OIDC sign-on with PingOne, PingOne Advanced Identity Cloud, and PingAM.
+
+## Configuration instructions
+
+For server configuration steps and platform-specific SDK usage, see [Securing OIDC sign-on with Pushed Authorization Requests](../oidc/use-cases/par/index.html).
 
 ---
 
@@ -122,29 +212,35 @@ The Orchestration SDKs are built from the ground up to use best practices for se
 
 Security is a very broad subject, and every environment is different. Readers are expected to do their own research and complement the information found in these topics.
 
-[icon: file-certificate, set=fadr, size=3x]
+[icon: file-certificate, set=fad, size=3x]
 
 #### [Tokens and keys](security-tokens.html)
 
 Learn how the Orchestration SDKs secure your session and OAuth 2.0-related tokens, and the encryption used.
 
-[icon: user-shield, set=fadr, size=3x]
+[icon: user-shield, set=fad, size=3x]
 
 #### [Authentication](security-authn.html)
 
 Discover the protocols the Orchestration SDKs use when your app authenticates your users.
 
-[icon: binary-lock, set=fadr, size=3x]
+[icon: binary-lock, set=fad, size=3x]
 
 #### [Data](security-data.html)
 
 What data do the Orchestration SDKs use, and what security measures help to protect it.
 
-[icon: swap, set=fadr, size=3x]
+[icon: swap, set=fad, size=3x]
 
-#### [OAuth 2.0](oauth2-pkce.html)
+#### [OAuth 2.0 PKCE](oauth2-pkce.html)
 
 See how the Orchestration SDKs use Proof Key for Code Exchange (PKCE) to mitigate the risks of an OAuth 2.0 attack.
+
+[icon: split, set=fad, size=3x]
+
+#### [OAuth 2.0 PAR](oauth2-par.html)
+
+See how the Orchestration SDKs use Pushed Authorization Requests (PAR) to keep authorization parameters out of the browser URL.
 
 ---
 

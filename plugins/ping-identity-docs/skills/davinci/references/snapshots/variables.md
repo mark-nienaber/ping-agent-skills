@@ -1,12 +1,12 @@
 ---
 title: Adding a variable
-description: Add a new variable that can be used in flows.
+description: Add a PingOne DaVinci variable, including its context, data type, initial value, and mutability.
 component: davinci
 page_id: davinci:variables:davinci_adding_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_adding_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 31, 2024
+revdate: 2026-03-24
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -75,13 +75,13 @@ Add a new variable that can be used in flows.
 
 ---
 title: Deleting a variable
-description: Delete an existing variable to remove it from the UI and from all flows.
+description: Delete an existing PingOne DaVinci variable to remove it from the UI and from all flows.
 component: davinci
 page_id: davinci:variables:davinci_deleting_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_deleting_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_deleting_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2024-09-13
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -111,13 +111,13 @@ Delete an existing variable to remove it from the UI and from all flows.
 
 ---
 title: Editing a variable
-description: Edit an existing variable to change its properties.
+description: Edit an existing PingOne DaVinci variable to change its description, data type, value, or mutability.
 component: davinci
 page_id: davinci:variables:davinci_editing_a_variable
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_editing_a_variable.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_editing_a_variable.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 31, 2024
+revdate: 2026-03-24
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -178,13 +178,13 @@ Edit an existing variable to change its properties.
 
 ---
 title: Using variables in flows
-description: You can use variables in multiple ways within a flow.
+description: Use PingOne DaVinci variables in flows, including the Variables connector, referencing variables in code, and sharing values between flows.
 component: davinci
 page_id: davinci:variables:davinci_using_variables_in_flows
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_using_variables_in_flows.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_using_variables_in_flows.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 19, 2024
+revdate: 2026-03-24
 section_ids:
   variables-connector: Variables connector
   including-variables-in-code: Including variables in code
@@ -257,13 +257,13 @@ Next, open each of the nodes that sends a JSON success, error, or custom respons
 
 ---
 title: Variables
-description: Variables let you track and adjust values from within your flows.
+description: Reference for PingOne DaVinci variable contexts, including Company, Flow, Flow Instance, and User context.
 component: davinci
 page_id: davinci:variables:davinci_variables
-canonical_url: http://docs.pingidentity.com/davinci/variables/davinci_variables.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/variables/davinci_variables.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 31, 2024
+revdate: 2024-09-13
 ---
 
 # Variables

@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Jive and PingFederate
-description: Learn how to configure SAML SSO with Jive and PingFederate.
+description: Configure SAML SSO with Jive and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:jive:config_saml_jive_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/jive/config_saml_jive_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   about-this-task: About this task
@@ -87,10 +89,12 @@ The following table details the references that are used within this guide that 
 
 ---
 title: Configuring SAML SSO with Jive and PingOne for Enterprise
-description: Learn how to configure SAML SSO with Jive and PingOne for Enterprise.
+description: Configure SAML SSO with Jive and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:jive:config_saml_jive_p14e
 canonical_url: https://docs.pingidentity.com/configuration_guides/jive/config_saml_jive_p14e.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 7, 2021
 section_ids:
   about-this-task: About this task

@@ -2,7 +2,7 @@
 
 - Product: Configuration Guides
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/configuration_guides/llms.txt
 - Guides discovered: 46
 - Guides captured: 46
@@ -16,101 +16,101 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| amazon.md | assembled | <10 pages from amazon> | 10 | 10 | full |
-| github.md | assembled | <4 pages from github> | 4 | 4 | full |
-| salesforce.md | assembled | <4 pages from salesforce> | 4 | 4 | full |
-| tableau.md | assembled | <3 pages from tableau> | 3 | 3 | full |
-| atlassian-cloud.md | assembled | <2 pages from atlassian_cloud> | 2 | 2 | full |
-| bamboohr.md | assembled | <2 pages from bamboohr> | 2 | 2 | full |
-| box.md | assembled | <2 pages from box> | 2 | 2 | full |
-| coupa.md | assembled | <2 pages from coupa> | 2 | 2 | full |
-| docusign.md | assembled | <2 pages from docusign> | 2 | 2 | full |
-| dropbox.md | assembled | <2 pages from dropbox> | 2 | 2 | full |
-| egnyte.md | assembled | <2 pages from egnyte> | 2 | 2 | full |
-| evernote.md | assembled | <2 pages from evernote> | 2 | 2 | full |
-| hubspot.md | assembled | <2 pages from hubspot> | 2 | 2 | full |
-| jamf.md | assembled | <2 pages from jamf> | 2 | 2 | full |
-| jira-confluence.md | assembled | <2 pages from jira_confluence> | 2 | 2 | full |
-| jive.md | assembled | <2 pages from jive> | 2 | 2 | full |
-| marketo.md | assembled | <2 pages from marketo> | 2 | 2 | full |
-| microsoft-365.md | assembled | <2 pages from microsoft_365> | 2 | 2 | full |
-| mimecast.md | assembled | <2 pages from mimecast> | 2 | 2 | full |
-| namely.md | assembled | <2 pages from namely> | 2 | 2 | full |
-| sap-netweaver.md | assembled | <2 pages from sap_netweaver> | 2 | 2 | full |
-| slack.md | assembled | <2 pages from slack> | 2 | 2 | full |
-| splunk.md | assembled | <2 pages from splunk> | 2 | 2 | full |
-| successfactors.md | assembled | <2 pages from successfactors> | 2 | 2 | full |
-| ultipro.md | assembled | <2 pages from ultipro> | 2 | 2 | full |
-| workato.md | assembled | <2 pages from workato> | 2 | 2 | full |
-| workday.md | assembled | <2 pages from workday> | 2 | 2 | full |
-| zendesk.md | assembled | <2 pages from zendesk> | 2 | 2 | full |
-| adobe-creative-suite.md | assembled | <1 pages from adobe_creative_suite> | 1 | 1 | full |
-| aha-ideas.md | assembled | <1 pages from aha!_ideas> | 1 | 1 | full |
-| asana.md | assembled | <1 pages from asana> | 1 | 1 | full |
-| cloudflare.md | assembled | <1 pages from cloudflare> | 1 | 1 | full |
-| config-configuration-guides-md.md | assembled | <1 pages from config_configuration_guides.md> | 1 | 1 | full |
-| datadog.md | assembled | <1 pages from datadog> | 1 | 1 | full |
-| freshworks.md | assembled | <1 pages from freshworks> | 1 | 1 | full |
-| greenhouse.md | assembled | <1 pages from greenhouse> | 1 | 1 | full |
-| heap.md | assembled | <1 pages from heap> | 1 | 1 | full |
-| lookout-secure-access.md | assembled | <1 pages from lookout_secure_access> | 1 | 1 | full |
-| osano.md | assembled | <1 pages from osano> | 1 | 1 | full |
-| ringcentral.md | assembled | <1 pages from ringcentral> | 1 | 1 | full |
-| servicenow.md | assembled | <1 pages from servicenow> | 1 | 1 | full |
-| sumologic.md | assembled | <1 pages from sumologic> | 1 | 1 | full |
-| terraform.md | assembled | <1 pages from terraform> | 1 | 1 | full |
-| workplace-by-facebook.md | assembled | <1 pages from workplace_by_facebook> | 1 | 1 | full |
-| wrike.md | assembled | <1 pages from wrike> | 1 | 1 | full |
-| zoho.md | assembled | <1 pages from zoho> | 1 | 1 | full |
+| amazon.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 10 | 10 | full |
+| github.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 4 | 4 | full |
+| salesforce.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 4 | 4 | full |
+| tableau.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 3 | 3 | full |
+| atlassian-cloud.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| bamboohr.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| box.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| coupa.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| docusign.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| dropbox.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| egnyte.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| evernote.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| hubspot.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jamf.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jira-confluence.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| jive.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| marketo.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| microsoft-365.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| mimecast.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| namely.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| sap-netweaver.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| slack.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| splunk.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| successfactors.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| ultipro.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| workato.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| workday.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| zendesk.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 2 | 2 | full |
+| adobe-creative-suite.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| aha-ideas.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| asana.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| cloudflare.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| config-configuration-guides-md.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| datadog.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| freshworks.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| greenhouse.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| heap.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| lookout-secure-access.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| osano.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| ringcentral.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| servicenow.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| sumologic.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| terraform.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| workplace-by-facebook.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| wrike.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
+| zoho.md | assembled | https://docs.pingidentity.com/configuration_guides/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | d6157e8b867c9a77241f57e5f886ae28bf51a53bb36873264676430791e06615 |
-| snapshots/amazon.md | af41670ef4c8169aa86861f33b7e6e6931d19611a2fc33ba2443e1a2781a8693 |
-| snapshots/github.md | b73c3839a4c7bf059b311d21b88435fd4becd22649f9c675b313221f8c09e66e |
-| snapshots/salesforce.md | eb04e1221267f441a1a2d58eee408945dbb3f2813438fdd81e01eab66be8296e |
-| snapshots/tableau.md | 9fd5b4b1f04d6168f90e328f701513ecc1b7c453c39edda94672cf39c6475dc9 |
-| snapshots/atlassian-cloud.md | 72bf18289cc10aa36bf586aca45c87434eb80f9e1f42f06814d8e0f5475127cd |
-| snapshots/bamboohr.md | b7cce5c25eb6082402be86c0ffc3d080cb5f4060d103ea5920928f9873ed5901 |
-| snapshots/box.md | f7b20f08921065c28eeea4a94d5b374c53afc67d4079de835af15ef75b9fc67d |
-| snapshots/coupa.md | 4edfb0ebd478703d21109fa1121d474ac0dbc97c7b6d684a845f1a5e36a47175 |
-| snapshots/docusign.md | 70ec0c1efc8b654ef23c2463a709dd866f0e9695e9ad7abb45aee1b665a30243 |
-| snapshots/dropbox.md | 23cf951daf94e1daaa7bbf021aba3701b71e7a6becb1943941b93fd0f6e89011 |
-| snapshots/egnyte.md | e3ca92170809192cd05c71c6108c95309738d906e6f0f803f4ce4f3d697100c3 |
-| snapshots/evernote.md | a7311a9ff62c773d2437e4f7054fadc0392c63adee9ab5f12d38ac880b9a8829 |
-| snapshots/hubspot.md | ec6bbee8187bdcd68e3f5821946f204bbe0369b5ea1ff486a41acc51ed5824e0 |
-| snapshots/jamf.md | 670d1df2509b9d7c04813a39200ca14ccc841e3e332d283e17806eaea24220d1 |
-| snapshots/jira-confluence.md | 1abc9df0a7478895cda52410959f339d1cf2163a69177a8fd5258b87c0141037 |
-| snapshots/jive.md | 72409044cf5244ea043e169cf60625eb4678cec836872bc41ad7b1ef44df4047 |
-| snapshots/marketo.md | 24c1142ddd4380d5a34c6e2726c1d2dd14dc2f51136c5987338462d8502e6fb5 |
-| snapshots/microsoft-365.md | 310dc76da3ff9e92419c58df0d588b1a56a260808209d37a8bc2075c299551e1 |
-| snapshots/mimecast.md | 26857d332c391be958ecda7add25622663ba5e362c86e6dd88c0318596c62c16 |
-| snapshots/namely.md | 611628167eb42070266122c946d4a522b7638f24caacadcbb903c8805b06aff8 |
-| snapshots/sap-netweaver.md | d0ea2c22dd1f6af25c45323866aae5c3d538b2507964b0a67a239fead1c96cf4 |
-| snapshots/slack.md | f5b3e67f626fad6f08f6e75e0e72f7890323cb8ead495c545ab279ea255cf96d |
-| snapshots/splunk.md | 87b7ae98bb0afebf54f394f197749cecc4b26a180672a65d57d1e05479ffcd9a |
-| snapshots/successfactors.md | 939e221f4c0b7db5ca21f3a2c56204f632b77a60d4614b9632b7e28fc6658bf7 |
-| snapshots/ultipro.md | e9ff46472ce3fdc5276d2dc56320892224145bad11c060141144dfb6e0d61672 |
-| snapshots/workato.md | cdf89f4ba1ec363494bb6a7efec3320ff78574c3e4f12c360c47754622619fc4 |
-| snapshots/workday.md | 291f9cc42346202ccae125c232c7c9482489b3f38664c6e181e3d0af752fbd91 |
-| snapshots/zendesk.md | 45151b5aa65ab243963c9d24413b3019603b2b0652ab9d002b704bbf3af1a6e2 |
-| snapshots/adobe-creative-suite.md | c2500b93e66d58d57e85a196e618a6bc36c57aaf4fcf0a71c6c777e5c1623023 |
-| snapshots/aha-ideas.md | a2b6a7ba372d55f21b4c29a95089e941d1e83555104e3ebf7c6e6eb02460539b |
-| snapshots/asana.md | 5088c3204f7c3f22b6a83bf1c6f6bd60f6f2706235566688f8ebc8942c94d855 |
-| snapshots/cloudflare.md | 58ad5233101ac86003a61419096d4279b79f855e5cbc0a3545c22ec9610d6b7b |
-| snapshots/config-configuration-guides-md.md | 7387afe4ecc3b57a4c119697fa477088ba7ff8b8e889beffafe20d1bd29278e0 |
-| snapshots/datadog.md | 2ff967988d0287e30d845d23f2fc43a1ae4d38410c9d27953cfd3f6e8d44c2c7 |
-| snapshots/freshworks.md | 605e7900303243a75804a4aa45c65f5c5d8c40618e6c425c2300b7e77115fb16 |
-| snapshots/greenhouse.md | 59daa9b50da6fe83534f547c410ccf1e73bc26b9684495c1fb1defc29e7d00ca |
-| snapshots/heap.md | f969720baf1de2aa8fda3bb055760a0e05181c65f6a9fde1007c72c221d48570 |
-| snapshots/lookout-secure-access.md | cb68a901c3db0f30dfe77ecd9cc52905ce0bb891dcd51e88aa22e939fed2ec7a |
-| snapshots/osano.md | 177348ed91f8c0cdcf44dffe620ba664fa496b7426dfbf9b890b8e0308148a64 |
-| snapshots/ringcentral.md | 1abda039be4e3b7bd28778bc4bb907c9733b834cbaf144d07184295cc8011cfb |
-| snapshots/servicenow.md | 35b0ad5e85fbe309715292a092bd57efa2b904c7d1b6c97f8222a8540847fd5f |
-| snapshots/sumologic.md | b26101660aac18ad07ef5d2e146551f5c9dc5acb535f3aeed49a726400fc6419 |
-| snapshots/terraform.md | 9ac4b6ddce53502ba1f36fc36a03951ad64d5a7a35121e17d6022522b18f6053 |
-| snapshots/workplace-by-facebook.md | 9f0cc8c8778a57e0a646f02b02473d8b76b2e6efc8a08d2e2c54129f9dc87101 |
-| snapshots/wrike.md | e3f97a5428d00b32384778b10f4a520c9c60107bcc9d0ccad8af3bf55de46b52 |
-| snapshots/zoho.md | 15ba224f69b8fbeab9a2b495e328c26dac85da9118f499a33f3f40758a59d4d2 |
+| llms.txt | c213d547b66e6c57cbb124ac3f6bd96ea6c57618ba39f9a2661e6329ec6c1e83 |
+| snapshots/amazon.md | 8029ccfa5f84641dc243a0bfd7f4eabf7638574a747c3e48d7883c0bbdfbc74e |
+| snapshots/github.md | 435904292672ef0ab1fa035f6428c3445d654505eb9a98f1b20e746212f37aa0 |
+| snapshots/salesforce.md | 034bc7503b0ff7d2b5e74d64b801c2a799989029ae1be5ed5be1aa626700d64c |
+| snapshots/tableau.md | fc2871b3715470936e95438a345994d07fd035d4b55031faefac4da318e1520a |
+| snapshots/atlassian-cloud.md | 19fea8973d156038d824cbefb434429075f3ee34cc5f6fa62954f43596f63d19 |
+| snapshots/bamboohr.md | dea36ca73b792220ecf8166bac810c0339794c3adb9d66de34ccfaa93a1a963c |
+| snapshots/box.md | 957329d2dfd980c0e8b0b210566bcfd1106fdf45102e3fcf707cb2e9f09c3db3 |
+| snapshots/coupa.md | fa235a41651fbf3e2eca10e52a92428a91fea16ed4eeb96ecdc4fd7216df5998 |
+| snapshots/docusign.md | e6dfbc91791dd106507e28b5cf42cd5bc28c76a6d66f52ffba805846a4b10e6e |
+| snapshots/dropbox.md | 49dc4ca3b357fb2d32d0548f45669a1a7d43b9b98248a6522ccc0e587d09bd18 |
+| snapshots/egnyte.md | 8e136a1ef189cd87dbd65cf96fa6233056011564653f491320e87b8c565cb5a8 |
+| snapshots/evernote.md | 70dda0140961ff9634980cef2e3308fdfa73bf83fe04d271fac47e5ad5b4a255 |
+| snapshots/hubspot.md | 35d8156c149b204ea904dd36b8b5e43494199fc7159a35d60010e9f638c40bca |
+| snapshots/jamf.md | 417b1ef96e7d8b84812ae477607498ddbf64812e2e41ffd720aed16fc43a55cc |
+| snapshots/jira-confluence.md | c92f92805b5ec2db8d7fee8f8d7cf00ecfad794e60032b6ed4978d05e9da0380 |
+| snapshots/jive.md | 2c08e8cd87f0e24f55c9248c50f4e13ac6e3c5cdf499dec9ebf4061b0f399ecd |
+| snapshots/marketo.md | 454e5563775af734003a78b0323741dcb3467301178679e11cc528d7c0bac157 |
+| snapshots/microsoft-365.md | 333b6d1d9e7a76d2aa476b3b571f3d8a3ed2c903f4d9c53d07da6e415e06c7ae |
+| snapshots/mimecast.md | cb6bc57d153bc8c2cac201dcdd8e5cd104634f8830f86410342b74b6426badc7 |
+| snapshots/namely.md | 5f13e1c8f6c0d99c1983d7602c465e8b4be3a53697ec6921119ca334c37b6dc2 |
+| snapshots/sap-netweaver.md | 1ac1d41ca73f6934dc24deeb690381be7f027b56de6c85a19e63db28b6e08d5f |
+| snapshots/slack.md | f29011e094ff0038ab80b0739468bd8a5679abbb3680e02961943822313fff68 |
+| snapshots/splunk.md | 62cbc43baa589c5c44a1970b90f1911bc9032e4194cf93b070e882ec69ada9f4 |
+| snapshots/successfactors.md | 32a20a032dce2be8135670dd84f1abb96bc3d2ad7623e85e9034aedb88413b63 |
+| snapshots/ultipro.md | 8ce7e52b5bec77e9c9b0a109fdab8e2a883ded37c1f2b7c4c2a321dfb004f20f |
+| snapshots/workato.md | 74ad30311e734551bb29d06c364933f6cd4c527596b345408898af59052b41b7 |
+| snapshots/workday.md | e1dc70990db1671bcabd5b66075eea07edb33e3ba718fcd24cd65239a3737877 |
+| snapshots/zendesk.md | b4b5b22284603bc9b55c669610d7902d922f572b961c4cd3b4f3b7179ec752b1 |
+| snapshots/adobe-creative-suite.md | 9bfb1aca7c1ec25c838576f4e4d2d9a43c8927e61111b51eca36fb4368c88297 |
+| snapshots/aha-ideas.md | 0eae5890514c8e661c7827d654493949318a76c518848f1e7d86e70d309b63b4 |
+| snapshots/asana.md | 1f97a13bae07a415b68b0a969103aff523d5390fe2029fdfb1af5690008d1aac |
+| snapshots/cloudflare.md | 81d55ddcb83c5ce71890ed9a9661e9ecbfef7df612b546ddd6901fe7ab2a6624 |
+| snapshots/config-configuration-guides-md.md | 66deed1bdb7603a7e760c6fa86a5fa964f02c7f73592cd3c2aed66db92c97821 |
+| snapshots/datadog.md | eaeec096b9aad710e32c011d326ac7a9c7dc614f2050f5036c33c85fa0b90f35 |
+| snapshots/freshworks.md | 7a3f94c926e4f0f231b1bf001a25f3841b9af09fe214d9af2dd93a58d3897ab7 |
+| snapshots/greenhouse.md | 3577e6cf813360969341fa1c0212f73b5d2a4a16a10b6d3b45f3fd4d5bff5575 |
+| snapshots/heap.md | 3160535727cc124cb80b3c75984c804ec01247ee8c6bea5654e23f7337fb059d |
+| snapshots/lookout-secure-access.md | aa31d45fb21fd85712f59d4425305496aba04be9a6baafa5610f723f47b79228 |
+| snapshots/osano.md | 312cfbf275267c872fd6150c125659a65289e5c433a71f1aedc452388276d787 |
+| snapshots/ringcentral.md | cc75be046f8285cdf988665360711b999e9300910ae4007eb9db80722abd1e1b |
+| snapshots/servicenow.md | ec43a78c0f9dcadc5b7bb13527406634824081e6a3d63dd1ae69603cee4f223a |
+| snapshots/sumologic.md | 34a392d81fd6253815f5c15df695091a90f9f557072f41186e434e1cc98f8615 |
+| snapshots/terraform.md | 3c976bb6e4bf23a59a47e1e0cf13589542f554ba7d9fa5ad672f629e71740f8b |
+| snapshots/workplace-by-facebook.md | 95d16c33b3d29435adb0013408662633bb7f14000bf009593903288305bb044b |
+| snapshots/wrike.md | b6a8c9f9263a63e6fed5c89fe95961100ca951980adc336cc149b1ba0fe45421 |
+| snapshots/zoho.md | e01474e5b99945e78e516774c1189a7c5499a369f9a790998193107e30103144 |

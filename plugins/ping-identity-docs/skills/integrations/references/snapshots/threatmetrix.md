@@ -650,7 +650,7 @@ You can find general information about logging in [Enabling debug messages and c
    * To log activity for the adapter's HTTPS activity and other components but not the adapter itself, add the following line:
 
      ```
-     <Logger name="{logging-class}.shade" level="DEBUG"/>
+     <Logger name="com.pingidentity.adapters.threatmetrix.shade" level="DEBUG"/>
      ```
 
    * To log activity for the ThreatMetrix IdP Adapter but not its HTTPS or component activity, add the following lines:

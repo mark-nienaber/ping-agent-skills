@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Egnyte and PingFederate
-description: Learn how to enable Egnyte sign-on from a PingFederate URL (IdP-initiated sign-on) and direct Egnyte sign-on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with Egnyte and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:egnyte:config_saml_egnyte_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/egnyte/config_saml_egnyte_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -108,10 +110,12 @@ Learn how to enable Egnyte sign-on from a PingFederate URL (IdP-initiated sign-o
 
 ---
 title: Configuring SAML SSO with Egnyte and PingOne for Enterprise
-description: Learn how to enable Egnyte sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct Egnyte sign-on using PingOne for Enterprise (SP-initiated sign-on).
+description: Configure SAML SSO with Egnyte and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:egnyte:config_saml_egnyte_p14e
 canonical_url: https://docs.pingidentity.com/configuration_guides/egnyte/config_saml_egnyte_p14e.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   before-you-begin: Before you begin

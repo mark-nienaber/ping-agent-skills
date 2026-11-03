@@ -7,12 +7,35 @@ canonical_url: https://docs.pingidentity.com/licensing-guide/archive/archive.htm
 llms_txt: https://docs.pingidentity.com/licensing-guide/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
+  pingone-advanced-identity-cloud: PingOne Advanced Identity Cloud
+  enterprise-connect: Enterprise Connect
+  enterprise-connect-passwordless: Enterprise Connect Passwordless
   advanced-identity-software: Advanced identity software
 ---
 
 # Archive
 
 The archive section contains licensing components that are no longer offered to net-new customers.
+
+## PingOne Advanced Identity Cloud
+
+### Enterprise Connect
+
+Add-on capability for PingOne Advanced Identity Cloud and AM that brings rich MFA and stronger authentication to workstations, servers, VPNs, and other non-web resources.
+
+| Feature                                                                                                                                               | Description                                                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Plug-n-Play Desktop](https://docs.pingidentity.com/enterprise-connect/latest/overview-ec.html)                                                       | Desktop integration that gives users a plug-and-play experience for workstation login and desktop SSO, layering MFA and passwordless over existing Windows and Mac logins. |
+| [MFA for third-party authentication](https://docs.pingidentity.com/enterprise-connect/latest/windows-radius-proxy-3.0.2/configure-ssh-linux-pam.html) | Use Enterprise Connect (for example, the Windows RADIUS proxy) to add MFA in front of third-party systems such as VPNs, SSH, and other RADIUS-based services.              |
+
+### Enterprise Connect Passwordless
+
+Add-on capability for PingOne Advanced Identity Cloud and AM that brings passwordless authentication to enterprise resources like workstations, servers, VPNs, and legacy apps.
+
+| Feature                                                                                                          | Description                                                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [End-to-end Passwordless](https://docs.pingidentity.com/enterprise-connect/latest/overview-ec-passwordless.html) | Delivers an end-to-end passwordless experience by removing user interaction with passwords and handling any required password operations securely in the background.                                        |
+| [Workforce authentication](https://docs.pingidentity.com/enterprise-connect/latest/index.html)                   | Focused on workforce authentication, enabling passwordless and MFA sign-on for Windows and Mac workstations, servers, VPNs, and other infrastructure integrated with PingOne Advanced Identity Cloud or AM. |
 
 ## Advanced identity software
 

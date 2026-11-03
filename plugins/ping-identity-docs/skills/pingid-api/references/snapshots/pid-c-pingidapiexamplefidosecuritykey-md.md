@@ -1,9 +1,11 @@
 ---
 title: "Example: PingID FIDO security key"
-description: The examples on this page present the steps comprising the following FIDO security key flows:
+description: Example of FIDO security key pairing and authentication
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiExampleFIDOsecurityKey
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiExampleFIDOsecurityKey.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   overview: Overview
   fido-security-key-pairing-flow: FIDO security key pairing flow

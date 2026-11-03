@@ -1,12 +1,13 @@
 ---
 title: "<span class=\"command\">dsbackup</span> utility"
-description: This page provides instructions for backing up and restoring DS data in a ForgeOps deployment using the dsbackup utility.
+description: Configure DS backups and restores in ForgeOps with the dsbackup utility, cloud storage, scheduled backups, and disaster recovery
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:backup:dsbackup
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/backup/dsbackup.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/backup/dsbackup.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-22T21:02:19Z
 keywords: ["Backup &amp; Restore", "Directory Server", "dsbackup"]
 section_ids:
   dsbackup-backup: Back up using the dsbackup utility
@@ -362,7 +363,7 @@ The disaster recovery ID is configured in the `platform-config` configmap as fol
 
 * For Helm: update `ds_restore.disasterRecoveryId` in your custom values file
 
-* For Kustomize: update DISASTER\_RECOVERY\_ID in your custom overlay in base/platform-config.yaml
+* For Kustomize: update DISASTER_RECOVERY_ID in your custom overlay in base/platform-config.yaml
 
 ### Best practices for restoring directories
 
@@ -382,13 +383,14 @@ In DS version 8.1.0 you can use cloud storage mounted locally for backup and res
 
 ---
 title: Backup and restore overview
-description: ForgeOps deployments include two directory services:
+description: Plan and set up PingDS directory services backups using volume snapshots, the dsbackup utility, or third-party backup tools
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:backup:overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/backup/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/backup/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-22T21:02:19Z
 keywords: ["Backup &amp; Restore", "Volume Snapshot", "Directory Server"]
 section_ids:
   choose_a_backup_solution: Choose a backup solution
@@ -432,13 +434,14 @@ Your organization might have specific needs for its backup solution. Some factor
 
 ---
 title: Backup and restore using volume snapshots
-description: Kubernetes volume snapshots provide a standardized way to create copies of persistent volumes at a point in time without creating new volumes. Backing up your directory data with volume snapshots lets you perform rapid recovery from the last snapshot point. Volume snapshot backups also facilitate testing by letting you initialize DS with sample data.
+description: Configure Kubernetes volume snapshots to back up and restore PingDS data in ForgeOps, including schedules, full restores, and selective restores
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:backup:snapshots
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/backup/snapshots.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/backup/snapshots.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-20T12:54:27Z
 keywords: ["Backup &amp; Restore", "Volume Snapshot"]
 section_ids:
   backup: Backup
@@ -526,11 +529,81 @@ c7147ff   156m           156m
 
 When enabled, volume snapshots are created once every day by default and purged after three days. You can customize the backup schedules as required in your environment.
 
-* In a Kustomize-based deployment
+* Helm-based deployments
 
-* In a Helm-based deployment
+* Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-To modify the default schedule and purge delay for the `idrepo` repository\[[1](#_footnotedef_1 "View footnote.")]:
+To modify the default schedule and purge delay:
+
+1. In a terminal window, change to the /path/to/forgeops/helm/my-env directory:
+
+   ```
+   $ cd /path/to/forgeops/helm/my-env
+   ```
+
+2. Copy the values.yaml file, so you can restore it if required:
+
+   ```
+   $ cp values.yaml /tmp/values.yaml
+   ```
+
+3. Edit the values.yaml file and set the `schedule` and `purge-delay` parameters as needed.
+
+4. Run the helm upgrade command.
+
+   * Examples for scheduling snapshots for the `idrepo` repository\[[1](#_footnotedef_1 "View footnote.")]
+
+     * To schedule snapshots twice a day, at noon and midnight:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 0/12 * * *"
+       ...
+       ```
+
+     * To schedule snapshots every 8 hours:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            schedule: "0 */8 * * *"
+       ...
+       ```
+
+   * Examples for purging schedule for the `idrepo` repository\[[1](#_footnotedef_1 "View footnote.")]
+
+     * To schedule purge after 4 days:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-4 day"
+       ...
+       ```
+
+     * To schedule purge after a week:
+
+       ```
+       ...
+       ds_idrepo:
+         ...
+         snapshot:
+            ...
+            purgeDelay: "-7 day"
+       ...
+       ```
+
+To modify the default schedule and purge delay for the `idrepo` repository\[[2](#_footnotedef_2 "View footnote.")]:
 
 1. In a terminal window, change to the path/to/idrepo directory.
 
@@ -578,76 +651,6 @@ To modify the default schedule and purge delay for the `idrepo` repository\[[1](
                 env:
                   - name: PURGE_DELAY
                     value: "-7 day"
-       ```
-
-To modify the default schedule and purge delay:
-
-1. In a terminal window, change to the /path/to/forgeops/helm/my-env directory:
-
-   ```
-   $ cd /path/to/forgeops/helm/my-env
-   ```
-
-2. Copy the values.yaml file, so you can restore it if required:
-
-   ```
-   $ cp values.yaml /tmp/values.yaml
-   ```
-
-3. Edit the values.yaml file and set the `schedule` and `purge-delay` parameters as needed.
-
-4. Run the helm upgrade command.
-
-   * Examples for scheduling snapshots for the `idrepo` repository\[[2](#_footnotedef_2 "View footnote.")]
-
-     * To schedule snapshots twice a day, at noon and midnight:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            schedule: "0 0/12 * * *"
-       ...
-       ```
-
-     * To schedule snapshots every 8 hours:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            schedule: "0 */8 * * *"
-       ...
-       ```
-
-   * Examples for purging schedule for the `idrepo` repository\[[2](#_footnotedef_2 "View footnote.")]
-
-     * To schedule purge after 4 days:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            purgeDelay: "-4 day"
-       ...
-       ```
-
-     * To schedule purge after a week:
-
-       ```
-       ...
-       ds-idrepo:
-         ...
-         snapshot:
-            ...
-            purgeDelay: "-7 day"
-       ...
        ```
 
 ## Restore from volume snapshot
@@ -763,4 +766,4 @@ The snapshot-restore.sh command is available in the `bin` directory of the `forg
 
 ***
 
-[1](#_footnoteref_1). Use similar steps to modify the schedule and purge delay for the `cts` repository[2](#_footnoteref_2). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository
+[1](#_footnoteref_1). Change the `ds-cts` parameters to modify the schedule and purge delay for the `cts` repository[2](#_footnoteref_2). Use similar steps to modify the schedule and purge delay for the `cts` repository

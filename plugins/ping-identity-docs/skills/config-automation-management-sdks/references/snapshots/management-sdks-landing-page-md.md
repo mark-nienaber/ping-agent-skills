@@ -1,9 +1,11 @@
 ---
 title: Configuration and User Management SDKs Overview
-description: Develop administration applications faster using Ping Identity's Management and User client SDKs.
+description: Find the available Ping Identity Management and User client SDK libraries for PingOne Advanced Identity Cloud, PingFederate, and PingDirectory
 component: config-automation-management-sdks
 page_id: config-automation-management-sdks::management_sdks_landing_page
 canonical_url: https://developer.pingidentity.com/config-automation-management-sdks/management_sdks_landing_page.html
+llms_txt: https://developer.pingidentity.com/config-automation-management-sdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   pingone-advanced-identity-cloud: PingOne Advanced Identity Cloud

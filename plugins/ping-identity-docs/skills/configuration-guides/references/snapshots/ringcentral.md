@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with RingCentral and PingFederate
-description: Learn how to enable RingCentral sign-on for the PingFederate console (IdP-initiated sign-on) and direct RingCentral sign-on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with RingCentral and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:ringcentral:config_saml_ringcentral_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/ringcentral/config_saml_ringcentral_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

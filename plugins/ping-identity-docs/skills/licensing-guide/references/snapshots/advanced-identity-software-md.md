@@ -10,6 +10,7 @@ section_ids:
   self-managed-products: Self-managed products
   pingaccess: PingAccess
   pingauthorize: PingAuthorize
+  agent-authorize: Agent Authorize
   pingcentral: PingCentral
   pingdirectory: PingDirectory
   pingfederate: PingFederate
@@ -62,6 +63,20 @@ Fine-grained, externalized authorization engine that evaluates rich, attribute- 
 | [Data-level security](https://docs.pingidentity.com/pingauthorize/latest/troubleshooting_pingauthorize_server/paz_working_with_collect_support_data.html)        | Enforces row/record, field/column, and value-level controls so you can mask, filter, or transform sensitive data per policy.         |
 | [API and service integration](https://docs.pingidentity.com/pingauthorize/latest/pingauthorize_integrations/paz_integrations_main.html)                          | Protects APIs and services by evaluating policies at runtime through decision APIs or sidecar/gateway integrations.                  |
 | Policy modeling and testing                                                                                                                                      | Tools to design, simulate, and debug authorization policies before and after deployment to reduce risk and misconfigurations.        |
+
+### Agent Authorize
+
+AI access control layer that uses agent and human context to provide fine-grained, runtime authorization for agent actions, allowing decisions to be logged, allowed, denied, or escalated to a human.
+
+It's licensed based on the number of human identities (customer, workforce, or partner) that your AI agents act on behalf of, rather than by agent or transaction volume.
+
+| Feature                           | Description                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| API Access Management             | Controls and secures API access, evaluating identity context before granting access to resources.                         |
+| Dynamic Authorization             | Provides runtime, fine-grained access decisions using contextual data.                                                    |
+| Application Permissions           | Centralizes and manages what actions agents and users can perform within applications.                                    |
+| MCP Access Management             | Evaluates authorization and auditing controls for Model Context Protocol (MCP) interactions and agent developer gateways. |
+| Authorize Agents (Fair Use Limit) | Governs the fair-use limit of AI agents allowed per licensed human identity.                                              |
 
 ### PingCentral
 

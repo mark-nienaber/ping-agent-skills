@@ -1,4 +1,7 @@
-# Documentation
+# Ping Government Identity Cloud
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
 
 ## Pgic
 
@@ -54,7 +57,7 @@
 - [Plugins](http://docs.pingidentity.com/pgic/service_requests/p14g_plugins_pa.md)
 - [Runtime properties](http://docs.pingidentity.com/pgic/service_requests/p14g_runtime_properties.md)
 - [Schema](http://docs.pingidentity.com/pgic/service_requests/p14g_schema.md)
-- [Secure containers](http://docs.pingidentity.com/pgic/secure-containers.md)
+- [Secure containers](http://docs.pingidentity.com/pgic/secure-containers.md): Describes Ping Identity secure container availability, compatibility, security, and distribution.
 - [Self-service tasks](http://docs.pingidentity.com/pgic/products_and_self-service_tasks/p14g_products_selfservice.md)
 - [Service requests](http://docs.pingidentity.com/pgic/service_requests/p14g_service_requests.md)
 - [SIEM integration](http://docs.pingidentity.com/pgic/service_requests/p14g_siem_integration.md)

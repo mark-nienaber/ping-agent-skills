@@ -6,7 +6,7 @@ page_id: pingone:use_cases:p1_microsoft_entra_hybrid_join_prerequisites
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_entra_hybrid_join_prerequisites.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 17, 2025
+revdate: 2026-10-27T15:52:01Z
 section_ids:
   p1-download-entra-connect-sync: Downloading Entra Connect Sync
   steps: Steps
@@ -32,7 +32,9 @@ You must have the following:
 
 * A PingOne organization. Learn more in [Starting a PingOne trial](../getting_started_with_pingone/p1_start_a_p1_trial.html).
 
-* A pre-production PingOne environment, such as development or test, with the PingOne SSO service added.
+* A PingOne for Workforce Plus or Premium license for device authentication using hybrid join
+
+* A pre-production PingOne environment, such as development or test, with the PingOne SSO service added
 
 * An AD domain with the following:
 
@@ -186,7 +188,7 @@ page_id: pingone:use_cases:p1_configure_ciba_flow
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_configure_ciba_flow.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 20, 2026
+revdate: 2026-04-20T00:00:00Z
 section_ids:
   example-use-case: Example use case
   how-it-works: How it works
@@ -583,7 +585,7 @@ page_id: pingone:use_cases:p1_oauth_2_token_exchange
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 25, 2026
+revdate: 2026-02-25T00:00:00Z
 section_ids:
   how-it-works: How it works
   what-youll-do: What you'll do
@@ -646,7 +648,7 @@ page_id: pingone:use_cases:p1_configure_p1_as_idp_in_zscaler
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_configure_p1_as_idp_in_zscaler.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 20, 2024
+revdate: 2024-12-20T00:00:00Z
 ---
 
 # Configuring PingOne as an external IdP in ZIdentity
@@ -671,7 +673,7 @@ page_id: pingone:use_cases:p1_microsoft_hybrid_join_tasks
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_hybrid_join_tasks.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2025
+revdate: 2026-10-22T18:34:36Z
 section_ids:
   p1-connect-users-microsoft365: User authentication
   p1-create-attribute: Creating an attribute in PingOne
@@ -746,7 +748,7 @@ Set up PingOne as the federated IdP for Entra ID so that your users can authenti
 
 ### Creating an attribute in PingOne
 
-By default, Entra Connect Sync uses the `userPrincipalName` attribute from AD as the source of the Entra ID username. In most deployments, the `userPrincipalName` attribute value looks like an email address and might match the value of the email address (`mail` attribute) in the PingOne user record. However, in some deployments, the attributes don't match.
+By default, Entra Connect Sync uses the `userPrincipalName` attribute from AD as the source of the Entra ID username. In most deployments, the `userPrincipalName` attribute value looks like an email address and might match the value of the email address (`mail` attribute) in the PingOne user record. However, in some deployments, the attributes don't match. By default, Entra Connect Sync uses the `userPrincipalName` attribute from AD as the source of the Entra ID username.
 
 If the values don't match, PingOne can't match a user record to the username token from Entra ID. To ensure PingOne can locate the user record, create a custom user attribute in PingOne to store the `userPrincipalName` attribute value instead of relying on the `mail` attribute as the username.
 
@@ -1152,10 +1154,6 @@ A user can now sign on to Microsoft 365:
 
 Set up PingOne as the federated IdP and Entra Connect Sync to process hybrid join requests using the Kerberos protocol to sync devices from AD to Entra ID.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Device authentication using hybrid join is available as a limited access release for customers with a PingOne for Workforce Plus or Premium license in the North America (US) geography only and isn't covered under standard Support service level agreements (SLAs). You can open support cases for feedback, bug reports, configuration questions, or other inquiries related, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so response times might exceed the usual SLAs for your Support package.Topics for this feature are draft documentation for limited access purposes only and aren't complete or final. |
-
 ### Before you begin
 
 Before you begin enabling hybrid join, you must complete the steps in [User authentication](#p1-connect-users-microsoft365) to set up PingOne as the federated IdP for Entra ID.
@@ -1441,7 +1439,7 @@ Enable users to register their own devices with Entra ID as Entra joined devices
 
 2. For **Users may join devices to Microsoft Entra**, select **All**.
 
-   ![A screenshot of the Users may join devices to Microsoft Entra setting set to All in the Entra admin center."](_images/p1-entra-hybrid-join-setting.png)
+   ![A screenshot of the Users may join devices to Microsoft Entra setting set to All in the Entra admin center.](_images/p1-entra-hybrid-join-setting.png)
 
 ### Configuring Entra Connect Sync and verifying the SCP
 
@@ -1686,6 +1684,8 @@ Refer to [Reference and troubleshooting for Microsoft Entra hybrid join](p1_micr
 
    3. Gradually increase the set of users to cover all applicable users and devices.
 
+3. (Optional) [Enable PingID Windows login passwordless for hybrid-joined devices](p1_microsoft_hybrid_join_pingid_windows_login_passwordless.html).
+
 ---
 
 ---
@@ -1696,7 +1696,7 @@ page_id: pingone:use_cases:p1_oauth_2_token_exchange_delegation
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange_delegation.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 25, 2026
+revdate: 2026-02-25T00:00:00Z
 section_ids:
   example-scenario: Example scenario
   what-youll-do: What you'll do
@@ -2169,6 +2169,163 @@ The following diagram shows a high-level overview of the example delegation flow
 ---
 
 ---
+title: Enabling PingID Windows login passwordless support for Entra hybrid-joined devices
+description: Integrate PingID with Windows login passwordless for Microsoft Entra ID hybrid-joined devices.
+component: pingone
+page_id: pingone:use_cases:p1_microsoft_hybrid_join_pingid_windows_login_passwordless
+canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_hybrid_join_pingid_windows_login_passwordless.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-27T16:15:05Z
+section_ids:
+  how-it-works: How it works
+  before-you-begin: Before you begin
+  verifying-the-custom-user-attribute-mapping: Verifying the custom user attribute mapping
+  steps: Steps
+  updating-the-microsoft-365-application: Updating the Microsoft 365 application
+  steps-2: Steps
+  validation: Validation
+  domain-username-and-password-sign-on: Domain username and password sign-on
+  passwordless-sign-on-and-unlock: Passwordless sign-on and unlock
+---
+
+# Enabling PingID Windows login passwordless support for Entra hybrid-joined devices
+
+After [setting up PingOne as the federated identity provider (IdP) for Microsoft Entra ID](p1_microsoft_hybrid_join_tasks.html), you can enable PingID Windows login passwordless support. This extension to the Entra ID hybrid join configuration allows users to sign on to or unlock hybrid-joined Windows devices with PingID without a password. Entra ID can then issue a primary refresh token (PRT) for the user. Learn more in [Integrating PingID with Windows login (passwordless)](https://docs.pingidentity.com/pingid/pingid_integrations/pid_integrating_with_windows_login_passwordless.html).
+
+To enable PingID Windows login passwordless for hybrid-joined devices, you'll configure the Microsoft 365 application in PingOne to accept X.509 client certificate tokens from PingID.
+
+## How it works
+
+1. A user signs on to or unlocks a hybrid-joined Windows device using PingID without a password.
+
+2. Windows sends a request security token (RST) with an X.509 client certificate token from PingID to PingOne.
+
+3. PingOne validates the issuance certificate, uses a mapped custom user attribute to identify the user, and sends an assertion to Windows.
+
+4. Windows sends a request to Entra ID with the assertion to obtain a PRT.
+
+5. Entra ID validates the assertion and returns a PRT to Windows.
+
+## Before you begin
+
+* Set up [PingOne as the federated IdP](p1_microsoft_hybrid_join_tasks.html) for a verified custom domain in Entra ID.
+
+* Verify that user authentication and hybrid join are configured and functional. Refer to [Validation](p1_microsoft_hybrid_join_tasks.html#p1-hybrid-join-validation) for guidance.
+
+* Configure [PingID with Windows login passwordless](https://docs.pingidentity.com/pingid/pingid_integrations/pid_integrating_with_windows_login_passwordless.html).
+
+  Make a note of the issuance certificate name, such as **PingID Passwordless**. You'll need it when updating the Microsoft 365 application in PingOne.
+
+* Verify that users can sign on to and unlock a Windows device using PingID without a password.
+
+## Verifying the custom user attribute mapping
+
+To identify the correct PingOne user from an X.509 client certificate token, PingOne uses a custom user attribute that stores the user's `userPrincipalName`. The LDAP gateway mapping populates this attribute from the Active Directory (AD) `userPrincipalName` value.
+
+### Steps
+
+1. Verify that you have a custom user attribute to store the `userPrincipalName` value from AD:
+
+   1. In the PingOne admin console, go to **Directory > User Attributes** and locate the custom user attribute, such as `ms-upn`.
+
+      If the attribute doesn't exist, complete the steps in [Creating an attribute in PingOne](p1_microsoft_hybrid_join_tasks.html#p1-create-attribute).
+
+   2. Make a note of the user attribute name. You'll select it when updating the Microsoft 365 application.
+
+2. Verify that your LDAP gateway configuration for cloud users includes the custom user attribute mapping:
+
+   1. In the PingOne admin console, go to **Integrations > Gateways** and click the LDAP gateway you created for Microsoft 365.
+
+   2. On the **Lookup** tab, verify that the user type for cloud users includes the following in the **Map Attributes** section:
+
+      * **PingOne User Profile Attribute**: The custom user attribute you created, such as `ms-upn`.
+
+      * **LDAP Attribute**: `userPrincipalName`
+
+        ![A screenshot of the LDAP gateway map attribute for ms-upn.](_images/p1-entra-hybrid-join-ldap-gateway-map-attributes.png)
+
+   3. If the mapping is missing, add it by following the steps in [Adding an LDAP gateway to connect PingOne with AD](p1_microsoft_hybrid_join_tasks.html#p1-add-ldap-gateway) (step 3c). Use the existing gateway and user type for cloud users.
+
+## Updating the Microsoft 365 application
+
+Update the Microsoft 365 application in PingOne to accept X.509 client certificate tokens issued by PingID.
+
+### Steps
+
+1. In the PingOne admin console, go to **Applications > Applications** and select the Microsoft 365 application.
+
+2. On the **Configuration** tab, click the **Pencil** icon ([icon: pencil, set=fa]).
+
+3. In the **STS Active Profile Settings** section, configure the following settings:
+
+   1. For **Valid Issuance Certificates for X.509 Client Certificate tokens**, select the issuance certificate from your PingID Windows login passwordless setup, such as **PingID Passwordless**.
+
+   2. For **Attribute to identify users from X.509 Client Certificate tokens**, select the custom user attribute you previously created, such as `ms-upn`.
+
+   ![A screenshot of the Microsoft 365 application configuration settings.](_images/p1-entra-hybrid-join-microsoft-app-pingid-client-certificate.png)
+
+4. Click **Save**.
+
+## Validation
+
+After completing the configuration steps, verify that users receive a PRT when they sign on to a hybrid-joined Windows device with a domain username and password and when they sign on with PingID without a password.
+
+### Domain username and password sign-on
+
+Verify that the existing username token flow still works:
+
+1. Restart a hybrid-joined Windows device.
+
+2. Sign on to the device using a domain username and password.
+
+3. Open Command Prompt and run `dsregcmd /status`.
+
+4. In the `SSO State` section, verify the output includes `AzureAdPrt : YES`.
+
+   ```text
+   ...
+   +----------------------------------------------------------------------+
+   | SSO State                                                            |
+   +----------------------------------------------------------------------+
+
+                   AzureAdPrt : YES
+   ...
+   ```
+
+   `AzureAdPrt : YES` means the device received a PRT from Entra ID for the signed-on user.
+
+### Passwordless sign-on and unlock
+
+Verify that the new X.509 client certificate token flow with PingID Windows login passwordless works:
+
+1. Restart the hybrid-joined Windows device.
+
+2. Sign on to the device using PingID without a password.
+
+3. Open Command Prompt and run `dsregcmd /status`.
+
+4. In the `SSO State` section, verify the output includes `AzureAdPrt : YES`, as shown in the preceding example.
+
+5. Lock the device and unlock it using PingID without a password.
+
+6. Repeat steps 3 and 4 to verify that `AzureAdPrt : YES` appears in the `SSO State` section after unlocking the device.
+
+   ```text
+   ...
+   +----------------------------------------------------------------------+
+   | SSO State                                                            |
+   +----------------------------------------------------------------------+
+
+                   AzureAdPrt : YES
+   ...
+   ```
+
+   `AzureAdPrt : YES` means the device received a PRT from Entra ID for the signed-on user.
+
+---
+
+---
 title: Impersonation
 description: The impersonation use case for token exchange allows an application in PingOne to act as a user.
 component: pingone
@@ -2176,7 +2333,7 @@ page_id: pingone:use_cases:p1_oauth_2_token_exchange_impersonation
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange_impersonation.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 25, 2026
+revdate: 2026-02-25T00:00:00Z
 section_ids:
   example-scenario: Example scenario
   what-youll-do: What you'll do
@@ -2549,7 +2706,7 @@ page_id: pingone:use_cases:p1_oauth_2_token_exchange_machine_to_machine
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange_machine_to_machine.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 25, 2026
+revdate: 2026-02-25T00:00:00Z
 section_ids:
   example-scenario: Example scenario
   what-youll-do: What you'll do
@@ -2949,7 +3106,7 @@ page_id: pingone:use_cases:p1_use_cases
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_use_cases.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 20, 2024
+revdate: 2024-12-20T00:00:00Z
 ---
 
 # PingOne Use Cases
@@ -2966,7 +3123,7 @@ page_id: pingone:use_cases:p1_microsoft_hybrid_join_troubleshooting
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_hybrid_join_troubleshooting.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2025
+revdate: 2026-10-22T18:34:36Z
 section_ids:
   entra_hybrid_join_reference: Reference
   federated-idp-settings: Federated IdP settings
@@ -3678,7 +3835,7 @@ page_id: pingone:use_cases:p1_use_case_amazon_verified_permissions
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_use_case_amazon_verified_permissions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 21, 2025
+revdate: 2025-02-21T00:00:00Z
 section_ids:
   goals: Goals
   what-youll-do: What you'll do
@@ -3853,7 +4010,7 @@ Create two example users and groups to use for testing the AVP policies. As conf
 
    2. Click **Save**.
 
-   3. On the **Groups** page, locate the **AVP\_Admin** group and click it to open the details panel.
+   3. On the **Groups** page, locate the **AVP_Admin** group and click it to open the details panel.
 
    4. On the **Users** tab, click **Add Individually**.
 
@@ -3865,7 +4022,7 @@ Create two example users and groups to use for testing the AVP policies. As conf
 
    2. Click **Save**.
 
-   3. On the **Groups** page, locate the **AVP\_User** group and click it to open the details panel.
+   3. On the **Groups** page, locate the **AVP_User** group and click it to open the details panel.
 
    4. On the **Users** tab, click **Add Individually**.
 
@@ -3961,7 +4118,7 @@ Next you'll create an AVP policy store and configure it to protect your API.
 
 17. In **Actions allowed**, clear the checkbox next to **post/pets** to give users in this group restricted permissions to the API.
 
-    ![A screen capture of the Assign actions to groups page completed with the AVP\_Admin and AVP\_User groups as described in the previous steps.](_images/p1-use-case-avp-assign-actions-to-groups.png)
+    ![A screen capture of the Assign actions to groups page completed with the AVP_Admin and AVP_User groups as described in the previous steps.](_images/p1-use-case-avp-assign-actions-to-groups.png)
 
 18. Click **Next**.
 
@@ -3985,7 +4142,7 @@ page_id: pingone:use_cases:p1_microsoft_entra_hybrid_join
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_microsoft_entra_hybrid_join.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2025
+revdate: 2026-10-27T15:52:01Z
 section_ids:
   goals: Goals
   p1-hybrid-join-what-to-do: What you'll do
@@ -4011,9 +4168,7 @@ As organizations expand their on-premise Active Directory (AD) infrastructure to
 
   * When you're ready to start the hybrid join process to join a device to Entra ID, PingOne as the federated IdP enables the process by authenticating the device using the Kerberos protocol.
 
-    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    |   | Device authentication using hybrid join is available as a limited access release for customers with a PingOne for Workforce Plus or Premium license in the North America (US) geography only and isn't covered under standard Support service level agreements (SLAs). You can open support cases for feedback, bug reports, configuration questions, or other inquiries related, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so response times might exceed the usual SLAs for your Support package.Topics for this feature are draft documentation for limited access purposes only and aren't complete or final. |
+  * Users can sign on to or unlock a hybrid-joined Windows device using either a domain username and password or PingID without a password. PingOne validates the authentication token and returns an assertion to Windows, which can then obtain a primary refresh token (PRT).
 
   > **Collapse: Hybrid join diagram**
   >
@@ -4085,6 +4240,8 @@ After completing this configuration, you'll know how to:
 
    8. [(Optional) Disable fallback sync in Windows](p1_microsoft_hybrid_join_tasks.html#p1-disable-fallback-sync).
 
+4. (Optional) [Enable PingID Windows login passwordless for hybrid-joined devices](p1_microsoft_hybrid_join_pingid_windows_login_passwordless.html).
+
 ---
 
 ---
@@ -4095,7 +4252,7 @@ page_id: pingone:use_cases:p1_set_up_external_mfa_provider_microsoft_entra_use_c
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_set_up_external_mfa_provider_microsoft_entra_use_case.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 25, 2025
+revdate: 2025-04-25T00:00:00Z
 page_aliases: ["strong_authentication_mfa:p1_set_up_external_mfa_provider_microsoft_entra_use_case.adoc"]
 section_ids:
   goals: Goals
@@ -4820,7 +4977,7 @@ You now have two authentication policies:
 
 * An authentication policy for OIDC authentication to allow users to sign on to other applications
 
-![A screen capture of the PingOne Authentication Policies list with two policies: Entra\_ID\_EAM\_Policy and Entra\_ID\_OIDC\_Auth\_Policy.](_images/p1_microsoft_eam_two_auth_policies.png)
+![A screen capture of the PingOne Authentication Policies list with two policies: Entra_ID_EAM_Policy and Entra_ID_OIDC_Auth_Policy.](_images/p1_microsoft_eam_two_auth_policies.png)
 
 ### Adding the callback URL to the Entra admin center
 
@@ -4872,13 +5029,13 @@ After you create an authentication policy for OIDC authentication and add the ca
 
 4. Click **Save**.
 
-![A screen capture of the PingOne Applications page with the PingOne Self-Service - MyAccount app selected and the Policies tab showing an added policy named Entra\_ID\_OIDC\_Auth\_Policy.](_images/p1_selfservice_app_microsoft_entra_auth_policy.png)
+![A screen capture of the PingOne Applications page with the PingOne Self-Service - MyAccount app selected and the Policies tab showing an added policy named Entra_ID_OIDC_Auth_Policy.](_images/p1_selfservice_app_microsoft_entra_auth_policy.png)
 
 #### Next steps
 
 Repeat these steps for any other applications to which you want users to be able to sign on, for example **Another App** in the following screenshot.
 
-![A screen capture of the PingOne Applications page with an example application called Another App selected and the Policies tab showing an added policy named Entra\_ID\_OIDC\_Auth\_Policy.](_images/p1_microsoft_entra_another_app_policy.png)
+![A screen capture of the PingOne Applications page with an example application called Another App selected and the Policies tab showing an added policy named Entra_ID_OIDC_Auth_Policy.](_images/p1_microsoft_entra_another_app_policy.png)
 
 ## Validation
 
@@ -4958,7 +5115,7 @@ page_id: pingone:use_cases:p1_set_up_external_mfa_provider_microsoft_entra_davin
 canonical_url: https://docs.pingidentity.com/pingone/use_cases/p1_set_up_external_mfa_provider_microsoft_entra_davinci.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2025-04-28T00:00:00Z
 section_ids:
   goals: Goals
   what-youll-do: What you'll do
@@ -5833,7 +5990,7 @@ After you create a DaVinci flow and flow policy for OIDC authentication and add 
 
 Repeat these steps for any other applications to which you want users to be able to sign on, for example **Another App** in the following screenshot.
 
-![A screen capture of the PingOne Applications page with an example application called Another App selected and the Policies tab showing an added policy named Entra\_ID\_OIDC\_Auth\_Policy.](_images/p1_microsoft_entra_another_app_policy.png)
+![A screen capture of the PingOne Applications page with an example application called Another App selected and the Policies tab showing an added policy named Entra_ID_OIDC_Auth_Policy.](_images/p1_microsoft_entra_another_app_policy.png)
 
 ## Validation
 

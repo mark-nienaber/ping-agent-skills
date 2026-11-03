@@ -2,45 +2,47 @@
 
 - Product: PingFederate
 - Version: 13.1
-- Sync date: 2026-07-10
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/pingfederate/llms.txt
 - Guides discovered: 12
-- Guides captured: 11
-- Guides fully captured: 1
-- Guides partially captured: 10
-- Guides without snapshots: 1
-- Total pages indexed: 1211
-- Total snapshot pages captured: 184
+- Guides captured: 12
+- Guides fully captured: 3
+- Guides partially captured: 9
+- Guides without snapshots: 0
+- Total pages indexed: 1222
+- Total snapshot pages captured: 205
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| administrators-reference-guide.md | assembled | <797 pages from administrators_reference_guide> | 797 | 20 | partial |
-| introduction-to-pingfederate.md | assembled | <105 pages from introduction_to_pingfederate> | 105 | 20 | partial |
-| release-notes.md | assembled | <99 pages from release_notes> | 99 | 20 | partial |
-| developers-reference-guide.md | assembled | <56 pages from developers_reference_guide> | 56 | 20 | partial |
-| server-clustering-guide.md | assembled | <34 pages from server_clustering_guide> | 34 | 14 | partial |
-| sdk-developers-guide.md | assembled | <27 pages from sdk_developers_guide> | 27 | 12 | partial |
-| upgrading-pingfederate.md | assembled | <25 pages from upgrading_pingfederate> | 25 | 20 | partial |
-| getting-started-with-pingfederate.md | assembled | <22 pages from getting_started_with_pingfederate> | 22 | 20 | partial |
-| performance-tuning-guide.md | assembled | <21 pages from performance_tuning_guide> | 21 | 20 | partial |
-| installing-and-uninstalling-pingfederate.md | assembled | <12 pages from installing_and_uninstalling_pingfederate> | 12 | 12 | full |
-| pingfederate-monitoring-guide.md | assembled | <12 pages from pingfederate_monitoring_guide> | 12 | 6 | partial |
+| administrators-reference-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 798 | 20 | partial |
+| release-notes.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 110 | 20 | partial |
+| introduction-to-pingfederate.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 105 | 20 | partial |
+| developers-reference-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 47 | 20 | partial |
+| server-clustering-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 36 | 20 | partial |
+| sdk-developers-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 33 | 20 | partial |
+| upgrading-pingfederate.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 25 | 20 | partial |
+| getting-started-with-pingfederate.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 22 | 20 | partial |
+| performance-tuning-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 21 | 20 | partial |
+| installing-and-uninstalling-pingfederate.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 12 | 12 | full |
+| pingfederate-monitoring-guide.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 12 | 12 | full |
+| root.md | assembled | https://docs.pingidentity.com/pingfederate/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 4c7ea4100a532e714a7e256f74d7e8a06a12c806ac9a107c1961286ec8796030 |
-| snapshots/administrators-reference-guide.md | aa128ecab6e002e18cbb47d7883ef163b770b09c4d8c3d5dbac4beb8549840c9 |
-| snapshots/introduction-to-pingfederate.md | f35aac1a29e2d47e729af8672332c793dfd2b72613e897f6338db713d080c9c5 |
-| snapshots/release-notes.md | 40d0a1a451ee6b32b2847bdfe69220de410c7a5b25aa2539badb2dc81904e9b3 |
-| snapshots/developers-reference-guide.md | 16ffd9121658a9562452e95b23abb2bdd699f2a9ee8f5f1b6ecfba3072df11ab |
-| snapshots/server-clustering-guide.md | fb3c287c2f4e7a212515299a5b4fbcd57b0e0d8ed9255610624c779d62339018 |
-| snapshots/sdk-developers-guide.md | 91cee75cd0814183224c8fb6718aa57a1aafc3d1503fc9f6952783f658837221 |
-| snapshots/upgrading-pingfederate.md | 834cf12f4a5867387470836ea7c0bc3bb5fa16fc393aa188fed541e68ee1496c |
-| snapshots/getting-started-with-pingfederate.md | 840cd2a0b6ba4d394ea0f5528e0e0953407e353ed944f36025736fceb90e4070 |
-| snapshots/performance-tuning-guide.md | cd6a64619324939c92f066ec03976cc4bc0ad0e37d701aa10ff7490e4916d048 |
-| snapshots/installing-and-uninstalling-pingfederate.md | dd62ee30116f447855441b22afbb9429dc1517d570aa024d60fa40806651132a |
-| snapshots/pingfederate-monitoring-guide.md | 5ed67f2fdd6244b61cba186893439c8cb039863468fb266cbabd360f45dbd964 |
+| llms.txt | 49510361c3a60960b4789599bfba0985adf5733bd05f2c8089014b7290016fd5 |
+| snapshots/administrators-reference-guide.md | 8aa79edafdf188df03ea435ce54f126da504f8f0ed6af7cd67f150b57d6fa9bc |
+| snapshots/release-notes.md | 39a598d31bf10454771d43622ecc58e231cec79552101b0cd4ca59fd12cc4ab9 |
+| snapshots/introduction-to-pingfederate.md | 805e8d73a5dadc79dad11d9de1258937b064b5492128f5704000b60280995f89 |
+| snapshots/developers-reference-guide.md | d4668a8d70cf92364f964e09a7046d4af612e2d024f75dcc649317291fc15c86 |
+| snapshots/server-clustering-guide.md | dd3a50f87cdf2423e5924c499ac801c0f655c4eb72cf0a97b7a1b3dd7470d2db |
+| snapshots/sdk-developers-guide.md | 504a82a4c056799ec0015211ee05d653e3224459939c51febbd0ce0841e5053e |
+| snapshots/upgrading-pingfederate.md | 1c530fd58571e594246ad76ddac72d4bae535e584126a4ba32d498fc9496ec67 |
+| snapshots/getting-started-with-pingfederate.md | 8e73f41ccbbfc20a4c2f872962015639af62a91a5e8f2f953ca0c5007fcff503 |
+| snapshots/performance-tuning-guide.md | 8b12e09a0ed80e5af6aaacb37e5a12312c80c9033e90e9b8010c9b310dc5623d |
+| snapshots/installing-and-uninstalling-pingfederate.md | fefa82a3292723085d91e53f7952a724120586b12dcba686bf0351a2f9228f0e |
+| snapshots/pingfederate-monitoring-guide.md | c2b956de97a91ec6e1ec71cb5464c41cd5b71f9d3be6c9b3d795cf9e6adc239b |
+| snapshots/root.md | c5748de7b7298d56f4b8b143ebe65e1b21791db1c466668cb2b167cce875174a |

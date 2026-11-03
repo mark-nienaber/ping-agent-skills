@@ -1,9 +1,11 @@
 ---
 title: PingID API Overview
-description: PingID is a cloud-based strong authentication solution that enables software applications to authenticate users according to multiple factors. This means that in addition to entering a user name and password, the user must perform another authentication step using a mobile device. This could be swiping a button on the device, or entering a one-time password that the PingID mobile app generates. Since in addition to supplying the (potentially hackable) user credentials, users must perform a physical action on their own mobile device, which is registered on the PingID platform, a much higher level of security is enforced than the user credentials alone can provide.
+description: Overview of the PingID API for developers
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiOverview
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiOverview.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   the-pingid-api: The PingID API
   pingid-functional-overview: PingID Functional Overview
@@ -94,11 +96,11 @@ Note that all the sample requests in the PingID API documentation use the subdom
 
 The PingID account administrator will need to download the account's properties file. This file contains several account-specific settings, including these values that you'll need to use when creating a PingID API request message:
 
-| Setting          | Description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
-| token            | A unique identifier of the PingID client.                           |
-| org\_alias       | The name of the PingID client organization.                         |
-| use\_base64\_key | A key that you'll use to create a signature value for each message. |
+| Setting        | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| token          | A unique identifier of the PingID client.                           |
+| org_alias      | The name of the PingID client organization.                         |
+| use_base64_key | A key that you'll use to create a signature value for each message. |
 
 For security purposes, all PingID requests are validated using the `token` and `use_base64_key` values, and rejected if these values are invalid.
 
@@ -148,11 +150,11 @@ These three components are base64url-encoded and concatenated, with a period ('.
 
 The header consists of three parameters in a JSON structure:
 
-| Parameter  | Description                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| alg        | The signing algorithm (must be "HS256")                                                                                         |
-| org\_alias | A unique identifier of the organization, found in the org\_alias value in the properties file                                   |
-| token      | A unique ID of the calling client (there can be several per organization), also found in the properties file as the token value |
+| Parameter | Description                                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| alg       | The signing algorithm (must be "HS256")                                                                                         |
+| org_alias | A unique identifier of the organization, found in the org_alias value in the properties file                                    |
+| token     | A unique ID of the calling client (there can be several per organization), also found in the properties file as the token value |
 
 An example of an API token header is below:
 
@@ -175,7 +177,7 @@ The request token payload is a JSON object containing two child objects: a reque
 | Parameter | Description                                                                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | locale    | A code indicating the caller's preferred language. Error and status messages are returned in this language.                                          |
-| orgAlias  | A unique identifier of the organization, found in the org\_alias value in the properties file.                                                       |
+| orgAlias  | A unique identifier of the organization, found in the org_alias value in the properties file.                                                        |
 | secretKey | A unique ID of the calling client (can be several per organization). Found in the token value in the properties file.                                |
 | timestamp | The date and time the request was sent. The datetime format is: "yyyy-MM-dd HH:mm:ss.SSS" (SSS = 3-digit millisecond value), using the UTC timezone. |
 | version   | The version of the PingID API package.                                                                                                               |
@@ -212,7 +214,7 @@ The example below describes a request token payload that is used to add the new 
 
 #### Request Token Signature
 
-Before sending the request token to the API endpoint, the contents must be signed using the use\_base64\_key retrieved from the PingID account properties file.
+Before sending the request token to the API endpoint, the contents must be signed using the use_base64_key retrieved from the PingID account properties file.
 
 To create the signed token:
 
@@ -222,9 +224,9 @@ Create the signed data by concatenating the base64-encoded header and payload.
 <signed data> = base64UrlEncode(<header>) + "." + base64UrlEncode(<payload>)
 ```
 
-Generate a HMAC with SHA-256 hash of the `<signed data>` using the use\_base64\_key.
+Generate a HMAC with SHA-256 hash of the `<signed data>` using the use_base64_key.
 
-The use\_base64\_key needs to be decoded first, otherwise signature validation will fail.
+The use_base64_key needs to be decoded first, otherwise signature validation will fail.
 
 ```
 <signature> = base64UrlEncode( HMACSHA256( <signed data> ,<use_base64_key> ) )
@@ -255,7 +257,7 @@ eyJhbGciOiJIUzI1NiIsIm9yZ19hbGlhcyI6ImFhYWFhYWFhLWExYjItMTIzYS1iNDU2LTEyMzRhYmNk
 
 The response from the API request is a similarly signed JWT as the API request token. The response token contains a header, a payload (consisting of a responseBody object) and the digital signature.
 
-The API request and response are sent over a secure HTTPS channel, therefore validation of the digital signature in the response token is not mandatory. However the token may be validated by checking the digital signature using the use\_base64\_key value found in the PingID account properties file.
+The API request and response are sent over a secure HTTPS channel, therefore validation of the digital signature in the response token is not mandatory. However the token may be validated by checking the digital signature using the use_base64_key value found in the PingID account properties file.
 
 |   |                                                                                                                                                                           |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -263,7 +265,7 @@ The API request and response are sent over a secure HTTPS channel, therefore val
 
 #### Response Token Header
 
-The response token header has the same format as the request token header. The token value and the org\_alias value will match the values from your PingID account properties file.
+The response token header has the same format as the request token header. The token value and the org_alias value will match the values from your PingID account properties file.
 
 The header also includes the algorithm used to sign the token, which is HS256.
 

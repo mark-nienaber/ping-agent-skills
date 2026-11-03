@@ -6,7 +6,7 @@ license: MIT
 
 # PingAuthorize (Developer)
 
-PingAuthorize (Developer) documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Add an approval to a PingAuthorize snapshot by ID.
 
 ## Live source of truth
 
@@ -27,7 +27,7 @@ PingAuthorize (Developer) documentation is indexed in the bundled llms.txt and l
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Pingauthorize: create, authorize, client | pingauthorize | https://developer.pingidentity.com/pingauthorize/pingauthorize/*.md | references/snapshots/pingauthorize.md |
+| Pingauthorize: create, pingauthorize, decision | pingauthorize | https://developer.pingidentity.com/pingauthorize/pingauthorize/*.md | references/snapshots/pingauthorize.md |
 
 ## Composition
 

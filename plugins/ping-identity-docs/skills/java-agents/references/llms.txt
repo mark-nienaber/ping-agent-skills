@@ -1,5 +1,8 @@
 # Java Agents
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Java Agents 2026
 
 - [About Java Agent](https://docs.pingidentity.com/java-agents/2026/user-guide/about.md): Overview of PingAM Java Agent architecture: agent components, configuration modes, session handling, and the request processing flow.

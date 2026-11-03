@@ -142,7 +142,7 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 24
 
   Severity: WARNING\
-  Message: The provided Access Control Instruction (ACI) bind rule userattr expression inheritance pattern value "%s" is invalid. A valid inheritance pattern value must have the following format: parent\[inheritance\_level].attribute#bindType.
+  Message: The provided Access Control Instruction (ACI) bind rule userattr expression inheritance pattern value "%s" is invalid. A valid inheritance pattern value must have the following format: parent\[inheritance_level].attribute#bindType.
 
 * []()ID: 25
 
@@ -187,7 +187,7 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 33
 
   Severity: WARNING\
-  Message: The provided Access Control Instruction (ACI) target expression value "%s" is invalid. A valid target keyword expression value requires a LDAP URL in the following format: ldap\:///distinguished\_name\_pattern.
+  Message: The provided Access Control Instruction (ACI) target expression value "%s" is invalid. A valid target keyword expression value requires a LDAP URL in the following format: ldap\:///distinguished_name_pattern.
 
 * []()ID: 34
 
@@ -4753,21 +4753,6 @@ This document covers server messages, such as those in logs/errors.
 
 ## IDs: 1001-1500
 
-* []()ID: 1003
-
-  Severity: ERROR\
-  Message: The OAuth2 authorization mechanism defined in %s contains an invalid JSON Pointer %s: %s.
-
-* []()ID: 1004
-
-  Severity: ERROR\
-  Message: The authorization mechanism defined in %s is referencing a non-existing or non-readable directory: %s.
-
-* []()ID: 1005
-
-  Severity: ERROR\
-  Message: The authorization mechanism defined in %s is referencing a non existing DN: %s.
-
 * []()ID: 1006
 
   Severity: ERROR\
@@ -6376,7 +6361,7 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 1362
 
   Severity: ERROR\
-  Message: The free space (%s) on the disk containing directory "%s" is between low and full threshold for the following subsystems: %s. Write operations are only permitted by a user with the BYPASS\_LOCKDOWN privilege until the free space rises above the threshold. Replication updates are still allowed.
+  Message: The free space (%s) on the disk containing directory "%s" is between low and full threshold for the following subsystems: %s. Write operations are only permitted by a user with the BYPASS_LOCKDOWN privilege until the free space rises above the threshold. Replication updates are still allowed.
 
 * []()ID: 1363
 
@@ -10230,12 +10215,12 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 2213
 
   Severity: WARNING\
-  Message: Replication server RS(%s) ignoring update %s for domain "%s" from directory server DS(%s) at %s because the peer DS reported to be in BAD\_DATA status. The generation ID matches, (DS is %s, RS is %s), there may be a problem with fractional replication configuration. Check the DS error logs for more details.
+  Message: Replication server RS(%s) ignoring update %s for domain "%s" from directory server DS(%s) at %s because the peer DS reported to be in BAD_DATA status. The generation ID matches, (DS is %s, RS is %s), there may be a problem with fractional replication configuration. Check the DS error logs for more details.
 
 * []()ID: 2214
 
   Severity: WARNING\
-  Message: Replication server RS(%s) not sending update %s for domain "%s" to directory server DS(%s) at %s because the peer DS reported to be in BAD\_DATA status. The generation ID matches, (DS is %s, RS is %s), there may be a problem with fractional replication configuration. Check the DS error logs for more details.
+  Message: Replication server RS(%s) not sending update %s for domain "%s" to directory server DS(%s) at %s because the peer DS reported to be in BAD_DATA status. The generation ID matches, (DS is %s, RS is %s), there may be a problem with fractional replication configuration. Check the DS error logs for more details.
 
 * []()ID: 2215
 
@@ -12257,22 +12242,22 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 2652
 
   Severity: ERROR\
-  Message: Only users with the SERVER\_LOCKDOWN privilege may place the server in lockdown mode.
+  Message: Only users with the SERVER_LOCKDOWN privilege may place the server in lockdown mode.
 
 * []()ID: 2653
 
   Severity: ERROR\
-  Message: Only users with the SERVER\_LOCKDOWN privilege connected from a loopback address may place the server in lockdown mode.
+  Message: Only users with the SERVER_LOCKDOWN privilege connected from a loopback address may place the server in lockdown mode.
 
 * []()ID: 2654
 
   Severity: ERROR\
-  Message: Only users with the SERVER\_LOCKDOWN privilege may cause the server to leave lockdown mode.
+  Message: Only users with the SERVER_LOCKDOWN privilege may cause the server to leave lockdown mode.
 
 * []()ID: 2655
 
   Severity: ERROR\
-  Message: Only users with the SERVER\_LOCKDOWN privilege connected from a loopback address may cause the server to leave lockdown mode.
+  Message: Only users with the SERVER_LOCKDOWN privilege connected from a loopback address may cause the server to leave lockdown mode.
 
 * []()ID: 2656
 
@@ -13642,7 +13627,7 @@ This document covers server messages, such as those in logs/errors.
 * []()ID: 2938
 
   Severity: ERROR\
-  Message: The directory %s specified as the DS\_JAVA\_HOME path does not exist or is not a directory.
+  Message: The directory %s specified as the DS_JAVA_HOME path does not exist or is not a directory.
 
 * []()ID: 2939
 
@@ -16055,7 +16040,7 @@ The first form verifies each replica has the same data after recovery: on a repl
 
 The command prints the identifier to use on all other servers with the --generated-id option: dsrepl disaster-recovery --baseDn dc=example,dc=com --generated-id {identifier}
 
-The second form uses an identifier you provide. It lets you automate the recovery process when you cannot use the first form. Do not use this form if the topology has standalone replication servers. With this form of the subcommand, you must ensure you recover each replica with the same data. Run the same subcommand on all servers. Example: dsrepl disaster-recovery --baseDn dc=example,dc=com --user-generated-id Recovery\_Date\_20240101
+The second form uses an identifier you provide. It lets you automate the recovery process when you cannot use the first form. Do not use this form if the topology has standalone replication servers. With this form of the subcommand, you must ensure you recover each replica with the same data. Run the same subcommand on all servers. Example: dsrepl disaster-recovery --baseDn dc=example,dc=com --user-generated-id Recovery_Date_20240101
 
 Read the documentation on disaster recovery carefully before using this command. []()ID: 3433:: Severity: INFO\
 Message: Generate a disaster recovery identifier during recovery. Use this for the first directory server in a replication topology with standalone RS servers. For all subsequent servers to recover, omit this option and use --generated-id {generatedRecoveryId} with the generated identifier. []()ID: 3434:: Severity: INFO\
@@ -16330,7 +16315,7 @@ Message: %s.
 * []()ID: 3544
 
   Severity: ERROR\
-  Message: Replica '%s' is TOO\_OLD for domain %s: the local changelog or the topology combined changelog does not contain changes which are required by the replica. The replica must be re-initialized.
+  Message: Replica '%s' is TOO_OLD for domain %s: the local changelog or the topology combined changelog does not contain changes which are required by the replica. The replica must be re-initialized.
 
 * []()ID: 3545
 
@@ -16370,7 +16355,7 @@ Message: %s.
 * []()ID: 3552
 
   Severity: INFO\
-  Message: {jfr\_directory}.
+  Message: {jfr_directory}.
 
 * []()ID: 3553
 
@@ -16680,7 +16665,7 @@ Message: %s.
 * []()ID: 3617
 
   Severity: INFO\
-  Message: Truststore type (one of JVM, PKCS11, PKCS12, JCEKS, JKS, BLIND\_TRUST (evaluation only), or freeform for custom truststores like BCFKS, BKS, …​):.
+  Message: Truststore type (one of JVM, PKCS11, PKCS12, JCEKS, JKS, BLIND_TRUST (evaluation only), or freeform for custom truststores like BCFKS, BKS, …​):.
 
 * []()ID: 3618
 
@@ -16731,3 +16716,8 @@ Message: %s.
 
   Severity: INFO\
   Message: Warning: the use of a PKCS11 keystore is incompatible with the use of a deployment ID. If you confirm the use of a PKCS11 keystore, the deployment ID will be ignored and you must ensure the PKCS11 keystore holds a master-key. For further information, refer to the documentation. Do you want to continue using a PKCS11 keystore?.
+
+* []()ID: 3644
+
+  Severity: ERROR\
+  Message: An identity mapper is required when authzid-template starts with u:.

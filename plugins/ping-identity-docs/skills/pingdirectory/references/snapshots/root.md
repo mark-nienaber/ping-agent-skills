@@ -1,252 +1,4 @@
 ---
-description: PingAccess
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory::common_product_keydefs
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/common_product_keydefs.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
----
-
-PingAccess
-
-PingAuthorize
-
-Policy Editor
-
-PingCentral
-
-PingCloud
-
-PingDataGovernance
-
-PingDataMetrics
-
-PingDataSync
-
-PingDirectory
-
-PingDirectory Consent API
-
-PingDirectoryProxy
-
-Delegated Admin
-
-PingFederate
-
-PingFederate Bridge
-
-PingID
-
-PingID SDK
-
-PingID desktop app
-
-PingID mobile app
-
-PingIntelligence
-
-PingIntelligence for APIs
-
-PingOne
-
-PingOne Authorize
-
-PingOne SSO for SaaS Apps
-
-PingOne
-
-PingOne MFA
-
-PingID
-
-PingOne Protect
-
-PingOne Verify
-
-PingOne for Enterprise
-
-the PingOne administration console
-
-Customer360
-
-Workforce360
-
-DaVinci
-
-PingOne Advanced Identity Cloud
-
-Advanced Identity Cloud
-
-PingOne
-
-PingOne Neo
-
-PingOne Solutions
-
-PingOne for Customers
-
-PingOne for Workforce
-
-PingOne for Individuals
-
-PingOne for Government
-
-PingOne Services
-
-PingOne SSO
-
-PingOne Credentials
-
-PingOne Advanced Services
-
-PingOne Advanced Services Single Sign-on
-
-PingOne Advanced Services Security
-
-PingOne Advanced Services Directory
-
-PingOne Dynamic Authorization
-
-PingOne Advanced API Security
-
-PingOne Advanced Central Administration
-
-PingOne Fraud
-
-PingOne API Intelligence
-
-PingOne API Access Management
-
-ShoCard
-
-PingOne for Individuals SDK
-
-PingOne for Customers Passwordless
-
-PingOne for Customers Plus
-
-NET
-
-AD Connect
-
-AirWatch
-
-Akana
-
-Amazon Web Services
-
-AWS
-
-Apache
-
-Apigee
-
-Atlassian
-
-Axway
-
-Azure AD
-
-Box
-
-Citrix
-
-Cloud Identity
-
-Concur
-
-CoreBlox
-
-Coupa
-
-Dropbox
-
-Duo Security
-
-Egnyte
-
-Evernote
-
-Facebook
-
-G Suite
-
-Google
-
-Google Apps
-
-Heroku
-
-IIS
-
-Intune
-
-Java
-
-LinkedIn
-
-Linux
-
-Microsoft
-
-MobileIron
-
-Mulesoft
-
-NGINX
-
-Office 365
-
-Oracle Access Manager
-
-Oracle Directory Server Enterprise Edition
-
-PHP
-
-Palo Alto Networks
-
-RSA SecurID
-
-SAP NetWeaver
-
-Salesforce
-
-ServiceNow
-
-SharePoint
-
-Slack
-
-Splunk
-
-Symantec VIP
-
-Twitter
-
-VMware
-
-WebEx
-
-WebLogic
-
-WebSphere
-
-Windows Live
-
-Workday
-
-Workplace by Facebook
-
-YubiCloud
-
-YubiKey
-
-Zendesk
-
----
-
----
 title: Feature statuses
 description: Learn about testing and using new server features that are still in development.
 component: pingdirectory
@@ -255,6 +7,7 @@ page_id: pingdirectory::feature_status
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/feature_status.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 3, 2026
 section_ids:
   preview: Preview
   evolving: Evolving
@@ -282,7 +35,7 @@ You can use preview features to test new technology in non-production environmen
 
 ## Evolving
 
-You can use evolving features in both pre-production and production environments, however, the development team could make significant changes. These changes can occur in backwards-incompatible ways and might be delivered in a minor release. Any changes are documented at the time of release.
+You can use evolving features in both pre-production and production environments. However, the development team could make significant changes. These changes can occur in backwards-incompatible ways and might be delivered in a minor release. Any changes are documented at the time of release.
 
 |   |                                                                                                                                                                                                                                                                           |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -292,13 +45,14 @@ You can use evolving features in both pre-production and production environments
 
 ---
 title: Introduction to the PingDataSync server
-description: The PingDataSync server uses a dataless approach that synchronizes changes directly from the data sources in the background so that applications can continue to update their data sources directly. PingDataSync doesn't store any data from the endpoints themselves, which reduces hardware and administration costs. The server's high-availability mechanisms allow for easy failover from the main PingDataSync server to redundant instances.
+description: Overview of PingDataSync server features, including dataless synchronization, attribute mapping, and multi-vendor directory support.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory::pd_sync_main_intro
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pd_sync_main_intro.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: December 19, 2024
 section_ids:
   pingdatasync-server-features: PingDataSync server features
 ---
@@ -345,13 +99,14 @@ PingDataSync is designed to run with little administrative maintenance and inclu
 
 ---
 title: Introduction to the PingDirectory server
-description: The PingDirectory server is a high-performance, extensible Lightweight Directory Access Protocol (LDAP) directory that provides seamless data management over a distributed system while meeting the constant performance demands for today's markets.
+description: Overview of PingDirectory server features, including LDAP support, replication, security, administration tools, and APIs.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory::pd_ds_intro_pindirectory_server
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pd_ds_intro_pindirectory_server.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pingdirectory_server_administration_guide:pd_ds_intro_pindirectory_server.adoc"]
 section_ids:
   server-features: Server features
@@ -445,7 +200,7 @@ The PingDirectory server provides the following features and tools.
 
     * CRAM-MD5
 
-    * Digest-MD
+    * Digest-MD5
 
     * GSSAPI
 
@@ -475,7 +230,7 @@ The PingDirectory server provides the following features and tools.
 
   The PingDirectory server provides a SCIM servlet extension to facilitate moving users to, from, and between cloud-based software as a service (SaaS) applications in a secure and fast manner.
 
-  Learn more in [Managing the SCIM 2.0 servlet extension](managing_scim_11_and_20_servlet_extensions/pd_ds_scim_servlet_ext_mgmt.html).
+  Learn more in [Managing the SCIM 2.0 servlet extension](managing_scim/pd_ds_scim_servlet_ext_mgmt.html).
 
 * Directory REST API
 
@@ -517,14 +272,14 @@ Before installing the PingDirectory server, refer to [Preparing the operating sy
 
 ---
 title: Introduction to the PingDirectoryProxy server
-description: The following overview describes the PingDirectoryProxy server's features and capabilities.
+description: Overview of PingDirectoryProxy server features, including high availability, load balancing, data mapping, and monitoring.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory::pd_proxy_overview_pdproxy_features
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pd_proxy_overview_pdproxy_features.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pingdirectoryproxy_server_administration_guide:pd_proxy_overview_pdproxy_features.adoc"]
 ---
 
@@ -554,7 +309,7 @@ The PingDirectoryProxy server provides the following features:
 
 * Load balancing and failover
 
-  You can spread the workload across multiple directory servers in a large data center using load-balancing algorithms. Load balancing is also useful when a server becomes degraded or non-responsive because client process requesting directs to a different server.
+  You can spread the workload across multiple directory servers in a large data center using load-balancing algorithms. Load balancing is also useful when a server becomes degraded or non-responsive because the client's request is directed to a different server.
 
   Learn more in [Configuring load balancing](pingdirectoryproxy_server_administration_guide/pd_proxy_config_load_balancing.html).
 
@@ -580,14 +335,14 @@ The PingDirectoryProxy server provides the following features:
 
 ---
 title: PingDirectory
-description: The PingDirectory suite of products includes the PingDirectory server, the PingDirectoryProxy server, the PingDataSync server, and the Delegated Admin application.
+description: Landing page for the PingDirectory suite (PingDirectory, PingDirectoryProxy, PingDataSync, Delegated Admin) with links to release notes, get-started, admin, troubleshooting, and support resources.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory::pd_ds_landing_page
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pd_ds_landing_page.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 15, 2023
+revdate: 2026-10-06T00:00:00Z
 page_aliases: ["_@pingdirectory::index.adoc"]
 section_ids:
   release-notes: Release Notes
@@ -657,9 +412,7 @@ The PingDirectory suite of products includes the PingDirectory server, the PingD
 
 ## Use PingDirectory
 
-* [Best practices for PingDirectory application integration](https://docs.pingidentity.com/solution-guides/best_practice_guides/bp_pd_operational_support.html)
-
-* [PingDirectory admin guide](pingdirectory_server_administration_guide/pd_ds_amin_guide.html)
+* [PingDirectory admin guide](pingdirectory_server_administration_guide/pd_ds_admin_guide.html)
 
 * [PingDirectoryProxy admin guide](pingdirectoryproxy_server_administration_guide/pd_proxy_admin_guide.html)
 
@@ -679,8 +432,6 @@ The PingDirectory suite of products includes the PingDirectory server, the PingD
 
 * [PingDirectory community page](https://support.pingidentity.com/s/question/0D51W00007KMHjqSAH/welcome-to-the-pingdirectory-community-page)
 
-* [PingDirectory customer training (existing customers only)](https://www.pingidentity.com/en/support/training/course-details/389.html)
-
 * [Partner portal (partners)](https://support.pingidentity.com/s/not-an-authorized-partner)
 
 ---
@@ -694,6 +445,7 @@ page_id: pingdirectory::release_status
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/release_status.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: April 3, 2026
 section_ids:
   versioning: Versioning
   status-types: Status types

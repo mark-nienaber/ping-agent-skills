@@ -10,15 +10,18 @@ section_ids:
   identity-based-licensing: Identity-based licensing
   packaging: Packaging
   pingone-authorize: PingOne Authorize
+  agent-authorize: Agent Authorize
   pingone-credentials: PingOne Credentials
   pingone-davinci: PingOne DaVinci
   pingone-directory: PingOne Directory
   pingone-mfa-pingid: PingOne MFA and PingID
   pingone-privilege: PingOne Privilege
+  enterprise-personal-agent-access: Enterprise Personal Agent Access
   pingone-protect: PingOne Protect
   pingone-recognize: PingOne Recognize
   pingone-sso: PingOne SSO
   pingone-verify: PingOne Verify
+  identity-proofing-biometric-reverification: Identity Proofing with Biometric Reverification
   pingone-platform-agent-iam-core: PingOne Platform Agent IAM Core
   solutions-bundles: Solutions bundles
 ---
@@ -106,6 +109,20 @@ Central decision service for fine-grained, contextual authorization decisions on
 | [Decision APIs](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_decision_endpoints.html)            | REST-based decision endpoints that applications and gateways can call at runtime for authorization decisions.                              |
 | [Policy modeling and testing](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_policy_testing.html) | Tools to model, test, and troubleshoot authorization policies before rolling them into production.                                         |
 
+### Agent Authorize
+
+AI access control layer that uses agent and human context to provide fine-grained, runtime authorization for agent actions, allowing decisions to be logged, allowed, denied, or escalated to a human.
+
+It's licensed based on the number of human identities (customer, workforce, or partner) that your AI agents act on behalf of, rather than by agent or transaction volume.
+
+| Feature                           | Description                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| API Access Management             | Controls and secures API access, evaluating identity context before granting access to resources.                         |
+| Dynamic Authorization             | Provides runtime, fine-grained access decisions using contextual data.                                                    |
+| Application Permissions           | Centralizes and manages what actions agents and users can perform within applications.                                    |
+| MCP Access Management             | Evaluates authorization and auditing controls for Model Context Protocol (MCP) interactions and agent developer gateways. |
+| Authorize Agents (Fair Use Limit) | Governs the fair-use limit of AI agents allowed per licensed human identity.                                              |
+
 ### PingOne Credentials
 
 Verifiable credentials platform to issue, manage, and verify digital identity credentials for users.
@@ -179,26 +196,32 @@ Strong, adaptive MFA and passwordless experiences across web and mobile, using m
 
 Just-in-time privileged access management for cloud resources (servers, databases, VMs, Kubernetes), with real-time monitoring and control.
 
-PingOne Privilege uses **resources** as its unit of measure.
+| Feature                                                                                                                                       | Description                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [Just-in-time privileged access](https://docs.pingidentity.com/privilege/getting-started/key-concepts.html)                                   | Grant time-bound elevated access to servers, databases, VMs, and Kubernetes clusters based on policy and approvals. |
+| [Cloud Infrastructure Onboarding](https://docs.pingidentity.com/privilege/configuration/cloud-accounts.html)                                  | Onboard cloud infrastructure to enable privileged access management for resources.                                  |
+| [Policy-based access control](https://docs.pingidentity.com/privilege/privileged-access-management/what-is-privileged-access-management.html) | Define who can access which resources, with what roles, and under what conditions, using centralized policies.      |
+| [Session visibility](https://docs.pingidentity.com/privilege/getting-started/introduction.html)                                               | Monitor and audit privileged sessions to understand who accessed what and when.                                     |
 
-A **resource** is a **managed infrastructure target** such as:
+|   |                                                                                             |
+| - | ------------------------------------------------------------------------------------------- |
+|   | Monthly Active User (MAU) identity-based licensing is not applicable for PingOne Privilege. |
 
-* **Server**
+### Enterprise Personal Agent Access
 
-* **Database**
+Governed access management for enterprise personal AI agents, coding assistants, LLMs, and MCP-connected tools, with real-time monitoring, attribution, and control.
 
-* **Virtual machine (VM)**
+| Feature                    | Description                                                                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Continuous agent discovery | Identify agent-access paths and discover unmanaged personal agents, LLMs, and MCP servers running on user devices.                                                 |
+| Just-in-time agent access  | Grant time-bound, least-privilege access for personal agents to reach MCP tools, Git operations, and backend services based on centralized policies and approvals. |
+| Credential protection      | Inject ephemeral credentials at the gateway and inspect requests to keep secrets away from agents and block AI-specific threats.                                   |
+| Human-to-agent attribution | Tie every agent action securely back to the owning human user, device, session, and approved business purpose.                                                     |
+| Session auditing           | Capture detailed session and activity logs so security and compliance teams can monitor what an agent accessed and why.                                            |
 
-* **Kubernetes cluster**
-
-To count as a resource for licensing purposes, the component must be **registered** with the product and be assigned a **unique identifier** in the product.
-
-| Feature                                                                                                                                            | Description                                                                                                         |
-| -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| [Just-in-time privileged access](https://docs.pingidentity.com/privilege/getting-started/key-concepts.html)                                        | Grant time-bound elevated access to servers, databases, VMs, and Kubernetes clusters based on policy and approvals. |
-| [Cloud infrastructure onboarding](https://docs.pingidentity.com/privilege/configuration/cloud-accounts.html)                                       | Onboard cloud infrastructure to enable privileged access management for resources.                                  |
-| [Policy-based access management](https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/access-management/policies.html) | Define who can access which resources, with what roles, and under what conditions, using centralized policies.      |
-| [Session visibility](https://docs.pingidentity.com/privilege/privileged-access-management/admin-tasks/activity/activity-logs.html)                 | Monitor and audit privileged sessions to understand who accessed what and when.                                     |
+|   |                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------- |
+|   | Monthly Active User (MAU) identity-based licensing is not applicable for Enterprise Personal Agent Access. |
 
 ### PingOne Protect
 
@@ -277,6 +300,18 @@ Each verification transaction (or bundled verification process, depending on con
 | [Manual ID Inspection Step Up](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_documentation_authentication.html)              | Manual inspection of one sample image file set (image signal) captured from a supported government-issued ID after Automated ID Inspection if required. Service requires purchase of Automated Document Inspection.                                                                                   |
 | [Government ID System of Record Check](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_aamva_dldv.html)                        | Compare data extracted from one supported government ID against the issuer's, or an authoritative commercial, system of record upon completion of an automated document inspection. Service requires purchase of Automated Document Inspection. Not eligible for any uptime availability commitment.  |
 | [Data-Based Identity Verification (Group I - V)](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_data_based_verification.html) | Connects to over 300 government, credit, consumer, and utility data sources worldwide to verify identity attributes.                                                                                                                                                                                  |
+
+### Identity Proofing with Biometric Reverification
+
+Securely establishes a user's identity during onboarding and uses zero-knowledge biometrics to ensure the exact same person is present during future sign-ons or high-risk events. For corporate workforce, frontline workers, and partners only (not available for consumer or citizen use cases).
+
+| Feature                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Universal Capture](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_types_of_verification.html)                                                                                                                                                                              | Includes phone and email verification, as well as physical document capture.                                                                                                                           |
+| [Automated ID Inspection](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_documentation_authentication.html) and [Digital Credential Verifications](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_data_based_verification.html) | Provides automated physical document validation, near-field communication (NFC) verification, mobile driver's license (mDL) and electronic ID (eID) verification, and Aadhaar DigiLocker Verification. |
+| [Face Verification](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_face_verification.html)                                                                                                                                                                                  | Matches the user's selfie to their ID, incorporating liveness and injection detection.                                                                                                                 |
+| [Recognize Biometric Authentication](https://docs.pingidentity.com/recognize/pingone-recognize.html)                                                                                                                                                                                                                    | Proves the same verified user is present at sign-on or during high-risk reverification events without storing biometric data.                                                                          |
+| [PingID Verification](https://docs.pingidentity.com/pingid/pid_landing_page.html)                                                                                                                                                                                                                                       | Includes standard verification capabilities through PingID.                                                                                                                                            |
 
 ### PingOne Platform Agent IAM Core
 

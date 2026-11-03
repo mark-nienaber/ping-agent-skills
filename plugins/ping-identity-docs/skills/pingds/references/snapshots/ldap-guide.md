@@ -7,7 +7,7 @@ page_id: pingds:ldap-guide:about-tools
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/about-tools.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP"]
 section_ids:
   cli-tools: Client tools
@@ -98,7 +98,7 @@ page_id: pingds:ldap-guide:client-auth
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/client-auth.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authentication", "LDAP"]
 section_ids:
   client-auth-identity-mappers: Identity mappers
@@ -262,7 +262,7 @@ page_id: pingds:ldap-guide:compare-ldap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/compare-ldap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP"]
 ---
 
@@ -304,7 +304,7 @@ page_id: pingds:ldap-guide:schema
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/schema.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Integration", "LDAP", "Standards"]
 section_ids:
   getting-schema-information: Read schema
@@ -747,7 +747,7 @@ page_id: pingds:ldap-guide:search-ldap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/search-ldap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP"]
 section_ids:
   simple-filter-search: Simple LDAP filter
@@ -1790,7 +1790,7 @@ page_id: pingds:ldap-guide:write-ldap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/write-ldap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP"]
 section_ids:
   add-ldap: Add entries
@@ -2532,7 +2532,7 @@ page_id: pingds:ldap-guide:ldif-tools
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/ldif-tools.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Integration", "LDAP", "Storage"]
 section_ids:
   generating-ldif: Generate test data
@@ -2713,7 +2713,7 @@ page_id: pingds:ldap-guide:change-notification
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/change-notification.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Change Notification", "LDAP"]
 section_ids:
   persistent-search: Use persistent search
@@ -3025,7 +3025,7 @@ page_id: pingds:ldap-guide:passwords-and-accounts
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/passwords-and-accounts.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authentication", "LDAP"]
 page_aliases: ["change-password.adoc"]
 section_ids:
@@ -3524,7 +3524,7 @@ page_id: pingds:ldap-guide:proxied-authz
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/proxied-authz.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authorization", "LDAP"]
 ---
 
@@ -3649,7 +3649,7 @@ page_id: pingds:ldap-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/ldap-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP"]
 page_aliases: ["index.adoc"]
 ---

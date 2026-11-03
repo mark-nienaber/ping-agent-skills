@@ -1,6 +1,6 @@
 ---
 title: Adjusting system memory allocation
-description: You can adjust system memory allocation to improve overall performance by setting the /proc/sys/vm/max_map_count kernel tuning parameter. Doing this can prevent problems such as the slowing down of batch execution and a continuous increase of memory used by the JVM.
+description: Set the vm.max_map_count kernel parameter to improve PingDirectory memory allocation and performance.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_adjust_system_memory_alloc
@@ -49,14 +49,14 @@ A good setting to use is four times the number of megabytes of system memory. Fo
 
 ---
 title: Completing the installation
-description: Regardless of whether you are installing Delegated Admin in a Unix, Linux, or Windows environment, perform the relevant steps in this section after you complete the previous OS-specific tasks.
+description: Complete Delegated Admin installation for PingDirectoryProxy, external web server, or PingDirectory-hosted deployments.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_da_completing_install
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_da_completing_install.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_da_pdproxy.adoc", "pd_da_replicated_ds.adoc", "pd_da_external_web_server.adoc", "pd_da_all_locations_except_pdproxy.adoc", "pd_da_next_steps.adoc"]
 section_ids:
   pingdirectoryproxy-server: PingDirectoryProxy server
@@ -124,10 +124,10 @@ The following steps assume that when you ran the `setup` command, you answered `
 
 2. Change the variable values to specify the location of the PingDirectory server.
 
-   | config.jsVariable | Value                                  |
-   | ----------------- | -------------------------------------- |
-   | `window.DS_HOST`  | Host name of the PingDirectory server  |
-   | `window.DS_PORT`  | HTTPS port of the PingDirectory server |
+   | config.js Variable | Value                                  |
+   | ------------------ | -------------------------------------- |
+   | `window.DS_HOST`   | Host name of the PingDirectory server  |
+   | `window.DS_PORT`   | HTTPS port of the PingDirectory server |
 
    To view an example outline that features these settings, see `example.config.js`.
 
@@ -209,7 +209,7 @@ After you configure Delegated Admin, [verify that the application is installed](
 
 ---
 title: Configuring the file descriptor limits
-description: The operating system default file descriptor limits restrict the number of PingDirectory server connections. You can change the descriptor limits to allow more connections.
+description: Increase operating system file descriptor limits to allow more PingDirectory server connections.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_config_file_descriptor_limits
@@ -310,7 +310,7 @@ After you set the operating system limit, you can configure the number of file d
 
 ---
 title: Delegated Admin
-description: Consider the following points when upgrading your version of Delegated Admin.
+description: Delegated Admin version compatibility and upgrade considerations, including OIDC grant type and permission changes.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_da_upgrade_considerations
@@ -386,7 +386,7 @@ To enable the **Initiate Password Reset** menu option on user entries, perform t
 
 ---
 title: Disabling file system swapping
-description: Because file system swapping can interfere with PingDirectory, disable performance tuning tools like tuned.
+description: Disable file system swapping tools to prevent interference with PingDirectory performance.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_proxy_disable_file_system_swapping
@@ -426,7 +426,7 @@ Because file system swapping can interfere with PingDirectory, disable performan
 
 ---
 title: Downloading the installation packages
-description: Download the latest PingDirectory installation packages from the downloads page on the Ping Identity website.
+description: Download PingDirectory installation packages and add-ons, including PingDirectoryProxy, PingDataSync, and Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_download_install_packages
@@ -498,7 +498,7 @@ To download PingDirectory and its add-ons, you must have an active license and b
 
 ---
 title: Editing OS-level environment variables
-description: Certain environment variables might affect the PingDirectory server in unexpected ways. This is particularly true for environment variables that are used by the underlying operating system to control how it uses non-default libraries.
+description: Edit OS-level environment variables such as PATH and LD_LIBRARY_PATH that the PingDirectory server overrides at startup.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_edit_os_env_variables
@@ -512,9 +512,9 @@ revdate: August 13, 2024
 
 Certain environment variables might affect the PingDirectory server in unexpected ways. This is particularly true for environment variables that are used by the underlying operating system to control how it uses non-default libraries.
 
-For this reason, the PingDirectory server explicitly overrides the values of key environment variables like *\<PATH>*, *\<LD\_LIBRARY\_PATH>*, and *\<LD\_PRELOAD>* to ensure that environment settings used to start the server do not inadvertently impact its behavior.
+For this reason, the PingDirectory server explicitly overrides the values of key environment variables like *\<PATH>*, *\<LD_LIBRARY_PATH>*, and *\<LD_PRELOAD>* to ensure that environment settings used to start the server do not inadvertently impact its behavior.
 
-If you need to edit any of these environment variables, set the values of those variables by manually editing the *\<set\_environment\_vars>* function of the `lib/_script-util.sh` script.
+If you need to edit any of these environment variables, set the values of those variables by manually editing the *\<set_environment_vars>* function of the `lib/_script-util.sh` script.
 
 You must stop (`bin/stop-server`) and re-start (`bin/start-server`) the server for the change to take effect.
 
@@ -522,14 +522,14 @@ You must stop (`bin/stop-server`) and re-start (`bin/start-server`) the server f
 
 ---
 title: Installation requirements
-description: Before installing Delegated Admin, you must install and configure the following components:
+description: Review the components to install before Delegated Admin, including the PingDirectory server, PingFederate or another OIDC provider, and hosting options.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_da_install_requirements
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_da_install_requirements.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_da_before_you_begin.adoc", "pd_da_install_locations.adoc"]
 section_ids:
   application-hosting-options: Application hosting options
@@ -549,7 +549,7 @@ Learn more about PingDirectory and the supported IdPs in the following table.
 
 | Product              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Supported versions                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| PingDirectory server | Stores user-identity data. The HTTPS port that was configured during PingDirectory server setup is required to install Delegated Admin.Learn more about upgrading a PingDirectory server in [Upgrading the PingDirectory, PingDirectoryProxy, and PingDataSync servers](pd_ds_upgrade_server.html).Learn more about installing and configuring a PingDirectory server in [Installing the PingDirectory server](pd_ds_install_server.html) and [PingDirectory server administration guide](../pingdirectory_server_administration_guide/pd_ds_amin_guide.html).                                                                                                                                                                                                                                            | Refer to the [Compatibility matrix](../delegated_admin_application_guide/pd_da_compatibility_matrix.html). |
+| PingDirectory server | Stores user-identity data. The HTTPS port that was configured during PingDirectory server setup is required to install Delegated Admin.Learn more about upgrading a PingDirectory server in [Upgrading the PingDirectory, PingDirectoryProxy, and PingDataSync servers](pd_ds_upgrade_server.html).Learn more about installing and configuring a PingDirectory server in [Installing the PingDirectory server](pd_ds_install_server.html) and [PingDirectory server administration guide](../pingdirectory_server_administration_guide/pd_ds_admin_guide.html).                                                                                                                                                                                                                                           | Refer to the [Compatibility matrix](../delegated_admin_application_guide/pd_da_compatibility_matrix.html). |
 | PingFederate server  | &#xA;&#xA;You must configure the following OAuth clients within PingFederate:&#xA;&#xA;Delegated Admin, which obtains an OpenID Connect (OIDC) token that describes the authenticated user. Learn more in Creating an OAuth client for Delegated Admin.&#xA;&#xA;The PingDirectory server itself, which calls PingFederate to validate the OIDC token that Delegated Admin passes to it. Learn more in Creating an OAuth client for PingDirectory.Provides identities for authentication and authorization.Learn more about installing and configuring the PingFederate server in [Configuring the PingFederate server](../delegated_admin_application_guide/pd_da_config_pf_server.html) or the [PingFederate documentation](https://docs.pingidentity.com/pingfederate/latest/pf_pf_landing_page.html). | PingFederate 9.0.0 or later                                                                                |
 | Other OIDC providers | &#xA;&#xA;You must configure an OIDC client for Delegated Admin on the OIDC provider. Learn more in Configuring other OIDC identity providers.Provides identities for authentication and authorization.Learn more in [Configuring PingDirectory to use an OIDC identity provider](../delegated_admin_application_guide/pd_da_config_oidc_pd.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | N/A                                                                                                        |
 
@@ -569,7 +569,7 @@ You can install Delegated Admin in any of the following locations:
 
 ---
 title: Installing Delegated Admin
-description: Different options and procedures are available when you install Delegated Admin depending on your environment and the location of your installation.
+description: Requirements, preparation, application installation, and completion steps for installing Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_da_install_delegated_admin
@@ -597,7 +597,7 @@ To install Delegated Admin, read the following sections:
 
 ---
 title: Installing dstat (SUSE Linux)
-description: The system monitoring tool dstat can help you troubleshoot PingDirectory servers on SUSE distributions.
+description: Install the dstat monitoring utility on SUSE Linux to support PingDirectory troubleshooting.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_install_dstat_suse
@@ -634,16 +634,14 @@ The `collect-support-data` tool uses the `dstat` utility for system monitoring. 
 
 ---
 title: Installing Java
-description: The PingDirectory server requires Java. For optimized performance, use Java for 64-bit architectures. See System requirements for the list of supported Java versions.
+description: Install Java for the PingDirectory server, using a 64-bit JDK for optimized performance, and note that Java 17 support is deprecated.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_install_java
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_ds_install_java.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 18, 2023
-section_ids:
-  about-this-task: About this task
+revdate: 2026-08-17T00:00:00Z
 ---
 
 # Installing Java
@@ -652,9 +650,7 @@ The PingDirectory server requires Java. For optimized performance, use Java for 
 
 |   |                                                                                  |
 | - | -------------------------------------------------------------------------------- |
-|   | Support for Java 11 has been deprecated and will be removed in a future release. |
-
-## About this task
+|   | Support for Java 17 has been deprecated and will be removed in a future release. |
 
 Even if your system already has Java installed, you might want to create a separate Java installation for use by the PingDirectory server so that updates to the system-wide Java installation do not impact the server.
 
@@ -668,7 +664,7 @@ To install Java, go to the website for the type of Java you want to install, loc
 
 ---
 title: Installing sysstat and pstack (Red Hat)
-description: If you plan to run PingDirectory on a Red Hat Linux system, install the sysstat and pstack packages. These packages are disabled by default, but are useful for troubleshooting.
+description: Install the sysstat and pstack packages on Red Hat Linux to support PingDirectory troubleshooting.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_install_sysstat_pstack_red_hat
@@ -701,7 +697,7 @@ The troubleshooting tool `collect-support-data` uses the `iostat`, `mpstat`, and
 
 ---
 title: Installing the application
-description: The steps for installing the Delegated Admin application depend on:
+description: Install Delegated Admin on Unix, Linux, or Windows with PingFederate or a generic OIDC provider.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_da_install_application
@@ -829,14 +825,14 @@ Proceed to [Completing the installation](pd_da_completing_install.html) to compl
 
 ---
 title: Installing the PingDataSync server
-description: This section describes how to install and run PingDataSync.
+description: Install the main PingDataSync server and a failover server using the setup tool.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_sync_installing_pds
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_sync_installing_pds.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_sync_install_pds.adoc", "pd_sync_install_failover_server.adoc"]
 section_ids:
   installing-the-main-server: Installing the main server
@@ -922,7 +918,7 @@ Use the `setup` tool to install the server. The server needs to be started and s
 
 ### Next steps
 
-After the server configuration is complete, you can run the `create-sync-pipe-config` tool configure the synchronization environment.
+After the server configuration is complete, you can run the `create-sync-pipe-config` tool to configure the synchronization environment.
 
 The admin console enables browser-based server management, the `dsconfig` tool enables command-line management, and the Configuration API enables management by third-party interfaces.
 
@@ -999,7 +995,7 @@ To remove a failover server, use the `uninstall` command.
 
 ---
 title: Installing the PingDirectory server
-description: After you prepare your hardware and software systems, you can set up the PingDirectory server.
+description: Install the PingDirectory server using interactive, non-interactive, lightweight, or Windows setup.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_install_server
@@ -1077,7 +1073,7 @@ Review [Pre-installation considerations](pd_ds_before_you_begin_install.html).
    $ ./setup
    ```
 
-   If the *JAVA\_HOME* environment variable is set to an older version of Java, explicitly specify the path to the Java Development Kit (JDK) installation during the setup process. Either set the *JAVA\_HOME* environment variable with the JDK path or execute the `setup` command in a modified Java environment using the `env` command.
+   If the *JAVA_HOME* environment variable is set to an older version of Java, explicitly specify the path to the Java Development Kit (JDK) installation during the setup process. Either set the *JAVA_HOME* environment variable with the JDK path or execute the `setup` command in a modified Java environment using the `env` command.
 
    #### Example:
 
@@ -1412,7 +1408,7 @@ Use the `setup.bat` script to install the server on Windows.
 
 ### Before you begin
 
-* Make sure that you have set the *JAVA\_HOME* environment variable to the location of your Java installation directory. For more information, see the "Java Runtime Environment" section in [System requirements](pd_ds_system_requirements.html) and [Installing Java](pd_ds_install_java.html).
+* Make sure that you have set the *JAVA_HOME* environment variable to the location of your Java installation directory. For more information, see the "Java Runtime Environment" section in [System requirements](pd_ds_system_requirements.html) and [Installing Java](pd_ds_install_java.html).
 
 * Review [Pre-installation considerations](pd_ds_before_you_begin_install.html).
 
@@ -1444,7 +1440,7 @@ Complete the following steps to install the PingDirectory server.
 
 ---
 title: Installing the PingDirectory Suite of Products
-description: PingDirectory offers a highly portable and scalable architecture that runs on multiple platforms and operating systems. The server is specifically optimized for operating systems used in environments that process a large number of entries.
+description: Prepare, install, upgrade, uninstall, and start or stop PingDirectory, PingDirectoryProxy, PingDataSync, and Delegated Admin.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_suite_install_guide
@@ -1466,7 +1462,7 @@ It contains instructions for preparing your environment for installation, obtain
 
 ---
 title: Installing the PingDirectoryProxy server
-description: After you install the PingDirectory server, you can install and set up the PingDirectoryProxy server.
+description: Install the PingDirectoryProxy server in interactive or non-interactive mode after installing the PingDirectory server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_proxy_install_dir_proxy_server
@@ -1776,7 +1772,7 @@ Running `setup` doesn't copy your key and trust store files or their associated 
 
 ---
 title: Installing the servers
-description: The setup tool allows you to quickly install and configure a stand-alone server instance.
+description: Install PingDirectory suite of products servers using the setup tool in interactive or non-interactive mode.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_suite_installing_the_servers
@@ -1809,10 +1805,6 @@ You can run the tool in either of the following modes:
 | - | ------------------------------------------------------------------------------------------------------------------------------- |
 |   | Make sure you perform all installation steps while logged on to the system as the user or role under which the server will run. |
 
-|   |                                                                                  |
-| - | -------------------------------------------------------------------------------- |
-|   | Support for Java 11 has been deprecated and will be removed in a future release. |
-
 ## Installation instructions
 
 See the instructions in the following topics to install the PingDirectory suite of products:
@@ -1829,7 +1821,7 @@ See the instructions in the following topics to install the PingDirectory suite 
 
 ---
 title: Managing system entropy
-description: Linux uses entropy to calculate random data that is used by the system in cryptographic operations.
+description: Monitor Linux system entropy to prevent intermittent performance issues with PingDirectory SSL-based communication.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_manage_system_entropy
@@ -1857,71 +1849,95 @@ Some environments with low entropy might have intermittent performance issues wi
 ---
 
 ---
-title: Obtaining a Ping Identity license key
-description: License keys are required to install, update, and renew all Ping Identity products.
+title: Managing the clock source
+description: Verify the Linux clock source and replace the slow Xen default to improve PingDirectory server performance on virtualized systems.
 component: pingdirectory
 version: 11.1
-page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_ping_license_keys
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_ds_ping_license_keys.html
+page_id: pingdirectory:installing_the_pingdirectory_suite_of_products:pd_ds_manage_clock_source
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/pd_ds_manage_clock_source.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 12, 2024
+revdate: 2026-10-15T00:00:00Z
 section_ids:
-  how-to-obtain-a-license: How to obtain a license
-  when-you-need-a-license: When you need a license
-  how-to-specify-a-license: How to specify a license
-  how-to-view-the-license-status: How to view the license status
-  license-expiration: License expiration
+  steps: Steps
+  choose-from: Choose from:
 ---
 
-# Obtaining a Ping Identity license key
+# Managing the clock source
 
-License keys are required to install, update, and renew all Ping Identity products.
+The PingDirectory server measures the duration of many operations using the system clock. A clock source that is slow to read can reduce server throughput, particularly on virtualized systems.
 
-## How to obtain a license
+Some virtualized environments, such as older Amazon Web Services (AWS) EC2 T2 instance types, use the Xen clock source by default. The Xen clock source is significantly slower to read than alternatives such as Time Stamp Counter (TSC). Modern KVM and Nitro instance types and bare metal systems typically use TSC.
 
-To obtain a license key, contact your account representative or use the [Ping Identity licensing portal](https://www.pingidentity.com/en/account/request-license-key.html).
+## Steps
 
-## When you need a license
+1. To display the current clock source, run the following command:
 
-A license is required for setting up a new single server instance and can be used site-wide for all servers in an environment. Additionally, you must obtain a new license when updating a server to a new major version, such as when upgrading from 8.3 to 9.0. When cloning a server instance with a valid license, you do not need a new license.
+   ```shell
+   $ cat /sys/devices/system/clocksource/clocksource0/current_clocksource
+   ```
 
-|   |                                                          |
-| - | -------------------------------------------------------- |
-|   | The upgrade process displays a prompt for a new license. |
+   If the output shows any clock source other than `xen`, stop here. The remaining steps don't apply.
 
-## How to specify a license
+2. If the output shows `xen`, switch the running system to a faster clock source, such as `tsc`, by running the following command as a user with root privileges:
 
-* Specify a license at setup.
+   ```shell
+   $ sudo bash -c 'echo tsc > /sys/devices/system/clocksource/clocksource0/current_clocksource'
+   ```
 
-  You have these options:
+   The change takes effect immediately for all processes on the system. To revert this change, write the previous clock source to the file in the same way. This runtime change doesn't persist across system restarts.
 
-  * Use the `--licenseKeyFile` *\<path-to-license>* option with `setup`.
+3. To make the change persist across system restarts, add the `tsc` clock source to the kernel command line using the method for your Linux distribution:
 
-  * Copy the license file to the server root directory and then run the `setup` tool. The tool discovers the license file.
+   ### Choose from:
 
-* Specify a license after setup
+   * On Rocky Linux, Red Hat Enterprise Linux, and other RHEL-family distributions, run the following command:
 
-  Use the admin console or `dsconfig` (in the **Topology** section, select **License**).
+     ```shell
+     $ sudo grubby --update-kernel=ALL --args="clocksource=tsc"
+     ```
 
-  |   |                                                                                       |
-  | - | ------------------------------------------------------------------------------------- |
-  |   | Placing the new license file in the server root directory does not work in this case. |
+     This command updates all installed kernels. To verify that the clock source was added to the kernel command line, run the following command:
 
-## How to view the license status
+     ```shell
+     $ sudo grubby --info=DEFAULT | grep -E 'clocksource|args='
+     ```
 
-To view the details of a license, including its expiration, you have these options:
+   * On Ubuntu, edit the `/etc/default/grub` file to add the `tsc` clock source to the *GRUB_CMDLINE_LINUX_DEFAULT* value, preserving any existing arguments. For example:
 
-* Use the server's `status` tool.
+     ```shell
+     GRUB_CMDLINE_LINUX_DEFAULT="quiet splash clocksource=tsc"
+     ```
 
-* In the admin console, go to the **Status** page and search for **License** on the **Monitors** tab.
+     Then regenerate the GRUB configuration:
 
-## License expiration
+     ```shell
+     $ sudo update-grub
+     ```
 
-The server provides a notification as the expiration date approaches.
+   * On SUSE Enterprise Linux, edit the `/etc/default/grub` file to add the `tsc` clock source to the *GRUB_CMDLINE_LINUX_DEFAULT* value, preserving any existing arguments. For example:
 
-Before a license expires, obtain a new one and install it by using `dsconfig` or the admin console. Learn more in [Upgrading a PingDirectory license](pd_ds_upgrade_license.html).
+     ```shell
+     GRUB_CMDLINE_LINUX_DEFAULT="quiet splash clocksource=tsc"
+     ```
 
-|   |                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------- |
-|   | An expiring license causes alerts and alarms but does not affect the functionality of the product. |
+     Then regenerate the GRUB configuration:
+
+     ```shell
+     $ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+     ```
+
+4. Restart the system:
+
+   ```shell
+   $ sudo systemctl reboot
+   ```
+
+5. After the restart, display the current clock source again to confirm that the output shows `tsc`, and check the kernel command line:
+
+   ```shell
+   $ cat /sys/devices/system/clocksource/clocksource0/current_clocksource
+   $ cat /proc/cmdline
+   ```
+
+   The `clocksource=tsc` argument appears in the output of the `/proc/cmdline` check on all distributions.

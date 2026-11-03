@@ -1,24 +1,26 @@
 ---
-title: Active Directory
-description: Configure the Advanced Identity Cloud Active Directory application to provision users and groups to an Active Directory instance
+title: Adobe Admin Console
+description: Configure the Advanced Identity Cloud Adobe Admin Console application to manage users, groups, and memberships with Adobe Admin Console
 component: pingoneaic
-page_id: pingoneaic:app-management:applications/active-directory
-canonical_url: https://docs.pingidentity.com/pingoneaic/app-management/applications/active-directory.html
+page_id: pingoneaic:app-management:applications/adobe-admin-console
+canonical_url: https://docs.pingidentity.com/pingoneaic/app-management/applications/adobe-admin-console.html
 llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["release-notes:rapid-channel/adobe-admin-console-app.adoc"]
 section_ids:
   register-the-application: Register the application
+  adobe-admin-console-requirements: Adobe Admin Console requirements
   configure-the-provisioner: Configure the provisioner
   configure-provisioning-and-reconciliation-resources: Configure provisioning and reconciliation resources
 ---
 
-# Active Directory
+# Adobe Admin Console
 
-The Active Directory application template allows you to provision users and groups to an Active Directory instance.
+The Advanced Identity Cloud Adobe Admin Console application lets you manage users, groups, and user group memberships between Adobe Admin Console and Advanced Identity Cloud. This application requires an Adobe Admin Console administrator account and a properly configured Adobe Admin Console.
 
 ## Register the application
 
-1. In the Advanced Identity Cloud admin console, go to Applications, and click [icon: grid_view, set=material, size=inline] Browse App Catalog.
+1. In the Advanced Identity Cloud admin console, go to Applications > Applications, and click [icon: grid_view, set=material, size=inline] Browse App Catalog.
 
 2. In the Browse App Catalog modal, select an application, and click Next.
 
@@ -26,144 +28,139 @@ The Active Directory application template allows you to provision users and grou
 
 4. In the Application Details window, specify the name, description, application owners, and logo for the application.
 
-5. To make the application an [Authoritative](../applications.html#target_and_authoritative_applications) source of identity data, select the Authoritative check box. This option is not available for every application.
+5. To make the application an [Authoritative](../register-an-application.html#target_and_authoritative_applications) source of identity data, select the Authoritative check box. This option is not available for every application.
 
 6. Click Create Application.
+
+## Adobe Admin Console requirements
+
+|   |                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The steps for configuring Adobe Admin Console should be used as an outline, as the specific options, menus, and features could have changed. |
+
+Before you can configure the Advanced Identity Cloud application, you must create and configure a project in Adobe Admin Console. You need an Adobe Admin Console developer account to complete this procedure:
+
+1. Create or log in to an [Adobe Admin Console developer account](https://developer.adobe.com/console/home/).
+
+2. From the Adobe Developer Console, click the [Projects tab](https://developer.adobe.com/console/projects), and then click Create new project.
+
+   > **Collapse: Show Me**
+   >
+   > ![Create a project in the Adobe Developer Console](../_images/adobe-admin-console-create-project.png)
+
+3. On the Project Name page, click Add API.
+
+   > **Collapse: Show Me**
+   >
+   > ![Adobe Developer Console, add API](../_images/adobe-admin-console-add-api.png)
+
+4. In the Add an API window, select User Management API, and click Next.
+
+   > **Collapse: Show Me**
+   >
+   > ![Adobe Admin Console, Add User Management API](../_images/adobe-admin-console-add-user-mgmt-api.png)
+
+5. In the Add Credential area, select OAuth Server-to-Server, enter a Credential name, and then click Save configured API.
+
+   > **Collapse: Show Me**
+   >
+   > ![Add credential area of the Add an API flow](../_images/adobe-admin-console-api-credential.png)
+
+6. On the Project Name > User Management API page, in the Connected credentials area, click the credential you just added (OAuth Server-to-Server).
+
+   > **Collapse: Show Me**
+   >
+   > ![Adobe Developer Console, connected credentials](../_images/adobe-admin-console-connected-credentials.png)
+
+7. From the Credential detail tab, make note of the following:
+
+   * CLIENT ID
+
+   * CLIENT SECRET
+
+   * SCOPES
+
+   * ORGANIZATION ID
+
+   > **Collapse: Show Me**
+   >
+   > ![Adobe Developer Console, credentials tab](../_images/adobe-admin-console-credentials-tab.png)
+
+   Use these values when you configure provisioning for an Advanced Identity Cloud Adobe Admin Console application.
 
 ## Configure the provisioner
 
 After you register the application, you can configure provisioning.
 
-1. In the Advanced Identity Cloud admin console, on the Provisioning tab, click Set up Provisioning:
+1. Complete [Adobe Admin Console requirements](#adobe-admin-console-requirements).
 
-   * If setting up provisioning for the first time:
+2. In the Advanced Identity Cloud admin console, on the Provisioning tab:
 
-     1. If you haven't configured a remote server, click New Connector Server and follow the steps to create a server.
+   * If setting up provisioning for the first time, click Set up Provisioning.
 
-     2. If you configured one remote server, it's automatically selected.
+   * If editing existing settings, in the Connection area, click Settings.
 
-     3. If you configured multiple remote servers, choose a server.
+3. Configure the following fields:
 
-   * When editing existing settings in the Connection area, click Settings.
+   | Field                    | Description                                                                                                                                                               |
+   | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Service URI              | The service endpoint URI.                                                                                                                                                 |
+   | Organization ID          | Your organization's unique ID. For example, `12345@AdobeOrg`.Refer to [Adobe Admin Console requirements](#adobe-admin-console-requirements) for help locating this value. |
+   | Token Endpoint           | The endpoint to query for a new access token.                                                                                                                             |
+   | Client ID                | The client ID for OAuth 2.0 flow\.Refer to [Adobe Admin Console requirements](#adobe-admin-console-requirements) for help locating this value.                            |
+   | Client Secret (optional) | The client secret for OAuth 2.0 flow\.Refer to [Adobe Admin Console requirements](#adobe-admin-console-requirements) for help locating this value.                        |
 
-2. Configure the following fields:
+4. Optionally, click Show advanced settings to set any of the following options:
 
-   | Field                              | Description                                                                                                                                                                                                                                         |
-   | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Host Name or IP                    | The hostname or IP address for the Active Directory domain controller.                                                                                                                                                                              |
-   | Port                               | The port for connecting to the Active Directory domain controller.                                                                                                                                                                                  |
-   | Use SSL                            | Enable to use SSL to connect to the Active Directory domain controller. The default value is `true`.                                                                                                                                                |
-   | Login Account DN                   | The distinguished name for the login account.                                                                                                                                                                                                       |
-   | Password                           | The password for the login account.                                                                                                                                                                                                                 |
-   | Base DNs                           | The base context for Active Directory users and groups.                                                                                                                                                                                             |
-   | Base DNs to Synchronize (optional) | The base context for Active Directory users and groups to synchronize.&#xA;&#xA;Although this field is optional, an authoritative app requires this context for liveSync to function. You should also verify the bind account can query uSNChanged. |
+   **Application specific settings**
 
-3. Click Show advanced settings.
+   | Field                 | Description                                                                                                                                |
+   | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+   | Scope (optional)      | The OAuth 2.0 scope(s) to use.Refer to [Adobe Admin Console requirements](#adobe-admin-console-requirements) for help locating this value. |
+   | Group Read Rate Limit | Defines throttling for group read operations either per second ("30/sec") or per minute ("100/min").                                       |
+   | User Read Rate Limit  | Defines throttling for user read operations either per second ("30/sec") or per minute ("100/min").                                        |
+   | Write Rate Limit      | Defines throttling for write operations (create/update/delete) either per second ("30/sec") or per minute ("100/min").                     |
+   | Maximum Connections   | The maximum size of the HTTP connection pool. The default is 10 connections.                                                               |
+   | Connection Timeout    | The timeout for the underlying HTTP connection in seconds. The default is 30 seconds.                                                      |
 
-4. To filter users and groups:
+   **Pool configuration**
 
-   * To only connect a subset of users by applying a query filter based on user attributes, enable Filter users.
+   | Field                                   | Description                                                                                                                                                                           |
+   | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Max idle and active container instances | The maximum number of idle and active container instances. The default value is `10`.                                                                                                 |
+   | Max Idle Connector Instances            | The maximum number of idle connector instances. The default value is `10`.                                                                                                            |
+   | Set Timeout Period                      | Select to enable a timeout period for the connection. After enabling, configure the following:- Timeout period (ms): The timeout period in milliseconds.                              |
+   | Set Minimum Idle Time                   | Select to set a minimum time (in milliseconds) before an idle object is removed. After enabling, configure the following:- Min idle time (ms): The minimum idle time in milliseconds. |
+   | Min Idle Instances                      | The minimum number of idle connector instances.                                                                                                                                       |
 
-     * To apply a filter to users manually:
+   **Result Handler configuration**
 
-       1. Choose to assign to if All or Any conditions are met.
+   | Field                                                                   | Description                                                                       |
+   | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+   | Enable for connectors with the attribute normalizer interface           | Enables the attribute normalizer interface for supported connectors.              |
+   | Enable local filtering/search features                                  | Enables local filtering and search capabilities.                                  |
+   | Enable case insensitive filter                                          | Configures filters to ignore case sensitivity.                                    |
+   | Enable configuration of search attributes; disable for local connectors | Enables search attribute configuration. Disable this option for local connectors. |
 
-       2. Set the conditions for assigning filters.
+   1. In the Operation Timeouts (ms) area, select the operations to enforce timeouts on and enter the duration in milliseconds.
 
-       3. In the User Object Classes field, enter the names of object classes a user must have for inclusion.
+      Available operations include Create, Validate, Test, Enable a Script on the Connector, Schema, Delete, Update, Sync, Authenticate, Get, Enable a Script on the Target, and Search.
 
-          |   |                                                                                                                                                                                                                                           |
-          | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-          |   | If you installed Microsoft Exchange, you can add properties to `extensionAttribute1` through `extensionAttribute15` only if you add `msExchCustomAttributes` to the application's User Object Classes list and set Read Schema to `true`. |
+   2. In the Operation Rate Limits area, select the operations to enforce rate limits on.
 
-     * To use a query to apply a filter to users:
+      You can enforce limits on specific operations, including Create, Validate, Test, Script on Connector, Schema, Delete, Update, Sync, Authenticate, Get, Script on Target, and Search.
 
-       1. Click Advanced Editor.
+      For each selected operation, configure the following fields:
 
-       2. Edit the query code.
+      | Field           | Description                        |
+      | --------------- | ---------------------------------- |
+      | Request Limit   | Requests allowed over time.        |
+      | Request Period  | Limit resets after this time (ms). |
+      | Request Timeout | Time before exception thrown (ms). |
 
-   * To only connect a subset of groups by applying a query filter based on user attributes, enable Filter groups.
+5. Click Connect.
 
-     * To apply a filter to groups manually:
-
-       1. Choose to assign to if All or Any conditions are met.
-
-       2. Set the conditions for assigning filters.
-
-     * To filter users and groups:
-
-       1. Click Advanced Editor.
-
-       2. Edit the query code.
-
-5. To use block-based LDAP controls, enable Use Block-based controls.
-
-6. To use paged results control, enable Use Paged Results control. If Use Block-based controls is enabled, specifies the LDAP Paged Results control is preferred over the VLV control when retrieving entries. The default value is `true`.
-
-7. To set the change log attribute in the change log entry, set the Change Number Attribute field. The default value is `changeNumber`.
-
-8. To set the object classes that Advanced Identity Cloud uses as filters when synchronizing, add classes to the Object Classes to synchronize field. The default value is `user`.
-
-9. To set the sort attribute to use VLV indexes on the resource, set the Virtual List View (VLV) Sort Attribute field. The default value is `sAMAccountName`.
-
-10. To set the name of the attribute that holds the password, set the Password Attribute field. The default value is `unicodePwd`.
-
-11. To have the LDAP provisioner read the schema from the server, enable Read Schema. The default value is `false`.
-
-12. To have Advanced Identity Cloud modify group membership when entries are renamed or deleted, enable Maintain LDAP Group Membership. The default value is `true`.
-
-13. To specify the group attribute to update with the DN of newly added users, set the Group Member Attribute field. The default value is `member`.
-
-14. To specify the name of the attribute that maps to the OpenICF UID attribute, set the UID Attribute field. The default value is `objectGUID`.
-
-15. To specify the password hash algorithm, set the Password Hash Algorithm field.
-
-16. Enter the Account Username Attributes that hold the account's username.
-
-17. To synchronize only the modified properties on a target resource, select Exclude Unmodified.
-
-18. To use timestamps for liveSync operations instead of the changelog, select Timestamp for Sync Token.
-
-19. Set any of the following options:
-
-    **Pool configuration**
-
-    | Field                                   | Description                                                                                                                                                                           |
-    | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | Max idle and active container instances | The maximum number of idle and active container instances. The default value is `10`.                                                                                                 |
-    | Max Idle Connector Instances            | The maximum number of idle connector instances. The default value is `10`.                                                                                                            |
-    | Set Timeout Period                      | Select to enable a timeout period for the connection. After enabling, configure the following:- Timeout period (ms): The timeout period in milliseconds.                              |
-    | Set Minimum Idle Time                   | Select to set a minimum time (in milliseconds) before an idle object is removed. After enabling, configure the following:- Min idle time (ms): The minimum idle time in milliseconds. |
-    | Min Idle Instances                      | The minimum number of idle connector instances.                                                                                                                                       |
-
-    **Result Handler configuration**
-
-    | Field                                                                   | Description                                                                       |
-    | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-    | Enable for connectors with the attribute normalizer interface           | Enables the attribute normalizer interface for supported connectors.              |
-    | Enable local filtering/search features                                  | Enables local filtering and search capabilities.                                  |
-    | Enable case insensitive filter                                          | Configures filters to ignore case sensitivity.                                    |
-    | Enable configuration of search attributes; disable for local connectors | Enables search attribute configuration. Disable this option for local connectors. |
-
-    1. In the Operation Timeouts (ms) area, select the operations to enforce timeouts on and enter the duration in milliseconds.
-
-       Available operations include Create, Validate, Test, Enable a Script on the Connector, Schema, Delete, Update, Sync, Authenticate, Get, Enable a Script on the Target, and Search.
-
-    2. In the Operation Rate Limits area, select the operations to enforce rate limits on.
-
-       You can enforce limits on specific operations, including Create, Validate, Test, Script on Connector, Schema, Delete, Update, Sync, Authenticate, Get, Script on Target, and Search.
-
-       For each selected operation, configure the following fields:
-
-       | Field           | Description                        |
-       | --------------- | ---------------------------------- |
-       | Request Limit   | Requests allowed over time.        |
-       | Request Period  | Limit resets after this time (ms). |
-       | Request Timeout | Time before exception thrown (ms). |
-
-20. Click Connect.
-
-21. Verify the information in the Details tab.
+6. Verify the information in the Details tab.
 
 ## Configure provisioning and reconciliation resources
 
@@ -181,3 +178,33 @@ Use the object type list to select a provisioning and reconciliation resource, s
 | Privacy & Consent     | Manage end-user data sharing and synchronization.                                                                                                                                                                                                                                                          | [Configure end-user data sharing](../provision-an-application.html#config-end-user-data-sharing)                                                      |
 | Rules                 | View and manage provisioning rules for mappings between Advanced Identity Cloud and a target application.                                                                                                                                                                                                  | [Manage provisioning rules](../provision-an-application.html#manage-provisioning-rules)                                                               |
 | Advanced Sync         | Create and manage mappings between a managed object type and an application or between applications.                                                                                                                                                                                                       | [Manage advanced sync](../provision-an-application.html#manage-advanced-sync)                                                                         |
+
+---
+
+---
+title: Application management
+description: Learn how Advanced Identity Cloud applications work, including provisioning, SSO with OIDC and SAML, and best practices for registration
+component: pingoneaic
+page_id: pingoneaic:app-management:applications
+canonical_url: https://docs.pingidentity.com/pingoneaic/app-management/applications.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Application Management"]
+page_aliases: ["release-notes:rapid-channel/app-management.adoc"]
+---
+
+# Application management
+
+|   |                                                                                                                                                                                                                                       |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The topics in this section are for tenants created on or after January 12, 2023. Learn more in [Application management migration FAQ](../product-information/migration-dependent-features/application-management-migration-faq.html). |
+
+In Advanced Identity Cloud, an *application* is an object that represents an external service you want to connect to. This service might be a popular cloud-based application (such as Salesforce or Workday), a directory service (such as LDAP or Active Directory), or your own custom-built application.
+
+You can configure an application for two main functions:
+
+* **Provisioning**: Automates the creation and management of user accounts in external applications.
+
+* **Single sign-on (SSO)**: Lets end users access external applications using their Advanced Identity Cloud credentials. Through standard protocols such as OpenID Connect (OIDC), SAML, or WS-Federation, users authenticate once with Advanced Identity Cloud and can access applications without reentering credentials. Sometimes, these protocols also let users consent to delegated access, enabling applications to act on their behalf within approved scopes.
+
+Applications are therefore comprehensive objects. They can also include authorization, authentication, and identity management policies.

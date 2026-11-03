@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Tableau and PingFederate
-description: Learn how to enable Tableau SSO in PingFederate (IdP and SP-initiated).
+description: Configure SAML SSO with Tableau and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:tableau:config_saml_tableau_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/tableau/config_saml_tableau_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -102,10 +104,12 @@ Learn how to enable Tableau SSO in PingFederate (IdP and SP-initiated).
 
 ---
 title: Configuring SAML SSO with Tableau and PingOne
-description: Learn how to enable Tableau SSO in PingOne (IdP and SP-initiated).
+description: Configure SAML SSO with Tableau and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:tableau:config_saml_tableau_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/tableau/config_saml_tableau_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -208,10 +212,12 @@ Learn how to enable Tableau SSO in PingOne (IdP and SP-initiated).
 
 ---
 title: Configuring SCIM 2.0 provisioning with Tableau and PingFederate
-description: Learn how to enable Tableau SCIM 2.0 Provisioning in PingFederate.
+description: Configure SCIM 2.0 outbound provisioning with Tableau and PingFederate using the SCIM Connector
 component: configuration_guides
 page_id: configuration_guides:tableau:config_scim_tableau_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/tableau/config_scim_tableau_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

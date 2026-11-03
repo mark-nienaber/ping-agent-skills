@@ -7,7 +7,7 @@ page_id: pingds:use-cases:backup-restore
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/backup-restore.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-12T12:15:36Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Backup &amp; Restore", "LDAP", "Use Case", "Storage"]
 section_ids:
   description: Description
@@ -362,7 +362,7 @@ page_id: pingds:use-cases:schema
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/schema.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Use Case"]
 section_ids:
   description: Description
@@ -956,7 +956,7 @@ page_id: pingds:use-cases:change-password-storage
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/change-password-storage.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Use Case"]
 section_ids:
   description: Description
@@ -1476,7 +1476,7 @@ page_id: pingds:use-cases:cross-region-replication
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/cross-region-replication.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Replication", "Use Case"]
 section_ids:
   description: Description
@@ -1885,7 +1885,7 @@ page_id: pingds:use-cases:disaster-recovery
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/disaster-recovery.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-12T12:15:36Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Backup &amp; Restore", "Deployment", "LDAP", "Use Case"]
 page_aliases: ["maintenance-guide:disaster-recovery.adoc"]
 section_ids:
@@ -2488,7 +2488,7 @@ page_id: pingds:use-cases:cts
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/cts.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-27T13:21:24Z
+revdate: 2026-08-05T07:42:02Z
 keywords: ["CTS Store (Sessions &amp; Tokens)", "LDAP", "Use Case"]
 section_ids:
   description: Description
@@ -2500,12 +2500,21 @@ section_ids:
   tasks: Tasks
   task_1_prepare_for_installation: "Task 1: Prepare for installation"
   task_2_set_up_ds: "Task 2: Set up DS"
-  task_3_set_up_tomcat: "Task 3: Set up Tomcat"
-  task_4_set_up_am: "Task 4: Set up AM"
+  task_3_set_up_am: "Task 3: Set up AM"
+  about_this_task: About this task
+  steps: Steps
+  result: Result
+  task_4_configure_affinity_load_balancing: "Task 4: Configure affinity load balancing"
+  about_this_task_2: About this task
+  steps_2: Steps
   task_5_create_a_test_user: "Task 5: Create a test user"
+  steps_3: Steps
   validation: Validation
   access_am_as_the_test_user: Access AM as the test user
+  steps_4: Steps
+  result_2: Result
   test_cts_failover: Test CTS failover
+  result_3: Result
   whats_next: What's next
   explore_further: Explore further
   related_use_cases: Related use cases
@@ -2582,11 +2591,11 @@ This sample deployment shows the steps to replicate CTS data on your computer. U
 
 ![Sample deployment of AM with DS](../_images/cts-sample.png)
 
-* Two AM servlets run in Apache Tomcat and serve HTTP requests from AM client applications.
+* Two AM servers each run in their own Apache Tomcat and serve HTTP requests from AM client applications.
 
 * Two replicated DS servers provide storage for AM.
 
-* Each AM servlet makes LDAP requests to DS for CTS data.
+* Each AM server makes LDAP requests to DS for CTS data.
 
 ### Task 1: Prepare for installation
 
@@ -2594,7 +2603,7 @@ This sample deployment shows the steps to replicate CTS data on your computer. U
 
    The cookie domain for AM session cookies depends on the FQDN, because the browser uses it to connect to AM.
 
-   This sample simulates DNS on your computer by updating the [hosts file](https://en.wikipedia.org/wiki/Hosts_\(file\)) with an alias for each DS server:
+   This sample simulates DNS on your computer by updating the [hosts file](https://en.wikipedia.org/wiki/Hosts_\(file\)) with an alias for the AM servers:
 
    ```none
    # Simulate DNS with an FQDN alias for the loopback address:
@@ -2607,11 +2616,12 @@ This sample deployment shows the steps to replicate CTS data on your computer. U
 
    This sample uses folder locations aligned with the hostnames:
 
-   | Base path         | Description          |
-   | ----------------- | -------------------- |
-   | `/path/to/ds1`    | First DS server      |
-   | `/path/to/ds2`    | Second DS server     |
-   | `/path/to/tomcat` | Apache Tomcat server |
+   | Base path          | Description                                            |
+   | ------------------ | ------------------------------------------------------ |
+   | `/path/to/ds1`     | First DS server                                        |
+   | `/path/to/ds2`     | Second DS server                                       |
+   | `/path/to/tomcat1` | First Apache Tomcat server (for the first AM server)   |
+   | `/path/to/tomcat2` | Second Apache Tomcat server (for the second AM server) |
 
 3. Determine the port numbers for the service.
 
@@ -2621,9 +2631,10 @@ This sample deployment shows the steps to replicate CTS data on your computer. U
    | ------------- | -------------------------------------------------------- |
    | `ds1`         | LDAP: 1389 LDAPS: 1636 Admin: 4444 Replication: 8989     |
    | `ds2`         | LDAP: 11389 LDAPS: 11636 Admin: 14444 Replication: 18989 |
-   | Tomcat        | HTTPS: 8080                                              |
+   | Tomcat 1      | HTTP: 8080                                               |
+   | Tomcat 2      | HTTP: 8081                                               |
 
-   When installing each DS server on a different host, use the same port numbers everywhere.
+   When installing each server on a different host, you can reuse the same port numbers.
 
 4. Set the `JAVA_HOME` environment variable to a supported JDK home if it isn't already set:
 
@@ -2732,187 +2743,175 @@ These sample commands prepare DS servers for AM CTS, configuration, and identiti
 
 At this point, both DS servers are running and replicating changes to each other.
 
-### Task 3: Set up Tomcat
+### Task 3: Set up AM
 
-1. Update Tomcat settings for AM:
+#### About this task
 
-   This command uses the `TRUSTSTORE` environment variable you set:
+These steps deploy AM using a passive installation with file-based configuration (FBC). Setting environment variables before startup connects AM to the DS stores, without needing to use the interactive setup wizard.
+
+#### Steps
+
+1. Unpack two Tomcat servers to `/path/to/tomcat1` and `/path/to/tomcat2`.
+
+2. Update the configuration for the second Tomcat server, `/path/to/tomcat2/conf/server.xml`, to avoid using the default ports the first Tomcat uses:
+
+   | Port          | Number |
+   | ------------- | ------ |
+   | Shutdown      | 8006   |
+   | HTTP          | 8081   |
+   | HTTP redirect | 8444   |
+
+3. Copy the AM `.war` file to `/path/to/tomcat1/webapps/am.war` and `/path/to/tomcat2/webapps/am.war`.
+
+4. Configure each Tomcat for AM:
+
+   These commands use the `TRUSTSTORE` environment variable you set and a sample encryption key. The two Tomcat servers use different port numbers but share the same store connection details and encryption key.
+
+   First AM server:
 
    ```shell
    echo "export CATALINA_OPTS=\"\$CATALINA_OPTS \
+   -Dcom.sun.identity.sm.sms_object_filebased_enabled=true \
+   -Dcom.sun.identity.configuration.directory=/path/to/am1-config \
+   -Dam.server.protocol=http \
+   -Dam.server.fqdn=am.example.com \
+   -Dam.server.port=8080 \
+   -Dam.server.context=/am \
+   -Dam.encryption.key=w72dwbuhsLQzFNcUftA8eMCaw3a5ayhL \
+   -Dam.stores.user.servers=localhost:1636 \
+   -Dam.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities \
+   -Dam.stores.user.password=5up35tr0ng \
+   -Dam.stores.user.ssl.enabled=true \
+   -Dam.stores.application.servers=localhost:1636 \
+   -Dam.stores.application.password=5up35tr0ng \
+   -Dam.stores.cts.servers=localhost:1636,localhost:11636 \
+   -Dam.stores.cts.username=uid=openam_cts,ou=admins,ou=famrecords,ou=openam-session,ou=tokens \
+   -Dam.stores.cts.password=5up35tr0ng \
    -Djavax.net.ssl.trustStore=${TRUSTSTORE} \
    -Djavax.net.ssl.trustStorePassword=changeit \
    -Djavax.net.ssl.trustStoreType=jks \
    -server \
    -Xmx2g \
    -XX:MetaspaceSize=256m \
-   -XX:MaxMetaspaceSize=256m\"" > /path/to/tomcat/bin/setenv.sh
+   -XX:MaxMetaspaceSize=256m\"" > /path/to/tomcat1/bin/setenv.sh
    ```
 
-   In production, don't set passwords and other secrets in Java system properties. Learn more in [Hardening and security](../deployment-guide/plans.html#plan-security).
+   Second AM server:
 
-2. Make the Tomcat scripts executable:
+   ```shell
+   echo "export CATALINA_OPTS=\"\$CATALINA_OPTS \
+   -Dcom.sun.identity.sm.sms_object_filebased_enabled=true \
+   -Dcom.sun.identity.configuration.directory=/path/to/am2-config \
+   -Dam.server.protocol=http \
+   -Dam.server.fqdn=am.example.com \
+   -Dam.server.port=8081 \
+   -Dam.server.context=/am \
+   -Dam.encryption.key=w72dwbuhsLQzFNcUftA8eMCaw3a5ayhL \
+   -Dam.stores.user.servers=localhost:1636 \
+   -Dam.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities \
+   -Dam.stores.user.password=5up35tr0ng \
+   -Dam.stores.user.ssl.enabled=true \
+   -Dam.stores.application.servers=localhost:1636 \
+   -Dam.stores.application.password=5up35tr0ng \
+   -Dam.stores.cts.servers=localhost:1636,localhost:11636 \
+   -Dam.stores.cts.username=uid=openam_cts,ou=admins,ou=famrecords,ou=openam-session,ou=tokens \
+   -Dam.stores.cts.password=5up35tr0ng \
+   -Djavax.net.ssl.trustStore=${TRUSTSTORE} \
+   -Djavax.net.ssl.trustStorePassword=changeit \
+   -Djavax.net.ssl.trustStoreType=jks \
+   -server \
+   -Xmx2g \
+   -XX:MetaspaceSize=256m \
+   -XX:MaxMetaspaceSize=256m\"" > /path/to/tomcat2/bin/setenv.sh
+   ```
+
+   In production, use your own secrets, not the samples listed here. Don't set passwords, encryption keys, or other secrets directly in Java system properties. Learn more in [Hardening and security](../deployment-guide/plans.html#plan-security).
+
+5. Make the Tomcat scripts executable:
 
    ```console
-   $ chmod +x /path/to/tomcat/bin/*.sh
+   chmod +x /path/to/tomcat1/bin/*.sh
+   chmod +x /path/to/tomcat2/bin/*.sh
    ```
 
-3. Start Tomcat:
+6. Start both Tomcat servers:
 
    ```console
-   $ /path/to/tomcat/bin/startup.sh
+   /path/to/tomcat1/bin/startup.sh
+   /path/to/tomcat2/bin/startup.sh
    ```
 
-At this point, Tomcat is ready for you to set up AM.
+#### Result
 
-### Task 4: Set up AM
+The AM servers are running at <http://am.example.com:8080/am> and <http://am.example.com:8081/am>, with DS connection details configured through FBC.
 
-These steps prepare AM to use DS with affinity load balancing and failover.
+### Task 4: Configure affinity load balancing
 
-1. Copy the AM .war file to `/path/to/tomcat/webapps/am1.war` and `/path/to/tomcat/webapps/am2.war`.
+#### About this task
 
-2. Configure AM at <http://am.example.com:8080/am1> and <http://am.example.com:8080/am2>.
+After AM starts, configure affinity load balancing for the CTS store and the identity store so that each request for the same entry always goes to the same DS server. These settings are shared across both AM servers because they share the same DS configuration store.
 
-   Use the following configuration settings:
+#### Steps
 
-   | Setting                                                      | Choice                                                                                                                                                                                                                                                         |
-   | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Configuration Options                                        | Create New Configuration.                                                                                                                                                                                                                                      |
-   | Server Settings > Default User Password                      | `Passw0rd`                                                                                                                                                                                                                                                     |
-   | Server Settings > Server URL                                 | `http://am.example.com:8080`                                                                                                                                                                                                                                   |
-   | Server Settings > Cookie Domain                              | `example.com`                                                                                                                                                                                                                                                  |
-   | Server Settings > Platform Locale                            | `en_US`                                                                                                                                                                                                                                                        |
-   | Server Settings > Configuration Directory                    | `/path/to/am1` or `/path/to/am2`                                                                                                                                                                                                                               |
-   | Configuration Data Store Settings > Configuration Data Store | External DS                                                                                                                                                                                                                                                    |
-   | Configuration Data Store Settings > SSL/TLS Enabled          | Enable                                                                                                                                                                                                                                                         |
-   | Configuration Data Store Settings > Host Name                | `localhost`                                                                                                                                                                                                                                                    |
-   | Configuration Data Store Settings > Port                     | `1636`                                                                                                                                                                                                                                                         |
-   | Configuration Data Store Settings > Encryption Key           | Save the generated key (example: `w72dwbuhsLQzFNcUftA8eMCaw3a5ayhL`) from `am1` to use when configuring `am2`.                                                                                                                                                 |
-   | Configuration Data Store Settings > Root Suffix              | `ou=am-config`                                                                                                                                                                                                                                                 |
-   | Configuration Data Store Settings > Login ID                 | `uid=am-config,ou=admins,ou=am-config`                                                                                                                                                                                                                         |
-   | Configuration Data Store Settings > Password                 | `5up35tr0ng`                                                                                                                                                                                                                                                   |
-   | Configuration Data Store Settings > Server configuration     | New deployment (`am1`) or Additional server for existing deployment (`am2`)&#xA;&#xA;The am2 server uses the same stores as those of the existing deployment.&#xA;&#xA;This choice causes the configurator to skip to the Site Configuration settings for am2. |
-   | User Data Store Settings > User Data Store Type              | ForgeRock Directory Services (DS)                                                                                                                                                                                                                              |
-   | User Data Store Settings > SSL/TLS Enabled                   | Enable                                                                                                                                                                                                                                                         |
-   | User Data Store Settings > Directory Name                    | `localhost`                                                                                                                                                                                                                                                    |
-   | User Data Store Settings > Port                              | `1636`                                                                                                                                                                                                                                                         |
-   | User Data Store Settings > Root Suffix                       | `ou=identities`                                                                                                                                                                                                                                                |
-   | User Data Store Settings > Login ID                          | `uid=am-identity-bind-account,ou=admins,ou=identities`                                                                                                                                                                                                         |
-   | User Data Store Settings > Password                          | `5up35tr0ng`                                                                                                                                                                                                                                                   |
-   | Site Configuration                                           | No                                                                                                                                                                                                                                                             |
+Update the affinity configuration of each AM server at <http://am.example.com:8080/am> and <http://am.example.com:8081/am>:
 
-3. Configure the CTS store with affinity load balancing to both DS servers.
+1. Sign on to the AM admin UI as `amadmin`.
 
-   On the `am1` servlet, make these configuration changes, which are shared with the `am2` servlet:
+   The default password set during FBC startup is `password`.
 
-   1. Log in to the AM admin UI at <http://am.example.com/am1> as `amadmin` with `Passw0rd`.
+2. Go to Configure > Server Defaults > CTS, enable External Store Configuration, enable Affinity Enabled, and click Save Changes.
 
-   2. Browse to Configure > Server Defaults > CTS.
+3. Go to Top Level Realm > Identity Stores > OpenDJ > Server Settings, update the following identity settings, and click Save Changes:
 
-   3. Use the following CTS settings, saving changes before switching tabs:
-
-      | Setting                                             | Choice                                                               |
-      | --------------------------------------------------- | -------------------------------------------------------------------- |
-      | CTS Token Store > Store Mode                        | External Token Store                                                 |
-      | CTS Token Store > Root Suffix                       | `ou=famrecords,ou=openam-session,ou=tokens`                          |
-      | External Store Configuration > SSL/TLS Enabled      | Enable                                                               |
-      | External Store Configuration > Connection String(s) | `localhost:1636,localhost:11636`                                     |
-      | External Store Configuration > Login Id             | `uid=openam_cts,ou=admins,ou=famrecords,ou=openam-session,ou=tokens` |
-      | External Store Configuration > Password             | `5up35tr0ng`                                                         |
-      | External Store Configuration > Affinity Enabled     | Enable                                                               |
-
-4. Configure the identity store with affinity load balancing to both DS servers.
-
-   In the `am1` admin UI, while connected as `amadmin`:
-
-   1. Browse to Top Level Realm > Identity Stores > ds1 > Server Settings.
-
-   2. Update the following identity settings:
-
-      | Setting          | Choice                 |
-      | ---------------- | ---------------------- |
-      | LDAP Server      | Add `localhost:11636`. |
-      | Affinity Enabled | Enable                 |
-      | Affinty Level    | Bind                   |
-
-   3. Save your changes.
-
-5. Configure the configuration store to use both DS servers.
-
-   In the `am1` admin UI, while connected as `amadmin`:
-
-   1. Browse to Deployment > Servers.
-
-   2. *For each AM servlet*:
-
-      * Browse to *Server URL* > Directory Configuration > Server.
-
-      * Add an entry for the second DS server and save the changes:
-
-        | Setting         | Choice      |
-        | --------------- | ----------- |
-        | NAME            | `ds2`       |
-        | HOST NAME       | `localhost` |
-        | PORT NUMBER     | `11636`     |
-        | CONNECTION TYPE | SSL         |
-
-      * Save your changes.
-
-6. Log out of the AM admin UI.
-
-7. Restart Tomcat to take the configuration changes into account.
-
-   Wait a moment for Tomcat to shut down cleanly before starting it again:
-
-   ```console
-   $ /path/to/tomcat/bin/shutdown.sh
-   $ /path/to/tomcat/bin/startup.sh
-   ```
+   | Setting          | Choice |
+   | ---------------- | ------ |
+   | Affinity Enabled | Enable |
+   | Affinity Level   | Bind   |
 
 At this point, AM is ready to use.
 
 ### Task 5: Create a test user
 
-You will use this account for validation.
+You will use this account for validation. DS replicates the account, so you only need to create it once.
 
-1. Log in to the AM admin UI at <http://am.example.com/am1> as `amadmin` with `Passw0rd`.
+#### Steps
 
-2. Browse to Top Level Realm > Identities and click + Add Identity.
-
-3. Use the following settings for the test user:
+1. In the AM admin go to Top Level Realm > Identities, click + Add Identity, and create a test user with the following settings:
 
    | Setting       | Choice                |
    | ------------- | --------------------- |
    | User ID       | `bjensen`             |
-   | Password      | `hifalutin`           |
+   | Password      | `Ch4ng31t`            |
    | Email Address | `bjensen@example.com` |
    | First Name    | `Babs`                |
    | Last Name     | `Jensen`              |
    | Full Name     | `Barbara Jensen`      |
 
-4. Log out of the AM admin UI.
+2. Sign off so you can sign in next as the test user.
 
 ## Validation
 
 To validate your work, check:
 
-* A user can log in to one AM servlet and access the other with the same session while all servers are up.
+* The test user can sign on to one AM server and access the other with the same session while all servers are up.
 
-* The session is still honored when a CTS store is unavailable.
+* AM honors the session when one CTS store is unavailable.
 
 The following sections show how to do this in detail.
 
 ### Access AM as the test user
 
-1. Log in to AM at <http://am.example.com/am1> as `bjensen` with password `hifalutin`.
+#### Steps
 
-   The AM UI displays the user profile page:
+1. Sign on to AM at <http://am.example.com:8080/am/XUI/> as `bjensen` with password `Ch4ng31t`.
+
+   The AM UI shows the user profile page:
 
    ![Profile page for the test user](../_images/bjensen-am-profile.png)
 
-2. Switch AM servlets by updating the URL in the browser address bar, replacing `am1` with `am2`.
+2. Switch AM servers by updating the URL in the browser address bar, replacing port `8080` with `8081`.
 
-   The AM UI displays the same user profile page again.
+   The AM UI shows the same user profile page again.
 
 3. On the command line, find the associated CTS token in DS:
 
@@ -2933,8 +2932,8 @@ The following sections show how to do this in detail.
 
    Output
 
-   ```
-   dn: coreTokenId=[.var]##<token-id>##,ou=famrecords,ou=openam-session,ou=tokens
+   ```none
+   dn: coreTokenId=<token-id>,ou=famrecords,ou=openam-session,ou=tokens
    coreTokenObject: {"clientDomain":"ou=am-config","clientID":"id=bjensen,ou=user,ou=am-config","...":...}
    ```
 
@@ -2944,51 +2943,54 @@ The following sections show how to do this in detail.
    >
    > ```json
    > {
-   > "clientDomain": "ou=am-config",
-   > "clientID": "id=bjensen,ou=user,ou=am-config",
-   > "creationTimeInMillis": 1706087705386,
-   > "listeners": {
-   > "8f51ba31-a2e8-4f44-a998-91b411ffde3e": true,
-   > "f0e6df25-2a9c-4be7-a5bb-1ae22c834190": true
-   > },
-   > "maxCachingTimeInMinutes": 3,
-   > "maxIdleTimeInMinutes": 30,
-   > "maxSessionTimeInMinutes": 120,
-   > "restrictedTokensBySessionID": {},
-   > "sessionEventURLs": {},
-   > "sessionID": {
-   > "encryptedString": "ecJSF_y5EMdaJhQ4oJ01JGiXAyU.*AAJTSQACMDEAAlNLABxraFNLaytaenFKMlBtYjNmelpBdG9JTUU3ZEE9AAR0eXBlAANDVFMAAlMxAAA.*"
-   > },
-   > "sessionProperties": {
-   > "Locale": "en_GB",
-   > "authInstant": "2024-01-24T09:15:05Z",
-   > "Organization": "ou=am-config",
-   > "UserProfile": "Required",
-   > "Principals": "bjensen",
-   > "successURL": "/am1/console",
-   > "CharSet": "UTF-8",
-   > "Service": "ldapService",
-   > "Host": "127.0.0.1",
-   > "FullLoginURL": "/am1/UI/Login?realm=%2F",
-   > "AuthLevel": "0",
-   > "clientType": "genericHTML",
-   > "AMCtxId": "4cc3e651-f4eb-4bd6-9355-03b2b0abb45b-319",
-   > "loginURL": "/am1/UI/Login",
-   > "UserId": "bjensen",
-   > "AuthType": "DataStore",
-   > "sun.am.UniversalIdentifier": "id=bjensen,ou=user,ou=am-config",
-   > "HostName": "127.0.0.1",
-   > "amlbcookie": "01",
-   > "Principal": "id=bjensen,ou=user,ou=am-config",
-   > "UserToken": "bjensen"
-   > },
-   > "sessionState": "VALID",
-   > "sessionType": "USER",
-   > "timedOutTimeInSeconds": 0
+   >     "clientDomain": "ou=am-config",
+   >     "clientID": "id=bjensen,ou=user,ou=am-config",
+   >     "creationTimeInMillis": 1785824397488,
+   >     "listeners": {
+   >         "a97dc88b-a23d-4a42-9b47-ed69007def34": true,
+   >         "d3f91614-00c9-43ac-ac2e-7d35fce53e07": true,
+   >         "c1752b7c-56ba-43e7-9703-be4af53238b6": true,
+   >         "3681647e-210d-4229-b3c4-3966aeca4aeb": true
+   >     },
+   >     "maxCachingTimeInMinutes": 3,
+   >     "maxIdleTimeInMinutes": 30,
+   >     "maxSessionTimeInMinutes": 120,
+   >     "restrictedTokensBySessionID": {},
+   >     "sessionEventURLs": {},
+   >     "sessionID": {
+   >         "encryptedString": "<encrypted-string>"
+   >     },
+   >     "sessionProperties": {
+   >         "Locale": "en_US",
+   >         "authInstant": "<datestamp>",
+   >         "Organization": "ou=am-config",
+   >         "Principals": "bjensen",
+   >         "UserProfile": "Required",
+   >         "successURL": "/am/console",
+   >         "CharSet": "UTF-8",
+   >         "Service": "ldapService",
+   >         "Host": "127.0.0.1",
+   >         "FullLoginURL": "/am/UI/Login?realm=%2F",
+   >         "AuthLevel": "0",
+   >         "clientType": "genericHTML",
+   >         "AMCtxId": "<uuid>",
+   >         "loginURL": "/am/UI/Login",
+   >         "UserId": "bjensen",
+   >         "sun.am.UniversalIdentifier": "id=bjensen,ou=user,ou=am-config",
+   >         "HostName": "127.0.0.1",
+   >         "amlbcookie": "01",
+   >         "Principal": "id=bjensen,ou=user,ou=am-config",
+   >         "UserToken": "bjensen"
+   >     },
+   >     "sessionState": "VALID",
+   >     "sessionType": "USER",
+   >     "timedOutTimeInSeconds": 0
    > }
    > ```
 
-You have shown the test user session works for either AM servlet.
+#### Result
+
+You have shown the test user session works for either AM server.
 
 ### Test CTS failover
 
@@ -2998,9 +3000,9 @@ You have shown the test user session works for either AM servlet.
    $ /path/to/ds1/bin/stop-ds
    ```
 
-2. Verify you can still access both AM servlets as `bjensen`.
+2. Verify you can still access both AM servers as `bjensen`.
 
-   For `am1` and `am2`, the AM UI displays the user profile page.
+   At <http://am.example.com:8080/am> and <http://am.example.com:8081/am>, the AM UI shows the user profile page.
 
 3. Start the first DS server and stop the second:
 
@@ -3009,11 +3011,13 @@ You have shown the test user session works for either AM servlet.
    $ /path/to/ds2/bin/stop-ds
    ```
 
-4. Verify again you can still access both AM servlets as `bjensen`.
+4. Verify again you can still access both AM servers as `bjensen`.
 
-   For `am1` and `am2`, the AM UI displays the user profile page.
+   At <http://am.example.com:8080/am> and <http://am.example.com:8081/am>, the AM UI shows the user profile page.
 
-You have demonstrated how AM can use DS as a CTS store with affinity load balancing and failover.
+#### Result
+
+You have demonstrated that AM can use DS as a CTS store with affinity load balancing and failover.
 
 ## What's next
 
@@ -3064,7 +3068,7 @@ page_id: pingds:use-cases:limits
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/limits.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration", "Use Case"]
 page_aliases: ["maintenance-guide:resource-limits.adoc"]
 section_ids:
@@ -3478,7 +3482,7 @@ page_id: pingds:use-cases:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/use-cases/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Use Case"]
 page_aliases: ["index.adoc"]
 ---

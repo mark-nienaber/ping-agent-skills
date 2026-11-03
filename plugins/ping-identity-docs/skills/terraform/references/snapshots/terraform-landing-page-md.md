@@ -1,9 +1,11 @@
 ---
 title: Terraform at Ping Identity
-description: We develop and provide Terraform providers that are used to integrate product administration APIs with the Hashicorp Terraform ecosystem. With Terraform providers, developers can create Configuration as Code packages of Ping Identity product configurations (alongside supported third-party vendor product configurations) that represent a declaration of the intended end-state configuration for an environment.
+description: Landing page for Terraform at Ping Identity, linking to published providers, getting started guides, and conceptual documentation
 component: terraform
 page_id: terraform::terraform_landing_page
 canonical_url: https://developer.pingidentity.com/terraform/terraform_landing_page.html
+llms_txt: https://developer.pingidentity.com/terraform/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 19, 2025
 section_ids:
   published-terraform-providers: Published Terraform providers

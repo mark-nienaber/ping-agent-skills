@@ -111,7 +111,7 @@ To configure Evernote for single sign-on (SSO), you must have the signing certif
 
 4. In the **SAML HTTP Request URL** field, enter the HTTPS endpoint of your IdP for SSO requests.
 
-   For example, https\://*\<pf\_hostname>*:*\<pf\_port>*/idp/SSO.saml2
+   For example, https\://*\<pf_hostname>*:*\<pf_port>*/idp/SSO.saml2
 
 5. Open your PingFederate signing certificate file using a text editor.
 
@@ -264,11 +264,11 @@ To configure a connection for single sign-on (SSO) to Evernote, follow the instr
 
    * [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html)
 
-6. On the **Attribute Contract** screen, set the **Subject Name Format** for SAML\_SUBJECT to the below value:
+6. On the **Attribute Contract** screen, set the **Subject Name Format** for SAML_SUBJECT to the below value:
 
    * urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
 
-7. On the authentication adapter's **Attribute Contract Fulfillment** screen, map SAML\_SUBJECT to email address. Evernote requires SAML\_SUBJECT to contain the user's email address, which must match the Evernote user's business email address.
+7. On the authentication adapter's **Attribute Contract Fulfillment** screen, map SAML_SUBJECT to email address. Evernote requires SAML_SUBJECT to contain the user's email address, which must match the Evernote user's business email address.
 
 8. On the **Credentials > Digital Signature Settings** screen, select the signing certificate.
 

@@ -29,8 +29,8 @@ Learn about new PingOne Advanced Identity Cloud API updates.
 |---|---|---|---|
 | Idm Rest Api: managed, rest, objects | idm-rest-api | https://developer.pingidentity.com/pingoneaic-api/idm-rest-api/*.md | references/snapshots/idm-rest-api.md |
 | Am Oauth2: oauth2, oauth, token | am-oauth2 | https://developer.pingidentity.com/pingoneaic-api/am-oauth2/*.md | references/snapshots/am-oauth2.md |
-| Am Authentication: callbacks, over, rest | am-authentication | https://developer.pingidentity.com/pingoneaic-api/am-authentication/*.md | live-only |
-| Am Oidc1: oauth2, connect, jwk | am-oidc1 | https://developer.pingidentity.com/pingoneaic-api/am-oidc1/*.md | live-only |
+| Am Authentication: callbacks, over, rest | am-authentication | https://developer.pingidentity.com/pingoneaic-api/am-authentication/*.md | references/snapshots/am-authentication.md |
+| Am Oidc1: oauth2, connect, jwk | am-oidc1 | https://developer.pingidentity.com/pingoneaic-api/am-oidc1/*.md | references/snapshots/am-oidc1.md |
 | Crest: action, advanced, cloud | crest | https://developer.pingidentity.com/pingoneaic-api/crest/*.md | references/snapshots/crest.md |
 | Am Scripting: script, scripts, create | am-scripting | https://developer.pingidentity.com/pingoneaic-api/am-scripting/*.md | references/snapshots/am-scripting.md |
 | Am Authorization: over, rest, policy | am-authorization | https://developer.pingidentity.com/pingoneaic-api/am-authorization/*.md | references/snapshots/am-authorization.md |
@@ -38,7 +38,7 @@ Learn about new PingOne Advanced Identity Cloud API updates.
 | Identity Governance: governance, identity, access | identity-governance | https://developer.pingidentity.com/pingoneaic-api/identity-governance/*.md | references/snapshots/identity-governance.md |
 | Am Sessions: manage, over, rest | am-sessions | https://developer.pingidentity.com/pingoneaic-api/am-sessions/*.md | references/snapshots/am-sessions.md |
 | Api Custom Headers.Md: advanced, cloud, custom | api-custom-headers.md | https://developer.pingidentity.com/pingoneaic-api/api-custom-headers.md | references/snapshots/api-custom-headers-md.md |
-| Api Reference.Md: advanced, cloud, identity | api-reference.md | https://developer.pingidentity.com/pingoneaic-api/api-reference.md | references/snapshots/api-reference-md.md |
+| Api Reference.Md: identity, advanced, cloud | api-reference.md | https://developer.pingidentity.com/pingoneaic-api/api-reference.md | references/snapshots/api-reference-md.md |
 
 ## Composition
 

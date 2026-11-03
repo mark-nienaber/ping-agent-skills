@@ -6,7 +6,7 @@ license: MIT
 
 # PingDirectory
 
-Configure a Kafka sync source to consume change events from a Kafka topic and apply them to a sync destination.
+Landing page for the PingDirectory suite (PingDirectory, PingDirectoryProxy, PingDataSync, Delegated Admin) with links to release notes, get-started, admin, troubleshooting, and support resources.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ Configure a Kafka sync source to consume change events from a Kafka topic and ap
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Pingdirectory Server Administration Guide: about, managing, attribute | pingdirectory_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_server_administration_guide/*.md | references/snapshots/pingdirectory-server-administration-guide.md |
-| Pingdirectory Security Guide: aci, auditing, account | pingdirectory_security_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/*.md | references/snapshots/pingdirectory-security-guide.md |
-| Pingdirectoryproxy Server Administration Guide: about, connection, log | pingdirectoryproxy_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/*.md | references/snapshots/pingdirectoryproxy-server-administration-guide.md |
-| Pingdatasync Server Administration Guide: sync, configure, configuration | pingdatasync_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/*.md | references/snapshots/pingdatasync-server-administration-guide.md |
-| Installing The Pingdirectory Suite Of Products: installing, installation, server | installing_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/*.md | references/snapshots/installing-the-pingdirectory-suite-of-products.md |
-| Troubleshooting The Pingdirectory Suite Of Products: problems, server, information | troubleshooting_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/*.md | references/snapshots/troubleshooting-the-pingdirectory-suite-of-products.md |
-| Delegated Admin Application Guide: configuring, delegated, admin | delegated_admin_application_guide | https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/*.md | references/snapshots/delegated-admin-application-guide.md |
-| Managing Servers And Certificates: certificate, certificates, enabling | managing_servers_and_certificates | https://docs.pingidentity.com/pingdirectory/11.1/managing_servers_and_certificates/*.md | references/snapshots/managing-servers-and-certificates.md |
-| Consent Solution Guide: consent, configuring, service | consent_solution_guide | https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/*.md | live-only |
-| Managing Access Control: access, token, control | managing_access_control | https://docs.pingidentity.com/pingdirectory/11.1/managing_access_control/*.md | references/snapshots/managing-access-control.md |
-| Monitoring The Pingdirectory Suite Of Products: monitoring, snmp, configuring | monitoring_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/*.md | references/snapshots/monitoring-the-pingdirectory-suite-of-products.md |
-| Managing Scim 11 And 20 Servlet Extensions: scim, extension, operations | managing_scim_11_and_20_servlet_extensions | https://docs.pingidentity.com/pingdirectory/11.1/managing_scim_11_and_20_servlet_extensions/*.md | references/snapshots/managing-scim-11-and-20-servlet-extensions.md |
+| Pingdirectory Server Administration Guide: about, pingdirectory, attribute | pingdirectory_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_server_administration_guide/*.md | references/snapshots/pingdirectory-server-administration-guide.md |
+| Pingdirectory Security Guide: pingdirectory, understand, aci | pingdirectory_security_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/*.md | references/snapshots/pingdirectory-security-guide.md |
+| Pingdirectoryproxy Server Administration Guide: about, pingdirectoryproxy, understand | pingdirectoryproxy_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/*.md | references/snapshots/pingdirectoryproxy-server-administration-guide.md |
+| Pingdatasync Server Administration Guide: sync, pingdatasync, configure | pingdatasync_server_administration_guide | https://docs.pingidentity.com/pingdirectory/11.1/pingdatasync_server_administration_guide/*.md | references/snapshots/pingdatasync-server-administration-guide.md |
+| Installing The Pingdirectory Suite Of Products: pingdirectory, server, installing | installing_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/installing_the_pingdirectory_suite_of_products/*.md | references/snapshots/installing-the-pingdirectory-suite-of-products.md |
+| Delegated Admin Application Guide: delegated, admin, configuring | delegated_admin_application_guide | https://docs.pingidentity.com/pingdirectory/11.1/delegated_admin_application_guide/*.md | references/snapshots/delegated-admin-application-guide.md |
+| Troubleshooting The Pingdirectory Suite Of Products: server, pingdirectory, pingdatasync | troubleshooting_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/troubleshooting_the_pingdirectory_suite_of_products/*.md | references/snapshots/troubleshooting-the-pingdirectory-suite-of-products.md |
+| Managing Servers And Certificates: pingdirectory, certificate, certificates | managing_servers_and_certificates | https://docs.pingidentity.com/pingdirectory/11.1/managing_servers_and_certificates/*.md | references/snapshots/managing-servers-and-certificates.md |
+| Consent Solution Guide: consent, service, pingdirectory | consent_solution_guide | https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/*.md | references/snapshots/consent-solution-guide.md |
+| Managing Access Control: access, pingdirectory, token | managing_access_control | https://docs.pingidentity.com/pingdirectory/11.1/managing_access_control/*.md | references/snapshots/managing-access-control.md |
+| Monitoring The Pingdirectory Suite Of Products: monitoring, pingdirectory, server | monitoring_the_pingdirectory_suite_of_products | https://docs.pingidentity.com/pingdirectory/11.1/monitoring_the_pingdirectory_suite_of_products/*.md | references/snapshots/monitoring-the-pingdirectory-suite-of-products.md |
+| Managing Scim: scim, pingdirectoryproxy, ldap | managing_scim | https://docs.pingidentity.com/pingdirectory/11.1/managing_scim/*.md | references/snapshots/managing-scim.md |
 
 ## Composition
 

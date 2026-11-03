@@ -1,12 +1,12 @@
 ---
 title: Applications
-description: An application in DaVinci represents one of your applications and gives you fine-grained control over which flows can be run through that application and by what methods.
+description: PingOne DaVinci applications control which flows external sites can run and how incoming requests are authenticated and managed.
 component: davinci
 page_id: davinci:applications:davinci_applications
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_applications.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_applications.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2026-03-24
 ---
 
 # Applications
@@ -27,13 +27,13 @@ The **Connections** tab lets you direct requests to specific connectors.
 
 ---
 title: Configuring a flow policy
-description: Configure flow policies to control which flows and flow versions are displayed for users.
+description: Configure a PingOne DaVinci flow policy to control which flows and flow versions run, including weight distribution for A/B testing.
 component: davinci
 page_id: davinci:applications:davinci_configuring_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2026-04-03
 section_ids:
   steps: Steps
   result: Result:
@@ -109,13 +109,13 @@ Configure flow policies to control which flows and flow versions are displayed f
 
 ---
 title: Configuring connection settings
-description: Add connections to an application to enable direct interactions with that connector through REST API calls.
+description: Add connections to a PingOne DaVinci application to enable direct REST API interactions with a connector.
 component: davinci
 page_id: davinci:applications:davinci_configuring_connections
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_connections.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_connections.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2024-09-13
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -147,13 +147,13 @@ Add connections to an application to enable direct interactions with that connec
 
 ---
 title: Configuring general application settings
-description: Configure an application's general properties and API settings.
+description: Configure PingOne DaVinci application general settings, including API keys and FIDO2 connections for authentication.
 component: davinci
 page_id: davinci:applications:davinci_configuring_general_settings
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_general_settings.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_general_settings.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2025-12-05
 section_ids:
   steps: Steps
 ---
@@ -202,13 +202,13 @@ Configure an application's general properties and API settings.
 
 ---
 title: Configuring OIDC settings
-description: Configure OpenID Connect (OIDC) for your application to enable it as a method for invoking flows.
+description: Configure OpenID Connect settings for a PingOne DaVinci application, including redirect URLs, scopes, grants, and JWKS.
 component: davinci
 page_id: davinci:applications:davinci_configuring_openid
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_configuring_openid.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_configuring_openid.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2026-03-24
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -280,13 +280,13 @@ Configure OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
 
 ---
 title: Creating an application
-description: Create a new application to enable DaVinci to interact with that application.
+description: Create a PingOne DaVinci application to enable flows to be launched through it.
 component: davinci
 page_id: davinci:applications:davinci_creating_an_application
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_creating_an_application.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_creating_an_application.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2026-03-24
 section_ids:
   steps: Steps
 ---
@@ -321,13 +321,13 @@ Create a new application to enable DaVinci to interact with that application.
 
 ---
 title: Deleting a flow policy
-description: Delete an existing flow policy to permanently remove it from use.
+description: Delete a PingOne DaVinci flow policy to permanently remove it from use.
 component: davinci
 page_id: davinci:applications:davinci_deleting_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_deleting_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_deleting_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2024-09-13
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -359,13 +359,13 @@ Verify that the flow policy is not in use.
 
 ---
 title: Deleting an application
-description: Delete an application to remove it from the UI and stop all flow use for it.
+description: Delete a PingOne DaVinci application to permanently remove it from use.
 component: davinci
 page_id: davinci:applications:davinci_deleting_an_application
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_deleting_an_application.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_deleting_an_application.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 22, 2023
+revdate: 2024-09-13
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -395,13 +395,13 @@ Delete an application to remove it from the UI and stop all flow use for it.
 
 ---
 title: Editing a flow policy
-description: Edit existing flow policies to update which flows and flow versions are displayed for users.
+description: Edit a PingOne DaVinci flow policy to update which flows and flow versions are displayed to users.
 component: davinci
 page_id: davinci:applications:davinci_editing_a_flow_policy
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_editing_a_flow_policy.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_editing_a_flow_policy.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2025-01-07
 section_ids:
   steps: Steps
 ---
@@ -460,13 +460,13 @@ Edit existing flow policies to update which flows and flow versions are displaye
 
 ---
 title: Flow Policies
-description: Flow policies let you control which flows are launched through the application.
+description: PingOne DaVinci flow policies control which flows and flow versions launch through an application, including A/B testing options.
 component: davinci
 page_id: davinci:applications:davinci_flow_policies
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_flow_policies.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_flow_policies.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2024-09-12
 ---
 
 # Flow Policies
@@ -487,13 +487,13 @@ Choose from one of the following topics:
 
 ---
 title: Flow policy metrics
-description: The Flow Comparison Metrics page lets you view data about the flows included in a flow policy. You can view it by locating the flow policy and, in the More options ( ) list, selecting Comparison Metrics.
+description: View PingOne DaVinci flow policy comparison metrics, including total visitors and success rate for each flow version.
 component: davinci
 page_id: davinci:applications:davinci_flow_policy_comparison_metrics
-canonical_url: http://docs.pingidentity.com/davinci/applications/davinci_flow_policy_comparison_metrics.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/applications/davinci_flow_policy_comparison_metrics.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 25, 2023
+revdate: 2024-12-13
 ---
 
 # Flow policy metrics

@@ -116,7 +116,7 @@ CURATED_SAMPLES = (
             "and safe handling of sensitive data?"
         ),
         expected_skill="davinci",
-        expected_guide="davinci_best_practices",
+        expected_guide="flows",
     ),
     Sample(
         name="pingfederate-sdk-oauth-adapters",
@@ -157,7 +157,7 @@ CURATED_SAMPLES = (
             "then apply the policy to the application."
         ),
         expected_skill="pingone",
-        expected_guide="applications",
+        expected_guide="authentication",
     ),
     Sample(
         name="pingone-authorize-oauth-policy",

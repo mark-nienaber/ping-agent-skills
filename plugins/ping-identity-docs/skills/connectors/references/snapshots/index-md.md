@@ -1,12 +1,12 @@
 ---
 title: PingOne DaVinci Connectors
-description: Connectors form the building blocks for flows. They connect DaVinci with third parties, HTML pages, and other tools.
+description: Browse and configure PingOne DaVinci connectors to integrate third-party services, HTML pages, and tools into your PingOne DaVinci flows
 component: connectors
 page_id: connectors::index
 canonical_url: https://docs.pingidentity.com/connectors/index.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 20, 2026
+revdate: 2026-07-09T00:00:00Z
 keywords: ["DaVinci", "Connectors"]
 page_aliases: ["alphabetical/a_c.adoc", "alphabetical/d_f.adoc", "alphabetical/g_i.adoc", "alphabetical/j_l.adoc", "alphabetical/m_o.adoc", "alphabetical/p_r.adoc", "alphabetical/s_u.adoc", "alphabetical/v_z.adoc"]
 section_ids:
@@ -36,11 +36,11 @@ Refer to the [Ping Identity Marketplace](https://marketplace.pingone.com/browse?
 
 Ping Identity offers a variety of connector types to help meet specific needs when building user experiences in PingOne DaVinci.
 
-Flow templates in the Ping Identity Marketplace provide premade solutions for common DaVinci use cases that you can modify or use as examples for orchestration flows. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.adoc).
+Flow templates in the Ping Identity Marketplace provide premade solutions for common PingOne DaVinci use cases that you can modify or use as examples for orchestration flows. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.adoc).
 
 ### Core connectors
 
-Provide the foundation for your DaVinci flows by performing basic functions.
+Provide the foundation for your PingOne DaVinci flows by performing basic functions.
 
 ![](_images/connector-logos/davincicolor-logo.png)
 
@@ -164,7 +164,7 @@ Store and retrieve flow and user attributes as variables in your flow.
 
 ### Ping connectors
 
-Help you integrate other Ping Identity products and features into your DaVinci flows.
+Help you integrate other Ping Identity products and features into your PingOne DaVinci flows.
 
 ![](_images/connector-logos/pingfederate-logo.png)
 
@@ -240,6 +240,12 @@ Integrate your flows with a PingOne RADIUS Gateway.
 
 ![](_images/connector-logos/davincicolor-logo.png)
 
+#### [PingOne Recognize connector](p1_recognize_connector.html)
+
+Integrate your flows with a PingOne Recognize.
+
+![](_images/connector-logos/davincicolor-logo.png)
+
 #### [PingOne Scope Consent Connector](p1_scope_consent_connector.html)
 
 View consent records on an application or user basis, revoke or update user consent records, or prompt users to provide or decline consent to sign-on policies and record these decisions.
@@ -260,11 +266,23 @@ Help you integrate flows with other products and services that your organization
 
 Send identity lifecycle events to Accertify for real-time fraud detection and risk scoring in your flow.
 
+![](_images/connector-logos/abuseipdb-logo.png)
+
+#### [AbuseIPDB Connector](abuseipdb_connector.html)
+
+Check whether an IP address has been associated with malicious activity in your flow.
+
 ![](_images/connector-logos/adobe-experience-cloud-logo.png)
 
 #### [Adobe Experience Manager Connector](adobe_experience_manager_connector.html)
 
 Process privacy requests and manage customer consent status within Adobe Experience Platform in your flow.
+
+![](_images/connector-logos/akamai-account-protector-logo.png)
+
+#### [Akamai Account Protector Connector](akamai_account_protector_connector.html)
+
+Evaluate Akamai user risk signals and branch your flow on the resulting risk level.
 
 ![](_images/connector-logos/apple-logo.png)
 
@@ -278,6 +296,18 @@ Authenticate users with Apple in your flow.
 
 Use AuthenticID for identity proofing in your flow.
 
+![](_images/connector-logos/aws-s3-logo.png)
+
+#### [AWS S3 Connector](aws_s3_connector.html)
+
+Upload, retrieve, and delete objects in an Amazon S3 bucket in your flow.
+
+![](_images/connector-logos/aws-secrets-manager-logo.png)
+
+#### [AWS Secrets Manager Connector](aws_secrets_manager_connector.html)
+
+Retrieve, create, update, and delete secrets stored in AWS Secrets Manager in your flow.
+
 ![](_images/connector-logos/microsoft-teams-logo.png)
 
 #### [Azure AD User Management Connector](azure_ad_user_management_connector.html)
@@ -289,6 +319,12 @@ Manage users, groups, and software licenses in your flow.
 #### [Babel Street Connector](babelstreet_connector.html)
 
 Use the Babel Street Analytics API in your flow.
+
+![](_images/connector-logos/beyondtrust-pra-logo.png)
+
+#### [BeyondTrust Privileged Remote Access Connector](beyondtrust_pra_connector.html)
+
+Terminate BeyondTrust Privileged Remote Access jump sessions by hostname or username in your flow.
 
 ![](_images/connector-logos/castle-logo.png)
 
@@ -307,6 +343,12 @@ Verify users using CLEAR's hosted identity verification UI in your flow.
 #### [Cloudflare Connector](cloudflare_connector.html)
 
 Integrate Cloudflare threat intelligence and Zero Trust risk scoring into your flows to assess security risks in real time.
+
+![](_images/connector-logos/connectid-logo.png)
+
+#### [ConnectID Connector](connectid_connector.html)
+
+Request identity verification through the ConnectID identity exchange in your flow.
 
 ![](_images/connector-logos/constella-logo.png)
 
@@ -374,6 +416,24 @@ Use HYPR for passwordless authentication in your flow.
 
 Use ID DataWeb for identity verification in your flow.
 
+![](_images/connector-logos/idme-community-verification-logo.png)
+
+#### [ID.me Community Verification Connector](idme_community_verification_connector.html)
+
+Verify user community affiliation with ID.me in your flow.
+
+![](_images/connector-logos/infinipoint-logo.png)
+
+#### [Infinipoint Connector](infinipoint_connector.html)
+
+Authenticate users with Infinipoint Device-Identity-as-a-Service and verify device trust in your flow.
+
+![](_images/connector-logos/ipstack-logo.png)
+
+#### [IPStack Connector](ipstack_connector.html)
+
+Look up IP address geolocation data with ipstack in your flow.
+
 ![](_images/connector-logos/island-logo.png)
 
 #### [Island Connector](island_connector.html)
@@ -409,6 +469,12 @@ Integrate endpoint detection and response capabilities into your flows and enfor
 #### [Microsoft Edge Connector](microsoft_edge_connector.html)
 
 Use Microsoft Edge for Business to improve authentication security in your flow.
+
+![](_images/connector-logos/microsoft-intune-logo.png)
+
+#### [Microsoft Intune Connector](microsoft_intune_connector.html)
+
+Query and manage user devices through Microsoft Graph in your flow.
 
 ![](_images/connector-logos/microsoft-teams-logo.png)
 
@@ -452,6 +518,12 @@ Use Secret Double Octopus for passwordless authentication in your flow.
 
 Use RSA SecurID for MFA in your flow.
 
+![](_images/connector-logos/segment-logo.png)
+
+#### [Segment Connector](segment_connector.html)
+
+Collect, clean, and control customer data with Segment's HTTP Tracking API in your flow.
+
 ![](_images/connector-logos/sentinelone-logo.png)
 
 #### [SentinelOne Connector](sentinelone_connector.html)
@@ -476,6 +548,12 @@ Manage users, group memberships, and incidents in ServiceNow from your flow.
 
 Verify identity documents and get fraud scores in your flows.
 
+![](_images/connector-logos/socure-logo.png)
+
+#### [Socure RiskOS Connector](socure_riskos_connector.html)
+
+Run fraud and identity risk evaluations, manage decisions, and submit fraud feedback using the Socure RiskOS API in your flow.
+
 ![](_images/connector-logos/splunk-logo.png)
 
 #### [Splunk Connector](splunk_connector.html)
@@ -494,6 +572,12 @@ Verify a user's identity information in your flow by checking TransUnion's trust
 
 Verify users with Veriff's artificial intelligence (AI)-powered identity solution for identity fraud prevention in your flow.
 
+![](_images/connector-logos/wirewheel-logo.png)
+
+#### [WireWheel Connector](wirewheel_connector.html)
+
+Manage customer consent records with WireWheel in your flow.
+
 ![](_images/connector-logos/yoti-logo.png)
 
 #### [Yoti Connector](yoti_connector.html)
@@ -506,13 +590,13 @@ Provide the fastest way to orchestrate flows for common user experiences, such a
 
 ![](_images/connector-logos/davincicolor-logo.png)
 
-#### [Authentication Connector](authentication_connector.html)
+#### [Authentication Use Case Connector](authentication_connector.html)
 
 Quickly orchestrate authentication flows by eliminating the need for multiple granular nodes.
 
 ![](_images/connector-logos/davincicolor-logo.png)
 
-#### [MFA Connector](mfa_connector.html)
+#### [MFA Use Case Connector](mfa_connector.html)
 
 Quickly orchestrate MFA flows by eliminating the need for multiple granular nodes.
 
@@ -521,3 +605,9 @@ Quickly orchestrate MFA flows by eliminating the need for multiple granular node
 #### [Protect Use Case Connector](protect_use_case_connector.html)
 
 Quickly orchestrate risk-aware user journeys with PingOne Protect policy mitigations, including adaptive challenges and access decisions.
+
+![](_images/connector-logos/davincicolor-logo.png)
+
+#### [Identity Verification Use Case Connector](identity_verification_connector.html)
+
+Quickly orchestrate identity verification journeys by integrating government ID validation and facial liveness checks into your user onboarding and re-verification experiences.

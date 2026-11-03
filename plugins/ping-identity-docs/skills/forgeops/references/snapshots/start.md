@@ -1,260 +1,13 @@
 ---
-title: Assess your skill level
-description: I can:
-component: forgeops
-version: 2026.2
-page_id: forgeops:start:start-here-skills
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/start-here-skills.html
-llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Kubernetes", "Docker", "CI/CD", "Git", "Google Cloud", "AWS", "Azure", "Certificates", "SSL/TLS", "Load Testing", "Backup &amp; Restore"]
-section_ids:
-  skills-benchmarking: Benchmarking and load testing
-  skills-cicd: CI/CD for cloud deployments
-  skills-docker: Docker
-  skills-git: Git
-  skills-integration: External application and database integration
-  skills-platform: Ping Advanced Identity Software
-  skills-cdm-cloud-provider: Google Cloud, AWS, or Azure (basic)
-  skills-prod-cloud-provider: Google Cloud, AWS, or Azure (expert)
-  skills-integration-test: Integration testing
-  skills-cdk-kubernetes: Kubernetes (basic)
-  skills-prod-kubernetes: Kubernetes (expert)
-  skills-kubernetes-backup: Kubernetes backup and restore
-  skills-proj-plan: Project planning and management for cloud deployments
-  skills-security: Security and hardening for cloud deployments
-  skills-sr: Site reliability engineering for cloud deployments
----
-
-# Assess your skill level
-
-## Benchmarking and load testing
-
-I can:
-
-* Write performance tests, using tools such as Gatling and Apache JMeter, to ensure that the system meets required performance thresholds and service level agreements (SLAs).
-
-* Resize a Kubernetes cluster, taking into account performance test results, thresholds, and SLAs.
-
-* Run Linux performance monitoring utilities, such as top.
-
-## CI/CD for cloud deployments
-
-I have experience:
-
-* Designing and implementing a CI/CD process for a cloud-based deployment running in production.
-
-* Using a cloud CI/CD tool, such as Tekton, Google Cloud Build, Codefresh, AWS CloudFormation, or Jenkins, to implement a CI/CD process for a cloud-based deployment running in production.
-
-* Integrating GitOps into a CI/CD process.
-
-## Docker
-
-I know how to:
-
-* Write Dockerfiles.
-
-* Create Docker images, and push them to a private Docker registry.
-
-* Pull and run images from a private Docker registry.
-
-I understand:
-
-* The concepts of Docker layers, and building images based on other Docker images using the FROM instruction.
-
-* The difference between the COPY and ADD instructions in a Dockerfile.
-
-## Git
-
-I know how to:
-
-* Use a Git repository collaboration framework, such as GitHub, GitLab, or Bitbucket Server.
-
-* Perform common Git operations, such as cloning and forking repositories, branching, committing changes, submitting pull requests, merging, viewing logs, and so forth.
-
-## External application and database integration
-
-I have expertise in:
-
-* AM policy agents.
-
-* Configuring AM policies.
-
-* Synchronizing and reconciling identity data using IDM.
-
-* Managing cloud databases.
-
-* Connecting Ping Advanced Identity Software components to cloud databases.
-
-## Ping Advanced Identity Software
-
-I have:
-
-* Attended Ping Identity University training courses.
-
-* Deployed the Ping Advanced Identity Software in production, and kept the deployment highly available.
-
-* Configured DS replication.
-
-* Passed the Certified Access and Identity Management exams from Ping Identity (highly recommended).
-
-## Google Cloud, AWS, or Azure (basic)
-
-I can:
-
-* Use the graphical user interface for Google Cloud, AWS, or Azure to navigate, browse, create, and remove Kubernetes clusters.
-
-* Use the cloud provider's tools to monitor a Kubernetes cluster.
-
-* Use the command user interface for Google Cloud, AWS, or Azure.
-
-* Administer cloud storage.
-
-## Google Cloud, AWS, or Azure (expert)
-
-In addition to the [basic skills for Google Cloud, AWS, or Azure](#skills-cdm-cloud-provider), I can
-
-* Review Terraform artifacts in the `forgeops-extras` repository to see how clusters that support ForgeOps deployments are configured.
-
-* Create and manage a Kubernetes cluster using an infrastructure-as-code tool such as Terraform, AWS CloudFormation, or Pulumi.
-
-* Configure multi-zone and multi-region Kubernetes clusters.
-
-* Configure cloud-provider identity and access management (IAM).
-
-* Configure virtual private clouds (VPCs) and VPC networking.
-
-* Manage keys in the cloud using a service such as Google Key Management Service (KMS), Amazon KMS, or Azure Key Vault.
-
-* Configure and manage DNS domains on Google Cloud, AWS, or Azure.
-
-* Troubleshoot a deployment running in the cloud using the cloud provider's tools, such as Google Stackdriver, Amazon CloudWatch, or Azure Monitor.
-
-* Integrate a deployment with certificate management tools, such as cert-manager and Let's Encrypt.
-
-* Integrate a deployment with monitoring and alerting tools, such as Prometheus and Alertmanager.
-
-I have obtained one of the following certifications (highly recommended):
-
-* Google Certified Associate Cloud Engineer Certification.
-
-* AWS professional-level or associate-level certifications (multiple).
-
-* Azure Administrator.
-
-## Integration testing
-
-I can:
-
-* Automate QA testing using a test automation framework.
-
-* Design a chaos engineering test for a cloud-based deployment running in production.
-
-* Use chaos engineering testing tools, such as Chaos Monkey.
-
-## Kubernetes (basic)
-
-I've gone through the tutorials at kubernetes.io, and am able to:
-
-* Use the kubectl command to determine the status of all the pods in a namespace, and to determine whether pods are operational.
-
-* Use the kubectl describe pod command to perform basic troubleshooting on pods that are not operational.
-
-* Use the kubectl command to obtain information about namespaces, secrets, deployments, and stateful sets.
-
-* Use the kubectl command to manage persistent volumes and persistent volume claims.
-
-## Kubernetes (expert)
-
-In addition to the [basic skills for Kubernetes](#skills-cdk-kubernetes), I have:
-
-* Configured role-based access to cloud resources.
-
-* Configured Kubernetes objects, such as deployments and stateful sets.
-
-* Configured Kubernetes ingresses.
-
-* Configured Kubernetes resources using Kustomize.
-
-* Passed the Cloud Native Certified Kubernetes Administrator exam (highly recommended).
-
-## Kubernetes backup and restore
-
-I know how to:
-
-* Schedule backups of Kubernetes persistent volumes on volume snapshots.
-
-* Restore Kubernetes persistent volumes from volume snapshots.
-
-I have experience with one or more of the following:
-
-* Volume snapshots on Google Kubernetes Engine (GKE), Amazon Elastic Kubernetes Service (EKS), or Azure Kubernetes Service (AKS)
-
-* A third-party Kubernetes backup and restore product, such as Velero, Kasten K10, TrilioVault, Commvault, or Portworx PX-Backup.
-
-## Project planning and management for cloud deployments
-
-I have planned and managed:
-
-* A production deployment in the cloud.
-
-* A production deployment of Ping Advanced Identity Software.
-
-## Security and hardening for cloud deployments
-
-I can:
-
-* Harden a Ping Advanced Identity Software deployment.
-
-* Configure TLS, including mutual TLS, for a multi-tiered cloud deployment.
-
-* Configure cloud identity and access management and role-based access control for a production deployment.
-
-* Configure encryption for a cloud deployment.
-
-* Configure Kubernetes network security policies.
-
-* Configure private Kubernetes networks, deploying bastion servers as needed.
-
-* Undertake threat modeling exercises.
-
-* Scan Docker images to ensure container security.
-
-* Configure and use private Docker container registries.
-
-## Site reliability engineering for cloud deployments
-
-I can:
-
-* Manage multi-zone and multi-region deployments.
-
-* Implement DS backup and restore in order to recover from a database failure.
-
-* Manage cloud disk availability issues.
-
-* Analyze monitoring output and alerts, and respond should a failure occur.
-
-* Obtain logs from all the software components in my deployment.
-
-* Follow the cloud provider's recommendations for patching and upgrading software in my deployment.
-
-* Implement an upgrade scheme, such as blue/green or rolling upgrades, in my deployment.
-
-* Create a Site Reliability Runbook for the deployment, documenting all the procedures to be followed and other relevant information.
-
-* Follow all the procedures in the project's Site Reliability Runbook, and revise the runbook if it becomes out-of-date.
-
----
-
----
 title: ForgeOps release process
-description: ForgeOps release process is aimed at simplifying the management of multiple ForgeOps versions in a single branch. This process:
+description: Understand ForgeOps release process
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:release-process
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/release-process.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/release-process.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-18T11:55:56Z
 keywords: ["Docker", "forgeops Command"]
 section_ids:
   key_features: Key features
@@ -282,7 +35,7 @@ ForgeOps release process is aimed at simplifying the management of multiple Forg
 
 * Product versions are separated from the `forgeops` repository
 
-  * Product image tags are now maintained in tag files at <http://releases.forgeops.com>.
+  * Product image tags are now maintained in tag files at <https://releases.forgeops.com>.
 
   * The refactored `forgeops` tool retrieves the requested tags and updates Dockerfiles/Helm/Kustomize as required.
 
@@ -300,7 +53,7 @@ ForgeOps release process is aimed at simplifying the management of multiple Forg
 
     * The Ping Advanced Identity Software teams provide the platform-level patches.
 
-  * The delivery process is automated, and the newly promoted tags will be available at <http://releases.forgeops.com>.
+  * The delivery process is automated, and the newly promoted tags will be available at <https://releases.forgeops.com>.
 
   * New `dev` branch for latest forgeops features. Equivalent to the erstwhile `master` branch which is no longer available.
 
@@ -314,13 +67,14 @@ ForgeOps release process is aimed at simplifying the management of multiple Forg
 
 ---
 title: Repositories 
-description: The ForgeOps project provides two public GitHub repositories; the forgeops and forgeops-extras repositories.
+description: Understand the content of `forgeops` and `forgeops-extras` GitHub repositories
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:repositories
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/repositories.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/repositories.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 keywords: ["forgeops Repository", "forgeops-extras"]
 section_ids:
   forgeops_repository: forgeops repository
@@ -391,26 +145,26 @@ Learn more about the files in the repository, recommendations about how to work 
 
 ### `forgeops` repository updates
 
-New `forgeops` repository features become available in the `2026.2.1` tag of the `main` branch from time to time.
+New `forgeops` repository features become available in the `2026.3.2` tag of the `main` branch from time to time.
 
 When you start working with the `forgeops` repository, clone the repository. Depending on your organization's setup, you'll clone the repository either from the public repository on GitHub, or from a fork. You can find more information in [Git clone or Git fork?](#forgeops-fork).
 
-Then, check out the `2026.2.1` tag and create a working branch. For example:
+Then, check out the `2026.3.2` tag and create a working branch. For example:
 
 ```
-$ git checkout 2026.2.1
+$ git checkout 2026.3.2
 $ git checkout -b my-working-branch
 ```
 
-The ForgeOps team recommends that you regularly incorporate updates to the `2026.2.1` tag into your working branch:
+The ForgeOps team recommends that you regularly incorporate updates to the `2026.3.2` tag into your working branch:
 
-1. [Get emails or subscribe to the ForgeOps RSS feed](../rn/rn.html) to be notified when there have been updates to ForgeOps 2026.2.1.
+1. [Get emails or subscribe to the ForgeOps RSS feed](../rn/rn.html) to be notified when there have been updates to ForgeOps 2026.3.2.
 
-2. Pull new commits in the `2026.2.1` tag from the repository into your `2026.2.1` clone.
+2. Pull new commits in the `2026.3.2` tag from the repository into your `2026.3.2` clone.
 
 3. Rebase the commits from the new branch into your working branch in your `forgeops` repository clone.
 
-It's important to understand the impact of rebasing changes from the `forgeops` repository into your branches. [`forgeops` repository reference](#forgeops-reference) provides advice about which files in the `forgeops` repository to change, which files not to change, and what to look out for when you rebase. Follow the advice in [`forgeops` repository reference](#forgeops-reference) to reduce merge conflicts, and to better understand how to resolve them when you rebase your working branch with updates that the ForgeOps team has made to the `2026.2.1` tag of the `main` branch.
+It's important to understand the impact of rebasing changes from the `forgeops` repository into your branches. [`forgeops` repository reference](#forgeops-reference) provides advice about which files in the `forgeops` repository to change, which files not to change, and what to look out for when you rebase. Follow the advice in [`forgeops` repository reference](#forgeops-reference) to reduce merge conflicts, and to better understand how to resolve them when you rebase your working branch with updates that the ForgeOps team has made to the `2026.3.2` tag of the `main` branch.
 
 ### `forgeops` repository reference
 
@@ -588,7 +342,7 @@ Support Status: Sample files. [Not supported by Ping Identity.](support.html#com
 
 ## Git clone or Git fork?
 
-For the simplest use cases—a single user performing a proof of concept, or exploration of the platform—cloning the ForgeOps public repositories from GitHub provides a quick and adequate way to access the repositories.
+For the simplest use cases—a single user performing a proof of concept, or exploration of the platform—cloning the ForgeOps public repositories from GitHub provides a quick and adequate way to access public repositories.
 
 If, however, your use case is more complex, you might want to fork the repositories, and use the forks as your common upstream repositories. For example:
 
@@ -610,13 +364,14 @@ If you've forked the `forgeops` and `forgeops-extras` repositories:
 
 ---
 title: Start here
-description: Ping Identity provides several resources to help you get started in the cloud. These resources demonstrate how to deploy the Ping Advanced Identity Software on Kubernetes. Before you proceed, review the following precautions:
+description: Get started with deploying ForgeOps on Kubernetes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:start-here
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/start-here.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/start-here.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-18T11:55:56Z
 keywords: ["CDK", "CDM", "Certificates", "SSL/TLS", "Load Testing", "Backup &amp; Restore", "Docker"]
 section_ids:
   cdm-sandbox: Try an out-of-the-box ForgeOps deployment
@@ -813,13 +568,14 @@ More information:
 
 ---
 title: Support for ForgeOps
-description: This appendix contains information about support options for ForgeOps deployments and the Ping Advanced Identity Software.
+description: Understand the support coverage, limitations, and reporting procedures for ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:support
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/support.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/support.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 keywords: ["ForgeOps Support", "Ping Support", "Kubernetes", "Google Cloud", "AWS", "Azure", "forgeops Repository", "forgeops-extras Repository"]
 section_ids:
   forgeops_support: ForgeOps support
@@ -842,13 +598,13 @@ This appendix contains information about support options for ForgeOps deployment
 
 ## ForgeOps support
 
-The Ping Identity ForgeOps team has developed artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) Git repositories for deploying the Ping Advanced Identity Software in the cloud. The companion [ForgeOps documentation](../index.html) provides examples to help you get started.
+The Ping Identity ForgeOps team has developed artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) Git repositories for deploying the Ping Advanced Identity Software in the cloud. The companion [ForgeOps documentation](../index.html) provides examples to help you get started.
 
 These artifacts and documentation are provided on an as-is basis. Ping Identity doesn't guarantee the individual success developers may have in implementing the code on their development platforms or in production configurations.
 
 ### ForgeOps lifecycle policy
 
-When a Ping Advanced Identity Software product has been deployed using ForgeOps, the product support lifecycle policy and timeline that applies to that product continues to apply regardless of the deployment type. These support policies relate to the Ping Advanced Identity Software product only and not the underlying container operating system. Therefore, refer to the support lifecycle policy for the relevant Ping Advanced Identity Software product support lifecycle:
+When a Ping Advanced Identity Software product has been deployed using ForgeOps, the product support lifecycle policy and timeline that applies to that product continues to apply regardless of the deployment type. These support policies relate to the Ping Advanced Identity Software product only and not the underlying container operating system. Therefore, refer to the support lifecycle policy for the relevant Ping Identity Platform product support lifecycle:
 
 * [Support lifecycle policy for PingAM, PingDS, PingIDM, and IGA](https://support.pingidentity.com/s/article/Ping-Identity-Product-Support-Lifecycle-Policy-PingAM-PingDS-PingIDM-and-IGA).
 
@@ -893,7 +649,7 @@ Ping Identity provides support for the following resources:
 
 * Docker images provided by the ForgeOps team.
 
-* Artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) Git repository:
+* Artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) Git repository:
 
   * Files used to build Docker images for the Ping Advanced Identity Software:
 
@@ -913,7 +669,7 @@ For more information about support for specific directories and files in the `fo
 
 Ping Identity provides support for the Ping Advanced Identity Software. For supported components, containers, and Java versions, refer to the following:
 
-* [PingAM Release Notes](https://docs.pingidentity.com/pingam//release-notes/preface.html)
+* [PingAM Release Notes](https://docs.pingidentity.com/pingam/release-notes/preface.html)
 
 * [PingIDM Release Notes](https://docs.pingidentity.com/pingidm/8.1/release-notes/preface.html)
 
@@ -927,7 +683,7 @@ Ping Identity provides no support for the following:
 
 * Artifacts in the [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repository. For more information about support for specific directories and files in the `forgeops-extras` repository, refer to the [`forgeops-extras` repository reference](repositories.html#forgeops-extras-reference).
 
-* Artifacts other than Dockerfiles, Helm charts, Kustomize bases, and Kustomize overlays in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) Git repository. Examples include scripts, example configurations, and so forth.
+* Artifacts other than Dockerfiles, Helm charts, Kustomize bases, and Kustomize overlays in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) Git repository. Examples include scripts, example configurations, and so forth.
 
 * Infrastructure outside Ping Identity. Examples include Docker, Kubernetes, Google Cloud Platform, Amazon Web Services, Microsoft Azure, and so forth.
 
@@ -981,7 +737,7 @@ When requesting help with a problem, include the following information:
 
 ## Suggestions for fixes and enhancements to artifacts
 
-ForgeOps greatly appreciates suggestions for fixes and enhancements to ForgeOps-provided artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.2.1) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repositories.
+ForgeOps greatly appreciates suggestions for fixes and enhancements to ForgeOps-provided artifacts in the [forgeops](https://github.com/ForgeRock/forgeops/tree/2026.3.2) and [forgeops-extras](https://github.com/ForgeRock/forgeops-extras) repositories.
 
 If you would like to report a problem with or make an enhancement request for an artifact in either repository, create a GitHub issue in the repository.
 
@@ -995,13 +751,14 @@ Ping Identity has staff members around the globe who support our international c
 
 ---
 title: Third-party software
-description: Before performing a ForgeOps deployment, install the requisite third-party software on your local computer.
+description: Install third-party software required to deploy ForgeOps on Kubernetes
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:3rd-party
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/3rd-party.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/3rd-party.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 section_ids:
   required_third_party_software: Required third-party software
 ---
@@ -1010,7 +767,7 @@ section_ids:
 
 Before performing a ForgeOps deployment, install the requisite third-party software on your local computer.
 
-The ForgeOps team recommends you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[1](#_footnotedef_1 "View footnote.")]' .
+The ForgeOps team recommends you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[1](#_footnotedef_1 "View footnote.")] .
 
 ## Required third-party software
 
@@ -1029,7 +786,7 @@ The ForgeOps team recommends you install third-party software using [Homebrew](h
 | * Setup tools (Python)                  | 82.0.1  | `python-setuptools`                                         |
 | - Terraform                             | 1.12.2  | `terraform`                                                 |
 | **Additionally on Google GKE**          |         |                                                             |
-| * Google Cloud SDK                      | 569.0.0 | `gcloud-cli` (cask)\[[1](#_footnotedef_1 "View footnote.")] |
+| * Google Cloud CLI                      | 569.0.0 | `gcloud-cli` (cask)\[[1](#_footnotedef_1 "View footnote.")] |
 | **Additionally on Amazon EKS**          |         |                                                             |
 | - Amazon AWS Command-line Interface     | 2.34.50 | `awscli`                                                    |
 | * AWS IAM Authenticator for Kubernetes  | 0.7.16  | `aws-iam-authenticator`                                     |
@@ -1045,24 +802,39 @@ The ForgeOps team recommends you install third-party software using [Homebrew](h
 ---
 
 ---
-title: What&#8217;s new in ForgeOps 2026.2
-description: The ForgeOps early adapter artifacts have been moved from the dev branch to the main branch of the ForgeOps repository. The main branch will be the default branch for the ForgeOps repository.
+title: What&#8217;s new in ForgeOps 2026.3
+description: Review new ForgeOps features, release changes, supported Ping Advanced Identity Software versions, and deployment updates
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:start:whats-new
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/start/whats-new.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/start/whats-new.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-28T11:57:11Z
 section_ids:
   release_information: Release information
-  highlights_in_2026_2_1_release: Highlights in 2026.2.1 release
+  highlights_in_2026_3_release: Highlights in 2026.3 release
+  deprecated_features: Deprecated features
+  release_notes_for_2026_3: Release notes for 2026.3
 ---
 
-# What's new in ForgeOps 2026.2
+# What's new in ForgeOps 2026.3
 
 ## Release information
 
-### Highlights in 2026.2.1 release
+### Highlights in 2026.3 release
+
+* Custom release site
+
+  A reference section is added in the ForgeOps documentation to set up your release site to manage the images and tags in your deployments. Learn more in the [Custom release site](../reference/releases.html) section.
+
+* RCS Helm chart
+
+  A new Helm chart has been created for RCS Server. This allows users to synchronize Advanced Identity Cloud identities with a ForgeOps deployment. Learn more about the use of RCS Helm chart in the [Ping RCS Connector](../integration/rcs-helm-chart.html) section.
+
+* Optionally enable IDM admin UI
+
+  In PingIDM 8.1.0, the IDM admin UI was removed. Accordingly, it was removed in the ForgeOps 2026.3.1 release. We have made it possible to enable the IDM admin UI optionally in ForgeOps deployments.
 
 * The `main` branch contains pre-release artifacts
 
@@ -1072,22 +844,32 @@ section_ids:
 
   The `dev` branch that used to contain the pre-release artifacts is discontinued and will no longer be updated.
 
-* Focus more on using Helm 4
+* Helm-generated secrets
 
-  The `forgeops` utility now uses Helm 4 for deploying ForgeOps on Kubernetes. Helm 4 provides improved performance and security features compared to previous Helm versions. We recommend you use Helm in ForgeOps deployments rather than Kustomize.
+  You can now generate secrets using Helm in ForgeOps deployments. A Kubernetes job was created to generate an ssh key and store it in a secret. This is used by `amster` to connect to am.
 
-* Security enabled by default
+  A new subcommand, **forgeops migrate sa2hs**, has been added. This subcommand can be used to migrate secrets from secret agent to Helm-generated secrets.
 
-  The `forgeops` utility now enables security by default for new ForgeOps deployments. Learn more in [Enable security features](../rn/rn.html#sec-2026-2-features).
+* Integration with PingOne Worker service
 
-* SBOM for ForgeOps images
+  ForgeOps provides integration with PingOne Worker service in ForgeOps 2026.3.0 release. This allows ForgeOps users to leverage real-time risk scores for better authentication decisions.
 
-  Software Bill of Materials (SBOM) is now available for ForgeOps images. SBOM provides a detailed inventory of the components and dependencies used in ForgeOps images, which can help you identify and manage security vulnerabilities and compliance issues.
+* Supported Ping Advanced Identity Software images
 
-* Images support update
+  ForgeOps supports the last three major or minor versions of the Ping Advanced Identity Software images. With the availability of 8.1 images, ForgeOps supports 8.1, 8.0, and 7.5 versions of the platform images, and **7.4 images are no longer supported**.
 
-  ForgeOps supports the latest available major or minor versions of the Ping Advanced Identity Software components. Learn more at [ForgeOps image support](support.html#forgeops-image-support).
+## Deprecated features
 
-* Further release information
+The following features are deprecated in ForgeOps 2026.3 release:
 
-  Learn more about this release in the [ForgeOps 2026.2.1 release notes](../rn/rn.html#forgeops-2026-2-1-features).
+* Kustomize
+
+  Support for Kustomize-based deployments is deprecated. The ForgeOps team recommends migrating to Helm chart-based deployments. The ForgeOps Helm charts are actively maintained. Learn about migrating to Helm chart-based deployments in the [Migrate from Kustomize to Helm chart-based deployments](https://github.com/ForgeRock/forgeops/blob//2026.3.2/how-tos/migrate-kustomize-to-helm.md) article.
+
+* Secret agent
+
+  The secret agent operator is deprecated. Users need to migrate to the built-in Helm-generated secrets or an alternative secrets management solution. Use [Migrate to Helm-generated secrets](../prepare/security/migrate-helmsec.html) for guidance on migrating to Helm-generated secrets.
+
+## Release notes for 2026.3
+
+Further release information is available in the [ForgeOps release notes](../rn/rn.html).

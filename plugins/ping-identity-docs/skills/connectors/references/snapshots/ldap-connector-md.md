@@ -1,12 +1,12 @@
 ---
 title: LDAP Connector
-description: The Lightweight Directory Access Protocol (LDAP) connector for PingOne DaVinci lets you gain access to entries in an LDAP directory to be used in your PingOne DaVinci flow.
+description: Configure the LDAP connector to create, update, delete, and search entries in an LDAP directory store within a PingOne DaVinci flow
 component: connectors
 page_id: connectors::ldap_connector
 canonical_url: https://docs.pingidentity.com/connectors/ldap_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -26,9 +26,15 @@ section_ids:
   example-active-directory-server-policy-hints-control: "Example: Active directory server policy hints control"
   troubleshooting-ldap-controls-errors: Troubleshooting LDAP controls errors
   capabilities: Capabilities
-  search: LDAP Search
-  add: LDAP Add
-  delete: LDAP Delete
+  createEntry: Create Entry
+  generatePassword: Generate Password
+  modifyDN: Modify DN
+  replaceAttributes: Replace Attributes
+  modifyAttribute: Modify Attribute
+  resetPassword: Reset Password
+  searchEntries: Search Entries
+  deleteEntry: Delete Entry
+  checkPassword: Check Password
 ---
 
 # LDAP Connector
@@ -63,13 +69,13 @@ Learn more in the following documentation:
 
   * [Introduction to PingDirectory Server](https://docs.pingidentity.com/pingdirectory/10.3/pd_ds_intro_pindirectory_server.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -93,7 +99,7 @@ Review the prerequisites in [Before you begin](https://docs.pingidentity.com/pin
 
 ### Setting up the connector configuration
 
-In DaVinci, add an LDAP connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add an LDAP connector. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 
@@ -340,50 +346,624 @@ The following example shows how to use the active directory server policy hints 
 
 ## Capabilities
 
-### LDAP Search
+### Create Entry
 
-Execute ldap/ad searches
-
-> **Collapse: Show details**
->
-> * Properties
->
-> * Output Schema
->
-> - - baseDN textField
->   - ldapScope dropDown
->   - ldapFilter textField
->   - ldapAttributes textFieldArrayView
->
-> * output object
-
-### LDAP Add
-
-Add entry to your LDAP Directory
+Create a new entry
 
 > **Collapse: Show details**
 >
 > * Properties
 >
+> * Input Schema
+>
 > * Output Schema
 >
-> - - DN textField
->   - New User Entry Fields selectNameValueListColumn
+> - DN textField required
 >
->   Use this section to add additional fields to the response
+>   The DN to perform the operation on.
 >
-> * output object
+> - * Input attributes as JSON? toggleSwitch
+>   * Attributes variableInputList
+>   * Attributes codeEditor
+>
+>   Input attributes as a JSON object with the attribute names as the keys and the attribute values as the values. Multi-valued attributes may be provided as an array.
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * entry object
+>
+>     * dn string
+>
+>     * attributes object
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
 
-### LDAP Delete
+### Generate Password
 
-Delete entry from your LDAP Directory
+Generates a new password and sets it on an entry
 
 > **Collapse: Show details**
 >
 > * Properties
 >
+> * Input Schema
+>
 > * Output Schema
 >
-> - DN textField
+> - DN textField required
 >
-> * output object
+>   The DN to perform the operation on.
+>
+> - Old Password textField
+>
+>   The current password for the entry. If provided, it must match the entry's current password in order for the operation to succeed.
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * oldPassword string
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * password string
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Modify DN
+
+Changes the DN of an entry
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - New DN textField required
+>
+>   The new DN of the entry.
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * newDn string required
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * entry object
+>
+>     * dn string
+>
+>     * attributes object
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Replace Attributes
+
+Replaces attribute values on an entry with the provided values
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - * Input attributes as JSON? toggleSwitch
+>   * Attributes variableInputList
+>   * Attributes codeEditor
+>
+>   Input attributes as a JSON object with the attribute names as the keys and the attribute values as the values. Multi-valued attributes may be provided as an array.
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * entry object
+>
+>     * dn string
+>
+>     * attributes object
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Modify Attribute
+
+Add or delete individual attribute values
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - Attribute Name textField required
+>
+>   The name of the attribute that will be modified.
+>
+> - Modifications variableInputList required
+>
+>   The attribute values to add or delete. Multiple modifications with the same operation may be specified in order to manage multiple values at once.
+>
+>   * Add
+>
+>   * Delete
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * attributeName string
+>
+>     * modifications array
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * entry object
+>
+>     * dn string
+>
+>     * attributes object
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Reset Password
+
+Sets a given password on an entry
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - New Password textField required
+>
+>   The password to set on an entry.
+>
+> - Old Password textField
+>
+>   The current password for the entry. If provided, it must match the entry's current password in order for the operation to succeed.
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * newPassword string required
+>
+>     * oldPassword string
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Search Entries
+
+Search for entries
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - Base DN textField required
+>
+>   The base distinguished name of the search.
+>
+> - Filter textField required
+>
+>   The criteria for defining matching entries in a search.
+>
+> - Scope dropDown required
+>
+>   The set of entries at or below the BaseDN that may be considered potential matches in a search.
+>
+>   * Whole Subtree
+>
+>   * Base Object
+>
+>   * Single Level
+>
+> - Entry Attributes multipleTextFields
+>
+>   The attributes that should be retrieved. If "Retrieve Operational Attributes" is true, "\*" must be used in order to retrieve all user attributes. Otherwise, retrieving all user attributes can be done by leaving this field blank.
+>
+> - Retrieve Operational Attributes? toggleSwitch
+>
+>   Operational attributes will be retrieved when this is enabled. If you wish to retrieve all user attributes in addition to operational attributes, "\*" must be specified in the "Entry Attributes" field.
+>
+> - Size Limit textField
+>
+>   The maximum number of entries to retrieve.
+>
+> - Time Limit textField
+>
+>   The maximum amount of time allowed for the search in seconds.
+>
+> - Types only toggleSwitch
+>
+>   Only the attribute names but not values will be returned when this is enabled.
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * entries array
+>
+>   * references array
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Delete Entry
+
+Delete an entry
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - Controls codeEditor
+>
+>   A JSON array of controls to include with this request
+>
+> - Perform Operation As dropDown required
+>
+>   The user that will perform this operation.
+>
+>   * Gateway Service Account (Default)
+>
+>   * Proxied User - Match by Username
+>
+>   * Proxied User - Match by Distinguished Name (DN)
+>
+> - Proxied Authorization Username textField
+>
+>   The user to perform this operation as.
+>
+> - Proxied Authorization DN textField
+>
+>   The Distinguished Name of the user to perform this operation as.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * proxyAuthzUser string
+>
+>     * proxyAuthzUsername string
+>
+>     * proxyAuthzDn string
+>
+> - output object
+>
+>   * controls array
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer
+
+### Check Password
+
+Validate a user's password
+
+> **Collapse: Show details**
+>
+> * Properties
+>
+> * Input Schema
+>
+> * Output Schema
+>
+> - DN textField required
+>
+>   The DN to perform the operation on.
+>
+> - Password textField
+>
+>   The user's password to validate.
+>
+> * default object
+>
+>   * properties object
+>
+>     * dn string required
+>
+>     * password string required
+>
+> - output object
+>
+>   * status string
+>
+>   * message string
+>
+>   * rawResponse object
+>
+>   * headers object
+>
+>   * statusCode integer

@@ -4,6 +4,8 @@ description: With Ping Government Identity Cloud, you have one production enviro
 component: pgic
 page_id: pgic:environments:pgic_environments
 canonical_url: http://docs.pingidentity.com/pgic/environments/pgic_environments.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 15, 2025
 section_ids:
   prod: Production environment

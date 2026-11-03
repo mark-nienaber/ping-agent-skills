@@ -224,7 +224,7 @@ The Session Management API now includes IP address and User-Agent information in
 
 New
 
-* PingFederate now supports Amazon EC2 Instance Metadata Service version 2 (IMDSv2) when AWS\_PING is the chosen dynamic discovery method. No PingFederate configuration changes are required, and IMDSv1 remains supported.
+* PingFederate now supports Amazon EC2 Instance Metadata Service version 2 (IMDSv2) when AWS_PING is the chosen dynamic discovery method. No PingFederate configuration changes are required, and IMDSv1 remains supported.
 
 * PingFederate now records administrative timed-out events in the administrator audit log (`admin.log`).
 
@@ -596,11 +596,11 @@ Info
 
 Starting with PingFederate 10.1, roles and protocols are always enabled and no longer configurable through the administrative console and API.
 
-### S3\_PING discovery protocol
+### S3_PING discovery protocol
 
 Info
 
-Starting with PingFederate 10.1, the S3\_PING discovery protocol has been deprecated. Customers running on AWS infrastructure should instead use NATIVE\_S3\_PING.
+Starting with PingFederate 10.1, the S3_PING discovery protocol has been deprecated. Customers running on AWS infrastructure should instead use NATIVE_S3_PING.
 
 ### Red Hat Enterprise Linux install script
 
@@ -1360,7 +1360,7 @@ The JSON response from REST API data source lookups now retains number and Boole
 
 Fixed PF-30075
 
-Resolved an issue that caused the `NotYetConnectedException` warning message to repeatedly appear in the `server.log` when using AWS\_PING for dynamic cluster discovery.
+Resolved an issue that caused the `NotYetConnectedException` warning message to repeatedly appear in the `server.log` when using AWS_PING for dynamic cluster discovery.
 
 ### Matching OAuth client's redirection URIs
 
@@ -1390,7 +1390,7 @@ When an OAuth client is performing a password reset through the authentication A
 
 Fixed PF-30770
 
-Resolved an issue that prevented PingFederate from correctly determining the authentication instant for the flow when the initial OIDC authorization request specifies a max\_age, the flow falls through to legacy authentication source selection (policies are disabled or no policy applies), and the user chooses an upstream OIDC IdP connection.
+Resolved an issue that prevented PingFederate from correctly determining the authentication instant for the flow when the initial OIDC authorization request specifies a max_age, the flow falls through to legacy authentication source selection (policies are disabled or no policy applies), and the user chooses an upstream OIDC IdP connection.
 
 ### Templates for PingOne MFA 1.6.1
 
@@ -1604,11 +1604,11 @@ Info
 
 Starting with PingFederate 10.1, roles and protocols are always enabled and no longer configurable through the administrative console and API.
 
-### S3\_PING discovery protocol
+### S3_PING discovery protocol
 
 Info
 
-Starting with PingFederate 10.1, the S3\_PING discovery protocol has been deprecated. Customers running on AWS infrastructure should instead use NATIVE\_S3\_PING.
+Starting with PingFederate 10.1, the S3_PING discovery protocol has been deprecated. Customers running on AWS infrastructure should instead use NATIVE_S3_PING.
 
 ### Red Hat Enterprise Linux install script
 

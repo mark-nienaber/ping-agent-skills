@@ -1,6 +1,6 @@
 ---
 title: About backing up and restoring data
-description: Administrators should make a comprehensive backup strategy and schedule that consist of daily, weekly, and monthly backups. The plan should include:
+description: Understand PingDirectory backup and restore strategies, including backup descriptors, encryption options, and version-compatibility warnings.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_about_backup_restore_data
@@ -64,7 +64,7 @@ If necessary, you can use the `--maxMegabytesPerSecond` argument to impose a lim
 
 ---
 title: About backing up and restoring the encryption settings definitions
-description: The PingDirectory server provides two different mechanisms for backing up and restoring encryption settings definitions.
+description: Understand options for backing up and restoring PingDirectory encryption settings definitions.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_backup_restore_encryption_settings_defs
@@ -104,7 +104,7 @@ The `encryption-settings export` command is recommended for the following reason
 
 ---
 title: About encrypting and protecting sensitive data
-description: The PingDirectory server provides an encryption settings database that holds encryption and decryption definitions to protect sensitive data. You can enable on-disk encryption for data:
+description: Understand how PingDirectory protects sensitive data with on-disk encryption for backends, the changelog, and replication databases.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_encrypt_protect_sensitive_data
@@ -130,7 +130,7 @@ You can protect sensitive attributes by limiting the ways that clients can inter
 
 ---
 title: About encrypting log files
-description: The server lets you encrypt log files as they are written.
+description: Encrypt PingDirectory log files as they are written using encryption settings definitions, including enabling encryption, compression, and decrypting files.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_encrypt_log_files
@@ -277,7 +277,7 @@ Configure log file encryption for a log publisher.
 
 ---
 title: About log compression
-description: The server supports the ability to compress log files as they are written.
+description: Compress PingDirectory log files as they are written using gzip, including limitations such as enabling compression only at logger creation.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_log_compression
@@ -293,11 +293,11 @@ The server supports the ability to compress log files as they are written.
 
 This feature can significantly increase the amount of data that can be stored in a given amount of space so that log information can be kept for a longer period of time.
 
-Because of the inherent problems with mixing compressed and uncompressed data, compression can only be enabled at the time the logger is created. Compression cannot be turned on or off when the logger is configured. Because of problems in trying to append to an existing compressed file, if the server encounters an existing log file at startup, it rotates that file and begin a new one rather than attempting to append to the previous file.
+Because of the inherent problems with mixing compressed and uncompressed data, compression can only be enabled at the time the logger is created. Compression can't be turned on or off when the logger is configured. Because of problems in trying to append to an existing compressed file, if the server encounters an existing log file at startup, it rotates that file and begins a new one rather than attempting to append to the previous file.
 
 Compression is performed using the standard gzip algorithm, so compressed log files can be accessed using readily available tools. The `summarize-access-log` tool can also work directly on compressed log files rather than requiring them to be uncompressed first.
 
-However, because it can be useful to have a small amount of uncompressed log data available for troubleshooting purposes, administrators using compressed logging might want to have a second logger defined that does not use compression and has rotation and retention policies that minimizes the amount of space consumed by those logs while still making them useful for diagnostic purposes without the need to uncompress the files before examining them.
+However, administrators who use compressed logging might also define a second, uncompressed logger for troubleshooting, with rotation and retention policies that limit disk usage while keeping recent logs available for diagnosis without requiring decompression.
 
 Configure compression by setting the `compression-mechanism` property to have the value of `gzip` when creating a new logger.
 
@@ -305,7 +305,7 @@ Configure compression by setting the `compression-mechanism` property to have th
 
 ---
 title: About log signing
-description: The server supports the ability to cryptographically sign a log to ensure that it has not been modified in any way.
+description: Cryptographically sign PingDirectory log files to detect tampering, including enabling the sign-log property and validating file signatures.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_log_signing
@@ -333,7 +333,7 @@ After you have enabled this property, you must disable and then re-enable the lo
 
 ---
 title: About managing attribute syntaxes
-description: The attribute type definition has a SYNTAX element, or attribute syntax, that specifies how the data values for the attribute are represented.
+description: Understand attribute syntaxes in PingDirectory and how they define data value representation in ASN.1 format.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_manage_attr_syntaxes
@@ -353,7 +353,7 @@ The syntax can be used to define a large range of data types necessary for clien
 
 ---
 title: About managing attribute types
-description: An attribute type determines the important properties related to an attribute, such as specifying the matching and syntax rules used in value comparisons. An attribute description consists of an attribute type and a set of zero or more options.
+description: Understand PingDirectory attribute types and the matching and syntax rules used in value comparisons.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_manage_attribute_types
@@ -389,7 +389,7 @@ Attributes have the following properties:
 
 ---
 title: About managing JSON attribute values
-description: The PingDirectory server supports a JSON object attribute syntax that can be used for attribute types whose values are JSON objects. The syntax requires that each value of this type is a valid JSON object.
+description: Understand the PingDirectory JSON object attribute syntax and matching rules for attributes with JSON values.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_manage_json_attr_values
@@ -455,7 +455,7 @@ $ bin/ldapsearch -p 1389 -b dc=example,dc=com  -D "cn=Directory Manager" -w pass
 
 ---
 title: About managing matching rules
-description: Matching rules determine how clients and servers compare attribute values during LDAP requests or operations.
+description: Understand how PingDirectory matching rules compare attribute values in LDAP requests and search filters.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_manage_matching_rules
@@ -485,7 +485,7 @@ Matching rules are also used in evaluating search filter elements, including dis
 
 ---
 title: About minimizing disk access
-description: Minimizing disk access is critical to the PingDirectory server's performance.
+description: Explains how to minimize PingDirectory disk access to improve performance through JVM heap sizing and database cleaner tuning.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_minimize_disk_access
@@ -499,17 +499,17 @@ revdate: May 6, 2024
 
 Minimizing disk access is critical to the PingDirectory server's performance.
 
-Defining a Java Virtual Machine (JVM) heap size that can contain the entire contents of the database cache in memory minimizes read operations from disk and achieves optimal performance. The database on-disk is comprised of transaction log files, which are only appended to. After an initial database import, the size on-disk will grow by a factor of at least 25% as inactive records accumulate in the transaction logs. During normal operation, the on-disk size of the database transaction logs does not represent the memory needed to cache the database.
+Defining a Java Virtual Machine (JVM) heap size that can contain the entire contents of the database cache in memory minimizes read operations from disk and achieves optimal performance. The on-disk database comprises transaction log files, which are only appended to. After an initial database import, the on-disk size grows by a factor of at least 25% as inactive records accumulate in the transaction logs. During normal operation, the on-disk size of the database transaction logs doesn't represent the memory needed to cache the database.
 
 Consider minimizing the size of the database based on the known characteristics of your data. Doing so reduces hard disk requirements and the memory requirements for the database cache. An example of this is the PingDirectory server automatically compacting common parent distinguished names (DN).
 
-Finally, consider the write load on your server and its effect on the database. Write operations will always require an associated write-to-disk, but an environment that sustains a high load of write operations might consider tuning the background database cleaner to minimize the size of the database on disk.
+Finally, consider the write load on your server and its effect on the database. Write operations always require an associated write-to-disk, but an environment that sustains a high load of write operations might consider tuning the background database cleaner to minimize the size of the database on disk.
 
 ---
 
 ---
 title: About monitoring index entry limits
-description: Index keys that have reached their limit require indexes to be rebuilt before they can use a new limit. To avoid a potentially costly rebuild, there are several ways to monitor index limits.
+description: Monitor PingDirectory index keys approaching or exceeding the index entry limit with verify-index, access logs, and monitor entries.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_monitor_index_entry_limits
@@ -569,7 +569,7 @@ The server provides other methods for determining if index keys have exceeded or
 
 ---
 title: About recurring tasks and task chains
-description: You can use the admin console to create recurring tasks and task chains to perform regular maintenance tasks for the PingDirectory server. These tasks can perform regular backups, LDIF exports, enter and exit lockdown mode, or other static operations.
+description: Recurring task and task chain concepts in PingDirectory for scheduling backups, LDIF exports, and lockdown mode changes.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_recurring_task_chains
@@ -619,7 +619,7 @@ A recurring task chain includes:
 
 ---
 title: About recurring tasks and task chains
-description: You can use the admin console to create recurring tasks and task chains to perform regular maintenance tasks for the PingDirectory server. These tasks can perform regular backups, LDIF exports, enter and exit lockdown mode, or other static operations.
+description: Explains PingDirectory recurring tasks and task chains used to schedule maintenance operations like backups and LDIF exports.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_recurring_task_chains_2
@@ -669,7 +669,7 @@ A recurring task chain includes:
 
 ---
 title: About soft deletes
-description: Soft deletes preserve a deleted entry's attribute and uniqueness characteristics so it can be undeleted or permanently removed at a later date.
+description: Explains the PingDirectory soft-delete feature that preserves deleted entries for later undelete or permanent removal.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_soft_deletes
@@ -703,7 +703,7 @@ For replicated topologies, when a participating PingDirectory server soft delete
 
 ---
 title: "About the <code class=\"cmdname\"><strong>manage-profile</strong></code> tool"
-description: The manage-profile tool is provided with the server to work with server profiles. It includes subcommands for creating, applying, and replacing server profiles, all of which significantly reduce the effort required by an administrator to configure a server appropriately.
+description: About the PingDirectory manage-profile tool and its subcommands for generating, setting up, and replacing server profiles.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_manage_profile_tool
@@ -790,7 +790,7 @@ The `--skipValidation` option skips the validation step when running on an offli
 
 ---
 title: About the client connection policy
-description: Client connection policies are based on two factors.
+description: Client connection policy concepts in PingDirectory, including connection criteria and evaluation order for assigning policies to connections.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_client_connection_policy
@@ -818,7 +818,7 @@ If the connection policy matches a connection, then the connection is assigned t
 
 ---
 title: About the configuration tools
-description: You can access and modify the server configuration in two ways.
+description: Overview of the PingDirectory admin console and dsconfig command-line tool for viewing and editing server configuration.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_config_tools
@@ -858,7 +858,7 @@ You can access and modify the server configuration in two ways.
 
 ---
 title: About the dbtest Index Status table
-description: The dbtest tool has a list-all --analyze option that generates the current status of all of the databases on your system, including all index databases.
+description: Interpret the PingDirectory dbtest Index Status table, which reports entry counts and index status such as TRUSTED or UNTRUSTED.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_dbtest_index_status_table
@@ -900,7 +900,7 @@ The table shows the following information:
 
 ---
 title: About the dsconfig configuration tool
-description: The dsconfig tool is the text-based management tool used to configure the underlying server configuration.
+description: "Overview of the PingDirectory dsconfig tool's interactive, non-interactive, batch, and offline operational modes."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_server_administration_guide:pd_ds_dsconfig_config_tool

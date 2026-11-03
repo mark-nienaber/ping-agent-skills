@@ -4,6 +4,8 @@ description: To manage authenticated sessions using the REST API, send requests 
 component: pingoneaic-api
 page_id: pingoneaic-api:am-sessions:managing-sessions-REST
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-sessions/managing-sessions-REST.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Sessions", "REST API", "Log Out", "Properties"]
 page_aliases: ["index.adoc"]
 section_ids:

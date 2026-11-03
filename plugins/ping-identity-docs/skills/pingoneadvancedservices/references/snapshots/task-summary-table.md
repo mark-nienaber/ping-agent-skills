@@ -1,8 +1,11 @@
 ---
 description: The API requires a JWT Bearer token for authenticating requests. This token can be retrieved using either an authorization code flow or a client credentials flow.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_api_config
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_api_config.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_api_config.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configuring-access-to-the-administrative-api: Configuring access to the administrative API
   _auth_code_flow: Authenticate using an authorization code flow
@@ -200,8 +203,11 @@ To ensure that only administrators can generate access tokens, restrict access t
 ---
 description: The API includes interactive documentation for both developers and non-developers to explore the API endpoints, view documentation for the API, and experiment with API calls. Built on Swagger UI, this interactive tool makes it easy for you to visualize, interact with, and test the APIs within a browser.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_api_doc
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_api_doc.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_api_doc.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   using-the-api-interactive-documentation: Using the API interactive documentation
 ---
@@ -251,8 +257,11 @@ To test an administrative API:
 ---
 description: The API supports the authorization code flow, which gets access tokens by securely redirecting users to the authorization server for authentication.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_auth_flow
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_auth_flow.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_auth_flow.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   authenticate-using-an-authorization-code-flow: Authenticate using an authorization code flow
   before-you-begin: Before you begin
@@ -291,67 +300,14 @@ After user accounts are created, you can assign the appropriate user access cont
 ---
 
 ---
-description: The API includes interactive documentation for both developers and non-developers to explore the API endpoints, view documentation for the API, and experiment with API calls. Built on Swagger UI, this interactive tool makes it easy for you to visualize, interact with, and test the APIs within a browser.
-component: pingoneadvancedservices
-page_id: pingoneadvancedservices:task_summary_table:p1as_platform_interactive_api
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_interactive_api.html
-section_ids:
-  using-the-api-interactive-documentation: Using the API interactive documentation
-  before-you-begin: Before you begin
-  steps: Steps
-  steps-2: Steps
----
-
-## Using the API interactive documentation
-
-The API includes interactive documentation for both developers and non-developers to explore the API endpoints, view documentation for the API, and experiment with API calls. Built on Swagger UI, this interactive tool makes it easy for you to visualize, interact with, and test the APIs within a browser.
-
-You can make API calls from an interactive user interface, custom applications, or from command line tools such as cURL.
-
-### Before you begin
-
-Ensure you have access to the administrative API. Learn more in [Accessing the admin console and administrative API](p1as_platform_admin_api.html).
-
-To access the administrative API documentation:
-
-### Steps
-
-1. Start a web browser.
-
-2. Go to the URL:
-
-   https\://self-service-api.\<environment>-\<customer>.\<region>.ping.cloud/docs
-
-   |   |                                                                                                                                                                                                               |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The API is also documented in the OpenAPI Specification, previously known as the Swagger Specification. Go to: https\://self-service-api.\<environment>-\<customer>.\<region>.ping.cloud/api/v1/openapi.json. |
-
-To test an administrative API:
-
-### Steps
-
-1. Select a section of the administrative API you would like to explore. For example, **/hostnames**.
-
-2. Expand the method you want to use. For example, **GET /hostnames**.
-
-3. Enter required parameters, if any. For more information, see **Schema Models** under the selected API endpoint.
-
-4. Click **Try it out**.
-
-   |   |                                                                                                                                                                                      |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | You will be prompted to sign on using an access token for OAuth authentication. The role assigned to the respective administrative accounts affects the access to the requested API. |
-
-   If the request completes successfully, the administrative API returns the **Request URL**, the **Response Body**, the **Response Code**, and the **Response Headers**.
-
----
-
----
-title: Accessing the PingOne Advanced Services admin console and administrative API
+title: Accessing the admin console and administrative API
 description: Introductory information about the PingOne Advanced Services administrative API and instructions on configuring access to it.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_admin_api
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_admin_api.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_admin_api.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 29, 2026
 section_ids:
   _admin_console: Accessing the admin console
@@ -371,13 +327,9 @@ section_ids:
   steps-6: Steps
   restrict_access: Restricting access to the application
   steps-7: Steps
-  interactive_api: Using the API interactive documentation
-  before-you-begin: Before you begin
-  steps-8: Steps
-  steps-9: Steps
 ---
 
-# Accessing the PingOne Advanced Services admin console and administrative API
+# Accessing the admin console and administrative API
 
 You can use the PingOne Advanced Services admin console or a REST-based API to perform many tasks yourself instead of submitting a service request.
 
@@ -389,13 +341,13 @@ For example, you can create and update virtual hosts yourself through the admin 
 
 To access the admin console:
 
-* Ensure that you have the appropriate roles assigned. Learn more about the roles available in [User access control roles](p1as_platform_mng_admins.html#p1as_admin_role_mappings). Learn how to assign these roles in [Assigning users the appropriate roles](#assign_roles)
+* Ensure that you have the appropriate roles assigned. Learn more about the roles available in [User access control roles](p1as_platform_mng_admins.html#p1as_admin_role_mappings). Learn how to assign these roles in [Assigning users the appropriate roles](#assign_roles).
 
 * Take these steps to [access the admin console](#_admin_console).
 
 To access the administrative API:
 
-* Ensure that you have the appropriate roles assigned. Learn more about the roles available in [User access control roles](p1as_platform_mng_admins.html#p1as_admin_role_mappings). Learn how to assign these roles in [Assigning users the appropriate roles](#assign_roles)
+* Ensure that you have the appropriate roles assigned. Learn more about the roles available in [User access control roles](p1as_platform_mng_admins.html#p1as_admin_role_mappings). Learn how to assign these roles in [Assigning users the appropriate roles](#assign_roles).
 
 * Take these steps to [configure access to the API](#_platform_api_config).
 
@@ -609,56 +561,17 @@ To ensure that only administrators can generate access tokens, restrict access t
 
 2. Select the **Admin Only Access** checkbox and click **Save**.
 
-## Using the API interactive documentation
-
-The API includes interactive documentation for both developers and non-developers to explore the API endpoints, view documentation for the API, and experiment with API calls. Built on Swagger UI, this interactive tool makes it easy for you to visualize, interact with, and test the APIs within a browser.
-
-You can make API calls from an interactive user interface, custom applications, or from command line tools such as cURL.
-
-### Before you begin
-
-Ensure you have access to the administrative API. Learn more in [Accessing the admin console and administrative API](#).
-
-To access the administrative API documentation:
-
-### Steps
-
-1. Start a web browser.
-
-2. Go to the URL:
-
-   https\://self-service-api.\<environment>-\<customer>.\<region>.ping.cloud/docs
-
-   |   |                                                                                                                                                                                                               |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The API is also documented in the OpenAPI Specification, previously known as the Swagger Specification. Go to: https\://self-service-api.\<environment>-\<customer>.\<region>.ping.cloud/api/v1/openapi.json. |
-
-To test an administrative API:
-
-### Steps
-
-1. Select a section of the administrative API you would like to explore. For example, **/hostnames**.
-
-2. Expand the method you want to use. For example, **GET /hostnames**.
-
-3. Enter required parameters, if any. For more information, see **Schema Models** under the selected API endpoint.
-
-4. Click **Try it out**.
-
-   |   |                                                                                                                                                                                      |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | You will be prompted to sign on using an access token for OAuth authentication. The role assigned to the respective administrative accounts affects the access to the requested API. |
-
-   If the request completes successfully, the administrative API returns the **Request URL**, the **Response Body**, the **Response Code**, and the **Response Headers**.
-
 ---
 
 ---
 title: ACIs
 description: Instructions for completing the service request form to add, modify, or remove PingDirectory ACIs.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pd_acis
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pd_acis.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pd_acis.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -732,8 +645,11 @@ You can find more information about ACIs in [Defining global ACIs](https://docs.
 title: Administrator MFA
 description: Instructions for completing the service request form to manage administrator MFA.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_admin_mfa
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_admin_mfa.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_admin_mfa.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 21, 2022
 section_ids:
   steps: Steps
@@ -783,8 +699,11 @@ To manage customer administrator multi-factor authentication (MFA), submit a ser
 title: Approve merge request
 description: Instructions for completing the service request form to approve merge requests.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_approve_merge_request
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_approve_merge_request.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_approve_merge_request.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -828,8 +747,11 @@ To approve a merge request, submit a service request through the [Support Portal
 title: Creating and updating product configurations
 description: Instructions for creating and updating product configurations and rolling configurations back to previous versions.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_product_config
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_product_config.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_product_config.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   configuring-product-configurations: Configuring product configurations
   steps: Steps
@@ -845,9 +767,9 @@ You and your administrators can create and update some supported product configu
 
 Supported configurations currently include [PingFederate HTML templates](https://docs.pingidentity.com/pingfederate/12.3/administrators_reference_guide/pf_custom_user_facing_pages.html), which are used to customize your user-facing pages, and [language packs](https://docs.pingidentity.com/pingfederate/12.3/administrators_reference_guide/pf_local_message_end_users.html), which are used to localize messages for your users.
 
-|   |                                                                                                                                                                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | To use this functionality, you must be using platform version 2.2.0 or later with the PingFederate 2.2.1 update. If you are upgrading from an earlier version and your configurations were managed using GitOps orchestration, know that we will migrate your configurations to self-service during the upgrade process. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | To use this functionality, you must be using platform version 2.2.0 or later with the PingFederate 2.2.1 update. If you are upgrading from an earlier version and have existing configurations managed using GitOps orchestration, we'll need to migrate them first. A Ping Identity representative will reach out to you to complete this migration, or you can request this migration at any time by submitting a [service request](p1as_service_requests.html). |
 
 Keep the following in mind:
 
@@ -931,8 +853,11 @@ To rollback product configurations to previous versions, complete these steps:
 title: Creating and updating virtual hosts
 description: You and your administrators can create and update virtual host certificates and TLS configurations yourselves.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_virtual_hosts
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_virtual_hosts.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_virtual_hosts.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 26, 2026
 section_ids:
   before-you-begin: Before you begin
@@ -1122,8 +1047,11 @@ If you're having trouble:
 title: Elevate admin
 description: Instructions for completing the service request form to modify permissions for your administrators.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pf_elevate_admin
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pf_elevate_admin.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pf_elevate_admin.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -1165,8 +1093,11 @@ To modify the permissions your administrators have, such as managing certificate
 title: Email templates
 description: Instructions for completing the service request form to modify email templates.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pd_email_templates
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pd_email_templates.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pd_email_templates.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -1223,8 +1154,11 @@ You can find more information in [Editing and copying the email template to Ping
 title: Enable debug logger
 description: Instructions for completing the service request form to enable the standard debug logger or request a non-standard debug level.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pa_logging_settings
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pa_logging_settings.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pa_logging_settings.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -1272,8 +1206,11 @@ PingAccess generates logs that record server events. To enable the standard debu
 title: Enable debug logger
 description: Instructions for completing the service request form to enable the standard debug logger or request a non-standard debug level.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pf_logging
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pf_logging.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pf_logging.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -1326,8 +1263,11 @@ Log files are written to the PingFederate log directory, located in the followin
 title: Enable debug logging
 description: Instructions for completing the service request form to enable the debug logger on an environment or application.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_logging
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_logging.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_logging.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -1373,8 +1313,11 @@ To enable the debug logger on an environment or application, submit a service re
 title: Enable outbound provisioning
 description: To enable outbound provisioning, submit a service request through the Support Portal.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_provisioning
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_provisioning.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_provisioning.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -1418,8 +1361,11 @@ To enable outbound provisioning, submit a service request through the [Support P
 title: Indexes
 description: Instructions for completing the service request form to request index modifications.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pd_email_indexes
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pd_email_indexes.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pd_email_indexes.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   about-this-task: About this task
@@ -1478,8 +1424,11 @@ Learn more about indexes in [Working with indexes](https://docs.pingidentity.com
 title: Integration kits
 description: Instructions for completing the service request form to install a new integration kit or upgrade an existing kit.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pa_plugins
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pa_plugins.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pa_plugins.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
 section_ids:
   steps: Steps
@@ -1527,8 +1476,11 @@ To install a new integration kit or upgrade an existing kit, submit a request th
 title: Integration kits
 description: Instructions for completing the service request form to install a new integration kit or upgrade an existing kit.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_pf_plugins
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_pf_plugins.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pf_plugins.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 27, 2024
 section_ids:
   steps: Steps
@@ -1576,8 +1528,11 @@ To install a new integration kit, or upgrade an existing integration kit, submit
 title: IP allow list
 description: Instructions for completing the service request form to create or update the IP allow list.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:task_summary_table:p1as_platform_allowlist
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_allowlist.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_platform_allowlist.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   steps: Steps
 ---
@@ -1631,3 +1586,74 @@ Starting in platform version 2.2, you can submit a service request to ask that a
 5. If you are tracking your request within your organization, enter the tracking ID or ticket number associated with it in the **Customer Tracking ID** field.
 
 6. To submit your request, click **Save**.
+
+---
+
+---
+title: JSON field constraints
+description: Instructions for completing the service request form to define JSON field constraints.
+component: pingoneadvancedservices
+version: 2.2
+page_id: pingoneadvancedservices:task_summary_table:p1as_pd_json
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/task_summary_table/p1as_pd_json.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# JSON field constraints
+
+Submit your requests to define JSON field constraints through the service request form on the [Support Portal](https://support.pingidentity.com/s/).
+
+## About this task
+
+You can define a number of constraints for the fields included in JSON objects stored in values of a specified attribute type. For example, you can require that a field value is a specific data type, specify whether a field is required or optional, or restrict values of string fields to a predefined set of values.
+
+Learn more about these values in [About managing JSON attribute values](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_manage_json_attr_values.html) in the PingDirectory documentation.
+
+## Steps
+
+1. Complete the following fields:
+
+   * **Subject**: Enter a description of your request, including the action to be taken.
+
+   * **Environment Type**: Specify the type of environment affected by this request.
+
+   * **Proposed Change Window**: Specify the dates or times in which you want the work complete.
+
+2. In the **Capability** list, select **PingDirectory service requests** > **JSON field constraints**.
+
+3. In the **JSON attribute** field, specify the JSON attribute for which a field will be created.
+
+4. Select the **Allow unnamed fields** option if you want to allow attributes that are not explicitly defined in the constraints.
+
+5. In the **JSON field name** field, specify a field name to add to the JSON attribute
+
+6. In the **Value type** field, specify the value type of the JSON.
+
+7. Select the **Is required** option if this field should be required.
+
+8. In the **Is array** field, specify whether the field should hold an array (required), can hold an array (optional) or cannot hold an array (prohibited).
+
+9. Select the **Allow null value** option if you want to allow nun values in the field.
+
+10. Select the **Allow empty object** option to allow empty objects in the field.
+
+11. Select the **Index values** option to create an index for this field.
+
+12. In the **Business Priority** list, select the appropriate description:
+
+    * Change needed by deadline to avoid business impact
+
+    * Change modifies existing functionality
+
+    * Change adds new functionality
+
+13. In the **Description** field, enter a description of your request.
+
+14. If you are tracking your request within your organization, enter the tracking ID or ticket number associated with it in the **Customer Tracking ID** field.
+
+15. To submit your request, click **Save**.

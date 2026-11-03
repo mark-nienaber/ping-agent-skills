@@ -1,12 +1,12 @@
 ---
 title: ServiceNow Connector
-description: The ServiceNow connector lets you manage users, group memberships, and incidents in ServiceNow from your PingOne DaVinci flow.
+description: Configure the ServiceNow connector to manage users, group memberships, and incidents in ServiceNow from a PingOne DaVinci flow
 component: connectors
 page_id: connectors::servicenow_connector
 canonical_url: https://docs.pingidentity.com/connectors/servicenow_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -52,13 +52,13 @@ You can use the ServiceNow connector to:
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -66,7 +66,7 @@ To use the connector, you'll need a ServiceNow license.
 
 ### Configuring the ServiceNow connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -154,37 +154,37 @@ Get information about a user.
 >
 >     * result object
 >
->       * calendar\_integration string
+>       * calendar_integration string
 >
 >       * country string
 >
->       * user\_password string
+>       * user_password string
 >
->       * last\_login\_time string
+>       * last_login_time string
 >
->       * x\_pd\_integration\_pagerduty\_id string
+>       * x_pd_integration_pagerduty_id string
 >
->       * hashed\_user\_id string
+>       * hashed_user_id string
 >
 >       * source string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
 >       * building string
 >
->       * web\_service\_access\_only string
+>       * web_service_access_only string
 >
 >       * notification string
 >
->       * enable\_multifactor\_authn string
+>       * enable_multifactor_authn string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * sso\_source string
+>       * sso_source string
 >
->       * sys\_created\_on string
+>       * sys_created_on string
 >
->       * sys\_domain object
+>       * sys_domain object
 >
 >         * link string
 >
@@ -194,87 +194,87 @@ Get information about a user.
 >
 >       * vip string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * zip string
 >
->       * home\_phone string
+>       * home_phone string
 >
->       * time\_format string
+>       * time_format string
 >
->       * last\_login string
+>       * last_login string
 >
->       * default\_perspective string
+>       * default_perspective string
 >
 >       * active string
 >
->       * sys\_domain\_path string
+>       * sys_domain_path string
 >
->       * cost\_center string
+>       * cost_center string
 >
 >       * phone string
 >
 >       * name string
 >
->       * employee\_number string
+>       * employee_number string
 >
->       * password\_needs\_reset string
+>       * password_needs_reset string
 >
 >       * gender string
 >
 >       * city string
 >
->       * failed\_attempts string
+>       * failed_attempts string
 >
->       * user\_name string
+>       * user_name string
 >
 >       * roles string
 >
 >       * title string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * internal\_integration\_user string
+>       * internal_integration_user string
 >
->       * ldap\_server string
+>       * ldap_server string
 >
->       * mobile\_phone string
+>       * mobile_phone string
 >
 >       * street string
 >
 >       * company string
 >
->       * first\_name string
+>       * first_name string
 >
 >       * email string
 >
 >       * introduction string
 >
->       * preferred\_language string
+>       * preferred_language string
 >
 >       * manager string
 >
->       * locked\_out string
+>       * locked_out string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
->       * last\_name string
+>       * last_name string
 >
 >       * photo string
 >
 >       * avatar string
 >
->       * middle\_name string
+>       * middle_name string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
->       * time\_zone string
+>       * time_zone string
 >
 >       * schedule string
 >
->       * date\_format string
+>       * date_format string
 >
 >       * location string
 >
@@ -398,21 +398,21 @@ Create a new user.
 >
 >       * country string
 >
->       * user\_password string
+>       * user_password string
 >
 >       * gender string
 >
 >       * city string
 >
->       * sys\_import\_state\_comment string
+>       * sys_import_state_comment string
 >
->       * template\_import\_log string
+>       * template_import_log string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * sys\_target\_sys\_id object
+>       * sys_target_sys_id object
 >
 >         * link string
 >
@@ -420,73 +420,73 @@ Create a new user.
 >
 >       * notification string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * sys\_created\_on string
+>       * sys_created_on string
 >
->       * sys\_import\_set object
->
->         * link string
->
->         * value string
->
->       * sys\_transform\_map object
+>       * sys_import_set object
 >
 >         * link string
 >
 >         * value string
 >
->       * first\_name string
+>       * sys_transform_map object
+>
+>         * link string
+>
+>         * value string
+>
+>       * first_name string
 >
 >       * email string
 >
->       * preferred\_language string
+>       * preferred_language string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * group string
 >
->       * sys\_import\_row string
+>       * sys_import_row string
 >
->       * home\_phone string
+>       * home_phone string
 >
->       * sys\_row\_error string
+>       * sys_row_error string
 >
->       * sys\_target\_table string
+>       * sys_target_table string
 >
->       * locked\_out string
+>       * locked_out string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
 >       * active string
 >
->       * last\_name string
+>       * last_name string
 >
->       * import\_set\_run object
+>       * import_set_run object
 >
 >         * link string
 >
 >         * value string
 >
->       * middle\_name string
+>       * middle_name string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
->       * sys\_import\_state string
+>       * sys_import_state string
 >
 >       * phone string
 >
->       * employee\_number string
+>       * employee_number string
 >
->       * mobile\_number string
+>       * mobile_number string
 >
 >       * username string
 >
->       * group\_record\_id string
+>       * group_record_id string
 >
->       * group\_sys\_id string
+>       * group_sys_id string
 >
 >   * statusCode number
 
@@ -582,37 +582,37 @@ Modify a user.
 >
 >     * result object
 >
->       * calendar\_integration string
+>       * calendar_integration string
 >
 >       * country string
 >
->       * user\_password string
+>       * user_password string
 >
->       * last\_login\_time string
+>       * last_login_time string
 >
->       * x\_pd\_integration\_pagerduty\_id string
+>       * x_pd_integration_pagerduty_id string
 >
->       * hashed\_user\_id string
+>       * hashed_user_id string
 >
 >       * source string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
 >       * building string
 >
->       * web\_service\_access\_only string
+>       * web_service_access_only string
 >
 >       * notification string
 >
->       * enable\_multifactor\_authn string
+>       * enable_multifactor_authn string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * sso\_source string
+>       * sso_source string
 >
->       * sys\_created\_on string
+>       * sys_created_on string
 >
->       * sys\_domain object
+>       * sys_domain object
 >
 >         * link string
 >
@@ -622,53 +622,53 @@ Modify a user.
 >
 >       * vip string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * zip string
 >
->       * home\_phone string
+>       * home_phone string
 >
->       * time\_format string
+>       * time_format string
 >
->       * last\_login string
+>       * last_login string
 >
->       * default\_perspective string
+>       * default_perspective string
 >
 >       * active string
 >
->       * sys\_domain\_path string
+>       * sys_domain_path string
 >
->       * cost\_center string
+>       * cost_center string
 >
 >       * phone string
 >
 >       * name string
 >
->       * employee\_number string
+>       * employee_number string
 >
->       * password\_needs\_reset string
+>       * password_needs_reset string
 >
 >       * gender string
 >
 >       * city string
 >
->       * failed\_attempts string
+>       * failed_attempts string
 >
->       * user\_name string
+>       * user_name string
 >
 >       * roles string
 >
 >       * title string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * internal\_integration\_user string
+>       * internal_integration_user string
 >
->       * ldap\_server string
+>       * ldap_server string
 >
->       * mobile\_phone string
+>       * mobile_phone string
 >
 >       * street string
 >
@@ -676,35 +676,35 @@ Modify a user.
 >
 >       * department string
 >
->       * first\_name string
+>       * first_name string
 >
 >       * email string
 >
 >       * introduction string
 >
->       * preferred\_language string
+>       * preferred_language string
 >
 >       * manager string
 >
->       * locked\_out string
+>       * locked_out string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
->       * last\_name string
+>       * last_name string
 >
 >       * photo string
 >
 >       * avatar string
 >
->       * middle\_name string
+>       * middle_name string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
->       * time\_zone string
+>       * time_zone string
 >
 >       * schedule string
 >
->       * date\_format string
+>       * date_format string
 >
 >       * location string
 >
@@ -778,71 +778,71 @@ Create a new incident.
 >
 >     * result object
 >
->       * x\_pd\_integration\_conf\_bridge string
+>       * x_pd_integration_conf_bridge string
 >
 >       * parent string
 >
->       * made\_sla string
+>       * made_sla string
 >
->       * caused\_by string
+>       * caused_by string
 >
->       * watch\_list string
+>       * watch_list string
 >
->       * upon\_reject string
+>       * upon_reject string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
->       * child\_incidents string
+>       * child_incidents string
 >
->       * hold\_reason string
+>       * hold_reason string
 >
->       * origin\_table string
+>       * origin_table string
 >
->       * task\_effective\_number string
+>       * task_effective_number string
 >
->       * approval\_history string
+>       * approval_history string
 >
 >       * number string
 >
->       * resolved\_by string
+>       * resolved_by string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * opened\_by object
->
->         * link string
->
->         * value string
->
->       * user\_input string
->
->       * sys\_created\_on string
->
->       * sys\_domain object
+>       * opened_by object
 >
 >         * link string
 >
 >         * value string
 >
->       * x\_pd\_integration\_incident string
+>       * user_input string
+>
+>       * sys_created_on string
+>
+>       * sys_domain object
+>
+>         * link string
+>
+>         * value string
+>
+>       * x_pd_integration_incident string
 >
 >       * state string
 >
->       * route\_reason string
+>       * route_reason string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * knowledge string
 >
 >       * order string
 >
->       * calendar\_stc string
+>       * calendar_stc string
 >
->       * closed\_at string
+>       * closed_at string
 >
->       * cmdb\_ci string
+>       * cmdb_ci string
 >
->       * delivery\_plan string
+>       * delivery_plan string
 >
 >       * contract string
 >
@@ -850,117 +850,117 @@ Create a new incident.
 >
 >       * active string
 >
->       * work\_notes\_list string
+>       * work_notes_list string
 >
->       * business\_service object
+>       * business_service object
 >
 >         * link string
 >
 >         * value string
 >
->       * business\_impact string
+>       * business_impact string
 >
 >       * priority string
 >
->       * sys\_domain\_path string
+>       * sys_domain_path string
 >
 >       * rfc string
 >
->       * time\_worked string
+>       * time_worked string
 >
->       * expected\_start string
+>       * expected_start string
 >
->       * opened\_at string
+>       * opened_at string
 >
->       * business\_duration string
+>       * business_duration string
 >
->       * group\_list string
+>       * group_list string
 >
->       * work\_end string
+>       * work_end string
 >
->       * caller\_id object
+>       * caller_id object
 >
 >         * link string
 >
 >         * value string
 >
->       * reopened\_time string
+>       * reopened_time string
 >
->       * resolved\_at string
+>       * resolved_at string
 >
->       * approval\_set string
+>       * approval_set string
 >
 >       * subcategory string
 >
->       * work\_notes string
+>       * work_notes string
 >
->       * x\_pd\_integration\_incident\_id string
+>       * x_pd_integration_incident_id string
 >
->       * universal\_request string
+>       * universal_request string
 >
->       * short\_description string
+>       * short_description string
 >
->       * close\_code string
+>       * close_code string
 >
->       * correlation\_display string
+>       * correlation_display string
 >
->       * delivery\_task string
+>       * delivery_task string
 >
->       * work\_start string
+>       * work_start string
 >
->       * assignment\_group object
+>       * assignment_group object
 >
 >         * link string
 >
 >         * value string
 >
->       * additional\_assignee\_list string
+>       * additional_assignee_list string
 >
->       * business\_stc string
+>       * business_stc string
 >
 >       * cause string
 >
 >       * description string
 >
->       * origin\_id string
+>       * origin_id string
 >
->       * calendar\_duration string
+>       * calendar_duration string
 >
->       * close\_notes string
+>       * close_notes string
 >
 >       * notify string
 >
->       * service\_offering string
+>       * service_offering string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * closed\_by string
+>       * closed_by string
 >
->       * follow\_up string
+>       * follow_up string
 >
->       * parent\_incident string
+>       * parent_incident string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * contact\_type string
+>       * contact_type string
 >
->       * reopened\_by string
+>       * reopened_by string
 >
->       * incident\_state string
+>       * incident_state string
 >
 >       * urgency string
 >
->       * problem\_id string
+>       * problem_id string
 >
 >       * company string
 >
->       * reassignment\_count string
+>       * reassignment_count string
 >
->       * x\_pd\_integration\_incident\_key string
+>       * x_pd_integration_incident_key string
 >
->       * activity\_due string
+>       * activity_due string
 >
->       * assigned\_to string
+>       * assigned_to string
 >
 >       * severity string
 >
@@ -968,23 +968,23 @@ Create a new incident.
 >
 >       * approval string
 >
->       * sla\_due string
+>       * sla_due string
 >
->       * comments\_and\_work\_notes string
+>       * comments_and_work_notes string
 >
->       * due\_date string
+>       * due_date string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
->       * reopen\_count string
+>       * reopen_count string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
 >       * escalation string
 >
->       * upon\_approval string
+>       * upon_approval string
 >
->       * correlation\_id string
+>       * correlation_id string
 >
 >       * location string
 >
@@ -1024,71 +1024,71 @@ Search for an incident by the incident number or by the ServiceNow ID.
 >
 >     * result object
 >
->       * x\_pd\_integration\_conf\_bridge string
+>       * x_pd_integration_conf_bridge string
 >
 >       * parent string
 >
->       * made\_sla string
+>       * made_sla string
 >
->       * caused\_by string
+>       * caused_by string
 >
->       * watch\_list string
+>       * watch_list string
 >
->       * upon\_reject string
+>       * upon_reject string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
->       * child\_incidents string
+>       * child_incidents string
 >
->       * hold\_reason string
+>       * hold_reason string
 >
->       * origin\_table string
+>       * origin_table string
 >
->       * task\_effective\_number string
+>       * task_effective_number string
 >
->       * approval\_history string
+>       * approval_history string
 >
 >       * number string
 >
->       * resolved\_by string
+>       * resolved_by string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * opened\_by object
->
->         * link string
->
->         * value string
->
->       * user\_input string
->
->       * sys\_created\_on string
->
->       * sys\_domain object
+>       * opened_by object
 >
 >         * link string
 >
 >         * value string
 >
->       * x\_pd\_integration\_incident string
+>       * user_input string
+>
+>       * sys_created_on string
+>
+>       * sys_domain object
+>
+>         * link string
+>
+>         * value string
+>
+>       * x_pd_integration_incident string
 >
 >       * state string
 >
->       * route\_reason string
+>       * route_reason string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * knowledge string
 >
 >       * order string
 >
->       * calendar\_stc string
+>       * calendar_stc string
 >
->       * closed\_at string
+>       * closed_at string
 >
->       * cmdb\_ci string
+>       * cmdb_ci string
 >
->       * delivery\_plan string
+>       * delivery_plan string
 >
 >       * contract string
 >
@@ -1096,117 +1096,117 @@ Search for an incident by the incident number or by the ServiceNow ID.
 >
 >       * active string
 >
->       * work\_notes\_list string
+>       * work_notes_list string
 >
->       * business\_service object
+>       * business_service object
 >
 >         * link string
 >
 >         * value string
 >
->       * business\_impact string
+>       * business_impact string
 >
 >       * priority string
 >
->       * sys\_domain\_path string
+>       * sys_domain_path string
 >
 >       * rfc string
 >
->       * time\_worked string
+>       * time_worked string
 >
->       * expected\_start string
+>       * expected_start string
 >
->       * opened\_at string
+>       * opened_at string
 >
->       * business\_duration string
+>       * business_duration string
 >
->       * group\_list string
+>       * group_list string
 >
->       * work\_end string
+>       * work_end string
 >
->       * caller\_id object
+>       * caller_id object
 >
 >         * link string
 >
 >         * value string
 >
->       * reopened\_time string
+>       * reopened_time string
 >
->       * resolved\_at string
+>       * resolved_at string
 >
->       * approval\_set string
+>       * approval_set string
 >
 >       * subcategory string
 >
->       * work\_notes string
+>       * work_notes string
 >
->       * x\_pd\_integration\_incident\_id string
+>       * x_pd_integration_incident_id string
 >
->       * universal\_request string
+>       * universal_request string
 >
->       * short\_description string
+>       * short_description string
 >
->       * close\_code string
+>       * close_code string
 >
->       * correlation\_display string
+>       * correlation_display string
 >
->       * delivery\_task string
+>       * delivery_task string
 >
->       * work\_start string
+>       * work_start string
 >
->       * assignment\_group object
+>       * assignment_group object
 >
 >         * link string
 >
 >         * value string
 >
->       * additional\_assignee\_list string
+>       * additional_assignee_list string
 >
->       * business\_stc string
+>       * business_stc string
 >
 >       * cause string
 >
 >       * description string
 >
->       * origin\_id string
+>       * origin_id string
 >
->       * calendar\_duration string
+>       * calendar_duration string
 >
->       * close\_notes string
+>       * close_notes string
 >
 >       * notify string
 >
->       * service\_offering string
+>       * service_offering string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * closed\_by string
+>       * closed_by string
 >
->       * follow\_up string
+>       * follow_up string
 >
->       * parent\_incident string
+>       * parent_incident string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * contact\_type string
+>       * contact_type string
 >
->       * reopened\_by string
+>       * reopened_by string
 >
->       * incident\_state string
+>       * incident_state string
 >
 >       * urgency string
 >
->       * problem\_id string
+>       * problem_id string
 >
 >       * company string
 >
->       * reassignment\_count string
+>       * reassignment_count string
 >
->       * x\_pd\_integration\_incident\_key string
+>       * x_pd_integration_incident_key string
 >
->       * activity\_due string
+>       * activity_due string
 >
->       * assigned\_to string
+>       * assigned_to string
 >
 >       * severity string
 >
@@ -1214,23 +1214,23 @@ Search for an incident by the incident number or by the ServiceNow ID.
 >
 >       * approval string
 >
->       * sla\_due string
+>       * sla_due string
 >
->       * comments\_and\_work\_notes string
+>       * comments_and_work_notes string
 >
->       * due\_date string
+>       * due_date string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
->       * reopen\_count string
+>       * reopen_count string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
 >       * escalation string
 >
->       * upon\_approval string
+>       * upon_approval string
 >
->       * correlation\_id string
+>       * correlation_id string
 >
 >       * location string
 >
@@ -1310,71 +1310,71 @@ Modify an incident by its ServiceNow ID.
 >
 >     * result object
 >
->       * x\_pd\_integration\_conf\_bridge string
+>       * x_pd_integration_conf_bridge string
 >
 >       * parent string
 >
->       * made\_sla string
+>       * made_sla string
 >
->       * caused\_by string
+>       * caused_by string
 >
->       * watch\_list string
+>       * watch_list string
 >
->       * upon\_reject string
+>       * upon_reject string
 >
->       * sys\_updated\_on string
+>       * sys_updated_on string
 >
->       * child\_incidents string
+>       * child_incidents string
 >
->       * hold\_reason string
+>       * hold_reason string
 >
->       * origin\_table string
+>       * origin_table string
 >
->       * task\_effective\_number string
+>       * task_effective_number string
 >
->       * approval\_history string
+>       * approval_history string
 >
 >       * number string
 >
->       * resolved\_by string
+>       * resolved_by string
 >
->       * sys\_updated\_by string
+>       * sys_updated_by string
 >
->       * opened\_by object
->
->         * link string
->
->         * value string
->
->       * user\_input string
->
->       * sys\_created\_on string
->
->       * sys\_domain object
+>       * opened_by object
 >
 >         * link string
 >
 >         * value string
 >
->       * x\_pd\_integration\_incident string
+>       * user_input string
+>
+>       * sys_created_on string
+>
+>       * sys_domain object
+>
+>         * link string
+>
+>         * value string
+>
+>       * x_pd_integration_incident string
 >
 >       * state string
 >
->       * route\_reason string
+>       * route_reason string
 >
->       * sys\_created\_by string
+>       * sys_created_by string
 >
 >       * knowledge string
 >
 >       * order string
 >
->       * calendar\_stc string
+>       * calendar_stc string
 >
->       * closed\_at string
+>       * closed_at string
 >
->       * cmdb\_ci string
+>       * cmdb_ci string
 >
->       * delivery\_plan string
+>       * delivery_plan string
 >
 >       * contract string
 >
@@ -1382,117 +1382,117 @@ Modify an incident by its ServiceNow ID.
 >
 >       * active string
 >
->       * work\_notes\_list string
+>       * work_notes_list string
 >
->       * business\_service object
+>       * business_service object
 >
 >         * link string
 >
 >         * value string
 >
->       * business\_impact string
+>       * business_impact string
 >
 >       * priority string
 >
->       * sys\_domain\_path string
+>       * sys_domain_path string
 >
 >       * rfc string
 >
->       * time\_worked string
+>       * time_worked string
 >
->       * expected\_start string
+>       * expected_start string
 >
->       * opened\_at string
+>       * opened_at string
 >
->       * business\_duration string
+>       * business_duration string
 >
->       * group\_list string
+>       * group_list string
 >
->       * work\_end string
+>       * work_end string
 >
->       * caller\_id object
+>       * caller_id object
 >
 >         * link string
 >
 >         * value string
 >
->       * reopened\_time string
+>       * reopened_time string
 >
->       * resolved\_at string
+>       * resolved_at string
 >
->       * approval\_set string
+>       * approval_set string
 >
 >       * subcategory string
 >
->       * work\_notes string
+>       * work_notes string
 >
->       * x\_pd\_integration\_incident\_id string
+>       * x_pd_integration_incident_id string
 >
->       * universal\_request string
+>       * universal_request string
 >
->       * short\_description string
+>       * short_description string
 >
->       * close\_code string
+>       * close_code string
 >
->       * correlation\_display string
+>       * correlation_display string
 >
->       * delivery\_task string
+>       * delivery_task string
 >
->       * work\_start string
+>       * work_start string
 >
->       * assignment\_group object
+>       * assignment_group object
 >
 >         * link string
 >
 >         * value string
 >
->       * additional\_assignee\_list string
+>       * additional_assignee_list string
 >
->       * business\_stc string
+>       * business_stc string
 >
 >       * cause string
 >
 >       * description string
 >
->       * origin\_id string
+>       * origin_id string
 >
->       * calendar\_duration string
+>       * calendar_duration string
 >
->       * close\_notes string
+>       * close_notes string
 >
 >       * notify string
 >
->       * service\_offering string
+>       * service_offering string
 >
->       * sys\_class\_name string
+>       * sys_class_name string
 >
->       * closed\_by string
+>       * closed_by string
 >
->       * follow\_up string
+>       * follow_up string
 >
->       * parent\_incident string
+>       * parent_incident string
 >
->       * sys\_id string
+>       * sys_id string
 >
->       * contact\_type string
+>       * contact_type string
 >
->       * reopened\_by string
+>       * reopened_by string
 >
->       * incident\_state string
+>       * incident_state string
 >
 >       * urgency string
 >
->       * problem\_id string
+>       * problem_id string
 >
 >       * company string
 >
->       * reassignment\_count string
+>       * reassignment_count string
 >
->       * x\_pd\_integration\_incident\_key string
+>       * x_pd_integration_incident_key string
 >
->       * activity\_due string
+>       * activity_due string
 >
->       * assigned\_to string
+>       * assigned_to string
 >
 >       * severity string
 >
@@ -1500,23 +1500,23 @@ Modify an incident by its ServiceNow ID.
 >
 >       * approval string
 >
->       * sla\_due string
+>       * sla_due string
 >
->       * comments\_and\_work\_notes string
+>       * comments_and_work_notes string
 >
->       * due\_date string
+>       * due_date string
 >
->       * sys\_mod\_count string
+>       * sys_mod_count string
 >
->       * reopen\_count string
+>       * reopen_count string
 >
->       * sys\_tags string
+>       * sys_tags string
 >
 >       * escalation string
 >
->       * upon\_approval string
+>       * upon_approval string
 >
->       * correlation\_id string
+>       * correlation_id string
 >
 >       * location string
 >

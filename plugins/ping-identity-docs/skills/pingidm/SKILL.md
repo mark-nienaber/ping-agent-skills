@@ -35,8 +35,8 @@ Overview of PingIDM: Reconciling user accounts across distributed data stores an
 | Rest Api Reference: rest, pingidm, endpoints | rest-api-reference | https://docs.pingidentity.com/pingidm/8.1/rest-api-reference/*.md | references/snapshots/rest-api-reference.md |
 | Scripting Guide: pingidm, configuration, script | scripting-guide | https://docs.pingidentity.com/pingidm/8.1/scripting-guide/*.md | references/snapshots/scripting-guide.md |
 | Security Guide: pingidm, secret, encryption | security-guide | https://docs.pingidentity.com/pingidm/8.1/security-guide/*.md | references/snapshots/security-guide.md |
-| Setup Guide: pingidm, admin, configuration | setup-guide | https://docs.pingidentity.com/pingidm/8.1/setup-guide/*.md | references/snapshots/setup-guide.md |
 | Auth Guide: authentication, pingidm, user | auth-guide | https://docs.pingidentity.com/pingidm/8.1/auth-guide/*.md | references/snapshots/auth-guide.md |
+| Setup Guide: pingidm, admin, configuration | setup-guide | https://docs.pingidentity.com/pingidm/8.1/setup-guide/*.md | references/snapshots/setup-guide.md |
 | Schedules Guide: pingidm, tasks, scanning | schedules-guide | https://docs.pingidentity.com/pingidm/8.1/schedules-guide/*.md | references/snapshots/schedules-guide.md |
 | Pwd Plugin Guide: password, synchronization, active | pwd-plugin-guide | https://docs.pingidentity.com/pingidm/8.1/pwd-plugin-guide/*.md | references/snapshots/pwd-plugin-guide.md |
 

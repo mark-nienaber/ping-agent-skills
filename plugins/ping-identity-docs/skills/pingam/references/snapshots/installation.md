@@ -1,2094 +1,58 @@
 ---
-title: Apache Tomcat
-description: Configure Apache Tomcat as a deployment container for PingAM, including JVM settings, cookie domains, request logging, and security parameters
+title: Prepare identity stores
+description: Configure PingAM to access user identity data from LDAP directory servers or prepare a new PingDS instance for identity storage
 component: pingam
 version: 8.1
-page_id: pingam:installation:prepare-apache-tomcat
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-apache-tomcat.html
+page_id: pingam:installation:prepare-identity-repository
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-identity-repository.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Web Container"]
-page_aliases: ["install-guide:prepare-apache-tomcat.adoc"]
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Identity Store"]
+page_aliases: ["install-guide:prepare-identity-repository.adoc"]
 section_ids:
-  jvm_startup: JVM startup
-  slashes_in_resource_names: Slashes in resource names
-  cookie_domains: Cookie domains
-  log_request_times: Log request times
-  encoding_and_security: Encoding and security
+  prepare-idrepo: Install and configure PingDS for identity data
+  prepare-existing-identity-repository: Configure existing directory servers for identity data
+  prepare-idrepo-considerations: Create a directory server user for AM connections
+  ad-bind-account: Create a bind account in Active Directory for AM connections
+  prepare-idrepo-schema: Update the schema in an identity store
+  prepare-idrepo-manual-schema-steps: Prepare an identity store with manual schema updates
+  prepare-idrepo-auto-schema-steps: Prepare an identity store with automatic schema updates
 ---
 
-# Apache Tomcat
+# Prepare identity stores
 
-AM examples often use Apache Tomcat (Tomcat) as the deployment container. In these examples, Tomcat is installed on `am.example.com` and listens on the default ports without a Java Security Manager enabled.
+AM accesses user identity data from one or more identity stores, also called identity repositories.
 
-## JVM startup
+In most deployments, AM connects to existing LDAP directory servers for user identity data, because it shares data in an identity store with other applications.
 
-AM core services require a minimum JVM heap size of 1 GB, and a metadata space size of up to 256 MB.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Be careful when you configure more than one identity store in a single realm:- **Writes**: AM tries to perform write operations on each writable identity store configured in a realm, and there's no way to configure which store is written to. Don't configure more than one writable identity store per realm.
 
-|   |                                                                                                                                                                                                                                                                                                                                                              |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | Metadata space (Metaspace) is a dedicated region within Native Memory. It can grow automatically if you don't set a maximum size. The ideal Metaspace size depends on your deployment and the number of scripts you're running. 256 MB is considered a safe value for production deployments, but you might need to tweak this for your specific deployment. |
+- **Reads**: AM reads from all identity stores in a realm. If multiple stores are present, attribute mappings used by agents, SAML 2.0 logins, or other features may draw values from any of the configured stores.To manage identities and reconcile differences between multiple identity stores, use [PingIDM](https://docs.pingidentity.com/pingidm/8.1). |
 
-Set a `CATALINA_OPTS` environment variable with the appropriate tuning for your environment. For example, add the following in your `setenv` file:
+To prepare identity stores, read the following sections:
 
-* Linux
+* If you're installing a new PingDS instance for identity data, read [Install and configure PingDS for identity data](#prepare-idrepo).
 
-* Windows
+* If you're connecting AM to an existing identity store, read [Configure existing directory servers for identity data](#prepare-existing-identity-repository).
 
-In `$CATALINA_BASE/bin/setenv.sh`:
+Find more information on configuring your identity stores in [Identity stores](../setup/setting-up-identity-stores.html).
 
-```bash
-export CATALINA_OPTS="$CATALINA_OPTS -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-```
+## Install and configure PingDS for identity data
 
-In `$CATALINA_BASE/bin/setenv.bat`:
+This section shows how to install and set up a new DS server for identity data. Make sure DS replicas use the same configuration.
 
-```powershell
-set "CATALINA_OPTS=%CATALINA_OPTS% -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-```
+Installing DS with a [setup profile](https://docs.pingidentity.com/pingds/8.1/install-guide/setup-profiles.html) creates the required backend, schema, bind user, and indexes.
 
-Some versions of Microsoft Edge support the `Expires` header attribute instead of the `Max-Age` header attribute, which may cause SAML 2.0 and agent logout sequences to fail.
+|   |                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The bind account for the identity store is fetched when AM starts up. If you change the account (DN or password) while AM is running, you must restart AM to take account of the changes. Otherwise, you'll encounter bind failures with persistent searches. |
 
-If you have set the `org.apache.catalina.STRICT_SERVLET_COMPLIANCE` Tomcat property to `true`, add the `org.apache.tomcat.util.http.ServerCookie.ALWAYS_ADD_EXPIRE` property in the `setenv` file, to add the `Expires` attribute to the headers:
+1. Follow the steps in [Install DS for AM identities](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-idrepo.html) in the PingDS documentation.
 
-* Linux
-
-* Windows
-
-In `$CATALINA_BASE/bin/setenv.sh`:
-
-```bash
-export CATALINA_OPTS="$CATALINA_OPTS -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m \
--Dorg.apache.tomcat.util.http.ServerCookie.ALWAYS_ADD_EXPIRES=true"
-```
-
-In `$CATALINA_BASE/bin/setenv.bat`:
-
-```powershell
-set "CATALINA_OPTS=%CATALINA_OPTS% -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -
--Dorg.apache.tomcat.util.http.ServerCookie.ALWAYS_ADD_EXPIRES=true"
-```
-
-## Slashes in resource names
-
-Some AM resources have names that can contain slash characters (`/`), for example, in policy names, application names, and SAML 2.0 entities. These slash characters can cause unexpected behavior when running AM on Tomcat.
-
-Avoid resource names that contain forward slashes.
-
-## Cookie domains
-
-Set the cookie domain name value to an empty string (for *host-only* cookies) or to any non-top level domain (for *domain* cookies).
-
-For example, if you install AM on `am.example.com`, you can set the cookie domain name to `example.com`.
-
-|   |                                                                                                                                                                  |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Because host-only cookies are more secure than domain cookies, you *should* use host-only cookies unless you have a good business case for using domain cookies. |
-
-You can find information on configuring the cookie domain during installation in [Install an instance](interactive-install.html#configure-openam-custom).
-
-## Log request times
-
-Tomcat provides components called valves that can be configured to track access to resources. The Access Log Valve outputs information about request activity to log files for you to analyze or use when troubleshooting.
-
-To record request times in the Access Log Valve log, configure the `pattern` attribute to include the following values:
-
-* `%D`: The time taken to send an entire request in milliseconds. This is the total processing time and may be affected by network conditions.
-
-* `%F`: The time taken to commit the response in milliseconds.
-
-Example `Valve` element in `server.xml`:
-
-```bash
-<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-       prefix="localhost_access_log" suffix=".txt"
-       pattern="%h %l %u %t "%r" %s %b %D %F" />
-```
-
-You can find information about the Access Log Valve configuration in the [Tomcat documentation](https://tomcat.apache.org/tomcat-10.0-doc/config/valve.html#Access_Log_Valve), including the `%F` value.
-
-## Encoding and security
-
-You should edit the Tomcat `<Connector>` configuration to set `URIEncoding="UTF-8"`. UTF-8 URI encoding means the container can correctly decode URL-encoded characters in URI paths. This is particularly useful if your applications use the AM REST APIs and some identifiers, such as usernames, contain special characters.
-
-You should also set the `protocols` property appropriately to define which protocols are supported. Make sure you don't support any unsafe protocols such as the SSL v3.0 protocol (`SSLv3`).
-
-`<Connector>` configuration elements are found in the configuration file, `/path/to/tomcat/conf/server.xml`. The following excerpt shows an example `<Connector>` with the `URIEncoding` and `protocols` attributes set appropriately:
-
-```xml
-<Connector port="8443" protocol="HTTP/1.1"
-                  SSLEnabled="true"
-                  protocols="TLSv1.2,TLSv1.3"
-                  maxThreads="150"
-                  scheme="https"
-                  secure="true"
-                  clientAuth="false"
-                  URIEncoding="UTF-8" />
-```
-
-When you have finished setting up Apache Tomcat, you *should* enforce HTTPS connections to AM. Learn more in [Secure connections to the AM container](configure-container-HTTPS.html).
-
----
-
----
-title: Configure sites and add servers
-description: Configure PingAM sites to group multiple servers together and add servers to sites for high availability behind a load balancer
-component: pingam
-version: 8.1
-page_id: pingam:installation:configure-sites
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/configure-sites.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Deployment"]
-page_aliases: ["install-guide:configure-sites.adoc"]
-section_ids:
-  configure-site-after-installation: Configure a site with the first server
-  add-servers-to-site: Add a server to a site
----
-
-# Configure sites and add servers
-
-Sites group multiple AM servers together to provide services.
-
-To configure a site, follow these high-level steps:
-
-1. Install the first server in the site. This creates the configuration that the site will share.
-
-   Learn more in [Interactive install](interactive-install.html).
-
-2. Add the first server to a site if you didn't do this already during the installation.
-
-   Learn more in [Configure a site with the first server](#configure-site-after-installation).
-
-3. Add more servers to the site.
-
-   Learn more in [Add a server to a site](#add-servers-to-site).
-
-## Configure a site with the first server
-
-The following steps show how to set up a site when AM is running:
-
-1. Review AM's load balancing requirements in [Load balancing](../setup/configure-lb.html).
-
-2. In the AM admin UI, go to Deployment > Sites.
-
-3. Click Add a Site to start configuring the new site.
-
-4. On the New Site page, enter the site name without any spaces. For example, the site name must be in the format `ExampleSite`, rather than `Example Site`.
-
-   Set the Primary URL to the load balancer URL that's the entry point for the site, such as `https://lb.example.com/am`.
-
-   The site URL is the URL to the load balancer in front of the AM servers in the site. For example, if your load balancer listens for HTTPS on host `lb.example.com` and port `443` with AM under `/am`, then your site URL is `https://lb.example.com/am`.
-
-   Client applications and web or Java agents access the servers in the site through the site URL.
-
-5. Click Save to keep the site configuration.
-
-6. Configure the cookie domain of your site as required. Learn more in [Change the cookie domain](../security/changing-cookie-domain.html).
-
-7. Go to Deployment > Servers > server name > General.
-
-8. Set the Parent Site drop-down menu to the name of the site you just created, and save your changes.
-
-   At this point, the first server is part of the new site you have configured.
-
-   For all additional servers in the AM site, add them to the site at configuration time as described in [Add a server to a site](#add-servers-to-site).
-
-## Add a server to a site
-
-High availability requires redundant servers in case of failure. With AM, you configure an AM site with multiple servers in a pool behind a load balancing service that exposes a single URL as an entry point to the site.
-
-Follow these steps to configure a server to an existing site:
-
-1. Go to the deployment URL of the new instance to display the AM configurator page.
-
-2. On the initial configuration page, click Create New Configuration.
-
-3. Read the license agreement. Agree to the license agreement and click Continue.
-
-4. On the Default User Password page, enter the same password you entered for the `amAdmin` administrator when you configured the first server in the site.
-
-5. Configure server settings as required.
-
-   The cookie domain must be identical to that of the first server in the site.
-
-   |   |                                                                                                                                                                                |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | You'll get a warning if the Configuration Directory isn't empty. If this happens, check that the directory you're trying to use doesn't contain any data you need to preserve. |
-
-6. On the Configuration Data Store page, configure the same DS instance that is already used as the configuration store for the rest of the instances in the site, including the same encryption key.
-
-   |   |                                                                                                                |
-   | - | -------------------------------------------------------------------------------------------------------------- |
-   |   | You can find the encryption key under Deployment > Servers > server name > Security > Password Encryption Key. |
-
-   Make sure you also select the Additional server for existing deployment option.
-
-7. On the Site Configuration page, select Yes, and enter the same Site Name and Load Balancer URL values as the existing servers in the site.
-
-   |   |                                         |
-   | - | --------------------------------------- |
-   |   | Spaces aren't allowed in the site name. |
-
-8. Check the details on the Configurator Summary page.
-
-   * If anything needs changing, click Previous to return to earlier pages and update as needed.
-
-   * If everything is correct, click Create Configuration to proceed.
-
-9. When the configuration process completes, **stop** the newly-installed AM instance or the container where it runs, and don't try to access it.
-
-10. Compare the `/path/to/am/config/boot.json` bootstrap file with that of a running instance. Make sure the newly installed instance's bootstrap file is appropriate for your environment.
-
-    > **Collapse: The  file doesn't exist in the new instance**
-    >
-    > Depending on the configuration of the AM keystore in the site, the installation process might not create the bootstrap file.
-    >
-    > If not, copy the bootstrap file from another instance and continue with the procedure.
-
-    Unless your environment has a requirement to configure the AM keystore in a different location on each instance, it's likely the bootstrap file will be the same across the site.
-
-    If you are [overriding the start up settings](startup-openam.html#startup-openam-dynamic):
-
-    * Make sure you have copied the customized bootstrap file from another instance in the site.
-
-    * Make sure you are overwriting the existing bootstrap file with your modified file prior to every AM restart.
-
-11. Make the existing AM keystore infrastructure available to the new instance:
-
-    * Back up the new instance's default keystore and password files in the following locations:
-
-      * `/path/to/am/security/keystores/`
-
-      * `/path/to/am/security/secrets/default/`
-
-    * Make sure the existing keystores in the site are available in the same location to the new instance. You might need to make changes, such as copying the keystores and their password files or mounting a volume.
-
-    * Make sure the keystore files configured in the `/path/to/am/config/boot.json` file are available to the instance.
-
-12. Make the existing secret store infrastructure in the site available to the new instance:
-
-    * In the AM admin UI of an existing instance in the site, go to Configure > Secret Stores.
-
-    * Review the list of secret stores configured globally and provide the relevant stores to the new instance. For example:
-
-      * For keystore-type secret stores, copy the keystores to the same path on the new instance.
-
-      * For filesystem-type secret stores, copy the contents of the directories to the same path or make the filesystem available on the same mount point on the new instance.
-
-      * For HSM-type stores, make sure the new instance can access it.
-
-      * For secrets configured as environment variables accessible by the container where AM runs, make sure they're also accessible by the container of the new instance.
-
-    * Go to Realms > *realm name* > Secret Stores.
-
-    * Review the list of secret stores configured per realm and make sure to provide the relevant stores to the new instance.
-
-13. Restart the new instance.
-
-    The instance is now configured for the site.
-
-14. Review AM's load balancing requirements in [Load balancing](../setup/configure-lb.html).
-
-15. Make sure the cookie domain configuration is appropriate for your site. Learn more in [Change the cookie domain](../security/changing-cookie-domain.html).
-
----
-
----
-title: Customize the AM <code>.war</code> file
-description: Customize PingAM extension points and user pages by adding classes and resources to the `.war` file before deployment
-component: pingam
-version: 8.1
-page_id: pingam:installation:customize-openam
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/customize-openam.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Customization", "Install", "Deployment"]
-page_aliases: ["install-guide:customize-openam.adoc"]
----
-
-# Customize the AM `.war` file
-
-For basic AM installations you don't need to customize the AM `.war` file before deploying it. If you need to customize any AM extension points, add the new classes to the `.war` file before deploying it.
-
-|   |                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------- |
-|   | Find information about customizing the secure cookie filter in [Secure cookie filter](../security/secure-cookie-filter.html). |
-
-You can also [customize the AM user pages](../ui-customization/preface.html) and package them into the `.war` file.
-
-Learn more about customizing the `.war` file in [Customize before upgrading](../upgrade/upgrade-planning.html#pre-upgrade-customization).
-
----
-
----
-title: Delete and redeploy AM
-description: Delete PingAM configuration files and redeploy the application to start the installation process from the beginning
-component: pingam
-version: 8.1
-page_id: pingam:installation:start-over-install
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/start-over-install.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Backup &amp; Restore"]
-page_aliases: ["install-guide:start-over-install.adoc"]
----
-
-# Delete and redeploy AM
-
-If you need to delete your configuration and start the process from the beginning, follow these steps:
-
-1. Stop the AM web application to clear the configuration held in memory.
-
-   The following example shuts down Apache Tomcat:
-
-   ```bash
-   $ /path/to/tomcat/bin/shutdown.sh
-   Password:
-   Using CATALINA_BASE:   /path/to/tomcat
-   Using CATALINA_HOME:   /path/to/tomcat
-   Using CATALINA_TMPDIR: /path/to/tomcat/temp
-   Using JRE_HOME:        /path/to/jdk/jre
-   Using CLASSPATH:
-   /path/to/tomcat/bin/bootstrap.jar:/path/to/tomcat/bin/tomcat-juli.jar
-   ```
-
-2. Delete the AM configuration files, by default under the `$HOME` of the user running the web application container:
-
-   ```bash
-   $ rm -rf $HOME/am $HOME/.openamcfg
-   ```
-
-3. When installing or reinstalling a standalone AM instance, you must ensure the configuration store used does not contain previous configuration data.
-
-   You should either install a new, clean instance of DS, or delete the entries under the configured AM suffix (by default `ou=am-config`) of an existing instance.
-
-   Note that when adding a server to an existing deployment, you must not delete the configuration from DS, as it is shared by all servers in the deployment. See [Add a server to a site](configure-sites.html#add-servers-to-site).
-
-4. Delete any cached files from the container.
-
-   For example, on Tomcat, files are cached in a folder named after the deployment path, such as `/path/to/tomcat/work/Catalina/localhost/deployment path`. Use a command such as the following to delete these cached files:
-
-   ```bash
-   $ rm -rf /path/to/tomcat/work/Catalina/localhost/am
-   ```
-
-5. Restart the AM web application.
-
-   The following example starts the Tomcat container:
-
-   ```bash
-   $ /path/to/tomcat/bin/startup.sh
-   Password:
-   Using CATALINA_BASE:   /path/to/tomcat
-   Using CATALINA_HOME:   /path/to/tomcat
-   Using CATALINA_TMPDIR: /path/to/tomcat/temp
-   Using JRE_HOME:        /path/to/jdk/jre
-   Using CLASSPATH:
-   /path/to/tomcat/bin/bootstrap.jar:/path/to/tomcat/bin/tomcat-juli.jar
-   ```
-
----
-
----
-title: Deploy AM
-description: Extract the WAR file into your application container to deploy PingAM before installation and configuration
-component: pingam
-version: 8.1
-page_id: pingam:installation:deploy-openam
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/deploy-openam.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Deployment", "Topology"]
-page_aliases: ["install-guide:deploy-openam.adoc"]
----
-
-# Deploy AM
-
-After you have downloaded AM software, deploy it to your installed application container.
-
-Deploying AM only extracts the files into the application container, prior to installation and configuration. Deploying AM also makes LDIF files available, which can be used to prepare datastores for use with AM.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                      |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | After deploying AM, but before installation, your application container serves AM's installer (or upgrader, if performing an upgrade) user interfaces.We recommend that any external network access to the application container is suspended until the install, or upgrade, is complete. When complete, AM prevents access to the installer, or upgrader UI itself. |
-
-The `AM-8.1.1.war` file contains the AM server. How you deploy the `.war` file depends on your web application container.
-
-1. Deploy the `.war` file on your container.
-
-   For example, copy the file to deploy on Apache Tomcat.
-
-   ```
-   $ cp AM-8.1.1.war /path/to/tomcat/webapps/am.war
-   ```
-
-   In development or demonstration deployments, change the `.war` file name to `am.war` when deploying in Tomcat, so that the deployment URI is `/am`.
-
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                            |
-   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | * Change the file name to something other than `am.war` when deploying to a production environment so the deployment URI isn't `/am`. Your deployment URI in production shouldn't disclose the kind of software it is hosting.
-
-   * AM requires a deployment URI with a non-empty string after `/`. Don't deploy AM in the root context. For example, don't rename the `.war` file to `ROOT.war` before deploying on Tomcat. |
-
-   It can take several seconds for AM to be deployed in your container.
-
-2. Go to the initial configuration page. For example, `https://am.example.com:8443/am`.
-
-   ![The initial configuration page lets you start configuring AM.](_images/openam-start.png)
-
-   AM is now ready for installation.
-
-3. You can now configure datastores using the files created during deployment. Learn more in [Prepare datastores](prepare-ext-stores.html).
-
----
-
----
-title: Download AM
-description: Download PingAM software packages including the complete distribution, WAR file, administrative tools, agents, and documentation
-component: pingam
-version: 8.1
-page_id: pingam:installation:download-openam-software
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/download-openam-software.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install"]
-page_aliases: ["install-guide:download-openam-software.adoc"]
----
-
-# Download AM
-
-The [Ping Identity Download Center](https://backstage.pingidentity.com/downloads) hosts downloads, including a `.zip` file with all of the AM components, the `.war` file, AM tools, the configurator, web and Java agents, PingGateway, and documentation. Review the Software License and Subscription Agreement presented before you download AM files.
-
-For each release of AM, you can download the entire package as a `.zip` file, only the AM `.war` file, or only the administrative tools as a `.zip` archive.
-
-After you download the `.zip` file, create a new directory for AM, and unzip the `.zip` file to access the content.
-
-```
-$ cd ~/Downloads
-$ mkdir am && cd am
-$ unzip ~/Downloads/AM-8.1.1.zip
-```
-
-When you unzip the archive of the entire package, you get samples, snmp and legal-notices directories in addition to the following files:
-
-**Distribution Files**
-
-| File                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AM-8.1.1.war`                 | The distribution `.war` file includes the core server code and an administrative graphical user interface (GUI) Web console.During installation, the `.war` file accesses properties to get the fully qualified domain name, port, context path, and the location of the configuration folder. These properties can be retrieved from the `boot.json` file in the AM installation directory, from environment variables, or from a combination of the two.This file is also available to download individually. |
-| `AM-crypto-tool-8.1.1.war`     | A utility with some cryptographic functionality used for creating Docker images.	Strictly for future use, not currently supported.                                                                                                                                                                                                                                                                                                                                                                              |
-| `Config-Upgrader-8.1.1.zip`    | Configuration file upgrade tool.Find more information on converting configuration files for import into AM in the `README.md` file in the `Config-Upgrader-8.1.1.zip` file.                                                                                                                                                                                                                                                                                                                                     |
-| `Fedlet-8.1.1.zip`             | An AM Fedlet, a light-weight SAML 2.0 service provider.The Fedlet lets you set up a federated deployment without the need of a fully-featured service provider.                                                                                                                                                                                                                                                                                                                                                 |
-| `IDPDiscovery-8.1.1.war`       | An IdP Discovery Profile (SAMLv2 binding profile) for its IdP Discovery service. The profile keeps track of the identity providers for each user.                                                                                                                                                                                                                                                                                                                                                               |
-| `sample-trees-8.1.1.zip`       | Sample authentication trees for demonstration purposes. The trees are provided as JSON files and can be imported into an AM deployment using *Amster*. Find information on importing files using Amster in [Import configuration data](../amster/import-config.html).                                                                                                                                                                                                                                           |
-| `Truststore-Utility-8.1.1.zip` | A utility to help with creating a trust store for use with web authentication.Find more information in the `readme.md` in the `.zip` archive and [MFA: Web authentication (WebAuthn) and passkeys](../am-authentication/authn-mfa-webauthn.html).                                                                                                                                                                                                                                                               |
-
----
-
----
-title: IBM WebSphere Liberty
-description: Deploy PingAM in IBM WebSphere Liberty by preparing the JVM, customizing the WAR file, and configuring WebSphere classloader and SOAP settings
-component: pingam
-version: 8.1
-page_id: pingam:installation:prepare-ibm-websphere
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-ibm-websphere.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Web Container"]
-page_aliases: ["install-guide:prepare-ibm-websphere.adoc"]
-section_ids:
-  prep-openam-for-websphere: Prepare AM for WebSphere
-  prep-websphere-for-am: Prepare WebSphere
----
-
-# IBM WebSphere Liberty
-
-To deploy AM in IBM WebSphere Liberty, perform the following steps:
-
-1. Update the JVM options as described in [Prepare the Java environment](prepare-java.html).
-
-2. Customize the `AM-8.1.1.war` file as described in [Prepare AM for WebSphere](#prep-openam-for-websphere).
-
-3. After deploying AM, configure WebSphere as described in [Prepare WebSphere](#prep-websphere-for-am).
-
-## Prepare AM for WebSphere
-
-To prepare AM to run in WebSphere, change the AM `.war` file to ensure that the AM upgrade process is able to find the AM configuration files. You must make this change whenever you deploy a new `.war` file as part of an AM upgrade.
-
-|   |                                                                                                          |
-| - | -------------------------------------------------------------------------------------------------------- |
-|   | If you are installing on Windows, use slashes (`/`) in the paths listed here, and not backslashes (`\`). |
-
-1. Create a temporary directory and expand the `AM-8.1.1.war` file. For example:
-
-   ```bash
-   $ cd /tmp
-   $ mkdir /tmp/am && cd /tmp/am
-   $ jar xvf ~/Downloads/AM-8.1.1.war
-   ```
-
-2. Locate the `bootstrap.properties` file in the `WEB-INF/classes` directory of the expanded `war` file.
-
-   Update the `# configuration.dir=` line in the `bootstrap.properties` file to specify a path with read and write permissions. For example:
-
-   ```properties
-   # This property should also be used when the system user that
-   # is running the web/application server process does not have
-   # a home directory. i.e. System.getProperty("user.home") returns
-   # null.
-
-   configuration.dir=/my/readwrite/config/dir
-   ```
-
-3. Rebuild the `AM-8.1.1.war` file:
-
-   ```bash
-   $ jar cvf ../AM-8.1.1.war *
-   ```
-
-## Prepare WebSphere
-
-In addition to preparing the AM `.war` file, follow these steps to configure WebSphere for AM *after you deploy AM into WebSphere*:
-
-1. Load classes from AM bundled libraries before loading classes from libraries delivered with Liberty:
-
-   * In the WebSphere Liberty administration console, go to Explore > Configure > server.xml.
-
-   * Select the `am` web application, click Add Child, and select Classloader from the list.
-
-   * In the Delegation field, select parentLast.
-
-   * Save your work.
-
-2. If your environment uses SOAP, add the SOAP-related properties to the JVM.
-
-   In the `AM-config-dir`, create a file named `jvm.options`, and add the following properties:
-
-   ```none
-   -Djavax.xml.soap.MessageFactory=com.sun.xml.internal.messaging.saaj.soap.ver1_1.SOAPMessageFactory1_1Impl
-   -Djavax.xml.soap.SOAPFactory=com.sun.xml.internal.messaging.saaj.soap.ver1_1.SOAPFactory1_1Impl
-   -Djavax.xml.soap.SOAPConnectionFactory=com.sun.xml.internal.messaging.saaj.client.p2p.HttpSOAPConnectionFactory
-   -Djavax.xml.soap.MetaFactory=com.sun.xml.internal.messaging.saaj.soap.SAAJMetaFactoryImpl
-   -Dcom.ibm.websphere.webservices.DisableIBMJAXWSEngine=true
-   ```
-
----
-
----
-title: Install AM
-description: Install PingAM instances in production or high-availability environments using interactive, passive, or site-based deployment methods
-component: pingam
-version: 8.1
-page_id: pingam:installation:installing-instances
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/installing-instances.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Availability"]
-page_aliases: ["install-guide:installing-instances.adoc"]
-section_ids:
-  install-high-availability: Install multiple instances for high availability
----
-
-# Install AM
-
-Production or production-like environments require a separate configuration store and CTS token store.
-
-You can store the configuration in a DS server or in JSON files. File-based configuration (FBC) is best-suited to a DevOps-style deployment, with the associated tools and practices of that approach.
-
-The CTS token store must be a DS server. If you store configuration in a DS server, AM stores CTS tokens there until you configure a separate LDAP store for them.
-
-Learn more in [Prepare datastores](prepare-ext-stores.html).
-
-The following table provides information to help you install AM instances:
-
-| Task or requirement                                                                                                                                                                              | Resources                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Configure an instance interactively in a production or pre-production environmentThis can be the first instance of a site deployment. Interactive installation assumes a DS configuration store. | [Interactive install](interactive-install.html)                                                                                       |
-| Configure an instance without user interactionYou can install an instance passively with either a DS configuration or file-based configuration.                                                  | [Passive install](passive-install.html)                                                                                               |
-| Configure an AM site and add an instance to the siteA *site* lets you group multiple AM servers.                                                                                                 | [Install multiple instances for high availability](#install-high-availability)[Configure sites and add servers](configure-sites.html) |
-
-## Install multiple instances for high availability
-
-Install multiple instances to maintain service availability. If one instance is down for any reason, another instance can respond instead. This means you need some type of component, such as a load balancer or a proxy server, between incoming traffic and AM to route around instances that are down.
-
-AM uses a *site* for this purpose. In an AM site, multiple AM instances are configured in the same way, and accessed through a load balancer layer.
-
-The load balancer can be implemented in hardware or software, but it is separate and independent from AM. When installed properly, a site configuration improves service availability, because the load balancer routes around AM instances that are down, sending traffic to other servers in the site.
-
-You can find high-level deployment information in [Deployment planning](../deployment-planning/preface.html).
-
-|   |                                                                                                                                                      |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you need to delete your AM configuration entirely and start again, you can find information in [Delete and redeploy AM](start-over-install.html). |
-
----
-
----
-title: Installation
-description: Install PingAM for access and federation management
-component: pingam
-version: 8.1
-page_id: pingam:installation:preface
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/preface.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install"]
-page_aliases: ["index.adoc", "release-notes:preface.adoc", "install-guide:preface.adoc"]
----
-
-# Installation
-
-This guide shows you how to install PingAM for access and federation management.
-
-Unless you are planning a demo or test installation, read the [Release notes](https://docs.pingidentity.com/pingam/release-notes) before you get started.
-
-[icon: th-list, set=fad, size=3x]
-
-#### [Prepare the environment for deployment](prepare-env-install.html)
-
-Prerequisites for deploying PingAM software.
-
-[icon: copy, set=fad, size=3x]
-
-#### [Prepare the Java container](prepare-containers.html)
-
-Prepare the application server of your choice.
-
-[icon: cogs, set=fad, size=3x]
-
-#### [Install AM](installing-instances.html)
-
-Install AM servers for high availability.
-
-[icon: cubes, set=fad, size=3x]
-
-#### [Prepare datastores](prepare-ext-stores.html)
-
-Store identities, configuration, CTS, policies and applications, and UMA-related data in LDAP directories.
-
-[icon: files, set=fad, size=3x]
-
-#### [Store configuration in files](fbc.html)
-
-Store configuration data in JSON files.
-
-[icon: times, set=fad, size=3x]
-
-#### [Remove installations](removing-instances.html)
-
-Uninstall AM and start over.
-
-[icon: ambulance, set=fad, size=3x]
-
-#### [Troubleshoot installations](install-troubleshooting.html)
-
-Troubleshoot or repair an AM installation.
-
----
-
----
-title: Interactive install
-description: Customize PingAM deployment parameters during interactive installation, including cookie domain, configuration datastore, and user datastore settings
-component: pingam
-version: 8.1
-page_id: pingam:installation:interactive-install
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/interactive-install.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install"]
-page_aliases: ["install-custom.adoc", "install-guide:interactive-install.adoc"]
----
-
-# Interactive install
-
-During interactive installation, you customize the parameters of the AM deployment, such as the cookie domain and the settings of the configuration and datastores.
-
-* Installing the first instance creates the required configuration that the site will share.
-
-  You can specify the site configuration when you install the first instance or configure the site when the first instance is running.
-
-* By default, the cookie domain is set to the full URL of the first instance; for example, `server.west.example.com`.
-
-  You can change the cookie domain when you're installing the first instance or later.
-
-* You can use a load balancer layer to protect AM services. The load balancer can restrict access to AM services, throttle traffic, offload HTTPS encryption, and so forth.
-
-  As an alternative, or in addition, you can use a separate reverse proxy.
-
-* When you are protecting AM with a load balancer or proxy service, configure your container so that AM can trust the load balancer or proxy service.
-
-* The container for each instance in the site must trust any certificate authorities (CA) used to sign certificates used by other instances in the site to communicate using SSL.
-
-* Successful authentication can depend on information about the authenticating user, such as the IP address where the request originated. When AM is accessed through a load balancer or proxy layer, pass this information along using request headers. Also, configure AM to consume and to forward the headers as necessary. Learn more in [Handle HTTP request headers](../setup/configure-lb.html#handle-request-headers).
-
-Follow these steps to install a single AM instance, or to install the first instance on a site.
-
-1. Go to your deployment URL. For example, `https://am.example.com:8443/am`.
-
-2. On the initial configuration page, click Create New Configuration.
-
-3. Read the license agreement. Agree to the license agreement and click Continue.
-
-4. On the Default User Password page, provide a password with at least eight characters for the AM Administrator, `amAdmin`.
-
-5. Verify that the server settings are valid for your configuration.
-
-   * Server URL
-
-     Provide a valid URL to the base of your AM web container, including an FQDN.
-
-     In a test or QA environment, you can simulate the FQDN by adding it to your `/etc/hosts` as an alias. The following example shows lines from the `/etc/hosts` file on a Linux system where AM is installed:
-
-     ```none
-     127.0.0.1 localhost.localdomain localhost
-     ::1 localhost6.localdomain6 localhost6
-     127.0.1.1 am am.example.com
-     ```
-
-   * Cookie Domain
-
-     The domain for which created cookies will be valid. For example `example.com`.
-
-   * Platform Locale
-
-     The platform locale of your server. Supported locales include en\_US (English), de (German), es (Spanish), fr (French), ja (Japanese), ko (Korean), zh\_CN (Simplified Chinese), and zh\_TW (Traditional Chinese).
-
-   * Configuration Directory
-
-     The directory to use for configuration files. AM must be able to write to this directory.
-
-     By default, the configuration directory is located in `$HOME/am`, where $HOME corresponds to the user who runs the web container.
-
-6. On the Configuration Data Store page, you can configure options related to AM configuration data.
-
-   The installation process stores AM configuration data in an existing DS server. You must have prepared the server as explained in [Prepare a configuration store](prepare-configuration-store.html).
-
-   * SSL/TLS Enabled
-
-     Select this option to use LDAPS to communicate with the configuration store. DS is configured for LDAPS by default.
-
-     Before proceeding, make sure you have shared the DS certificate with the container where AM is running. Learn more in [Prepare the truststore](prepare-trust-store.html).
-
-   * Host Name
-
-     The FQDN of the DS server.
-
-   * Port
-
-     The LDAPS port of the DS server.
-
-   * Encryption Key
-
-     A randomly generated key that AM uses for different purposes. All the servers in the site must have the same encryption key.
-
-     The installer creates a random key automatically, which you can use.
-
-   * Root Suffix
-
-     The root suffix of the DS store.
-
-     The default base DN of a DS store when you configure it with the `am_config` profile is `ou=am-config`.
-
-   * Login ID
-
-     The bind DN to use to connect to the DS store.
-
-     The default bind DN of a DS store when you configure it with the `am_config` profile is `uid=am-config,ou=admins,ou=am-config`.
-
-     Don't use `cn=admin` as the bind account.
-
-   * Password
-
-     The password for the bind DN.
-
-   * Server configuration
-
-     * New deployment
-
-       The installation is a new deployment, with its own configuration and identity stores.
-
-       If you choose this option, the next step is to configure the identity store.
-
-     * Additional server for existing deployment
-
-       The installation is an additional server for an existing deployment, which uses the existing configuration and identity stores.
-
-       If you choose this option, you don't need to configure the identity store. The installation uses the same stores as those of the existing deployment.
-
-       Learn more in [Add a server to a site](configure-sites.html#add-servers-to-site).
-
-7. If you specified New deployment in the previous step, the User Data Store page appears as the next step. Use this page to configure where AM looks for identities.
-
-   AM must have write access to the directory service you choose, because it adds to the directory schema needed to allow AM to manage identity profiles in the identity store.
-
-   * User Data Store Type
-
-     If you have already provisioned a directory service with identities in a supported identity store, then select that type of directory from the options available.
-
-   * SSL/TLS Enabled
-
-     Select this option to use a secure connection. When using this option, make sure the trust store used by the JVM running AM has the necessary certificates installed. Learn more in [Prepare the truststore](prepare-trust-store.html).
-
-   * Directory Name
-
-     The FQDN of the identity store.
-
-   * Port
-
-     The LDAPS port of the identity store. Make sure the port you define corresponds to the port the directory server listens to for StartTLS or SSL connections.
-
-   * Root Suffix
-
-     The base DN of the identity store.
-
-     If you installed PingDS with the `am-identity-store` profile, the base DN is `ou=identities`.
-
-   * Login ID
-
-     The directory administrator user DN. The administrator must be able to update the schema and identity profiles.
-
-     If you installed PingDS with the `am-identity-store` profile, the bind DN to use here is `uid=am-identity-bind-account,ou=admins,ou=identities`.
-
-   * Password
-
-     The password for the directory administrator user.
-
-     If you installed PingDS with the `am-identity-store` profile, this password is the one you set with `am-identity-store/amIdentityStoreAdminPassword`.
-
-8. On the Site Configuration page, you can set up AM as part of a site where the load is balanced across multiple AM servers.
-
-   When you deploy multiple servers, AM automatically enables session high availability.(1) AM stores session data in a directory service that is shared by multiple AM servers. The shared storage means that if an AM server fails, other AM servers in the deployment have access to the user's session data and can serve requests about that user. As a result, the user doesn't have to log in again.
-
-   You can also set up a site after initial installation and configuration. Learn more in [Configure a site with the first server](configure-sites.html#configure-site-after-installation).
-
-9. Check the details on the Configurator Summary page.
-
-   * If anything needs changing, click Previous to return to earlier pages and update as needed.
-
-   * If everything is correct, click Create Configuration to proceed. The configuration progress is shown in the browser and also output to the installation log.
-
-10. When the configuration process completes, click Proceed to Login, and log in as the `amAdmin` administrator.
-
-    After logging in, the Realms page is displayed.
-
-11. Restrict permissions to the configuration directory to prevent other users accessing configuration files.
-
-12. The AM install wizard uses four libraries that should be removed after installation for security reasons.
-
-    When your installation is complete, remove the following .jar files from the `WEB-INF/lib` directory:
-
-    * `click-extras-2.3.0.jar`
-
-    * `click-nodeps-2.3.0.jar`
-
-    * `ognl-3.2.10.jar`
-
-    * `velocity-1.7.jar`
-
-    |   |                                                                                                                               |
-    | - | ----------------------------------------------------------------------------------------------------------------------------- |
-    |   | These files are used *only* by the install and upgrade wizards. Removing them will have no effect on your installed instance. |
-
-    You must also remove the references to `click-servlet` from the deployment descriptor file. Edit `/path/to/tomcat/webapps/am/WEB-INF/web.xml` to remove the following mappings:
-
-    ```xml
-    <servlet>
-        <servlet-name>click-servlet</servlet-name>
-        <servlet-class>org.apache.click.ClickServlet</servlet-class>
-    </servlet>
-
-    ...
-
-    <servlet-mapping>
-        <servlet-name>click-servlet</servlet-name>
-        <url-pattern>*.htm</url-pattern>
-    </servlet-mapping>
-    ```
-
-13. Review the suggested [next steps](post-install.html) after installing AM.
-
-(1) You can configure AM to store sessions in the [Core Token Service (CTS) token store](../cts/preface.html) or on the client. Because [client-side](../am-sessions/client-based-sessions.html) sessions reside in HTTP cookies, they don't need to be retrieved from a persistent datastore. In the event of a server failure, they can be retrieved from the cookies. AM doesn't store client-side sessions in the CTS token store. You can find details about sessions in [Introduction to sessions](../am-sessions/about-sessions.html).
-
----
-
----
-title: JBoss and WildFly
-description: Prepare JBoss, JBoss EAP, and WildFly application servers to deploy PingAM, and configure the PingAM WAR archive for these environments
-component: pingam
-version: 8.1
-page_id: pingam:installation:prepare-jboss
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-jboss.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Web Container"]
-page_aliases: ["install-guide:prepare-jboss.adoc"]
-section_ids:
-  prep-jboss-for-openam: Prepare JBoss or WildFly
-  prep-openam-for-jboss: Prepare AM for JBoss and WildFly
----
-
-# JBoss and WildFly
-
-You can deploy AM on JBoss AS, JBoss EAP, and WildFly. The procedures listed here provide steps for configuring JBoss AS, JBoss EAP, and WildFly for AM.
-
-After configuring JBoss or WildFly, you then prepare AM for deployment by making changes to the contents of the AM `.war` archive.
-
-## Prepare JBoss or WildFly
-
-1. Stop JBoss or WildFly.
-
-2. The default JVM settings don't allocate enough memory to AM. This step shows one method you can use to modify the JVM settings. You can find other methods in JBoss [Configuring JVM Settings](https://docs.redhat.com/en/documentation/red_hat_jboss_enterprise_application_platform/8.1/html/configuration_guide/configuring-jvm-settings_default) or WildFly [JVM Settings](https://docs.jboss.org/author/display/WFLY/JVM%20settings.html).
-
-   * Open the `standalone.conf` file in the `/path/to/jboss/bin` directory for JBoss or WildFly in standalone mode.
-
-   * Check the JVM settings associated with `JAVA_OPTS`.
-
-     Change the JVM heap size to `-Xmx2g`. The default JVM heap size for some versions of JBoss might already exceed the recommended value.
-
-     Change the metaspace size to `-XX:MaxMetaspaceSize=256m` if the default size doesn't exceed this amount.
-
-   * Set one of the following JVM `JAVA_OPTS` settings in the same file depending on which web application container you're preparing:
-
-     * JBoss:
-
-       ```none
-       -Dorg.apache.tomcat.util.http.ServerCookie.ALWAYS_ADD_EXPIRES=true
-       ```
-
-       Make sure the headers include the `Expires` attribute in addition to `Max-Age` because some versions of Microsoft Edge don't support `Max-Age`.
-
-     * WildFly:
-
-       ```none
-       -Dio.undertow.legacy.cookie.ALLOW_HTTP_SEPARATORS_IN_V0=true
-       ```
-
-3. Edit the WildFly configuration to allow HTTP connections from any IP address.
-
-   In the `/path/to/wildfly/standalone/configuration/standalone.xml` file, locate the `<interface name="public">` interface (around line 512 of the file) and change the value to `<any-address/>`:
-
-   ```xml
-   <interface name="public">
-      <any-address/>
-   </interface>
-   ```
-
-4. Set up WildFly for Social Authentication by performing the following steps:
-
-   * Ensure the WildFly server is running.
-
-   * Go to the WildFly Path.
-
-   * In the `$JBOSS_HOME/bin` directory, run the `jboss-cli.sh` script file:
-
-     ```bash
-     $ ./bin/jboss-cli.sh
-     ```
-
-   * Type "connect" to connect to the server.
-
-   * Enable use of the equals (`=`) symbol in cookies by running the following command:
-
-     For example:
-
-     ```none
-     [standalone@localhost:9990 /] /subsystem=undertow/server=default-server/
-     http-listener=default:write-attribute(name=allow-equals-in-cookie-value,
-     value=true)
-     {
-        "outcome" => "success",
-        "response-headers" => {
-           "operation-requires-reload" => true,
-           "process-state" => "reload-required"
-         }
-     }
-     ```
-
-   * Restart WildFly.
-
-5. Deploy the `am.war` file into the appropriate deployment directory. The directory varies depending on whether you're running in standalone or domain mode.
-
-## Prepare AM for JBoss and WildFly
-
-To prepare AM to run with JBoss or WildFly, you must change the default AM `war` file. JBoss and WildFly deploy applications from different temporary directories every time you restart the container, which would require reconfiguring AM. To avoid problems, change the AM `war` file as follows:
-
-1. If you haven't already done so, create a temporary directory and expand the `AM-8.1.1.war` file. For example:
-
-   ```bash
-   $ cd /tmp
-   $ mkdir /tmp/am && cd /tmp/am
-   $ jar xvf ~/Downloads/AM-8.1.1.war
-   ```
-
-2. Locate the `bootstrap.properties` file in the `WEB-INF/classes` directory of the expanded `war` archive. Update the `# configuration.dir=` line in this file to specify a path with read and write permissions, then save the change.
-
-   ```properties
-   # This property should also be used when the system user that
-   # is running the web/application server process does not have
-   # a home directory. i.e. System.getProperty("user.home") returns
-   # null.
-
-   configuration.dir=/my/readwrite/config/dir
-   ```
-
-3. If you are deploying AM on JBoss AS or JBoss EAP, remove the `jboss-all.xml` file from the `WEB-INF` directory of the expanded `war` archive.
-
-   Don't remove this file if you are deploying AM on WildFly.
-
-4. Rebuild the `am.war` file.
-
-   ```bash
-   $ jar cvf ../am.war *
-   ```
-
----
-
----
-title: Next steps
-description: Complete essential PingAM configuration tasks after installation, including realm setup, authentication trees, security hardening, and federation features
-component: pingam
-version: 8.1
-page_id: pingam:installation:post-install
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/post-install.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install"]
-page_aliases: ["install-guide:post-install.adoc"]
----
-
-# Next steps
-
-Congratulations on installing AM!
-
-The following list shows you different tasks to consider after installing AM:
-
-* Core administrative tasks
-
-  * Log in to the AM admin UI.
-
-  * Learn about the administration command-line tools.
-
-  * Learn about realms, configure them, and connect them to identity stores.
-
-  * Configure AM's cookie domain.
-
-  * Learn about other types of configuration stores and decide if your environment would benefit from having dedicated application stores.
-
-    Find more information in [Setup and configuration](../setup/preface.html).
-
-* Core Token Service tasks
-
-  * Learn about the Core Token Service and decide if your environment would benefit from having dedicated CTS token stores.
-
-    Find more information in [Core Token Service (CTS)](../cts/preface.html).
-
-* Access Management-related tasks
-
-  * Learn about authentication trees and nodes and configure them to let your users log in to AM.
-
-  * Learn about sessions in AM and configure them for your environment.
-
-    Find more information in [Authentication and SSO](../am-authentication/preface.html).
-
-* Security-related tasks
-
-  * Secure your core AM environment against different threats.
-
-  * Configure keys and keystores used for different AM features.
-
-  * Change the `amAdmin` user password.
-
-  * Learn about delegated privileges and configure delegated realm administrators.
-
-  * Configure audit logging services.
-
-    Find more information in [Security](../security/preface.html).
-
-* Maintenance-related tasks
-
-  * Learn how to back up and restore your environment.
-
-  * Learn how to monitor your AM instances.
-
-  * Learn how to enable debug logging and how to record troubleshooting information.
-
-  * Tune AM.
-
-    Find more information in [Maintenance](../maintenance/preface.html).
-
-* Federation
-
-  AM offers authentication and authorization functionality which you can expand with Internet specifications and drafts, such as OAuth 2.0, and SAML 2.0.
-
-  When you're confident about your base AM configuration, move on to more advanced features such as protecting web applications, configuring single sign-on (SSO), federating access across applications, and others.
-
-  Find more information in [OAuth 2.0](../am-oauth2/preface.html), [OpenID Connect 1.0](../am-oidc1/preface.html), and [SAML 2.0](../am-saml2/preface.html).
-
----
-
----
-title: Passive install
-description: Set up PingAM with minimal user intervention using JSON files, REST API, or Amster
-component: pingam
-version: 8.1
-page_id: pingam:installation:passive-install
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Silent install", "Non-interactive install"]
-page_aliases: ["install-guide:passive-install.adoc"]
----
-
-# Passive install
-
-Passive installation, also called non-interactive or silent installation, lets you set up AM with minimal user intervention.
-
-There are three methods of installing AM passively:
-
-[icon: files, set=fad, size=3x]
-
-#### [Passive install with FBC](passive-install-fbc.html)
-
-Set up AM to read its configuration from JSON files.
-
-[icon: gears, set=fad, size=3x]
-
-#### [Passive install over REST](passive-install-rest.html)
-
-Configure AM using the REST API.
-
-[icon: wrench, set=fad, size=3x]
-
-#### [Passive install using Amster](passive-install-amster.html)
-
-Configure AM with Amster.
-
-File-based configuration (FBC) is best-suited to a DevOps-style deployment, with the associated tools and practices of that approach.
-
-Learn more in [Deployment configuration locations](../deployment-planning/deploy-configuration-types.html).
-
----
-
----
-title: Passive install over REST
-description: Use the REST API to install PingAM with minimal user interaction by sending a POST request to the /config/configurator endpoint
-component: pingam
-version: 8.1
-page_id: pingam:installation:passive-install-rest
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-rest.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["silent-install.adoc", "install-guide:passive-install-configurator.adoc", "passive-install-configurator.adoc"]
-section_ids:
-  examples: Examples
-  install_a_standalone_server: Install a standalone server
-  install_two_servers_in_a_site_configuration: Install two servers in a site configuration
-  config-properties: Configuration properties
----
-
-# Passive install over REST
-
-Use the REST API to install AM with minimal user interaction. The AM server must be deployed and running *but not yet configured*.
-
-Send a `POST` request to the `/config/configurator` endpoint with the configuration properties. You can find a list of valid properties in [Configuration properties](#config-properties).
-
-## Examples
-
-These examples assume you have a DS instance up and running, and that the instance has been installed as a [configuration store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-config.html), [identity store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-idrepo.html), and [CTS store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-cts.html).
-
-|   |                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can find information on setting up an evaluation DS server that stores all three data types in [Step 2. Prepare your datastore](../evaluation/step-2-prepare-data-store.html). |
-
-### Install a standalone server
-
-```bash
-$ curl \
---request POST \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "SERVER_URL=https://am.example.com:8443" \
---data-urlencode "DEPLOYMENT_URI=/am" \
---data-urlencode "BASE_DIR=$HOME/am" \
---data-urlencode "locale=en_US" \
---data-urlencode "PLATFORM_LOCALE=en_US" \
---data-urlencode "ADMIN_PWD=Ch4ng31t" \
---data-urlencode "ADMIN_CONFIRM_PWD=Ch4ng31t" \
---data-urlencode "COOKIE_DOMAIN=am.example.com" \
---data-urlencode "acceptLicense=true" \
---data-urlencode "DATA_STORE=dirServer" \
---data-urlencode "DIRECTORY_SSL=SSL" \
---data-urlencode "DIRECTORY_SERVER=ds.example.com" \
---data-urlencode "DIRECTORY_PORT=1636" \
---data-urlencode "DIRECTORY_ADMIN_PORT=4444" \
---data-urlencode "ROOT_SUFFIX=ou=am-config" \
---data-urlencode "DS_DIRMGRDN=uid=am-config,ou=admins,ou=am-config" \
---data-urlencode "DS_DIRMGRPASSWD=Ch4ng31t" \
---data-urlencode "USERSTORE_TYPE=LDAPv3ForOpenDS" \
---data-urlencode "USERSTORE_SSL=SSL" \
---data-urlencode "USERSTORE_HOST=ds.example.com" \
---data-urlencode "USERSTORE_PORT=1636" \
---data-urlencode "USERSTORE_SUFFIX=ou=identities" \
---data-urlencode "USERSTORE_MGRDN=uid=am-identity-bind-account,ou=admins,ou=identities" \
---data-urlencode "USERSTORE_PASSWD=Ch4ng31t" \
-"https://am.example.com:8443/am/config/configurator"
-
-Configuration complete!
-```
-
-### Install two servers in a site configuration
-
-Install the first server. The REST call is the same as for a standalone server install, with the addition of the `AM_ENC_KEY` property and the site properties (`LB_SITE_NAME` and `LB_PRIMARY_URL`):
-
-```bash
-$ curl \
---request POST \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "SERVER_URL=https://am.example.com:8443" \
---data-urlencode "DEPLOYMENT_URI=/am" \
---data-urlencode "BASE_DIR=$HOME/am" \
---data-urlencode "locale=en_US" \
---data-urlencode "PLATFORM_LOCALE=en_US" \
---data-urlencode "AM_ENC_KEY=O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32" \
---data-urlencode "ADMIN_PWD=Ch4ng31t" \
---data-urlencode "ADMIN_CONFIRM_PWD=Ch4ng31t" \
---data-urlencode "COOKIE_DOMAIN=am.example.com" \
---data-urlencode "acceptLicense=true" \
---data-urlencode "DATA_STORE=dirServer" \
---data-urlencode "DIRECTORY_SSL=SSL" \
---data-urlencode "DIRECTORY_SERVER=ds.example.com" \
---data-urlencode "DIRECTORY_PORT=1636" \
---data-urlencode "DIRECTORY_ADMIN_PORT=4444" \
---data-urlencode "ROOT_SUFFIX=ou=am-config" \
---data-urlencode "DS_DIRMGRDN=uid=am-config,ou=admins,ou=am-config" \
---data-urlencode "DS_DIRMGRPASSWD=Ch4ng31t" \
---data-urlencode "USERSTORE_TYPE=LDAPv3ForOpenDS" \
---data-urlencode "USERSTORE_SSL=SSL" \
---data-urlencode "USERSTORE_HOST=ds.example.com" \
---data-urlencode "USERSTORE_PORT=1636" \
---data-urlencode "USERSTORE_SUFFIX=ou=identities" \
---data-urlencode "USERSTORE_MGRDN=uid=am-identity-bind-account,ou=admins,ou=identities" \
---data-urlencode "USERSTORE_PASSWD=Ch4ng31t" \
---data-urlencode "LB_SITE_NAME=lb" \
---data-urlencode "LB_PRIMARY_URL=https://lb.example.com:8443/am" \
-"https://am.example.com:8443/am/config/configurator"
-
-Configuration complete!
-```
-
-Install the second server. Make sure the `AM_ENC_KEY` and site properties match those used for the first server:
-
-```bash
-$ curl \
---request POST \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "SERVER_URL=https://am2.example.com:8443" \
---data-urlencode "DEPLOYMENT_URI=/am" \
---data-urlencode "BASE_DIR=$HOME/am" \
---data-urlencode "locale=en_US" \
---data-urlencode "PLATFORM_LOCALE=en_US" \
---data-urlencode "AM_ENC_KEY=O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32" \
---data-urlencode "ADMIN_PWD=Ch4ng31t" \
---data-urlencode "ADMIN_CONFIRM_PWD=Ch4ng31t" \
---data-urlencode "COOKIE_DOMAIN=am.example.com" \
---data-urlencode "acceptLicense=true" \
---data-urlencode "DATA_STORE=dirServer" \
---data-urlencode "DIRECTORY_SSL=SSL" \
---data-urlencode "DIRECTORY_SERVER=ds.example.com" \
---data-urlencode "DIRECTORY_PORT=1636" \
---data-urlencode "DIRECTORY_ADMIN_PORT=4444" \
---data-urlencode "ROOT_SUFFIX=ou=am-config" \
---data-urlencode "DS_DIRMGRDN=uid=am-config,ou=admins,ou=am-config" \
---data-urlencode "DS_DIRMGRPASSWD=Ch4ng31t" \
---data-urlencode "USERSTORE_TYPE=LDAPv3ForOpenDS" \
---data-urlencode "USERSTORE_SSL=SSL" \
---data-urlencode "USERSTORE_HOST=ds.example.com" \
---data-urlencode "USERSTORE_PORT=1636" \
---data-urlencode "USERSTORE_SUFFIX=ou=identities" \
---data-urlencode "USERSTORE_MGRDN=uid=am-identity-bind-account,ou=admins,ou=identities" \
---data-urlencode "USERSTORE_PASSWD=Ch4ng31t" \
---data-urlencode "LB_SITE_NAME=lb" \
---data-urlencode "LB_PRIMARY_URL=https://lb.example.com:8443/am" \
-"https://am2.example.com:8443/am/config/configurator"
-
-Configuration complete!
-```
-
-## Configuration properties
-
-The following table lists the configuration properties that you can set when installing AM over REST.
-
-| Property name          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example values                                         |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| SERVER\_URL            | The protocol, fully qualified domain name, and port to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://am.example.com:8443`                          |
-| DEPLOYMENT\_URI        | The deployment URI to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `/am`                                                  |
-| BASE\_DIR              | The configuration directory where AM stores files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `$HOME/am`                                             |
-| locale                 | The user locale.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `en_GB`                                                |
-| PLATFORM\_LOCALE       | The locale of the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `en_US`                                                |
-| AM\_ENC\_KEY           | The password encryption key, which must be the same on all servers in a site configuration.If this property is excluded, AM generates a random password encryption key on install that you can view in the AM admin UI, under Deployment > Servers > *server name* > Security.                                                                                                                                                                                                                                                                                                                                        | `O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32`                     |
-| ADMIN\_PWD             | The password of the AM administrator user `amAdmin`, which must be at least 8 characters in length and must be the same on all servers in a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `Ch4ng31t`                                             |
-| ADMIN\_CONFIRM\_PWD    | Confirmation of the `amAdmin` password.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Ch4ng31t`                                             |
-| COOKIE\_DOMAIN         | The name of the trusted DNS domain AM returns to a browser when it grants a session ID to a user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `am.example.com`                                       |
-| acceptLicense          | Set this to `true` to auto-accept the software license agreement, which suppresses the display of the license acceptance page during the install.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `true`                                                 |
-| DATA\_STORE            | Set this to `dirServer` to indicate an external PingDS directory server for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `dirServer`                                            |
-| DIRECTORY\_SSL         | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
-| DIRECTORY\_SERVER      | The fully qualified domain name of the configuration store directory server host.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `ds.example.com`                                       |
-| DIRECTORY\_PORT        | The LDAPS or LDAP port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `1636`                                                 |
-| DIRECTORY\_ADMIN\_PORT | The administration port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `4444`                                                 |
-| ROOT\_SUFFIX           | The root suffix distinguished name (DN) for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `ou=am-config`                                         |
-| DS\_DIRMGRDN           | The bind DN of the configuration store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `uid=am-config,ou=admins,ou=am-config`                 |
-| DS\_DIRMGRPASSWD       | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
-| USERSTORE\_TYPE        | The type of directory server to use for the identity store.Possible values are:- `LDAPv3ForAD`: Active Directory with host and port settings
-
-- `LDAPv3ForADDC`: Active Directory with domain name setting
-
-  If you use this type, you must also set the `USERSTORE_DOMAINNAME` property.
-
-- `LDAPv3ForADAM`: Active Directory Lightweight Directory Services (AD LDS)
-
-- `LDAPv3ForForgeRockIAM`: PingDS
-
-  Only use this type if DS is the shared identity store in a Ping Identity Platform deployment. Otherwise, use `LDAPv3ForOpenDS`.
-
-- `LDAPv3ForOpenDS`: PingDS
-
-- `LDAPv3ForPingDirectory`: PingDirectory | `LDAPv3ForOpenDS`                                      |
-| USERSTORE\_DOMAINNAME  | If `USERSTORE_TYPE` is `LDAPv3ForADDC`, set this to the Active Directory Domain Name. Then only set the `USERSTORE_SSL`, `USERSTORE_MGRDN`, and `USERSTORE_PASSWD` properties to let Active Directory use DNS to retrieve service locations. Otherwise, don't set this property.                                                                                                                                                                                                                                                                                                                                      | `ad.example.com`                                       |
-| USERSTORE\_SSL         | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
-| USERSTORE\_HOST        | The fully qualified domain name of the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `ds.example.com`                                       |
-| USERSTORE\_PORT        | The LDAPS or LDAP port number for the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `1636`                                                 |
-| USERSTORE\_SUFFIX      | The root suffix DN for the identity store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `ou=identities`                                        |
-| USERSTORE\_MGRDN       | The bind DN of the identity store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `uid=am-identity-bind-account,ou=admins,ou=identities` |
-| USERSTORE\_PASSWD      | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
-| LB\_SITE\_NAME         | The name of the AM site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `lb`                                                   |
-| LB\_PRIMARY\_URL       | The load balancer URL for the site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://lb.example.com:8443/am`                       |
-
----
-
----
-title: Passive install using Amster
-description: Use Amster to configure a deployed PingAM instance as a standalone server or within a site with external configuration and identity stores
-component: pingam
-version: 8.1
-page_id: pingam:installation:passive-install-amster
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-amster.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["user-guide:amster-install-am.adoc", "amster:configure-am-with-amster.adoc"]
-section_ids:
-  install-am-examples: Examples
-  example_1_standalone_server: "Example 1: Standalone server"
-  example_2_two_servers_in_a_site: "Example 2: Two servers in a site"
-  install-am-options: Configuration options
-  am-post-install-steps-sites: Post-installation steps for site deployments
-  amster-troubleshooting-am-install: Troubleshoot AM installations
----
-
-# Passive install using Amster
-
-Use Amster to configure a deployed AM instance as either a single, standalone server or as a server within a site.
-
-Amster configures AM to use an external configuration store and identity store.
-
-|   |                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | You can't use Amster to install PingAM in file-based configuration (FBC) mode. Instead, follow the instructions in [Passive install with FBC](passive-install-fbc.html). |
-
-To configure AM with Amster, run the `install-openam` command:
-
-**Usage:**
-
-```
-am> install-openam \
- --serverUrl protocol://FQDN:port/URI \
- --adminPwd amAdmin_password \
-   [options]
-```
-
-* `--serverUrl protocol://FQDN:port/URI`
-
-  The protocol, URL, port, and deployment URI of the AM instance. For example, `https://am.example.com:8443/am`.
-
-* `--adminPwd amAdmin-password`
-
-  The password of the `amAdmin` user. If the `--cfgStoreDirMgrPwd` option is not specified, this value is also the password of the configuration store's directory manager user.
-
-  The password must be at least 8 characters in length.
-
-**Options:**
-
-* `[options]`
-
-  Use these optional parameters to configure properties like the cookie domain, ports, and passwords for the configuration store.
-
-  To see all available options, run the `:help install-openam` command or read [Configuration options](#install-am-options).
-
-## Examples
-
-Before you start, make sure your AM instance is deployed and running, but not yet configured. Learn more in [Deploy AM](deploy-openam.html).
-
-Before you run the `amster` command, you must create a truststore for AM, and prepare the external configuration and identity stores. Learn more in [Prepare datastores](prepare-ext-stores.html).
-
-You can't install AM with an external configuration store that already contains configuration data, unless you're adding a server to an existing site.
-
-|   |                                                                                                           |
-| - | --------------------------------------------------------------------------------------------------------- |
-|   | Amster also supports scripting the installation process. Learn more in [Scripts](../amster/scripts.html). |
-
-### Example 1: Standalone server
-
-This example installs AM with external configuration and identity stores.
-
-```
-am> install-openam \
- --serverUrl https://am.example.com:8443/am \
- --adminPwd Ch4ng31t \
- --acceptLicense \
- --cfgStoreDirMgrPwd Ch4ng31t \
- --cfgStore dirServer \
- --cfgStoreHost ds.example.com \
- --cfgStoreAdminPort 4444 \
- --cfgStorePort 1636 \
- --cfgStoreSsl SSL \
- --cfgStoreRootSuffix ou=am-config \
- --userStoreDirMgrPwd Ch4ng31t \
- --userStoreHost ds.example.com \
- --userStoreType LDAPv3ForOpenDS \
- --userStorePort 1636 \
- --userStoreSsl SSL \
- --userStoreRootSuffix ou=identities
-timestamp: Checking license acceptance…​
-timestamp: License terms accepted.
-timestamp: Checking configuration directory /Users/Ping/am.
-timestamp: …​Success.
-timestamp: Tag swapping schema files.
-timestamp: …​Success.
-…​
-timestamp: Loading Schema /Users/Ping/am/opendj_pushdevices.ldif
-timestamp: …​Success.
-timestamp: Installing new plugins…​
-timestamp: Plugin installation complete.
-timestamp: Setting up monitoring authentication file.
-Configuration complete!
-```
-
-* When you install AM locally, Amster stores the AM configuration in the home directory of the user running the `amster` command. For example, for the `tomcat` user, the configuration is stored in `/path/to/tomcat_home/am` . To change this location, use the `--cfgDir` option.
-
-* The DS instances in this example require secure connections, so the `amster` command specifies port `1636` and `SSL` for both stores.
-
-  Find information about other options in [Configuration options](#install-am-options).
-
-  You must create a truststore and configure it in the AM container. If you don't, the installation will fail.
-
-* If a problem occurs while setting up the configuration store, the installation process exits with an error. When this happens, going to the AM URL opens the configuration page.
-
-### Example 2: Two servers in a site
-
-This example shows how to install two AM servers in a site with external configuration and identity stores.
-
-Before you start, create a truststore for each AM server and prepare the external stores. Because both servers share the configuration and identity store, their truststores must contain the same certificates.
-
-First instance:
-
-```
-am> install-openam \
- --serverUrl https://am1.example.com:8443/am \
- --adminPwd Ch4ng31t \
- --acceptLicense \
- --cookieDomain example.com \
- --lbSiteName TestSite01 \
- --cfgDir /tomcat/am1 \
- --lbPrimaryUrl https://site.example.com:8443/am \
- --cfgStoreDirMgr uid=am-config,ou=admins,ou=am-config \
- --cfgStoreDirMgrPwd Ch4ng31t
- --cfgStore dirServer \
- --cfgStoreHost ds.example.com \
- --cfgStoreAdminPort 3444 \
- --cfgStorePort 1636 \
- --cfgStoreSsl SSL \
- --cfgStoreRootSuffix ou=am-config \
- --userStoreDirMgrPwd Ch4ng31t \
- --userStoreHost ds.example.com \
- --userStoreType LDAPv3ForOpenDS \
- --userStorePort 1636 \
- --userStoreSsl SSL \
- --userStoreRootSuffix ou=identities
-timestamp: Checking license acceptance…​
-timestamp: License terms accepted.
-timestamp: Checking configuration directory /tomcat/am1.
-timestamp: …​Success.
-…​
-timestamp: …​Success.
-…​
-timestamp: …​Success.
-timestamp: Installing new plugins…​
-timestamp: Plugin installation complete.
-timestamp: Setting up monitoring authentication file.
-Configuration complete!
-```
-
-* Amster creates the directory specified with the `--cfgDir` option.
-
-* The `--lbSiteName` option creates a site with that name, accessible at the URL specified with `--lbPrimaryUrl`.
-
-* Use the `--cookieDomain` option to set the cookie domain. If you don't specify it, Amster uses the server's URL, which isn't optimal for a site with multiple servers.
-
-Second instance:
-
-```
-am> install-openam \
- --serverUrl https://am2.example.com:8443/am \
- --adminPwd Ch4ng31t \
- --acceptLicense \
- --cookieDomain example.com \
- --lbSiteName TestSite01 \
- --cfgDir /tomcat/am2 \
- --lbPrimaryUrl https://site.example.com:8443/am \
- --cfgStoreDirMgr uid=am-config,ou=admins,ou=am-config \
- --cfgStoreDirMgrPwd Ch4ng31t \
- --cfgStore dirServer\
- --cfgStoreHost ds.example.com \
- --cfgStoreAdminPort 3444 \
- --cfgStorePort 1636 \
- --cfgStoreSsl SSL \
- --cfgStoreRootSuffix ou=am-config \
- --userStoreDirMgrPwd Ch4ng31t \
- --userStoreHost ds.example.com \
- --userStoreType LDAPv3ForOpenDS \
- --userStorePort 1636 \
- --userStoreSsl SSL \
- --userStoreRootSuffix ou=identities \
- --pwdEncKey MneLwkkOokJx58znp7QyvGmiawmc2vl4
-timestamp: Checking license acceptance…​
-timestamp: License terms accepted.
-timestamp: Checking configuration directory /tomcat/am2.
-timestamp: …​Success.
-timestamp:Reinitializing system properties.
-timestamp:…​Done
-timestamp:Configuring server instance.
-timestamp: …​Done
-timestamp: Installing new plugins…​
-timestamp: Plugin installation complete.
-timestamp: Setting up monitoring authentication file.
-Configuration complete!
-```
-
-|   |                                                                                                                                                            |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To finish adding the second server to the site, you must follow the steps in [Post-installation steps for site deployments](#am-post-install-steps-sites). |
-
-* This command adds a new AM server to the `TestSite01` site. The configuration store details are identical to the first server's, as they share the same DS instance.
-
-* The password for `--adminPwd` must be the same one used for all other servers in the site.
-
-* The `--cookieDomain` must be the same as the one used for the first server (`example.com`).
-
-  If this option isn't set correctly, you might not be able to sign in to the new server.
-
-* The `--pwdEncKey` option specifies the encryption key used by the existing servers in the site. To find this key, sign in to an existing server and go to Deployment > Servers > Server Name > Security > Encryption.
-
-  You must set this option to the correct value. If you don't, the original encryption key will be overwritten, which will prevent the site from reading the configuration and identity stores.
-
-## Configuration options
-
-The following options are available to use with the `install-openam` command:
-
-* `--acceptLicense`
-
-  Indicates the user accepts Amster usage terms and conditions.
-
-* `--authorizedKey` *path*
-
-  The path to an SSH public key file. The content of this file is appended to the `authorized_keys` file of the newly-installed AM instance, allowing users to connect to it with Amster after the install completes.
-
-  Find more information about connecting to AM with Amster in [Connect to AM](../amster/connect-am.html).
-
-* `--cfgDir` *path*
-
-  The configuration directory where AM stores files, such as `$HOME/am`.
-
-* `--cfgStore` *dirServer*
-
-  Set this to `dirServer` to install AM with an external DS server as the configuration store.
-
-  By default, identities are stored in the same directory server instance as the configuration store.
-
-  You must use an external directory server for the configuration store. If you try to install AM with the `--cfgStore embedded` option, the installation fails with the following exception `From AM 8, embedded DS configuration is not supported`.
-
-* `--cfgStoreAdminPort` *port*
-
-  The administration port number for the configuration store, such as `4444`.
-
-* `--cfgStoreDirMgr` *username*
-
-  The bind DN of the configuration store user account, such as `uid=am-config,ou=admins,ou=am-config`.
-
-* `--cfgStoreDirMgrPwd` *password*
-
-  The password for the bind DN. If not set, it takes the password defined for the `--adminPwd` option.
-
-* `--cfgStoreHost` *FQDN*
-
-  The FQDN of the configuration store directory server host, for example, `ds.example.com`.
-
-* `--cfgStorePort` *port*
-
-  The LDAPS or LDAP port number for the configuration store directory server, such as `1636` or `1389`.
-
-* `--cfgStoreRootSuffix` *DN*
-
-  The root suffix DN for the configuration store, such as `ou=am-config`.
-
-* `--cfgStoreSsl [SIMPLE|SSL]`
-
-  Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.
-
-* `--cookieDomain` *domain*
-
-  The name of the trusted DNS domain AM returns to a browser when it grants a session ID to a user.
-
-  Default: FQDN used in the `--serverUrl` option
-
-* `--installLocale` *locale*
-
-  The locale to use during the install process.
-
-  Default: `en_US`
-
-* `--lbPrimaryUrl` *URL*
-
-  The load balancer URL of the site, such as `https://lb.example.com:443/am`
-
-* `--lbSiteName` *name*
-
-  The name of the site to create, if any.
-
-* `--platformLocale` *locale*
-
-  The default locale for the AM installation.
-
-  Default: `en_US`
-
-* `--pwdEncKey` *key*
-
-  The encryption key value used to encrypt passwords in the AM instance. For example `O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32`.
-
-  If you're installing an AM instance that will use existing data, you must provide the same encryption key value originally used to encrypt the passwords in those data stores.
-
-  To locate the encryption key value in an AM instance, navigate to Deployment > Servers > *server name* > Security > Encryption.
-
-  If you are installing a new AM instance that won't use existing data in a data store, you can leave this property empty. AM generates a random encryption key during installation to encrypt the data that will be added to the data store.
-
-  This option is *required* when configuring an AM instance into a site, and must be set to the encryption key configured for the rest of the servers in the site. Failure to set this option to the appropriate value will cause the original encryption key to be overwritten, which will render the site unable to read the configuration, and the identity stores.
-
-  Default: No value; a random encryption key is generated during installation
-
-* `--userStoreDirMgr` *username*
-
-  The bind DN of the identity store user account, such as `uid=am-identity-bind-account,ou=admins,ou=identities`.
-
-* `--userStoreDirMgrPwd` *password*
-
-  The password for the bind DN.
-
-* `--userStoreDomainName` *FQDN*
-
-  The Active Directory Domain Name, such as `ad.example.com`, when the `--userStoreType` option is set to `LDAPv3ForADDC`.
-
-* `--userStoreHost` *FQDN*
-
-  The FQDN of the identity store directory server, such as `ds.example.com`.
-
-* `--userStorePort` *port*
-
-  The LDAPS or LDAP port number for the identity store. Default for LDAPS is `636` and for LDAP is `389`.
-
-* `--userStoreRootSuffix` *DN*
-
-  The root suffix DN for the identity store, such as `ou=identities`.
-
-* `--userStoreSsl [SIMPLE|SSL]`
-
-  Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to SIMPLE.
-
-* `--userStoreType` *type*
-
-  The type of directory server used for the identity store. Possible values for *type* are:
-
-  * `LDAPv3ForAD`: Active Directory with host and port settings
-
-  * `LDAPv3ForADDC`: Active Directory with domain name setting
-
-    If you use this type, you must also set the `--userStoreDomainName` option.
-
-  * `LDAPv3ForADAM`: Active Directory Lightweight Directory Services (AD LDS)
-
-  * `LDAPv3ForForgeRockIAM`: PingDS
-
-    Only use this type if DS is the shared identity store in a Ping Identity Platform deployment. Otherwise, use `LDAPv3ForOpenDS`.
-
-  * `LDAPv3ForOpenDS`: PingDS
-
-  * `LDAPv3ForPingDirectory`: PingDirectory
-
-* `--userStoreDomainName`
-
-  If `--userStoreType` is `LDAPv3ForADDC`, set this to the Active Directory Domain Name, such as `ad.example.com`. Then only set the `--userStoreSsl`, `--userStoreDirMgr`, and `--userStoreDirMgrPwd` options to let Active Directory use DNS to retrieve service locations. Otherwise, don't set this option.
-
-## Post-installation steps for site deployments
-
-All AM servers in a site share the same keystore and secret store infrastructure. This sharing ensures every server in the site can encrypt, decrypt, and verify items like messages and JWTs with the same keys.
-
-The installation process creates these stores only on the first server in the site. You must manually configure them on all other servers you add to the site.
-
-After you've used Amster to add a new server to your site, follow these steps:
-
-1. Make the site keystore infrastructure available to the new instance:
-
-   * Back up the new instance's default keystore and password files in the following locations:
-
-     * `/path/to/am/security/keystores/`
-
-     * `/path/to/am/security/secrets/default/`
-
-   * Make the existing site keystores available to the new server in the same location. For example, you might copy the keystores and their password files, or mount a shared volume.
-
-   * Make sure the keystore files configured in the `/path/to/am/config/boot.json` are available to the new instance.
-
-2. Make the secret store infrastructure in the site available to the new instance:
-
-   * Sign in to the AM admin UI of an existing server in the site and go to Configure > Secret Stores.
-
-   * Review the list of globally configured secret stores and make sure the new server has access to the required stores. For example:
-
-     * For keystore-type secret stores, copy the keystores to the same path on the new server.
-
-     * For filesystem-type secret stores, copy the directory contents to the same path, or make the filesystem available on the same mount point.
-
-     * For HSM-type stores, make sure the new server can access the HSM.
-
-     * For secrets configured as environment variables, make sure the new server's container can access them.
-
-   * Go to Realms > *realm name* > Secret Stores.
-
-   * Review the list of realm-specific secret stores and provide access to the new server as needed.
-
-3. Restart the new server.
-
-   The server is now fully configured and part of the site.
-
-## Troubleshoot AM installations
-
-The following table describes possible errors when installing AM with the `install-openam` command:
-
-| Error                                                                                                                                   | Solution                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `Invalid Suffix for directory server ds.example.com:1636. No Base Entity dc=incorrectsuffix,dc=com found.`                              | Check that the suffix you are trying to use exists in DS.                                    |
-| `Cannot connect to Directory Server. Invalid Credentials.`                                                                              | Check the credentials you're using to connect to DS.                                         |
-| `Cannot connect to Directory Server. Connect Error: Connection refused.`                                                                | Check the DS host and connection port.                                                       |
-| `Unexpected LDAP exception occurred.`                                                                                                   | Check the DS logs. DS may be stopped or may have become unreachable during the installation. |
-| `Cannot connect to Directory Server. Connect Error: The LDAP connection has failed because an error occurred during the SSL handshake.` | Make sure the container where AM is installed trusts the DS SSL certificates.                |
-
----
-
----
-title: Passive install with FBC
-description: Set up PingAM with file-based configuration for passive installation without user interaction at startup
-component: pingam
-version: 8.1
-page_id: pingam:installation:passive-install-fbc
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-fbc.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["install-guide:passive-install-fbc.adoc"]
-section_ids:
-  fbc-startup: FBC initial startup
-  mandatory-startup-properties: Mandatory startup properties
-  additional-startup-properties: Additional startup properties
-  start-with-fbc: Start the server with the mandatory FBC properties
----
-
-# Passive install with FBC
-
-If you store your configuration in JSON files (file-based configuration) you can set up AM with no user interaction when you start the web application container.
-
-The following sections describe the process to install an AM server with (file-based configuration) (FBC).
-
-|   |                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------- |
-|   | Before you start, read [How AM reads FBC](fbc.html#how-am-reads-FBC) to understand the FBC layers. |
-
-These topics assume you have a DS instance up and running, and that the instance has been installed as an [identity store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-idrepo.html), [CTS store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-cts.html), and [policy and application store](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-config.html).
-
-|   |                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can find information on setting up an evaluation DS server that stores all three data types in [Step 2. Prepare your datastore](../evaluation/step-2-prepare-data-store.html). |
-
-## FBC initial startup
-
-A passive FBC installation requires a few [mandatory configuration properties](#mandatory-startup-properties) set as environment variables on initial startup. These properties specify that it's a file-based configuration, set the AM server host and port, and set the connection details to the identity and policy stores.
-
-If you don't explicitly set a mandatory configuration property, its default value is used, as listed in the tables in this section. This lets you get started with FBC with minimal configuration upfront and add the required configuration after startup.
-
-FBC installation writes files to the location specified by the value of `com.sun.identity.configuration.directory`. If you don't set a value for this property, AM uses the location of the application container (for example, /path/to/tomcat/webapps/am) and the application context (for example, `/am`) to create a file in `~/openamcfg` with the derived name. That file contains the path to the configuration folder.
-
-### Mandatory startup properties
-
-This table lists the minimum environment variables required to install a server with FBC. If you don't specify a variable listed here, its default value is used on startup.
-
-| Environment variable                               | Description                                                                                            | Valid values                            | Default                                                                                                                                                                                                                                                                                                                |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `com.sun.identity.sm.sms_object_filebased_enabled` | Whether FBC is enabled.                                                                                | true, false                             | false                                                                                                                                                                                                                                                                                                                  |
-| `com.sun.identity.configuration.directory`         | Path to the folder that holds the configuration files                                                  | Any writeable folder on the file system | `$HOME/application-context`                                                                                                                                                                                                                                                                                            |
-| `am.server.protocol`                               | The server protocol used for the AM server instance configuration.                                     | https, http                             | http                                                                                                                                                                                                                                                                                                                   |
-| `am.server.fqdn`                                   | The fully qualified domain name that will be used for the AM server instance configuration             | Any valid FQDN                          | `am.localtest.me`                                                                                                                                                                                                                                                                                                      |
-| `am.server.port`                                   | The port on which this server instance will be available.                                              | Any valid port number                   | 8080                                                                                                                                                                                                                                                                                                                   |
-| `am.server.context`                                | The web application context on which this server instance will be available.                           | /*web application context*              | `/am`                                                                                                                                                                                                                                                                                                                  |
-| `am.encryption.key`                                | The encryption key value that will be used to encrypt passwords and other sensitive FBC configuration. | An alphanumeric string                  | A random secret is generated if not providedFor FBC installations, if you use client-side sessions for authentication, you must set an encryption key after the initial install, even if you map a secret label to this key. The key that's generated by default doesn't work for client-side authentication sessions. |
-| `am.stores.user.servers`                           | Connection string for the user store in the format *host*:*port*.                                      | A valid server connection string        | `ds.localtest.me:1636`                                                                                                                                                                                                                                                                                                 |
-| `am.stores.user.username`                          | Bind DN to connect to the user store.                                                                  | Valid bind DN                           | `uid=admin`                                                                                                                                                                                                                                                                                                            |
-| `am.stores.user.password`                          | Bind password for the user store                                                                       | Alphanumeric value                      | `password`                                                                                                                                                                                                                                                                                                             |
-| `am.stores.application.servers`                    | Connection string for the application and policy stores in the format *host*:*port*.                   | A valid server connection string        | `ds.localtest.me:1636`                                                                                                                                                                                                                                                                                                 |
-| `am.stores.application.password`                   | Bind password for the user store                                                                       | Alphanumeric value                      | `password`                                                                                                                                                                                                                                                                                                             |
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can't specify the password of the `amAdmin` user during a passive FBC install. The default `amAdmin` password is `password`. You can use this password to log in to the AM admin UI after the initial install.In production deployments, you *must* set up a secret store to store the `amAdmin` password.Learn more in [Store the amAdmin password in a secret store](../security/securing-administration.html#amadmin-password-secret-store). |
-
-### Additional startup properties
-
-These tables list all the properties you can set as environment variables on startup.
-
-|   |                                                                                                                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The properties listed in these tables aren't written to the `noninteractive-install.properties` file. After an initial startup, you must specify these values in the deployment configuration layer. Otherwise, you'll need to include them as environment variables for each subsequent startup. |
-
-> **Collapse: General startup properties**
->
-> | Environment variable                   | Description                                                                                                                                                  | Valid values                            | Default                    |
-> | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- | -------------------------- |
-> | `AM_TEST_MODE`                         | Whether AM starts with default test keys and secret stores. Set to `true` for evaluation installs to avoid configuring secret stores manually after startup. | true, false                             | false                      |
-> | `com.iplanet.services.debug.directory` | The location of the debug logs.                                                                                                                              | A writeable location on the file system | `am-config-path/var/debug` |
-
-> **Collapse: Startup properties for the identity store**
->
-> | Environment variable          | Description                                        | Valid values | Default |
-> | ----------------------------- | -------------------------------------------------- | ------------ | ------- |
-> | `am.stores.user.ssl.enabled`  | Whether AM connects to the identity store over SSL | true, false  | true    |
-> | `am.stores.user.mtls.enabled` | Whether mTLS is enabled for the identity store(1). | true, false  | false   |
->
-> (1) This property requires you to configure secrets so you can't set it on an initial install.
->
-> The root suffix for the identity store defaults to `ou=identities`.
-
-> **Collapse: Startup properties for the CTS store**
->
-> | Environment variable         | Description                                                     | Valid values                     | Default                                                              |
-> | ---------------------------- | --------------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------- |
-> | `am.stores.cts.servers`      | Connection string for the CTS store in the format *host*:*port* | A valid server connection string | The value of `am.stores.user.servers`                                |
-> | `am.stores.cts.username`     | Bind DN to connect to the CTS store                             | Valid bind DN                    | `uid=openam_cts,ou=admins,ou=famrecords,ou=openam-session,ou=tokens` |
-> | `am.stores.cts.password`     | Bind password for the CTS store                                 | Alphanumeric value               | The value of `am.stores.user.password`                               |
-> | `am.stores.cts.root.suffix`  | Root suffix for CTS store                                       | Valid base DN                    | `ou=famrecords,ou=openam-session,ou=tokens`                          |
-> | `am.stores.cts.ssl.enabled`  | Whether AM connects to the CTS store over SSL                   | true, false                      | The value `am.stores.user.ssl.enabled`, if set, otherwise `true`     |
-> | `am.stores.cts.mtls.enabled` | Whether mTLS is enabled for the CTS store                       | true, false                      | false                                                                |
->
-> The base DN for the CTS store defaults to `ou=famrecords,ou=openam-session,ou=tokens`.
-
-> **Collapse: Startup properties for the application store**
->
-> | Environment variable                 | Description                                                             | Valid values                     | Default                                                          |
-> | ------------------------------------ | ----------------------------------------------------------------------- | -------------------------------- | ---------------------------------------------------------------- |
-> | `am.stores.application.servers`      | Connection string for the application store in the format *host*:*port* | A valid server connection string | The value of `am.stores.user.servers`                            |
-> | `am.stores.application.username`     | Bind DN to connect to the application store                             | Valid bind DN                    | `uid=am-config,ou=admins,ou=am-config`                           |
-> | `am.stores.application.password`     | Bind password for the application store                                 | Alphanumeric value               | The value of `am.stores.user.password`                           |
-> | `am.stores.application.ssl.enabled`  | Whether AM connects to the application store over SSL                   | true, false                      | The value `am.stores.user.ssl.enabled`, if set, otherwise `true` |
-> | `am.stores.application.mtls.enabled` | **Not used for the application store**                                  | –                                | –                                                                |
->
-> The base DN for the application store defaults to `ou=services,ou=am-config`.
-
-> **Collapse: Startup properties for the policy store**
->
-> | Environment variable           | Description                                                        | Valid values                     | Default                                                                  |
-> | ------------------------------ | ------------------------------------------------------------------ | -------------------------------- | ------------------------------------------------------------------------ |
-> | `am.stores.policy.servers`     | Connection string for the policy store in the format *host*:*port* | A valid server connection string | The value of `am.stores.application.servers`                             |
-> | `am.stores.policy.username`    | Bind DN to connect to the policy store                             | Valid bind DN                    | `uid=am-config,ou=admins,ou=am-config`                                   |
-> | `am.stores.policy.password`    | Bind password for the policy store                                 | Alphanumeric value               | The value of `am.stores.application.password`                            |
-> | `am.stores.policy.ssl.enabled` | Whether AM connects to the policy store over SSL                   | true, false                      | The value `am.stores.user.application.enabled`, if set, otherwise `true` |
->
-> The base DN for the policy store defaults to `ou=services,ou=am-config`.
-
-> **Collapse: Startup properties for UMA stores**
->
-> | Environment variable         | Description                                                     | Valid values                     | Default                                                                   |
-> | ---------------------------- | --------------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------- |
-> | `am.stores.uma.servers`      | Connection string for the UMA store in the format *host*:*port* | A valid server connection string | The value of `am.stores.application.servers`                              |
-> | `am.stores.uma.username`     | Bind DN to connect to the UMA store                             | Valid bind DN                    | `uid=am-config,ou=admins,ou=am-config`                                    |
-> | `am.stores.uma.password`     | Bind password for the UMA store                                 | Alphanumeric value               | The value of `am.stores.application.password`                             |
-> | `am.stores.uma.ssl.enabled`  | Whether AM connects to the UMA store over SSL                   | true, false                      | The value `am.stores.user.application.enabled`, if set, otherwise `true`  |
-> | `am.stores.uma.mtls.enabled` | Whether mTLS is enabled for the UMA store(1).                   | true, false                      | The value `am.stores.application.mtls.enabled`, if set, otherwise `false` |
->
-> (1) This property requires you to configure secrets so you can't set it on an initial install.
->
-> The root suffix for the UMA store defaults to `ou=am-config`.
-
-## Start the server with the mandatory FBC properties
-
-The following command assumes you're running AM in Apache Tomcat. It adds the required settings to the `CATALINA_OPTS` variable in the `setenv` file. You can also set these properties as `JAVA_OPTS` environment variables before you start the application container.
-
-|   |                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If you're evaluating AM, set `AM_TEST_MODE=true` as an environment variable before starting the server. AM then starts with default test keys and secret stores, so you don't need to configure secret stores manually after startup. |
-
-This command sets the following properties:
-
-* FBC to `true`
-
-* Location of configuration files to `/path/to/am-config`
-
-* Identity and application stores to `ds.example.com:1636`
-
-* Identity and application store connection details to the values set if you install your <https://docs.pingidentity.com/pingds/8.1> servers with the corresponding [setup profiles](https://docs.pingidentity.com/pingds/8.1/install-guide/setup-profiles.html).
-
-* Location of truststore to `/path/to/truststore`. Learn more in [Prepare the truststore](prepare-trust-store.html).
-
-* Truststore password to `new-password`
-
-* Truststore type to `jks`
-
-- Linux
-
-- Windows
-
-In `$CATALINA_BASE/bin/setenv.sh`:
-
-```bash
-export CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.identity.sm.sms_object_filebased_enabled=true \
--Dcom.sun.identity.configuration.directory=/path/to/am-config \
--Dam.server.fqdn=am.example.com \
--Dam.stores.user.servers=ds.example.com:1636 \
--Dam.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities \
--Dam.stores.user.password=5up35tr0ng \
--Dam.stores.application.servers=ds.example.com:1636 \
--Dam.stores.application.password=5up35tr0ng \
--Djavax.net.ssl.trustStore=/path/to/truststore \
--Djavax.net.ssl.trustStorePassword=new-password \
--Djavax.net.ssl.trustStoreType=jks -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-```
-
-In `$CATALINA_BASE/bin/setenv.bat`:
-
-```powershell
-set "CATALINA_OPTS=%CATALINA_OPTS% -Dcom.sun.identity.sm.sms_object_filebased_enabled=true -
--Dcom.sun.identity.configuration.directory=/path/to/am-config -
--Dam.server.fqdn=am.example.com -
--Dam.stores.user.servers=ds.example.com:1636 -
--Dam.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities -
--Dam.stores.user.password=5up35tr0ng -
--Dam.stores.application.servers=ds.example.com:1636 -
--Dam.stores.application.password=5up35tr0ng -
--Djavax.net.ssl.trustStore=/path/to/truststore -
--Djavax.net.ssl.trustStorePassword=new-password -
--Djavax.net.ssl.trustStoreType=jks -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-```
-
-1. Start the web application container where AM runs. For example:
-
-   ```bash
-   $ bin/startup.sh
-   Using CATALINA_BASE:   /path/to/tomcat10
-   Using CATALINA_HOME:   /path/to/tomcat10
-   Using CATALINA_TMPDIR: /path/to/tomcat10/temp
-   Using JRE_HOME:        /Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home
-   Using CLASSPATH:       /path/to/tomcat10/bin/bootstrap.jar:/path/to/tomcat10/bin/tomcat-juli.jar
-   Using CATALINA_OPTS:   -Dcom.sun.identity.sm.sms_object_filebased_enabled=true -Dcom.sun.identity.configuration.directory=/path/to/am-config -Dam.server.fqdn=am.example.com -Dam.stores.user.servers=ds.example.com:1636 -Dam.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities -Dam.stores.user.password=5up35tr0ng -Dam.stores.application.servers=ds.example.com:1636 -Dam.stores.application.password=5up35tr0ng -Djavax.net.ssl.trustStore=/path/to/truststore -Djavax.net.ssl.trustStorePassword=new-password -Djavax.net.ssl.trustStoreType=jks -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m
-   Tomcat started.
-   ```
-
-2. In the configuration file directory, locate the `noninteractive-install.properties` file for the FBC installation.
-
-   This file reflects the environment variables you provided at startup:
-
-   ```bash
-   $ more am-config/config/services/noninteractive-install.properties
-   am.server.fqdn=am.example.com
-   am.passwords.dsameuser.encrypted=AQICpxyEaXv0vc5cFxQttsDWoYfqmCqV9Kljs4rByHQ2hHzOTjiF3MdTrUfKNKKyg5ie7FujAhPxWY6unMOpxn8Tj9CJXJ/289YxL04q6pMkxqX9K2tGh55F/um4tv7sqYybySDeAP7UW9X3PpeMB8Ye6e+reEdH9dAmjGcf8gh8rvnZw29hPo0/EA==
-   am.server.protocol=http
-   am.stores.user.password=5up35tr0ng
-   am.server.port=8080
-   am.stores.application.servers=ds.example.com:1636
-   am.server.context=/am
-   am.encryption.key=PL2EdksXsEyCh0xrEwgLdRXwXPzCqf36
-   am.stores.user.username=uid=am-identity-bind-account,ou=admins,ou=identities
-   am.stores.user.servers=ds.example.com:1636
-   am.stores.application.password=5up35tr0ng
-   ```
-
-   If you don't explicitly set a variable on startup, the FBC install uses the defaults listed in [Mandatory startup properties](#mandatory-startup-properties).
-
-3. Navigate to the AM admin UI at your deployment URL:
-
-   `am.server.protocol://am.server.fqdn:am.server.port/am.server.context`
-
-   For example, `http://am.example.com:8080/am`.
-
-4. Log in as `amAdmin` with the default password (`password`).
-
-5. Set up a secret store to store the `amAdmin` password.
-
-   Learn more in [Store the amAdmin password in a secret store](../security/securing-administration.html#amadmin-password-secret-store).
-
-6. Review and edit the configuration for the following datastores, as required:
-
-   * [Identity store](../setup/setting-up-identity-stores.html)
-
-   * [CTS store](../cts/cts-openam-config.html)
-
-   * [Application and policy stores](../setup/prepare-policy-and-application-store.html)
-
-   * [UMA stores](../uma/configure-external-uma-stores.html)
-
-7. Configure any required [secret stores](../security/secret-stores.html).
-
-8. Make any additional configuration changes.
-
-|   |                                                                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Any configuration you update in the AM admin UI is written to the deployment configuration layer (under `/path/to/am/config/services`).Any configuration you *don't* update uses the baseline layer and requires the relevant environment variables to be set on subsequent startups. |
-
----
-
----
-title: Prepare a configuration store
-description: Prepare a PingDS server as a configuration datastore for PingAM and enable TLS/LDAPS communication between them
-component: pingam
-version: 8.1
-page_id: pingam:installation:prepare-configuration-store
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-configuration-store.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Configuration Store"]
-page_aliases: ["install-guide:prepare-configuration-store.adoc"]
----
-
-# Prepare a configuration store
-
-This page explains how to prepare a single DS server as a configuration datastore. Make sure DS replicas use the same configuration.
-
-Installing DS with a [setup profile](https://docs.pingidentity.com/pingds/8.1/install-guide/setup-profiles.html) creates the required backend, schema, bind user, and indexes:
-
-1. Follow the steps in [Install DS for AM configuration](https://docs.pingidentity.com/pingds/8.1/install-guide/profile-am-config.html) in the PingDS documentation.
-
-2. [Install AM](interactive-install.html) to use the prepared DS directory server as a configuration store.
-
-   The default bind DN of the service account to connect to the configuration store is:
-
-   ```
-   uid=am-config,ou=admins,ou=am-config
-   ```
-
-3. Share the configuration store certificate with the AM container to prepare for TLS/LDAPS.
-
-   Communication with the configuration store *must* use a secure connection.
+2. Share the identity store certificate with the AM container to prepare for TLS/LDAPS. Communication with the identity store *must* use a secure connection.
 
    * On the DS host, export the DS CA certificate.
 
@@ -2116,42 +80,1386 @@ Installing DS with a [setup profile](https://docs.pingidentity.com/pingds/8.1/in
      -storepass truststore-password
      ```
 
-   Learn more about configuring AM's truststore in [Prepare the truststore](prepare-trust-store.html).
+   Learn more about configuring AM's truststore, in [Prepare the truststore](prepare-trust-store.html).
 
-4. When the certificate is in place, continue installing AM.
+3. If you didn't install DS using a setup profile, perform the following steps to update the permissions in a PingDS identity store.
 
-|   |                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | After setting up the configuration store, you can enhance security by configuring mTLS authentication to that store and rotating the mTLS certificates periodically. Learn more in [mTLS for configuration stores](../security/secure-connections.html#mtls-config-stores). |
+   If you are using a directory server other than PingDS, apply the relevant LDIF files using the appropriate tools.
+
+   * Edit the `opendj_userinit.ldif` LDIF file in the `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj` directory, replacing all variables that are surrounded by *at* (`@` ) symbols with a value specific to your directory server.
+
+     For example, in the `opendj_userinit.ldif` LDIF file you must replace all instances of *@userStoreRootSuffix@* with the root suffix you specified when configuring the DS identity store. The default is `ou=identities`.
+
+   * Use the `ldapmodify` command to add the updated LDIF data to the DS instance.
+
+     For example:
+
+     ```bash
+     $ /path/to/opendj/bin/ldapmodify \
+     --hostname 'ds.example.com' \
+     --port 1636 \
+     --useSsl \
+     --usePkcs12TrustStore /path/to/opendj/config/keystore \
+     --truststorepassword:file /path/to/opendj/config/keystore.pin \
+     --continueOnError \
+     --bindDN uid=admin \
+     --bindPassword str0ngAdm1nPa55word \
+     /path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj/opendj_userinit.ldif
+     ```
+
+     You can find more information on this LDIF file, and equivalent files for supported directory servers, in [Set up directory schemas with LDIF](supported-ldifs.html).
+
+   * If you intend to use web authentication, or perform device profiling with the Ping SDKs, you might need to update the directory server schema. For a PingDS repository, you can update the schema by applying the following LDIF files:
+
+     * `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj/opendj_webauthndevices.ldif`
+
+     * `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj/opendj_deviceprofiles.ldif`
+
+       For example:
+
+       ```bash
+       $ /path/to/opendj/bin/ldapmodify \
+       --hostname 'ds.example.com' \
+       --port 1636 \
+       --useSsl \
+       --usePkcs12TrustStore /path/to/opendj/config/keystore \
+       --truststorepassword:file /path/to/opendj/config/keystore.pin \
+       --continueOnError \
+       --bindDN uid=admin \
+       --bindPassword str0ngAdm1nPa55word \
+       /path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj/opendj_webauthndevices.ldif\
+       /path/to/tomcat/webapps/am/WEB-INF/template/ldif/opendj/opendj_deviceprofiles.ldif
+       ```
+
+       You can find more information on these LDIF files in [Set up directory schemas with LDIF](supported-ldifs.html). For directory servers other than PingDS, adapt the `opendj_*.ldif` files accordingly.
+
+4. Proceed to [configure the identity store](../setup/setting-up-identity-stores.html#realm-data-store) in AM.
+
+   The bind DN of the service account to use when configuring the identity store in AM is `uid=am-identity-bind-account,ou=admins,ou=identities`.
+
+## Configure existing directory servers for identity data
+
+It is common for AM to access identity data from an existing directory server. AM requires a user account to connect to the directory server, and AM LDAP schema to update entries with AM-related identity data.
+
+You can find a list of supported directory servers in [Directory servers](https://docs.pingidentity.com/pingam/release-notes/requirements.html#directory-servers).
+
+The following sections show you how to prepare an existing identity store for use in AM:
+
+* [Create a directory server user for AM connections](#prepare-idrepo-considerations)
+
+* [Update the schema in an identity store](#prepare-idrepo-schema)
+
+### Create a directory server user for AM connections
+
+AM connects to a directory server with a service account that you specify in the AM identity store configuration. This service account is known as the *AM bind account*.
+
+Specifying the directory administrator as the AM bind account isn't recommended for production deployments as it would give AM directory administrator privileges to the identity store.
+
+Instead, create a separate AM bind account with fewer access privileges than the directory administrator so that you can assign the appropriate level of privileges for the AM bind account.
+
+You need to consider two areas of permission for the AM bind account:
+
+* Schema Update Privileges
+
+  AM needs to update the directory schema when you configure a new identity store and when you upgrade AM software. If the AM bind account has schema update privileges, AM can update the schema dynamically during identity store configuration and during AM upgrades. If the AM bind account doesn't have schema update privileges, you must update the schema manually before configuring a new identity store and before upgrading AM.
+
+* Directory Read and Write Access Privileges
+
+  If you want AM to create, update, and delete user entries, then the AM bind account must have full read and write access to the identity data in the directory. If you are using an identity store as a read-only user directory, then the AM bind account needs read privileges only.
+
+The level of access privileges you give the AM bind account is specific to each AM deployment. Work with your directory server administrator to determine the appropriate level of privileges as part of the process of preparing your identity stores.
+
+#### Create a bind account in Active Directory for AM connections
+
+The following procedure gives an example of creating a bind account in Active Directory:
+
+Perform these steps to create a user that AM can use to connect to Active Directory. These steps are one example, consult with your Active Directory administrator on how best to create an account.
+
+1. Create a new user account in the Active Directory domain. For example, in Windows 2019:
+
+   * In the Active Directory Users and Computers tool, right-click Users in the domain, and select New > User.
+
+   * Provide descriptive values for the new user, and a logon name such as `AM-Bind-Account`.
+
+   * Click Next.
+
+   * Enter a strong password for the bind account, disable the *User must change password at next logon* option, and click Next.
+
+   * Review the details of the new account, and click Finish.
+
+2. Give the new bind account access to the directory data:
+
+   * In the Active Directory Users and Computers tool, right-click the domain that contains your users, and select Delegate Control.
+
+   * Add the bind account you created in the previous step, and click Next.
+
+   * Select the tasks you want to allow the AM bind account to perform from the list.
+
+     For example, to allow read and write access to users, enable the `Create, delete, and manage inetOrgPerson accounts` task.
+
+   * After assigning the tasks you want to allow the AM bind account to perform, click Finish.
+
+     You can now set up the necessary schema in the directory server.
+
+   The bind account to use when configuring the identity store in AM is the full DN of the user, for example `uid=AM-Bind-Account,ou=Users,dc=example,dc=org`.
+
+### Update the schema in an identity store
+
+AM can add the necessary LDAP schema definitions itself, if it has sufficient privileges to do so, or you can apply the LDAP schema definition LDIF files manually if required. Read the following procedures:
+
+* [Prepare an identity store with manual schema updates](#prepare-idrepo-manual-schema-steps)
+
+* [Prepare an identity store with automatic schema updates](#prepare-idrepo-auto-schema-steps)
+
+#### Prepare an identity store with manual schema updates
+
+If the AM bind account doesn't have permission to update schema then you must configure existing datastores using manual schema updates. To do this, you must update the directory server schema of the existing identity store manually at the following times:
+
+* Before you configure the identity store as part of initial AM configuration.
+
+* Before you configure an identity store after initial AM configuration.
+
+* Whenever you upgrade AM.
+
+A number of LDIF files are provided in the AM `.war` file for supported identity directory servers. The path is `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/directory-type`, where `directory-type` is one of the following:
+
+* `ad` for Microsoft Active Directory
+
+* `adam` for Microsoft Active Directory Lightweight Directory Services
+
+* `opendj` for PingDS and Oracle Unified Directory
+
+* `pingdirectory` for PingDirectory
+
+You can find more information on the LDIF files in [Set up directory schemas with LDIF](supported-ldifs.html).
+
+The following steps update the schema in an Active Directory identity store. For other directory servers, apply the relevant LDIF files using the appropriate tools.
+
+1. Edit the LDIF files in the `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/ad` directory, replacing any variables that are surrounded by *at* (`@` ) symbols with a value specific to your directory server.
+
+   For the Active Directory LDIF files you must replace all instances of *@userStoreRootSuffix@* with the root suffix used by your Active Directory identity store, for example `DC=example,DC=org`.
+
+2. Using an Active Directory administrator account, add the required AM schema extensions to your identity store.
+
+   For example, in PowerShell, run the `ldifde` command to import the user, device print, and dashboard schema extensions:
+
+   ```powershell
+   PS C:\Users\Administrator> cd \path\to\am\WEB-INF\template\ldif\ad
+   PS C:\path\to\am\WEB-INF\template\ldif\ad> ldifde -i -f .\ad_user_schema.ldif
+   Connecting to "domain.example.org"
+   Logging in as current user using SSPI
+   Importing directory from file ".\ad_user_schema.ldif"
+   Loading entries.................................................................
+   64 entries modified successfully.
+
+   The command has completed successfully
+
+   PS C:\path\to\am\WEB-INF\template\ldif\ad> ldifde -i -f .\ad_deviceprint.ldif
+   Connecting to "domain.example.org"
+   Logging in as current user using SSPI
+   Importing directory from file ".\ad_deviceprint.ldif"
+   Loading entries.................................................................
+   6 entries modified successfully.
+
+   The command has completed successfully
+
+   PS C:\path\to\am\WEB-INF\template\ldif\ad> ldifde -i -f .\ad_dashboard.ldif
+   Connecting to "domain.example.org"
+   Logging in as current user using SSPI
+   Importing directory from file ".\ad_dashboard.ldif"
+   Loading entries.................................................................
+   6 entries modified successfully.
+
+   The command has completed successfully
+   ```
+
+3. If you intend to use push or web authentication, apply the following LDIF files:
+
+   * `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/ad/ad_pushdevices.ldif`
+
+   * `/path/to/tomcat/webapps/am/WEB-INF/template/ldif/ad/ad_webauthndevices.ldif`
+
+   You can find more information on these LDIF files, and the equivalent files for supported directory servers, in [Set up directory schemas with LDIF](supported-ldifs.html).
+
+4. Proceed to [configure the identity store](../setup/setting-up-identity-stores.html#realm-data-store) in AM.
+
+   |   |                                                                                                                                                                                                                                                    |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you updated the schema to use web authentication, you must add `webauthnDeviceProfilesContainer` to the LDAP User Object Class property when configuring the identity store in a realm. This property is located on the User Configuration tab. |
+
+#### Prepare an identity store with automatic schema updates
+
+If the bind account has permission to update schema then you can allow AM to update the schema automatically.
+
+To allow AM to update the schema, you must first configure AM to be able to access the directory server, and enable the Load Schema option, by performing the following steps:
+
+1. Configure the directory server in AM by following the instructions in [Configure an identity store](../setup/setting-up-identity-stores.html#realm-data-store).
+
+   |   |                                                                                                                           |
+   | - | ------------------------------------------------------------------------------------------------------------------------- |
+   |   | Enable the Load Schema option before saving your changes, and AM will apply the necessary schema to the directory server. |
+
+   The schema is loaded as part of configuring the identity store in AM. No further configuration is required.
+
+2. Verify that the new identity store is correctly configured in AM by following the instructions in [Test identity store access](../setup/prepare-idrepo-testing.html).
 
 ---
 
 ---
-title: Prepare a web application container
-description: Prepare a Java application container to deploy PingAM by configuring your supported container and enforcing HTTPS connections
+title: Prepare the environment
+description: Prepare your environment for PingAM installation by configuring networking, Java, and file descriptor settings
 component: pingam
 version: 8.1
-page_id: pingam:installation:prepare-containers
-canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-containers.html
+page_id: pingam:installation:prepare-env-install
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-env-install.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Install", "Web Container"]
-page_aliases: ["install-guide:prepare-containers.adoc"]
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:prepare-env-install.adoc"]
 ---
 
-# Prepare a web application container
+# Prepare the environment
 
-As a Java application, AM must be deployed in a Java container. Refer to [Application containers](https://docs.pingidentity.com/pingam/release-notes/requirements.html#prerequisites-application-servers) for the list of supported containers.
+Perform the following tasks to prepare your environment for AM:
 
-The following table summarizes the high-level tasks required to prepare your container:
+[icon: id-card, set=fad, size=3x]
 
-| Task                                                                                                                                                                                                                                                    | Resources                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Prepare the container for AMFollow the instructions for your container.                                                                                                                                                                                 | * [Apache Tomcat](prepare-apache-tomcat.html)
+#### [Prepare an FQDN](prepare-networking.html)
 
-* [JBoss and WildFly](prepare-jboss.html)
+AM cookies require a fully qualified domain name.
 
-* [IBM WebSphere Liberty](prepare-ibm-websphere.html) |
-| Secure the containerThere are many ways to deploy and configure your environment for AM. Enforce HTTPS connections to AM where possible.If a Java Security Manager is enabled for your web application container, add permissions before installing AM. | - [Secure connections to the AM container](configure-container-HTTPS.html)
+[icon: coffee, set=fad, size=3x]
 
-- [Use stronger encryption algorithms](prepare-aeswrap.html)        |
+#### [Prepare a Java environment](prepare-java.html)
+
+AM requires a JDK to run.
+
+[icon: cogs, set=fad, size=3x]
+
+#### [Configure maximum file descriptors](prerequisites-file-descriptors.html)
+
+Data stores use file descriptors for concurrent connections.
+
+|   |                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Find details of supported operating systems and Java requirements in [Requirements](https://docs.pingidentity.com/pingam/release-notes/requirements.html) in the Release notes. |
+
+---
+
+---
+title: Prepare the Java environment
+description: Prepare the Java environment and configure JVM settings for PingAM deployments
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-java
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-java.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:prepare-java.adoc"]
+section_ids:
+  prepare-java-oracle: Settings for Oracle Java environments
+  prepare-java-openjdk: Settings for OpenJDK Java environments
+  tuning-jvm-for-openam: Tune JVM settings
+---
+
+# Prepare the Java environment
+
+AM software depends on a Java runtime environment. Check the output of the `java -version` command to make sure your version is supported according to the [Java requirements](https://docs.pingidentity.com/pingam/release-notes/requirements.html#prerequisites-java).
+
+|   |                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Keep your Java software up-to-date with the latest supported version. Make sure your `JAVA_HOME` environment variable always points to the latest supported Java version. |
+
+The following table summarizes the high-level tasks required to configure your Java environment:
+
+| Task                                                                                                                                                                                                                                                                                                                                                               | Resources                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Prepare your JDKThe suggestions in these sections apply to AM deployments with the following characteristics:- The deployment has a dedicated DS server for the Core Token Service (CTS). The host running this directory server is a high-end server with a large amount of memory and multiple CPUs.
+
+- The AM server is configured to use server-side sessions. | * [Settings for Oracle Java environments](#prepare-java-oracle)
+
+* [Settings for OpenJDK Java environments](#prepare-java-openjdk) |
+| Tune the JVM for AMThis document provides guidance on tuning the JVM for production, but you must also tune it for garbage collection based on your environment.                                                                                                                                                                                                   | - [Tune JVM settings](#tuning-jvm-for-openam)                                                                                      |
+
+|   |                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can find information on configuring JVM properties for proxy support in [Configuring AM for Outbound Communication](../security/reverse-proxy.html#outbound-communication). |
+
+## Settings for Oracle Java environments
+
+When using an Oracle Java environment, set at least the following options:
+
+* `-Xmx1g` (minimum)
+
+  AM requires at least a 1 GB heap. Higher volume and higher performance deployments require additional heap space.
+
+* `-XX:MetaspaceSize=256m`
+
+  Set the metaspace memory size to 256 MB.
+
+* `-XX:MaxMetaspaceSize=256m`
+
+  Set the maximum metaspace memory size to 256 MB.
+
+You can find additional JVM tuning and security recommendations in [Tune JVM settings](#tuning-jvm-for-openam).
+
+## Settings for OpenJDK Java environments
+
+When using an OpenJDK Java environment, set at least the following options.
+
+* `-Xmx1024m` (minimum)
+
+  AM requires at least a 1 GB heap. Higher volume and higher performance deployments require additional heap space.
+
+  Recommended: `-Xmx2048m`.
+
+* `-XX:MetaspaceSize=256m`
+
+  Set the initial metadata space size to 256 MB.
+
+## Tune JVM settings
+
+This section gives some initial guidance on configuring the JVM for running AM when the deployment has a dedicated CTS token store, and AM is configured to use server-side sessions.
+
+These settings provide a strong foundation to the JVM before a more detailed garbage collection tuning exercise, or as best practice configuration for production:
+
+**Heap size settings**
+
+| JVM parameters                               | Suggested value                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-Xms` & `-Xmx`                              | At least 1 GB. In production environments, at least 2 to 3 GB. This setting depends on the available physical memory and whether a 32- or 64-bit JVM is used.                                                                                                                                                                                                                   |                                                                                                                                                                                                                                 |
+| `-XX:MetaspaceSize` & `-XX:MaxMetaspaceSize` | Set both to 256 MB	Metadata space (Metaspace) is a dedicated region within Native Memory. It can grow automatically if you don't set a maximum size. The ideal Metaspace size depends on your deployment and the number of scripts you're running. 256 MB is considered a safe value for production deployments, but you might need to tweak this for your specific deployment. | Controls the size of the metaspace in the JVM.                                                                                                                                                                                  |
+| `-Dsun.net.client.defaultReadTimeout`        | 60000                                                                                                                                                                                                                                                                                                                                                                           | Controls the read timeout in the Java HTTP client implementation.This applies only to the Sun/Oracle HotSpot JVM.                                                                                                               |
+| `-Dsun.net.client.defaultConnectTimeout`     | High setting: 30000 (30 seconds)                                                                                                                                                                                                                                                                                                                                                | Controls the connect timeout in the Java HTTP client implementation.When you have hundreds of incoming requests per second, reduce this value to avoid a huge connection queue.This applies only to the Sun/Oracle HotSpot JVM. |
+
+**Security settings**
+
+| JVM parameters                                        | Suggested value | Description                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `-Dhttps.protocols`                                   | `TLSv1.2`       | Controls the protocols used for outbound HTTPS connections from AM.Specify one or more of the following values, separated by commas:- TLSv1.2
+
+- TLSv1.3This setting applies only to Sun/Oracle Java environments.                                                                                                                                     |
+| `-Dorg.forgerock.openam.ldap.secure.protocol.version` | `TLSv1.2`       | Controls the protocol AM uses to connect to affected external resources.Specify one or more of the following values, separated by commas:- TLSv1.2
+
+- TLSv1.3This setting overrides the default server value. Learn more in [advanced properties](../setup/deployment-configuration-reference.html#org.forgerock.openam.ldap.secure.protocol.version). |
+
+**Garbage collection settings**
+
+| JVM parameters                    | Suggested value                                      | Description                                                                                                                            |
+| --------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `-verbose:gc`                     |                                                      | Verbose garbage collection reporting.                                                                                                  |
+| `-Xlog:gc*`                       | `-Xlog:gc=info:file=$CATALINA_HOME/logs/gc-info.log` | Logs detailed information about garbage collection. When using the `-Xlog:gc` option, you can also specify the level, and output file. |
+| `-XX:+HeapDumpOnOutOfMemoryError` |                                                      | Out of Memory errors generate a heap dump automatically.                                                                               |
+| `-XX:HeapDumpPath`                | `$CATALINA_HOME/logs/heapdump.hprof`                 | Location of the heap dump.                                                                                                             |
+| `-XX:+PrintClassHistogram`        |                                                      | Prints a heap histogram when the JVM receives a SIGTERM signal.                                                                        |
+
+**Other settings**
+
+| JVM parameters                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--add-opens java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED`    | When running AM, SAML Artifact flows, WS-Federation flows and any flows that use Xerces SOAP libraries can fail with the following error:`Caused by: java.lang.IllegalAccessError: superclass access check failed: class com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl (in unnamed module @0x774ca796) cannot access class com.sun.org.apache.xerces.internal.dom.DocumentImpl (in module java.xml) because module java.xml does not export com.sun.org.apache.xerces.internal.dom to unnamed module @0x774ca796`Set these JVM parameters to avoid this error. |
+| `--add-exports java.xml/com.sun.org.apache.xerces.internal.jaxp=ALL-UNNAMED` |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--add-exports java.xml/com.sun.org.apache.xerces.internal.util=ALL-UNNAMED` |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+---
+
+---
+title: Prepare the truststore
+description: Create and configure a truststore to enable PingAM to make secure LDAPS and HTTPS connections to PingDS and external sites
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-trust-store
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-trust-store.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-01T10:22:10Z
+keywords: ["Install", "Security"]
+page_aliases: ["install-guide:prepare-trust-store.adoc"]
+section_ids:
+  prepare-am-trust-store: Create a truststore for AM
+---
+
+# Prepare the truststore
+
+PingDS requires secure connections using LDAPS. To connect to a DS server securely, AM needs access to DS's CA certificate. AM also needs access to CA certificates for making secure connections to other sites; for example, connections to social providers using HTTPS.
+
+To give AM access to these certificates, you create a *truststore* that contains the certificates, and configure AM's web application container to use that truststore when starting up.
+
+AM uses a single truststore for LDAPS and outbound HTTPS connections. This truststore *must* contain the CA certificates of the sites with which AM communicates securely.
+
+By default, Apache Tomcat loads the truststore configured for its JVM (for example, `$JAVA_HOME/JRE/lib/security/cacerts`). The default JVM truststore contains multiple CA certificates. Its password, by default, is `changeit`.
+
+As a best practice, create a *new* truststore with the certificates required for your AM deployment, then configure your container to use it. Don't add the DS CA certificate to the JVM's truststore because JVM updates are likely to overwrite the `cacerts` file.
+
+To keep all existing CA certificates, you can copy the `cacerts` keystore file, change its password to a secure one, and import the DS CA certificate into it. Then, configure your web application container, for example, Apache Tomcat, to load that file as its truststore.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Using a separate truststore for AM means updates to the JVM truststore in patch releases aren't taken into account. This can cause operational issues, for example, when distrusted root CA certificates are removed, or when new root CA certificates are added.To mitigate this risk, update the AM truststore periodically to reflect the latest JVM truststore settings. |
+
+## Create a truststore for AM
+
+These steps create a copy of the default JVM truststore, and configure the AM web application container to use the new truststore:
+
+1. Copy the default truststore. For example, `$JAVA_HOME/lib/security/cacerts`, name it `truststore`, and place it in a directory of your choice:
+
+   ```bash
+   $ cp $JAVA_HOME/lib/security/cacerts /path/to/truststore
+   ```
+
+   |   |                                                                                                                                                                                                                                                                                                                     |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you place the truststore in the `/path/to/am` directory *before* you install AM, the installation process detects the directory isn't empty and the installation fails.After AM is installed, you can move the truststore to a different directory. For example, the `/path/to/am/security/keystores` directory. |
+
+2. For improved security, change the default password for the truststore.
+
+   |   |                                                                                         |
+   | - | --------------------------------------------------------------------------------------- |
+   |   | The default password of the `$JAVA_HOME/lib/security/cacerts` truststore is `changeit`. |
+
+   Use the `keytool -storepasswd` option to change the default password:
+
+   ```bash
+   $ keytool -storepasswd -keystore /path/to/truststore
+   Enter keystore password: changeit
+   New keystore password: new-password
+   Re-enter new keystore password: new-password
+   ```
+
+3. Export the DS certificate.
+
+   * On the DS host, export the DS CA certificate.
+
+     DS uses a deployment ID and password to generate a CA key pair. Learn more in [Deployment IDs](https://docs.pingidentity.com/pingds/8.1/security-guide/pki.html#about-deployment-ids).
+
+     Use the `dskeymgr` command to export the CA certificate:
+
+     ```bash
+     $ /path/to/opendj/bin/dskeymgr \
+     export-ca-cert \
+     --deploymentId $DEPLOYMENT_ID \
+     --deploymentIdPassword password \
+     --outputFile /path/to/ca-cert.pem
+     ```
+
+   * Copy the `ca-cert.pem` file to an accessible location on the AM host.
+
+4. Import the DS CA certificate into the new truststore:
+
+   ```bash
+   $ keytool \
+   -importcert \
+   -file /path/to/ca-cert.pem \
+   -keystore /path/to/truststore
+   -storepass truststore-password
+   ```
+
+   Confirm you trust this certificate when prompted.
+
+5. To configure the truststore in Apache Tomcat so that AM can access it, append the truststore settings to the `CATALINA_OPTS` variable in the `setenv` file.
+
+   For example:
+
+   * Unix/Linux
+
+   * Windows (Command Prompt)
+
+   In `$CATALINA_BASE/bin/setenv.sh`:
+
+   ```bash
+   export CATALINA_OPTS="$CATALINA_OPTS -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m \
+   -Djavax.net.ssl.trustStore=/path/to/truststore \
+   -Djavax.net.ssl.trustStorePassword=new-password \
+   -Djavax.net.ssl.trustStoreType=jks"
+   ```
+
+   In `$CATALINA_BASE/bin/setenv.bat`:
+
+   ```powershell
+   set "CATALINA_OPTS=%CATALINA_OPTS% -server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -
+   -Djavax.net.ssl.trustStore=/path/to/truststore -
+   -Djavax.net.ssl.trustStorePassword=new-password -
+   -Djavax.net.ssl.trustStoreType=jks"
+   ```
+
+   Read your specific container's documentation for information on configuring truststores.
+
+   After AM is installed, you can move the truststore to a different location. For example, the `/path/to/am/security/keystores/`. If you do, remember to update the truststore path in the container configuration.
+
+---
+
+---
+title: Run AM as a service
+description: Configure PingAM to run as a systemd service on Linux distributions and manage it using systemctl commands
+component: pingam
+version: 8.1
+page_id: pingam:installation:run-am-service
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/run-am-service.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:run-am-service.adoc"]
+section_ids:
+  configure-am-service: Configure AM as a service
+  manage-am-service: Use systemctl commands to manage the AM service
+---
+
+# Run AM as a service
+
+AM can run as a service on a standard `systemd`-based Linux distribution. Once you have configured AM as a service, you can stop and start AM using `systemd`.
+
+These instructions assume you have deployed AM on Apache Tomcat.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | A service file (called `tomcat`) is created if you install Tomcat using a package manager such as `yum`. You can use this service file instead of creating your own.You can [enable](#enable) this service to run on startup and [manage the Tomcat service](#manage-am-service) using `systemctl` commands. Replace `am.service` in these example commands with `tomcat`. |
+
+## Configure AM as a service
+
+1. Create a service file using your preferred text editor:
+
+   ```bash
+   $ sudo vim /etc/systemd/system/am.service
+   ```
+
+2. Add the following content to this file, update all the values as needed, and save:
+
+   ```ini
+   [Unit]
+   Description=AM (Apache Tomcat)
+   After=network.target
+
+   [Service]
+   Type=forking
+
+   Environment=JAVA_HOME=/path/to/jdk
+   Environment=CATALINA_PID=/path/to/tomcat/temp/tomcat.pid
+   Environment=CATALINA_HOME=/path/to/tomcat
+   Environment=CATALINA_BASE=/path/to/tomcat
+   Environment='CATALINA_OPTS=-Xmx2048m -server -XX:+UseParallelGC'
+   Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+   ExecStart=/path/to/tomcat/bin/startup.sh
+   ExecStop=/path/to/tomcat/bin/shutdown.sh
+
+   User=tomcat_user
+   Group=tomcat_user
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+3. Reload the daemon:
+
+   ```bash
+   $ sudo systemctl daemon-reload
+   ```
+
+4. []()Make the new service launch on startup:
+
+   ```bash
+   $ sudo systemctl enable am.service
+   ```
+
+5. Check the service is enabled:
+
+   ```bash
+   $ systemctl is-enabled am.service
+   ```
+
+   This command returns `enabled` or `disabled` as appropriate.
+
+## Use systemctl commands to manage the AM service
+
+Once you've configured AM as a service and checked it's enabled, use `systemctl` commands to manage the AM service:
+
+* Start the service:
+
+  ```bash
+  $ sudo systemctl start am.service
+  ```
+
+* Stop the service:
+
+  ```bash
+  $ sudo systemctl stop am.service
+  ```
+
+* Restart the service:
+
+  ```bash
+  $ sudo systemctl restart am.service
+  ```
+
+* Check the service status:
+
+  ```bash
+  $ sudo systemctl status am.service
+  ```
+
+  This command returns the service state (whether the service has started or stopped as expected) and the first few entries of the AM log file.
+
+---
+
+---
+title: Secure connections to the AM container
+description: Configure Apache Tomcat to use CA-signed or self-signed certificates for secure HTTPS connections to PingAM
+component: pingam
+version: 8.1
+page_id: pingam:installation:configure-container-HTTPS
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/configure-container-HTTPS.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Web Container"]
+page_aliases: ["install-guide:configure-container-HTTPS.adoc"]
+section_ids:
+  openam-with-https-on-tomcat: Configure Apache Tomcat for HTTPS
+  share-self-signed-certs: Share self-signed certificates
+---
+
+# Secure connections to the AM container
+
+There are many ways to deploy and configure your environment for AM, but we recommend that you enforce HTTPS connections to AM. For more information about securing AM, see [Security](../security/preface.html).
+
+The container where AM runs requires a certificate to set up secure connections. You can install either CA-signed or self-signed certificates in the container where AM runs, although you should have in mind that you will need to configure your applications to trust your self-signed certificates.
+
+The following is an example about how to configure Apache Tomcat for HTTPS:
+
+## Configure Apache Tomcat for HTTPS
+
+There are several ways of completing the tasks ahead, and it is beyond the scope of this document to explore them all. If this procedure does not suit your environment, refer to your CA vendor documentation, the `keytool` command documentation, or Java container documentation for more information.
+
+1. Stop Apache Tomcat.
+
+2. Ensure you have a keystore containing the appropriate certificates:
+
+   * If you have CA certificates, import them in a new keystore using the `keytool` command. For example, if you have root, intermediate, and primary certificates, import them in the same keystore you used when generating your certificate signing request (CSR):
+
+     ```
+     $ keytool -importcert -alias root -file myrootCA.cert \
+     -keystore /path/to/tomcat_keystore.pfx -storetype PKCS12
+     $ keytool -importcert -alias intermediate -file myintCA.cert \
+     -keystore /path/to/tomcat_keystore.pfx -storetype PKCS12
+     $ keytool -importcert -alias mysite.example.com -file mypriCA.cert \
+     -keystore /path/to/tomcat_keystore.pfx -storetype PKCS12
+     ```
+
+   * If you need a self-signed certificate, create a new self-signed key pair with the `keytool` command.
+
+     For example:
+
+     ```
+     $ cd /path/to/tomcat/conf/
+     $ keytool -genkey -alias am.example.com -storetype PKCS12 -keyalg RSA -validity 730 \
+       -keysize 2048 -keystore tomcat_keystore.pfx -dname 'CN=am.example.com' -ext 'san=dns:am.example.com'
+     ```
+
+3. Create an SSL connector configuration in Apache Tomcat's `conf/server.xml` configuration file, and specify your keystore file, type, and password.
+
+   Note that there are different types of SSL connectors, and that implementation details may change across Tomcat versions. This example creates a JSSE connector in Tomcat as provided as part of the Java runtime:
+
+   ```xml
+   <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+    maxThreads="200" SSLEnabled="true" scheme="https" secure="true"
+    keystoreFile="/path/to/tomcat_keystore.pfx"
+    keystoreType="PKCS12" keystorePass="keystore_password"
+    clientAuth="false" sslProtocol="TLS" />
+   ```
+
+   You may need different settings depending on your configuration and version of Apache Tomcat. See the documentation for your version for more information.
+
+4. Start Tomcat.
+
+5. Verify that you can connect to Apache Tomcat on port 8443 over HTTPS.
+
+   If you used self-signed certificates, your browser would not trust the certificate, because the certificate is self-signed and not signed by any of the CAs stored in your browser.
+
+   ![The browser displays pages to let you decide to trust the self-signed certificate.](_images/browser-unknown-cert.png)Figure 1. Unknown Certificate
+
+   If you recognize the subject and issuer of your certificate, and so can choose to trust the certificate, save it into your browser's trust store.
+
+6. Deploy and configure AM.
+
+7. To share the self-signed certificate in your container with other applications or servers, see [Share self-signed certificates](#share-self-signed-certs).
+
+## Share self-signed certificates
+
+How you configure the containers where AM and your applications run to use self-signed certificates depends on your web application server or web server software. The following basic principles apply:
+
+* First, your container requires its own certificate for setting up secure connections.
+
+* Second, the clients connecting must be able to trust the container's certificate. Generally, this means that clients recognize the container's certificate because they have a copy of the public certificate stored somewhere the client trusts.
+
+* Third, if you use certificate authentication in AM, AM must also be able to find a copy of the client's public certificate to trust the client, most likely by finding a match with the certificate stored in the client profile from the identity store. How you include client certificates in their identity store entries depends on your identity store more than it depends on AM.
+
+Some client applications let you trust certificates blindly. This can be helpful when working in your lab or test environment with self-signed certificates. For example, you might want to use HTTPS with the AM RESTful API without having the client recognize the self-signed server certificate:
+
+```bash
+$ curl \
+--request POST \
+--header "Content-Type: application/json" \
+--header "X-OpenAM-Username: bjensen" \
+--header "X-OpenAM-Password: Ch4ng31t" \
+--header "Accept-API-Version: resource=2.0, protocol=1.0" \
+'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+{
+    curl: (60) Peer certificate cannot be authenticated with known CA certificates
+}
+```
+
+The `curl` command performs SSL certificate verification by default, using a "bundle" of CA-signed public keys. If the default bundle file is not adequate, you can specify an alternate file using the `--cacert` option.
+
+If this HTTPS server uses a certificate signed by a CA represented in the bundle, the certificate verification probably failed due to a problem with the certificate (it might be expired, or the name might not match the domain name in the URL). If you would like to turn off curl's verification of the certificate *for test purposes only*, use the `--insecure` option.
+
+```bash
+$ curl \
+--request POST \
+--insecure \
+--header "Content-Type: application/json" \
+--header "X-OpenAM-Username: bjensen" \
+--header "X-OpenAM-Password: Ch4ng31t" \
+--header "Accept-API-Version: resource=2.0, protocol=1.0" \
+'https://am.example.com:8443/am/json/realms/root/realms/alpha/authenticate'
+{
+  "tokenId":"rMLhJjWVo…​MAAlMxAAA.*",
+  "successUrl":"/am/console",
+  "realm":"/alpha"
+}
+```
+
+When you use a self-signed certificate for your container, clients connecting must be able to trust the container certificate. Your browser makes this an easy, but manual process. For other client applications, you must import the certificate into the truststore used by the client. By default, Java applications can use the `$JAVA_HOME/lib/security/cacerts` store. The default password is `changeit`.(1)
+
+The following steps demonstrate how to import a self-signed certificate into the Java `cacerts` store:
+
+1. Export the certificate from the keystore:
+
+   ```bash
+   $ cd /path/to/tomcat/conf/
+   $ keytool \
+   -exportcert \
+   -alias am.example.com \
+   -file am.crt \
+   -storetype JCEKS
+   -keystore keystore.jceks
+   Enter keystore password:
+   Certificate stored in file <am.crt>;
+   ```
+
+2. Import the certificate into the trust store:
+
+   ```bash
+   $ keytool \
+   -importcert \
+   -alias am.example.com \
+   -file am.crt
+   -trustcacerts \
+   -keystore $JAVA_HOME/lib/security/cacerts
+   Enter keystore password:
+   Owner: CN=am.example.com, OU=Admin, O=example.com
+   Issuer: CN=am.example.com, OU=Admin, O=example.com
+   Serial number: 4e789e40
+   Valid from: Tue Sep 20 16:08:00 CEST 2011 until: Mon Dec 19 15:08:00 CET 2011
+   Certificate fingerprints:
+   MD5:  31:08:11:3B:15:75:87:C2:12:08:E9:66:00:81:61:8D
+   SHA1: AA:90:2F:42:0A:F4:A9:A5:0C:90:A9:FC:69:FD:64:65:D9:78:BA:1D
+   Signature algorithm name: SHA1withRSA
+   Version: 3
+   Trust this certificate? [no]: yes
+   Certificate was added to keystore
+   ```
+
+(1) Alternatively, you can specify the trust store for a Java application, such as `-Djavax.net.ssl.trustStore=/path/to/truststore.jks -Djavax.net.ssl.trustStorePassword=changeit`.
+
+---
+
+---
+title: Set up directory schemas with LDIF
+description: Deploy LDIF files to create directory schemas required by PingAM for supported directory servers including PingDS, Active Directory, and Active Directory Lightweight Directory Services
+component: pingam
+version: 8.1
+page_id: pingam:installation:supported-ldifs
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/supported-ldifs.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Directory Server"]
+page_aliases: ["install-guide:supported-ldifs.adoc"]
+---
+
+# Set up directory schemas with LDIF
+
+The AM installation deploys several LDIF files that can be used to create the schemas required by AM. Find these LDIF files in the `/path/to/tomcat/webapps/am/WEB-INF/template/ldif` directory.
+
+LDIF files are available for the following directory servers:
+
+* PingDS
+
+  > **Collapse: PingDS LDIF Files**
+  >
+  > | LDIF file                   | Description                                                                                                                                                                                                           |
+  > | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  > | opendj_bounddevices.ldif    | LDIF to support bound devices.                                                                                                                                                                                        |
+  > | opendj_config_schema.ldif   | LDIF to support user services.                                                                                                                                                                                        |
+  > | opendj_dashboard.ldif       | LDIF to support the dashboard service.                                                                                                                                                                                |
+  > | opendj_deviceprint.ldif     | LDIF to support the device print service.                                                                                                                                                                             |
+  > | opendj_deviceprofiles.ldif  | LDIF to support storage of device information, collected by the SDK device authentication nodes.Apply this LDIF if you intend to use the [Ping SDKs](https://docs.pingidentity.com/sdks/latest) for device profiling. |
+  > | opendj_iot_schema.ldif      | LDIF to support the IoT service.                                                                                                                                                                                      |
+  > | opendj_kba.ldif             | LDIF to support the User Self-Service's knowledge-based questions and answers.                                                                                                                                        |
+  > | opendj_oathdevices.ldif     | LDIF to support registered devices for the OATH authentication service.                                                                                                                                               |
+  > | opendj_pushdevices.ldif     | LDIF to support registered devices for the PUSH notification service.                                                                                                                                                 |
+  > | opendj_user_index.ldif      | LDIF for the user repository indexes.                                                                                                                                                                                 |
+  > | opendj_user_schema.ldif     | LDIF for the user repository schema.                                                                                                                                                                                  |
+  > | opendj_userinit.ldif        | LDIF to set up user session initialization.                                                                                                                                                                           |
+  > | opendj_webauthndevices.ldif | LDIF to support registered devices for the Web Authentication (WebAuthn) authentication service.                                                                                                                      |
+
+* PingDirectory
+
+  > **Collapse: PingDirectory LDIF Files**
+  >
+  > | LDIF file                          | Description                                                                                                                                                                                                           |
+  > | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  > | pingdirectory_bounddevices.ldif    | LDIF to support bound devices.                                                                                                                                                                                        |
+  > | pingdirectory_config_schema.ldif   | LDIF to support user services.                                                                                                                                                                                        |
+  > | pingdirectory_dashboard.ldif       | LDIF to support the dashboard service.                                                                                                                                                                                |
+  > | pingdirectory_deviceprint.ldif     | LDIF to support the device print service.                                                                                                                                                                             |
+  > | pingdirectory_deviceprofiles.ldif  | LDIF to support storage of device information, collected by the SDK device authentication nodes.Apply this LDIF if you intend to use the [Ping SDKs](https://docs.pingidentity.com/sdks/latest) for device profiling. |
+  > | pingdirectory_iot_schema.ldif      | LDIF to support the IoT service.                                                                                                                                                                                      |
+  > | pingdirectory_kba.ldif             | LDIF to support the User Self-Service's knowledge-based questions and answers.                                                                                                                                        |
+  > | pingdirectory_oathdevices.ldif     | LDIF to support registered devices for the OATH authentication service.                                                                                                                                               |
+  > | pingdirectory_pushdevices.ldif     | LDIF to support registered devices for the PUSH notification service.                                                                                                                                                 |
+  > | pingdirectory_user_index.ldif      | LDIF for the user repository indexes.                                                                                                                                                                                 |
+  > | pingdirectory_user_schema.ldif     | LDIF for the user repository schema.                                                                                                                                                                                  |
+  > | pingdirectory_userinit.ldif        | LDIF to set up user session initialization.                                                                                                                                                                           |
+  > | pingdirectory_webauthndevices.ldif | LDIF to support registered devices for the Web Authentication (WebAuthn) authentication service.                                                                                                                      |
+
+* Microsoft Active Directory
+
+  > **Collapse: Microsoft Active Directory LDIF Files**
+  >
+  > | LDIF File               | Description                                                                                      |
+  > | ----------------------- | ------------------------------------------------------------------------------------------------ |
+  > | ad_config_schema.ldif   | LDIF to support user services.                                                                   |
+  > | ad_dashboard.ldif       | LDIF to support the dashboard service.                                                           |
+  > | ad_deviceprint.ldif     | LDIF to support the device print service.                                                        |
+  > | ad_kba.ldif             | LDIF to support the User Self-Service's knowledge-based questions and answers service.           |
+  > | ad_oathdevices.ldif     | LDIF to support registered devices for the OATH authentication service.                          |
+  > | ad_pushdevices.ldif     | LDIF to support registered devices for the PUSH notification service.                            |
+  > | ad_user_schema.ldif     | LDIF for the user schema.                                                                        |
+  > | ad_webauthndevices.ldif | LDIF to support registered devices for the Web Authentication (WebAuthn) authentication service. |
+
+* Microsoft Active Directory Lightweight Directory Services
+
+  > **Collapse: Microsoft Active Directory Lightweight Directory Services LDIF Files**
+  >
+  > | LDIF file                 | Description                                                                                      |
+  > | ------------------------- | ------------------------------------------------------------------------------------------------ |
+  > | adam_dashboard.ldif       | LDIF to support the dashboard service.                                                           |
+  > | adam_deviceprint.ldif     | LDIF to support the device print service.                                                        |
+  > | adam_kba.ldif             | LDIF to support the User Self-Service's knowledge-based questions and answers.                   |
+  > | adam_oathdevices.ldif     | LDIF to support registered devices for the OATH authentication service.                          |
+  > | adam_pushdevices.ldif     | LDIF to support registered devices for the PUSH notification service.                            |
+  > | adam_user_schema.ldif     | LDIF for the user schema.                                                                        |
+  > | adam_webauthndevices.ldif | LDIF to support registered devices for the Web Authentication (WebAuthn) authentication service. |
+
+|   |                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `odsee_` and `tivoli_` LDIF files are obsolete because Oracle Directory Server Enterprise Edition and Tivoli aren't supported as identity stores. |
+
+---
+
+---
+title: Start AM
+description: Start the PingAM web application deployed in a web container like Apache Tomcat, and learn how to override bootstrap settings using configuration files or environment variables
+component: pingam
+version: 8.1
+page_id: pingam:installation:startup-openam
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/startup-openam.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:startup-openam.adoc"]
+section_ids:
+  startup-openam-dynamic: Override startup settings
+  startup-openam-replace-bootstrap: Replace the bootstrap File
+  startup-openam-env-vars: Override startup settings using environment variables
+  startup-openam-java-properties: Override startup settings using Java properties
+---
+
+# Start AM
+
+AM is a web application installed in a web container, such as Apache Tomcat. Starting the web container starts the AM application.
+
+At the beginning of its startup process, AM performs an operation called *bootstrapping*, during which AM obtains startup settings from a bootstrap file in its configuration directory, then uses those settings to initiate its operation. AM creates the bootstrap file, `boot.json`, during installation.
+
+> **Collapse: How is the bootstrap file created?**
+>
+> The installation or upgrade process creates the file after configuring the instance, provided it can find the AM keystore and its password files in either of the following locations:
+>
+> * Configure > Server Defaults > Security > Key Store
+>
+> * Deployment > Servers > *server name* > Security > Key Store
+>
+> Change the AM default keystore configuration at Server Default level so the environment is homogeneous.
+
+> **Collapse: When is the bootstrap file updated?**
+>
+> After every successful startup, AM rewrites the bootstrap file using the current information for the AM keystore.
+>
+> If you change the configuration of the AM keystore, for example, the path to its files, AM will save the changes to the bootstrap file the next time it starts successfully.
+>
+> This is why, if you want to [override AM's startup settings](#startup-openam-dynamic), you need to replace the bootstrap file manually before AM starts.
+
+## Override startup settings
+
+Users who deploy AM with DevOps tooling, such as Docker and Kubernetes, might want to launch multiple AM instances from a single image, providing startup settings dynamically when AM starts up instead of reading the settings from the bootstrap file created during AM installation.
+
+You can replace the bootstrap file and provide your own static and dynamic startup settings. The following sections describe how to override the bootstrap file created during AM installation:
+
+* [Replace the bootstrap File](#startup-openam-replace-bootstrap) covers how to specify a custom bootstrap file, and describes all the startup settings in the bootstrap file.
+
+* [Override startup settings using environment variables](#startup-openam-env-vars) covers how to dynamically override startup settings in the bootstrap file with environment variables.
+
+* [Override startup settings using Java properties](#startup-openam-java-properties) covers how to dynamically override startup settings in the bootstrap file with Java properties.
+
+### Replace the bootstrap File
+
+AM's bootstrap file is located at the path `/path/to/am/config/boot.json`, where `/path/to/am/config` is the AM configuration directory.
+
+> **Collapse: How is the AM configuration directory specified?**
+>
+> You specify it during an AM installation, as follows:
+>
+> * In the Configuration Directory field on the Server Settings page when using the GUI installation. You can find details in [Interactive install](interactive-install.html).
+>
+> * In the `com.sun.identity.configuration.directory` environment variable when performing an [FBC installation](passive-install-fbc.html).
+>
+> * In the `BASE_DIR` property when [installing over REST](passive-install-rest.html).
+>
+> * In the `--cfgDir` option when [installing using Amster](passive-install-amster.html).
+
+To override AM's startup configuration, modify the `boot.json` bootstrap file then overwrite the existing bootstrap file with your modified file *before every AM restart*.
+
+You must overwrite the file each time you start AM because after startup, AM overwrites the bootstrap file with the initial startup settings created during AM installation, removing any modifications you might have made to startup settings in the bootstrap file.
+
+Make changes to supporting files and passwords before changing bootstrap file properties—AM will fail to start up if bootstrap properties don't correspond to actual configuration. For example, if you change the value of the `keyStorePasswordFile` property to a file that doesn't exist, AM won't be able to start up.
+
+> **Collapse: Bootstrap file example, with properties**
+>
+> ```json
+> {
+>   "instance": "https://am.example.com:8443/am",
+>   "dsameUser": "cn=dsameuser,ou=DSAME Users,ou=am-config",
+>   "keystores": {
+>     "default": {
+>       "keyStorePasswordFile": "/path/to/am/security/secrets/default/.storepass",
+>       "keyPasswordFile": "/path/to/am/security/secrets/default/.keypass",
+>       "keyStoreType": "JCEKS",
+>       "keyStoreFile": "/path/to/am/security/keystores/keystore.jceks"
+>     }
+>   },
+>   "configStoreList": [
+>     {
+>       "baseDN": "ou=am-config",
+>       "dirManagerDN": "uid=am-config,ou=admins,ou=am-config",
+>       "ldapHost": "ds.example.com",
+>       "ldapPort": 1636,
+>       "ldapProtocol": "ldaps"
+>     }
+>   ]
+> }
+> ```
+>
+> **Startup settings in the bootstrap file**
+>
+> | Property                                 | Description and Derivation                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+> | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `instance`                               | AM server URL.Defaults to the Server URL field on the Server Settings page (GUI configurator) or the `SERVER_URL` configuration property (command-line configurator).This property's value is the URL for directly accessing an AM instance, *not* an AM site using a load balancer URL.Do not modify this bootstrap file property. If you need to change the AM instance URL, reinstall AM.                                                                      |
+> | `dsameUser`                              | An internal account that AM uses to connect to the configuration store. AM generates the password for this account on startup and you can't read or change it.The first part of the user's DN is always created initially as `cn=dsameuser,ou=DSAME Users`. The second part of the DN defaults to the Root Suffix field on the Configuration Data Store Settings page (GUI configurator) or the `ROOT_SUFFIX` configuration property (command-line configurator). |
+> | `keystores.default`                      | The AM keystore. Currently, no other keystores are referenced in the bootstrap file.                                                                                                                                                                                                                                                                                                                                                                              |
+> | `keystores.default.keyStorePasswordFile` | Path to the file that contains the password required to open the AM keystore. Always created initially as `/path/to/am/security/secrets/default/.storepass`.When creating a new `.storepass` file, ensure that there are no hidden trailing characters after the password. For example, use the `echo -n` command to add the password to the new file.                                                                                                            |
+> | `keystores.default.keyPasswordFile`      | Path to the file that contains the password used to encrypt individual keystore entries. Always created initially as `/path/to/am/security/secrets/default/.keypass`.When creating a new `.keypass` file, ensure that there are no hidden trailing characters after the password. For example, use the `echo -n` command to add the password to the new file.                                                                                                     |
+> | `keystores.default.keyStoreType`         | AM keystore type. Currently, the only valid value is `JCEKS`.                                                                                                                                                                                                                                                                                                                                                                                                     |
+> | `keystores.default.keyStoreFile`         | Path to the AM keystore. Always created initially as `/path/to/am/security/keystores/keystore.jceks`.The AM keystore is required for startup because it contains the password of the directory manager user of the AM configuration store.                                                                                                                                                                                                                        |
+> | `configStoreList[*]`                     | Array of one or more objects that describe AM configuration stores. The initial object in the array is mandatory and defines the primary configuration store. Additional objects are optional and define failover configuration stores.                                                                                                                                                                                                                           |
+> | `configStoreList[*].baseDN`              | Root suffix of the AM configuration store.Defaults to the Root Suffix field on the Configuration Data Store Settings page (GUI configurator) or the `ROOT_SUFFIX` configuration property (command-line configurator).                                                                                                                                                                                                                                             |
+> | `configStoreList[*].dirManagerDN`        | DN of the configuration store directory manager user.Defaults to `uid=am-config,ou=admins,ou=am-config` (GUI configurator) or the `DS_DIRMGRDN` configuration property (command-line configurator).                                                                                                                                                                                                                                                               |
+> | `configStoreList[*].ldapHost`            | fully qualified domain name (FQDN) of the configuration store's host.Defaults to the Host Name field on the Configuration Data Store Settings page (GUI configurator) or the `DIRECTORY_SERVER` configuration property (command-line configurator).                                                                                                                                                                                                               |
+> | `configStoreList[*].ldapPort`            | LDAP or LDAPS port number on which to access the configuration store.Defaults to the Port field on the Configuration Data Store Settings page (GUI configurator) or the `DIRECTORY_PORT` configuration property (command-line configurator).                                                                                                                                                                                                                      |
+> | `configStoreList[*].ldapProtocol`        | Protocol with which to access the directory service running the configuration store. The value can be `ldap` or `ldaps`.Defaults to the SSL/TLS Enabled field on the Configuration Data Store Settings page (GUI configurator) or the `DIRECTORY_SSL` configuration property (command-line configurator).                                                                                                                                                         |
+
+### Override startup settings using environment variables
+
+You can dynamically override startup settings in the bootstrap file by defining environment variables in the shell that starts AM and referencing the variables in a modified version of the bootstrap file.
+
+Specify JSON properties that reference environment variables in a modified bootstrap file that uses the notation `${env.MY_ENVIRONMENT_VARIABLE}`.
+
+For example, you could dynamically change the AM instance URL as follows:
+
+1. Set an environment variable named `MY_INSTANCE` in the shell that starts AM.
+
+2. Create a modified version of the bootstrap file with the following line:
+
+   ```
+   "instance" : "${env.MY_INSTANCE}",
+   ```
+
+3. Overwrite the initial bootstrap file with the modified bootstrap file.
+
+4. Start AM.
+
+### Override startup settings using Java properties
+
+You can dynamically override startup settings in the bootstrap file by referencing Java system properties in a modified version of the bootstrap file. You can reference both built-in Java system properties and properties specified with the `-D` option in the web container that runs AM.
+
+Specify JSON properties that reference Java properties in a modified bootstrap file that uses the notation `${MY_JAVA_PROPERTY}`.
+
+For example, you could dynamically change the AM keystore's path to the user's home directory as follows:
+
+1. Create a modified version of the bootstrap file, specifying the default AM keystore as follows:
+
+   ```
+   "keystores" : {
+       "default" : {
+          "keyStorePasswordFile" : "${user.home}/.storepass",
+          "keyPasswordFile" : "${user.home}/.keypass",
+          "keyStoreType" : "JCEKS",
+          "keyStoreFile" : "${user.home}/keystore.jceks"
+       }
+   },
+   ```
+
+2. Overwrite the initial bootstrap file with the modified bootstrap file.
+
+3. Start AM.
+
+---
+
+---
+title: Store configuration data in JSON files
+description: Configure PingAM to store configuration data in JSON files instead of directory servers, enabling file-based configuration management across deployment layers
+component: pingam
+version: 8.1
+page_id: pingam:installation:fbc
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/fbc.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Configuration Store", "File Based Config", "FBC"]
+page_aliases: ["install-guide:fbc.adoc"]
+section_ids:
+  how-am-reads-FBC: How AM reads FBC
+  fbc-and-am-sites: FBC and AM sites
+---
+
+# Store configuration data in JSON files
+
+AM can read its configuration from JSON files instead of directory servers. Configuration stored in JSON files is called *file-based configuration* (FBC).
+
+File-based configuration (FBC) is best-suited to a DevOps-style deployment, with the associated tools and practices of that approach.
+
+Static FBC data is written to configuration files in the file system and checked into a source control system, such as Git.
+
+AM instances are created as Docker images, with the FBC incorporated into the image.
+
+![Kubernetes deployment using file-based configuration.](../_images/docker-deployment.png)
+
+You can insert variables into these configuration files before you check them into source control. The variables are substituted with the appropriate values at runtime when you start the Docker container. Using variables lets you reuse the same base configuration files for multiple instances, and different staging environments. For example, development, QA, or pre-production, which are then promoted to production.
+
+In an existing deployment, you can [migrate to FBC](../upgrade/migrate-to-fbc.html) after you've upgraded to AM 8.
+
+If you're setting up an AM deployment from scratch, read [Passive install with FBC](passive-install-fbc.html) to create a file-based configuration store.
+
+## How AM reads FBC
+
+An initial startup with FBC enabled writes configuration files with the following structure:
+
+* noninteractive-install.properties
+
+  You specify a limited set of environment variables on startup. AM writes these environment variables to a configuration properties file, `/path/to/am/config/services/noninteractive-install.properties`, when the server starts.
+
+  The values in the `noninteractive-install.properties` file are used on subsequent startups, *unless you set these properties in the deployment configuration layer*.
+
+* Baseline configuration layer
+
+  The baseline configuration files are read-only and are located under `/path/to/am/baseline/config/services`.
+
+  These files include placeholders that are resolved with values of environment variables. The baseline layer lets you define a configuration that works across different environments, with a few distinct parameters that are specific to each server instance.
+
+  For example, three instances might have the same configuration but different keystore locations and URLs. Those differences are resolved with environment variables at startup.
+
+* Deployment configuration layer
+
+  The deployment configuration files are read/write and are located under `/path/to/am/config/services`.
+
+  Changes made through the AM admin UI and REST API are written to the deployment configuration layer.
+
+  This layer overrides the baseline configuration on a file-by-file basis. In other words, AM reads its configuration from the baseline configuration until you add corresponding files to the deployment configuration layer.
+
+In summary, AM looks for its configuration in the following order:
+
+1. Deployment configuration layer
+
+2. Baseline configuration layer
+
+3. `noninteractive-install.properties`
+
+## FBC and AM sites
+
+A *site* refers to multiple AM servers that share a single configuration store.
+
+When your configuration is stored in files, you don't need to group AM servers into sites because each AM server has its configuration stored locally.
+
+Instead of pointing at a shared configuration store, servers using FBC are exact copies of each other. Each server is assumed to be in its own discrete site, along with its configuration.
+
+The following diagram illustrates the difference between configuration stored in an LDAP store and configuration stored in files on the file system:
+
+![File-based configuration vs LDAP configuration store](_images/FBC-vs-LDAP.png)
+
+If you migrate to FBC from an LDAP configuration store, the migration utility enforces a *single* site and a *single* server instance. If your deployment has more than one server or more than one site, the migration retains the first site and uses this site in the resulting output configuration. If your deployment has no sites configured, a single site is added.
+
+---
+
+---
+title: Troubleshoot installations
+description: Resolve PingAM installation issues using debug logging and SSL troubleshooting techniques
+component: pingam
+version: 8.1
+page_id: pingam:installation:install-troubleshooting
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/install-troubleshooting.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Troubleshooting"]
+page_aliases: ["install-guide:install-troubleshooting.adoc"]
+section_ids:
+  debug-logging: Debug logging
+  ssl-connection-issues: SSL connection issues
+---
+
+# Troubleshoot installations
+
+## Debug logging
+
+AM can capture information in debug log files that are useful when troubleshooting AM problems. [Debug logging](../monitoring/debug-logging.html) describes how to enable debug logging after AM has been started.
+
+It's also possible to capture debug logs while installing AM. This can be useful if you need to troubleshoot an installation problem.
+
+Follow these steps to capture debug logs while installing AM on Tomcat:
+
+1. If Tomcat is already started, stop it.
+
+2. Specify the `-Dcom.iplanet.services.debug.level=message` option in the `CATALINA_OPTS` environment variable:
+
+   ```
+   $ export CATALINA_OPTS=-Dcom.iplanet.services.debug.level=message
+   ```
+
+   There are several ways that you can specify the `CATALINA_OPTS` environment variable. You can set the variable:
+
+   * In the `/path/to/tomcat/bin/setenv.sh` file
+
+   * In the login shell of the user who runs Tomcat
+
+3. Run the AM installation. Debug log files containing troubleshooting information appear in the `/path/to/am/var/debug` directory.
+
+4. When you have completed the AM installation and no longer need to capture debug logs, stop Tomcat, revert the debug logging options, and restart Tomcat.
+
+## SSL connection issues
+
+Connection issues during an AM installation are often caused by certificate or truststore misconfigurations.
+
+> **Collapse: Example connection error**
+>
+> The following error is seen when AM can't connect to DS during the installation:
+>
+> ```none
+> AMSetupServlet.processRequest: error com.sun.identity.setup.ConfiguratorException: Cannot connect to Directory Server, the error was: Client-Side Timeout
+> ```
+
+Perform the following steps to troubleshoot connection issues:
+
+1. Check you can connect to the DS server by running the following `openssl` command with the `hostname:port` of your DS server:
+
+   ```none
+   $ openssl s_client -connect ds.example.com:1636 -showcerts
+   ```
+
+   The output from this command confirms that you can establish a secure connection to the DS server independent of AM. If you can connect, the command returns the entire certificate chain for DS.
+
+2. Check the AM truststore contains the DS CA certificate by running the following `keytool` command:
+
+   ```none
+   $ keytool -list -v -keystore /path/to/truststore -storetype jks -storepass password
+   ```
+
+   This command returns the contents of the truststore so you can check it includes the DS CA certificate.
+
+3. Enable SSL debugging on Tomcat by adding the `-Djavax.net.debug=SSL,handshake,trustmanager` JVM option.
+
+   To do this, add the following debug option to the `setenv.sh` file and restart Tomcat:
+
+   ```none
+   export CATALINA_OPTS="$CATALINA_OPTS -Djavax.net.debug=ssl,handshake,trustmanager"
+   ```
+
+   The SSL debug logs are written to `catalina.out`. They provide detailed information about the SSL handshake process to help you identify where the issue is occurring.
+
+   Learn more about this option in [Debugging Utilities](https://docs.oracle.com/en/java/javase/25/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-31B7E142-B874-46E9-8DD0-4E18EC0EB2CF) in the Java documentation.
+
+4. When you have completed the AM installation and no longer need to capture SSL debug logs, stop Tomcat, revert the SSL debugging option, and restart Tomcat.
+
+---
+
+---
+title: Tune the underlying datastores
+description: Tune PingDS instances to handle multiple client connections and optimize performance in your PingAM environment
+component: pingam
+version: 8.1
+page_id: pingam:installation:tune-ds
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/tune-ds.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Performance", "Scaling"]
+page_aliases: ["prerequisites-file-descriptors.adoc", "install-guide:tune-ds.adoc"]
+---
+
+# Tune the underlying datastores
+
+AM is not file-descriptor intensive, but you may need to tune each DS instance in your environment to handle multiple client connections.
+
+Learn more about tuning DS in the [DS performance tuning](https://docs.pingidentity.com/pingds/8.1/maintenance-guide/tuning.html) documentation.
+
+---
+
+---
+title: Uninstall AM
+description: Remove PingAM software from your deployment, including configuration files, directory server data, and web application files
+component: pingam
+version: 8.1
+page_id: pingam:installation:removing-instances
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/removing-instances.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:removing-instances.adoc"]
+---
+
+# Uninstall AM
+
+This page describes how to remove AM software.
+
+To remove a single server from a multi-server deployment, select Deployment > Servers > *server name* then click [icon: ellipsis-v, set=fas]and [icon: times, set=fas]Delete.
+
+You can find instructions on removing agents in the [Web Agents Installation Guide](https://docs.pingidentity.com/web-agents/2025.3/installation-guide/uninstallation.html) and the [Java Agents Installation Guide](https://docs.pingidentity.com/java-agents/2025.3/installation-guide/uninstallation.html).
+
+After you have deployed and configured AM, you might have as many as four locations where AM files are stored on your system.
+
+The following steps remove the AM software. After removing all the software, remove the AM configuration data.
+
+1. Shut down the web application container where you deployed AM.
+
+   ```bash
+   $ /etc/init.d/tomcat stop
+   Password:
+   Using CATALINA_BASE:   /path/to/tomcat
+   Using CATALINA_HOME:   /path/to/tomcat
+   Using CATALINA_TMPDIR: /path/to/tomcat/temp
+   Using JRE_HOME:        /path/to/jdk/jre
+   Using CLASSPATH:       /path/to/tomcat/bin/bootstrap.jar:
+    /path/to/tomcat/bin/tomcat-juli.jar
+   ```
+
+1) Unconfigure AM by removing the configuration files in the $HOME directory of the user running the web application container.
+
+   For example:
+
+   ```bash
+   $ rm -rf $HOME/am $HOME/.openamcfg
+   ```
+
+   To uninstall AM and its associated configuration files, delete the following directories:
+
+   * *The configuration directory*.
+
+     If you didn't use the default configuration location (`$HOME/am`), check the value of the `Base installation directory` property under Deployment > Servers > *server name* > General > System.
+
+   * *The hidden directory that holds a file pointing to the configuration directory*.
+
+     For example, if you are using Apache Tomcat as the web container, this file could be `$HOME/.openamcfg/AMConfig_path_to_tomcat_webapps_am_`.
+
+2) Remove the configuration manually from your directory server. The default base DN for AM configuration data is `ou=am-config`.
+
+   |   |                                                                                                                                                                   |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | At this point, you can restart the web container and reconfigure AM if you only want to start over with a clean configuration rather than removing AM completely. |
+
+3) Undeploy the AM web application.
+
+   For example, if you are using Apache Tomcat as the web container, remove the `.war` file and expanded web application from the container:
+
+   ```bash
+   $ cd /path/to/tomcat/webapps/
+   $ rm -rf am.war am/
+   ```
+
+---
+
+---
+title: Use stronger encryption algorithms
+description: Configure PingAM to use AES Key Wrap encryption with PBKDF2 and HMAC-SHA1 for stronger password and key protection during installation
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-aeswrap
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-aeswrap.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Security"]
+page_aliases: ["install-guide:prepare-aeswrap.adoc"]
+section_ids:
+  configure-aeswrap-tomcat: Configure AES Key Wrap encryption for Tomcat
+---
+
+# Use stronger encryption algorithms
+
+AM encrypts and decrypts system passwords and the keys used in the configuration, and by components such as agents. The default encryption algorithm is Java Cryptography Extension (JCE) [PBEWithMD5AndDES](https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html#algorithmparameters-algorithms).
+
+If you need a more secure encryption algorithm, use the Advanced Encryption Standard (AES) Key Wrap algorithm ([RFC3394](https://www.rfc-editor.org/info/rfc3394)). AM's implementation of AES Key Wrap uses the Password-Based Key Derivation Function 2 (PBKDF2) ([RFC2898](https://www.rfc-editor.org/info/rfc2898)) with HMAC-SHA1. This lets you choose key size hash algorithms, such as SHA256, SHA384, or SHA512.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The AES Key Wrap encryption algorithm is only enabled when installing AM. There is no current upgrade path for existing installations.AES key wrap is a symmetric encryption method, which means the same key is used for encrypting and decrypting. Make sure you use the same secret (secret label: `am.global.services.session.clientbased.encryption.AES`) on all AM instances to allow any AM instance to decrypt the encrypted passwords and keys. |
+
+## Configure AES Key Wrap encryption for Tomcat
+
+Edit your container startup scripts, for example `setenv.sh`, to set the following JVM system properties in Tomcat:
+
+```none
+JAVA_OPTS="$JAVA_OPTS -Dcom.iplanet.security.encryptor=org.forgerock.openam.shared.security.crypto.AESWrapEncryption"  1
+JAVA_OPTS="$JAVA_OPTS -Dorg.forgerock.openam.encryption.key.iterations=10000"                                          2
+JAVA_OPTS="$JAVA_OPTS -Dorg.forgerock.openam.encryption.useextractandexpand=true"                                      3
+JAVA_OPTS="$JAVA_OPTS -Dorg.forgerock.openam.encryption.key.size=256"                                                  4
+JAVA_OPTS="$JAVA_OPTS -Dorg.forgerock.openam.encryption.key.digest=SHA512"                                             5
+```
+
+1 Enables use of AES Key Wrap encryption.
+
+2 Specifies the iteration count of the encryption key. Large iteration counts, for example, of 20,000, slow down brute-force attacks when passwords are of low quality (less than 20 characters and easy to predict). AM does not have an iteration count requirement. However, it will log a warning if both of the following conditions are true: - The number of iterations is less than 10,000. - The AM encryption key is less than 20 characters long.
+
+3 Enables the algorithm to reduce the performance cost of AES Key Wrap encryption even when high-iteration counts are used. If this property is unset, and you configured a large iteration count, AM startup times may see a performance impact if there are many agents in your deployment. Determine the optimal iteration count based on the security and performance requirements of your deployment.
+
+4 Specifies the size of the encryption key. Configure the key size to meet the needs of your deployment.
+
+5 Specifies the digest algorithm. Possible values are `SHA1`, `SHA256`, `SHA384`, or `SHA512`. Configure the digest algorithm to meet the needs of your deployment.
+
+|   |                                                                             |
+| - | --------------------------------------------------------------------------- |
+|   | You can't change these configuration parameters once AM has been installed. |

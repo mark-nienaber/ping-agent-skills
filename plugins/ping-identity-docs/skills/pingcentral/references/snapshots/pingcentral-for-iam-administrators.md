@@ -2,9 +2,11 @@
 title: Configuring logging
 description: Instructions for configuring logging for PingCentral.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_logging
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_logging.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_logging.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   steps: Steps
@@ -53,9 +55,11 @@ The log file serves as a record of events that occurred within the system and is
 title: Configuring MTLS
 description: Instructions for importing a client TLS key pair so that you can use MTLS for admin API authentication.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_config_mtls
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_config_mtls.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_config_mtls.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 10, 2025
 section_ids:
   steps: Steps
@@ -95,9 +99,11 @@ To use mutual TLS (MTLS) for Admin API authentication, import a client TLS key p
 title: Configuring PingAccess for SSO
 description: Instructions for configuring PingCentral to use SSO to access PingAccess.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_pa_sso
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pa_sso.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pa_sso.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 15, 2025
 section_ids:
   about-this-task: About this task
@@ -156,7 +162,7 @@ To use SSO to access PingAccess from PingCentral:
       | `introspection.endpoint`  | This URL specifies where PingFederate validates the authentication token.For example, `https://<PF_RUNTIME_HOST>:<PF_RUNTIME_PORT>/as/introspect.oauth2`                                                                                                                   |
       | `required.scopes`         | Use any of the scopes defined in PingFederate.Go to **System → OAuth Settings → Scope Management** to see a list of available scopes.For details, see [Scopes](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_scopes) in the *PingFederate Server* guide. |
       | `username.attribute.name` | The value mapped to the **Username** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                                |
-      | `role.attribute.name`     | The value mapped to the **admin\_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                             |
+      | `role.attribute.name`     | The value mapped to the **admin_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                              |
 
 2. Configure PingAccess:
 
@@ -206,9 +212,11 @@ To use SSO to access PingAccess from PingCentral:
 title: Configuring PingCentral to run as a Linux systemd service
 description: Instructions for running PingCentral as a Linux systemd service.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemd
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemd.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemd.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -229,7 +237,7 @@ Ensure that:
 
 * The *\<JAVA-HOME>* path points to the Java Development Kit (JDK) software on your system. For example, `usr/java/jdk11.0_4`.
 
-* The *\<PINGCENTRAL\_HOME>* path points to the folder extracted from the `.zip` archive in your installation directory. Ensure that this path does not reside within a user's home folder.
+* The *\<PINGCENTRAL_HOME>* path points to the folder extracted from the `.zip` archive in your installation directory. Ensure that this path does not reside within a user's home folder.
 
 ## Steps
 
@@ -241,11 +249,11 @@ Ensure that:
 
 2. Open the `pingcentral.service` file and assign appropriate values to the following variables:
 
-   * *\<PINGCENTRAL\_HOME>*: Labeled "WorkingDirectory."
+   * *\<PINGCENTRAL_HOME>*: Labeled "WorkingDirectory."
 
-   * *\<PINGCENTRAL\_USER>*: Labeled "User."
+   * *\<PINGCENTRAL_USER>*: Labeled "User."
 
-   * *\<JAVA\_HOME>*: Labeled "Environment."
+   * *\<JAVA_HOME>*: Labeled "Environment."
 
 3. Enable read and write activity for the service using the `chmod 644 /lib/systemd/system/pingcentral.service` command.
 
@@ -278,9 +286,11 @@ If you have privileges that allow you to install applications, you can remove th
 title: Configuring PingCentral to run as a Linux systemv service
 description: Instructions for running PingCentral as a Linux systemv service.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemv
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemv.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_linux_systemv.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -299,7 +309,7 @@ Ensure that:
 
 * You are signed on to your system as a root user.
 
-* The *\<JAVA\_HOME>*`JAVA_HOME` path points to the Java Development Kit (JDK) software on your system. For example, `/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.e17_7.x86_64`. To verify this information, run the `echo $JAVA_HOME` command.
+* The *\<JAVA_HOME>*`JAVA_HOME` path points to the Java Development Kit (JDK) software on your system. For example, `/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.e17_7.x86_64`. To verify this information, run the `echo $JAVA_HOME` command.
 
 * The `PINGCENTRAL_HOME` path points to the folder extracted from the `.zip` archive in your installation directory. Ensure that this path doesn't reside within a user's home folder.
 
@@ -354,9 +364,11 @@ If you have privileges that allow you to install applications, you can remove th
 title: Configuring PingCentral to run as a Windows service
 description: Instructions for configuring PingCentral to run as a Windows service.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_conf_pc_windows
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_windows.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_conf_pc_windows.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -403,7 +415,7 @@ If you have administrator privileges, you can remove the PingCentral Windows ser
 
 3. In the command prompt, change to the `<PINGCENTRAL_HOME>\sbin\windows` directory and run the `uninstall-service.bat` script.
 
-4. After the script is finished running, remove the *\<PINGCENTRAL\_HOME>* environment variable from the system.
+4. After the script is finished running, remove the *\<PINGCENTRAL_HOME>* environment variable from the system.
 
 ---
 
@@ -411,9 +423,11 @@ If you have administrator privileges, you can remove the PingCentral Windows ser
 title: Configuring PingCentral to run in FIPS-compliant mode
 description: Instructions on configuring PingCentral to run in FIPS-compliant mode.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_fips_mode
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_fips_mode.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_fips_mode.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 16, 2025
 ---
 
@@ -435,9 +449,11 @@ To enable this option, access the `<PingCentral_install>/conf/application.proper
 title: Configuring PingFederate and PingAccess for SSO
 description: Instructions for configuring PingCentral, PingFederate, and PingAccess for SSO.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_pf_pa_sso
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pf_pa_sso.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pf_pa_sso.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   configuring-pingfederate-for-sso: Configuring PingFederate for SSO
@@ -492,7 +508,7 @@ To access PingFederate from PingCentral using SSO:
 
       * `admin_role`: This multivalued attribute must include the `admin` and `cryptoadmin` roles. In this example, an OGNL expression is used to include these values.
 
-        ![In this example, admin\_role is an expression mapped to an OGNL expression and Username is mapped to value.](../_images/ehl1656367060970.jpg)
+        ![In this example, admin_role is an expression mapped to an OGNL expression and Username is mapped to value.](../_images/ehl1656367060970.jpg)
 
 2. Configure a new PingFederate client:
 
@@ -538,7 +554,7 @@ To access PingFederate from PingCentral using SSO:
       | `introspection.endpoint`  | This URL specifies where PingFederate validates the authentication token.For example, `https://<PF_RUNTIME_HOST>:<PF_RUNTIME_PORT>/as/introspect.oauth2`                                                                                                                   |
       | `required.scopes`         | Use any of the scopes defined in PingFederate.Go to **System → OAuth Settings → Scope Management** to see a list of available scopes.For details, see [Scopes](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_scopes) in the *PingFederate Server* guide. |
       | `username.attribute.name` | The value mapped to the **Username** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                                |
-      | `role.attribute.name`     | The value mapped to the **admin\_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                             |
+      | `role.attribute.name`     | The value mapped to the **admin_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                              |
 
 3. Configure PingCentral:
 
@@ -614,7 +630,7 @@ To use SSO to access PingAccess from PingCentral:
       | `introspection.endpoint`  | This URL specifies where PingFederate validates the authentication token.For example, `https://<PF_RUNTIME_HOST>:<PF_RUNTIME_PORT>/as/introspect.oauth2`                                                                                                                   |
       | `required.scopes`         | Use any of the scopes defined in PingFederate.Go to **System → OAuth Settings → Scope Management** to see a list of available scopes.For details, see [Scopes](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_scopes) in the *PingFederate Server* guide. |
       | `username.attribute.name` | The value mapped to the **Username** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                                |
-      | `role.attribute.name`     | The value mapped to the **admin\_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                             |
+      | `role.attribute.name`     | The value mapped to the **admin_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                              |
 
 2. Configure PingAccess:
 
@@ -664,9 +680,11 @@ To use SSO to access PingAccess from PingCentral:
 title: Configuring PingFederate as a PingAccess token provider
 description: This topic explains how to configure PingFederate as the PingAccess token provider.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_pf_as_pa_token/pingcentral_configuring_pf_token_provider
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_pf_as_pa_token/pingcentral_configuring_pf_token_provider.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_pf_as_pa_token/pingcentral_configuring_pf_token_provider.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 7, 2025
 section_ids:
   about-this-task: About this task
@@ -739,9 +757,11 @@ For application owners to securely promote Security Assertion Markup Language (S
 title: Configuring PingFederate for SSO
 description: To access PingFederate from PingCentral using SSO:
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_pf_sso
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pf_sso.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_pf_sso.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -783,7 +803,7 @@ To access PingFederate from PingCentral using SSO:
 
       * `admin_role`: This multivalued attribute must include the `admin` and `cryptoadmin` roles. In this example, an OGNL expression is used to include these values.
 
-        ![In this example, admin\_role is an expression mapped to an OGNL expression and Username is mapped to value.](../_images/ehl1656367060970.jpg)
+        ![In this example, admin_role is an expression mapped to an OGNL expression and Username is mapped to value.](../_images/ehl1656367060970.jpg)
 
 2. Configure a new PingFederate client:
 
@@ -829,7 +849,7 @@ To access PingFederate from PingCentral using SSO:
       | `introspection.endpoint`  | This URL specifies where PingFederate validates the authentication token.For example, `https://<PF_RUNTIME_HOST>:<PF_RUNTIME_PORT>/as/introspect.oauth2`                                                                                                                   |
       | `required.scopes`         | Use any of the scopes defined in PingFederate.Go to **System → OAuth Settings → Scope Management** to see a list of available scopes.For details, see [Scopes](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_scopes) in the *PingFederate Server* guide. |
       | `username.attribute.name` | The value mapped to the **Username** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                                |
-      | `role.attribute.name`     | The value mapped to the **admin\_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                             |
+      | `role.attribute.name`     | The value mapped to the **admin_role** attribute defined on the **Contract Fulfillment** tab.                                                                                                                                                                              |
 
 3. Configure PingCentral:
 
@@ -859,9 +879,11 @@ To access PingFederate from PingCentral using SSO:
 title: Creating and testing approval expressions
 description: Instructions for creating and testing Spring Expression Language (SpEL) expressions, and provide OAuth and SAML SP approval examples.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_approval_expressions/pingcentral_create_test_expressions
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_approval_expressions/pingcentral_create_test_expressions.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_approval_expressions/pingcentral_create_test_expressions.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 7, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -951,9 +973,11 @@ In this example, if the **Require Approval If Any Expression Succeeds** option i
 title: Installing and configuring PingCentral
 description: This page contains links to instructions for installing and configuring PingCentral.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_install_config
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_install_config.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_install_config.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   installing-pingcentral: Installing PingCentral
@@ -994,7 +1018,7 @@ Installation, upgrade, and configuration instructions are accessible from the li
 
 To avoid seeing a certificate warning when you access PingCentral, replace the user-facing SSL certificate so it will no longer use the self-signed certificate. Learn more about replacing it in [Replacing the Admin Console SSL Certificate](pingcentral_admin_ssl_cert.html).
 
-The Spring Boot Actuator, enabled by default, collects a wide variety of information to help you monitor and manage PingCentral in production environments. Spring Metrics collects a large amount of data, but it does not present the data in ways that are easy to understand, so you might want to move this data to either a Prometheus or Graphite time series database and use Grafana to view it through interactive dashboards with charts and graphs. Learn more in [Monitoring PingCentral](../pingcentral_monitoring/pingcentral_monitoring_pc.html).
+The Spring Boot Actuator, enabled by default, collects a wide variety of information to help you monitor and manage PingCentral in production environments. Spring Metrics collects a large amount of data, but it does not present the data in ways that are easy to understand, so you might want to move this data to either a Prometheus or Graphite time series database and use Grafana to view it through interactive dashboards with charts and graphs. Learn more in [Monitoring PingCentral](../pingcentral_monitoring/pingcentral_monitoring_pc.html)
 
 ---
 
@@ -1002,9 +1026,11 @@ The Spring Boot Actuator, enabled by default, collects a wide variety of informa
 title: Installing PingCentral on Linux systems
 description: Instructions for installing PingCentral on Linux systems.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_installing_pc_linux
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_installing_pc_linux.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_installing_pc_linux.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 10, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1024,7 +1050,7 @@ Ensure that:
 
 * All [System requirements and supported configurations](../pingcentral_system_requirements/pingcentral_system_requirements.html) are met, and the Oracle or OpenJDK Java 11 LTS runtime environment is installed.
 
-* The *\<JAVA\_HOME>* path points to the JDK software on your system. For example, `/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.e17_7.x86_64`. To verify this information, run the `echo $JAVA_HOME` command.
+* The *\<JAVA_HOME>* path points to the JDK software on your system. For example, `/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.e17_7.x86_64`. To verify this information, run the `echo $JAVA_HOME` command.
 
 * The JAVA`/bin` directory path is added to the *\<PATH>* variable. To verify this information, run the `echo $PATH` command.
 
@@ -1064,9 +1090,11 @@ Ensure that:
 title: Installing PingCentral on Microsoft Windows
 description: Instructions for installing PingCentral on Microsoft Windows.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_installing_configuring/pingcentral_installing_pc_windows
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_installing_pc_windows.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_installing_configuring/pingcentral_installing_pc_windows.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 10, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1085,7 +1113,7 @@ Ensure that:
 
 * All [System requirements and supported configurations](../pingcentral_system_requirements/pingcentral_system_requirements.html) are met, and the Oracle Java 11 LTS runtime environment is installed.
 
-* The *\<JAVA\_HOME>* path points to the JDK software on your system. Similar to `/usr/lib/jvm/[JAVA_VERSION]`. To verify this information, run the `echo $JAVA_HOME` command.
+* The *\<JAVA_HOME>* path points to the JDK software on your system. For example, `/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.e17_7.x86_64`. To verify this information, run the `echo $JAVA_HOME` command.
 
 * The JAVA `/bin` directory path is added to the *\<PATH>* variable. To verify this information, run the `$echo $PATH` command.
 
@@ -1129,11 +1157,12 @@ Ensure that:
 title: Introduction to PingCentral
 description: An introduction to PingCentral and a high-level explanation of how it works.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_intro/pingcentral_intro
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_intro/pingcentral_intro.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_intro/pingcentral_intro.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
-page_aliases: ["index.adoc"]
 ---
 
 # Introduction to PingCentral
@@ -1178,9 +1207,11 @@ For a deeper understanding of how PingAccess applications work, see [Promoting a
 title: Managing applications
 description: Instructions for managing PingCentral applications.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_mng_applications/pingcentral_manage_apps
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_mng_applications/pingcentral_manage_apps.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_mng_applications/pingcentral_manage_apps.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 7, 2025
 section_ids:
   _filtering_applications: Filtering applications
@@ -1356,9 +1387,11 @@ You can delete applications within PingCentral, or choose to delete the applicat
 title: Managing approvals (administrators)
 description: Instructions for managing application approvals.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_mng_approvals/pingcentral_manage_approvals
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_mng_approvals/pingcentral_manage_approvals.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_mng_approvals/pingcentral_manage_approvals.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 9, 2025
 section_ids:
   about-this-task: About this task
@@ -1423,9 +1456,11 @@ From this page, you can:
 title: Managing environments
 description: Instructions for adding,updating, and deleting environments.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_mng_environments/pingcentral_mng_environments
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_mng_environments/pingcentral_mng_environments.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_mng_environments/pingcentral_mng_environments.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 7, 2025
 section_ids:
   adding-environments: Adding environments
@@ -1638,9 +1673,11 @@ Delete environments from PingCentral when they are no longer needed.
 title: Managing templates
 description: Instructions for managing OAuth, OIDC, and SAML application templates.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_mng_templates/pingcentral_mng_templates
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_mng_templates/pingcentral_mng_templates.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_mng_templates/pingcentral_mng_templates.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 7, 2025
 section_ids:
   oauth-and-oidc-templates: OAuth and OIDC templates
@@ -1743,13 +1780,12 @@ To add an OAuth or OIDC template, select a client configuration to replicate. Pi
 
    All the editable information is on one page.
 
-   | Option                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-   | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | To update the name, description, or icon: | Update the information in the **Name** and **Description** fields or select a new icon to represent the template.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-   | To update grant types:                    | To update the grant types used for authorization, select or deselect the grant types that you want to use for this template.Learn more about [Grant types](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_grant_types.html) in the PingFederate documentation.&#xA;&#xA;Some grant types might not be available with your version of PingFederate.                                                                                                                                                                                                 |
-   | To update scopes:                         | To add or update scopes, search for them and select or deselect the scopes that you want to use for this template.Learn more about [Scopes](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_scopes.html) in the PingFederate documentation.                                                                                                                                                                                                                                                                                                         |
-   | To update extended properties:            | Add or remove the extended property values that you want to use for this template. If you don't want applications owners to update extended property values in their applications, select the **Read-only** checkbox.Learn more about [Extended properties](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_extended_properti.html) in the PingFederate documentation.                                                                                                                                                                            |
-   | To update policy contracts:               | Add, delete, or update the current attribute mappings in the PingFederate policy contract associated with this template.Learn more about [Attribute contracts](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_attr_contract.html) in the PingFederate documentation.&#xA;&#xA;If you update a policy contract, a new contract is created in PingFederate, and you will be prompted to name it.&#xA;&#xA;	If a template is associated with an environment that is deleted, you will not be able to update OIDC policy information for the template. |
+   | Option                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | To update the name, description, or icon: | Update the information in the **Name** and **Description** fields or select a new icon to represent the template.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   | To update grant types:                    | To update the grant types used for authorization, select or deselect the grant types that you want to use for this template.For details, see [Grant Types](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_grant_types) in the *PingFederate Server* guide.&#xA;&#xA;Some grant types might not be available with your version of PingFederate.                                                                                                                                                                                                 |
+   | To update scopes:                         | To add or update scopes, search for them and select or deselect the scopes that you want to use for this template.For details, see [Scopes](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_scopes) in the *PingFederate Server* guide.                                                                                                                                                                                                                                                                                                         |
+   | To update policy contracts:               | Add, delete, or update the current attribute mappings in the PingFederate policy contract associated with this template.For details, see [Attribute contracts](https://docs.pingidentity.com/csh?Product=pf-latest\&context=pf_attr_contract) in the *PingFederate Server* guide.&#xA;&#xA;If you update a policy contract, a new contract is created in PingFederate, and you will be prompted to name it.&#xA;&#xA;	If a template is associated with an environment that is deleted, you will not be able to update OIDC policy information for the template. |
 
 4. Click **Save**.
 
@@ -1871,11 +1907,7 @@ Applications based on outdated templates have **Outdated Template** icons associ
 
 4. Update the information in the **Name** and **Description** fields or select a new icon to represent the template.
 
-5. Add or remove the extended property values that you want to use for this template. If you don't want application owners to be able to modify the extended property values in their applications, select the **Read-only** checkbox.
-
-   Learn more about these properties in [Extended properties](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_extended_properties.adoc) in the PingFederate documentation.
-
-6. Click **Save**.
+5. Click **Save**.
 
 ### Reverting templates to previous versions
 
@@ -1921,9 +1953,11 @@ The history of each template is available to review and compare with previous ve
 title: Managing user groups
 description: This section explains how to add, update, and delete user groups.
 component: pingcentral
-version: 3.1.1
+version: 3.2
 page_id: pingcentral:pingcentral_for_iam_administrators:pingcentral_mng_user_groups/pingcentral_managing_groups
-canonical_url: https://docs.pingidentity.com/pingcentral/3.1.1/pingcentral_for_iam_administrators/pingcentral_mng_user_groups/pingcentral_managing_groups.html
+canonical_url: https://docs.pingidentity.com/pingcentral/3.2/pingcentral_for_iam_administrators/pingcentral_mng_user_groups/pingcentral_managing_groups.html
+llms_txt: https://docs.pingidentity.com/pingcentral/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 13, 2025
 section_ids:
   adding-user-groups: Adding user groups

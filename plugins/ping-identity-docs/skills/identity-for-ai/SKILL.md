@@ -6,7 +6,7 @@ license: MIT
 
 # Identity for AI
 
-Ping Identity's comprehensive Identity for AI solution secures, manages, and governs AI systems and data.
+Landing page for Identity for AI documentation covering Ping Identity's comprehensive solution for AI agent security, governance, and identity management.
 
 ## Live source of truth
 
@@ -27,12 +27,14 @@ Ping Identity's comprehensive Identity for AI solution secures, manages, and gov
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Agents: mcp, secure, agents | agents | https://developer.pingidentity.com/identity-for-ai/agents/*.md | references/snapshots/agents.md |
+| Protocols: authplayground, explore, oauth | protocols | https://developer.pingidentity.com/identity-for-ai/protocols/*.md | references/snapshots/protocols.md |
+| Integrations: gemini, identity, mcp | integrations | https://developer.pingidentity.com/identity-for-ai/integrations/*.md | live-only |
+| Identity: agents, mcp, oauth | identity | https://developer.pingidentity.com/identity-for-ai/identity/*.md | live-only |
+| Agents: agents, learn, use | agents | https://developer.pingidentity.com/identity-for-ai/agents/*.md | live-only |
 | Use Cases: agents, least, privilege | use-cases | https://developer.pingidentity.com/identity-for-ai/use-cases/*.md | references/snapshots/use-cases.md |
-| Identity: agent, exchange, token | identity | https://developer.pingidentity.com/identity-for-ai/identity/*.md | references/snapshots/identity.md |
 | Getting Started: identity, about, comprehensive | getting-started | https://developer.pingidentity.com/identity-for-ai/getting-started/*.md | references/snapshots/getting-started.md |
-| Glossary: identity, key, about | glossary | https://developer.pingidentity.com/identity-for-ai/glossary/*.md | references/snapshots/glossary.md |
-| Index.Md: identity, comprehensive, data | index.md | https://developer.pingidentity.com/identity-for-ai/index.md | references/snapshots/index-md.md |
+| Glossary: identity, key, agent | glossary | https://developer.pingidentity.com/identity-for-ai/glossary/*.md | references/snapshots/glossary.md |
+| Index.Md: identity, agent, comprehensive | index.md | https://developer.pingidentity.com/identity-for-ai/index.md | references/snapshots/index-md.md |
 | Release Notes: identity, new, about | release-notes | https://developer.pingidentity.com/identity-for-ai/release-notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition

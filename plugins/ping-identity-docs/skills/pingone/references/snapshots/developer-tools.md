@@ -6,7 +6,7 @@ page_id: pingone:developer_tools:p1_dev_tools
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_dev_tools.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 8, 2024
+revdate: 2026-09-30T22:51:58Z
 ---
 
 # Developer Tools
@@ -35,7 +35,7 @@ page_id: pingone:developer_tools:p1_integrate_with_other_ping_software
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_integrate_with_other_ping_software.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2024
+revdate: 2026-10-01T18:54:56Z
 section_ids:
   pingfederate: PingFederate
   pingdatasync: PingDataSync
@@ -59,9 +59,9 @@ Learn more about the integration kits in the following documentation:
 
 * [PingOne Integration Kit](https://docs.pingidentity.com/integrations/pingone/pf_p1_ik.html)
 
-* [PingOne MFA Integration Kit](https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik.html)
+* [PingOne MFA Integration Kit](https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_4.0.html)
 
-* [PingOne Protect Integration Kit](https://docs.pingidentity.com//integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik.html)
+* [PingOne Protect Integration Kit](https://docs.pingidentity.com/integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik.html)
 
 ## PingDataSync
 
@@ -87,7 +87,7 @@ page_id: pingone:developer_tools:p1_ip_address_domain_reference
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_ip_address_domain_reference.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 6, 2024
+revdate: 2026-10-01T19:02:05Z
 section_ids:
   inbound: Inbound
   firewall-settings-for-end-users-accessing-pingone-from-your-network: Firewall settings for end users accessing PingOne from your network
@@ -96,7 +96,11 @@ section_ids:
 
 # IP address and domain reference
 
-Use the information in this section to configure your network rules for PingOne. For PingOne to function correctly, you might need to configure your network to allow appropriate inbound and outbound traffic.
+Use the information to configure your network rules for PingOne. For PingOne to function correctly, you might need to configure your network to allow appropriate inbound and outbound traffic.
+
+|   |                                                                                                                                                                                                                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Some domains, such as typekit.net, are managed by third-party services. These examples use the base host name only. The vendor might require a region-specific host name (for example, typekit.net.au). Verify the required domain format with the vendor before you configure your firewall or proxy rules. |
 
 ## Inbound
 
@@ -104,14 +108,182 @@ PingOne provides services through several domains. The domains vary based on you
 
 Add the following domains to your allow list to ensure that the services are available.
 
-| Geography                                                                   | Domain                                                                                                                                                                     |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Australia                                                                   | api.pingone.com.auapps.pingone.com.auassets.pingone.com.auauth.pingone.com.auconsole.pingone.com.auhttp-access-api.pingone.auuploads.pingone.com.auuploads2.pingone.com.au |
-| Canada                                                                      | api.pingone.caapps.pingone.caassets.pingone.caauth.pingone.caconsole.pingone.cahttp-access-api.pingone.cauploads.pingone.cauploads2.pingone.ca                             |
-| Europe                                                                      | api.pingone.euapps.pingone.euassets.pingone.euauth.pingone.euconsole.pingone.euhttp-access-api.pingone.euuploads.pingone.euuploads2.pingone.eu                             |
-| North America (US)                                                          | api.pingone.comapps.pingone.comassets.pingone.comauth.pingone.comconsole.pingone.comhttp-access-api.pingone.comuploads.pingone.comuploads2.pingone.com                     |
-| Singapore                                                                   | api.pingone.sgapps.pingone.sgassets.pingone.sgauth.pingone.sgconsole.pingone.sghttp-access-api.pingone.sguploads.pingone.sguploads2.pingone.sg                             |
-| Asia Pacific (legacy)&#xA;&#xA;Available only for existing .asia customers. | api.pingone.asiaapps.pingone.asiaassets.pingone.asiaauth.pingone.asiaconsole.pingone.asiahttp-access-api.pingone.asiauploads.pingone.asiauploads2.pingone.asia             |
+| Geography                                                                   | Domain                                                                                                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Australia                                                                   | * api.pingone.com.au
+
+* apps.pingone.com.au
+
+* assets.pingone.com.au
+
+* auth.pingone.com.au
+
+* console.pingone.com.au
+
+* http-access-api.pingone.com.au
+
+* uploads.pingone.com.au
+
+* uploads2.pingone.com.au
+
+* orchestrate-api.pingone.com.au
+
+* scim-api.pingone.com.au
+
+* typekit.net
+
+* nr-data.net
+
+* \*.newrelic.com
+
+* bam.nr-data.net
+
+* data.pendo.io |
+| Canada                                                                      | - api.pingone.ca
+
+- apps.pingone.ca
+
+- assets.pingone.ca
+
+- auth.pingone.ca
+
+- console.pingone.ca
+
+- http-access-api.pingone.ca
+
+- uploads.pingone.ca
+
+- uploads2.pingone.ca
+
+- orchestrate-api.pingone.ca
+
+- scim-api.pingone.ca
+
+- typekit.net
+
+- nr-data.net
+
+- \*.newrelic.com
+
+- bam.nr-data.net
+
+- data.pendo.io                                         |
+| Europe                                                                      | * api.pingone.eu
+
+* apps.pingone.eu
+
+* assets.pingone.eu
+
+* auth.pingone.eu
+
+* console.pingone.eu
+
+* http-access-api.pingone.eu
+
+* uploads.pingone.eu
+
+* uploads2.pingone.eu
+
+* orchestrate-api.pingone.eu
+
+* scim-api.pingone.eu
+
+* typekit.net
+
+* nr-data.net
+
+* \*.newrelic.com
+
+* bam.nr-data.net
+
+* data.pendo.io                                         |
+| North America (US)                                                          | - api.pingone.com
+
+- apps.pingone.com
+
+- assets.pingone.com
+
+- auth.pingone.com
+
+- console.pingone.com
+
+- http-access-api.pingone.com
+
+- uploads.pingone.com
+
+- uploads2.pingone.com
+
+- orchestrate-api.pingone.com
+
+- scim-api.pingone.com
+
+- typekit.net
+
+- nr-data.net
+
+- \*.newrelic.com
+
+- bam.nr-data.net
+
+- data.pendo.io                               |
+| Singapore                                                                   | * api.pingone.sg
+
+* apps.pingone.sg
+
+* assets.pingone.sg
+
+* auth.pingone.sg
+
+* console.pingone.sg
+
+* http-access-api.pingone.sg
+
+* uploads.pingone.sg
+
+* uploads2.pingone.sg
+
+* orchestrate-api.pingone.sg
+
+* scim-api.pingone.sg
+
+* typekit.net
+
+* nr-data.net
+
+* \*.newrelic.com
+
+* bam.nr-data.net
+
+* data.pendo.io                                         |
+| Asia Pacific (legacy)&#xA;&#xA;Available only for existing .asia customers. | - api.pingone.asia
+
+- apps.pingone.asia
+
+- assets.pingone.asia
+
+- auth.pingone.asia
+
+- console.pingone.asia
+
+- http-access-api.pingone.asia
+
+- uploads.pingone.asia
+
+- uploads2.pingone.asia
+
+- orchestrate-api.pingone.asia
+
+- scim-api.pingone.asia
+
+- typekit.net
+
+- nr-data.net
+
+- \*.newrelic.com
+
+- bam.nr-data.net
+
+- data.pendo.io                     |
 
 |   |                                                                                                                                                                                                                                                                                                    |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,12 +325,11 @@ page_id: pingone:developer_tools:p1_monitor_activity_splunk
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_monitor_activity_splunk.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2025
+revdate: 2026-09-30T22:51:58Z
 page_aliases: ["p1_app_splunk_troubleshooting.adoc", "p1_splunk_app.adoc"]
 section_ids:
   p1-add-splunk-app: Installing the PingOne App for Splunk
   before-you-begin: Before you begin
-  about-this-task: About this task
   steps: Steps
   p1-splunk-troubleshoot: Troubleshooting the PingOne App for Splunk
   why-do-some-of-the-graphs-not-populate: Why do some of the graphs not populate?
@@ -185,7 +356,7 @@ You must:
 
   * Create a data input in Splunk to receive the webhook data from PingOne. In Splunk, click **Settings > Data inputs**.
 
-  * For **HTTP Event Collector**, click **+Add new**. Send the data to `index=PingOne`. Make sure to copy the token provided by Splunk. Learn more in the [Splunk HTTP Event Collector](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector) documentation.
+  * For **HTTP Event Collector**, click **+Add new**. Send the data to `index=PingOne`. Make sure to copy the token provided by Splunk. Learn more in [Set up and use HTTP Event Collector in Splunk Web](https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/10.4/get-data-with-http-event-collector/set-up-and-use-http-event-collector-in-splunk-web) in the Splunk documentation.
 
     ![A screen capture of the Splunk Index page with 'PingOne' as the selected index.](_images/uqb1675363189824.png)
 
@@ -197,13 +368,9 @@ You must:
 
 * Download the PingOne App for Splunk package in Splunkbase. Search for `PingOne` in Splunkbase to find the file.
 
-### About this task
-
-To install the [PingOne App for Splunk](https://splunkbase.splunk.com/app/6750):
-
 ### Steps
 
-1. Sign on to Splunk and install the PingOne App for Splunk.
+1. Sign on to Splunk and install the [PingOne App for Splunk](https://splunkbase.splunk.com/app/6750).
 
    1. Click **Apps > Manage Apps**.
 
@@ -221,9 +388,9 @@ To install the [PingOne App for Splunk](https://splunkbase.splunk.com/app/6750):
 
       ![A screen capture of the Splunk Settings menu with a red box around All configurations.](_images/loq1673287883877.png)
 
-   2. For the **App** field, filter on **PingOne App for Splunk** configurations and select the **PingOne\_data** macro.
+   2. For the **App** field, filter on **PingOne App for Splunk** configurations and select the **PingOne_data** macro.
 
-      ![A screen capture of the Splunk All configurations page filtered on PingOne App For Splunk with a red box around the PingOne\_data macro.](_images/ssd1673288502247.png)
+      ![A screen capture of the Splunk All configurations page filtered on PingOne App For Splunk with a red box around the PingOne_data macro.](_images/ssd1673288502247.png)
 
    3. To point the macro to your data, enter your index in the **Definition** box.
 
@@ -310,7 +477,7 @@ page_id: pingone:developer_tools:p1_browser_support
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_browser_support.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 2, 2025
+revdate: 2026-09-30T22:51:58Z
 ---
 
 # PingOne browser support
@@ -343,7 +510,7 @@ page_id: pingone:developer_tools:p1_api_reference
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_api_reference.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 9, 2023
+revdate: 2026-09-30T22:51:58Z
 ---
 
 # PingOne Platform API Reference
@@ -362,7 +529,7 @@ page_id: pingone:developer_tools:p1_tools_for_devs
 canonical_url: https://docs.pingidentity.com/pingone/developer_tools/p1_tools_for_devs.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 12, 2023
+revdate: 2026-09-30T22:51:58Z
 ---
 
 # Tools for developers

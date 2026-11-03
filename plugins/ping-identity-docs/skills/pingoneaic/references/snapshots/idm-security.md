@@ -9,10 +9,10 @@ docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agent
 keywords: ["Security", "Password", "Encryption", "Salted Hash", "Algorithms", "HMAC", "SHA-256", "SHA-384", "SHA-512"]
 section_ids:
   ssd-reversible-encryption: Reversible encryption
-  encrypt-ui: Encrypt and decrypt properties using the IDM admin console
+  encrypt-ui: Encrypt and decrypt properties using the admin console
   keystore-encrypt-decrypt: Encrypt and decrypt properties using REST
   encoding-salted-hash: Salted hashing
-  secure-hash-ui: Configure hashing using the IDM admin console
+  secure-hash-ui: Configure hashing using the admin console
 ---
 
 # Secure identity data
@@ -33,25 +33,9 @@ There are two ways to secure a managed object's sensitive data properties: *reve
 
 Reversible encryption secures your data by encrypting it with a key. It should be used in cases where you may need to decrypt the sensitive data in order to synchronize it or provide it to another system.
 
-### Encrypt and decrypt properties using the IDM admin console
+### Encrypt and decrypt properties using the admin console
 
-To encrypt or decrypt a property of a managed object using the IDM admin console:
-
-1. On the top navigation bar, select Configure > Managed Objects. A list of the system's managed objects displays.
-
-2. Select an object type (for example, User). A page displays where you can configure the managed object's properties, details, and scripts.
-
-3. On the Properties tab, select the property to be encrypted. A page displays where you can can manage the property.
-
-4. On the Privacy & Encryption tab, select the Encrypted toggle. If encryption is enabled, the toggle is green and displays a white checkmark. If encryption is disabled, the toggle is grey and no checkmark displays.
-
-5. In the Encryption Purpose field, type `idm.password.encryption`.
-
-   |   |                                                                                                          |
-   | - | -------------------------------------------------------------------------------------------------------- |
-   |   | A blank or invalid purpose may cause errors. Do not leave the field blank or provide an invalid purpose. |
-
-6. Click Save.
+To encrypt a property of a managed object using the admin console, update the property's Privacy & Encryption settings to protect the property value with reversible encryption. Learn more in [Customize managed object types](../identities/customize-object-types.html#property-settings-reference).
 
 ### Encrypt and decrypt properties using REST
 
@@ -169,11 +153,11 @@ Encrypted objects and properties include a `$crypto` object which indicate how t
 
 The following table displays supported hashing algorithms:
 
-| Algorithm | Attributes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Algorithm | Attributes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `BCRYPT`  | * `cost`
 
-  Value between 4 and 31. The default is `13`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  Value between 4 and 31. The default is `13`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `PBKDF2`  | - `hashLength`
 
   Byte-length of the generated hash. The default is `16`.
@@ -206,7 +190,7 @@ The following table displays supported hashing algorithms:
 
   * `SHA3-384`
 
-  * `SHA3-512`                                                                                              |
+  * `SHA3-512`                                                                                             |
 | `SCRYPT`  | * `hashLength`
 
   Byte-length of the generated hash, must be greater than or equal to 8. The default is `16`.
@@ -221,20 +205,20 @@ The following table displays supported hashing algorithms:
 
 * `p`
 
-  Parallelization. Must be a positive integer less than or equal to *Integer.MAX\_VALUE / (128 \* r \* 8)*. The default is `1`.
+  Parallelization. Must be a positive integer less than or equal to *Integer.MAX_VALUE / (128 \* r \* 8)*. The default is `1`.
 
 * `r`
 
   Block size. Must be greater than or equal to 1. The default is `8`. |
 | `SHA-256` | - `saltLength`
 
-  Byte-length of the salt value. The default is `16`.	This is the default algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+  Byte-length of the salt value. The default is `16`.	This is the default algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `SHA-384` | * `saltLength`
 
-  Byte-length of the salt value. The default is `16`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+  Byte-length of the salt value. The default is `16`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `SHA-512` | - `saltLength`
 
-  Byte-length of the salt value. The default is `16`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+  Byte-length of the salt value. The default is `16`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 Choosing a hashing function
 
@@ -244,20 +228,10 @@ PBKDF2, Bcrypt, and Scrypt are relatively slow algorithms even on modern hardwar
 | - | --------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | The MD5 and SHA-1 algorithms are not considered secure and are only supported for legacy reasons. Do not use them in production environments. |
 
-### Configure hashing using the IDM admin console
+### Configure hashing using the admin console
 
-You can set a property hash algorithm using the IDM admin console. Only some algorithms and none of the enhanced configuration options are supported.
+To hash a property of a managed object using the admin console, update the property's Privacy & Encryption settings to protect the property value with non-reversible salted hashing.
 
-> **Collapse: Show Me**
->
-> ![Admin UI hash property](_images/Admin-UI-hash-property.gif)
+To configure a specific hashing algorithm or the algorithm's enhanced configuration options, update the managed object's configuration at the `openidm/config/managed` endpoint.
 
-1. Select Configure > Managed Objects, and select an object type (for example, User).
-
-2. On the Properties tab, select a property to hash.
-
-3. On the Property page, click the Privacy & Encryption tab, and select Hashed.
-
-4. From the adjacent drop-down menu, select an algorithm.
-
-5. Click Save.
+Learn more in [Customize managed object types](../identities/customize-object-types.html#property-settings-reference).

@@ -2,63 +2,63 @@
 
 - Product: PingIDM
 - Version: 8.1
-- Sync date: 2026-07-03
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/pingidm/llms.txt
 - Guides discovered: 20
 - Guides captured: 20
-- Guides fully captured: 1
-- Guides partially captured: 19
+- Guides fully captured: 12
+- Guides partially captured: 8
 - Guides without snapshots: 0
-- Total pages indexed: 351
-- Total snapshot pages captured: 20
+- Total pages indexed: 358
+- Total snapshot pages captured: 268
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| objects-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/objects-guide/data-rest-proxy.md | 49 | 1 | partial |
-| synchronization-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/synchronization-guide/chap-asynchronous-sync.md | 34 | 1 | partial |
-| install-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/install-guide/register-servlet-filters.md | 32 | 1 | partial |
-| audit-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/audit-guide/access-event-prop.md | 31 | 1 | partial |
-| samples-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/samples-guide/sync-asynchronous.md | 30 | 1 | partial |
-| rest-api-reference.md | page | https://docs.pingidentity.com/pingidm/8.1/rest-api-reference/endpoints/rest-audit-logs.md | 24 | 1 | partial |
-| scripting-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/scripting-guide/script-call.md | 22 | 1 | partial |
-| security-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/security-guide/security-adjust-log-levels.md | 22 | 1 | partial |
-| setup-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/setup-guide/chap-overview.md | 15 | 1 | partial |
-| auth-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/auth-guide/admin-users.md | 14 | 1 | partial |
-| schedules-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/schedules-guide/activate-deactivate-tasks.md | 14 | 1 | partial |
-| pwd-plugin-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/pwd-plugin-guide/conf-ad-pwd-sync.md | 10 | 1 | partial |
-| release-notes.md | page | https://docs.pingidentity.com/pingidm/8.1/release-notes/before-you-install.md | 10 | 1 | partial |
-| crest.md | page | https://docs.pingidentity.com/pingidm/8.1/crest/crest-action.md | 9 | 1 | partial |
-| monitoring-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/monitoring-guide/api-metrics.md | 9 | 1 | partial |
-| workflow-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/workflow-guide/about-workflow-tools.md | 9 | 1 | partial |
-| upgrade-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/upgrade-guide/about-upgrades.md | 8 | 1 | partial |
-| external-services-guide.md | page | https://docs.pingidentity.com/pingidm/8.1/external-services-guide/external-rest.md | 5 | 1 | partial |
-| getting-started.md | page | https://docs.pingidentity.com/pingidm/8.1/getting-started/about-idm.md | 3 | 1 | partial |
-| root.md | page | https://docs.pingidentity.com/pingidm/8.1/glossary.md | 1 | 1 | full |
+| objects-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 55 | 20 | partial |
+| synchronization-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 34 | 20 | partial |
+| install-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 32 | 20 | partial |
+| audit-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 31 | 20 | partial |
+| samples-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 30 | 20 | partial |
+| rest-api-reference.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 24 | 20 | partial |
+| scripting-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 22 | 20 | partial |
+| security-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 22 | 20 | partial |
+| auth-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 15 | 15 | full |
+| setup-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 15 | 15 | full |
+| schedules-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 14 | 14 | full |
+| pwd-plugin-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 10 | 10 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 10 | 10 | full |
+| crest.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 9 | 9 | full |
+| monitoring-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 9 | 9 | full |
+| workflow-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 9 | 9 | full |
+| upgrade-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 8 | 8 | full |
+| external-services-guide.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 5 | 5 | full |
+| getting-started.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 3 | 3 | full |
+| root.md | assembled | https://docs.pingidentity.com/pingidm/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | e9f51618968a345be00cc38fd59054def316a58b8dc3e4e7d404cc7973c5e727 |
-| snapshots/objects-guide.md | 7ccb0a3492d5d27f277353ae93744c28eb2439c59521e3276eaa09adfc11f56c |
-| snapshots/synchronization-guide.md | d2e5826e287f7cd3df5a54264ae08899c13b62706ba3a4007b9e71a8b9501fe7 |
-| snapshots/install-guide.md | d0ac3665216377b96367c070d616cd0486b6e52272eb36b768c7bd5329777082 |
-| snapshots/audit-guide.md | 08e5fa1ae21f11c5077eb99833982c746ecfa2026a622f9169299c5ee3ff3224 |
-| snapshots/samples-guide.md | 4028e15e9d0119e239688a400d248e736f0d5b55cdfa6c2f717fabbc1d828eab |
-| snapshots/rest-api-reference.md | 48e2e1818aa45895c4c0918f147596e0e08eb54e896c527fdb6034a2c8dcfe86 |
-| snapshots/scripting-guide.md | 4f1aa8527f51008f43fff70df6f4c457c961023dcda02608ccbaa8c51f37870b |
-| snapshots/security-guide.md | 58cf10d0c6bf7a7307c6599d8bd37285b72e61d6339abd25fb737ae2ca4350d4 |
-| snapshots/setup-guide.md | 53a6a64a2d6e4f562f60fd005455575ce39e6d69d55d9006211f7923bd662e4b |
-| snapshots/auth-guide.md | 9f9a5f90f1016e95c27f4363978d0807a6386224bf510ab2f40b537ea88011b0 |
-| snapshots/schedules-guide.md | 142769fb4d0156aad5f81ec26cdd6e8f62ea9abe403d913eec128d6730c4f117 |
-| snapshots/pwd-plugin-guide.md | 7f5281d3ed5013661ae172e4c97070faf84ed27b51715eda4ff7444f31d30ee8 |
-| snapshots/release-notes.md | 40df6a511255fd53487a2b2420a1e42616e22246037b04d5032e4184695e99d8 |
-| snapshots/crest.md | a31b8ba8d5515c946a7948763ca8cd8057e5a865d890532996a8419ac1283cc2 |
-| snapshots/monitoring-guide.md | 60d81672677bb53fef0e276e6e50dfc440648d7c92b4e292e8e2253fac24b894 |
-| snapshots/workflow-guide.md | 16a4e6cb881b4ed4055959d7e73215d82f5e419a0c7eba898d965623c40f6fb9 |
-| snapshots/upgrade-guide.md | 4266fda35b3963106bca22791d66dc88c0a616b13fbe6469827a0c4f4bc086c3 |
-| snapshots/external-services-guide.md | b901b6e5b53756214df7bb1987e8ff997aca44a0357408add90ca0451f187f7f |
-| snapshots/getting-started.md | 1f515d5c2caf15cd670d90141070135a08ca99d43a3a1cb2ff39ec1aec2cffd3 |
-| snapshots/root.md | 461a870c6a514778e3352b46cae822bf20bdbf99c208705a2739973c39425fd9 |
+| llms.txt | f9fff3b44d4c653955bcd4a95ab9b4146842c5e660fc9e510dc854ce90135427 |
+| snapshots/objects-guide.md | c5c72aeec362cc7287a88a1a97e252b8632e33635780761690c4a6f6308cc542 |
+| snapshots/synchronization-guide.md | 5415a5d36deefe08aebb3fccd66f5b0ef5d3038e3122354642b1f6f814815fc8 |
+| snapshots/install-guide.md | 3d59139dfbbcda5141f9650294ad80ad6483d05c33071f80e2ce14f67326794f |
+| snapshots/audit-guide.md | 80455243d200dabf654cc60d74dec2cbc4ca79ec7db1483b338361278408a5e6 |
+| snapshots/samples-guide.md | a92ff3e7c7b99f42f26bb7bcfeff409c07e704b8cd1a57ec82c7e5f501d298e6 |
+| snapshots/rest-api-reference.md | 142f091a6ef67de595ddadb1391b1ef6fcfda61ac65159141c76c3420a78d8b3 |
+| snapshots/scripting-guide.md | 864f02c8bddb6ebd8a585f1361addcf2c1bb603db610505ce90c9d112d090e8c |
+| snapshots/security-guide.md | 007ebb3f17e689a25988c1bb39464b6f25cf00e9231f7df8e35716fe33681715 |
+| snapshots/auth-guide.md | b8f175da9dd1cab7807cad8a145d279c58d58e5d4cfa375e8d5e483e2eb9e89b |
+| snapshots/setup-guide.md | b6e3d3c7aa5d1e2c99fb1d440d76e2d96f86aa13bf0f5da1b3b956af2d26f325 |
+| snapshots/schedules-guide.md | fbd1f54ce25ee6cc3421027bd6e3003f982d7a11ce99bff4b7ad502ebb6a0114 |
+| snapshots/pwd-plugin-guide.md | 15a4f056fdd55f07e19056c1a40d15129f8115a352bdfc10d58cdef033498f55 |
+| snapshots/release-notes.md | 31b1cec4135411abd1b91403a5851ca6d0f87da3a8efb31a7d0c7e7b0793baa2 |
+| snapshots/crest.md | 2ee1feb41bdf6689dabc7bbcc63075c8bc8748a5fd48e2ae23a8b2b1d1d5ae17 |
+| snapshots/monitoring-guide.md | ad936fa1357218738ab51d5882dc2944b8ead6cf2be0bfd43082b5bb1ae0450f |
+| snapshots/workflow-guide.md | b285af9421f8f3cd4ee903670d2a2b6e3dde530b07471da40a8249271be3f7d8 |
+| snapshots/upgrade-guide.md | f286f308058daa97252b5b562e5c500e60ce8bca825f28921f160abef21a4dd0 |
+| snapshots/external-services-guide.md | 52d4edaa7675b8480c745ee70476f586e64a8463c5da244fb65fba67b363c724 |
+| snapshots/getting-started.md | 00f004c3318c5cd173f713b4bd8777a3382bbc81b02a4f8dfe8a5618976b0c6b |
+| snapshots/root.md | 35a05b82a5407bf43bc0680cb701f7898f505529172e92a63c8b21be21dc6799 |

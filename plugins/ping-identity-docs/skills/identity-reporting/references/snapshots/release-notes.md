@@ -164,6 +164,57 @@ Ping Identity publishes comprehensive documentation online:
 ---
 
 ---
+title: Release notes
+description: These release notes are intended to provide information to administrators and evaluators of the Ping Identity Reporting. All information is accurate at the time of publication and updates are be provided by Ping Identity with subsequent software releases.
+component: identity-reporting
+page_id: identity-reporting:release-notes:preface
+canonical_url: https://docs.pingidentity.com/identity-reporting/release-notes/preface.html
+page_aliases: ["index.adoc"]
+---
+
+# Release notes
+
+These release notes are intended to provide information to administrators and evaluators of the Ping Identity Reporting. All information is accurate at the time of publication and updates are be provided by Ping Identity with subsequent software releases.
+
+[icon: newspaper, set=fas, size=3x]
+
+#### [What's New](chap-whats-new.html)
+
+Discover new features.
+
+[icon: shield-alt, set=fas, size=3x]
+
+#### [Check security advisories](chap-security-advisories.html)
+
+Gain insight into security advisories in the community and at Ping Identity.
+
+[icon: cogs, set=fas, size=3x]
+
+#### [Before you start](chap-before-you-install.html)
+
+Learn about the requirements for running Identity Reporting software in production.
+
+[icon: star-of-life, set=fas, size=3x]
+
+#### [Fixes, limitations, and known issues](chap-key-fixes.html)
+
+Learn about the fixes, limitations, and known issues in this release.
+
+[icon: book, set=fas, size=3x]
+
+#### [Check doc updates](chap-doc-updates.html)
+
+Track important changes to the documentation.
+
+[icon: life-ring, set=fas, size=3x]
+
+#### [Get support](appendix-getting-support.html)
+
+Find out where to get professional support and training.
+
+---
+
+---
 title: Security advisories
 description: Ping Identity issues security advisories in collaboration with our customers and the open source community to address any security vulnerabilities transparently and rapidly. Ping Identity's security advisory policy governs the process by which security issues are submitted, received, and evaluated, as well as the timeline for issuing security advisories and patches.
 component: identity-reporting
@@ -176,3 +227,40 @@ canonical_url: https://docs.pingidentity.com/identity-reporting/release-notes/ch
 Ping Identity issues security advisories in collaboration with our customers and the open source community to address any security vulnerabilities transparently and rapidly. Ping Identity's security advisory policy governs the process by which security issues are submitted, received, and evaluated, as well as the timeline for issuing security advisories and patches.
 
 For details of all the security advisories across Ping Identity products, learn more in [Security Advisories](https://support.pingidentity.com/s/global-search/%40uri#q=security%20advisory\&t=All\&sort=relevancy\&numberOfResults=25).
+
+---
+
+---
+title: What&#8217;s new
+description: Ping Identity Reporting 7.1.2 contains no new key features or functionality changes.
+component: identity-reporting
+page_id: identity-reporting:release-notes:chap-whats-new
+canonical_url: https://docs.pingidentity.com/identity-reporting/release-notes/chap-whats-new.html
+section_ids:
+  pingidr_7_1_2: PingIDR 7.1.2
+  pingidr_7_1_1: PingIDR 7.1.1
+  whats-new-7.1.0: PingIDR 7.1
+  improvements-changes: Improvements/changes in configuration
+---
+
+# What's new
+
+## PingIDR 7.1.2
+
+Ping Identity Reporting 7.1.2 contains no new key features or functionality changes.
+
+## PingIDR 7.1.1
+
+Ping Identity Reporting 7.1.1 contains no new key features or functionality changes.
+
+## PingIDR 7.1
+
+Ping Identity Reporting 7.1 introduces the following new features and functionality:
+
+### Improvements/changes in configuration
+
+* **API as a Data Source and Report Definition**. You can now utilize REST API endpoints as a data source, as well as create report definitions.
+
+* **Dynamic Report Parameters**. Dynamic report parameters can be used for any SQL or API report definitions.
+
+* **User Interface Enhancements**. Changes to the user interface to coincide with the current platform user interface.

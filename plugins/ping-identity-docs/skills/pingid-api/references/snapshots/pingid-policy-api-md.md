@@ -1,9 +1,11 @@
 ---
 title: Web Authentication Policy API
-description: When using the API to create authentication policies, it's important to keep in mind the following information about authentication policies in PingID:
+description: Creating authentication policies with the Web Authentication Policy API
 component: pingid-api
 page_id: pingid-api::pingid_policy_api
 canonical_url: https://developer.pingidentity.com/pingid-api/pingid_policy_api.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   basic-rules-for-creating-policies: Basic rules for creating policies
   api-specific-issues-when-creating-policies: API-specific issues when creating policies
@@ -327,21 +329,21 @@ The default action for a policy is set with `defaultPolicyAction`. The action fo
 
 * DESKTOP
 
-* OTP\_ONLY (used for one-time passcode)
+* OTP_ONLY (used for one-time passcode)
 
-* SWIPE\_ONLY
+* SWIPE_ONLY
 
-* FINGERPRINT\_ONLY (used for Mobile App Biometrics)
+* FINGERPRINT_ONLY (used for Mobile App Biometrics)
 
 * OATHTOKEN
 
-* AUTHENTICATOR\_APP
+* AUTHENTICATOR_APP
 
-* NUMBER\_MATCHING
+* NUMBER_MATCHING
 
 * WEBAUTHN (used for Security Key)
 
-* WEBAUTHN\_PLATFORM (used for FIDO2 Biometrics)
+* WEBAUTHN_PLATFORM (used for FIDO2 Biometrics)
 
 Use AUTHENTICATE when you want the action to be any of the allowed methods for the policy. If you only want to allow a subset of the methods allowed for the policy, use a comma-separated list of the specific actions you want to allow, for example:
 
@@ -405,10 +407,10 @@ Note also that while the allowed methods are contained within the definition of 
 }
 ```
 
-| Parameter             | DataType | Description                                                                                                                                                                                                                                                                        |
-| --------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| authenticationMethods | Array    | Mandatory. Contents of the array should be the methods you want to allow from this list: SWIPE, FINGERPRINT, SMS, VOICE, YUBIKEY, EMAIL, OTP, DESKTOP, RESCUE, WEBAUTHN, WEBAUTHN\_PLATFORM, OATHTOKEN, AUTHENTICATOR\_APP, NUMBER\_MATCHING. The method names must be upper case. |
-| priority              | int      | Mandatory, must be set to 1.                                                                                                                                                                                                                                                       |
+| Parameter             | DataType | Description                                                                                                                                                                                                                                                                     |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| authenticationMethods | Array    | Mandatory. Contents of the array should be the methods you want to allow from this list: SWIPE, FINGERPRINT, SMS, VOICE, YUBIKEY, EMAIL, OTP, DESKTOP, RESCUE, WEBAUTHN, WEBAUTHN_PLATFORM, OATHTOKEN, AUTHENTICATOR_APP, NUMBER_MATCHING. The method names must be upper case. |
+| priority              | int      | Mandatory, must be set to 1.                                                                                                                                                                                                                                                    |
 
 If you want to allow all the current authentication methods as well as any that might be supported in the future (the equivalent of the "All Methods" option in the user interface), do not include the `authenticationMethodsPolicy` object in the request.
 

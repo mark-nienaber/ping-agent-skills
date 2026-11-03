@@ -1,11 +1,12 @@
 ---
 title: Accept Admin Invite
-description: The POST /{{envID}}/flows/{{flowID}} operation is used to accept an admin invitation.
+description: Accept an administrator invitation with an invite code and password to activate a PingOne admin user
 component: pingone-api
 page_id: pingone-api:auth:flows/flows-1/admin-invitations/accept-admin-invite
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/admin-invitations/accept-admin-invite.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -40,7 +41,7 @@ If successful, the response returns a `200 OK` message. The user is valid and ab
 
 * Send an admin invitation to a user: [Send Admin Invite](../../../../platform/users/user-admin-invitations/send-admin-invite.html).
 
-* Send an authorize request to get a flow ID: [Authorize](../../../openid-connect-oauth-2/authorize-intro.html).
+* Send an authorize request to get a flow ID: [Authorize](../../../openid-connect-oauth-2/authorization/index.html).
 
 > **Collapse: Request Model**
 >
@@ -50,7 +51,7 @@ If successful, the response returns a `200 OK` message. The user is valid and ab
 > | `inviteCode` | String  | Required |
 > | `password`   | String  | Required |
 >
-> Refer to the [Users data model](../../../../platform/users/users-1.html#users-data-model) data model for full property descriptions.
+> Refer to the [Users data model](../../../../platform/users/users-1/index.html#users-data-model) data model for full property descriptions.
 
 ### Headers
 
@@ -368,12 +369,13 @@ task.resume()
 
 ---
 title: Accept Device Authorization Grant Consent
-description: The POST /{{envID}}/flows/{{flowID}} operation uses the application/vnd.pingidentity.deviceAuthGrant.consent+json custom media type in the request header to specify that a consent action is required.
+description: Accept or reject a device authorization grant consent agreement to continue a PingOne authentication flow
 component: pingone-api
 page_id: pingone-api:auth:flows/device-authorization-grant-flows/accept-device-authorization-grant-consent
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/device-authorization-grant-flows/accept-device-authorization-grant-consent.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -395,13 +397,13 @@ An authentication flow can prompt users to consent to (or reject) an agreement. 
 
 ### Prerequisites
 
-* Send an authorize request to get a user code: [Device Authorization](../../openid-connect-oauth-2/device-authorization-grant.html).
+* Send an authorize request to get a user code: [Device Authorization](../../openid-connect-oauth-2/device-authorization-grant/index.html).
 
-* Refer also to the \`DAG\_CONSENT\_REQUIRED \` flow state in the [Flow status values table](../flows-1.html).
+* Refer also to the \`DAG_CONSENT_REQUIRED \` flow state in the [Flow status values table](../flows-1/index.html).
 
-|   |                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | After accepting consent, a record is stored in the user's [OAuth Scope Consents](../../../platform/users/user-oauth-scope-consents.html). If the user refuses to consent to the terms of service agreement, the flow fails. |
+|   |                                                                                                                                                                                                                                   |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | After accepting consent, a record is stored in the user's [OAuth Scope Consents](../../../platform/users/user-oauth-scope-consents/index.html). If the user refuses to consent to the terms of service agreement, the flow fails. |
 
 > **Collapse: Request Model**
 >
@@ -409,7 +411,7 @@ An authentication flow can prompt users to consent to (or reject) an agreement. 
 > | -------- | ------- | -------- |
 > | `accept` | Boolean | Required |
 >
-> Refer to the [Flows](../flows-1.html) for full property descriptions.
+> Refer to the [Flows](../flows-1/index.html) for full property descriptions.
 
 ### Headers
 
@@ -669,12 +671,13 @@ task.resume()
 
 ---
 title: Admin Invitations
-description: The flows endpoint supports operations to accept administrator invitations sent to users.
+description: Describes the PingOne flows endpoint operations for accepting administrator invitations sent to users
 component: pingone-api
-page_id: pingone-api:auth:flows/flows-1/admin-invitations
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/admin-invitations.html
+page_id: pingone-api:auth:flows/flows-1/admin-invitations/index
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/admin-invitations/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   response-codes: Response codes
 ---
@@ -697,12 +700,13 @@ The flows endpoint supports operations to accept administrator invitations sent 
 
 ---
 title: Agreement Accept Consent
-description: An authentication flow can prompt users to consent to (or reject) an agreement. The agreement to which users must consent is configured in the sign-on policy. The flow determines whether consent is required based on the agreement configuration and the user's consent history. If the user does not have any recorded consents that satisfy any of the agreement languages, then the flow requires user consent.
+description: Accept or reject a terms of service agreement to satisfy a consent requirement in a PingOne authentication flow
 component: pingone-api
 page_id: pingone-api:auth:flows/registration-and-verification/agreement-accept-consent
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/registration-and-verification/agreement-accept-consent.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -723,13 +727,13 @@ An authentication flow can prompt users to consent to (or reject) an agreement. 
 
 ### Prerequisites
 
-* Refer to [Flows](../flows-1.html) for important overview information.
+* Refer to [Flows](../flows-1/index.html) for important overview information.
 
-* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorize-intro.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts.html).
+* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorization/index.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts/index.html).
 
 * Start the flow: [Read Flow](../flows-1/read-flow.html).
 
-* Refer also to the `AGREEMENT_CONSENT_REQUIRED` flow state in the [Flow status values table](../flows-1.html).
+* Refer also to the `AGREEMENT_CONSENT_REQUIRED` flow state in the [Flow status values table](../flows-1/index.html).
 
 |   |                                                                                   |
 | - | --------------------------------------------------------------------------------- |
@@ -1036,12 +1040,14 @@ task.resume()
 
 ---
 title: Authorization
-description: The authorize endpoints support the following actions:
+description: Describes the PingOne authorize endpoint actions, including redirect, non-redirect pi.flow, and offline access with refresh tokens
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-intro
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-intro.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/index
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
+page_aliases: ["auth:openid-connect-oauth-2/authorize-intro.adoc"]
 ---
 
 # Authorization
@@ -1052,7 +1058,7 @@ The authorize endpoints support the following actions:
 
 * For non-redirect flows, such as with native mobile apps in which the app renders the end user interface, `response_mode` property value is set to `pi.flow`. This setting allows the app to authenticate using the PingOne flows API without needing to handle HTTP redirections. The `pi.flow` value is also used with transaction approval use cases in which strong authentication is required for elevated security for a high-value transaction, or high-risk resource or service.
 
-* For offline access, on applications having a `refresh_token` grant type, when the authorize request includes `offline_access` in the `scope` parameter, and the request specifies the `authorization_code` or `device_code` grant type, a refresh token is always included in the token response. Otherwise, if the `offline_access` scope is omitted from the `scope` parameter of the authorize request, a refresh token is not included, even if the `refresh_token` grant type is defined in the application configuration. Refer to [Application Resource Grants](../../platform/applications/application-resource-grants.html) to add the `offline_access` scope to the application's resource grant.
+* For offline access, on applications having a `refresh_token` grant type, when the authorize request includes `offline_access` in the `scope` parameter, and the request specifies the `authorization_code` or `device_code` grant type, a refresh token is always included in the token response. Otherwise, if the `offline_access` scope is omitted from the `scope` parameter of the authorize request, a refresh token is not included, even if the `refresh_token` grant type is defined in the application configuration. Refer to [Application Resource Grants](../../../platform/applications/application-resource-grants/index.html) to add the `offline_access` scope to the application's resource grant.
 
   If the application does not have a resource grant that includes `offline_access` in the `scope` parameter, a refresh token is always included in the token response for grant types that allow it.
 
@@ -1062,28 +1068,30 @@ The authorize endpoints support the following actions:
 
 > **Collapse: Related topics**
 >
-> * [Authorization and authentication by application type](../../foundations/authentication-concepts/authorization-and-authentication-by-application-type.html)
+> * [Authorization and authentication by application type](../../../foundations/authentication-concepts/authorization-and-authentication-by-application-type/index.html)
 >
-> * [Authorization flow by grant type](../../foundations/authentication-concepts/authorization-flow-by-grant-type.html)
+> * [Authorization flow by grant type](../../../foundations/authentication-concepts/authorization-flow-by-grant-type/index.html)
 >
-> * [Access services through scopes and roles](../../foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles.html)
+> * [Access services through scopes and roles](../../../foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/index.html)
 
 ---
 
 ---
 title: Authorize (authorization_code GET)
-description: The authorization endpoint is used to interact with the end user and obtain an authorization grant. The sample shows the GET /{{envID}}/as/authorize operation. The request URL includes the response_type parameter with a value of code, which designates that this authorization request, if successful, returns an authorization code that is exchanged for an access token.
+description: Submit a GET authorize request with the authorization_code response type, optionally using PKCE, to obtain a PingOne authorization code
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-authorization_code
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-authorization_code.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-authorization_code
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-authorization_code.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-authorization_code.adoc"]
 section_ids:
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Authorize (authorization\_code GET)
+# Authorize (authorization_code GET)
 
 ##
 
@@ -1095,9 +1103,9 @@ The authorization endpoint is used to interact with the end user and obtain an a
 
 For a Proof Key for Code Exchange (PKCE) authorization request, the `/{{envID}}/as/authorize` request must include the `code_challenge` parameter. The `code_challenge_method` parameter is required if the application's `pkceEnforcement` property is set to `S256_REQUIRED`. Otherwise, it is optional.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 > **Collapse: Query parameters**
 >
@@ -1314,12 +1322,14 @@ task.resume()
 
 ---
 title: Authorize (authorization_code POST)
-description: "The authorization endpoint is used in a POST request. The POST request accepts all the same parameters as the GET request. Both initiate an authorization request. Note that for the POST request, parameters and their values are Form Serialized by adding the parameter names and values to the entity body of the HTTP request and specifying the Content-Type: application/x-www-form-urlencoded request header."
+description: Submit a POST authorize request with the authorization_code response type to obtain a PingOne authorization code
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-authorization_code-1
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-authorization_code-1.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-authorization_code-1
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-authorization_code-1.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-authorization_code-1.adoc"]
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -1328,7 +1338,7 @@ section_ids:
   example-response: Example Response
 ---
 
-# Authorize (authorization\_code POST)
+# Authorize (authorization_code POST)
 
 ##
 
@@ -1338,21 +1348,21 @@ POST {{authPath}}/{{envID}}/as/authorize
 
 The authorization endpoint is used in a `POST` request. The `POST` request accepts all the same parameters as the `GET` request. Both initiate an authorization request. Note that for the `POST` request, parameters and their values are Form Serialized by adding the parameter names and values to the entity body of the HTTP request and specifying the `Content-Type: application/x-www-form-urlencoded` request header.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 The sample shows the `POST /{{envID}}/as/authorize` operation.
 
 ### Prerequisites
 
-* Refer to [OpenID Connect/OAuth 2](../openid-connect-oauth-2.html) for important overview information.
+* Refer to [OpenID Connect/OAuth 2](../index.html) for important overview information.
 
-* Create an application to get an `appID`. Refer to \[Application Operations]/pingone/platform/v1/api/#application-operations). Run [Read All Applications](../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
+* Create an application to get an `appID`. Refer to [Application Operations](../../../platform/applications/applications-1/index.html). Run [Read All Applications](../../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
 
-* Run [Read All Templates](../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
+* Run [Read All Templates](../../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
 
-* Run [Read All Contents](../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
+* Run [Read All Contents](../../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
 
 > **Collapse: Request Model**
 >
@@ -1374,7 +1384,7 @@ The sample shows the `POST /{{envID}}/as/authorize` operation.
 > | `scope`                 | String | Optional |
 > | `state`                 | String | Optional |
 >
-> Refer to the [OpenID Connect/OAuth2 data model](../openid-connect-oauth-2.html) for full property descriptions.
+> Refer to the [OpenID Connect/OAuth2 data model](../index.html) for full property descriptions.
 
 ### Headers
 
@@ -1384,12 +1394,12 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key            | Value                       |
-| -------------- | --------------------------- |
-| response\_type | code                        |
-| client\_id     | {{appID}}                   |
-| redirect\_uri  | {{redirect\_uri}}           |
-| scope          | openid profile p1:read:user |
+| Key           | Value                       |
+| ------------- | --------------------------- |
+| response_type | code                        |
+| client_id     | {{appID}}                   |
+| redirect_uri  | {{redirect_uri}}            |
+| scope         | openid profile p1:read:user |
 
 ##
 
@@ -1640,12 +1650,13 @@ task.resume()
 
 ---
 title: Authorize (device)
-description: "The POST /{{envID}}/as/device_authorization endpoint initiates a device authorization operation on applications that specify DEVICE_CODE as the grantTypes property value. The POST request's parameters and their values are Form Serialized by adding the parameter names and values to the entity body of the HTTP request and specifying the Content-Type: application/x-www-form-urlencoded request header."
+description: Initiate a device authorization request on a PingOne application to obtain a device code, user code, and verification URI
 component: pingone-api
 page_id: pingone-api:auth:openid-connect-oauth-2/device-authorization-grant/authorize-device
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/device-authorization-grant/authorize-device.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1674,7 +1685,7 @@ The `POST /{{envID}}/as/device_authorization` endpoint initiates a device author
 > | `client_id` | String | Required |
 > | `scope`     | String | Optional |
 >
-> Refer to the [Device authentication grant data model](../device-authorization-grant.html#device-authorization-grant-data-model) for full property descriptions.
+> Refer to the [Device authentication grant data model](index.html#device-authorization-grant-data-model) for full property descriptions.
 
 ### Headers
 
@@ -1684,10 +1695,10 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key        | Value           |
-| ---------- | --------------- |
-| client\_id | {{deviceAppID}} |
-| scope      | openid          |
+| Key       | Value           |
+| --------- | --------------- |
+| client_id | {{deviceAppID}} |
+| scope     | openid          |
 
 ##
 
@@ -1939,12 +1950,14 @@ task.resume()
 
 ---
 title: Authorize (hybrid GET)
-description: The authorization endpoint is used to interact with the end user and obtain an authorization grant. The sample shows the GET /{{envID}}/as/authorize operation. The request URL includes the response_type parameter with a value of code id_token token, which designates that this authorization request is a hybrid flow.
+description: Submit a GET authorize request using a hybrid response_type to receive an authorization code and tokens from PingOne
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-hybrid
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-hybrid.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-hybrid
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-hybrid.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-hybrid.adoc"]
 section_ids:
   example-request: Example Request
   example-response: Example Response
@@ -1966,9 +1979,9 @@ Note that for the `POST` request, parameters and their values are Form Serialize
 
 For a Proof Key for Code Exchange (PKCE) authorization request, the `/{{envID}}/as/authorize` request must include the `code_challenge` parameter. The `code_challenge_method` parameter is required if the application's `pkceEnforcement` property is set to `S256_REQUIRED`. Otherwise, it is optional.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 The sample shows the `POST /{{envID}}/as/authorize` operation for a hybrid flow. For more information about hybrid flows, refer to [Authentication using the Hybrid Flow](https://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth).
 
@@ -1994,7 +2007,7 @@ The sample shows the `POST /{{envID}}/as/authorize` operation for a hybrid flow.
 
 > **Collapse: Related topics**
 >
-> * [Authorization flow by grant type](../../foundations/authentication-concepts/authorization-flow-by-grant-type.html)
+> * [Authorization flow by grant type](../../../foundations/authentication-concepts/authorization-flow-by-grant-type/index.html)
 
 ##
 
@@ -2191,12 +2204,14 @@ task.resume()
 
 ---
 title: Authorize (hybrid POST)
-description: The authorization endpoint can be used to initiate a hybrid flow authorization request, in which an authorization code is returned from the authorization endpoint, some tokens are returned from the authorization endpoint, and others are returned from the token endpoint. In a hybrid flow, the authorization endpoint's response_type property specifies the code type and it also specifies id_token, or token, or both. An authorization code (specified by the code response type) is always returned in a hybrid flow. An ID token is returned when the response_type property is code id_token or code id_token token. An access token is returned when the response_type property is code token or code id_token token.
+description: Submit a POST authorize request using a hybrid response_type to receive an authorization code and tokens from PingOne
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-hybrid-1
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-hybrid-1.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-hybrid-1
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-hybrid-1.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-hybrid-1.adoc"]
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2219,21 +2234,21 @@ Note that for the `POST` request, parameters and their values are Form Serialize
 
 For a Proof Key for Code Exchange (PKCE) authorization request, the `/{{envID}}/as/authorize` request must include the `code_challenge` parameter. The `code_challenge_method` parameter is required if the application's `pkceEnforcement` property is set to `S256_REQUIRED`. Otherwise, it is optional.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 The sample shows the `POST /{{envID}}/as/authorize` operation for a hybrid flow. For more information about hybrid flows, refer to [Authentication using the Hybrid Flow](https://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth).
 
 ### Prerequisites
 
-* Refer to [OpenID Connect/OAuth 2](../openid-connect-oauth-2.html) for important overview information.
+* Refer to [OpenID Connect/OAuth 2](../index.html) for important overview information.
 
-* Create an application to get an `appID`. Refer to [Application Operations](../../platform/applications/applications-1.html). Run [Read All Applications](../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
+* Create an application to get an `appID`. Refer to [Application Operations](../../../platform/applications/applications-1/index.html). Run [Read All Applications](../../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
 
-* Run [Read All Templates](../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
+* Run [Read All Templates](../../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
 
-* Run [Read All Contents](../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
+* Run [Read All Contents](../../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
 
 > **Collapse: Request Model**
 >
@@ -2255,11 +2270,11 @@ The sample shows the `POST /{{envID}}/as/authorize` operation for a hybrid flow.
 > | `scope`                 | String | Optional |
 > | `state`                 | String | Optional |
 >
-> Refer to the [OpenID Connect/OAuth2 data model](../openid-connect-oauth-2.html) for full property descriptions.
+> Refer to the [OpenID Connect/OAuth2 data model](../index.html) for full property descriptions.
 
 > **Collapse: Related topics**
 >
-> * [Authorization flow by grant type](../../foundations/authentication-concepts/authorization-flow-by-grant-type.html)
+> * [Authorization flow by grant type](../../../foundations/authentication-concepts/authorization-flow-by-grant-type/index.html)
 
 ### Headers
 
@@ -2269,13 +2284,13 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key            | Value                |
-| -------------- | -------------------- |
-| response\_type | code id\_token       |
-| client\_id     | {{appID}}            |
-| redirect\_uri  | {{redirect\_uri}}    |
-| scope          | openid profile email |
-| state          | {{state}}            |
+| Key           | Value                |
+| ------------- | -------------------- |
+| response_type | code id_token        |
+| client_id     | {{appID}}            |
+| redirect_uri  | {{redirect_uri}}     |
+| scope         | openid profile email |
+| state         | {{state}}            |
 
 ##
 
@@ -2531,12 +2546,14 @@ task.resume()
 
 ---
 title: Authorize (implicit GET)
-description: The authorization endpoint is used to interact with the end user and obtain an authorization grant. The sample shows the GET /{{envID}}/as/authorize operation. The request URL includes the response_type parameter with a value of token.
+description: Submit a GET authorize request with the implicit token response type to obtain a PingOne access token
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-implicit
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-implicit.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-implicit
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-implicit.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-implicit.adoc"]
 section_ids:
   example-request: Example Request
   example-response: Example Response
@@ -2552,9 +2569,9 @@ GET {{authPath}}/{{envID}}/as/authorize?response_type=token&client_id={{appID}}&
 
 The authorization endpoint is used to interact with the end user and obtain an authorization grant. The sample shows the `GET /{{envID}}/as/authorize` operation. The request URL includes the `response_type` parameter with a value of `token`.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 > **Collapse: Query parameters**
 >
@@ -2771,12 +2788,14 @@ task.resume()
 
 ---
 title: Authorize (implicit POST)
-description: "The authorization endpoint is used in a POST request. The POST request accepts all the same parameters as the GET request. Both initiate an authorization request. Note that for the POST request, parameters and their values are Form Serialized by adding the parameter names and values to the entity body of the HTTP request and specifying the Content-Type: application/x-www-form-urlencoded request header."
+description: Submit a POST authorize request with the implicit token response type to obtain a PingOne access token
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-implicit-1
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-implicit-1.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-implicit-1
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-implicit-1.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-implicit-1.adoc"]
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2797,19 +2816,19 @@ The authorization endpoint is used in a `POST` request. The `POST` request accep
 
 The sample shows the `POST /{{envID}}/as/authorize` operation. The request includes a `response_type` parameter with a value of `token`, which designates that this authorization request, if successful, returns an access token.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The optional `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 ### Prerequisites
 
-* Refer to [OpenID Connect/OAuth 2](../openid-connect-oauth-2.html) for important overview information.
+* Refer to [OpenID Connect/OAuth 2](../index.html) for important overview information.
 
-* Create an application to get an `appID`. Refer to [Application Operations](../../platform/applications/applications-1.html). Run [Read All Applications](../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
+* Create an application to get an `appID`. Refer to [Application Operations](../../../platform/applications/applications-1/index.html). Run [Read All Applications](../../../platform/applications/applications-1/read-all-applications.html) to find an existing application.
 
-* Run [Read All Templates](../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
+* Run [Read All Templates](../../../platform/notifications/notifications-templates/read-all-templates.html) to find a `templateName`.
 
-* Run [Read All Contents](../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
+* Run [Read All Contents](../../../platform/notifications/notifications-templates/read-all-contents.html) to find a `variantName`.
 
 > **Collapse: Request Model**
 >
@@ -2833,7 +2852,7 @@ The sample shows the `POST /{{envID}}/as/authorize` operation. The request inclu
 > | `scope`                 | String | Optional |
 > | `state`                 | String | Optional |
 >
-> Refer to the [OpenID Connect/OAuth2 data model](../openid-connect-oauth-2.html) for full property descriptions.
+> Refer to the [OpenID Connect/OAuth2 data model](../index.html) for full property descriptions.
 
 ### Headers
 
@@ -2843,13 +2862,13 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key            | Value                       |
-| -------------- | --------------------------- |
-| response\_type | token                       |
-| client\_id     | {{appID}}                   |
-| redirect\_uri  | {{redirect\_uri}}           |
-| scope          | openid profile p1:read:user |
-| nonce          | {{nonce}}                   |
+| Key           | Value                       |
+| ------------- | --------------------------- |
+| response_type | token                       |
+| client_id     | {{appID}}                   |
+| redirect_uri  | {{redirect_uri}}            |
+| scope         | openid profile p1:read:user |
+| nonce         | {{nonce}}                   |
 
 ##
 
@@ -3105,18 +3124,20 @@ task.resume()
 
 ---
 title: Authorize (implicit) (request_uri)
-description: The authorization endpoint is used to interact with the end user and obtain an authorization grant. The sample shows the GET /{{envID}}/as/authorize operation. The request URL includes the request_uri parameter which is returned from a pushed authorization request.
+description: Submit a PingOne authorize request with a request_uri parameter returned from a pushed authorization request
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/par-authorize-implicit
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/par-authorize-implicit.html
+page_id: pingone-api:auth:openid-connect-oauth-2/pushed-authorization-request/par-authorize-implicit
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/pushed-authorization-request/par-authorize-implicit.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/par-authorize-implicit.adoc"]
 section_ids:
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Authorize (implicit) (request\_uri)
+# Authorize (implicit) (request_uri)
 
 ##
 
@@ -3328,12 +3349,14 @@ task.resume()
 
 ---
 title: Authorize (Non-redirect and MFA Only Flows)
-description: For browerless use cases such as native mobile apps where the app wants to render the end user interface, setting the response_mode property to pi.flow allows the app to authenticate using the flows API without needing to handle HTTP redirections. When authentication is complete, the app receives the auth code, access token, or ID token in a JSON response instead of a redirect.
+description: Configure a PingOne authorize request with response_mode set to pi.flow to authenticate native apps without HTTP redirections
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-browserless-and-mfa-only-flows
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-browserless-and-mfa-only-flows.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-browserless-and-mfa-only-flows
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-browserless-and-mfa-only-flows.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-browserless-and-mfa-only-flows.adoc"]
 section_ids:
   preqrequisites: Preqrequisites
   non-redirect-mfa-flow-example: Non-redirect MFA flow example
@@ -3351,11 +3374,11 @@ GET {{authPath}}/{{envID}}/as/authorize?state={{state}}&response_type=token%20id
 
 For browerless use cases such as native mobile apps where the app wants to render the end user interface, setting the `response_mode` property to `pi.flow` allows the app to authenticate using the flows API without needing to handle HTTP redirections. When authentication is complete, the app receives the auth code, access token, or ID token in a JSON response instead of a redirect.
 
-The `response_mode` property is the mechanism for returning authorization response parameters from the authorization endpoint. Options are `query`, `fragment`, `form_post`, and `pi.flow`. The `pi.flow` option is a Ping Identity custom response mode to specify that the `redirect_uri` parameter is not required and authorization response parameters are encoded as a JSON object wrapped in a flow response and returned directly to the client with a `200` status. For more information about the `query`, `fragment`, and `form_post` options, refer to the [ResponseModes](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes) section of the *OAuth 2.0 Multiple Response Type Encoding Practices* specification. For non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../auth-config-options/browserless-authentication-flow-options.html).
+The `response_mode` property is the mechanism for returning authorization response parameters from the authorization endpoint. Options are `query`, `fragment`, `form_post`, and `pi.flow`. The `pi.flow` option is a Ping Identity custom response mode to specify that the `redirect_uri` parameter is not required and authorization response parameters are encoded as a JSON object wrapped in a flow response and returned directly to the client with a `200` status. For more information about the `query`, `fragment`, and `form_post` options, refer to the [ResponseModes](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes) section of the *OAuth 2.0 Multiple Response Type Encoding Practices* specification. For non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../../auth-config-options/browserless-authentication-flow-options.html).
 
-|   |                                                                                                                                                                                   |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For additional non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../auth-config-options/browserless-authentication-flow-options.html). |
+|   |                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For additional non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../../auth-config-options/browserless-authentication-flow-options.html). |
 
 The sample shows the `GET /{{envID}}/as/authorize` operation, which includes the `response_mode` parameter to designate one of the following special authentication flow options:
 
@@ -3371,9 +3394,9 @@ The sample shows the `GET /{{envID}}/as/authorize` operation, which includes the
 
 ### Preqrequisites
 
-* To build the `login_hint_token` JWT, refer to [Create a login\_hint\_token JWT](../auth-config-options/create-a-login_hint_token-jwt.html).
+* To build the `login_hint_token` JWT, refer to [Create a login_hint_token JWT](../../auth-config-options/create-a-login_hint_token-jwt.html).
 
-* To build the `request` JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html).
+* To build the `request` JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html).
 
 > **Collapse: Query parameters**
 >
@@ -3427,9 +3450,9 @@ The `request` property value is a JWT that includes the following claims:
 
 The `request` token passes in the user's IP address securely.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For details on how to construct the `request` property JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For details on how to construct the `request` property JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 ##
 
@@ -3671,12 +3694,14 @@ task.resume()
 
 ---
 title: Authorize (Transaction Approval)
-description: PingOne supports transaction approval when strong authentication is required for elevated security for a high-value transaction, or high-risk resource or service. The sample shows the GET /{{envID}}/as/authorize operation, which includes the response_mode and request parameters in the authorization request.
+description: Submit a PingOne authorize request with a signed request JWT to require strong authentication for a high-value transaction
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-transaction-approval-
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-transaction-approval-.html
+page_id: pingone-api:auth:openid-connect-oauth-2/authorization/authorize-transaction-approval-
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorization/authorize-transaction-approval-.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-transaction-approval-.adoc"]
 section_ids:
   example-request: Example Request
   example-response: Example Response
@@ -3692,7 +3717,7 @@ GET {{authPath}}/{{envID}}/as/authorize?state={{state}}&response_type=token%20id
 
 PingOne supports transaction approval when strong authentication is required for elevated security for a high-value transaction, or high-risk resource or service. The sample shows the `GET /{{envID}}/as/authorize` operation, which includes the `response_mode` and `request` parameters in the authorization request.
 
-The `response_mode` property is the mechanism for returning authorization response parameters from the authorization endpoint. Options are `query`, `fragment`, `form_post`, and `pi.flow`. The `pi.flow` option is a Ping Identity custom response mode to specify that the `redirect_uri` parameter is not required and authorization response parameters are encoded as a JSON object wrapped in a flow response and returned directly to the client with a `200` status. For more information about the `query`, `fragment`, and `form_post` options, refer to the [ResponseModes](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes) section of the *OAuth 2.0 Multiple Response Type Encoding Practices* specification. For non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../auth-config-options/browserless-authentication-flow-options.html).
+The `response_mode` property is the mechanism for returning authorization response parameters from the authorization endpoint. Options are `query`, `fragment`, `form_post`, and `pi.flow`. The `pi.flow` option is a Ping Identity custom response mode to specify that the `redirect_uri` parameter is not required and authorization response parameters are encoded as a JSON object wrapped in a flow response and returned directly to the client with a `200` status. For more information about the `query`, `fragment`, and `form_post` options, refer to the [ResponseModes](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes) section of the *OAuth 2.0 Multiple Response Type Encoding Practices* specification. For non-redirect use case information, refer to [Redirect and non-redirect authentication flows](../../auth-config-options/browserless-authentication-flow-options.html).
 
 The `request` property contains request parameters from the application. If the application's `supportUnsignedRequestObject` property value is set to `false`, the JWT must be signed using the `HS256` algorithm and the app's client secret as the key. Using a JWT enables integrity protection of parameters that are required for risk based authentication or privacy and consent use cases.
 
@@ -3721,9 +3746,9 @@ JWT: "header" :
 }
 ```
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. Using a JWT enables integrity protection of parameters that are required for risk-based authentication or privacy and consent use cases. Specifically, (1) passing in the user agent's original IP address when the PingOne platform is used behind a server side application that is functioning as an authentication gateway or PingFederate, and (2) passing in a purpose or usage description string that could be displayed to the user on the authentication UI prompt, SMS or voice message, push notification, or email message. For details on how to construct the JWT, refer to [Create a request property JWT](../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../platform/notifications/notifications-templates.html). For information on `pi.clientContext` refer to [Device Authentication](../../mfa/mfa-authentication/mfa-device-authentications.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The `request` property specifies a JWT that enables OIDC/OAuth2 request parameters to be passed as a single, self-contained parameter. Using a JWT enables integrity protection of parameters that are required for risk-based authentication or privacy and consent use cases. Specifically, (1) passing in the user agent's original IP address when the PingOne platform is used behind a server side application that is functioning as an authentication gateway or PingFederate, and (2) passing in a purpose or usage description string that could be displayed to the user on the authentication UI prompt, SMS or voice message, push notification, or email message. For details on how to construct the JWT, refer to [Create a request property JWT](../../auth-config-options/create-a-request-property-jwt.html). For information on `pi.template` refer to [Notifications Templates](../../../platform/notifications/notifications-templates/index.html). For information on `pi.clientContext` refer to [Device Authentication](../../../mfa/mfa-authentication/mfa-device-authentications/index.html). |
 
 > **Collapse: Query parameters**
 >
@@ -3984,12 +4009,13 @@ task.resume()
 
 ---
 title: Cancel Authentication Flow
-description: This example shows how to cancel an authentication flow that has begun. You can use this in situations where the user wants to authenticate from a different device. Note that this feature requires version 2.0 or higher of the PingOne MFA SDK.
+description: Cancel an in-progress PingOne authentication flow, for example when a user wants to authenticate from a different device
 component: pingone-api
 page_id: pingone-api:auth:flows/flows-1/cancel_authentication
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/cancel_authentication.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -4010,7 +4036,7 @@ The ID of the flow is included in the URL: `{{authPath}}/{{envID}}/flows/{{flowI
 
 The value of the Content-Type header must be set to: `application/vnd.pingidentity.cancel.push.authentication+json`
 
-The body consists of a single field, `reason`, which is set to CHANGE\_DEVICE.
+The body consists of a single field, `reason`, which is set to CHANGE_DEVICE.
 
 > **Collapse: Request Model**
 >
@@ -4289,12 +4315,13 @@ task.resume()
 
 ---
 title: Check Assertion
-description: The multi-factor authentication flow for a FIDO device checks the authenticator assertion response, which contains the signed challenge needed to complete the MFA flow. The MFA actions service validates the challenge.
+description: Validate a FIDO2 authenticator assertion response to complete a multi-factor authentication action in a PingOne flow
 component: pingone-api
 page_id: pingone-api:auth:flows/flows-1/check-assertion
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/check-assertion.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4314,15 +4341,15 @@ The multi-factor authentication flow for a FIDO device checks the authenticator 
 
 ### Prerequisites
 
-* Refer to [Flows](../flows-1.html) for important overview information.
+* Refer to [Flows](index.html) for important overview information.
 
-* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorize-intro.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts.html).
+* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorization/index.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts/index.html).
 
 * Start the flow: [Read Flow](read-flow.html).
 
-* Refer also to the `ASSERTION_REQUIRED` flow state in the [Flow status values table](../flows-1.html).
+* Refer also to the `ASSERTION_REQUIRED` flow state in the [Flow status values table](index.html).
 
-* Refer also to [FIDO Policies](../../../mfa/fido-policies.html).
+* Refer also to [FIDO Policies](../../../mfa/fido-policies/index.html).
 
 |   |                                                                                                                                                                                                                                                                                                           |
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -4616,12 +4643,13 @@ task.resume()
 
 ---
 title: Check One-Time Password (OTP)
-description: The multi-factor authentication flow uses a one-time password (OTP) sent to the user's device to continue the login flow. The user receives the OTP and submits it as a step in the login process. The MFA actions service validates the OTP to complete the authentication flow.
+description: "Validate a one-time password sent to a user's device to complete a multi-factor authentication action in a PingOne flow"
 component: pingone-api
 page_id: pingone-api:auth:flows/flows-1/check-one-time-password-otp
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/check-one-time-password-otp.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4644,13 +4672,13 @@ The following sample shows the `POST /{{envID}}/flows/{{flowID}}` operation to v
 
 ### Prerequisites
 
-* Refer to [Flows](../flows-1.html) for important overview information.
+* Refer to [Flows](index.html) for important overview information.
 
-* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorize-intro.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts.html).
+* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorization/index.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts/index.html).
 
 * Start the flow: [Read Flow](read-flow.html).
 
-* Refer also to the `OTP_REQUIRED` flow state in the [Flow status values table](../flows-1.html).
+* Refer also to the `OTP_REQUIRED` flow state in the [Flow status values table](index.html).
 
 If completed successfully, and if this action is the last action of the authentication flow, the `status` property shows a value of `COMPLETED`.
 
@@ -4947,12 +4975,13 @@ task.resume()
 
 ---
 title: Check Username/Password
-description: The POST /{{envID}}/flows/{{flowID}} operation initiates an action to allow users to login with a username and password. The request body requires the username and password attributes. The values for these properties provided by the user are verified in this action. This operation uses the application/vnd.pingidentity.usernamePassword.check+json custom media type as the content type in the request header.
+description: "Verify a user's username and password to sign on in a PingOne authentication flow"
 component: pingone-api
 page_id: pingone-api:auth:flows/flows-1/check-username-password
 canonical_url: https://developer.pingidentity.com/pingone-api/auth/flows/flows-1/check-username-password.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4973,13 +5002,13 @@ The `POST /{{envID}}/flows/{{flowID}}` operation initiates an action to allow us
 
 ### Prerequisites
 
-* Refer to [Flows](../flows-1.html) for important overview information.
+* Refer to [Flows](index.html) for important overview information.
 
-* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorize-intro.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts.html).
+* Send an authorize request to get a flow ID: [Authorize](../../openid-connect-oauth-2/authorization/index.html). Refer also to [Login action authentication flow](../../../foundations/authentication-concepts/pingone-authentication-flow-states/login-action.html) and [Authorization and authentication](../../../foundations/authentication-concepts/index.html).
 
 * Start the flow: [Read Flow](read-flow.html).
 
-* Refer also to the `USERNAME_PASSWORD_REQUIRED` and `ACCOUNT_LINKING_REQUIRED` flow states in the [Flow status values table](../flows-1.html).
+* Refer also to the `USERNAME_PASSWORD_REQUIRED` and `ACCOUNT_LINKING_REQUIRED` flow states in the [Flow status values table](index.html).
 
 If there is a user already associated with the current flow, and a `username` value is provided in the request body, then the value of `username` must identify the user associated with the session.
 
@@ -5298,12 +5327,14 @@ task.resume()
 
 ---
 title: CIBA Authorize
-description: The CIBA grant type uses its own authorize endpoint, POST /{{envID}}/as/cibaAuthorization, unlike other grant types. This endpoint returns an auth_req_id value that the relying party (RP) then passes to the token endpoint to obtain an access token and ID token.
+description: Submit a CIBA authorization request to obtain an auth_req_id for exchanging at the PingOne token endpoint
 component: pingone-api
-page_id: pingone-api:auth:openid-connect-oauth-2/authorize-ciba
-canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/authorize-ciba.html
+page_id: pingone-api:auth:openid-connect-oauth-2/client-initiated-backchannel-auth/authorize-ciba
+canonical_url: https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/client-initiated-backchannel-auth/authorize-ciba.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23
+page_aliases: ["auth:openid-connect-oauth-2/authorize-ciba.adoc"]
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -5322,13 +5353,13 @@ POST {{authPath}}/{{envID}}/as/cibaAuthorization
 
 The CIBA grant type uses its own authorize endpoint, `POST /{{envID}}/as/cibaAuthorization`, unlike other grant types. This endpoint returns an `auth_req_id` value that the relying party (RP) then passes to the token endpoint to obtain an access token and ID token.
 
-The request must include a value for either `login_hint`, `id_token_hint`, or `login_hint_token`. Providing more than one of these properties will result in an error. Learn more in [Create a login\_hint\_token JWT](../auth-config-options/create-a-login_hint_token-jwt.html).
+The request must include a value for either `login_hint`, `id_token_hint`, or `login_hint_token`. Providing more than one of these properties will result in an error. Learn more in [Create a login_hint_token JWT](../../auth-config-options/create-a-login_hint_token-jwt.html).
 
 The application's configured `tokenEndpointAuthMethod` value determines how you authenticate. This must be either `CLIENT_SECRET_BASIC`, `CLIENT_SECRET_JWT`, `PRIVATE_KEY_JWT`, or `CLIENT_SECRET_POST`.
 
 In the sample request shown here, the application's `tokenEndpointAuthMethod` value is `CLIENT_SECRET_BASIC`, which requires the `Authorization: Basic` HTTP header and a Base64-encoded representation of "username:password" in the request, in which the username is the `client_id` and the password is the `client_secret`.
 
-If the application's `tokenEndpointAuthMethod` value is `CLIENT_SECRET_JWT`, the endpoint accepts a JWT signed by the application's client secret to authenticate the request. Learn more about creating the JWT and the claims in the JWT in [Create a client secret JWT](../auth-config-options/create-a-client-secret-jwt.html). This request requires the `client_assertion` and `client_assertion_type` properties to specify the JWT:
+If the application's `tokenEndpointAuthMethod` value is `CLIENT_SECRET_JWT`, the endpoint accepts a JWT signed by the application's client secret to authenticate the request. Learn more about creating the JWT and the claims in the JWT in [Create a client secret JWT](../../auth-config-options/create-a-client-secret-jwt.html). This request requires the `client_assertion` and `client_assertion_type` properties to specify the JWT:
 
 ```
 curl --location --request POST '{{authPath}}/{{envID}}/as/cibaAuthorization' \
@@ -5339,7 +5370,7 @@ curl --location --request POST '{{authPath}}/{{envID}}/as/cibaAuthorization' \
 --data-urlencode 'scope=openid'
 ```
 
-If the application's `tokenEndpointAuthMethod` value is `PRIVATE_KEY_JWT`, the endpoint accepts a JWT signed by an external private key file to authenticate the request. Learn more about creating the JWT and the claims in the JWT in [Create a private key JWT](../auth-config-options/create-a-private-key-jwt.html). This request requires the `client_assertion` and `client_assertion_type` properties to specify the JWT:
+If the application's `tokenEndpointAuthMethod` value is `PRIVATE_KEY_JWT`, the endpoint accepts a JWT signed by an external private key file to authenticate the request. Learn more about creating the JWT and the claims in the JWT in [Create a private key JWT](../../auth-config-options/create-a-private-key-jwt.html). This request requires the `client_assertion` and `client_assertion_type` properties to specify the JWT:
 
 ```
 curl --location --request POST '{{authPath}}/{{envID}}/as/cibaAuthorization' \
@@ -5363,9 +5394,9 @@ curl --location --request POST '{{authPath}}/{{envID}}/as/cibaAuthorization' \
 
 ### Prerequisites
 
-* Refer to [OpenID Connect/OAuth 2](../openid-connect-oauth-2.html), [Authorization](authorize-intro.html), and [CIBA grant type](../../foundations/authentication-concepts/authorization-flow-by-grant-type/ciba-grant-type.html) for overview information.
+* Refer to [OpenID Connect/OAuth 2](../index.html), [Authorization](../authorization/index.html), and [CIBA grant type](../../../foundations/authentication-concepts/authorization-flow-by-grant-type/ciba-grant-type.html) for overview information.
 
-* Refer to [Create a login\_hint\_token JWT](../auth-config-options/create-a-login_hint_token-jwt.html) for information about creating a `login_hint_token`.
+* Refer to [Create a login_hint_token JWT](../../auth-config-options/create-a-login_hint_token-jwt.html) for information about creating a `login_hint_token`.
 
 > **Collapse: Request Model**
 >
@@ -5376,7 +5407,7 @@ curl --location --request POST '{{authPath}}/{{envID}}/as/cibaAuthorization' \
 > | `login_hint_token` | String | Optional |
 > | `scope`            | String | Required |
 >
-> Refer to the [OpenID Connect/OAuth2 data model](../openid-connect-oauth-2.html) for full property descriptions.
+> Refer to the [OpenID Connect/OAuth2 data model](../index.html) for full property descriptions.
 
 ### Headers
 
@@ -5388,10 +5419,10 @@ Content-Type      application/x-www-form-urlencoded
 
 urlencoded ( application/x-www-form-urlencoded )
 
-| Key         | Value        |
-| ----------- | ------------ |
-| login\_hint | {{cibaHint}} |
-| scope       | {{scopeID}}  |
+| Key        | Value        |
+| ---------- | ------------ |
+| login_hint | {{cibaHint}} |
+| scope      | {{scopeID}}  |
 
 ##
 

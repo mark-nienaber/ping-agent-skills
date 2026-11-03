@@ -1,11 +1,12 @@
 ---
 title: Apply Credential Issuance Rule Staged Changes
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes/{{credentialTypeID}}/issuanceRules/{{credentialIssuanceRuleID}}/stagedChanges operation to apply the changes staged by the specified credential issuance rule for the specified credential type in the specified environment.
+description: Apply the changes staged by a credential issuance rule for a specified credential type in a PingOne environment
 component: pingone-api
 page_id: pingone-api:credentials:credential-issuance-rules/apply-credential-issuance-rule
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuance-rules/apply-credential-issuance-rule.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -18,6 +19,10 @@ section_ids:
 # Apply Credential Issuance Rule Staged Changes
 
 ##
+
+Required permission:
+
+* [credentialsIssuance:update:stagedChanges](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-update-stagedChanges "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes/{{credentialTypeID}}/issuanceRules/{{credentialIssuanceRuleID}}/stagedChanges
@@ -33,13 +38,13 @@ For each staged credential, the credential service uses a notification template 
 
 ### Prerequisites
 
-* [Create a credential type (automated)](../credential-types/create-credential-type-automated.html) or [Create a credential type (managed)](../credential-types/create-credential-type-managed.html) to get a `credentialTypeID` for the endpoint. Refer also to [Credential Types](../credential-types.html).
+* [Create a credential type (automated)](../credential-types/create-credential-type-automated.html) or [Create a credential type (managed)](../credential-types/create-credential-type-managed.html) to get a `credentialTypeID` for the endpoint. Refer also to [Credential Types](../credential-types/index.html).
 
-* [Create a credential issuance rule](create-credential-issuance-rule.html) to get a `credentialIssuanceRuleID` for the endpoint. Refer also to [Credential Issuance Rules](../credential-issuance-rules.html).
+* [Create a credential issuance rule](create-credential-issuance-rule.html) to get a `credentialIssuanceRuleID` for the endpoint. Refer also to [Credential Issuance Rules](index.html).
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Issuance Rules staged changes data model](../credential-issuance-rules.html#credential-issuance-rules-staged-changes-data-model) for full property descriptions.
+> Refer to [Credential Issuance Rules staged changes data model](index.html#credential-issuance-rules-staged-changes-data-model) for full property descriptions.
 >
 > | Property | Type      | Required |
 > | -------- | --------- | -------- |
@@ -425,12 +430,13 @@ task.resume()
 
 ---
 title: Create a User Credential
-description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials request creates a user credential.
+description: Create a user credential for a specified user from a managed PingOne credential type
 component: pingone-api
 page_id: pingone-api:credentials:user-credentials/create-user-credential
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/user-credentials/create-user-credential.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-15
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -443,21 +449,27 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:credentials](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-credentials "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials
 ```
 
-The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials` request creates a user credential.
+The `POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/credentials` request creates a user credential from a managed credential type.
+
+This request requires a `credentialType.id` with a `management.mode` of `MANAGED` in the body.
 
 ### Prerequisites
 
-* [Create a user](../../platform/users/users-1/create-user.html) to get a `userID` for the endpoint. Refer also to [Users](../../platform/users.html), especially [User operations](../../platform/users/users-1.html).
+* [Create a user](../../platform/users/users-1/create-user.html) to get a `userID` for the endpoint. Refer also to [Users](../../platform/users/index.html), especially [User operations](../../platform/users/users-1/index.html).
 
 * [Create a credential type (managed)](../credential-types/create-credential-type-managed.html) to get a ``credentialType.id`with a `management.mode`` of `MANAGED` for the body.
 
 > **Collapse: Request Model**
 >
-> Refer to [User Credentials data model](../user-credentials.html#user-credentials-data-model) for full property descriptions.
+> Refer to [User Credentials data model](index.html#user-credentials-data-model) for full property descriptions.
 >
 > | Property                           | Type      | Required          |
 > | ---------------------------------- | --------- | ----------------- |
@@ -867,12 +879,13 @@ task.resume()
 
 ---
 title: Create Credential Issuance Rule
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes/{{credentialTypeID}}/issuanceRules operation to create a credential issuance rule for the specified credential type in the specified environment.
+description: Create a credential issuance rule that governs issuing, updating, or revoking credentials of a specified credential type
 component: pingone-api
 page_id: pingone-api:credentials:credential-issuance-rules/create-credential-issuance-rule
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuance-rules/create-credential-issuance-rule.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -884,6 +897,10 @@ section_ids:
 # Create Credential Issuance Rule
 
 ##
+
+Required permission:
+
+* [credentialsIssuance:create:issuanceRule](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-issuanceRule "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes/{{credentialTypeID}}/issuanceRules
@@ -897,11 +914,11 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes/{{credential
 
 ### Prerequisites
 
-[Create a credential type (automated)](../credential-types/create-credential-type-automated.html) or [Create a credential type (managed)](../credential-types/create-credential-type-managed.html) to get a `credentialTypeId` for the endpoint. Refer also to [Credential Types](../credential-types.html).
+[Create a credential type (automated)](../credential-types/create-credential-type-automated.html) or [Create a credential type (managed)](../credential-types/create-credential-type-managed.html) to get a `credentialTypeId` for the endpoint. Refer also to [Credential Types](../credential-types/index.html).
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Issuance Rules data model](../credential-issuance-rules.html#credential-issuance-rules-data-model) for full property descriptions.
+> Refer to [Credential Issuance Rules data model](index.html#credential-issuance-rules-data-model) for full property descriptions.
 >
 > | Property                          | Type      | Required          |
 > | --------------------------------- | --------- | ----------------- |
@@ -1356,12 +1373,13 @@ task.resume()
 
 ---
 title: Create Credential Type (automated)
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes operation to create a new type of credential for issuance. A credential type corresponds to the Card type presented by the compatible wallet app.
+description: Create an automated credential type that is issued to matching users through an associated credential issuance rule
 component: pingone-api
 page_id: pingone-api:credentials:credential-types/create-credential-type-automated
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-types/create-credential-type-automated.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-11
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -1374,21 +1392,25 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:credentialType](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-credentialType "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes
 ```
 
 Use the `POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes` operation to create a new type of credential for issuance. A credential type corresponds to the Card type presented by the compatible wallet app.
 
-In this request, `management.mode` is `AUTOMATED`. Such credential types are only issued by its associated [credential issuance rule](../credential-issuance-rules.html). An `expiration` object can be used to set the date when the credential will expire.
+In this request, `management.mode` is `AUTOMATED`. Such credential types are only issued by its associated [credential issuance rule](../credential-issuance-rules/index.html). An `expiration` object can be used to set the date when the credential will expire.
 
 ### Prerequisites
 
-Refer to [Credential Types](../credential-types.html) for important overview information.
+Refer to [Credential Types](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Types data model](../credential-types.html#credential-types-data-model) for full property descriptions.
+> Refer to [Credential Types data model](index.html#credential-types-data-model) for full property descriptions.
 >
 > | Property                           | Type     | Required          |
 > | ---------------------------------- | -------- | ----------------- |
@@ -2364,12 +2386,13 @@ task.resume()
 
 ---
 title: Create Credential Type (managed)
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes operation to create a new type of credential for issuance. A credential type corresponds to the Card type presented by the compatible wallet app.
+description: Create a managed credential type that is issued to users individually through the user credentials operations
 component: pingone-api
 page_id: pingone-api:credentials:credential-types/create-credential-type-managed
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-types/create-credential-type-managed.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-11
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2382,6 +2405,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:credentialType](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-credentialType "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/credentialTypes
 ```
@@ -2392,11 +2419,11 @@ In this request, `management.mode` is `MANAGED`. Such credential types are only 
 
 ### Prerequisites
 
-* Refer to [Credential Types](../credential-types.html) for important overview information.
+* Refer to [Credential Types](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Types data model](../credential-types.html#credential-types-data-model) for full property descriptions.
+> Refer to [Credential Types data model](index.html#credential-types-data-model) for full property descriptions.
 >
 > | Property                           | Type     | Required          |
 > | ---------------------------------- | -------- | ----------------- |
@@ -3400,12 +3427,13 @@ task.resume()
 
 ---
 title: Create Credential Verification Session (NATIVE - Push Notification)
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions to initiate verification of a user credential using the native protocol of the PingOne Credentials service and use a push notification to the user's digital wallet. Each credential verification session silently times out after 5 minutes.
+description: "Initiate a native credential verification session that sends a push notification to the user's digital wallet"
 component: pingone-api
 page_id: pingone-api:credentials:credential-verifications/create-credential-verification-presentation-session-native-push-notification
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifications/create-credential-verification-presentation-session-native-push-notification.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -3418,6 +3446,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsVerification:create:presentationSession](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsVerification-create-presentationSession "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions
 ```
@@ -3426,11 +3458,11 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions` to ini
 
 ### Prerequisites
 
-* Refer to [Credential Verifications](../credential-verifications.html) for important overview information.
+* Refer to [Credential Verifications](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Verifications session data model](../credential-verifications.html#credential-verifications-session-data-model) for full property descriptions.
+> Refer to [Credential Verifications session data model](index.html#credential-verifications-session-data-model) for full property descriptions.
 >
 > | Property                          | Type      | Required          |
 > | --------------------------------- | --------- | ----------------- |
@@ -3982,12 +4014,13 @@ task.resume()
 
 ---
 title: Create Credential Verification Session (NATIVE)
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions to initiate verification of a user credential using the native protocol of the PingOne Credentials service. Each credential verification session silently times out after 5 minutes.
+description: Initiate a credential verification session using the native protocol of the PingOne Credentials service
 component: pingone-api
 page_id: pingone-api:credentials:credential-verifications/create-credential-verification-presentation-session-native
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifications/create-credential-verification-presentation-session-native.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4000,6 +4033,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsVerification:create:presentationSession](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsVerification-create-presentationSession "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions
 ```
@@ -4008,11 +4045,11 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions` to ini
 
 ### Prerequisites
 
-* Refer to [Credential Verifications](../credential-verifications.html) for important overview information.
+* Refer to [Credential Verifications](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Verifications session data model](../credential-verifications.html#credential-verifications-session-data-model) for full property descriptions.
+> Refer to [Credential Verifications session data model](index.html#credential-verifications-session-data-model) for full property descriptions.
 >
 > | Property                      | Type      | Required |
 > | ----------------------------- | --------- | -------- |
@@ -4427,12 +4464,13 @@ task.resume()
 
 ---
 title: Create Credential Verification Session (OPENID4VP)
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions to initiate verification of a user credential using the OpenID for Verifiable Presentations (OPENID4VP) protocol of JSON Web Token Verifiable Credentials (JWT-VC). Each credential verification session silently times out after 5 minutes.
+description: Initiate a credential verification session using the OpenID for Verifiable Presentations (OpenID4VP) protocol
 component: pingone-api
 page_id: pingone-api:credentials:credential-verifications/create-credential-verification-presentation-session-openid4vp
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifications/create-credential-verification-presentation-session-openid4vp.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-11
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4445,6 +4483,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsVerification:create:presentationSession](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsVerification-create-presentationSession "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions
 ```
@@ -4453,11 +4495,11 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions` to ini
 
 ### Prerequisites
 
-* Refer to [Credential Verifications](../credential-verifications.html) for important overview information.
+* Refer to [Credential Verifications](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential Verifications session data model](../credential-verifications.html#credential-verifications-session-data-model) for full property descriptions.
+> Refer to [Credential Verifications session data model](index.html#credential-verifications-session-data-model) for full property descriptions.
 >
 > | Property                      | Type      | Required |
 > | ----------------------------- | --------- | -------- |
@@ -4476,7 +4518,7 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/presentationSessions` to ini
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Content of `requestedCredentials` differs by `protocol`. The `protocol` of `OPENID4VP` permits only one credential type per request and ignores `requestedCredentials.keys` if present. |
 
-Using the [PingOne Wallet Native SDKs](../../native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks.html), a wallet app retrieves verification information from the returned `_links.appOpenURL.href`. The information retrieved varies depending on the `didMethod` in the request.
+Using the [PingOne Wallet Native SDKs](../../native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks/index.html), a wallet app retrieves verification information from the returned `_links.appOpenURL.href`. The information retrieved varies depending on the `didMethod` in the request.
 
 If `issuerFilter.dids` is submitted and `protocol` is `OPENID4VP`, the service searches all listed decentralized identifiers for the issuer of the presented credential. If the user presents a credential that is not from one of these issuers, the verification fails with `status` of `VERIFICATION_FAILED`.
 
@@ -4929,12 +4971,13 @@ task.resume()
 
 ---
 title: Create Customer Signing Public Key
-description: Use the POST {{apiPath}}/v1/environments/{{envID}}/credentialSigningKeys operation to create a new credential signing public key. Set enabled to true to use the key for signing credentials and to be available for verifying credentials. Set it to false to make it available only for verifying credentials.
+description: Create a public signing key in a PingOne environment for signing or verifying issued credentials
 component: pingone-api
 page_id: pingone-api:credentials:credential-signing-keys/create-customer-signing-public-key
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys/create-customer-signing-public-key.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -4946,6 +4989,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:credentialSigningKey](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-credentialSigningKey "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/credentialSigningKeys
 ```
@@ -4954,7 +5001,7 @@ Use the `POST {{apiPath}}/v1/environments/{{envID}}/credentialSigningKeys` opera
 
 > **Collapse: Request Model**
 >
-> Refer to [Credential signing key data model](../credential-signing-keys.html#customer-credential-signing-request-data-model) for full property descriptions.
+> Refer to [Credential signing key data model](index.html#customer-credential-signing-request-data-model) for full property descriptions.
 >
 > | Property  | Type   | Required          |
 > | --------- | ------ | ----------------- |
@@ -5336,12 +5383,13 @@ task.resume()
 
 ---
 title: Create Digital Wallet
-description: The POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/digitalWallets operation creates a digital wallet for the specified user in the specified environment.
+description: Create a digital wallet for a specified user in a PingOne environment
 component: pingone-api
 page_id: pingone-api:credentials:digital-wallets/create-digital-wallet
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/digital-wallets/create-digital-wallet.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -5354,6 +5402,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:digitalWallet](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-digitalWallet "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/users/{{userID}}/digitalWallets
 ```
@@ -5364,13 +5416,13 @@ A request body is required to create a digital wallet.
 
 ### Prerequisites
 
-* [Create a user](../../platform/users/users-1/create-user.html) to get a `userID` for the endpoint. Refer also to [Users](../../platform/users.html), especially [User operations](../../platform/users/users-1.html).
+* [Create a user](../../platform/users/users-1/create-user.html) to get a `userID` for the endpoint. Refer also to [Users](../../platform/users/index.html), especially [User operations](../../platform/users/users-1/index.html).
 
-* [Create Digital Wallet App](../digital-wallet-apps/create-digital-wallet-app.html) to get a `digitalWalletApplication.id` for the body. Refer also to [Digital Wallets](../digital-wallets.html).
+* [Create Digital Wallet App](../digital-wallet-apps/create-digital-wallet-app.html) to get a `digitalWalletApplication.id` for the body. Refer also to [Digital Wallets](index.html).
 
 > **Collapse: Request Model**
 >
-> Refer to [Digital wallet data model](../digital-wallets.html#digital-wallet-data-model) for full property descriptions.
+> Refer to [Digital wallet data model](index.html#digital-wallet-data-model) for full property descriptions.
 >
 > | Property                          | Type      | Required          |
 > | --------------------------------- | --------- | ----------------- |
@@ -5860,12 +5912,13 @@ task.resume()
 
 ---
 title: Create Digital Wallet App
-description: The POST {{apiPath}}/v1/environments/{{envID}}/digitalWalletApplications operation creates a digital wallet app in the specified environment.
+description: "Create a digital wallet app that links a PingOne application to users' digital wallets"
 component: pingone-api
 page_id: pingone-api:credentials:digital-wallet-apps/create-digital-wallet-app
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/digital-wallet-apps/create-digital-wallet-app.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -5878,6 +5931,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [credentialsIssuance:create:digitalWalletApplication](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-credentialsIssuance-create-digitalWalletApplication "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/digitalWalletApplications
 ```
@@ -5888,11 +5945,11 @@ A request body is required to create a digital wallet app.
 
 ### Prerequisites
 
-[Create Application (OIDC Mobile App)](../../platform/applications/applications-1/create-application-oidc-mobile-app.html) to get an `application.id` for the body. Refer also to [Application Management](../../platform/applications/application-management.html), especially [Application Operations](../../platform/applications/applications-1.html).
+[Create Application (OIDC Mobile App)](../../platform/applications/applications-1/create-application-oidc-mobile-app.html) to get an `application.id` for the body. Refer also to [Application Management](../../platform/application-management.html), especially [Application Operations](../../platform/applications/applications-1/index.html).
 
 > **Collapse: Request Model**
 >
-> Refer to [Digital wallet app data model](../digital-wallet-apps.html#digital-wallet-app-data-model) for full property descriptions.
+> Refer to [Digital wallet app data model](index.html#digital-wallet-app-data-model) for full property descriptions.
 >
 > | Property               | Type    | Required |
 > | ---------------------- | ------- | -------- |
@@ -6236,12 +6293,13 @@ task.resume()
 
 ---
 title: Credential Issuance Rules
-description: Use the Credentials Issuance Rules operations to create, read, and update rules for issuing, updating, and revoking credentials by credential type. Rules are defined for:
+description: Explains how to create, read, and update rules that govern issuing, updating, and revoking PingOne credentials by credential type
 component: pingone-api
-page_id: pingone-api:credentials:credential-issuance-rules
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuance-rules.html
+page_id: pingone-api:credentials:credential-issuance-rules/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuance-rules/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-issuance-rules-data-model: Credential Issuance Rules data model
@@ -6252,111 +6310,112 @@ section_ids:
   credential-issuance-rules-errors-object: Credential Issuance Rules errors object
   credential-issuance-rules-staged-changes-error-codes: Credential Issuance Rules staged changes error codes
   response-codes: Response codes
+  credential-issuance-rules-errors: Credential Issuance Rules errors
 ---
 
 # Credential Issuance Rules
 
 Use the Credentials Issuance Rules operations to create, read, and update rules for issuing, updating, and revoking credentials by credential type. Rules are defined for:
 
-* A specific [Credential Type](credential-types.html) in the endpoint
+* A specific [Credential Type](../credential-types/index.html) in the endpoint
 
-* A specific [Digital Wallet App](digital-wallet-apps.html) in the request body
+* A specific [Digital Wallet App](../digital-wallet-apps/index.html) in the request body
 
 * A specific set of users defined by one, and only one, of these filters in the request body:
 
-  * Membership in one or more [Groups](../platform/groups.html).
+  * Membership in one or more [Groups](../../platform/groups/index.html).
 
-  * Membership in one or more [Populations](../platform/populations.html).
+  * Membership in one or more [Populations](../../platform/populations/index.html).
 
-  * Satisfying a SCIM query. For information about SCIM syntax and operators, refer to [SCIM operators](../platform/users/users-1.html#users-scim-operators).
+  * Satisfying a SCIM query. For information about SCIM syntax and operators, refer to [SCIM operators](../../platform/users/users-1/index.html#users-scim-operators).
 
-A credential rule contains an `automation` object with available actions as keys: `issue`, `revoke`, and `update`. If an action is set to `PERIODIC`, the service performs the action at the end of the period. If an action is set to `ON_DEMAND`, you must use [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html) to perform staged changes for those `ON_DEMAND` actions.
+A credential rule contains an `automation` object with available actions as keys: `issue`, `revoke`, and `update`. If an action is set to `PERIODIC`, the service performs the action at the end of the period. If an action is set to `ON_DEMAND`, you must use [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html) to perform staged changes for those `ON_DEMAND` actions.
 
 The general procedure for rules is:
 
-1. [Create](credential-issuance-rules/create-credential-issuance-rule.html): create a new rule to stage actions for for the credential by user
+1. [Create](create-credential-issuance-rule.html): create a new rule to stage actions for for the credential by user
 
-2. [Update](credential-issuance-rules/update-credential-issuance-rule.html): update an existing rule to stage actions for the credential by user
+2. [Update](update-credential-issuance-rule.html): update an existing rule to stage actions for the credential by user
 
-3. [Staged Changes](credential-issuance-rules/read-all-credential-issuance-rule-staged-changes.html): show actions staged for execution
+3. [Staged Changes](read-all-credential-issuance-rule-staged-changes.html): show actions staged for execution
 
-4. [Apply](credential-issuance-rules/apply-credential-issuance-rule.html): act upon credentials staged for actions.
+4. [Apply](apply-credential-issuance-rule.html): act upon credentials staged for actions.
 
 You can also monitor credential rules:
 
-* [All Rules](credential-issuance-rules/read-all-credential-issuance-rules.html): view all rules defined for a credential type
+* [All Rules](read-all-credential-issuance-rules.html): view all rules defined for a credential type
 
-* [One Rule](credential-issuance-rules/read-one-credential-issuance-rule.html): view a specific rule for a credential
+* [One Rule](read-one-credential-issuance-rule.html): view a specific rule for a credential
 
-* [Usage Counts](credential-issuance-rules/read-credential-issuance-rule-usage-counts.html): show counts by action applied to the credential by user
+* [Usage Counts](read-credential-issuance-rule-usage-counts.html): show counts by action applied to the credential by user
 
-* [Usage Details](credential-issuance-rules/read-credential-issuance-rule-usage-details.html): show details by action applied to the credential by user
+* [Usage Details](read-credential-issuance-rule-usage-details.html): show details by action applied to the credential by user
 
 You can, finally, remove a rule for a credential type:
 
-* [Delete](credential-issuance-rules/delete-credential-issuance-rule.html): remove a rule from a credential type
+* [Delete](delete-credential-issuance-rule.html): remove a rule from a credential type
 
-For actions set to `PERIODIC`, an improper credential could cause endless repetitious errors. The service monitors staged changes for errors. When an error occurs during processing, the service adds details of the error to the staged change so that errors can be tracked, counted, and returned to the user. If more than 3 errors occur for the same scheduled staged change, the service unschedules (changes `stagedChanges.scheduled` from `true` to `false`) that staged change so that the service no longer attempts to process it. The user can manually trigger the staged change with [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html).
+For actions set to `PERIODIC`, an improper credential could cause endless repetitious errors. The service monitors staged changes for errors. When an error occurs during processing, the service adds details of the error to the staged change so that errors can be tracked, counted, and returned to the user. If more than 3 errors occur for the same scheduled staged change, the service unschedules (changes `stagedChanges.scheduled` from `true` to `false`) that staged change so that the service no longer attempts to process it. The user can manually trigger the staged change with [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html).
 
 Credentials unscheduled due to errors are reported. Some errors are known but there can also be unexpected errors. The `errors.errorDetail` object provides an error [code and message](#credential-issuance-rules-staged-changes-error-codes). If the error was related to processing a specific credential field, the field name will be in `errors.errorDetail.target`. This includes the staged changes that exist when the request is made with 1 or more errors. It does not include a staged change that was failed in the past, but has since completed successfully or was deleted (because the user no longer matches the issuance rule). Requests that report errors include:
 
-* [Read Credential Issuance Rule Staged Changes](credential-issuance-rules/read-all-credential-issuance-rule-staged-changes.html)
+* [Read Credential Issuance Rule Staged Changes](read-all-credential-issuance-rule-staged-changes.html)
 
-* [Read Credential Issuance Rule Usage Counts](credential-issuance-rules/read-credential-issuance-rule-usage-counts.html)
+* [Read Credential Issuance Rule Usage Counts](read-credential-issuance-rule-usage-counts.html)
 
-* [Read Credential Issuance Rule Usage Details](credential-issuance-rules/read-credential-issuance-rule-usage-details.html)
+* [Read Credential Issuance Rule Usage Details](read-credential-issuance-rule-usage-details.html)
 
-* [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html)
+* [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html)
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                   |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | - For a [credential type](credential-types.html) with `management.mode` set to `AUTOMATED` and no credential issuance rule exists for that credential type, no error occurs. That credential type is simply never issued.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                     |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | - For a [credential type](../credential-types/index.html) with `management.mode` set to `AUTOMATED` and no credential issuance rule exists for that credential type, no error occurs. That credential type is simply never issued.
 
-- For a [credential type](credential-types.html) with `management.mode` set to `MANAGED`, you cannot create an issuance rule for that credential type. |
+- For a [credential type](../credential-types/index.html) with `management.mode` set to `MANAGED`, you cannot create an issuance rule for that credential type. |
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential Issuance Rules data model
 
-| Property                          | Type      | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                              |
-| --------------------------------- | --------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `automation`                      | Object    | Required          | Mutable   | Contains a list of actions, as key names, and the update method for each action.                                                                                                                                                                                                                                                         |
-| `automation.issue`                | String    | Required          | Mutable   | The method the service uses to issue credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                    |
-| `automation.revoke`               | String    | Required          | Mutable   | The method the service uses to revoke credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                   |
-| `automation.update`               | String    | Required          | Mutable   | The method the service uses to update credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                   |
-| `createdAt`                       | DateTime  | N/A               | Read-only | Date and time the credential issuance rule was created.                                                                                                                                                                                                                                                                                  |
-| `credentialType.id`               | String    | N/A               | Read-only | Identifier (UUID) of the credential type with which this credential issuance rule is associated.                                                                                                                                                                                                                                         |
-| `digitalWalletApplication.id`     | String    | Optional          | Mutable   | Identifier (UUID) of the customer's [Digital Wallet App](digital-wallet-apps.html) that will interact with the user's [Digital Wallet](digital-wallets.html). Optional, and if present, digital wallet pairing automatically starts when a user matches the credential issuance rule.                                                    |
-| `environment.id`                  | String    | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential issuance rule exists.                                                                                                                                                                                                                                                      |
-| `filter`                          | Object    | Optional          | Mutable   | Contains one and only one filter (`.groupIds`, `.populationIds`, or `.scim`) that selects the users to which the credential issuance rule applies.                                                                                                                                                                                       |
-| `filter.groupIds`                 | String\[] | Required/Optional | Mutable   | Array of one or more identifiers (UUIDs) of groups, any of which a user must belong for the credential issuance rule to apply. One and only one filter is required in `filter`, others are optional and cause an error if used.                                                                                                          |
-| `filter.populationIds`            | String\[] | Required/Optional | Mutable   | Array of one or more identifiers (UUIDs) of populations, any of which a user must belong for the credential issuance rule to apply. One and only one filter is required in `filter`, others are optional and cause an error if used.                                                                                                     |
-| `filter.scim`                     | String    | Required/Optional | Mutable   | A SCIM query that selects users to which the credential issuance rule applies. One and only one filter is required in `filter`, others are optional and cause an error if used. For more information about SCIM syntax and operators, refer to [SCIM operators](../platform/users/users-1.html#users-scim-operators).                    |
-| `id`                              | String    | N/A               | Read-only | Identifier (UUID) of the credential issuance rule.                                                                                                                                                                                                                                                                                       |
-| `notification`                    | Object    | Optional          | Immutable | Contains notification information. When this property is supplied, the information within is used to create a custom notification.                                                                                                                                                                                                       |
-| `notification.methods`            | String\[] | Optional          | Immutable | Array of methods for notifying the user. Can be `EMAIL`, `SMS`, or both.                                                                                                                                                                                                                                                                 |
-| `notification.template`           | Object    | Optional          | Immutable | Contains template parameters.                                                                                                                                                                                                                                                                                                            |
-| `notification.template.locale`    | String    | Optional          | Immutable | The ISO 2-character language code used for the notification, for example: `en` for English.                                                                                                                                                                                                                                              |
-| `notification.template.variables` | Object\[] | Required/Optional | Immutable | An object of name-value pairs that defines the dynamic variables used by the content variant. Required if the template requires variables, otherwise ignored. For more information on dynamic variables, refer to [Dynamic variables](../platform/notifications/notifications-templates.html#notifications-templates-dynamic-variables). |
-| `notification.template.variant`   | String    | Optional          | Immutable | The unique user-defined name for the content variant that contains the message text used for the notification. For more information on variants, refer to [Creating custom contents](../platform/notifications/notifications-templates.html#notifications-templates-creating-custom-contents).                                           |
-| `status`                          | String    | Required          | Mutable   | Status of the credential issuance rule. Can be `ACTIVE` or `DISABLED`.                                                                                                                                                                                                                                                                   |
-| `updatedAt`                       | DateTime  | N/A               | Read-only | Date and time the credential issuance rule was last updated. Can be null.                                                                                                                                                                                                                                                                |
+| Property                          | Type      | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------- | --------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `automation`                      | Object    | Required          | Mutable   | Contains a list of actions, as key names, and the update method for each action.                                                                                                                                                                                                                                                                  |
+| `automation.issue`                | String    | Required          | Mutable   | The method the service uses to issue credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                             |
+| `automation.revoke`               | String    | Required          | Mutable   | The method the service uses to revoke credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                            |
+| `automation.update`               | String    | Required          | Mutable   | The method the service uses to update credentials with the credential issuance rule. Can be `PERIODIC` or `ON_DEMAND`.                                                                                                                                                                                                                            |
+| `createdAt`                       | DateTime  | N/A               | Read-only | Date and time the credential issuance rule was created.                                                                                                                                                                                                                                                                                           |
+| `credentialType.id`               | String    | N/A               | Read-only | Identifier (UUID) of the credential type with which this credential issuance rule is associated.                                                                                                                                                                                                                                                  |
+| `digitalWalletApplication.id`     | String    | Optional          | Mutable   | Identifier (UUID) of the customer's [Digital Wallet App](../digital-wallet-apps/index.html) that will interact with the user's [Digital Wallet](../digital-wallets/index.html). Optional, and if present, digital wallet pairing automatically starts when a user matches the credential issuance rule.                                           |
+| `environment.id`                  | String    | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential issuance rule exists.                                                                                                                                                                                                                                                               |
+| `filter`                          | Object    | Optional          | Mutable   | Contains one and only one filter (`.groupIds`, `.populationIds`, or `.scim`) that selects the users to which the credential issuance rule applies.                                                                                                                                                                                                |
+| `filter.groupIds`                 | String\[] | Required/Optional | Mutable   | Array of one or more identifiers (UUIDs) of groups, any of which a user must belong for the credential issuance rule to apply. One and only one filter is required in `filter`, others are optional and cause an error if used.                                                                                                                   |
+| `filter.populationIds`            | String\[] | Required/Optional | Mutable   | Array of one or more identifiers (UUIDs) of populations, any of which a user must belong for the credential issuance rule to apply. One and only one filter is required in `filter`, others are optional and cause an error if used.                                                                                                              |
+| `filter.scim`                     | String    | Required/Optional | Mutable   | A SCIM query that selects users to which the credential issuance rule applies. One and only one filter is required in `filter`, others are optional and cause an error if used. For more information about SCIM syntax and operators, refer to [SCIM operators](../../platform/users/users-1/index.html#users-scim-operators).                    |
+| `id`                              | String    | N/A               | Read-only | Identifier (UUID) of the credential issuance rule.                                                                                                                                                                                                                                                                                                |
+| `notification`                    | Object    | Optional          | Immutable | Contains notification information. When this property is supplied, the information within is used to create a custom notification.                                                                                                                                                                                                                |
+| `notification.methods`            | String\[] | Optional          | Immutable | Array of methods for notifying the user. Can be `EMAIL`, `SMS`, or both.                                                                                                                                                                                                                                                                          |
+| `notification.template`           | Object    | Optional          | Immutable | Contains template parameters.                                                                                                                                                                                                                                                                                                                     |
+| `notification.template.locale`    | String    | Optional          | Immutable | The ISO 2-character language code used for the notification, for example: `en` for English.                                                                                                                                                                                                                                                       |
+| `notification.template.variables` | Object\[] | Required/Optional | Immutable | An object of name-value pairs that defines the dynamic variables used by the content variant. Required if the template requires variables, otherwise ignored. For more information on dynamic variables, refer to [Dynamic variables](../../platform/notifications/notifications-templates/index.html#notifications-templates-dynamic-variables). |
+| `notification.template.variant`   | String    | Optional          | Immutable | The unique user-defined name for the content variant that contains the message text used for the notification. For more information on variants, refer to [Creating custom contents](../../platform/notifications/notifications-templates/index.html#notifications-templates-creating-custom-contents).                                           |
+| `status`                          | String    | Required          | Mutable   | Status of the credential issuance rule. Can be `ACTIVE` or `DISABLED`.                                                                                                                                                                                                                                                                            |
+| `updatedAt`                       | DateTime  | N/A               | Read-only | Date and time the credential issuance rule was last updated. Can be null.                                                                                                                                                                                                                                                                         |
 
-Actions within `automation` (`.issue`, `.update`, and `.revoke`) can be `PERIODIC`, the service applies the rule frequently every hour, or `ON_DEMAND`, the service applies the rule only with an [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html) request. For `ON_DEMAND`, use [Read Credential Issuance Rule Staged Changes](credential-issuance-rules/read-all-credential-issuance-rule-staged-changes.html) to determine staged changes.
+Actions within `automation` (`.issue`, `.update`, and `.revoke`) can be `PERIODIC`, the service applies the rule frequently every hour, or `ON_DEMAND`, the service applies the rule only with an [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html) request. For `ON_DEMAND`, use [Read Credential Issuance Rule Staged Changes](read-all-credential-issuance-rule-staged-changes.html) to determine staged changes.
 
 The one `notification.template` object applies a variant and locale to all three credential notification templates: `credential_issued`, `credential_updated`, and `credential_revoked`. When adding a variant or locale to any of the three notification templates, consider adding the same variant or locale to the other notification templates. If a requested variant is not defined, the notification uses the default notification template. If a requested locale is not defined, the notification uses the user's preferred language or, if the user has no preferred language, the default language of the environment.
 
@@ -6375,14 +6434,14 @@ The one `notification.template` object applies a variant and locale to all three
 
 ## Credential Issuance Rules apply staged changes data model
 
-This data model applies only to [Read Credential Issuance Rule Staged Changes](credential-issuance-rules/read-all-credential-issuance-rule-staged-changes.html) and [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html).
+This data model applies only to [Read Credential Issuance Rule Staged Changes](read-all-credential-issuance-rule-staged-changes.html) and [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html).
 
-| Property | Type      | Required | Mutable   | Description                                                                                                                                                                                                                                                         |
-| -------- | --------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `issue`  | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in an `issue` action state and should be issued.                                                                                                                                            |
-| `revoke` | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in a `revoke` action state and should be revoked. Used only in the body of [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html).  |
-| `update` | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in an `update` action state and should be updated. Used only in the body of [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html). |
-| `errors` | Object\[] | N/A      | Read-only | Array of objects representing credentials that had errors when attempting an action on it. Refer to [Credential Issuance Rules errors object](#credential-issuance-rules-errors-object).                                                                            |
+| Property | Type      | Required | Mutable   | Description                                                                                                                                                                                                                               |
+| -------- | --------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `issue`  | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in an `issue` action state and should be issued.                                                                                                                  |
+| `revoke` | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in a `revoke` action state and should be revoked. Used only in the body of [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html).  |
+| `update` | String\[] | Optional | Mutable   | Array of one or more identifiers (UUIDs) of users whose credentials are in an `update` action state and should be updated. Used only in the body of [Apply Credential Issuance Rule Staged Changes](apply-credential-issuance-rule.html). |
+| `errors` | Object\[] | N/A      | Read-only | Array of objects representing credentials that had errors when attempting an action on it. Refer to [Credential Issuance Rules errors object](#credential-issuance-rules-errors-object).                                                  |
 
 ## Credential Issuance Rules usage counts data model
 
@@ -6453,25 +6512,84 @@ This data model applies only to [Read Credential Issuance Rule Staged Changes](c
 | 404  | The requested resource was not found.                                 |
 | 500  | Unexpected server error.                                              |
 
+## Credential Issuance Rules errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential issuance rule operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                      | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------- | ------------------ | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE` or `INVALID_VALUE` | **Message:** `Validation Error : [filter <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /issuanceRules` request supplies `filter` as an explicit `null`, supplies an empty `groupIds`, `populationIds`, or `scim` filter, supplies `null` entries in a filter array, supplies more than one filter type in `filter`, or supplies a SCIM filter that cannot be parsed or exceeds 50 components
+>
+> **Details:** The Bean-Validation literal for the failing property, for example `must not be null` for an explicit `null` `filter`, `groupIds must not be empty` for an empty `groupIds` array, `scim must not be empty` for an empty SCIM filter, `groupIds must not contain null` for a `null` group ID, `only 1 filter type may be provided` when more than one filter type is supplied, `invalid SCIM filter: <parse error>` for an unparseable filter, or `Search filters cannot include more than 50 components` for an overly complex filter (for example `Validation Error : [filter only 1 filter type may be provided]`) |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /issuanceRules` request references a `digitalWalletApplication.id` that does not exist in the environment, or references a digital wallet application whose PingOne application is not active when the rule is `ACTIVE`
+>
+> **Details:** `digitalWalletApplication not found` or `digitalWalletApplication is not valid` for the `digitalWalletApplication` relationship                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /issuanceRules` request supplies a `filter` that the directory cannot evaluate, such as a SCIM filter that references an attribute that does not exist
+>
+> **Details:** `unable to determine matching Users from directory: <directory message>`, reported against the `filter` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`                 | **Message:** `The request is missing a required value.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /issuanceRules` request sets `status` to `ACTIVE` without providing a filter in `filter`
+>
+> **Details:** `a valid filter must be provided to activate this Issuance Rule`, reported against the `filter` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /applyStagedChanges` request is made for a rule that is not `ACTIVE`
+>
+> **Details:** `issuanceRule is not ACTIVE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `INVALID_REQUEST`  | `INVALID_VALUE`                  | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** A path identifier cannot be parsed as a UUID, or the request body cannot be deserialized as JSON
+>
+> **Details:** For a JSON field conversion error, the target is the field path and the detail message is `Invalid value for attribute.`. Otherwise no detail is returned                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`           | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /issuanceRules` request creates a rule for a credential type that already has an issuance rule, or for a credential type whose `management.mode` is `MANAGED` or that is system-provided
+>
+> **Details:** `an issuanceRule already exists for the credentialType` or `credentialType does not allow issuanceRule`, respectively                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 403         | `ACCESS_FAILED`    | None                             | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `credentialsIssuance:create:issuanceRule` permission (`POST`), the `credentialsIssuance:update:issuanceRule` permission (`PUT` or apply), the `credentialsIssuance:update:stagedChanges` permission (apply staged changes), the `credentialsIssuance:delete:issuanceRule` permission (`DELETE`), the `credentialsIssuance:read:issuanceRule` permission (`GET` rules, usage counts, and usage details), or the `credentialsIssuance:read:stagedChanges` permission (`GET` staged changes)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 404         | `NOT_FOUND`        | None                             | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET`, `PUT`, or `DELETE /issuanceRules/{issuanceRuleID}` or a staged changes request references an issuance rule that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 500         | `UNEXPECTED_ERROR` | None                             | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while processing the request.
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
 ---
 
 ---
 title: Credential Issuer Decentralized Identifiers
-description: W3C defines Decentralized IDs (DIDs) as a means to identify an entity in a decentralized ecosystem. See the W3C DIDs spec for details. An entities DID is represented as a string and used in the different ID fields, such as issuer, subject, audience, or holder, for Java Web Tokens (JWTs), Verifiable Credentials (VCs), and other JSON objects. The DID is used to find public keys for the entity as well as optional information about how to interact with the entity.
+description: Explains Decentralized Identifiers (DIDs) used by PingOne Credentials issuers and how to retrieve and manage issuer DID resources
 component: pingone-api
-page_id: pingone-api:credentials:credential-issuer-decentralized-identifiers
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuer-decentralized-identifiers.html
+page_id: pingone-api:credentials:credential-issuer-decentralized-identifiers/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-issuer-decentralized-identifiers/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pingone-hosted-issuer-didweb: PingOne hosted issuer did:web
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-did-data-models: Credential issuer DID data models
+  credential-issuer-did-errors: Credential Issuer DID errors
 ---
 
 # Credential Issuer Decentralized Identifiers
 
-W3C defines Decentralized IDs (DIDs) as a means to identify an entity in a decentralized ecosystem. See the [W3C DIDs spec](https://www.w3.org/TR/did-core/) for details. An entities DID is represented as a string and used in the different ID fields, such as issuer, subject, audience, or holder, for Java Web Tokens (JWTs), Verifiable Credentials (VCs), and other JSON objects. The DID is used to find public keys for the entity as well as optional information about how to interact with the entity.
+W3C defines Decentralized IDs (DIDs) as a means to identify an entity in a decentralized ecosystem. See the [W3C DIDs spec](https://www.w3.org/TR/did-core/) for details. An entities DID is represented as a string and used in the different ID fields, such as issuer, subject, audience, or holder, for JSON Web Tokens (JWTs), Verifiable Credentials (VCs), and other JSON objects. The DID is used to find public keys for the entity as well as optional information about how to interact with the entity.
 
 The DID specification supports multiple ways to store and represent the DID. Every DID is a colon-separated string with the literal `did`, a method name, and method-specific data. W3C maintains a list of all of the [current DID methods](https://www.w3.org/TR/did-spec-registries/#did-methods).
 
@@ -6519,19 +6637,19 @@ The service supports retrieving the `did:web` documents of issuers hosted by Pin
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential issuer DID data models
 
@@ -6546,21 +6664,45 @@ Refer to [Roles Management](../platform/roles.html) for more information.
 | `authentication`                  | String | N/A      | Read-only | A unique identifier that conforms to [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax) including in its fragment a UUID for the key of the `verificationMethod.publicKeyJwk`                               |
 | `assertionMethod`                 | String | N/A      | Read-only | A unique identifier that conforms to [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax) including in its fragment a UUID for the key of the `verificationMethod.publicKeyJwk`                               |
 
+## Credential Issuer DID errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential issuer DID document requests can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_REQUEST`  | None        | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A path identifier cannot be parsed as a UUID
+>
+> **Details:** None. The top‑level code is `INVALID_REQUEST` even though the message text is the `INVALID_DATA` default message.                                                     |
+| 404         | `NOT_FOUND`        | None        | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** The DID document request is made for an environment that has no credential issuer profile
+>
+> **Details:** None. A `/.well-known/did.json` request for an environment with no custom domain configured returns `200` with an empty body instead. |
+| 500         | `UNEXPECTED_ERROR` | None        | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while building the DID document.
+>
+> **Details:** None                                                                                                                                                    |
+
 ---
 
 ---
 title: Credential Issuers
-description: Use the Credential Issuers operations to retrieve or update the credential issuer information. A default credential issuer profile, which enables issuance of credentials, is automatically created when the credential service is added to an environment.
+description: Explains how to retrieve and update the PingOne Credentials issuer profile that enables credential issuance in an environment
 component: pingone-api
-page_id: pingone-api:credentials:credential-profiles
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-profiles.html
+page_id: pingone-api:credentials:credential-profiles/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-profiles/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-issuers-data-model: Credential Issuers data model
   did-webvh-didwebvh: DID WEBVH (did:webvh)
   response-codes: Response codes
+  credential-issuers-errors: Credential Issuers errors
 ---
 
 # Credential Issuers
@@ -6569,39 +6711,39 @@ Use the Credential Issuers operations to retrieve or update the credential issue
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential Issuers data model
 
-| Property                            | Type     | Required | Mutable   | Description                                                                                                                                                                                                                                  |
-| ----------------------------------- | -------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `applicationInstance.id`            | String   | N/A      | Read-only | Identifier (UUID) of the application instance registered with the PingOne platform service. This enables the client to send messages to the service.                                                                                         |
-| `credentialSigning`                 | Object   | Optional | Mutable   | Object with the configuration for sending verifiable credentials (VC-JWT or SD-JWT) to the customer's remote signing service at `credentialSigning.url` for signing with their private key.                                                  |
-| `credentialSigning.url`             | String   | Required | Mutable   | URL to which to send verifiable credentials (VC-JWT or SD-JWT) for signing with their private key. Must be a valid URL with a protocol of HTTPS.                                                                                             |
-| `credentialSigning.headers`         | Object   | Optional | Mutable   | Object of headers as key-value pairs, where the key is the name of a header field and the value is the value of the header field, to send with the verifiable credentials (VC-JWT or SD-JWT) for signing.                                    |
-| `credentialSigning.headers.<field>` | String   | Required | Mutable   | The placeholder, `<field>`, is the name of the header field to add to the request. The value assigned to this becomes the value of the header field created.                                                                                 |
-| `createdAt`                         | DateTime | N/A      | Read-only | Date and time the issuer profile was created.                                                                                                                                                                                                |
-| `did.method`                        | String   | Optional | Mutable   | Decentralized Identifier (DID) method for the issuer. Can be `WEB` or `WEBVH`. Initially set to `WEB`. Refer to [DID WEBVH (did:webvh)](#did-webvh-didwebvh).                                                                                |
-| `did.value`                         | String   | N/A      | Read-only | The entity that controls the DID in [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax). In PingOne Credentials, the method-specific data is always equal to the domain part of the request URL                                         |
-| `did.web.host`                      | String   | N/A      | Read-only | The hosting provider. Always "PING"                                                                                                                                                                                                          |
-| `did.web.useCustomDomain`           | Boolean  | Optional | Mutable   | Whether or not the credential issuer uses its custom domain in its DID when the issuer has [Custom Domains](../platform/custom-domains.html) enabled. Defaults to `true` and uses the custom domain, whereas `false` uses `auth.pingone.com` |
-| `id`                                | String   | N/A      | Read-only | Identifier (UUID) of the credential issuer.                                                                                                                                                                                                  |
-| `logo`                              | String   | Optional | Mutable   | A URI containing the logo for the issuer. Restricted to a valid URL with a scheme of `https:` or a scheme of `data:` with a base64-encoded image. Included in credentials issued.                                                            |
-| `name`                              | String   | Required | Immutable | The name of the credential issuer. Included in credentials issued.                                                                                                                                                                           |
-| `siteUrl`                           | String   | Optional | Mutable   | URL, chosen by the issuer, that references the issuer in issued credentials.                                                                                                                                                                 |
-| `updatedAt`                         | DateTime | N/A      | Read-only | Date and time the credential issuer profile was last updated. Can be null.                                                                                                                                                                   |
+| Property                            | Type     | Required | Mutable   | Description                                                                                                                                                                                                                                           |
+| ----------------------------------- | -------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `applicationInstance.id`            | String   | N/A      | Read-only | Identifier (UUID) of the application instance registered with the PingOne platform service. This enables the client to send messages to the service.                                                                                                  |
+| `credentialSigning`                 | Object   | Optional | Mutable   | Object with the configuration for sending verifiable credentials (VC-JWT or SD-JWT) to the customer's remote signing service at `credentialSigning.url` for signing with their private key.                                                           |
+| `credentialSigning.url`             | String   | Required | Mutable   | URL to which to send verifiable credentials (VC-JWT or SD-JWT) for signing with their private key. Must be a valid URL with a protocol of HTTPS.                                                                                                      |
+| `credentialSigning.headers`         | Object   | Optional | Mutable   | Object of headers as key-value pairs, where the key is the name of a header field and the value is the value of the header field, to send with the verifiable credentials (VC-JWT or SD-JWT) for signing.                                             |
+| `credentialSigning.headers.<field>` | String   | Required | Mutable   | The placeholder, `<field>`, is the name of the header field to add to the request. The value assigned to this becomes the value of the header field created.                                                                                          |
+| `createdAt`                         | DateTime | N/A      | Read-only | Date and time the issuer profile was created.                                                                                                                                                                                                         |
+| `did.method`                        | String   | Optional | Mutable   | Decentralized Identifier (DID) method for the issuer. Can be `WEB` or `WEBVH`. Initially set to `WEB`. Refer to [DID WEBVH (did:webvh)](#did-webvh-didwebvh).                                                                                         |
+| `did.value`                         | String   | N/A      | Read-only | The entity that controls the DID in [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax). In PingOne Credentials, the method-specific data is always equal to the domain part of the request URL                                                  |
+| `did.web.host`                      | String   | N/A      | Read-only | The hosting provider. Always "PING"                                                                                                                                                                                                                   |
+| `did.web.useCustomDomain`           | Boolean  | Optional | Mutable   | Whether or not the credential issuer uses its custom domain in its DID when the issuer has [Custom Domains](../../platform/custom-domains/index.html) enabled. Defaults to `true` and uses the custom domain, whereas `false` uses `auth.pingone.com` |
+| `id`                                | String   | N/A      | Read-only | Identifier (UUID) of the credential issuer.                                                                                                                                                                                                           |
+| `logo`                              | String   | Optional | Mutable   | A URI containing the logo for the issuer. Restricted to a valid URL with a scheme of `https:` or a scheme of `data:` with a base64-encoded image. Included in credentials issued.                                                                     |
+| `name`                              | String   | Required | Immutable | The name of the credential issuer. Included in credentials issued.                                                                                                                                                                                    |
+| `siteUrl`                           | String   | Optional | Mutable   | URL, chosen by the issuer, that references the issuer in issued credentials.                                                                                                                                                                          |
+| `updatedAt`                         | DateTime | N/A      | Read-only | Date and time the credential issuer profile was last updated. Can be null.                                                                                                                                                                            |
 
 In the `credentialSigning` object, the `credentialSigning.headers` object defines headers to add to the signing request sent to the customer's `credentialSigning.url`. For example:
 
@@ -6617,7 +6759,7 @@ Creates a header on the signing request such as:
 ClientID: 016e1474-7c62-b944-0a96-b467731ef0bd
 ```
 
-The `logo` and `name` can be shown to the user when indicating the credential issuer by the wallet app using using the [PingOne Neo Native SDKs](../native-sdks/pingone-neo-native-sdks.html) with [getIssuerMetadata](https://pingidentity.github.io/pingone-wallet-mobile-sdk-android/com/pingidentity/sdk/pingonewallet/utils/CredentialUtils.html#getIssuerMetadata\(com.pingidentity.did.sdk.types.Claim\)) for Android and [getCredentialIssuerMetadataFromClaim(\_:)](https://pingidentity.github.io/pingone-wallet-mobile-sdk-ios/documentation/pingonewallet/credentialutils/getcredentialissuermetadatafromclaim\(_:\)/) for iOS.
+The `logo` and `name` can be shown to the user when indicating the credential issuer by the wallet app using using the [PingOne Neo Native SDKs](../../native-sdks/pingone-neo-native-sdks/index.html) with [getIssuerMetadata](https://pingidentity.github.io/pingone-wallet-mobile-sdk-android/com/pingidentity/sdk/pingonewallet/utils/CredentialUtils.html#getIssuerMetadata\(com.pingidentity.did.sdk.types.Claim\)) for Android and [getCredentialIssuerMetadataFromClaim(\_:)](https://pingidentity.github.io/pingone-wallet-mobile-sdk-ios/documentation/pingonewallet/credentialutils/getcredentialissuermetadatafromclaim\(_:\)/) for iOS.
 
 ## DID WEBVH (did:webvh)
 
@@ -6664,20 +6806,69 @@ The shortcoming of `did:webvh` is that it is not as widely accepted by verifiers
 | 404  | The requested resource was not found.                                 |
 | 500  | Unexpected server error.                                              |
 
+## Credential Issuers errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential issuer operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------- | ------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE` or `OUT_OF_RANGE` | **Message:** `Validation Error : [<property> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialIssuerProfile` request supplies a `name` that is blank, has invalid characters, or is longer than 256 characters, a `logo` that is empty, is not a valid HTTPS or `data:` URL, is not a base64-encoded image, does not use a valid image media type, or does not decode as base64, or a `siteUrl` that is empty, does not use the HTTPS protocol, or is not a valid URL
+>
+> **Details:** The Bean-Validation literal for the failing property, for example `must not be empty or blank` for a blank `name`, `size must be between 1 and 256` with `rangeMinimumValue` and `rangeMaximumValue` inner errors and the `OUT_OF_RANGE` detail code for a `name` longer than 256 characters, `must contain only Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens` for a `name` with invalid characters, `must be a base64 encoded image` for a `logo` without `;base64,`, or `url must be https` for a non-HTTPS `siteUrl` (for example `Validation Error : [siteUrl url must be https]`) |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE`                     | **Message:** `Validation Error : [did.method must not be null]`> **Collapse: When and details**
+>
+> **When:** A `PUT /credentialIssuerProfile` request omits `did.method`
+>
+> **Details:** `must not be null`, for example `Validation Error : [did.method must not be null]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`            | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /credentialIssuerProfile` request attempts to create a credential issuer profile when one already exists in the environment
+>
+> **Details:** `A resource with the specified name already exists.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                   | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialIssuerProfile` request sets `did.method` to `WEBVH` when the did:webvh feature flag is off for the environment
+>
+> **Details:** `did:webvh not supported in this environment`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_REQUEST`  | `INVALID_VALUE`                   | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** The request body cannot be deserialized as JSON, such as a JSON syntax error or a property with the wrong JSON type
+>
+> **Details:** For a JSON field conversion error, the target is the field path and the detail message is `Invalid value for attribute.`. Otherwise no detail is returned                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 403         | `ACCESS_FAILED`    | None                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `credentialsIssuance:create:issuerProfile` permission (`POST`), the `credentialsIssuance:update:issuerProfile` permission (`PUT`), or the `credentialsIssuance:read:issuerProfile` permission (`GET`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 404         | `NOT_FOUND`        | None                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` or `PUT /credentialIssuerProfile` request references an environment that has no credential issuer profile (the profile was not automatically created when the credential service was added to the environment)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 500         | `UNEXPECTED_ERROR` | None                              | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while creating, reading, or updating the credential issuer profile, such as a DID log generation failure.
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
 ---
 
 ---
 title: Credential Signing Keys
-description: You can choose to sign credentials before issuance using your private keys maintained within your infrastructure. However, to properly build the JWT header, Ping Identity requires your public key.
+description: Explains how to store, retrieve, update, and delete the public signing keys PingOne Credentials uses to sign and verify credentials before issuance
 component: pingone-api
-page_id: pingone-api:credentials:credential-signing-keys
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys.html
+page_id: pingone-api:credentials:credential-signing-keys/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-signing-key-data-model: Credential signing key data model
   available-algorithms-for-jwk: Available algorithms for JWK
+  credential-signing-keys-errors: Credential Signing Keys errors
 ---
 
 # Credential Signing Keys
@@ -6688,38 +6879,38 @@ Use the Credential Signing Keys operations to store, retrieve, update, or delete
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential signing key data model
 
-| Property         | Type     | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------- | -------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `createdAt`      | DateTime | N/A               | Read-only | Date and time the credential signing key was created.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `enabled`        | String   | Required          | Mutable   | Whether the key is available for use in signing. Allows you to change the key that is used by the credentialing service for signing but retain the key for verification. Can be `true` or `false`.                                                                                                                                                                                                                                                                     |
-| `environment.id` | String   | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential signing key exists.                                                                                                                                                                                                                                                                                                                                                                                      |
-| `jwk`            | Object   | Required/Optional | Immutable | JSON Web Key as defined in [RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517). Required for [Create Customer Signing Public Key](credential-signing-keys/create-customer-signing-public-key.html), but optional (because it is immutable) for [Update Customer Signing Public Key](credential-signing-keys/update-customer-signing-public-key.html). Used when sending unsigned credentials to your signing endpoint and verifying returned signed credentials. |
-| `jwk.alg`        | String   | Required          | Immutable | Algorithm, identifies the algorithm intended for use with the key. Refer to [Available algorithms for JWK](#available-algorithms-for-jwk).                                                                                                                                                                                                                                                                                                                             |
-| `jwk.crv`        | String   | Required/Optional | Immutable | Curve of the Elliptic Curve (EC) or Octet Key Pair (OKP) public key. Required for EC- and OKP-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                                  |
-| `jwk.e`          | String   | Required/Optional | Immutable | RSA exponent of the RSA public key. Required for RSA-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                                                                           |
-| `jwk.kid`        | String   | Required          | Immutable | Key ID, a unique identifier for the key that helps when selecting a key.                                                                                                                                                                                                                                                                                                                                                                                               |
-| `jwk.kty`        | String   | Required          | Immutable | Key Type, identifies the cryptographic algorithm family used with the key. Can be `RSA`, `EC`, or `OKP`.                                                                                                                                                                                                                                                                                                                                                               |
-| `jwk.n`          | String   | Required/Optional | Immutable | RSA modulus of the RSA public key. Required for RSA-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                                                                            |
-| `jwk.x`          | String   | Required/Optional | Immutable | Elliptic curve x-coordinate of the EC public key or OKP public key. Required for EC-based algorithms and OKP-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                   |
-| `jwk.y`          | String   | Required/Optional | Immutable | Elliptic curve y-coordinate of the EC public key. Required for EC-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                                                              |
-| `name`           | String   | Optional          | Mutable   | A friendly name shown in the admin console for the key. Optional and defaults to `jwk.kid`.                                                                                                                                                                                                                                                                                                                                                                            |
-| `updatedAt`      | DateTime | N/A               | Read-only | Date and time the credential signing key was last updated. Can be null.                                                                                                                                                                                                                                                                                                                                                                                                |
+| Property         | Type     | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------- | -------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `createdAt`      | DateTime | N/A               | Read-only | Date and time the credential signing key was created.                                                                                                                                                                                                                                                                                                                                                                  |
+| `enabled`        | String   | Required          | Mutable   | Whether the key is available for use in signing. Allows you to change the key that is used by the credentialing service for signing but retain the key for verification. Can be `true` or `false`.                                                                                                                                                                                                                     |
+| `environment.id` | String   | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential signing key exists.                                                                                                                                                                                                                                                                                                                                      |
+| `jwk`            | Object   | Required/Optional | Immutable | JSON Web Key as defined in [RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517). Required for [Create Customer Signing Public Key](create-customer-signing-public-key.html), but optional (because it is immutable) for [Update Customer Signing Public Key](update-customer-signing-public-key.html). Used when sending unsigned credentials to your signing endpoint and verifying returned signed credentials. |
+| `jwk.alg`        | String   | Required          | Immutable | Algorithm, identifies the algorithm intended for use with the key. Refer to [Available algorithms for JWK](#available-algorithms-for-jwk).                                                                                                                                                                                                                                                                             |
+| `jwk.crv`        | String   | Required/Optional | Immutable | Curve of the Elliptic Curve (EC) or Octet Key Pair (OKP) public key. Required for EC- and OKP-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                  |
+| `jwk.e`          | String   | Required/Optional | Immutable | RSA exponent of the RSA public key. Required for RSA-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                           |
+| `jwk.kid`        | String   | Required          | Immutable | Key ID, a unique identifier for the key that helps when selecting a key.                                                                                                                                                                                                                                                                                                                                               |
+| `jwk.kty`        | String   | Required          | Immutable | Key Type, identifies the cryptographic algorithm family used with the key. Can be `RSA`, `EC`, or `OKP`.                                                                                                                                                                                                                                                                                                               |
+| `jwk.n`          | String   | Required/Optional | Immutable | RSA modulus of the RSA public key. Required for RSA-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                                            |
+| `jwk.x`          | String   | Required/Optional | Immutable | Elliptic curve x-coordinate of the EC public key or OKP public key. Required for EC-based algorithms and OKP-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                   |
+| `jwk.y`          | String   | Required/Optional | Immutable | Elliptic curve y-coordinate of the EC public key. Required for EC-based algorithms, optional and ignored if present for other algorithms.                                                                                                                                                                                                                                                                              |
+| `name`           | String   | Optional          | Mutable   | A friendly name shown in the admin console for the key. Optional and defaults to `jwk.kid`.                                                                                                                                                                                                                                                                                                                            |
+| `updatedAt`      | DateTime | N/A               | Read-only | Date and time the credential signing key was last updated. Can be null.                                                                                                                                                                                                                                                                                                                                                |
 
 The `jwk` object must not contain private key material. If you perform a POST request and the `jwk` object includes private key material, the service returns an HTTP 400 error.
 
@@ -6735,7 +6926,7 @@ The service does not allow `none`.
 
 | Key Management Algorithm                                                                        | jwk.alg        |
 | ----------------------------------------------------------------------------------------------- | -------------- |
-| RSAES-PKCS1-V1\_5 key encryption                                                                | RSA1\_5        |
+| RSAES-PKCS1-V1_5 key encryption                                                                 | RSA1_5         |
 | RSAES using OAEP key encryption                                                                 | RSA-OAEP       |
 |                                                                                                 | RSA-OAEP-256   |
 | AES key wrap                                                                                    | A128KW         |
@@ -6749,16 +6940,69 @@ The service does not allow `none`.
 |                                                                                                 | ECDH-ES+A192KW |
 |                                                                                                 | ECDH-ES+A256KW |
 
+## Credential Signing Keys errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential signing key operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------- | ------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_REQUEST`  | `INVALID_VALUE`                   | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialSigningKeys` request supplies a `jwk` object that cannot be parsed as a JSON Web Key, such as a missing `kty` or a missing key field for the key type, or a path identifier cannot be parsed as a UUID
+>
+> **Details:** The jose4j parsing message for the failing field with the target at the `jwk` field path, for example `Missing required 'kty' parameter.` or `Missing required 'n' parameter.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /credentialSigningKeys` request omits the `jwk` object
+>
+> **Details:** `jwk must not be null`, reported against the `jwk` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE` or `OUT_OF_RANGE` | **Message:** `Validation Error : [<property> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialSigningKeys` request supplies a `jwk` object with a missing or blank `alg`, a `kid` that is missing, contains characters outside a-z, 0-9, A-Z, `-`, and `_`, or is longer than 256 characters, an `alg` that the service does not support (such as `none`), a `jwk.kty` that does not match `jwk.alg`, or a `jwk` that contains private key material, or supplies a `name` that is blank, contains characters outside Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens, or is longer than 256 characters
+>
+> **Details:** The validator literal for the failing property, for example `alg must not be null or empty` for a blank `jwk.alg`, `kid must not be null` for an omitted `jwk.kid`, `kid must contain only alphanumeric characters, dashes, and underscores` for a `jwk.kid` with invalid characters, `kid must not be longer than 256 characters` for an overly long `jwk.kid`, `unsupported algorithm: <alg>` for an unsupported `jwk.alg`, `key type <kty> does not match algorithm <alg>` for a mismatched key type and algorithm, `must not contain private key material` for a `jwk` that includes a private key field, `must not be empty or blank` for a blank `name`, or `must contain only Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens` for a `name` with invalid characters (for example `Validation Error : [jwk kid must not be null]`). A `name` longer than 256 characters returns `size must be between 1 and 256` with `rangeMinimumValue` and `rangeMaximumValue` inner errors and the `OUT_OF_RANGE` detail code |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`            | **Message:** `A resource with the specified name already exists.`> **Collapse: When and details**
+>
+> **When:** A `POST /credentialSigningKeys` request supplies a `jwk.kid` that already exists in the environment
+>
+> **Details:** `CredentialSigningKey with kid <kid> already exists in environment`, reported against the `jwk.kid` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                   | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** The environment does not have the capability to use PingOne Credentials
+>
+> **Details:** `Environment does not have capability to use credentials`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                   | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /credentialSigningKeys/{credentialSigningKeyID}` request supplies a `jwk` object that differs from the existing key
+>
+> **Details:** `The attribute is immutable and can not be updated.` for the `jwk` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 403         | `ACCESS_FAILED`    | None                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `credentialsIssuance:create:credentialSigningKey` permission (`POST`), the `credentialsIssuance:read:credentialSigningKey` permission (`GET`), the `credentialsIssuance:update:credentialSigningKey` permission (`PUT`), or the `credentialsIssuance:delete:credentialSigningKey` permission (`DELETE`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 404         | `NOT_FOUND`        | None                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET`, `PUT`, or `DELETE /credentialSigningKeys/{credentialSigningKeyID}` request references a credential signing key that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 500         | `UNEXPECTED_ERROR` | None                              | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while processing the request.
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
 ---
 
 ---
 title: Credential Types
-description: Use the Credentials Types operations to create, read, and update the credential types used by compatible wallet apps.
+description: Explains how to create, read, and update the PingOne Credentials credential types used by compatible digital wallet apps
 component: pingone-api
-page_id: pingone-api:credentials:credential-types
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-types.html
+page_id: pingone-api:credentials:credential-types/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-types/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-type-management-modes: Credential Type management modes
@@ -6782,6 +7026,7 @@ section_ids:
   credential-types-example-api: Example API
   credential-types-important-considerations: Important considerations
   response-codes: Response codes
+  credential-types-errors: Credential Types errors
 ---
 
 # Credential Types
@@ -6790,19 +7035,19 @@ Use the Credentials Types operations to create, read, and update the credential 
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential Type management modes
 
@@ -6810,15 +7055,15 @@ Credential Types supports two modes of management identified in `management.mode
 
 ### Issuance method
 
-if `management.mode` is `AUTOMATIC`, you [create a credential issuance rule](credential-issuance-rules/create-credential-issuance-rule.html) and the service issues the credential to all users who match the rule.
+if `management.mode` is `AUTOMATIC`, you [create a credential issuance rule](../credential-issuance-rules/create-credential-issuance-rule.html) and the service issues the credential to all users who match the rule.
 
-if `management.mode` is `MANAGED`, you [create a user credential](user-credentials/create-user-credential.html) or [update a user credential](user-credentials/update-a-user-credential.html) and the service issues the credential to that user.
+if `management.mode` is `MANAGED`, you [create a user credential](../user-credentials/create-user-credential.html) or [update a user credential](../user-credentials/update-a-user-credential.html) and the service issues the credential to that user.
 
 ### Data source
 
-if `management.mode` is `AUTOMATIC`, you can define `Alphanumeric Text` fields, but the value of the field is fixed when you [create the credential type (automated)](credential-types/create-credential-type-automated.html). For dynamic values, where the value is assigned at the time a [credential issuance rule](credential-issuance-rules/create-credential-issuance-rule.html) issues the credential, you can define `Directory Attribute` fields where the value is obtained from either standard attributes or custom attributes in the user directory.
+if `management.mode` is `AUTOMATIC`, you can define `Alphanumeric Text` fields, but the value of the field is fixed when you [create the credential type (automated)](create-credential-type-automated.html). For dynamic values, where the value is assigned at the time a [credential issuance rule](../credential-issuance-rules/create-credential-issuance-rule.html) issues the credential, you can define `Directory Attribute` fields where the value is obtained from either standard attributes or custom attributes in the user directory.
 
-if `management.mode` is `MANAGED`, you can define `Alphanumeric Text` fields and you can optionally assign a value when you [create a credential type (managed)](credential-types/create-credential-type-managed.html). However, the key difference of `MANAGED` is that you can assign a value when you [create a user credential](user-credentials/create-user-credential.html) or [update a user credential](user-credentials/update-a-user-credential.html), which overrides any value in the credential type. You can also define `Directory Attribute` fields where the value is obtained from either standard attributes or custom attributes in the user directory and are assigned when you create or update a user credential.
+if `management.mode` is `MANAGED`, you can define `Alphanumeric Text` fields and you can optionally assign a value when you [create a credential type (managed)](create-credential-type-managed.html). However, the key difference of `MANAGED` is that you can assign a value when you [create a user credential](../user-credentials/create-user-credential.html) or [update a user credential](../user-credentials/update-a-user-credential.html), which overrides any value in the credential type. You can also define `Directory Attribute` fields where the value is obtained from either standard attributes or custom attributes in the user directory and are assigned when you create or update a user credential.
 
 ## Issuance protocol
 
@@ -6826,21 +7071,21 @@ Credential Types support two issuance protocols. By setting `openid4VCI.enabled`
 
 ### OpenID4VCI protocol
 
-The Credentials service receives, and responds to, requests for credential issuance using [OpenID for Verifiable Credential Issuance (OpenID4VCI)](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) API. For authentication this open standard API uses [OAuth 2.0 (RFC6749)](https://www.rfc-editor.org/info/rfc6749). For data models it uses [IETF SD-JWT VC](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-final.html#I-D.ietf-oauth-sd-jwt-vc). The `openid4VCI` protocol is available only if `openid4VCI.enabled` is `true` on the credential type when you [create an automated credential type](credential-types/create-credential-type-automated.html) or [create a managed credential type](credential-types/create-credential-type-managed.html).
+The Credentials service receives, and responds to, requests for credential issuance using [OpenID for Verifiable Credential Issuance (OpenID4VCI)](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) API. For authentication this open standard API uses [OAuth 2.0 (RFC6749)](https://www.rfc-editor.org/info/rfc6749). For data models it uses [IETF SD-JWT VC](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-final.html#I-D.ietf-oauth-sd-jwt-vc). The `openid4VCI` protocol is available only if `openid4VCI.enabled` is `true` on the credential type when you [create an automated credential type](create-credential-type-automated.html) or [create a managed credential type](create-credential-type-managed.html).
 
-If `management.mode` is `AUTOMATED`, its associated [credential issuance rule](credential-issuance-rules.html) creates the credentials and issues them to all users who match the rule. For OpenID4VCI credentials, the credential remains in the staged queue until the user retrieves it with their wallet using OpenID4VCI.
+If `management.mode` is `AUTOMATED`, its associated [credential issuance rule](../credential-issuance-rules/index.html) creates the credentials and issues them to all users who match the rule. For OpenID4VCI credentials, the credential remains in the staged queue until the user retrieves it with their wallet using OpenID4VCI.
 
-If `management.mode` is `MANAGED`, you [create a user credential](user-credentials/create-user-credential.html) or [update a user credential](user-credentials/update-a-user-credential.html) to create the credential and the user retrieves it with their wallet using OpenID4VCI.
+If `management.mode` is `MANAGED`, you [create a user credential](../user-credentials/create-user-credential.html) or [update a user credential](../user-credentials/update-a-user-credential.html) to create the credential and the user retrieves it with their wallet using OpenID4VCI.
 
 ### Native protocol
 
-The service can also use PingOne `native` protocol. The PingOne native protocol only works with apps that use the [PingOne Neo Native SDKs](../native-sdks/pingone-neo-native-sdks.html), which has more features but is restricted to only supported apps.
+The service can also use PingOne `native` protocol. The PingOne native protocol only works with apps that use the [PingOne Neo Native SDKs](../../native-sdks/pingone-neo-native-sdks/index.html), which has more features but is restricted to only supported apps.
 
-If the user's wallet is paired with a PingOne digital wallet app, you use the `native` protocol. The `native` protocol is always available. You can [create an automated credential type](credential-types/create-credential-type-automated.html), and its associated [credential issuance rule](credential-issuance-rules.html) creates and pushes the credential to the paired wallet. Or you can [create a managed credential type](credential-types/create-credential-type-managed.html), or [update a credential type](credential-types/update-a-credential-type.html) and use [create a user credential](user-credentials/create-user-credential.html) or [update a user credential](user-credentials/update-a-user-credential.html) to push it to the paired wallet.
+If the user's wallet is paired with a PingOne digital wallet app, you use the `native` protocol. The `native` protocol is always available. You can [create an automated credential type](create-credential-type-automated.html), and its associated [credential issuance rule](../credential-issuance-rules/index.html) creates and pushes the credential to the paired wallet. Or you can [create a managed credential type](create-credential-type-managed.html), or [update a credential type](update-a-credential-type.html) and use [create a user credential](../user-credentials/create-user-credential.html) or [update a user credential](../user-credentials/update-a-user-credential.html) to push it to the paired wallet.
 
 ## Versioning
 
-If the updated credential type differs from the existing credential type, the service saves the existing credential type as a Credential Type Version and increments `version.number` in the updated credential type. Credential Type Versions can be read with [Read All Credential Type Versions](credential-types/read-all-credential-types-versions.html).
+If the updated credential type differs from the existing credential type, the service saves the existing credential type as a Credential Type Version and increments `version.number` in the updated credential type. Credential Type Versions can be read with [Read All Credential Type Versions](read-all-credential-types-versions.html).
 
 ## Automatic deletion and revocation
 
@@ -6856,7 +7101,7 @@ If `onDelete.revokeIssuedCredentials` is true:
 
 If `onDelete.revokeIssuedCredentials` is false:
 
-* User credentials are only revoked if the issuance rule causes it to be revoked or if [Update a User Credential](user-credentials/update-a-user-credential.html) sets the expiration date.
+* User credentials are only revoked if the issuance rule causes it to be revoked or if [Update a User Credential](../user-credentials/update-a-user-credential.html) sets the expiration date.
 
 * Provisioned credentials are revoked if the user credential is revoked (refer to previous item).
 
@@ -6926,61 +7171,61 @@ Regardless of the setting of `onDelete.revokeIssuedCredentials`, the service alw
 
 ## Credential schema
 
-When the service creates a credential from a credential type, it maintains the full credential schema, including attributes without corresponding values in the [Create a User Credential](user-credentials/create-user-credential.html) request, so that the credential structure is consistent and predictable. It assigns an empty string (`""`) to any attribute without a value in the request body.
+When the service creates a credential from a credential type, it maintains the full credential schema, including attributes without corresponding values in the [Create a User Credential](../user-credentials/create-user-credential.html) request, so that the credential structure is consistent and predictable. It assigns an empty string (`""`) to any attribute without a value in the request body.
 
 ## Credential Types data model
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | **Deprecation notice:** PingOne credentials no longer support `cardDesignTemplate`, which is replaced by fixed templates, and is deprecated. The property `metadata.fields.isVisible`, which controls visibility of fields in `cardDesignTemplate`, is no longer required and is also deprecated. Existing credential types defined by a `cardDesignTemplate` will continue to work, but `cardDesignTemplate` cannot be updated. You can use [Update a Credential Type](credential-types/update-a-credential-type.html) to remove `cardDesignTemplate` and add `visualizationTemplateData` to such credential types. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | **Deprecation notice:** PingOne credentials no longer support `cardDesignTemplate`, which is replaced by fixed templates, and is deprecated. The property `metadata.fields.isVisible`, which controls visibility of fields in `cardDesignTemplate`, is no longer required and is also deprecated. Existing credential types defined by a `cardDesignTemplate` will continue to work, but `cardDesignTemplate` cannot be updated. You can use [Update a Credential Type](update-a-credential-type.html) to remove `cardDesignTemplate` and add `visualizationTemplateData` to such credential types. |
 
-| Property                              | Type     | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------- | -------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cardDesignTemplate` (deprecated)     | String   | Required          | Immutable | Deprecated, do not use. An SVG formatted image containing placeholders for the credentials fields that need to be displayed in the image. Refer to warning following this table. Not returned with [Read All Credential Types](credential-types/read-all-credential-types.html). You must [Read One Credential Type](credential-types/read-one-credential-type.html) with the `id` of the credential type you want to review.                                                                  |
-| `cardType`                            | String   | Optional          | Mutable   | A descriptor of the credential type. Can be non-identity types such as proof of employment or proof of insurance.                                                                                                                                                                                                                                                                                                                                                                              |
-| `createdAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was created.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `deletedAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was deleted. Returned only with [Read One Credential Type](credential-types/read-one-credential-type.html).                                                                                                                                                                                                                                                                                                                                                  |
-| `description`                         | String   | Optional          | Mutable   | A description of the credential type.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `environment.id`                      | String   | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential type exists.                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `expiration`                          | Object   | Optional          | Mutable   | Object that identifies how to evaluate the expiration date. Requires one and only one of `after`, `timestamp`, or `expression`. Permitted only when `management.mode` is `AUTOMATED`.                                                                                                                                                                                                                                                                                                          |
-| `expiration.after`                    | Object   | Required/Optional | Mutable   | Contains the numeric duration and its time unit for calculating an expiration date.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `expiration.after.duration`           | Integer  | Required          | Mutable   | Length of time before transaction timeout expires. Range is from a 1 hour minimum (or equivalent) to an (effectively) unbounded maximum.                                                                                                                                                                                                                                                                                                                                                       |
-| `expiration.after.timeUnit`           | String   | Required          | Mutable   | Time unit of transaction timeout. Can be `SECONDS`, `MINUTES`, `HOURS`, or `DAYS`.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `expiration.expression`               | String   | Required/Optional | Mutable   | PingOne Expression Language (PEL) expression that evaluates to an ISO 8601 date. For more information on PEL, refer to [PingOne expression language](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html).                                                                                                                                                                                                                                           |
-| `expiration.fieldName`                | String   | Required/Optional | Mutable   | On issuance, name of the field in the credential to hold the `expiration` that, when evaluated, returns an expiration date. Must be unique from all fields defined in the `metadata` object of [Create Credential Type](#credentialing-metadata-object-data-model). Required when `expiration.type` is `SOFT`. Optional when `expiration.type` is `HARD` and ignored if used.                                                                                                                  |
-| `expiration.timestamp`                | DateTime | Required/Optional | Mutable   | The date and time to expire in ISO 8601 YYYY-MM-DDTHH:MM:SS.sssZ format (milliseconds optional).                                                                                                                                                                                                                                                                                                                                                                                               |
-| `expiration.type`                     | String   | Required          | Mutable   | Indicates how expiration of the credential is presented. Can be `SOFT` or `HARD`. A `SOFT` expiration appears as a user-defined field (named in `fieldName`) in the credential but returns no expiration date in [Read One User Credential](user-credentials/read-one-user-credential.html). A `HARD` expiration appears as a standards-based expiration field in the credential and returns an expiration date in [Read One User Credential](user-credentials/read-one-user-credential.html). |
-| `id`                                  | String   | N/A               | Read-only | Identifier (UUID) associated with the credential type.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `issuer.id`                           | String   | N/A               | Read-only | The identifier (UUID) of the issuer.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `issuerName`                          | String   | Optional          | Mutable   | Issuer name associated with the card, can differ from title.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `management.mode`                     | String   | Optional          | Mutable   | Management mode of the credential type. Can be `AUTOMATED` (the default) or `MANAGED`. Refer to the note following this table.                                                                                                                                                                                                                                                                                                                                                                 |
-| `metadata`                            | Object   | Required          | Mutable   | Contains the names, data types, and other metadata related to the credential. Refer to [metadata object data model](#credentialing-metadata-object-data-model).                                                                                                                                                                                                                                                                                                                                |
-| `multiple`                            | Object   | Optional          | Mutable   | Object containing directives that enable you to [Issue multiple credentials to a user based on a directory attribute](#credentialing-issue-multiple-credentials-to-a-user-based-on-a-directory-attribute).                                                                                                                                                                                                                                                                                     |
-| `multiple.expression`                 | String   | Required          | Mutable   | A [PingOne Expression Language (PEL)](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html) expression that evaluates to a number or array. If an array, calculates the array length for the count. Populates the limit to a variable, `ITERATOR`, available to PEL expressions in `metadata.fields.attribute`.                                                                                                                                       |
-| `onDelete.` `revokeIssuedCredentials` | Boolean  | Optional          | Mutable   | Whether user credentials are automatically revoked when a credential type, user, or environment is deleted. Defaults to `true`. For credential types (such as birth certificates, university degrees, or marriage certificates) that should never be automatically revoked even if the user or environment is deleted, set this to `false`.                                                                                                                                                    |
-| `openid4VCI`                          | Object   | Optional          | Mutable   | Object containing directives that enable you to configure OpenID for Verifiable Credentials Issuance as an issuance protocol.                                                                                                                                                                                                                                                                                                                                                                  |
-| `openid4VCI.enabled`                  | Boolean  | Required          | Mutable   | Whether or not the credential type can use OpenID for Verifiable Credentials Issuance protocol to issue a user's credential.                                                                                                                                                                                                                                                                                                                                                                   |
-| `openid4VCI.scope`                    | String   | Required          | Immutable | Scope of the credential type. The scope required of a wallet to request issuance of that credential type. Defaults to `p1:provision:credentials`. Can be a custom scope defined in your environment, but must begin with `p1:provision:credentials:` to be recognized by the service as a valid scope.                                                                                                                                                                                         |
-| `title`                               | String   | Required          | Immutable | Title of the credential. Verification sites are expected to be able to request the issued credential from the compatible wallet app using the title.                                                                                                                                                                                                                                                                                                                                           |
-| `updatedAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was last updated. Can be null.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `version.id`                          | String   | N/A               | Read-only | Identifier (UUID) of this version of the credential type. The service assigns identifiers.                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `version.number`                      | Integer  | N/A               | Read-only | Version of this credential type. The service assigns versions.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `version.uri`                         | String   | N/A               | Read-only | A URI to of this version of the credential type. The service assigns URIs.                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `visualizationTemplateData`           | Object   | Optional          | Mutable   | Describes fields in the credential as it appears in the wallet. Refer to [visualizationTemplateData object data model](#credentialing-visualizationtemplatedata-object-data-model).                                                                                                                                                                                                                                                                                                            |
+| Property                              | Type     | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------- | -------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cardDesignTemplate` (deprecated)     | String   | Required          | Immutable | Deprecated, do not use. An SVG formatted image containing placeholders for the credentials fields that need to be displayed in the image. Refer to warning following this table. Not returned with [Read All Credential Types](read-all-credential-types.html). You must [Read One Credential Type](read-one-credential-type.html) with the `id` of the credential type you want to review.                                                                                                          |
+| `cardType`                            | String   | Optional          | Mutable   | A descriptor of the credential type. Can be non-identity types such as proof of employment or proof of insurance.                                                                                                                                                                                                                                                                                                                                                                                    |
+| `createdAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was created.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `deletedAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was deleted. Returned only with [Read One Credential Type](read-one-credential-type.html).                                                                                                                                                                                                                                                                                                                                                                         |
+| `description`                         | String   | Optional          | Mutable   | A description of the credential type.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `environment.id`                      | String   | N/A               | Read-only | PingOne environment identifier (UUID) in which the credential type exists.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `expiration`                          | Object   | Optional          | Mutable   | Object that identifies how to evaluate the expiration date. Requires one and only one of `after`, `timestamp`, or `expression`. Permitted only when `management.mode` is `AUTOMATED`.                                                                                                                                                                                                                                                                                                                |
+| `expiration.after`                    | Object   | Required/Optional | Mutable   | Contains the numeric duration and its time unit for calculating an expiration date.                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `expiration.after.duration`           | Integer  | Required          | Mutable   | Length of time before transaction timeout expires. Range is from a 1 hour minimum (or equivalent) to an (effectively) unbounded maximum.                                                                                                                                                                                                                                                                                                                                                             |
+| `expiration.after.timeUnit`           | String   | Required          | Mutable   | Time unit of transaction timeout. Can be `SECONDS`, `MINUTES`, `HOURS`, or `DAYS`.                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `expiration.expression`               | String   | Required/Optional | Mutable   | PingOne Expression Language (PEL) expression that evaluates to an ISO 8601 date. For more information on PEL, refer to [PingOne expression language](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html).                                                                                                                                                                                                                                                 |
+| `expiration.fieldName`                | String   | Required/Optional | Mutable   | On issuance, name of the field in the credential to hold the `expiration` that, when evaluated, returns an expiration date. Must be unique from all fields defined in the `metadata` object of [Create Credential Type](#credentialing-metadata-object-data-model). Required when `expiration.type` is `SOFT`. Optional when `expiration.type` is `HARD` and ignored if used.                                                                                                                        |
+| `expiration.timestamp`                | DateTime | Required/Optional | Mutable   | The date and time to expire in ISO 8601 YYYY-MM-DDTHH:MM:SS.sssZ format (milliseconds optional).                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `expiration.type`                     | String   | Required          | Mutable   | Indicates how expiration of the credential is presented. Can be `SOFT` or `HARD`. A `SOFT` expiration appears as a user-defined field (named in `fieldName`) in the credential but returns no expiration date in [Read One User Credential](../user-credentials/read-one-user-credential.html). A `HARD` expiration appears as a standards-based expiration field in the credential and returns an expiration date in [Read One User Credential](../user-credentials/read-one-user-credential.html). |
+| `id`                                  | String   | N/A               | Read-only | Identifier (UUID) associated with the credential type.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `issuer.id`                           | String   | N/A               | Read-only | The identifier (UUID) of the issuer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issuerName`                          | String   | Optional          | Mutable   | Issuer name associated with the card, can differ from title.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `management.mode`                     | String   | Optional          | Mutable   | Management mode of the credential type. Can be `AUTOMATED` (the default) or `MANAGED`. Refer to the note following this table.                                                                                                                                                                                                                                                                                                                                                                       |
+| `metadata`                            | Object   | Required          | Mutable   | Contains the names, data types, and other metadata related to the credential. Refer to [metadata object data model](#credentialing-metadata-object-data-model).                                                                                                                                                                                                                                                                                                                                      |
+| `multiple`                            | Object   | Optional          | Mutable   | Object containing directives that enable you to [Issue multiple credentials to a user based on a directory attribute](#credentialing-issue-multiple-credentials-to-a-user-based-on-a-directory-attribute).                                                                                                                                                                                                                                                                                           |
+| `multiple.expression`                 | String   | Required          | Mutable   | A [PingOne Expression Language (PEL)](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html) expression that evaluates to a number or array. If an array, calculates the array length for the count. Populates the limit to a variable, `ITERATOR`, available to PEL expressions in `metadata.fields.attribute`.                                                                                                                                             |
+| `onDelete.` `revokeIssuedCredentials` | Boolean  | Optional          | Mutable   | Whether user credentials are automatically revoked when a credential type, user, or environment is deleted. Defaults to `true`. For credential types (such as birth certificates, university degrees, or marriage certificates) that should never be automatically revoked even if the user or environment is deleted, set this to `false`.                                                                                                                                                          |
+| `openid4VCI`                          | Object   | Optional          | Mutable   | Object containing directives that enable you to configure OpenID for Verifiable Credentials Issuance as an issuance protocol.                                                                                                                                                                                                                                                                                                                                                                        |
+| `openid4VCI.enabled`                  | Boolean  | Required          | Mutable   | Whether or not the credential type can use OpenID for Verifiable Credentials Issuance protocol to issue a user's credential.                                                                                                                                                                                                                                                                                                                                                                         |
+| `openid4VCI.scope`                    | String   | Required          | Immutable | Scope of the credential type. The scope required of a wallet to request issuance of that credential type. Defaults to `p1:provision:credentials`. Can be a custom scope defined in your environment, but must begin with `p1:provision:credentials:` to be recognized by the service as a valid scope.                                                                                                                                                                                               |
+| `title`                               | String   | Required          | Immutable | Title of the credential. Verification sites are expected to be able to request the issued credential from the compatible wallet app using the title.                                                                                                                                                                                                                                                                                                                                                 |
+| `updatedAt`                           | DateTime | N/A               | Read-only | Date and time the credential type was last updated. Can be null.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `version.id`                          | String   | N/A               | Read-only | Identifier (UUID) of this version of the credential type. The service assigns identifiers.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `version.number`                      | Integer  | N/A               | Read-only | Version of this credential type. The service assigns versions.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `version.uri`                         | String   | N/A               | Read-only | A URI to of this version of the credential type. The service assigns URIs.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `visualizationTemplateData`           | Object   | Optional          | Mutable   | Describes fields in the credential as it appears in the wallet. Refer to [visualizationTemplateData object data model](#credentialing-visualizationtemplatedata-object-data-model).                                                                                                                                                                                                                                                                                                                  |
 
 |   |                                                                                                                                                                                                                                                                                                      |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Multiple credential issuance is limited to 10 credentials issued for one user for one credential type. You must ensure that the content of the directory attribute will not exceed the 10 credential limit when using your PEL expressions in `multiple.expression` and `metadata.fields.attribute`. |
 
-If `management.mode` is `AUTOMATED`, the credential type is only issued by its associated [credential issuance rule](credential-issuance-rules.html). If `management.mode` is `MANAGED`, the credential type is only issued by [Create a User Credential](user-credentials/create-user-credential.html) or [Update a User Credential](user-credentials/update-a-user-credential.html) API requests. If you change `management.mode` from `AUTOMATED` to `MANAGED` and an associated issuance rule exists, the rule is disabled, but not deleted.
+If `management.mode` is `AUTOMATED`, the credential type is only issued by its associated [credential issuance rule](../credential-issuance-rules/index.html). If `management.mode` is `MANAGED`, the credential type is only issued by [Create a User Credential](../user-credentials/create-user-credential.html) or [Update a User Credential](../user-credentials/update-a-user-credential.html) API requests. If you change `management.mode` from `AUTOMATED` to `MANAGED` and an associated issuance rule exists, the rule is disabled, but not deleted.
 
 If `management.mode` is `AUTOMATED`, you can value one and only one of the three properties in the `expiration` object and the associated credential issuance rule automatically assigns an expiration date when it issues the credential. If `management.mode` is `MANAGED` and an `expiration` object is present, it causes an error.
 
-If you want to change `management.mode` from `AUTOMATED` to `MANAGED`, but one of the three properties in the `expiration` object is valued, you must remove the `expiration` object. Use [Update the Credential Type](credential-types/update-a-credential-type.html) with no `expiration` object, which removes it from the credential type, and with `management.mode` set to `MANAGED`.
+If you want to change `management.mode` from `AUTOMATED` to `MANAGED`, but one of the three properties in the `expiration` object is valued, you must remove the `expiration` object. Use [Update the Credential Type](update-a-credential-type.html) with no `expiration` object, which removes it from the credential type, and with `management.mode` set to `MANAGED`.
 
-|   |                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For a credential type, if `management.mode` is `AUTOMATED` and no [credential issuance rule](credential-issuance-rules.html) exists for that credential type, no error occurs. That credential type is simply never issued. |
+|   |                                                                                                                                                                                                                                      |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For a credential type, if `management.mode` is `AUTOMATED` and no [credential issuance rule](../credential-issuance-rules/index.html) exists for that credential type, no error occurs. That credential type is simply never issued. |
 
 * If `openid4VCI.enabled` is `true`, you can issue a credential using the `openid4VCI` protocol or the `native` protocol.
 
@@ -6988,7 +7233,7 @@ If you want to change `management.mode` from `AUTOMATED` to `MANAGED`, but one o
 
 ### metadata object data model
 
-The `metadata` object is not returned with [Read All Credential Types](credential-types/read-all-credential-types.html). You must [Read One Credential Type](credential-types/read-one-credential-type.html) with the `id` of the credential type you want to review.
+The `metadata` object is not returned with [Read All Credential Types](read-all-credential-types.html). You must [Read One Credential Type](read-one-credential-type.html) with the `id` of the credential type you want to review.
 
 | Property                        | Type      | Required          | Mutable | Description                                                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------- | --------- | ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -7028,21 +7273,21 @@ If the string does not have `${` and `}`, the string is interpreted as the tradi
 
 #### fields.fileSupport types
 
-A credential `field` that uses a `type` of `Directory Attribute` can contain a URL that references a JPEG, PNG, or GIF image file uploaded with [Create Image](../platform/images/create-image.html). The credential type is limited to 5 fields that have `fileSupport` set to `BASE64_STRING` or `INCLUDE_FILE`. For credentials, an image file has a maximum size of 2 MB. A credential cannot exceed 2.5 MB including all images.
+A credential `field` that uses a `type` of `Directory Attribute` can contain a URL that references a JPEG, PNG, or GIF image file uploaded with [Create Image](../../platform/images/create-image.html). The credential type is limited to 5 fields that have `fileSupport` set to `BASE64_STRING` or `INCLUDE_FILE`. For credentials, an image file has a maximum size of 2 MB. A credential cannot exceed 2.5 MB including all images.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If an image field is in the credential type, before issuing a credential you must:1) If a suitable standard attribute is unavailable, use [Create Attribute](../platform/schemas/create-attribute.html) to create a custom directory attribute in the user schema that can be referenced by the credential field.
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If an image field is in the credential type, before issuing a credential you must:1) If a suitable standard attribute is unavailable, use [Create Attribute](../../platform/schemas/create-attribute.html) to create a custom directory attribute in the user schema that can be referenced by the credential field.
 
-2) Use [Create Image](../platform/images/create-image.html) to make the image available to the service.
+2) Use [Create Image](../../platform/images/create-image.html) to make the image available to the service.
 
-3) Use [Update User](../platform/users/users-1/update-user-patch.html) to place the URL returned by [Create Image](../platform/images/create-image.html) in the attribute in the user schema. |
+3) Use [Update User](../../platform/users/users-1/update-user-patch.html) to place the URL returned by [Create Image](../../platform/images/create-image.html) in the attribute in the user schema. |
 
-| Type            | Description                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------ |
-| BASE64\_STRING  | Image is base64-encoded to a string in the credential.                                                             |
-| INCLUDE\_FILE   | Image binary is included in the credential.                                                                        |
-| REFERENCE\_FILE | Only a URL referencing the image is in the credential. The image binary remains stored external to the credential. |
+| Type           | Description                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------ |
+| BASE64_STRING  | Image is base64-encoded to a string in the credential.                                                             |
+| INCLUDE_FILE   | Image binary is included in the credential.                                                                        |
+| REFERENCE_FILE | Only a URL referencing the image is in the credential. The image binary remains stored external to the credential. |
 
 #### fields.type types
 
@@ -7060,7 +7305,7 @@ The `fields.value` of a credential type has these restrictions based on `managem
 
 * If `management.mode` is `AUTOMATED` and `fields.type` is `Alphanumeric Text`, then `fields.value` is required and is assigned the string provided in `fields.value` when the credential type is created.
 
-* if `management.mode` is `MANAGED` and `type` is `Alphanumeric Text`, then `fields.value` is optional and any string provided in `fields.value` is effectively a default that can be replaced by a `data` value in [Create a User Credential](user-credentials/create-user-credential.html) or [Update a User Credential](user-credentials/update-a-user-credential.html).
+* if `management.mode` is `MANAGED` and `type` is `Alphanumeric Text`, then `fields.value` is optional and any string provided in `fields.value` is effectively a default that can be replaced by a `data` value in [Create a User Credential](../user-credentials/create-user-credential.html) or [Update a User Credential](../user-credentials/update-a-user-credential.html).
 
 * Regardless of `management.mode`, if `type` is `Issued Timestamp`, then `fields.value` is not allowed.
 
@@ -7080,7 +7325,7 @@ The customer can define a single directory attribute for each user to hold a dat
 
 The definition of the data object is up to the customer. They then use [PingOne Expression Language (PEL)](https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html) expressions to retrieve any information as required. The [Credential Types `multiple.expression`](#credential-types-data-model) contains a PEL expression that counts qualifying entries in the data object. The [Credential Types `metadata.fields.attribute`](#credentialing-metadata-object-data-model) contains a PEL expression to retrieve individual data elements that populates a field in the credit type definition.
 
-When you [Apply Credential Issuance Rule Staged Changes](credential-issuance-rules/apply-credential-issuance-rule.html) for a user for a credential type that has multiple configured, the service creates multiple, separate user credentials for the credential type.
+When you [Apply Credential Issuance Rule Staged Changes](../credential-issuance-rules/apply-credential-issuance-rule.html) for a user for a credential type that has multiple configured, the service creates multiple, separate user credentials for the credential type.
 
 An example might better illustrate applying these concepts.
 
@@ -7123,7 +7368,7 @@ An administrator at BigBank creates two different credential types, one each for
 
 This demonstrates the API using the `branded` array. An administrator at BigBank created this credential type for `branded`.
 
-A body for [Create a credential type (automated)](credential-types/create-credential-type-automated.html) that creates multiple credentials from the [data object](#credential-types-example-data-object) for the `credit_cards.branded` is:
+A body for [Create a credential type (automated)](create-credential-type-automated.html) that creates multiple credentials from the [data object](#credential-types-example-data-object) for the `credit_cards.branded` is:
 
 ```json
 {
@@ -7176,7 +7421,7 @@ A body for [Create a credential type (automated)](credential-types/create-creden
 
 The PEL expression in `multiple.expression` returns the count of objects in the `credit_cards.branded` object array of the [data object](#credential-types-example-data-object). This populates the iteration limit of the system `ITERATOR` variable seen in the PEL expressions of the three `metadata.fields.attribute` values.
 
-A body for [Create a credential type (automated)](credential-types/create-credential-type-automated.html) that creates multiple credentials from the [data object](#credential-types-example-data-object) for the `credit_cards.owned` is:
+A body for [Create a credential type (automated)](create-credential-type-automated.html) that creates multiple credentials from the [data object](#credential-types-example-data-object) for the `credit_cards.owned` is:
 
 ```json
 {
@@ -7244,16 +7489,99 @@ The PEL expression in `multiple.expression` returns the count of objects in the 
 | 404  | The requested resource was not found.                                 |
 | 500  | Unexpected server error.                                              |
 
+## Credential Types errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential type operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------- | ------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `Validation Error : [<property> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request omits required properties such as `title` or `metadata`, or supplies invalid property values, such as `textColor` or `cardColor` that is not a 6 hex-digit color code, `backgroundImage` larger than 50 KB or `logoImage` larger than 25 KB, `bgOpacityPercent` outside 0 to 100 or `columns` outside 0 to 3, a `cardDesignTemplate` larger than 100 KB, or duplicate `metadata.fields` IDs or titles
+>
+> **Details:** The Bean-Validation literal for the failing property, for example `must not be null` for an omitted `title` or `metadata`, `must be a 6 hex-digit color code` for an invalid `metadata.textColor` or `metadata.cardColor`, `maximum size is 50KB` for an oversized `metadata.backgroundImage`, `maximum size is 25KB` for an oversized `metadata.logoImage`, `must be between 0 and 100` for an out-of-range `metadata.bgOpacityPercent`, `must be between 0 and 3` for an out-of-range `metadata.columns`, `field IDs must be unique` for duplicate field IDs, or `field titles must be unique` for duplicate field titles (for example `Validation Error : [metadata.fields field IDs must be unique]`) |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `Validation Error : [metadata.fields <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request supplies a field whose `fields.value` is not allowed for its `fields.type`, a `Directory Attribute` field without `fields.attribute`, a non-`Directory Attribute` field with `fields.attribute` or `fileSupport`, or an `openid4VCI.scope` that is not `p1:provision:credentials` and does not begin with `p1:provision:credentials:`
+>
+> **Details:** The validator literal, for example `value not allowed`, `attribute required`, `attribute not allowed` for a non-`Directory Attribute` field with `fields.attribute`, `fileSupport is only allowed for field type Directory Attribute` for a non-`Directory Attribute` field with `fields.fileSupport`, or `must be 'p1:provision:credentials' or start with 'p1:provision:credentials:' followed by at least one character`                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `Validation Error : [visualizationTemplateData <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request with `visualizationTemplateData` supplies more than 3 `displayFields`, a `null` or blank `dataFieldName`, a `dataFieldName` that is not a `metadata.fields.title`, or a `dataFieldName` whose field is not required
+>
+> **Details:** `displayFields cannot be more than 3`, `displayField cannot be null`, `dataFieldName cannot be blank`, `dataFieldName not found in metadata.fields`, or `dataFieldName must be a required field in metadata.fields` (for example `Validation Error : [visualizationTemplateData displayFields cannot be more than 3]`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `Validation Error : [metadata.fields[<index>] value required]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request with `management.mode` of `AUTOMATED` omits `fields.value` for an `Alphanumeric Text` field
+>
+> **Details:** `value required`, reported against the `metadata.fields[<index>]` entry (for example `Validation Error : [metadata.fields[1] value required]`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `Validation Error : [expiration <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request supplies an `expiration` object with an invalid configuration, such as an unrecognized `expiration.type`, a `SOFT` expiration without `fieldName`, a `HARD` expiration with `fieldName`, a `timestamp` in the past, an `after` object without `duration` or `timeUnit`, an `after.duration` shorter than one hour, a number of configured expiration properties other than one, or a `fieldName` that conflicts with a `metadata.fields.title`
+>
+> **Details:** The validator literal, for example `type must be a valid value` for an unrecognized `expiration.type`, `fieldName is required for SOFT expiration`, `fieldName is not configurable HARD expiration`, `timestamp must be in the future`, `after.timeUnit must not be null` or `after.duration must not be null` for an incomplete `after` object, `after.duration must not be at least one hour`, `must configure exactly one field: after, timestamp, or expression`, or `field title conflict with expiration field name` (for example `Validation Error : [expiration timestamp must be in the future]`)                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `Validation Error : [management.mode MANAGED does not support expiration configuration]`> **Collapse: When and details**
+>
+> **When:** A `PUT /credentialTypes` request supplies `management.mode` of `MANAGED` together with an `expiration` object
+>
+> **Details:** `MANAGED does not support expiration configuration`, reported against the `management.mode` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request with `multiple` supplies a `multiple.expression` that evaluates to a number outside the range of 1 to 10
+>
+> **Details:** `expression value must be between 1 and 10`, reported against the `multiple.expression` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                   | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request supplies a `metadata.fields.attribute` PEL expression that cannot be evaluated
+>
+> **Details:** A PingOne Expression Language error describing the invalid expression, reported against the failing `metadata.fields.attribute` expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `INVALID_DATA`     | `CREDENTIAL_TYPE_INVALID`                         | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /credentialTypes` request supplies `metadata.fields` that is empty, or more than 5 fields with `fileSupport` of `BASE64_STRING` or `INCLUDE_FILE`
+>
+> **Details:** `fields are empty` or `at most 5 fields with fileSupport INCLUDE_FILE or BASE64_STRING are allowed`, reported against the `metadata.fields` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_REQUEST`  | `INVALID_VALUE`                                   | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** A path identifier cannot be parsed as a UUID, or the request body cannot be deserialized as JSON
+>
+> **Details:** For a JSON field conversion error, the target is the field path and the detail message is `Invalid value for attribute.`. Otherwise no detail is returned                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                            | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /credentialTypes` request is made before a credential issuer profile exists for the environment, uses a system-protected `cardType`, or sets `systemProvided` to `true`, a `PUT` targets a deleted credential type, or a `POST` or `PUT` with `multiple` does not use `__ITERATOR__` in any `metadata.fields.attribute` expression
+>
+> **Details:** `issuerProfile must exist before creating credentialTypes`, `cannot use system protected card type` for the `cardType` property, `cannot create a system provided credential type` for the `systemProvided` property, `cannot update a deleted CredentialType`, or `at least 1 field must use __ITERATOR__ when 'multiple' is present` for the `metadata.fields` property, respectively                                                                                                                                                                                                                                                                                                                                                                                    |
+| 403         | `ACCESS_FAILED`    | `INSUFFICIENT_PERMISSIONS`                        | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The environment does not have the feature enabled for the requested configuration, such as `visualizationTemplateData`, `multiple`, `expiration`, or `openid4VCI` (create and update), or the credential type is system-provided and the request updates or deletes it
+>
+> **Details:** `visualizationTemplateData not allowed in this Environment`, `issuing multiple Credentials not allowed in this Environment`, `credentials expiration not allowed in this Environment`, `OpenID4VCI not allowed in this Environment`, `Cannot update system provided credential type`, or `Cannot delete system provided credential type`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 403         | `ACCESS_FAILED`    | None                                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `credentialsIssuance:create:credentialType` permission (`POST`), the `credentialsIssuance:update:credentialType` permission (`PUT`), the `credentialsIssuance:delete:credentialType` permission (`DELETE`), or the `credentialsIssuance:read:credentialType` permission (`GET`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 404         | `NOT_FOUND`        | None                                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET`, `PUT`, or `DELETE /credentialTypes/{credentialTypeID}` or a versions request references a credential type or version that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 500         | `UNEXPECTED_ERROR` | None                                              | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while processing the request.
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
 ---
 
 ---
 title: Credential Verifications
-description: The Credential Verification service receives, and responds to, requests for credential verification using Decentralized Identity Foundation Java Web Token Verifiable Credentials Presentation Profile (DIF JWT-VC Profile). The profile uses such open standards as:
+description: Explains PingOne Credential Verification, which receives and responds to credential verification requests using the DIF JWT-VC Profile
 component: pingone-api
-page_id: pingone-api:credentials:credential-verifications
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifications.html
+page_id: pingone-api:credentials:credential-verifications/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifications/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-verifications-session-data-model: Credential Verifications session data model
@@ -7262,11 +7590,12 @@ section_ids:
   credential-verifications-error-object-data-model: Credential Verifications errors object data model
   credential-verifications-error-codes: Credential Verifications error codes
   response-codes: Response codes
+  credential-verifications-errors: Credential Verifications errors
 ---
 
 # Credential Verifications
 
-The Credential Verification service receives, and responds to, requests for credential verification using Decentralized Identity Foundation Java Web Token Verifiable Credentials Presentation Profile (DIF JWT-VC Profile). The profile uses such open standards as:
+The Credential Verification service receives, and responds to, requests for credential verification using Decentralized Identity Foundation JSON Web Token Verifiable Credentials Presentation Profile (DIF JWT-VC Profile). The profile uses such open standards as:
 
 * World Wide Web Consortium (W3C) Decentralized Identifiers (DID) for core architecture, data model, and representations
 
@@ -7278,57 +7607,57 @@ The Credential Verification service receives, and responds to, requests for cred
 
 Use of [these standards](https://identity.foundation/jwt-vc-presentation-profile/#normative-references) provides interoperability with any app that complies with DIF JWT-VC Profile.
 
-The service can also use PingOne native protocols. The PingOne native protocol only works with apps that use the [PingOne Neo Native SDKs](../native-sdks/pingone-neo-native-sdks.html), which has more features but is restricted to only supported apps.
+The service can also use PingOne native protocols. The PingOne native protocol only works with apps that use the [PingOne Neo Native SDKs](../../native-sdks/pingone-neo-native-sdks/index.html), which has more features but is restricted to only supported apps.
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential Verifications session data model
 
-| Property                          | Type      | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                              |
-| --------------------------------- | --------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_links.appOpenURL.href`          | String    | N/A               | Read-only | URL to use in a mobile browser to open a compatible wallet app, such as the PingOne Neo Sample App.                                                                                                                                                                                                                                      |
-| `_links.qr.href`                  | String    | N/A               | Read-only | URL to return a QR code that, when evaluated, opens the compatible wallet app to this verification.                                                                                                                                                                                                                                      |
-| `_links.self.href`                | String    | N/A               | Read-only | URL to return this same response.                                                                                                                                                                                                                                                                                                        |
-| `applicationInstance.id`          | String    | Required/Optional | Immutable | Identifier (UUID) of the application running the Wallet SDK on the user's device and registered with the service. When set and `protocol` is `NATIVE`, the service sends a push notification to the application instance using the settings of the digital wallet application.                                                           |
-| `createdAt`                       | DateTime  | N/A               | Read-only | Date and time the credential verifications session was created.                                                                                                                                                                                                                                                                          |
-| `didMethod`                       | String    | Optional          | Immutable | The decentralized identifier method to use during the credential verification session. Can be `JWK`, the default, or `ION`.                                                                                                                                                                                                              |
-| `digitalWalletApplication.id`     | String    | Optional          | Immutable | Identifier (UUID) of the customer's digital wallet app that interacts with the user's digital wallet. When set and `protocol` is `NATIVE`, the service uses the `appOpenURL` defined on the [Digital Wallet App](digital-wallet-apps.html) instead of `shocard.pingone.com`.                                                             |
-| `errors`                          | Object\[] | N/A               | Read-only | Array of objects representing errors recorded when attempting an action on a credential. Refer to [Credential Verifications errors object data model](#credential-verifications-error-object-data-model).                                                                                                                                |
-| `expiresAt`                       | DateTime  | N/A               | Read-only | Date and time the credential verifications session will expire.                                                                                                                                                                                                                                                                          |
-| `id`                              | String    | N/A               | Read-only | Identifier (UUID) of the credential verification session.                                                                                                                                                                                                                                                                                |
-| `issuerFilter.dids`               | String\[] | Optional          | Immutable | Array of unique [Decentralized Identifiers (DID)](https://www.w3.org/TR/did-core/). Ignored if `protocol` is `NATIVE`. Refer to the note following this table.                                                                                                                                                                           |
-| `issuerFilter.environmentIds`     | String\[] | Optional          | Immutable | Array of PingOne environment identifiers. Refer to the note following this table.                                                                                                                                                                                                                                                        |
-| `message`                         | String    | Optional          | Immutable | A message shown to the user by the compatible wallet app to alert the user.                                                                                                                                                                                                                                                              |
-| `notification`                    | Object    | Optional          | Immutable | Contains notification information. When `protocol` is `NATIVE` and `applicationInstance.id` is set, permits administrators to customize their push notification.                                                                                                                                                                         |
-| `notification.template`           | Object    | Optional          | Immutable | Contains template parameters.                                                                                                                                                                                                                                                                                                            |
-| `notification.template.locale`    | String    | Optional          | Immutable | The ISO 2-character language code used for the notification, for example, `en` for English.                                                                                                                                                                                                                                              |
-| `notification.template.variables` | Object\[] | Required/Optional | Immutable | An object of name-value pairs that defines the dynamic variables used by the content variant. Required if the template requires variables, otherwise ignored. For more information on dynamic variables, refer to [Dynamic variables](../platform/notifications/notifications-templates.html#notifications-templates-dynamic-variables). |
-| `notification.template.variant`   | String    | Optional          | Immutable | The unique user-defined name for the content variant that contains the message text used for the notification. For more information on variants, refer to [Creating custom contents](../platform/notifications/notifications-templates.html#notifications-templates-creating-custom-contents).                                           |
-| `protocol`                        | String    | Optional          | Immutable | Protocol to use for verification. Can be `OPENID4VP` or `NATIVE`. If not present, defaults to `NATIVE`.                                                                                                                                                                                                                                  |
-| `protocolVersion`                 | String    | Optional          | Immutable | Protocol version. Only applicable to `OPENID4VP`. If not present, defaults to `JWT-VC-Presentation-Profile-v0.0.1`.                                                                                                                                                                                                                      |
-| `requestedCredentials`            | Object\[] | Required          | Immutable | Array of objects that contain the type of credentials to verify and the keys to return from the credential. Refer to the important note following this table.                                                                                                                                                                            |
-| `requestedCredentials.keys`       | String\[] | Optional          | Immutable | Array of strings that identify the key names for selective disclosure to return from the credential.                                                                                                                                                                                                                                     |
-| `requestedCredentials.type`       | String    | Required          | Immutable | Type of credential to verify. Must be the name of a PingOne credential type issued by the credential issuer.                                                                                                                                                                                                                             |
-| `status`                          | String    | N/A               | Read-only | Status of the verification request. Can be `INITIAL`, `WAITING`, `EXPIRED` (verification session expired),`VERIFICATION_SUCCESSFUL`, or `VERIFICATION_FAILED`.                                                                                                                                                                           |
-| `timeoutSeconds`                  | Integer   | Optional          | Immutable | Maximum number of seconds the presentation session is active. Must be in the range of 30 to 600 seconds. Default is 300 seconds.                                                                                                                                                                                                         |
+| Property                          | Type      | Required          | Mutable   | Description                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------- | --------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_links.appOpenURL.href`          | String    | N/A               | Read-only | URL to use in a mobile browser to open a compatible wallet app, such as the PingOne Neo Sample App.                                                                                                                                                                                                                                               |
+| `_links.qr.href`                  | String    | N/A               | Read-only | URL to return a QR code that, when evaluated, opens the compatible wallet app to this verification.                                                                                                                                                                                                                                               |
+| `_links.self.href`                | String    | N/A               | Read-only | URL to return this same response.                                                                                                                                                                                                                                                                                                                 |
+| `applicationInstance.id`          | String    | Required/Optional | Immutable | Identifier (UUID) of the application running the Wallet SDK on the user's device and registered with the service. When set and `protocol` is `NATIVE`, the service sends a push notification to the application instance using the settings of the digital wallet application.                                                                    |
+| `createdAt`                       | DateTime  | N/A               | Read-only | Date and time the credential verifications session was created.                                                                                                                                                                                                                                                                                   |
+| `didMethod`                       | String    | Optional          | Immutable | The decentralized identifier method to use during the credential verification session. Can be `JWK`, the default, or `ION`.                                                                                                                                                                                                                       |
+| `digitalWalletApplication.id`     | String    | Optional          | Immutable | Identifier (UUID) of the customer's digital wallet app that interacts with the user's digital wallet. When set and `protocol` is `NATIVE`, the service uses the `appOpenURL` defined on the [Digital Wallet App](../digital-wallet-apps/index.html) instead of `shocard.pingone.com`.                                                             |
+| `errors`                          | Object\[] | N/A               | Read-only | Array of objects representing errors recorded when attempting an action on a credential. Refer to [Credential Verifications errors object data model](#credential-verifications-error-object-data-model).                                                                                                                                         |
+| `expiresAt`                       | DateTime  | N/A               | Read-only | Date and time the credential verifications session will expire.                                                                                                                                                                                                                                                                                   |
+| `id`                              | String    | N/A               | Read-only | Identifier (UUID) of the credential verification session.                                                                                                                                                                                                                                                                                         |
+| `issuerFilter.dids`               | String\[] | Optional          | Immutable | Array of unique [Decentralized Identifiers (DID)](https://www.w3.org/TR/did-core/). Ignored if `protocol` is `NATIVE`. Refer to the note following this table.                                                                                                                                                                                    |
+| `issuerFilter.environmentIds`     | String\[] | Optional          | Immutable | Array of PingOne environment identifiers. Refer to the note following this table.                                                                                                                                                                                                                                                                 |
+| `message`                         | String    | Optional          | Immutable | A message shown to the user by the compatible wallet app to alert the user.                                                                                                                                                                                                                                                                       |
+| `notification`                    | Object    | Optional          | Immutable | Contains notification information. When `protocol` is `NATIVE` and `applicationInstance.id` is set, permits administrators to customize their push notification.                                                                                                                                                                                  |
+| `notification.template`           | Object    | Optional          | Immutable | Contains template parameters.                                                                                                                                                                                                                                                                                                                     |
+| `notification.template.locale`    | String    | Optional          | Immutable | The ISO 2-character language code used for the notification, for example, `en` for English.                                                                                                                                                                                                                                                       |
+| `notification.template.variables` | Object\[] | Required/Optional | Immutable | An object of name-value pairs that defines the dynamic variables used by the content variant. Required if the template requires variables, otherwise ignored. For more information on dynamic variables, refer to [Dynamic variables](../../platform/notifications/notifications-templates/index.html#notifications-templates-dynamic-variables). |
+| `notification.template.variant`   | String    | Optional          | Immutable | The unique user-defined name for the content variant that contains the message text used for the notification. For more information on variants, refer to [Creating custom contents](../../platform/notifications/notifications-templates/index.html#notifications-templates-creating-custom-contents).                                           |
+| `protocol`                        | String    | Optional          | Immutable | Protocol to use for verification. Can be `OPENID4VP` or `NATIVE`. If not present, defaults to `NATIVE`.                                                                                                                                                                                                                                           |
+| `protocolVersion`                 | String    | Optional          | Immutable | Protocol version. Only applicable to `OPENID4VP`. If not present, defaults to `JWT-VC-Presentation-Profile-v0.0.1`.                                                                                                                                                                                                                               |
+| `requestedCredentials`            | Object\[] | Required          | Immutable | Array of objects that contain the type of credentials to verify and the keys to return from the credential. Refer to the important note following this table.                                                                                                                                                                                     |
+| `requestedCredentials.keys`       | String\[] | Optional          | Immutable | Array of strings that identify the key names for selective disclosure to return from the credential.                                                                                                                                                                                                                                              |
+| `requestedCredentials.type`       | String    | Required          | Immutable | Type of credential to verify. Must be the name of a PingOne credential type issued by the credential issuer.                                                                                                                                                                                                                                      |
+| `status`                          | String    | N/A               | Read-only | Status of the verification request. Can be `INITIAL`, `WAITING`, `EXPIRED` (verification session expired),`VERIFICATION_SUCCESSFUL`, or `VERIFICATION_FAILED`.                                                                                                                                                                                    |
+| `timeoutSeconds`                  | Integer   | Optional          | Immutable | Maximum number of seconds the presentation session is active. Must be in the range of 30 to 600 seconds. Default is 300 seconds.                                                                                                                                                                                                                  |
 
 The service uses `timeoutSeconds` to determine the `expiresAt` timestamp during presentation session creation. The user must receive the push notification or scan the QR code and then share the requested credential before this time. The service returns `status` of `EXPIRED` if the user attempts to share a credential after the `expiresAt` time. The service also returns `status` of `EXPIRED` if the user does not share a credential before the `expiresAt` time.
 
-The digital wallet service uses the `credential_verification` notification template to send a push notification to a digital wallet when a [Create Credential Verification Session (NATIVE - Push Notification)](credential-verifications/create-credential-verification-presentation-session-native-push-notification.html) is created. The `notification.template` object can define a variant and locale for the notification, if needed.
+The digital wallet service uses the `credential_verification` notification template to send a push notification to a digital wallet when a [Create Credential Verification Session (NATIVE - Push Notification)](create-credential-verification-presentation-session-native-push-notification.html) is created. The `notification.template` object can define a variant and locale for the notification, if needed.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                               |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -7400,13 +7729,13 @@ This `issuerFilter.dids` typically contains decentralized identifiers for issuer
 
 ## Credential Verifications error codes
 
-| Code                           | Message                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| REQUESTED\_CREDENTIAL\_MISSING | One or more of the requested credential types is not included in the presentation from the user.                                                                                                                                                                                                                                                                                                                                             |
-| REQUESTED\_FIELD\_MISSING      | One or more of the requested fields for one or more credential types is not included in the presentation from the user.                                                                                                                                                                                                                                                                                                                      |
-| INVALID\_TOKEN                 | The `idToken` presented by the user's wallet is not valid (format or signature error).                                                                                                                                                                                                                                                                                                                                                       |
-| INVALID\_CREDENTIAL            | One or more of the credentials presented by the user could not be validated. Many different errors can cause this. A more specific error is returned in the errors array of the [Read Credential Verification Credential Data](credential-verifications/read-credential-verification-credential-data.html) or [Read Credential Verification Session Data](credential-verifications/read-credential-verification-session-data.html) response. |
-| UNEXPECTED\_ERROR              | An unexpected error occurred during credential verification.                                                                                                                                                                                                                                                                                                                                                                                 |
+| Code                         | Message                                                                                                                                                                                                                                                                                                                                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| REQUESTED_CREDENTIAL_MISSING | One or more of the requested credential types is not included in the presentation from the user.                                                                                                                                                                                                                                                                                           |
+| REQUESTED_FIELD_MISSING      | One or more of the requested fields for one or more credential types is not included in the presentation from the user.                                                                                                                                                                                                                                                                    |
+| INVALID_TOKEN                | The `idToken` presented by the user's wallet is not valid (format or signature error).                                                                                                                                                                                                                                                                                                     |
+| INVALID_CREDENTIAL           | One or more of the credentials presented by the user could not be validated. Many different errors can cause this. A more specific error is returned in the errors array of the [Read Credential Verification Credential Data](read-credential-verification-credential-data.html) or [Read Credential Verification Session Data](read-credential-verification-session-data.html) response. |
+| UNEXPECTED_ERROR             | An unexpected error occurred during credential verification.                                                                                                                                                                                                                                                                                                                               |
 
 ## Response codes
 
@@ -7419,20 +7748,69 @@ This `issuerFilter.dids` typically contains decentralized identifiers for issuer
 | 404  | The requested resource was not found.                                 |
 | 500  | Unexpected server error.                                              |
 
+## Credential Verifications errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential verification operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                      | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------- | ------------------ | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE` or `INVALID_VALUE` | **Message:** `Validation Error : [<property> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST /presentationSessions` request omits both `requestedCredentials` and `schemaSets`, supplies a `requestedCredentials.type` that is null or an empty string, supplies a `timeoutSeconds` outside the range of 30 to 600 seconds, or supplies a `digitalWalletApplication` or `applicationInstance` relationship without an `id`
+>
+> **Details:** The Bean-Validation literal for the failing property, for example `either requestedCredentials or schemaSets must be provided` when both are omitted, `Requested credential type cannot be null or a zero length trimmed string` for a blank type, `Timeout must be greater than or equal to 30 seconds` or `Timeout must be less than or equal to 600 seconds` for an out-of-range `timeoutSeconds`, or `must have an id` for a relationship without an id (for example `Validation Error : [timeoutSeconds Timeout must be less than or equal to 600 seconds]`) |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /presentationSessions` request references an `applicationInstance.id` that is not registered with id-routing, or a `digitalWalletApplication.id` that does not exist for the issuer
+>
+> **Details:** `applicationInstance does not exist` for the `applicationInstance` relationship, or `digitalWalletApplication could not be found` for the `digitalWalletApplication` relationship                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                  | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /presentationSessions` request supplies an `issuerFilter.dids` value that does not begin with `did:web:`, `did:ion:`, or `did:jwk:`, or supplies an `issuerFilter.environmentIds` value that does not have a recognized PingOne credential issuer profile
+>
+> **Details:** `Unrecognized did method in issuerFilter <did>` or `EnvironmentId <environmentId> not a recognized PingOne Issuer`                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_REQUEST`  | `INVALID_VALUE`                  | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** A path identifier cannot be parsed as a UUID, or the request body cannot be deserialized as JSON
+>
+> **Details:** For a JSON field conversion error, the target is the field path and the detail message is `Invalid value for attribute.`. Otherwise no detail is returned                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 403         | `ACCESS_FAILED`    | `INSUFFICIENT_PERMISSIONS`       | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** A `POST /presentationSessions` request with `protocol` of `OPENID4VP` supplies `schemaSets` or sets `authRequestRequired` to `true` with a token that is not platform-scoped
+>
+> **Details:** `schemaSets or authRequestRequired can only be used with platform-scoped tokens`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 403         | `ACCESS_FAILED`    | None                             | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `credentialsVerification:create:presentationSession` permission (`POST`), the `credentialsVerification:delete:presentationSession` permission (`DELETE`), or the `credentialsVerification:read:presentationSession` permission (`GET` status, credential data, and session data)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 404         | `NOT_FOUND`        | None                             | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` or `DELETE /presentationSessions/{credentialVerificationID}` request references a credential verification session that is no longer in the session store (an expired session is still returned with its `status` of `EXPIRED` until its one-hour storage TTL evicts it), or a status, credential data, or session data request references a session that belongs to a different environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 500         | `UNEXPECTED_ERROR` | None                             | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while creating or processing the verification session.
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+
 ---
 
 ---
 title: Credential Verifier Decentralized Identifiers
-description: W3C defines Decentralized IDs (DIDs) as a means to identify an entity in a decentralized ecosystem. See the W3C DIDs spec for details. An entities DID is represented as a string and used in the different ID fields, such as issuer, subject, audience, or holder, for Java Web Tokens (JWTs), Verifiable Credentials (VCs), and other JSON objects. The DID is used to find public keys for the entity as well as optional information about how to interact with the entity.
+description: Explains Decentralized Identifiers (DIDs) used by PingOne Credentials verifiers and how to retrieve and manage verifier DID resources
 component: pingone-api
-page_id: pingone-api:credentials:credential-verifier-decentralized-identifiers
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifier-decentralized-identifiers.html
+page_id: pingone-api:credentials:credential-verifier-decentralized-identifiers/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-verifier-decentralized-identifiers/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pingone-hosted-verifier-didweb: PingOne hosted verifier did:web
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   credential-verifier-did-data-models: Credential verifier DID data models
+  credential-verifier-did-errors: Credential Verifier DID errors
 ---
 
 # Credential Verifier Decentralized Identifiers
@@ -7495,19 +7873,19 @@ The service supports retrieving the `did:web` documents of verifiers hosted by P
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Credential verifier DID data models
 
@@ -7522,16 +7900,39 @@ Refer to [Roles Management](../platform/roles.html) for more information.
 | `authentication`                  | String | N/A      | Read-only | A unique identifier that conforms to [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax) including in its fragment a UUID for the key of the `verificationMethod.publicKeyJwk`                                                   |
 | `assertionMethod`                 | String | N/A      | Read-only | A unique identifier that conforms to [DID Syntax](https://www.w3.org/TR/did-core/#did-syntax) including in its fragment a UUID for the key of the `verificationMethod.publicKeyJwk`                                                   |
 
+## Credential Verifier DID errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), credential verifier DID document requests can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                               |
+| ----------- | ------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_REQUEST`  | None        | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A path identifier cannot be parsed as a UUID
+>
+> **Details:** None. The top‑level code is `INVALID_REQUEST` even though the message text is the `INVALID_DATA` default message.                                                          |
+| 404         | `NOT_FOUND`        | None        | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** The DID document request references a presentation session that is no longer in the session store, the session belongs to a different environment than the one in the request URL, or the session's protocol is not `OPENID4VP`
+>
+> **Details:** None |
+| 500         | `UNEXPECTED_ERROR` | None        | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an internal error while building the DID document.
+>
+> **Details:** None                                                                                                                                                         |
+
 ---
 
 ---
 title: Customer Credential Signing API Definition
-description: If you choose to sign your credentials with your private key, you must implement an API that conforms to this design. You must Update Credential Issuer Profile and provide the URL of your API in credentialSigning.url.
+description: Defines the customer API design for signing PingOne credentials with your own private key, including request and response data models
 component: pingone-api
-page_id: pingone-api:credentials:credential-signing-keys/customer-credential-signing-api-definition
-canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys/customer-credential-signing-api-definition.html
+page_id: pingone-api:credentials:credential-signing-keys/customer-credential-signing-api-definition/index
+canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys/customer-credential-signing-api-definition/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-14
 section_ids:
   customer-credential-signing-request-data-model: Customer credential signing request data model
   customer-credential-signing-response-data-model: Customer credential signing response data model
@@ -7539,9 +7940,9 @@ section_ids:
 
 # Customer Credential Signing API Definition
 
-If you choose to sign your credentials with your private key, you must implement an API that conforms to this design. You must [Update Credential Issuer Profile](../credential-profiles/update-credential-issuer-profile.html) and provide the URL of your API in `credentialSigning.url`.
+If you choose to sign your credentials with your private key, you must implement an API that conforms to this design. You must [Update Credential Issuer Profile](../../credential-profiles/update-credential-issuer-profile.html) and provide the URL of your API in `credentialSigning.url`.
 
-The request for signing contains an array of payloads that you must sign. Each payload has a key ID and a corresponding credential signing key ID. The key ID, `kid`, you define in the public signing key submitted in the request to [Create Customer Signing Public Key](create-customer-signing-public-key.html). The credential signing key ID, `credentialSigningKeyId`, the PingOne service assigns in the response to [Create Customer Signing Public Key](create-customer-signing-public-key.html).
+The request for signing contains an array of payloads that you must sign. Each payload has a key ID and a corresponding credential signing key ID. The key ID, `kid`, you define in the public signing key submitted in the request to [Create Customer Signing Public Key](../create-customer-signing-public-key.html). The credential signing key ID, `credentialSigningKeyId`, the PingOne service assigns in the response to [Create Customer Signing Public Key](../create-customer-signing-public-key.html).
 
 ## Customer credential signing request data model
 
@@ -7565,18 +7966,17 @@ You can use either `payloads.kid` or `payloads.credentialSigningKeyId` to find t
 | `payloads.payload`   | String    | Required | Immutable | The `payload` sent in the request.                                                    |
 | `payloads.signature` | String    | Required | Immutable | The base64-encoded signature you generated using your private credential signing key. |
 
-Learn more about Java Web Tokens (JWT) in [Introduction to JSON Web Tokens (JWT)](https://docs.pingidentity.com/developer-resources/dev_jwt_jose_overview.html).
-
 ---
 
 ---
 title: Customer Credential Signing Request
-description: The credential signing service uses the POST {{customerCredentialSigningApiUrl}} operation to send credentials for signing. You must define your credential signing API URL to the service in credentialSigning.url when you Update Credential Issuer Profile.
+description: Send a credential payload to your customer signing API for signing with your private key before PingOne issues the credential
 component: pingone-api
 page_id: pingone-api:credentials:credential-signing-keys/customer-credential-signing-api-definition/customer-credential-signing-request
 canonical_url: https://developer.pingidentity.com/pingone-api/credentials/credential-signing-keys/customer-credential-signing-api-definition/customer-credential-signing-request.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-04-21
 section_ids:
   headers: Headers
   body: Body
@@ -7600,7 +8000,7 @@ The credential signing service uses the POST `{{customerCredentialSigningApiUrl}
 
 > **Collapse: Request Model**
 >
-> Refer to [Customer credential signing request data model](../customer-credential-signing-api-definition.html#customer-credential-signing-request-data-model) for full property descriptions.
+> Refer to [Customer credential signing request data model](index.html#customer-credential-signing-request-data-model) for full property descriptions.
 >
 > | `purpose`                         | String    | Optional |
 > | --------------------------------- | --------- | -------- |

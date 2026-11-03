@@ -4,6 +4,8 @@ description: Release notes for the .NET Remote Connector Server, covering fixes,
 component: openicf
 page_id: openicf:connector-release-notes:dotnet-server-release
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/dotnet-server-release.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_7_0_net_rcs: 1.5.7.0 .NET RCS
 ---
@@ -12,13 +14,15 @@ section_ids:
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect Remote Connector Server (RCS) behavior.
-
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect Remote Connector Server (RCS) behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
 |   |                                                                                                                                                                                                                                |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | Unless you have a specific need for the .NET version of the RCS, such as needing the [PowerShell connector toolkit](../connector-reference/powershell.html), we recommend using the [Java RCS](connector-server.html) instead. |
+
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
 
 ## 1.5.7.0 .NET RCS
 
@@ -112,9 +116,13 @@ description: Breaking changes and changed functionality across ICF connectors, t
 component: openicf
 page_id: openicf:connector-release-notes:changed-functionality
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/changed-functionality.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Compatibility"]
 section_ids:
   connectors: Connectors
+  _1-5-20-36-changed-fx: 1.5.20.36
+  saas_common: SaaS Common
   _1-5-20-33-changed-fx: 1.5.20.33
   ldap_connector: LDAP connector
   oracle_ebs_connector: Oracle EBS connector
@@ -128,6 +136,7 @@ section_ids:
   database_table_connector: Database Table connector
   docusign_connector: DocuSign connector
   rcs: RCS
+  1_5_20_36: 1.5.20.36
   1_5_20_32: 1.5.20.32
   1_5_20_24: 1.5.20.24
   1_5_20_23: 1.5.20.23
@@ -143,6 +152,12 @@ section_ids:
 The following changes may impact existing deployments when you update. Adjust existing scripts, files, configurations, and so on, as necessary.
 
 ## Connectors
+
+### 1.5.20.36
+
+#### [SaaS Common](../connector-reference/preface.html#saas-common)
+
+* OPENICF-3460: The `jwtExpiration` property has always treated its value as minutes, but was previously documented as seconds. If you configured `jwtExpiration` with a value intended as seconds, review and update your configuration.
 
 ### 1.5.20.33
 
@@ -210,6 +225,10 @@ We removed the following runtime configuration properties:
 
 ## RCS
 
+### 1.5.20.36
+
+* OPENICF-2180: The Java RCS now caches and shares a single OAuth access token across all IDM instances that use the same connection manager, instead of issuing a separate token per instance. If you relied on per-instance token issuance for rate-limit or credential-rotation assumptions tied to a specific instance, review your configuration.
+
 ### 1.5.20.32
 
 * OPENICF-3369: The Java RCS now supports Java 21. Learn more in [Install Java RCS](../connector-reference/java-server.html).
@@ -248,7 +267,10 @@ description: Release notes for the ICF connector framework, covering changes, bu
 component: openicf
 page_id: openicf:connector-release-notes:framework
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/framework.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
+  1_5_20_36_framework: 1.5.20.36 Framework
   1_5_20_35_framework: 1.5.20.35 Framework
   1_5_20_34_framework: 1.5.20.34 Framework
   1_5_20_33_framework: 1.5.20.33 Framework
@@ -287,9 +309,13 @@ section_ids:
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-|   |                                                                                                            |
-| - | ---------------------------------------------------------------------------------------------------------- |
-|   | Updates to the connector framework can also include security, formatting, and other internal-facing fixes. |
+Updates to the connector framework can also include security, formatting, and other internal-facing fixes.
+
+## 1.5.20.36 Framework
+
+* OPENICF-3538: Fixed an issue where the response-encoding pipeline held the same large payload in memory multiple times, which could exhaust RCS heap memory when returning very large results from `Get` operations.
+
+* OPENICF-3543: Fixed an issue where a `SEARCH` or `SYNC` operation that timed out on the IDM side didn't send a cancellation request to the RCS, leaving the remote connector operation running after IDM gave up.
 
 ## 1.5.20.35 Framework
 
@@ -447,159 +473,173 @@ description: Per-version release notes for ICF connectors, covering new connecto
 component: openicf
 page_id: openicf:connector-release-notes:connectors
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/connectors.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  _1_5_20_35_connectors: 1.5.20.35 Connectors
+  _1_5_20_36_connectors: 1.5.20.36 Connectors
   updated_connectors_with_change_details: Updated connectors with change details
+  box_connector: Box connector
+  database_table_connector: Database Table connector
+  ldap_connector: LDAP connector
   ms_graph_api: MS Graph API
   multiple_csv_connector: Multiple CSV connector
+  multiple_csv_cloud_connector: Multiple CSV Cloud connector
+  _1.5.20.36_saascommon: SaaS Common
+  scim_connector: SCIM connector
+  servicenow_connector: ServiceNow connector
+  updated_connectors_without_change_details: Updated connectors without change details
+  _1_5_20_35_connectors: 1.5.20.35 Connectors
+  updated_connectors_with_change_details_2: Updated connectors with change details
+  ms_graph_api_2: MS Graph API
+  multiple_csv_connector_2: Multiple CSV connector
   pingone_connector: PingOne connector
   _1.5.20.35_saascommon: SaaS Common
   snowflake_connector: Snowflake connector
-  updated_connectors_without_change_details: Updated connectors without change details
-  1_5_20_34_connectors: 1.5.20.34 Connectors
-  updated_connectors_with_change_details_2: Updated connectors with change details
-  ldap_connector: LDAP connector
-  microsoft_graph_api_connector: Microsoft Graph API connector
   updated_connectors_without_change_details_2: Updated connectors without change details
+  1_5_20_34_connectors: 1.5.20.34 Connectors
+  updated_connectors_with_change_details_3: Updated connectors with change details
+  ldap_connector_2: LDAP connector
+  microsoft_graph_api_connector: Microsoft Graph API connector
+  updated_connectors_without_change_details_3: Updated connectors without change details
   1_5_20_33_connectors: 1.5.20.33 Connectors
   new_connectors: New connectors
   snowflake_connector_2: Snowflake connector
-  updated_connectors_with_change_details_3: Updated connectors with change details
+  updated_connectors_with_change_details_4: Updated connectors with change details
   google_apps_connector: Google Apps connector
-  ldap_connector_2: LDAP connector
+  ldap_connector_3: LDAP connector
   oracle_ebs_connector: Oracle EBS connector
   _1.5.20.33_saascommon: SaaS Common
   sap_successfactors_connector: SAP SuccessFactors connector
-  scim_connector: SCIM connector
+  scim_connector_2: SCIM connector
   workday_connector: Workday connector
-  updated_connectors_without_change_details_3: Updated connectors without change details
+  updated_connectors_without_change_details_4: Updated connectors without change details
   1_5_20_32_connectors: 1.5.20.32 Connectors
-  updated_connectors_with_change_details_4: Updated connectors with change details
+  updated_connectors_with_change_details_5: Updated connectors with change details
   dropbox_connector_saas_common: Dropbox connector (SaaS common)
-  ldap_connector_3: LDAP connector
+  ldap_connector_4: LDAP connector
   _1.5.20.32_saascommon: SaaS Common
   saas_rest_connector_saas_common: SaaS REST Connector (SaaS common)
   sap_hana_database_connector: SAP HANA Database connector
-  updated_connectors_without_change_details_4: Updated connectors without change details
+  updated_connectors_without_change_details_5: Updated connectors without change details
   1_5_20_31_connectors: 1.5.20.31 Connectors
-  updated_connectors_with_change_details_5: Updated connectors with change details
+  updated_connectors_with_change_details_6: Updated connectors with change details
   docusign_connector: DocuSign connector
-  multiple_csv_connector_2: Multiple CSV connector
-  multiple_csv_cloud_connector: Multiple CSV Cloud connector
+  multiple_csv_connector_3: Multiple CSV connector
+  multiple_csv_cloud_connector_2: Multiple CSV Cloud connector
   sap_successfactors_connector_2: SAP SuccessFactors connector
   saas_rest_connector: SaaS REST Connector
-  scim_connector_2: SCIM connector
-  updated_connectors_without_change_details_5: Updated connectors without change details
+  scim_connector_3: SCIM connector
+  updated_connectors_without_change_details_6: Updated connectors without change details
   1_5_20_30_connectors: 1.5.20.30 Connectors
-  updated_connectors_with_change_details_6: Updated connectors with change details
-  database_table_connector: Database Table connector
+  updated_connectors_with_change_details_7: Updated connectors with change details
+  database_table_connector_2: Database Table connector
   google_apps_connector_2: Google Apps connector
   kerberos_connector: Kerberos connector
-  ldap_connector_4: LDAP connector
+  ldap_connector_5: LDAP connector
   microsoft_graph_api_connector_2: Microsoft Graph API connector
   _1.5.20.30_saascommon: SaaS Common
   saas_rest_connector_2: SaaS REST Connector
   salesforce_connector: Salesforce connector
-  scim_connector_3: SCIM connector
-  servicenow_connector: ServiceNow connector
-  updated_connectors_without_change_details_6: Updated connectors without change details
+  scim_connector_4: SCIM connector
+  servicenow_connector_2: ServiceNow connector
+  updated_connectors_without_change_details_7: Updated connectors without change details
   1_5_20_29_connectors: 1.5.20.29 Connectors
   new_connectors_2: New connectors
   saas_rest_connector_3: SaaS REST Connector
-  updated_connectors_with_change_details_7: Updated connectors with change details
+  updated_connectors_with_change_details_8: Updated connectors with change details
   adobe_marketing_cloud_connector: Adobe Marketing Cloud connector
-  box_connector: Box connector
+  box_connector_2: Box connector
   epic_connector: Epic connector
   google_cloud_platform_connector: Google Cloud Platform connector
   hubspot_connector: HubSpot connector
-  ldap_connector_5: LDAP connector
+  ldap_connector_6: LDAP connector
   marketo_connector: Marketo connector
   _1.5.20.29_saascommon: SaaS Common
   salesforce_connector_2: Salesforce connector
   sap_successfactors_connector_3: SAP SuccessFactors connector
-  scim_connector_4: SCIM connector
-  servicenow_connector_2: ServiceNow connector
+  scim_connector_5: SCIM connector
+  servicenow_connector_3: ServiceNow connector
   1_5_20_28_connectors: 1.5.20.28 Connectors
   new_connectors_3: New connectors
-  updated_connectors_with_change_details_8: Updated connectors with change details
-  microsoft_graph_api_connector_3: Microsoft Graph API connector
-  updated_connectors_without_change_details_7: Updated connectors without change details
-  1_5_20_27_connectors: 1.5.20.27 Connectors
   updated_connectors_with_change_details_9: Updated connectors with change details
+  microsoft_graph_api_connector_3: Microsoft Graph API connector
+  updated_connectors_without_change_details_8: Updated connectors without change details
+  1_5_20_27_connectors: 1.5.20.27 Connectors
+  updated_connectors_with_change_details_10: Updated connectors with change details
   google_apps_connector_3: Google Apps connector
-  ldap_connector_6: LDAP connector
+  ldap_connector_7: LDAP connector
   1_5_20_26_connectors: 1.5.20.26 Connectors
   new_connectors_4: New connectors
-  updated_connectors_with_change_details_10: Updated connectors with change details
+  updated_connectors_with_change_details_11: Updated connectors with change details
   aws_iam_identity_center_connector: AWS IAM Identity Center connector
   epic_connector_2: Epic connector
-  ldap_connector_7: LDAP connector
+  ldap_connector_8: LDAP connector
   microsoft_graph_api_connector_4: Microsoft Graph API connector
   mongodb_connector_scripted_groovy: MongoDB connector (Scripted Groovy)
   sap_s4hana_connector: SAP S/4HANA connector
-  scim_connector_5: SCIM connector
+  scim_connector_6: SCIM connector
   _1.5.20.26_scriptedgroovy: Scripted Groovy
   workday_connector_2: Workday connector
-  updated_connectors_without_change_details_8: Updated connectors without change details
+  updated_connectors_without_change_details_9: Updated connectors without change details
   1_5_20_23_connectors: 1.5.20.23 Connectors
   new_connectors_5: New connectors
-  updated_connectors_with_change_details_11: Updated connectors with change details
+  updated_connectors_with_change_details_12: Updated connectors with change details
   adobe_admin_console_connector_saas_common: Adobe Admin Console connector (SaaS common)
   amazon_web_services_aws_connector: Amazon Web Services (AWS) connector
-  ldap_connector_8: LDAP connector
+  ldap_connector_9: LDAP connector
   microsoft_graph_api_connector_5: Microsoft Graph API connector
   _1.5.20.23_saascommon: SaaS Common
   sap_successfactors_connector_4: SAP SuccessFactors connector
   webex_connector_saas_common: Webex Connector (SaaS common)
   workday_connector_3: Workday connector
-  updated_connectors_without_change_details_9: Updated connectors without change details
+  updated_connectors_without_change_details_10: Updated connectors without change details
   1_5_20_22_connectors: 1.5.20.22 Connectors
-  updated_connectors_with_change_details_12: Updated connectors with change details
+  updated_connectors_with_change_details_13: Updated connectors with change details
   adobe_admin_console_connector: Adobe Admin Console connector
-  database_table_connector_2: Database Table connector
+  database_table_connector_3: Database Table connector
   docusign_connector_2: DocuSign connector
   ibm_racf_connector: IBM RACF connector
   mongodb_connector: MongoDB connector
   oracle_ebs_connector_2: Oracle EBS connector
   pingone_connector_2: PingOne connector
   sap_successfactors_connector_5: SAP SuccessFactors connector
-  scim_connector_6: SCIM connector
+  scim_connector_7: SCIM connector
   workday_connector_4: Workday connector
-  updated_connectors_without_change_details_10: Updated connectors without change details
+  updated_connectors_without_change_details_11: Updated connectors without change details
   1_5_20_21_connectors: 1.5.20.21 Connectors
-  updated_connectors_with_change_details_13: Updated connectors with change details
+  updated_connectors_with_change_details_14: Updated connectors with change details
   dropbox_connector: Dropbox connector
   epic_connector_3: Epic connector
   google_apps_connector_4: Google Apps connector
-  ldap_connector_9: LDAP connector
+  ldap_connector_10: LDAP connector
   pingone_connector_3: PingOne connector
   sap_connector: SAP connector
   scripted_rest_connector: Scripted REST connector
   webex_connector: Webex Connector
-  updated_connectors_without_change_details_11: Updated connectors without change details
+  updated_connectors_without_change_details_12: Updated connectors without change details
   1_5_20_20_connectors: 1.5.20.20 Connectors
-  updated_connectors_with_change_details_14: Updated connectors with change details
-  database_table_connector_3: Database Table connector
+  updated_connectors_with_change_details_15: Updated connectors with change details
+  database_table_connector_4: Database Table connector
   google_apps_connector_5: Google Apps connector
   microsoft_graph_api_connector_6: Microsoft Graph API connector
   salesforce_connector_3: Salesforce connector
-  scim_connector_7: SCIM connector
-  updated_connectors_without_change_details_12: Updated connectors without change details
-  1_5_20_19_connectors: 1.5.20.19 Connectors
-  updated_connectors_with_change_details_15: Updated connectors with change details
   scim_connector_8: SCIM connector
   updated_connectors_without_change_details_13: Updated connectors without change details
-  1_5_20_18_connectors: 1.5.20.18 Connectors
+  1_5_20_19_connectors: 1.5.20.19 Connectors
   updated_connectors_with_change_details_16: Updated connectors with change details
+  scim_connector_9: SCIM connector
+  updated_connectors_without_change_details_14: Updated connectors without change details
+  1_5_20_18_connectors: 1.5.20.18 Connectors
+  updated_connectors_with_change_details_17: Updated connectors with change details
   dropbox_connector_2: Dropbox connector
   google_apps_connector_6: Google Apps connector
-  ldap_connector_10: LDAP connector
+  ldap_connector_11: LDAP connector
   microsoft_graph_api_connector_7: Microsoft Graph API connector
   salesforce_connector_4: Salesforce connector
   sap_connector_2: SAP connector
   sap_hana_database_connector_2: SAP HANA Database connector
-  scim_connector_9: SCIM connector
-  updated_connectors_without_change_details_14: Updated connectors without change details
+  scim_connector_10: SCIM connector
+  updated_connectors_without_change_details_15: Updated connectors without change details
   1_5_20_17_connectors: 1.5.20.17 Connectors
   1_5_20_16_connectors: 1.5.20.16 Connectors
   1_5_20_15_connectors: 1.5.20.15 Connectors
@@ -630,13 +670,127 @@ section_ids:
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect connector behavior.
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect connector behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+All updated connectors can include security, formatting, and other internal-facing fixes.
 
-|   |                                                                                           |
-| - | ----------------------------------------------------------------------------------------- |
-|   | All updated connectors can include security, formatting, and other internal-facing fixes. |
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
+
+## 1.5.20.36 Connectors
+
+### Updated connectors with change details
+
+#### [Box connector](../connector-reference/box.html)
+
+* OPENICF-3558: Fixed an issue where the connector discarded `additionalTokenParams`, breaking enterprise OAuth token requests that require `box_subject_type` and `box_subject_id` for token scoping.
+
+#### [Database Table connector](../connector-reference/dbtable.html)
+
+* OPENICF-3622: Fixed two JDBC connection leaks, one per paged query and one during connector instance initialization, that caused the connection pool to grow until exhausted.
+
+* OPENICF-3623: The connector now provides improved logging and traceability, including per-operation timing and IDM transaction ID correlation, to help diagnose slow or failing operations without enabling global debug logging.
+
+#### [LDAP connector](../connector-reference/ldap.html)
+
+* OPENICF-2922: Fixed an issue where LiveSync removed a user's `ldapGroups` on Active Directory account updates, while reconciliation synced them correctly.
+
+* OPENICF-3541: Fixed a regression where a custom `GUID` attribute configured as a plain string was incorrectly treated as binary, causing its value to be returned hex-encoded and breaking `_queryFilter` searches on that attribute.
+
+* OPENICF-3598: Fixed an issue where the connector didn't correctly support read and LiveSync of the `ldapGroups` attribute when the underlying `memberOf` attribute is ranged, containing more than 1,500 entries, on Microsoft Active Directory.
+
+#### [MS Graph API](../connector-reference/ms-graph-api.html)
+
+* OPENICF-3485: The connector now supports [Entra ID access packages](../connector-reference/msgraph-access-packages.html). The new `accessPackage` object class supports read and query. The `__accessPackages__` attribute on the `user` object lets you read and replace a user's access package assignments. The attribute isn't returned by default. Request it explicitly. Requires the `EntitlementManagement.Read.All` permission (plus `EntitlementManagement.ReadWrite.All` to grant or revoke assignments).
+
+* OPENICF-3485: Fixed a paging cookie truncation issue affecting all paging handlers. `URI.getQuery()` decoded percent-encoding before splitting query parameters, which stripped base64 `==` padding from `skiptoken` values and caused paging failures on certain result sets. All handlers now use `URI.getRawQuery()`.
+
+* OPENICF-3566: Fixed a Jackson dependency regression that caused connector initialization and the `test()` operation to fail.
+
+#### [Multiple CSV connector](../connector-reference/multicsv.html)
+
+* OPENICF-3557: Fixed a performance issue where resolving `linkedObject` references rescanned the entire linked CSV file for every account record, causing large reconciliations to time out.
+
+* OPENICF-3572: Fixed a potential race condition where concurrent operations across connector instances had no cross-instance file-locking coordination, which could result in a torn read of a linked CSV file mid-write.
+
+* OPENICF-3652: Fixed an issue where a single-UID `GET` parsed the entire CSV file instead of stopping at the first match, making lookup time proportional to file size rather than the position of the match.
+
+#### [Multiple CSV Cloud connector](../connector-reference/multicsvcloud.html)
+
+* OPENICF-3557: Fixed a performance issue where resolving `linkedObject` references rescanned the entire linked CSV file for every account record, causing large reconciliations to time out.
+
+* OPENICF-3572: Fixed a potential race condition where concurrent operations across connector instances had no cross-instance file-locking coordination, which could result in a torn read of a linked CSV file mid-write.
+
+* OPENICF-3652: Fixed an issue where a single-UID `GET` parsed the entire CSV file instead of stopping at the first match, making lookup time proportional to file size rather than the position of the match.
+
+#### [SaaS Common](../connector-reference/preface.html#saas-common)
+
+* OPENICF-3460: The `jwtExpiration` configuration property description is updated to reflect that the value is in minutes, not seconds. Learn more in [Changed functionality](changed-functionality.html#_1-5-20-36-changed-fx).
+
+#### [SCIM connector](../connector-reference/scim.html)
+
+* OPENICF-3573: Fixed an issue where the `test()` operation failed for SCIM providers that return an HTTP 401 (instead of 404) from `/ServiceProviderConfig`, by letting the connector fall back to `/ServiceProviderConfigs`.
+
+* OPENICF-3644: Fixed an issue where the `__groupMemberships__` attribute wasn't included in results when the connector performed implicit pagination, which could cause a full reconciliation to return different results than `reconById` for the same user.
+
+#### [ServiceNow connector](../connector-reference/servicenow.html)
+
+* OPENICF-3416: The connector now supports [managing Alumni Center users](../connector-reference/servicenow.html#servicenow-alumni-users) through the new `alumniUser` object type.
+
+### Updated connectors without change details
+
+|   |                                                                                                      |
+| - | ---------------------------------------------------------------------------------------------------- |
+|   | Connectors without change details can include security, formatting, and other internal-facing fixes. |
+
+* Adobe Admin Console connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Adobe Marketing Cloud connector
+
+* AWS connector
+
+* Cerner connector
+
+* DocuSign connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Dropbox connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Duo connector
+
+* Epic connector
+
+* Google Cloud Platform connector
+
+* HubSpot connector
+
+* Marketo connector
+
+* Oracle EBS connector
+
+* Peoplesoft connector
+
+* PingOne connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* RACF connector
+
+* SaaS REST connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Salesforce connector
+
+* SAP connector
+
+* SAP S/4HANA connector
+
+* Scripted REST connector
+
+* Snowflake connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* SuccessFactors connector
+
+* Webex connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Workday connector
 
 ## 1.5.20.35 Connectors
 
@@ -1590,7 +1744,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 #### [Google Apps connector](../connector-reference/google.html)
 
-* OPENICF-2617: Deprecate \_\_SECONDARY\_EMAIL\_\_ in favor of \_\_SECONDARY\_EMAILS\_\_ attribute
+* OPENICF-2617: Deprecate \_\_SECONDARY_EMAIL\_\_ in favor of \_\_SECONDARY_EMAILS\_\_ attribute
 
 #### [LDAP connector](../connector-reference/ldap.html)
 
@@ -1676,7 +1830,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 * OPENICF-1296: HTTP Status and Error Response Handling.
 
-* OPENICF-2574: Authorization header contains an extra space which breaks client\_credentials flow.
+* OPENICF-2574: Authorization header contains an extra space which breaks client_credentials flow.
 
 * OPENICF-2579: TestOp should catch all exceptions thrown by the initial attempt to read the alternate ServiceProviderConfig endpoint.
 
@@ -1720,7 +1874,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 #### [Salesforce connector](../connector-reference/salesforce.html)
 
-* OPENICF-1527: Returns a generic ConnectorException 'Error: 400' on expired/revoked refresh\_token.
+* OPENICF-1527: Returns a generic ConnectorException 'Error: 400' on expired/revoked refresh_token.
 
 * OPENICF-2246: Implement support for Client Credentials Grant type. Refer to [Configure the Salesforce connector](../connector-reference/salesforce.html#salesforce-provisioner).
 
@@ -1744,9 +1898,9 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 
 #### [SCIM connector](../connector-reference/scim.html)
 
-* OPENICF-1528: Salesforce returns a generic ConnectorException 'Error: 400' on expired/revoked refresh\_token.
+* OPENICF-1528: Salesforce returns a generic ConnectorException 'Error: 400' on expired/revoked refresh_token.
 
-* OPENICF-2472: access\_token validation checked on `issued_at` claim instead of `expires_in` for refresh\_token grant.
+* OPENICF-2472: access_token validation checked on `issued_at` claim instead of `expires_in` for refresh_token grant.
 
 * OPENICF-2500: Extension attributes not flattened when converted to ConnectorObject.
 
@@ -1830,7 +1984,7 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 >
 > * OPENICF-2448: HTTP Client fails to handle OAuth errors
 >
-> * OPENICF-2453: Persist optional refresh\_token issued upon successful access\_token renewal
+> * OPENICF-2453: Persist optional refresh_token issued upon successful access_token renewal
 
 > **Collapse: ScriptedSQL Connector**
 >
@@ -2452,9 +2606,9 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 
 ## 1.5.20.1 Connectors
 
-|   |                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------- |
-|   | 1.5.20.1 is a limited release, where only the Database Table Connector was released to Backstage. |
+|   |                                                                                      |
+| - | ------------------------------------------------------------------------------------ |
+|   | 1.5.20.1 is a limited release, where only the Database Table Connector was released. |
 
 > **Collapse: Database Table Connector**
 >
@@ -2618,7 +2772,7 @@ No issues specific any connectors were addressed in this release.
 >
 > * OPENICF-1432: Workday Connector: Implement OR filter
 >
-> * OPENICF-1447: Workday Connector: add the Contingent\_Worker\_ID as a search criteria
+> * OPENICF-1447: Workday Connector: add the Contingent_Worker_ID as a search criteria
 
 ## 1.5.19.0 Connectors
 
@@ -2654,6 +2808,8 @@ description: Release notes tracking deprecated ICF connector functionality acros
 component: openicf
 page_id: openicf:connector-release-notes:deprecated-functionality
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/deprecated-functionality.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   1_5_20_33: 1.5.20.33
   google_apps_connector: Google Apps connector
@@ -2705,9 +2861,12 @@ description: Release notes for the connectors that are supported with PingIDM an
 component: openicf
 page_id: openicf:connector-release-notes:feed
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/feed.html
-revdate: March 20, 2026
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 26, 2026
 section_ids:
   framework: Connector framework release notes
+  1_5_20_36_framework: 1.5.20.36 Framework
   1_5_20_35_framework: 1.5.20.35 Framework
   1_5_20_34_framework: 1.5.20.34 Framework
   1_5_20_33_framework: 1.5.20.33 Framework
@@ -2741,158 +2900,170 @@ section_ids:
   1_5_19_0_framework: 1.5.19.0 Framework
   1_5_18_0_framework: 1.5.18.0 Framework
   connectors: Connector release notes
-  _1_5_20_35_connectors: 1.5.20.35 Connectors
+  _1_5_20_36_connectors: 1.5.20.36 Connectors
   updated_connectors_with_change_details: Updated connectors with change details
+  box_connector: Box connector
+  database_table_connector: Database Table connector
+  ldap_connector: LDAP connector
   ms_graph_api: MS Graph API
   multiple_csv_connector: Multiple CSV connector
+  multiple_csv_cloud_connector: Multiple CSV Cloud connector
+  _1.5.20.36_saascommon: SaaS Common
+  scim_connector: SCIM connector
+  servicenow_connector: ServiceNow connector
+  updated_connectors_without_change_details: Updated connectors without change details
+  _1_5_20_35_connectors: 1.5.20.35 Connectors
+  updated_connectors_with_change_details_2: Updated connectors with change details
+  ms_graph_api_2: MS Graph API
+  multiple_csv_connector_2: Multiple CSV connector
   pingone_connector: PingOne connector
   _1.5.20.35_saascommon: SaaS Common
   snowflake_connector: Snowflake connector
-  updated_connectors_without_change_details: Updated connectors without change details
-  1_5_20_34_connectors: 1.5.20.34 Connectors
-  updated_connectors_with_change_details_2: Updated connectors with change details
-  ldap_connector: LDAP connector
-  microsoft_graph_api_connector: Microsoft Graph API connector
   updated_connectors_without_change_details_2: Updated connectors without change details
+  1_5_20_34_connectors: 1.5.20.34 Connectors
+  updated_connectors_with_change_details_3: Updated connectors with change details
+  ldap_connector_2: LDAP connector
+  microsoft_graph_api_connector: Microsoft Graph API connector
+  updated_connectors_without_change_details_3: Updated connectors without change details
   1_5_20_33_connectors: 1.5.20.33 Connectors
   new_connectors: New connectors
   snowflake_connector_2: Snowflake connector
-  updated_connectors_with_change_details_3: Updated connectors with change details
+  updated_connectors_with_change_details_4: Updated connectors with change details
   google_apps_connector: Google Apps connector
-  ldap_connector_2: LDAP connector
+  ldap_connector_3: LDAP connector
   oracle_ebs_connector: Oracle EBS connector
   _1.5.20.33_saascommon: SaaS Common
   sap_successfactors_connector: SAP SuccessFactors connector
-  scim_connector: SCIM connector
+  scim_connector_2: SCIM connector
   workday_connector: Workday connector
-  updated_connectors_without_change_details_3: Updated connectors without change details
+  updated_connectors_without_change_details_4: Updated connectors without change details
   1_5_20_32_connectors: 1.5.20.32 Connectors
-  updated_connectors_with_change_details_4: Updated connectors with change details
+  updated_connectors_with_change_details_5: Updated connectors with change details
   dropbox_connector_saas_common: Dropbox connector (SaaS common)
-  ldap_connector_3: LDAP connector
+  ldap_connector_4: LDAP connector
   _1.5.20.32_saascommon: SaaS Common
   saas_rest_connector_saas_common: SaaS REST Connector (SaaS common)
   sap_hana_database_connector: SAP HANA Database connector
-  updated_connectors_without_change_details_4: Updated connectors without change details
+  updated_connectors_without_change_details_5: Updated connectors without change details
   1_5_20_31_connectors: 1.5.20.31 Connectors
-  updated_connectors_with_change_details_5: Updated connectors with change details
+  updated_connectors_with_change_details_6: Updated connectors with change details
   docusign_connector: DocuSign connector
-  multiple_csv_connector_2: Multiple CSV connector
-  multiple_csv_cloud_connector: Multiple CSV Cloud connector
+  multiple_csv_connector_3: Multiple CSV connector
+  multiple_csv_cloud_connector_2: Multiple CSV Cloud connector
   sap_successfactors_connector_2: SAP SuccessFactors connector
   saas_rest_connector: SaaS REST Connector
-  scim_connector_2: SCIM connector
-  updated_connectors_without_change_details_5: Updated connectors without change details
+  scim_connector_3: SCIM connector
+  updated_connectors_without_change_details_6: Updated connectors without change details
   1_5_20_30_connectors: 1.5.20.30 Connectors
-  updated_connectors_with_change_details_6: Updated connectors with change details
-  database_table_connector: Database Table connector
+  updated_connectors_with_change_details_7: Updated connectors with change details
+  database_table_connector_2: Database Table connector
   google_apps_connector_2: Google Apps connector
   kerberos_connector: Kerberos connector
-  ldap_connector_4: LDAP connector
+  ldap_connector_5: LDAP connector
   microsoft_graph_api_connector_2: Microsoft Graph API connector
   _1.5.20.30_saascommon: SaaS Common
   saas_rest_connector_2: SaaS REST Connector
   salesforce_connector: Salesforce connector
-  scim_connector_3: SCIM connector
-  servicenow_connector: ServiceNow connector
-  updated_connectors_without_change_details_6: Updated connectors without change details
+  scim_connector_4: SCIM connector
+  servicenow_connector_2: ServiceNow connector
+  updated_connectors_without_change_details_7: Updated connectors without change details
   1_5_20_29_connectors: 1.5.20.29 Connectors
   new_connectors_2: New connectors
   saas_rest_connector_3: SaaS REST Connector
-  updated_connectors_with_change_details_7: Updated connectors with change details
+  updated_connectors_with_change_details_8: Updated connectors with change details
   adobe_marketing_cloud_connector: Adobe Marketing Cloud connector
-  box_connector: Box connector
+  box_connector_2: Box connector
   epic_connector: Epic connector
   google_cloud_platform_connector: Google Cloud Platform connector
   hubspot_connector: HubSpot connector
-  ldap_connector_5: LDAP connector
+  ldap_connector_6: LDAP connector
   marketo_connector: Marketo connector
   _1.5.20.29_saascommon: SaaS Common
   salesforce_connector_2: Salesforce connector
   sap_successfactors_connector_3: SAP SuccessFactors connector
-  scim_connector_4: SCIM connector
-  servicenow_connector_2: ServiceNow connector
+  scim_connector_5: SCIM connector
+  servicenow_connector_3: ServiceNow connector
   1_5_20_28_connectors: 1.5.20.28 Connectors
   new_connectors_3: New connectors
-  updated_connectors_with_change_details_8: Updated connectors with change details
-  microsoft_graph_api_connector_3: Microsoft Graph API connector
-  updated_connectors_without_change_details_7: Updated connectors without change details
-  1_5_20_27_connectors: 1.5.20.27 Connectors
   updated_connectors_with_change_details_9: Updated connectors with change details
+  microsoft_graph_api_connector_3: Microsoft Graph API connector
+  updated_connectors_without_change_details_8: Updated connectors without change details
+  1_5_20_27_connectors: 1.5.20.27 Connectors
+  updated_connectors_with_change_details_10: Updated connectors with change details
   google_apps_connector_3: Google Apps connector
-  ldap_connector_6: LDAP connector
+  ldap_connector_7: LDAP connector
   1_5_20_26_connectors: 1.5.20.26 Connectors
   new_connectors_4: New connectors
-  updated_connectors_with_change_details_10: Updated connectors with change details
+  updated_connectors_with_change_details_11: Updated connectors with change details
   aws_iam_identity_center_connector: AWS IAM Identity Center connector
   epic_connector_2: Epic connector
-  ldap_connector_7: LDAP connector
+  ldap_connector_8: LDAP connector
   microsoft_graph_api_connector_4: Microsoft Graph API connector
   mongodb_connector_scripted_groovy: MongoDB connector (Scripted Groovy)
   sap_s4hana_connector: SAP S/4HANA connector
-  scim_connector_5: SCIM connector
+  scim_connector_6: SCIM connector
   _1.5.20.26_scriptedgroovy: Scripted Groovy
   workday_connector_2: Workday connector
-  updated_connectors_without_change_details_8: Updated connectors without change details
+  updated_connectors_without_change_details_9: Updated connectors without change details
   1_5_20_23_connectors: 1.5.20.23 Connectors
   new_connectors_5: New connectors
-  updated_connectors_with_change_details_11: Updated connectors with change details
+  updated_connectors_with_change_details_12: Updated connectors with change details
   adobe_admin_console_connector_saas_common: Adobe Admin Console connector (SaaS common)
   amazon_web_services_aws_connector: Amazon Web Services (AWS) connector
-  ldap_connector_8: LDAP connector
+  ldap_connector_9: LDAP connector
   microsoft_graph_api_connector_5: Microsoft Graph API connector
   _1.5.20.23_saascommon: SaaS Common
   sap_successfactors_connector_4: SAP SuccessFactors connector
   webex_connector_saas_common: Webex Connector (SaaS common)
   workday_connector_3: Workday connector
-  updated_connectors_without_change_details_9: Updated connectors without change details
+  updated_connectors_without_change_details_10: Updated connectors without change details
   1_5_20_22_connectors: 1.5.20.22 Connectors
-  updated_connectors_with_change_details_12: Updated connectors with change details
+  updated_connectors_with_change_details_13: Updated connectors with change details
   adobe_admin_console_connector: Adobe Admin Console connector
-  database_table_connector_2: Database Table connector
+  database_table_connector_3: Database Table connector
   docusign_connector_2: DocuSign connector
   ibm_racf_connector: IBM RACF connector
   mongodb_connector: MongoDB connector
   oracle_ebs_connector_2: Oracle EBS connector
   pingone_connector_2: PingOne connector
   sap_successfactors_connector_5: SAP SuccessFactors connector
-  scim_connector_6: SCIM connector
+  scim_connector_7: SCIM connector
   workday_connector_4: Workday connector
-  updated_connectors_without_change_details_10: Updated connectors without change details
+  updated_connectors_without_change_details_11: Updated connectors without change details
   1_5_20_21_connectors: 1.5.20.21 Connectors
-  updated_connectors_with_change_details_13: Updated connectors with change details
+  updated_connectors_with_change_details_14: Updated connectors with change details
   dropbox_connector: Dropbox connector
   epic_connector_3: Epic connector
   google_apps_connector_4: Google Apps connector
-  ldap_connector_9: LDAP connector
+  ldap_connector_10: LDAP connector
   pingone_connector_3: PingOne connector
   sap_connector: SAP connector
   scripted_rest_connector: Scripted REST connector
   webex_connector: Webex Connector
-  updated_connectors_without_change_details_11: Updated connectors without change details
+  updated_connectors_without_change_details_12: Updated connectors without change details
   1_5_20_20_connectors: 1.5.20.20 Connectors
-  updated_connectors_with_change_details_14: Updated connectors with change details
-  database_table_connector_3: Database Table connector
+  updated_connectors_with_change_details_15: Updated connectors with change details
+  database_table_connector_4: Database Table connector
   google_apps_connector_5: Google Apps connector
   microsoft_graph_api_connector_6: Microsoft Graph API connector
   salesforce_connector_3: Salesforce connector
-  scim_connector_7: SCIM connector
-  updated_connectors_without_change_details_12: Updated connectors without change details
-  1_5_20_19_connectors: 1.5.20.19 Connectors
-  updated_connectors_with_change_details_15: Updated connectors with change details
   scim_connector_8: SCIM connector
   updated_connectors_without_change_details_13: Updated connectors without change details
-  1_5_20_18_connectors: 1.5.20.18 Connectors
+  1_5_20_19_connectors: 1.5.20.19 Connectors
   updated_connectors_with_change_details_16: Updated connectors with change details
+  scim_connector_9: SCIM connector
+  updated_connectors_without_change_details_14: Updated connectors without change details
+  1_5_20_18_connectors: 1.5.20.18 Connectors
+  updated_connectors_with_change_details_17: Updated connectors with change details
   dropbox_connector_2: Dropbox connector
   google_apps_connector_6: Google Apps connector
-  ldap_connector_10: LDAP connector
+  ldap_connector_11: LDAP connector
   microsoft_graph_api_connector_7: Microsoft Graph API connector
   salesforce_connector_4: Salesforce connector
   sap_connector_2: SAP connector
   sap_hana_database_connector_2: SAP HANA Database connector
-  scim_connector_9: SCIM connector
-  updated_connectors_without_change_details_14: Updated connectors without change details
+  scim_connector_10: SCIM connector
+  updated_connectors_without_change_details_15: Updated connectors without change details
   1_5_20_17_connectors: 1.5.20.17 Connectors
   1_5_20_16_connectors: 1.5.20.16 Connectors
   1_5_20_15_connectors: 1.5.20.15 Connectors
@@ -2918,6 +3089,7 @@ section_ids:
   1_5_19_0_connectors: 1.5.19.0 Connectors
   1_5_18_0_connectors: 1.5.18.0 Connectors
   java-rcs-release-notes: Java RCS release notes
+  1_5_20_36_java_rcs: 1.5.20.36 Java RCS
   1_5_20_35_java_rcs: 1.5.20.35 Java RCS
   1_5_20_34_java_rcs: 1.5.20.34 Java RCS
   1_5_20_33_java_rcs: 1.5.20.33 Java RCS
@@ -2961,13 +3133,21 @@ section_ids:
 
 # ICF release notes
 
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
+
 ## Connector framework release notes
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-|   |                                                                                                            |
-| - | ---------------------------------------------------------------------------------------------------------- |
-|   | Updates to the connector framework can also include security, formatting, and other internal-facing fixes. |
+Updates to the connector framework can also include security, formatting, and other internal-facing fixes.
+
+### 1.5.20.36 Framework
+
+* OPENICF-3538: Fixed an issue where the response-encoding pipeline held the same large payload in memory multiple times, which could exhaust RCS heap memory when returning very large results from `Get` operations.
+
+* OPENICF-3543: Fixed an issue where a `SEARCH` or `SYNC` operation that timed out on the IDM side didn't send a cancellation request to the RCS, leaving the remote connector operation running after IDM gave up.
 
 ### 1.5.20.35 Framework
 
@@ -3121,13 +3301,127 @@ No issues specific to the ICF Connector Framework were addressed in this release
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect connector behavior.
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect connector behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+All updated connectors can include security, formatting, and other internal-facing fixes.
 
-|   |                                                                                           |
-| - | ----------------------------------------------------------------------------------------- |
-|   | All updated connectors can include security, formatting, and other internal-facing fixes. |
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
+
+### 1.5.20.36 Connectors
+
+#### Updated connectors with change details
+
+##### [Box connector](../connector-reference/box.html)
+
+* OPENICF-3558: Fixed an issue where the connector discarded `additionalTokenParams`, breaking enterprise OAuth token requests that require `box_subject_type` and `box_subject_id` for token scoping.
+
+##### [Database Table connector](../connector-reference/dbtable.html)
+
+* OPENICF-3622: Fixed two JDBC connection leaks, one per paged query and one during connector instance initialization, that caused the connection pool to grow until exhausted.
+
+* OPENICF-3623: The connector now provides improved logging and traceability, including per-operation timing and IDM transaction ID correlation, to help diagnose slow or failing operations without enabling global debug logging.
+
+##### [LDAP connector](../connector-reference/ldap.html)
+
+* OPENICF-2922: Fixed an issue where LiveSync removed a user's `ldapGroups` on Active Directory account updates, while reconciliation synced them correctly.
+
+* OPENICF-3541: Fixed a regression where a custom `GUID` attribute configured as a plain string was incorrectly treated as binary, causing its value to be returned hex-encoded and breaking `_queryFilter` searches on that attribute.
+
+* OPENICF-3598: Fixed an issue where the connector didn't correctly support read and LiveSync of the `ldapGroups` attribute when the underlying `memberOf` attribute is ranged, containing more than 1,500 entries, on Microsoft Active Directory.
+
+##### [MS Graph API](../connector-reference/ms-graph-api.html)
+
+* OPENICF-3485: The connector now supports [Entra ID access packages](../connector-reference/msgraph-access-packages.html). The new `accessPackage` object class supports read and query. The `__accessPackages__` attribute on the `user` object lets you read and replace a user's access package assignments. The attribute isn't returned by default. Request it explicitly. Requires the `EntitlementManagement.Read.All` permission (plus `EntitlementManagement.ReadWrite.All` to grant or revoke assignments).
+
+* OPENICF-3485: Fixed a paging cookie truncation issue affecting all paging handlers. `URI.getQuery()` decoded percent-encoding before splitting query parameters, which stripped base64 `==` padding from `skiptoken` values and caused paging failures on certain result sets. All handlers now use `URI.getRawQuery()`.
+
+* OPENICF-3566: Fixed a Jackson dependency regression that caused connector initialization and the `test()` operation to fail.
+
+##### [Multiple CSV connector](../connector-reference/multicsv.html)
+
+* OPENICF-3557: Fixed a performance issue where resolving `linkedObject` references rescanned the entire linked CSV file for every account record, causing large reconciliations to time out.
+
+* OPENICF-3572: Fixed a potential race condition where concurrent operations across connector instances had no cross-instance file-locking coordination, which could result in a torn read of a linked CSV file mid-write.
+
+* OPENICF-3652: Fixed an issue where a single-UID `GET` parsed the entire CSV file instead of stopping at the first match, making lookup time proportional to file size rather than the position of the match.
+
+##### [Multiple CSV Cloud connector](../connector-reference/multicsvcloud.html)
+
+* OPENICF-3557: Fixed a performance issue where resolving `linkedObject` references rescanned the entire linked CSV file for every account record, causing large reconciliations to time out.
+
+* OPENICF-3572: Fixed a potential race condition where concurrent operations across connector instances had no cross-instance file-locking coordination, which could result in a torn read of a linked CSV file mid-write.
+
+* OPENICF-3652: Fixed an issue where a single-UID `GET` parsed the entire CSV file instead of stopping at the first match, making lookup time proportional to file size rather than the position of the match.
+
+##### [SaaS Common](../connector-reference/preface.html#saas-common)
+
+* OPENICF-3460: The `jwtExpiration` configuration property description is updated to reflect that the value is in minutes, not seconds. Learn more in [Changed functionality](changed-functionality.html#_1-5-20-36-changed-fx).
+
+##### [SCIM connector](../connector-reference/scim.html)
+
+* OPENICF-3573: Fixed an issue where the `test()` operation failed for SCIM providers that return an HTTP 401 (instead of 404) from `/ServiceProviderConfig`, by letting the connector fall back to `/ServiceProviderConfigs`.
+
+* OPENICF-3644: Fixed an issue where the `__groupMemberships__` attribute wasn't included in results when the connector performed implicit pagination, which could cause a full reconciliation to return different results than `reconById` for the same user.
+
+##### [ServiceNow connector](../connector-reference/servicenow.html)
+
+* OPENICF-3416: The connector now supports [managing Alumni Center users](../connector-reference/servicenow.html#servicenow-alumni-users) through the new `alumniUser` object type.
+
+#### Updated connectors without change details
+
+|   |                                                                                                      |
+| - | ---------------------------------------------------------------------------------------------------- |
+|   | Connectors without change details can include security, formatting, and other internal-facing fixes. |
+
+* Adobe Admin Console connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Adobe Marketing Cloud connector
+
+* AWS connector
+
+* Cerner connector
+
+* DocuSign connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Dropbox connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Duo connector
+
+* Epic connector
+
+* Google Cloud Platform connector
+
+* HubSpot connector
+
+* Marketo connector
+
+* Oracle EBS connector
+
+* Peoplesoft connector
+
+* PingOne connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* RACF connector
+
+* SaaS REST connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Salesforce connector
+
+* SAP connector
+
+* SAP S/4HANA connector
+
+* Scripted REST connector
+
+* Snowflake connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* SuccessFactors connector
+
+* Webex connector ([SaaS common](#_1.5.20.36_saascommon))
+
+* Workday connector
 
 ### 1.5.20.35 Connectors
 
@@ -4081,7 +4375,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 ##### [Google Apps connector](../connector-reference/google.html)
 
-* OPENICF-2617: Deprecate \_\_SECONDARY\_EMAIL\_\_ in favor of \_\_SECONDARY\_EMAILS\_\_ attribute
+* OPENICF-2617: Deprecate \_\_SECONDARY_EMAIL\_\_ in favor of \_\_SECONDARY_EMAILS\_\_ attribute
 
 ##### [LDAP connector](../connector-reference/ldap.html)
 
@@ -4167,7 +4461,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 * OPENICF-1296: HTTP Status and Error Response Handling.
 
-* OPENICF-2574: Authorization header contains an extra space which breaks client\_credentials flow.
+* OPENICF-2574: Authorization header contains an extra space which breaks client_credentials flow.
 
 * OPENICF-2579: TestOp should catch all exceptions thrown by the initial attempt to read the alternate ServiceProviderConfig endpoint.
 
@@ -4211,7 +4505,7 @@ Downloads are available on [Backstage](https://backstage.forgerock.com/downloads
 
 ##### [Salesforce connector](../connector-reference/salesforce.html)
 
-* OPENICF-1527: Returns a generic ConnectorException 'Error: 400' on expired/revoked refresh\_token.
+* OPENICF-1527: Returns a generic ConnectorException 'Error: 400' on expired/revoked refresh_token.
 
 * OPENICF-2246: Implement support for Client Credentials Grant type. Refer to [Configure the Salesforce connector](../connector-reference/salesforce.html#salesforce-provisioner).
 
@@ -4235,9 +4529,9 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 
 ##### [SCIM connector](../connector-reference/scim.html)
 
-* OPENICF-1528: Salesforce returns a generic ConnectorException 'Error: 400' on expired/revoked refresh\_token.
+* OPENICF-1528: Salesforce returns a generic ConnectorException 'Error: 400' on expired/revoked refresh_token.
 
-* OPENICF-2472: access\_token validation checked on `issued_at` claim instead of `expires_in` for refresh\_token grant.
+* OPENICF-2472: access_token validation checked on `issued_at` claim instead of `expires_in` for refresh_token grant.
 
 * OPENICF-2500: Extension attributes not flattened when converted to ConnectorObject.
 
@@ -4321,7 +4615,7 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 >
 > * OPENICF-2448: HTTP Client fails to handle OAuth errors
 >
-> * OPENICF-2453: Persist optional refresh\_token issued upon successful access\_token renewal
+> * OPENICF-2453: Persist optional refresh_token issued upon successful access_token renewal
 
 > **Collapse: ScriptedSQL Connector**
 >
@@ -4943,9 +5237,9 @@ Initial release of the SAP HANA Database connector. Refer to [SAP HANA Database 
 
 ### 1.5.20.1 Connectors
 
-|   |                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------- |
-|   | 1.5.20.1 is a limited release, where only the Database Table Connector was released to Backstage. |
+|   |                                                                                      |
+| - | ------------------------------------------------------------------------------------ |
+|   | 1.5.20.1 is a limited release, where only the Database Table Connector was released. |
 
 > **Collapse: Database Table Connector**
 >
@@ -5109,7 +5403,7 @@ No issues specific any connectors were addressed in this release.
 >
 > * OPENICF-1432: Workday Connector: Implement OR filter
 >
-> * OPENICF-1447: Workday Connector: add the Contingent\_Worker\_ID as a search criteria
+> * OPENICF-1447: Workday Connector: add the Contingent_Worker_ID as a search criteria
 
 ### 1.5.19.0 Connectors
 
@@ -5141,13 +5435,23 @@ No issues specific any connectors were addressed in this release.
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect RCS behavior.
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect RCS behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+Updates to the Java RCS can also include security, formatting, and other internal-facing fixes.
 
-|   |                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------- |
-|   | Updates to the Java RCS can also include security, formatting, and other internal-facing fixes. |
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
+
+### 1.5.20.36 Java RCS
+
+* OPENICF-2180: The Java RCS now caches and shares a single OAuth access token across all IDM instances that use the same connection manager, instead of requesting a separate token for each instance. Learn more in [Changed functionality](changed-functionality.html).
+
+* OPENICF-3615: Fixed an issue where a hung OAuth token refresh with no read timeout could permanently block all WebSocket upgrades to an Advanced Identity Cloud tenant.
+
+* OPENICF-3618: Fixed an issue where a `hostId`-scoped operation's periodic control message omitted requests routed by `hostId`, causing long-running `hostId`-routed operations, such as paged reconciliation searches, to be marked inconsistent and hang indefinitely.
+
+* OPENICF-3681: The RCS now supports Basic proxy authentication when connecting through an HTTP proxy that also advertises Negotiate and NT (New Technology) LAN Manager (NTLM) authentication schemes.
 
 ### 1.5.20.35 Java RCS
 
@@ -5321,7 +5625,7 @@ Bundled connectors were updated, though no changes to the remote connector serve
 
 ### 1.5.20.3 Java RCS
 
-* OPENICF-1725: Java RCS: classPath issue in JAVA\_DLL when running as a service on Windows.
+* OPENICF-1725: Java RCS: classPath issue in JAVA_DLL when running as a service on Windows.
 
 * OPENICF-1730: Client ConnectorInfos cache not refreshed upon RCS instance restart when using RCS Agent.
 
@@ -5423,13 +5727,15 @@ No issues specific to the Remote Connector Server were addressed in this release
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect Remote Connector Server (RCS) behavior.
-
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect Remote Connector Server (RCS) behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
 |   |                                                                                                                                                                                                                                |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | Unless you have a specific need for the .NET version of the RCS, such as needing the [PowerShell connector toolkit](../connector-reference/powershell.html), we recommend using the [Java RCS](connector-server.html) instead. |
+
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
 
 ### 1.5.7.0 .NET RCS
 
@@ -5523,216 +5829,223 @@ description: Release notes for the connectors that are supported with PingIDM an
 component: openicf
 page_id: openicf:connector-release-notes:preface
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/preface.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 ---
 
 # ICF release notes
 
-These release notes cover the ICF releases that are supported in a deployment of PingIDM, Remote Connector Server (RCS), or PingOne Advanced Identity Cloud.
+These release notes cover the ICF releases that are supported in a deployment of PingIDM, Remote Connector Server (RCS), or PingOne Advanced Identity Cloud. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
 
 **Recent updates**
 
 | Version   | Product                                                                                                                                                                                                                                                                                                                                     | Date       |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| 1.5.20.35 | * [ICF Connector Framework](framework.html#_1_5_20_35_framework)
+| 1.5.20.36 | * [ICF Connector Framework](framework.html#_1_5_20_36_framework)
 
-* [Remote Connector Server](connector-server.html#_1_5_20_35_java_rcs)
+* [Remote Connector Server](connector-server.html#_1_5_20_36_java_rcs)
 
-* [ICF Connectors](connectors.html#_1_5_20_35_connectors)                                                                                                                                         | 2026/06/09 |
-| 1.5.20.34 | - [ICF Connector Framework](framework.html#_1_5_20_34_framework)
+* [ICF Connectors](connectors.html#_1_5_20_36_connectors)
 
-- [Remote Connector Server](connector-server.html#_1_5_20_34_java_rcs)
+* [Changed functionality](changed-functionality.html#_1-5-20-36-changed-fx)                                                            | 2026/08/26 |
+| 1.5.20.35 | - [ICF Connector Framework](framework.html#_1_5_20_35_framework)
 
-- [ICF Connectors](connectors.html#_1_5_20_34_connectors)                                                                                                                                         | 2026/03/20 |
-| 1.5.20.33 | * [ICF Connector Framework](framework.html#_1_5_20_33_framework)
+- [Remote Connector Server](connector-server.html#_1_5_20_35_java_rcs)
 
-* [Remote Connector Server](connector-server.html#_1_5_20_33_java_rcs)
+- [ICF Connectors](connectors.html#_1_5_20_35_connectors)                                                                                                                                         | 2026/06/09 |
+| 1.5.20.34 | * [ICF Connector Framework](framework.html#_1_5_20_34_framework)
 
-* [ICF Connectors](connectors.html#_1_5_20_33_connectors)
+* [Remote Connector Server](connector-server.html#_1_5_20_34_java_rcs)
 
-* [Changed functionality](changed-functionality.html#_1-5-20-33-changed-fx)
+* [ICF Connectors](connectors.html#_1_5_20_34_connectors)                                                                                                                                         | 2026/03/20 |
+| 1.5.20.33 | - [ICF Connector Framework](framework.html#_1_5_20_33_framework)
 
-* [Deprecation](deprecated-functionality.html#_1_5_20_33) | 2026/03/10 |
-| 1.5.20.32 | - [ICF Connector Framework](framework.html#_1_5_20_32_framework)
+- [Remote Connector Server](connector-server.html#_1_5_20_33_java_rcs)
 
-- [Remote Connector Server](connector-server.html#_1_5_20_32_java_rcs)
+- [ICF Connectors](connectors.html#_1_5_20_33_connectors)
 
-- [ICF Connectors](connectors.html#_1_5_20_32_connectors)                                                                                                                                         | 2025/09/30 |
-| 1.5.20.31 | * [ICF Connector Framework](framework.html#_1_5_20_31_framework)
+- [Changed functionality](changed-functionality.html#_1-5-20-33-changed-fx)
 
-* [Remote Connector Server](connector-server.html#_1_5_20_31_java_rcs)
+- [Deprecation](deprecated-functionality.html#_1_5_20_33) | 2026/03/10 |
+| 1.5.20.32 | * [ICF Connector Framework](framework.html#_1_5_20_32_framework)
 
-* [ICF Connectors](connectors.html#_1_5_20_31_connectors)
+* [Remote Connector Server](connector-server.html#_1_5_20_32_java_rcs)
 
-* [Changed functionality](changed-functionality.html#_1-5-20-31-changed-fx)                                                            | 2025/09/02 |
-| 1.5.20.30 | - [ICF Connector Framework](framework.html#_1_5_20_30_framework)
+* [ICF Connectors](connectors.html#_1_5_20_32_connectors)                                                                                                                                         | 2025/09/30 |
+| 1.5.20.31 | - [ICF Connector Framework](framework.html#_1_5_20_31_framework)
 
-- [Remote Connector Server](connector-server.html#_1_5_20_30_java_rcs)
+- [Remote Connector Server](connector-server.html#_1_5_20_31_java_rcs)
 
-- [ICF Connectors](connectors.html#_1_5_20_30_connectors)
+- [ICF Connectors](connectors.html#_1_5_20_31_connectors)
 
-- [Deprecation](deprecated-functionality.html#_1_5_20_30)                                                                              | 2025/07/07 |
-| 1.5.20.29 | * [ICF Connector Framework](framework.html#1_5_20_29)
+- [Changed functionality](changed-functionality.html#_1-5-20-31-changed-fx)                                                            | 2025/09/02 |
+| 1.5.20.30 | * [ICF Connector Framework](framework.html#_1_5_20_30_framework)
 
-* [Remote Connector Server](connector-server.html#1_5_20_29)
+* [Remote Connector Server](connector-server.html#_1_5_20_30_java_rcs)
 
-* [ICF Connectors](connectors.html#1_5_20_29)
+* [ICF Connectors](connectors.html#_1_5_20_30_connectors)
 
-* [Changed functionality](changed-functionality.html#1_5_20_29)                                                                                                         | 2025/04/23 |
-| 1.5.20.28 | - [ICF Connector Framework](framework.html#1_5_20_28)
+* [Deprecation](deprecated-functionality.html#_1_5_20_30)                                                                              | 2025/07/07 |
+| 1.5.20.29 | - [ICF Connector Framework](framework.html#1_5_20_29)
 
-- [Remote Connector Server](connector-server.html#1_5_20_28)
+- [Remote Connector Server](connector-server.html#1_5_20_29)
 
-- [ICF Connectors](connectors.html#1_5_20_28)                                                                                                                                                                          | 2025/02/27 |
-| 1.5.20.27 | * [Remote Connector Server](connector-server.html#1_5_20_27)
+- [ICF Connectors](connectors.html#1_5_20_29)
 
-* [ICF Connectors](connectors.html#1_5_20_27)                                                                                                                                                                                                                                 | 2025/01/09 |
-| 1.5.20.26 | - [ICF Connector Framework](framework.html#1_5_20_26)
+- [Changed functionality](changed-functionality.html#1_5_20_29)                                                                                                         | 2025/04/23 |
+| 1.5.20.28 | * [ICF Connector Framework](framework.html#1_5_20_28)
 
-- [Remote Connector Server](connector-server.html#1_5_20_26)
+* [Remote Connector Server](connector-server.html#1_5_20_28)
 
-- [ICF Connectors](connectors.html#1_5_20_26)                                                                                                                                                                          | 2024/12/06 |
-| 1.5.20.25 | * [ICF Connector Framework](framework.html#1_5_20_25)                                                                                                                                                                                                                                                                                       | 2024/10/18 |
-| 1.5.20.24 | - [ICF Connector Framework](framework.html#1_5_20_24)                                                                                                                                                                                                                                                                                       | 2024/10/02 |
-| 1.5.20.23 | * [ICF Connector Framework](framework.html#1_5_20_23)
+* [ICF Connectors](connectors.html#1_5_20_28)                                                                                                                                                                          | 2025/02/27 |
+| 1.5.20.27 | - [Remote Connector Server](connector-server.html#1_5_20_27)
 
-* [Remote Connector Server](connector-server.html#1_5_20_23)
+- [ICF Connectors](connectors.html#1_5_20_27)                                                                                                                                                                                                                                 | 2025/01/09 |
+| 1.5.20.26 | * [ICF Connector Framework](framework.html#1_5_20_26)
 
-* [ICF Connectors](connectors.html#1_5_20_23)
+* [Remote Connector Server](connector-server.html#1_5_20_26)
 
-* [Changed functionality](changed-functionality.html#1_5_20_23)                                                                                                         | 2024/08/01 |
-| 1.5.20.22 | - [ICF Connector Framework](framework.html#1_5_20_22)
+* [ICF Connectors](connectors.html#1_5_20_26)                                                                                                                                                                          | 2024/12/06 |
+| 1.5.20.25 | - [ICF Connector Framework](framework.html#1_5_20_25)                                                                                                                                                                                                                                                                                       | 2024/10/18 |
+| 1.5.20.24 | * [ICF Connector Framework](framework.html#1_5_20_24)                                                                                                                                                                                                                                                                                       | 2024/10/02 |
+| 1.5.20.23 | - [ICF Connector Framework](framework.html#1_5_20_23)
 
-- [Remote Connector Server](connector-server.html#1_5_20_22)
+- [Remote Connector Server](connector-server.html#1_5_20_23)
 
-- [ICF Connectors](connectors.html#1_5_20_22)
+- [ICF Connectors](connectors.html#1_5_20_23)
 
-- [Changed functionality](changed-functionality.html#1_5_20_22)                                                                                                         | 2024/06/21 |
-| 1.5.20.21 | * [ICF Connector Framework](framework.html#1_5_20_21)
+- [Changed functionality](changed-functionality.html#1_5_20_23)                                                                                                         | 2024/08/01 |
+| 1.5.20.22 | * [ICF Connector Framework](framework.html#1_5_20_22)
 
-* [Remote Connector Server](connector-server.html#1_5_20_21)
+* [Remote Connector Server](connector-server.html#1_5_20_22)
 
-* [ICF Connectors](connectors.html#1_5_20_21)
+* [ICF Connectors](connectors.html#1_5_20_22)
 
-* [Changed functionality](changed-functionality.html#1_5_20_21)
+* [Changed functionality](changed-functionality.html#1_5_20_22)                                                                                                         | 2024/06/21 |
+| 1.5.20.21 | - [ICF Connector Framework](framework.html#1_5_20_21)
 
-* [Deprecation](deprecated-functionality.html#1_5_20_21)                                               | 2024/03/19 |
-| 1.5.20.20 | - [ICF Connectors](connectors.html#1_5_20_20)                                                                                                                                                                                                                                                                                               | 2024/02/06 |
-| 1.5.20.19 | * [ICF Connectors](connectors.html#1_5_20_19)                                                                                                                                                                                                                                                                                               | 2023/11/17 |
-| 1.5.20.18 | - [ICF Connector Framework](framework.html#1_5_20_18)
+- [Remote Connector Server](connector-server.html#1_5_20_21)
 
-- [Remote Connector Server](connector-server.html#1_5_20_18)
+- [ICF Connectors](connectors.html#1_5_20_21)
 
-- [ICF Connectors](connectors.html#1_5_20_18)                                                                                                                                                                          | 2023/11/17 |
-| 1.5.20.17 | * [ICF Connectors](connectors.html#1_5_20_17)                                                                                                                                                                                                                                                                                               | 2023/09/07 |
-| 1.5.20.16 | - [ICF Connectors](connectors.html#1_5_20_16)                                                                                                                                                                                                                                                                                               | 2023/08/02 |
-| 1.5.20.15 | * [ICF Connector Framework](framework.html#1_5_20_15)
+- [Changed functionality](changed-functionality.html#1_5_20_21)
 
-* [Remote Connector Server](connector-server.html#1_5_20_15)
+- [Deprecation](deprecated-functionality.html#1_5_20_21)                                               | 2024/03/19 |
+| 1.5.20.20 | * [ICF Connectors](connectors.html#1_5_20_20)                                                                                                                                                                                                                                                                                               | 2024/02/06 |
+| 1.5.20.19 | - [ICF Connectors](connectors.html#1_5_20_19)                                                                                                                                                                                                                                                                                               | 2023/11/17 |
+| 1.5.20.18 | * [ICF Connector Framework](framework.html#1_5_20_18)
 
-* [ICF Connectors](connectors.html#1_5_20_15)                                                                                                                                                                          | 2023/05/12 |
-| 1.5.20.14 | - [Remote Connector Server](connector-server.html#1_5_20_14)
+* [Remote Connector Server](connector-server.html#1_5_20_18)
 
-- [ICF Connectors](connectors.html#1_5_20_14)                                                                                                                                                                                                                                 | 2023/03/20 |
-| 1.5.7.0   | * [.NET remote connector server](dotnet-server-release.html#1_5_7_0)                                                                                                                                                                                                                                                                        | 2023/02/02 |
-| 1.5.20.12 | - [Remote Connector Server](connector-server.html#1_5_20_12)
+* [ICF Connectors](connectors.html#1_5_20_18)                                                                                                                                                                          | 2023/11/17 |
+| 1.5.20.17 | - [ICF Connectors](connectors.html#1_5_20_17)                                                                                                                                                                                                                                                                                               | 2023/09/07 |
+| 1.5.20.16 | * [ICF Connectors](connectors.html#1_5_20_16)                                                                                                                                                                                                                                                                                               | 2023/08/02 |
+| 1.5.20.15 | - [ICF Connector Framework](framework.html#1_5_20_15)
 
-- [ICF Connectors](connectors.html#1_5_20_12)                                                                                                                                                                                                                                 | 2022/12/09 |
-| 1.5.20.11 | * [ICF Connector Framework](framework.html#1_5_20_11)
+- [Remote Connector Server](connector-server.html#1_5_20_15)
 
-* [Remote Connector Server](connector-server.html#1_5_20_11)
+- [ICF Connectors](connectors.html#1_5_20_15)                                                                                                                                                                          | 2023/05/12 |
+| 1.5.20.14 | * [Remote Connector Server](connector-server.html#1_5_20_14)
 
-* [ICF Connectors](connectors.html#1_5_20_11)                                                                                                                                                                          | 2022/11/01 |
-| 1.5.20.9  | - [Remote Connector Server](connector-server.html#1_5_20_9)
+* [ICF Connectors](connectors.html#1_5_20_14)                                                                                                                                                                                                                                 | 2023/03/20 |
+| 1.5.7.0   | - [.NET remote connector server](dotnet-server-release.html#1_5_7_0)                                                                                                                                                                                                                                                                        | 2023/02/02 |
+| 1.5.20.12 | * [Remote Connector Server](connector-server.html#1_5_20_12)
 
-- [ICF Connectors](connectors.html#1_5_20_9)                                                                                                                                                                                                                                   | 2022/09/09 |
-| 1.5.20.8  | * [ICF Connector Framework](framework.html#1_5_20_8)
+* [ICF Connectors](connectors.html#1_5_20_12)                                                                                                                                                                                                                                 | 2022/12/09 |
+| 1.5.20.11 | - [ICF Connector Framework](framework.html#1_5_20_11)
 
-* [Remote Connector Server](connector-server.html#1_5_20_8)
+- [Remote Connector Server](connector-server.html#1_5_20_11)
 
-* [ICF Connectors](connectors.html#1_5_20_8)                                                                                                                                                                             | 2022/08/08 |
-| 1.5.20.7  | - [ICF Connector Framework](framework.html#1_5_20_7)
+- [ICF Connectors](connectors.html#1_5_20_11)                                                                                                                                                                          | 2022/11/01 |
+| 1.5.20.9  | * [Remote Connector Server](connector-server.html#1_5_20_9)
 
-- [Remote Connector Server](connector-server.html#1_5_20_7)
+* [ICF Connectors](connectors.html#1_5_20_9)                                                                                                                                                                                                                                   | 2022/09/09 |
+| 1.5.20.8  | - [ICF Connector Framework](framework.html#1_5_20_8)
 
-- [ICF Connectors](connectors.html#1_5_20_7)                                                                                                                                                                             | 2022/06/06 |
-| 1.5.20.6  | * [ICF Connector Framework](framework.html#1_5_20_6)
+- [Remote Connector Server](connector-server.html#1_5_20_8)
 
-* [Remote Connector Server](connector-server.html#1_5_20_6)
+- [ICF Connectors](connectors.html#1_5_20_8)                                                                                                                                                                             | 2022/08/08 |
+| 1.5.20.7  | * [ICF Connector Framework](framework.html#1_5_20_7)
 
-* [ICF Connectors](connectors.html#1_5_20_6)                                                                                                                                                                             | 2022/05/05 |
-| 1.5.20.5  | - [ICF Connector Framework](framework.html#1_5_20_5)
+* [Remote Connector Server](connector-server.html#1_5_20_7)
 
-- [Remote Connector Server](connector-server.html#1_5_20_5)
+* [ICF Connectors](connectors.html#1_5_20_7)                                                                                                                                                                             | 2022/06/06 |
+| 1.5.20.6  | - [ICF Connector Framework](framework.html#1_5_20_6)
 
-- [ICF Connectors](connectors.html#1_5_20_5)                                                                                                                                                                             | 2022/02/14 |
-| 1.5.20.4  | * [ICF Connector Framework](framework.html#1_5_20_4)
+- [Remote Connector Server](connector-server.html#1_5_20_6)
 
-* [Remote Connector Server](connector-server.html#1_5_20_4)
+- [ICF Connectors](connectors.html#1_5_20_6)                                                                                                                                                                             | 2022/05/05 |
+| 1.5.20.5  | * [ICF Connector Framework](framework.html#1_5_20_5)
 
-* [ICF Connectors](connectors.html#1_5_20_4)                                                                                                                                                                             | 2021/12/08 |
-| 1.5.20.3  | - [ICF Connector Framework](framework.html#1_5_20_3)
+* [Remote Connector Server](connector-server.html#1_5_20_5)
 
-- [Remote Connector Server](connector-server.html#1_5_20_3)
+* [ICF Connectors](connectors.html#1_5_20_5)                                                                                                                                                                             | 2022/02/14 |
+| 1.5.20.4  | - [ICF Connector Framework](framework.html#1_5_20_4)
 
-- [ICF Connectors](connectors.html#1_5_20_3)                                                                                                                                                                             | 2021/11/22 |
-| 1.5.20.2  | * [Remote Connector Server](connector-server.html#1_5_20_2)
+- [Remote Connector Server](connector-server.html#1_5_20_4)
 
-* [ICF Connectors](connectors.html#1_5_20_2)                                                                                                                                                                                                                                   | 2021/07/27 |
-| 1.5.20.1  | - [Database Table Connector](connectors.html#1_5_20_1)                                                                                                                                                                                                                                                                                      | 2021/05/28 |
-| 1.5.20.0  | * [ICF Connector Framework](framework.html#1_5_20_0)
+- [ICF Connectors](connectors.html#1_5_20_4)                                                                                                                                                                             | 2021/12/08 |
+| 1.5.20.3  | * [ICF Connector Framework](framework.html#1_5_20_3)
 
-* [ICF Connectors](connectors.html#1_5_20_0)
+* [Remote Connector Server](connector-server.html#1_5_20_3)
 
-* [Remote Connector Server](connector-server.html#1_5_20_0)                                                                                                                                                                             | 2021/04/16 |
-| 1.5.19.6  | - [ICF Connector Framework](framework.html#1_5_19_6)
+* [ICF Connectors](connectors.html#1_5_20_3)                                                                                                                                                                             | 2021/11/22 |
+| 1.5.20.2  | - [Remote Connector Server](connector-server.html#1_5_20_2)
 
-- [ICF Connectors](connectors.html#1_5_19_6)
+- [ICF Connectors](connectors.html#1_5_20_2)                                                                                                                                                                                                                                   | 2021/07/27 |
+| 1.5.20.1  | * [Database Table Connector](connectors.html#1_5_20_1)                                                                                                                                                                                                                                                                                      | 2021/05/28 |
+| 1.5.20.0  | - [ICF Connector Framework](framework.html#1_5_20_0)
 
-- [Remote Connector Server](connector-server.html#1_5_19_6)                                                                                                                                                                             | 2021/02/26 |
-| 1.5.19.5  | * [ICF Connector Framework](framework.html#1_5_19_5)
+- [ICF Connectors](connectors.html#1_5_20_0)
 
-* [ICF Connectors](connectors.html#1_5_19_5)
+- [Remote Connector Server](connector-server.html#1_5_20_0)                                                                                                                                                                             | 2021/04/16 |
+| 1.5.19.6  | * [ICF Connector Framework](framework.html#1_5_19_6)
 
-* [Remote Connector Server](connector-server.html#1_5_19_5)                                                                                                                                                                             | 2021/02/12 |
-| 1.5.19.4  | - [ICF Connector Framework](framework.html#1_5_19_4)
+* [ICF Connectors](connectors.html#1_5_19_6)
 
-- [ICF Connectors](connectors.html#1_5_19_4)
+* [Remote Connector Server](connector-server.html#1_5_19_6)                                                                                                                                                                             | 2021/02/26 |
+| 1.5.19.5  | - [ICF Connector Framework](framework.html#1_5_19_5)
 
-- [Remote Connector Server](connector-server.html#1_5_19_4)                                                                                                                                                                             | 2021/01/22 |
-| 1.5.19.3  | * [ICF Connector Framework](framework.html#1_5_19_3)
+- [ICF Connectors](connectors.html#1_5_19_5)
 
-* [ICF Connectors](connectors.html#1_5_19_3)
+- [Remote Connector Server](connector-server.html#1_5_19_5)                                                                                                                                                                             | 2021/02/12 |
+| 1.5.19.4  | * [ICF Connector Framework](framework.html#1_5_19_4)
 
-* [Remote Connector Server](connector-server.html#1_5_19_3)                                                                                                                                                                             | 2020/12/13 |
-| 1.5.19.2  | - [ICF Connector Framework](framework.html#1_5_19_2)
+* [ICF Connectors](connectors.html#1_5_19_4)
 
-- [ICF Connectors](connectors.html#1_5_19_2)
+* [Remote Connector Server](connector-server.html#1_5_19_4)                                                                                                                                                                             | 2021/01/22 |
+| 1.5.19.3  | - [ICF Connector Framework](framework.html#1_5_19_3)
 
-- [Remote Connector Server](connector-server.html#1_5_19_2)                                                                                                                                                                             | 2020/11/30 |
-| 1.5.19.1  | * [ICF Connector Framework](framework.html#1_5_19_1)
+- [ICF Connectors](connectors.html#1_5_19_3)
 
-* [ICF Connectors](connectors.html#1_5_19_1)
+- [Remote Connector Server](connector-server.html#1_5_19_3)                                                                                                                                                                             | 2020/12/13 |
+| 1.5.19.2  | * [ICF Connector Framework](framework.html#1_5_19_2)
 
-* [Remote Connector Server](connector-server.html#1_5_19_1)                                                                                                                                                                             | 2020/11/18 |
-| 1.5.19.0  | - [ICF Connector Framework](framework.html#1_5_19_0)
+* [ICF Connectors](connectors.html#1_5_19_2)
 
-- [ICF Connectors](connectors.html#1_5_19_0)
+* [Remote Connector Server](connector-server.html#1_5_19_2)                                                                                                                                                                             | 2020/11/30 |
+| 1.5.19.1  | - [ICF Connector Framework](framework.html#1_5_19_1)
 
-- [Remote Connector Server](connector-server.html#1_5_19_0)                                                                                                                                                                             | 2020/10/20 |
-| 1.5.18.0  | * [ICF Connector Framework](framework.html#1_5_18_0)
+- [ICF Connectors](connectors.html#1_5_19_1)
 
-* [ICF Connectors](connectors.html#1_5_18_0)
+- [Remote Connector Server](connector-server.html#1_5_19_1)                                                                                                                                                                             | 2020/11/18 |
+| 1.5.19.0  | * [ICF Connector Framework](framework.html#1_5_19_0)
 
-* [Remote Connector Server](connector-server.html#1_5_18_0)                                                                                                                                                                             | 2020/09/14 |
+* [ICF Connectors](connectors.html#1_5_19_0)
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | IDM supportThe releases listed in this document cover the connector releases since ICF 1.5.18.0. In most cases, these releases are backwards compatible with previous versions of IDM. Check the [IDM / ICF Compatibility Matrix](https://docs.pingidentity.com/pingidm/8/release-notes/before-you-install.html#connector-matrix) for your version of IDM for compatibility before installing a new version of a connector. |
+* [Remote Connector Server](connector-server.html#1_5_19_0)                                                                                                                                                                             | 2020/10/20 |
+| 1.5.18.0  | - [ICF Connector Framework](framework.html#1_5_18_0)
+
+- [ICF Connectors](connectors.html#1_5_18_0)
+
+- [Remote Connector Server](connector-server.html#1_5_18_0)                                                                                                                                                                             | 2020/09/14 |
 
 ---
 
@@ -5742,7 +6055,10 @@ description: Release notes for the Java Remote Connector Server, covering change
 component: openicf
 page_id: openicf:connector-release-notes:connector-server
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/connector-server.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
+  1_5_20_36_java_rcs: 1.5.20.36 Java RCS
   1_5_20_35_java_rcs: 1.5.20.35 Java RCS
   1_5_20_34_java_rcs: 1.5.20.34 Java RCS
   1_5_20_33_java_rcs: 1.5.20.33 Java RCS
@@ -5786,13 +6102,23 @@ section_ids:
 
 Subscribe for automatic updates: [icon: rss-square, set=fa][ICF release notes RSS Feed](./feed.xml)
 
-Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect RCS behavior.
+Refer to [Connector framework release notes](framework.html) for details regarding any changes to the ICF Connector Framework that can affect RCS behavior. Downloads are available on [Ping Identity Product Downloads](https://product-downloads.pingidentity.com/browse/idm/featured/connectors).
 
-Downloads are available on [Backstage](https://backstage.forgerock.com/downloads/browse/idm/featured/connectors).
+Updates to the Java RCS can also include security, formatting, and other internal-facing fixes.
 
-|   |                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------- |
-|   | Updates to the Java RCS can also include security, formatting, and other internal-facing fixes. |
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
+
+## 1.5.20.36 Java RCS
+
+* OPENICF-2180: The Java RCS now caches and shares a single OAuth access token across all IDM instances that use the same connection manager, instead of requesting a separate token for each instance. Learn more in [Changed functionality](changed-functionality.html).
+
+* OPENICF-3615: Fixed an issue where a hung OAuth token refresh with no read timeout could permanently block all WebSocket upgrades to an Advanced Identity Cloud tenant.
+
+* OPENICF-3618: Fixed an issue where a `hostId`-scoped operation's periodic control message omitted requests routed by `hostId`, causing long-running `hostId`-routed operations, such as paged reconciliation searches, to be marked inconsistent and hang indefinitely.
+
+* OPENICF-3681: The RCS now supports Basic proxy authentication when connecting through an HTTP proxy that also advertises Negotiate and NT (New Technology) LAN Manager (NTLM) authentication schemes.
 
 ## 1.5.20.35 Java RCS
 
@@ -5966,7 +6292,7 @@ Bundled connectors were updated, though no changes to the remote connector serve
 
 ## 1.5.20.3 Java RCS
 
-* OPENICF-1725: Java RCS: classPath issue in JAVA\_DLL when running as a service on Windows.
+* OPENICF-1725: Java RCS: classPath issue in JAVA_DLL when running as a service on Windows.
 
 * OPENICF-1730: Client ConnectorInfos cache not refreshed upon RCS instance restart when using RCS Agent.
 
@@ -6072,11 +6398,17 @@ description: Open known bugs across ICF connectors, including LDAP, SCIM, MS Gra
 component: openicf
 page_id: openicf:connector-release-notes:known-issues
 canonical_url: https://docs.pingidentity.com/openicf/connector-release-notes/known-issues.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Known issues
 
 This topic lists issues that remain open at the time of release.
+
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
 
 * OPENICF-1365: LDAP Connector: Triggered livesync using timestamps on a custom object returns HTTP 500
 
@@ -6094,11 +6426,7 @@ This topic lists issues that remain open at the time of release.
 
 * OPENICF-2289: SCIM Connector: Update operation fails on Salesforce using scimv2
 
-* OPENICF-2302: LDAP Connector: createFullConfig doesn't throw a uniform error when invalid connection details provided
-
 * OPENICF-2319: SCIM Connector: GoTo system returns non-404 code when trying to read a deleted record
-
-* OPENICF-2349: ServiceNow Connector: query filter with complex expression including negation `!` doesn't work
 
 * OPENICF-2369: MSGraphAPI Connector: Attributes embedded in the additionalDataManager should be exposed upon request
 
@@ -6108,7 +6436,7 @@ This topic lists issues that remain open at the time of release.
 
 * OPENICF-2416: SAP Connector: InternalServerError thrown when requesting \_pagedResultsOffset which exceeds number of available records
 
-* OPENICF-2495: SCIM Connector: Do not log failure to retrieve AccessToken issued\_at time at SEVERE level
+* OPENICF-2495: SCIM Connector: Do not log failure to retrieve AccessToken issued_at time at SEVERE level
 
 * OPENICF-2516: SAP Connector: Unsupported Filter operators are not rejected by the connector
 
@@ -6144,17 +6472,11 @@ This topic lists issues that remain open at the time of release.
 
 * OPENICF-3043: GoogleApps Connector: Test operation should test connectivity to Google via supplied config
 
-* OPENICF-3080: Box Connector: Consolidate HTTP client initializer with SaaSCommon
-
-* OPENICF-3087: Java RCS: A runtime exception in the Main thread upon RCS startup is not being logged
-
 * OPENICF-3089: Remove connector reference to test code on several connectors
 
 * OPENICF-3094: Consolidate and improve configuration validation exceptions and handling
 
 * OPENICF-3096: SCIM Connector: BeyondTrust patch remove on multivalued map throws 400 \[invalidFilter]
-
-* OPENICF-3150: DocuSign Connector: Query filter on non-existing id returns HTTP 404
 
 * OPENICF-3151: Duo Connector: Query filter on non-existing id returns HTTP 404
 
@@ -6167,3 +6489,9 @@ This topic lists issues that remain open at the time of release.
 * OPENICF-3262: SaaS REST Connector: Update operation via PATCH fails
 
 * OPENICF-3382: Oracle EBS Connector: replace `__NAME__` attribute by USERNAME from connector schema or add as fallback
+
+* OPENICF-3443: LDAP Connector: Update and Delete on system user fails when `baseContexts` is an OU with referral
+
+* OPENICF-3513: SaaS Common: `validateJwtBearer` reports "jwtAlgorithm must not be null" when `keyAlgorithm` is missing
+
+* OPENICF-3610: SaaS REST Connector: outbound recon times out with combined pagination strategies

@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Workday and PingFederate
-description: Enable Workday sign-on from a PingFederate URL (IdP-initiated sign-on) and direct Workday sign-on using PingFederate (SP-initiated sign-on), with single logout (SLO).
+description: Configure SAML SSO with Workday and PingFederate — IdP-initiated and SP-initiated sign-on with SLO
 component: configuration_guides
 page_id: configuration_guides:workday:config_saml_workday_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/workday/config_saml_workday_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -204,10 +206,12 @@ Enable Workday sign-on from a PingFederate URL (IdP-initiated sign-on) and direc
 
 ---
 title: Configuring SAML SSO with Workday and PingOne for Enterprise
-description: Enable Workday sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct WorkDay sign-on using PingOne for Enterprise (SP-initiated sign-on), with single logout (SLO).
+description: Configure SAML SSO with Workday and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on with SLO
 component: configuration_guides
 page_id: configuration_guides:workday:config_saml_workday_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/workday/config_saml_workday_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   before-you-begin: Before you begin

@@ -1,9 +1,11 @@
 ---
 title: Welcome
-description: This is the documentation for using Helm to deploy the Ping Identity container images. This single chart can be used to deploy any of the available Ping Identity products in a Kubernetes environment.
+description: Landing page introducing Ping Identity Helm charts, DevOps resources, and Helm repository prerequisites
 component: helm
 page_id: helm::helm-charts-landing-page
 canonical_url: https://developer.pingidentity.com/helm/helm-charts-landing-page.html
+llms_txt: https://developer.pingidentity.com/helm/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["pages:index.adoc"]
 section_ids:
   devops-resources: DevOps Resources

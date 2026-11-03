@@ -1,9 +1,11 @@
 ---
 title: Authenticating Azure AD tenants who don&#8217;t have their own Azure account
-description: Create a PingFederate workflow to authenticate users from different Microsoft tenants.
+description: Authenticate Azure AD users from multiple Microsoft tenants or personal accounts using PingFederate and Azure Application Registration.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_authn_azure_ad_tenants
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_authn_azure_ad_tenants.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_authn_azure_ad_tenants_oidc_app_for_authn.adoc", "workforce_use_cases:htg_authn_azure_ad_tenants_view_update_app.adoc", "workforce_use_cases:htg_authn_azure_ad_tenants_oidc_idp_pf.adoc"]
 section_ids:
@@ -188,10 +190,12 @@ You can now authenticate users with non-Azure Microsoft accounts.
 
 ---
 title: Configuring a SAML application
-description: Configure a SAML application in PingFederate, PingOne, and PingOne for Enterprise.
+description: Configure a SAML application in PingFederate, PingOne, or PingOne for Enterprise to enable SAML-based single sign-on.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_saml_app
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_saml_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_saml_app_pf.adoc", "workforce_use_cases:htg_config_saml_app_p1.adoc", "workforce_use_cases:htg_config_saml_app_p14e.adoc"]
 section_ids:
@@ -277,7 +281,7 @@ Make sure you have the following:
 
 17. On the **Mapping Method** tab, leave the default selection, and then click **Next**.
 
-18. On the **Attribute Contract Fulfillment** tab, from the **Source** list for **SAML\_SUBJECT**, select **Adapter**.
+18. On the **Attribute Contract Fulfillment** tab, from the **Source** list for **SAML_SUBJECT**, select **Adapter**.
 
 19. From the **Value** list, depending on what the SP is expecting, select **mail** or **uid**.
 
@@ -467,13 +471,13 @@ If you do not have the service provider's (SP) single sign-on (SSO) URL for the 
 
        * **Encryption Certificate**: Upload the certificate to use to encrypt the assertions.
 
-       * **Encryption Algorithm**: Choose the algorithm to use for encrypting the assertions. We recommend **AES\_256** (the default), but you can select **AES\_128** instead.
+       * **Encryption Algorithm**: Choose the algorithm to use for encrypting the assertions. We recommend **AES_256** (the default), but you can select **AES_128** instead.
 
        * **Transport Algorithm**: The algorithm used for securely transporting the encryption key. Currently, **RSA-OAEP** is the only transport algorithm supported.
 
-         |   |                                                                                                                                                                                                                                                           |
-         | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-         |   |  If an encryption certificate is included in the metadata you upload, this option is automatically enabled. The entry for **Encryption Certificate** shows the name of the certificate and the entry for **Encryption Algorithm **is set to **AES\_256**. |
+         |   |                                                                                                                                                                                                                                                          |
+         | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+         |   |  If an encryption certificate is included in the metadata you upload, this option is automatically enabled. The entry for **Encryption Certificate** shows the name of the certificate and the entry for **Encryption Algorithm **is set to **AES_256**. |
 
    12. In the **Signing** field, select either to sign the SAML assertion or to sign the SAML response.
 
@@ -535,10 +539,12 @@ The new SAML application is added to your **My Applications** list. Go to **User
 
 ---
 title: Configuring adaptive authentication in PingFederate
-description: This document explains the conceptual information behind network-based adaptive authentication. It also provides instructions for creating a new selector and configuring an authentication policy to enable adaptive authentication.
+description: Configure network-based adaptive authentication in PingFederate to route internal users through Kerberos and external users through a sign-on page.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_adaptive_authn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_adaptive_authn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_adaptive_authn_pf_new_selector.adoc"]
 section_ids:
@@ -664,10 +670,12 @@ Authentication policies define how PingFederate authenticates users.
 
 ---
 title: Configuring an Active Directory datastore for PingFederate
-description: In PingFederate, establish an Active Directory datastore connection for retrieving user attributes for outbound connections.
+description: Configure an Active Directory datastore in PingFederate to retrieve user attributes for outbound connections.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_config_ad_datastore_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_config_ad_datastore_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_config_ad_datastore_pf_config_ad_datastore.adoc"]
 section_ids:
@@ -777,10 +785,12 @@ This topic details specific tasks for configuring an Active Directory datastore 
 
 ---
 title: Connecting PingFederate to a Microsoft SQL JDBC datastore with Windows authentication
-description: Create a Microsoft SQL server Java Database Connectivity (JDBC)-connected datastore in PingFederate and configure it for Windows authentication.
+description: Connect PingFederate to a Microsoft SQL JDBC datastore using Windows authentication for credential validation.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_connect_pf_to_ms_sql_jdbc_datastore.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_add_user.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_assign_logon_policy.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_edit_signon_tab.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_deploy_jdbc.adoc", "workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_connect_jdbc.adoc workforce_use_cases:htg_connect_pf_to_ms_sql_jdbc_datastore_testing.ado"]
 section_ids:
@@ -993,10 +1003,12 @@ Perform these steps on each PingFederate node.
 
 ---
 title: Connecting PingFederate with Yahoo through OIDC
-description: Learn how to connect PingFederate with your Yahoo developer account using OpenID Connect (OIDC).
+description: Connect PingFederate with a Yahoo developer account using OpenID Connect (OIDC) for social login.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_connect_pf_with_yahoo_through_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_oidc_app_yahoo.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_oidc_idp_connection.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_local_identity_profile.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_html_idp_adapter.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_policy_contract_lip.adoc", "workforce_use_cases:htg_connect_pf_with_yahoo_through_oidc_testing.adoc"]
 section_ids:
@@ -1096,12 +1108,12 @@ In your Yahoo developer account, create an OIDC app and obtain the **Client ID**
 
 15. On the **Adapter Contract Fulfillment** tab, map the values as follows. Click **Next**.
 
-    | Attribute     | Source              | Value            |
-    | ------------- | ------------------- | ---------------- |
-    | **givenName** | **Provider Claims** | **given\_name**  |
-    | **mail**      | **Provider Claims** | **email**        |
-    | **sn**        | **Provider Claims** | **family\_name** |
-    | **subject**   | **Provider Claims** | **sub**          |
+    | Attribute     | Source              | Value           |
+    | ------------- | ------------------- | --------------- |
+    | **givenName** | **Provider Claims** | **given_name**  |
+    | **mail**      | **Provider Claims** | **email**       |
+    | **sn**        | **Provider Claims** | **family_name** |
+    | **subject**   | **Provider Claims** | **sub**         |
 
     ![Screen capture of the Adapter Contract Fulfillment tab showing the specified settings.](_images/bwa1624389840839.png)
 
@@ -1257,10 +1269,12 @@ After signing on, you are taken to the end application.
 
 ---
 title: Delegating all authentication to an external IdP
-description: PingOne provides an authentication policy step that allows you to make an external identity provider (IdP) part of a PingOne authentication policy or delegate all authentication to that external IdP.
+description: Delegate authentication to an external identity provider using a PingOne authentication policy step.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_delegate_authn_to_external_idp
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_delegate_authn_to_external_idp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_delegate_authn_to_external_idp_config_idp.adoc", "workforce_use_cases:htg_delegate_authn_to_external_idp_create_authn_policy.adoc"]
 section_ids:
@@ -1402,10 +1416,12 @@ After a successful return from the external IdP:
 
 ---
 title: Enabling SLO for a PingAccess-protected application using PingFederate
-description: Learn how to require a sign off of a PingAccess-protected application with PingFederate acting as a token provider.
+description: Configure single logout (SLO) for a PingAccess-protected application using PingFederate as the token provider.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_enable_slo_for_pa_protected_app_using_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pa_logout_endpoint.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pa_partial_logout.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_global_slo.adoc", "workforce_use_cases:htg_enable_slo_for_pa_protected_app_using_pf_pf_pa_logout.adoc"]
 section_ids:
@@ -1607,10 +1623,12 @@ Learn more in [Configuring PingFederate for user-initiated single logout](https:
 
 ---
 title: Integrating Pulse Connect Secure with PingFederate
-description: Learn how to integrate Pulse Connect Secure with PingFederate for single sign-on (SSO).
+description: Integrate Pulse Connect Secure with PingFederate for SAML-based single sign-on (SSO).
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_integrate_pulse_connect_secure_with_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_metadata.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_signing_cert.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_saml_pf.adoc", "workforce_use_cases:htg_integrate_pulse_connect_secure_with_pf_saml_pcs.adoc"]
 section_ids:
@@ -1942,10 +1960,12 @@ PingFederate 10.3
 
 ---
 title: Protecting a web application with PingAccess using PingFederate as the token provider
-description: Configure a proof of concept to protect a web application from unwanted access using PingAccess with PingFederate as the token provider.
+description: Protect a web application using PingAccess with PingFederate as the token provider in a proof-of-concept configuration.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_protect_web_app_with_pa_using_pf_as_token_provider.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_pf101.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_pa61.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_prep_pf.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_connect_pf_pa.adoc", "workforce_use_cases:htg_protect_web_app_with_pa_using_pf_as_token_provider_protect_web_app.adoc"]
 section_ids:
@@ -2188,9 +2208,9 @@ To configure PingFederate for PingAccess connectivity, use the PingFederate cons
 
    3. Click **Next** until you reach the **Contract Fulfillment** section.
 
-   4. From the **Source** list, select **Authentication Policy Contract** for both **User\_Key** and **User\_Name** contracts.
+   4. From the **Source** list, select **Authentication Policy Contract** for both **User_Key** and **User_Name** contracts.
 
-   5. From the **Value** list, select **Subject** for both **User\_Key** and **User\_Name** contracts.
+   5. From the **Value** list, select **Subject** for both **User_Key** and **User_Name** contracts.
 
    6. Click **Next** until you reach the **Summary** section. Click **Save**.
 
@@ -2434,7 +2454,7 @@ To configure PingAccess to protect a web application for a proof of concept, use
 
    ![A flow diagram showing a browser request to the virtual host 'protected.com' that generates a web session with . A session cookie is set in the browser that later uses instead of re-authenticating the user. processes and forwards the request to the target site, httpbin.org. Identity mapping and security policies verify the user should have access to the target site, providing user-centric data in the request. presents the protected site's response to the browser.](_images/rvp1609775442223.png)
 
-   1. From the PingFederate administrative console, go to **Applications → OAuth → Clients → pa\_wam**.
+   1. From the PingFederate administrative console, go to **Applications → OAuth → Clients → pa_wam**.
 
    2. Click **Add**.
 
@@ -2562,10 +2582,12 @@ To configure PingAccess to protect a web application for a proof of concept, use
 
 ---
 title: Protecting your VPN with PingID MFA
-description: To improve network security posture and provide a true MFA experience to network resources, add PingID multi-factor authentication (MFA) to your VPN authentication ceremony.
+description: Add PingID MFA to your VPN authentication to strengthen network security with a true multi-factor experience.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_protect_vpn_with_pid_mfa
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_protect_vpn_with_pid_mfa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -2679,10 +2701,12 @@ Perform the RADIUS client test to verify and ensure the authentication ceremony 
 
 ---
 title: Setting up a login form that validates credentials against AD in PingFederate
-description: Configure a login form in PingFederate that validates credentials against Active Directory (AD).
+description: Configure a login form in PingFederate using the HTML form adapter to validate credentials against Active Directory.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_login_form_validating_creds_with_ad_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_datastore.adoc", "workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_pcv.adoc", "workforce_use_cases:htg_set_up_login_form_validating_creds_with_ad_pf_adapter.adoc"]
 section_ids:
@@ -2908,10 +2932,12 @@ Enter AD credentials (username and password) to test the configured adapter.
 
 ---
 title: Setting up an authentication flow that includes MFA (PingFederate and PingID)
-description: This configuration creates a service provider (SP) connection with a multi-factor authentication (MFA) flow using PingFederate and PingID.
+description: Set up an authentication flow in PingFederate that includes PingID MFA using authentication policies and adapters.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_authn_flow_mfa_pf_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_pcv_pf.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_html_adapter_pcv.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_download_props.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_adapter.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_authn_policy_contract.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_sp_connection.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_authn_selector.adoc", "workforce_use_cases:htg_set_up_authn_pid_pf_create_policy.adoc", "workforce_use_cases:htg_set_up_authn_flow_mfa_pf_pid_testing.adoc"]
 section_ids:
@@ -3121,10 +3147,12 @@ This configuration creates a service provider (SP) connection with a multi-facto
 
 ---
 title: Setting up an authentication flow that includes MFA (PingOne for Enterprise and PingID)
-description: You can create an authentication flow that uses multi-factor authentication (MFA) with PingOne for Enterprise and PingID.
+description: Create an MFA authentication flow using PingOne for Enterprise and PingID to require multi-factor verification at sign-on.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_authn_flow_mfa_p14e_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_authn_flow_mfa_p14e_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 section_ids:
   steps: Steps
@@ -3152,10 +3180,12 @@ You can create an authentication flow that uses multi-factor authentication (MFA
 
 ---
 title: Setting up and testing a custom authentication policy
-description: Authentication policies are used in PingFederate to implement complex authentication requirements. This document explains how to create a new custom authentication policy in PingFederate, and then test the policy.
+description: Create and test a custom authentication policy in PingFederate to implement complex authentication requirements.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_test_custom_authn_policy
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_test_custom_authn_policy.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_test_custom_authn_policy_create_pf_policy.adoc", "workforce_use_cases:htg_set_up_test_custom_authn_policy_test_pf_policy.adoc"]
 section_ids:
@@ -3273,7 +3303,7 @@ Set up a service provider (SP) connection.
 
 ### About this task
 
-This requires an SP connection. This example uses the website HTTP\_BIN as a sample application that PingFederate sends the user to after the custom authentication policy has completed successfully.
+This requires an SP connection. This example uses the website HTTP_BIN as a sample application that PingFederate sends the user to after the custom authentication policy has completed successfully.
 
 ### Steps
 
@@ -3309,10 +3339,12 @@ This requires an SP connection. This example uses the website HTTP\_BIN as a sam
 
 ---
 title: Setting up Kerberos authentication in PingFederate
-description: Set up a Kerberos authentication adapter in PingFederate for a seamless user authentication experience from a Windows machine to your applications.
+description: Set up Kerberos authentication in PingFederate to enable seamless SSO for domain-joined Windows users without additional prompts.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_kerberos_authn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_kerberos_authn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 15, 2022
 page_aliases: ["workforce_use_cases:htg_set_up_kerberos_authn_pf_config_realm.adoc", "workforce_use_cases:htg_set_up_kerberos_authn_pf_config_idp_adapter.adoc"]
 section_ids:
@@ -3406,10 +3438,12 @@ Configure a new Kerberos adapter instance in PingFederate.
 
 ---
 title: Setting up password recovery in PingFederate
-description: Learn how to set up PingFederate for self-service password reset and account recovery through an HTML Form Adapter.
+description: Set up self-service password reset and account recovery in PingFederate using an LDAP datastore and HTML Form Adapter.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_pf_password_recovery_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_pf_password_recovery_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2024
 page_aliases: ["workforce_use_cases:htg_pf_password_recovery_setup_ldap.adoc", "workforce_use_cases:htg_pf_password_recovery_setup_ldap_pcv.adoc", "workforce_use_cases:htg_pf_password_recovery_setup_html_form_adapter.adoc"]
 section_ids:
@@ -3571,10 +3605,12 @@ To configure an HTML Form Adapter instance to enable account recovery and passwo
 
 ---
 title: Setting up passwordless authentication in PingOne
-description: Learn how to set up passwordless authentication and eliminate the need for your users to enter a password. Passwordless authentication is a quick and easy configuration where end users sign on with a paired multi-factor authentication (MFA) device.
+description: Set up passwordless authentication in PingOne using a paired MFA device so users can sign on without a password.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_p1_passwordless_authn_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_p1_passwordless_authn_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_p1_passwordless_authn_setup_policy_p1.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_no_paired_device.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_add_policies_app.adoc", "workforce_use_cases:htg_p1_passwordless_authn_setup_testing.adoc"]
 section_ids:
@@ -3678,10 +3714,12 @@ PingOne prompts for a username.
 
 ---
 title: Setting up PingFederate as a FedHub
-description: Configuring PingFederate as an identity bridge or FedHub (SAML Chaining) allows you to manage external identities and facilitate access to applications across the enterprise community.
+description: Configure PingFederate as a FedHub (SAML Chaining) to manage external identities and facilitate access across an enterprise community.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_set_up_pf_as_fedhub
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_set_up_pf_as_fedhub.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_set_up_pf_as_fedhub_flow.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_contract.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_sp_connection.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_ip_connection.adoc", "workforce_use_cases:htg_set_up_pf_as_fedhub_authn_policy.adoc"]
 section_ids:
@@ -3869,10 +3907,12 @@ When users from Company B sign-on using their IdP, the IdP sends the assertion t
 
 ---
 title: Setting up your PingOne Dock
-description: The PingOne Dock gives your users one-click, single sign-on (SSO) access to the applications and other service providers (SPs) you authorize them to use.
+description: Set up the PingOne Dock for one-click SSO access, including user group assignment, dock settings, and branding.
 component: solution-guides
 page_id: solution-guides:workforce_use_cases:htg_p1_dock_setup
 canonical_url: https://docs.pingidentity.com/solution-guides/workforce_use_cases/htg_p1_dock_setup.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["workforce_use_cases:htg_p1_dock_setup_access_directory.adoc", "workforce_use_cases:htg_p1_dock_setup_config_third_party_ip.adoc", "workforce_use_cases:htg_p1_dock_setup_config_dock.adoc", "workforce_use_cases:htg_p1_dock_setup_branding.adoc"]
 section_ids:

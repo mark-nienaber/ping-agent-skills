@@ -1,751 +1,4 @@
 ---
-title: Changelog
-description: Added support for handling rate-limiting responses from Slack
-component: slack
-page_id: slack:release_notes:pf_slack_connector_changelog
-canonical_url: https://docs.pingidentity.com/integrations/slack/release_notes/pf_slack_connector_changelog.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 25, 2024
-section_ids:
-  slack-connector-3-0-2-march-2020: Slack Connector 3.0.2 – March 2020
-  slack-connector-3-0-1-november-2019: Slack Connector 3.0.1 – November 2019
-  slack-connector-3-0-october-2017: Slack Connector 3.0 – October 2017
-  slack-connector-2-2-1-june-2017: Slack Connector 2.2.1 – June 2017
-  slack-connector-2-2-may-2017: Slack Connector 2.2 – May 2017
-  slack-connector-2-1-1-march-2017: Slack Connector 2.1.1 – March 2017
-  slack-connector-2-1-january-2017: Slack Connector 2.1 – January 2017
-  slack-connector-2-0-december-2015: Slack Connector 2.0 – December 2015
-  slack-connector-1-0-october-2015: Slack Connector 1.0 – October 2015
----
-
-# Changelog
-
-## Slack Connector 3.0.2 – March 2020
-
-* Added support for handling rate-limiting responses from Slack
-
-## Slack Connector 3.0.1 – November 2019
-
-* Fixed an issue that caused the connector to update the wrong phone number attribute as a result of a change in the Slack API
-
-## Slack Connector 3.0 – October 2017
-
-* Added deprovisioning configuration options for CRUD capabilities
-
-* Added support for additional user attributes
-
-## Slack Connector 2.2.1 – June 2017
-
-* Fixed an issue with deserialization the response due to an API change
-
-## Slack Connector 2.2 – May 2017
-
-* Added configuration options for the Unique User Identifier
-
-## Slack Connector 2.1.1 – March 2017
-
-* Optimized HTTP calls to Slack
-
-* Fixed synchronization on update of users that were previously created with "User Create Enabled" set to false in configurable options
-
-## Slack Connector 2.1 – January 2017
-
-* Added configuration options for CRUD capabilities
-
-## Slack Connector 2.0 – December 2015
-
-* Added Support for Group Provisioning
-
-## Slack Connector 1.0 – October 2015
-
-* Initial Release
-
-* Added Support for User Provisioning
-
----
-
----
-title: Configuring Browser SSO
-description: Use the following details for the Browser SSO part of your single sign-on (SSO) connection to Slack.
-component: slack
-page_id: slack:setup:pf_slack_connector_configuring_browser_sso
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_browser_sso.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configuring Browser SSO
-
-Use the following details for the **Browser SSO** part of your single sign-on (SSO) connection to Slack.
-
-## About this task
-
-|   |                                                                                                                                                                                                                                                                                                                       |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For all other settings, you can use the default or customize the configuration for your needs. For help, see [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation. |
-
-For more context on subject format requirements, see [SAML NameID Format urn:oasis:names:tc:SAML:2.0:nameid-format:persistent](https://support.pingidentity.com/s/article/SAML-Name-ID-urn-oasis-names-tc-SAML-2-0-nameid-format-persistent) in the Ping Identity Knowledge Center.
-
-## Steps
-
-1. On the **Browser SSO** tab, click **Configure Browser SSO**.
-
-2. On the **Browser SSO > SAML Profiles** tab, select only **IDP-Initiated SSO** and **SP-Initiated SSO**. Click **Next**.
-
-3. On the **Assertion Lifetime** tab, click **Next**.
-
-4. On the **Assertion Creation** tab, configure the assertion.
-
-   The following steps only cover the critical settings for the Slack connection. For a complete guide, see [Managing authentication source mappings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_assertioncreationtasklet_idpadaptermappingstate.html) in the PingFederate documentation.
-
-   1. Click **Configure Assertion Creation**.
-
-   2. On the **Attribute Contract** tab, set the following name format.
-
-      | Attribute Contract | Subject Name Format                                     |
-      | ------------------ | ------------------------------------------------------- |
-      | SAML\_SUBJECT      | `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` |
-
-   3. In the **Extended the Contract** section, add the following attributes, and then click **Next**.
-
-      **Extend the Contract Mappings**
-
-      | Extend the Contract | Attribute name Format                                     |
-      | ------------------- | --------------------------------------------------------- |
-      | SAML\_NAME\_FORMAT  | `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified` |
-      | User.Email          | `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified` |
-
-   4. On the **Authentication Source Mapping** tab, select or create your authentication source.
-
-      For help, see [Managing authentication source mappings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_assertioncreationtasklet_idpadaptermappingstate.html) in the PingFederate documentation.
-
-   5. On your authentication source **Mapping Method**tab, select **Retrieve additional attributes from a data store**.
-
-   6. On your authentication source **Attribute Sources & User Lookup**tab, select or create your LDAP datastore.
-
-   7. On your authentication source **Attribute Sources & User Lookup**tab, select or create your LDAP datastore. On the **LDAP Directory Search** tab, use the following configuration.
-
-      For more information, see [Specifying directory properties and attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_specify_directory_properties_and_attributes.html) in the PingFederate documentation.
-
-      ![A screenshot that shows the LDAP Directory Search tab](_images/ljw1563995734086.png)
-
-   8. On the **Browser SSO > Assertion Creation > IdP Adapter Mapping > Attribute Contract Fulfillment** tab, map the attributes as follows. Click **Next**.
-
-      |   |                                                                                                                                                                                            |
-      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-      |   | This allows the connection to provide Slack with the required `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` name format, which PingFederate does not provide as a default option. |
-
-      | Attribute Contract | Source      | Value                                                  |
-      | ------------------ | ----------- | ------------------------------------------------------ |
-      | SAML\_NAME\_FORMAT | **text**    | `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` |
-      | SAML\_SUBJECT      | **Adapter** | `username`                                             |
-      | User.Email         | **LDAP**    | `mail`                                                 |
-
-      ![A screenshot that shows the Attribute Contract Fulfillment tab with the attributes mapped.](_images/vku1563995733409.png)
-
-5. On the **Browser SSO > Protocol Settings > Signature Policy** tab, clear the **Require authn requests…​** and **Always sign assertion** check boxes. Click **Next**.
-
-6. On the **Encryption Policy** tab, select **None**. Click **Next**.
-
-7. On the **Browser SSO > Protocol Settings** tab, click **Next**.
-
-8. On the **Summary** tab, click **Done**.
-
-9. On the **SP Connection > Browser SSO** tab, click **Next**.
-
----
-
----
-title: Configuring single sign-on
-description: To allow PingFederate to act as an identity provider for Slack, create a connection and enable single sign-on (SSO) in Slack.
-component: slack
-page_id: slack:setup:pf_slack_connector_configuring_single_sign_on
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_single_sign_on.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Configuring single sign-on
-
-To allow PingFederate to act as an identity provider for Slack, create a connection and enable single sign-on (SSO) in Slack.
-
-## About this task
-
-|   |                                                                                                                                            |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | SSO integration is an optional part of this integration. If you only want to use the Slack Provisioner for provisioning, skip these steps. |
-
-## Steps
-
-1. Complete the steps in [Creating a single sign-on connection](pf_slack_connector_creating_a_single_sign_on_connection.html).
-
-2. Complete the steps in [Configuring single sign-on in Slack](pf_slack_connector_configuring_single_sign_on_in_slack.html).
-
----
-
----
-title: Configuring single sign-on in Slack
-description: To allow PingFederate to manage authentication, enable single sign-on (SSO) in Slack.
-component: slack
-page_id: slack:setup:pf_slack_connector_configuring_single_sign_on_in_slack
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_single_sign_on_in_slack.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  configuring-sso-in-slack-standard-or-plus: Configuring SSO in Slack Standard or Plus
-  about-this-task: About this task
-  steps: Steps
-  result: Result:
-  configuring-sso-in-slack-enterprise-grid: Configuring SSO in Slack Enterprise Grid
-  about-this-task-2: About this task
-  steps-2: Steps
-  result-2: Result:
----
-
-# Configuring single sign-on in Slack
-
-To allow PingFederate to manage authentication, enable single sign-on (SSO) in Slack.
-
-## Configuring SSO in Slack Standard or Plus
-
-If you use Slack Standard or Plus, configure SSO as follows.
-
-### About this task
-
-For help, see the [Plus plan](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on#plus-plan-1) tab in [SAML single sign-on](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on) in the Slack documentation.
-
-### Steps
-
-1. Sign on to Slack as a Workspace Owner.
-
-2. Click your workspace name, and then click **Administration > Workspace Settings**.
-
-3. In the navigation pane, click **Authentication**.
-
-4. On the **Settings & Permissions** page, for **SAML Authentication**, click **Configure**.
-
-5. Select **Custom SAML 2.0** and click **Configure**.
-
-6. In the **SAML 2.0 Endpoint (HTTP)** field, enter `https://pf_host:pf_port/idp/SSO.saml2`.
-
-   For example: `https://pf.example.com:9031/idp/SSO.saml2`
-
-7. In the **Identity Provider Issuer** field, enter the **SAML 2.0 Entity ID** that you created in [Enabling provisioning and single sign-on in PingFederate](pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html).
-
-8. In the **Public Certificate** field, enter the contents of your PingFederate signing certificate.
-
-   To get your certificate, see **Exporting a certificate** in [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html) in the PingFederate documentation.
-
-9. Click **Save Configuration**.
-
-10. Sign out of Slack, and then sign back on using SSO.
-
-    #### Result:
-
-    This saves your configuration and sends an email to team members inviting them set up SSO with their Slack accounts.
-
-## Configuring SSO in Slack Enterprise Grid
-
-If you use Slack Enterprise Grid, configure SSO as follows.
-
-### About this task
-
-For help, see the [Enterprise Grid plan](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on#enterprise-grid-plan-1) tab in [SAML single sign-on](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on) in the Slack documentation.
-
-### Steps
-
-1. Sign on to Slack Enterprise Grid as a Workspace Owner.
-
-2. Go to **Manage Organization > Security > SSO Settings > Configure SSO**.
-
-   ![A screen recording that shows the dashboard. The user clicks Manage Organization, and then clicks Security.](_images/fvm1617230085096.gif)
-
-3. In the **SAML 2.0 Endpoint (HTTP)** field, enter `https://pf_host:pf_port/idp/SSO.saml2`.
-
-   For example: `https://pf.example.com:9031/idp/SSO.saml2`
-
-4. In the **Identity Provider Issuer** field, enter the **SAML 2.0 Entity ID** that you created in [Enabling provisioning and single sign-on in PingFederate](pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html).
-
-5. In the **Service Provider Issuer URL**, use the default value of **<https://slack.com>**.
-
-6. In the **Public (X.509) Certificate** field, enter the contents of your PingFederate signing certificate.
-
-   To get your certificate, see **Exporting a certificate** in [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html) in the PingFederate documentation.
-
-7. Enable authentication request signing.
-
-   1. Select the **Sign the AuthnRequest** check box.
-
-   2. Copy the certificate text.
-
-   3. Create a new `.crt` file on your computer and paste the certificate text.
-
-   4. In PingFederate, import the `.crt` file as a trusted certificate authority.
-
-   For help, see [Manage trusted certificate authorities](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_trustedcas_certmanagementstate.html) in the PingFederate documentation.
-
-8. Clear the **Sign the Assertion** check box.
-
-   ![A screenshot that shows the SAML Response Signing section with the correct settings.](_images/bdv1617989116378.jpg)
-
-9. Click **Test Configuration**.
-
-10. Save your configuration.
-
-11. Sign out of Slack, and then sign back on using SSO.
-
-    #### Result:
-
-    This saves your configuration and sends an email to team members inviting them set up SSO with their Slack accounts.
-
----
-
----
-title: Configuring SSO in Slack Enterprise Grid
-description: If you use Slack Enterprise Grid, configure SSO as follows.
-component: slack
-page_id: slack:setup:pf_slack_connector_configuring_sso_in_slack_enterprise_grid
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_sso_in_slack_enterprise_grid.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  result: Result:
----
-
-# Configuring SSO in Slack Enterprise Grid
-
-If you use Slack Enterprise Grid, configure SSO as follows.
-
-## About this task
-
-For help, see the [Enterprise Grid plan](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on#enterprise-grid-plan-1) tab in [SAML single sign-on](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on) in the Slack documentation.
-
-## Steps
-
-1. Sign on to Slack Enterprise Grid as a Workspace Owner.
-
-2. Go to **Manage Organization > Security > SSO Settings > Configure SSO**.
-
-   ![A screen recording that shows the dashboard. The user clicks Manage Organization, and then clicks Security.](_images/fvm1617230085096.gif)
-
-3. In the **SAML 2.0 Endpoint (HTTP)** field, enter `https://pf_host:pf_port/idp/SSO.saml2`.
-
-   For example: `https://pf.example.com:9031/idp/SSO.saml2`
-
-4. In the **Identity Provider Issuer** field, enter the **SAML 2.0 Entity ID** that you created in [Enabling provisioning and single sign-on in PingFederate](pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html).
-
-5. In the **Service Provider Issuer URL**, use the default value of **<https://slack.com>**.
-
-6. In the **Public (X.509) Certificate** field, enter the contents of your PingFederate signing certificate.
-
-   To get your certificate, see **Exporting a certificate** in [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html) in the PingFederate documentation.
-
-7. Enable authentication request signing.
-
-   1. Select the **Sign the AuthnRequest** check box.
-
-   2. Copy the certificate text.
-
-   3. Create a new `.crt` file on your computer and paste the certificate text.
-
-   4. In PingFederate, import the `.crt` file as a trusted certificate authority.
-
-   For help, see [Manage trusted certificate authorities](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_trustedcas_certmanagementstate.html) in the PingFederate documentation.
-
-8. Clear the **Sign the Assertion** check box.
-
-   ![A screenshot that shows the SAML Response Signing section with the correct settings.](_images/bdv1617989116378.jpg)
-
-9. Click **Test Configuration**.
-
-10. Save your configuration.
-
-11. Sign out of Slack, and then sign back on using SSO.
-
-    ### Result:
-
-    This saves your configuration and sends an email to team members inviting them set up SSO with their Slack accounts.
-
----
-
----
-title: Configuring SSO in Slack Standard or Plus
-description: If you use Slack Standard or Plus, configure SSO as follows.
-component: slack
-page_id: slack:setup:pf_slack_connector_configuring_sso_in_slack_standard_or_plus
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_configuring_sso_in_slack_standard_or_plus.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  result: Result:
----
-
-# Configuring SSO in Slack Standard or Plus
-
-If you use Slack Standard or Plus, configure SSO as follows.
-
-## About this task
-
-For help, see the [Plus plan](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on#plus-plan-1) tab in [SAML single sign-on](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on) in the Slack documentation.
-
-## Steps
-
-1. Sign on to Slack as a Workspace Owner.
-
-2. Click your workspace name, and then click **Administration > Workspace Settings**.
-
-3. In the navigation pane, click **Authentication**.
-
-4. On the **Settings & Permissions** page, for **SAML Authentication**, click **Configure**.
-
-5. Select **Custom SAML 2.0** and click **Configure**.
-
-6. In the **SAML 2.0 Endpoint (HTTP)** field, enter `https://pf_host:pf_port/idp/SSO.saml2`.
-
-   For example: `https://pf.example.com:9031/idp/SSO.saml2`
-
-7. In the **Identity Provider Issuer** field, enter the **SAML 2.0 Entity ID** that you created in [Enabling provisioning and single sign-on in PingFederate](pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html).
-
-8. In the **Public Certificate** field, enter the contents of your PingFederate signing certificate.
-
-   To get your certificate, see **Exporting a certificate** in [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html) in the PingFederate documentation.
-
-9. Click **Save Configuration**.
-
-10. Sign out of Slack, and then sign back on using SSO.
-
-    ### Result:
-
-    This saves your configuration and sends an email to team members inviting them set up SSO with their Slack accounts.
-
----
-
----
-title: Creating a provisioning connection
-description: To allow PingFederate to manage users in Slack, create a service provider (SP) connection.
-component: slack
-page_id: slack:setup:pf_slack_connector_creating_a_provisioning_connection
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_creating_a_provisioning_connection.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  steps: Steps
----
-
-# Creating a provisioning connection
-
-To allow PingFederate to manage users in Slack, create a service provider (SP) connection.
-
-## Steps
-
-1. In the PingFederate administrator console, create a new SP connection:
-
-   1. For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Click **Create Connection**.
-
-   2. For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Click **Create Connection**.
-
-2. Configure the basic connection details with the Slack quick connection template.
-
-   1. On the **Connection Template** tab, select **Use a template for this connection**.
-
-   2. From the **Connection Template** list, select **Slack Provisioner**.
-
-   3. On the **Metadata File** row, select the saml-metadata.xml file that you saved in [Preparing your SAML metadata file](pf_slack_connector_preparing_your_saml_metadata_file.html). Click **Next**.
-
-   4. On the **Connection Type** tab select only **Outbound Provisioning**. Click **Next**.
-
-   5. On the **Connection Options** tab, click **Next**.
-
-   6. On the **General Info** tab, in the **Connection Name** field, enter a name of your choosing. Click **Next**.
-
-3. On the **Outbound Provisioning** tab, configure the provisioning target and channel as shown in [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html) in the PingFederate documentation.
-
-   1. Click **Configure Provisioning**.
-
-   2. On the **Target** tab, enter the **OAuth 2 Access Token** that you noted in [Getting a Slack API access token](pf_slack_connector_getting_a_slack_api_access_token.html).
-
-      |   |                                                                                  |
-      | - | -------------------------------------------------------------------------------- |
-      |   | PingFederate verifies the token when you activate the channel and SP connection. |
-
-   3. **Optional:** If your environment requires you to use the `userName` attribute to synchronize users between your datastore and Slack, select it from the **Unique User Identifier** list. Otherwise, use `primaryEmail`.
-
-      |   |                                                                                                                                                                              |
-      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | You cannot change this selection without deleting the connection. See [Known issues and limitations](../release_notes/pf_slack_connector_known_issues_and_limitations.html). |
-
-   4. Under **Provisioning Options**, customize the provisioning connector actions as shown in [Provisioning options reference](pf_slack_connector_provisioning_options_reference.html). Click **Next**.
-
-   5. On the **Manage Channels** tab, create a channel as shown in [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation. Click **Done**.
-
-      |   |                                                                                                                                                                                  |
-      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | For more information about the attributes available in your channel configuration, see [Supported attributes reference](pf_slack_connector_supported_attributes_reference.html). |
-
-   6. On the **Outbound Provisioning** tab, click **Next**.
-
-4. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
-
----
-
----
-title: Creating a single sign-on connection
-description: To allow PingFederate to handle single sign-on (SSO) to Slack, create a service provider (SP) SSO connection.
-component: slack
-page_id: slack:setup:pf_slack_connector_creating_a_single_sign_on_connection
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_creating_a_single_sign_on_connection.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Creating a single sign-on connection
-
-To allow PingFederate to handle single sign-on (SSO) to Slack, create a service provider (SP) SSO connection.
-
-## About this task
-
-|   |                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------- |
-|   | You can follow these steps to create a new SP connection, or you can modify an existing connection. |
-
-|   |                                                                                                                        |
-| - | ---------------------------------------------------------------------------------------------------------------------- |
-|   | SSO isn't required for provisioning. If you only want to use the Slack Provisioner for provisioning, skip these steps. |
-
-## Steps
-
-1. In the PingFederate administrator console, create a new SP connection:
-
-   1. For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Click **Create Connection**.
-
-   2. For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Click **Create Connection**.
-
-2. Configure the basic connection details with the Slack quick connection template.
-
-   1. On the **Connection Template** tab, select **Use a template for this connection**.
-
-   2. From the **Connection Template** list, select **Slack Provisioner**.
-
-   3. On the **Metadata File** row, select the `saml-metadata.xml` file that you saved in [Preparing your SAML metadata file](pf_slack_connector_preparing_your_saml_metadata_file.html). Click **Next**.
-
-   4. On the **Connection Type** tab select **Browser SSO Profiles**. Click **Next**.
-
-   5. On the **Connection Options** tab, select only **Browser SSO**. Click **Next**.
-
-   6. If you see the **Metadata URL** tab, clear the **Enable automatic reloading** check box. Click **Next**.
-
-   7. On the **General Info** tab, in the **Connection Name** field, enter a name for your connection. Click **Next**.
-
-3. On the **Browser SSO** tab, complete the steps in [Configuring Browser SSO](pf_slack_connector_configuring_browser_sso.html).
-
-4. On the **Credentials** tab, configure the connection credentials.
-
-   For a complete guide, see [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation.
-
-   1. Click **Configure Credentials**.
-
-   2. On the **Digital Signature Settings** tab, select your signing certificate.
-
-   3. Clear the **Include the certificate in the signature \<KEYINFO> element** check box. Click **Next**.
-
-   4. On the **Summary** tab, click **Done**.
-
-   5. On the **SP Connection > Credentials** tab, click **Next**.
-
-5. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
-
----
-
----
-title: Deploying the integration files
-description: To get started with the integration, deploy the Slack Provisioner files to your PingFederate directory.
-component: slack
-page_id: slack:setup:pf_slack_connector_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_deploying_the_integration_files.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  steps: Steps
----
-
-# Deploying the integration files
-
-To get started with the integration, deploy the Slack Provisioner files to your PingFederate directory.
-
-## Steps
-
-1. Download the Slack Provisioner `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/slack-single-signon-integration).
-
-2. Stop PingFederate.
-
-3. If you're upgrading an existing deployment, delete the `pf-slack-quickconnection-<version>.jar` file from your `<pf_install>/pingfederate/server/default/deploy` directory.
-
-4. Extract the `.zip` archive and merge the contents of the `dist` directory with your `<pf_install>/pingfederate/server/default/deploy` directory.
-
-5. Enable the PingFederate provisioning engine: Open your `<pf_install>/pingfederate/bin/run.properties` file.Change `pf.provisioner.mode` to `STANDALONE`. Save the file.
-
-   |   |                                                                                                                                                                                                                                        |
-   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | To configure the `FAILOVER` mode instead, see [Deploying provisioning failover](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_deploy_provis_failover.html) in the PingFederate Server Clustering Guide. |
-
-6. Start PingFederate.
-
-7. If you operate PingFederate in a cluster, repeat steps 2-4 and step 6 for each engine node.
-
----
-
----
-title: Download manifest
-description: The following files are included in the Slack Provisioner .zip archive:
-component: slack
-page_id: slack:release_notes:pf_slack_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/slack/release_notes/pf_slack_connector_download_manifest.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
----
-
-# Download manifest
-
-The following files are included in the Slack Provisioner `.zip` archive:
-
-* `legal/Legal.pdf` – copyright and license information.
-
-* `dist` – contains the integration files
-
-  * `pf-slack-quickconnection-<version>.jar` – The Slack Provisioner quick connection template.
-
-* `saml-metadata.xml` – a modifiable metadata file used to create the connection.
-
----
-
----
-title: Enabling provisioning and single sign-on in PingFederate
-description: To use PingFederate for provisioning and single sign-on (SSO), configure an external datastore and set a SAML entity ID.
-component: slack
-page_id: slack:setup:pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  about-this-task: About this task
-  enabling-provisioning-and-single-sign-on-in-pingfederate-10-1-or-later: Enabling provisioning and single sign-on in PingFederate 10.1 or later
-  steps: Steps
-  enabling-provisioning-and-single-sign-on-in-pingfederate-10-0-or-earlier: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-  steps-2: Steps
----
-
-# Enabling provisioning and single sign-on in PingFederate
-
-To use PingFederate for provisioning and single sign-on (SSO), configure an external datastore and set a SAML entity ID.
-
-## About this task
-
-Your external datastore acts as the source of data for provisioning. PingFederate also uses an internal datastore to store the state of synchronization between the source datastore and the target datastore.
-
-For more information, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) and [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
-## Enabling provisioning and single sign-on in PingFederate 10.1 or later
-
-### Steps
-
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
-
-2. Go to **System > Server > Protocol Settings > Federation Info**.
-
-3. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use when identifying itself to SAML partners.
-
-4. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
-
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
-## Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-
-### Steps
-
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
-
-2. Go to **System > Protocol Settings > Roles & Protocols**.
-
-3. Select the **Enable Identity Provider IdP Role and Support the Following** check box.
-
-4. Select the **SAML 2.0** and **Outbound Provisioning** check boxes. Click **Next**.
-
-5. Click the **Federation Info** tab.
-
-6. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use to identify itself to SAML partners.
-
-7. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
-
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
----
-
----
-title: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-component: slack
-page_id: slack:setup:pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
-canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
-llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2024
-section_ids:
-  steps: Steps
----
-
-# Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-
-## Steps
-
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
-
-2. Go to **System > Protocol Settings > Roles & Protocols**.
-
-3. Select the **Enable Identity Provider IdP Role and Support the Following** check box.
-
-4. Select the **SAML 2.0** and **Outbound Provisioning** check boxes. Click **Next**.
-
-5. Click the **Federation Info** tab.
-
-6. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use to identify itself to SAML partners.
-
-7. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
-
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
----
-
----
 title: Enabling provisioning and single sign-on in PingFederate 10.1 or later
 description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
 component: slack
@@ -1127,3 +380,375 @@ Before PingFederate can access the Slack API, it needs an access token. To get t
    2. In the **Remove Hard Coded Information** section, select the **I've reviewed and removed any hard-coded information** check box.
 
    3. Click **Activate Public Distribution**.
+
+---
+
+---
+title: Slack Provisioner
+description: The Slack Provisioner allows PingFederate to integrate with Slack for user provisioning and single sign-on (SSO).
+component: slack
+page_id: slack::pf_slack_connector
+canonical_url: https://docs.pingidentity.com/integrations/slack/pf_slack_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2024
+section_ids:
+  features: Features
+  intended-audience: Intended audience
+  system-requirements: System requirements
+---
+
+# Slack Provisioner
+
+The Slack Provisioner allows PingFederate to integrate with Slack for user provisioning and single sign-on (SSO).
+
+## Features
+
+* Supports all Slack plans, including Standard, Plus, and Enterprise Grid.
+
+* Manages users in Slack based on changes in an external datastore that is attached to PingFederate.
+
+  * Creates, updates, and disables users.
+
+  * Allows you to enable the create, update, and disable capabilities independently.
+
+  * Allows you to choose to disable users when deprovisioning.
+
+* Browser-based SSO initiated by the service provider (SP) or identity provider (IdP).
+
+* Pre-populates some connection settings with the included quick connection template and SAML metadata file.
+
+## Intended audience
+
+This document is intended for PingFederate administrators.
+
+If you need help during the setup process, see the following resources:
+
+* The following sections of the PingFederate documentation:
+
+  * [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html)
+
+  * [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html)
+
+  * [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html)
+
+  * [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html)
+
+  * [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html)
+
+- The following sections of the Slack documentation:
+
+  * [Manage members with SCIM Provisioning](https://slack.com/intl/en-ca/help/articles/212572638-Manage-members-with-SCIM-provisioning)
+
+  * [SAML single sign-on](https://slack.com/intl/en-ca/help/articles/203772216-SAML-single-sign-on)
+
+  * [Guide to single sign-on settings](https://slack.com/intl/en-ca/help/articles/220403548-Guide-to-single-sign-on-settings)
+
+## System requirements
+
+* PingFederate 9.0 or later.
+
+* A Slack Workspace Owner account.
+
+* A Slack Plus or Enterprise Grid plan is required to use the optional SSO functionality.
+
+* To allow PingFederate to make outbound connections to the Slack API, you might need to allow the following domain in your firewall:
+
+  * https\://api.slack.com
+
+---
+
+---
+title: Supported attributes reference
+description: The table provided lists the attributes that can be mapped for user provisioning to Slack.
+component: slack
+page_id: slack:setup:pf_slack_connector_supported_attributes_reference
+canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_supported_attributes_reference.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 25, 2024
+---
+
+# Supported attributes reference
+
+The table provided lists the attributes that can be mapped for user provisioning to Slack.
+
+| Attribute         | Description                                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| userName          | The user's unique identifier in Slack. A user's userName cannot be updated once it is created.This attribute is required.                                                                               |
+| primaryEmail      | The user's email address.This attribute is required.                                                                                                                                                    |
+| givenName         | The given name of the user, or first name in most Western languages. For example, "Barbara" given the full name "Ms. Barbara Jane Jensen, III".                                                         |
+| familyName        | The family name of the user, or last name in most Western languages. For example, "Jensen" given the full name "Ms. Barbara Jane Jensen, III".                                                          |
+| honorificPrefix   | The honorific prefix or prefixes of the user, or title in most Western languages. For example, "Ms." given the full name "Ms. Barbara Jane Jensen, III".                                                |
+| displayName       | The name of the user, suitable for display to end-users.                                                                                                                                                |
+| title             | The user's title, such as "Vice President".                                                                                                                                                             |
+| preferredLanguage | Indicates the user's preferred written or spoken languages and is generally used for selecting a localized user interface.                                                                              |
+| userType          | Used to identify the relationship between the organization and the user. Typical values used might be "Contractor", "Employee", "Intern", "Temp", "External", and "Unknown", but any value can be used. |
+| locale            | Used to indicate the user's default location for purposes of localizing such items as currency, date time format, or numerical representations.                                                         |
+| profileUrl        | A URI that is a uniform resource locator that points to a location representing the user's online profile, such as a web page.                                                                          |
+| profilePhotoUrl   | A URI that is a uniform resource locator that points to the user's profile photo. The resource MUST be a file (for example, a GIF, JPEG, or PNG image file) rather than a web page containing an image. |
+| timezone          | The user's time zone, in IANA Time Zone database format, such as "America/Los_Angeles".                                                                                                                 |
+| roles             | A role for the user that represents who the user is, such as "Student", "Faculty". This attribute can only accept one value.                                                                            |
+| primaryPhone      | The primary phone number for the user, such as "+1-201-555-0123".                                                                                                                                       |
+| mobilePhone       | The mobile phone number for the user, such as "+1-201-555-0123".                                                                                                                                        |
+| streetAddress     | The work street address for the user, which may include house number, street name, P.O. box, and multi-line extended street address information.                                                        |
+| locality          | The work locality or locality component for the user's mailing address.                                                                                                                                 |
+| region            | The region or state component for the user's mailing address.                                                                                                                                           |
+| postalCode        | The work ZIP or postal code component for the user's mailing address.                                                                                                                                   |
+| country           | The work country component for the user's mailing address.                                                                                                                                              |
+| employeeNumber    | A string identifier, typically numeric or alphanumeric, assigned to a person, often based on order of hire or association with an organization.                                                         |
+| costCenter        | The cost center for the user.                                                                                                                                                                           |
+| organization      | The organization for the user.                                                                                                                                                                          |
+| division          | The division for the user.                                                                                                                                                                              |
+| department        | The department for the user.                                                                                                                                                                            |
+
+---
+
+---
+title: Upgrading an existing deployment
+description: If you're upgrading from a previous version of the Slack Provisioner, note your existing service provider (SP) connection configuration and create a new connection.
+component: slack
+page_id: slack:setup:pf_slack_connector_upgrading_an_existing_deployment
+canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_upgrading_an_existing_deployment.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2024
+section_ids:
+  upgrading-an-existing-deployment-in-pingfederate-10-1-or-later: Upgrading an existing deployment in PingFederate 10.1 or later
+  steps: Steps
+  upgrading-an-existing-deployment-in-pingfederate-10-0-or-earlier: Upgrading an existing deployment in PingFederate 10.0 or earlier
+  steps-2: Steps
+---
+
+# Upgrading an existing deployment
+
+* If you're upgrading from a previous version of the Slack Provisioner, note your existing service provider (SP) connection configuration and create a new connection.
+
+## Upgrading an existing deployment in PingFederate 10.1 or later
+
+### Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Applications > Integration > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Applications > Integration > SP Connections**.For your existing connection, click **Select action**, and then click **Delete**. Click **Confirm.**
+
+4. Complete the steps in [Deploying the integration files](pf_slack_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a provisioning connection](pf_slack_connector_creating_a_provisioning_connection.html).
+
+   * From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+6. Complete the steps in [Creating a single sign-on connection](pf_slack_connector_creating_a_single_sign_on_connection.html).
+
+## Upgrading an existing deployment in PingFederate 10.0 or earlier
+
+### Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Identity Provider > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Identity Provider > SP Connections > Manage All**.For your existing connection, click **Select action**, and then click **Delete**. Click **Save.**
+
+4. Complete the steps in [Deploying the integration files](pf_slack_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a provisioning connection](pf_slack_connector_creating_a_provisioning_connection.html).
+
+   * From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+6. Complete the steps in [Creating a single sign-on connection](pf_slack_connector_creating_a_single_sign_on_connection.html).
+
+---
+
+---
+title: Upgrading an existing deployment in PingFederate 10.0 or earlier
+description: Back up your current PingFederate configuration as shown in Configuration archive in the PingFederate documentation.
+component: slack
+page_id: slack:setup:pf_slack_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier
+canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2024
+section_ids:
+  steps: Steps
+---
+
+# Upgrading an existing deployment in PingFederate 10.0 or earlier
+
+## Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Identity Provider > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Identity Provider > SP Connections > Manage All**.For your existing connection, click **Select action**, and then click **Delete**. Click **Save.**
+
+4. Complete the steps in [Deploying the integration files](pf_slack_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a provisioning connection](pf_slack_connector_creating_a_provisioning_connection.html).
+
+   * From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+6. Complete the steps in [Creating a single sign-on connection](pf_slack_connector_creating_a_single_sign_on_connection.html).
+
+---
+
+---
+title: Upgrading an existing deployment in PingFederate 10.1 or later
+description: Back up your current PingFederate configuration as shown in Configuration archive in the PingFederate documentation.
+component: slack
+page_id: slack:setup:pf_slack_connector_upgrading_an_existing_deployment_in_pf_101_or_later
+canonical_url: https://docs.pingidentity.com/integrations/slack/setup/pf_slack_connector_upgrading_an_existing_deployment_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2024
+section_ids:
+  steps: Steps
+---
+
+# Upgrading an existing deployment in PingFederate 10.1 or later
+
+## Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Applications > Integration > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Applications > Integration > SP Connections**.For your existing connection, click **Select action**, and then click **Delete**. Click **Confirm.**
+
+4. Complete the steps in [Deploying the integration files](pf_slack_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a provisioning connection](pf_slack_connector_creating_a_provisioning_connection.html).
+
+   * From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+6. Complete the steps in [Creating a single sign-on connection](pf_slack_connector_creating_a_single_sign_on_connection.html).
+
+---
+
+---
+title: User and group management
+description: The Slack Provisioner links users and groups from the data store to Slack. The behavior of each provisioning capability is described below.
+component: slack
+page_id: slack::pf_slack_connector_user_and_group_management
+canonical_url: https://docs.pingidentity.com/integrations/slack/pf_slack_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/slack/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 8, 2024
+section_ids:
+  synchronizing-existing-users: Synchronizing existing users
+  user-provisioning: User provisioning
+  user-updates: User updates
+  user-deprovisioning: User deprovisioning
+  synchronizing-existing-groups: Synchronizing existing groups
+  group-provisioning: Group provisioning
+  group-name-updates: Group name updates
+  group-membership-updates: Group membership updates
+  group-deletion: Group deletion
+---
+
+# User and group management
+
+The Slack Provisioner links users and groups from the data store to Slack. The behavior of each provisioning capability is described below.
+
+## Synchronizing existing users
+
+By default, the provisioning connector synchronizes based on the `userName` attribute in Slack. You can change the default mapping in [Creating a provisioning connection](setup/pf_slack_connector_creating_a_provisioning_connection.html).
+
+For example:
+
+* In Slack, Janet's `userName` is `jsmith`.
+
+* In your data store, Janet's `sAMAccountName` is `jsmith`.
+
+* On the **Attribute Mapping** tab of your PingFederate channel configuration, you map the `userName` attribute to `sAMAccountName`.
+
+* When the provisioning connector runs, the data store user is provisioned with a `userName` of `jsmith`. That matches Janet's existing `userName` in Slack, so her information in the data store is synchronized to her Slack account.
+
+## User provisioning
+
+Triggered by either of the following:
+
+* A user is added to the data store group or filter that is targeted by the provisioning connector.
+
+* A user with "disabled" status is added to the data store group or filter that is targeted by the provisioning connector, and the **Provision disabled users** provisioning option is enabled.
+
+The target is determined by the **Source Location** tab in the provisioning connector configuration.
+
+## User updates
+
+Triggered when a change occurs to a user attribute that is mapped in the provisioning connector configuration, such as an attribute change or the user being re-enabled from a disabled status.
+
+## User deprovisioning
+
+Triggered by any of the following:
+
+* A user is deleted from the user store.
+
+* A user is disabled in the user store.
+
+* A user is removed from the data store group or filter that is targeted by the provisioning connector.
+
+The **Remove User Action** setting in the connection configuration determines whether the deprovisioning action disables or deletes the user.
+
+## Synchronizing existing groups
+
+The provisioning connector synchronizes groups from the data store to Slack based on the group name.
+
+For example:
+
+* In Slack, there is a group is named `Accounting`.
+
+* In your data store, there is a group with a `CN` of `Accounting`.
+
+* When the provisioning connector runs, the two groups are synchronized.
+
+## Group provisioning
+
+Triggered when a group is added to the data store filter that is targeted by the provisioning connector.
+
+The target is determined by the **Source Location** tab in the provisioning connector configuration.
+
+## Group name updates
+
+Renaming the group in the data store will trigger PingFederate to rename the group in Slack.
+
+## Group membership updates
+
+Changing group memberships through the group's properties or a user's properties will trigger PingFederate to update the group membership in Slack.
+
+Group memberships in the data store overwrite the group memberships in Slack.
+
+## Group deletion
+
+Triggered by any of the following:
+
+* Deleting the group in the data store will trigger PingFederate to delete the group in Slack. Group deletions are permanent and cannot be undone.
+
+* The group is removed from the data store group or filter that is targeted by the provisioning connector.

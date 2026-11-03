@@ -1,60 +1,56 @@
 ---
-title: DevOps Support Policy
-description: This DevOps Support Policy is an extension of the Ping Identity Support Policy.
+title: Portal Updates
+description: List recent updates and changes to the Ping Identity DevOps documentation portal, including storage guidance and removed content
 component: devops
-page_id: devops::home/supportPolicy
-canonical_url: https://developer.pingidentity.com/devops/home/supportPolicy.html
+page_id: devops::home/portalUpdates
+canonical_url: https://developer.pingidentity.com/devops/home/portalUpdates.html
 llms_txt: https://developer.pingidentity.com/devops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  devops-included-in-support: Included in Support
-  devops-supported-orchestration-tools: Supported orchestration tools
-  devops-resources: Resources
+  devops-september-2023: September 2023
+  devops-a-statement-on-aws-efsebs: A statement on AWS EFS/EBS
+  devops-july-2023: July 2023
+  devops-read-only-filesystem-example-and-explanation: Read-only filesystem example and explanation
+  devops-november-2022: November 2022
+  devops-video-content-is-arriving: Video content is arriving
+  devops-july-2022: July 2022
+  devops-removal-of-docker-compose-examples: Removal of Docker Compose examples
+  devops-removal-of-kubernetes-kustomize-examples: Removal of Kubernetes Kustomize examples
+  devops-confirmation-of-documentation: Confirmation of Documentation
 ---
 
-# DevOps Support Policy
+# Portal Updates
 
-This DevOps Support Policy is an extension of the [Ping Identity Support Policy](https://www.pingidentity.com/en/legal/support-policy.html).
+This page provides details on significant changes to this portal.
 
-This Ping Identity Corporation ("Ping Identity") DevOps Support Policy (this "Policy") encompasses all support obligations that Ping Identity has toward you as Ping Identity's Customer ("Customer").
+## September 2023
 
-|   |                                                                                                                                           |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The support policy for Ping Identity product Docker images is found at [Docker Image Support Policy](../docker-images/imageSupport.html). |
+### A statement on AWS EFS/EBS
 
-## Included in Support
+Some of the product documentation does not explicitly explain the recommended storage solution to use when running on AWS. Clarification was added, particularly when running Ping products in containerized environments [here](../reference/awsStorage.html).
 
-* Providing base images for Ping Identity products to Customers
+## July 2023
 
-* Providing documentation and basic examples for [Helm deployments](https://helm.pingidentity.com/) using Ping Identity's [Helm charts](https://github.com/pingidentity/helm-charts)
+### Read-only filesystem example and explanation
 
-* Providing the Customer with DevOps tooling, such as `config_export` and `pingcli`
+Some environments require the use of a read-only filesystem on containers in runtime. As our product images mature to better align with this practice, a way to work around the situation with our images as they stand today can be found [here](../reference/readOnlyFilesystem.html).
 
-* Providing the Customer direction in using [Server Profile](../how-to/containerAnatomy.html) to achieve the following:
+## November 2022
 
-  * Deployment
+### Video content is arriving
 
-  * Customization
+In recent weeks, videos on topics relevant to the DevOps program at Ping have started to be released. Look for links on some pages where the videos are relevant, or you can browse all videos [here](../videos/videos.html).
 
-  * Saving Configuration
+## July 2022
 
-  * Layering
+### Removal of Docker Compose examples
 
-  * Environment Substitution
+With focus of using Helm to provision to Kubernetes as recommended practice, multi-product Docker Compose examples were no longer maintained or supported and have been removed. The only examples that remain are for single-product deployments. For orchestrating multiple products, see [Helm examples](https://developer.pingidentity.com/helm/examples/index.html).
 
-  * Private Github repos
+### Removal of Kubernetes Kustomize examples
 
-## Supported orchestration tools
+Kustomize was the former method for for Kubernetes orchestration. As most of those examples were replaced by Helm, the Kustomize guides and files were also removed from this portal.
 
-| Tool                                                         | Description                                                                                                                          |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [Kubernetes](https://kubernetes.io/)                         | Also known as K8s, Kubernetes is an open-source system for automating deployment, scaling, and management of containerized software. |
-| [Helm charts](https://helm.pingidentity.com/)                | Helm is the easiest way to deploy Ping Identity software images in a Kubernetes environment.                                         |
-| [Docker images](https://hub.docker.com/u/pingidentity)       | Docker images are maintained by Ping Identity and are a collection of preconfigured environments for Ping Identity products.         |
-| [GitHub repositories](https://github.com/topics/ping-devops) | These repositories provide all of the components to build Docker images for your own development, testing and deployments.           |
+### Confirmation of Documentation
 
-## Resources
-
-Ping Identity customers can create a case in the [Ping Identity Support Portal](https://support.pingidentity.com/s/).
-
-Non-Ping Identity customers can use the [PingDevOps Community](https://support.pingidentity.com/s/topic/0TO1W000000IF30WAG/pingdevops).
+We received reports in recent weeks that some of examples were not working due to changes in Kubernetes version support, files that had been removed from this repository, and other reasons. All examples and guides on this portal have been reviewed and should work as written.

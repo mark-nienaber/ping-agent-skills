@@ -1,12 +1,12 @@
 ---
 title: Actions reference
-description: Actions are predefined sets of nodes designed to perform specific tasks. They are not complete flows, but you can use them during flow creation to simplify the process.
+description: Reference for PingOne DaVinci actions, predefined node sets for registration, authentication, and account recovery available in the PingOne Marketplace.
 component: davinci
 page_id: davinci:flows:davinci_actions
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_actions.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_actions.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 21, 2026
+revdate: 2026-07-31
 section_ids:
   registration: Registration
   sign-up-with-tos-agreement: Sign up with TOS Agreement
@@ -48,10 +48,6 @@ Actions can be placed in the following categories:
 * **Authentication**: Actions that are used to authenticate existing users.
 
 * **Account Recovery**: Actions that are used to help a user recover an account.
-
-|   |                                                                                                                        |
-| - | ---------------------------------------------------------------------------------------------------------------------- |
-|   | Actions are currently available in the [PingOne Marketplace](https://marketplace.pingone.com/browse?products=davinci). |
 
 ## Registration
 
@@ -137,7 +133,7 @@ This action identifies the user.
 
 ## Authentication
 
-This section describes actions that are used to authenticate existing users.
+Authentication actions are used to authenticate existing users.
 
 ### MFA Device Authentication
 
@@ -191,7 +187,7 @@ This action requires an identified user.
 
 ## Account Recovery
 
-This section describes actions that are used to help a user recover an account.
+Account recovery actions are used to help a user recover an account.
 
 ### Account Recovery
 
@@ -215,13 +211,13 @@ This action requires an identified user.
 
 ---
 title: Adding an item to the canvas
-description: When you create or add to a flow, you do so by adding nodes or groups of nodes to the canvas using the icon. This presents the following options for additions to the flow:
+description: Add connectors, user interface elements, or subflows to the PingOne DaVinci flow canvas using the plus icon.
 component: davinci
 page_id: davinci:flows:davinci_adding_an_item_to_the_canvas
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_an_item_to_the_canvas.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_an_item_to_the_canvas.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 25, 2023
+revdate: 2026-07-30
 ---
 
 # Adding an item to the canvas
@@ -238,17 +234,19 @@ When you create or add to a flow, you do so by adding nodes or groups of nodes t
 
 * **Subflow**: Adds a flow conductor connector that launches a subflow that you select.
 
+* **Action**: Adds a set of nodes designed for a specific purpose to the flow canvas.
+
 ---
 
 ---
 title: Adding annotations
-description: Add annotations to make a flow more comprehensible to yourself and others developing the flow.
+description: Add annotations to a PingOne DaVinci flow canvas to make the flow easier to understand for yourself and other developers.
 component: davinci
 page_id: davinci:flows:davinci_adding_annotations
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_annotations.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_annotations.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 25, 2023
+revdate: 2026-03-24
 section_ids:
   steps: Steps
 ---
@@ -301,13 +299,13 @@ Add annotations to make a flow more comprehensible to yourself and others develo
 
 ---
 title: Adding SK-Components to a connector
-description: Add an SK-Component to the HTML Template section of a connector such as the HTTP connector to add additional capabilities to the user-facing page for that node.
+description: Add SK-Components to the HTML Template of a PingOne DaVinci connector, such as the HTTP connector, to extend node functionality.
 component: davinci
 page_id: davinci:flows:davinci_adding_sk_components
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_adding_sk_components.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_adding_sk_components.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 15, 2023
+revdate: 2024-11-20
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -366,13 +364,13 @@ Click the **Save**, **Deploy**, and **Try Flow** buttons to view the user-facing
 
 ---
 title: Changing a connector instance
-description: To use a different instance of a selected connector while retaining its in-flow configuration, change the linked connector.
+description: Change the linked connector instance for a PingOne DaVinci node while retaining its in-flow configuration.
 component: davinci
 page_id: davinci:flows:davinci_changing_a_linked_connection
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_changing_a_linked_connection.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_changing_a_linked_connection.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 11, 2023
+revdate: 2024-09-13
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -409,13 +407,13 @@ All nodes in the flow of the selected connector type now use the new connector i
 
 ---
 title: Cloning a flow
-description: Clone a flow to create an identical new flow.
+description: Clone a PingOne DaVinci flow to create an identical new flow with the same steps and settings.
 component: davinci
 page_id: davinci:flows:davinci_cloning_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_cloning_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_cloning_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2026-03-24
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -444,13 +442,13 @@ A new flow is created with identical naming, steps, and settings. The descriptio
 
 ---
 title: Cloning a node
-description: Clone a node to add an identical node to the flow.
+description: Clone a node in a PingOne DaVinci flow to add an identical node to the canvas.
 component: davinci
 page_id: davinci:flows:davinci_cloning_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_cloning_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_cloning_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2025-10-09
 section_ids:
   steps: Steps
 ---
@@ -473,13 +471,13 @@ Clone a node to add an identical node to the flow.
 
 ---
 title: Common flow variables
-description: Flow templates created by Ping Identity use variables to make it easy for you to configure the flow. Although each flow uses a unique set of variables, the most common ones are defined in this list.
+description: Reference for common flow variables used in PingOne DaVinci flow templates, such as origin and originURL.
 component: davinci
 page_id: davinci:flows:davinci_common_flow_variables
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_common_flow_variables.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_common_flow_variables.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 6, 2023
+revdate: 2026-03-24
 ---
 
 # Common flow variables
@@ -509,13 +507,13 @@ To configure the variables, go to the **Variables** tab in the main DaVinci menu
 
 ---
 title: Content Security Policies
-description: Content Security Policy (CSP) is a browser security feature that mitigates common web security threats (such as cross-site scripting and clickjacking) by explicitly defining what resources a website can load. CSP can be implemented by defining a set of policy directives in the HTTP headers of a website. It's enforced at the browser level, with all browsers supporting a common set of policy directives.
+description: Configure Content Security Policy directives for PingOne DaVinci flows, including the baseline report-only and enforced policies.
 component: davinci
 page_id: davinci:flows:davinci_content_security_policies
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_content_security_policies.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_content_security_policies.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2026
+revdate: 2026-07-30
 section_ids:
   baseline-policy: Baseline policy
   using-a-custom-csp: Using a custom CSP
@@ -541,7 +539,7 @@ There are two types of CSP:
 
 ## Baseline policy
 
-DaVinci uses a report-only baseline CSP for all flows that use the `auth` domain. This baseline CSP will begin to be enforced in September. You can override this CSP for specific flows if your environment has a custom domain.
+DaVinci uses a report-only baseline CSP for all flows that use the `auth` domain. This baseline CSP will begin to be enforced in September. DaVinci does not use the baseline CSP for custom domains, but you can configure custom enforced or report-only CSPs in flow settings.
 
 |   |                                                         |
 | - | ------------------------------------------------------- |
@@ -694,13 +692,13 @@ To configure policy violations for all end users to be logged to a monitoring se
 
 ---
 title: Copying nodes
-description: Copy one or more nodes to paste them into the current flow or into another flow.
+description: Copy one or more nodes in a PingOne DaVinci flow to paste them into the same flow or a different flow.
 component: davinci
 page_id: davinci:flows:davinci_copying_nodes
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_copying_nodes.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_copying_nodes.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2025-10-09
 section_ids:
   steps: Steps
   result: Result
@@ -730,13 +728,13 @@ The nodes are copied. Paste the nodes by right-clicking the background of any fl
 
 ---
 title: Deleting a flow
-description: Delete an existing flow.
+description: Delete an existing PingOne DaVinci flow.
 component: davinci
 page_id: davinci:flows:davinci_deleting_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_deleting_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_deleting_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2026-03-24
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -762,13 +760,13 @@ Delete an existing flow.
 
 ---
 title: Deleting a node
-description: Delete a node to remove it from the flow and break any connections to it.
+description: Delete a node from a PingOne DaVinci flow to remove it and break any connections to it.
 component: davinci
 page_id: davinci:flows:davinci_deleting_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_deleting_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_deleting_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2025-10-09
 section_ids:
   steps: Steps
 ---
@@ -795,13 +793,13 @@ Delete a node to remove it from the flow and break any connections to it.
 
 ---
 title: Disabling or enabling a node
-description: Disable a node to temporarily prevent it from being executed when the flow is run. Enable it to execute the node as normal.
+description: Disable or enable a node in a PingOne DaVinci flow to control whether it runs when the flow executes.
 component: davinci
 page_id: davinci:flows:davinci_disablng_or_enabling_a_node
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_disablng_or_enabling_a_node.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_disablng_or_enabling_a_node.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2025-10-09
 section_ids:
   steps: Steps
 ---
@@ -824,13 +822,13 @@ Disable a node to temporarily prevent it from being executed when the flow is ru
 
 ---
 title: Editing flow settings
-description: Configure the settings that apply to the flow as a whole.
+description: Configure PingOne DaVinci flow settings, including general options, Content Security Policy, and other flow-wide configuration.
 component: davinci
 page_id: davinci:flows:davinci_editing_flow_settings
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_flow_settings.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_flow_settings.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 14, 2025
+revdate: 2026-06-03
 page_aliases: ["ROOT:davinci-legacy-browser-ea.adoc"]
 section_ids:
   steps: Steps
@@ -853,6 +851,7 @@ Configure the settings that apply to the flow as a whole.
    | Option                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
    | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
    | **PingOne Flow**                                         | Indicates that the flow is a PingOne flow, enabling it to be included in PingOne flow policies and launched directly from PingOne.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | **CIBA Flow**                                            | Allows flows to use PingOne client-initiated backchannel authentication (CIBA). This feature lets a user request authentication on one device that can then be approved by an authorized user on a separate device. This setting can only be enabled for PingOne flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
    | **Validate Flows when Changes are Saved**                | Automatically validate the flow whenever it is saved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
    | **Require Authentication to Initiate Flow**              | Require authentication as part of the flow initiation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
    | **Legacy Browser and WebView Compatible Rendering Mode** | Switches the flow to support rendering in a legacy browser directly or within a WebView compatible with legacy browsers. This setting is intended for legacy systems that rely on Trident 7+ or EdgeHTML 18+ WebView rendering engines in situations where upgrading to a Chromium browser is not yet possible.Some elements and features are limited or unavailable when this setting is enabled:- PingOne Forms can't be used.
@@ -863,7 +862,7 @@ Configure the settings that apply to the flow as a whole.
 
    - FIDO2 functionality might be limited.
 
-   - PingOne Protect uses version 5.5.2.
+   - PingOne Protect uses version 5.2.7.
 
    - Images (such as logos) can't be added directly in HTML nodes. Instead, you must add them using the **Custom CSS Rules** option.
 
@@ -889,9 +888,7 @@ Configure the settings that apply to the flow as a whole.
        .footerLogo { /* Ping Logo */ background-image: url("https://authenticator.pingone.com/pingid/assets/images/ping-logo.sm.2x.png"); width: 105px !important; height: auto; background-size: cover; background-repeat: no-repeat; background-position: center; }``
        ``` |
    | **Flow Timeout (in seconds)**                            | A timeout value for the entire flow, beginning when the flow is invoked. The default value is 300 (five minutes) and the maximum value is 172800 (two days).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-   | **Flow HTTP Response Timeout (in seconds)**              | A timeout value for any HTTP call made by any node in the flow. The default value is 15 and the maximum value is 120.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-   | **Enable Content Security Policy**                       | Restricts the domains from which content can be loaded.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-   | **CSP Value**                                            | If you selected **Enable Content Security Policy**, enter your content security policy in text form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   | **Flow HTTP Response Timeout (in seconds)**              | A timeout value for any backend call made by any node in the flow. The default value is 15 and the maximum value is 120.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 5. (Optional) Click the **Logging** tab to configure logging levels and sensitive data protections for the flow.
 
@@ -949,15 +946,13 @@ Configure the settings that apply to the flow as a whole.
 
 7. (Optional) Click the **Security** tab to configure security settings for the flow.
 
-   | Option                                          | Description                                                                                                                                                                                                                                                                                         |
-   | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Enforce Content Security Policy**             | Enables the use of a custom Content Security Policy (CSP) in enforce mode.This option is only available if your environment has a custom domain. If you don't have a custom domain, the baseline CSP is applied. Learn more in [Content Security Policies](davinci_content_security_policies.html). |
-   | **Enforced Content Security Policy Value**      | The CSP to apply to the flow if **Enforce Content Security Policy** is enabled.                                                                                                                                                                                                                     |
-   | **Report-Only Content Security Policy**         | Enables the use of a Content Security Policy (CSP) in report-only mode.This option is only available if your environment has a custom domain. If you don't have a custom domain, the baseline CSP is applied. Learn more in [Content Security Policies](davinci_content_security_policies.html).    |
-   | **Report Destination URL**                      | The URL to which CSP reports from the **Report-Only Content Security Policy** are sent if **Report-Only Content Security Policy** is enabled.                                                                                                                                                       |
-   | **Report-Only Content Security Policy Value**   | The CSP to apply to the flow in report-only mode if **Report-Only Content Security Policy** is enabled.                                                                                                                                                                                             |
-   | **Enable Content Security Policy (Deprecated)** | A deprecated field that enabled the use of a custom Content Security Policy (CSP) in enforce mode.If you are using this setting, switch to the **Enforce Content Security Policy** setting.                                                                                                         |
-   | **CSP value (Deprecated)**                      | A deprecated field for the CSP to enforce if **Enable Content Security Policy (Deprecated)** was enabled.If you are using this field, switch to the **Enforced Content Security Policy Value** field.                                                                                               |
+   | Option                                        | Description                                                                                                                                                                                                                                                                                         |
+   | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Enforce Content Security Policy**           | Enables the use of a custom Content Security Policy (CSP) in enforce mode.This option is only available if your environment has a custom domain. If you don't have a custom domain, the baseline CSP is applied. Learn more in [Content Security Policies](davinci_content_security_policies.html). |
+   | **Enforced Content Security Policy Value**    | The CSP to apply to the flow if **Enforce Content Security Policy** is enabled.                                                                                                                                                                                                                     |
+   | **Report-Only Content Security Policy**       | Enables the use of a Content Security Policy (CSP) in report-only mode.This option is only available if your environment has a custom domain. If you don't have a custom domain, the baseline CSP is applied. Learn more in [Content Security Policies](davinci_content_security_policies.html).    |
+   | **Report Destination URL**                    | The URL to which CSP reports from the **Report-Only Content Security Policy** are sent if **Report-Only Content Security Policy** is enabled.                                                                                                                                                       |
+   | **Report-Only Content Security Policy Value** | The CSP to apply to the flow in report-only mode if **Report-Only Content Security Policy** is enabled.                                                                                                                                                                                             |
 
 8. Click **Save**.
 
@@ -965,13 +960,13 @@ Configure the settings that apply to the flow as a whole.
 
 ---
 title: Editing the input schema
-description: Configure the information that's provided to the flow when it is invoked. This lets you map in external parameters for dynamic content or logic.
+description: Configure the input schema of a PingOne DaVinci flow to map external parameters into the flow for dynamic content or logic.
 component: davinci
 page_id: davinci:flows:davinci_editing_the_input_schema
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_the_input_schema.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_the_input_schema.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 19, 2024
+revdate: 2026-03-24
 section_ids:
   steps: Steps
 ---
@@ -1019,13 +1014,13 @@ Configure the information that's provided to the flow when it is invoked. This l
 
 ---
 title: Editing the output schema
-description: Configure the information included in the output when the flow completes.
+description: Configure the output schema of a PingOne DaVinci flow using JSON schema to define the data returned when the flow completes.
 component: davinci
 page_id: davinci:flows:davinci_editing_the_output_schema
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_editing_the_output_schema.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_editing_the_output_schema.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2025-10-09
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -1078,13 +1073,13 @@ The output from the flow is generated using a JSON schema with `output` as a roo
 
 ---
 title: Exporting a flow
-description: Export a flow to create a flow backup file that you can analyze or import into another environment.
+description: Export a PingOne DaVinci flow to create a backup file that you can analyze or import into another environment.
 component: davinci
 page_id: davinci:flows:davinci_exporting_a_flow
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_exporting_a_flow.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_exporting_a_flow.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 14, 2024
+revdate: 2025-10-14
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -1105,7 +1100,7 @@ Exporting a flow creates a JSON version of the flow. You can use this file to:
 
 * Share the flow with colleagues who use a different environment
 
-You can also export forms that are part of the flow. Learn more in [Importing and exporting forms](http://docs.pingidentity.com/pingone/user_experience/p1_import_export_forms.html).
+You can also export forms that are part of the flow. Learn more in [Importing and exporting forms](https://docs.pingidentity.com/pingone/user_experience/p1_import_export_forms.html).
 
 Ping support might also request flows for troubleshooting purposes.
 
@@ -1147,13 +1142,13 @@ Ping support might also request flows for troubleshooting purposes.
 
 ---
 title: Flow editing options
-description: You can control many flow properties using the More options ( ) menu while editing a flow.
+description: Reference for PingOne DaVinci flow options in the More options menu, including enabling flows, showing node IDs, and analytics.
 component: davinci
 page_id: davinci:flows:davinci_flow_editing_options
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_editing_options.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_editing_options.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 18, 2023
+revdate: 2026-03-24
 ---
 
 # Flow editing options
@@ -1177,13 +1172,13 @@ You can control many flow properties using the **More options ( [icon: ellipsis-
 
 ---
 title: Flow limits
-description: These limits affect the creation of flows.
+description: Reference for PingOne DaVinci flow limits, including maximum flows, connections, versions, and variables per environment.
 component: davinci
 page_id: davinci:flows:davinci_flow_limits
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_limits.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_limits.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 4, 2024
+revdate: 2026-05-07
 ---
 
 # Flow limits
@@ -1192,13 +1187,14 @@ These limits affect the creation of flows.
 
 Some connectors have additional limitations; see the connector documentation for your connectors to learn more.
 
-For PingOne standard platform limits, see [PingOne standard platform limits](http://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html).
+For PingOne standard platform limits, see [PingOne standard platform limits](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html).
 
 Flow limits
 
 | Property                                              | Limit                                                   | Description                                                                                                                                                                                          |
 | ----------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Resource                                              | 100                                                     | Your environment can contain a maximum of 100 of each entity type. This limitation applies to flows and connections, but not to variables or end users. Each flow is limited to 100 stored versions. |
+| Nodes                                                 | 1000 per flow                                           | Each flow can contain a maximum of 1000 nodes.                                                                                                                                                       |
 | Variable                                              | 200, 1 MB each                                          | Your environment can include a total of 200 variables across all variable types. Each variable can have a maximum size of 1 MB.                                                                      |
 | API payload                                           | 10 MB                                                   | The maximum payload size for any API call (such as POST, GET, or DELETE) made within a flow.                                                                                                         |
 | Number of times a node can be run per flow invocation | 20                                                      | If a flow repeats one or more nodes, each node can be run a maximum of 20 times. This limitation doesn't apply to polling nodes.                                                                     |
@@ -1210,13 +1206,13 @@ Flow limits
 
 ---
 title: Flow Validation Rules
-description: The following errors can be identified by flow validation:
+description: Reference for PingOne DaVinci flow validation errors and warnings, such as empty flows, floating nodes, and disabled nodes.
 component: davinci
 page_id: davinci:flows:davinci_flow_validation_rules
-canonical_url: http://docs.pingidentity.com/davinci/flows/davinci_flow_validation_rules.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/flows/davinci_flow_validation_rules.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 13, 2025
+revdate: 2026-02-06
 section_ids:
   errors: Errors
   warnings: Warnings

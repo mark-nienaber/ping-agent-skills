@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Lookout Secure Access
-description: The Ping Identity and Lookout SAML integration supports service provider (SP) and identity provider (IdP) initiated single sign-on (SSO).
+description: Configure SAML SSO with Lookout Secure Access and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:lookout_secure_access:config_saml_sso_lookout_secure_access
 canonical_url: https://docs.pingidentity.com/configuration_guides/lookout_secure_access/config_saml_sso_lookout_secure_access.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 7, 2024
 section_ids:
   what-it-is: What it is

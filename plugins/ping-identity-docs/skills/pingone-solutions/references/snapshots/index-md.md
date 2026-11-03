@@ -4,13 +4,16 @@ description: Provides descriptions and links for the PingOne solution packs.
 component: pingone-solutions
 page_id: pingone-solutions::index
 canonical_url: https://docs.pingidentity.com/pingone-solutions/index.html
-revdate: July 15, 2025
+llms_txt: https://docs.pingidentity.com/pingone-solutions/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-07-15
 section_ids:
   pingone-for-customers-passwordless: PingOne for Customers Passwordless
   pingone-for-customers-plus: PingOne for Customers Plus
   financial-services: Financial Services
   gift-card-redemption: Gift Card Redemption
-  healthcare-flow-pack: Healthcare flow pack
+  healthcare-patient-experience-flow-pack: Healthcare Patient Experience flow pack
+  verified-frontline-workers-flow-pack: Verified Frontline Workers flow pack
 ---
 
 # PingOne Solution Packs
@@ -73,16 +76,30 @@ The Gift Card Redemption solution pack gives end users a secure way to redeem gi
 
 * [Flow Reference](gift-card-auth/flow_reference/gift-card-flow-reference.html)
 
-## Healthcare flow pack
+## Healthcare Patient Experience flow pack
 
-The Healthcare flow pack solution pack gives end users a way to access healthcare accounts and customer service representatives a way to assist users with account access and management.
+The Healthcare Patient Experience flow pack solution pack gives end users a way to access healthcare accounts and customer service representatives a way to assist users with account access and management.
 
-* [Healthcare flow pack on the Marketplace](https://marketplace.pingone.com/item/healthcare-patient-experience-flow-pack)
+* [Healthcare Patient Experience flow pack on the Marketplace](https://marketplace.pingone.com/item/healthcare-patient-experience-flow-pack)
 
-* [About Healthcare flow pack](healthcare/index.html)
+* [About Healthcare Patient Experience flow pack](healthcare/index.html)
 
 * [Getting Started](healthcare/getting-started/healthcare-getting-started.html)
 
-* [Healthcare flow pack Release Notes](healthcare/release-notes/healthcare-release-notes.html)
+* [Healthcare Patient Experience flow pack Release Notes](healthcare/release-notes/healthcare-release-notes.html)
 
 * [Flow Reference](healthcare/flow-reference/healthcare-flow-reference.html)
+
+## Verified Frontline Workers flow pack
+
+The Verified Frontline Workers flow pack solution pack lets administrators help new employees register accounts and sign on in environments where users may not have keyboard or mouse access.
+
+* LINK WILL GO HERE
+
+* [About Verified Frontline Workers flow pack](frontline-workers/index.html)
+
+* [Getting Started](frontline-workers/getting-started/frontline-getting-started.html)
+
+* [Verified Frontline Workers flow pack Release Notes](frontline-workers/release-notes/frontline-release-notes.html)
+
+* FLOW REFERENCE WILL GO HERE

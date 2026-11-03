@@ -5,6 +5,9 @@ component: web-agents
 version: 2026
 page_id: web-agents:identity-cloud-guide:about
 canonical_url: https://docs.pingidentity.com/web-agents/2026/identity-cloud-guide/about.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T15:46:19Z
 ---
 
 # About Web Agent and PingOne Advanced Identity Cloud
@@ -26,6 +29,9 @@ component: web-agents
 version: 2026
 page_id: web-agents:identity-cloud-guide:pep
 canonical_url: https://docs.pingidentity.com/web-agents/2026/identity-cloud-guide/pep.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T15:46:19Z
 ---
 
 # Enforce policy decisions from Advanced Identity Cloud
@@ -57,6 +63,9 @@ component: web-agents
 version: 2026
 page_id: web-agents:identity-cloud-guide:preface
 canonical_url: https://docs.pingidentity.com/web-agents/2026/identity-cloud-guide/preface.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T15:46:19Z
 page_aliases: ["index.adoc"]
 section_ids:
   preface-examples: Example installation for this guide
@@ -97,6 +106,9 @@ component: web-agents
 version: 2026
 page_id: web-agents:identity-cloud-guide:installation
 canonical_url: https://docs.pingidentity.com/web-agents/2026/identity-cloud-guide/installation.html
+llms_txt: https://docs.pingidentity.com/web-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T15:46:19Z
 section_ids:
   demo-user: Add a test user in Advanced Identity Cloud
   create-policy: Create a policy set and policy in Advanced Identity Cloud

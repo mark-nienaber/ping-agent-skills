@@ -39,19 +39,19 @@ To allow PingFederate to manage users in ServiceNow, add the special Ping Identi
 
       ![The ServiceNow account name menu.](_images/ndn1574898659542.jpg)
 
-   2. On the **Elevate Roles** dialog, select **security\_admin**. Click **OK**.
+   2. On the **Elevate Roles** dialog, select **security_admin**. Click **OK**.
 
    3. Go to **System Security > Access Control (ACL)**. Click **New**.
 
    4. On the **New record** tab, from the **Operation** list, select **Delete**.
 
-   5. From the **Name** list, select **User Role (sys\_user\_has\_role)**.
+   5. From the **Name** list, select **User Role (sys_user_has_role)**.
 
    6. In the **Requires role** section, double-click **Insert a new row**.
 
    7. Enter `ping_identity_provisioning_role`, and then press enter.
 
-      ![The new role field with ping\_identity\_provisioning\_role entered.](_images/gzk1574899230765.jpg)
+      ![The new role field with ping_identity_provisioning_role entered.](_images/gzk1574899230765.jpg)
 
    8. Click **Submit**.
 
@@ -554,7 +554,7 @@ To allow PingFederate and ServiceNow to communicate securely, exchange the signi
 
    1. On your ServiceNow instance, go to **SAML 2 Single Sign-on > Certificate**. Click **SAML 2.0 SP Keystore**.
 
-   2. On the **SAML 2.0 SP Keystore** screen, download the certificate keystore by clicking **saml2sp\_keystore**.
+   2. On the **SAML 2.0 SP Keystore** screen, download the certificate keystore by clicking **saml2sp_keystore**.
 
    3. Extract the certificate from `saml2sp_keystore` as shown in [How to print the Public Key of a Certificate using Keytool](https://hi.service-now.com/kb_view.do?sysparm_article=KB0714222) in the ServiceNow documentation.
 
@@ -723,17 +723,17 @@ For official documentation, see [External single sign-on (SSO)](https://docs.ser
 
 3. In the **Identity Provider properties** section, in the **Identity Provider URL** field, enter your PingFederate URL based on the following:
 
-   https\://*pf\_host*:*pf\_port*
+   https\://*pf_host*:*pf_port*
 
 4. In the **base URL to the Identity Provider's AuthnRequest service** field, enter your PingFederate SSO endpoint based on the following:
 
-   https\://*pf\_host*:*pf\_port*/idp/SSO.saml2
+   https\://*pf_host*:*pf_port*/idp/SSO.saml2
 
 5. **Optional:** Select **Sign AuthnRequest**.
 
 6. In the **base URL to the Identity Provider's SingleLogOutRequest service** field, enter your PingFederate SSO endpoint based on the following:
 
-   https\://*pf\_host*:*pf\_port*/idp/SLO.saml2
+   https\://*pf_host*:*pf_port*/idp/SLO.saml2
 
 7. In the **protocol binding for the Identity Provider's SIngleLogoutRequest service** field, enter `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 
@@ -890,7 +890,7 @@ For more information about these attributes, see [Create a user](https://docs.se
 | Roles                | The user's role, such as "Student" or "Faculty".This attribute supports multiple values.The ServiceNow Provisioner can only assign roles that are already assigned to the user account that you use for provisioning.The ServiceNow Provisioner does not create new roles, so the roles must already exist in ServiceNow\.By default, the ServiceNow Provisioner can set roles but not remove them. To remove this limitation, you can grant elevated security permissions, as shown in [Adding the Ping Identity provisioning role in ServiceNow](pf_servicenow_connector_adding_the_ping_identity_provisioning_role_in_servicenow.html). |
 | Notification         | Determines whether to enable notifications. Select **Enable** or **Disable**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Employee Number      | A string identifier, typically numeric or alphanumeric, assigned to a person, often based on order of hire or association with an organization.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Time Zone            | The user's time zone. Uses IANA time zone database format. For example, "America/Los\_Angeles".&#xA;&#xA;The ServiceNow Provisioner can only set time zones that are already assigned to the user account that you use for provisioning. The time zone might need to be updated in ServiceNow to account for other allowable values in this field.                                                                                                                                                                                                                                                                                         |
+| Time Zone            | The user's time zone. Uses IANA time zone database format. For example, "America/Los_Angeles".&#xA;&#xA;The ServiceNow Provisioner can only set time zones that are already assigned to the user account that you use for provisioning. The time zone might need to be updated in ServiceNow to account for other allowable values in this field.                                                                                                                                                                                                                                                                                          |
 | Time Format          | The user's time format. For details on time formatting, see [Global date and time field format](https://docs.servicenow.com/en-US/bundle/vancouver-platform-administration/page/administer/time/reference/r_FormatDateAndTimeFields.html) in the ServiceNow documentation.&#xA;&#xA;The ServiceNow Provisioner can only set time formats that are already assigned to the user account that you use for provisioning.                                                                                                                                                                                                                      |
 | Manager              | The distinguished name (DN) representing the manager for the user.&#xA;&#xA;During the first synchronization between ServiceNow and your data store, you might see errors in provisioner.log because the manager for a user has not been provisioned yet. The user is still created without the manager attribute. On the next retry, the manager will exist and the user's manager attribute will be updated.	&#xA;&#xA;This attribute is not supported in PingFederate 9.0 and 9.0.1.                                                                                                                                                    |
 

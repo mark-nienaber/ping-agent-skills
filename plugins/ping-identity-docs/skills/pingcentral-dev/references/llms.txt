@@ -1,0 +1,100 @@
+# PingCentral API Reference
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
+## Pingcentral
+
+- [Applications](https://developer.pingidentity.com/pingcentral/pingcentral/applications/index.md): Manage PingCentral application resources, including creating, updating, deleting, and promoting applications between environments
+- [Certificate Utilities](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/index.md): Use PingCentral certificate utility endpoints to convert, encode, read, and validate certificates and key pairs
+- [Certificates](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/index.md): Create, read, update, and delete PingCentral certificate resources through the Certificates API
+- [Convert Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/convert-certificate.md): Convert a certificate to X.509 format for downloading
+- [CREATE Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/create-application.md): Create a new PingCentral application resource
+- [CREATE Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/create-certificate.md): Add a new trusted certificate to PingCentral
+- [CREATE Client Secret](https://developer.pingidentity.com/pingcentral/pingcentral/applications/create-client-secret.md): Generate a client secret for a PingCentral application
+- [Create Environments](https://developer.pingidentity.com/pingcentral/pingcentral/environments/create-environments.md): Create a new PingCentral environment resource
+- [CREATE Group](https://developer.pingidentity.com/pingcentral/pingcentral/groups/create-group.md): Create a PingCentral group
+- [CREATE Session (Login)](https://developer.pingidentity.com/pingcentral/pingcentral/session-login-management/create-session-login.md): Create a new PingCentral user session by authenticating login credentials
+- [CREATE Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/create-template.md): Create a PingCentral template based on an existing PingFederate or PingAccess application
+- [CREATE User](https://developer.pingidentity.com/pingcentral/pingcentral/users/create-user.md): Create a new PingCentral user with a name, user name, and assigned role
+- [CSRF Protection](https://developer.pingidentity.com/pingcentral/pingcentral/csrf-protection/index.md): Manage Cross Site Request Forgery protection settings that guard PingCentral against unauthorized HTTP requests from trusted users
+- [DELETE Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/delete-application.md): Delete a PingCentral application resource by ID
+- [DELETE Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/delete-certificate.md): Remove a PingCentral certificate by ID
+- [DELETE Environments](https://developer.pingidentity.com/pingcentral/pingcentral/environments/delete-environments.md): Delete the PingCentral environment specified by its ID
+- [DELETE Group](https://developer.pingidentity.com/pingcentral/pingcentral/groups/delete-group.md): Remove the PingCentral group identified by its group ID
+- [DELETE Session (Logout)](https://developer.pingidentity.com/pingcentral/pingcentral/session-login-management/delete-session-logout.md): Terminate the current PingCentral user session by logging the user out
+- [DELETE Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/delete-template.md): Delete a PingCentral template by ID
+- [DELETE User](https://developer.pingidentity.com/pingcentral/pingcentral/users/delete-user.md): Delete a PingCentral user by ID
+- [Encode Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/encode-certificate.md): Encode a P12 certificate
+- [Environments](https://developer.pingidentity.com/pingcentral/pingcentral/environments/index.md): Create, read, update, and delete PingCentral environments, including connected PingFederate and PingAccess environments
+- [Groups](https://developer.pingidentity.com/pingcentral/pingcentral/groups/index.md): Create, read, update, and delete PingCentral groups and manage their user membership
+- [Import Groups File](https://developer.pingidentity.com/pingcentral/pingcentral/groups/import-groups-file.md): Import a CSV file listing PingCentral groups to add
+- [Licenses](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/index.md): Read, upload, and validate PingCentral license resources
+- [Metadata (Service Provider)](https://developer.pingidentity.com/pingcentral/pingcentral/metadata-service-provider/index.md): Upload SAML service provider connection metadata to PingCentral from a file or a URL
+- [Orchestration - PingAccess](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingaccess/index.md): List PingAccess applications, dependent resources, and site authenticators orchestrated by PingCentral
+- [Orchestration - PingFederate](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/index.md): List PingFederate clients, signing certificates, and service provider connections orchestrated by PingCentral
+- [PingCentral API Reference](https://developer.pingidentity.com/pingcentral/pingcentral/index.md): Introduces the PingCentral administrative REST API for managing users, environments, templates, applications, and certificates
+- [Promote Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/promote-application-.md): Promote a PingCentral OAuth application to a specified environment
+- [READ All Templates](https://developer.pingidentity.com/pingcentral/pingcentral/templates/read-all-templates.md): Retrieve all PingCentral templates, with options to filter by integration type or name
+- [READ Application Metadata](https://developer.pingidentity.com/pingcentral/pingcentral/applications/read-application-metadata.md): Retrieve metadata for a PingCentral application in a specified environment
+- [READ Applications](https://developer.pingidentity.com/pingcentral/pingcentral/applications/read-applications.md): List all PingCentral application resources
+- [READ Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/read-certificate.md): Read certificate data from a certificate file
+- [READ Certificates](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/read-certificates.md): Retrieve a paginated list of PingCentral certificates with optional alias filtering
+- [READ Client Secret](https://developer.pingidentity.com/pingcentral/pingcentral/applications/read-client-secret.md): Retrieve the client secret key for a PingCentral application in a specified environment
+- [READ CSRF](https://developer.pingidentity.com/pingcentral/pingcentral/csrf-protection/read-csrf.md): Retrieve the CSRF protection token information used to guard PingCentral against cross-site request forgery
+- [READ Environment With Runtime Information](https://developer.pingidentity.com/pingcentral/pingcentral/environments/read-environment-with-runtime-information.md): Retrieve runtime information about the PingCentral environment specified by its ID
+- [READ Environments](https://developer.pingidentity.com/pingcentral/pingcentral/environments/read-environments.md): Retrieve a list of all PingCentral environments
+- [READ Groups](https://developer.pingidentity.com/pingcentral/pingcentral/groups/read-groups.md): Retrieve a filtered and paginated list of PingCentral groups
+- [READ License](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/read-license.md): Retrieve information about the current PingCentral license
+- [READ One Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/read-one-application.md): Retrieve information about a PingCentral application by ID
+- [READ One Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/read-one-certificate.md): Retrieve a PingCentral certificate by ID
+- [READ One Environment](https://developer.pingidentity.com/pingcentral/pingcentral/environments/read-one-environment.md): Retrieve information about the PingCentral environment specified by its ID
+- [READ One Group](https://developer.pingidentity.com/pingcentral/pingcentral/groups/read-one-group.md): Retrieve the PingCentral group with the associated group ID
+- [READ One PingFederate Client Summary from Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/read-one-pingfederate-client-summary-from-template.md): Retrieve the PingFederate client summary associated with a single PingCentral template
+- [READ One Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/read-one-template.md): Retrieve a single PingCentral template by ID
+- [READ One User](https://developer.pingidentity.com/pingcentral/pingcentral/users/read-one-user.md): Retrieve a single PingCentral user by ID
+- [READ PingAccess Applications](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingaccess/read-pingaccess-applications.md): List PingAccess applications orchestrated by PingCentral for a given environment
+- [READ PingAccess Dependent Resources](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingaccess/read-pingaccess-dependent-resources.md): List PingAccess dependent resources orchestrated by PingCentral for a given environment
+- [READ PingAccess Site Authenticators](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingaccess/read-pingaccess-site-authenticators.md): List PingAccess site authenticators orchestrated by PingCentral for a given environment
+- [READ PingFederate Client Dependencies](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/read-pingfederate-client-dependencies.md): Retrieve a PingFederate client and its dependencies orchestrated by PingCentral
+- [READ PingFederate Client Summaries](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/read-pingfederate-client-summaries.md): List PingFederate client summaries orchestrated by PingCentral for a given environment
+- [READ PingFederate Client summaries from Templates](https://developer.pingidentity.com/pingcentral/pingcentral/templates/read-pingfederate-client-summaries-from-templates.md): Retrieve PingFederate client summaries associated with all PingCentral templates, with optional filtering
+- [READ PingFederate Signing Certificates](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/read-pingfederate-signing-certificates.md): Retrieve PingFederate signing certificates orchestrated by PingCentral for a given environment
+- [READ PingFederate SP Connection Details](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/read-pingfederate-sp-connection-details.md): Retrieve details about a PingFederate service provider connection orchestrated by PingCentral
+- [READ PingFederate SP Connection Summaries](https://developer.pingidentity.com/pingcentral/pingcentral/orchestration---pingfederate/read-pingfederate-sp-connection-summaries.md): List PingFederate service provider connection summaries orchestrated by PingCentral
+- [READ Promotion History](https://developer.pingidentity.com/pingcentral/pingcentral/applications/read-promotion-history.md): Retrieve the promotion history for a PingCentral application
+- [READ Service-level Agreement Status](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/read-service-level-agreement-status.md): Retrieve whether the PingCentral service-level agreement has been accepted
+- [READ Session Information](https://developer.pingidentity.com/pingcentral/pingcentral/session-login-management/read-session-information.md): Retrieve information about the current PingCentral user's active session
+- [READ Sessions](https://developer.pingidentity.com/pingcentral/pingcentral/session-management/read-sessions.md): Retrieve the current PingCentral session configuration settings
+- [READ SSO Status](https://developer.pingidentity.com/pingcentral/pingcentral/system/sso/get.md): Retrieve the current single sign-on enablement status for a PingCentral environment
+- [READ TLS Key Pair](https://developer.pingidentity.com/pingcentral/pingcentral/tls-key-pairs/read-tls-key-pair.md): Retrieve the current TLS key pair configured in PingCentral
+- [READ Users](https://developer.pingidentity.com/pingcentral/pingcentral/users/read-users.md): Retrieve all PingCentral users, with optional filtering and pagination
+- [READ Version](https://developer.pingidentity.com/pingcentral/pingcentral/version/read-version.md): Retrieve the current version of PingCentral
+- [Restore Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/restore-application.md): Restore a PingCentral application to the state at a previous promotion
+- [Restore Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/restore-template.md): Restore a previous revision of a PingCentral template
+- [Session Login Management](https://developer.pingidentity.com/pingcentral/pingcentral/session-login-management/index.md): Create, read, and delete PingCentral user session resources for login, logout, and session information
+- [Session Management](https://developer.pingidentity.com/pingcentral/pingcentral/session-management/index.md): Read and update PingCentral session settings such as cookie name, idle timeout, and session lifetime
+- [SSO](https://developer.pingidentity.com/pingcentral/pingcentral/system/sso/index.md): Check whether single sign-on is enabled for a PingCentral environment
+- [System](https://developer.pingidentity.com/pingcentral/pingcentral/system/index.md): Access system-related configuration for a PingCentral environment, including single sign-on status
+- [Templates](https://developer.pingidentity.com/pingcentral/pingcentral/templates/index.md): Create, read, update, and delete PingCentral templates based on existing PingFederate or PingAccess applications
+- [TLS Key Pairs](https://developer.pingidentity.com/pingcentral/pingcentral/tls-key-pairs/index.md): Retrieve the current TLS key pair and upload PKCS12 TLS key pairs for encrypting and decrypting PingCentral data
+- [UPDATE Application](https://developer.pingidentity.com/pingcentral/pingcentral/applications/update-application.md): Update a PingCentral application resource by ID
+- [UPDATE Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificates/update-certificate.md): Update a PingCentral certificate by ID
+- [UPDATE Environment](https://developer.pingidentity.com/pingcentral/pingcentral/environments/update-environment.md): Update the PingCentral environment specified by its ID
+- [UPDATE Group](https://developer.pingidentity.com/pingcentral/pingcentral/groups/update-group.md): Update the PingCentral group with the specified group ID
+- [UPDATE Service-level Agreement Acceptance](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/update-service-level-agreement-acceptance.md): Update the acceptance status of the PingCentral service-level agreement
+- [UPDATE Session Settings](https://developer.pingidentity.com/pingcentral/pingcentral/session-management/update-session-settings.md): Update PingCentral session settings such as cookie name, idle timeout, and maximum session lifetime
+- [UPDATE Template](https://developer.pingidentity.com/pingcentral/pingcentral/templates/update-template.md): Update an existing PingCentral template
+- [UPDATE User](https://developer.pingidentity.com/pingcentral/pingcentral/users/update-user.md): Update an existing PingCentral user's name, user name, password, or role
+- [Upload a Multipart TLS Key Pair PKCS12 File](https://developer.pingidentity.com/pingcentral/pingcentral/tls-key-pairs/upload-a-multipart-tls-key-pair-pkcs12-file.md): Upload a TLS PKCS12 key pair file to PingCentral using a multipart form request
+- [Upload Connection Metadata](https://developer.pingidentity.com/pingcentral/pingcentral/metadata-service-provider/upload-connection-metadata-.md): Upload SAML service provider connection metadata to PingCentral from a file
+- [Upload Connection Metadata from URL](https://developer.pingidentity.com/pingcentral/pingcentral/metadata-service-provider/upload-connection-metadata-from-url.md): Upload SAML service provider connection metadata to PingCentral from a URL
+- [Upload License](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/upload-license.md): Upload PingCentral license data
+- [Upload PKCS12 TLS Key Pair](https://developer.pingidentity.com/pingcentral/pingcentral/tls-key-pairs/upload-pkcs12-tls-key-pair.md): Upload a TLS PKCS12 key pair to PingCentral for encrypting and decrypting data
+- [Users](https://developer.pingidentity.com/pingcentral/pingcentral/users/index.md): Create, read, update, and delete PingCentral user resources, including names, user names, and assigned roles
+- [Validate Certificate](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/validate-certificate.md): Validate a certificate
+- [Validate Environment](https://developer.pingidentity.com/pingcentral/pingcentral/environments/validate-environment.md): Validate a PingCentral environment resource before creating or updating it
+- [Validate Groups File](https://developer.pingidentity.com/pingcentral/pingcentral/groups/validate-groups-file.md): Validate a groups CSV file before importing it into PingCentral
+- [Validate Key Pairs](https://developer.pingidentity.com/pingcentral/pingcentral/certificate-utilities/validate-key-pairs.md): Validate the key pairs of a P12 certificate
+- [Validate License](https://developer.pingidentity.com/pingcentral/pingcentral/licenses/validate-license.md): Validate PingCentral license data before applying it
+- [Version](https://developer.pingidentity.com/pingcentral/pingcentral/version/index.md): Retrieve the current version of PingCentral

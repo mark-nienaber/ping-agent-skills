@@ -7,6 +7,7 @@ page_id: pingam:setup:data-stores-active-directory
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/data-stores-active-directory.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Directory Server", "Identity Store", "LDAP"]
 page_aliases: ["setup-guide:data-stores-active-directory.adoc"]
 section_ids:
@@ -584,6 +585,7 @@ page_id: pingam:setup:data-stores-adam
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/data-stores-adam.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Directory Server", "Identity Store", "LDAP"]
 page_aliases: ["setup-guide:data-stores-adam.adoc"]
 section_ids:
@@ -1116,7 +1118,7 @@ Default: `member`
 
 ### AD Recursive Group Membership Evaluation
 
-Whether to evaluate Active Directory group membership recursively using the Active Directory specific extensible filter named LDAP\_MATCHING\_RULE\_IN\_CHAIN.
+Whether to evaluate Active Directory group membership recursively using the Active Directory specific extensible filter named LDAP_MATCHING_RULE_IN_CHAIN.
 
 When enabled, AM evaluates nested group memberships when determining whether a user is a member of a group.
 
@@ -1171,6 +1173,7 @@ page_id: pingam:setup:server-advanced
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/server-advanced.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-04T10:48:02Z
 page_aliases: ["setup-guide:server-advanced.adoc"]
 ---
 
@@ -1244,7 +1247,7 @@ Each server has a list of advanced properties that can be modified at Deployment
 
   Default: `true`
 
-- `am.cts.use.etag.assertion.on.update`
+- `am.cts.use.etag.assertion.on.updates`
 
   When set to `true` (the default), AM uses ETag assertions to prevent parallel CTS updates for authentication journeys. The assertion checks that the state of the CTS token hasn't changed between the read and the update. This check applies only to CTS session updates related to journeys, when allowlisting is enabled and journey sessions are stored in the CTS token store.
 
@@ -1254,7 +1257,19 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 | - | ---------------------------------------------------------------------------------------------------------------------------------- |
 |   | Unless you use in-memory journey sessions, disabling the assertion check can expose your journey sessions to parallel CTS updates. |
 
-* `am.oauth2.request.object.restrictions.enforced`
+* `am.oauth2.ciba.spec.compliant.acr.resolution.enabled`
+
+  Enables spec-compliant authentication context class reference (ACR) resolution for CIBA backchannel requests when set to `true`. When enabled, requests without an `acr_values` claim resolve the authentication journey using the client default ACR values, the OAuth 2.0 provider default ACR values, or the realm's default authentication journey, in that order.
+
+  |   |                                                                                                                                                                                 |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | A client or provider default ACR value must match a key in the provider's OpenID Connect acr_values to Auth Chain Mapping. AM skips unmapped values and checks the next source. |
+
+  Learn more in [Resolve the CIBA authentication journey](../am-oidc1/openid-connect-backchannel-request-flow.html#ciba-acr-resolution).
+
+  Default: `false`
+
+- `am.oauth2.request.object.restrictions.enforced`
 
   Aligns AM behavior with the following specifications:
 
@@ -1272,69 +1287,69 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `false`
 
-- `am.secrets.gsm.stableid.version.only`
+* `am.secrets.gsm.stableid.version.only`
 
-  By default, for certificates stored in a [GSM secret store](../security/secret-stores.html#create-GSM-secret-stores), the public key published in the JWK\_URI has a Key-ID (`kid`) value that includes the name of the secret. To override the default `kid` value with only the GSM secret version, set this property to `true`.
+  By default, for certificates stored in a [GSM secret store](../security/secret-stores.html#create-GSM-secret-stores), the public key published in the JWK_URI has a Key-ID (`kid`) value that includes the name of the secret. To override the default `kid` value with only the GSM secret version, set this property to `true`.
 
   Default: `false`
 
   Find more information in [Overwrite default `kid` values](../am-oidc1/managing-jwk_uri.html#overwrite-default-kid-values).
 
-- `bootstrap.file`
+* `bootstrap.file`
 
   File that contains the path to the AM configuration folder. By default, the `.openamcfg` directory is created in the home directory of the user that runs the web container. For example, `$HOME/.openamcfg/AMConfig_path_to_tomcat_webapps_am_`.
 
-- `com.iplanet.am.cookie.c66Encode`
+* `com.iplanet.am.cookie.c66Encode`
 
   Properly URL encode session tokens.
 
   Default: `true`
 
-- `com.iplanet.am.daemons`
+* `com.iplanet.am.daemons`
 
   This property was used only for authentication with modules and chains and is no longer documented.
 
-- `com.iplanet.am.directory.ssl.enabled`
+* `com.iplanet.am.directory.ssl.enabled`
 
   If `true` AM connects to the configuration directory server over LDAPS.
 
   Default: `false`
 
-- `com.iplanet.am.installdir`
+* `com.iplanet.am.installdir`
 
   AM Configuration and log file location.
 
   Default: `~/openam/`, such as `~/am`
 
-- `com.iplanet.am.jssproxy.checkSubjectAltName`
+* `com.iplanet.am.jssproxy.checkSubjectAltName`
 
   When using JSS or JSSE, check whether the name values in the `SubjectAltName` certificate match the server FQDN.
 
   Default: `false`
 
-- `com.iplanet.am.jssproxy.resolveIPAddress`
+* `com.iplanet.am.jssproxy.resolveIPAddress`
 
   When using JSS or JSSE, check that the IP address of the server resolves to the host name.
 
   Default: `false`
 
-- `com.iplanet.am.jssproxy.SSLTrustHostList`
+* `com.iplanet.am.jssproxy.SSLTrustHostList`
 
   When using JSS or JSSE, comma-separated list of server FQDNs to trust if they match the certificate CN, even if the domain name isn't correct.
 
-- `com.iplanet.am.jssproxy.trustAllServerCerts`
+* `com.iplanet.am.jssproxy.trustAllServerCerts`
 
   When using JSS or JSSE, set to `true` to trust whatever certificate is presented without checking.
 
   Default: `true`
 
-- `com.iplanet.am.lbcookie.name`
+* `com.iplanet.am.lbcookie.name`
 
   Used with sticky load balancers that can inspect the cookie value.
 
   Default: `amlbcookie`
 
-- `com.iplanet.am.lbcookie.value`
+* `com.iplanet.am.lbcookie.value`
 
   Used with sticky load balancers that can inspect the cookie value. The value of this property defaults to the unique AM server ID, although you can set your own unique value.
 
@@ -1369,25 +1384,25 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `01`
 
-- `com.iplanet.am.pcookie.name`
+* `com.iplanet.am.pcookie.name`
 
   Persistent cookie name.
 
   Default: `DProPCookie`
 
-- `com.iplanet.am.profile.host`
+* `com.iplanet.am.profile.host`
 
   Not used
 
   Default: *server-host*, such as `am.example.com`
 
-- `com.iplanet.am.profile.port`
+* `com.iplanet.am.profile.port`
 
   Not used
 
   Default: *server-port*, such as `8080` or `8443`
 
-- `com.iplanet.am.sdk.caching.enabled`
+* `com.iplanet.am.sdk.caching.enabled`
 
   Enables caching for configuration data and user data.
 
@@ -1397,79 +1412,79 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-- `com.iplanet.am.session.agentSessionIdleTime`
+* `com.iplanet.am.session.agentSessionIdleTime`
 
   Time in *minutes* after which a web or Java agent's [server-side](../am-sessions/cts-based-sessions.html) session expires. Note that this setting is ignored when AM creates a client-side session for a web or Java agent.
 
   Default: `1440` (session expires after one day). You can set this property to `0` (session never expires), or any integer higher than `30` (no maximum limit).
 
-- `com.iplanet.am.session.client.polling.enable`
+* `com.iplanet.am.session.client.polling.enable`
 
   If `true`, client applications such as web or Java agents poll for [server-side](../am-sessions/cts-based-sessions.html) session changes. If `false`, client applications register listeners for notifications about changes to server-side sessions.
 
   Default: `false`
 
-- `com.iplanet.am.session.client.polling.period`
+* `com.iplanet.am.session.client.polling.period`
 
   If client applications poll for changes, number of seconds between polls.
 
   Default: `180`
 
-- `com.iplanet.am.session.httpSession.enabled`
+* `com.iplanet.am.session.httpSession.enabled`
 
   Create an `HttpSession` for users on successful authentication.
 
   Default: `true`
 
-- `com.iplanet.security.SSLSocketFactoryImpl`
+* `com.iplanet.security.SSLSocketFactoryImpl`
 
   SSL socket factory implementation used by AM.
 
   Default: `com.sun.identity.shared.ldap.factory.JSSESocketFactory`, uses a pure Java provider
 
-- `com.sun.identity.am.cookie.check`
+* `com.sun.identity.am.cookie.check`
 
   If `true`, AM checks for cookie support in the user agent and returns an error if cookies aren't supported.
 
   Default: `false`
 
-- `com.sun.identity.appendSessionCookieInURL`
+* `com.sun.identity.appendSessionCookieInURL`
 
   If `true`, AM appends the session cookie to the URL for a zero page session.
 
   Default: `true`
 
-- `com.sun.identity.auth.cookieName`
+* `com.sun.identity.auth.cookieName`
 
   Cookie used by the AM authentication service to handle the authentication process.
 
   Default: `AMAuthCookie`
 
-- `com.sun.identity.authentication.client.ipAddressHeader`
+* `com.sun.identity.authentication.client.ipAddressHeader`
 
   Set the name of the HTTP header that AM can examine to learn the client IP address when requests go through a proxy or load balancer. (When requests go through an HTTP proxy or load balancer, checking the IP address on the request alone returns the address of the proxy or load balancer rather than that of the client.) AM must be able to trust the proxy or load balancer to set the client IP address correctly in the header specified.
 
   Example: `com.sun.identity.authentication.client.ipAddressHeader=X-Forwarded-For`
 
-- `com.sun.identity.authentication.multiple.tabs.used`
+* `com.sun.identity.authentication.multiple.tabs.used`
 
   If `true`, users can open many browser tabs to the login page at the same time without encountering an error.
 
   Default: `false`
 
-- `com.sun.identity.authentication.setCookieToAllDomains`
+* `com.sun.identity.authentication.setCookieToAllDomains`
 
   If `true`, AM allows multiple cookie domains.
 
   Default: `true`
 
-- `com.sun.identity.authentication.special.users`
+* `com.sun.identity.authentication.special.users`
 
   List of special users always authenticated against the local directory server.
 
   Default: `cn=dsameuser,ou=DSAME Users,%ROOT_SUFFIX%|cn=amService-UrlAccessAgent,ou=DSAME Users,%ROOT_SUFFIX%`
 
-- `com.sun.identity.authentication.super.user`
+* `com.sun.identity.authentication.super.user`
 
   Identifies an administrative user that replaces the `amAdmin` user. For example, `uid=superroot,ou=people,dc=example,dc=com`.
 
@@ -1481,25 +1496,25 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `uid=amAdmin,ou=People,%ROOT_SUFFIX%`
 
-- `com.sun.identity.authentication.uniqueCookieName`
+* `com.sun.identity.authentication.uniqueCookieName`
 
   When cookie hijacking protection is configured, name of the cookie holding the URL to the AM server that authenticated the user.
 
   Default: `sunIdentityServerAuthNServer`
 
-- `com.sun.identity.client.notification.url`
+* `com.sun.identity.client.notification.url`
 
   Notification service endpoint for clients such as web and Java agents.
 
   Default: `server-protocol://server-host:server-port/server-uri/notificationservice`, such as `https://am.example.com:8443/am/notificationservice`
 
-- `com.sun.identity.common.systemtimerpool.size`
+* `com.sun.identity.common.systemtimerpool.size`
 
   Number of threads in the shared system timer pool used to schedule operations such as session timeout.
 
   Default: `3`
 
-- `com.sun.identity.cookie.httponly`
+* `com.sun.identity.cookie.httponly`
 
   When set to `true`, mark cookies as HTTPOnly to prevent scripts and third-party programs from accessing the cookies.
 
@@ -1507,7 +1522,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-- `com.sun.identity.cookie.samesite`
+* `com.sun.identity.cookie.samesite`
 
   Configures support for applying *SameSite* cookie rules, as per internet-draft [Cookies:HTTP State Management Mechanism](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-rfc6265bis-02#section-5.3.7).
 
@@ -1539,73 +1554,73 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
     Default: `off`
 
-- `com.sun.identity.enableUniqueSSOTokenCookie`
+* `com.sun.identity.enableUniqueSSOTokenCookie`
 
   If `true`, AM uses protection against cookie hijacking.
 
   Default: `false`
 
-- `com.sun.identity.jss.donotInstallAtHighestPriority`
+* `com.sun.identity.jss.donotInstallAtHighestPriority`
 
   If `false`, JSS takes priority over other providers.
 
   Default: `true`
 
-- `com.sun.identity.monitoring`
+* `com.sun.identity.monitoring`
 
   Activates AM monitoring.
 
   Default: `off`
 
-- `com.sun.identity.monitoring.local.conn.server.url`
+* `com.sun.identity.monitoring.local.conn.server.url`
 
   URL for local connection to the monitoring service.
 
   Default: `service:jmx:rmi://`
 
-- `com.sun.identity.password.deploymentDescriptor`
+* `com.sun.identity.password.deploymentDescriptor`
 
   Internal property used by AM.
 
   Default: *server-uri*, such as `am`
 
-- `com.sun.identity.policy.Policy.policy_evaluation_weights`
+* `com.sun.identity.policy.Policy.policy_evaluation_weights`
 
   Weights of the cost of evaluating policy subjects, rules, and conditions. Evaluation is in order of the heaviest weight to the lightest.
 
   Default: `10:10:10`, meaning evaluation of rules, then conditions, then subjects
 
-- `com.sun.identity.policy.resultsCacheMaxSize`
+* `com.sun.identity.policy.resultsCacheMaxSize`
 
   Maximum number of policy decisions AM caches.
 
   Default: `10000`
 
-- `com.sun.identity.security.checkcaller`
+* `com.sun.identity.security.checkcaller`
 
   If `true`, AM performs a Java security permissions check.
 
   Default: `false`
 
-- `com.sun.identity.server.fqdnMap`
+* `com.sun.identity.server.fqdnMap`
 
   Enables virtual hosts, partial hostname and IP address. Maps invalid or virtual name keys to valid FQDN values for proper redirection.
 
   To map `myserver` to `myserver.example.com`, set `com.sun.identity.server.fqdnMap[myserver]=myserver.example.com`.
 
-- `com.sun.identity.session.repository.enableAttributeCompression`
+* `com.sun.identity.session.repository.enableAttributeCompression`
 
   For additional compression of CTS token JSON binaries, beyond GZip, if desired.
 
   Default: `false`
 
-- `com.sun.identity.session.repository.enableCompression`
+* `com.sun.identity.session.repository.enableCompression`
 
   For GZip-based compression of CTS tokens, if desired.
 
   Default: `false`
 
-- `com.sun.identity.session.repository.enableEncryption`
+* `com.sun.identity.session.repository.enableEncryption`
 
   Enables tokens to be encrypted when stored.
 
@@ -1615,7 +1630,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `false`
 
-- `com.sun.identity.sm.cache.enabled`
+* `com.sun.identity.sm.cache.enabled`
 
   Enables service configuration caching.
 
@@ -1625,7 +1640,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-- `com.sun.identity.sm.cache.ttl`
+* `com.sun.identity.sm.cache.ttl`
 
   When service configuration caching time-to-live is enabled, this sets the time to live in minutes.
 
@@ -1633,7 +1648,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `30`
 
-- `com.sun.identity.sm.cache.ttl.enable`
+* `com.sun.identity.sm.cache.ttl.enable`
 
   If service configuration caching is enabled, whether to enable a time-to-live for cached configuration.
 
@@ -1641,25 +1656,25 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `false`
 
-- `com.sun.identity.sm.flatfile.root_dir`
+* `com.sun.identity.sm.flatfile.root_dir`
 
   File system directory to hold file-based representation of AM configuration.
 
   Default: `/path/to/am/`
 
-- `com.sun.identity.sm.sms_object_class_name`
+* `com.sun.identity.sm.sms_object_class_name`
 
   Class used to read and write AM service configuration entries in the directory.
 
   Default: `com.sun.identity.sm.SmsWrapperObject`
 
-- `com.sun.identity.url.readTimeout`
+* `com.sun.identity.url.readTimeout`
 
   Used to set the read timeout in milliseconds for HTTP and HTTPS connections to other servers.
 
   Default: `30000`
 
-- `com.sun.identity.urlchecker.dorequest`
+* `com.sun.identity.urlchecker.dorequest`
 
   If `true`, AM sends an HTTP GET request to the `com.sun.identity.urlchecker.targeturl` as a health check against another server in the same site.
 
@@ -1669,29 +1684,29 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-- `com.sun.identity.urlchecker.targeturl`
+* `com.sun.identity.urlchecker.targeturl`
 
   URL to monitor when `com.sun.identity.urlchecker.dorequest` is set to `true`.
 
   Default: URL to the `/am/namingservice` endpoint on the remote server
 
-- `com.sun.identity.urlconnection.useCache`
+* `com.sun.identity.urlconnection.useCache`
 
   If `true`, AM caches documents for HTTP and HTTPS connections to other servers.
 
   Default: `false`
 
-- `com.sun.identity.webcontainer`
+* `com.sun.identity.webcontainer`
 
   Name of the web container to correctly set character encoding, if necessary.
 
   Default: `WEB_CONTAINER`
 
-- `console.privileged.users`
+* `console.privileged.users`
 
   Used to assign privileged console access to particular users. Set to a `|` separated list of users' Universal IDs, such as `console.privileged.users=uid=bjensen,ou=user,dc=am,dc=example,dc=com|uid=scarter,ou=user,dc=am,dc=example,dc=com`.
 
-* `oauth2.provider.request.object.processing.enforced`
+- `oauth2.provider.request.object.processing.enforced`
 
   Forces AM to use the specification set in the [Request Object Processing Specification](services-configuration.html#config-request-object-proc-spec) field of the OAuth 2.0 provider configuration for JWT requests.
 
@@ -1699,49 +1714,49 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `false`
 
-* `openam.auth.destroy_session_after_upgrade`
+- `openam.auth.destroy_session_after_upgrade`
 
   Where to destroy the old session after a session is successfully upgraded.
 
   Default: `true`
 
-* `openam.auth.session_property_upgrader`
+- `openam.auth.session_property_upgrader`
 
   Class that controls which session properties are copied during session upgrade, where default is to copy all properties to the upgraded session.
 
   Default: `org.forgerock.openam.authentication.service.DefaultSessionPropertyUpgrader`
 
-* `openam.auth.version.header.enabled`
+- `openam.auth.version.header.enabled`
 
   The X-DSAMEVersion http header provides detailed information about the version of AM currently running on the system, including the build and date/time of the build. AM will need to be restarted once this property is enabled.
 
   Default: `false`
 
-* `openam.authentication.ignore_goto_during_logout`
+- `openam.authentication.ignore_goto_during_logout`
 
   If `true`, AM ignores the `goto` query string parameter on logout and displays the logout page instead.
 
   Default: `false`
 
-* `openam.cdm.default.charset`
+- `openam.cdm.default.charset`
 
   Character set used for globalization.
 
   Default: `UTF-8`
 
-* `openam.forbidden.to.copy.headers`
+- `openam.forbidden.to.copy.headers`
 
   Comma-separated list of HTTP headers not to copy when the distributed authentication server forwards a request to another distributed authentication server.
 
   Default: `connection`
 
-* `openam.forbidden.to.copy.request.headers`
+- `openam.forbidden.to.copy.request.headers`
 
   Comma-separated list of HTTP headers not to copy when the distributed authentication server forwards a request to another distributed authentication server.
 
   Default: `connection`
 
-- `openam.private.key.jwt.encryption.algorithm.whitelist`
+* `openam.private.key.jwt.encryption.algorithm.whitelist`
 
   Comma-separated list of encryption algorithms that the OpenID Connect clients of the Social Identity Provider service can configure in the *Private Key JWT Encryption Algorithm* field.
 
@@ -1755,7 +1770,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `RSA-OAEP,RSA-OAEP-256,ECDH-ES`
 
-- `openam.retained.http.headers`
+* `openam.retained.http.headers`
 
   Comma-separated list of HTTP headers to copy to the forwarded response when the server forwards a request to another server.
 
@@ -1769,7 +1784,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `X-DSAMEVersion`
 
-* `openam.retained.http.request.headers`
+- `openam.retained.http.request.headers`
 
   Comma-separated list of HTTP headers to copy to the forwarded request when the server forwards a request to another server.
 
@@ -1787,13 +1802,13 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `X-DSAMEVersion`
 
-* `openam.session.case.sensitive.uuid`
+- `openam.session.case.sensitive.uuid`
 
   If `true`, universal user IDs are considered case-sensitive when matching them.
 
   Default: `false`
 
-- `org.forgerock.allow.http.client.debug`
+* `org.forgerock.allow.http.client.debug`
 
   Specifies whether AM can output logging at the `Message` level for the `org.apache.http.wire` and `org.apache.http.headers` logging appenders.
 
@@ -1810,7 +1825,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
   You can also set this property as a JVM option in the container where AM runs.\
   Default: `false`
 
-- `org.forgerock.openam.http.ssl.connection.manager`
+* `org.forgerock.openam.http.ssl.connection.manager`
 
   The class that implements the [org.forgerock.openam.http.SslConnectionManager](../_attachments/apidocs/org/forgerock/openam/http/SslConnectionManager.html) interface, which controls both keystore and truststore settings, as well as hostname verification.
 
@@ -1820,7 +1835,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   |   | In previous versions of AM, this property was named `opensso.protocol.handler.pkgs`, and required a value of `com.sun.identity.protocol` if the `java.protocol.handler.pkgs` property was set by the container. |
 
-- `org.forgerock.openam.audit.identity.activity.events.blacklist`
+* `org.forgerock.openam.audit.identity.activity.events.blacklist`
 
   A comma-separated list of audit events that won't be logged.
 
@@ -1832,11 +1847,11 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `AM-ACCESS-ATTEMPT,AM-IDENTITY-CHANGE,AM-GROUP-CHANGE`
 
-- `org.forgerock.openam.authLevel.excludeRequiredOrRequisite`
+* `org.forgerock.openam.authLevel.excludeRequiredOrRequisite`
 
   This property was used only for authentication with modules and chains and is no longer documented.
 
-- `org.forgerock.openam.auth.audit.nodes.enabled`
+* `org.forgerock.openam.auth.audit.nodes.enabled`
 
   When `true`, AM generates audit log messages for each authentication node reached during authentication tree flows.
 
@@ -1844,7 +1859,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-- `org.forgerock.openam.auth.audit.trees.enabled`
+* `org.forgerock.openam.auth.audit.trees.enabled`
 
   When `true`, AM generates audit log messages with the outcome of authentication tree flows.
 
@@ -1852,7 +1867,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-* `org.forgerock.openam.auth.transactionauth.returnErrorOnAuthFailure`
+- `org.forgerock.openam.auth.transactionauth.returnErrorOnAuthFailure`
 
   Specifies whether AM returns an HTTP 200 or HTTP 401 message when the user fails to complete the required actions to perform session upgrade during transactional authorization. Possible values are:
 
@@ -1889,23 +1904,23 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `false`
 
-* `org.forgerock.openam.authentication.accountExpire.days`
+- `org.forgerock.openam.authentication.accountExpire.days`
 
   Days until account expiration set after successful authentication by the account expiration post-authentication plugin.
 
   Default: `30`
 
-* `org.forgerock.openam.authentication.forceAuth.enabled`
+- `org.forgerock.openam.authentication.forceAuth.enabled`
 
   This property was used only for authentication with modules and chains and is no longer documented.
 
-* `org.forgerock.openam.console.autocomplete.enabled`
+- `org.forgerock.openam.console.autocomplete.enabled`
 
   Specifies whether input forms and password fields can be autocompleted. This property only affects end-user pages in the classic UI. Possible values are `true`, to enable autocomplete, and `false`, to disable it.
 
   Default: `true`
 
-* `org.forgerock.openam.core.resource.lookup.cache.enabled`
+- `org.forgerock.openam.core.resource.lookup.cache.enabled`
 
   Controls whether the results of resource file lookup should be cached.
 
@@ -1915,13 +1930,13 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Default: `true`
 
-* `org.forgerock.openam.core.sms.always.fail.on.invalid.attributes`
+- `org.forgerock.openam.core.sms.always.fail.on.invalid.attributes`
 
   Specifies whether the server should throw an exception, when it encounters an unknown attribute while parsing file-based configurations. By default, the server ignores any unknown attributes, and doesn't throw an exception. To override this behavior, set this property to `true`.
 
   Default: `false`
 
-* `org.forgerock.openam.core.sms.placeholder_api_enabled`
+- `org.forgerock.openam.core.sms.placeholder_api_enabled`
 
   For file-based configurations, enables [property value substitution](property-value-substitution.html).
 
@@ -2319,7 +2334,7 @@ To enable parallel updates on CTS sessions, set this parameter to `false`.
 
   Sets the padding mode for RSA encryption of client-side sessions. Possible values are:
 
-  * **RSA1\_5**. RSA with PKCS#1 v1.5 padding.
+  * **RSA1_5**. RSA with PKCS#1 v1.5 padding.
 
   * **RSA-OAEP**. RSA with OAEP and SHA-1.
 
@@ -2635,6 +2650,7 @@ page_id: pingam:setup:amster-tool
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/amster-tool.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Administration", "Tools", "User Interface"]
 page_aliases: ["setup-guide:cli-tools.adoc", "cli-tools.adoc", "install-guide:install-openam-admin-tools.adoc"]
 ---
@@ -2658,6 +2674,7 @@ page_id: pingam:setup:services-configuration
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/services-configuration.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Administration", "Configuration"]
 page_aliases: ["reference:global-services-configuration.adoc", "reference:services-configuration.adoc", "setup-guide:services-configuration.adoc"]
 section_ids:
@@ -2726,7 +2743,6 @@ section_ids:
   global-devicebindingservice: Device Binding service
   global-devicebindingservice-realm-defaults: Realm defaults
   global-deviceidservice: Device ID service
-  global-deviceidservice-realm-defaults: Realm defaults
   global-deviceprofilesservice: Device Profiles service
   global-deviceprofilesservice-realm-defaults: Realm defaults
   global-email: Email service
@@ -3915,6 +3931,8 @@ The following settings appear on the General Configuration tab:
 
   Both relative and absolute URLs are supported. Users are redirected to an absolute URL using the configured HTTP Binding whereas relative URLs are displayed within the request.
 
+  Learn more about the parameters and error codes sent to this page in [SAML error codes](../am-saml2/saml2-error-codes.html).
+
   Default value: `/saml2/jsp/saml2error.jsp`
 
   `amster` attribute: `samlErrorPageUrl`
@@ -4485,17 +4503,17 @@ The following settings appear on the Realm Defaults tab:
 
   Encryption scheme to use to secure device binding data stored on the server.
 
-  AM encrypts the data for each bound device using a unique random secret key with the selected AES encryption standard in CBC mode with PKCS#5 padding. An HMAC-SHA of the selected strength (truncated to half-size) protects the integrity and authenticity of the encryption. AM encrypts the unique random key with the given RSA key pair and stores it with the bound device data.
+  If enabled, the data for each bound device is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the data.
 
   The possible values for this property are:
 
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (value: `RSAES_AES256CBC_HS512`)
+  * `AES-256/HMAC-SHA-512 with RSA Key Wrapping`
 
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (value: `RSAES_AES128CBC_HS256`)
+  * `AES-128/HMAC-SHA-256 with RSA Key Wrapping`
 
-  * Label: **No encryption of device settings** (value: `NONE`)
+  * `No encryption of device settings.`
 
-  Default value: `NONE`
+  Default value: `No encryption of device settings.`
 
   `amster` attribute: `deviceBindingSettingsEncryptionScheme`
 
@@ -4515,35 +4533,31 @@ The following settings appear on the Realm Defaults tab:
   | - | ---------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.devicebinding.encryption` label in a secret store, this value is ignored. |
 
-  Default value: `/path/to/openam/security/keystores/keystore.jks`
-
   `amster` attribute: `deviceBindingSettingsEncryptionKeystore`
 
 * Key Store Type
 
-  Type of keystore to load.
+  Type of key store to load.
 
-  |   |                                                                                                                                                    |
-  | - | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 key stores require hardware support such as a security device or smart card, which are not available by default in most JVM installations. |
+  |   |                                                                                                                                                                                                                                                                             |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PKCS#11 key stores require hardware support such as a security device or smart card and isn't available by default in most JVM installations. Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html). |
 
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
+  The possible values for this property are:
+
+  * `Java Key Store (JKS).`
+
+  * `Java Cryptography Extension Key Store (JCEKS).`
+
+  * `PKCS#11 Hardware Crypto Storage.`
+
+  * `PKCS#12 Key Store.`
+
+  Default value: `Java Key Store (JKS).`
 
   |   |                                                                                                                              |
   | - | ---------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.devicebinding.encryption` label in a secret store, this value is ignored. |
-
-  The possible values for this property are:
-
-  * Label: **Java Key Store (JKS)** (value: `JKS`)
-
-  * Label: **Java Cryptography Extension Key Store (JCEKS)** (value: `JCEKS`)
-
-  * Label: **PKCS#11 Hardware Crypto Storage** (value: `PKCS11`)
-
-  * Label: **PKCS#12 Key Store** (value: `PKCS12`)
-
-  Default value: `JKS`
 
   `amster` attribute: `deviceBindingSettingsEncryptionKeystoreType`
 
@@ -4579,117 +4593,7 @@ The following settings appear on the Realm Defaults tab:
 
 ## Device ID service
 
-`amster` service name: `deviceIdService`
-
-### Realm defaults
-
-The following settings appear on the Realm Defaults tab:
-
-* Profile Storage Attribute
-
-  The user's attribute in which to store Device ID profiles.
-
-  The default attribute is added to the schema when you prepare a user store for AM. If you want to use a different attribute, make sure you add it to your user store schema before creating journeys that use device data. AM must be able to write to the attribute.
-
-  Default value: `devicePrintProfiles`
-
-  `amster` attribute: `deviceIdAttrName`
-
-* Device Profile Encryption Scheme
-
-  Encryption scheme to use to secure device profiles stored on the server.
-
-  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the device profile.
-
-  The possible values for this property are:
-
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (value: `RSAES_AES256CBC_HS512`)
-
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (value: `RSAES_AES128CBC_HS256`)
-
-  * Label: **No encryption of device settings** (value: `NONE`)
-
-  Default value: `NONE`
-
-  `amster` attribute: `deviceIdSettingsEncryptionScheme`
-
-* Encryption Key Store
-
-  Path to the keystore from which to load encryption keys.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | * For greater security, store encryption key information in a [secret store](../security/secret-stores.html), instead of in the configuration. Use the secret label `am.services.deviceid.encryption` to map an alias for Device ID service secrets.
-
-  * If you update encryption key information in the configuration or in the secret stores, users with existing device profiles will no longer be able to log in using this service. Delete the user's device profile from their entry in the identity store so that the user can create a new one when they next log in.
-
-  * To use this service in a FIPS 140-3 compliant environment, you must map the `am.services.deviceid.encryption` secret label to an alias in a [FIPS-compliant keystore](../security/fips.html#manage-bcfks-keystores). |
-
-  |   |                                                                                                                         |
-  | - | ----------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceid.encryption` label in a secret store, this value is ignored. |
-
-  Default value: `/path/to/openam/security/keystores/keystore.jks`
-
-  `amster` attribute: `deviceIdSettingsEncryptionKeystore`
-
-* Key Store Type
-
-  Type of keystore to load.
-
-  |   |                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 key stores require hardware support such as a security device or smart card and is not available by default in most JVM installations. |
-
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
-
-  |   |                                                                                                                         |
-  | - | ----------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceid.encryption` label in a secret store, this value is ignored. |
-
-  The possible values for this property are:
-
-  * Label: **Java Key Store (JKS)** (value: `JKS`)
-
-  * Label: **Java Cryptography Extension Key Store (JCEKS)** (value: `JCEKS`)
-
-  * Label: **PKCS#11 Hardware Crypto Storage** (value: `PKCS11`)
-
-  * Label: **PKCS#12 Key Store** (value: `PKCS12`)
-
-  Default value: `JKS`
-
-  `amster` attribute: `deviceIdSettingsEncryptionKeystoreType`
-
-* Key Store Password
-
-  Password to unlock the key store. AM encrypts this password when you save it in the configuration. You should modify the default value.
-
-  |   |                                                                                                                         |
-  | - | ----------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceid.encryption` label in a secret store, this value is ignored. |
-
-  `amster` attribute: `deviceIdSettingsEncryptionKeystorePassword`
-
-* Key-Pair Alias
-
-  Alias of the certificate and private key in the key store. The private key is used to encrypt and decrypt device profiles.
-
-  |   |                                                                                                                         |
-  | - | ----------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceid.encryption` label in a secret store, this value is ignored. |
-
-  `amster` attribute: `deviceIdSettingsEncryptionKeystoreKeyPairAlias`
-
-* Private Key Password
-
-  Password to unlock the private key.
-
-  |   |                                                                                                                         |
-  | - | ----------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceid.encryption` label in a secret store, this value is ignored. |
-
-  `amster` attribute: `deviceIdSettingsEncryptionKeystorePrivateKeyPassword`
+This service was used only for authentication with modules and chains and is no longer documented.
 
 ## Device Profiles service
 
@@ -4713,17 +4617,17 @@ The following settings appear on the Realm Defaults tab:
 
   Encryption scheme to use to secure device profiles stored on the server.
 
-  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the device profile.
+  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the data.
 
   The possible values for this property are:
 
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (value: `RSAES_AES256CBC_HS512`)
+  * `AES-256/HMAC-SHA-512 with RSA Key Wrapping`
 
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (value: `RSAES_AES128CBC_HS256`)
+  * `AES-128/HMAC-SHA-256 with RSA Key Wrapping`
 
-  * Label: **No encryption of device settings** (value: `NONE`)
+  * `No encryption of device settings.`
 
-  Default value: `NONE`
+  Default value: `No encryption of device settings.`
 
   `amster` attribute: `deviceProfilesSettingsEncryptionScheme`
 
@@ -4731,47 +4635,45 @@ The following settings appear on the Realm Defaults tab:
 
   Path to the keystore from which to load encryption keys.
 
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  |   | * For greater security, store the encryption key information in a [secret store](../security/secret-stores.html), instead of in the configuration. Use the secret label `am.services.deviceprofile.encryption` to map an alias for Device Profiles service secrets.
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | * For greater security, store the encryption key information in a [secret store](../security/secret-stores.html), instead of in the configuration. Use the secret label `am.services.deviceprofiles.encryption` to map an alias for Device Profiles service secrets.
 
   * If you update encryption key information in the configuration or in the secret stores, users with existing device profiles will no longer be able to log in using this service. Delete the user's device profile from their entry in the identity store so that the user can create a new one when they next log in.
 
-  * To use this service in a FIPS 140-3 compliant environment, you must map the `am.services.deviceprofile.encryption` secret label to an alias in a [FIPS-compliant keystore](../security/fips.html#manage-bcfks-keystores). |
+  * To use this service in a FIPS 140-3 compliant environment, you must map the `am.services.deviceprofiles.encryption` secret label to an alias in a [FIPS-compliant keystore](../security/fips.html#manage-bcfks-keystores). |
 
-  |   |                                                                                                                              |
-  | - | ---------------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceprofile.encryption` label in a secret store, this value is ignored. |
+  |   |                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------- |
+  |   | If AM finds a matching secret for the `am.services.deviceprofiles.encryption` label in a secret store, this value is ignored. |
 
-  Default value: `/path/to/openam/security/keystores/keystore.jks`
+  Default value: `/path/to/am/security/keystores/keystore.jks`
 
   `amster` attribute: `deviceProfilesSettingsEncryptionKeystore`
 
 * Key Store Type
 
-  Type of keystore to load.
+  Type of key store to load.
 
-  |   |                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 key stores require hardware support such as a security device or smart card and is not available by default in most JVM installations. |
-
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
-
-  |   |                                                                                                                              |
-  | - | ---------------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceprofile.encryption` label in a secret store, this value is ignored. |
+  |   |                                                                                                                                                                                                                                                                             |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PKCS#11 key stores require hardware support such as a security device or smart card and isn't available by default in most JVM installations. Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html). |
 
   The possible values for this property are:
 
-  * Label: **Java Key Store (JKS)** (value: `JKS`)
+  * `Java Key Store (JKS).`
 
-  * Label: **Java Cryptography Extension Key Store (JCEKS)** (value: `JCEKS`)
+  * `Java Cryptography Extension Key Store (JCEKS).`
 
-  * Label: **PKCS#11 Hardware Crypto Storage** (value: `PKCS11`)
+  * `PKCS#11 Hardware Crypto Storage.`
 
-  * Label: **PKCS#12 Key Store** (value: `PKCS12`)
+  * `PKCS#12 Key Store.`
 
-  Default value: `JKS`
+  Default value: `Java Key Store (JKS).`
+
+  |   |                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------- |
+  |   | If AM finds a matching secret for the `am.services.deviceprofiles.encryption` label in a secret store, this value is ignored. |
 
   `amster` attribute: `deviceProfilesSettingsEncryptionKeystoreType`
 
@@ -4779,9 +4681,9 @@ The following settings appear on the Realm Defaults tab:
 
   Password to unlock the key store. AM encrypts this password when you save it in the configuration. You should modify the default value.
 
-  |   |                                                                                                                              |
-  | - | ---------------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceprofile.encryption` label in a secret store, this value is ignored. |
+  |   |                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------- |
+  |   | If AM finds a matching secret for the `am.services.deviceprofiles.encryption` label in a secret store, this value is ignored. |
 
   `amster` attribute: `deviceProfilesSettingsEncryptionKeystorePassword`
 
@@ -4789,9 +4691,9 @@ The following settings appear on the Realm Defaults tab:
 
   Alias of the certificate and private key in the key store. The private key is used to encrypt and decrypt device profiles.
 
-  |   |                                                                                                                              |
-  | - | ---------------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceprofile.encryption` label in a secret store, this value is ignored. |
+  |   |                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------- |
+  |   | If AM finds a matching secret for the `am.services.deviceprofiles.encryption` label in a secret store, this value is ignored. |
 
   `amster` attribute: `deviceProfilesSettingsEncryptionKeystoreKeyPairAlias`
 
@@ -4799,9 +4701,9 @@ The following settings appear on the Realm Defaults tab:
 
   Password to unlock the private key.
 
-  |   |                                                                                                                              |
-  | - | ---------------------------------------------------------------------------------------------------------------------------- |
-  |   | If AM finds a matching secret for the `am.services.deviceprofile.encryption` label in a secret store, this value is ignored. |
+  |   |                                                                                                                               |
+  | - | ----------------------------------------------------------------------------------------------------------------------------- |
+  |   | If AM finds a matching secret for the `am.services.deviceprofiles.encryption` label in a secret store, this value is ignored. |
 
   `amster` attribute: `deviceProfilesSettingsEncryptionKeystorePrivateKeyPassword`
 
@@ -5059,19 +4961,19 @@ The following settings appear on the Realm Defaults tab:
 
 * Device Profile Encryption Scheme
 
-  Encryption scheme for securing device profiles stored on the server.
+  Encryption scheme to use to secure device profiles stored on the server.
 
-  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the device profile.
+  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the data.
 
   The possible values for this property are:
 
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (Value: `RSAES_AES256CBC_HS512`)
+  * `AES-256/HMAC-SHA-512 with RSA Key Wrapping`
 
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (Value: `RSAES_AES128CBC_HS256`)
+  * `AES-128/HMAC-SHA-256 with RSA Key Wrapping`
 
-  * Label: **No encryption of device settings.** (Value: `NONE`)
+  * `No encryption of device settings.`
 
-  Default value: `NONE`
+  Default value: `No encryption of device settings.`
 
   `amster` attribute: `authenticatorOATHDeviceSettingsEncryptionScheme`
 
@@ -5091,35 +4993,31 @@ The following settings appear on the Realm Defaults tab:
   | - | -------------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.authenticatoroath.encryption` label in a secret store, this value is ignored. |
 
-  Default value: `/path/to/openam/openam/keystore.jks`
-
   `amster` attribute: `authenticatorOATHDeviceSettingsEncryptionKeystore`
 
 * Key Store Type
 
-  Type of encryption key store.
+  Type of key store to load.
 
-  |   |                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 keys tores require hardware support such as a security device or smart card and is not available by default in most JVM installations. |
+  |   |                                                                                                                                                                                                                                                                             |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PKCS#11 key stores require hardware support such as a security device or smart card and isn't available by default in most JVM installations. Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html). |
 
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
+  The possible values for this property are:
+
+  * `Java Key Store (JKS).`
+
+  * `Java Cryptography Extension Key Store (JCEKS).`
+
+  * `PKCS#11 Hardware Crypto Storage.`
+
+  * `PKCS#12 Key Store.`
+
+  Default value: `Java Cryptography Extension Key Store (JCEKS).`
 
   |   |                                                                                                                                  |
   | - | -------------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.authenticatoroath.encryption` label in a secret store, this value is ignored. |
-
-  The possible values for this property are:
-
-  * Label: **Java Key Store (JKS).** (Value: `JKS`)
-
-  * Label: **Java Cryptography Extension Key Store (JCEKS).** (Value: `JCEKS`)
-
-  * Label: **PKCS#11 Hardware Crypto Storage.** (Value: `PKCS11`)
-
-  * Label: **PKCS#12 Key Store.** (Value: `PKCS12`)
-
-  Default value: `JKS`
 
   `amster` attribute: `authenticatorOATHDeviceSettingsEncryptionKeystoreType`
 
@@ -5185,17 +5083,17 @@ The following settings appear on the Realm Defaults tab:
 
   Encryption scheme to use to secure device profiles stored on the server.
 
-  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the device profile.
+  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the data.
 
   The possible values for this property are:
 
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (value: `RSAES_AES256CBC_HS512`)
+  * `AES-256/HMAC-SHA-512 with RSA Key Wrapping`
 
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (value: `RSAES_AES128CBC_HS256`)
+  * `AES-128/HMAC-SHA-256 with RSA Key Wrapping`
 
-  * Label: **No encryption of device settings** (value: `NONE`)
+  * `No encryption of device settings.`
 
-  Default value: `NONE`
+  Default value: `No encryption of device settings.`
 
   `amster` attribute: `authenticatorPushDeviceSettingsEncryptionScheme`
 
@@ -5215,37 +5113,33 @@ The following settings appear on the Realm Defaults tab:
   | - | -------------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.authenticatorpush.encryption` label in a secret store, this value is ignored. |
 
-  Default value: `/path/to/openam/openam/keystore.jks`
-
   `amster` attribute: `authenticatorPushDeviceSettingsEncryptionKeystore`
 
 * Key Store Type
 
-  Type of keystore to load.
+  Type of key store to load.
 
-  |   |                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 key stores require hardware support such as a security device or smart card and is not available by default in most JVM installations. |
+  |   |                                                                                                                                                                                                                                                                             |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PKCS#11 key stores require hardware support such as a security device or smart card and isn't available by default in most JVM installations. Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html). |
 
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
+  The possible values for this property are:
+
+  * `Java Key Store (JKS).`
+
+  * `Java Cryptography Extension Key Store (JCEKS).`
+
+  * `PKCS#11 Hardware Crypto Storage.`
+
+  * `PKCS#12 Key Store.`
+
+  Default value: `Java Cryptography Extension Key Store (JCEKS).`
 
   |   |                                                                                                                                  |
   | - | -------------------------------------------------------------------------------------------------------------------------------- |
   |   | If AM finds a matching secret for the `am.services.authenticatorpush.encryption` label in a secret store, this value is ignored. |
 
-The possible values for this property are:
-
-* Label: **Java Key Store (JKS)** (value: `JKS`)
-
-* Label: **Java Cryptography Extension Key Store (JCEKS)** (value: `JCEKS`)
-
-* Label: **PKCS#11 Hardware Crypto Storage** (value: `PKCS11`)
-
-* Label: **PKCS#12 Key Store** (value: `PKCS12`)
-
-Default value: `JKS`
-
-`amster` attribute: `authenticatorPushDeviceSettingsEncryptionKeystoreType`
+  `amster` attribute: `authenticatorPushDeviceSettingsEncryptionKeystoreType`
 
 * Key Store Password
 
@@ -6917,7 +6811,7 @@ The following settings appear on the Advanced tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
     The possible values for this property are:
 
@@ -6972,9 +6866,9 @@ The following settings appear on the Advanced tab:
 
   If *pairwise* subject types are supported, it is *STRONGLY RECOMMENDED* to change this value. It is used in the salting of hashes for returning specific `sub` claims to individuals using the same `request_uri` or `sector_identifier_uri`.
 
-  |   |                                                                                                                                                                                                                                                                 |
-  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | If you map `am.services.oauth2.provider.hash.salt.secret` to a secret in a secret store, AM ignores this value.Learn more about secret labels in [OAuth 2.0 default secret label mappings](../security/secret-mapping.html#oauth2-provider-default-secret-IDs). |
+  |   |                                                                                                                                                                                                                                                                        |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | If you map `am.services.oauth2.provider.hash.salt.secret` to a secret in a secret store, AM ignores this value.Learn more about secret labels in [OAuth 2.0 default secret label mappings](../security/secret-label-mappings.html#oauth2-provider-default-secret-IDs). |
 
   Default value: `changeme`
 
@@ -7300,15 +7194,15 @@ The following settings appear on the Advanced tab:
 
   Default value: `false`
 
-* Use token\_introspection claim for JWT
+* Use token_introspection claim for JWT
 
   Specifies whether AM wraps the introspected token's claims inside a `token_introspection` claim in the JWT introspection response, as required by RFC 9701.
 
-  When enabled, AM separates the JWT's own top-level claims (`iss`, `aud`, `iat`) from the introspected token's claims, which appear inside `token_introspection`. The `aud` claim of the introspected token is always included.
+  When enabled, AM separates the JWT's own top-level claims (`iss`, `aud`, `iat`) from the introspected token's claims, which appear inside `token_introspection`. The `aud` claim of the introspected token is always included in the JWT response, including for client-side tokens. The JSON introspection response also includes the `aud` claim of the introspected token, if present.
 
-  When disabled, AM returns a flat JWT structure and omits the `aud` claim from the response.
+  When not enabled, AM returns a flat JWT structure and omits the `aud` claim from the response. JSON responses also omit the `aud` claim.
 
-  Learn more in [RFC 9701 token\_introspection claim](../am-oauth2/oauth2-introspect-endpoint.html#rfc-9701-token-introspection-claim).
+  Learn more in [RFC 9701 token_introspection claim](../am-oauth2/oauth2-introspect-endpoint.html#rfc-9701-token-introspection-claim).
 
   Default value: `false`
 
@@ -7380,7 +7274,7 @@ The following settings appear on the Client Dynamic Registration tab:
 
 The following settings appear on the OpenID Connect tab:
 
-* Overrideable Id\_Token Claims
+* Overrideable Id_Token Claims
 
   List of claims in the ID token that can be overridden in the OIDC Claims script. These should be the subset of the core OIDC claims, such as `aud` or `azp`.
 
@@ -7414,11 +7308,11 @@ The following settings appear on the OpenID Connect tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
-  * `RS384` - RSASSA-PKCS-v1\_5 using SHA-384.
+  * `RS384` - RSASSA-PKCS-v1_5 using SHA-384.
 
-  * `RS512` - RSASSA-PKCS-v1\_5 using SHA-512.
+  * `RS512` - RSASSA-PKCS-v1_5 using SHA-512.
 
   * `PS256` - RSASSA-PSS using SHA-256.
 
@@ -7457,7 +7351,7 @@ The following settings appear on the OpenID Connect tab:
 
   * \` A128KW\` - AES Key Wrapping with 128-bit key derived from the client secret.
 
-  * \` RSA1\_5\` - RSA with PKCS#1 v1.5 padding.
+  * \` RSA1_5\` - RSA with PKCS#1 v1.5 padding.
 
   * \` A256KW\` - AES Key Wrapping with 256-bit key derived from the client secret.
 
@@ -7573,7 +7467,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   `amster` attribute: `idTokenInfoClientAuthenticationEnabled`
 
-* Enable "claims\_parameter\_supported"
+* Enable "claims_parameter_supported"
 
   If enabled, clients will be able to request individual claims using the `claims` request parameter, as per [section 5.5 of the OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter).
 
@@ -7581,9 +7475,9 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   `amster` attribute: `claimsParameterSupported`
 
-* OpenID Connect acr\_values to Auth Chain Mapping
+* OpenID Connect acr_values to Auth Chain Mapping
 
-  Maps OIDC ACR values to authentication trees. You can find details in the [acr\_values parameter](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) in the OIDC authentication request specification.
+  Maps OIDC ACR values to authentication trees. You can find details in the [acr_values parameter](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) in the OIDC authentication request specification.
 
   |   |                                                                                                                                                                    |
   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -7595,11 +7489,11 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   Default requested Authentication Context Class Reference values.
 
-  List of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr\_values\_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr\_values request parameter or an individual acr Claim request override these default values.
+  List of strings that specifies the default acr values that the OP is being requested to use for processing requests from this Client, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value in the issued ID Token. The acr Claim is requested as a Voluntary Claim by this parameter. The acr_values_supported discovery element contains a list of the acr values supported by this server. Values specified in the acr_values request parameter or an individual acr Claim request override these default values.
 
   `amster` attribute: `defaultACR`
 
-* OpenID Connect id\_token amr Values to Auth Module Mappings
+* OpenID Connect id_token amr Values to Auth Module Mappings
 
   This property was used only for authentication with modules and chains and is no longer documented.
 
@@ -7637,7 +7531,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
   Default value:
 
@@ -7720,7 +7614,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
 - Supported Token Endpoint JWS Signing Algorithms.
 
-  Supported JWS Signing Algorithms for 'private\_key\_jwt' JWT-based authentication method.
+  Supported JWS Signing Algorithms for 'private_key_jwt' JWT-based authentication method.
 
   Default value:
 
@@ -7765,7 +7659,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
   Default value:
 
@@ -7793,7 +7687,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   * \` A128KW\` - AES Key Wrapping with 128-bit key derived from the client secret.
 
-  * \` RSA1\_5\` - RSA with PKCS#1 v1.5 padding.
+  * \` RSA1_5\` - RSA with PKCS#1 v1.5 padding.
 
   * \` A256KW\` - AES Key Wrapping with 256-bit key derived from the client secret.
 
@@ -7859,11 +7753,11 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
-  * `RS384` - RSASSA-PKCS-v1\_5 using SHA-384.
+  * `RS384` - RSASSA-PKCS-v1_5 using SHA-384.
 
-  * `RS512` - RSASSA-PKCS-v1\_5 using SHA-512.
+  * `RS512` - RSASSA-PKCS-v1_5 using SHA-512.
 
   * `EdDSA` - EdDSA with SHA-512.
 
@@ -7959,11 +7853,11 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   * `HS512` - HMAC with SHA-512
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256
 
-  * `RS384` - RSASSA-PKCS1-v1\_5 using SHA-384
+  * `RS384` - RSASSA-PKCS1-v1_5 using SHA-384
 
-  * `RS512` - RSASSA-PKCS1-v1\_5 using SHA-512
+  * `RS512` - RSASSA-PKCS1-v1_5 using SHA-512
 
   * `ES256` - ECDSA with SHA-256 and NIST standard P-256 elliptic curve
 
@@ -8064,9 +7958,9 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   `amster` attribute: `supportedAuthorizationResponseEncryptionEnc`
 
-* Include all kty and alg combinations in jwks\_uri
+* Include all kty and alg combinations in jwks_uri
 
-  By default only distinct kid entries are returned in the jwks\_uri and the alg property is not included. Enabling this flag will result in duplicate kid entries, each one specifying a different kty and alg combination ([RFC7517 distinct key KIDs](https://www.rfc-editor.org/rfc/rfc7517.html#section-4.5)).
+  By default only distinct kid entries are returned in the jwks_uri and the alg property is not included. Enabling this flag will result in duplicate kid entries, each one specifying a different kty and alg combination ([RFC7517 distinct key KIDs](https://www.rfc-editor.org/rfc/rfc7517.html#section-4.5)).
 
   Default value: `false`
 
@@ -8082,7 +7976,7 @@ The following settings appear on the Advanced OpenID Connect tab:
 
   Default value: `false`
 
-- Use Force Authentication for max\_age
+- Use Force Authentication for max_age
 
   This property applies only to reauthentication triggered by the Default Max Age property of an OAuth 2.0 client.
 
@@ -8200,7 +8094,7 @@ The following settings appear on the Consent tab:
 
 * Remote Consent Service Request Signing Algorithms Supported
 
-  Algorithms supported to sign consent\_request JWTs for Remote Consent Services.
+  Algorithms supported to sign consent_request JWTs for Remote Consent Services.
 
   AM supports signing algorithms listed in JSON Web Algorithms (JWA): ["alg" (Algorithm) Header Parameter Values for JWS](https://www.rfc-editor.org/rfc/rfc7518#section-3.1):
 
@@ -8216,7 +8110,7 @@ The following settings appear on the Consent tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
     Default value:
 
@@ -8299,7 +8193,7 @@ The following settings appear on the Consent tab:
 
 * Remote Consent Service Response Signing Algorithms Supported
 
-  Algorithms supported to verify signed consent\_response JWT from Remote Consent Services.
+  Algorithms supported to verify signed consent_response JWT from Remote Consent Services.
 
   AM supports signing algorithms listed in JSON Web Algorithms (JWA): ["alg" (Algorithm) Header Parameter Values for JWS](https://www.rfc-editor.org/rfc/rfc7518.html#section-3.1):
 
@@ -8315,7 +8209,7 @@ The following settings appear on the Consent tab:
 
   * `ES512` - ECDSA with SHA-512 and NIST standard P-521 elliptic curve.
 
-  * `RS256` - RSASSA-PKCS-v1\_5 using SHA-256.
+  * `RS256` - RSASSA-PKCS-v1_5 using SHA-256.
 
     Default value:
 
@@ -9222,7 +9116,7 @@ Configure RADIUS clients that connect to the RADIUS server. You can create multi
 
   Indicates if full packet contents should be output to the log.
 
-  When troubleshooting issues with RADIUS it is helpful to know what was received in a given packet. Enable this option to log packet contents in a human readable format. The USER\_PASSWORD field is obfuscated with asterisks in the logs. Only enable this option for troubleshooting because it adds significant content to logs and slows processing. Learn more in [Troubleshooting](../am-authentication/radius-troubleshooting.html).
+  When troubleshooting issues with RADIUS it is helpful to know what was received in a given packet. Enable this option to log packet contents in a human readable format. The USER_PASSWORD field is obfuscated with asterisks in the logs. Only enable this option for troubleshooting because it adds significant content to logs and slows processing. Learn more in [Troubleshooting](../am-authentication/radius-troubleshooting.html).
 
   Default value: `NO`
 
@@ -9359,9 +9253,9 @@ The following settings appear on the Realm Defaults tab:
 
   `amster` attribute: `clientId`
 
-* Authorization Server jwk\_uri
+* Authorization Server jwk_uri
 
-  The jwk\_uri for retrieving the authorization server signing and encryption keys.
+  The jwk_uri for retrieving the authorization server signing and encryption keys.
 
   `amster` attribute: `jwksUriAS`
 
@@ -9822,7 +9716,7 @@ The following settings appear on the Client-Side Sessions tab:
 
   * `HS512`. HMAC using SHA-512.
 
-  * `RS256`. RSASSA-PKCS1-v1\_5 using SHA-256.
+  * `RS256`. RSASSA-PKCS1-v1_5 using SHA-256.
 
   * `ES256`. ECDSA using SHA-256 and NIST standard P-256 elliptic curve.
 
@@ -10216,7 +10110,7 @@ The following properties can be set on the Claims Gathering tab:
 
 * Interactive Claims Gathering Enabled
 
-  If this setting is enabled, and no PCT *(tooltip: Persisted Claims Token)* is provided on the request, the UMA provider returns a *redirect\_user* hint to the client, where the requesting party can authenticate themselves.
+  If this setting is enabled, and no PCT *(tooltip: Persisted Claims Token)* is provided on the request, the UMA provider returns a *redirect_user* hint to the client, where the requesting party can authenticate themselves.
 
   Default value: `false`
 
@@ -10844,17 +10738,17 @@ The following settings appear on the Realm Defaults tab:
 
   Encryption scheme to use to secure device profiles stored on the server.
 
-  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the device profile.
+  If enabled, each device profile is encrypted using a unique random secret key using the given strength of AES encryption in CBC mode with PKCS#5 padding. An HMAC-SHA of the given strength (truncated to half-size) is used to ensure integrity protection and authenticated encryption. The unique random key is encrypted with the given RSA key pair and stored with the data.
 
   The possible values for this property are:
 
-  * Label: **AES-256/HMAC-SHA-512 with RSA Key Wrapping** (value: `RSAES_AES256CBC_HS512`)
+  * `AES-256/HMAC-SHA-512 with RSA Key Wrapping`
 
-  * Label: **AES-128/HMAC-SHA-256 with RSA Key Wrapping** (value: `RSAES_AES128CBC_HS256`)
+  * `AES-128/HMAC-SHA-256 with RSA Key Wrapping`
 
-  * Label: **No encryption of device settings** (value: `NONE`)
+  * `No encryption of device settings.`
 
-  Default value: `NONE`
+  Default value: `No encryption of device settings.`
 
   `amster` attribute: `authenticatorWebAuthnDeviceSettingsEncryptionScheme`
 
@@ -10874,37 +10768,35 @@ The following settings appear on the Realm Defaults tab:
   | - | ------------------------------------------------------------------------------------------------------------------------------------ |
   |   | If AM finds a matching secret for the `am.services.authenticatorwebauthn.encryption` label in a secret store, this value is ignored. |
 
-  Default value: `/path/to/openam/security/keystores/keystore.jceks`
+  Default value: `/path/to/am/security/keystores/keystore.jks`
 
   `amster` attribute: `authenticatorWebAuthnDeviceSettingsEncryptionKeystore`
 
 * Key Store Type
 
-  Type of keystore to load.
+  Type of key store to load.
 
-  |   |                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | PKCS#11 key stores require hardware support such as a security device or smart card and is not available by default in most JVM installations. |
+  |   |                                                                                                                                                                                                                                                                             |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | PKCS#11 key stores require hardware support such as a security device or smart card and isn't available by default in most JVM installations. Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html). |
 
-  Learn more in the [PKCS#11 Reference Guide](https://docs.oracle.com/en/java/javase/25/security/pkcs11-reference-guide1.html).
+  The possible values for this property are:
+
+  * `Java Key Store (JKS).`
+
+  * `Java Cryptography Extension Key Store (JCEKS).`
+
+  * `PKCS#11 Hardware Crypto Storage.`
+
+  * `PKCS#12 Key Store.`
+
+  Default value: `Java Cryptography Extension Key Store (JCEKS).`
 
   |   |                                                                                                                                      |
   | - | ------------------------------------------------------------------------------------------------------------------------------------ |
   |   | If AM finds a matching secret for the `am.services.authenticatorwebauthn.encryption` label in a secret store, this value is ignored. |
 
-The possible values for this property are:
-
-* Label: **Java Key Store (JKS)** (value: `JKS`)
-
-* Label: **Java Cryptography Extension Key Store (JCEKS)** (value: `JCEKS`)
-
-* Label: **PKCS#11 Hardware Crypto Storage** (value: `PKCS11`)
-
-* Label: **PKCS#12 Key Store** (value: `PKCS12`)
-
-Default value: `JCEKS`
-
-`amster` attribute: `authenticatorWebAuthnDeviceSettingsEncryptionKeystoreType`
+  `amster` attribute: `authenticatorWebAuthnDeviceSettingsEncryptionKeystoreType`
 
 * Key Store Password
 
@@ -10947,6 +10839,7 @@ page_id: pingam:setup:sec-rest-realm-rest
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/sec-rest-realm-rest.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "REST", "Identities", "Realms"]
 page_aliases: ["setup-guide:sec-rest-realm-rest.adoc"]
 section_ids:
@@ -12125,6 +12018,7 @@ page_id: pingam:setup:setting-up-policy-and-app-stores
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/setting-up-policy-and-app-stores.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Policy", "Application Store", "Directory Server"]
 page_aliases: ["setup-guide:setting-up-policy-and-app-stores.adoc"]
 section_ids:
@@ -12284,6 +12178,7 @@ page_id: pingam:setup:configure-realms-console
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/configure-realms-console.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Realms"]
 page_aliases: ["setup-guide:configure-realms-console.adoc"]
 section_ids:
@@ -12445,6 +12340,7 @@ page_id: pingam:setup:server-cts
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/server-cts.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["setup-guide:server-cts.adoc"]
 section_ids:
   cts-tokenstore: CTS token store
@@ -12624,6 +12520,7 @@ page_id: pingam:setup:customizing-data-stores
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/customizing-data-stores.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Customization", "Identity Store", "LDAP"]
 page_aliases: ["setup-guide:customizing-data-stores.adoc"]
 section_ids:
@@ -13383,6 +13280,7 @@ page_id: pingam:setup:dashboard-service
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/dashboard-service.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Dashboard"]
 page_aliases: ["setup-guide:dashboard-service.adoc"]
 section_ids:
@@ -13655,6 +13553,7 @@ page_id: pingam:setup:server-directory-configuration
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/server-directory-configuration.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["setup-guide:server-directory-configuration.adoc"]
 section_ids:
   directory-directory: Directory configuration
@@ -13716,6 +13615,7 @@ page_id: pingam:setup:server-general
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/server-general.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["setup-guide:server-general.adoc"]
 section_ids:
   general-site: Site
@@ -13845,6 +13745,7 @@ page_id: pingam:setup:data-stores-generic-ldapv3
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/data-stores-generic-ldapv3.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Directory Server", "Identity Store", "LDAP"]
 page_aliases: ["setup-guide:data-stores-generic-ldapv3.adoc"]
 section_ids:
@@ -14353,6 +14254,7 @@ page_id: pingam:setup:setting-up-identity-stores
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/setting-up-identity-stores.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Identity Store", "Repository"]
 page_aliases: ["setup-guide:setting-up-identity-stores.adoc"]
 section_ids:
@@ -14465,6 +14367,7 @@ page_id: pingam:setup:configure-lb
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/configure-lb.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Load Balancer", "Setup &amp; Configuration"]
 page_aliases: ["setup-guide:configure-lb.adoc"]
 section_ids:
@@ -14586,6 +14489,7 @@ page_id: pingam:setup:deployment-configuration-reference
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/deployment-configuration-reference.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Configuration"]
 page_aliases: ["reference:deployment-configuration-reference.adoc", "setup-guide:deployment-configuration-reference.adoc"]
 section_ids:
@@ -14646,6 +14550,7 @@ page_id: pingam:setup:data-stores-ping-directory
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/data-stores-ping-directory.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Directory Server", "Identity Store", "LDAP"]
 section_ids:
   all_tabs: All tabs
@@ -15262,6 +15167,7 @@ page_id: pingam:setup:data-stores-opendj
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/data-stores-opendj.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Directory Server", "Identity Store", "LDAP"]
 page_aliases: ["setup-guide:data-stores-opendj.adoc"]
 section_ids:
@@ -15951,6 +15857,7 @@ page_id: pingam:setup:setting-up-data-stores
 canonical_url: https://docs.pingidentity.com/pingam/8.1/setup/setting-up-data-stores.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Setup &amp; Configuration", "Policy", "Application Store"]
 page_aliases: ["setup-guide:setting-up-data-stores.adoc"]
 ---

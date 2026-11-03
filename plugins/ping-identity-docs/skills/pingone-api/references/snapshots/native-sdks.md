@@ -1,12 +1,13 @@
 ---
 title: Native SDKs
-description: The PingOne Native SDKs are iOS and Android client SDKs for PingOne services built to interact with the PingOne Platform API. Currently, native PingOne SDKs are available for these services:
+description: Introduces the PingOne Native SDKs for iOS and Android, covering PingOne MFA, PingOne Neo, and PingOne Protect client integrations
 component: pingone-api
-page_id: pingone-api:native-sdks:introduction
-canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/introduction.html
+page_id: pingone-api:native-sdks:index
+canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["index.adoc"]
+revdate: 2026-08-07
+page_aliases: ["introduction.adoc"]
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
 ---
@@ -15,9 +16,9 @@ section_ids:
 
 The PingOne Native SDKs are iOS and Android client SDKs for PingOne services built to interact with the PingOne Platform API. Currently, native PingOne SDKs are available for these services:
 
-* [PingOne MFA](pingone-mfa-mobile-sdks.html)
+* [PingOne MFA](pingone-mfa-mobile-sdks/index.html)
 
-* [PingOne Neo](pingone-neo-native-sdks.html)
+* [PingOne Neo](pingone-neo-native-sdks/index.html)
 
 * [PingOne Protect](pingone-risk-sdks/risk_evaluation_sdk.html)
 
@@ -31,24 +32,25 @@ You can also choose to assign admin roles based on particular service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../platform/roles/index.html) for more information.
 
 ---
 
 ---
 title: PingOne MFA Native SDK flows
-description: The automatic enrollment flow requires as little as one extra step from the user. The first time the user logs into an application which has an embedded PingOne Native SDK component, they are asked if they wish to trust that device. Once they approve, PingOne works behind the scenes, without requiring anything else from the user.
+description: Describes PingOne MFA Native SDK pairing flows, including automatic enrollment and the steps for coordinating admin and developer setup
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-flows
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-flows.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pairing-automatic-enrollment: Pairing - automatic enrollment
   implement-automatic-pairing-of-native-app-as-mfa-authenticator-app: Implement automatic pairing of native app as MFA authenticator app
@@ -214,7 +216,7 @@ In your native application code (also described in the iOS and Android README.md
 
 The authentication code flow enables users to sign on without any data entry, such as providing a username, password, or entering a one-time passcode. The user scans the code, and if successful, gains access to an application's services.
 
-During an authentication code flow, a native app communicates with the PingOne platform to initiate authentication with an authentication code, which can be a QR code. The flow starts with a call to the [Create Authentication Code](/pingone/mfa/v1/api/#post-create-authentication-code) endpoint. The Mobile SDK validates the code value and returns an `AuthenticationObject` to the mobile app.
+During an authentication code flow, a native app communicates with the PingOne platform to initiate authentication with an authentication code, which can be a QR code. The flow starts with a call to the [Create Authentication Code](../../mfa/mfa-authentication/mfa-authentication-code/create-authentication-code.html) endpoint. The Mobile SDK validates the code value and returns an `AuthenticationObject` to the mobile app.
 
 ![A diagram showing the PingOne Mobile SDK authentication code flow.](../../_images/p1_MobileSDKFlowQRAuthentication.png)
 
@@ -268,42 +270,44 @@ This mechanism uses the response received from the Google and Apple notification
 
 Note that Apple does not guarantee a specific response to push notifications after an application is uninstalled, so this feature may not always work on iOS devices.
 
-In situations where an *unregistered* response is not received from the Google or Apple notification server, MFA flows will continue to prompt for push confirmation, and this may result in a status of PUSH\_CONFIRMATION\_TIMED\_OUT.
+In situations where an *unregistered* response is not received from the Google or Apple notification server, MFA flows will continue to prompt for push confirmation, and this may result in a status of PUSH_CONFIRMATION_TIMED_OUT.
 
 ---
 
 ---
 title: PingOne MFA Native SDKs
-description: The PingOne Native SDK provides the ability to integrate PingOne MFA functionality into your native applications. Topics include:
+description: Lists topics for integrating PingOne MFA into native applications, including SDK flows, Android and iOS implementations, and error codes
 component: pingone-api
-page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks
-canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks.html
+page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks/index
+canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne MFA Native SDKs
 
 The PingOne Native SDK provides the ability to integrate PingOne MFA functionality into your native applications. Topics include:
 
-* [PingOne MFA Native SDK flows](pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-flows.html)
+* [PingOne MFA Native SDK flows](pingone-mfa-mobile-sdk-flows.html)
 
-* [PingOne Native SDK for Android](pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-for-android.html)
+* [PingOne Native SDK for Android](pingone-mfa-mobile-sdk-for-android.html)
 
-* [PingOne Native SDK for iOS](pingone-mfa-mobile-sdks/pingone-mobile-sdk-for-ios.html)
+* [PingOne Native SDK for iOS](pingone-mobile-sdk-for-ios.html)
 
-* [PingOne MFA SDK error codes](pingone-mfa-mobile-sdks/pingone_mfa_sdk_errror_codes.html)
+* [PingOne MFA SDK error codes](pingone_mfa_sdk_errror_codes.html)
 
 ---
 
 ---
 title: PingOne MFA SDK error codes
-description: The pairing object always returns both a push authenticator status and an OTP status. If the status is FAILED, a Push authenticator error code and message or an OTP error code and message is returned with the status.
+description: Lists PingOne MFA Native SDK pairing object error codes for push authenticator and OTP failures
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks/pingone_mfa_sdk_errror_codes
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks/pingone_mfa_sdk_errror_codes.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pairing-object-error-codes: Pairing object error codes
   push-authenticator-error-codes: Push authenticator error codes
@@ -339,12 +343,13 @@ The pairing object always returns both a push authenticator status and an OTP st
 
 ---
 title: PingOne MFA SDK for Android
-description: The PingOne MFA Native SDK provides the ability to integrate PingOne MFA functionality into your native applications.
+description: Explains how to integrate the PingOne MFA Native SDK for Android into native applications, including setup, supported versions, and sample apps
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-for-android
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks/pingone-mfa-mobile-sdk-for-android.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   overview: Overview
   pingone-mfa-native-sdk-sample-app: PingOne MFA Native SDK sample app
@@ -436,12 +441,13 @@ Refer to the [API documentation](https://pingidentity.github.io/pingone-mobile-s
 
 ---
 title: PingOne MFA SDK for iOS
-description: The PingOne MFA Native SDK provides the ability to integrate PingOne MFA functionality into your native applications.
+description: Explains how to integrate the PingOne MFA Native SDK for iOS into native applications, including setup, supported versions, and sample apps
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-mfa-mobile-sdks/pingone-mobile-sdk-for-ios
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-mfa-mobile-sdks/pingone-mobile-sdk-for-ios.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   overview: Overview
   pingone-mfa-native-sdk-sample-app: PingOne MFA Native SDK sample app
@@ -465,7 +471,7 @@ The PingOne SDK for iOS supports the following software versions:
 
 * Xcode 14 or later
 
-* iOS 15.0 or later
+* iOS 16.0 or later
 
 Refer to [Edit an application](https://docs.pingidentity.com/pingone/applications/p1_edit_application_native.html) in the admin guide for the server-side configuration steps.
 
@@ -505,12 +511,13 @@ Refer to the [API documentation](https://pingidentity.github.io/pingone-mobile-s
 
 ---
 title: PingOne Neo Native SDKs
-description: PingOne Neo is a decentralized identity solution that gives control of identity data back to users. PingOne Neo empowers businesses to give their users full control over how they securely store and share verified credentials without unnecessary friction.
+description: Explains PingOne Neo, a decentralized identity solution, and links to its Verify and Wallet native SDK components
 component: pingone-api
-page_id: pingone-api:native-sdks:pingone-neo-native-sdks
-canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks.html
+page_id: pingone-api:native-sdks:pingone-neo-native-sdks/index
+canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Neo Native SDKs
@@ -521,20 +528,21 @@ PingOne Neo provides enterprises with identity verification capabilities and the
 
 PingOne Neo has two components:
 
-* [PingOne Verify Native SDKs](pingone-neo-native-sdks/pingone-verify-native-sdks.html)
+* [PingOne Verify Native SDKs](pingone-verify-native-sdks/index.html)
 
-* [PingOne Wallet Native SDKs](pingone-neo-native-sdks/pingone-wallet-native-sdks.html)
+* [PingOne Wallet Native SDKs](pingone-wallet-native-sdks/index.html)
 
 ---
 
 ---
 title: PingOne Protect Native SDKs
-description: You can use the PingOne Signals (Protect) SDK to obtain information for additional risk-related variables and then pass this information on to the risk evaluation.
+description: Introduces the PingOne Signals (Protect) SDK for collecting risk-related variables and lists integrations that consume its data
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-risk-sdks/risk_evaluation_sdk
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Protect Native SDKs
@@ -557,14 +565,15 @@ The data provided by the Signals SDK can be used with the following:
 
 ---
 title: PingOne Protect SDK for Android
-description: Using the Android version of the SDK involves the following steps:
+description: Explains how to add, initialize, and use the PingOne Signals (Protect) SDK for Android to collect data for risk assessment
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-risk-sdks/risk_evaluation_sdk_android
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk_android.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
-  pingone-signals-protect-sdk-for-android-version-5-2-0: PingOne Signals (Protect) SDK for Android (version 5.2.0)
+  pingone-signals-protect-sdk-for-android-version-5-4-0: PingOne Signals (Protect) SDK for Android (version 5.4.0)
   adding-the-sdk-to-your-app-dependencies: Adding the SDK to your app dependencies
   sdk-initialization: SDK initialization
   getting-the-data-for-risk-assessment: Getting the data for risk assessment
@@ -572,7 +581,7 @@ section_ids:
 
 # PingOne Protect SDK for Android
 
-## PingOne Signals (Protect) SDK for Android (version 5.2.0)
+## PingOne Signals (Protect) SDK for Android (version 5.4.0)
 
 Using the Android version of the SDK involves the following steps:
 
@@ -590,9 +599,9 @@ Add the following to your application-level build.gradle file:
 
 |   |                                                                                                                                        |
 | - | -------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Update the path to match the version of the PingOne Signals SDK for Android that you are using. Currently the latest version is 5.2.0. |
+|   | Update the path to match the version of the PingOne Signals SDK for Android that you are using. Currently the latest version is 5.4.0. |
 
-`implementation "com.pingidentity.signals:android-sdk:5.2.0"`
+`implementation "com.pingidentity.signals:android-sdk:5.4.0"`
 
 ### SDK initialization
 
@@ -663,12 +672,13 @@ public class MyClass {
 
 ---
 title: PingOne Protect SDK for iOS
-description: Using the iOS version of the SDK involves the following steps:
+description: Explains how to add, initialize, and use the PingOne Signals (Protect) SDK for iOS to collect data for risk assessment
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-risk-sdks/risk_evaluation_sdk_ios
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk_ios.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pingone-signals-protect-sdk-for-ios-version-5-4-0: PingOne Signals (Protect) SDK for iOS (version 5.4.0)
   adding-the-sdk-to-your-app: Adding the SDK to your app
@@ -771,12 +781,13 @@ pingOneSignals?.getData { data, error in
 
 ---
 title: PingOne Protect SDK for Web
-description: When using the PingFederate Authentication API, use the version of the Signals SDK that supports the Risk/Protect Integration Kit that you installed in PingFederate:
+description: Explains how to import, initialize, and use the PingOne Signals (Protect) SDK for Web to collect data for risk assessment
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-risk-sdks/risk_evaluation_sdk_web
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/risk_evaluation_sdk_web.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-14
 section_ids:
   pingone-signals-protect-sdk-for-web: PingOne Signals (Protect) SDK for Web
   version-of-the-signals-sdk-to-use: Version of the Signals SDK to use
@@ -873,7 +884,7 @@ onPingOneSignalsReady(function () {
         // universalDeviceIdentification: true,
         // Set htmlGeoLocation to true if you want the SDK payload to include browser-based user location data if the user has provided their consent
         // htmlGeoLocation: true,
-        // Set agentIdentification to true if you are using risk policies that contain the PingID Device Trust predictor
+        // Set agentIdentification to true if your users are going to be running the {pingid} Device Trust agent
         // agentIdentification: true,
         // If you have set agentIdentification to true, use agentTimeout to specify the timeout the trust agent should use if you don't want to use the default timeout setting. Can be between 200 and 10,000 milliseconds.
         // agentTimeout: 5000,
@@ -950,32 +961,34 @@ style-src 'self' https://apps.pingone.com 'unsafe-inline';
 
 ---
 title: PingOne Verify Native SDKs
-description: PingOne Verify Native SDKs collect information required for verifying a user's identity and share the collected information with the PingOne Verify service. PingOne Verify Native SDKs are available in for two operating systems:
+description: Introduces the PingOne Verify Native SDKs for iOS and Android that collect identity verification information for the PingOne Verify service
 component: pingone-api
-page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-verify-native-sdks
-canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-verify-native-sdks.html
+page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-verify-native-sdks/index
+canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-verify-native-sdks/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Verify Native SDKs
 
 PingOne Verify Native SDKs collect information required for verifying a user's identity and share the collected information with the PingOne Verify service. PingOne Verify Native SDKs are available in for two operating systems:
 
-* [PingOne Verify SDK for iOS](pingone-verify-native-sdks/pingone-verify-native-sdk-for-ios.html)
+* [PingOne Verify SDK for iOS](pingone-verify-native-sdk-for-ios.html)
 
-* [PingOne Verify SDK for Android](pingone-verify-native-sdks/pingone-verify-native-sdk-for-android.html)
+* [PingOne Verify SDK for Android](pingone-verify-native-sdk-for-android.html)
 
 ---
 
 ---
 title: PingOne Verify SDK for Android
-description: The PingOne Verify SDK enables you to integrate PingOne Verify functionality into your native applications.
+description: Explains how to download and integrate the PingOne Verify Native SDK for Android into your native applications
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-verify-native-sdks/pingone-verify-native-sdk-for-android
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-verify-native-sdks/pingone-verify-native-sdk-for-android.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Verify SDK for Android
@@ -988,12 +1001,13 @@ The PingOne Veridy Native SDK package is available for download at <https://gith
 
 ---
 title: PingOne Verify SDK for iOS
-description: The PingOne Verify SDK enables you to integrate PingOne Verify functionality into your native applications.
+description: Explains how to download and integrate the PingOne Verify Native SDK for iOS into your native applications
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-verify-native-sdks/pingone-verify-native-sdk-for-ios
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-verify-native-sdks/pingone-verify-native-sdk-for-ios.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Verify SDK for iOS
@@ -1006,12 +1020,13 @@ The PingOne Verify Native SDK package is available for download at <https://gith
 
 ---
 title: PingOne Wallet Native SDK for Android
-description: The PingOne Wallet SDK enables you to integrate PingOne Wallet functionality into your native applications.
+description: Explains how to download and integrate the PingOne Wallet Native SDK for Android into your native applications
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-android
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-android.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Wallet Native SDK for Android
@@ -1024,12 +1039,13 @@ The PingOne Wallet Native SDK package is available for download at <https://gith
 
 ---
 title: PingOne Wallet Native SDK for iOS
-description: The PingOne Wallet SDK enables you to integrate PingOne Wallet functionality into your native applications.
+description: Explains how to download and integrate the PingOne Wallet Native SDK for iOS into your native applications
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-ios
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-ios.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # PingOne Wallet Native SDK for iOS
@@ -1042,12 +1058,13 @@ The PingOne Wallet Native SDK package is available for download at <https://gith
 
 ---
 title: PingOne Wallet Native SDKs
-description: This defines the usage and interfaces of the PingOne Wallet Native SDKs to interact with PingOne credentialing services. The SDK provides for a user to receive, save, and share credentials for identification and verification purposes. PingOne Wallet Native SDKs are available in for two operating systems:
+description: Describes the PingOne Wallet Native SDKs for iOS and Android, including credential storage and the initialization and presentation flows
 component: pingone-api
-page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-wallet-native-sdks
-canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks.html
+page_id: pingone-api:native-sdks:pingone-neo-native-sdks/pingone-wallet-native-sdks/index
+canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-neo-native-sdks/pingone-wallet-native-sdks/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   pingone-wallet-native-sdk-flows: PingOne Wallet Native SDK flows
   wallet-initialization: Wallet initialization
@@ -1058,9 +1075,9 @@ section_ids:
 
 This defines the usage and interfaces of the PingOne Wallet Native SDKs to interact with PingOne credentialing services. The SDK provides for a user to receive, save, and share credentials for identification and verification purposes. PingOne Wallet Native SDKs are available in for two operating systems:
 
-* [PingOne Wallet Native SDK for iOS](pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-ios.html)
+* [PingOne Wallet Native SDK for iOS](pingone-wallet-native-sdk-for-ios.html)
 
-* [PingOne Wallet Native SDK for Android](pingone-wallet-native-sdks/pingone-wallet-native-sdk-for-android.html)
+* [PingOne Wallet Native SDK for Android](pingone-wallet-native-sdk-for-android.html)
 
 ## PingOne Wallet Native SDK flows
 
@@ -1068,24 +1085,25 @@ This defines the usage and interfaces of the PingOne Wallet Native SDKs to inter
 
 When the wallet SDK initializes for the first time, it creates a new application instance for the default geographic supplied in the PingOneWalletClient.Builder, registers with the credentials service, and saves the application identifier with cryptographic keys locally. When the SDK receives a request for another region, it registers the same set of keys with the credential service running in the geographywhere the request originated before processing the request.
 
-![PingOne Wallet Native SDK wallet initialization flow diagram](../../_images/p1Credentials-walletInitialization.png)
+![PingOne Wallet Native SDK wallet initialization flow diagram](../../../_images/p1Credentials-walletInitialization.png)
 
 ### Credential presentation
 
 Upon scanning a QR, receiving a notification, or clicking a deep link the application passes the information to the SDK. The SDK then uses this information to fetch and parse the Presentation Request, and find the credentials in storage that match. These pass back to the Wallet Application that decides and approves which credentials to share. The SDK identifies the protocol in the presentation request (Native vs OPENID4VP) and prepares a Presentation Response accordingly. If the request is for presenting credentials for a session on the same device, the SDK asks the app to redirect the user to the corresponding URL in the browser after submitting the presentation response.
 
-![PingOne Wallet Native SDK credential presentation flow diagram](../../_images/p1Credentials-credentialPresentation.png)
+![PingOne Wallet Native SDK credential presentation flow diagram](../../../_images/p1Credentials-credentialPresentation.png)
 
 ---
 
 ---
 title: SDK Changelog
-description: Jan 21, 2026
+description: Lists release dates, versions, and changes for the PingOne Signals (Protect) SDK across iOS, Android, and Web
 component: pingone-api
 page_id: pingone-api:native-sdks:pingone-risk-sdks/protect_sdk_changelog
 canonical_url: https://developer.pingidentity.com/pingone-api/native-sdks/pingone-risk-sdks/protect_sdk_changelog.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   signals-protect-sdk-for-ios: Signals (Protect) SDK for iOS
   signals-protect-sdk-for-android: Signals (Protect) SDK for Android
@@ -1106,11 +1124,15 @@ section_ids:
 
 ## Signals (Protect) SDK for Android
 
-| Release Date   | Description                                                                                                                                                                                                                                                             |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Jan 21, 2026   | Version 5.3.0- The Signals SDK is now targeted for Level 36 (Android 16).                                                                                                                                                                                               |
-| March 23, 2025 | Version 5.2.0- For user location information, the Signals SDK now takes into account GPS data if the application has requested location permissions.                                                                                                                    |
-| Nov 6, 2024    | Version 5.1.6- The Signals SDK now takes into account mobile device permissions and additional sensor readings.
+| Release Date | Description                                                                                                                                                                                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Oct 28, 2026 | Version 5.4.1- This version contains a number of bug fixes.                                                                                                                                                                                                             |
+| Aug 5, 2026  | Version 5.4.0- The Signals SDK is now targeted for Level 37 (Android 17).
+
+- The minimum Android version supported is now Level 24 (Android 7.0).                                                                                                                       |
+| Jan 21, 2026 | Version 5.3.0- The Signals SDK is now targeted for Level 36 (Android 16).                                                                                                                                                                                               |
+| Mar 23, 2025 | Version 5.2.0- For user location information, the Signals SDK now takes into account GPS data if the application has requested location permissions.                                                                                                                    |
+| Nov 6, 2024  | Version 5.1.6- The Signals SDK now takes into account mobile device permissions and additional sensor readings.
 
 - The minimum Android version supported is now Level 21 (Android 5.0).
 
@@ -1120,16 +1142,17 @@ section_ids:
 
 | Release Date | Description                                                                                                                                                                                                                                                                                                                                         |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sep 10, 2026 | Version 5.6.11- Improvements to further increase the accuracy of risk evaluations.                                                                                                                                                                                                                                                                  |
 | Jun 30, 2026 | Version 5.6.10- The SDK can now detect AI agents (requires turning on the `isIAFDetectionEnabled` property).
 
-- Improvements aimed at further increasing the accuracy of risk evaluations.
+- Improvements to further increase the accuracy of risk evaluations.
 
-- Performance enhancements.                                                                                                                             |
+- Performance enhancements.                                                                                                                                     |
 | Mar 16, 2026 | Version 5.6.9- Improved browser fingerprint.
 
 - General efficiency improvements.                                                                                                                                                                                                                                                                    |
 | Mar 9, 2026  | Version 5.6.8- Initial npm package for the PingOne Signals SDK.                                                                                                                                                                                                                                                                                     |
-| Jan 21, 2026 | Version 5.6.7- Contains improvements aimed at further increasing the accuracy of risk evaluations.                                                                                                                                                                                                                                                  |
+| Jan 21, 2026 | Version 5.6.7- Contains improvements to further increase the accuracy of risk evaluations.                                                                                                                                                                                                                                                          |
 | Oct 23, 2025 | Version 5.6.3- Now includes an option to have the SDK payload include browser-based user location data if the user has provided their consent.                                                                                                                                                                                                      |
 | Jun 4, 2025  | Version 5.6.0- Enhancements have been made to the signal-collection engine to keep pace with changes in the browser landscape.                                                                                                                                                                                                                      |
 | Mar 4, 2025  | Version 5.5.0- Includes support for the new PingID Device Trust predictor. The predictor requires that the [PingID Device Trust agent](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_using_the_workforce_trust_agent.html) be installed on users' computers, and requires both a PingID license and a PingOne Protect license. |

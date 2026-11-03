@@ -1,13 +1,13 @@
 ---
 title: About alternate authorization identities
-description: Alternate authorization identities allow for the proper evaluation of access control rules for users whose entries aren't present within an entry-balanced dataset.
+description: "Understand how PingDirectoryProxy alternate authorization identities let access control rules evaluate correctly for users whose entries aren't in the entry-balanced data set."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_about_alt_authn_ids
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/pd_proxy_about_alt_authn_ids.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   processing-steps: Processing steps
 ---
@@ -32,7 +32,7 @@ For the following example, assume that you have three classes of users: full adm
 
 * `uid=password-admin,dc=example,dc=com`
 
-![An illustrated workflow of an alternate authorization identity solving an access control issue in an entry-balancing deployment. The processing steps section below describes the workflow in detail. The client with uid=5000 is represented by a person at a desktop. The flow moves down from the client sending a bind request to the proxy server 01 which is represented by a box with the global index box sitting beside it. The the flow moves from the Proxy Server 01 in two directions: it sends a search request represented by an orange line to the entry balancing set 02 represented by a box with an orange outline and it sends a bind request represented by a green line to entry balancing set 01 represented by a box with a green outline. The entry balancing set 01 contains the base distinguished name, normal users, full administrators, and password administrator users, entries in the uid=0-10000 range, access control instructions, and an entry balancing point. The flow within is described in the processing steps. The entry balancing set 02 contains the base distinguished name, normal users, full administrators, and password administrator users, entries for uid=10001-20000, access control instructions, and an entry balancing point. The flow within is described in the processing steps.](_images/aqs1564012014720.png)Alternate Authorization Identity Solves Access Control Issues in Entry-Balancing Deployments
+![An illustrated workflow of an alternate authorization identity solving an access control issue in an entry-balancing deployment. The processing steps section below describes the workflow in detail. The client with uid=5000 is represented by a person at a desktop. The flow moves down from the client sending a bind request to the proxy server 01 which is represented by a box with the global index box sitting beside it. The flow moves from the Proxy Server 01 in two directions: it sends a search request represented by an orange line to the entry balancing set 02 represented by a box with an orange outline and it sends a bind request represented by a green line to entry balancing set 01 represented by a box with a green outline. The entry balancing set 01 contains the base distinguished name, normal users, full administrators, and password administrator users, entries in the uid=0-10000 range, access control instructions, and an entry balancing point. The flow within is described in the processing steps. The entry balancing set 02 contains the base distinguished name, normal users, full administrators, and password administrator users, entries for uid=10001-20000, access control instructions, and an entry balancing point. The flow within is described in the processing steps.](_images/aqs1564012014720.png)Alternate Authorization Identity Solves Access Control Issues in Entry-Balancing Deployments
 
 ## Processing steps
 
@@ -70,7 +70,7 @@ For the following example, assume that you have three classes of users: full adm
 
 ---
 title: About client connection policies
-description: Client connection policies define the general behavior the server exhibits when communicating with a set of clients.
+description: Understand how PingDirectoryProxy client connection policies use connection criteria, operation constraints, and subtree views to control client access.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_client_connection_policies
@@ -114,7 +114,7 @@ Learn more about [Client connection policy configuration](../pingdirectory_serve
 
 ---
 title: About creating a custom health check
-description: You can create a new health check from scratch or use an existing health check as a template for the configuration of a new health check.
+description: Understand the custom LDAP health check types you can create for PingDirectoryProxy, including admin alert, replication backlog, search, and scripted health checks.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_about_creating_custom_health_check
@@ -158,7 +158,7 @@ If you choose to create a custom health check, you can create one of the followi
 
 ---
 title: About dynamic rebalancing
-description: During dynamic rebalancing, entries get moved as they are modified. You configure dynamic rebalancing in the entry counter placement algorithm or a third-party placement algorithm that supports rebalancing.
+description: Understand how PingDirectoryProxy dynamic rebalancing moves entries as they are modified, configured in the entry counter or a third-party placement algorithm.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_dynamic_rebalancing
@@ -204,7 +204,7 @@ If you are writing your own third-party algorithm, you program dynamic rebalanci
 
 ---
 title: About encrypting log files
-description: The server lets you encrypt log files as they are written.
+description: Understand how to encrypt PingDirectoryProxy log files as they are written using the encrypt-log property, including the encrypted file extensions.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_encrypt_log_files
@@ -351,7 +351,7 @@ Configure log file encryption for a log publisher.
 
 ---
 title: About entry balancing
-description: Entry balancing allows you to automatically spread entries below a common parent among multiple sets of directory servers for improved scalability and performance.
+description: Understand how PingDirectoryProxy entry balancing spreads entries below a common parent across multiple server sets and uses a global index to route requests.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_entry_balancing
@@ -373,7 +373,7 @@ For information about configuring entry balancing, see [Deploying an entry-balan
 
 ---
 title: About LDAP external servers
-description: PingDirectoryProxy allows you to configure different types of LDAP external servers.
+description: Understand the LDAP external server information PingDirectoryProxy uses, including connection details, location, authentication, health checks, and allowed operations.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_ldap_ext_servers
@@ -411,14 +411,14 @@ For more information about configuring LDAP external servers, see [Configuring L
 
 ---
 title: About LDAP health checks
-description: LDAP health checks provide information about the status and availability of LDAP external servers. Configure the PingDirectoryProxy server health checks that work best for your environment.
+description: Understand PingDirectoryProxy LDAP health check types, available, degraded, and unavailable server states, health check scores, and check frequency.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_ldap_health_checks
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/pd_proxy_ldap_health_checks.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   results: Results
   frequency: Frequency
@@ -469,7 +469,7 @@ Health check results include a numeric score that has a value between 1 and 10. 
 
 The results of health checks are made available to the load-balancing algorithms to help determine where to send requests. The PingDirectoryProxy server attempts to use servers with a state of `available` before trying servers with a state of `degraded`. It never attempts to use servers with a state of `unavailable`.
 
-Some load-balancing algorithms also take the health check score into account, such as the health-weighted load-balancing algorithm that prefers servers with higher scores over those with lower scores. You should configure the algorithms that work best for you environment.
+Some load-balancing algorithms also take the health check score into account, such as the health-weighted load-balancing algorithm that prefers servers with higher scores over those with lower scores. You should configure the algorithms that work best for your environment.
 
 ## Frequency
 
@@ -493,7 +493,7 @@ You can find more information about configuring health checks in [Configuring se
 
 ---
 title: About load-balancing algorithms
-description: Load-balancing algorithms determine which server in a set of similar servers to use to process a client request.
+description: Understand the PingDirectoryProxy load-balancing algorithm types and the criteria they use to route requests, including location, health, and operation retries.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_load_balancing_algorithms
@@ -557,7 +557,7 @@ The algorithm takes the following criteria into account:
 
 ---
 title: About locations
-description: You can assign a location to the PingDirectoryProxy server and each of the backend LDAP external servers for routing requests and failover response preferences.
+description: Understand how PingDirectoryProxy locations group servers with similar response times and determine request routing and failover order across data centers.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_locations
@@ -587,14 +587,14 @@ Learn more about [Configuring locations](pd_proxy_config_locations.html).
 
 ---
 title: About log compression
-description: The server supports the ability to compress log files as they are written.
+description: Understand how PingDirectoryProxy compresses log files as they are written, increasing the amount of log data that fits in a given amount of space.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_log_compression
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/pd_proxy_log_compression.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 5, 2024
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # About log compression
@@ -603,7 +603,7 @@ The server supports the ability to compress log files as they are written.
 
 This feature can significantly increase the amount of data that can be stored in a given amount of space so that log information can be kept for a longer period of time.
 
-Because of the inherent problems with mixing compressed and uncompressed data, compression can only be enabled at the time the logger is created. Compression cannot be turned on or off when the logger is configured. Because of problems in trying to append to an existing compressed file, if the server encounters an existing log file at startup, it rotates that file and begin a new one rather than attempting to append to the previous file.
+Because of the inherent problems with mixing compressed and uncompressed data, compression can only be enabled at the time the logger is created. Compression can't be turned on or off when the logger is configured. Because of problems in trying to append to an existing compressed file, if the server encounters an existing log file at startup, it rotates that file and begins a new one rather than attempting to append to the previous file.
 
 Compression is performed using the standard gzip algorithm, so compressed log files can be accessed using readily available tools. The `summarize-access-log` tool can also work directly on compressed log files rather than requiring them to be uncompressed first.
 
@@ -615,7 +615,7 @@ Configure compression by setting the `compression-mechanism` property to have th
 
 ---
 title: About log signing
-description: The server supports the ability to cryptographically sign a log to ensure that it has not been modified in any way.
+description: Understand how PingDirectoryProxy cryptographically signs log files to ensure they have not been modified, providing tamper-proof audit logs.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_log_signing
@@ -643,7 +643,7 @@ After you have enabled this property, you must disable and then re-enable the lo
 
 ---
 title: About mapping multiple source DNs to the same target DN
-description: Some complications exist when defining multiple distinguished names (DN) mappings that are used for the same request processor and the same source or target DN or that have source or target DNs that are hierarchically related.
+description: Understand the complications of defining multiple PingDirectoryProxy DN mappings that share the same source or target DN in a single request processor.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_map_multiple_source_dns_target_dn
@@ -667,7 +667,7 @@ Alternatively, if it is unnecessary to search under the `o=sample` base DN, then
 
 ---
 title: About request processors
-description: A request processor encapsulates the logic for handling an operation, ensuring that a given operation is handled appropriately.
+description: Understand how PingDirectoryProxy request processors process, forward, or hand off operations, including the proxying, entry-balancing, and failover types.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_request_processors
@@ -711,7 +711,7 @@ Learn more about [Configuring request processors](pd_proxy_config_request_proces
 
 ---
 title: About server affinity providers
-description: The PingDirectoryProxy server supports the ability to forward a sequence of requests to the same external server if specific conditions are met, called server affinity.
+description: Understand the PingDirectoryProxy server affinity provider methods, client connection, client IP address, and bind DN, for routing requests to the same backend server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_server_affinity_providers
@@ -747,21 +747,21 @@ For information about configuring server affinity, see [Configuring server affin
 
 ---
 title: About subtree views
-description: A subtree view can be used to make a portion of the directory information tree (DIT) available to a client by associating a request processor with a base distinguished name (DN).
+description: Understand how PingDirectoryProxy subtree views associate a base DN with a request processor to make a portion of the DIT available to clients.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_subtree_views
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectoryproxy_server_administration_guide/pd_proxy_subtree_views.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # About subtree views
 
 A subtree view can be used to make a portion of the directory information tree (DIT) available to a client by associating a request processor with a base distinguished name (DN).
 
-A subtree views allow you to route operations concerning one set of data to a particular set of data sources and operations concerning another set of data to another set of data sources. Multiple subtree views are involved in processing a request, such as searches that have a scope that is larger than the subtree view.
+Subtree views allow you to route operations concerning one set of data to a particular set of data sources and operations concerning another set of data to another set of data sources. Multiple subtree views are involved in processing a request, such as searches that have a scope that is larger than the subtree view.
 
 The subtree view includes using a single base DN to identify the portion of the DIT. They might have hierarchical relationships: for example, one subtree view is configured for `dc=example,dc=com` and another for `ou=People,dc=example,dc=com`.
 
@@ -771,7 +771,7 @@ For information about configuring a subtree view, see [Configuring subtree views
 
 ---
 title: About the --restricted argument of the dsreplication command-line Tool
-description: The dsreplication tool with the --restricted argument specifies a base distinguished name (DN) when multiple domains are enabled in an entry balanced environment.
+description: "Understand how the dsreplication tool's --restricted argument specifies a base DN when multiple domains are enabled in a PingDirectoryProxy entry-balanced environment."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_about_restricted_arg_dsreplication_tool
@@ -791,7 +791,7 @@ When enabling replication for a server that takes part in an entry-balanced envi
 
 ---
 title: About the client connection policy
-description: Client connection policies are based on two factors.
+description: Understand how connection criteria and the evaluation order index determine which PingDirectoryProxy client connection policy applies to a client connection.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_client_connection_policy
@@ -819,7 +819,7 @@ Client connection policies are based on two factors.
 
 ---
 title: About the configuration tools
-description: You can access and modify the server configuration in two ways.
+description: Compare the PingDirectoryProxy admin console and the dsconfig command-line tool for viewing and editing the server configuration.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_config_tools
@@ -859,7 +859,7 @@ You can access and modify the server configuration in two ways.
 
 ---
 title: About the connection pools
-description: PingDirectoryProxy maintains either one or two connection pools to the backend server, depending on the type of backend server you use.
+description: Understand how the PingDirectoryProxy server maintains connection pools to backend servers and forwards client bind requests using the configured authentication method.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectoryproxy_server_administration_guide:pd_proxy_connection_pools

@@ -2,7 +2,7 @@
 
 - Product: PingDirectory (Developer)
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-11-03
 - Source: https://developer.pingidentity.com/pingdirectory/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
@@ -16,15 +16,15 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| directory.md | assembled | <93 pages from directory> | 93 | 20 | partial |
-| directory-proxy-scim.md | assembled | <28 pages from directory-proxy-scim> | 28 | 20 | partial |
-| consent.md | assembled | <16 pages from consent> | 16 | 16 | full |
+| directory.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 93 | 20 | partial |
+| directory-proxy-scim.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 28 | 20 | partial |
+| consent.md | assembled | https://developer.pingidentity.com/pingdirectory/llms.txt | 16 | 16 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 8f4b137e8b1735a1394c6113481253d7d306533118eb4bbd020926d16d69f3ce |
-| snapshots/directory.md | ab485e441ee746d56fded0a6a0a640b6840f52788752892afba5d503a185ac10 |
-| snapshots/directory-proxy-scim.md | af69bfc3de7ed0c4d7ddeb642be68099190940405c36753255fa58aee29c7858 |
-| snapshots/consent.md | fb6bc445928b988e2ec9fb210aabb9670b59c1e815b088f6b3b0ab95ac67d624 |
+| llms.txt | 18d1e9bf07c0d5b18dbe7513aa2cbe974513930ca0eacb532221b43830342e3b |
+| snapshots/directory.md | 3cc96548ece035f073c0b1ff0be746155831fa0b6c8041d37b2582789fca75d2 |
+| snapshots/directory-proxy-scim.md | d57d6858b24084a75db69a63d967889a18dbda0be1e69e0ae377f08a4acd3e53 |
+| snapshots/consent.md | 3944b4ed4859d99ff52c88cd4495db49df9958995c8cf2cc13a5eb57969005a3 |

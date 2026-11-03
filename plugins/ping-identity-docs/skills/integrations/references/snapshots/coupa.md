@@ -33,14 +33,14 @@ The following table lists the user attributes that you can map for provisioning.
 - Through your Coupa Implementation Administrator.                     |
 | `manager`                                       | The `login` attribute value of the user's manager.The manager must exist already on the Coupa account before it can be added as a manager of another user.                                                                                                                                                                                                          |
 | `Requisition Approval Limit Amount`             | User's approval limit, such as `1000.00`.                                                                                                                                                                                                                                                                                                                           |
-| `Requisition Approval Limit Currency`           | User's requisition approval limit currency code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your\_Subdomain*.coupacloud.com/currencies.                                                                                                                                 |
+| `Requisition Approval Limit Currency`           | User's requisition approval limit currency code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your_Subdomain*.coupacloud.com/currencies.                                                                                                                                  |
 | `Invoice Approval Limit Amount`                 | User's approval limit, such as `1000.00`.                                                                                                                                                                                                                                                                                                                           |
-| `Invoice Approval Limit Currency`               | User's invoice approval limit currency code, such as`CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your\_Subdomain*.coupacloud.com/currencies.                                                                                                                                      |
+| `Invoice Approval Limit Currency`               | User's invoice approval limit currency code, such as`CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your_Subdomain*.coupacloud.com/currencies.                                                                                                                                       |
 | `Content-Groups`                                | The names of content groups the user is a member of.The content groups must exist already in Coupa before you can add a user to them.&#xA;&#xA;Content groups can't be cleared directly by the Coupa Connector. However, you can remove a user from all content groups through the Coupa admin console.                                                             |
 | `Requisition Self-Approval Limit Amount`        | User's self-Approval limit, such as `1000.00`.                                                                                                                                                                                                                                                                                                                      |
-| `Requisition Self-Approval Limit Currency Code` | User's requisition self-approval limit currency code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your\_Subdomain*.coupacloud.com/currencies.                                                                                                                            |
+| `Requisition Self-Approval Limit Currency Code` | User's requisition self-approval limit currency code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your_Subdomain*.coupacloud.com/currencies.                                                                                                                             |
 | `Approval Groups`                               | The names of approval groups the user is a member of.The approval groups must exist already in Coupa before you can add a user to them.&#xA;&#xA;Approval groups can't be cleared directly by the Coupa Connector. However, you can remove a user from all approval groups through the Coupa admin console.                                                         |
-| `Default Currency`                              | User's Default Currency Code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your\_Subdomain*.coupacloud.com/currencies.                                                                                                                                                    |
+| `Default Currency`                              | User's Default Currency Code, such as `CAD`.The list of valid currency codes available for your use can be found on your Coupa accounts currencies list at https\://*Your_Subdomain*.coupacloud.com/currencies.                                                                                                                                                     |
 | `Departments`                                   | The names of departments the user is a member of.The departments must exist already in Coupa before you can add a user to them.                                                                                                                                                                                                                                     |
 
 ---
@@ -53,16 +53,21 @@ page_id: coupa:release_notes:pf_coupa_connector_changelog
 canonical_url: https://docs.pingidentity.com/integrations/coupa/release_notes/pf_coupa_connector_changelog.html
 llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 14, 2024
+revdate: August 20, 2026
 section_ids:
-  coupa-connector-1-0-february-2015-current-release: Coupa Connector 1.0 — February 2015 (Current Release)
+  coupa-connector-1-0-3-0-august-2026: Coupa Connector 1.0.3.0 (August 2026)
+  coupa-connector-1-0-february-2015: Coupa Connector 1.0 — (February 2015)
 ---
 
 # Changelog
 
 The following changes have been implemented for the Coupa Connector:
 
-## Coupa Connector 1.0 — February 2015 (Current Release)
+## Coupa Connector 1.0.3.0 (August 2026)
+
+* Added a field to support different Coupa domains.
+
+## Coupa Connector 1.0 — (February 2015)
 
 * Initial release.
 
@@ -253,24 +258,22 @@ page_id: coupa:setup:pf_coupa_connector_creating_a_connection
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_creating_a_connection.html
 llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 14, 2024
+revdate: August 20, 2026
 section_ids:
   steps: Steps
 ---
 
 # Creating a connection
 
-To allow PingFederate to act as an identity provider (IdP) and manage users in Coupa, create a service provider (SP) connection.
+To allow PingFederate to act as an identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)* and manage users in Coupa, create a service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* connection.
 
 ## Steps
 
-1. In the PingFederate administrator console, create a new SP connection:
-
-   **Choose from:**
-
-   * For PingFederate 10.1 or later: Go to **Applications > Integration > SP Connections**. Click **Create Connection**.
-
-   * For PingFederate 10.0 or earlier: Go to **Identity Provider > SP Connections**. Click **Create Connection**.
+1. In the PingFederate administrator console go to **Applications > Integration > SP Connections**. Click **Create Connection**.
 
 2. Configure the basic connection details with the Coupa quick connection template:
 
@@ -290,13 +293,19 @@ To allow PingFederate to act as an identity provider (IdP) and manage users in C
 
    You can find more information in [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation.
 
-4. On the **Credentials** tab, configure the connection credentials as shown in [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation. Click **Next**.
+4. On the **Credentials** tab, configure the connection credentials as shown in [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation.
 
-5. On the **Outbound Provisioning** tab, configure provisioning with the following details.
+5. Click **Next**.
+
+6. On the **Outbound Provisioning** tab, configure provisioning with the following details.
 
    Learn more in [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html) in the PingFederate documentation.
 
    1. On the **Target** tab, enter the API key and subdomain you noted in [Obtaining required information](pf_coupa_connector_obtain_required_information.html).
+
+      |   |                                                                                                                                                                                                                                                                                                                                                                                     |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | The **COUPA_DOMAIN** is the domain supplied by Coupa. If you don't configure this field, it uses the default value of `coupacloud.com`.The **COUPA_SUBDOMAIN** is the subdomain for your organization.These two parts combine to form your Coupa provisioning URL. For example, if you used the `coupacloud.com` domain, your provisioning URL would be `exampleorg.coupacloud.com` |
 
    2. (Optional) In the **Provisioning Options** section, customize the provisioning connector behavior. Click **Next**.
 
@@ -304,9 +313,9 @@ To allow PingFederate to act as an identity provider (IdP) and manage users in C
 
    4. Complete the attribute mappings by referring to the [Attribute index](pf_coupa_connector_attribute_index.html).
 
-      For help, reference [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation.
+   For help, reference [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation.
 
-6. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
+7. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
 
 ---
 
@@ -654,20 +663,32 @@ To create and obtain the Coupa API key:
 
 ---
 title: Obtaining your Coupa subdomain
-description: This connector requires your Coupa subdomain to access your Coupa account for single sign-on (SSO) and outbound provisioning.
+description: This connector requires your Coupa provisioning URL to access your Coupa account for single sign-on (SSO) and outbound provisioning.
 component: coupa
 page_id: coupa:setup:pf_coupa_connector_obtain_your_coupa_subdomain
 canonical_url: https://docs.pingidentity.com/integrations/coupa/setup/pf_coupa_connector_obtain_your_coupa_subdomain.html
 llms_txt: https://docs.pingidentity.com/integrations/coupa/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 14, 2024
+revdate: August 20, 2026
 ---
 
 # Obtaining your Coupa subdomain
 
-This connector requires your Coupa subdomain to access your Coupa account for single sign-on (SSO) and outbound provisioning.
+This connector requires your Coupa provisioning URL to access your Coupa account for single sign-on (SSO) *(tooltip: \<div class="paragraph">
+\<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
+\</div>)* and outbound provisioning.
 
-Your Coupa subdomain is the subdomain portion of the URL you visit to access your Coupa account, for example, https\://*YourSubDomain*.Coupa.com.
+The Coupa provisioning URL consists of two parts:
+
+* The **COUPA_DOMAIN** is the domain supplied by Coupa. If you don't configure this field, it uses the default value of `coupacloud.com`.
+
+* The **COUPA_SUBDOMAIN** is the subdomain for your organization.
+
+These two parts combine to form your Coupa provisioning URL. For example, if you used the `coupacloud.com` domain, your provisioning URL would be `exampleorg.coupacloud.com`
+
+Follow the directions available on [Obtaining required information](pf_coupa_connector_obtain_required_information.html) to learn both parts of your URL.
+
+You enter these values on the **Target** tab when you create an SP connection. Learn more in [Creating a connection](pf_coupa_connector_creating_a_connection.html).
 
 ---
 

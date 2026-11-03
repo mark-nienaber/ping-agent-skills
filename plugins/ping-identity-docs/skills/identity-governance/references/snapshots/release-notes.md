@@ -1,4 +1,323 @@
 ---
+title: Before You Start
+description: Identity Governance server software requires the following hardware and software requirements to run in your production environment.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-before-you-install
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-before-you-install.html
+section_ids:
+  sec-idm-version: Ping Identity Management
+  sec-operating-systems: Operating Systems
+  sec-java-requirements: Java Requirements
+  sec-system-requirements: System Requirements
+---
+
+# Before You Start
+
+Identity Governance server software requires the following hardware and software requirements to run in your production environment.
+
+## Ping Identity Management
+
+Ping Identity Governance supports the following PingIDM versions for installation:
+
+**Table 1: Identity Management Requirements**
+
+|         |                   |
+| ------- | ----------------- |
+| PingIDM | 6.5, 7.x.x, 8.0.x |
+
+## Operating Systems
+
+Ping Identity Governance is supported on the following operating system:
+
+**Table 2: Operating System Requirements**
+
+| Vendor                          | Versions               |
+| ------------------------------- | ---------------------- |
+| Red Hat Enterprise Linux/CentOS | 6.6, 6.7, 7.0, and 8.0 |
+| Ubuntu Linux                    | 16.04, 18.04           |
+| Windows Server                  | 2012 R2, 2016, 2019    |
+
+## Java Requirements
+
+Identity Governance software supports the following Java environments:
+
+**Table 3: Java Requirements**
+
+| Vendor                                                                                                                            | Versions                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| OpenJDK, including OpenJDK-based distributions:- AdoptOpenJDK/Eclipse Adoptium
+
+- Amazon Corretto
+
+- Azul Zulu
+
+- Red Hat OpenJDK | 8, 11                                                                       |
+| Oracle Java                                                                                                                       | 8, 11 (specifically at least the Java Standard Edition runtime environment) |
+
+## System Requirements
+
+Ping Identity Governance requires at least 100MB disk space and 4GB memory for non-production implementations. Production sizing depends on user population, audit requirements and expected request volume.
+
+---
+
+---
+title: Changelog
+description: Review the release notes in Identity Governance software.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-changelog
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-changelog.html
+section_ids:
+  september_2025: September 2025
+  september_25_2025: September 25, 2025
+  fixes: Fixes
+  limitations: Limitations
+  known_issues: Known Issues
+  march_2023: March 2023
+  march_18_2023: March 18, 2023
+  fixes_2: Fixes
+  march_2021: March 2021
+  march_18_2021: March 18, 2021
+  fixes_3: Fixes
+---
+
+# Changelog
+
+Review the release notes in Identity Governance software.
+
+Subscribe to get automatic updates: [icon: rss-square, set=fa][Ping Identity Governance changelog RSS feed](../release-notes/chap-changelog.xml)
+
+## September 2025
+
+### September 25, 2025
+
+#### Fixes
+
+* IGA-1764 - Issue with request for self in AM integrated environments
+
+* IGA-1876 - Fixed appAuthHelperBundle logout issues
+
+* IGA-2468 - Allow multiple word searches in addition to split words
+
+* IGA-1455 - Fix for FILTER keyword
+
+* IGA-2500 - Fixed intermittent end user comment modal error
+
+* IGA-2511 - Fixed repo/link reference
+
+* IGA-2563 - Editing scheduled certifications
+
+* IGA-2553 - Update linkedSystems endpoint wrapper
+
+* IGA-2597 - Set XHR as identity proxy preference
+
+* IGA-2563 - Editing certs with only external applications certifiable
+
+* IGA-2644 - File validation in request creation
+
+* IGA-3110 - Searchable array fix
+
+* IGA-3315 - Allow upload of RAR files
+
+* IGA-3365 - Fixed hardcoding of IDM endpoint in httpservice
+
+* IGA-3375 - Additional file validation in request creation
+
+* IGA-3481 - Fixed object certification escalation notifications
+
+##### Limitations
+
+PingIGA doesn't officially support internationalization or multi-language support of any kind.
+
+##### Known Issues
+
+There are no known issues in this release.
+
+## March 2023
+
+### March 18, 2023
+
+#### Fixes
+
+* IGA-276 - Group (role) drop-down list not functioning if AM OAuth is used
+
+* IGA-501 - False error message 'Access Denied' is shown on logon with Access Review
+
+* IGA-518 - Reviewer unable to sign-off on the access review task
+
+* IGA-882 - Clicking the Submit button twice in 'Approve Access-Request' causes failure
+
+* IGA-887 - Removal approvers list incorrectly referenced when defined without approvers
+
+* IGA-888 - AR Admin check will reference both role types if configured that way
+
+* IGA-891 - User with only AR Admin role blocked from certain access
+
+* IGA-1221 - Notifications not sending on certain second stage certification tasks
+
+* IGA-1223 - Scheduled object cert failing validation
+
+* IGA-1306 - Internal role filters returning only 1 entry
+
+* IGA-1349 - Event Details modal stage stepper not loading in other stage's information
+
+* IGA-1355 - Nested attribute specific filters only matching first condition
+
+* IGA-1430 - Access denied error when logging out from certain screens
+
+* IGA-1455 - Campaigns auto sign-off when using DS as IDM repository
+
+* IGA-1628 - Cert generation calls outdated config endpoint
+
+* IGA-1837 - Policy scan query for active eq true
+
+## March 2021
+
+### March 18, 2021
+
+#### Fixes
+
+* FOR-1967 - Multi Stage certification with completely empty first stage not advancing
+
+* FOR-1969 - Events view off when one of the other stage's events is empty
+
+* FOR-1975 - Expiration certification failing to fully close certification
+
+* FOR-1977 - Add displayName to defaults for glossary
+
+* FOR-1980 - Reassigning events in bulk sends a notification for every single event
+
+* IGA-258 - New glossary item creation is slow
+
+* IGA-155 - Access Review not allowing us to delete scheduled script
+
+* IGA-85 - OOTB example remediate does not remove assignments
+
+---
+
+---
+title: Compatibility
+description: This section covers major and minor changes to existing functionality, as well as deprecated and removed functionality. You must read this section before you start a migration from a previous release.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-compatibility
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-compatibility.html
+section_ids:
+  important_changes_to_existing_functionality: Important Changes to Existing Functionality
+  deprecated_functionality: Deprecated Functionality
+  removed_functionality: Removed Functionality
+---
+
+# Compatibility
+
+This section covers major and minor changes to existing functionality, as well as deprecated and removed functionality. *You must read this section before you start a migration from a previous release*.
+
+## Important Changes to Existing Functionality
+
+No changes to existing functionality.
+
+## Deprecated Functionality
+
+No functionality is deprecated at this time.
+
+## Removed Functionality
+
+No functionality has been removed at this time.
+
+---
+
+---
+title: Deprecated
+description: The following API endpoints have been deprecated in this release:
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-deprecated
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-deprecated.html
+---
+
+# Deprecated
+
+The following API endpoints have been deprecated in this release:
+
+* /api/report. The Spark jobs now generates the Anomaly and Master Feed reports.
+
+The following CompanyView endpoints have been deprecated as the data is included in the response from the `companyOverview` endpoint:
+
+* GET Entitlements Without Owner: /api/companyview/entitlementsWithoutOwner
+
+* GET Users without manager: /api/companyview/usersWithoutManager
+
+* GET coverage: /api/companyview/coverage
+
+* GET companyViewEntitlements: /api/companyview/companyViewEntitlements
+
+* GET companyViewEmployeeTypes: /api/companyview/companyViewEmployeeTypes
+
+* GET Assignments High Threshold: /api/companyview/assignments
+
+The following Single View with Application endpoints have been deprecated:
+
+* POST employees: /api/singleViewWithApp/employees. This endpoint is replaced by the `/userDetails` endpoint.
+
+* GET entitlements/entitlementId: /api/singleViewWithApp/entitlements/{entitlementID}. This endpoint is replaced by the `/entitlements/entitlementId` endpoint.
+
+The following Role Owner with Application Oriented endpoints have been deprecated:
+
+* POST unscoredEntitlements: /api/roleOwnerWithAppOriented/unscoredEntitlements. This endpoint is replaced by the `/entitlements/unscored` endpoint.
+
+* POST entownuserdata: /api/roleOwnerWithAppOriented/entownuserdata. This endpoint is replaced by the `/entitlements/stats` endpoint.
+
+* POST entownentdata: /api/roleOwnerWithAppOriented/entownentdata. This endpoint is replaced by the `/entitlements/stats` endpoint.
+
+The following Manager with Application Oriented endpoints have been deprecated:
+
+* POST unscoredEntitlements:
+
+* POST supervisor: /api/managersWithAppOriented/supervisor. This endpoint is replaced by the `/entitlement/stats` endpoint.
+
+* POST supervisorEntitlements: /api/managersWithAppOriented/supervisorEntitlements. This endpoint is replaced by the `/entitlement/stats` endpoint.
+
+* POST supervisorUser: /api/managersWithAppOriented/supervisorUser. This endpoint is replaced by the `/entitlement/stats` endpoint.
+
+The following Entitlements endpoints have been deprecated:
+
+* GET Filters by Entt Owners: /api/entitlements/filters?by=entitlementOwner\&ownerId=timothy.slack. The endpoint has been moved to the Filters API.
+
+* GET Filters by Supervisor: /api/entitlements/filters?by=supervisor\&ownerId=albert.pardini. The endpoint has been moved to the Filters API.
+
+The following Applications (formerly `Appcentric View`) endpoints have been deprecated:
+
+* GET filters: /api/applications/{\<appID>}/filters. This endpoint has been moved to the Filters API.
+
+---
+
+---
+title: Documentation Updates
+description: The following table tracks changes to the documentation set following the release of Identity Governance 7.1.2:
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-doc-updates
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-doc-updates.html
+---
+
+# Documentation Updates
+
+The following table tracks changes to the documentation set following the release of Identity Governance 7.1.2:
+
+**Documentation Change Log**
+
+| Date       | Description                                   |
+| ---------- | --------------------------------------------- |
+| 2026-03-03 | Removed security advisories file.             |
+| 2026-01-08 | Updated the PingIDM supported version to 8.0. |
+| 2025-09-01 | Initial release of Ping Identity IGA 7.1.2    |
+| 2023-03-18 | Initial release of Ping Identity IGA 7.1.1.   |
+| 2021-03-18 | Initial release of Ping Identity IGA 7.1.     |
+
+---
+
+---
 title: Getting Support
 description: Ping Identity provides support services, professional services, training through Ping Identity University, and partner services to assist you in setting up and maintaining your deployments. For a general overview of these services, see https://www.pingidentity.com.
 component: identity-governance
@@ -189,3 +508,257 @@ Other important features are as follows:
 * **Autonomous Identity integration**. Administrators can configure system settings to allow Identity Governance to work in conjunction with Ping Identity Autonomous Identity to provide additional insights to certifiers and approvers within certifications and requests. Items that have recommendations available from AutoID will be marked with a recommendation to approve/certify or reject/revoke, as well as a confidence score for that suggestion.
 
 * **Scripted certification and policy remediation**. In addition to being able to use the IDM BPMN workflow functionality to remediate revoked access or policy violations, administrators now also have the option to use a scripted remediation process.
+
+---
+
+---
+title: Before You Start
+description: Identity Governance server software requires the following hardware and software requirements to run in your production environment.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-before-you-install
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-before-you-install.html
+section_ids:
+  sec-idm-version: Ping Identity Management
+  sec-operating-systems: Operating Systems
+  sec-java-requirements: Java Requirements
+  sec-system-requirements: System Requirements
+---
+
+# Before You Start
+
+Identity Governance server software requires the following hardware and software requirements to run in your production environment.
+
+## Ping Identity Management
+
+Ping Identity Governance supports the following PingIDM versions for installation:
+
+**Table 1: Identity Management Requirements**
+
+|         |                   |
+| ------- | ----------------- |
+| PingIDM | 6.5, 7.x.x, 8.0.x |
+
+## Operating Systems
+
+Ping Identity Governance is supported on the following operating system:
+
+**Table 2: Operating System Requirements**
+
+| Vendor                          | Versions               |
+| ------------------------------- | ---------------------- |
+| Red Hat Enterprise Linux/CentOS | 6.6, 6.7, 7.0, and 8.0 |
+| Ubuntu Linux                    | 16.04, 18.04           |
+| Windows Server                  | 2012 R2, 2016, 2019    |
+
+## Java Requirements
+
+Identity Governance software supports the following Java environments:
+
+**Table 3: Java Requirements**
+
+| Vendor                                                                                                                            | Versions                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| OpenJDK, including OpenJDK-based distributions:- AdoptOpenJDK/Eclipse Adoptium
+
+- Amazon Corretto
+
+- Azul Zulu
+
+- Red Hat OpenJDK | 8, 11                                                                       |
+| Oracle Java                                                                                                                       | 8, 11 (specifically at least the Java Standard Edition runtime environment) |
+
+## System Requirements
+
+Ping Identity Governance requires at least 100MB disk space and 4GB memory for non-production implementations. Production sizing depends on user population, audit requirements and expected request volume.
+
+---
+
+---
+title: Changelog
+description: Review the release notes in Identity Governance software.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-changelog
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-changelog.html
+section_ids:
+  september_2025: September 2025
+  september_25_2025: September 25, 2025
+  fixes: Fixes
+  limitations: Limitations
+  known_issues: Known Issues
+  march_2023: March 2023
+  march_18_2023: March 18, 2023
+  fixes_2: Fixes
+  march_2021: March 2021
+  march_18_2021: March 18, 2021
+  fixes_3: Fixes
+---
+
+# Changelog
+
+Review the release notes in Identity Governance software.
+
+Subscribe to get automatic updates: [icon: rss-square, set=fa][Ping Identity Governance changelog RSS feed](../release-notes/chap-changelog.xml)
+
+## September 2025
+
+### September 25, 2025
+
+#### Fixes
+
+* IGA-1764 - Issue with request for self in AM integrated environments
+
+* IGA-1876 - Fixed appAuthHelperBundle logout issues
+
+* IGA-2468 - Allow multiple word searches in addition to split words
+
+* IGA-1455 - Fix for FILTER keyword
+
+* IGA-2500 - Fixed intermittent end user comment modal error
+
+* IGA-2511 - Fixed repo/link reference
+
+* IGA-2563 - Editing scheduled certifications
+
+* IGA-2553 - Update linkedSystems endpoint wrapper
+
+* IGA-2597 - Set XHR as identity proxy preference
+
+* IGA-2563 - Editing certs with only external applications certifiable
+
+* IGA-2644 - File validation in request creation
+
+* IGA-3110 - Searchable array fix
+
+* IGA-3315 - Allow upload of RAR files
+
+* IGA-3365 - Fixed hardcoding of IDM endpoint in httpservice
+
+* IGA-3375 - Additional file validation in request creation
+
+* IGA-3481 - Fixed object certification escalation notifications
+
+##### Limitations
+
+PingIGA doesn't officially support internationalization or multi-language support of any kind.
+
+##### Known Issues
+
+There are no known issues in this release.
+
+## March 2023
+
+### March 18, 2023
+
+#### Fixes
+
+* IGA-276 - Group (role) drop-down list not functioning if AM OAuth is used
+
+* IGA-501 - False error message 'Access Denied' is shown on logon with Access Review
+
+* IGA-518 - Reviewer unable to sign-off on the access review task
+
+* IGA-882 - Clicking the Submit button twice in 'Approve Access-Request' causes failure
+
+* IGA-887 - Removal approvers list incorrectly referenced when defined without approvers
+
+* IGA-888 - AR Admin check will reference both role types if configured that way
+
+* IGA-891 - User with only AR Admin role blocked from certain access
+
+* IGA-1221 - Notifications not sending on certain second stage certification tasks
+
+* IGA-1223 - Scheduled object cert failing validation
+
+* IGA-1306 - Internal role filters returning only 1 entry
+
+* IGA-1349 - Event Details modal stage stepper not loading in other stage's information
+
+* IGA-1355 - Nested attribute specific filters only matching first condition
+
+* IGA-1430 - Access denied error when logging out from certain screens
+
+* IGA-1455 - Campaigns auto sign-off when using DS as IDM repository
+
+* IGA-1628 - Cert generation calls outdated config endpoint
+
+* IGA-1837 - Policy scan query for active eq true
+
+## March 2021
+
+### March 18, 2021
+
+#### Fixes
+
+* FOR-1967 - Multi Stage certification with completely empty first stage not advancing
+
+* FOR-1969 - Events view off when one of the other stage's events is empty
+
+* FOR-1975 - Expiration certification failing to fully close certification
+
+* FOR-1977 - Add displayName to defaults for glossary
+
+* FOR-1980 - Reassigning events in bulk sends a notification for every single event
+
+* IGA-258 - New glossary item creation is slow
+
+* IGA-155 - Access Review not allowing us to delete scheduled script
+
+* IGA-85 - OOTB example remediate does not remove assignments
+
+---
+
+---
+title: Compatibility
+description: This section covers major and minor changes to existing functionality, as well as deprecated and removed functionality. You must read this section before you start a migration from a previous release.
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-compatibility
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-compatibility.html
+section_ids:
+  important_changes_to_existing_functionality: Important Changes to Existing Functionality
+  deprecated_functionality: Deprecated Functionality
+  removed_functionality: Removed Functionality
+---
+
+# Compatibility
+
+This section covers major and minor changes to existing functionality, as well as deprecated and removed functionality. *You must read this section before you start a migration from a previous release*.
+
+## Important Changes to Existing Functionality
+
+No changes to existing functionality.
+
+## Deprecated Functionality
+
+No functionality is deprecated at this time.
+
+## Removed Functionality
+
+No functionality has been removed at this time.
+
+---
+
+---
+title: Documentation Updates
+description: The following table tracks changes to the documentation set following the release of Identity Governance 7.1.2:
+component: identity-governance
+version: 7.1.2
+page_id: identity-governance:release-notes:chap-doc-updates
+canonical_url: https://docs.pingidentity.com/identity-governance/7.1.2/release-notes/chap-doc-updates.html
+---
+
+# Documentation Updates
+
+The following table tracks changes to the documentation set following the release of Identity Governance 7.1.2:
+
+**Documentation Change Log**
+
+| Date       | Description                                   |
+| ---------- | --------------------------------------------- |
+| 2026-03-03 | Removed security advisories file.             |
+| 2026-01-08 | Updated the PingIDM supported version to 8.0. |
+| 2025-09-01 | Initial release of Ping Identity IGA 7.1.2    |
+| 2023-03-18 | Initial release of Ping Identity IGA 7.1.1.   |
+| 2021-03-18 | Initial release of Ping Identity IGA 7.1.     |

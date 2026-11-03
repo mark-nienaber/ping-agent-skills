@@ -4,6 +4,8 @@ description: Items to keep in mind regarding Ping Government Identity Cloud infr
 component: pgic
 page_id: pgic::pgic_infrastructure
 canonical_url: http://docs.pingidentity.com/pgic/pgic_infrastructure.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   supported-regions: Supported regions
 ---

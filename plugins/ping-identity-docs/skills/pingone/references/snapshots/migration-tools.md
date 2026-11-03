@@ -6,7 +6,7 @@ page_id: pingone:migration-tools:p1_cloud_acceleration_toolset
 canonical_url: https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 16,2025
+revdate: 2026-09-30T22:51:58Z
 section_ids:
   target-audience: Target audience
   getting-started-with-cloud-migration: Getting started with cloud migration
@@ -107,7 +107,7 @@ You can perform a cloud migration assessment by completing these steps:
 
 ### Step 1: Meet the prerequisites
 
-The Cloud Acceleration Toolset today supports PingFederate as a source and PingOne cloud as the destination. Over time, the Cloud Acceleration Toolset will support additional sources and destinations.
+The Cloud Acceleration Toolset today supports PingFederate as a source and PingOne as the destination. Over time, the Cloud Acceleration Toolset will support additional sources and destinations.
 
 #### PingFederate to PingOne
 
